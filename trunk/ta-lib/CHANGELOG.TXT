@@ -14,7 +14,7 @@ V0.0.6 (October 2002)
   an "Invalid Date" error. (Fix #609753)
 
 - Speed optimization of STDDEV, VAR and BBANDS.
-  Contribution by Jesus Virer.
+  Contribution by Viver Jesus.
 
 See HISTORY.TXT for summary of previous version.
 
