@@ -1,9 +1,10 @@
 # makefile for building a perl TA.pm module
+# CMR (commandline multitheraded release only)
 # Handmade (experimental)
 #
-# Tested with SWIG v1.3.22
+# Tested with SWIG v1.3.22, Perl v5.8.4
 
-PERL5_VERSION=5.8.4
+PERL5_VERSION=$(shell perl -v | perl -ne 'print $$1 if / v(\d+\.\d+\.\d+) /')
 PERL5_INCLUDE=/usr/lib/perl/$(PERL5_VERSION)/CORE
 
 INSTDIR=/usr/local/lib/perl/$(PERL5_VERSION)
