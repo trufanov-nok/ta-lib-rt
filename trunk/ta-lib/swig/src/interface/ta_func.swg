@@ -1553,6 +1553,26 @@ int TA_OBV_Lookback( void );
  ******************************************/
 
 /*
+ * TA_CDL2CROWS - Two Crows
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDL2CROWS( int           START_IDX,
+                         int           END_IDX,
+                         const double *IN_ARRAY /* inOpen */,
+                         const double *IN_ARRAY /* inHigh */,
+                         const double *IN_ARRAY /* inLow */,
+                         const double *IN_ARRAY /* inClose */,
+                         int          *BEG_IDX,
+                         int          *OUT_SIZE,
+                         int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDL2CROWS_Lookback( void );
+
+
+/*
  * TA_CDL3BLACKCROWS - Three Black Crows
  * 
  * Input  = Open, High, Low, Close
@@ -1570,6 +1590,86 @@ TA_RetCode TA_CDL3BLACKCROWS( int           START_IDX,
                               int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDL3BLACKCROWS_Lookback( void );
+
+
+/*
+ * TA_CDL3INSIDE - Three Inside Up/Down
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDL3INSIDE( int           START_IDX,
+                          int           END_IDX,
+                          const double *IN_ARRAY /* inOpen */,
+                          const double *IN_ARRAY /* inHigh */,
+                          const double *IN_ARRAY /* inLow */,
+                          const double *IN_ARRAY /* inClose */,
+                          int          *BEG_IDX,
+                          int          *OUT_SIZE,
+                          int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDL3INSIDE_Lookback( void );
+
+
+/*
+ * TA_CDL3LINESTRIKE - Three-Line Strike 
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDL3LINESTRIKE( int           START_IDX,
+                              int           END_IDX,
+                              const double *IN_ARRAY /* inOpen */,
+                              const double *IN_ARRAY /* inHigh */,
+                              const double *IN_ARRAY /* inLow */,
+                              const double *IN_ARRAY /* inClose */,
+                              int          *BEG_IDX,
+                              int          *OUT_SIZE,
+                              int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDL3LINESTRIKE_Lookback( void );
+
+
+/*
+ * TA_CDL3OUTSIDE - Three Outside Up/Down
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDL3OUTSIDE( int           START_IDX,
+                           int           END_IDX,
+                           const double *IN_ARRAY /* inOpen */,
+                           const double *IN_ARRAY /* inHigh */,
+                           const double *IN_ARRAY /* inLow */,
+                           const double *IN_ARRAY /* inClose */,
+                           int          *BEG_IDX,
+                           int          *OUT_SIZE,
+                           int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDL3OUTSIDE_Lookback( void );
+
+
+/*
+ * TA_CDL3WHITESOLDIERS - Three Advancing White Soldiers
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDL3WHITESOLDIERS( int           START_IDX,
+                                 int           END_IDX,
+                                 const double *IN_ARRAY /* inOpen */,
+                                 const double *IN_ARRAY /* inHigh */,
+                                 const double *IN_ARRAY /* inLow */,
+                                 const double *IN_ARRAY /* inClose */,
+                                 int          *BEG_IDX,
+                                 int          *OUT_SIZE,
+                                 int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDL3WHITESOLDIERS_Lookback( void );
 
 
 /*
@@ -1597,6 +1697,53 @@ TA_RetCode TA_CDLABANDONEDBABY( int           START_IDX,
                                 int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLABANDONEDBABY_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+/*
+ * TA_CDLADVANCEBLOCK - Advance Block
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLADVANCEBLOCK( int           START_IDX,
+                               int           END_IDX,
+                               const double *IN_ARRAY /* inOpen */,
+                               const double *IN_ARRAY /* inHigh */,
+                               const double *IN_ARRAY /* inLow */,
+                               const double *IN_ARRAY /* inClose */,
+                               int          *BEG_IDX,
+                               int          *OUT_SIZE,
+                               int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLADVANCEBLOCK_Lookback( void );
+
+
+/*
+ * TA_CDLDARKCLOUDCOVER - Dark Cloud Cover
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInPenetration:(From 0 to TA_REAL_MAX)
+ *    Percentage of penetration of a candle within another candle
+ * 
+ * 
+ */
+TA_RetCode TA_CDLDARKCLOUDCOVER( int           START_IDX,
+                                 int           END_IDX,
+                                 const double *IN_ARRAY /* inOpen */,
+                                 const double *IN_ARRAY /* inHigh */,
+                                 const double *IN_ARRAY /* inLow */,
+                                 const double *IN_ARRAY /* inClose */,
+                                 double        OPT_REAL /* optInPenetration */, /* From 0 to TA_REAL_MAX */
+                                 int          *BEG_IDX,
+                                 int          *OUT_SIZE,
+                                 int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLDARKCLOUDCOVER_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
 /*
@@ -1814,6 +1961,26 @@ int TA_CDLIDENTICAL3CROWS_Lookback( void );
 
 
 /*
+ * TA_CDLINNECK - In-Neck Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLINNECK( int           START_IDX,
+                         int           END_IDX,
+                         const double *IN_ARRAY /* inOpen */,
+                         const double *IN_ARRAY /* inHigh */,
+                         const double *IN_ARRAY /* inLow */,
+                         const double *IN_ARRAY /* inClose */,
+                         int          *BEG_IDX,
+                         int          *OUT_SIZE,
+                         int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLINNECK_Lookback( void );
+
+
+/*
  * TA_CDLINVERTEDHAMMER - Inverted Hammer
  * 
  * Input  = Open, High, Low, Close
@@ -1908,6 +2075,46 @@ int TA_CDLMORNINGSTAR_Lookback( double        optInPenetration );  /* From 0 to 
 
 
 /*
+ * TA_CDLONNECK - On-Neck Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLONNECK( int           START_IDX,
+                         int           END_IDX,
+                         const double *IN_ARRAY /* inOpen */,
+                         const double *IN_ARRAY /* inHigh */,
+                         const double *IN_ARRAY /* inLow */,
+                         const double *IN_ARRAY /* inClose */,
+                         int          *BEG_IDX,
+                         int          *OUT_SIZE,
+                         int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLONNECK_Lookback( void );
+
+
+/*
+ * TA_CDLPIERCING - Piercing Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLPIERCING( int           START_IDX,
+                           int           END_IDX,
+                           const double *IN_ARRAY /* inOpen */,
+                           const double *IN_ARRAY /* inHigh */,
+                           const double *IN_ARRAY /* inLow */,
+                           const double *IN_ARRAY /* inClose */,
+                           int          *BEG_IDX,
+                           int          *OUT_SIZE,
+                           int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLPIERCING_Lookback( void );
+
+
+/*
  * TA_CDLSHOOTINGSTAR - Shooting Star
  * 
  * Input  = Open, High, Low, Close
@@ -1965,6 +2172,46 @@ TA_RetCode TA_CDLSPINNINGTOP( int           START_IDX,
                               int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLSPINNINGTOP_Lookback( void );
+
+
+/*
+ * TA_CDLSTALLEDPATTERN - Stalled Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLSTALLEDPATTERN( int           START_IDX,
+                                 int           END_IDX,
+                                 const double *IN_ARRAY /* inOpen */,
+                                 const double *IN_ARRAY /* inHigh */,
+                                 const double *IN_ARRAY /* inLow */,
+                                 const double *IN_ARRAY /* inClose */,
+                                 int          *BEG_IDX,
+                                 int          *OUT_SIZE,
+                                 int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLSTALLEDPATTERN_Lookback( void );
+
+
+/*
+ * TA_CDLTHRUSTING - Thrusting Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLTHRUSTING( int           START_IDX,
+                            int           END_IDX,
+                            const double *IN_ARRAY /* inOpen */,
+                            const double *IN_ARRAY /* inHigh */,
+                            const double *IN_ARRAY /* inLow */,
+                            const double *IN_ARRAY /* inClose */,
+                            int          *BEG_IDX,
+                            int          *OUT_SIZE,
+                            int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLTHRUSTING_Lookback( void );
 
 
 /*
