@@ -785,14 +785,14 @@ namespace TA
          #define TA_AROONOSC Core::AROONOSC
          #define TA_AROONOSC_Lookback Core::AROONOSC_Lookback
 
-         static int CCI_Lookback( int           optInTimePeriod );  /* From 5 to 100000 */
+         static int CCI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          static enum TA_RetCode CCI( int    startIdx,
                                      int    endIdx,
                                      double       inHigh __gc [],
                                      double       inLow __gc [],
                                      double       inClose __gc [],
-                                     int           optInTimePeriod, /* From 5 to 100000 */
+                                     int           optInTimePeriod, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal __gc [] );
@@ -801,7 +801,7 @@ namespace TA
                                      float        inHigh __gc [],
                                      float        inLow __gc [],
                                      float        inClose __gc [],
-                                     int           optInTimePeriod, /* From 5 to 100000 */
+                                     int           optInTimePeriod, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal __gc [] );
@@ -1496,6 +1496,102 @@ namespace TA
 
          #define TA_OBV Core::OBV
          #define TA_OBV_Lookback Core::OBV_Lookback
+
+         static int CDLHIGHWAVE_Lookback( void );
+
+         static enum TA_RetCode CDLHIGHWAVE( int    startIdx,
+                                             int    endIdx,
+                                             double       inOpen __gc [],
+                                             double       inHigh __gc [],
+                                             double       inLow __gc [],
+                                             double       inClose __gc [],
+                                             [OutAttribute]Int32 *outBegIdx,
+                                             [OutAttribute]Int32 *outNbElement,
+                                             int           outInteger __gc [] );
+         static enum TA_RetCode CDLHIGHWAVE( int    startIdx,
+                                             int    endIdx,
+                                             float        inOpen __gc [],
+                                             float        inHigh __gc [],
+                                             float        inLow __gc [],
+                                             float        inClose __gc [],
+                                             [OutAttribute]Int32 *outBegIdx,
+                                             [OutAttribute]Int32 *outNbElement,
+                                             int           outInteger __gc [] );
+
+         #define TA_CDLHIGHWAVE Core::CDLHIGHWAVE
+         #define TA_CDLHIGHWAVE_Lookback Core::CDLHIGHWAVE_Lookback
+
+         static int CDLLONGLINE_Lookback( void );
+
+         static enum TA_RetCode CDLLONGLINE( int    startIdx,
+                                             int    endIdx,
+                                             double       inOpen __gc [],
+                                             double       inHigh __gc [],
+                                             double       inLow __gc [],
+                                             double       inClose __gc [],
+                                             [OutAttribute]Int32 *outBegIdx,
+                                             [OutAttribute]Int32 *outNbElement,
+                                             int           outInteger __gc [] );
+         static enum TA_RetCode CDLLONGLINE( int    startIdx,
+                                             int    endIdx,
+                                             float        inOpen __gc [],
+                                             float        inHigh __gc [],
+                                             float        inLow __gc [],
+                                             float        inClose __gc [],
+                                             [OutAttribute]Int32 *outBegIdx,
+                                             [OutAttribute]Int32 *outNbElement,
+                                             int           outInteger __gc [] );
+
+         #define TA_CDLLONGLINE Core::CDLLONGLINE
+         #define TA_CDLLONGLINE_Lookback Core::CDLLONGLINE_Lookback
+
+         static int CDLSHORTLINE_Lookback( void );
+
+         static enum TA_RetCode CDLSHORTLINE( int    startIdx,
+                                              int    endIdx,
+                                              double       inOpen __gc [],
+                                              double       inHigh __gc [],
+                                              double       inLow __gc [],
+                                              double       inClose __gc [],
+                                              [OutAttribute]Int32 *outBegIdx,
+                                              [OutAttribute]Int32 *outNbElement,
+                                              int           outInteger __gc [] );
+         static enum TA_RetCode CDLSHORTLINE( int    startIdx,
+                                              int    endIdx,
+                                              float        inOpen __gc [],
+                                              float        inHigh __gc [],
+                                              float        inLow __gc [],
+                                              float        inClose __gc [],
+                                              [OutAttribute]Int32 *outBegIdx,
+                                              [OutAttribute]Int32 *outNbElement,
+                                              int           outInteger __gc [] );
+
+         #define TA_CDLSHORTLINE Core::CDLSHORTLINE
+         #define TA_CDLSHORTLINE_Lookback Core::CDLSHORTLINE_Lookback
+
+         static int CDLSPINNINGTOP_Lookback( void );
+
+         static enum TA_RetCode CDLSPINNINGTOP( int    startIdx,
+                                                int    endIdx,
+                                                double       inOpen __gc [],
+                                                double       inHigh __gc [],
+                                                double       inLow __gc [],
+                                                double       inClose __gc [],
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+         static enum TA_RetCode CDLSPINNINGTOP( int    startIdx,
+                                                int    endIdx,
+                                                float        inOpen __gc [],
+                                                float        inHigh __gc [],
+                                                float        inLow __gc [],
+                                                float        inClose __gc [],
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+
+         #define TA_CDLSPINNINGTOP Core::CDLSPINNINGTOP
+         #define TA_CDLSPINNINGTOP_Lookback Core::CDLSPINNINGTOP_Lookback
 
          static int CORREL_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
