@@ -55,6 +55,8 @@ Building the Perl module
 ========================
 Build can be done using MSVC with either the nmake utility or using the IDE.
 
+IDE - Microsoft Developer Studio
+--------------------------------
 First, make sure that the proper ta-lib library is already build in
 ta-lib/c/lib.  The wrapper links only with Release Multithreaded DLL variant
 (because of necessary compatibility with Perl build), so you need
@@ -62,6 +64,15 @@ ta_libc_cdr.lib
 
 Open workspace swig\ide\msvc\perl\perl.dsw and hit Build All. You can 
 alternatively use "nmake" in that same directory.
+
+make - Linux/gcc
+----------------
+First, make sure that the proper ta-lib library is already build in
+ta-lib/c/lib.  The wrapper links only with Release Multithreaded Static
+variant so you need libta_libc_cmr.a and the family.
+
+cd swig/make/perl/linux/g++
+make
 
 Using ta-lib in Perl
 ====================
