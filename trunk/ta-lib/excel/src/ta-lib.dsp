@@ -22,8 +22,6 @@ CFG=xlw - Win32 OnTheEdgeRelease
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
-# PROP Scc_ProjName ""$/xlw", BXAAAAAA"
-# PROP Scc_LocalPath "."
 CPP=cl.exe
 RSC=rc.exe
 # PROP BASE Use_MFC 0
