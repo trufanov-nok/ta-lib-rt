@@ -40,7 +40,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "EXAMPLE_EXPORTS" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /O1 /I "$(PERL5_INCLUDE)" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MSWIN32" /D "_CONSOLE" /D "NO_STRICT" /D "PERL_MSVCRT_READFIX" /D "PERL_CAPI" /YX /FD /c
+# ADD CPP /nologo /MD /W3 /O1 /I "..\..\..\..\c\include" /I "$(PERL5_INCLUDE)" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MSWIN32" /D "_CONSOLE" /D "NO_STRICT" /D "PERL_MSVCRT_READFIX" /D "PERL_CAPI" /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x809 /d "NDEBUG"
@@ -118,7 +118,7 @@ BuildCmds= \
 	echo Make also sure that swig and perl are on search path: \
 	echo %PATH% \
 	echo on \
-	swig -perl5 -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c $(InputPath) \
+	swig -perl5 -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include $(InputPath) \
 	copy /Y /A ..\..\..\temp\perl\wrap\TA.pm+..\..\..\src\interface\perl.pm ..\..\..\lib\perl\Finance\TA.pm \
 	
 
