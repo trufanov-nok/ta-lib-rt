@@ -37,13 +37,13 @@
  *  -------------------------------------------------------------------
  *  MF       Mario Fortier
  *  PSG      Przemyslaw Grodzki (pgrodzki@ki.net.pl)
+ *  RM       Robert Meier (talib@meierlim.com http://www.meierlim.com)
  *
- * Change history:
- *
- *  MMDDYY BY   Description
+ *  MMDDYY BY     Description
  *  -------------------------------------------------------------------
- *  050703 MF   First version with all the TA functions.
- *  112304 PSG  Fix #1072276 for TA_CandleDefaultSettings size.
+ *  050703 MF     First version with all the TA functions.
+ *  112304 PSG    Fix #1072276 for TA_CandleDefaultSettings size.
+ *  123004 RM,MF  Adapt code to work with Visual Studio 2005
  */
 
 #pragma once
