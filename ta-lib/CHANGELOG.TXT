@@ -21,9 +21,10 @@ V0.0.7 (January 2003)
 
 - Speed optimization of some functions.
 
-- Fix #644512: BBANDS when using a MA type != SMA
-
 - Fix #660248: TA_HistoryAlloc start/end intra-day range.
+- Fix #660250: BBANDS when using a MA type != SMA
+- Fix #660449: TA_STOCH crash with certain parameter/data
+- Fix #644512: ASCII Data Source [-I] bug
 
 See HISTORY.TXT for summary of previous version.
 
