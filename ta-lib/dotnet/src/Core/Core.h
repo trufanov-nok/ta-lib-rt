@@ -1111,14 +1111,14 @@ namespace TA
          #define TA_PPO Core::PPO
          #define TA_PPO_Lookback Core::PPO_Lookback
 
-         static int PLUS_DI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+         static int PLUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
          static enum TA_RetCode PLUS_DI( int    startIdx,
                                          int    endIdx,
                                          double       inHigh __gc [],
                                          double       inLow __gc [],
                                          double       inClose __gc [],
-                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         int           optInTimePeriod, /* From 1 to 100000 */
                                          [OutAttribute]Int32 *outBegIdx,
                                          [OutAttribute]Int32 *outNbElement,
                                          double        outReal __gc [] );
@@ -1127,7 +1127,7 @@ namespace TA
                                          float        inHigh __gc [],
                                          float        inLow __gc [],
                                          float        inClose __gc [],
-                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         int           optInTimePeriod, /* From 1 to 100000 */
                                          [OutAttribute]Int32 *outBegIdx,
                                          [OutAttribute]Int32 *outNbElement,
                                          double        outReal __gc [] );
@@ -1135,13 +1135,13 @@ namespace TA
          #define TA_PLUS_DI Core::PLUS_DI
          #define TA_PLUS_DI_Lookback Core::PLUS_DI_Lookback
 
-         static int PLUS_DM_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+         static int PLUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
          static enum TA_RetCode PLUS_DM( int    startIdx,
                                          int    endIdx,
                                          double       inHigh __gc [],
                                          double       inLow __gc [],
-                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         int           optInTimePeriod, /* From 1 to 100000 */
                                          [OutAttribute]Int32 *outBegIdx,
                                          [OutAttribute]Int32 *outNbElement,
                                          double        outReal __gc [] );
@@ -1149,7 +1149,7 @@ namespace TA
                                          int    endIdx,
                                          float        inHigh __gc [],
                                          float        inLow __gc [],
-                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         int           optInTimePeriod, /* From 1 to 100000 */
                                          [OutAttribute]Int32 *outBegIdx,
                                          [OutAttribute]Int32 *outNbElement,
                                          double        outReal __gc [] );
