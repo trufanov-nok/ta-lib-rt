@@ -34,7 +34,8 @@ $(TOPDIR)/lib/perl/TA.so: \
 $(TOPDIR)/lib/perl/Finance/TA.pm: \
 		$(WRAPDIR)/TA.pm \
 		$(TOPDIR)/src/interface/perl.pm
-	cat $+ >$@ 
+	perl -pe 's/^%(OWNER|ITERATORS)/our %\1/' $(WRAPDIR)/TA.pm >$@
+	cat $(TOPDIR)/src/interface/perl.pm >>$@ 
 
 $(WRAPDIR)/TA.pm $(WRAPDIR)/ta_libc_wrap.c: \
 		$(TOPDIR)/src/interface/ta_libc.swg \

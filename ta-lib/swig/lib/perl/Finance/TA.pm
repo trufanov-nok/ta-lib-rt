@@ -353,8 +353,8 @@ package Finance::TA;
 
 package Finance::TA::TA_Timestamp;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_date_get = *Finance::TAc::TA_Timestamp_date_get;
 *swig_date_set = *Finance::TAc::TA_Timestamp_date_set;
 *swig_time_get = *Finance::TAc::TA_Timestamp_time_get;
@@ -405,8 +405,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_RetCodeInfo;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_enumStr_get = *Finance::TAc::TA_RetCodeInfo_enumStr_get;
 *swig_enumStr_set = *Finance::TAc::TA_RetCodeInfo_enumStr_set;
 *swig_infoStr_get = *Finance::TAc::TA_RetCodeInfo_infoStr_get;
@@ -445,8 +445,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_InitializeParam;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_logOutput_get = *Finance::TAc::TA_InitializeParam_logOutput_get;
 *swig_logOutput_set = *Finance::TAc::TA_InitializeParam_logOutput_set;
 *swig_userLocalDrive_get = *Finance::TAc::TA_InitializeParam_userLocalDrive_get;
@@ -485,7 +485,7 @@ sub ACQUIRE {
 
 package Finance::TA::TA_UDBase;
 @ISA = qw( Finance::TA );
-%OWNER = ();
+our %OWNER = ();
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -503,8 +503,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_AddDataSourceParam;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_id_get = *Finance::TAc::TA_AddDataSourceParam_id_get;
 *swig_id_set = *Finance::TAc::TA_AddDataSourceParam_id_set;
 *swig_flags_get = *Finance::TAc::TA_AddDataSourceParam_flags_get;
@@ -565,8 +565,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_History;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_nbBars_get = *Finance::TAc::TA_History_nbBars_get;
 *swig_nbBars_set = *Finance::TAc::TA_History_nbBars_set;
 *swig_period_get = *Finance::TAc::TA_History_period_get;
@@ -604,8 +604,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_HistoryAllocParam;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_sourceName_get = *Finance::TAc::TA_HistoryAllocParam_sourceName_get;
 *swig_sourceName_set = *Finance::TAc::TA_HistoryAllocParam_sourceName_set;
 *swig_category_get = *Finance::TAc::TA_HistoryAllocParam_category_get;
@@ -656,8 +656,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_Instrument;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_catString_get = *Finance::TAc::TA_Instrument_catString_get;
 *swig_catString_set = *Finance::TAc::TA_Instrument_catString_set;
 *swig_symString_get = *Finance::TAc::TA_Instrument_symString_get;
@@ -698,8 +698,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_Transaction;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_type_get = *Finance::TAc::TA_Transaction_type_get;
 *swig_type_set = *Finance::TAc::TA_Transaction_type_set;
 *swig_id_get = *Finance::TAc::TA_Transaction_id_get;
@@ -750,7 +750,7 @@ sub ACQUIRE {
 
 package Finance::TA::TA_TradeLog;
 @ISA = qw( Finance::TA );
-%OWNER = ();
+our %OWNER = ();
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -768,7 +768,7 @@ sub ACQUIRE {
 
 package Finance::TA::TA_PM;
 @ISA = qw( Finance::TA );
-%OWNER = ();
+our %OWNER = ();
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -786,8 +786,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_PMArray;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_nbData_get = *Finance::TAc::TA_PMArray_nbData_get;
 *swig_nbData_set = *Finance::TAc::TA_PMArray_nbData_set;
 *swig_timestamp_get = *Finance::TAc::TA_PMArray_timestamp_get;
@@ -817,8 +817,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_Trade;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_quantity_get = *Finance::TAc::TA_Trade_quantity_get;
 *swig_quantity_set = *Finance::TAc::TA_Trade_quantity_set;
 *swig_entryPrice_get = *Finance::TAc::TA_Trade_entryPrice_get;
@@ -871,8 +871,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_TradeReport;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_nbTrades_get = *Finance::TAc::TA_TradeReport_nbTrades_get;
 *swig_nbTrades_set = *Finance::TAc::TA_TradeReport_nbTrades_set;
 *swig_trades_get = *Finance::TAc::TA_TradeReport_trades_get;
@@ -894,7 +894,7 @@ sub ACQUIRE {
 
 package Finance::TA::TA_FuncHandle;
 @ISA = qw( Finance::TA );
-%OWNER = ();
+our %OWNER = ();
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -912,8 +912,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_FuncInfo;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_name_get = *Finance::TAc::TA_FuncInfo_name_get;
 *swig_name_set = *Finance::TAc::TA_FuncInfo_name_set;
 *swig_group_get = *Finance::TAc::TA_FuncInfo_group_get;
@@ -949,8 +949,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_RealRange;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_min_get = *Finance::TAc::TA_RealRange_min_get;
 *swig_min_set = *Finance::TAc::TA_RealRange_min_set;
 *swig_max_get = *Finance::TAc::TA_RealRange_max_get;
@@ -980,8 +980,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_IntegerRange;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_min_get = *Finance::TAc::TA_IntegerRange_min_get;
 *swig_min_set = *Finance::TAc::TA_IntegerRange_min_set;
 *swig_max_get = *Finance::TAc::TA_IntegerRange_max_get;
@@ -1009,8 +1009,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_RealDataPair;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_value_get = *Finance::TAc::TA_RealDataPair_value_get;
 *swig_value_set = *Finance::TAc::TA_RealDataPair_value_set;
 *swig_string_get = *Finance::TAc::TA_RealDataPair_string_get;
@@ -1032,8 +1032,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_IntegerDataPair;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_value_get = *Finance::TAc::TA_IntegerDataPair_value_get;
 *swig_value_set = *Finance::TAc::TA_IntegerDataPair_value_set;
 *swig_string_get = *Finance::TAc::TA_IntegerDataPair_string_get;
@@ -1055,8 +1055,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_RealList;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_data_get = *Finance::TAc::TA_RealList_data_get;
 *swig_data_set = *Finance::TAc::TA_RealList_data_set;
 *swig_nbElement_get = *Finance::TAc::TA_RealList_nbElement_get;
@@ -1078,8 +1078,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_IntegerList;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_data_get = *Finance::TAc::TA_IntegerList_data_get;
 *swig_data_set = *Finance::TAc::TA_IntegerList_data_set;
 *swig_nbElement_get = *Finance::TAc::TA_IntegerList_nbElement_get;
@@ -1101,8 +1101,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_InputParameterInfo;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_type_get = *Finance::TAc::TA_InputParameterInfo_type_get;
 *swig_type_set = *Finance::TAc::TA_InputParameterInfo_type_set;
 *swig_paramName_get = *Finance::TAc::TA_InputParameterInfo_paramName_get;
@@ -1126,8 +1126,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_OptInputParameterInfo;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_type_get = *Finance::TAc::TA_OptInputParameterInfo_type_get;
 *swig_type_set = *Finance::TAc::TA_OptInputParameterInfo_type_set;
 *swig_paramName_get = *Finance::TAc::TA_OptInputParameterInfo_paramName_get;
@@ -1161,8 +1161,8 @@ sub ACQUIRE {
 
 package Finance::TA::TA_OutputParameterInfo;
 @ISA = qw( Finance::TA );
-%OWNER = ();
-%ITERATORS = ();
+our %OWNER = ();
+our %ITERATORS = ();
 *swig_type_get = *Finance::TAc::TA_OutputParameterInfo_type_get;
 *swig_type_set = *Finance::TAc::TA_OutputParameterInfo_type_set;
 *swig_paramName_get = *Finance::TAc::TA_OutputParameterInfo_paramName_get;
@@ -1588,6 +1588,8 @@ package Finance::TA;
 
 package Finance::TA;
 
+use strict;
+
 our $VERSION = v0.1.3;
 
 package Finance::TA::TA_Timestamp;
@@ -1623,14 +1625,14 @@ undef *new;
 
 sub GetStringDate {
     my ($self) = @_;
-    @res = ::Finance::TAc::TA_GetDate($self);
+    my @res = ::Finance::TAc::TA_GetDate($self);
     return sprintf("%04d-%02d-%02d", @res[1..3]);
 }
 
 
 sub GetStringTime {
     my ($self) = @_;
-    @res = ::Finance::TAc::TA_GetTime($self);
+    my @res = ::Finance::TAc::TA_GetTime($self);
     return sprintf("%02d:%02d:%02d", @res[1..3]);
 }
 
@@ -1674,23 +1676,36 @@ sub new {
 sub DESTROY {
     return unless $_[0]->isa('HASH');
     my $self = tied(%{$_[0]});
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        ::Finance::TAc::TA_UDBaseFree($self);
+    delete $ITERATORS{$self} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$self}) {
         delete $OWNER{$self};
+        ::Finance::TAc::TA_UDBaseFree($self);
     }
 }
 
 sub AddDataSource {
-    my $self = shift;
-    ::Finance::TAc::TA_AddDataSource($self, @_);
+    my ($self, $param) = @_;
+    if (ref($param) eq 'HASH') {
+        my $hash = $param;
+        $param = Finance::TA::TA_AddDataSourceParam->new;
+        while ( my($key, $val) = each(%$hash) ) {
+            $param->{$key} = $val;
+        }
+    }
+    ::Finance::TAc::TA_AddDataSource($self, $param);
 }
 
 sub History {
-    return unless $_[0]->isa('HASH');
-    Finance::TA::TA_History->new(@_);
+    my ($self, $param) = @_;
+    if (ref($param) eq 'HASH') {
+        my $hash = $param;
+        $param = Finance::TA::TA_HistoryAllocParam->new;
+        while ( my($key, $val) = each(%$hash) ) {
+            $param->{$key} = $val;
+        }
+    }
+    Finance::TA::TA_History->new($self, $param);
 }
-
 
 sub CategoryTable {
     my $self = shift;
@@ -1704,7 +1719,7 @@ sub CategoryTable {
 
 sub SymbolTable {
     my ($self, $symbol) = @_;
-    $symbol ||= $TA_DEFAULT_CATEGORY;
+    $symbol ||= $Finance::TA::TA_DEFAULT_CATEGORY;
     my @table = ::Finance::TAc::TA_SymbolTable($self, $symbol);
     if (shift(@table) == $Finance::TA::TA_SUCCESS) {
         return @table;
@@ -1743,11 +1758,10 @@ sub DESTROY {
     return unless $_[0]->isa('HASH');
     my $self = tied(%{$_[0]});
     return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        #print "free history: @_: ";
-        ::Finance::TAc::TA_HistoryFree($self);
+    delete $ITERATORS{$self} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$self}) {
         delete $OWNER{$self};
+        ::Finance::TAc::TA_HistoryFree($self);
     }
 }
 
@@ -1837,16 +1851,23 @@ sub DESTROY {
     return unless $_[0]->isa('HASH');
     #print "destroying $_[0]\n";
     my $self = tied(%{$_[0]});
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        ::Finance::TAc::TA_TradeLogFree($self);
+    delete $ITERATORS{$self} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$self}) {
         delete $OWNER{$self};
+        ::Finance::TAc::TA_TradeLogFree($self);
     }
 }
 
 sub TradeLogAdd {
-    my $self = shift;
-    ::Finance::TAc::TA_TradeLogAdd($self, @_);
+    my ($self, $param) = @_;
+    if (ref($param) eq 'HASH') {
+        my $hash = $param;
+        $param = Finance::TA::TA_Transaction->new;
+        while ( my($key, $val) = each(%$hash) ) {
+            $param->{$key} = $val;
+        }
+    }
+    ::Finance::TAc::TA_TradeLogAdd($self, $param);
 }
 
 
@@ -1856,7 +1877,7 @@ package Finance::TA::TA_PM;
 # and providing object-oriented interface
 
 # Keep track which logs are added to PM, not to destroy them too early
-%logs = ();
+our %LOGS = ();
 
 sub new {
     my $pkg = shift;
@@ -1875,17 +1896,17 @@ sub DESTROY {
     return unless $self->isa('HASH');
     #print "destroying $self\n";
     my $this = tied(%$self);
-    delete $ITERATORS{$this};
-    if (exists $OWNER{$this}) {
-        ::Finance::TAc::TA_PMFree($this);
+    delete $ITERATORS{$this} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$this}) {
         delete $OWNER{$this};
-        delete $logs{$self};
+        ::Finance::TAc::TA_PMFree($this);
     }
+    delete $LOGS{$self} if defined %LOGS;
 }
 
 sub PMAddTradeLog {
     my ($self, $log) = @_;
-    push(@{$logs{$self}}, $log);
+    push(@{$LOGS{$self}}, $log);
     ::Finance::TAc::TA_PMAddTradeLog($self, $log);
 }
 
@@ -1933,8 +1954,8 @@ sub DESTROY {
     delete $ITERATORS{$self};
     if (exists $OWNER{$self}) {
         #print "free PMArray: @_: ";
-        ::Finance::TAc::TA_PMArrayFree($self);
         delete $OWNER{$self};
+        ::Finance::TAc::TA_PMArrayFree($self);
     }
 }
 
@@ -1951,7 +1972,7 @@ package Finance::TA::TA_TradeReport;
 # Keep track which PM is used for Trade Report, not to destroy it too early
 # (design limitation of TA_TradeReport)
 
-%PM = ();
+our %PM = ();
 
 sub new {
     #print "alloc TradeReport: @_\n";
@@ -1980,10 +2001,10 @@ sub DESTROY {
     delete $ITERATORS{$this};
     if (exists $OWNER{$this}) {
         #print "free TradeReport: @_: ";
-        ::Finance::TAc::TA_TradeReportFree($this);
         delete $OWNER{$this};
         #print "delete $self\n";
         delete $PM{$self};
+        ::Finance::TAc::TA_TradeReportFree($this);
     }
 }
 
@@ -2006,12 +2027,12 @@ undef *TA_Initialize;
     my $retCode;
     if ($INITIALIZED) {
         $retCode = TA_Shutdown();
-        return $retCode if $retCode != $TA_SUCCESS;
+        return $retCode if $retCode != $Finance::TA::TA_SUCCESS;
     }
     # Accept calls with no parameters
     $_[0] = undef if @_ == 0;
     $retCode = ::Finance::TAc::TA_Initialize(@_);
-    $INITIALIZED = ($retCode == $TA_SUCCESS);
+    $INITIALIZED = ($retCode == $Finance::TA::TA_SUCCESS);
     return $retCode;
 };
 
@@ -2024,7 +2045,7 @@ undef *TA_Shutdown;
     } else {
         # We are more forgiving on multiple calls to &TA_Shutdown
         # than TA-LIB on TA_Shutdown()
-        return $TA_SUCCESS;
+        return $Finance::TA::TA_SUCCESS;
     }
 };
 
@@ -2032,11 +2053,11 @@ undef *TA_Shutdown;
 # This small loop circumvents that and export everything beginning with 'TA_'
 foreach (keys %Finance::TA::) {
     if (/^TA_/) {
-        local *sym = $Finance::TA::{$_};        
-        push(@EXPORT, "\$$_") if defined $sym;
-        push(@EXPORT, "\@$_") if defined @sym;
-        push(@EXPORT, "\%$_") if defined %sym;
-        push(@EXPORT, $_) if defined &sym;
+        local *::sym = $Finance::TA::{$_};        
+        push(@Finance::TA::EXPORT, "\$$_") if defined $::sym;
+        push(@Finance::TA::EXPORT, "\@$_") if defined @::sym;
+        push(@Finance::TA::EXPORT, "\%$_") if defined %::sym;
+        push(@Finance::TA::EXPORT, $_) if defined &::sym;
     }
 }
 
