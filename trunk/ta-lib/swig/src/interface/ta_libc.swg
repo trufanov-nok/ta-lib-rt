@@ -1,3 +1,4 @@
+
 /* File : ta_libc.i */
 
 %module "Finance::TA"
@@ -10,9 +11,10 @@
 %include "typemaps.i"
 
 
+/** typemaps for all TA interfaces ******************************************/
 
 /* Adittional typemap not found in the standard set */
-/* Not working...
+/* Not working with ActivePerl, alas
 %typemap(perl5,in) FILE * {
    $1 = IoIFP(sv_2io($input));
    $1 = PerlIO_exportFILE(IoIFP(sv_2io($input)), 0);
@@ -25,8 +27,95 @@
  * but may prevent SWIG release memory in proxy classes.
  * This is safe because TA-Lib never sets returned const char pointers
  * to anything in static (data) area by itself (except in ta_abstract).
+ * If needed, const members are made explicitly immutable.
  */
 %clear const char *;
+
+/* hiddenData should not be accessible for client code */
+%ignore hiddenData;
+
+
+
+
+/* Handles are created and released only by appropriate calls to TA-Lib functions
+ * They have no accessible fields
+ * To obtain a handle in Perl, use references
+ * Example: 
+ *   $retCode = TA_HandleAlloc(\$handle);
+ *   $retCode = TA_HandleFree($handle);
+ *
+ * However, for all TA handles, Perl shadow classes are defined, simplifying
+ * creaction and destruction.
+ */
+#ifdef SWIGPERL
+
+%define HANDLE(TYPE, NAME)
+
+%typemap(in) TYPE **NAME($*1_ltype temp) 
+{
+    SV *tempsv;
+    if (!SvROK($input)) {
+        SWIG_croak("Expected a reference as argument $argnum of $symname");
+    }
+    tempsv = SvRV($input);
+    if (SWIG_ConvertPtr(tempsv, (void **) &temp, $*1_descriptor, 0) < 0) {
+        SWIG_croak("Type error in argument $argnum of $symname. Expected $*1_mangle");
+    }
+    if (temp) {
+        SWIG_croak("Expected a reference to undef variable as argument $argnum of $symname");
+    }
+    $1 = &temp;
+}
+
+%typemap(argout) TYPE **NAME 
+{
+    SV *tempsv;
+    tempsv = SvRV($input);
+    SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, SWIG_SHADOW);
+}
+
+/* Don't create default constructors/destructors. 
+ */
+%nodefault TYPE;
+
+%enddef /* HANDLE */
+
+
+/* typemaps for TA objects like TA_History */
+
+/* Objects are created as argout (just to be different than handles ;-)
+ * Example:
+ * @res = TA_HistoryAlloc($udb, $history_param);
+ * $history = $res[1] if $res[0] == $TA_SUCCESS;
+ *
+ * Clumsy, huh?
+ * However in practice, you will use 'new' anyway...
+ */
+
+%define OBJECT(TYPE, NAME)
+
+%typemap(in,numinputs=0) TYPE **NAME($*1_ltype temp = 0) 
+	"$1 = &temp;";
+
+%typemap(argout) TYPE **NAME 
+%{
+    if (*$1) {
+	if (argvi >= items) {
+	    EXTEND(sp,1);
+	}
+	$result = sv_newmortal();
+	SWIG_MakePtr($result, (void *) *$1, $*1_descriptor, SWIG_SHADOW|SWIG_OWNER);
+	argvi++;
+    }
+%}
+
+/* Don't create default constructors/destructors. 
+ */
+%nodefault TYPE;
+
+%enddef  /* OBJECT */
+
+#endif  /* SWIGPERL */
 
 
 /** ta_defs *****************************************************************/
@@ -63,9 +152,6 @@
 
 /* output parameter of TA_TimestampDeltaXxxx functions */
 %apply unsigned int *OUTPUT { unsigned int *delta }
-
-/* hiddenData should not be accessible from Perl at all */
-%ignore hiddenData;
 
 /* TA_StringTable */
 %typemap(in,numinputs=0) TA_StringTable** (TA_StringTable *temp = 0)
@@ -117,7 +203,7 @@
 
 
 /* we don't want just TA_StringTable classes around */
-%nodefault TA_StringTable;
+%ignore TA_StringTable;
 
 %include "../../../../../c/include/ta_common.h"
 
@@ -212,77 +298,19 @@ void TA_Timestamp_seconds_set(TA_Timestamp *ts, unsigned int seconds)
 
 /** ta_data *****************************************************************/
 
-#ifdef SWIGPERL
 
-/* typemaps for TA_UDBaseAlloc */
-
-/* Don't create default constructors/destructors.  We will use our own that
- * rely on TA_UDBaseAlloc/TA_UDBBaseFree
- */
-%nodefault TA_UDBase;
+HANDLE(TA_UDBase, newUDBase)
 
 /* fool SWIG that TA_UDBase is a struct.  SWIG creates shadow classes only
  * for structs and classes.
  */
 typedef struct {} TA_UDBase;
 
-/* pass as reference (Perl specific, maybe more convenient)
- * Example:
- * $ret = TA_UDBaseAlloc(\$udb);
- */
-%typemap(in) TA_UDBase **newUDBase($*1_ltype temp) 
-{
-    SV *tempsv;
-    if (!SvROK($input)) {
-        SWIG_croak("Expected a reference as argument $argnum of $symname");
-    }
-    tempsv = SvRV($input);
-    if (SWIG_ConvertPtr(tempsv, (void **) &temp, $*1_descriptor, 0) < 0) {
-        SWIG_croak("Type error in argument $argnum of $symname. Expected $*1_mangle");
-    }
-    if (temp) {
-        SWIG_croak("Expected a reference to undef variable as argument $argnum of $symname");
-    }
-    $1 = &temp;
-}
 
-%typemap(argout) TA_UDBase **newUDBase 
-{
-    SV *tempsv;
-    tempsv = SvRV($input);
-    SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, SWIG_SHADOW);
-}
+OBJECT(TA_History, history)
 
 
-/* typemaps for TA_HistoryAlloc */
-
-/* pass as argout (just to be different than TA_UDBaseAlloc ;-)
- * Example:
- * @res = TA_HistoryAlloc($udb, "US.NASDAQ.STOCK", 
- *                              "LNUX", $TA_DAILY, undef, undef,
- *                              $TA_ALL);
- * $history = $res[1] if $res[0] == $TA_SUCCESS;
- *
- * Clumsy, huh?
- * However in practice, you will use 'new' anyway...
- */
-
-%typemap(in,numinputs=0) TA_History **history(TA_History *temp = 0) 
-	"$1 = &temp;";
-
-%typemap(argout) TA_History **history 
-%{
-    if (*$1) {
-	if (argvi >= items) {
-	    EXTEND(sp,1);
-	}
-	$result = sv_newmortal();
-	SWIG_MakePtr($result, (void *) *$1, $*1_descriptor, SWIG_SHADOW|SWIG_OWNER);
-	argvi++;
-    }
-%}
-
-
+#ifdef SWIGPERL
 
 /* accessing members of TA_History */
 
@@ -377,11 +405,6 @@ typedef struct {} TA_UDBase;
     const TA_Timestamp *timestamp 
 };
 
-/* TA_History cannot be created in a standard way.  Use TA_HistoryAlloc
- * and TA_HistoryFree.  Perl module wraps them in a custom constructor
- * and destructor.
- */
-%nodefault TA_History;
 
 /* nbBars must not be modified, otherwise segmentation fault may occur */
 %immutable nbBars;
@@ -396,9 +419,6 @@ typedef struct {} TA_UDBase;
 %immutable volume;
 %immutable openInterest;
 %immutable listOfSource;
-
-/* hiddenData should not be accessible from Perl at all */
-%ignore hiddenData;
 
 /* Accessing symbol and category tables:
  * String tables are converted to perl lists directly, so no need for
@@ -596,7 +616,16 @@ typedef struct {} TA_UDBase;
 
 
 /** ta_pm *******************************************************************/
-/* untested */
+
+/* TA_TradeLog and TA_PM are handle types */
+HANDLE(TA_TradeLog, allocatedTradeLog)
+HANDLE(TA_PM, allocatedPM)
+
+/* output of TA_PMValue */
+%apply double *OUTPUT { TA_Real *value };
+
+
+OBJECT(TA_PMArray, allocatedArray)
 
 /* TA_PMArray has array fields of TA_Timestamp and TA_Real
  * We can reuse typemaps defined for TA_History
@@ -606,8 +635,58 @@ typedef struct {} TA_UDBase;
 
 %apply const TA_Real *ARRAY { const TA_Real *data }
 
+/* all fields of TA_PMArray are readonly */
+%immutable nbData;
+%immutable timestamp;
+%immutable data;
+%immutable arrayId;
+%immutable grp;
+%immutable period;
+
+/* PM report */
+
+/* TA_PMReport is never passed to Perl directly;
+ * it is converted to a list of strings
+ */
+%ignore TA_PMReport;
+%rename(TA_PMReport) TA_PMReportAlloc;
+%ignore TA_PMReportFree;
+
+%typemap(in,numinputs=0) TA_PMReport** newAllocatedReport (TA_PMReport *temp = 0)
+    "$1 = &temp;"
+
+%typemap(perl5,argout) TA_PMReport** 
+{
+    /* Copy the strings from **$1 to a Perl array */
+    if ( *$1 && (*$1)->nbLine > 0) {
+        int new_argvi = argvi + (*$1)->nbLine;
+        unsigned int elem;
+        if (new_argvi > items) {
+            EXTEND(sp,(new_argvi-items));
+        }
+        for (elem = 0;  elem < (*$1)->nbLine;  elem++) {
+            ST(argvi) = sv_newmortal();
+            sv_setpv((SV*)ST(argvi++), (char *) (*$1)->buffer+(elem*(*$1)->lineLength));
+        }
+    }
+    TA_PMReportFree(*$1);
+}
+
+/* Reporting to file is of little use, in Perl it is easy to output
+ * a string list to any file.
+ */
+%ignore TA_PMReportToFile;
 
 %include "../../../../../c/include/ta_pm.h"
+
+%clear TA_Real *value;
+
+%mutable nbData;
+%mutable timestamp;
+%mutable data;
+%mutable arrayId;
+%mutable grp;
+%mutable period;
 
 
 
@@ -619,7 +698,7 @@ typedef struct {} TA_UDBase;
 %ignore TA_GroupTableFree;
 
 /* For const handles returned, we define a macro to get them throug a Perl ref */
-%define HANDLE(TYPE, NAME)
+%define CONST_HANDLE(TYPE, NAME)
 
 %nodefault TYPE;
 
@@ -640,11 +719,11 @@ typedef struct {} TA_UDBase;
 
 %enddef
 
-HANDLE(TA_FuncHandle, handle)
-HANDLE(TA_FuncInfo, funcInfo)
-HANDLE(TA_InputParameterInfo, info)
-HANDLE(TA_OptInputParameterInfo, info)
-HANDLE(TA_OutputParameterInfo, info)
+CONST_HANDLE(TA_FuncHandle, handle)
+CONST_HANDLE(TA_FuncInfo, funcInfo)
+CONST_HANDLE(TA_InputParameterInfo, info)
+CONST_HANDLE(TA_OptInputParameterInfo, info)
+CONST_HANDLE(TA_OutputParameterInfo, info)
 
 /* Fool SWIG that TA_FuncHandle is a struct.  SWIG creates shadow classes only
  * for structs and classes.

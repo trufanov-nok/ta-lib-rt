@@ -38,6 +38,25 @@ undef *new;
 };
 
 
+sub GetStringDate {
+    my ($self) = @_;
+    @res = ::Finance::TAc::TA_GetDate($self);
+    return sprintf("%04d-%02d-%02d", @res[1..3]);
+}
+
+
+sub GetStringTime {
+    my ($self) = @_;
+    @res = ::Finance::TAc::TA_GetTime($self);
+    return sprintf("%02d:%02d:%02d", @res[1..3]);
+}
+
+
+sub GetStringTimestamp {
+    my ($self) = @_;
+    return GetStringDate($self) . " " . GetStringTime($self);
+}
+
 
 package Finance::TA::TA_RetCodeInfo;
 
@@ -55,7 +74,8 @@ undef *new;
 
 package Finance::TA::TA_UDBase;
 
-# Wrapper class for TA_UDBase, handling allocation deallocation automatically
+# Wrapper class for TA_UDBase, handling allocation deallocation automatically,
+# and providing object-oriented interface
 
 sub new {
     my $pkg = shift;
@@ -85,8 +105,7 @@ sub AddDataSource {
 
 sub History {
     return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    ::Finance::TA::TA_History::new($self, @_);
+    Finance::TA::TA_History->new(@_);
 }
 
 
@@ -124,10 +143,8 @@ sub new {
     #print "alloc history: @_\n";
     my $pkg = shift;
     my $self;
-    # handle default parameters
-    #$_[6] = $::Finance::TA::TA_ALL if (@_ < 7) || !defined($_[6]);
     my @res = ::Finance::TAc::TA_HistoryAlloc(@_);
-    if($res[0] == $::Finance::TA::TA_SUCCESS && defined($res[1])) {
+    if($res[0] == $Finance::TA::TA_SUCCESS && defined($res[1])) {
         $self = $res[1];
         return bless $self, $pkg;
     } else {
@@ -214,6 +231,129 @@ sub new {
     }
     return $self;
 }
+
+
+package Finance::TA::TA_TradeLog;
+
+# Wrapper class for TA_TradeLog, handling allocation deallocation automatically,
+# and providing object-oriented interface
+
+sub new {
+    my $pkg = shift;
+    my $self;
+    my $retCode = ::Finance::TAc::TA_TradeLogAlloc(\$self);
+    if (defined $self) {
+        bless $self, $pkg;
+        ACQUIRE($self);
+    }
+    #print "creating $self\n";
+    return $self;
+}
+
+sub DESTROY {
+    return unless $_[0]->isa('HASH');
+    #print "destroying $_[0]\n";
+    my $self = tied(%{$_[0]});
+    delete $ITERATORS{$self};
+    if (exists $OWNER{$self}) {
+        ::Finance::TAc::TA_TradeLogFree($self);
+        delete $OWNER{$self};
+    }
+}
+
+sub TradeLogAdd {
+    my $self = shift;
+    ::Finance::TAc::TA_TradeLogAdd($self, @_);
+}
+
+
+package Finance::TA::TA_PM;
+
+# Wrapper class for TA_PM, handling allocation deallocation automatically,
+# and providing object-oriented interface
+
+# Keep track which logs are added to PM, not to destroy them too early
+%logs = ();
+
+sub new {
+    my $pkg = shift;
+    my $self;
+    my $retCode = ::Finance::TAc::TA_PMAlloc(@_[0..2], \$self);
+    if (defined $self) {
+        bless $self, $pkg;
+        ACQUIRE($self);
+    }
+    #print "creating $self\n";
+    return $self;
+}
+
+sub DESTROY {
+    my ($self) = @_;
+    return unless $self->isa('HASH');
+    #print "destroying $self\n";
+    my $this = tied(%$self);
+    delete $ITERATORS{$this};
+    if (exists $OWNER{$this}) {
+        ::Finance::TAc::TA_PMFree($this);
+        delete $OWNER{$this};
+        delete $logs{$self};
+    }
+}
+
+sub PMAddTradeLog {
+    my ($self, $log) = @_;
+    push(@{$logs{$self}}, $log);
+    ::Finance::TAc::TA_PMAddTradeLog($self, $log);
+}
+
+sub PMValue {
+    my @res = ::Finance::TAc::TA_PMValue(@_);
+    return ($res[0] == $Finance::TA::TA_SUCCESS)? $res[1] : undef;
+}
+
+sub PMArray {
+    return unless $_[0]->isa('HASH');
+    return Finance::TA::TA_PMArray->new(@_);
+}
+
+
+package Finance::TA::TA_PMArray;
+
+# Wrapper classes arrange access to TA_PMArray, similarly to TA_History
+
+sub new {
+    #print "alloc PMArray: @_\n";
+    my $pkg = shift;
+    my $self;
+    my @res = ::Finance::TAc::TA_PMArrayAlloc(@_);
+    if($res[0] == $::Finance::TA::TA_SUCCESS && defined($res[1])) {
+        $self = $res[1];
+        return bless $self, $pkg;
+    } else {
+        my %hash;
+        $hash{retCode} = $res[0];
+        return \%hash;  # not blessed!
+    }
+}
+
+*swig_retCode_get = sub { $::Finance::TA::TA_SUCCESS };
+
+sub DESTROY {
+    return unless $_[0]->isa('HASH');
+    my $self = tied(%{$_[0]});
+    return unless defined $self;
+    delete $ITERATORS{$self};
+    if (exists $OWNER{$self}) {
+        #print "free PMArray: @_: ";
+        ::Finance::TAc::TA_PMArrayFree($self);
+        delete $OWNER{$self};
+    }
+}
+
+# Now prevent accidental direct calls to TA_PMArrayAlloc/TA_PMArrayhFree
+delete $::Finance::TA::{TA_PMArrayAlloc};
+delete $::Finance::TA::{TA_PMArrayFree};
+
 
 
 package Finance::TA;
