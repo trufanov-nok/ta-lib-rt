@@ -1562,9 +1562,7 @@ package Finance::TA;
 
 package Finance::TA;
 
-# Tested with TA-LIB version between v0.1.2 and v0.1.3
-our $VERSION = v0.1.2;
-
+our $VERSION = v0.1.3;
 
 package Finance::TA::TA_Timestamp;
 
