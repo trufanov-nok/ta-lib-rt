@@ -1,29 +1,19 @@
-V0.0.8 (April 2003)
+V0.1.0 (August 2003)
 
-- New TA Functions:
-    AROON          Aroon
-    AROONOSC       Aroon Oscillator
-    MAMA           MESA Adaptive Moving Average
-    KAMA           Kaufman Adaptive Moving Average
-    T3             Triple Exponential Moving Average
-    HT_TRENDLINE   Hilbert Transform - Instantaneous Trendline
-    HT_DCPERIOD    Hilbert Transform - Dominant Cycle Period
-    HT_DCPHASE     Hilbert Transform - Dominant Cycle Phase
-    HT_PHASOR      Hilbert Transform - Phasor Components
-    HT_SINE        Hilbert Transform - SineWave
-    HT_TRENDMODE   Hilbert Transform - Trend vs Cycle Mode
-    AD             Chaikin A/D Line
-    ADOSC          Chaikin A/D Oscillator
+(Stable Release Candidate - Please Test and provide feedback)
 
-  The Hilbert Transform functions are the ones found
-  in John F. Ehlers books "Rocket Science For Traders".
+- New .NET/Mono interface.
 
-- MA types parameters have been changed, hopefully for the last time.
+- Performance Measurements: New trade-by-trade reports with
+  Maximum Adverse Excursion. Sharpe Ratio added and slight
+  change to interface.
 
-- Fix #701060: Fix TA_TRIMA function. Thanks to Chris.
-
-- Excel shutdown logic corrected. Sync with latest XLW 1.2.2 release
+- Fix #724662: TA_GetTime bug
+- Fix #736196: TA_STOCHF bug with outFastD_1
+- Fix #731857: TA_String bad memory access 
+- Fix #748163: TA_AROON never reaching zero
 
 See HISTORY.TXT for summary of previous version.
 
 Info: http://ta-lib.org
+
