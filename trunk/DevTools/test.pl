@@ -39,14 +39,16 @@ sub Main
       removeAllTempFile( "..\\ta-unixodbc\\" );
       removeAllBinFile( "..\\ta-mysql\\", 0 );
       removeAllTempFile( "..\\ta-mysql\\" );
+      removeRelease($root_dir);
       exit(0);        
+   }
+   else
+   {
+     removeRelease($root_dir);   
    }
 
    open(STDOUT, ">".$root_dir."\\release\\log\\stdout.txt" ) or die;
    open(STDERR, ">".$root_dir."\\release\\log\\stderr.txt" ) or die;
-
-   # Clean-up packaging directory
-   removeRelease();
 
    if( $fastOption eq 0 )
    {

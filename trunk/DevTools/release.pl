@@ -57,20 +57,19 @@ sub Main
    $a = "zip -r -o -q ".$root_dir."release\\ta-mysql-".$versionSuffix."-msvc.zip ta-mysql\\*.*";
    execProg( $root_dir."release\\build\\", $a );
    removeAllBinFile($ta_mysql_dir, 0 );
-
-   #buildBorland($ta_mysql_dir, "cdr", 1, $root_dir."release\\log\\", "ta_mysql" );
-   #buildBorland($ta_mysql_dir, "cdd", 1, $root_dir."release\\log\\", "ta_mysql" );
-   #removeAllTempFile($ta_mysql_dir);
-   #$a = "zip -r -o -q ".$root_dir."release\\ta-mysql-".$versionSuffix."-borl.zip ta-mysql\\*.*";
-   #execProg( $ta_mysql_dir, $a );
-   #removeAllBinFile($ta_mysql_dir, 0 );
    
    ###########################################################################
    # Package ta_lib
    ###########################################################################
    # Make the 'src' package
-   $a = "zip -r -o -q ".$root_dir."release\\ta-lib-".$versionSuffix."-src.zip ta-lib\\*.*";
+   $packageName = $root_dir."release\\ta-lib-".$versionSuffix."-src.zip";
+   $a = "zip -r -o -q ".$packageName." ta-lib\\*.*";
    execProg( $root_dir."release\\build\\", $a );
+
+   # Remove the Excel/Perl/.NET binaries from the package.
+   # These binaries were not build, they are coming from 
+   # the CVS import.
+   removeBinFromPackage( $root_dir, $packageName );
 
    # Make the MSVC package
    my $keepTheLib =1;
