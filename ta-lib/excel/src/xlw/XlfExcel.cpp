@@ -52,26 +52,10 @@ XlfExcel *XlfExcel::this_ = 0;
 struct XlfExcelImpl
 {
   //! Ctor.
-  XlfExcelImpl(std::ofstream * hlogf = 0): hlogf_(hlogf) {}
+  XlfExcelImpl(): handle_(0) {}
   //! Handle to the DLL module.
   HINSTANCE handle_;
-  //! Pointer to log file, currently not used.
-  std::ofstream * hlogf_;
 };
-
-//! Destroys the XlfExcel singleton.
-/*!
-\deprecated Uses xlAutoClose: 
-\code
-  long EXCEL_EXPORT xlAutoClose()
-  {
-		delete &XlfExcel::Instance();
-    return 1;
-  }
-\endcode
-*/
-class XlfExcelDestroyer
-  {};
 
 /*!
 You always have the choice with the singleton in returning a pointer or
@@ -213,10 +197,8 @@ int cdecl XlfExcel::Call(int xlfn, LPXLOPER pxResult, int count, ...) const
 #endif
 
 #ifdef _ALPHA_
-
   return Callv(xlfn, pxResult, count, plpx);
 #else
-
   return Callv(xlfn, pxResult, count, (LPXLOPER *)(&count + 1));
 #endif
 }
@@ -262,51 +244,54 @@ int XlfExcel::Callv(int xlfn, LPXLOPER pxResult, int count, LPXLOPER pxdata[]) c
   return xlret;
 }
 
-namespace {
+namespace
+{
 
 //! Needed by IsCalledByFuncWiz.
-typedef struct _EnumStruct {
-    bool bFuncWiz;
-    short hwndXLMain;
-} EnumStruct, FAR * LPEnumStruct;
+typedef struct _EnumStruct
+{
+  bool bFuncWiz;
+  short hwndXLMain;
+}
+EnumStruct, FAR * LPEnumStruct;
 
 //! Needed by IsCalledByFuncWiz.
 bool CALLBACK EnumProc(HWND hwnd, LPEnumStruct pEnum)
 {
-    const size_t CLASS_NAME_BUFFER = 50;
+  const size_t CLASS_NAME_BUFFER = 50;
 
-    // first check the class of the window.  Will be szXLDialogClass
-    // if function wizard dialog is up in Excel
-    char rgsz[CLASS_NAME_BUFFER];
-    GetClassName(hwnd, (LPSTR)rgsz, CLASS_NAME_BUFFER);
-    if (2 == CompareString(MAKELCID(MAKELANGID(LANG_ENGLISH,
-        SUBLANG_ENGLISH_US),SORT_DEFAULT), NORM_IGNORECASE,
-        (LPSTR)rgsz,  (lstrlen((LPSTR)rgsz)>lstrlen("bosa_sdm_XL")) 
-        ? lstrlen("bosa_sdm_XL"):-1, "bosa_sdm_XL", -1)) 
+  // first check the class of the window.  Will be szXLDialogClass
+  // if function wizard dialog is up in Excel
+  char rgsz[CLASS_NAME_BUFFER];
+  GetClassName(hwnd, (LPSTR)rgsz, CLASS_NAME_BUFFER);
+  if (2 == CompareString(MAKELCID(MAKELANGID(LANG_ENGLISH,
+                                  SUBLANG_ENGLISH_US),SORT_DEFAULT), NORM_IGNORECASE,
+                         (LPSTR)rgsz,  (lstrlen((LPSTR)rgsz)>lstrlen("bosa_sdm_XL"))
+                         ? lstrlen("bosa_sdm_XL"):-1, "bosa_sdm_XL", -1))
+  {
+    if(LOWORD((DWORD) GetParent(hwnd)) == pEnum->hwndXLMain)
     {
-        if(LOWORD((DWORD) GetParent(hwnd)) == pEnum->hwndXLMain) 
-        {
-            pEnum->bFuncWiz = TRUE;
-            return false;
-        }
+      pEnum->bFuncWiz = TRUE;
+      return false;
     }
-    // no luck - continue the enumeration
-    return true;
+  }
+  // no luck - continue the enumeration
+  return true;
 }
-}
+} // empty namespace
 
 bool XlfExcel::IsCalledByFuncWiz() const
 {
-    XLOPER xHwndMain;
-    EnumStruct    enm;
+  XLOPER xHwndMain;
+  EnumStruct    enm;
 
-    if (Excel4(xlGetHwnd, &xHwndMain, 0) == xlretSuccess) 
-    {
-        enm.bFuncWiz = false;
-        enm.hwndXLMain = xHwndMain.val.w;
-        EnumWindows((WNDENUMPROC) EnumProc,
-            (LPARAM) ((LPEnumStruct)  &enm)); 
-        return enm.bFuncWiz;
-    }
-    return false;    //safe case: Return false if not sure
+  if (Excel4(xlGetHwnd, &xHwndMain, 0) == xlretSuccess)
+  {
+    enm.bFuncWiz = false;
+    enm.hwndXLMain = xHwndMain.val.w;
+    EnumWindows((WNDENUMPROC) EnumProc,
+                (LPARAM) ((LPEnumStruct)  &enm));
+    return enm.bFuncWiz;
+  }
+  return false;    //safe case: Return false if not sure
 }

@@ -26,12 +26,7 @@
 
 #include <xlw/EXCEL32_API.h>
 #include <string>
-#ifdef PORT_USE_OLD_IO_HEADERS
-#include <fstream.h>
-#else
-#include <fstream>
 #include <list>
-#endif
 #include <xlw/xlcall32.h>
 
 #if defined(_MSC_VER)
@@ -61,10 +56,8 @@ public:
   std::string GetName() const;
   //! Interface to Excel (perform ERR_CHECKs before passing XlfOper to Excel)
 #ifdef __MINGW32__
-
   int __cdecl Call(int xlfn, LPXLOPER pxResult, int count, ...) const;
 #else
-
   int cdecl Call(int xlfn, LPXLOPER pxResult, int count, ...) const;
 #endif
   //! Same as above but with an argument array instead of the variable length argument list
@@ -86,11 +79,11 @@ private:
   //! Memory buffer used to store data that are passed to Excel
   /*!
   When we pass XLOPER from the XLL towards Excel we should not use 
-	XLL local variables as it would be freed before MSExcel could get 
-	the data.
+  XLL local variables as it would be freed before MSExcel could get 
+  the data.
 
   Therefore the framework C library that comes with \ref XLSDK97 "Excel 
-	97 developer's kit" suggests to use a static area where the XlfOper
+  97 developer's kit" suggests to use a static area where the XlfOper
   are stored (see XlfExcel::GetMemory) and still available to
   Excel when we exit the XLL routine. This array is then reset
   by a call to XlfExcel::FreeMemory at the begining of each new
