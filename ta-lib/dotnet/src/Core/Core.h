@@ -50,17 +50,17 @@
 using namespace System;
 using namespace System::Runtime::InteropServices;
 
-#include <stdio.h>
 #include <limits.h>
 
 namespace TA
 {
    namespace Lib
    {
-      #include "ta_defs.h"
-            
-	   public __gc __sealed class Core
-	   {
+      public __gc __sealed class Core
+	  {
+	  public:
+         #include "ta_defs.h"
+
       private:
          __gc __sealed class TA_GlobalsType
          {
@@ -82,22 +82,6 @@ namespace TA
 
          static TA_GlobalsType *TA_Globals;
 
-         static enum TA_RetCode TA_INT_SMA( int     startIdx,
-                                int     endIdx,
-                                double  inReal_0 __gc [],
-                                int     optInTimePeriod_0, /* From 1 to 200 */
-                                [OutAttribute]Int32 *outBegIdx,
-                                [OutAttribute]Int32 *outNbElement,
-                                double  outReal_0 __gc [] );
-
-         static enum TA_RetCode TA_S_INT_SMA( int     startIdx,
-                                int     endIdx,
-                                float   inReal_0 __gc [],
-                                int     optInTimePeriod_0, /* From 1 to 200 */
-                                [OutAttribute]Int32 *outBegIdx,
-                                [OutAttribute]Int32 *outNbElement,
-                                double  outReal_0 __gc [] );
-
          static enum TA_RetCode TA_INT_EMA( int           startIdx,
                                 int           endIdx,
                                 double        inReal_0 __gc [],
@@ -107,9 +91,46 @@ namespace TA
                                 [OutAttribute]Int32 *outNbElement,
                                 double        outReal_0 __gc []);
 
+         static enum TA_RetCode TA_INT_EMA( int           startIdx,
+                                int           endIdx,
+                                float         inReal_0 __gc [],
+                                int           optInTimePeriod_0, /* From 1 to 200 */
+                                double        optInK_1,
+                                [OutAttribute]Int32 *outBegIdx,
+                                [OutAttribute]Int32 *outNbElement,
+                                double        outReal_0 __gc []);
+
+         static enum TA_RetCode TA_INT_SMA( int     startIdx,
+                                int     endIdx,
+                                double  inReal_0 __gc [],
+                                int     optInTimePeriod_0, /* From 1 to 200 */
+                                [OutAttribute]Int32 *outBegIdx,
+                                [OutAttribute]Int32 *outNbElement,
+                                double  outReal_0 __gc [] );
+
+         static enum TA_RetCode TA_INT_SMA( int     startIdx,
+                                int     endIdx,
+                                float   inReal_0 __gc [],
+                                int     optInTimePeriod_0, /* From 1 to 200 */
+                                [OutAttribute]Int32 *outBegIdx,
+                                [OutAttribute]Int32 *outNbElement,
+                                double  outReal_0 __gc [] );
+
          static enum TA_RetCode TA_INT_MACD( int    startIdx,
                                  int    endIdx,
                                  double inReal_0 __gc [],
+                                 int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
+                                 int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
+                                 int    optInSignalPeriod_2, /* From 1 to 200 */
+                                 [OutAttribute]Int32 *outBegIdx,
+                                 [OutAttribute]Int32 *outNbElement,
+                                 double outMACD_0 __gc [],
+                                 double outMACDSignal_1 __gc [],
+                                 double outMACDHist_2 __gc [] );
+
+         static enum TA_RetCode TA_INT_MACD( int    startIdx,
+                                 int    endIdx,
+                                 float  inReal_0 __gc [],
                                  int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
                                  int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
                                  int    optInSignalPeriod_2, /* From 1 to 200 */
@@ -131,9 +152,29 @@ namespace TA
                                double  tempBuffer __gc [],
                                unsigned int  doPercentageOutput );
 
+         static enum TA_RetCode TA_INT_PO( int    startIdx,
+                               int    endIdx,
+                               float inReal_0 __gc [],
+                               int    optInFastPeriod_0, /* From 1 to 200 */
+                               int    optInSlowPeriod_1, /* From 1 to 200 */
+                               TA_MAType optInMethod_2,
+                               [OutAttribute]Int32 *outBegIdx,
+                               [OutAttribute]Int32 *outNbElement,
+                               double  outReal_0 __gc [],
+                               double  tempBuffer __gc [],
+                               unsigned int  doPercentageOutput );
+
          static enum TA_RetCode TA_INT_VAR( int    startIdx,
                                 int    endIdx,
                                 double inReal_0 __gc [],
+                                int    optInTimePeriod_0,                       
+                                [OutAttribute]Int32 *outBegIdx,
+                                [OutAttribute]Int32 *outNbElement,
+                                double outReal_0 __gc []);
+
+         static enum TA_RetCode TA_INT_VAR( int    startIdx,
+                                int    endIdx,
+                                float inReal_0 __gc [],
                                 int    optInTimePeriod_0,                       
                                 [OutAttribute]Int32 *outBegIdx,
                                 [OutAttribute]Int32 *outNbElement,
@@ -145,6 +186,14 @@ namespace TA
                                               int inMovAvgNbElement,
                                               int timePeriod,
                                               double output __gc []);
+
+         static void TA_INT_stddev_using_precalc_ma( float inReal __gc [],
+                                              double inMovAvg __gc [],
+                                              int inMovAvgBegIdx,
+                                              int inMovAvgNbElement,
+                                              int timePeriod,
+                                              double output __gc []);
+
       public:
          static Core()
          {
@@ -170,6 +219,13 @@ namespace TA
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode MAX( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
 
          #define TA_MAX Core::MAX
          #define TA_MAX_Lookback Core::MAX_Lookback
@@ -179,6 +235,13 @@ namespace TA
          static enum TA_RetCode MIN( int    startIdx,
                                      int    endIdx,
                                      double       inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode MIN( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
                                      int           optInTimePeriod_0, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
@@ -203,6 +266,18 @@ namespace TA
                                         double        outRealUpperBand_0 __gc [],
                                         double        outRealMiddleBand_1 __gc [],
                                         double        outRealLowerBand_2 __gc [] );
+         static enum TA_RetCode BBANDS( int    startIdx,
+                                        int    endIdx,
+                                        float        inReal_0 __gc [],
+                                        int           optInTimePeriod_0, /* From 2 to 100000 */
+                                        double        optInNbDevUp_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInNbDevDn_2, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        TA_MAType     optInMAType_3,
+                                        [OutAttribute]Int32 *outBegIdx,
+                                        [OutAttribute]Int32 *outNbElement,
+                                        double        outRealUpperBand_0 __gc [],
+                                        double        outRealMiddleBand_1 __gc [],
+                                        double        outRealLowerBand_2 __gc [] );
 
          #define TA_BBANDS Core::BBANDS
          #define TA_BBANDS_Lookback Core::BBANDS_Lookback
@@ -212,6 +287,13 @@ namespace TA
          static enum TA_RetCode DEMA( int    startIdx,
                                       int    endIdx,
                                       double       inReal_0 __gc [],
+                                      int           optInTimePeriod_0, /* From 2 to 100000 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode DEMA( int    startIdx,
+                                      int    endIdx,
+                                      float        inReal_0 __gc [],
                                       int           optInTimePeriod_0, /* From 2 to 100000 */
                                       [OutAttribute]Int32 *outBegIdx,
                                       [OutAttribute]Int32 *outNbElement,
@@ -229,6 +311,13 @@ namespace TA
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode EMA( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
 
          #define TA_EMA Core::EMA
          #define TA_EMA_Lookback Core::EMA_Lookback
@@ -238,6 +327,12 @@ namespace TA
          static enum TA_RetCode HT_TRENDLINE( int    startIdx,
                                               int    endIdx,
                                               double       inReal_0 __gc [],
+                                              [OutAttribute]Int32 *outBegIdx,
+                                              [OutAttribute]Int32 *outNbElement,
+                                              double        outReal_0 __gc [] );
+         static enum TA_RetCode HT_TRENDLINE( int    startIdx,
+                                              int    endIdx,
+                                              float        inReal_0 __gc [],
                                               [OutAttribute]Int32 *outBegIdx,
                                               [OutAttribute]Int32 *outNbElement,
                                               double        outReal_0 __gc [] );
@@ -254,6 +349,13 @@ namespace TA
                                       [OutAttribute]Int32 *outBegIdx,
                                       [OutAttribute]Int32 *outNbElement,
                                       double        outReal_0 __gc [] );
+         static enum TA_RetCode KAMA( int    startIdx,
+                                      int    endIdx,
+                                      float        inReal_0 __gc [],
+                                      int           optInTimePeriod_0, /* From 2 to 100000 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outReal_0 __gc [] );
 
          #define TA_KAMA Core::KAMA
          #define TA_KAMA_Lookback Core::KAMA_Lookback
@@ -263,6 +365,14 @@ namespace TA
          static enum TA_RetCode MA( int    startIdx,
                                     int    endIdx,
                                     double       inReal_0 __gc [],
+                                    int           optInTimePeriod_0, /* From 2 to 100000 */
+                                    TA_MAType     optInMAType_1,
+                                    [OutAttribute]Int32 *outBegIdx,
+                                    [OutAttribute]Int32 *outNbElement,
+                                    double        outReal_0 __gc [] );
+         static enum TA_RetCode MA( int    startIdx,
+                                    int    endIdx,
+                                    float        inReal_0 __gc [],
                                     int           optInTimePeriod_0, /* From 2 to 100000 */
                                     TA_MAType     optInMAType_1,
                                     [OutAttribute]Int32 *outBegIdx,
@@ -284,6 +394,15 @@ namespace TA
                                       [OutAttribute]Int32 *outNbElement,
                                       double        outMAMA_0 __gc [],
                                       double        outFAMA_1 __gc [] );
+         static enum TA_RetCode MAMA( int    startIdx,
+                                      int    endIdx,
+                                      float        inReal_0 __gc [],
+                                      double        optInFastLimit_0, /* From 0.01 to 0.99 */
+                                      double        optInSlowLimit_1, /* From 0.01 to 0.99 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outMAMA_0 __gc [],
+                                      double        outFAMA_1 __gc [] );
 
          #define TA_MAMA Core::MAMA
          #define TA_MAMA_Lookback Core::MAMA_Lookback
@@ -298,6 +417,14 @@ namespace TA
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
                                           double        outReal_0 __gc [] );
+         static enum TA_RetCode MIDPRICE( int    startIdx,
+                                          int    endIdx,
+                                          float        inHigh_0 __gc [],
+                                          float        inLow_0 __gc [],
+                                          int           optInTimePeriod_0, /* From 2 to 100000 */
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
 
          #define TA_MIDPRICE Core::MIDPRICE
          #define TA_MIDPRICE_Lookback Core::MIDPRICE_Lookback
@@ -307,6 +434,13 @@ namespace TA
          static enum TA_RetCode MIDPOINT( int    startIdx,
                                           int    endIdx,
                                           double       inReal_0 __gc [],
+                                          int           optInTimePeriod_0, /* From 2 to 100000 */
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
+         static enum TA_RetCode MIDPOINT( int    startIdx,
+                                          int    endIdx,
+                                          float        inReal_0 __gc [],
                                           int           optInTimePeriod_0, /* From 2 to 100000 */
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
@@ -327,6 +461,15 @@ namespace TA
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode SAR( int    startIdx,
+                                     int    endIdx,
+                                     float        inHigh_0 __gc [],
+                                     float        inLow_0 __gc [],
+                                     double        optInAcceleration_0, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                     double        optInMaximum_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
 
          #define TA_SAR Core::SAR
          #define TA_SAR_Lookback Core::SAR_Lookback
@@ -336,6 +479,13 @@ namespace TA
          static enum TA_RetCode SMA( int    startIdx,
                                      int    endIdx,
                                      double       inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode SMA( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
                                      int           optInTimePeriod_0, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
@@ -355,6 +505,14 @@ namespace TA
                                     [OutAttribute]Int32 *outBegIdx,
                                     [OutAttribute]Int32 *outNbElement,
                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode T3( int    startIdx,
+                                    int    endIdx,
+                                    float        inReal_0 __gc [],
+                                    int           optInTimePeriod_0, /* From 2 to 100000 */
+                                    double        optInVFactor_1, /* From 0 to 1 */
+                                    [OutAttribute]Int32 *outBegIdx,
+                                    [OutAttribute]Int32 *outNbElement,
+                                    double        outReal_0 __gc [] );
 
          #define TA_T3 Core::T3
          #define TA_T3_Lookback Core::T3_Lookback
@@ -364,6 +522,13 @@ namespace TA
          static enum TA_RetCode TEMA( int    startIdx,
                                       int    endIdx,
                                       double       inReal_0 __gc [],
+                                      int           optInTimePeriod_0, /* From 2 to 100000 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode TEMA( int    startIdx,
+                                      int    endIdx,
+                                      float        inReal_0 __gc [],
                                       int           optInTimePeriod_0, /* From 2 to 100000 */
                                       [OutAttribute]Int32 *outBegIdx,
                                       [OutAttribute]Int32 *outNbElement,
@@ -381,6 +546,13 @@ namespace TA
                                        [OutAttribute]Int32 *outBegIdx,
                                        [OutAttribute]Int32 *outNbElement,
                                        double        outReal_0 __gc [] );
+         static enum TA_RetCode TRIMA( int    startIdx,
+                                       int    endIdx,
+                                       float        inReal_0 __gc [],
+                                       int           optInTimePeriod_0, /* From 2 to 100000 */
+                                       [OutAttribute]Int32 *outBegIdx,
+                                       [OutAttribute]Int32 *outNbElement,
+                                       double        outReal_0 __gc [] );
 
          #define TA_TRIMA Core::TRIMA
          #define TA_TRIMA_Lookback Core::TRIMA_Lookback
@@ -390,6 +562,13 @@ namespace TA
          static enum TA_RetCode WMA( int    startIdx,
                                      int    endIdx,
                                      double       inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode WMA( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
                                      int           optInTimePeriod_0, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
@@ -409,6 +588,15 @@ namespace TA
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode ATR( int    startIdx,
+                                     int    endIdx,
+                                     float        inHigh_0 __gc [],
+                                     float        inLow_0 __gc [],
+                                     float        inClose_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 1 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
 
          #define TA_ATR Core::ATR
          #define TA_ATR_Lookback Core::ATR_Lookback
@@ -423,6 +611,14 @@ namespace TA
                                         [OutAttribute]Int32 *outBegIdx,
                                         [OutAttribute]Int32 *outNbElement,
                                         double        outReal_0 __gc [] );
+         static enum TA_RetCode TRANGE( int    startIdx,
+                                        int    endIdx,
+                                        float        inHigh_0 __gc [],
+                                        float        inLow_0 __gc [],
+                                        float        inClose_0 __gc [],
+                                        [OutAttribute]Int32 *outBegIdx,
+                                        [OutAttribute]Int32 *outNbElement,
+                                        double        outReal_0 __gc [] );
 
          #define TA_TRANGE Core::TRANGE
          #define TA_TRANGE_Lookback Core::TRANGE_Lookback
@@ -434,6 +630,15 @@ namespace TA
                                      double       inHigh_0 __gc [],
                                      double       inLow_0 __gc [],
                                      double       inClose_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode ADX( int    startIdx,
+                                     int    endIdx,
+                                     float        inHigh_0 __gc [],
+                                     float        inLow_0 __gc [],
+                                     float        inClose_0 __gc [],
                                      int           optInTimePeriod_0, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
@@ -453,6 +658,15 @@ namespace TA
                                       [OutAttribute]Int32 *outBegIdx,
                                       [OutAttribute]Int32 *outNbElement,
                                       double        outReal_0 __gc [] );
+         static enum TA_RetCode ADXR( int    startIdx,
+                                      int    endIdx,
+                                      float        inHigh_0 __gc [],
+                                      float        inLow_0 __gc [],
+                                      float        inClose_0 __gc [],
+                                      int           optInTimePeriod_0, /* From 2 to 100000 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outReal_0 __gc [] );
 
          #define TA_ADXR Core::ADXR
          #define TA_ADXR_Lookback Core::ADXR_Lookback
@@ -463,6 +677,15 @@ namespace TA
          static enum TA_RetCode APO( int    startIdx,
                                      int    endIdx,
                                      double       inReal_0 __gc [],
+                                     int           optInFastPeriod_0, /* From 2 to 100000 */
+                                     int           optInSlowPeriod_1, /* From 2 to 100000 */
+                                     TA_MAType     optInMAType_2,
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode APO( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
                                      int           optInFastPeriod_0, /* From 2 to 100000 */
                                      int           optInSlowPeriod_1, /* From 2 to 100000 */
                                      TA_MAType     optInMAType_2,
@@ -484,6 +707,15 @@ namespace TA
                                        [OutAttribute]Int32 *outNbElement,
                                        double        outAroonDown_0 __gc [],
                                        double        outAroonUp_1 __gc [] );
+         static enum TA_RetCode AROON( int    startIdx,
+                                       int    endIdx,
+                                       float        inHigh_0 __gc [],
+                                       float        inLow_0 __gc [],
+                                       int           optInTimePeriod_0, /* From 2 to 100000 */
+                                       [OutAttribute]Int32 *outBegIdx,
+                                       [OutAttribute]Int32 *outNbElement,
+                                       double        outAroonDown_0 __gc [],
+                                       double        outAroonUp_1 __gc [] );
 
          #define TA_AROON Core::AROON
          #define TA_AROON_Lookback Core::AROON_Lookback
@@ -494,6 +726,14 @@ namespace TA
                                           int    endIdx,
                                           double       inHigh_0 __gc [],
                                           double       inLow_0 __gc [],
+                                          int           optInTimePeriod_0, /* From 2 to 100000 */
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
+         static enum TA_RetCode AROONOSC( int    startIdx,
+                                          int    endIdx,
+                                          float        inHigh_0 __gc [],
+                                          float        inLow_0 __gc [],
                                           int           optInTimePeriod_0, /* From 2 to 100000 */
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
@@ -513,6 +753,15 @@ namespace TA
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode CCI( int    startIdx,
+                                     int    endIdx,
+                                     float        inHigh_0 __gc [],
+                                     float        inLow_0 __gc [],
+                                     float        inClose_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 5 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
 
          #define TA_CCI Core::CCI
          #define TA_CCI_Lookback Core::CCI_Lookback
@@ -528,6 +777,15 @@ namespace TA
                                     [OutAttribute]Int32 *outBegIdx,
                                     [OutAttribute]Int32 *outNbElement,
                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode DX( int    startIdx,
+                                    int    endIdx,
+                                    float        inHigh_0 __gc [],
+                                    float        inLow_0 __gc [],
+                                    float        inClose_0 __gc [],
+                                    int           optInTimePeriod_0, /* From 2 to 100000 */
+                                    [OutAttribute]Int32 *outBegIdx,
+                                    [OutAttribute]Int32 *outNbElement,
+                                    double        outReal_0 __gc [] );
 
          #define TA_DX Core::DX
          #define TA_DX_Lookback Core::DX_Lookback
@@ -539,6 +797,17 @@ namespace TA
          static enum TA_RetCode MACD( int    startIdx,
                                       int    endIdx,
                                       double       inReal_0 __gc [],
+                                      int           optInFastPeriod_0, /* From 2 to 100000 */
+                                      int           optInSlowPeriod_1, /* From 2 to 100000 */
+                                      int           optInSignalPeriod_2, /* From 1 to 100000 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outMACD_0 __gc [],
+                                      double        outMACDSignal_1 __gc [],
+                                      double        outMACDHist_2 __gc [] );
+         static enum TA_RetCode MACD( int    startIdx,
+                                      int    endIdx,
+                                      float        inReal_0 __gc [],
                                       int           optInFastPeriod_0, /* From 2 to 100000 */
                                       int           optInSlowPeriod_1, /* From 2 to 100000 */
                                       int           optInSignalPeriod_2, /* From 1 to 100000 */
@@ -571,6 +840,20 @@ namespace TA
                                          double        outMACD_0 __gc [],
                                          double        outMACDSignal_1 __gc [],
                                          double        outMACDHist_2 __gc [] );
+         static enum TA_RetCode MACDEXT( int    startIdx,
+                                         int    endIdx,
+                                         float        inReal_0 __gc [],
+                                         int           optInFastPeriod_0, /* From 2 to 100000 */
+                                         TA_MAType     optInFastMAType_1,
+                                         int           optInSlowPeriod_2, /* From 2 to 100000 */
+                                         TA_MAType     optInSlowMAType_3,
+                                         int           optInSignalPeriod_4, /* From 1 to 100000 */
+                                         TA_MAType     optInSignalMAType_5,
+                                         [OutAttribute]Int32 *outBegIdx,
+                                         [OutAttribute]Int32 *outNbElement,
+                                         double        outMACD_0 __gc [],
+                                         double        outMACDSignal_1 __gc [],
+                                         double        outMACDHist_2 __gc [] );
 
          #define TA_MACDEXT Core::MACDEXT
          #define TA_MACDEXT_Lookback Core::MACDEXT_Lookback
@@ -580,6 +863,15 @@ namespace TA
          static enum TA_RetCode MACDFIX( int    startIdx,
                                          int    endIdx,
                                          double       inReal_0 __gc [],
+                                         int           optInSignalPeriod_0, /* From 1 to 100000 */
+                                         [OutAttribute]Int32 *outBegIdx,
+                                         [OutAttribute]Int32 *outNbElement,
+                                         double        outMACD_0 __gc [],
+                                         double        outMACDSignal_1 __gc [],
+                                         double        outMACDHist_2 __gc [] );
+         static enum TA_RetCode MACDFIX( int    startIdx,
+                                         int    endIdx,
+                                         float        inReal_0 __gc [],
                                          int           optInSignalPeriod_0, /* From 1 to 100000 */
                                          [OutAttribute]Int32 *outBegIdx,
                                          [OutAttribute]Int32 *outNbElement,
@@ -602,6 +894,16 @@ namespace TA
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode MFI( int    startIdx,
+                                     int    endIdx,
+                                     float        inHigh_0 __gc [],
+                                     float        inLow_0 __gc [],
+                                     float        inClose_0 __gc [],
+                                     int          inVolume_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
 
          #define TA_MFI Core::MFI
          #define TA_MFI_Lookback Core::MFI_Lookback
@@ -613,6 +915,15 @@ namespace TA
                                           double       inHigh_0 __gc [],
                                           double       inLow_0 __gc [],
                                           double       inClose_0 __gc [],
+                                          int           optInTimePeriod_0, /* From 1 to 100000 */
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
+         static enum TA_RetCode MINUS_DI( int    startIdx,
+                                          int    endIdx,
+                                          float        inHigh_0 __gc [],
+                                          float        inLow_0 __gc [],
+                                          float        inClose_0 __gc [],
                                           int           optInTimePeriod_0, /* From 1 to 100000 */
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
@@ -631,6 +942,14 @@ namespace TA
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
                                           double        outReal_0 __gc [] );
+         static enum TA_RetCode MINUS_DM( int    startIdx,
+                                          int    endIdx,
+                                          float        inHigh_0 __gc [],
+                                          float        inLow_0 __gc [],
+                                          int           optInTimePeriod_0, /* From 1 to 100000 */
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
 
          #define TA_MINUS_DM Core::MINUS_DM
          #define TA_MINUS_DM_Lookback Core::MINUS_DM_Lookback
@@ -640,6 +959,13 @@ namespace TA
          static enum TA_RetCode MOM( int    startIdx,
                                      int    endIdx,
                                      double       inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 1 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode MOM( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
                                      int           optInTimePeriod_0, /* From 1 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
@@ -654,6 +980,15 @@ namespace TA
          static enum TA_RetCode PPO( int    startIdx,
                                      int    endIdx,
                                      double       inReal_0 __gc [],
+                                     int           optInFastPeriod_0, /* From 2 to 100000 */
+                                     int           optInSlowPeriod_1, /* From 2 to 100000 */
+                                     TA_MAType     optInMAType_2,
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode PPO( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
                                      int           optInFastPeriod_0, /* From 2 to 100000 */
                                      int           optInSlowPeriod_1, /* From 2 to 100000 */
                                      TA_MAType     optInMAType_2,
@@ -675,6 +1010,15 @@ namespace TA
                                          [OutAttribute]Int32 *outBegIdx,
                                          [OutAttribute]Int32 *outNbElement,
                                          double        outReal_0 __gc [] );
+         static enum TA_RetCode PLUS_DI( int    startIdx,
+                                         int    endIdx,
+                                         float        inHigh_0 __gc [],
+                                         float        inLow_0 __gc [],
+                                         float        inClose_0 __gc [],
+                                         int           optInTimePeriod_0, /* From 2 to 100000 */
+                                         [OutAttribute]Int32 *outBegIdx,
+                                         [OutAttribute]Int32 *outNbElement,
+                                         double        outReal_0 __gc [] );
 
          #define TA_PLUS_DI Core::PLUS_DI
          #define TA_PLUS_DI_Lookback Core::PLUS_DI_Lookback
@@ -685,6 +1029,14 @@ namespace TA
                                          int    endIdx,
                                          double       inHigh_0 __gc [],
                                          double       inLow_0 __gc [],
+                                         int           optInTimePeriod_0, /* From 2 to 100000 */
+                                         [OutAttribute]Int32 *outBegIdx,
+                                         [OutAttribute]Int32 *outNbElement,
+                                         double        outReal_0 __gc [] );
+         static enum TA_RetCode PLUS_DM( int    startIdx,
+                                         int    endIdx,
+                                         float        inHigh_0 __gc [],
+                                         float        inLow_0 __gc [],
                                          int           optInTimePeriod_0, /* From 2 to 100000 */
                                          [OutAttribute]Int32 *outBegIdx,
                                          [OutAttribute]Int32 *outNbElement,
@@ -702,6 +1054,13 @@ namespace TA
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode ROC( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 1 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
 
          #define TA_ROC Core::ROC
          #define TA_ROC_Lookback Core::ROC_Lookback
@@ -711,6 +1070,13 @@ namespace TA
          static enum TA_RetCode ROCP( int    startIdx,
                                       int    endIdx,
                                       double       inReal_0 __gc [],
+                                      int           optInTimePeriod_0, /* From 1 to 100000 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode ROCP( int    startIdx,
+                                      int    endIdx,
+                                      float        inReal_0 __gc [],
                                       int           optInTimePeriod_0, /* From 1 to 100000 */
                                       [OutAttribute]Int32 *outBegIdx,
                                       [OutAttribute]Int32 *outNbElement,
@@ -728,6 +1094,13 @@ namespace TA
                                       [OutAttribute]Int32 *outBegIdx,
                                       [OutAttribute]Int32 *outNbElement,
                                       double        outReal_0 __gc [] );
+         static enum TA_RetCode ROCR( int    startIdx,
+                                      int    endIdx,
+                                      float        inReal_0 __gc [],
+                                      int           optInTimePeriod_0, /* From 1 to 100000 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outReal_0 __gc [] );
 
          #define TA_ROCR Core::ROCR
          #define TA_ROCR_Lookback Core::ROCR_Lookback
@@ -741,6 +1114,13 @@ namespace TA
                                          [OutAttribute]Int32 *outBegIdx,
                                          [OutAttribute]Int32 *outNbElement,
                                          double        outReal_0 __gc [] );
+         static enum TA_RetCode ROCR100( int    startIdx,
+                                         int    endIdx,
+                                         float        inReal_0 __gc [],
+                                         int           optInTimePeriod_0, /* From 1 to 100000 */
+                                         [OutAttribute]Int32 *outBegIdx,
+                                         [OutAttribute]Int32 *outNbElement,
+                                         double        outReal_0 __gc [] );
 
          #define TA_ROCR100 Core::ROCR100
          #define TA_ROCR100_Lookback Core::ROCR100_Lookback
@@ -750,6 +1130,13 @@ namespace TA
          static enum TA_RetCode RSI( int    startIdx,
                                      int    endIdx,
                                      double       inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode RSI( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
                                      int           optInTimePeriod_0, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
@@ -768,6 +1155,20 @@ namespace TA
                                        double       inHigh_0 __gc [],
                                        double       inLow_0 __gc [],
                                        double       inClose_0 __gc [],
+                                       int           optInFastK_Period_0, /* From 1 to 100000 */
+                                       int           optInSlowK_Period_1, /* From 1 to 100000 */
+                                       TA_MAType     optInSlowK_MAType_2,
+                                       int           optInSlowD_Period_3, /* From 1 to 100000 */
+                                       TA_MAType     optInSlowD_MAType_4,
+                                       [OutAttribute]Int32 *outBegIdx,
+                                       [OutAttribute]Int32 *outNbElement,
+                                       double        outSlowK_0 __gc [],
+                                       double        outSlowD_1 __gc [] );
+         static enum TA_RetCode STOCH( int    startIdx,
+                                       int    endIdx,
+                                       float        inHigh_0 __gc [],
+                                       float        inLow_0 __gc [],
+                                       float        inClose_0 __gc [],
                                        int           optInFastK_Period_0, /* From 1 to 100000 */
                                        int           optInSlowK_Period_1, /* From 1 to 100000 */
                                        TA_MAType     optInSlowK_MAType_2,
@@ -796,6 +1197,18 @@ namespace TA
                                         [OutAttribute]Int32 *outNbElement,
                                         double        outFastK_0 __gc [],
                                         double        outFastD_1 __gc [] );
+         static enum TA_RetCode STOCHF( int    startIdx,
+                                        int    endIdx,
+                                        float        inHigh_0 __gc [],
+                                        float        inLow_0 __gc [],
+                                        float        inClose_0 __gc [],
+                                        int           optInFastK_Period_0, /* From 1 to 100000 */
+                                        int           optInFastD_Period_1, /* From 1 to 100000 */
+                                        TA_MAType     optInFastD_MAType_2,
+                                        [OutAttribute]Int32 *outBegIdx,
+                                        [OutAttribute]Int32 *outNbElement,
+                                        double        outFastK_0 __gc [],
+                                        double        outFastD_1 __gc [] );
 
          #define TA_STOCHF Core::STOCHF
          #define TA_STOCHF_Lookback Core::STOCHF_Lookback
@@ -805,6 +1218,13 @@ namespace TA
          static enum TA_RetCode TRIX( int    startIdx,
                                       int    endIdx,
                                       double       inReal_0 __gc [],
+                                      int           optInTimePeriod_0, /* From 1 to 100000 */
+                                      [OutAttribute]Int32 *outBegIdx,
+                                      [OutAttribute]Int32 *outNbElement,
+                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode TRIX( int    startIdx,
+                                      int    endIdx,
+                                      float        inReal_0 __gc [],
                                       int           optInTimePeriod_0, /* From 1 to 100000 */
                                       [OutAttribute]Int32 *outBegIdx,
                                       [OutAttribute]Int32 *outNbElement,
@@ -824,6 +1244,15 @@ namespace TA
                                        [OutAttribute]Int32 *outBegIdx,
                                        [OutAttribute]Int32 *outNbElement,
                                        double        outReal_0 __gc [] );
+         static enum TA_RetCode WILLR( int    startIdx,
+                                       int    endIdx,
+                                       float        inHigh_0 __gc [],
+                                       float        inLow_0 __gc [],
+                                       float        inClose_0 __gc [],
+                                       int           optInTimePeriod_0, /* From 2 to 100000 */
+                                       [OutAttribute]Int32 *outBegIdx,
+                                       [OutAttribute]Int32 *outNbElement,
+                                       double        outReal_0 __gc [] );
 
          #define TA_WILLR Core::WILLR
          #define TA_WILLR_Lookback Core::WILLR_Lookback
@@ -833,6 +1262,12 @@ namespace TA
          static enum TA_RetCode HT_DCPERIOD( int    startIdx,
                                              int    endIdx,
                                              double       inReal_0 __gc [],
+                                             [OutAttribute]Int32 *outBegIdx,
+                                             [OutAttribute]Int32 *outNbElement,
+                                             double        outReal_0 __gc [] );
+         static enum TA_RetCode HT_DCPERIOD( int    startIdx,
+                                             int    endIdx,
+                                             float        inReal_0 __gc [],
                                              [OutAttribute]Int32 *outBegIdx,
                                              [OutAttribute]Int32 *outNbElement,
                                              double        outReal_0 __gc [] );
@@ -848,6 +1283,12 @@ namespace TA
                                             [OutAttribute]Int32 *outBegIdx,
                                             [OutAttribute]Int32 *outNbElement,
                                             double        outReal_0 __gc [] );
+         static enum TA_RetCode HT_DCPHASE( int    startIdx,
+                                            int    endIdx,
+                                            float        inReal_0 __gc [],
+                                            [OutAttribute]Int32 *outBegIdx,
+                                            [OutAttribute]Int32 *outNbElement,
+                                            double        outReal_0 __gc [] );
 
          #define TA_HT_DCPHASE Core::HT_DCPHASE
          #define TA_HT_DCPHASE_Lookback Core::HT_DCPHASE_Lookback
@@ -857,6 +1298,13 @@ namespace TA
          static enum TA_RetCode HT_PHASOR( int    startIdx,
                                            int    endIdx,
                                            double       inReal_0 __gc [],
+                                           [OutAttribute]Int32 *outBegIdx,
+                                           [OutAttribute]Int32 *outNbElement,
+                                           double        outInPhase_0 __gc [],
+                                           double        outQuadrature_1 __gc [] );
+         static enum TA_RetCode HT_PHASOR( int    startIdx,
+                                           int    endIdx,
+                                           float        inReal_0 __gc [],
                                            [OutAttribute]Int32 *outBegIdx,
                                            [OutAttribute]Int32 *outNbElement,
                                            double        outInPhase_0 __gc [],
@@ -874,6 +1322,13 @@ namespace TA
                                          [OutAttribute]Int32 *outNbElement,
                                          double        outSine_0 __gc [],
                                          double        outLeadSine_1 __gc [] );
+         static enum TA_RetCode HT_SINE( int    startIdx,
+                                         int    endIdx,
+                                         float        inReal_0 __gc [],
+                                         [OutAttribute]Int32 *outBegIdx,
+                                         [OutAttribute]Int32 *outNbElement,
+                                         double        outSine_0 __gc [],
+                                         double        outLeadSine_1 __gc [] );
 
          #define TA_HT_SINE Core::HT_SINE
          #define TA_HT_SINE_Lookback Core::HT_SINE_Lookback
@@ -883,6 +1338,12 @@ namespace TA
          static enum TA_RetCode HT_TRENDMODE( int    startIdx,
                                               int    endIdx,
                                               double       inReal_0 __gc [],
+                                              [OutAttribute]Int32 *outBegIdx,
+                                              [OutAttribute]Int32 *outNbElement,
+                                              int           outInteger_0 __gc [] );
+         static enum TA_RetCode HT_TRENDMODE( int    startIdx,
+                                              int    endIdx,
+                                              float        inReal_0 __gc [],
                                               [OutAttribute]Int32 *outBegIdx,
                                               [OutAttribute]Int32 *outNbElement,
                                               int           outInteger_0 __gc [] );
@@ -897,6 +1358,15 @@ namespace TA
                                     double       inHigh_0 __gc [],
                                     double       inLow_0 __gc [],
                                     double       inClose_0 __gc [],
+                                    int          inVolume_0 __gc [],
+                                    [OutAttribute]Int32 *outBegIdx,
+                                    [OutAttribute]Int32 *outNbElement,
+                                    double        outReal_0 __gc [] );
+         static enum TA_RetCode AD( int    startIdx,
+                                    int    endIdx,
+                                    float        inHigh_0 __gc [],
+                                    float        inLow_0 __gc [],
+                                    float        inClose_0 __gc [],
                                     int          inVolume_0 __gc [],
                                     [OutAttribute]Int32 *outBegIdx,
                                     [OutAttribute]Int32 *outNbElement,
@@ -919,6 +1389,17 @@ namespace TA
                                        [OutAttribute]Int32 *outBegIdx,
                                        [OutAttribute]Int32 *outNbElement,
                                        double        outReal_0 __gc [] );
+         static enum TA_RetCode ADOSC( int    startIdx,
+                                       int    endIdx,
+                                       float        inHigh_0 __gc [],
+                                       float        inLow_0 __gc [],
+                                       float        inClose_0 __gc [],
+                                       int          inVolume_0 __gc [],
+                                       int           optInFastPeriod_0, /* From 2 to 100000 */
+                                       int           optInSlowPeriod_1, /* From 2 to 100000 */
+                                       [OutAttribute]Int32 *outBegIdx,
+                                       [OutAttribute]Int32 *outNbElement,
+                                       double        outReal_0 __gc [] );
 
          #define TA_ADOSC Core::ADOSC
          #define TA_ADOSC_Lookback Core::ADOSC_Lookback
@@ -928,6 +1409,13 @@ namespace TA
          static enum TA_RetCode OBV( int    startIdx,
                                      int    endIdx,
                                      double       inReal_0 __gc [],
+                                     int          inVolume_1 __gc [],
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     int           outInteger_0 __gc [] );
+         static enum TA_RetCode OBV( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
                                      int          inVolume_1 __gc [],
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
@@ -945,6 +1433,13 @@ namespace TA
                                            [OutAttribute]Int32 *outBegIdx,
                                            [OutAttribute]Int32 *outNbElement,
                                            double        outReal_0 __gc [] );
+         static enum TA_RetCode LINEARREG( int    startIdx,
+                                           int    endIdx,
+                                           float        inReal_0 __gc [],
+                                           int           optInTimePeriod_0, /* From 2 to 100000 */
+                                           [OutAttribute]Int32 *outBegIdx,
+                                           [OutAttribute]Int32 *outNbElement,
+                                           double        outReal_0 __gc [] );
 
          #define TA_LINEARREG Core::LINEARREG
          #define TA_LINEARREG_Lookback Core::LINEARREG_Lookback
@@ -954,6 +1449,13 @@ namespace TA
          static enum TA_RetCode LINEARREG_SLOPE( int    startIdx,
                                                  int    endIdx,
                                                  double       inReal_0 __gc [],
+                                                 int           optInTimePeriod_0, /* From 2 to 100000 */
+                                                 [OutAttribute]Int32 *outBegIdx,
+                                                 [OutAttribute]Int32 *outNbElement,
+                                                 double        outReal_0 __gc [] );
+         static enum TA_RetCode LINEARREG_SLOPE( int    startIdx,
+                                                 int    endIdx,
+                                                 float        inReal_0 __gc [],
                                                  int           optInTimePeriod_0, /* From 2 to 100000 */
                                                  [OutAttribute]Int32 *outBegIdx,
                                                  [OutAttribute]Int32 *outNbElement,
@@ -971,6 +1473,13 @@ namespace TA
                                                  [OutAttribute]Int32 *outBegIdx,
                                                  [OutAttribute]Int32 *outNbElement,
                                                  double        outReal_0 __gc [] );
+         static enum TA_RetCode LINEARREG_ANGLE( int    startIdx,
+                                                 int    endIdx,
+                                                 float        inReal_0 __gc [],
+                                                 int           optInTimePeriod_0, /* From 2 to 100000 */
+                                                 [OutAttribute]Int32 *outBegIdx,
+                                                 [OutAttribute]Int32 *outNbElement,
+                                                 double        outReal_0 __gc [] );
 
          #define TA_LINEARREG_ANGLE Core::LINEARREG_ANGLE
          #define TA_LINEARREG_ANGLE_Lookback Core::LINEARREG_ANGLE_Lookback
@@ -980,6 +1489,13 @@ namespace TA
          static enum TA_RetCode LINEARREG_INTERCEPT( int    startIdx,
                                                      int    endIdx,
                                                      double       inReal_0 __gc [],
+                                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                                     [OutAttribute]Int32 *outBegIdx,
+                                                     [OutAttribute]Int32 *outNbElement,
+                                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode LINEARREG_INTERCEPT( int    startIdx,
+                                                     int    endIdx,
+                                                     float        inReal_0 __gc [],
                                                      int           optInTimePeriod_0, /* From 2 to 100000 */
                                                      [OutAttribute]Int32 *outBegIdx,
                                                      [OutAttribute]Int32 *outNbElement,
@@ -994,6 +1510,14 @@ namespace TA
          static enum TA_RetCode STDDEV( int    startIdx,
                                         int    endIdx,
                                         double       inReal_0 __gc [],
+                                        int           optInTimePeriod_0, /* From 2 to 100000 */
+                                        double        optInNbDev_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        [OutAttribute]Int32 *outBegIdx,
+                                        [OutAttribute]Int32 *outNbElement,
+                                        double        outReal_0 __gc [] );
+         static enum TA_RetCode STDDEV( int    startIdx,
+                                        int    endIdx,
+                                        float        inReal_0 __gc [],
                                         int           optInTimePeriod_0, /* From 2 to 100000 */
                                         double        optInNbDev_1, /* From TA_REAL_MIN to TA_REAL_MAX */
                                         [OutAttribute]Int32 *outBegIdx,
@@ -1014,6 +1538,14 @@ namespace TA
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
+         static enum TA_RetCode VAR( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 1 to 100000 */
+                                     double        optInNbDev_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
 
          #define TA_VAR Core::VAR
          #define TA_VAR_Lookback Core::VAR_Lookback
@@ -1029,6 +1561,15 @@ namespace TA
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
                                           double        outReal_0 __gc [] );
+         static enum TA_RetCode AVGPRICE( int    startIdx,
+                                          int    endIdx,
+                                          float        inOpen_0 __gc [],
+                                          float        inHigh_0 __gc [],
+                                          float        inLow_0 __gc [],
+                                          float        inClose_0 __gc [],
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
 
          #define TA_AVGPRICE Core::AVGPRICE
          #define TA_AVGPRICE_Lookback Core::AVGPRICE_Lookback
@@ -1039,6 +1580,13 @@ namespace TA
                                           int    endIdx,
                                           double       inHigh_0 __gc [],
                                           double       inLow_0 __gc [],
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
+         static enum TA_RetCode MEDPRICE( int    startIdx,
+                                          int    endIdx,
+                                          float        inHigh_0 __gc [],
+                                          float        inLow_0 __gc [],
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
                                           double        outReal_0 __gc [] );
@@ -1056,6 +1604,14 @@ namespace TA
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
                                           double        outReal_0 __gc [] );
+         static enum TA_RetCode TYPPRICE( int    startIdx,
+                                          int    endIdx,
+                                          float        inHigh_0 __gc [],
+                                          float        inLow_0 __gc [],
+                                          float        inClose_0 __gc [],
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
 
          #define TA_TYPPRICE Core::TYPPRICE
          #define TA_TYPPRICE_Lookback Core::TYPPRICE_Lookback
@@ -1067,6 +1623,14 @@ namespace TA
                                           double       inHigh_0 __gc [],
                                           double       inLow_0 __gc [],
                                           double       inClose_0 __gc [],
+                                          [OutAttribute]Int32 *outBegIdx,
+                                          [OutAttribute]Int32 *outNbElement,
+                                          double        outReal_0 __gc [] );
+         static enum TA_RetCode WCLPRICE( int    startIdx,
+                                          int    endIdx,
+                                          float        inHigh_0 __gc [],
+                                          float        inLow_0 __gc [],
+                                          float        inClose_0 __gc [],
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
                                           double        outReal_0 __gc [] );
