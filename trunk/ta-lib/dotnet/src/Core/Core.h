@@ -1527,6 +1527,26 @@ namespace TA
          #define TA_STDDEV Core::STDDEV
          #define TA_STDDEV_Lookback Core::STDDEV_Lookback
 
+         static int TSF_Lookback( int           optInTimePeriod_0 );  /* From 2 to 100000 */
+
+         static enum TA_RetCode TSF( int    startIdx,
+                                     int    endIdx,
+                                     double       inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+         static enum TA_RetCode TSF( int    startIdx,
+                                     int    endIdx,
+                                     float        inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+
+         #define TA_TSF Core::TSF
+         #define TA_TSF_Lookback Core::TSF_Lookback
+
          static int VAR_Lookback( int           optInTimePeriod_0, /* From 1 to 100000 */
                                 double        optInNbDev_1 );  /* From TA_REAL_MIN to TA_REAL_MAX */
 
