@@ -1,4 +1,4 @@
-#!perl
+#!/usr/bin/perl
 #
 # Run all tests for Swig Perl wrapper module Finance::TA
 

@@ -1,4 +1,4 @@
-#!perl
+#!/usr/bin/perl -w
 #
 # Test of ta_common
 # 
