@@ -26,6 +26,9 @@
    #include "ta_libc.h"
 #endif
 
+#ifdef __cplusplus
+extern "C"
+#endif
 TA_RetCode TA_MYSQL_Initialize(void);
 
 #endif
