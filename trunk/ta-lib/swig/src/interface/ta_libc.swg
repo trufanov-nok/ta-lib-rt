@@ -594,10 +594,10 @@ OBJECT(TA_History, history)
  * Therefore the 'in' typemap does not generate any code, 
  * but the array allocation is done in the 'check' typemap.
  */
-%typemap(in,numinputs=0) double *OUT_ARRAY, float *OUT_ARRAY 
+%typemap(in,numinputs=0) double *OUT_ARRAY, float *OUT_ARRAY, int *OUT_ARRAY
     "/* $1 ignored on input */";
 
-%typemap(check) double *OUT_ARRAY, float *OUT_ARRAY
+%typemap(check) double *OUT_ARRAY, float *OUT_ARRAY, int *OUT_ARRAY
 {
     int array_size = endIdx2 - startIdx1 + 1;
     $1 = ($1_ltype) calloc(array_size, sizeof($*1_ltype));
@@ -606,7 +606,7 @@ OBJECT(TA_History, history)
 /* On output, the arrays are converted to Perl arrays and returned as
  * Perl references on the output stack
  */
-%typemap(argout) double *OUT_ARRAY, float *OUT_ARRAY 
+%typemap(argout) double *OUT_ARRAY, float *OUT_ARRAY, int *OUT_ARRAY
 {
     AV *av;
     int idx;
@@ -634,7 +634,7 @@ OBJECT(TA_History, history)
  * the typemap 'argout', memory leak could occur.
  * The code of the typemap 'freearg' will always be executed.
  */
-%typemap(freearg) double *OUT_ARRAY, float *OUT_ARRAY
+%typemap(freearg) double *OUT_ARRAY, float *OUT_ARRAY, int *OUT_ARRAY
     "free($1);";
 
 
