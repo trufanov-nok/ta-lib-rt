@@ -285,7 +285,7 @@ int XlfOper::ConvertToShort(short& s) const throw()
 
   if (lpxloper_->xltype & xltypeNum)
   {
-    s = lpxloper_->val.num;
+    s = (short)lpxloper_->val.num;
     xlret=xlretSuccess;
   }
   else
