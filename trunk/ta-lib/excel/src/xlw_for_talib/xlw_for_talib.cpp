@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2000, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2003, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -43,6 +43,9 @@
  *  MMDDYY BY   Description
  *  -------------------------------------------------------------------
  *  121502 MF   First version
+ *  042003 MF   Make the initialization/shutdown sequence more reliable
+ *              with work-around to Excel bugs. Some info here:
+ *                  http://longre.free.fr/pages/prog/api-c.htm
  *
  */
 
@@ -56,7 +59,7 @@
 
 extern "C" double trio_nan(void);
 
-#define DEBUG
+//#define DEBUG
 
 extern "C"
 {
@@ -68,6 +71,19 @@ extern "C"
 #define NB_MAX_input    10 /* Maximum Excel inputs */
 #define NB_MAX_optinput  5 /* Maximum Excel optional parameters */
 #define NB_MAX_output    5 /* Maximum Excel outputs */
+
+// Local Functions
+static void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData );
+
+static void allocGlobals    (void);
+static void freeGlobals     (void);
+
+static int doInitialization(void);
+static int doShutdown      (void);
+
+static int lengthDataPairs( const TA_OptInputParameterInfo *paramInfo );
+static void concatDataPairs( char *out, const TA_OptInputParameterInfo *paramInfo );
+static void displayError( TA_RetCode theRetCode );
 
 // In this file you will see often reference to "TA-Lib parameters"
 // against "excel parameters". Many conversion code exist because
@@ -82,6 +98,10 @@ extern "C"
 // "OH", "OHL", "OHLC" or "OHLCV". For TA-Lib, all these are only
 // one parameter with the ta-abstract interface.
 
+
+
+// Global Variable Optimization
+//
 // Permanently initialize some arrays and constant that are
 // re-used at each TA functions calls.
 //
@@ -104,7 +124,34 @@ ArrayPtrs outputPtrs[NB_MAX_output];
 double *outputExcel;
 int outputExcelSize;
 
-void allocGlobals()
+#ifdef DEBUG
+   // Coredump file, only used while debugging...
+   FILE *outCoredump;
+#endif
+
+// Sometimes xlAutoClose can be called without
+// a following xlAutoOpen. Example: Do change
+// a cell and attempt to exit and then cancel
+// the exit, this will cause xlAutoClose to be
+// called, but xlAutoOpen will not be called
+// again. 
+//
+// This is why XLW creation and registration are
+// done only once (from xlAutoOpen).
+//
+// TA-Lib is shutdown on xlAutoClose, and re-initialize
+// whenever needed. This allow to reset a possible large
+// global memory allocation (by using at our advantage
+// the bug in Excel 2003). Bug or not, the following set
+// of booleans will help to keep control on the initialization
+// and shutdown sequence.
+int talibInitDone    = 0;
+int registrationDone = 0;
+
+
+// Globals are allocated/freed along with TA-Lib
+// initialization and shutdown.
+static void allocGlobals(void)
 {
    memset( inputPtrs,  0, sizeof(ArrayPtrs)*NB_MAX_input );
    memset( outputPtrs, 0, sizeof(ArrayPtrs)*NB_MAX_output );
@@ -112,8 +159,7 @@ void allocGlobals()
    outputExcelSize = 0;
    outputExcel     = NULL;
 }
-
-void freeGlobals( void )
+static void freeGlobals( void )
 {
    int i;
 
@@ -167,13 +213,129 @@ GLOBAL_ARRAY_MACRO(int,output)
 
 #undef GLOBAL_ARRAY_MACRO
 
+static int doInitialization(void)
+{
+   TA_RetCode retCode;
+
+
+   // If already initialize, do nothing.
+   if( !talibInitDone )
+   {
+      allocGlobals();
+
+      #ifdef DEBUG
+        XlfExcel::Instance().MsgBox("Initializing TA-Lib", "Debug");
+      #endif
+
+      // Displays a message in the status bar.
+      XlfExcel::Instance().SendMessage("Initializing TA-Lib...");
+
+      // Initialize TA-Lib
+      TA_InitializeParam initParam;
+      memset( &initParam, 0, sizeof( TA_InitializeParam ) );
+
+      #ifdef DEBUG
+         outCoredump = fopen( "g:\\ta-lib\\c\\bin\\coredump.txt", "w" );
+         initParam.logOutput = outCoredump;
+      #endif
+
+      retCode = TA_Initialize( &initParam );
+
+      if( retCode != TA_SUCCESS )
+      {
+         XlfExcel::Instance().MsgBox("Failed to initialize TA_Lib.xll", "Error");
+         return 0;
+      }
+
+      #ifndef DEBUG
+        // Clears the status bar.
+        XlfExcel::Instance().SendMessage();
+      #endif
+
+      talibInitDone = 1;
+   }
+
+   if( !registrationDone )
+   {
+      #ifdef DEBUG
+        XlfExcel::Instance().MsgBox("Registering TA-Lib functions...", "Debug");
+      #endif
+
+      // Displays a message in the status bar.
+      XlfExcel::Instance().SendMessage("Registering TA-Lib functions...");
+
+      // Register all the TA function. 
+      TA_ForEachFunc( registerTAFunction, NULL );
+
+      // Register other misc. function
+      const char *utilGroupStr = "TA-LIB [Utilities]";
+      XlfFuncDesc versionFunc("xlTA_Version","TA_Version","Return the version of TA-Lib. ", utilGroupStr, XlfFuncDesc::Volatile );
+      versionFunc.Register();
+
+      XlfFuncDesc naValueFunc("xlTA_NAError","TA_NAError","Return the excel value #N/A! ", utilGroupStr );
+      naValueFunc.Register();
+
+      XlfArgDesc range_param("Range", "Range of cells" );
+      XlfArgDesc n_param("n", "Number of cell to add, starting with the last in the provided range" );
+      XlfFuncDesc sumLastInRangeFunc("xlTA_SumLastInRange","TA_SumLastInRange","Add the 'n' last cell in the range", utilGroupStr );
+      sumLastInRangeFunc.SetArguments(range_param+n_param);
+      sumLastInRangeFunc.Register();
+
+      #ifndef DEBUG
+        // Clears the status bar.
+        XlfExcel::Instance().SendMessage();
+      #endif
+
+      registrationDone = 1;
+   }
+
+   return 1;
+}
+
+static int doShutdown(void)
+{
+   if( talibInitDone )
+   {
+     #ifdef DEBUG
+       XlfExcel::Instance().MsgBox("Shutting down TA-Lib...", "Debug");
+     #endif
+
+     XlfExcel::Instance().SendMessage("Shutting Down TA-Lib...");
+     freeGlobals();
+   
+     TA_RetCode retCode;
+
+     delete &XlfExcel::Instance();
+
+     /* Shutdown TA-Lib. */
+     retCode = TA_Shutdown();
+     if( retCode != TA_SUCCESS )
+     {
+       displayError(retCode);
+     }
+
+
+     #ifdef DEBUG
+       if( outCoredump )
+          fclose( outCoredump );
+     #endif
+
+     #ifndef DEBUG
+
+       // Clears the status bar.
+       XlfExcel::Instance().SendMessage();
+     #endif
+
+     talibInitDone = 0;
+   }
+
+
+   return 1;
+}
+
 /*********************/
 /* Utility functions */
 /*********************/
-
-#ifdef DEBUG
-   FILE *outCoredump;
-#endif
 
 // Character used when building a string representing the list of data pairs.
 #define EQUAL_CHAR  '='
@@ -299,7 +461,7 @@ static int nbExcelInput( const TA_FuncInfo *funcInfo )
    return nbParam;
 }
 
-void displayError( TA_RetCode theRetCode )
+static void displayError( TA_RetCode theRetCode )
 {
    TA_RetCodeInfo retCodeInfo;
 
@@ -312,7 +474,7 @@ void displayError( TA_RetCode theRetCode )
 // The following will be executed for ALL functions existing
 // in TA-Lib.
 // Registration is done once when Excel call xlAutoOpen.
-void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData )
+static void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData )
 {
    char *groupStr = NULL;
    char *excelName = NULL;
@@ -1160,6 +1322,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
 
 LPXLOPER EXCEL_EXPORT xlTA_Version()
 {
+   doInitialization(); // Make sure TA-Lib is initialized
    EXCEL_BEGIN;   
    return XlfOper(TA_GetVersionString());
    EXCEL_END;
@@ -1168,6 +1331,7 @@ LPXLOPER EXCEL_EXPORT xlTA_Version()
 // Make the sumation of the last 'n' cells in the 'range'
 LPXLOPER EXCEL_EXPORT xlTA_SumLastInRange( XlfOper range_param, XlfOper n_param )
 {
+   doInitialization(); // Make sure TA-Lib is initialized
    EXCEL_BEGIN;
 
    double sum = 0.0;
@@ -1195,81 +1359,37 @@ LPXLOPER EXCEL_EXPORT xlTA_SumLastInRange( XlfOper range_param, XlfOper n_param 
 
 LPXLOPER EXCEL_EXPORT xlTA_NAError()
 {
+   doInitialization(); // Make sure everything is initialized
    EXCEL_BEGIN;
    return XlfOper::Error(xlerrNA);
    EXCEL_END;
 }
 
-long EXCEL_EXPORT xlAutoOpen()
+long EXCEL_EXPORT xlAutoAdd()
 {
-   TA_RetCode retCode;
-
-   allocGlobals();
-
-   // Displays a message in the status bar.
-   XlfExcel::Instance().SendMessage("Registering TA-Lib...");
-
-   // Initialize TA-Lib
-   TA_InitializeParam initParam;
-   memset( &initParam, 0, sizeof( TA_InitializeParam ) );
-
    #ifdef DEBUG
-      outCoredump = fopen( "g:\\ta-lib\\c\\bin\\coredump.txt", "w" );
-      initParam.logOutput = outCoredump;
+      XlfExcel::Instance().MsgBox("AutoAdd called...", "Debug");
+   #endif
+   return doInitialization();
+}
+
+long EXCEL_EXPORT xlAutoRemove()
+{
+   #ifdef DEBUG
+      XlfExcel::Instance().MsgBox("AutoRemove called...", "Debug");
    #endif
 
-   retCode = TA_Initialize( &initParam );
+   return doShutdown();
+}
 
-   if( retCode != TA_SUCCESS )
-   {
-      XlfExcel::Instance().MsgBox("Failed to initialize TA_Lib.xll", "Error");
-      return 0;
-   }
-
-   /*TA_SetCompatibility( TA_COMPATIBILITY_METASTOCK );*/
-
-   // Register all the TA function. 
-   TA_ForEachFunc( registerTAFunction, NULL );
-
-   // Register other misc. function
-   const char *utilGroupStr = "TA-LIB [Utilities]";
-   XlfFuncDesc versionFunc("xlTA_Version","TA_Version","Return the version of TA-Lib. ", utilGroupStr );
-   versionFunc.Register();
-
-   XlfFuncDesc naValueFunc("xlTA_NAError","TA_NAError","Return the excel value #N/A! ", utilGroupStr );
-   naValueFunc.Register();
-
-   XlfArgDesc range_param("Range", "Range of cells" );
-   XlfArgDesc n_param("n", "Number of cell to add, starting with the last in the provided range" );
-   XlfFuncDesc sumLastInRangeFunc("xlTA_SumLastInRange","TA_SumLastInRange","Add the 'n' last cell in the range", utilGroupStr );
-   sumLastInRangeFunc.SetArguments(range_param+n_param);
-   sumLastInRangeFunc.Register();
-
-   // Clears the status bar.
-   XlfExcel::Instance().SendMessage();
-
-   return 1;
+long EXCEL_EXPORT xlAutoOpen()
+{
+   return doInitialization();
 }
 
 long EXCEL_EXPORT xlAutoClose()
 {
-   freeGlobals();
-
-      TA_RetCode retCode;
-
-      delete &XlfExcel::Instance();
-
-      /* Shutdown TA-Lib. */
-      retCode = TA_Shutdown();
-      if( retCode != TA_SUCCESS )
-      {
-         displayError(retCode);
-      }
-
-      if( outCoredump )
-         fclose( outCoredump );
-
-   return 1;
+   return doShutdown();
 }
 
 #define CNVT_ARG_EXCEL_TO_TALIB(paramNb) \
@@ -1280,6 +1400,7 @@ long EXCEL_EXPORT xlAutoClose()
 #define EXCEL_GLUE_CODE_WITH_1_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1290,6 +1411,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_2_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1301,6 +1423,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_3_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1313,6 +1436,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_4_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1326,6 +1450,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_5_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1340,6 +1465,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_6_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1355,6 +1481,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_7_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1371,6 +1498,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_8_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7, XlfOper p8) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1388,6 +1516,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_9_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7, XlfOper p8, XlfOper p9) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1406,6 +1535,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_10_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7, XlfOper p8, XlfOper p9, XlfOper p10) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1425,6 +1555,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_11_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7, XlfOper p8, XlfOper p9, XlfOper p10, XlfOper p11) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1445,6 +1576,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_12_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7, XlfOper p8, XlfOper p9, XlfOper p10, XlfOper p11, XlfOper p12) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1466,6 +1598,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_13_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7, XlfOper p8, XlfOper p9, XlfOper p10, XlfOper p11, XlfOper p12, XlfOper p13) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1488,6 +1621,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_14_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7, XlfOper p8, XlfOper p9, XlfOper p10, XlfOper p11, XlfOper p12, XlfOper p13, XlfOper p14) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1511,6 +1645,7 @@ EXCEL_END; \
 #define EXCEL_GLUE_CODE_WITH_15_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2, XlfOper p3, XlfOper p4, XlfOper p5, XlfOper p6, XlfOper p7, XlfOper p8, XlfOper p9, XlfOper p10, XlfOper p11, XlfOper p12, XlfOper p13, XlfOper p14, XlfOper p15) \
 { \
+doInitialization(); \
 EXCEL_BEGIN; \
       std::vector<XlfOper> argList; \
       CNVT_ARG_EXCEL_TO_TALIB(1) \
@@ -1535,4 +1670,3 @@ EXCEL_END; \
 #include "excel_glue.c"
 
 }
-
