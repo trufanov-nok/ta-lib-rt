@@ -1,4 +1,4 @@
-V0.1.0 (August 2003)
+V0.1.0 (September 2003)
 
 (Release Candidate 1 - Please Test)
 
@@ -16,8 +16,6 @@ V0.1.0 (August 2003)
   
 - TA-PM: New trade-by-trade report. Many interface changes.
 
-- Fix #562129: Add robustness to avoid buffer overflow
-               with large strings.
 - Fix #724662: TA_GetTime bug
 - Fix #731857: TA_String bad memory access 
 - Fix #736095: New TA_REPLACE_ZERO_PRICE_BAR flag for
