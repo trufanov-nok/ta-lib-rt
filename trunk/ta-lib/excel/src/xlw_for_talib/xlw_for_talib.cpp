@@ -1083,9 +1083,9 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        return XlfOper::Error(xlerrValue);
     }
 
-    char buffer[200];
-    sprintf( buffer, "outBeg=%d, outNbElement=%d\n", outBegIdx, outNbElement );
-    XlfExcel::Instance().MsgBox(funcName, buffer );
+    //char buffer[200];
+    //sprintf( buffer, "outBeg=%d, outNbElement=%d\n", outBegIdx, outNbElement );
+    //XlfExcel::Instance().MsgBox(funcName, buffer );
 
     // Build the excel output. This time merge all outputs within a large
     // allocated buffer so that XLW can correctly build the output for excel.
@@ -1221,7 +1221,6 @@ long EXCEL_EXPORT xlAutoClose()
 {
    freeGlobals();
 
-   #ifdef DEBUG
       TA_RetCode retCode;
 
       delete &XlfExcel::Instance();
@@ -1235,7 +1234,6 @@ long EXCEL_EXPORT xlAutoClose()
 
       if( outCoredump )
          fclose( outCoredump );
-   #endif
 
    return 1;
 }
