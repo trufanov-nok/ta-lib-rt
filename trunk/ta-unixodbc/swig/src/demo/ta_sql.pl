@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 #
-# Simple application for accessing an SQL database using TA-LIB using the SWIG wrapper
+# Simple application for accessing an SQL database using TA-LIB 
+# using the SWIG wrapper
 #
 
-use Data::Dumper;
 use Finance::TA;
 use strict;
 
