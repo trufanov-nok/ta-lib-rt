@@ -18,8 +18,17 @@ conflicting; then the Perl way took precedence over being literally
 identical to the TA-LIB C way.
 
 Although SWIG is capable of generating wrappers to many languages, makefiles
-in this directory tree support perl only.  Tahking perl as example, one can
+in this directory tree support perl only.  Taking perl as example, one can
 extend it to other laungages, if needed.
+
+First Thing
+===========
+If you are a Win32 user, and you are using Perl 5.8.0, you will find in
+the TA-Lib MSVC package the pre-compiled binaries. You can then directly 
+jump to the section "Using TA-Lib in Perl".
+
+Others will need to build their own binaries. Follow the step starting 
+with the "Installation" section.
 
 Installation
 ============
@@ -44,20 +53,15 @@ try:
 
 Building the Perl module
 ========================
-Build process can be done using make/nmake utility or using IDE
+Build can be done using MSVC with either the nmake utility or using the IDE.
 
-IDE - Microsoft Developer Studio
---------------------------------
 First, make sure that the proper ta-lib library is already build in
 ta-lib/c/lib.  The wrapper links only with Release Multithreaded DLL variant
 (because of necessary compatibility with Perl build), so you need
-ta_libc_cdr.lib and the family.
+ta_libc_cdr.lib
 
-Open workspace ta-lib\swig\ide\msvc\perl\perl.dsw and hit Build All.
-
-make/nmake
-----------
-[under construction]
+Open workspace swig\ide\msvc\perl\perl.dsw and hit Build All. You can 
+alternatively use "nmake" in that same directory.
 
 Using ta-lib in Perl
 ====================
