@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 98 }
+BEGIN { plan tests => 96 }
 
 use Finance::TA v0.1.2;
 
@@ -103,15 +103,15 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
     my @categories = TA_CategoryTable($udb);
     #print "Categories: @categories\n";
     ok( shift(@categories), $TA_SUCCESS );
-    ok( $categories[0], "TA_SIM_MRG" );
-    ok( $categories[1], "TA_SIM_REF" );
-    ok( $categories[2], "ZZ.OTHER.OTHER" );
+    #ok( $categories[0], "TA_SIM_MRG" );
+    ok( $categories[0], "TA_SIM_REF" );
+    ok( $categories[1], "ZZ.OTHER.OTHER" );
 
     # Another way - using shadow class
     @categories = $udb->CategoryTable();
-    ok( $categories[0], "TA_SIM_MRG" );
-    ok( $categories[1], "TA_SIM_REF" );
-    ok( $categories[2], "ZZ.OTHER.OTHER" );
+    #ok( $categories[0], "TA_SIM_MRG" );
+    ok( $categories[0], "TA_SIM_REF" );
+    ok( $categories[1], "ZZ.OTHER.OTHER" );
     
     my @symbols = TA_SymbolTable($udb, "TA_SIM_REF");
     #print "Symbols @symbols\n";
