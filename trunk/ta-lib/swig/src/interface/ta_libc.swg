@@ -61,7 +61,60 @@
 
 
 /************************************************************************/
-/* untested */
+/* under test */
+
+%ignore TA_WebFetch;
+
+typedef unsigned int TA_UDBase;
+
+#ifdef SWIGPERL
+
+/* typemaps for TA_UDBaseAlloc */
+
+/* as argout (my first try)
+ * Example:
+ * @res = TA_UDBaseAlloc();
+ * $udb = $res[1] if $res[0] == $TA_SUCCESS;
+
+%typemap(arginit) TA_UDBase **newUDBase(TA_UDBase *temp) 
+	"$1 = &temp;";
+
+%typemap(argout) TA_UDBase **newUDBase {
+	if (argvi >= items) {
+		EXTEND(sp,1);
+	}
+	$result = sv_newmortal();
+	SWIG_MakePtr($result, (void *) *$1, $*1_descriptor, 0);
+	argvi++;
+}
+*/
+
+/* as reference (Perl specific, maybe more convenient)
+ * Example:
+ * $ret = TA_UDBaseAlloc(\$udb);
+ */
+%typemap(in) TA_UDBase **newUDBase($*1_ltype temp) {
+	SV *tempsv;
+	if (!SvROK($input)) {
+		SWIG_croak("Expected a reference as argument $argnum of $symname");
+	}
+	tempsv = SvRV($input);
+	if (SWIG_ConvertPtr(tempsv, (void **) &temp, $*1_descriptor, 0) < 0) {
+		SWIG_croak("Type error in argument $argnum of $symname. Expected $*1_mangle");
+	}
+    $1 = &temp;
+}
+
+%typemap(argout) TA_UDBase **newUDBase {
+	SV *tempsv;
+	tempsv = SvRV($input);
+	SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, 0);
+}
+
+#endif
+
+%ignore hiddenData;
+%ignore new_TA_History;
 
 %include "../../../../../c/include/ta_data.h"
 
