@@ -1,31 +1,6 @@
-V0.1.0 (September 2003)
+V1.0.0 (?? 2003)
 
-(Release Candidate 1 - Please Test)
-
-- New .NET/Mono interface (for the TA Functions only).
-
-- All TA functions can now accept either single or
-  double precision inputs.
-
-- New Linear regression related TA functions:
-  TA_TSF, TA_LINEARREG, TA_LINEARREG_INTERCEPT
-  TA_LINEARREG_ANGLE, TA_LINEARREG_SLOPE
-
-- TA-Data: Can now do conversion of intra-day data
-  source to daily, weekly, monthly etc...
-  
-- TA-PM: New trade-by-trade report. Many interface changes.
-
-- Fix #724662: TA_GetTime bug
-- Fix #731857: TA_String bad memory access 
-- Fix #736095: New TA_REPLACE_ZERO_PRICE_BAR flag for
-               TA_AddDataSource to allow to replace zero
-               values with the last known close price. By
-               default, zero values are reported as an error.
-- Fix #736196: TA_STOCHF bug with outFastD_1
-- Fix #748163: TA_AROON never reaching zero
-- Fix #767653: TA_MACD period swapping too late
-- Fix #792298: Remove rounding to ADX,ADXR,DI+,DI- and DX
+- New TA functions: TA_SAREXT
                
 See HISTORY.TXT for summary of previous version.
 

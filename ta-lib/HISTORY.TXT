@@ -1,12 +1,21 @@
+V0.1.0 (Sept 2003)
+  - New .NET/Mono interface (Core namespace)
+  - TA functions now accept single precision inputs.
+  - Add: TSF, LINEARREG, LINEARREG_INTERCEPT
+  - Add: LINEARREG_ANGLE, LINEARREG_SLOPE
+  - Now do intra-day conversion to daily, weekly etc...
+  - Add TA-PM trade-by-trade report.
+  - Fix #724662,731857,736095,736196,748163,767653,792298
+
 V0.0.8 (April 2003)
   - Add: AD,ADOSC,AROON,AROONOSC,KAMA,T3,HT_TRENDLINE,MAMA
   - Add: HT_DCPHASE,HT_PHASOR,HT_SINE,HT_TRENDMODE,HT_DCPERIOD
-  - Fix#701060
+  - Fix #701060
 
 V0.0.7 (January 2003)
   - Excel Add-In implemented.
   - Add: MFI,MIDPRICE,MIDPOINT,TRIMA,MACDEXT,ROCP,STOCHF,AVGPRICE                   
-  - Fix#660248, #660250, #660449, #644512
+  - Fix #660248,660250,660449,644512
 
 V0.0.6 (October 2002)
   - Add Functions: SAR,ADX,ADXR,DX,+DI,-DI,+DM,-DM
@@ -16,7 +25,7 @@ V0.0.6 (October 2002)
 
 V0.0.5 (June 2002)
   - Add: OBV + performance measurement infrastructure.
-  - Fix#537806 + some Yahoo! data source fix.
+  - Fix #537806 + some Yahoo! data source fix.
 
 V0.0.4 (March 2002)
   - Add: TEMA, DEMA, TRIX
