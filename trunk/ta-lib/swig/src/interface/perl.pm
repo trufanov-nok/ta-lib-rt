@@ -316,6 +316,11 @@ sub PMArray {
     return Finance::TA::TA_PMArray->new(@_);
 }
 
+sub TradeReport {
+    return unless $_[0]->isa('HASH');
+    return Finance::TA::TA_TradeReport->new(@_);
+}
+
 
 package Finance::TA::TA_PMArray;
 
@@ -350,9 +355,58 @@ sub DESTROY {
     }
 }
 
-# Now prevent accidental direct calls to TA_PMArrayAlloc/TA_PMArrayhFree
+# Now prevent accidental direct calls to TA_PMArrayAlloc/TA_PMArrayFree
 delete $::Finance::TA::{TA_PMArrayAlloc};
 delete $::Finance::TA::{TA_PMArrayFree};
+
+
+
+package Finance::TA::TA_TradeReport;
+
+# Wrapper classes arrange access to TA_TradeReport, similarly to TA_PMArray
+
+# Keep track which PM is used for Trade Report, not to destroy it too early
+# (design limitation of TA_TradeReport)
+
+%PM = ();
+
+sub new {
+    #print "alloc TradeReport: @_\n";
+    my ($pkg, $pm) = @_;
+    my $self;
+    my @res = ::Finance::TAc::TA_TradeReportAlloc($pm);
+    if($res[0] == $::Finance::TA::TA_SUCCESS && defined($res[1])) {
+        $self = $res[1];
+        $PM{$self} = $pm;
+        #print "new $self\n";
+        return bless $self, $pkg;
+    } else {
+        my %hash;
+        $hash{retCode} = $res[0];
+        return \%hash;  # not blessed!
+    }
+}
+
+*swig_retCode_get = sub { $::Finance::TA::TA_SUCCESS };
+
+sub DESTROY {
+    my ($self) = @_;
+    return unless $self->isa('HASH');
+    my $this = tied(%$self);
+    return unless defined $self;
+    delete $ITERATORS{$this};
+    if (exists $OWNER{$this}) {
+        #print "free TradeReport: @_: ";
+        ::Finance::TAc::TA_TradeReportFree($this);
+        delete $OWNER{$this};
+        #print "delete $self\n";
+        delete $PM{$self};
+    }
+}
+
+# Now prevent accidental direct calls to TA_TradeReportAlloc/TA_TradeReportFree
+delete $::Finance::TA::{TA_TradeReportAlloc};
+delete $::Finance::TA::{TA_TradeReportFree};
 
 
 

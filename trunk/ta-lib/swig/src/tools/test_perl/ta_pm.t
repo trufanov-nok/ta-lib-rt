@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 175 }
+BEGIN { plan tests => 77 }
 
 use Finance::TA v0.1.2;
 
@@ -119,10 +119,27 @@ ok( $instr->{userKey}, 10 );
 
     my @report = TA_PMReport($pm);
     ok( shift(@report), $TA_SUCCESS );
-    {
-        local $" = "|\n";
-        print "@report|\n";
-    }
+
+    # Quick way of printing a report:
+    #{ local $" = "|\n"; print "@report|\n"; }
+
+    my $tr = new TA_TradeReport($pm);
+    ok( $tr->{retCode}, $TA_SUCCESS );
+    # Another way:
+    $tr = $pm->TradeReport();
+    ok( $tr->{retCode}, $TA_SUCCESS );
+    ok( $tr->{nbTrades}, 1 );
+
+    my $trades = $tr->{trades};
+    ok( $$trades[0]->{quantity}, $trans->{quantity} );
+    ok( $$trades[0]->{entryPrice}, $trans->{quantity} * 16.95 );
+    ok( $$trades[0]->{entryTimestamp}->GetStringDate(), "2003-01-02" );
+    ok( $$trades[0]->{exitTimestamp}->GetStringDate(),  "2003-01-10" );
+    ok( $$trades[0]->{profit}, 135 );
+    ok( $$trades[0]->{id}{catString}, $instr->{catString} );
+    ok( $$trades[0]->{id}{symString}, $instr->{symString} );
+    ok( $$trades[0]->{id}{userKey}, $instr->{userKey} );
+
+    # MAE not implemented
 }
-#print "End\n";
 
