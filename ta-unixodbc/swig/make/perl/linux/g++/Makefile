@@ -41,7 +41,7 @@ $(TOPDIR)/lib/perl/Finance/TA.pm: \
 		$(WRAPDIR)/TA.pm \
 		$(TALIBDIR)/swig/src/interface/perl.pm \
 		$(TOPDIR)/src/interface/perl.pm
-	sed -e '$d' $(TALIBDIR)/swig/src/interface/perl.pm | cat $(WRAPDIR)/TA.pm - $(TOPDIR)/src/interface/perl.pm >$@ 
+	sed -e '$$d' $(TALIBDIR)/swig/src/interface/perl.pm | cat $(WRAPDIR)/TA.pm - $(TOPDIR)/src/interface/perl.pm >$@ 
 
 $(WRAPDIR)/TA.pm $(WRAPDIR)/ta_libc_wrap.c: \
 		$(TOPDIR)/src/interface/ta_unixodbc.swg \
