@@ -90,6 +90,14 @@ namespace TA
                                 [OutAttribute]Int32 *outNbElement,
                                 double  outReal_0 __gc [] );
 
+         static enum TA_RetCode TA_S_INT_SMA( int     startIdx,
+                                int     endIdx,
+                                float   inReal_0 __gc [],
+                                int     optInTimePeriod_0, /* From 1 to 200 */
+                                [OutAttribute]Int32 *outBegIdx,
+                                [OutAttribute]Int32 *outNbElement,
+                                double  outReal_0 __gc [] );
+
          static enum TA_RetCode TA_INT_EMA( int           startIdx,
                                 int           endIdx,
                                 double        inReal_0 __gc [],
@@ -327,13 +335,21 @@ namespace TA
 
          static enum TA_RetCode SMA( int    startIdx,
                                      int    endIdx,
-                                     double       inReal_0 __gc [],
+                                     double        inReal_0 __gc [],
                                      int           optInTimePeriod_0, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
 
-         #define TA_SMA Core::SMA
+         static enum TA_RetCode SMA( int    startIdx,
+                                     int    endIdx,
+                                     float         inReal_0 __gc [],
+                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                     [OutAttribute]Int32 *outBegIdx,
+                                     [OutAttribute]Int32 *outNbElement,
+                                     double        outReal_0 __gc [] );
+
+         #define TA_SMA   Core::SMA
          #define TA_SMA_Lookback Core::SMA_Lookback
 
          static int T3_Lookback( int           optInTimePeriod_0, /* From 2 to 100000 */
