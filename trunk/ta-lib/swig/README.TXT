@@ -78,10 +78,10 @@ Open issues/To do
   - low priority as I have solved it with Perl
 * How to generate submodules, e.g. Finance::TA::func
   - answer: use %import, see SWIG examples
-* How to export TA_INTEGER_MIN/TA_INTEGER_MAX
-  - answer: remove type casts in ta-lib
 * How to write log files to stdout
 * How to define a custom TA fatal handler in Perl
 * Automatically call TA_Shutdown on program exit if needed
 * Automatically call TA_Initialize on module load; get parameters on 'use"-line
+* Allow to pass hash table to TA_AddDataSourceParam::new with initial values
+* Add nice constructors to TA_Timestamp
 
