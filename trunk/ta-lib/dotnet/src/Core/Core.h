@@ -449,15 +449,15 @@ namespace TA
          #define TA_MIDPOINT Core::MIDPOINT
          #define TA_MIDPOINT_Lookback Core::MIDPOINT_Lookback
 
-         static int SAR_Lookback( double        optInAcceleration_0, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                double        optInMaximum_1 );  /* From TA_REAL_MIN to TA_REAL_MAX */
+         static int SAR_Lookback( double        optInAcceleration_0, /* From 0 to TA_REAL_MAX */
+                                double        optInMaximum_1 );  /* From 0 to TA_REAL_MAX */
 
          static enum TA_RetCode SAR( int    startIdx,
                                      int    endIdx,
                                      double       inHigh_0 __gc [],
                                      double       inLow_0 __gc [],
-                                     double        optInAcceleration_0, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                     double        optInMaximum_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                     double        optInAcceleration_0, /* From 0 to TA_REAL_MAX */
+                                     double        optInMaximum_1, /* From 0 to TA_REAL_MAX */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
@@ -465,8 +465,8 @@ namespace TA
                                      int    endIdx,
                                      float        inHigh_0 __gc [],
                                      float        inLow_0 __gc [],
-                                     double        optInAcceleration_0, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                     double        optInMaximum_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                     double        optInAcceleration_0, /* From 0 to TA_REAL_MAX */
+                                     double        optInMaximum_1, /* From 0 to TA_REAL_MAX */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
@@ -474,27 +474,27 @@ namespace TA
          #define TA_SAR Core::SAR
          #define TA_SAR_Lookback Core::SAR_Lookback
 
-         static int SAREXT_Lookback( double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInOffsetOnReverse_1, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInAccelerationInitLong_2, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInAccelerationLong_3, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInAccelerationMaxLong_4, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInAccelerationInitShort_5, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInAccelerationShort_6, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInAccelerationMaxShort_7 );  /* From TA_REAL_MIN to TA_REAL_MAX */
+         static int SAREXT_Lookback( double        optInStartValue_0, /* From 0 to TA_REAL_MAX */
+                                   double        optInOffsetOnReverse_1, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationInitLong_2, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationLong_3, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationMaxLong_4, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationInitShort_5, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationShort_6, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationMaxShort_7 );  /* From 0 to TA_REAL_MAX */
 
          static enum TA_RetCode SAREXT( int    startIdx,
                                         int    endIdx,
                                         double       inHigh_0 __gc [],
                                         double       inLow_0 __gc [],
-                                        double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInOffsetOnReverse_1, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationInitLong_2, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationLong_3, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationMaxLong_4, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationInitShort_5, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationShort_6, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationMaxShort_7, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInStartValue_0, /* From 0 to TA_REAL_MAX */
+                                        double        optInOffsetOnReverse_1, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationInitLong_2, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationLong_3, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationMaxLong_4, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationInitShort_5, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationShort_6, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationMaxShort_7, /* From 0 to TA_REAL_MAX */
                                         [OutAttribute]Int32 *outBegIdx,
                                         [OutAttribute]Int32 *outNbElement,
                                         double        outReal_0 __gc [] );
@@ -502,14 +502,14 @@ namespace TA
                                         int    endIdx,
                                         float        inHigh_0 __gc [],
                                         float        inLow_0 __gc [],
-                                        double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInOffsetOnReverse_1, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationInitLong_2, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationLong_3, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationMaxLong_4, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationInitShort_5, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationShort_6, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                        double        optInAccelerationMaxShort_7, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInStartValue_0, /* From 0 to TA_REAL_MAX */
+                                        double        optInOffsetOnReverse_1, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationInitLong_2, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationLong_3, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationMaxLong_4, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationInitShort_5, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationShort_6, /* From 0 to TA_REAL_MAX */
+                                        double        optInAccelerationMaxShort_7, /* From 0 to TA_REAL_MAX */
                                         [OutAttribute]Int32 *outBegIdx,
                                         [OutAttribute]Int32 *outNbElement,
                                         double        outReal_0 __gc [] );
