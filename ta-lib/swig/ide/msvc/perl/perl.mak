@@ -129,7 +129,8 @@ USERDEP__TA_LI="..\..\..\src\interface\perl.pm"
 	echo %PATH% 
 	echo on 
 	swig -perl5 -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include -I$(InputDir) $(InputPath) 
-	copy /Y /A ..\..\..\temp\perl\wrap\TA.pm+..\..\..\src\interface\perl.pm ..\..\..\lib\perl\Finance\TA.pm
+	perl -pe "s/^\x25(OWNER|ITERATORS)/our \x25\1/" ..\..\..\temp\perl\wrap\TA.pm >..\..\..\lib\perl\Finance\TA.pm
+	type ..\..\..\src\interface\perl.pm >>..\..\..\lib\perl\Finance\TA.pm
 << 
 	
 
