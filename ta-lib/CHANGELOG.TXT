@@ -1,10 +1,58 @@
-V0.1.1 (January 2004)
+V0.1.2 (September 2004)
 
-- New SQL/ODBC and MySQL data sources.
-- New TA functions: TA_SAREXT, TA_STOCHRSI, TA_CORREL
-- Add CygWin makefiles
-- Add support for adjusted split/dividend data for Yahoo!
+New Features
+============
+  - Perl interface
+
+  - CSI and CSIM (old Metastock) data sources.
+
+  - intraday-to-intraday period conversion.
+
+  - Candlestick functions: TA_CDLSHORTLINE, TA_CDLLONGLINE, 
+                           TA_CDLHIGHWAVE, TA_CDLSPINNINGTOP
+
+  - Validate price bar chronological order and detect some other
+    inconsistency like low > high, open < low and so on.
+
+  - TA_YAHOO_ONE_SYMBOL data source
+
+  - Add [-NDL] flag for ASCII data source. Allows
+    to filter all lines not starting with a digit.
+    
+  - Add TA_GetLoopback() to ta_abstract.h
+
+  - FreeBSD Support
+
+  - Profiling Makefile for FreeBSD, CygWin and Linux.
+
+  - xcode IDE project files for MacOS X
+
+Interface changes
+=================
+TA_HistoryAlloc now receive params with TA_HistoryAllocParam.
+See "ta_data.h" for an example.
+
+A few functions in ta_abstract.h were renamed for consistency:
+
+Old name                          New Name
+----------------------------      ----------------------------
+TA_SetInputParameterInfoPtr       TA_GetInputParameterInfo
+TA_SetOptInputParameterInfoPtr    TA_GetOptInputParameterInfo
+TA_SetOutputParameterInfoPtr      TA_GetOutputParameterInfo
+
+Fixes
+=====
+#927808: Adapt to Yahoo! data format change
+#917085: Unprotected fclose in ta_yahoo segfaults
+#888470: Monthly,Quarterly,Yearly not always good when start/end != 0
+#881950: SQL Data Source Problem
+#873879: gen_code fails on linux
+#960230: Change lower limit of TA_CCI from 5 to 2
+#965557: Detect divide by zero on some limit cases.
+
+Thanks to all contributors.
 
 See HISTORY.TXT for summary of previous versions.
 
 Info: http://ta-lib.org
+
