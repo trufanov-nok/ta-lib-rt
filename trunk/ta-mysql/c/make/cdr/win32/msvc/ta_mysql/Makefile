@@ -68,15 +68,15 @@ dist:
 	$(ZIP) ta_mysql/ta_mysql.zip ta_mysql/ta_mysql.pro $(SOURCES) $(HEADERS) $(DIST) $(INTERFACES)
 
 clean:
-        -del ..\..\..\..\..\temp\cdr\ta_mysql.obj
+	-del ..\..\..\..\..\temp\cdr\ta_mysql.obj
 	-del $(TARGET)
-	-del ../../../../../bin/*.map
-	-del ../../../../../bin/*._xe
-	-del ../../../../../bin/*.tds
-	-del ../../../../../bin/*.pdb
-	-del ../../../../../bin/*.pbo
-	-del ../../../../../bin/*.pbi
-	-del ../../../../../bin/*.pbt
+	-del ..\..\..\..\..\bin\*.map
+	-del ..\..\..\..\..\bin\*._xe
+	-del ..\..\..\..\..\bin\*.tds
+	-del ..\..\..\..\..\bin\*.pdb
+	-del ..\..\..\..\..\bin\*.pbo
+	-del ..\..\..\..\..\bin\*.pbi
+	-del ..\..\..\..\..\bin\*.pbt
 
 ####### Compile
 
