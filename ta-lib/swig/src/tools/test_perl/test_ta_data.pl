@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 66 }
+BEGIN { plan tests => 77 }
 
 use Finance::TA;
 
@@ -64,12 +64,24 @@ ok( $TA_REPORT_SOURCE, 1 << 2 );
 ok( $TA_REPORT_TOTAL, 1 << 3 );
 
 print "Testing functions...\n";
-ok( TA_Initialize(undef), $TA_SUCCESS );
 my $udb; # Universal DataBase
 ok( TA_UDBaseAlloc(\$udb), $TA_SUCCESS );
 
 print "Testing TA_SIMULATOR data source...\n";
 my $sparam = new TA_AddDataSourceParam;
+ok( $sparam->{id}, 0 );
+ok( $sparam->{flags}, $TA_NO_FLAGS );
+ok( $sparam->{period}, 0 );
+ok( $sparam->{location}, undef );
+ok( $sparam->{info}, undef );
+ok( $sparam->{username}, undef );
+ok( $sparam->{password}, undef );
+ok( $sparam->{category}, undef );
+ok( $sparam->{country}, undef );
+ok( $sparam->{exchange}, undef );
+ok( $sparam->{type}, undef );
+ok( $sparam->{symbol}, undef );
+ok( $sparam->{name}, undef );
 $sparam->{id} = $TA_SIMULATOR;
 ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
 
@@ -127,6 +139,5 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
 
 
 ok( TA_UDBaseFree($udb), $TA_SUCCESS );
-ok( TA_Shutdown(), $TA_SUCCESS );
 
 
