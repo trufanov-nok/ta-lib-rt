@@ -6,9 +6,9 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 96 }
+BEGIN { plan tests => 99 }
 
-use Finance::TA v0.1.2;
+use Finance::TA v0.1.3;
 
 print "TA-Lib ", TA_GetVersionString(), "\n";
 print "Testing ta_data...\n";
@@ -46,6 +46,11 @@ ok( $TA_DOHLCV, "[Y][M][D][O][H][L][C][V]" );
 ok( $TA_DOCHLV, "[Y][M][D][O][C][H][L][V]" );
 ok( $TA_DOCV, "[Y][M][D][O][C][V]" );
 ok( $TA_DCV, "[Y][M][D][C][V]" );
+
+print "Testing TA_HistoryFlag...\n";
+ok( $TA_ALLOW_INCOMPLETE_PRICE_BARS, 1 << 0 );
+ok( $TA_USE_TOTAL_VOLUME, 1 << 1 );
+ok( $TA_USE_TOTAL_OPENINTEREST, 1 << 2 );
 
 print "Testing TA_Field...\n";
 ok( $TA_ALL, 0 );
@@ -144,7 +149,7 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
     $histparam->{symbol} = "DAILY_REF_0";
     $histparam->{period} = $TA_DAILY;
     $histparam->{field} = $TA_ALL;
- 
+    $histparam->{flags} = $TA_ALLOW_INCOMPLETE_PRICE_BARS+$TA_USE_TOTAL_VOLUME; 
     #my $history1 = new TA_History($udb, "TA_SIM_REF", "DAILY_REF_0", $TA_DAILY, undef, undef, $TA_ALL);
     my $history1 = new TA_History($udb, $histparam);
     ok( defined $history1 );
