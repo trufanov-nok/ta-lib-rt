@@ -1,4 +1,4 @@
-#!perl
+#!perl -w
 #
 # Test of ta_data
 # 
@@ -6,9 +6,9 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 82 }
+BEGIN { plan tests => 98 }
 
-use Finance::TA;
+use Finance::TA v0.1.2;
 
 print "TA-Lib ", TA_GetVersionString(), "\n";
 print "Testing ta_data...\n";
@@ -99,6 +99,46 @@ $sparam->{id} = $TA_SIMULATOR;
 ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
 
 {
+    # Testing string tables
+    my @categories = TA_CategoryTable($udb);
+    #print "Categories: @categories\n";
+    ok( shift(@categories), $TA_SUCCESS );
+    ok( $categories[0], "TA_SIM_MRG" );
+    ok( $categories[1], "TA_SIM_REF" );
+    ok( $categories[2], "ZZ.OTHER.OTHER" );
+
+    # Another way - using shadow class
+    @categories = $udb->CategoryTable();
+    ok( $categories[0], "TA_SIM_MRG" );
+    ok( $categories[1], "TA_SIM_REF" );
+    ok( $categories[2], "ZZ.OTHER.OTHER" );
+    
+    my @symbols = TA_SymbolTable($udb, "TA_SIM_REF");
+    #print "Symbols @symbols\n";
+    ok( shift(@symbols), $TA_SUCCESS );
+    ok( $symbols[0], "DAILY_REF_0" );
+    ok( $symbols[1], "INTRA_REF_0" );
+
+    # Another way - using shadow class
+    @symbols = $udb->SymbolTable("TA_SIM_REF");
+    ok( $symbols[0], "DAILY_REF_0" );
+    ok( $symbols[1], "INTRA_REF_0" );
+
+    # Negative testing
+    @symbols = TA_SymbolTable($udb, "BOGUS");
+    ok( shift(@symbols), $TA_CATEGORY_NOT_FOUND );
+    ok( $udb->SymbolTable("BOGUS"), undef );
+
+    my $udbx;  # undef
+    @categories = TA_CategoryTable($udbx);
+    ok( shift(@categories), $TA_BAD_PARAM );
+    @symbols = TA_SymbolTable($udbx, "BOGUS");
+    ok( shift(@symbols), $TA_BAD_PARAM );
+}
+
+{
+    # Testing history
+ 
     my $history1 = new TA_History($udb, "TA_SIM_REF", "DAILY_REF_0", $TA_DAILY, undef, undef, $TA_ALL);
     ok( defined $history1 );
     ok( $history1->{retCode}, $TA_SUCCESS );
@@ -134,6 +174,9 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
     ok( shift(@timestamp), $TA_SUCCESS );
     ok( "@timestamp", "1999 1 6" );
 
+    my @sources = $history1->{listOfSource};
+    ok( $sources[0], "SIMULATOR" );
+
     # In TA_History::new, other parameters than the first four are optional    
     my $history2 = new TA_History($udb, "TA_SIM_REF", "INTRA_REF_0", $TA_10MINS);
     ok( defined $history2 );
@@ -149,8 +192,4 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
     # history will be freed automatically when 'my' variables go out of scope
     # Pay attention that it happens before TA_Shutdown!
 }
-
-
-ok( TA_UDBaseFree($udb), $TA_SUCCESS );
-
 

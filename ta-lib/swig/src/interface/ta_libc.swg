@@ -9,6 +9,23 @@
 
 %include "typemaps.i"
 
+%inline %{
+
+char *test() {
+    return "test";
+}
+%}
+
+
+/* Adittional typemap not found in the standard set */
+/* Not working...
+%typemap(perl5,in) FILE * {
+   $1 = IoIFP(sv_2io($input));
+   $1 = PerlIO_exportFILE(IoIFP(sv_2io($input)), 0);
+}
+*/
+
+
 
 /* Strip all const qualifies, they are not relevant to Perl,
  * but may prevent SWIG release memory in proxy classes.
@@ -54,6 +71,56 @@
 
 /* hiddenData should not be accessible from Perl at all */
 %ignore hiddenData;
+
+/* TA_StringTable */
+%typemap(in,numinputs=0) TA_StringTable** (TA_StringTable *temp = 0)
+    "$1 = &temp;"
+
+/* TA_StringTable** is used as output in TA_XxxAlloc() functions */
+%typemap(perl5,argout) TA_StringTable** {
+    /* Copy the strings from **$1 to a Perl array */
+    if ( *$1 && (*$1)->size > 0) {
+        int new_argvi = argvi + (*$1)->size;
+        unsigned int elem;
+	    if (new_argvi > items) {
+		    EXTEND(sp,(new_argvi-items));
+	    }
+        for (elem = 0;  elem < (*$1)->size;  elem++) {
+            ST(argvi) = sv_newmortal();
+            if ((*$1)->string[elem]) {
+                sv_setpv((SV*)ST(argvi++), (char *) (*$1)->string[elem]);
+            } else {
+                sv_setsv((SV*)ST(argvi++), &PL_sv_undef);
+            }
+        }
+    }
+    $symnameFree(*$1);
+}
+
+
+/* TA_StringTable* is out too but need not be deallocated */
+%typemap(perl5,out) TA_StringTable* {
+    /* Copy the strings from *$1 to a Perl array */
+    if ( $1->size > 0) {
+        int new_argvi = argvi + $1->size;
+        unsigned int elem;
+	    if (new_argvi > items) {
+		    EXTEND(sp,(new_argvi-items));
+	    }
+        for (elem = 0;  elem < $1->size;  elem++) {
+            ST(argvi) = sv_newmortal();
+            if ($1->string[elem]) {
+                sv_setpv((SV*)ST(argvi++), (char *) $1->string[elem]);
+            } else {
+                sv_setsv((SV*)ST(argvi++), &PL_sv_undef);
+            }
+        }
+    }
+}
+
+
+/* we don't want just TA_StringTable classes around */
+%nodefault TA_StringTable;
 
 %include "../../../../../c/include/ta_common.h"
 
@@ -119,17 +186,19 @@ typedef struct {} TA_UDBase;
  * However in practice, you will use 'new' anyway...
  */
 
-%typemap(in,numinputs=0) TA_History **history(TA_History *temp) 
+%typemap(in,numinputs=0) TA_History **history(TA_History *temp = 0) 
 	"$1 = &temp;";
 
-%typemap(argout) TA_History **history {
-	if (argvi >= items) {
-		EXTEND(sp,1);
-	}
-	$result = sv_newmortal();
-	SWIG_MakePtr($result, (void *) *$1, $*1_descriptor, SWIG_SHADOW|SWIG_OWNER);
-	argvi++;
-}
+%typemap(argout) TA_History **history %{
+    if (*$1) {
+	    if (argvi >= items) {
+		    EXTEND(sp,1);
+	    }
+	    $result = sv_newmortal();
+	    SWIG_MakePtr($result, (void *) *$1, $*1_descriptor, SWIG_SHADOW|SWIG_OWNER);
+	    argvi++;
+    }
+%}
 
 
 
@@ -224,9 +293,19 @@ typedef struct {} TA_UDBase;
 %immutable close;
 %immutable volume;
 %immutable openInterest;
+%immutable listOfSource;
 
 /* hiddenData should not be accessible from Perl at all */
 %ignore hiddenData;
+
+/* Accessing symbol and category tables:
+ * String tables are converted to perl lists directly, so no need for
+ * alloc/free scheme
+ */
+%rename(TA_CategoryTable) TA_CategoryTableAlloc;
+%ignore TA_CategoryTableFree;
+%rename(TA_SymbolTable) TA_SymbolTableAlloc;
+%ignore TA_SymbolTableFree;
 
 /* TA_ForEachSymbol doesn't make sense for scripting languages */
 %ignore TA_ForEachSymbol;
@@ -241,6 +320,7 @@ typedef struct {} TA_UDBase;
 %mutable close;
 %mutable volume;
 %mutable openInterest;
+%mutable listOfSource;
 
 /* we better also get rid of the TA_History-specific typemaps for TA_Real* etc.*/
 %clear TA_Real *, TA_Integer *, TA_Timestamp *;
