@@ -308,41 +308,33 @@ typedef struct {} TA_UDBase;
  * If forgot to define it, a compile error will occur.
  */
 %typemap(out) const TA_Real *ARRAY {
-    AV *myav;
-    SV **svs;
-    unsigned int i = 0;
+    AV *av;
+    unsigned int idx = 0;
+    SV *sv;
 
-    /* this is not the most efficient way of creating an array
-     * it creates much too many mortals
-     * I have copied it from SWIG example but a better way is in 
-     * the typemap for OUT_ARRAY
-     * TODO: optimize it here (an in the following two typemaps)
-     */
-    svs = (SV **) malloc(array_size1 * sizeof(SV *));
-    for (i = 0; i < array_size1 ; i++) {
-	svs[i] = sv_newmortal();
-	sv_setnv((SV*)svs[i],$1[i]);
+    av = newAV();
+    av_extend(av, array_size1-1);
+    for (idx = 0; idx < array_size1 ; idx++) {
+	sv = newSVnv($1[idx]);
+        if (av_store(av, idx, sv) == 0) SvREFCNT_dec(sv);	
     };
-    myav = av_make(array_size1,svs);
-    free(svs);
-    $result = newRV((SV*)myav);
+    $result = newRV((SV*)av);
     sv_2mortal($result);
     argvi++;    
 }
 
 %typemap(out) const TA_Integer *ARRAY {
-    AV *myav;
-    SV **svs;
-    unsigned int i = 0;
+    AV *av;
+    SV *sv;
+    unsigned int idx = 0;
 
-    svs = (SV **) malloc(array_size1 * sizeof(SV *));
-    for (i = 0; i < array_size1 ; i++) {
-        svs[i] = sv_newmortal();
-        sv_setiv((SV*)svs[i],$1[i]);
+    av = newAV();
+    av_extend(av, array_size1-1);
+    for (idx = 0; idx < array_size1 ; idx++) {
+	sv = newSViv($1[idx]);
+        if (av_store(av, idx, sv) == 0) SvREFCNT_dec(sv);	
     };
-    myav =  av_make(array_size1,svs);
-    free(svs);
-    $result = newRV((SV*)myav);
+    $result = newRV((SV*)av);
     sv_2mortal($result);
     argvi++;    
 }
@@ -352,6 +344,12 @@ typedef struct {} TA_UDBase;
     SV **svs;
     unsigned int i = 0;
 
+    /* this is not the most efficient way of creating an array
+     * it creates much too many mortals
+     * I have cloned it from SWIG example but a better way is in 
+     * the typemaps above
+     * TODO: optimize it here
+     */
     svs = (SV **) malloc(array_size1 * sizeof(SV *));
     for (i = 0; i < array_size1 ; i++) {
         svs[i] = sv_newmortal();
