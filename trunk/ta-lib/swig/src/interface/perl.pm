@@ -178,26 +178,26 @@ sub GetFuncInfo {
 }
 
 
-sub SetInputParameterInfoPtr {
+sub GetInputParameterInfo {
     my ($self, $param) = @_;
     my $info;
-    my $retCode = ::Finance::TAc::TA_SetInputParameterInfoPtr($self, $param, \$info);
+    my $retCode = ::Finance::TAc::TA_GetInputParameterInfo($self, $param, \$info);
     return $info;
 }
 
 
-sub SetOutputParameterInfoPtr {
+sub GetOutputParameterInfo {
     my ($self, $param) = @_;
     my $info;
-    my $retCode = ::Finance::TAc::TA_SetOutputParameterInfoPtr($self, $param, \$info);
+    my $retCode = ::Finance::TAc::TA_GetOutputParameterInfo($self, $param, \$info);
     return $info;
 }
 
 
-sub SetOptInputParameterInfoPtr {
+sub GetOptInputParameterInfo {
     my ($self, $param) = @_;
     my $info;
-    my $retCode = ::Finance::TAc::TA_SetOptInputParameterInfoPtr($self, $param, \$info);
+    my $retCode = ::Finance::TAc::TA_GetOptInputParameterInfo($self, $param, \$info);
     return $info;
 }
 
