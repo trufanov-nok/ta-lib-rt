@@ -1697,13 +1697,6 @@ sub AddDataSource {
 
 sub History {
     my ($self, $param) = @_;
-    if (ref($param) eq 'HASH') {
-        my $hash = $param;
-        $param = Finance::TA::TA_HistoryAllocParam->new;
-        while ( my($key, $val) = each(%$hash) ) {
-            $param->{$key} = $val;
-        }
-    }
     Finance::TA::TA_History->new($self, $param);
 }
 
@@ -1738,12 +1731,17 @@ package Finance::TA::TA_History;
 # use malloc/free), TA_HistoryAlloc and TA_HistoryFree has to be used.
 
 sub new {
-    #print "alloc history: @_\n";
-    my $pkg = shift;
-    my $self;
-    my @res = ::Finance::TAc::TA_HistoryAlloc(@_);
+    my ($pkg, $udb, $param) = @_;
+    if (ref($param) eq 'HASH') { # accept plain hash as HistoryAllocParam
+        my $hash = $param;
+        $param = Finance::TA::TA_HistoryAllocParam->new;
+        while ( my($key, $val) = each(%$hash) ) {
+            $param->{$key} = $val;
+        }
+    }
+    my @res = ::Finance::TAc::TA_HistoryAlloc($udb, $param);
     if($res[0] == $Finance::TA::TA_SUCCESS && defined($res[1])) {
-        $self = $res[1];
+        my $self = $res[1];
         return bless $self, $pkg;
     } else {
         my %hash;
@@ -1949,13 +1947,12 @@ sub new {
 
 sub DESTROY {
     return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        #print "free PMArray: @_: ";
-        delete $OWNER{$self};
-        ::Finance::TAc::TA_PMArrayFree($self);
+    my $this = tied(%{$_[0]});
+    return unless defined $this;
+    delete $ITERATORS{$this} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$this}) {
+        delete $OWNER{$this};
+        ::Finance::TAc::TA_PMArrayFree($this);
     }
 }
 
@@ -1975,14 +1972,12 @@ package Finance::TA::TA_TradeReport;
 our %PM = ();
 
 sub new {
-    #print "alloc TradeReport: @_\n";
     my ($pkg, $pm) = @_;
     my $self;
     my @res = ::Finance::TAc::TA_TradeReportAlloc($pm);
     if($res[0] == $::Finance::TA::TA_SUCCESS && defined($res[1])) {
         $self = $res[1];
         $PM{$self} = $pm;
-        #print "new $self\n";
         return bless $self, $pkg;
     } else {
         my %hash;
@@ -1998,14 +1993,12 @@ sub DESTROY {
     return unless $self->isa('HASH');
     my $this = tied(%$self);
     return unless defined $self;
-    delete $ITERATORS{$this};
-    if (exists $OWNER{$this}) {
-        #print "free TradeReport: @_: ";
+    delete $ITERATORS{$this} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$this}) {
         delete $OWNER{$this};
-        #print "delete $self\n";
-        delete $PM{$self};
         ::Finance::TAc::TA_TradeReportFree($this);
     }
+    delete $PM{$self} if defined %PM;
 }
 
 # Now prevent accidental direct calls to TA_TradeReportAlloc/TA_TradeReportFree
