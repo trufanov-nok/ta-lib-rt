@@ -1653,6 +1653,26 @@ int TA_CDL3OUTSIDE_Lookback( void );
 
 
 /*
+ * TA_CDL3STARSINSOUTH - Three Stars In The South
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDL3STARSINSOUTH( int           START_IDX,
+                                int           END_IDX,
+                                const double *IN_ARRAY /* inOpen */,
+                                const double *IN_ARRAY /* inHigh */,
+                                const double *IN_ARRAY /* inLow */,
+                                const double *IN_ARRAY /* inClose */,
+                                int          *BEG_IDX,
+                                int          *OUT_SIZE,
+                                int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDL3STARSINSOUTH_Lookback( void );
+
+
+/*
  * TA_CDL3WHITESOLDIERS - Three Advancing White Soldiers
  * 
  * Input  = Open, High, Low, Close
@@ -1757,6 +1777,46 @@ TA_RetCode TA_CDLBREAKAWAY( int           START_IDX,
                             int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLBREAKAWAY_Lookback( void );
+
+
+/*
+ * TA_CDLCLOSINGMARUBOZU - Closing Marubozu
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLCLOSINGMARUBOZU( int           START_IDX,
+                                  int           END_IDX,
+                                  const double *IN_ARRAY /* inOpen */,
+                                  const double *IN_ARRAY /* inHigh */,
+                                  const double *IN_ARRAY /* inLow */,
+                                  const double *IN_ARRAY /* inClose */,
+                                  int          *BEG_IDX,
+                                  int          *OUT_SIZE,
+                                  int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLCLOSINGMARUBOZU_Lookback( void );
+
+
+/*
+ * TA_CDLCONCEALBABYSWALL - Concealing Baby Swallow
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLCONCEALBABYSWALL( int           START_IDX,
+                                   int           END_IDX,
+                                   const double *IN_ARRAY /* inOpen */,
+                                   const double *IN_ARRAY /* inHigh */,
+                                   const double *IN_ARRAY /* inLow */,
+                                   const double *IN_ARRAY /* inClose */,
+                                   int          *BEG_IDX,
+                                   int          *OUT_SIZE,
+                                   int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLCONCEALBABYSWALL_Lookback( void );
 
 
 /*
@@ -1938,6 +1998,26 @@ TA_RetCode TA_CDLEVENINGSTAR( int           START_IDX,
                               int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLEVENINGSTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+/*
+ * TA_CDLGAPSIDESIDEWHITE - Up/Down-gap side-by-side white lines
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLGAPSIDESIDEWHITE( int           START_IDX,
+                                   int           END_IDX,
+                                   const double *IN_ARRAY /* inOpen */,
+                                   const double *IN_ARRAY /* inHigh */,
+                                   const double *IN_ARRAY /* inLow */,
+                                   const double *IN_ARRAY /* inClose */,
+                                   int          *BEG_IDX,
+                                   int          *OUT_SIZE,
+                                   int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLGAPSIDESIDEWHITE_Lookback( void );
 
 
 /*
@@ -2221,6 +2301,33 @@ int TA_CDLMARUBOZU_Lookback( void );
 
 
 /*
+ * TA_CDLMATHOLD - Mat Hold
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInPenetration:(From 0 to TA_REAL_MAX)
+ *    Percentage of penetration of a candle within another candle
+ * 
+ * 
+ */
+TA_RetCode TA_CDLMATHOLD( int           START_IDX,
+                          int           END_IDX,
+                          const double *IN_ARRAY /* inOpen */,
+                          const double *IN_ARRAY /* inHigh */,
+                          const double *IN_ARRAY /* inLow */,
+                          const double *IN_ARRAY /* inClose */,
+                          double        OPT_REAL /* optInPenetration */, /* From 0 to TA_REAL_MAX */
+                          int          *BEG_IDX,
+                          int          *OUT_SIZE,
+                          int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLMATHOLD_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+/*
  * TA_CDLMORNINGDOJISTAR - Morning Doji Star
  * 
  * Input  = Open, High, Low, Close
@@ -2332,6 +2439,26 @@ TA_RetCode TA_CDLRICKSHAWMAN( int           START_IDX,
                               int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLRICKSHAWMAN_Lookback( void );
+
+
+/*
+ * TA_CDLRISEFALL3METHODS - Rising/Falling Three Methods
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLRISEFALL3METHODS( int           START_IDX,
+                                   int           END_IDX,
+                                   const double *IN_ARRAY /* inOpen */,
+                                   const double *IN_ARRAY /* inHigh */,
+                                   const double *IN_ARRAY /* inLow */,
+                                   const double *IN_ARRAY /* inClose */,
+                                   int          *BEG_IDX,
+                                   int          *OUT_SIZE,
+                                   int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLRISEFALL3METHODS_Lookback( void );
 
 
 /*
@@ -2512,6 +2639,26 @@ TA_RetCode TA_CDLTRISTAR( int           START_IDX,
                           int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLTRISTAR_Lookback( void );
+
+
+/*
+ * TA_CDLUNIQUE3RIVER - Unique 3 River
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLUNIQUE3RIVER( int           START_IDX,
+                               int           END_IDX,
+                               const double *IN_ARRAY /* inOpen */,
+                               const double *IN_ARRAY /* inHigh */,
+                               const double *IN_ARRAY /* inLow */,
+                               const double *IN_ARRAY /* inClose */,
+                               int          *BEG_IDX,
+                               int          *OUT_SIZE,
+                               int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLUNIQUE3RIVER_Lookback( void );
 
 
 /*
