@@ -35,7 +35,11 @@
 struct XlfFuncDescImpl
 {
   //! Ctor.
-  XlfFuncDescImpl(const std::string& category): category_(category) {}
+  XlfFuncDescImpl(XlfFuncDesc::RecalcPolicy recalcPolicy, 
+	  const std::string& category): recalcPolicy_(recalcPolicy), category_(category) 
+  {}
+  //! Recalculation policy
+  XlfFuncDesc::RecalcPolicy recalcPolicy_;
   //! Category where the function is displayed in the function wizzard.
   std::string category_;
   //! List of the argument descriptions of the function.
@@ -47,13 +51,15 @@ struct XlfFuncDescImpl
 \param alias
 \param comment The first 3 argument are directly passed to
 XlfAbstractCmdDesc::XlfAbstractCmdDesc.
-\param category Category in which the function should appear
-in Excel function wizard.
+\param category Category in which the function should appear.
+\param recalcPolicy Policy to recalculate the cell.
 */
-XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias, const std::string& comment, const std::string& category)
+XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias, 
+						 const std::string& comment, const std::string& category,
+						 RecalcPolicy recalcPolicy)
     :XlfAbstractCmdDesc(name, alias, comment), impl_(0)
 {
-  impl_ = new XlfFuncDescImpl(category);
+  impl_ = new XlfFuncDescImpl(recalcPolicy,category);
 }
 
 XlfFuncDesc::~XlfFuncDesc()
@@ -92,7 +98,13 @@ int XlfFuncDesc::DoRegister(const std::string& dllName) const
 		if (it != arguments.end())
 			argnames+=", ";
 	}
-	args[nbargs + 1] = 0;
+	if (impl_->recalcPolicy_ == XlfFuncDesc::Volatile)
+	{
+		args+="!";
+		args[nbargs + 2] = 0;
+	} 
+	else
+		args[nbargs + 1] = 0;
 	LPXLOPER *rgx = new LPXLOPER[10 + nbargs];
 	LPXLOPER *px = rgx;
 	(*px++) = XlfOper(dllName.c_str());

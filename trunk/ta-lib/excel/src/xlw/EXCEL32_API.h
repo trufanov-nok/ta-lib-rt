@@ -30,13 +30,13 @@
 */
 
 //! version hexadecimal number
-#define XLW_HEX_VERSION 0x010200f0
+#define XLW_HEX_VERSION 0x010201a0
 
 //! version string
 #ifdef XLW_DEBUG
-    #define XLW_VERSION "1.2.0a0-cvs-debug"
+    #define XLW_VERSION "1.2.1a0-cvs-debug"
 #else
-    #define XLW_VERSION "1.2.0a0-cvs"
+    #define XLW_VERSION "1.2.1a0-cvs"
 #endif
 
 //! global trace level (may be superseded locally by a greater value)
