@@ -2,18 +2,27 @@ V0.1.0 (August 2003)
 
 (Stable Release Candidate - Please Test and provide feedback)
 
-- New .NET/Mono interface.
+- New .NET/Mono interface (for the TA Functions only).
 
-- Performance Measurements: New trade-by-trade reports with
-  Maximum Adverse Excursion. Sharpe Ratio added and slight
-  change to interface.
+- New TA Functions: TA_LINEARREG
+
+- TA-Data: Can now do conversion of intra-day data
+  source to daily, weekly, monthly etc...
+
+- TA-Data: New TA_REPLACE_ZERO_PRICE_BAR flag
+  for TA_AddDataSource to allow to replace zero
+  values with the last known close price. By
+  default, zero values are reported as an error.
+
+- TA-PM: New trade-by-trade reports with Maximum
+  Adverse Excursion. Many interface changes.
 
 - Fix #724662: TA_GetTime bug
 - Fix #736196: TA_STOCHF bug with outFastD_1
 - Fix #731857: TA_String bad memory access 
 - Fix #748163: TA_AROON never reaching zero
+- Fix #767653: TA_MACD period swapping too late
 
 See HISTORY.TXT for summary of previous version.
 
 Info: http://ta-lib.org
-
