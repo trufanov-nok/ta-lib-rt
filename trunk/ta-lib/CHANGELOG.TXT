@@ -1,81 +1,33 @@
-V0.1.2 (November 2004)
+V0.1.3 (December 2004)
 
 New Features
 ============
-  - Perl interface
-
-  - CSI and CSIM (old Metastock) data sources.
-
-  - intraday-to-intraday period conversion.
-
   - New candlestick functions:
-             CDL3BLACKCROWS      Three Black Crows
-             CDLABANDONEDBABY    Abandoned Baby
-             CDLDOJISTAR         Doji Star
-             CDLENGULFING        Engulfing Pattern
-             CDLEVENINGDOJISTAR  Evening Doji Star
-             CDLEVENINGSTAR      Evening Star
-             CDLHAMMER           Hammer
-             CDLHANGINGMAN       Hanging Man
-             CDLHARAMI           Harami Pattern
-             CDLHARAMICROSS      Harami Cross Pattern
-             CDLHIGHWAVE         High-Wave Candle
-             CDLIDENTICAL3CROWS  Identical Three Crows
-             CDLINVERTEDHAMMER   Inverted Hammer
-             CDLLONGLINE         Long Line Candle
-             CDLMORNINGDOJISTAR  Morning Doji Star
-             CDLMORNINGSTAR      Morning Star
-             CDLSHOOTINGSTAR     Shooting Star
-             CDLSHORTLINE        Short Line Candle
-             CDLSPINNINGTOP      Spinning Top
-             CDLTRISTAR          Tristar Pattern
-             CDLUPSIDEGAP2CROWS  Upside Gap Two Crows
+      CDL2CROWS          Two Crows 
+      CDL3INSIDE         Three Inside Up/Down 
+      CDL3LINESTRIKE     Three-Line Strike 
+      CDL3OUTSIDE        Three Outside Up/Down 
+      CDL3WHITESOLDIERS  Three Advancing White Soldiers 
+      CDLADVANCEBLOCK    Advance Block 
+      CDLDARKCLOUDCOVER  Dark Cloud Cover 
+      CDLINNECK          In-Neck Pattern 
+      CDLONNECK          On-Neck Pattern 
+      CDLPIERCING        Piercing Pattern 
+      CDLSTALLEDPATTERN  Stalled Pattern 
+      CDLTHRUSTING       Thrusting Pattern
 
-  - Validate price bar chronological order and detect some other
-    inconsistency like low > high, open < low and so on.
-
-  - Starting/ending weekly, monthly, quarterly and yearly price bar are now
-    removed from the output when incomplete. Behavior can be override with 
-    the new flag TA_ALLOW_INCOMPLETE_PRICE_BARS.
-    
-  - New TA_YAHOO_ONE_SYMBOL data source.
-
-  - Add [-NDL] flag for ASCII data source. Allows
-    to filter all lines not starting with a digit.
-    
-  - Add TA_GetLoopback() to ta_abstract.h
-
-  - FreeBSD Support
-
-  - Profiling Makefile for FreeBSD, CygWin and Linux.
-
-  - xcode IDE project files for MacOS X
-
-Interface changes
-=================
-TA_HistoryAlloc now receive params with TA_HistoryAllocParam.
-See "ta_data.h" for an example.
-
-A few functions in ta_abstract.h were renamed for consistency:
-
-Old name                          New Name
-----------------------------      ----------------------------
-TA_SetInputParameterInfoPtr       TA_GetInputParameterInfo
-TA_SetOptInputParameterInfoPtr    TA_GetOptInputParameterInfo
-TA_SetOutputParameterInfoPtr      TA_GetOutputParameterInfo
-
+  - Excel: Default value for unspecified parameters now handled.
+  
+  - Excel: Function wizard display the default values.
+  
+  - .NET Visual Studio 2005 support (Beta)
+  
 Fixes
 =====
-# 927808: Adapt to Yahoo! data format change
-# 917085: Unprotected fclose in ta_yahoo segfaults
-# 888470: Monthly,Quarterly,Yearly not always good when start/end != 0
-# 881950: SQL Data Source Problem
-# 873879: gen_code fails on linux
-# 960230: Change lower limit of TA_CCI from 5 to 2
-# 965557: Detect divide by zero on some limit cases.
-# 978056: sqrt: DOMAIN error
-#1039601: Incorrect CMD/CMR compilation flags
-#1042729: MAE Performance Measurement bug (Short sales only)
+#1090231: TA_MINUS_DI/TA_PLUS_DI bug on period of 1
+#1089506: TA_SAR/TA_PLUS_DM bug on .NET
+#1072276: .NET exception on initialization
+#1023151: ASCII Data source - File name with space (Linux only)
 
 Thanks to all contributors.
 
