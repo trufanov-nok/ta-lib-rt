@@ -84,7 +84,7 @@ sub DESTROY {
     return unless defined $self;
     delete $ITERATORS{$self};
     if (exists $OWNER{$self}) {
-		#print "free history: @_: ";
+        #print "free history: @_: ";
         ::Finance::TAc::TA_HistoryFree($self);
         delete $OWNER{$self};
     }
@@ -93,6 +93,34 @@ sub DESTROY {
 # Now prevent accidental direct calls to TA_HistoryAllow/TA_HistoryFree
 delete $::Finance::TA::{TA_HistoryAlloc};
 delete $::Finance::TA::{TA_HistoryFree};
+
+
+
+package Finance::TA::TA_UDBase;
+
+# Wrapper class for TA_UDBase, handling allocation deallocation automatically
+
+sub new {
+    my $pkg = shift;
+    my $self;
+    my $retCode = ::Finance::TAc::TA_UDBaseAlloc(\$self);
+    if (defined $self) {
+        bless $self, $pkg;
+        ACQUIRE($self);
+    }
+    return $self;
+}
+
+sub DESTROY {
+    return unless $_[0]->isa('HASH');
+    my $self = tied(%{$_[0]});
+    return unless defined $self;
+    delete $ITERATORS{$self};
+    if (exists $OWNER{$self}) {
+        ::Finance::TAc::TA_UDBaseFree($self);
+        delete $OWNER{$self};
+    }
+}
 
 
 

@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 77 }
+BEGIN { plan tests => 82 }
 
 use Finance::TA;
 
@@ -66,6 +66,19 @@ ok( $TA_REPORT_TOTAL, 1 << 3 );
 print "Testing functions...\n";
 my $udb; # Universal DataBase
 ok( TA_UDBaseAlloc(\$udb), $TA_SUCCESS );
+ok( TA_UDBaseFree($udb), $TA_SUCCESS );
+undef $udb;     # IMPORTANT: don't forget to undef the database 
+                # after call to &TA_UDBaseFree or segfault may happen!
+
+ok( TA_UDBaseAlloc(\$udb), $TA_SUCCESS );
+ok( TA_UDBaseFree($udb), $TA_SUCCESS );
+
+$udb = new TA_UDBase;   # Preferred way of allocating the database
+ok( defined $udb );
+undef $udb;
+$udb = new TA_UDBase;
+ok( defined $udb );
+
 
 print "Testing TA_SIMULATOR data source...\n";
 my $sparam = new TA_AddDataSourceParam;
@@ -99,7 +112,7 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
     ok( $$series[0], 91.500 );
     ok( $$series[1], 94.815 );
     ok( $$series[2], 94.375 );
-    
+
     # testing TA_Integer* array
     $series = $history1->{volume};
     ok( @$series, $history1->{nbBars} );

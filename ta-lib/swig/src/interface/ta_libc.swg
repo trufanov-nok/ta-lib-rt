@@ -52,6 +52,9 @@
 /* output parameter of TA_TimestampDeltaXxxx functions */
 %apply unsigned int *OUTPUT { unsigned int *delta }
 
+/* hiddenData should not be accessible from Perl at all */
+%ignore hiddenData;
+
 %include "../../../../../c/include/ta_common.h"
 
 /* clearing typemaps to avoid potential future problems in other header files */
@@ -67,7 +70,15 @@
 
 /* typemaps for TA_UDBaseAlloc */
 
-/* typedef unsigned int TA_UDBase; */
+/* Don't create default constructors/destructors.  We will use our own that
+ * rely on TA_UDBaseAlloc/TA_UDBBaseFree
+ */
+%nodefault TA_UDBase;
+
+/* fool SWIG that TA_UDBase is a struct.  SWIG creates shadow classes only
+ * for structs and classes.
+ */
+typedef struct {} TA_UDBase;
 
 /* pass as reference (Perl specific, maybe more convenient)
  * Example:
@@ -91,7 +102,7 @@
 %typemap(argout) TA_UDBase **newUDBase {
 	SV *tempsv;
 	tempsv = SvRV($input);
-	SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, 0);
+	SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, SWIG_SHADOW);
 }
 
 
@@ -119,6 +130,8 @@
 	SWIG_MakePtr($result, (void *) *$1, $*1_descriptor, SWIG_SHADOW|SWIG_OWNER);
 	argvi++;
 }
+
+
 
 /* accessing members of TA_History */
 
@@ -214,6 +227,9 @@
 
 /* hiddenData should not be accessible from Perl at all */
 %ignore hiddenData;
+
+/* TA_ForEachSymbol doesn't make sense for scripting languages */
+%ignore TA_ForEachSymbol;
 
 %include "../../../../../c/include/ta_data.h"
 
