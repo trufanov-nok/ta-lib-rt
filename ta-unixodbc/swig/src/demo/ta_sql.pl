@@ -93,16 +93,26 @@ sub print_data {
         return 0;
     }
 
-    for ( my $i = 0; $i < $history->{nbBars}; $i++ ) {
-        printf "%02u-%02u-%02u", $history->{timestamp}[$i]{year},
-                                 $history->{timestamp}[$i]{month},
-                                 $history->{timestamp}[$i]{day};
+    # copy data to my variables to speedup the access
+    my @timestamp = @{$history->{timestamp}};
+    my @open      = @{$history->{open}};
+    my @high      = @{$history->{high}};
+    my @low       = @{$history->{low}};
+    my @close     = @{$history->{close}};
+    my @volume    = @{$history->{volume}};
+    my $nbBars    = $history->{nbBars};
 
-        printf ",%.2f", $history->{open}[$i]   if defined $history->{open};
-        printf ",%.2f", $history->{high}[$i]   if defined $history->{high};
-        printf ",%.2f", $history->{low}[$i]    if defined $history->{low};
-        printf ",%.2f", $history->{close}[$i]  if defined $history->{close};
-        printf ",%.2f", $history->{volume}[$i] if defined $history->{volume};
+    for ( my $i = 0; $i < $nbBars; $i++ ) {
+        #print $timestamp[$i];
+        printf "%02u-%02u-%02u", $timestamp[$i]{year},
+                                 $timestamp[$i]{month},
+                                 $timestamp[$i]{day};
+
+        printf ",%.2f", $open[$i]   if defined @open;
+        printf ",%.2f", $high[$i]   if defined @high;
+        printf ",%.2f", $low[$i]    if defined @low;
+        printf ",%.2f", $close[$i]  if defined @close;
+        printf ",%d",   $volume[$i] if defined @volume;
         printf "\n";
     }
 
