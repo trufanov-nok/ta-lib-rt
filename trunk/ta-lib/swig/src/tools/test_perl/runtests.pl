@@ -7,6 +7,6 @@ use Test::Harness;
 # Windows workaround - space problem
 $^X =~ s/Program Files/PROGRA~1/;
 
-@tests = <test*.pl>;
+@tests = <*.t>;
 runtests(@tests);
 
