@@ -2,25 +2,36 @@
 # CMR (commandline multitheraded release only)
 # Handmade (experimental)
 #
-# Tested with SWIG v1.3.21
+# Tested with SWIG v1.3.22, Perl v5.8.4
 
-PERL5_VERSION=5.8
+PERL5_VERSION=$(shell perl -v | perl -ne 'print $$1 if / v(\d+\.\d+\.\d+) /')
 PERL5_INCLUDE=/usr/lib/perl/$(PERL5_VERSION)/CORE
 
-INSTDIR=/usr/local/lib/perl/$(PERL5_VERSION).0
+INSTDIR=/usr/local/lib/perl/$(PERL5_VERSION)
 TALIBDIR=../../../../../../ta-lib
 TOPDIR=../../../..
 WRAPDIR=$(TOPDIR)/temp/perl/wrap
 TEMPDIR=$(TOPDIR)/temp/perl/wrap
 
-CPPFLAGS   = -Dbool=char -D_REENTRANT -D_GNU_SOURCE \
+CPPFLAGS   = -D_REENTRANT -D_GNU_SOURCE \
 	     -DTHREADS_HAVE_PIDS -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 \
 	     -I$(PERL5_INCLUDE) \
+	     -I$(TOPDIR)/../c/include \
 	     -I$(TALIBDIR)/c/include
-CFLAGS     = -pipe -Wall -Wno-unused -O2 -fpic -fno-strict-aliasing
+CFLAGS     = -pipe -Wall -Wno-unused -O2 -fno-strict-aliasing -fPIC
+
+####### Support for 64-bit systems
+ifeq ($(shell uname -m), x86_64)
+    CFLAGS   += -m64 -D__64BIT__
+    ifeq ($(shell uname -r | cut -d- -f3-), amd64-k8)
+        CFLAGS   += -march=k8
+    else
+        CFLAGS   += -march=x86-64
+    endif
+endif
 
 CC         = gcc
-LDFLAGS    = -shared
+LDFLAGS    = -shared -fPIC
 LDLIBS     = -lpthread -lcurl -lodbc
 
 all: $(TOPDIR)/lib/perl/TA.so $(TOPDIR)/lib/perl/Finance/TA.pm
