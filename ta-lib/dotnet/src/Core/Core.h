@@ -1487,6 +1487,28 @@ namespace TA
          #define TA_OBV Core::OBV
          #define TA_OBV_Lookback Core::OBV_Lookback
 
+         static int CORREL_Lookback( int           optInTimePeriod_0 );  /* From 1 to 100000 */
+
+         static enum TA_RetCode CORREL( int    startIdx,
+                                        int    endIdx,
+                                        double       inReal_0 __gc [],
+                                        double       inReal_1 __gc [],
+                                        int           optInTimePeriod_0, /* From 1 to 100000 */
+                                        [OutAttribute]Int32 *outBegIdx,
+                                        [OutAttribute]Int32 *outNbElement,
+                                        double        outReal_0 __gc [] );
+         static enum TA_RetCode CORREL( int    startIdx,
+                                        int    endIdx,
+                                        float        inReal_0 __gc [],
+                                        float        inReal_1 __gc [],
+                                        int           optInTimePeriod_0, /* From 1 to 100000 */
+                                        [OutAttribute]Int32 *outBegIdx,
+                                        [OutAttribute]Int32 *outNbElement,
+                                        double        outReal_0 __gc [] );
+
+         #define TA_CORREL Core::CORREL
+         #define TA_CORREL_Lookback Core::CORREL_Lookback
+
          static int LINEARREG_Lookback( int           optInTimePeriod_0 );  /* From 2 to 100000 */
 
          static enum TA_RetCode LINEARREG( int    startIdx,
