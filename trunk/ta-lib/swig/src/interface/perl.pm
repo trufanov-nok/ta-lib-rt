@@ -420,14 +420,16 @@ our $INITIALIZED = 0;
 undef *TA_Initialize;
 
 *TA_Initialize = sub {
+    my $retCode;
     if ($INITIALIZED) {
-        my $retCode = TA_Shutdown();
+        $retCode = TA_Shutdown();
         return $retCode if $retCode != $TA_SUCCESS;
     }
-    $INITIALIZED = 1;
     # Accept calls with no parameters
     $_[0] = undef if @_ == 0;
-    return ::Finance::TAc::TA_Initialize(@_);
+    $retCode = ::Finance::TAc::TA_Initialize(@_);
+    $INITIALIZED = ($retCode == $TA_SUCCESS);
+    return $retCode;
 };
 
 undef *TA_Shutdown;
