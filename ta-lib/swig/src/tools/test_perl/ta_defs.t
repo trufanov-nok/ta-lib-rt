@@ -1,4 +1,4 @@
-#!perl
+#!/usr/bin/perl -w
 #
 # Simple test of ta_defs
 # 
