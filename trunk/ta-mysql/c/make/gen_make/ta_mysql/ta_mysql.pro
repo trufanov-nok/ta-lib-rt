@@ -35,10 +35,11 @@ INCLUDEPATH *= ../../../../../../../ta-lib/c/src/ta_data/ta_source/ta_sql
 
 TMAKE_CXXFLAGS += -GX
 
-TMAKE_LIB += ../../../../../src/msvc-mysql++/lib/mysql++.lib
 # TMAKE_LIB += ../../../../../src/msvc-mysql++/mysql/lib/libmySQL.lib
 
 # debug/release dependent options.
+cdr:TMAKE_LIB += ../../../../../src/msvc-mysql++/lib/mysql++.lib
+cdd:TMAKE_LIB += ../../../../../src/msvc-mysql++/lib/mysql++d.lib
 debug:DEFINES   *= TA_DEBUG
 debug:DEFINES   *= _DEBUG
 DEFINES        += TA_SINGLE_THREAD
@@ -46,4 +47,4 @@ thread:DEFINES -= TA_SINGLE_THREAD
 # Platform dependent options.
 win32:DEFINES         *= WIN32
 win32-msvc:DEFINES    *= _MBCS _LIB
-win32:CLEAN_FILES = ../../../../../bin/*.map ../../../../../bin/*._xe ../../../../../bin/*.tds ../../../../../bin/*.pdb ../../../../../bin/*.pbo ../../../../../bin/*.pbi ../../../../../bin/*.pbt
+# win32:CLEAN_FILES = ..\..\..\..\..\bin\*.map ..\..\..\..\..\bin\*._xe ..\..\..\..\..\bin\*.tds ..\..\..\..\..\bin\*.pdb ..\..\..\..\..\bin\*.pbo ..\..\..\..\..\bin\*.pbi ..\..\..\..\..\bin\*.pbt
