@@ -1,20 +1,9 @@
-V0.0.6 (October 2002)
-
-- Directional Movement TA functions added:
-  ADX, ADXR, DX, +DI, -DI, +DM and -DM
-
-- Parabolic SAR added.
-
-- Add support of many new Yahoo! data source:
-  United Kingdom, France, Germany, Italy
-  Belgium... Type "ta_yahoo -c" for the list.
-
-- Correct problem with Yahoo! data source causing
-  the allocation of historical data to fail with
-  an "Invalid Date" error. (Fix #609753)
-
-- Speed optimization of STDDEV, VAR and BBANDS.
-  Contribution by Viver Jesus.
+V0.0.7 (February 2003)
+- Excel Add-In implemented.
+- New TA Functions: TRIMA, MFI, STOCHF, MACDEXT
+- Remove TA_Libc parameter from all functions.
+- Fix #644512: BBANDS when using a MA type != SMA
+- Fix #660248: TA_HistoryAlloc start/end intra-day range.
 
 See HISTORY.TXT for summary of previous version.
 
