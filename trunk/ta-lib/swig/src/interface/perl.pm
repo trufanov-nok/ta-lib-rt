@@ -97,15 +97,28 @@ sub DESTROY {
 }
 
 sub AddDataSource {
-    my $self = shift;
-    ::Finance::TAc::TA_AddDataSource($self, @_);
+    my ($self, $param) = @_;
+    if (ref($param) eq 'HASH') {
+        my $hash = $param;
+        $param = Finance::TA::TA_AddDataSourceParam->new;
+        while ( my($key, $val) = each(%$hash) ) {
+            $param->{$key} = $val;
+        }
+    }
+    ::Finance::TAc::TA_AddDataSource($self, $param);
 }
 
 sub History {
-    return unless $_[0]->isa('HASH');
-    Finance::TA::TA_History->new(@_);
+    my ($self, $param) = @_;
+    if (ref($param) eq 'HASH') {
+        my $hash = $param;
+        $param = Finance::TA::TA_HistoryAllocParam->new;
+        while ( my($key, $val) = each(%$hash) ) {
+            $param->{$key} = $val;
+        }
+    }
+    Finance::TA::TA_History->new($self, $param);
 }
-
 
 sub CategoryTable {
     my $self = shift;
