@@ -1256,22 +1256,29 @@ namespace TA
          #define TA_STOCHF Core::STOCHF
          #define TA_STOCHF_Lookback Core::STOCHF_Lookback
 
-         static int STOCHRSI_Lookback( int           optInTimePeriod_0 );  /* From 2 to 100000 */
-
+         static int STOCHRSI_Lookback( int           optInFastK_Period_0, /* From 1 to 100000 */
+                                     int           optInFastD_Period_1, /* From 1 to 100000 */
+                                     TA_MAType     optInFastD_MAType_2 ); 
          static enum TA_RetCode STOCHRSI( int    startIdx,
                                           int    endIdx,
                                           double       inReal_0 __gc [],
-                                          int           optInTimePeriod_0, /* From 2 to 100000 */
+                                          int           optInFastK_Period_0, /* From 1 to 100000 */
+                                          int           optInFastD_Period_1, /* From 1 to 100000 */
+                                          TA_MAType     optInFastD_MAType_2,
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
-                                          double        outReal_0 __gc [] );
+                                          double        outFastK_0 __gc [],
+                                          double        outFastD_1 __gc [] );
          static enum TA_RetCode STOCHRSI( int    startIdx,
                                           int    endIdx,
                                           float        inReal_0 __gc [],
-                                          int           optInTimePeriod_0, /* From 2 to 100000 */
+                                          int           optInFastK_Period_0, /* From 1 to 100000 */
+                                          int           optInFastD_Period_1, /* From 1 to 100000 */
+                                          TA_MAType     optInFastD_MAType_2,
                                           [OutAttribute]Int32 *outBegIdx,
                                           [OutAttribute]Int32 *outNbElement,
-                                          double        outReal_0 __gc [] );
+                                          double        outFastK_0 __gc [],
+                                          double        outFastD_1 __gc [] );
 
          #define TA_STOCHRSI Core::STOCHRSI
          #define TA_STOCHRSI_Lookback Core::STOCHRSI_Lookback
