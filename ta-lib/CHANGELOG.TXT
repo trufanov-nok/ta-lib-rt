@@ -1,8 +1,11 @@
 V0.1.0 (August 2003)
 
-(Stable Release Candidate - Please Test)
+(Release Candidate - Please Test)
 
 - New .NET/Mono interface (for the TA Functions only).
+
+- All TA functions can now accept either single or
+  double precision inputs.
 
 - New TA Functions: TA_LINEARREG
 
@@ -23,6 +26,7 @@ V0.1.0 (August 2003)
 - Fix #736196: TA_STOCHF bug with outFastD_1
 - Fix #748163: TA_AROON never reaching zero
 - Fix #767653: TA_MACD period swapping too late
+- Fix #792298: Remove rounding to ADX,ADXR,DI+,DI- and DX
                
 See HISTORY.TXT for summary of previous version.
 
