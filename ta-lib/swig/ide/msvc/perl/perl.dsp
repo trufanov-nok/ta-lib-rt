@@ -144,23 +144,34 @@ SOURCE=..\..\..\..\c\include\ta_pm.h
 # End Group
 # Begin Source File
 
+SOURCE=..\..\..\src\interface\perl.pm
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\src\interface\ta_libc.i
 
 !IF  "$(CFG)" == "perl - Win32 Release"
 
+USERDEP__TA_LI="..\..\..\src\interface\perl.pm"	
 # Begin Custom Build
 InputPath=..\..\..\src\interface\ta_libc.i
 InputName=ta_libc
 
-"..\..\..\temp\perl\wrap\$(InputName)_wrap.c" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	echo In order to function correctly, please ensure the following environment variables are correctly set: 
-	echo PERL5_INCLUDE: %PERL5_INCLUDE% 
-	echo Make also sure that swig and perl are on search path: 
-	echo %PATH% 
-	echo on 
-	swig -perl5 -proxy -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c $(InputPath) 
-	copy /Y /A ..\..\..\temp\perl\wrap\TA.pm+..\..\..\src\interface\perl.pm ..\..\..\lib\perl\Finance\TA.pm 
+BuildCmds= \
+	echo In order to function correctly, please ensure the following environment variables are correctly set: \
+	echo PERL5_INCLUDE: %PERL5_INCLUDE% \
+	echo Make also sure that swig and perl are on search path: \
+	echo %PATH% \
+	echo on \
+	swig -perl5 -proxy -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c $(InputPath) \
+	copy /Y /A ..\..\..\temp\perl\wrap\TA.pm+..\..\..\src\interface\perl.pm ..\..\..\lib\perl\Finance\TA.pm \
 	
+
+"..\..\..\temp\perl\wrap\$(InputName)_wrap.c" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+   $(BuildCmds)
+
+"..\..\..\temp\perl\wrap\TA.pm" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+   $(BuildCmds)
 # End Custom Build
 
 !ELSEIF  "$(CFG)" == "perl - Win32 TA_Data Release"
