@@ -7,6 +7,7 @@
 PERL5_VERSION=5.8
 PERL5_INCLUDE=/usr/lib/perl/$(PERL5_VERSION)/CORE
 
+INSTDIR=/usr/local/lib/perl/$(PERL5_VERSION).0
 TALIBDIR=../../../../../../ta-lib
 TOPDIR=../../../..
 WRAPDIR=$(TOPDIR)/temp/perl/wrap
@@ -47,5 +48,13 @@ $(WRAPDIR)/TA.pm $(WRAPDIR)/ta_libc_wrap.c: \
 		-I$(TALIBDIR)/swig/src/interface -I$(TALIBDIR)/c/include \
 		-I$(TOPDIR)/../c/include $<
 
+install: $(INSTDIR)/TA.so $(INSTDIR)/Finance/TA.pm
 
-.PHONY: all clean
+$(INSTDIR)/Finance/TA.pm: $(TOPDIR)/lib/perl/TA.so
+	test -d $(INSTDIR)/Finance || mkdir $(INSTDIR)/Finance
+	cp -f $(TOPDIR)/lib/perl/TA.so $(INSTDIR)/TA.so
+
+$(INSTDIR)/TA.so: $(TOPDIR)/lib/perl/Finance/TA.pm
+	cp -f $(TOPDIR)/lib/perl/Finance/TA.pm $(INSTDIR)/Finance/TA.pm
+
+.PHONY: all clean install
