@@ -33,6 +33,7 @@
 
 #include "stdafx.h"
 
+using namespace System;
 using namespace System::Reflection;
 using namespace System::Runtime::CompilerServices;
 
@@ -50,6 +51,8 @@ using namespace System::Runtime::CompilerServices;
 [assembly:AssemblyTrademarkAttribute("Trademark and license details at http://ta-lib.org")];
 [assembly:AssemblyCultureAttribute("")];		
 
+[assembly:CLSCompliantAttribute(true)]; 
+
 //
 // Version information for an assembly consists of the following four values:
 //
@@ -60,9 +63,9 @@ using namespace System::Runtime::CompilerServices;
 //
 // You can specify all the value or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly:AssemblyInformationalVersionAttribute("0.1.0")];
-[assembly:AssemblyFileVersionAttribute("0.1.0")];
-[assembly:AssemblyVersionAttribute("0.1.0")];
+[assembly:AssemblyInformationalVersionAttribute("0.2.0")];
+[assembly:AssemblyFileVersionAttribute("0.2.0")];
+[assembly:AssemblyVersionAttribute("0.2.0")];
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
