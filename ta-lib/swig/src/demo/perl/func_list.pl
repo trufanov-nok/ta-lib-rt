@@ -106,7 +106,7 @@ sub display_list {
 
 sub display_inpar {
     my ($fh, $i, $ident) = @_;
-    $info = $fh->SetInputParameterInfoPtr($i);
+    $info = $fh->GetInputParameterInfo($i);
     print ident($ident++), "Input: $info->{paramName}\n";
     return unless $level > 3;
     my @flags = in_flags($info->{flags});
@@ -116,7 +116,7 @@ sub display_inpar {
 
 sub display_optpar {
     my ($fh, $i, $ident) = @_;
-    $info = $fh->SetOptInputParameterInfoPtr($i);
+    $info = $fh->GetOptInputParameterInfo($i);
     print ident($ident++), "Option: $info->{paramName}\n"; 
     return unless $level > 3;
     print ident($ident), "Name: $info->{displayName}\n"; 
@@ -133,7 +133,7 @@ sub display_optpar {
 
 sub display_outpar {
     my ($fh, $i, $ident) = @_;
-    $info = $fh->SetOutputParameterInfoPtr($i);
+    $info = $fh->GetOutputParameterInfo($i);
     print ident($ident++), "Output: $info->{paramName}\n"; 
     return unless $level > 3;
     my @flags = out_flags($info->{flags});
