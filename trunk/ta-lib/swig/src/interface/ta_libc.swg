@@ -9,12 +9,6 @@
 
 %include "typemaps.i"
 
-%inline %{
-
-char *test() {
-    return "test";
-}
-%}
 
 
 /* Adittional typemap not found in the standard set */
@@ -49,6 +43,7 @@ char *test() {
 %ignore INT_MIN;
 #define INT_MAX 2147483647
 #define INT_MIN -INT_MAX-1
+
 
 %include "../../../../../c/include/ta_defs.h"
 
@@ -204,69 +199,65 @@ typedef struct {} TA_UDBase;
 
 /* accessing members of TA_History */
 
-%typemap(out) TA_Real * {
+/* Each TA_History saves its size in array_size
+ * This will later be needed when acessing the member arrays
+ * This typemap does not perform a conversion, that's why it
+ * cannot be type 'in'.
+ */
+%typemap(check) TA_History* (unsigned int array_size)
+    "array_size = ($1 != NULL)? ($1->nbBars) : 0;"
+
+/* How to figure out how many elements we have? 
+ * This and the following two typemaps rely upon the encompassing structure
+ * creating a local variable array_size.
+ * We have seen above that TA_History does it.
+ * If forgot to define it, a compile error will occur.
+ */
+%typemap(out) TA_Real *ARRAY {
 	AV *myav;
 	SV **svs;
-	int i = 0;
-    int len; 	
-    /* How to figure out how many elements we have? 
-     * We use a dirty trick knowing that TA_Real* in ta_data.h is used only
-     * inside struct TA_History.  I know no better way.  If we were wrong, 
-     * compiler error would occur.
-     */
-    len = arg1->nbBars;  /* hugh... */
+	unsigned int i = 0;
 
-	svs = (SV **) malloc(len*sizeof(SV *));
-	for (i = 0; i < len ; i++) {
+	svs = (SV **) malloc(array_size1 * sizeof(SV *));
+	for (i = 0; i < array_size1 ; i++) {
 	    svs[i] = sv_newmortal();
 	    sv_setnv((SV*)svs[i],$1[i]);
 	};
-	myav =	av_make(len,svs);
+	myav =	av_make(array_size1,svs);
 	free(svs);
     $result = newRV((SV*)myav);
     sv_2mortal($result);
     argvi++;    
 }
 
-%typemap(out) TA_Integer * {
+%typemap(out) TA_Integer *ARRAY {
 	AV *myav;
 	SV **svs;
-	int i = 0;
-    int len; 	
-    /* How to figure out how many elements we have? 
-     * As above.
-     */
-    len = arg1->nbBars;  /* hugh... */
+	unsigned int i = 0;
 
-	svs = (SV **) malloc(len*sizeof(SV *));
-	for (i = 0; i < len ; i++) {
+	svs = (SV **) malloc(array_size1 * sizeof(SV *));
+	for (i = 0; i < array_size1 ; i++) {
 	    svs[i] = sv_newmortal();
 	    sv_setiv((SV*)svs[i],$1[i]);
 	};
-	myav =	av_make(len,svs);
+	myav =	av_make(array_size1,svs);
 	free(svs);
     $result = newRV((SV*)myav);
     sv_2mortal($result);
     argvi++;    
 }
 
-%typemap(out) TA_Timestamp * {
+%typemap(out) TA_Timestamp *ARRAY {
 	AV *myav;
 	SV **svs;
-	int i = 0;
-    int len; 	
-    /* How to figure out how many elements we have? 
-     * As above.
-     */
-    len = arg1->nbBars;  /* hugh... */
+	unsigned int i = 0;
 
-	svs = (SV **) malloc(len*sizeof(SV *));
-	for (i = 0; i < len ; i++) {
+	svs = (SV **) malloc(array_size1 * sizeof(SV *));
+	for (i = 0; i < array_size1 ; i++) {
 	    svs[i] = sv_newmortal();
         SWIG_MakePtr((SV*)svs[i], (void *) &$1[i], $1_descriptor, SWIG_SHADOW);
-	    /* sv_setiv((SV*)svs[i],$1[i]); */
 	};
-	myav =	av_make(len,svs);
+	myav =	av_make(array_size1,svs);
 	free(svs);
     $result = newRV((SV*)myav);
     sv_2mortal($result);
@@ -274,6 +265,11 @@ typedef struct {} TA_UDBase;
 }
 
 #endif
+
+/* now apply the defined timestamps to specific fields */
+%apply TA_Real *ARRAY { TA_Real *open, TA_Real *high, TA_Real *low, TA_Real *close };
+%apply TA_Integer *ARRAY { TA_Integer *volume, TA_Integer *openInterest };
+%apply TA_Timestamp *ARRAY { TA_Timestamp *timestamp }
 
 /* TA_History cannot be created in a standard way.  Use TA_HistoryAlloc
  * and TA_HistoryFree.  Perl module wraps them in a custom constructor
@@ -322,8 +318,6 @@ typedef struct {} TA_UDBase;
 %mutable openInterest;
 %mutable listOfSource;
 
-/* we better also get rid of the TA_History-specific typemaps for TA_Real* etc.*/
-%clear TA_Real *, TA_Integer *, TA_Timestamp *;
 
 /** ta_func *****************************************************************/
 /* untested */
@@ -333,5 +327,25 @@ typedef struct {} TA_UDBase;
 
 /** ta_pm *******************************************************************/
 /* untested */
+
+/* TA_PMArray has array fields of TA_Timestamp and TA_Real
+ * We can reuse typemaps defined for TA_History
+ */
+%typemap(check) TA_PMArray* (unsigned int array_size)
+    "array_size = ($1 != NULL)? (unsigned int)($1->nbData) : 0;"
+
+%apply TA_Real *ARRAY { TA_Real *data }
+
+
+/* TA_Transaction actually does not have an array of TA_Timestamp
+ * Unfortunately, SWIG does not distinguiush structures and structure
+ * pointers.  Let's - for the time being - use an array of size 1 for that.
+ * Ideally, the TA_Timestamp field would have a different name than 
+ * "timestamp" which is "reserved" for array members.
+ */
+
+%typemap(check) TA_Transaction* (unsigned int array_size)
+    "array_size = 1;"
+
 
 %include "../../../../../c/include/ta_pm.h"
