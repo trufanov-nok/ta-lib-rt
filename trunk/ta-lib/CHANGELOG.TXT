@@ -1,4 +1,4 @@
-V0.1.3 (December 2004)
+V0.1.3 (January 2005)
 
 New Features
 ============
@@ -21,6 +21,8 @@ New Features
   - Excel: Function wizard display the default values.
   
   - .NET Visual Studio 2005 support (Beta)
+
+  - Perl binaries now included in Win32 packages.
   
 Fixes
 =====
