@@ -37,8 +37,8 @@ mysql__convert(double, strtod);
     operator TYPE () {return num;}\
   }\
 
-extern long strtol(const char *str, char **ptr, int base);
-extern unsigned long strtoul(const char *str, char **ptr, int base);
+//extern long strtol(const char *str, char **ptr, int base);
+//extern unsigned long strtoul(const char *str, char **ptr, int base);
 
 mysql__convert(char, strtol);
 mysql__convert(signed char, strtol);
