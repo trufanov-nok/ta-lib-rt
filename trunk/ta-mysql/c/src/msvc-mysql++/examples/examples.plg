@@ -1,0 +1,46 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: examples - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\WINDOWS\TEMP\RSP3172.TMP" with contents
+[
+/nologo /MD /GX /O2 /I "../include" /I "../mysql/include" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Release/examples.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Windows\Desktop\lazy\mysql++\examples\resetdb.cpp"
+]
+Creating command line "xicl6.exe @C:\WINDOWS\TEMP\RSP3172.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP3173.TMP" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/examples.pdb" /machine:I386 /out:"Release/examples.exe" 
+"..\lib\mysql++.lib"
+".\Release\resetdb.obj"
+]
+Creating command line "xilink6.exe @C:\WINDOWS\TEMP\RSP3173.TMP"
+<h3>Output Window</h3>
+Compiling...
+resetdb.cpp
+../include\type_info1.hh(39) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+../include\type_info1.hh(159) : warning C4800: 'unsigned int' : forcing value to bool 'true' or 'false' (performance warning)
+../include\type_info1.hh(172) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+../include\type_info1.hh(176) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+../include\type_info1.hh(180) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+../include\type_info1.hh(184) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+../include\convert1.hh(40) : warning C4273: 'strtol' : inconsistent dll linkage.  dllexport assumed.
+../include\convert1.hh(41) : warning C4273: 'strtoul' : inconsistent dll linkage.  dllexport assumed.
+../include\sql_query1.hh(37) : warning C4800: 'class SQLQuery *' : forcing value to bool 'true' or 'false' (performance warning)
+../include\sql_query1.hh(135) : warning C4355: 'this' : used in base member initializer list
+../include\compare1.hh(48) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+../include\result1.hh(33) : warning C4355: 'this' : used in base member initializer list
+../include\result1.hh(42) : warning C4800: 'char' : forcing value to bool 'true' or 'false' (performance warning)
+Linking...
+
+
+
+<h3>Results</h3>
+examples.exe - 0 error(s), 13 warning(s)
+</pre>
+</body>
+</html>
