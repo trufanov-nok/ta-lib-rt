@@ -1,9 +1,10 @@
-V0.1.1 (?? 2003)
+V0.1.1 (January 2004)
 
-- Support for SQL/ODBC and MySQL data sources.
-- New TA functions: TA_SAREXT, TA_STOCHRSI, TA_CORREL, TA_NVI, TA_PVI
-- Add CygWin support
+- New SQL/ODBC and MySQL data sources.
+- New TA functions: TA_SAREXT, TA_STOCHRSI, TA_CORREL
+- Add CygWin makefiles
+- Add support for adjusted split/dividend data for Yahoo!
 
-See HISTORY.TXT for summary of previous version.
+See HISTORY.TXT for summary of previous versions.
 
 Info: http://ta-lib.org
