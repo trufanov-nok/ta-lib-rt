@@ -1,4 +1,10 @@
-V0.1.0 (Sept 2003)
+V0.1.1 (January 2004)
+  - New SQL/ODBC and MySQL data source.
+  - Add: TA_CORREL, TA_STOCHRSI, TA_SAREXT
+  - Add split/dividend adjustment for Yahoo!
+  - Add CygWin support
+
+V0.1.0 (September 2003)
   - New .NET/Mono interface (Core namespace)
   - TA functions now accept single precision inputs.
   - Add: TSF, LINEARREG, LINEARREG_INTERCEPT
