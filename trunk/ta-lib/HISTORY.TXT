@@ -1,3 +1,11 @@
+V0.1.2 (November 2004)
+  - New: Perl interface, candlestick functions.
+  - New: price bar validation and intraday conversion.
+  - Add TA_YAHOO_ONE_SYMBOL, CSI and CSIM data source.
+  - Add MacOS X and FreeBSD support.
+  - Fix #927808,917085,888470,881950,873879,960230,965557,978056
+  - Fix #1039601,1042729
+
 V0.1.1 (January 2004)
   - New SQL/ODBC and MySQL data source.
   - Add: TA_CORREL, TA_STOCHRSI, TA_SAREXT
