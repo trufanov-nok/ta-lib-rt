@@ -6,7 +6,7 @@ See http://ta-lib.org in the documentation section.
 
 What's this version? What's new?
 ================================
-See CHANGELOG.TXT file.
+See CHANGELOG.TXT and HISTORY.TXT
 
 How to use TA-Lib with Excel?
 =============================

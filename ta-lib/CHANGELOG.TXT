@@ -1,30 +1,28 @@
-V0.0.7 (January 2003)
+V0.0.8 (April 2003)
 
-- Excel Add-In implemented. Give it a try with "example.xls".
+- New TA Functions:
+    AROON          Aroon
+    AROONOSC       Aroon Oscillator
+    MAMA           MESA Adaptive Moving Average
+    KAMA           Kaufman Adaptive Moving Average
+    T3             Triple Exponential Moving Average
+    HT_TRENDLINE   Hilbert Transform - Instantaneous Trendline
+    HT_DCPERIOD    Hilbert Transform - Dominant Cycle Period
+    HT_DCPHASE     Hilbert Transform - Dominant Cycle Phase
+    HT_PHASOR      Hilbert Transform - Phasor Components
+    HT_SINE        Hilbert Transform - SineWave
+    HT_TRENDMODE   Hilbert Transform - Trend vs Cycle Mode
+    AD             Chaikin A/D Line
+    ADOSC          Chaikin A/D Oscillator
 
-- Some new TA Functions:
-   MFI      Money Flow Index
-   MIDPRICE Midpoint Price over period
-   MIDPOINT MidPoint over period
-   TRIMA    Triangular Moving Average
-   MACDEXT  MACD with controllable MA type
-   ROCP     Rate of change %: (price-prevPrice)/prevPrice
-   STOCHF   Stochastic Fast
-   AVGPRICE Average Price  
+  The Hilbert Transform functions are the ones found
+  in John F. Ehlers books "Rocket Science For Traders".
 
-- Remove TA_Libc parameter from all functions.
+- MA types parameters have been changed, hopefully for the last time.
 
-- MA Type names have changed to be consistent 
-  e.g. TA_BBANDS_EXPONENTIAL becomes TA_BBANDS_EMA
+- Fix #701060: Fix TA_TRIMA function. Thanks to Chris.
 
-- STOCH function can now handle any MA type
-
-- Speed optimization of some functions.
-
-- Fix #660248: TA_HistoryAlloc start/end intra-day range.
-- Fix #660250: BBANDS when using a MA type != SMA
-- Fix #660449: TA_STOCH crash with certain parameter/data
-- Fix #644512: ASCII Data Source [-I] bug
+- Excel shutdown logic corrected. Sync with latest XLW 1.2.2 release
 
 See HISTORY.TXT for summary of previous version.
 

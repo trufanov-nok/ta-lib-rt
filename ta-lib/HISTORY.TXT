@@ -1,50 +1,46 @@
+V0.0.8 (April 2003)
+  - Add: AD,ADOSC,AROON,AROONOSC,KAMA,T3,HT_TRENDLINE,MAMA
+  - Add: HT_DCPHASE,HT_PHASOR,HT_SINE,HT_TRENDMODE,HT_DCPERIOD
+  - Fix#701060
+
 V0.0.7 (January 2003)
   - Excel Add-In implemented.
-  - New TA Functions: MFI,MIDPRICE,MIDPOINT,TRIMA,
-                      MACDEXT,ROCP,STOCHF,AVGPRICE
+  - Add: MFI,MIDPRICE,MIDPOINT,TRIMA,MACDEXT,ROCP,STOCHF,AVGPRICE                   
   - Fix#660248, #660250, #660449, #644512
 
 V0.0.6 (October 2002)
-  - Add TA Functions: SAR,ADX,ADXR,DX,+DI,-DI,+DM,-DM
+  - Add Functions: SAR,ADX,ADXR,DX,+DI,-DI,+DM,-DM
   - Add many european Yahoo! data source.
   - Fix#609753 for Yahoo! data source.
   - STDDEV,VAR,BBANDS speed optimization
 
 V0.0.5 (June 2002)
-  - Add performance measurement infrastructure.
-  - Add TA function: OBV
+  - Add: OBV + performance measurement infrastructure.
   - Fix#537806 + some Yahoo! data source fix.
 
 V0.0.4 (March 2002)
+  - Add: TEMA, DEMA, TRIX
   - Interface changes to all the TA functions:
     1) nbInputElement has been removed.
     2) startIdx and endIdx cannot be -1 anymore.
     3) only one outBegIdx and outNbElement output per function.
   - A "Lookback" function is now provided for each TA function.
-  - Add TA functions: TEMA, DEMA, TRIX
-  - Improve ta_regtest.
-  - Make better HTML parsing in gen_rdata.
+  - Improve ta_regtest + Make better HTML parsing in gen_rdata.
 
 V0.0.3 (December 2001)
   - Port to Linux/g++ completed.
-  - Add TA functions:
-      BBANDS, WMA, MOM, ROC, ROCR
-      STDDEV, VAR, STOCH
+  - Add: BBANDS,WMA,MOM,ROC,ROCR,STDDEV,VAR,STOCH
   - Add TA_SetUnstablePeriod.
   - Code and MSVC project clean-up.
 
 V0.0.2 (October 2001)
-  - Add a first batch of TA functions:
-      EMA, SMA, APO, MACD, PPO, RSI, ATR
-      TRANGE, MEDPRICE, TYPPRICE, WCLPRICE
-  - Add compatibility flag for Metastock.
-  - Add support for US/CAN indices to the
-    Yahoo! data source.
-  - Now include some Win32 binaries.
+  - Add: EMA,SMA,APO,MACD,PPO,RSI,ATR,TRANGE,WCLPRICE
+  - Add: MEDPRICE,TYPPRICE
+  - Add compatibility flag + some Win32 binaries.
+  - Add support for US/CAN indices to the Yahoo! data source.
 
 V0.0.1 (September 2001)
   - Alpha Release on Windows.
-  - Include ta_yahoo.exe demo application.
-  
+  - Include ta_yahoo.exe demo application.  
 
 Info: http://ta-lib.org
