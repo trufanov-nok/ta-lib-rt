@@ -49,12 +49,23 @@ sub Main
 
    execProg( $unix_dir."release/build/", "cp ta-unixodbc-".$versionSuffix."-src.tar.gz ".$release_dir );
 
-   # Make the ta-lib package
+   # Get the ta-lib package from CVS
    $a = "cvs -z3 -q -d".$root_cvs." export -Dtomorrow ta-lib";
    execProg( $unix_dir."release/build", $a );
+
+   # Remove Win32 Binaries from the local view.
+   $a = "rm ".$unix_dir."release/build/ta-lib/excel/ta-lib.xll";
+   execProg( $unix_dir."release/build", $a );
+   $a = "rm ".$unix_dir."release/build/ta-lib/swig/lib/perl/ta.dll";
+   execProg( $unix_dir."release/build", $a );
+   $a = "rm ".$unix_dir."release/build/ta-lib/swig/lib/perl/Finance/TA.pm";
+   execProg( $unix_dir."release/build", $a );
+
+   # Build the Source Package
    execProg( $unix_dir."release/build", "tar cvf ta-lib-".$versionSuffix."-src.tar ta-lib >tar.out" );
    execProg( $unix_dir."release/build", "gzip ta-lib-".$versionSuffix."-src.tar" );
 
+   # Run tests
    testGCC( $unix_dir."release/build/ta-lib/", "cmd", 0, 0, $release_dir."log/", 0 );
    testGCC( $unix_dir."release/build/ta-lib/", "csd", 0, 0, $release_dir."log/", 0 );
    testGCC( $unix_dir."release/build/ta-lib/", "cmr", 0, 0, $release_dir."log/", 0 );

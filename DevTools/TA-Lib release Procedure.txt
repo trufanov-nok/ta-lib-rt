@@ -22,7 +22,7 @@ Packaging Procedure
 [Windows] Build ta-lib.xll
 
 (4) .NET Assemblies
-[Windows] Build 
+[Windows] Build the Debug and Release assembly.
 
 (5) CVS finalization
 [Windows] Make sure the CVS is in synch. Further steps will be done

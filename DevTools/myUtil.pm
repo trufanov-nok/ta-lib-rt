@@ -4,7 +4,7 @@ use strict;
 use base 'Exporter';
 use Cwd;
 
-our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile removeRelease removeAllBinFile testBorland testMSVC testGCC testPerl buildMSVC buildBorland);
+our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile removeRelease removeAllBinFile testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage);
 
 sub removeFile
 {
@@ -16,7 +16,9 @@ sub removeFile
            and (not $z =~ /Entries/) 
            and (not $z =~ /Repository/)
            and (not $z =~ /Root/)
-           and (not $z =~ /TALib_Prefix.pch/) )
+           and (not $z =~ /TALib_Prefix.pch/) 
+           and (not $z =~ /TA.pm/)
+           and (not $z =~ /ta.dll/) )
       {
          unlink( $z );
       }
@@ -147,6 +149,17 @@ sub removeAllBinFile
    }
 
    removeFile( $_[0].'c\bin\*.*' );
+}
+
+sub removeBinFromPackage
+{
+   my $a = $_[0]."release\\";
+   my $b = "zip -d -o -q ".$_[1]; 
+   execProg($a, $b." \\ta-lib\\excel\\ta-lib.xll" );
+   execProg($a, $b." \\ta-lib\\dotnet\\src\\Core\\Debug\\TA-Lib-Core.dll"  );
+   execProg($a, $b." \\ta-lib\\dotnet\\src\\Core\\Release\\TA-Lib-Core.dll"  );
+   execProg($a, $b." \\ta-lib\\swig\\lib\\perl\\ta.dll"  );
+   execProg($a, $b." \\ta-lib\\swig\\lib\\perl\\Finance\\TA.pm"  );
 }
 
 sub execProg
