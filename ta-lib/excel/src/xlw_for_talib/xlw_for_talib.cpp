@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2003, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2004, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -46,7 +46,7 @@
  *  042003 MF   Make the initialization/shutdown sequence more reliable
  *              with work-around to Excel bugs. Some info here:
  *                  http://longre.free.fr/pages/prog/api-c.htm
- *
+ *  031504 MF   Adapt to a few changes to ta_abstract.h
  */
 
 #include <xlw/xlw.h>
@@ -433,7 +433,7 @@ static int nbExcelInput( const TA_FuncInfo *funcInfo )
    for( i=0; i < funcInfo->nbInput; i++ )
    {
       const TA_InputParameterInfo *paramInfo;
-      TA_SetInputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+      TA_GetInputParameterInfo( funcInfo->handle, i, &paramInfo );
       switch( paramInfo->type )
       {
       case TA_Input_Price:
@@ -505,7 +505,7 @@ static void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData )
       for( i=0; i < funcInfo->nbInput; i++ )
       {
          const TA_InputParameterInfo *paramInfo;
-         TA_SetInputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+         TA_GetInputParameterInfo( funcInfo->handle, i, &paramInfo );
          switch( paramInfo->type )
          {
          case TA_Input_Price:
@@ -538,7 +538,7 @@ static void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData )
       for( i=0; i < funcInfo->nbOptInput; i++ )
       {
          const TA_OptInputParameterInfo *paramInfo;
-         TA_SetOptInputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+         TA_GetOptInputParameterInfo( funcInfo->handle, i, &paramInfo );
 
          // Allocate the info string with all the possible values (when applicable)
          int length = lengthDataPairs( paramInfo );
@@ -777,7 +777,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
           // 'input' will contain only the valid data among the
           // cells provided by excel.
           const TA_InputParameterInfo *paramInfo;
-          TA_SetInputParameterInfoPtr( funcInfo->handle, curTALibParam, &paramInfo );
+          TA_GetInputParameterInfo( funcInfo->handle, curTALibParam, &paramInfo );
 
           // Only one of these two will be != NULL
           double *inputDouble = NULL;
@@ -954,7 +954,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        for( i=0; i < funcInfo->nbOutput; i++ )
        {
           const TA_OutputParameterInfo *paramInfo;
-          retCode = TA_SetOutputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+          retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, &paramInfo );
           if( retCode != TA_SUCCESS )
           {
              FREE_ALL_ALLOC;
@@ -986,7 +986,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        for( i=0; i < funcInfo->nbInput; i++ )
        {
           const TA_InputParameterInfo *paramInfo;
-          TA_SetInputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+          TA_GetInputParameterInfo( funcInfo->handle, i, &paramInfo );
           switch( paramInfo->type )
           {
           case TA_Input_Real:
@@ -1056,11 +1056,11 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        for( i=0; i < funcInfo->nbOptInput; i++ )
        {
           const TA_OptInputParameterInfo *paramInfo;
-          retCode = TA_SetOptInputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+          retCode = TA_GetOptInputParameterInfo( funcInfo->handle, i, &paramInfo );
           if( retCode != TA_SUCCESS )
           {
              displayError(retCode);
-             XlfExcel::Instance().MsgBox(funcName, "TA_SetOptInputParameterInfoPtr Failed!");
+             XlfExcel::Instance().MsgBox(funcName, "TA_GetOptInputParameterInfo Failed!");
           }
 
           switch( paramInfo->type)
@@ -1099,7 +1099,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
                 {
                    // Try to identify the string, if fails set with the default
                    const TA_OptInputParameterInfo *paramInfo;
-                   TA_SetOptInputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+                   TA_GetOptInputParameterInfo( funcInfo->handle, i, &paramInfo );
                    TA_RealList *list = (TA_RealList *) paramInfo->dataSet;
                    int foundInList = 0;
                    TA_Real valueForThisString;
@@ -1156,7 +1156,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
                 {
                    // Try to identify the string, if fails set with the default
                    const TA_OptInputParameterInfo *paramInfo;
-                   TA_SetOptInputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+                   TA_GetOptInputParameterInfo( funcInfo->handle, i, &paramInfo );
                    TA_IntegerList *list = (TA_IntegerList *) paramInfo->dataSet;
                    int foundInList = 0;
                    int valueForThisString;
@@ -1199,10 +1199,10 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        {
           const TA_OutputParameterInfo *paramInfo;
    
-          retCode = TA_SetOutputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+          retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, &paramInfo );
           if( retCode != TA_SUCCESS )
           {
-             XlfExcel::Instance().MsgBox(funcName, "TA_SetOutputParameterInfoPtr Failed!");
+             XlfExcel::Instance().MsgBox(funcName, "TA_GetOutputParameterInfo Failed!");
           }
    
           switch( paramInfo->type )
@@ -1278,7 +1278,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
     {
        const TA_OutputParameterInfo *paramInfo;
    
-       TA_SetOutputParameterInfoPtr( funcInfo->handle, i, &paramInfo );
+       TA_GetOutputParameterInfo( funcInfo->handle, i, &paramInfo );
 
        int outIdxRow = outIdxColStart;
    
