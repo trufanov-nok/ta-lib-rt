@@ -4,7 +4,6 @@
  * It includes other swg files, if needed.
  */
 
-%module "Finance::TA"
 
 %header %{
 #include "ta_libc.h"
@@ -74,6 +73,9 @@ STRING_TABLE(TA_StringTable, size)
 
 /* Sometimes it is used as output to constant strings */
 CONST_STRING_TABLE(TA_StringTable, size)
+
+/* TA_Timestamp* is used as a member array */
+MEMBER_ARRAY(TA_Timestamp)
 
 /* typemaps for TA_FatalReportToBuffer are language specific, see ta_libc.XXX.swg */
 

@@ -83,7 +83,7 @@
 %enddef /* CONST_STRING_TABLE */
 
 
-/* Enev some other string tables are flat, i.e. there is only one string pointer
+/* Some other string tables are flat, i.e. there is only one string pointer
  * and all strings (fixed length) are one after another.
  */
 %define STRING_BUFFER(TYPE, SIZE_FIELD, LEN_FIELD)
@@ -107,6 +107,9 @@
     }
     $symnameFree(*$1);
 }
+
+/* we don't want just wrapper classes around */
+%ignore TYPE;
 
 %enddef /* STRING_BUFFER */
 
@@ -147,8 +150,7 @@
     SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, SWIG_SHADOW);
 }
 
-/* Don't create default constructors/destructors. 
- */
+/* Don't create default constructors/destructors  */
 %nodefault TYPE;
 
 %enddef /* HANDLE */
@@ -235,7 +237,6 @@
 /* SIZE_FIELD must not be modified, otherwise segmentation fault may occur */
 %immutable SIZE_FIELD;
 
-
 %enddef /* ARRAY_OBJECT */
 
 /* Is that all?  Not really.  Array objects may have various number
@@ -313,8 +314,7 @@
 
 %enddef /* MEMBER_ARRAY */
 
-/* We pre-define the array of TA_Timestamp, since it is so common */
-MEMBER_ARRAY(TA_Timestamp)
+
 
 /* Some member arrays contain just pointers to objects, 
  * not the objects themselves.
@@ -347,7 +347,7 @@ MEMBER_ARRAY(TA_Timestamp)
     argvi++;
 }
 
-%enddef /* 
+%enddef /* MEMBER_PTRARRAY */
 
 
 
