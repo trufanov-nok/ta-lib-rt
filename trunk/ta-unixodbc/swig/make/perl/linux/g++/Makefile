@@ -53,11 +53,11 @@ $(WRAPDIR)/TA.pm $(WRAPDIR)/ta_libc_wrap.c: \
 
 install: $(INSTDIR)/TA.so $(INSTDIR)/Finance/TA.pm
 
-$(INSTDIR)/Finance/TA.pm: $(TOPDIR)/lib/perl/TA.so
-	test -d $(INSTDIR)/Finance || mkdir $(INSTDIR)/Finance
+$(INSTDIR)/TA.so: $(TOPDIR)/lib/perl/TA.so
 	cp -f $(TOPDIR)/lib/perl/TA.so $(INSTDIR)/TA.so
 
-$(INSTDIR)/TA.so: $(TOPDIR)/lib/perl/Finance/TA.pm
+$(INSTDIR)/Finance/TA.pm: $(TOPDIR)/lib/perl/Finance/TA.pm
+	test -d $(INSTDIR)/Finance || mkdir $(INSTDIR)/Finance
 	cp -f $(TOPDIR)/lib/perl/Finance/TA.pm $(INSTDIR)/Finance/TA.pm
 
 .PHONY: all clean install
