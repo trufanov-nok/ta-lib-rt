@@ -24,6 +24,8 @@ SOURCES = ../../../../../src/ta_unixodbc.c
 INCLUDEPATH *= ../../../../../include
 INCLUDEPATH *= ../../../../../../../ta-lib/c/include
 INCLUDEPATH *= ../../../../../../../ta-lib/c/src/ta_common
+INCLUDEPATH *= ../../../../../../../ta-lib/c/src/ta_data
+INCLUDEPATH *= ../../../../../../../ta-lib/c/src/ta_data/ta_source
 INCLUDEPATH *= ../../../../../../../ta-lib/c/src/ta_data/ta_source/ta_sql
 
 # debug/release dependent options.
