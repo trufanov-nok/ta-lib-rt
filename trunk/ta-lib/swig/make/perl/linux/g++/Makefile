@@ -3,15 +3,18 @@
 #
 # Tested with SWIG v1.3.21
 
+PERL5_VERSION=5.8.4
+PERL5_INCLUDE=/usr/lib/perl/$(PERL5_VERSION)/CORE
+
 TOPDIR=../../../..
 WRAPDIR=$(TOPDIR)/temp/perl/wrap
 TEMPDIR=$(TOPDIR)/temp/perl/wrap
 
 CPPFLAGS   = -Dbool=char -D_REENTRANT -D_GNU_SOURCE \
 	     -DTHREADS_HAVE_PIDS -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 \
-	     -I/usr/lib/perl/5.8.0/CORE \
+	     -I$(PERL5_INCLUDE) \
 	     -I$(TOPDIR)/../c/include
-CFLAGS     = -fpic -fno-strict-aliasing
+CFLAGS     = -pipe -Wall -Wno-unused -O2 -fpic -fno-strict-aliasing
 
 CC         = gcc
 LDFLAGS    = -shared
@@ -37,7 +40,8 @@ $(WRAPDIR)/TA.pm $(WRAPDIR)/ta_libc_wrap.c: \
 		$(TOPDIR)/src/interface/ta_libc.swg \
 		$(TOPDIR)/src/interface/ta_func.swg
 	swig -perl5 -proxy -Fstandard -o $(WRAPDIR)/ta_libc_wrap.c \
-		-I$(TOPDIR)/src/interface -I$(TOPDIR)/../c/include $<
+		-I$(TOPDIR)/src/interface -I$(TOPDIR)/../c/include \
+		$<
 
 
 .PHONY: all clean
