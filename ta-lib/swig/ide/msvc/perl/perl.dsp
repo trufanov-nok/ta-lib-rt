@@ -163,7 +163,7 @@ BuildCmds= \
 	echo Make also sure that swig and perl are on search path: \
 	echo %PATH% \
 	echo on \
-	swig -perl5 -proxy -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c $(InputPath) \
+	swig -perl5 -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c $(InputPath) \
 	copy /Y /A ..\..\..\temp\perl\wrap\TA.pm+..\..\..\src\interface\perl.pm ..\..\..\lib\perl\Finance\TA.pm \
 	
 
