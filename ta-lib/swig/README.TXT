@@ -127,12 +127,17 @@ arrays.  Examples:
 * Insead of doing:
     $retCode = TA_UDBaseAlloc(\$udBase);
     TA_UDBaseFree($udBase)
-you may prefer:
+you may strongly prefer:
     $udBase = new TA_UDBase; 
+In the former case, you have to call &TA_UDBaseFree, otherwise a memory leak
+will occur.  Also, after the call to &TA_UDBaseFree, you must not use the
+variable anywhere, otherwise a segmentation fault may occur.  In such case it
+is safer to undef the variable directly after the call to &TA_UDBaseFree.
 In the latter case, the database will be freed automatically when $udBase
 goes out of scope or is redefined. If the allocation fails, $udBase will be
 undef.  There is no way of getting the ret code then.  But hey, what can go
-wrong with TA_UDBaseAlloc()? 
+wrong with TA_UDBaseAlloc()?  And you are freed from the hurdle of keeping
+track of allocation and deallocation.  This is the True Perl Way.
 
 The module covers ta_defs, ta_common, ta_data, ta_func, and ta_pm.  It does not 
 cover ta_abstract - on purpose.  The information about ta_func can be obtained
