@@ -209,8 +209,8 @@ print "Testing error handling...\n";
 ok( TA_Initialize(), $TA_SUCCESS );
 ok( TA_RegressionTest($TA_REG_TEST_FATAL_ERROR),  $TA_FATAL_ERR );
 # use default buffer size of $TA_FATAL_ERROR_BUF_SIZE
-ok( TA_FatalReportToBuffer(), qr/\*\*\* Internal Fatal Error \*\*\*/ );
+ok( TA_FatalReportToBuffer(), qr/^\*\*\* Internal Fatal Error \*\*\*/ );
 ok( TA_RegressionTest($TA_REG_TEST_ASSERT_FAIL), $TA_FATAL_ERR );
 # use custom buffer size
-ok( TA_FatalReportToBuffer(12+1), "*** Internal");
+ok( TA_FatalReportToBuffer(14), qr/^\*\*\* Internal/);
 # Implicit shutdown
