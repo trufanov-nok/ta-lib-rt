@@ -2,7 +2,7 @@ How to rebuild ta-lib.xll?
 ==========================
 
 You need MSVC 6.0 to re-build (might work with Visual
-Studio .NET, but htis has not been tested).
+Studio .NET, but this has not been tested).
 
 Step # 1 : Build ta_libc_cdr.lib
 -----------------------------------
