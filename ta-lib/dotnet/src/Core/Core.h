@@ -1559,6 +1559,56 @@ namespace TA
          #define TA_OBV Core::OBV
          #define TA_OBV_Lookback Core::OBV_Lookback
 
+         static int CDL3BLACKCROWS_Lookback( void );
+
+         static enum TA_RetCode CDL3BLACKCROWS( int    startIdx,
+                                                int    endIdx,
+                                                double       inOpen __gc [],
+                                                double       inHigh __gc [],
+                                                double       inLow __gc [],
+                                                double       inClose __gc [],
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+         static enum TA_RetCode CDL3BLACKCROWS( int    startIdx,
+                                                int    endIdx,
+                                                float        inOpen __gc [],
+                                                float        inHigh __gc [],
+                                                float        inLow __gc [],
+                                                float        inClose __gc [],
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+
+         #define TA_CDL3BLACKCROWS Core::CDL3BLACKCROWS
+         #define TA_CDL3BLACKCROWS_Lookback Core::CDL3BLACKCROWS_Lookback
+
+         static int CDLABANDONEDBABY_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+         static enum TA_RetCode CDLABANDONEDBABY( int    startIdx,
+                                                  int    endIdx,
+                                                  double       inOpen __gc [],
+                                                  double       inHigh __gc [],
+                                                  double       inLow __gc [],
+                                                  double       inClose __gc [],
+                                                  double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                  [OutAttribute]Int32 *outBegIdx,
+                                                  [OutAttribute]Int32 *outNbElement,
+                                                  int           outInteger __gc [] );
+         static enum TA_RetCode CDLABANDONEDBABY( int    startIdx,
+                                                  int    endIdx,
+                                                  float        inOpen __gc [],
+                                                  float        inHigh __gc [],
+                                                  float        inLow __gc [],
+                                                  float        inClose __gc [],
+                                                  double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                  [OutAttribute]Int32 *outBegIdx,
+                                                  [OutAttribute]Int32 *outNbElement,
+                                                  int           outInteger __gc [] );
+
+         #define TA_CDLABANDONEDBABY Core::CDLABANDONEDBABY
+         #define TA_CDLABANDONEDBABY_Lookback Core::CDLABANDONEDBABY_Lookback
+
          static int CDLDOJISTAR_Lookback( void );
 
          static enum TA_RetCode CDLDOJISTAR( int    startIdx,
@@ -1582,6 +1632,30 @@ namespace TA
 
          #define TA_CDLDOJISTAR Core::CDLDOJISTAR
          #define TA_CDLDOJISTAR_Lookback Core::CDLDOJISTAR_Lookback
+
+         static int CDLENGULFING_Lookback( void );
+
+         static enum TA_RetCode CDLENGULFING( int    startIdx,
+                                              int    endIdx,
+                                              double       inOpen __gc [],
+                                              double       inHigh __gc [],
+                                              double       inLow __gc [],
+                                              double       inClose __gc [],
+                                              [OutAttribute]Int32 *outBegIdx,
+                                              [OutAttribute]Int32 *outNbElement,
+                                              int           outInteger __gc [] );
+         static enum TA_RetCode CDLENGULFING( int    startIdx,
+                                              int    endIdx,
+                                              float        inOpen __gc [],
+                                              float        inHigh __gc [],
+                                              float        inLow __gc [],
+                                              float        inClose __gc [],
+                                              [OutAttribute]Int32 *outBegIdx,
+                                              [OutAttribute]Int32 *outNbElement,
+                                              int           outInteger __gc [] );
+
+         #define TA_CDLENGULFING Core::CDLENGULFING
+         #define TA_CDLENGULFING_Lookback Core::CDLENGULFING_Lookback
 
          static int CDLEVENINGDOJISTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
@@ -1635,6 +1709,102 @@ namespace TA
          #define TA_CDLEVENINGSTAR Core::CDLEVENINGSTAR
          #define TA_CDLEVENINGSTAR_Lookback Core::CDLEVENINGSTAR_Lookback
 
+         static int CDLHAMMER_Lookback( void );
+
+         static enum TA_RetCode CDLHAMMER( int    startIdx,
+                                           int    endIdx,
+                                           double       inOpen __gc [],
+                                           double       inHigh __gc [],
+                                           double       inLow __gc [],
+                                           double       inClose __gc [],
+                                           [OutAttribute]Int32 *outBegIdx,
+                                           [OutAttribute]Int32 *outNbElement,
+                                           int           outInteger __gc [] );
+         static enum TA_RetCode CDLHAMMER( int    startIdx,
+                                           int    endIdx,
+                                           float        inOpen __gc [],
+                                           float        inHigh __gc [],
+                                           float        inLow __gc [],
+                                           float        inClose __gc [],
+                                           [OutAttribute]Int32 *outBegIdx,
+                                           [OutAttribute]Int32 *outNbElement,
+                                           int           outInteger __gc [] );
+
+         #define TA_CDLHAMMER Core::CDLHAMMER
+         #define TA_CDLHAMMER_Lookback Core::CDLHAMMER_Lookback
+
+         static int CDLHANGINGMAN_Lookback( void );
+
+         static enum TA_RetCode CDLHANGINGMAN( int    startIdx,
+                                               int    endIdx,
+                                               double       inOpen __gc [],
+                                               double       inHigh __gc [],
+                                               double       inLow __gc [],
+                                               double       inClose __gc [],
+                                               [OutAttribute]Int32 *outBegIdx,
+                                               [OutAttribute]Int32 *outNbElement,
+                                               int           outInteger __gc [] );
+         static enum TA_RetCode CDLHANGINGMAN( int    startIdx,
+                                               int    endIdx,
+                                               float        inOpen __gc [],
+                                               float        inHigh __gc [],
+                                               float        inLow __gc [],
+                                               float        inClose __gc [],
+                                               [OutAttribute]Int32 *outBegIdx,
+                                               [OutAttribute]Int32 *outNbElement,
+                                               int           outInteger __gc [] );
+
+         #define TA_CDLHANGINGMAN Core::CDLHANGINGMAN
+         #define TA_CDLHANGINGMAN_Lookback Core::CDLHANGINGMAN_Lookback
+
+         static int CDLHARAMI_Lookback( void );
+
+         static enum TA_RetCode CDLHARAMI( int    startIdx,
+                                           int    endIdx,
+                                           double       inOpen __gc [],
+                                           double       inHigh __gc [],
+                                           double       inLow __gc [],
+                                           double       inClose __gc [],
+                                           [OutAttribute]Int32 *outBegIdx,
+                                           [OutAttribute]Int32 *outNbElement,
+                                           int           outInteger __gc [] );
+         static enum TA_RetCode CDLHARAMI( int    startIdx,
+                                           int    endIdx,
+                                           float        inOpen __gc [],
+                                           float        inHigh __gc [],
+                                           float        inLow __gc [],
+                                           float        inClose __gc [],
+                                           [OutAttribute]Int32 *outBegIdx,
+                                           [OutAttribute]Int32 *outNbElement,
+                                           int           outInteger __gc [] );
+
+         #define TA_CDLHARAMI Core::CDLHARAMI
+         #define TA_CDLHARAMI_Lookback Core::CDLHARAMI_Lookback
+
+         static int CDLHARAMICROSS_Lookback( void );
+
+         static enum TA_RetCode CDLHARAMICROSS( int    startIdx,
+                                                int    endIdx,
+                                                double       inOpen __gc [],
+                                                double       inHigh __gc [],
+                                                double       inLow __gc [],
+                                                double       inClose __gc [],
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+         static enum TA_RetCode CDLHARAMICROSS( int    startIdx,
+                                                int    endIdx,
+                                                float        inOpen __gc [],
+                                                float        inHigh __gc [],
+                                                float        inLow __gc [],
+                                                float        inClose __gc [],
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+
+         #define TA_CDLHARAMICROSS Core::CDLHARAMICROSS
+         #define TA_CDLHARAMICROSS_Lookback Core::CDLHARAMICROSS_Lookback
+
          static int CDLHIGHWAVE_Lookback( void );
 
          static enum TA_RetCode CDLHIGHWAVE( int    startIdx,
@@ -1658,6 +1828,54 @@ namespace TA
 
          #define TA_CDLHIGHWAVE Core::CDLHIGHWAVE
          #define TA_CDLHIGHWAVE_Lookback Core::CDLHIGHWAVE_Lookback
+
+         static int CDLIDENTICAL3CROWS_Lookback( void );
+
+         static enum TA_RetCode CDLIDENTICAL3CROWS( int    startIdx,
+                                                    int    endIdx,
+                                                    double       inOpen __gc [],
+                                                    double       inHigh __gc [],
+                                                    double       inLow __gc [],
+                                                    double       inClose __gc [],
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+         static enum TA_RetCode CDLIDENTICAL3CROWS( int    startIdx,
+                                                    int    endIdx,
+                                                    float        inOpen __gc [],
+                                                    float        inHigh __gc [],
+                                                    float        inLow __gc [],
+                                                    float        inClose __gc [],
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+
+         #define TA_CDLIDENTICAL3CROWS Core::CDLIDENTICAL3CROWS
+         #define TA_CDLIDENTICAL3CROWS_Lookback Core::CDLIDENTICAL3CROWS_Lookback
+
+         static int CDLINVERTEDHAMMER_Lookback( void );
+
+         static enum TA_RetCode CDLINVERTEDHAMMER( int    startIdx,
+                                                   int    endIdx,
+                                                   double       inOpen __gc [],
+                                                   double       inHigh __gc [],
+                                                   double       inLow __gc [],
+                                                   double       inClose __gc [],
+                                                   [OutAttribute]Int32 *outBegIdx,
+                                                   [OutAttribute]Int32 *outNbElement,
+                                                   int           outInteger __gc [] );
+         static enum TA_RetCode CDLINVERTEDHAMMER( int    startIdx,
+                                                   int    endIdx,
+                                                   float        inOpen __gc [],
+                                                   float        inHigh __gc [],
+                                                   float        inLow __gc [],
+                                                   float        inClose __gc [],
+                                                   [OutAttribute]Int32 *outBegIdx,
+                                                   [OutAttribute]Int32 *outNbElement,
+                                                   int           outInteger __gc [] );
+
+         #define TA_CDLINVERTEDHAMMER Core::CDLINVERTEDHAMMER
+         #define TA_CDLINVERTEDHAMMER_Lookback Core::CDLINVERTEDHAMMER_Lookback
 
          static int CDLLONGLINE_Lookback( void );
 
@@ -1735,6 +1953,30 @@ namespace TA
          #define TA_CDLMORNINGSTAR Core::CDLMORNINGSTAR
          #define TA_CDLMORNINGSTAR_Lookback Core::CDLMORNINGSTAR_Lookback
 
+         static int CDLSHOOTINGSTAR_Lookback( void );
+
+         static enum TA_RetCode CDLSHOOTINGSTAR( int    startIdx,
+                                                 int    endIdx,
+                                                 double       inOpen __gc [],
+                                                 double       inHigh __gc [],
+                                                 double       inLow __gc [],
+                                                 double       inClose __gc [],
+                                                 [OutAttribute]Int32 *outBegIdx,
+                                                 [OutAttribute]Int32 *outNbElement,
+                                                 int           outInteger __gc [] );
+         static enum TA_RetCode CDLSHOOTINGSTAR( int    startIdx,
+                                                 int    endIdx,
+                                                 float        inOpen __gc [],
+                                                 float        inHigh __gc [],
+                                                 float        inLow __gc [],
+                                                 float        inClose __gc [],
+                                                 [OutAttribute]Int32 *outBegIdx,
+                                                 [OutAttribute]Int32 *outNbElement,
+                                                 int           outInteger __gc [] );
+
+         #define TA_CDLSHOOTINGSTAR Core::CDLSHOOTINGSTAR
+         #define TA_CDLSHOOTINGSTAR_Lookback Core::CDLSHOOTINGSTAR_Lookback
+
          static int CDLSHORTLINE_Lookback( void );
 
          static enum TA_RetCode CDLSHORTLINE( int    startIdx,
@@ -1806,6 +2048,30 @@ namespace TA
 
          #define TA_CDLTRISTAR Core::CDLTRISTAR
          #define TA_CDLTRISTAR_Lookback Core::CDLTRISTAR_Lookback
+
+         static int CDLUPSIDEGAP2CROWS_Lookback( void );
+
+         static enum TA_RetCode CDLUPSIDEGAP2CROWS( int    startIdx,
+                                                    int    endIdx,
+                                                    double       inOpen __gc [],
+                                                    double       inHigh __gc [],
+                                                    double       inLow __gc [],
+                                                    double       inClose __gc [],
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+         static enum TA_RetCode CDLUPSIDEGAP2CROWS( int    startIdx,
+                                                    int    endIdx,
+                                                    float        inOpen __gc [],
+                                                    float        inHigh __gc [],
+                                                    float        inLow __gc [],
+                                                    float        inClose __gc [],
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+
+         #define TA_CDLUPSIDEGAP2CROWS Core::CDLUPSIDEGAP2CROWS
+         #define TA_CDLUPSIDEGAP2CROWS_Lookback Core::CDLUPSIDEGAP2CROWS_Lookback
 
          static int CORREL_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 

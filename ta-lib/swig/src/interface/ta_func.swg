@@ -1553,6 +1553,53 @@ int TA_OBV_Lookback( void );
  ******************************************/
 
 /*
+ * TA_CDL3BLACKCROWS - Three Black Crows
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDL3BLACKCROWS( int           START_IDX,
+                              int           END_IDX,
+                              const double *IN_ARRAY /* inOpen */,
+                              const double *IN_ARRAY /* inHigh */,
+                              const double *IN_ARRAY /* inLow */,
+                              const double *IN_ARRAY /* inClose */,
+                              int          *BEG_IDX,
+                              int          *OUT_SIZE,
+                              int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDL3BLACKCROWS_Lookback( void );
+
+
+/*
+ * TA_CDLABANDONEDBABY - Abandoned Baby
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInPenetration:(From 0 to TA_REAL_MAX)
+ *    Percentage of penetration of a candle within another candle
+ * 
+ * 
+ */
+TA_RetCode TA_CDLABANDONEDBABY( int           START_IDX,
+                                int           END_IDX,
+                                const double *IN_ARRAY /* inOpen */,
+                                const double *IN_ARRAY /* inHigh */,
+                                const double *IN_ARRAY /* inLow */,
+                                const double *IN_ARRAY /* inClose */,
+                                double        OPT_REAL /* optInPenetration */, /* From 0 to TA_REAL_MAX */
+                                int          *BEG_IDX,
+                                int          *OUT_SIZE,
+                                int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLABANDONEDBABY_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+/*
  * TA_CDLDOJISTAR - Doji Star
  * 
  * Input  = Open, High, Low, Close
@@ -1570,6 +1617,26 @@ TA_RetCode TA_CDLDOJISTAR( int           START_IDX,
                            int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLDOJISTAR_Lookback( void );
+
+
+/*
+ * TA_CDLENGULFING - Engulfing Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLENGULFING( int           START_IDX,
+                            int           END_IDX,
+                            const double *IN_ARRAY /* inOpen */,
+                            const double *IN_ARRAY /* inHigh */,
+                            const double *IN_ARRAY /* inLow */,
+                            const double *IN_ARRAY /* inClose */,
+                            int          *BEG_IDX,
+                            int          *OUT_SIZE,
+                            int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLENGULFING_Lookback( void );
 
 
 /*
@@ -1627,6 +1694,86 @@ int TA_CDLEVENINGSTAR_Lookback( double        optInPenetration );  /* From 0 to 
 
 
 /*
+ * TA_CDLHAMMER - Hammer
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLHAMMER( int           START_IDX,
+                         int           END_IDX,
+                         const double *IN_ARRAY /* inOpen */,
+                         const double *IN_ARRAY /* inHigh */,
+                         const double *IN_ARRAY /* inLow */,
+                         const double *IN_ARRAY /* inClose */,
+                         int          *BEG_IDX,
+                         int          *OUT_SIZE,
+                         int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLHAMMER_Lookback( void );
+
+
+/*
+ * TA_CDLHANGINGMAN - Hanging Man
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLHANGINGMAN( int           START_IDX,
+                             int           END_IDX,
+                             const double *IN_ARRAY /* inOpen */,
+                             const double *IN_ARRAY /* inHigh */,
+                             const double *IN_ARRAY /* inLow */,
+                             const double *IN_ARRAY /* inClose */,
+                             int          *BEG_IDX,
+                             int          *OUT_SIZE,
+                             int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLHANGINGMAN_Lookback( void );
+
+
+/*
+ * TA_CDLHARAMI - Harami Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLHARAMI( int           START_IDX,
+                         int           END_IDX,
+                         const double *IN_ARRAY /* inOpen */,
+                         const double *IN_ARRAY /* inHigh */,
+                         const double *IN_ARRAY /* inLow */,
+                         const double *IN_ARRAY /* inClose */,
+                         int          *BEG_IDX,
+                         int          *OUT_SIZE,
+                         int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLHARAMI_Lookback( void );
+
+
+/*
+ * TA_CDLHARAMICROSS - Harami Cross Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLHARAMICROSS( int           START_IDX,
+                              int           END_IDX,
+                              const double *IN_ARRAY /* inOpen */,
+                              const double *IN_ARRAY /* inHigh */,
+                              const double *IN_ARRAY /* inLow */,
+                              const double *IN_ARRAY /* inClose */,
+                              int          *BEG_IDX,
+                              int          *OUT_SIZE,
+                              int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLHARAMICROSS_Lookback( void );
+
+
+/*
  * TA_CDLHIGHWAVE - High-Wave Candle
  * 
  * Input  = Open, High, Low, Close
@@ -1644,6 +1791,46 @@ TA_RetCode TA_CDLHIGHWAVE( int           START_IDX,
                            int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLHIGHWAVE_Lookback( void );
+
+
+/*
+ * TA_CDLIDENTICAL3CROWS - Identical Three Crows
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLIDENTICAL3CROWS( int           START_IDX,
+                                  int           END_IDX,
+                                  const double *IN_ARRAY /* inOpen */,
+                                  const double *IN_ARRAY /* inHigh */,
+                                  const double *IN_ARRAY /* inLow */,
+                                  const double *IN_ARRAY /* inClose */,
+                                  int          *BEG_IDX,
+                                  int          *OUT_SIZE,
+                                  int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLIDENTICAL3CROWS_Lookback( void );
+
+
+/*
+ * TA_CDLINVERTEDHAMMER - Inverted Hammer
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLINVERTEDHAMMER( int           START_IDX,
+                                 int           END_IDX,
+                                 const double *IN_ARRAY /* inOpen */,
+                                 const double *IN_ARRAY /* inHigh */,
+                                 const double *IN_ARRAY /* inLow */,
+                                 const double *IN_ARRAY /* inClose */,
+                                 int          *BEG_IDX,
+                                 int          *OUT_SIZE,
+                                 int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLINVERTEDHAMMER_Lookback( void );
 
 
 /*
@@ -1721,6 +1908,26 @@ int TA_CDLMORNINGSTAR_Lookback( double        optInPenetration );  /* From 0 to 
 
 
 /*
+ * TA_CDLSHOOTINGSTAR - Shooting Star
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLSHOOTINGSTAR( int           START_IDX,
+                               int           END_IDX,
+                               const double *IN_ARRAY /* inOpen */,
+                               const double *IN_ARRAY /* inHigh */,
+                               const double *IN_ARRAY /* inLow */,
+                               const double *IN_ARRAY /* inClose */,
+                               int          *BEG_IDX,
+                               int          *OUT_SIZE,
+                               int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLSHOOTINGSTAR_Lookback( void );
+
+
+/*
  * TA_CDLSHORTLINE - Short Line Candle
  * 
  * Input  = Open, High, Low, Close
@@ -1741,7 +1948,7 @@ int TA_CDLSHORTLINE_Lookback( void );
 
 
 /*
- * TA_CDLSPINNINGTOP - Spinning Top Candle
+ * TA_CDLSPINNINGTOP - Spinning Top
  * 
  * Input  = Open, High, Low, Close
  * Output = int
@@ -1761,7 +1968,7 @@ int TA_CDLSPINNINGTOP_Lookback( void );
 
 
 /*
- * TA_CDLTRISTAR - Tristar Candle
+ * TA_CDLTRISTAR - Tristar Pattern
  * 
  * Input  = Open, High, Low, Close
  * Output = int
@@ -1778,6 +1985,26 @@ TA_RetCode TA_CDLTRISTAR( int           START_IDX,
                           int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLTRISTAR_Lookback( void );
+
+
+/*
+ * TA_CDLUPSIDEGAP2CROWS - Upside Gap Two Crows
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLUPSIDEGAP2CROWS( int           START_IDX,
+                                  int           END_IDX,
+                                  const double *IN_ARRAY /* inOpen */,
+                                  const double *IN_ARRAY /* inHigh */,
+                                  const double *IN_ARRAY /* inLow */,
+                                  const double *IN_ARRAY /* inClose */,
+                                  int          *BEG_IDX,
+                                  int          *OUT_SIZE,
+                                  int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLUPSIDEGAP2CROWS_Lookback( void );
 
 
 
