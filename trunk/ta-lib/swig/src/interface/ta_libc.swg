@@ -24,7 +24,7 @@
 /* Strip all const qualifies, they are not relevant to Perl,
  * but may prevent SWIG release memory in proxy classes.
  * This is safe because TA-Lib never sets returned const char pointers
- * to anything in static (data) area by itself.
+ * to anything in static (data) area by itself (except in ta_abstract).
  */
 %clear const char *;
 
@@ -72,7 +72,8 @@
     "$1 = &temp;"
 
 /* TA_StringTable** is used as output in TA_XxxAlloc() functions */
-%typemap(perl5,argout) TA_StringTable** {
+%typemap(perl5,argout) TA_StringTable** 
+{
     /* Copy the strings from **$1 to a Perl array */
     if ( *$1 && (*$1)->size > 0) {
         int new_argvi = argvi + (*$1)->size;
@@ -94,7 +95,8 @@
 
 
 /* TA_StringTable* is out too but need not be deallocated */
-%typemap(perl5,out) TA_StringTable* {
+%typemap(perl5,out) TA_StringTable* 
+{
     /* Copy the strings from *$1 to a Perl array */
     if ( $1->size > 0) {
         int new_argvi = argvi + $1->size;
@@ -240,7 +242,8 @@ typedef struct {} TA_UDBase;
  * Example:
  * $ret = TA_UDBaseAlloc(\$udb);
  */
-%typemap(in) TA_UDBase **newUDBase($*1_ltype temp) {
+%typemap(in) TA_UDBase **newUDBase($*1_ltype temp) 
+{
     SV *tempsv;
     if (!SvROK($input)) {
         SWIG_croak("Expected a reference as argument $argnum of $symname");
@@ -255,7 +258,8 @@ typedef struct {} TA_UDBase;
     $1 = &temp;
 }
 
-%typemap(argout) TA_UDBase **newUDBase {
+%typemap(argout) TA_UDBase **newUDBase 
+{
     SV *tempsv;
     tempsv = SvRV($input);
     SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, SWIG_SHADOW);
@@ -278,7 +282,8 @@ typedef struct {} TA_UDBase;
 %typemap(in,numinputs=0) TA_History **history(TA_History *temp = 0) 
 	"$1 = &temp;";
 
-%typemap(argout) TA_History **history %{
+%typemap(argout) TA_History **history 
+%{
     if (*$1) {
 	if (argvi >= items) {
 	    EXTEND(sp,1);
@@ -307,7 +312,8 @@ typedef struct {} TA_UDBase;
  * We have seen above that TA_History does it.
  * If forgot to define it, a compile error will occur.
  */
-%typemap(out) const TA_Real *ARRAY {
+%typemap(out) const TA_Real *ARRAY 
+{
     AV *av;
     unsigned int idx = 0;
     SV *sv;
@@ -323,7 +329,8 @@ typedef struct {} TA_UDBase;
     argvi++;    
 }
 
-%typemap(out) const TA_Integer *ARRAY {
+%typemap(out) const TA_Integer *ARRAY 
+{
     AV *av;
     SV *sv;
     unsigned int idx = 0;
@@ -339,7 +346,8 @@ typedef struct {} TA_UDBase;
     argvi++;    
 }
 
-%typemap(out) const TA_Timestamp *ARRAY {
+%typemap(out) const TA_Timestamp *ARRAY 
+{
     AV *myav;
     SV **svs;
     unsigned int i = 0;
@@ -597,15 +605,6 @@ typedef struct {} TA_UDBase;
 
 %include "ta_func.swg"
 
-/*
-TA_RetCode TA_MAX( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY,
-                   int           OPT_INT,
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY );
-*/
 
 
 /** ta_pm *******************************************************************/
@@ -620,6 +619,173 @@ TA_RetCode TA_MAX( int           START_IDX,
 %apply const TA_Real *ARRAY { const TA_Real *data }
 
 
-
-
 %include "../../../../../c/include/ta_pm.h"
+
+
+
+/** ta_abstract *************************************************************/
+
+%rename(TA_GroupTable) TA_GroupTableAlloc;
+%rename(TA_FuncTable)  TA_FuncTableAlloc;
+%ignore TA_FuncTableFree;
+%ignore TA_GroupTableFree;
+
+/* For const handles returned, we define a macro to get them throug a Perl ref */
+%define HANDLE(TYPE, NAME)
+
+%nodefault TYPE;
+
+%typemap(in) const TYPE **NAME($*1_ltype temp = 0) 
+{
+    $1 = &temp;
+    if (!SvROK($input)) {
+        SWIG_croak("Expected a reference as argument $argnum of $symname");
+    }
+}
+
+%typemap(argout) const TYPE **NAME 
+{
+    SV *tempsv;
+    tempsv = SvRV($input);
+    SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, SWIG_SHADOW);
+}
+
+%enddef
+
+HANDLE(TA_FuncHandle, handle)
+HANDLE(TA_FuncInfo, funcInfo)
+HANDLE(TA_InputParameterInfo, info)
+HANDLE(TA_OptInputParameterInfo, info)
+HANDLE(TA_OutputParameterInfo, info)
+
+/* Fool SWIG that TA_FuncHandle is a struct.  SWIG creates shadow classes only
+ * for structs and classes.
+ */
+typedef struct {} TA_FuncHandle;
+
+/* For the rest TA_FuncHandle is as TA_UDBase, more or less... */
+/* similarly other const structs here */
+
+
+/* TA_ForEachFunc is not needed, use 'map' or 'grep' on the list (in Perl) */
+%ignore TA_ForEachFunc;
+
+/* None of TA_FuncInfo fields may be modified, especially const char* */
+/* The same applies to other structs */
+%immutable name;
+%immutable group;
+%immutable hint;
+%immutable helpFile;
+%immutable flags;
+%immutable nbInput;
+%immutable nbOptInput;
+%immutable nbOutput;
+%immutable handle;
+%immutable type;
+%immutable paramName;
+%immutable displayName;
+%immutable dataSet;
+%immutable defaultValue;
+
+/* The field 'dataSet' is a tricky one; it has to be recast from const void*
+ * to something sensible depending on the value of 'type'
+ */
+%typemap(out) const void *dataSet %{
+    if ($1) {
+        swig_type_info *retType = NULL;
+
+        switch (arg1->type) {
+            case TA_OptInput_RealRange    : retType = SWIGTYPE_p_TA_RealRange;    break;
+            case TA_OptInput_RealList     : retType = SWIGTYPE_p_TA_RealList;     break;
+            case TA_OptInput_IntegerRange : retType = SWIGTYPE_p_TA_IntegerRange; break;
+            case TA_OptInput_IntegerList  : retType = SWIGTYPE_p_TA_IntegerList;  break;
+        }
+        if (retType) {
+	    $result = sv_newmortal();
+	    SWIG_MakePtr($result, (void *) $1, retType, SWIG_SHADOW);
+	    argvi++;
+        }
+    }
+%}
+
+
+/* The following structs are never created; 
+ * Only pointers to const structs can be obtained through 'dataSet' access
+ */
+%nodefault TA_RealRange;
+%nodefault TA_IntegerRange;
+%nodefault TA_RealDataPair;
+%nodefault TA_IntegerDataPair;
+%nodefault TA_RealList;
+%nodefault TA_IntegerList;
+
+
+/* Again, the structs are read only */
+%immutable min;
+%immutable max;
+%immutable precision;
+%immutable suggested_start;
+%immutable suggested_end;
+%immutable suggested_increment;
+%immutable value;
+%immutable string;
+%immutable data;
+%immutable nbElement;
+
+
+/* Accessing 'data' of TA_RealList and TA_IntegerList is similar to 
+ * array access in TA_History 
+ */
+
+%typemap(check) 
+        TA_RealList*    (unsigned int array_size),
+        TA_IntegerList* (unsigned int array_size)
+    "array_size = ($1 != NULL)? ($1->nbElement) : 0;"
+
+
+%typemap(out) const TA_RealDataPair *data, const TA_IntegerDataPair *data 
+{
+    AV *myav;
+    SV **svs;
+    unsigned int i = 0;
+
+    svs = (SV **) malloc(array_size1 * sizeof(SV *));
+    for (i = 0; i < array_size1 ; i++) {
+        svs[i] = sv_newmortal();
+        SWIG_MakePtr((SV*)svs[i], (void *) &$1[i], $1_descriptor, SWIG_SHADOW);
+    };
+    myav =  av_make(array_size1,svs);
+    free(svs);
+    $result = newRV((SV*)myav);
+    sv_2mortal($result);
+    argvi++;    
+}
+
+
+/* The functions supporting abstract calling are not wrapped.
+ * There is no need for that; in Perl, you can already call 
+ * any function by name and with any parameter list you like
+ */
+
+%ignore TA_ParamHolder;
+%ignore TA_ParamHolderAlloc;
+%ignore TA_ParamHolderFree;
+%ignore TA_SetInputParamIntegerPtr;
+%ignore TA_SetInputParamRealPtr;
+%ignore TA_SetInputParamPricePtr;
+%ignore TA_SetOptInputParamInteger;
+%ignore TA_SetOptInputParamReal;
+%ignore TA_SetOutputParamIntegerPtr;
+%ignore TA_SetOutputParamRealPtr;
+%ignore TA_GetLookback;
+%ignore TA_CallFunc;
+
+%include "../../../../../c/include/ta_abstract.h"
+
+/* ta_abstract is the last module, so we do not have to clean up 
+ * the definitions specific to this file.
+ * I hope that some day there will be a SWIG version that is able to process
+ * several interface files for one library.
+ */
+
+/****************************************************************************/
