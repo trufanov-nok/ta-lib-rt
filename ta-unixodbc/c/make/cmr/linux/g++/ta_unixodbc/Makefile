@@ -9,8 +9,8 @@
 
 CC	=	gcc
 CXX	=	g++
-CFLAGS	=	-pipe -Wall -W -O2 -D_REENTRANT -DQT_THREAD_SUPPORT -DNO_DEBUG
-CXXFLAGS=	-pipe -Wall -W -O2 -D_REENTRANT -DQT_THREAD_SUPPORT -DNO_DEBUG
+CFLAGS	=	-pipe -Wall -W -O2 -fno-strict-aliasing -D_REENTRANT -DQT_THREAD_SUPPORT -DNO_DEBUG
+CXXFLAGS=	-pipe -Wall -W -O2 -fno-strict-aliasing -D_REENTRANT -DQT_THREAD_SUPPORT -DNO_DEBUG
 INCPATH	=	-I../../../../../include -I../../../../../../../ta-lib/c/include -I../../../../../../../ta-lib/c/src/ta_common -I../../../../../../../ta-lib/c/src/ta_data/ta_source/ta_sql -I$(QTDIR)/include
 AR	=	ar cqs
 RANLIB	=	
