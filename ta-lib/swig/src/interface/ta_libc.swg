@@ -4,7 +4,7 @@
 %module "Finance::TA"
 
 %{
-#include "../../../../c/include/ta_libc.h"
+#include "ta_libc.h"
 %}
 
 
@@ -134,7 +134,7 @@
 #define INT_MIN -INT_MAX-1
 
 
-%include "../../../../../c/include/ta_defs.h"
+%include "ta_defs.h"
 
 
 /** ta_common ***************************************************************/
@@ -205,7 +205,7 @@
 /* we don't want just TA_StringTable classes around */
 %ignore TA_StringTable;
 
-%include "../../../../../c/include/ta_common.h"
+%include "ta_common.h"
 
 
 /* synthesized attributes for TA_Timestamp */
@@ -432,7 +432,7 @@ OBJECT(TA_History, history)
 /* TA_ForEachSymbol doesn't make sense for scripting languages */
 %ignore TA_ForEachSymbol;
 
-%include "../../../../../c/include/ta_data.h"
+%include "ta_data.h"
 
 /* restore mutability for other header files, if needed */
 %mutable timestamp;
@@ -716,7 +716,7 @@ OBJECT(TA_TradeReport, tradeReportAllocated)
 %immutable nbTrades;
 %immutable trades;
 
-%include "../../../../../c/include/ta_pm.h"
+%include "ta_pm.h"
 
 %clear TA_Real *value;
 %clear TA_Trade **trades;
@@ -889,7 +889,7 @@ typedef struct {} TA_FuncHandle;
 %ignore TA_GetLookback;
 %ignore TA_CallFunc;
 
-%include "../../../../../c/include/ta_abstract.h"
+%include "ta_abstract.h"
 
 /* ta_abstract is the last module, so we do not have to clean up 
  * the definitions specific to this file.
