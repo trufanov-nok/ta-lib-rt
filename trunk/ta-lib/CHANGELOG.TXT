@@ -1,17 +1,16 @@
-V0.0.5 (June 2002)
-- Add performance measurement infrastructure.
-  Some basic measurements included: nb trade,
-  avg profit,annualized return, equity line...
+V0.0.6 (September 2002)
 
-- Add TA functions:
-   OBV : On-Balance-Volume
+- Add some "directional movement" TA functions:
+  ADX, ADXR, DX, +DI, -DI, +DM and -DM
 
-- Now the Yahoo! data source retreive correctly all the data,
-  particularly for some canadian stock.
+- Add support of many new Yahoo! data source:
+  United Kingdom, France, Germany, Italy
+  Belgium...
+  Type "ta_yahoo -c" for the complete list.
 
-- Correct a bug with TA_HistoryAlloc who was failing with
-  error 65535 when a subset of field was requested
-  (#537806 in the bug tracker)
+- Correct problem with Yahoo! data source causing
+  the allocation of historical data to fail with
+  an "Invalid Date" error.
 
 See HISTORY.TXT for summary of previous version.
 
