@@ -1,8 +1,28 @@
-V0.0.7 (February 2003)
-- Excel Add-In implemented.
-- New TA Functions: TRIMA, MFI, STOCHF, MACDEXT
+V0.0.7 (January 2003)
+
+- Excel Add-In implemented. Give it a try with "example.xls".
+
+- Some new TA Functions:
+   MFI      Money Flow Index
+   MIDPRICE Midpoint Price over period
+   MIDPOINT MidPoint over period
+   TRIMA    Triangular Moving Average
+   MACDEXT  MACD with controllable MA type
+   ROCP     Rate of change %: (price-prevPrice)/prevPrice
+   STOCHF   Stochastic Fast
+   AVGPRICE Average Price  
+
 - Remove TA_Libc parameter from all functions.
+
+- MA Type names have changed to be consistent 
+  e.g. TA_BBANDS_EXPONENTIAL becomes TA_BBANDS_EMA
+
+- STOCH function can now handle any MA type
+
+- Speed optimization of some functions.
+
 - Fix #644512: BBANDS when using a MA type != SMA
+
 - Fix #660248: TA_HistoryAlloc start/end intra-day range.
 
 See HISTORY.TXT for summary of previous version.

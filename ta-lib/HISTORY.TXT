@@ -1,3 +1,10 @@
+V0.0.7 (January 2003)
+  - Excel Add-In implemented.
+  - New TA Functions: MFI,MIDPRICE,MIDPOINT,TRIMA,
+                      MACDEXT,ROCP,STOCHF,AVGPRICE
+  - Fix #644512: BBANDS when using a MA type != SMA
+  - Fix #660248: TA_HistoryAlloc start/end intra-day range.
+
 V0.0.6 (October 2002)
   - Add TA Functions: SAR,ADX,ADXR,DX,+DI,-DI,+DM,-DM
   - Add many european Yahoo! data source.
