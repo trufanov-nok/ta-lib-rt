@@ -73,6 +73,8 @@ ta-lib/swig/src/demo/perl and - even better - at the test scripts in
 ta-lib/swig/src/tools/test_perl.  The test scripts tend to be complete so there
 is an example for every function, constant, or type.
 
+The module (currently) covers ta_defs, ta_common, ta_data, ta_func.  
+
 In general, the following usage rules apply:
  * structs are turned to Perl classes, so can be created using 'new'
  * access to struct fields are provided through tied variables
@@ -160,9 +162,25 @@ TA_SymbolTableAlloc/TA_SymbolTableFree.
 In such case, you don't have to bother about the error code; you get undef
 value in case of any error.
 
-The module covers ta_defs, ta_common, ta_data, ta_func, and ta_pm.  It does not 
-cover ta_abstract - on purpose.  The information about ta_func can be obtained
-in Perl much easier in may other perlish ways.
+* C functions in ta_func have three groups of parameters, input, optional
+input and output.  The input parameters are startIdx, endIdx, and one or more
+arrays with numbers, These are also expected parameters of the Perl
+functions, with a note that in place of arrays, references to arrays are
+expected.
+
+The optional parameters can be set to $TA_INTEGER_DEFAULT/$TA_REAL_DEFAULT or
+undef, or ommitted altogether.
+
+The output parameters are retured in the return array.  The returned array
+has the following structure: return code of the function, begin index, and
+one or more references to output arrays.  The parameter outNbElement used in
+the C functions is not passed to Perl as it can be easilly obtained
+evaluating an array in a scalar context.
+
+Example (default optInTimePeriod):
+    ($retCode, $begIdx, $outReal) = TA_MAX(0, $#inReal, \@inReal);
+
+More examples in swig/src/tools/test_perl/ta_func.t
 
 Good luck!
 Pawel Konieczny, konieczp-at-users.sourceforge.net 
@@ -177,9 +195,9 @@ Open issues/To do
 * How to define a custom TA fatal handler in Perl
 * Get parameters on 'use"-line for &TA_Initialize
 * Allow to pass hash table to &TA_AddDataSourceParam::new with initial values
-* Allw to set TA_RetCodeInfo in the constructor
-* Add nice constructors to TA_Timestamp
 * Add member functions to TA_Timestamp
 * Add synthetised member variables to TA_Timestamp
 * Create TA_UDBase class (member functions like &TA_CategoryTable)
+* Wrap ta_pm 
+* Wrap ta_abstract
 
