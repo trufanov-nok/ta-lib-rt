@@ -2,7 +2,7 @@
 # CMR (commandline multitheraded release only)
 # Handmade (experimental)
 #
-# Tested with SWIG v1.3.22, Perl v5.8.4
+# Tested with SWIG v1.3.24, Perl v5.8.4
 
 PERL5_VERSION=$(shell perl -v | perl -ne 'print $$1 if / v(\d+\.\d+\.\d+) /')
 PERL5_INCLUDE=/usr/lib/perl/$(PERL5_VERSION)/CORE
@@ -55,7 +55,7 @@ $(WRAPDIR)/TA.pm $(WRAPDIR)/ta_libc_wrap.c: \
 		$(TOPDIR)/src/interface/ta_libc.swg \
 		$(TOPDIR)/src/interface/ta_libc.perl.swg \
 		$(TOPDIR)/src/interface/ta_func.swg
-	swig -perl -proxy -Fstandard -o $(WRAPDIR)/ta_libc_wrap.c \
+	swig -perl -module "Finance::TA" -proxy -Fstandard -o $(WRAPDIR)/ta_libc_wrap.c \
 		-I$(TOPDIR)/src/interface -I$(TOPDIR)/../c/include \
 		$<
 
