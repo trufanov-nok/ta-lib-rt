@@ -677,9 +677,49 @@ OBJECT(TA_PMArray, allocatedArray)
  */
 %ignore TA_PMReportToFile;
 
+/* PM Trade Report */
+OBJECT(TA_TradeReport, tradeReportAllocated)
+
+/* the pointer to TA_Trade array handle similarly to TA_History fields */
+%typemap(check) TA_TradeReport* (unsigned int array_size)
+    "array_size = ($1 != NULL)? ($1->nbTrades) : 0;"
+
+%typemap(out) const TA_Trade **ARRAY 
+{
+    AV *myav;
+    SV **svs;
+    unsigned int i = 0;
+
+    /* this is not the most efficient way of creating an array
+     * it creates much too many mortals
+     * I have cloned it from SWIG example but a better way is in 
+     * the typemaps above
+     * TODO: optimize it here
+     */
+    svs = (SV **) malloc(array_size1 * sizeof(SV *));
+    for (i = 0; i < array_size1 ; i++) {
+        svs[i] = sv_newmortal();
+        SWIG_MakePtr((SV*)svs[i], (void *) $1[i], $*1_descriptor, SWIG_SHADOW);
+    };
+    myav =  av_make(array_size1,svs);
+    free(svs);
+    $result = newRV((SV*)myav);
+    sv_2mortal($result);
+    argvi++;    
+}
+
+
+%apply const TA_Trade **ARRAY { 
+    const TA_Trade **trades 
+};
+
+%immutable nbTrades;
+%immutable trades;
+
 %include "../../../../../c/include/ta_pm.h"
 
 %clear TA_Real *value;
+%clear TA_Trade **trades;
 
 %mutable nbData;
 %mutable timestamp;
@@ -687,6 +727,8 @@ OBJECT(TA_PMArray, allocatedArray)
 %mutable arrayId;
 %mutable grp;
 %mutable period;
+%mutable nbTrades;
+%mutable trades;
 
 
 
