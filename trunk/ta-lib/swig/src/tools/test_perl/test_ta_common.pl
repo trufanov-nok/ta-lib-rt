@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 112 }
+BEGIN { plan tests => 118 }
 
 use Finance::TA;
 
@@ -119,11 +119,11 @@ ok(TA_NextDay($ts2),$TA_SUCCESS);
 ok(TA_TimestampEqual($ts,$ts2), 0);
 ok(TA_TimestampLess($ts,$ts2), 1);
 ok(TA_TimestampGreater($ts,$ts2), 0);
-ok(TA_TimestampCompare($ts,$ts2), -1);
+ok(TA_TimestampCompare($ts,$ts2) < 0);
 ok(TA_TimestampDateEqual($ts,$ts2), 0);
 ok(TA_TimestampDateLess($ts,$ts2), 1);
 ok(TA_TimestampDateGreater($ts,$ts2), 0);
-ok(TA_TimestampDateCompare($ts,$ts2), -1);
+ok(TA_TimestampDateCompare($ts,$ts2) < 0);
 ok(TA_NextYear($ts2),$TA_SUCCESS);
 ok(TA_PrevYear($ts2),$TA_SUCCESS);
 ok(TA_PrevDay($ts2),$TA_SUCCESS);
@@ -148,6 +148,13 @@ ok((TA_TimestampDeltaYear($ts,$ts2))[1], 11);
 ok((TA_TimestampDeltaDay($ts,$ts2))[1], 4348);
 ok((TA_TimestampDeltaWeekday($ts,$ts2))[1], 3105);
 ok((TA_TimestampDeltaQuarter($ts,$ts2))[1], 35);
+
+ok(TA_SetDate(2004,2,29,$ts),$TA_SUCCESS);
+ok(TA_SetDate(2004,3,1,$ts2),$TA_SUCCESS);
+ok((TA_TimestampDeltaDay($ts,$ts2))[1], 2);
+ok(TA_TimestampCopy($ts2,$ts), $TA_SUCCESS);
+ok(TA_NextDay($ts2),$TA_SUCCESS);
+ok((TA_TimestampDeltaDay($ts,$ts2))[1], 2);
 
 print "Testing TA_Initialize and TA_Shutdown...\n";
 ok(TA_Initialize(undef),$TA_SUCCESS);
