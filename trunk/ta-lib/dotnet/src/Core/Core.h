@@ -63,7 +63,7 @@ namespace TA
          #include "ta_defs.h"
 
       private:
-		  __value struct TA_CandleSetting {
+		  __value __nogc struct TA_CandleSetting {
               __value enum TA_CandleSettingType settingType;
               __value enum TA_RangeType rangeType;
               int     avgPeriod;
@@ -206,7 +206,6 @@ namespace TA
                                               int timePeriod,
                                               double output __gc []);
 
-
       public:
          static Core()
          {
@@ -239,44 +238,58 @@ namespace TA
             return TA_SUCCESS;
          }
 
+		 
          static __value enum TA_RetCode TA_RestoreCandleDefaultSettings( TA_CandleSettingType settingType )
-         {
-            const TA_CandleSetting TA_CandleDefaultSettings[] = {
-        /* real body is long when it's longer than the average of the 10 previous candles' real body */
-        { TA_BodyLong, TA_RangeType_RealBody, 10, 1.0 },
-        /* real body is very long when it's longer than 3 times the average of the 10 previous candles' real body */
-        { TA_BodyVeryLong, TA_RangeType_RealBody, 10, 3.0 },
-        /* real body is short when it's shorter than the average of the 10 previous candles' real bodies */
-        { TA_BodyShort, TA_RangeType_RealBody, 10, 1.0 },
-        /* real body is like doji's body when it's shorter than 10% the average of the 10 previous candles' high-low range */
-        { TA_BodyDoji, TA_RangeType_HighLow, 10, 0.1 },
-        /* shadow is long when it's longer than the real body */
-        { TA_ShadowLong, TA_RangeType_RealBody, 0, 1.0 },
-        /* shadow is very long when it's longer than 2 times the real body */
-        { TA_ShadowVeryLong, TA_RangeType_RealBody, 0, 2.0 },
-        /* shadow is short when it's shorter than half the average of the 10 previous candles' sum of shadows */
-        { TA_ShadowShort, TA_RangeType_Shadows, 10, 1.0 },
-        /* shadow is very short when it's shorter than 10% the average of the 10 previous candles' high-low range */
-        { TA_ShadowVeryShort, TA_RangeType_HighLow, 10, 0.1 },
-        /* when measuring distance between parts of candles or width of gaps */
-        /* "near" means "<= 20% of the average of the 5 previous candles' high-low range" */
-        { TA_Near, TA_RangeType_HighLow, 5, 0.2 },
-        /* when measuring distance between parts of candles or width of gaps */
-        /* "far" means ">= 60% of the average of the 5 previous candles' high-low range" */
-        { TA_Far, TA_RangeType_HighLow, 5, 0.6 },
-        /* when measuring distance between parts of candles or width of gaps */
-        /* "equal" means "<= 5% of the average of the 5 previous candles' high-low range" */
-        { TA_Equal, TA_RangeType_HighLow, 5, 0.05 }
-        };
-
-            int i;
-            if( settingType > TA_AllCandleSettings )
-               return TA_BAD_PARAM;
-            if( settingType == TA_AllCandleSettings )
-               for( i = 0; i < TA_AllCandleSettings; ++i )
-                  TA_Globals->candleSettings[i] = TA_CandleDefaultSettings[i];
-            else
-               TA_Globals->candleSettings[settingType] = TA_CandleDefaultSettings[settingType];
+         {			
+			switch( settingType )
+			{
+			case TA_BodyLong:
+			   TA_SetCandleSettings( TA_BodyLong, TA_RangeType_RealBody, 10, 1.0 );
+			   break;
+			case TA_BodyVeryLong:
+			   TA_SetCandleSettings( TA_BodyVeryLong, TA_RangeType_RealBody, 10, 3.0 );
+			   break;
+			case TA_BodyShort:
+			   TA_SetCandleSettings( TA_BodyShort, TA_RangeType_RealBody, 10, 1.0 );
+			   break;
+			case TA_BodyDoji:
+			   TA_SetCandleSettings( TA_BodyDoji, TA_RangeType_HighLow, 10, 0.1 );
+			   break;
+			case TA_ShadowLong:
+			   TA_SetCandleSettings( TA_ShadowLong, TA_RangeType_RealBody, 0, 1.0 );
+			   break;
+			case TA_ShadowVeryLong:
+			   TA_SetCandleSettings( TA_ShadowVeryLong, TA_RangeType_RealBody, 0, 2.0 );
+			   break;
+			case TA_ShadowShort:
+			   TA_SetCandleSettings( TA_ShadowShort, TA_RangeType_Shadows, 10, 1.0 );
+			   break;
+			case TA_ShadowVeryShort:
+			   TA_SetCandleSettings( TA_ShadowVeryShort, TA_RangeType_HighLow, 10, 0.1 );
+			   break;
+			case TA_Near:
+			   TA_SetCandleSettings( TA_Near, TA_RangeType_HighLow, 5, 0.2 );
+			   break;
+			case TA_Far:
+			   TA_SetCandleSettings( TA_Far, TA_RangeType_HighLow, 5, 0.6 );
+			   break;
+			case TA_Equal:
+			   TA_SetCandleSettings( TA_Equal, TA_RangeType_HighLow, 5, 0.05);
+			   break;
+			case TA_AllCandleSettings:
+			   TA_SetCandleSettings( TA_BodyLong, TA_RangeType_RealBody, 10, 1.0 );
+			   TA_SetCandleSettings( TA_BodyVeryLong, TA_RangeType_RealBody, 10, 3.0 );
+			   TA_SetCandleSettings( TA_BodyShort, TA_RangeType_RealBody, 10, 1.0 );
+			   TA_SetCandleSettings( TA_BodyDoji, TA_RangeType_HighLow, 10, 0.1 );
+			   TA_SetCandleSettings( TA_ShadowLong, TA_RangeType_RealBody, 0, 1.0 );
+			   TA_SetCandleSettings( TA_ShadowVeryLong, TA_RangeType_RealBody, 0, 2.0 );
+			   TA_SetCandleSettings( TA_ShadowShort, TA_RangeType_Shadows, 10, 1.0 );
+			   TA_SetCandleSettings( TA_ShadowVeryShort, TA_RangeType_HighLow, 10, 0.1 );
+			   TA_SetCandleSettings( TA_Near, TA_RangeType_HighLow, 5, 0.2 );
+			   TA_SetCandleSettings( TA_Far, TA_RangeType_HighLow, 5, 0.6 );
+			   TA_SetCandleSettings( TA_Equal, TA_RangeType_HighLow, 5, 0.05);
+			   break;
+			}
 
             return TA_SUCCESS;
          }
