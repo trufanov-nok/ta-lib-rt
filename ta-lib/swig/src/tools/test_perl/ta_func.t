@@ -20,7 +20,11 @@ my $sparam = new TA_AddDataSourceParam;
 $sparam->{id} = $TA_SIMULATOR;
 ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
 
-my $history = new TA_History($udb, "TA_SIM_REF", "DAILY_REF_0", $TA_DAILY);
+my $hparam = new TA_HistoryAllocParam;
+$hparam->{category} = "TA_SIM_REF";
+$hparam->{symbol} = "DAILY_REF_0";
+$hparam->{period} = $TA_DAILY;
+my $history = new TA_History($udb, $hparam);
 ok( defined $history );
 ok( $history->{retCode}, $TA_SUCCESS );
 my $series = $history->{close};

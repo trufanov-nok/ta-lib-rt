@@ -138,8 +138,15 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
 
 {
     # Testing history
+    my $histparam = new TA_HistoryAllocParam;
+    $histparam->{source} = "Simulator";
+    $histparam->{category} = "TA_SIM_REF";
+    $histparam->{symbol} = "DAILY_REF_0";
+    $histparam->{period} = $TA_DAILY;
+    $histparam->{field} = $TA_ALL;
  
-    my $history1 = new TA_History($udb, "TA_SIM_REF", "DAILY_REF_0", $TA_DAILY, undef, undef, $TA_ALL);
+    #my $history1 = new TA_History($udb, "TA_SIM_REF", "DAILY_REF_0", $TA_DAILY, undef, undef, $TA_ALL);
+    my $history1 = new TA_History($udb, $histparam);
     ok( defined $history1 );
     ok( $history1->{retCode}, $TA_SUCCESS );
     ok( $history1->{nbBars}, 252 );
@@ -177,8 +184,11 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
     my @sources = $history1->{listOfSource};
     ok( $sources[0], "SIMULATOR" );
 
-    # In TA_History::new, other parameters than the first four are optional    
-    my $history2 = new TA_History($udb, "TA_SIM_REF", "INTRA_REF_0", $TA_10MINS);
+    $histparam->{symbol} = "INTRA_REF_0";
+    $histparam->{period} = $TA_10MINS;
+    $histparam->{start} = new TA_Timestamp("1999-01-01");
+    $histparam->{end} = new TA_Timestamp("2000-01-01");
+    my $history2 = new TA_History($udb, $histparam);
     ok( defined $history2 );
     ok( $history2->{retCode}, $TA_SUCCESS );
     ok( $history2->{nbBars}, 33 );
