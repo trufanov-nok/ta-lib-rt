@@ -139,9 +139,7 @@
 
 /** ta_common ***************************************************************/
 
-/* fatal handler is not supported (yet) */
-%ignore TA_FatalReport;
-%ignore TA_FatalReportToBuffer;
+/* fatal handler is not supported */
 %ignore TA_SetFatalErrorHandler;
 
 /* oputput parameters of TA_GetDate */
@@ -204,6 +202,39 @@
 
 /* we don't want just TA_StringTable classes around */
 %ignore TA_StringTable;
+
+/* typemaps for TA_FatalReportToBuffer */
+
+%typemap(default) ( char *buffer, unsigned int bufferSize )
+{
+    $1 = NULL;
+    $2 = TA_FATAL_ERROR_BUF_SIZE; /* default */
+}
+
+%typemap(in) ( char *buffer, unsigned int bufferSize )
+{
+    $2 = ($2_ltype) SvUV($input);
+}
+
+%typemap(check) ( char *buffer, unsigned int bufferSize )
+{
+    $1 = ($1_ltype) malloc($2);
+}
+
+%typemap(argout) ( char *buffer, unsigned int bufferSize )
+{
+    if (argvi >= items) {
+        EXTEND(sp,1);
+    }
+    $result = sv_newmortal();
+    sv_setpv($result, $1);
+    argvi++;
+}
+
+%typemap(freearg) ( char *buffer, unsigned int bufferSize )
+{
+    free($1);
+}
 
 %include "ta_common.h"
 
