@@ -5,9 +5,9 @@ This works currently only on a Linux platform.
 
 To use this package you have to:
 
-(1) Link your application to ta-unixodbc/lib/ta_unixodbc_XXX.lib
+(1) Link your application to ta-unixodbc/lib/ta_unixodbc_XXX.a
 
-(2) Link your application to ta-lib/c/lib/ta_libc_XXX.lib
+(2) Link your application to ta-lib/c/lib/ta_libc_XXX.a
 
 (3) Link your application with unixODBC (add -lodbc option). You must
     indepedently download and install unixODBC on your system.
