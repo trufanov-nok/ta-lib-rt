@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 127 }
+BEGIN { plan tests => 145 }
 
 use Finance::TA;
 
@@ -165,6 +165,34 @@ ok( (TA_TimestampDeltaDay($ts,$ts2))[1], 2 );
 ok( TA_TimestampCopy($ts2,$ts), $TA_SUCCESS );
 ok( TA_NextDay($ts2), $TA_SUCCESS );
 ok( (TA_TimestampDeltaDay($ts,$ts2))[1], 2 );
+
+# Testing synthesized data members
+ok( TA_SetDate(2004,2,20,$ts), $TA_SUCCESS );
+ok( $ts->{year}, 2004 );
+$ts->{year} = 1999;
+ok( $ts->{year}, 1999 );
+ok( $ts->{month}, 2 );
+$ts->{month} = 12;
+ok( $ts->{month}, 12 );
+ok( $ts->{day}, 20 );
+$ts->{day} = 24;
+ok( $ts->{day}, 24 );
+ok( TA_SetDate(1999,12,24,$ts2), $TA_SUCCESS );
+ok( TA_TimestampDateEqual($ts,$ts2), 1 );
+ok( TA_SetTime(9,12,55,$ts), $TA_SUCCESS );
+ok( $ts->{hours}, 9 );
+$ts->{hours} = 23;
+ok( $ts->{hours}, 23 );
+ok( $ts->{minutes}, 12 );
+$ts->{minutes} = 45;
+ok( $ts->{minutes}, 45 );
+ok( $ts->{seconds}, 55 );
+$ts->{seconds} = 1;
+ok( $ts->{seconds}, 1 );
+ok( TA_SetTime(23,45,1,$ts2), $TA_SUCCESS );
+ok( TA_TimestampEqual($ts,$ts2), 1 );
+
+
 
 print "Testing TA_Initialize and TA_Shutdown...\n";
 ok( TA_Initialize(), $TA_SUCCESS );

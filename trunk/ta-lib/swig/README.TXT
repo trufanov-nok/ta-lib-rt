@@ -114,7 +114,15 @@ But There's More Than One Way To Do It.
     $ts = new TA_Timestamp("2004-02-29 09:11:59");
     $ts = new TA_Timestamp("2004-02-29");
 To be parsed, all numbers have to be two-digit (except the year).  Superfluous
-characters are ignored.
+characters are ignored. Dash separators for date, colons for time.
+
+* Some other TA_Timestamp goodies: synthesized attributes (data members):
+    $y = $ts->{year};
+    $m = $ts->{month};
+    $s = $ts->{day};
+    $ts->{hours} = 12;
+    $ts->{minutes} = 30;
+    $ts->{seconds} = 59;
 
 * Do not call &TA_HistoryAlloc and &TA_HistoryFree directly.  Simply use
 &TA_History::new.  The parameters to &new are the same as to
@@ -174,7 +182,7 @@ undef, or ommitted altogether.
 The output parameters are retured in the return array.  The returned array
 has the following structure: return code of the function, begin index, and
 one or more references to output arrays.  The parameter outNbElement used in
-the C functions is not passed to Perl as it can be easilly obtained
+the C functions is not passed to Perl as it can be easilly obtained by
 evaluating an array in a scalar context.
 
 Example (default optInTimePeriod):
@@ -196,8 +204,6 @@ Open issues/To do
 * Get parameters on 'use"-line for &TA_Initialize
 * Allow to pass hash table to &TA_AddDataSourceParam::new with initial values
 * Add member functions to TA_Timestamp
-* Add synthetised member variables to TA_Timestamp
-* Create TA_UDBase class (member functions like &TA_CategoryTable)
 * Wrap ta_pm 
 * Wrap ta_abstract
 

@@ -77,9 +77,9 @@
     if ( *$1 && (*$1)->size > 0) {
         int new_argvi = argvi + (*$1)->size;
         unsigned int elem;
-	    if (new_argvi > items) {
-                EXTEND(sp,(new_argvi-items));
-	    }
+        if (new_argvi > items) {
+            EXTEND(sp,(new_argvi-items));
+        }
         for (elem = 0;  elem < (*$1)->size;  elem++) {
             ST(argvi) = sv_newmortal();
             if ((*$1)->string[elem]) {
@@ -118,6 +118,101 @@
 %nodefault TA_StringTable;
 
 %include "../../../../../c/include/ta_common.h"
+
+
+/* synthesized attributes for TA_Timestamp */
+
+%extend TA_Timestamp {
+    unsigned int year, month, day;
+    unsigned int hours, minutes, seconds;
+}
+
+%{
+unsigned int TA_Timestamp_year_get(const TA_Timestamp *ts)
+{
+    unsigned int y = 0, m = 0, d = 0;
+    TA_GetDate(ts, &y, &m, &d);
+    return y;
+}
+
+void TA_Timestamp_year_set(TA_Timestamp *ts, unsigned int year)
+{
+    unsigned int y = 0, m = 0, d = 0;
+    TA_GetDate(ts, &y, &m, &d);
+    TA_SetDate(year, m, d, ts);
+}
+
+unsigned int TA_Timestamp_month_get(const TA_Timestamp *ts)
+{
+    unsigned int y = 0, m = 0, d = 0;
+    TA_GetDate(ts, &y, &m, &d);
+    return m;
+}
+
+void TA_Timestamp_month_set(TA_Timestamp *ts, unsigned int month)
+{
+    unsigned int y = 0, m = 0, d = 0;
+    TA_GetDate(ts, &y, &m, &d);
+    TA_SetDate(y, month, d, ts);
+}
+
+unsigned int TA_Timestamp_day_get(const TA_Timestamp *ts)
+{
+    unsigned int y = 0, m = 0, d = 0;
+    TA_GetDate(ts, &y, &m, &d);
+    return d;
+}
+
+void TA_Timestamp_day_set(TA_Timestamp *ts, unsigned int day)
+{
+    unsigned int y = 0, m = 0, d = 0;
+    TA_GetDate(ts, &y, &m, &d);
+    TA_SetDate(y, m, day, ts);
+}
+
+unsigned int TA_Timestamp_hours_get(const TA_Timestamp *ts)
+{
+    unsigned int h = 0, m = 0, s = 0;
+    TA_GetTime(ts, &h, &m, &s);
+    return h;
+}
+
+void TA_Timestamp_hours_set(TA_Timestamp *ts, unsigned int hours)
+{
+    unsigned int h = 0, m = 0, s = 0;
+    TA_GetTime(ts, &h, &m, &s);
+    TA_SetTime(hours, m, s, ts);
+}
+
+unsigned int TA_Timestamp_minutes_get(const TA_Timestamp *ts)
+{
+    unsigned int h = 0, m = 0, s = 0;
+    TA_GetTime(ts, &h, &m, &s);
+    return m;
+}
+
+void TA_Timestamp_minutes_set(TA_Timestamp *ts, unsigned int minutes)
+{
+    unsigned int h = 0, m = 0, s = 0;
+    TA_GetTime(ts, &h, &m, &s);
+    TA_SetTime(h, minutes, s, ts);
+}
+
+unsigned int TA_Timestamp_seconds_get(const TA_Timestamp *ts)
+{
+    unsigned int h = 0, m = 0, s = 0;
+    TA_GetTime(ts, &h, &m, &s);
+    return s;
+}
+
+void TA_Timestamp_seconds_set(TA_Timestamp *ts, unsigned int seconds)
+{
+    unsigned int h = 0, m = 0, s = 0;
+    TA_GetTime(ts, &h, &m, &s);
+    TA_SetTime(h, m, seconds, ts);
+}
+
+%}
 
 /* clearing typemaps to avoid potential future problems in other header files */
 %clear unsigned int *year, unsigned int *month, unsigned int *day;
