@@ -3,6 +3,8 @@
 
 package Finance::TA;
 
+use strict;
+
 our $VERSION = v0.1.3;
 
 package Finance::TA::TA_Timestamp;
@@ -38,14 +40,14 @@ undef *new;
 
 sub GetStringDate {
     my ($self) = @_;
-    @res = ::Finance::TAc::TA_GetDate($self);
+    my @res = ::Finance::TAc::TA_GetDate($self);
     return sprintf("%04d-%02d-%02d", @res[1..3]);
 }
 
 
 sub GetStringTime {
     my ($self) = @_;
-    @res = ::Finance::TAc::TA_GetTime($self);
+    my @res = ::Finance::TAc::TA_GetTime($self);
     return sprintf("%02d:%02d:%02d", @res[1..3]);
 }
 
@@ -89,10 +91,10 @@ sub new {
 sub DESTROY {
     return unless $_[0]->isa('HASH');
     my $self = tied(%{$_[0]});
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        ::Finance::TAc::TA_UDBaseFree($self);
+    delete $ITERATORS{$self} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$self}) {
         delete $OWNER{$self};
+        ::Finance::TAc::TA_UDBaseFree($self);
     }
 }
 
@@ -132,7 +134,7 @@ sub CategoryTable {
 
 sub SymbolTable {
     my ($self, $symbol) = @_;
-    $symbol ||= $TA_DEFAULT_CATEGORY;
+    $symbol ||= $Finance::TA::TA_DEFAULT_CATEGORY;
     my @table = ::Finance::TAc::TA_SymbolTable($self, $symbol);
     if (shift(@table) == $Finance::TA::TA_SUCCESS) {
         return @table;
@@ -171,11 +173,10 @@ sub DESTROY {
     return unless $_[0]->isa('HASH');
     my $self = tied(%{$_[0]});
     return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        #print "free history: @_: ";
-        ::Finance::TAc::TA_HistoryFree($self);
+    delete $ITERATORS{$self} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$self}) {
         delete $OWNER{$self};
+        ::Finance::TAc::TA_HistoryFree($self);
     }
 }
 
@@ -265,16 +266,23 @@ sub DESTROY {
     return unless $_[0]->isa('HASH');
     #print "destroying $_[0]\n";
     my $self = tied(%{$_[0]});
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        ::Finance::TAc::TA_TradeLogFree($self);
+    delete $ITERATORS{$self} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$self}) {
         delete $OWNER{$self};
+        ::Finance::TAc::TA_TradeLogFree($self);
     }
 }
 
 sub TradeLogAdd {
-    my $self = shift;
-    ::Finance::TAc::TA_TradeLogAdd($self, @_);
+    my ($self, $param) = @_;
+    if (ref($param) eq 'HASH') {
+        my $hash = $param;
+        $param = Finance::TA::TA_Transaction->new;
+        while ( my($key, $val) = each(%$hash) ) {
+            $param->{$key} = $val;
+        }
+    }
+    ::Finance::TAc::TA_TradeLogAdd($self, $param);
 }
 
 
@@ -284,7 +292,7 @@ package Finance::TA::TA_PM;
 # and providing object-oriented interface
 
 # Keep track which logs are added to PM, not to destroy them too early
-%logs = ();
+our %LOGS = ();
 
 sub new {
     my $pkg = shift;
@@ -303,17 +311,17 @@ sub DESTROY {
     return unless $self->isa('HASH');
     #print "destroying $self\n";
     my $this = tied(%$self);
-    delete $ITERATORS{$this};
-    if (exists $OWNER{$this}) {
-        ::Finance::TAc::TA_PMFree($this);
+    delete $ITERATORS{$this} if defined %ITERATORS;
+    if (defined %OWNER && exists $OWNER{$this}) {
         delete $OWNER{$this};
-        delete $logs{$self};
+        ::Finance::TAc::TA_PMFree($this);
     }
+    delete $LOGS{$self} if defined %LOGS;
 }
 
 sub PMAddTradeLog {
     my ($self, $log) = @_;
-    push(@{$logs{$self}}, $log);
+    push(@{$LOGS{$self}}, $log);
     ::Finance::TAc::TA_PMAddTradeLog($self, $log);
 }
 
@@ -361,8 +369,8 @@ sub DESTROY {
     delete $ITERATORS{$self};
     if (exists $OWNER{$self}) {
         #print "free PMArray: @_: ";
-        ::Finance::TAc::TA_PMArrayFree($self);
         delete $OWNER{$self};
+        ::Finance::TAc::TA_PMArrayFree($self);
     }
 }
 
@@ -379,7 +387,7 @@ package Finance::TA::TA_TradeReport;
 # Keep track which PM is used for Trade Report, not to destroy it too early
 # (design limitation of TA_TradeReport)
 
-%PM = ();
+our %PM = ();
 
 sub new {
     #print "alloc TradeReport: @_\n";
@@ -408,10 +416,10 @@ sub DESTROY {
     delete $ITERATORS{$this};
     if (exists $OWNER{$this}) {
         #print "free TradeReport: @_: ";
-        ::Finance::TAc::TA_TradeReportFree($this);
         delete $OWNER{$this};
         #print "delete $self\n";
         delete $PM{$self};
+        ::Finance::TAc::TA_TradeReportFree($this);
     }
 }
 
@@ -434,12 +442,12 @@ undef *TA_Initialize;
     my $retCode;
     if ($INITIALIZED) {
         $retCode = TA_Shutdown();
-        return $retCode if $retCode != $TA_SUCCESS;
+        return $retCode if $retCode != $Finance::TA::TA_SUCCESS;
     }
     # Accept calls with no parameters
     $_[0] = undef if @_ == 0;
     $retCode = ::Finance::TAc::TA_Initialize(@_);
-    $INITIALIZED = ($retCode == $TA_SUCCESS);
+    $INITIALIZED = ($retCode == $Finance::TA::TA_SUCCESS);
     return $retCode;
 };
 
@@ -452,7 +460,7 @@ undef *TA_Shutdown;
     } else {
         # We are more forgiving on multiple calls to &TA_Shutdown
         # than TA-LIB on TA_Shutdown()
-        return $TA_SUCCESS;
+        return $Finance::TA::TA_SUCCESS;
     }
 };
 
@@ -460,11 +468,11 @@ undef *TA_Shutdown;
 # This small loop circumvents that and export everything beginning with 'TA_'
 foreach (keys %Finance::TA::) {
     if (/^TA_/) {
-        local *sym = $Finance::TA::{$_};        
-        push(@EXPORT, "\$$_") if defined $sym;
-        push(@EXPORT, "\@$_") if defined @sym;
-        push(@EXPORT, "\%$_") if defined %sym;
-        push(@EXPORT, $_) if defined &sym;
+        local *::sym = $Finance::TA::{$_};        
+        push(@Finance::TA::EXPORT, "\$$_") if defined $::sym;
+        push(@Finance::TA::EXPORT, "\@$_") if defined @::sym;
+        push(@Finance::TA::EXPORT, "\%$_") if defined %::sym;
+        push(@Finance::TA::EXPORT, $_) if defined &::sym;
     }
 }
 
