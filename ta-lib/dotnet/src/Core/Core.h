@@ -360,12 +360,12 @@ namespace TA
          #define TA_KAMA Core::KAMA
          #define TA_KAMA_Lookback Core::KAMA_Lookback
 
-         static int MA_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+         static int MA_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
                                TA_MAType     optInMAType ); 
          static enum TA_RetCode MA( int    startIdx,
                                     int    endIdx,
                                     double       inReal __gc [],
-                                    int           optInTimePeriod, /* From 2 to 100000 */
+                                    int           optInTimePeriod, /* From 1 to 100000 */
                                     TA_MAType     optInMAType,
                                     [OutAttribute]Int32 *outBegIdx,
                                     [OutAttribute]Int32 *outNbElement,
@@ -373,7 +373,7 @@ namespace TA
          static enum TA_RetCode MA( int    startIdx,
                                     int    endIdx,
                                     float        inReal __gc [],
-                                    int           optInTimePeriod, /* From 2 to 100000 */
+                                    int           optInTimePeriod, /* From 1 to 100000 */
                                     TA_MAType     optInMAType,
                                     [OutAttribute]Int32 *outBegIdx,
                                     [OutAttribute]Int32 *outNbElement,
@@ -1256,12 +1256,14 @@ namespace TA
          #define TA_STOCHF Core::STOCHF
          #define TA_STOCHF_Lookback Core::STOCHF_Lookback
 
-         static int STOCHRSI_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
+         static int STOCHRSI_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+                                     int           optInFastK_Period, /* From 1 to 100000 */
                                      int           optInFastD_Period, /* From 1 to 100000 */
                                      TA_MAType     optInFastD_MAType ); 
          static enum TA_RetCode STOCHRSI( int    startIdx,
                                           int    endIdx,
                                           double       inReal __gc [],
+                                          int           optInTimePeriod, /* From 2 to 100000 */
                                           int           optInFastK_Period, /* From 1 to 100000 */
                                           int           optInFastD_Period, /* From 1 to 100000 */
                                           TA_MAType     optInFastD_MAType,
@@ -1272,6 +1274,7 @@ namespace TA
          static enum TA_RetCode STOCHRSI( int    startIdx,
                                           int    endIdx,
                                           float        inReal __gc [],
+                                          int           optInTimePeriod, /* From 2 to 100000 */
                                           int           optInFastK_Period, /* From 1 to 100000 */
                                           int           optInFastD_Period, /* From 1 to 100000 */
                                           TA_MAType     optInFastD_MAType,
