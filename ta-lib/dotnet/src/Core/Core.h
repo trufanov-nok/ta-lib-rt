@@ -335,21 +335,13 @@ namespace TA
 
          static enum TA_RetCode SMA( int    startIdx,
                                      int    endIdx,
-                                     double        inReal_0 __gc [],
+                                     double       inReal_0 __gc [],
                                      int           optInTimePeriod_0, /* From 2 to 100000 */
                                      [OutAttribute]Int32 *outBegIdx,
                                      [OutAttribute]Int32 *outNbElement,
                                      double        outReal_0 __gc [] );
 
-         static enum TA_RetCode SMA( int    startIdx,
-                                     int    endIdx,
-                                     float         inReal_0 __gc [],
-                                     int           optInTimePeriod_0, /* From 2 to 100000 */
-                                     [OutAttribute]Int32 *outBegIdx,
-                                     [OutAttribute]Int32 *outNbElement,
-                                     double        outReal_0 __gc [] );
-
-         #define TA_SMA   Core::SMA
+         #define TA_SMA Core::SMA
          #define TA_SMA_Lookback Core::SMA_Lookback
 
          static int T3_Lookback( int           optInTimePeriod_0, /* From 2 to 100000 */
@@ -943,6 +935,58 @@ namespace TA
 
          #define TA_OBV Core::OBV
          #define TA_OBV_Lookback Core::OBV_Lookback
+
+         static int LINEARREG_Lookback( int           optInTimePeriod_0 );  /* From 2 to 100000 */
+
+         static enum TA_RetCode LINEARREG( int    startIdx,
+                                           int    endIdx,
+                                           double       inReal_0 __gc [],
+                                           int           optInTimePeriod_0, /* From 2 to 100000 */
+                                           [OutAttribute]Int32 *outBegIdx,
+                                           [OutAttribute]Int32 *outNbElement,
+                                           double        outReal_0 __gc [] );
+
+         #define TA_LINEARREG Core::LINEARREG
+         #define TA_LINEARREG_Lookback Core::LINEARREG_Lookback
+
+         static int LINEARREG_SLOPE_Lookback( int           optInTimePeriod_0 );  /* From 2 to 100000 */
+
+         static enum TA_RetCode LINEARREG_SLOPE( int    startIdx,
+                                                 int    endIdx,
+                                                 double       inReal_0 __gc [],
+                                                 int           optInTimePeriod_0, /* From 2 to 100000 */
+                                                 [OutAttribute]Int32 *outBegIdx,
+                                                 [OutAttribute]Int32 *outNbElement,
+                                                 double        outReal_0 __gc [] );
+
+         #define TA_LINEARREG_SLOPE Core::LINEARREG_SLOPE
+         #define TA_LINEARREG_SLOPE_Lookback Core::LINEARREG_SLOPE_Lookback
+
+         static int LINEARREG_ANGLE_Lookback( int           optInTimePeriod_0 );  /* From 2 to 100000 */
+
+         static enum TA_RetCode LINEARREG_ANGLE( int    startIdx,
+                                                 int    endIdx,
+                                                 double       inReal_0 __gc [],
+                                                 int           optInTimePeriod_0, /* From 2 to 100000 */
+                                                 [OutAttribute]Int32 *outBegIdx,
+                                                 [OutAttribute]Int32 *outNbElement,
+                                                 double        outReal_0 __gc [] );
+
+         #define TA_LINEARREG_ANGLE Core::LINEARREG_ANGLE
+         #define TA_LINEARREG_ANGLE_Lookback Core::LINEARREG_ANGLE_Lookback
+
+         static int LINEARREG_INTERCEPT_Lookback( int           optInTimePeriod_0 );  /* From 2 to 100000 */
+
+         static enum TA_RetCode LINEARREG_INTERCEPT( int    startIdx,
+                                                     int    endIdx,
+                                                     double       inReal_0 __gc [],
+                                                     int           optInTimePeriod_0, /* From 2 to 100000 */
+                                                     [OutAttribute]Int32 *outBegIdx,
+                                                     [OutAttribute]Int32 *outNbElement,
+                                                     double        outReal_0 __gc [] );
+
+         #define TA_LINEARREG_INTERCEPT Core::LINEARREG_INTERCEPT
+         #define TA_LINEARREG_INTERCEPT_Lookback Core::LINEARREG_INTERCEPT_Lookback
 
          static int STDDEV_Lookback( int           optInTimePeriod_0, /* From 2 to 100000 */
                                    double        optInNbDev_1 );  /* From TA_REAL_MIN to TA_REAL_MAX */
