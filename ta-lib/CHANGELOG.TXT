@@ -1,8 +1,9 @@
-V1.0.0 (?? 2003)
+V0.1.1 (?? 2003)
 
-- New TA functions: TA_SAREXT, TA_STOCHRSI, TA_CORREL
+- Support for SQL/ODBC and MySQL data sources.
+- New TA functions: TA_SAREXT, TA_STOCHRSI, TA_CORREL, TA_NVI, TA_PVI
 - Add CygWin support
-               
+
 See HISTORY.TXT for summary of previous version.
 
 Info: http://ta-lib.org
