@@ -16,12 +16,12 @@
 # Un-comment the following lines if
 # you wish to provide your own TMAKEPATH.
 # use Env qw( TMAKEPATH );
-$ENV{'TMAKEPATH'} = 'template\\win32-msvc';
+$ENV{'TMAKEPATH'} = '../../../../ta-lib/c/make/gen_make/template/linux-g++';
 
-system( "perl ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\make_make.pl cmd ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\win32-msvc ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\* linux_only" );
+system( "perl ../../../../ta-lib/c/make/gen_make/make_make.pl cmd ../../../../ta-lib/c/make/gen_make/template/linux-g++ \"../../../../ta-lib/c/make/gen_make/template/*\" linux_only" );
 
-system( "perl ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\make_make.pl cmr ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\win32-msvc ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\* linux_only" );
+system( "perl ../../../../ta-lib/c/make/gen_make/make_make.pl cmr ../../../../ta-lib/c/make/gen_make/template/linux-g++ \"../../../../ta-lib/c/make/gen_make/template/*\" linux_only" );
 
-system( "perl ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\make_make.pl csr ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\win32-msvc ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\* linux_only" );
+system( "perl ../../../../ta-lib/c/make/gen_make/make_make.pl csr ../../../../ta-lib/c/make/gen_make/template/linux-g++ \"../../../../ta-lib/c/make/gen_make/template/*\" linux_only" );
 
-system( "perl ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\make_make.pl csd ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\win32-msvc ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\* linux_only" );
+system( "perl ../../../../ta-lib/c/make/gen_make/make_make.pl csd ../../../../ta-lib/c/make/gen_make/template/linux-g++ \"../../../../ta-lib/c/make/gen_make/template/*\" linux_only" );
