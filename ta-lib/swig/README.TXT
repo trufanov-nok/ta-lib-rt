@@ -134,6 +134,11 @@ E.g.:
     if ($hist->{retCode} == $TA_SUCCESS) {
         ...
     }
+Alternatively:
+    my $hist = $udBase->History("US.NASDAQ.STOCKS", "LNUX", $TA_DAILY);
+    if ($hist->{retCode} == $TA_SUCCESS) {
+        ...
+    }
 
 * Note that TA_History objects are read-only.
 
@@ -171,6 +176,7 @@ TA_GoupTableAlloc/Free, TA_FuncTableAlloc/Free.
 * Alternatively, you may want to use the object interface of TA_UDBase:
     @categories = $udBase->CategoryTable();
     @symbols = $udBase->SymbolTable("ZZ.OTHER.OTHER");
+    @symbols = $udBase->SymbolTable(); # defaults to $TA_DEFAULT_CATEGORY
 In such case, you don't have to bother about the error code; you get undef
 value in case of any error.
 
