@@ -474,6 +474,49 @@ namespace TA
          #define TA_SAR Core::SAR
          #define TA_SAR_Lookback Core::SAR_Lookback
 
+         static int SAREXT_Lookback( double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInOffsetOnReverse_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInAccelerationInitLong_2, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInAccelerationLong_3, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInAccelerationMaxLong_4, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInAccelerationInitShort_5, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInAccelerationShort_6, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInAccelerationMaxShort_7 );  /* From TA_REAL_MIN to TA_REAL_MAX */
+
+         static enum TA_RetCode SAREXT( int    startIdx,
+                                        int    endIdx,
+                                        double       inHigh_0 __gc [],
+                                        double       inLow_0 __gc [],
+                                        double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInOffsetOnReverse_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationInitLong_2, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationLong_3, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationMaxLong_4, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationInitShort_5, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationShort_6, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationMaxShort_7, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        [OutAttribute]Int32 *outBegIdx,
+                                        [OutAttribute]Int32 *outNbElement,
+                                        double        outReal_0 __gc [] );
+         static enum TA_RetCode SAREXT( int    startIdx,
+                                        int    endIdx,
+                                        float        inHigh_0 __gc [],
+                                        float        inLow_0 __gc [],
+                                        double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInOffsetOnReverse_1, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationInitLong_2, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationLong_3, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationMaxLong_4, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationInitShort_5, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationShort_6, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        double        optInAccelerationMaxShort_7, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                        [OutAttribute]Int32 *outBegIdx,
+                                        [OutAttribute]Int32 *outNbElement,
+                                        double        outReal_0 __gc [] );
+
+         #define TA_SAREXT Core::SAREXT
+         #define TA_SAREXT_Lookback Core::SAREXT_Lookback
+
          static int SMA_Lookback( int           optInTimePeriod_0 );  /* From 2 to 100000 */
 
          static enum TA_RetCode SMA( int    startIdx,
