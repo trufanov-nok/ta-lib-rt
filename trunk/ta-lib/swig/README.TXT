@@ -8,6 +8,15 @@ interfaces to C and C++ programs. It supports a number of target languages:
 including Guile, Java, Mzscheme, Ocaml, Perl, Pike, PHP, Python, Ruby, and
 Tcl.  More information can be found at http://www.swig.org
 
+I had two goals while making this wrapper:
+1. To stay as close as possible to the original TA-LIB C interface
+2. To make the interface as much convenient (and "Perlish") and robust 
+   as possible.
+Those two objectives were often not compatible, what results in many elements
+being wrapped in two or more ways.  In a few cases, those objectives were
+conflicting; then the Perl way took precedence over being literally
+identical to the TA-LIB C way.
+
 Although SWIG is capable of generating wrappers to many languages, makefiles
 in this directory tree support perl only.  Tahking perl as example, one can
 extend it to other laungages, if needed.
@@ -139,6 +148,18 @@ undef.  There is no way of getting the ret code then.  But hey, what can go
 wrong with TA_UDBaseAlloc()?  And you are freed from the hurdle of keeping
 track of allocation and deallocation.  This is the True Perl Way.
 
+* Instead of TA_CategoryTableAlloc/TA_CategoryTableFree use just
+&TA_CategoryTable.  This function returns a Perl list of strings, so there is
+no need do deallocate it explicitly.  Note that the first list element is the
+return code, as usual.  The same applies to
+TA_SymbolTableAlloc/TA_SymbolTableFree.
+
+* Alternatively, you may want to use the object interface of TA_UDBase:
+    @categories = $udBase->CategoryTable();
+    @symbols = $udBase->SymbolTable("ZZ.OTHER.OTHER");
+In such case, you don't have to bother about the error code; you get undef
+value in case of any error.
+
 The module covers ta_defs, ta_common, ta_data, ta_func, and ta_pm.  It does not 
 cover ta_abstract - on purpose.  The information about ta_func can be obtained
 in Perl much easier in may other perlish ways.
@@ -159,5 +180,6 @@ Open issues/To do
 * Allw to set TA_RetCodeInfo in the constructor
 * Add nice constructors to TA_Timestamp
 * Add member functions to TA_Timestamp
-* Create TA_UDBase class
+* Add synthetised member variables to TA_Timestamp
+* Create TA_UDBase class (member functions like &TA_CategoryTable)
 

@@ -53,6 +53,56 @@ undef *new;
 };
 
 
+package Finance::TA::TA_UDBase;
+
+# Wrapper class for TA_UDBase, handling allocation deallocation automatically
+
+sub new {
+    my $pkg = shift;
+    my $self;
+    my $retCode = ::Finance::TAc::TA_UDBaseAlloc(\$self);
+    if (defined $self) {
+        bless $self, $pkg;
+        ACQUIRE($self);
+    }
+    return $self;
+}
+
+sub DESTROY {
+    return unless $_[0]->isa('HASH');
+    my $self = tied(%{$_[0]});
+    delete $ITERATORS{$self};
+    if (exists $OWNER{$self}) {
+        ::Finance::TAc::TA_UDBaseFree($self);
+        delete $OWNER{$self};
+    }
+}
+
+sub CategoryTable {
+    my $self = shift;
+    return unless defined $self;
+    my @table = ::Finance::TAc::TA_CategoryTable($self);
+    if (shift(@table) == $Finance::TA::TA_SUCCESS) {
+        return @table;
+    } else {
+        return;
+    }
+}
+
+sub SymbolTable {
+    my ($self, $symbol) = @_;
+    return unless defined $self;
+    my @table = ::Finance::TAc::TA_SymbolTable($self, $symbol);
+    if (shift(@table) == $Finance::TA::TA_SUCCESS) {
+        return @table;
+    } else {
+        return;
+    }
+}
+
+
+
+
 package Finance::TA::TA_History;
 
 # Wrapper classes arrange access to TA_History members but creation/deletion
@@ -93,34 +143,6 @@ sub DESTROY {
 # Now prevent accidental direct calls to TA_HistoryAllow/TA_HistoryFree
 delete $::Finance::TA::{TA_HistoryAlloc};
 delete $::Finance::TA::{TA_HistoryFree};
-
-
-
-package Finance::TA::TA_UDBase;
-
-# Wrapper class for TA_UDBase, handling allocation deallocation automatically
-
-sub new {
-    my $pkg = shift;
-    my $self;
-    my $retCode = ::Finance::TAc::TA_UDBaseAlloc(\$self);
-    if (defined $self) {
-        bless $self, $pkg;
-        ACQUIRE($self);
-    }
-    return $self;
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        ::Finance::TAc::TA_UDBaseFree($self);
-        delete $OWNER{$self};
-    }
-}
 
 
 
