@@ -78,7 +78,7 @@
         int new_argvi = argvi + (*$1)->size;
         unsigned int elem;
 	    if (new_argvi > items) {
-		    EXTEND(sp,(new_argvi-items));
+                EXTEND(sp,(new_argvi-items));
 	    }
         for (elem = 0;  elem < (*$1)->size;  elem++) {
             ST(argvi) = sv_newmortal();
@@ -100,7 +100,7 @@
         int new_argvi = argvi + $1->size;
         unsigned int elem;
 	    if (new_argvi > items) {
-		    EXTEND(sp,(new_argvi-items));
+                EXTEND(sp,(new_argvi-items));
 	    }
         for (elem = 0;  elem < $1->size;  elem++) {
             ST(argvi) = sv_newmortal();
@@ -126,7 +126,6 @@
 
 
 /** ta_data *****************************************************************/
-/* under development */
 
 #ifdef SWIGPERL
 
@@ -147,24 +146,24 @@ typedef struct {} TA_UDBase;
  * $ret = TA_UDBaseAlloc(\$udb);
  */
 %typemap(in) TA_UDBase **newUDBase($*1_ltype temp) {
-	SV *tempsv;
-	if (!SvROK($input)) {
-		SWIG_croak("Expected a reference as argument $argnum of $symname");
-	}
-	tempsv = SvRV($input);
-	if (SWIG_ConvertPtr(tempsv, (void **) &temp, $*1_descriptor, 0) < 0) {
-		SWIG_croak("Type error in argument $argnum of $symname. Expected $*1_mangle");
-	}
-	if (temp) {
-		SWIG_croak("Expected a reference to undef variable as argument $argnum of $symname");
-	}
+    SV *tempsv;
+    if (!SvROK($input)) {
+        SWIG_croak("Expected a reference as argument $argnum of $symname");
+    }
+    tempsv = SvRV($input);
+    if (SWIG_ConvertPtr(tempsv, (void **) &temp, $*1_descriptor, 0) < 0) {
+        SWIG_croak("Type error in argument $argnum of $symname. Expected $*1_mangle");
+    }
+    if (temp) {
+        SWIG_croak("Expected a reference to undef variable as argument $argnum of $symname");
+    }
     $1 = &temp;
 }
 
 %typemap(argout) TA_UDBase **newUDBase {
-	SV *tempsv;
-	tempsv = SvRV($input);
-	SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, SWIG_SHADOW);
+    SV *tempsv;
+    tempsv = SvRV($input);
+    SWIG_MakePtr(tempsv, (void *) *$1, $*1_descriptor, SWIG_SHADOW);
 }
 
 
@@ -186,12 +185,12 @@ typedef struct {} TA_UDBase;
 
 %typemap(argout) TA_History **history %{
     if (*$1) {
-	    if (argvi >= items) {
-		    EXTEND(sp,1);
-	    }
-	    $result = sv_newmortal();
-	    SWIG_MakePtr($result, (void *) *$1, $*1_descriptor, SWIG_SHADOW|SWIG_OWNER);
-	    argvi++;
+	if (argvi >= items) {
+	    EXTEND(sp,1);
+	}
+	$result = sv_newmortal();
+	SWIG_MakePtr($result, (void *) *$1, $*1_descriptor, SWIG_SHADOW|SWIG_OWNER);
+	argvi++;
     }
 %}
 
@@ -214,57 +213,63 @@ typedef struct {} TA_UDBase;
  * If forgot to define it, a compile error will occur.
  */
 %typemap(out) const TA_Real *ARRAY {
-	AV *myav;
-	SV **svs;
-	unsigned int i = 0;
+    AV *myav;
+    SV **svs;
+    unsigned int i = 0;
 
-	svs = (SV **) malloc(array_size1 * sizeof(SV *));
-	for (i = 0; i < array_size1 ; i++) {
-	    svs[i] = sv_newmortal();
-	    sv_setnv((SV*)svs[i],$1[i]);
-	};
-	myav =	av_make(array_size1,svs);
-	free(svs);
+    /* this is not the most efficient way of creating an array
+     * it creates much too many mortals
+     * I have copied it from SWIG example but a better way is in 
+     * the typemap for OUT_ARRAY
+     * TODO: optimize it here (an in the following two typemaps)
+     */
+    svs = (SV **) malloc(array_size1 * sizeof(SV *));
+    for (i = 0; i < array_size1 ; i++) {
+	svs[i] = sv_newmortal();
+	sv_setnv((SV*)svs[i],$1[i]);
+    };
+    myav = av_make(array_size1,svs);
+    free(svs);
     $result = newRV((SV*)myav);
     sv_2mortal($result);
     argvi++;    
 }
 
 %typemap(out) const TA_Integer *ARRAY {
-	AV *myav;
-	SV **svs;
-	unsigned int i = 0;
+    AV *myav;
+    SV **svs;
+    unsigned int i = 0;
 
-	svs = (SV **) malloc(array_size1 * sizeof(SV *));
-	for (i = 0; i < array_size1 ; i++) {
-	    svs[i] = sv_newmortal();
-	    sv_setiv((SV*)svs[i],$1[i]);
-	};
-	myav =	av_make(array_size1,svs);
-	free(svs);
+    svs = (SV **) malloc(array_size1 * sizeof(SV *));
+    for (i = 0; i < array_size1 ; i++) {
+        svs[i] = sv_newmortal();
+        sv_setiv((SV*)svs[i],$1[i]);
+    };
+    myav =  av_make(array_size1,svs);
+    free(svs);
     $result = newRV((SV*)myav);
     sv_2mortal($result);
     argvi++;    
 }
 
 %typemap(out) const TA_Timestamp *ARRAY {
-	AV *myav;
-	SV **svs;
-	unsigned int i = 0;
+    AV *myav;
+    SV **svs;
+    unsigned int i = 0;
 
-	svs = (SV **) malloc(array_size1 * sizeof(SV *));
-	for (i = 0; i < array_size1 ; i++) {
-	    svs[i] = sv_newmortal();
+    svs = (SV **) malloc(array_size1 * sizeof(SV *));
+    for (i = 0; i < array_size1 ; i++) {
+        svs[i] = sv_newmortal();
         SWIG_MakePtr((SV*)svs[i], (void *) &$1[i], $1_descriptor, SWIG_SHADOW);
-	};
-	myav =	av_make(array_size1,svs);
-	free(svs);
+    };
+    myav =  av_make(array_size1,svs);
+    free(svs);
     $result = newRV((SV*)myav);
     sv_2mortal($result);
     argvi++;    
 }
 
-#endif
+#endif  /* SWIGPERL */
 
 /* now apply the defined timestamps to specific fields */
 %apply const TA_Real *ARRAY { 
@@ -332,9 +337,180 @@ typedef struct {} TA_UDBase;
 
 
 /** ta_func *****************************************************************/
-/* untested */
 
-%include "../../../../../c/include/ta_func.h"
+#ifdef SWIGPERL
+
+/* START_IDX and END_IDX are always the first two arguments of all functions.
+ * They create two local (auto) variables, startIdx1 and endIdx2
+ * Other typemaps depend on them to allocate properly sized C arrays.
+ */
+%typemap(in) int START_IDX (int startIdx) 
+{
+    $1 = (int) SvIV($input);
+    if ($1 < 0) $1 = 0;                 /* ensure valid array range */
+    startIdx = $1;
+}
+
+%typemap(in) int END_IDX (int endIdx)
+{
+    $1 = (int) SvIV($input);
+    if ($1 < startIdx1) $1 = startIdx1;  /* ensure valid array range */
+    endIdx = $1;
+}
+
+/* Input arrays are passed by references, otherwise they would loose
+ * their identity.  Besides, it is more effiecient.
+ * As it is implemented now, startIdx and endIdx values overrule the actual
+ * array size; eventual missing elements are created and set to zero.
+ */
+%typemap(in) const double *IN_ARRAY, const float *IN_ARRAY 
+{
+    int array_size = endIdx2 + 1;
+    AV *av;
+    I32 len;
+    int idx;
+    SV **sv;
+
+    if (!SvROK($input) || SvTYPE(SvRV($input)) != SVt_PVAV) {
+        SWIG_croak("Expected an array reference as argument $argnum of $symname");
+    }
+    av = (AV*)SvRV($input);
+    $1 = ($1_ltype) calloc(array_size, sizeof($*1_ltype));
+    len = av_len(av);
+    if (len >= array_size) len = array_size - 1;
+    for (idx = 0; idx <= len; idx++) {
+        sv = av_fetch(av, idx, 0);	
+        $1[idx] = ($*1_ltype) SvNV(*sv);
+    }
+}
+
+%typemap(freearg) const double *IN_ARRAY, const float *IN_ARRAY
+    "free($1);";
+
+/* After the input arrays, optional parameters come.
+ * If not provided or given as 'undef', they will be translated to
+ * TA_INTEGER_DEFAULT or TA_REAL_DEFAULT, depending on the type.
+ */
+%typemap(default) int OPT_INT
+    "$1 = TA_INTEGER_DEFAULT;"
+
+%typemap(in) int OPT_INT 
+%{
+    if (SvOK($input)) {
+        $1 = (int) SvIV($input);
+    }
+%}
+
+%typemap(default) double OPT_REAL
+    "$1 = TA_REAL_DEFAULT;"
+
+%typemap(in) double OPT_REAL 
+%{
+    if (SvOK($input)) {
+        $1 = (int) SvNV($input);
+    }
+%}
+
+
+/* outBegIdx is handled just as a regular OUTPUT parameter, except that
+ * if the function failed, undef is returned
+ */
+%typemap(in,numinputs=0) int *BEG_IDX(int temp = 0)
+    "$1 = &temp;";
+
+%typemap(argout) int *BEG_IDX
+{
+    if (argvi >= items) {
+        EXTEND(sp,1);
+    }
+    $result = sv_newmortal();
+    if (result == TA_SUCCESS) {
+        sv_setiv($result,(IV) *($1));
+    } else {
+        sv_setsv($result, &PL_sv_undef);
+    }
+    argvi++;
+}
+
+
+/* Parameter outNbElement is an out value, but is not passed back to Perl.
+ * It is used to construct OUT_ARRAY of proper length.
+ * Its position within the parameter list varies, so we cannot use
+ * local variables declared in the same way as for startIdx and endIdx.
+ * Taking advantage of that 'arginit' typemaps are the very first ones in
+ * the wrapper function, we declare an explicitly named local variable.
+ */
+%typemap(arginit) int *OUT_SIZE
+    "int outNbElement = 0;";
+
+%typemap(in,numinputs=0) int *OUT_SIZE
+    "$1 = &outNbElement;";
+
+/* As last, output arrays come.  Since they are only output, numinputs=0 is
+ * given so that they do not have to be provided in the function call from Perl.
+ * However, in such case, they are placed at the very top of the wrapper 
+ * function, before other inputs (SWIG bug?), making startIdx and endIdx
+ * not accessible in the 'in' typemap.
+ * Therefore the 'in' typemap does not generate any code, 
+ * but the array allocation is done in the 'check' typemap.
+ */
+%typemap(in,numinputs=0) double *OUT_ARRAY, float *OUT_ARRAY 
+    "/* $1 ignored on input */";
+
+%typemap(check) double *OUT_ARRAY, float *OUT_ARRAY
+{
+    int array_size = endIdx2 - startIdx1 + 1;
+    $1 = ($1_ltype) calloc(array_size, sizeof($*1_ltype));
+}
+
+/* On output, the arrays are converted to Perl arrays and returned as
+ * Perl references on the output stack
+ */
+%typemap(argout) double *OUT_ARRAY, float *OUT_ARRAY 
+{
+    AV *av;
+    int idx;
+    SV *sv;
+
+    av = newAV();
+    if ( result == TA_SUCCESS && outNbElement > 0) {
+        av_extend(av, outNbElement-1);
+        for (idx = 0; idx < outNbElement; idx++) {
+            sv = newSVnv($1[idx]);
+            if (av_store(av, idx, sv) == 0) SvREFCNT_dec(sv);	
+        }
+    }
+    if (argvi >= items) {
+        EXTEND(sp,1);
+    }
+    $result = newRV((SV*)av);
+    sv_2mortal($result);
+    argvi++;
+}
+
+/* It is safer to have a separate typemap for cleanup rather than doing it
+ * at the end of the 'argout' typemap.
+ * If there were SWIG_croak() between the inlined typemap 'check' and 
+ * the typemap 'argout', memory leak could occur.
+ * The code of the typemap 'freearg' will always be executed.
+ */
+%typemap(freearg) double *OUT_ARRAY, float *OUT_ARRAY
+    "free($1);";
+
+
+#endif /* SWIGPERL */
+
+%apply int OPT_INT { TA_MAType OPT_MATYPE };
+
+/* %include "../../../../../c/include/ta_func.h" */
+TA_RetCode TA_MAX( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY,
+                   int           OPT_INT,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY );
+
 
 
 /** ta_pm *******************************************************************/
@@ -349,13 +525,6 @@ typedef struct {} TA_UDBase;
 %apply const TA_Real *ARRAY { const TA_Real *data }
 
 
-/* TA_Transaction actually does not have an array of TA_Timestamp
- * but it does have a member TA_Timestamp timestamp;
- * Unfortunately, SWIG does not distinguiush structures and structure
- * pointers. I rely on the fact that TA_Transaction::timestamp is not const
- * Ideally, the TA_Timestamp field would have a different name than 
- * "timestamp" which is "reserved" for array members.
- */
 
 
 %include "../../../../../c/include/ta_pm.h"
