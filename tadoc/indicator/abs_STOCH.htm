@@ -1,0 +1,40 @@
+<html><body><p><font color="#000080"><b>Abstract</b></font><br>
+For Stochastic there is 4 different lines 
+defined: FASTK, FASTD, SLOWK and SLOWD.<br>
+<br>
+The D is the signal line usually drawn over its corresponding K function.<br>
+</P>
+<div align="center">
+	<table border="0" cellpadding="0" width="75%" id="table1" style="border-collapse: collapse">
+		<tr>
+			<td><font face="Courier New" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			(Today's Close - LowestLow)<br>
+			FASTK(Kperiod) = --------------------------- * 100<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			(HighestHigh - LowestLow)</font></td>
+		</tr>
+		<tr>
+			<td><font face="Courier New" size="2"><br>
+			FASTD(FastDperiod) = MA Smoothed FASTK over FastDperiod</font></td>
+		</tr>
+		<tr>
+			<td><font face="Courier New" size="2"><br>
+			SLOWK(SlowKperiod) = MA Smoothed FASTK over SlowKperiod</font></td>
+		</tr>
+		<tr>
+			<td><font face="Courier New" size="2"><br>
+			SLOWD(SlowDperiod) = MA Smoothed SLOWK over SlowDperiod</font></td>
+		</tr>
+	</table>
+</div>
+<p>The HighestHigh and LowestLow are the extreme values among the last 'Kperiod'. 
+SLOWK and FASTD are equivalent when using the same period parameters. The 
+following shows how these four lines are typically made available:<br>
+<br>
+Stochastic(Kperiod,SlowKperiod,SlowDperiod) returns the SLOWK and SLOWD.<br>
+StochasticFast(Kperiod,FastDperiod) returns the FASTK and FASTD<br>
+<br>
+The Stochastic function correspond to the more widely implemented version found 
+in many software/charting package. The Stochastic Fast is more rarely used 
+because its higher volatility cause often whipsaws.</p>
+</body></html>
