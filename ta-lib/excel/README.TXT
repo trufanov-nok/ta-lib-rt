@@ -1,9 +1,9 @@
 * Quick Reference *
 
-How to use the ta-lib Excel wrapper?
+How to use the ta-lib Excel Add-Ins?
 ====================================
 In Excel, select "Add-In", browse and select "ta-lib.xll".
-All the TA functions shall appear in the "Function Wizard".
+All the TA functions will become visible in the "Function Wizard".
 
 Where is the documentation?
 ===========================
