@@ -125,7 +125,7 @@ sub new {
     my $pkg = shift;
     my $self;
     # handle default parameters
-    $_[6] = $::Finance::TA::TA_ALL if (@_ < 7) || !defined($_[6]);
+    #$_[6] = $::Finance::TA::TA_ALL if (@_ < 7) || !defined($_[6]);
     my @res = ::Finance::TAc::TA_HistoryAlloc(@_);
     if($res[0] == $::Finance::TA::TA_SUCCESS && defined($res[1])) {
         $self = $res[1];
