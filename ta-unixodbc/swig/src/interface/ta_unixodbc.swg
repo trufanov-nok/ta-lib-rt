@@ -7,5 +7,9 @@
 %include "ta_libc.swg"
 
 /* Then, swig the additional ODBC interface */
+%header %{
+#include "ta_unixodbc.h"
+%}
+
 %include "ta_unixodbc.h"
 
