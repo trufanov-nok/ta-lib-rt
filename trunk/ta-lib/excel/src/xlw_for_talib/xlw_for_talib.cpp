@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2004, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2005, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -47,6 +47,8 @@
  *              with work-around to Excel bugs. Some info here:
  *                  http://longre.free.fr/pages/prog/api-c.htm
  *  031504 MF   Adapt to a few changes to ta_abstract.h
+ *  121504 MF   Add support of optional parameter and display default
+ *              in the function wizard.
  */
 
 #include <xlw/xlw.h>
@@ -83,6 +85,10 @@ static int doShutdown      (void);
 
 static int lengthDataPairs( const TA_OptInputParameterInfo *paramInfo );
 static void concatDataPairs( char *out, const TA_OptInputParameterInfo *paramInfo );
+
+static int lengthDefault( const TA_OptInputParameterInfo *paramInfo );
+static void concatDefault( char *out, const TA_OptInputParameterInfo *paramInfo );
+
 static void displayError( TA_RetCode theRetCode );
 
 // In this file you will see often reference to "TA-Lib parameters"
@@ -425,6 +431,123 @@ static void concatDataPairs( char *out, const TA_OptInputParameterInfo *paramInf
    }
 }
 
+#define DEFAULT_PREFIX " (Default="
+#define DEFAULT_SUFFIX ")"
+static int lengthDefault( const TA_OptInputParameterInfo *paramInfo )
+{
+   unsigned int i;
+   int total = 0;
+   char buffer[400];
+  
+   // Slightly overestimate is ok. Under-estimate is not good!
+   switch( paramInfo->type )
+   {
+   case TA_OptInput_IntegerRange:
+      {
+         sprintf( buffer, "%d", paramInfo->defaultValue );
+         total = strlen( buffer ) + strlen(DEFAULT_PREFIX) + strlen(DEFAULT_SUFFIX);
+      }
+      break;
+
+   case TA_OptInput_RealRange:
+      {
+         sprintf( buffer, "%g", paramInfo->defaultValue );
+         total = strlen( buffer )  + strlen(DEFAULT_PREFIX) + strlen(DEFAULT_SUFFIX);
+      }
+      break;
+
+   case TA_OptInput_IntegerList:
+      {
+         TA_IntegerList *list = (TA_IntegerList *) paramInfo->dataSet;
+         for( i=0; i < list->nbElement; i++ )
+         {
+            const TA_IntegerDataPair *dataPair = &list->data[i];
+            if( (int)dataPair->value == (int)paramInfo->defaultValue )
+            {
+               total = strlen(dataPair->string) + strlen(DEFAULT_PREFIX) + strlen(DEFAULT_SUFFIX);
+               i = list->nbElement; // Exit loop
+            }
+         }
+      }
+      break;
+
+   case TA_OptInput_RealList:
+      {
+         TA_RealList *list = (TA_RealList *) paramInfo->dataSet;
+         for( i=0; i < list->nbElement; i++ )
+         {
+            const TA_RealDataPair *dataPair = &list->data[i];
+            if( dataPair->value == paramInfo->defaultValue )
+            {
+               total = strlen(dataPair->string) + strlen(DEFAULT_PREFIX) + strlen(DEFAULT_SUFFIX);
+               i = list->nbElement; // Exit loop
+            }
+         }
+      }
+      break;
+   default:
+      break;
+   }
+
+   return total;
+}
+
+static void concatDefault( char *out, const TA_OptInputParameterInfo *paramInfo )
+{
+   int i;
+   // Jump to the end of out
+   while( *out != NULL ) out++;
+
+   // Append the default.
+
+   switch( paramInfo->type )
+   {
+   case TA_OptInput_IntegerRange:
+      {
+         sprintf( out, "%s%d%s", DEFAULT_PREFIX, (int)paramInfo->defaultValue, DEFAULT_SUFFIX );
+      }
+      break;
+
+   case TA_OptInput_RealRange:
+      {
+         sprintf( out, "%s%g%s", DEFAULT_PREFIX, paramInfo->defaultValue, DEFAULT_SUFFIX );
+      }
+      break;
+
+   case TA_OptInput_IntegerList:
+      {
+         TA_IntegerList *list = (TA_IntegerList *) paramInfo->dataSet;
+         for( i=0; i < list->nbElement; i++ )
+         {
+            const TA_IntegerDataPair *dataPair = &list->data[i];
+            if( (int)dataPair->value == (int)paramInfo->defaultValue )
+            {
+               sprintf( out, "%s%s%s", DEFAULT_PREFIX, dataPair->string, DEFAULT_SUFFIX);
+               i = list->nbElement; // Exit loop
+            }
+         }
+      }
+      break;
+
+   case TA_OptInput_RealList:
+      {
+         TA_RealList *list = (TA_RealList *) paramInfo->dataSet;
+         for( i=0; i < list->nbElement; i++ )
+         {
+            const TA_RealDataPair *dataPair = &list->data[i];
+            if( dataPair->value == paramInfo->defaultValue )
+            {
+               sprintf( out, "%s%g%s", DEFAULT_PREFIX, dataPair->value, DEFAULT_SUFFIX );
+               i = list->nbElement; // Exit loop
+            }
+         }
+      }
+      break;
+   default:
+      break;
+   }
+}
+
 static int nbExcelInput( const TA_FuncInfo *funcInfo )
 {
    unsigned int i;
@@ -541,10 +664,11 @@ static void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData )
          TA_GetOptInputParameterInfo( funcInfo->handle, i, &paramInfo );
 
          // Allocate the info string with all the possible values (when applicable)
-         int length = lengthDataPairs( paramInfo );
-         char *strInfo = (char *)TA_Malloc( strlen(paramInfo->hint) + 10 + length );
-         strcpy( strInfo, paramInfo->hint );
+         int length = lengthDataPairs( paramInfo ) + lengthDefault( paramInfo );
+         char *strInfo = (char *)TA_Malloc( strlen(paramInfo->hint) + 50 + length );
+         strcpy( strInfo, paramInfo->hint );         
          concatDataPairs( strInfo, paramInfo );
+         concatDefault( strInfo, paramInfo );
 
          // Must append two spaces, seems there is a bug in the way Excel handle
          // the description and the last 1 or 2 characters are sometimes deleted.
@@ -555,7 +679,7 @@ static void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData )
          TA_Free( strInfo );
       }
 
-      const char *talib_prefix = "TA-LIB [";
+      const char *talib_prefix = "TA-Lib [";
       const char *talib_suffix = "]";
    
       groupStr = (char *)TA_Malloc( strlen(funcInfo->group) + strlen(talib_prefix) + strlen(talib_suffix) + 1 );
@@ -753,6 +877,12 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        int toDoMask      = 0;
        for( curExcelParam=0; curExcelParam < (nbParam - funcInfo->nbOptInput); curExcelParam++ )
        {
+          if( params[curExcelParam].IsMissing() )
+          {
+             FREE_ALL_ALLOC;
+             return XlfOper::Error(xlerrValue);
+          }
+
           // XlfExcel::Coerce method (internally called) will return to Excel
           // if one of the cell was invalidated and need to be recalculated.
           std::vector<double> temp = params[curExcelParam].AsDoubleVector(XlfOper::RowMajor);
@@ -1055,6 +1185,12 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
         **********************************/
        for( i=0; i < funcInfo->nbOptInput; i++ )
        {
+          if( params[curExcelParam].IsMissing() )
+          {
+             curExcelParam++;
+             continue;
+          }
+
           const TA_OptInputParameterInfo *paramInfo;
           retCode = TA_GetOptInputParameterInfo( funcInfo->handle, i, &paramInfo );
           if( retCode != TA_SUCCESS )
@@ -1066,10 +1202,10 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
           switch( paramInfo->type)
           {
           case TA_OptInput_RealRange:
-             retCode = TA_SetOptInputParamReal( paramsForTALib, i, params[curExcelParam++].AsDouble() );
+             retCode = TA_SetOptInputParamReal( paramsForTALib, i, params[curExcelParam++].AsDouble() );             
              break;
 
-          case TA_OptInput_IntegerRange:
+          case TA_OptInput_IntegerRange:             
              retCode = TA_SetOptInputParamInteger( paramsForTALib, i, params[curExcelParam++].AsInt() );
              break;
    
@@ -1393,7 +1529,7 @@ long EXCEL_EXPORT xlAutoClose()
 }
 
 #define CNVT_ARG_EXCEL_TO_TALIB(paramNb) \
-        if( p##paramNb.IsMissing() || p##paramNb.IsError() ) \
+        if( p##paramNb.IsError() ) \
            return XlfOper::Error(xlerrValue); \
         argList.push_back(p##paramNb);
 
