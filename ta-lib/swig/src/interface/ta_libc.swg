@@ -132,9 +132,7 @@
 %{
 unsigned int TA_Timestamp_year_get(const TA_Timestamp *ts)
 {
-    unsigned int y = 0, m = 0, d = 0;
-    TA_GetDate(ts, &y, &m, &d);
-    return y;
+    return TA_GetYear(ts);
 }
 
 void TA_Timestamp_year_set(TA_Timestamp *ts, unsigned int year)
@@ -146,9 +144,7 @@ void TA_Timestamp_year_set(TA_Timestamp *ts, unsigned int year)
 
 unsigned int TA_Timestamp_month_get(const TA_Timestamp *ts)
 {
-    unsigned int y = 0, m = 0, d = 0;
-    TA_GetDate(ts, &y, &m, &d);
-    return m;
+    return TA_GetMonth(ts);
 }
 
 void TA_Timestamp_month_set(TA_Timestamp *ts, unsigned int month)
@@ -160,9 +156,7 @@ void TA_Timestamp_month_set(TA_Timestamp *ts, unsigned int month)
 
 unsigned int TA_Timestamp_day_get(const TA_Timestamp *ts)
 {
-    unsigned int y = 0, m = 0, d = 0;
-    TA_GetDate(ts, &y, &m, &d);
-    return d;
+    return TA_GetDay(ts);
 }
 
 void TA_Timestamp_day_set(TA_Timestamp *ts, unsigned int day)
@@ -174,9 +168,7 @@ void TA_Timestamp_day_set(TA_Timestamp *ts, unsigned int day)
 
 unsigned int TA_Timestamp_hours_get(const TA_Timestamp *ts)
 {
-    unsigned int h = 0, m = 0, s = 0;
-    TA_GetTime(ts, &h, &m, &s);
-    return h;
+    return TA_GetHour(ts);
 }
 
 void TA_Timestamp_hours_set(TA_Timestamp *ts, unsigned int hours)
@@ -188,9 +180,7 @@ void TA_Timestamp_hours_set(TA_Timestamp *ts, unsigned int hours)
 
 unsigned int TA_Timestamp_minutes_get(const TA_Timestamp *ts)
 {
-    unsigned int h = 0, m = 0, s = 0;
-    TA_GetTime(ts, &h, &m, &s);
-    return m;
+    return TA_GetMin(ts);
 }
 
 void TA_Timestamp_minutes_set(TA_Timestamp *ts, unsigned int minutes)
@@ -202,9 +192,7 @@ void TA_Timestamp_minutes_set(TA_Timestamp *ts, unsigned int minutes)
 
 unsigned int TA_Timestamp_seconds_get(const TA_Timestamp *ts)
 {
-    unsigned int h = 0, m = 0, s = 0;
-    TA_GetTime(ts, &h, &m, &s);
-    return s;
+    return TA_GetSec(ts);
 }
 
 void TA_Timestamp_seconds_set(TA_Timestamp *ts, unsigned int seconds)
@@ -498,7 +486,7 @@ typedef struct {} TA_UDBase;
 %typemap(in) int OPT_INT 
 %{
     if (SvOK($input)) {
-        $1 = (int) SvIV($input);
+        $1 = ($1_ltype) SvIV($input);
     }
 %}
 
@@ -508,7 +496,7 @@ typedef struct {} TA_UDBase;
 %typemap(in) double OPT_REAL 
 %{
     if (SvOK($input)) {
-        $1 = (int) SvNV($input);
+        $1 = ($1_ltype) SvNV($input);
     }
 %}
 

@@ -78,9 +78,20 @@ sub DESTROY {
     }
 }
 
+sub AddDataSource {
+    my $self = shift;
+    ::Finance::TAc::TA_AddDataSource($self, @_);
+}
+
+sub History {
+    return unless $_[0]->isa('HASH');
+    my $self = tied(%{$_[0]});
+    ::Finance::TA::TA_History::new($self, @_);
+}
+
+
 sub CategoryTable {
     my $self = shift;
-    return unless defined $self;
     my @table = ::Finance::TAc::TA_CategoryTable($self);
     if (shift(@table) == $Finance::TA::TA_SUCCESS) {
         return @table;
@@ -91,7 +102,7 @@ sub CategoryTable {
 
 sub SymbolTable {
     my ($self, $symbol) = @_;
-    return unless defined $self;
+    $symbol ||= $TA_DEFAULT_CATEGORY;
     my @table = ::Finance::TAc::TA_SymbolTable($self, $symbol);
     if (shift(@table) == $Finance::TA::TA_SUCCESS) {
         return @table;
@@ -159,7 +170,7 @@ sub new {
 }
 
 
-sub TA_GetFuncInfo {
+sub GetFuncInfo {
     my ($self) = @_;
     my $info;
     my $retCode = ::Finance::TAc::TA_GetFuncInfo($self, \$info);
@@ -167,7 +178,7 @@ sub TA_GetFuncInfo {
 }
 
 
-sub TA_SetInputParameterInfoPtr {
+sub SetInputParameterInfoPtr {
     my ($self, $param) = @_;
     my $info;
     my $retCode = ::Finance::TAc::TA_SetInputParameterInfoPtr($self, $param, \$info);
@@ -175,7 +186,7 @@ sub TA_SetInputParameterInfoPtr {
 }
 
 
-sub TA_SetOutputParameterInfoPtr {
+sub SetOutputParameterInfoPtr {
     my ($self, $param) = @_;
     my $info;
     my $retCode = ::Finance::TAc::TA_SetOutputParameterInfoPtr($self, $param, \$info);
@@ -183,7 +194,7 @@ sub TA_SetOutputParameterInfoPtr {
 }
 
 
-sub TA_SetOptInputParameterInfoPtr {
+sub SetOptInputParameterInfoPtr {
     my ($self, $param) = @_;
     my $info;
     my $retCode = ::Finance::TAc::TA_SetOptInputParameterInfoPtr($self, $param, \$info);

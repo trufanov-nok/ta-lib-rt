@@ -78,7 +78,7 @@ print "Testing func info (object-oriented)...\n";
 
 $fh = new TA_FuncHandle("STOCH");
 ok( defined $fh );
-$fi = $fh->TA_GetFuncInfo();
+$fi = $fh->GetFuncInfo();
 ok( defined $fi );
 # or:
 $fi = new TA_FuncInfo($fh);
@@ -92,19 +92,19 @@ ok( $fi->{nbInput}, 1 );
 ok( $fi->{nbOptInput}, 5 );
 ok( $fi->{nbOutput}, 2 );
 
-$info = $fh->TA_SetInputParameterInfoPtr(0);
+$info = $fh->SetInputParameterInfoPtr(0);
 ok( defined $info );
 ok( $info->{type}, $TA_Input_Price );
 ok( $info->{paramName}, "inPriceHLC" );
 ok( $info->{flags}, $TA_IN_PRICE_HIGH | $TA_IN_PRICE_LOW | $TA_IN_PRICE_CLOSE );
 
-$info = $fh->TA_SetOutputParameterInfoPtr(1);
+$info = $fh->SetOutputParameterInfoPtr(1);
 ok( defined $info );
 ok( $info->{type}, $TA_Output_Real );
 ok( $info->{paramName}, "outSlowD" );
 ok( $info->{flags}, $TA_OUT_DASH_LINE );
 
-$info = $fh->TA_SetOptInputParameterInfoPtr(2);
+$info = $fh->SetOptInputParameterInfoPtr(2);
 ok( defined $info );
 ok( $info->{type}, $TA_OptInput_IntegerList );
 ok( $info->{paramName}, "optInSlowK_MAType" );

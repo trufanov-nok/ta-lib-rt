@@ -106,7 +106,7 @@ sub display_list {
 
 sub display_inpar {
     my ($fh, $i, $ident) = @_;
-    $info = $fh->TA_SetInputParameterInfoPtr($i);
+    $info = $fh->SetInputParameterInfoPtr($i);
     print ident($ident++), "Input: $info->{paramName}\n";
     return unless $level > 3;
     my @flags = in_flags($info->{flags});
@@ -116,7 +116,7 @@ sub display_inpar {
 
 sub display_optpar {
     my ($fh, $i, $ident) = @_;
-    $info = $fh->TA_SetOptInputParameterInfoPtr($i);
+    $info = $fh->SetOptInputParameterInfoPtr($i);
     print ident($ident++), "Option: $info->{paramName}\n"; 
     return unless $level > 3;
     print ident($ident), "Name: $info->{displayName}\n"; 
@@ -124,6 +124,7 @@ sub display_optpar {
     my @flags = opt_flags($info->{flags});
     print ident($ident), "Flags: @flags\n" if @flags > 0;
     print ident($ident), "Type: ", opt_type($info->{type}), "\n";
+    print ident($ident), "Default: $info->{defaultValue}\n";
     display_range($info->{dataSet}, $info->{type}, $ident+1) 
         if ($info->{type} == $TA_OptInput_RealRange) || ($info->{type} == $TA_OptInput_IntegerRange);
     display_list($info->{dataSet}, $ident+1) 
@@ -132,7 +133,7 @@ sub display_optpar {
 
 sub display_outpar {
     my ($fh, $i, $ident) = @_;
-    $info = $fh->TA_SetOutputParameterInfoPtr($i);
+    $info = $fh->SetOutputParameterInfoPtr($i);
     print ident($ident++), "Output: $info->{paramName}\n"; 
     return unless $level > 3;
     my @flags = out_flags($info->{flags});
@@ -152,7 +153,7 @@ foreach $group (@groups) {
     shift @functions;
     foreach $function (@functions) {
         $fh = new TA_FuncHandle($function);
-        $fi = $fh->TA_GetFuncInfo();
+        $fi = $fh->GetFuncInfo();
         print "\n" if $level > 2; 
         print ident(1), "Function: $function ($fi->{hint})\n";
         next unless $level > 2;
