@@ -1209,6 +1209,63 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLDOJISTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLEVENINGDOJISTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLEVENINGSTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDLHIGHWAVE.c">
 					<FileConfiguration
 						Name="Debug|Win32">
@@ -1247,6 +1304,44 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLMORNINGDOJISTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLMORNINGSTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDLSHORTLINE.c">
 					<FileConfiguration
 						Name="Debug|Win32">
@@ -1267,6 +1362,25 @@
 				</File>
 				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDLSPINNINGTOP.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLTRISTAR.c">
 					<FileConfiguration
 						Name="Debug|Win32">
 						<Tool
