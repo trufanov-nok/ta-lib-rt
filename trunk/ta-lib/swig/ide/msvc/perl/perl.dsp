@@ -50,7 +50,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386
-# ADD LINK32 ..\..\..\..\c\lib\ta_libc_cdr.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib $(PERL5_INCLUDE)/perl56.lib /nologo /dll /pdb:none /machine:I386 /out:"..\..\..\lib\perl\ta.dll"
+# ADD LINK32 ..\..\..\..\c\lib\ta_libc_cdr.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib $(PERL5_INCLUDE)/$(PERL5_LIB) /nologo /dll /pdb:none /machine:I386 /out:"..\..\..\lib\perl\ta.dll"
 # Begin Target
 
 # Name "perl - Win32 Release"
@@ -114,6 +114,7 @@ InputName=ta_libc
 BuildCmds= \
 	echo In order to function correctly, please ensure the following environment variables are correctly set: \
 	echo PERL5_INCLUDE: %PERL5_INCLUDE% \
+	echo PERL5_LIB: %PERL5_LIB% \
 	echo Make also sure that swig and perl are on search path: \
 	echo %PATH% \
 	echo on \
