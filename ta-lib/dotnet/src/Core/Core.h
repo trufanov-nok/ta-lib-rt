@@ -2262,6 +2262,30 @@ namespace TA
          #define TA_CDLHIGHWAVE Core::CDLHIGHWAVE
          #define TA_CDLHIGHWAVE_Lookback Core::CDLHIGHWAVE_Lookback
 
+         static int CDLHOMINGPIGEON_Lookback( void );
+
+         static __value enum TA_RetCode CDLHOMINGPIGEON( int    startIdx,
+                                                         int    endIdx,
+                                                         double       inOpen __gc [],
+                                                         double       inHigh __gc [],
+                                                         double       inLow __gc [],
+                                                         double       inClose __gc [],
+                                                         [OutAttribute]Int32 *outBegIdx,
+                                                         [OutAttribute]Int32 *outNbElement,
+                                                         int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLHOMINGPIGEON( int    startIdx,
+                                                         int    endIdx,
+                                                         float        inOpen __gc [],
+                                                         float        inHigh __gc [],
+                                                         float        inLow __gc [],
+                                                         float        inClose __gc [],
+                                                         [OutAttribute]Int32 *outBegIdx,
+                                                         [OutAttribute]Int32 *outNbElement,
+                                                         int           outInteger __gc [] );
+
+         #define TA_CDLHOMINGPIGEON Core::CDLHOMINGPIGEON
+         #define TA_CDLHOMINGPIGEON_Lookback Core::CDLHOMINGPIGEON_Lookback
+
          static int CDLIDENTICAL3CROWS_Lookback( void );
 
          static __value enum TA_RetCode CDLIDENTICAL3CROWS( int    startIdx,
@@ -2382,6 +2406,30 @@ namespace TA
          #define TA_CDLKICKINGBYLENGTH Core::CDLKICKINGBYLENGTH
          #define TA_CDLKICKINGBYLENGTH_Lookback Core::CDLKICKINGBYLENGTH_Lookback
 
+         static int CDLLADDERBOTTOM_Lookback( void );
+
+         static __value enum TA_RetCode CDLLADDERBOTTOM( int    startIdx,
+                                                         int    endIdx,
+                                                         double       inOpen __gc [],
+                                                         double       inHigh __gc [],
+                                                         double       inLow __gc [],
+                                                         double       inClose __gc [],
+                                                         [OutAttribute]Int32 *outBegIdx,
+                                                         [OutAttribute]Int32 *outNbElement,
+                                                         int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLLADDERBOTTOM( int    startIdx,
+                                                         int    endIdx,
+                                                         float        inOpen __gc [],
+                                                         float        inHigh __gc [],
+                                                         float        inLow __gc [],
+                                                         float        inClose __gc [],
+                                                         [OutAttribute]Int32 *outBegIdx,
+                                                         [OutAttribute]Int32 *outNbElement,
+                                                         int           outInteger __gc [] );
+
+         #define TA_CDLLADDERBOTTOM Core::CDLLADDERBOTTOM
+         #define TA_CDLLADDERBOTTOM_Lookback Core::CDLLADDERBOTTOM_Lookback
+
          static int CDLLONGLEGGEDDOJI_Lookback( void );
 
          static __value enum TA_RetCode CDLLONGLEGGEDDOJI( int    startIdx,
@@ -2479,6 +2527,30 @@ namespace TA
 
          #define TA_CDLMATHOLD Core::CDLMATHOLD
          #define TA_CDLMATHOLD_Lookback Core::CDLMATHOLD_Lookback
+
+         static int CDLMATCHINGLOW_Lookback( void );
+
+         static __value enum TA_RetCode CDLMATCHINGLOW( int    startIdx,
+                                                        int    endIdx,
+                                                        double       inOpen __gc [],
+                                                        double       inHigh __gc [],
+                                                        double       inLow __gc [],
+                                                        double       inClose __gc [],
+                                                        [OutAttribute]Int32 *outBegIdx,
+                                                        [OutAttribute]Int32 *outNbElement,
+                                                        int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLMATCHINGLOW( int    startIdx,
+                                                        int    endIdx,
+                                                        float        inOpen __gc [],
+                                                        float        inHigh __gc [],
+                                                        float        inLow __gc [],
+                                                        float        inClose __gc [],
+                                                        [OutAttribute]Int32 *outBegIdx,
+                                                        [OutAttribute]Int32 *outNbElement,
+                                                        int           outInteger __gc [] );
+
+         #define TA_CDLMATCHINGLOW Core::CDLMATCHINGLOW
+         #define TA_CDLMATCHINGLOW_Lookback Core::CDLMATCHINGLOW_Lookback
 
          static int CDLMORNINGDOJISTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
@@ -2747,6 +2819,30 @@ namespace TA
 
          #define TA_CDLSTALLEDPATTERN Core::CDLSTALLEDPATTERN
          #define TA_CDLSTALLEDPATTERN_Lookback Core::CDLSTALLEDPATTERN_Lookback
+
+         static int CDLSTICKSANDWICH_Lookback( void );
+
+         static __value enum TA_RetCode CDLSTICKSANDWICH( int    startIdx,
+                                                          int    endIdx,
+                                                          double       inOpen __gc [],
+                                                          double       inHigh __gc [],
+                                                          double       inLow __gc [],
+                                                          double       inClose __gc [],
+                                                          [OutAttribute]Int32 *outBegIdx,
+                                                          [OutAttribute]Int32 *outNbElement,
+                                                          int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLSTICKSANDWICH( int    startIdx,
+                                                          int    endIdx,
+                                                          float        inOpen __gc [],
+                                                          float        inHigh __gc [],
+                                                          float        inLow __gc [],
+                                                          float        inClose __gc [],
+                                                          [OutAttribute]Int32 *outBegIdx,
+                                                          [OutAttribute]Int32 *outNbElement,
+                                                          int           outInteger __gc [] );
+
+         #define TA_CDLSTICKSANDWICH Core::CDLSTICKSANDWICH
+         #define TA_CDLSTICKSANDWICH_Lookback Core::CDLSTICKSANDWICH_Lookback
 
          static int CDLTAKURI_Lookback( void );
 
