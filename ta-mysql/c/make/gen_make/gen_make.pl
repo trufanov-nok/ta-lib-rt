@@ -16,6 +16,8 @@
 # Un-comment the following lines if
 # you wish to provide your own TMAKEPATH.
 # use Env qw( TMAKEPATH );
-$ENV{'TMAKEPATH'} = 'template\\win32-msvc';
+$ENV{'TMAKEPATH'} = 'template/win32-msvc';
 
-system( "perl ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\make_make.pl cdr ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\win32-msvc ..\\..\\..\\..\\ta-lib\\c\\make\\gen_make\\template\\* msvc_only" );
+system( "perl ../../../../ta-lib/c/make/gen_make/make_make.pl cdr ../../../../ta-lib/c/make/gen_make/template/win32-msvc \"../../../../ta-lib/c/make/gen_make/template/*\" msvc_only" );
+
+system( "perl ../../../../ta-lib/c/make/gen_make/make_make.pl cdd ../../../../ta-lib/c/make/gen_make/template/win32-msvc \"../../../../ta-lib/c/make/gen_make/template/*\" msvc_only" );
