@@ -8,6 +8,10 @@ What's this version? What's new?
 ================================
 See CHANGELOG.TXT file.
 
+How to use TA-Lib with Excel?
+=============================
+See "ta-lib\excel\README.TXT"
+
 How to build the TA-LIB C Library?
 ==================================
 Makefiles can be found in ta-lib/c/make. Find
@@ -21,9 +25,8 @@ All executable are created in ta-lib/c/bin
 
 How to link to the TA-LIB?
 ==========================
-Generally, you just need to link
-to the static library created 
-in ta-lib/c/lib
+Generally, you just need to link to the static
+library created in ta-lib/c/lib
 
 Your application code just need to
 include ta-lib/c/include/ta-libc.h
