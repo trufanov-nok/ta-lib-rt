@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2003, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2004, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -62,6 +62,13 @@ namespace TA
          #include "ta_defs.h"
 
       private:
+		  __value struct TA_CandleSetting {
+              TA_CandleSettingType    settingType;
+              TA_RangeType            rangeType;
+              int                     avgPeriod;
+              double                  factor;
+         };
+
          __gc __sealed class TA_GlobalsType
          {
          public:
@@ -71,6 +78,7 @@ namespace TA
                compatibility = 0;
                for( int i=0; i < TA_FUNC_UNST_ALL; i++ )
                   unstablePeriod[i] = 0;
+			   candleSettings = new TA_CandleSetting __gc [TA_AllCandleSettings];
             }
 
             /* For handling the compatibility with other software */
@@ -78,6 +86,9 @@ namespace TA
 
             /* For handling the unstable period of some TA function. */
             unsigned int unstablePeriod __gc [];
+
+            /* For handling the candlestick global settings */
+            TA_CandleSetting candleSettings  __gc [];
          };
 
          static TA_GlobalsType *TA_Globals;
@@ -194,11 +205,14 @@ namespace TA
                                               int timePeriod,
                                               double output __gc []);
 
+
       public:
          static Core()
          {
             // Initialize global settings
             TA_Globals = new TA_GlobalsType;
+            /* Set the default value to global variables */
+            TA_RestoreCandleDefaultSettings( TA_AllCandleSettings );
          }
 
          static enum TA_RetCode SetUnstablePeriod( enum TA_FuncUnstId id,
@@ -208,6 +222,54 @@ namespace TA
 
          static enum TA_RetCode       SetCompatibility( enum TA_Compatibility value );
          static enum TA_Compatibility GetCompatibility( void );
+
+		 static TA_RetCode TA_SetCandleSettings( TA_CandleSettingType settingType, 
+                                                 TA_RangeType rangeType, 
+                                                 int avgPeriod, 
+                                                 double factor )
+         {    
+            if( settingType >= TA_AllCandleSettings )
+               return TA_BAD_PARAM;
+            TA_Globals->candleSettings[settingType].settingType = settingType;
+            TA_Globals->candleSettings[settingType].rangeType = rangeType;
+            TA_Globals->candleSettings[settingType].avgPeriod = avgPeriod;
+            TA_Globals->candleSettings[settingType].factor = factor;
+            TA_Globals->candleSettings[settingType].avgPeriod,TA_Globals->candleSettings[settingType].factor;
+            return TA_SUCCESS;
+         }
+
+         static TA_RetCode TA_RestoreCandleDefaultSettings( TA_CandleSettingType settingType )
+         {
+            const TA_CandleSetting TA_CandleDefaultSettings[] = {
+               /* real body is long when it's longer than the average of the 10 previous candles' real body */
+               { TA_BodyLong, TA_RangeType_RealBody, 10, 1.0 },
+               /* real body is very long when it's longer than 3 times the average of the 10 previous candles' real body */
+               { TA_BodyVeryLong, TA_RangeType_RealBody, 10, 3.0 },
+               /* real body is short when it's shorter than the average of the 10 previous candles' real bodies */
+               { TA_BodyShort, TA_RangeType_RealBody, 10, 1.0 },
+               /* real body is like doji's body when it's shorter than 10% the average of the 10 previous candles' high-low range */
+               { TA_BodyDoji, TA_RangeType_HighLow, 10, 0.1 },
+               /* shadow is long when it's longer than the real body */
+               { TA_ShadowLong, TA_RangeType_RealBody, 0, 1.0 },
+               /* shadow is very long when it's longer than 2 times the real body */
+               { TA_ShadowVeryLong, TA_RangeType_RealBody, 0, 2.0 },
+               /* shadow is short when it's shorter than half the average of the 10 previous candles' sum of shadows */
+               { TA_ShadowShort, TA_RangeType_Shadows, 10, 1.0 },
+               /* shadow is very short when it's shorter than 10% the average of the 10 previous candles' high-low range */
+               { TA_ShadowVeryShort, TA_RangeType_HighLow, 10, 0.1 }
+            };
+
+            int i;
+            if( settingType > TA_AllCandleSettings )
+               return TA_BAD_PARAM;
+            if( settingType == TA_AllCandleSettings )
+               for( i = 0; i < TA_AllCandleSettings; ++i )
+                  TA_Globals->candleSettings[i] = TA_CandleDefaultSettings[i];
+            else
+               TA_Globals->candleSettings[settingType] = TA_CandleDefaultSettings[settingType];
+
+            return TA_SUCCESS;
+         }
 
 /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
          static int MAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
