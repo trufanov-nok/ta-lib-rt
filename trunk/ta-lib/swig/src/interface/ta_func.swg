@@ -2141,6 +2141,26 @@ int TA_CDLHIGHWAVE_Lookback( void );
 
 
 /*
+ * TA_CDLHOMINGPIGEON - Homing Pigeon
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLHOMINGPIGEON( int           START_IDX,
+                               int           END_IDX,
+                               const double *IN_ARRAY /* inOpen */,
+                               const double *IN_ARRAY /* inHigh */,
+                               const double *IN_ARRAY /* inLow */,
+                               const double *IN_ARRAY /* inClose */,
+                               int          *BEG_IDX,
+                               int          *OUT_SIZE,
+                               int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLHOMINGPIGEON_Lookback( void );
+
+
+/*
  * TA_CDLIDENTICAL3CROWS - Identical Three Crows
  * 
  * Input  = Open, High, Low, Close
@@ -2241,6 +2261,26 @@ int TA_CDLKICKINGBYLENGTH_Lookback( void );
 
 
 /*
+ * TA_CDLLADDERBOTTOM - Ladder Bottom
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLLADDERBOTTOM( int           START_IDX,
+                               int           END_IDX,
+                               const double *IN_ARRAY /* inOpen */,
+                               const double *IN_ARRAY /* inHigh */,
+                               const double *IN_ARRAY /* inLow */,
+                               const double *IN_ARRAY /* inClose */,
+                               int          *BEG_IDX,
+                               int          *OUT_SIZE,
+                               int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLLADDERBOTTOM_Lookback( void );
+
+
+/*
  * TA_CDLLONGLEGGEDDOJI - Long Legged Doji
  * 
  * Input  = Open, High, Low, Close
@@ -2325,6 +2365,26 @@ TA_RetCode TA_CDLMATHOLD( int           START_IDX,
                           int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLMATHOLD_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+/*
+ * TA_CDLMATCHINGLOW - Matching Low
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLMATCHINGLOW( int           START_IDX,
+                              int           END_IDX,
+                              const double *IN_ARRAY /* inOpen */,
+                              const double *IN_ARRAY /* inHigh */,
+                              const double *IN_ARRAY /* inLow */,
+                              const double *IN_ARRAY /* inClose */,
+                              int          *BEG_IDX,
+                              int          *OUT_SIZE,
+                              int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLMATCHINGLOW_Lookback( void );
 
 
 /*
@@ -2559,6 +2619,26 @@ TA_RetCode TA_CDLSTALLEDPATTERN( int           START_IDX,
                                  int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLSTALLEDPATTERN_Lookback( void );
+
+
+/*
+ * TA_CDLSTICKSANDWICH - Stick Sandwich
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLSTICKSANDWICH( int           START_IDX,
+                                int           END_IDX,
+                                const double *IN_ARRAY /* inOpen */,
+                                const double *IN_ARRAY /* inHigh */,
+                                const double *IN_ARRAY /* inLow */,
+                                const double *IN_ARRAY /* inClose */,
+                                int          *BEG_IDX,
+                                int          *OUT_SIZE,
+                                int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLSTICKSANDWICH_Lookback( void );
 
 
 /*
