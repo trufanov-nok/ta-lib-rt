@@ -1165,6 +1165,34 @@ LPXLOPER EXCEL_EXPORT xlTA_Version()
    EXCEL_END;
 }
 
+// Make the sumation of the last 'n' cells in the 'range'
+LPXLOPER EXCEL_EXPORT xlTA_SumLastInRange( XlfOper range_param, XlfOper n_param )
+{
+   EXCEL_BEGIN;
+
+   double sum = 0.0;
+ 
+   // Transform the Excel parameter
+   std::vector<double> range = range_param.AsDoubleVector(XlfOper::RowMajor);
+   int n = n_param.AsInt();
+
+   // Validate the range
+   int size = range.size();
+
+   if( n > 0 )
+   {
+      if( n > size )
+         n = size;
+
+      // Add up the values and return
+      for( int i=size-1; n > 0; n--, i-- )
+         sum += range[i];
+   }
+
+   return XlfOper(sum);
+   EXCEL_END;
+}
+
 LPXLOPER EXCEL_EXPORT xlTA_NAError()
 {
    EXCEL_BEGIN;
@@ -1211,6 +1239,12 @@ long EXCEL_EXPORT xlAutoOpen()
    XlfFuncDesc naValueFunc("xlTA_NAError","TA_NAError","Return the excel value #N/A! ", utilGroupStr );
    naValueFunc.Register();
 
+   XlfArgDesc range_param("Range", "Range of cells" );
+   XlfArgDesc n_param("n", "Number of cell to add, starting with the last in the provided range" );
+   XlfFuncDesc sumLastInRangeFunc("xlTA_SumLastInRange","TA_SumLastInRange","Add the 'n' last cell in the range", utilGroupStr );
+   sumLastInRangeFunc.SetArguments(range_param+n_param);
+   sumLastInRangeFunc.Register();
+
    // Clears the status bar.
    XlfExcel::Instance().SendMessage();
 
@@ -1242,6 +1276,16 @@ long EXCEL_EXPORT xlAutoClose()
         if( p##paramNb.IsMissing() || p##paramNb.IsError() ) \
            return XlfOper::Error(xlerrValue); \
         argList.push_back(p##paramNb);
+
+#define EXCEL_GLUE_CODE_WITH_1_PARAM(funcName) \
+LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1) \
+{ \
+EXCEL_BEGIN; \
+      std::vector<XlfOper> argList; \
+      CNVT_ARG_EXCEL_TO_TALIB(1) \
+      return doTACall(#funcName,&argList[0],argList.size()); \
+EXCEL_END; \
+}
 
 #define EXCEL_GLUE_CODE_WITH_2_PARAM(funcName) \
 LPXLOPER EXCEL_EXPORT xlTA_##funcName(XlfOper p1, XlfOper p2) \
