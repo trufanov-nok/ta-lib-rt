@@ -23,3 +23,8 @@ To use this package you have to:
 
 For questions, visit http://ta-lib.org and use the mailing list.
 
+==========
+Test Setup
+==========
+ - tested with mysql++ version 1.7.1 for Visual C++
+
