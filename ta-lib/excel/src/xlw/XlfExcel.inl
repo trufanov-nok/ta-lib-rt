@@ -92,7 +92,7 @@ INLINE LPSTR XlfExcel::GetMemory(size_t bytes)
       return buffer.start + temp;
     }
     else
-      PushNewBuffer(buffer.size*1.5);
+      PushNewBuffer((size_t)(buffer.size*1.5));
   }
   // should never get to this point...
   return 0;
