@@ -474,7 +474,7 @@ namespace TA
          #define TA_SAR Core::SAR
          #define TA_SAR_Lookback Core::SAR_Lookback
 
-         static int SAREXT_Lookback( double        optInStartValue_0, /* From 0 to TA_REAL_MAX */
+         static int SAREXT_Lookback( double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
                                    double        optInOffsetOnReverse_1, /* From 0 to TA_REAL_MAX */
                                    double        optInAccelerationInitLong_2, /* From 0 to TA_REAL_MAX */
                                    double        optInAccelerationLong_3, /* From 0 to TA_REAL_MAX */
@@ -487,7 +487,7 @@ namespace TA
                                         int    endIdx,
                                         double       inHigh_0 __gc [],
                                         double       inLow_0 __gc [],
-                                        double        optInStartValue_0, /* From 0 to TA_REAL_MAX */
+                                        double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
                                         double        optInOffsetOnReverse_1, /* From 0 to TA_REAL_MAX */
                                         double        optInAccelerationInitLong_2, /* From 0 to TA_REAL_MAX */
                                         double        optInAccelerationLong_3, /* From 0 to TA_REAL_MAX */
@@ -502,7 +502,7 @@ namespace TA
                                         int    endIdx,
                                         float        inHigh_0 __gc [],
                                         float        inLow_0 __gc [],
-                                        double        optInStartValue_0, /* From 0 to TA_REAL_MAX */
+                                        double        optInStartValue_0, /* From TA_REAL_MIN to TA_REAL_MAX */
                                         double        optInOffsetOnReverse_1, /* From 0 to TA_REAL_MAX */
                                         double        optInAccelerationInitLong_2, /* From 0 to TA_REAL_MAX */
                                         double        optInAccelerationLong_3, /* From 0 to TA_REAL_MAX */
