@@ -105,9 +105,14 @@ SOURCE=..\..\..\src\interface\ta_func.swg
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\..\src\interface\ta_libc.perl.swg
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\..\src\interface\ta_libc.swg
 USERDEP__TA_LI="..\..\..\src\interface\perl.pm"	
 # Begin Custom Build
+InputDir=\devel\ta-lib\swig\src\interface
 InputPath=..\..\..\src\interface\ta_libc.swg
 InputName=ta_libc
 
@@ -118,7 +123,7 @@ BuildCmds= \
 	echo Make also sure that swig and perl are on search path: \
 	echo %PATH% \
 	echo on \
-	swig -perl5 -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include $(InputPath) \
+	swig -perl5 -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include -I$(InputDir) $(InputPath) \
 	copy /Y /A ..\..\..\temp\perl\wrap\TA.pm+..\..\..\src\interface\perl.pm ..\..\..\lib\perl\Finance\TA.pm \
 	
 

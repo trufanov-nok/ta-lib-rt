@@ -94,7 +94,7 @@ ok( $sparam->{country}, undef );
 ok( $sparam->{exchange}, undef );
 ok( $sparam->{type}, undef );
 ok( $sparam->{symbol}, undef );
-ok( $sparam->{name}, undef );
+ok( $sparam->{sourceName}, undef );
 $sparam->{id} = $TA_SIMULATOR;
 ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
 
@@ -139,7 +139,7 @@ ok( TA_AddDataSource($udb, $sparam), $TA_SUCCESS );
 {
     # Testing history
     my $histparam = new TA_HistoryAllocParam;
-    $histparam->{source} = "Simulator";
+    $histparam->{sourceName} = "Simulator";
     $histparam->{category} = "TA_SIM_REF";
     $histparam->{symbol} = "DAILY_REF_0";
     $histparam->{period} = $TA_DAILY;
