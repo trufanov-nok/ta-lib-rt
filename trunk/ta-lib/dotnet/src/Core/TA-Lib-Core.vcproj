@@ -1000,6 +1000,25 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_STOCHRSI.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_TRIX.c">
 					<FileConfiguration
 						Name="Debug|Win32">
