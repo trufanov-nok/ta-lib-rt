@@ -9,8 +9,8 @@
 
 CC	=	gcc
 CXX	=	g++
-CFLAGS	=	-pipe -Wall -W -g -D_REENTRANT -DTA_DEBUG -D_DEBUG -DQT_THREAD_SUPPORT
-CXXFLAGS=	-pipe -Wall -W -g -D_REENTRANT -DTA_DEBUG -D_DEBUG -DQT_THREAD_SUPPORT
+CFLAGS	=	-pipe -fPIC -Wall -W -g -D_REENTRANT -DTA_DEBUG -D_DEBUG -DQT_THREAD_SUPPORT
+CXXFLAGS=	-pipe -fPIC -Wall -W -g -D_REENTRANT -DTA_DEBUG -D_DEBUG -DQT_THREAD_SUPPORT
 INCPATH	=	-I../../../../../include -I../../../../../../../ta-lib/c/include -I../../../../../../../ta-lib/c/src/ta_common -I../../../../../../../ta-lib/c/src/ta_data -I../../../../../../../ta-lib/c/src/ta_data/ta_source -I../../../../../../../ta-lib/c/src/ta_data/ta_source/ta_sql -I$(QTDIR)/include
 AR	=	ar cqs
 RANLIB	=	
@@ -19,6 +19,16 @@ UIC	=	$(QTDIR)/bin/uic
 
 TAR	=	tar -cf
 GZIP	=	gzip -9f
+
+####### Support for 64-bit systems
+ifeq ($(shell uname -m), x86_64)
+     CFLAGS   += -march=x86-64 -m64 -D__64BIT__
+     CXXFLAGS += -march=x86-64 -m64 -D__64BIT__
+endif
+
+####### Apply additional overruling user flags, if any
+CFLAGS   += $(CUSERFLAGS)
+CXXFLAGS += $(CUSERFLAGS)
 
 ####### Files
 
