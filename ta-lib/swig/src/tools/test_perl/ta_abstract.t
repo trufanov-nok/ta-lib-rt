@@ -48,17 +48,17 @@ ok( TA_GetFuncInfo($fi->{handle}, \$fi), $TA_SUCCESS );
 ok( $fi->{name}, "BBANDS" );
 
 my $info;
-ok( TA_SetInputParameterInfoPtr( $fh, 0, \$info), $TA_SUCCESS );
+ok( TA_GetInputParameterInfo( $fh, 0, \$info), $TA_SUCCESS );
 ok( $info->{type}, $TA_Input_Real );
 ok( $info->{paramName}, "inReal" );
 ok( $info->{flags}, 0);
 
-ok( TA_SetOutputParameterInfoPtr( $fh, 1, \$info), $TA_SUCCESS );
+ok( TA_GetOutputParameterInfo( $fh, 1, \$info), $TA_SUCCESS );
 ok( $info->{type}, $TA_Output_Real );
 ok( $info->{paramName}, "outRealMiddleBand" );
 ok( $info->{flags}, $TA_OUT_LINE );
 
-ok( TA_SetOptInputParameterInfoPtr( $fh, 2, \$info), $TA_SUCCESS );
+ok( TA_GetOptInputParameterInfo( $fh, 2, \$info), $TA_SUCCESS );
 ok( $info->{type}, $TA_OptInput_RealRange );
 ok( $info->{paramName}, "optInNbDevDn" );
 ok( $info->{flags}, 0 );
@@ -92,19 +92,19 @@ ok( $fi->{nbInput}, 1 );
 ok( $fi->{nbOptInput}, 5 );
 ok( $fi->{nbOutput}, 2 );
 
-$info = $fh->SetInputParameterInfoPtr(0);
+$info = $fh->GetInputParameterInfo(0);
 ok( defined $info );
 ok( $info->{type}, $TA_Input_Price );
 ok( $info->{paramName}, "inPriceHLC" );
 ok( $info->{flags}, $TA_IN_PRICE_HIGH | $TA_IN_PRICE_LOW | $TA_IN_PRICE_CLOSE );
 
-$info = $fh->SetOutputParameterInfoPtr(1);
+$info = $fh->GetOutputParameterInfo(1);
 ok( defined $info );
 ok( $info->{type}, $TA_Output_Real );
 ok( $info->{paramName}, "outSlowD" );
 ok( $info->{flags}, $TA_OUT_DASH_LINE );
 
-$info = $fh->SetOptInputParameterInfoPtr(2);
+$info = $fh->GetOptInputParameterInfo(2);
 ok( defined $info );
 ok( $info->{type}, $TA_OptInput_IntegerList );
 ok( $info->{paramName}, "optInSlowK_MAType" );
