@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 121 }
+BEGIN { plan tests => 127 }
 
 use Finance::TA;
 
@@ -63,11 +63,15 @@ print "Testing TA_SetRetCodeInfo()...\n";
 {
     my $rci = new TA_RetCodeInfo;
     TA_SetRetCodeInfo(0, $rci);
-    ok($rci->{enumStr}, 'TA_SUCCESS' );
-    ok($rci->{infoStr}, 'No error' );
+    ok( $rci->{enumStr}, 'TA_SUCCESS' );
+    ok( $rci->{infoStr}, 'No error' );
     TA_SetRetCodeInfo(1, $rci );
-    ok($rci->{enumStr}, 'TA_LIB_NOT_INITIALIZE' );
-    ok($rci->{infoStr}, 'TA_Initialize was not sucessfully called' );
+    ok( $rci->{enumStr}, 'TA_LIB_NOT_INITIALIZE' );
+    ok( $rci->{infoStr}, 'TA_Initialize was not sucessfully called' );
+
+    # Using constructor parameter
+    ok( new TA_RetCodeInfo(2)->{enumStr}, 'TA_BAD_PARAM' );
+    ok( new TA_RetCodeInfo(2)->{infoStr}, 'A parameter is out of range' );
 }
 
 print "Testing TA_DayOfWeek...\n";
@@ -94,18 +98,24 @@ ok( TA_GetWeekOfTheYear($ts), 0 );
 ok( TA_GetQuarterOfTheYear($ts), 0 );
 {
     ok( TA_SetDate(2004,2,28,$ts), $TA_SUCCESS );
-    ok( TA_SetTime(23,11,55,$ts), $TA_SUCCESS );
+    ok( TA_SetTime(9,11,55,$ts), $TA_SUCCESS );
     my @timedate;
     @timedate = TA_GetDate($ts);
     ok( $timedate[0], $TA_SUCCESS, "@timedate" );
     ok( $timedate[1], 2004 );
-    ok( $timedate[2], 2 );
-    ok( $timedate[3], 28 );
+    ok( $timedate[2],    2 );
+    ok( $timedate[3],   28 );
     @timedate = TA_GetTime($ts);
     ok( $timedate[0], $TA_SUCCESS, "@timedate" );
-    ok( $timedate[1], 23 );
+    ok( $timedate[1],  9 );
     ok( $timedate[2], 11 );
     ok( $timedate[3], 55 );
+
+    # Testing param handling of &TA_Timestamp::new
+    ok( TA_TimestampEqual($ts, new TA_Timestamp(2004, 2, 28, 9, 11, 55)) );
+    ok( TA_TimestampDateEqual($ts, new TA_Timestamp(2004, 2, 28)) );
+    ok( TA_TimestampEqual($ts, new TA_Timestamp("2004-02-28 09:11:55")) );
+    ok( TA_TimestampDateEqual($ts, new TA_Timestamp("2004-02-28")) );
 }
 ok( TA_SetDateNow($ts), $TA_SUCCESS );
 ok( TA_SetTimeNow($ts), $TA_SUCCESS );
