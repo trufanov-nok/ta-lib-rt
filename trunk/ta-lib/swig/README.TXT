@@ -90,22 +90,39 @@ sure that there are no defined "TA" variables around.  Some objects make
 calls to TA-LIB in their destructors.
 
 * Instead of doing
-    my $rci = new TA_RetCodeInfo;
+    $rci = new TA_RetCodeInfo;
     TA_SetRetCodeInfo($retCode, $rci);
 you may prefer:
-    my $rci = new TA_RetCodeInfo($retCode);
+    $rci = new TA_RetCodeInfo($retCode);
+
+* As a bonus to Perl programmers, the constructor of TA_Timestamp allows for
+initializing the date and time:
+    $ts = new TA_Timestamp(2004, 2, 29, 9, 11, 59);
+    $ts = new TA_Timestamp(2004, 2, 29);  # time set to zero
+But There's More Than One Way To Do It.
+    $ts = new TA_Timestamp("2004-02-29 09:11:59");
+    $ts = new TA_Timestamp("2004-02-29");
+To be parsed, all numbers have to be two-digit (except the year).  Superfluous
+characters are ignored.
 
 * Do not call &TA_HistoryAlloc and &TA_HistoryFree directly.  Simply use
 &TA_History::new.  The parameters to &new are the same as to
 TA_HistoryAlloc(). The last three parameters are optional and default to
 NULL, NULL, TA_ALL. 
 E.g.:
-    my $h = new TA_History($udBase, "US.NASDAQ.STOCKS", "LNUX", $TA_DAILY);
-    if ($h->{retCode} == $TA_SUCCESS) {
+    my $hist = new TA_History($udBase, "US.NASDAQ.STOCKS", "LNUX", $TA_DAILY);
+    if ($hist->{retCode} == $TA_SUCCESS) {
         ...
     }
 
 * Note that TA_History objects are read-only.
+
+* The TA_History member arrays are made available as references to Perl
+arrays.  Examples:
+    print $hist->{close}[0], "\n";
+    $close_series = $hist->{close};
+    print $$close_series[0], "\n";
+    print "@$close_series\n";
 
 * Insead of doing:
     $retCode = TA_UDBaseAlloc(\$udBase);
