@@ -8,7 +8,7 @@ use lib "../../../lib/perl";
 use Test;
 BEGIN { plan tests => 150 }
 
-use Finance::TA;
+use Finance::TA v0.1.3;
 
 print "TA-Lib ", TA_GetVersionString(), "\n";
 print "Testing ta_common...\n";
