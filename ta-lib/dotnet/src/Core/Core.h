@@ -1702,6 +1702,30 @@ namespace TA
          #define TA_CDL3OUTSIDE Core::CDL3OUTSIDE
          #define TA_CDL3OUTSIDE_Lookback Core::CDL3OUTSIDE_Lookback
 
+         static int CDL3STARSINSOUTH_Lookback( void );
+
+         static __value enum TA_RetCode CDL3STARSINSOUTH( int    startIdx,
+                                                          int    endIdx,
+                                                          double       inOpen __gc [],
+                                                          double       inHigh __gc [],
+                                                          double       inLow __gc [],
+                                                          double       inClose __gc [],
+                                                          [OutAttribute]Int32 *outBegIdx,
+                                                          [OutAttribute]Int32 *outNbElement,
+                                                          int           outInteger __gc [] );
+         static __value enum TA_RetCode CDL3STARSINSOUTH( int    startIdx,
+                                                          int    endIdx,
+                                                          float        inOpen __gc [],
+                                                          float        inHigh __gc [],
+                                                          float        inLow __gc [],
+                                                          float        inClose __gc [],
+                                                          [OutAttribute]Int32 *outBegIdx,
+                                                          [OutAttribute]Int32 *outNbElement,
+                                                          int           outInteger __gc [] );
+
+         #define TA_CDL3STARSINSOUTH Core::CDL3STARSINSOUTH
+         #define TA_CDL3STARSINSOUTH_Lookback Core::CDL3STARSINSOUTH_Lookback
+
          static int CDL3WHITESOLDIERS_Lookback( void );
 
          static __value enum TA_RetCode CDL3WHITESOLDIERS( int    startIdx,
@@ -1823,6 +1847,54 @@ namespace TA
 
          #define TA_CDLBREAKAWAY Core::CDLBREAKAWAY
          #define TA_CDLBREAKAWAY_Lookback Core::CDLBREAKAWAY_Lookback
+
+         static int CDLCLOSINGMARUBOZU_Lookback( void );
+
+         static __value enum TA_RetCode CDLCLOSINGMARUBOZU( int    startIdx,
+                                                            int    endIdx,
+                                                            double       inOpen __gc [],
+                                                            double       inHigh __gc [],
+                                                            double       inLow __gc [],
+                                                            double       inClose __gc [],
+                                                            [OutAttribute]Int32 *outBegIdx,
+                                                            [OutAttribute]Int32 *outNbElement,
+                                                            int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLCLOSINGMARUBOZU( int    startIdx,
+                                                            int    endIdx,
+                                                            float        inOpen __gc [],
+                                                            float        inHigh __gc [],
+                                                            float        inLow __gc [],
+                                                            float        inClose __gc [],
+                                                            [OutAttribute]Int32 *outBegIdx,
+                                                            [OutAttribute]Int32 *outNbElement,
+                                                            int           outInteger __gc [] );
+
+         #define TA_CDLCLOSINGMARUBOZU Core::CDLCLOSINGMARUBOZU
+         #define TA_CDLCLOSINGMARUBOZU_Lookback Core::CDLCLOSINGMARUBOZU_Lookback
+
+         static int CDLCONCEALBABYSWALL_Lookback( void );
+
+         static __value enum TA_RetCode CDLCONCEALBABYSWALL( int    startIdx,
+                                                             int    endIdx,
+                                                             double       inOpen __gc [],
+                                                             double       inHigh __gc [],
+                                                             double       inLow __gc [],
+                                                             double       inClose __gc [],
+                                                             [OutAttribute]Int32 *outBegIdx,
+                                                             [OutAttribute]Int32 *outNbElement,
+                                                             int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLCONCEALBABYSWALL( int    startIdx,
+                                                             int    endIdx,
+                                                             float        inOpen __gc [],
+                                                             float        inHigh __gc [],
+                                                             float        inLow __gc [],
+                                                             float        inClose __gc [],
+                                                             [OutAttribute]Int32 *outBegIdx,
+                                                             [OutAttribute]Int32 *outNbElement,
+                                                             int           outInteger __gc [] );
+
+         #define TA_CDLCONCEALBABYSWALL Core::CDLCONCEALBABYSWALL
+         #define TA_CDLCONCEALBABYSWALL_Lookback Core::CDLCONCEALBABYSWALL_Lookback
 
          static int CDLCOUNTERATTACK_Lookback( void );
 
@@ -2021,6 +2093,30 @@ namespace TA
 
          #define TA_CDLEVENINGSTAR Core::CDLEVENINGSTAR
          #define TA_CDLEVENINGSTAR_Lookback Core::CDLEVENINGSTAR_Lookback
+
+         static int CDLGAPSIDESIDEWHITE_Lookback( void );
+
+         static __value enum TA_RetCode CDLGAPSIDESIDEWHITE( int    startIdx,
+                                                             int    endIdx,
+                                                             double       inOpen __gc [],
+                                                             double       inHigh __gc [],
+                                                             double       inLow __gc [],
+                                                             double       inClose __gc [],
+                                                             [OutAttribute]Int32 *outBegIdx,
+                                                             [OutAttribute]Int32 *outNbElement,
+                                                             int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLGAPSIDESIDEWHITE( int    startIdx,
+                                                             int    endIdx,
+                                                             float        inOpen __gc [],
+                                                             float        inHigh __gc [],
+                                                             float        inLow __gc [],
+                                                             float        inClose __gc [],
+                                                             [OutAttribute]Int32 *outBegIdx,
+                                                             [OutAttribute]Int32 *outNbElement,
+                                                             int           outInteger __gc [] );
+
+         #define TA_CDLGAPSIDESIDEWHITE Core::CDLGAPSIDESIDEWHITE
+         #define TA_CDLGAPSIDESIDEWHITE_Lookback Core::CDLGAPSIDESIDEWHITE_Lookback
 
          static int CDLGRAVESTONEDOJI_Lookback( void );
 
@@ -2358,6 +2454,32 @@ namespace TA
          #define TA_CDLMARUBOZU Core::CDLMARUBOZU
          #define TA_CDLMARUBOZU_Lookback Core::CDLMARUBOZU_Lookback
 
+         static int CDLMATHOLD_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+         static __value enum TA_RetCode CDLMATHOLD( int    startIdx,
+                                                    int    endIdx,
+                                                    double       inOpen __gc [],
+                                                    double       inHigh __gc [],
+                                                    double       inLow __gc [],
+                                                    double       inClose __gc [],
+                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLMATHOLD( int    startIdx,
+                                                    int    endIdx,
+                                                    float        inOpen __gc [],
+                                                    float        inHigh __gc [],
+                                                    float        inLow __gc [],
+                                                    float        inClose __gc [],
+                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+
+         #define TA_CDLMATHOLD Core::CDLMATHOLD
+         #define TA_CDLMATHOLD_Lookback Core::CDLMATHOLD_Lookback
+
          static int CDLMORNINGDOJISTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
          static __value enum TA_RetCode CDLMORNINGDOJISTAR( int    startIdx,
@@ -2481,6 +2603,30 @@ namespace TA
 
          #define TA_CDLRICKSHAWMAN Core::CDLRICKSHAWMAN
          #define TA_CDLRICKSHAWMAN_Lookback Core::CDLRICKSHAWMAN_Lookback
+
+         static int CDLRISEFALL3METHODS_Lookback( void );
+
+         static __value enum TA_RetCode CDLRISEFALL3METHODS( int    startIdx,
+                                                             int    endIdx,
+                                                             double       inOpen __gc [],
+                                                             double       inHigh __gc [],
+                                                             double       inLow __gc [],
+                                                             double       inClose __gc [],
+                                                             [OutAttribute]Int32 *outBegIdx,
+                                                             [OutAttribute]Int32 *outNbElement,
+                                                             int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLRISEFALL3METHODS( int    startIdx,
+                                                             int    endIdx,
+                                                             float        inOpen __gc [],
+                                                             float        inHigh __gc [],
+                                                             float        inLow __gc [],
+                                                             float        inClose __gc [],
+                                                             [OutAttribute]Int32 *outBegIdx,
+                                                             [OutAttribute]Int32 *outNbElement,
+                                                             int           outInteger __gc [] );
+
+         #define TA_CDLRISEFALL3METHODS Core::CDLRISEFALL3METHODS
+         #define TA_CDLRISEFALL3METHODS_Lookback Core::CDLRISEFALL3METHODS_Lookback
 
          static int CDLSEPARATINGLINES_Lookback( void );
 
@@ -2697,6 +2843,30 @@ namespace TA
 
          #define TA_CDLTRISTAR Core::CDLTRISTAR
          #define TA_CDLTRISTAR_Lookback Core::CDLTRISTAR_Lookback
+
+         static int CDLUNIQUE3RIVER_Lookback( void );
+
+         static __value enum TA_RetCode CDLUNIQUE3RIVER( int    startIdx,
+                                                         int    endIdx,
+                                                         double       inOpen __gc [],
+                                                         double       inHigh __gc [],
+                                                         double       inLow __gc [],
+                                                         double       inClose __gc [],
+                                                         [OutAttribute]Int32 *outBegIdx,
+                                                         [OutAttribute]Int32 *outNbElement,
+                                                         int           outInteger __gc [] );
+         static __value enum TA_RetCode CDLUNIQUE3RIVER( int    startIdx,
+                                                         int    endIdx,
+                                                         float        inOpen __gc [],
+                                                         float        inHigh __gc [],
+                                                         float        inLow __gc [],
+                                                         float        inClose __gc [],
+                                                         [OutAttribute]Int32 *outBegIdx,
+                                                         [OutAttribute]Int32 *outNbElement,
+                                                         int           outInteger __gc [] );
+
+         #define TA_CDLUNIQUE3RIVER Core::CDLUNIQUE3RIVER
+         #define TA_CDLUNIQUE3RIVER_Lookback Core::CDLUNIQUE3RIVER_Lookback
 
          static int CDLUPSIDEGAP2CROWS_Lookback( void );
 
