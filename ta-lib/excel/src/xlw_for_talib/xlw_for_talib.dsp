@@ -22,8 +22,6 @@ CFG=XLW_FOR_TALIB - WIN32 RELEASE
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
-# PROP Scc_ProjName ""$/afl/xlw/xlw_for_talib", IXAAAAAA"
-# PROP Scc_LocalPath "."
 CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe

@@ -3,6 +3,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TA-Lib-Core", "Core\TA-Lib-
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ta_regtest", "ta_regtest\ta_regtest.csproj", "{5D4B4335-7CE8-4938-BA0D-D8AC0B453283}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -13,6 +17,10 @@ Global
 		{CB8E37CA-7D77-43C4-BB46-E9F99D4B55CD}.Debug.Build.0 = Debug|Win32
 		{CB8E37CA-7D77-43C4-BB46-E9F99D4B55CD}.Release.ActiveCfg = Release|Win32
 		{CB8E37CA-7D77-43C4-BB46-E9F99D4B55CD}.Release.Build.0 = Release|Win32
+		{5D4B4335-7CE8-4938-BA0D-D8AC0B453283}.Debug.ActiveCfg = Debug|.NET
+		{5D4B4335-7CE8-4938-BA0D-D8AC0B453283}.Debug.Build.0 = Debug|.NET
+		{5D4B4335-7CE8-4938-BA0D-D8AC0B453283}.Release.ActiveCfg = Release|.NET
+		{5D4B4335-7CE8-4938-BA0D-D8AC0B453283}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
