@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 145 }
+BEGIN { plan tests => 149 }
 
 use Finance::TA;
 
@@ -204,4 +204,12 @@ my $param = new TA_InitializeParam;
 $param->{userLocalDrive} = '.';
 ok( TA_Initialize($param), $TA_SUCCESS );
 ok( TA_Shutdown(), $TA_SUCCESS );
+
+print "Testing error handling...\n";
+ok( TA_RegressionTest($TA_REG_TEST_FATAL_ERROR),  $TA_FATAL_ERR );
+# use default buffer size of $TA_FATAL_ERROR_BUF_SIZE
+ok( TA_FatalReportToBuffer(), "" );
+ok( TA_RegressionTest($TA_REG_TEST_ASSERT_FAIL), $TA_FATAL_ERR );
+# use custom buffer size
+ok( TA_FatalReportToBuffer(25), "");
 
