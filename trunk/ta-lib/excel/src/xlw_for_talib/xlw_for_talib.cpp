@@ -69,8 +69,8 @@ extern "C"
 // In practice, this is going sufficient for most, if
 // not all, the TA functions.
 #define NB_MAX_input    10 /* Maximum Excel inputs */
-#define NB_MAX_optinput  5 /* Maximum Excel optional parameters */
-#define NB_MAX_output    5 /* Maximum Excel outputs */
+#define NB_MAX_optinput 10 /* Maximum Excel optional parameters */
+#define NB_MAX_output   10 /* Maximum Excel outputs */
 
 // Local Functions
 static void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData );
