@@ -4,7 +4,7 @@
 
 # TARGTYPE "Win32 (x86) Static Library" 0x0104
 
-CFG=xlw - Win32 Debug
+CFG=xlw - Win32 OnTheEdgeRelease
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
@@ -13,14 +13,11 @@ CFG=xlw - Win32 Debug
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "ta-lib.mak" CFG="xlw - Win32 Debug"
+!MESSAGE NMAKE /f "ta-lib.mak" CFG="xlw - Win32 OnTheEdgeRelease"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
 !MESSAGE "xlw - Win32 Release" (based on "Win32 (x86) Static Library")
-!MESSAGE "xlw - Win32 Debug" (based on "Win32 (x86) Static Library")
-!MESSAGE "xlw - Win32 OnTheEdgeDebug" (based on "Win32 (x86) Static Library")
-!MESSAGE "xlw - Win32 OnTheEdgeRelease" (based on "Win32 (x86) Static Library")
 !MESSAGE 
 
 # Begin Project
@@ -29,9 +26,6 @@ CFG=xlw - Win32 Debug
 # PROP Scc_LocalPath "."
 CPP=cl.exe
 RSC=rc.exe
-
-!IF  "$(CFG)" == "xlw - Win32 Release"
-
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
 # PROP BASE Output_Dir "Release"
@@ -52,84 +46,9 @@ BSC32=bscmake.exe
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
 # ADD LIB32 /nologo /out:"..\temp\xlw.lib"
-
-!ELSEIF  "$(CFG)" == "xlw - Win32 Debug"
-
-# PROP BASE Use_MFC 0
-# PROP BASE Use_Debug_Libraries 1
-# PROP BASE Output_Dir "xlw___Win32_Debug"
-# PROP BASE Intermediate_Dir "xlw___Win32_Debug"
-# PROP BASE Target_Dir ""
-# PROP Use_MFC 0
-# PROP Use_Debug_Libraries 1
-# PROP Output_Dir "..\..\temp"
-# PROP Intermediate_Dir "..\..\temp"
-# PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I ".\\" /D "XLW_DEBUG" /D "_DEBUG" /D "WIN32" /D "_MBCS" /D "_LIB" /FR /YX /FD /GZ /c
-# ADD BASE RSC /l 0x409 /d "_DEBUG"
-# ADD RSC /l 0x409 /d "_DEBUG"
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
-LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"xlwd.lib"
-
-!ELSEIF  "$(CFG)" == "xlw - Win32 OnTheEdgeDebug"
-
-# PROP BASE Use_MFC 0
-# PROP BASE Use_Debug_Libraries 1
-# PROP BASE Output_Dir "xlw___Win32_OnTheEdgeDebug"
-# PROP BASE Intermediate_Dir "xlw___Win32_OnTheEdgeDebug"
-# PROP BASE Target_Dir ""
-# PROP Use_MFC 0
-# PROP Use_Debug_Libraries 1
-# PROP Output_Dir "build\OnTheEdgeDebug"
-# PROP Intermediate_Dir "build\OnTheEdgeDebug"
-# PROP Target_Dir ""
-# ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I ".\\" /D "XLW_DEBUG" /D "_DEBUG" /D "WIN32" /D "_MBCS" /D "_LIB" /FR /YX /FD /GZ /c
-# ADD BASE RSC /l 0x409 /d "_DEBUG"
-# ADD RSC /l 0x409 /d "_DEBUG"
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
-LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo /out:"lib\Win32\VisualStudio\xlw_d.lib"
-# ADD LIB32 /nologo /out:"lib\Win32\VisualStudio\xlwd.lib"
-
-!ELSEIF  "$(CFG)" == "xlw - Win32 OnTheEdgeRelease"
-
-# PROP BASE Use_MFC 0
-# PROP BASE Use_Debug_Libraries 0
-# PROP BASE Output_Dir "xlw___Win32_OnTheEdgeRelease"
-# PROP BASE Intermediate_Dir "xlw___Win32_OnTheEdgeRelease"
-# PROP BASE Target_Dir ""
-# PROP Use_MFC 0
-# PROP Use_Debug_Libraries 0
-# PROP Output_Dir "build\OnTheEdgeRelease"
-# PROP Intermediate_Dir "build\OnTheEdgeRelease"
-# PROP Target_Dir ""
-# ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /I ".\\" /D "NDEBUG" /D "WIN32" /D "_MBCS" /D "_LIB" /FR /YX /FD /c
-# ADD BASE RSC /l 0x409 /d "NDEBUG"
-# ADD RSC /l 0x409 /d "NDEBUG"
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
-LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo /out:"lib\Win32\VisualStudio\xlw.lib"
-# ADD LIB32 /nologo /out:"lib\Win32\VisualStudio\xlw.lib"
-
-!ENDIF 
-
 # Begin Target
 
 # Name "xlw - Win32 Release"
-# Name "xlw - Win32 Debug"
-# Name "xlw - Win32 OnTheEdgeDebug"
-# Name "xlw - Win32 OnTheEdgeRelease"
 # Begin Group "Include"
 
 # PROP Default_Filter ".h"
