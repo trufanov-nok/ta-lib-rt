@@ -213,7 +213,7 @@ typedef struct {} TA_UDBase;
  * We have seen above that TA_History does it.
  * If forgot to define it, a compile error will occur.
  */
-%typemap(out) TA_Real *ARRAY {
+%typemap(out) const TA_Real *ARRAY {
 	AV *myav;
 	SV **svs;
 	unsigned int i = 0;
@@ -230,7 +230,7 @@ typedef struct {} TA_UDBase;
     argvi++;    
 }
 
-%typemap(out) TA_Integer *ARRAY {
+%typemap(out) const TA_Integer *ARRAY {
 	AV *myav;
 	SV **svs;
 	unsigned int i = 0;
@@ -247,7 +247,7 @@ typedef struct {} TA_UDBase;
     argvi++;    
 }
 
-%typemap(out) TA_Timestamp *ARRAY {
+%typemap(out) const TA_Timestamp *ARRAY {
 	AV *myav;
 	SV **svs;
 	unsigned int i = 0;
@@ -267,9 +267,21 @@ typedef struct {} TA_UDBase;
 #endif
 
 /* now apply the defined timestamps to specific fields */
-%apply TA_Real *ARRAY { TA_Real *open, TA_Real *high, TA_Real *low, TA_Real *close };
-%apply TA_Integer *ARRAY { TA_Integer *volume, TA_Integer *openInterest };
-%apply TA_Timestamp *ARRAY { TA_Timestamp *timestamp }
+%apply const TA_Real *ARRAY { 
+    const TA_Real *open, 
+    const TA_Real *high, 
+    const TA_Real *low, 
+    const TA_Real *close 
+};
+
+%apply const TA_Integer *ARRAY { 
+    const TA_Integer *volume, 
+    const TA_Integer *openInterest 
+};
+
+%apply const TA_Timestamp *ARRAY { 
+    const TA_Timestamp *timestamp 
+};
 
 /* TA_History cannot be created in a standard way.  Use TA_HistoryAlloc
  * and TA_HistoryFree.  Perl module wraps them in a custom constructor
@@ -334,18 +346,16 @@ typedef struct {} TA_UDBase;
 %typemap(check) TA_PMArray* (unsigned int array_size)
     "array_size = ($1 != NULL)? (unsigned int)($1->nbData) : 0;"
 
-%apply TA_Real *ARRAY { TA_Real *data }
+%apply const TA_Real *ARRAY { const TA_Real *data }
 
 
 /* TA_Transaction actually does not have an array of TA_Timestamp
+ * but it does have a member TA_Timestamp timestamp;
  * Unfortunately, SWIG does not distinguiush structures and structure
- * pointers.  Let's - for the time being - use an array of size 1 for that.
+ * pointers. I rely on the fact that TA_Transaction::timestamp is not const
  * Ideally, the TA_Timestamp field would have a different name than 
  * "timestamp" which is "reserved" for array members.
  */
-
-%typemap(check) TA_Transaction* (unsigned int array_size)
-    "array_size = 1;"
 
 
 %include "../../../../../c/include/ta_pm.h"
