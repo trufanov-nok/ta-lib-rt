@@ -2262,9 +2262,9 @@ namespace TA
          #define TA_CDLKICKING Core::CDLKICKING
          #define TA_CDLKICKING_Lookback Core::CDLKICKING_Lookback
 
-         static int CDLKICKINGbyLength_Lookback( void );
+         static int CDLKICKINGBYLENGTH_Lookback( void );
 
-         static __value enum TA_RetCode CDLKICKINGbyLength( int    startIdx,
+         static __value enum TA_RetCode CDLKICKINGBYLENGTH( int    startIdx,
                                                             int    endIdx,
                                                             double       inOpen __gc [],
                                                             double       inHigh __gc [],
@@ -2273,7 +2273,7 @@ namespace TA
                                                             [OutAttribute]Int32 *outBegIdx,
                                                             [OutAttribute]Int32 *outNbElement,
                                                             int           outInteger __gc [] );
-         static __value enum TA_RetCode CDLKICKINGbyLength( int    startIdx,
+         static __value enum TA_RetCode CDLKICKINGBYLENGTH( int    startIdx,
                                                             int    endIdx,
                                                             float        inOpen __gc [],
                                                             float        inHigh __gc [],
@@ -2283,8 +2283,8 @@ namespace TA
                                                             [OutAttribute]Int32 *outNbElement,
                                                             int           outInteger __gc [] );
 
-         #define TA_CDLKICKINGbyLength Core::CDLKICKINGbyLength
-         #define TA_CDLKICKINGbyLength_Lookback Core::CDLKICKINGbyLength_Lookback
+         #define TA_CDLKICKINGBYLENGTH Core::CDLKICKINGBYLENGTH
+         #define TA_CDLKICKINGBYLENGTH_Lookback Core::CDLKICKINGBYLENGTH_Lookback
 
          static int CDLLONGLEGGEDDOJI_Lookback( void );
 
