@@ -342,7 +342,7 @@ static int doShutdown(void)
 #define SEP_CHAR    ','
 static int lengthDataPairs( const TA_OptInputParameterInfo *paramInfo )
 {
-   int i;
+   unsigned int i;
    int total = 0;
    char buffer[400];
 
@@ -391,7 +391,7 @@ static void concatDataPairs( char *out, const TA_OptInputParameterInfo *paramInf
       {
          TA_IntegerList *list = (TA_IntegerList *) paramInfo->dataSet;
          int offset = sprintf( out, ": " );
-         int i = 0; 
+         unsigned int i = 0; 
          while( i < list->nbElement )
          {
             const TA_IntegerDataPair *dataPair = &list->data[i++];
@@ -408,7 +408,7 @@ static void concatDataPairs( char *out, const TA_OptInputParameterInfo *paramInf
       {
          TA_RealList *list = (TA_RealList *) paramInfo->dataSet;
          int offset = sprintf( out, ": " );
-         int i = 0; 
+         unsigned int i = 0; 
          while( i < list->nbElement )
          {
             const TA_RealDataPair *dataPair = &list->data[i++];
@@ -427,7 +427,7 @@ static void concatDataPairs( char *out, const TA_OptInputParameterInfo *paramInf
 
 static int nbExcelInput( const TA_FuncInfo *funcInfo )
 {
-   int i;
+   unsigned int i;
    int nbParam = 0;
 
    for( i=0; i < funcInfo->nbInput; i++ )
@@ -501,7 +501,7 @@ static void registerTAFunction( const TA_FuncInfo *funcInfo, void *opaqueData )
    }
    else
    {
-      int i;
+      unsigned int i;
       for( i=0; i < funcInfo->nbInput; i++ )
       {
          const TA_InputParameterInfo *paramInfo;
@@ -701,7 +701,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
     const TA_FuncHandle *funcHandle;
     const TA_FuncInfo   *funcInfo;
     TA_RetCode retCode;
-    int i, j, k;
+    unsigned int i, j, k;
     int nbValidData, excelArraySize;
     
     retCode = TA_GetFuncHandle( funcName, &funcHandle );
@@ -748,7 +748,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
         **************************/
        int inputSize = 0;
 
-       int curExcelParam = 0;
+       unsigned int curExcelParam = 0;
        int curTALibParam = 0;
        int toDoMask      = 0;
        for( curExcelParam=0; curExcelParam < (nbParam - funcInfo->nbOptInput); curExcelParam++ )
@@ -1079,7 +1079,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
              {
                 char *str = params[curExcelParam].AsString();
                 // Calculate length and check if all digit.
-                int length = 0;
+                unsigned int length = 0;
                 int nbDigit = 0;
                 char car;
                 car = str[0];
@@ -1135,7 +1135,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
                 char *str = params[curExcelParam].AsString();
    
                 // Calculate length and check if all digit.
-                int length = 0;
+                unsigned int length = 0;
                 int nbDigit = 0;
                 char car;
                 car = str[0];
@@ -1273,7 +1273,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        outputExcel[outIdx++] = nanValue;
 
     int outIdxColStart = outIdx;
-    int nbOutput = funcInfo->nbOutput; 
+    unsigned int nbOutput = funcInfo->nbOutput; 
     for( i=0; i < nbOutput; i++ )
     {
        const TA_OutputParameterInfo *paramInfo;
@@ -1287,7 +1287,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        case TA_Output_Real:
           {
              double *outputDoublePtr = get_double_output(i);
-             for( j=0; j < outNbElement; j++ )
+             for( j=0; j < (unsigned int)outNbElement; j++ )
              {
                 outputExcel[outIdxRow] = outputDoublePtr[j];
                 outIdxRow += nbOutput;
@@ -1297,7 +1297,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        case TA_Output_Integer:
           {
              int *outputIntPtr = get_int_output(i);
-             for( j=0; j < outNbElement; j++ )
+             for( j=0; j < (unsigned int)outNbElement; j++ )
              {
                 outputExcel[outIdxRow] = (double)outputIntPtr[j];
                 outIdxRow += nbOutput;
