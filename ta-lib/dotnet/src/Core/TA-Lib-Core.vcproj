@@ -1304,6 +1304,25 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDL3STARSINSOUTH.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDL3WHITESOLDIERS.c">
 					<FileConfiguration
 						Name="Debug|Win32">
@@ -1381,6 +1400,44 @@
 				</File>
 				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDLBREAKAWAY.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLCLOSINGMARUBOZU.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLCONCEALBABYSWALL.c">
 					<FileConfiguration
 						Name="Debug|Win32">
 						<Tool
@@ -1533,6 +1590,25 @@
 				</File>
 				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDLEVENINGSTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLGAPSIDESIDEWHITE.c">
 					<FileConfiguration
 						Name="Debug|Win32">
 						<Tool
@@ -1817,6 +1893,25 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLMATHOLD.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDLMORNINGDOJISTAR.c">
 					<FileConfiguration
 						Name="Debug|Win32">
@@ -1894,6 +1989,25 @@
 				</File>
 				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDLRICKSHAWMAN.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLRISEFALL3METHODS.c">
 					<FileConfiguration
 						Name="Debug|Win32">
 						<Tool
@@ -2065,6 +2179,25 @@
 				</File>
 				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_CDLTRISTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLUNIQUE3RIVER.c">
 					<FileConfiguration
 						Name="Debug|Win32">
 						<Tool
