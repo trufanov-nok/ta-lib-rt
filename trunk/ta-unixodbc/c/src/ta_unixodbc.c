@@ -107,8 +107,6 @@ typedef struct
 static TA_RetCode allocRowData( TA_UNIXODBC_Statement *statement );
 static TA_RetCode freeRowData( TA_UNIXODBC_Statement *statement );
 
-static TA_RetCode TA_UNIXODBC_RegisterMinidriver(void);
-
 
 static TA_RetCode TA_UNIXODBC_OpenConnection(const char database[], 
                                       const char host[], 
