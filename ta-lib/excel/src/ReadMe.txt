@@ -20,3 +20,7 @@ Step #2 : Build ta-lib.xll
 (3) Select the configuration "Win32 Release"
 (4) Build "xlw_for_talib". The file "ta-lib.xll" shall be
     created in the directory ta-lib\excel
+
+Further information about XLW can be found here:
+   http://xlw.sourceforge.net
+
