@@ -1,3 +1,8 @@
+V0.0.6 (September 2002)
+  - Add many european Yahoo! data source.
+  - Add TA Functions: ADX,ADXR,DX,+DI,-DI,+DM,-DM
+  - Fix#609753 for Yahoo! data source.
+
 V0.0.5 (June 2002)
   - Add performance measurement infrastructure.
   - Add TA function: OBV
