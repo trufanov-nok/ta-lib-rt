@@ -53,8 +53,9 @@ $(TOPDIR)/lib/perl/Finance/TA.pm: \
 
 $(WRAPDIR)/TA.pm $(WRAPDIR)/ta_libc_wrap.c: \
 		$(TOPDIR)/src/interface/ta_libc.swg \
+		$(TOPDIR)/src/interface/ta_libc.perl.swg \
 		$(TOPDIR)/src/interface/ta_func.swg
-	swig -perl5 -proxy -Fstandard -o $(WRAPDIR)/ta_libc_wrap.c \
+	swig -perl -proxy -Fstandard -o $(WRAPDIR)/ta_libc_wrap.c \
 		-I$(TOPDIR)/src/interface -I$(TOPDIR)/../c/include \
 		$<
 
