@@ -30,7 +30,10 @@ clean:
 	rm -f $(WRAPDIR)/*.pm
 	rm -f $(TEMPDIR)/*.o
 
-$(TOPDIR)/lib/perl/TA.so: $(TEMPDIR)/ta_libc_wrap.o
+$(TOPDIR)/lib/perl/TA.so: \
+		$(TEMPDIR)/ta_libc_wrap.o \
+		$(TALIBDIR)/c/lib/libta_libc_cmr.a \
+		$(TOPDIR)/../c/lib/libta_unixodbc_cmr.a
 	$(CC) $(LDFLAGS) -o $@ $< \
 		$(TALIBDIR)/c/lib/libta_libc_cmr.a $(TOPDIR)/../c/lib/libta_unixodbc_cmr.a $(LDLIBS)
 
