@@ -502,7 +502,9 @@ typedef struct {} TA_UDBase;
 
 %apply int OPT_INT { TA_MAType OPT_MATYPE };
 
-/* %include "../../../../../c/include/ta_func.h" */
+%include "ta_func.swg"
+
+/*
 TA_RetCode TA_MAX( int           START_IDX,
                    int           END_IDX,
                    const double *IN_ARRAY,
@@ -510,7 +512,7 @@ TA_RetCode TA_MAX( int           START_IDX,
                    int          *BEG_IDX,
                    int          *OUT_SIZE,
                    double       *OUT_ARRAY );
-
+*/
 
 
 /** ta_pm *******************************************************************/

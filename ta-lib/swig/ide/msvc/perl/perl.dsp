@@ -138,13 +138,13 @@ SOURCE=..\..\..\..\c\include\ta_libc.h
 SOURCE=..\..\..\..\c\include\ta_pm.h
 # End Source File
 # End Group
-# Begin Group "Resource Files"
-
-# PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
-# End Group
 # Begin Source File
 
 SOURCE=..\..\..\src\interface\perl.pm
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\src\interface\ta_func.swg
 # End Source File
 # Begin Source File
 
