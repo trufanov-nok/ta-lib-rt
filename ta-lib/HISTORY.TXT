@@ -1,0 +1,38 @@
+V0.0.5 (June 2002)
+  - Add performance measurement infrastructure.
+  - Add TA function: OBV
+  - Fix#537806 + some Yahoo! data source fix.
+
+V0.0.4 (March 2002)
+  - Interface changes to all the TA functions:
+    1) nbInputElement has been removed.
+    2) startIdx and endIdx cannot be -1 anymore.
+    3) only one outBegIdx and outNbElement output per function.
+  - A "Lookback" function is now provided for each TA function.
+  - Add TA functions: TEMA, DEMA, TRIX
+  - Improve ta_regtest.
+  - Make better HTML parsing in gen_rdata.
+
+V0.0.3 (December 2001)
+  - Port to Linux/g++ completed.
+  - Add TA functions:
+      BBANDS, WMA, MOM, ROC, ROCR
+      STDDEV, VAR, STOCH
+  - Add TA_SetUnstablePeriod.
+  - Code and MSVC project clean-up.
+
+V0.0.2 (October 2001)
+  - Add a first batch of TA functions:
+      EMA, SMA, APO, MACD, PPO, RSI, ATR
+      TRANGE, MEDPRICE, TYPPRICE, WCLPRICE
+  - Add compatibility flag for Metastock.
+  - Add support for US/CAN indices to the
+    Yahoo! data source.
+  - Now include some Win32 binaries.
+
+V0.0.1 (September 2001)
+  - Alpha Release on Windows.
+  - Include ta_yahoo.exe demo application.
+  
+
+Info: http://ta-lib.org
