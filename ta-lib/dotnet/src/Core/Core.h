@@ -1559,6 +1559,82 @@ namespace TA
          #define TA_OBV Core::OBV
          #define TA_OBV_Lookback Core::OBV_Lookback
 
+         static int CDLDOJISTAR_Lookback( void );
+
+         static enum TA_RetCode CDLDOJISTAR( int    startIdx,
+                                             int    endIdx,
+                                             double       inOpen __gc [],
+                                             double       inHigh __gc [],
+                                             double       inLow __gc [],
+                                             double       inClose __gc [],
+                                             [OutAttribute]Int32 *outBegIdx,
+                                             [OutAttribute]Int32 *outNbElement,
+                                             int           outInteger __gc [] );
+         static enum TA_RetCode CDLDOJISTAR( int    startIdx,
+                                             int    endIdx,
+                                             float        inOpen __gc [],
+                                             float        inHigh __gc [],
+                                             float        inLow __gc [],
+                                             float        inClose __gc [],
+                                             [OutAttribute]Int32 *outBegIdx,
+                                             [OutAttribute]Int32 *outNbElement,
+                                             int           outInteger __gc [] );
+
+         #define TA_CDLDOJISTAR Core::CDLDOJISTAR
+         #define TA_CDLDOJISTAR_Lookback Core::CDLDOJISTAR_Lookback
+
+         static int CDLEVENINGDOJISTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+         static enum TA_RetCode CDLEVENINGDOJISTAR( int    startIdx,
+                                                    int    endIdx,
+                                                    double       inOpen __gc [],
+                                                    double       inHigh __gc [],
+                                                    double       inLow __gc [],
+                                                    double       inClose __gc [],
+                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+         static enum TA_RetCode CDLEVENINGDOJISTAR( int    startIdx,
+                                                    int    endIdx,
+                                                    float        inOpen __gc [],
+                                                    float        inHigh __gc [],
+                                                    float        inLow __gc [],
+                                                    float        inClose __gc [],
+                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+
+         #define TA_CDLEVENINGDOJISTAR Core::CDLEVENINGDOJISTAR
+         #define TA_CDLEVENINGDOJISTAR_Lookback Core::CDLEVENINGDOJISTAR_Lookback
+
+         static int CDLEVENINGSTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+         static enum TA_RetCode CDLEVENINGSTAR( int    startIdx,
+                                                int    endIdx,
+                                                double       inOpen __gc [],
+                                                double       inHigh __gc [],
+                                                double       inLow __gc [],
+                                                double       inClose __gc [],
+                                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+         static enum TA_RetCode CDLEVENINGSTAR( int    startIdx,
+                                                int    endIdx,
+                                                float        inOpen __gc [],
+                                                float        inHigh __gc [],
+                                                float        inLow __gc [],
+                                                float        inClose __gc [],
+                                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+
+         #define TA_CDLEVENINGSTAR Core::CDLEVENINGSTAR
+         #define TA_CDLEVENINGSTAR_Lookback Core::CDLEVENINGSTAR_Lookback
+
          static int CDLHIGHWAVE_Lookback( void );
 
          static enum TA_RetCode CDLHIGHWAVE( int    startIdx,
@@ -1607,6 +1683,58 @@ namespace TA
          #define TA_CDLLONGLINE Core::CDLLONGLINE
          #define TA_CDLLONGLINE_Lookback Core::CDLLONGLINE_Lookback
 
+         static int CDLMORNINGDOJISTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+         static enum TA_RetCode CDLMORNINGDOJISTAR( int    startIdx,
+                                                    int    endIdx,
+                                                    double       inOpen __gc [],
+                                                    double       inHigh __gc [],
+                                                    double       inLow __gc [],
+                                                    double       inClose __gc [],
+                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+         static enum TA_RetCode CDLMORNINGDOJISTAR( int    startIdx,
+                                                    int    endIdx,
+                                                    float        inOpen __gc [],
+                                                    float        inHigh __gc [],
+                                                    float        inLow __gc [],
+                                                    float        inClose __gc [],
+                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                    [OutAttribute]Int32 *outBegIdx,
+                                                    [OutAttribute]Int32 *outNbElement,
+                                                    int           outInteger __gc [] );
+
+         #define TA_CDLMORNINGDOJISTAR Core::CDLMORNINGDOJISTAR
+         #define TA_CDLMORNINGDOJISTAR_Lookback Core::CDLMORNINGDOJISTAR_Lookback
+
+         static int CDLMORNINGSTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+         static enum TA_RetCode CDLMORNINGSTAR( int    startIdx,
+                                                int    endIdx,
+                                                double       inOpen __gc [],
+                                                double       inHigh __gc [],
+                                                double       inLow __gc [],
+                                                double       inClose __gc [],
+                                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+         static enum TA_RetCode CDLMORNINGSTAR( int    startIdx,
+                                                int    endIdx,
+                                                float        inOpen __gc [],
+                                                float        inHigh __gc [],
+                                                float        inLow __gc [],
+                                                float        inClose __gc [],
+                                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                [OutAttribute]Int32 *outBegIdx,
+                                                [OutAttribute]Int32 *outNbElement,
+                                                int           outInteger __gc [] );
+
+         #define TA_CDLMORNINGSTAR Core::CDLMORNINGSTAR
+         #define TA_CDLMORNINGSTAR_Lookback Core::CDLMORNINGSTAR_Lookback
+
          static int CDLSHORTLINE_Lookback( void );
 
          static enum TA_RetCode CDLSHORTLINE( int    startIdx,
@@ -1654,6 +1782,30 @@ namespace TA
 
          #define TA_CDLSPINNINGTOP Core::CDLSPINNINGTOP
          #define TA_CDLSPINNINGTOP_Lookback Core::CDLSPINNINGTOP_Lookback
+
+         static int CDLTRISTAR_Lookback( void );
+
+         static enum TA_RetCode CDLTRISTAR( int    startIdx,
+                                            int    endIdx,
+                                            double       inOpen __gc [],
+                                            double       inHigh __gc [],
+                                            double       inLow __gc [],
+                                            double       inClose __gc [],
+                                            [OutAttribute]Int32 *outBegIdx,
+                                            [OutAttribute]Int32 *outNbElement,
+                                            int           outInteger __gc [] );
+         static enum TA_RetCode CDLTRISTAR( int    startIdx,
+                                            int    endIdx,
+                                            float        inOpen __gc [],
+                                            float        inHigh __gc [],
+                                            float        inLow __gc [],
+                                            float        inClose __gc [],
+                                            [OutAttribute]Int32 *outBegIdx,
+                                            [OutAttribute]Int32 *outNbElement,
+                                            int           outInteger __gc [] );
+
+         #define TA_CDLTRISTAR Core::CDLTRISTAR
+         #define TA_CDLTRISTAR_Lookback Core::CDLTRISTAR_Lookback
 
          static int CORREL_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
