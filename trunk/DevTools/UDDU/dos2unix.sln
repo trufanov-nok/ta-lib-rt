@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dos2unix", "dos2unix\dos2unix.vcproj", "{79165B1E-7B7C-4C47-BA4A-FD5F79B5A913}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unix2dos", "unix2dos\unix2dos.vcproj", "{61531DFE-DB20-4AA7-90F1-314FF0D1B968}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{79165B1E-7B7C-4C47-BA4A-FD5F79B5A913}.Debug.ActiveCfg = Debug|Win32
+		{79165B1E-7B7C-4C47-BA4A-FD5F79B5A913}.Debug.Build.0 = Debug|Win32
+		{79165B1E-7B7C-4C47-BA4A-FD5F79B5A913}.Release.ActiveCfg = Release|Win32
+		{79165B1E-7B7C-4C47-BA4A-FD5F79B5A913}.Release.Build.0 = Release|Win32
+		{61531DFE-DB20-4AA7-90F1-314FF0D1B968}.Debug.ActiveCfg = Debug|Win32
+		{61531DFE-DB20-4AA7-90F1-314FF0D1B968}.Debug.Build.0 = Debug|Win32
+		{61531DFE-DB20-4AA7-90F1-314FF0D1B968}.Release.ActiveCfg = Release|Win32
+		{61531DFE-DB20-4AA7-90F1-314FF0D1B968}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
