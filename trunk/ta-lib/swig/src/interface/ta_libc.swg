@@ -1,5 +1,5 @@
 
-/* File : ta_libc.i */
+/* File : ta_libc.swg */
 
 %module "Finance::TA"
 

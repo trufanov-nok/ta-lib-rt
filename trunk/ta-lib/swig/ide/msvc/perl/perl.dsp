@@ -148,13 +148,13 @@ SOURCE=..\..\..\src\interface\ta_func.swg
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\src\interface\ta_libc.i
+SOURCE=..\..\..\src\interface\ta_libc.swg
 
 !IF  "$(CFG)" == "perl - Win32 Release"
 
 USERDEP__TA_LI="..\..\..\src\interface\perl.pm"	
 # Begin Custom Build
-InputPath=..\..\..\src\interface\ta_libc.i
+InputPath=..\..\..\src\interface\ta_libc.swg
 InputName=ta_libc
 
 BuildCmds= \
