@@ -146,6 +146,65 @@ delete $::Finance::TA::{TA_HistoryFree};
 
 
 
+package Finance::TA::TA_FuncHandle;
+
+sub new {
+    my ($pkg, $name) = @_;
+    my $self;
+    my $retCode = ::Finance::TAc::TA_GetFuncHandle($name, \$self);
+    if (defined $self) {
+        bless $self, $pkg;
+    }
+    return $self;
+}
+
+
+sub TA_GetFuncInfo {
+    my ($self) = @_;
+    my $info;
+    my $retCode = ::Finance::TAc::TA_GetFuncInfo($self, \$info);
+    return $info;
+}
+
+
+sub TA_SetInputParameterInfoPtr {
+    my ($self, $param) = @_;
+    my $info;
+    my $retCode = ::Finance::TAc::TA_SetInputParameterInfoPtr($self, $param, \$info);
+    return $info;
+}
+
+
+sub TA_SetOutputParameterInfoPtr {
+    my ($self, $param) = @_;
+    my $info;
+    my $retCode = ::Finance::TAc::TA_SetOutputParameterInfoPtr($self, $param, \$info);
+    return $info;
+}
+
+
+sub TA_SetOptInputParameterInfoPtr {
+    my ($self, $param) = @_;
+    my $info;
+    my $retCode = ::Finance::TAc::TA_SetOptInputParameterInfoPtr($self, $param, \$info);
+    return $info;
+}
+
+
+
+package Finance::TA::TA_FuncInfo;
+
+sub new {
+    my ($pkg, $handle) = @_;
+    my $self;
+    my $retCode = ::Finance::TAc::TA_GetFuncInfo($handle, \$self);
+    if (defined $self) {
+        bless $self, $pkg;
+    }
+    return $self;
+}
+
+
 package Finance::TA;
 
 # Redefine exported TA_Initialize/TA_Shutdown functions 
