@@ -459,4 +459,5 @@ foreach (keys %Finance::TA::) {
 
 END { TA_Shutdown() }
 
-TA_Initialize() == $TA_SUCCESS;
+TA_Initialize();
+$INITIALIZED;
