@@ -73,7 +73,8 @@ ta-lib/swig/src/demo/perl and - even better - at the test scripts in
 ta-lib/swig/src/tools/test_perl.  The test scripts tend to be complete so there
 is an example for every function, constant, or type.
 
-The module (currently) covers ta_defs, ta_common, ta_data, ta_func.  
+The module (currently) covers ta_defs, ta_common, ta_data, ta_func,
+ta_abstract.  
 
 In general, the following usage rules apply:
  * structs are turned to Perl classes, so can be created using 'new'
@@ -158,11 +159,14 @@ undef.  There is no way of getting the ret code then.  But hey, what can go
 wrong with TA_UDBaseAlloc()?  And you are freed from the hurdle of keeping
 track of allocation and deallocation.  This is the True Perl Way.
 
+* The same as above applies to TA_FuncHandle, TA_FuncInfo, except that there
+is no need (and no possibility) to deallocate the handles.
+
 * Instead of TA_CategoryTableAlloc/TA_CategoryTableFree use just
 &TA_CategoryTable.  This function returns a Perl list of strings, so there is
 no need do deallocate it explicitly.  Note that the first list element is the
-return code, as usual.  The same applies to
-TA_SymbolTableAlloc/TA_SymbolTableFree.
+return code, as usual.  The same applies to TA_SymbolTableAlloc/Free,
+TA_GoupTableAlloc/Free, TA_FuncTableAlloc/Free.
 
 * Alternatively, you may want to use the object interface of TA_UDBase:
     @categories = $udBase->CategoryTable();
@@ -201,9 +205,8 @@ Open issues/To do
   - answer: use %import, see SWIG examples
 * How to write log files to stdout
 * How to define a custom TA fatal handler in Perl
-* Get parameters on 'use"-line for &TA_Initialize
+* Get parameters on "use"-line for &TA_Initialize
 * Allow to pass hash table to &TA_AddDataSourceParam::new with initial values
 * Add member functions to TA_Timestamp
 * Wrap ta_pm 
-* Wrap ta_abstract
 
