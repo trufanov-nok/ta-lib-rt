@@ -1,16 +1,20 @@
-V0.0.6 (September 2002)
+V0.0.6 (October 2002)
 
-- Add some "directional movement" TA functions:
+- Directional Movement TA functions added:
   ADX, ADXR, DX, +DI, -DI, +DM and -DM
+
+- Parabolic SAR added.
 
 - Add support of many new Yahoo! data source:
   United Kingdom, France, Germany, Italy
-  Belgium...
-  Type "ta_yahoo -c" for the complete list.
+  Belgium... Type "ta_yahoo -c" for the list.
 
 - Correct problem with Yahoo! data source causing
   the allocation of historical data to fail with
-  an "Invalid Date" error.
+  an "Invalid Date" error. (Fix #609753)
+
+- Speed optimization of STDDEV, VAR and BBANDS.
+  Contribution by Jesus Virer.
 
 See HISTORY.TXT for summary of previous version.
 
