@@ -13,12 +13,12 @@ I had two goals while making this wrapper:
 2. To make the interface as much convenient (and "Perlish") and robust 
    as possible.
 Those two objectives were often not compatible, what results in many elements
-being wrapped in two or more ways.  In a few cases, those objectives were
-conflicting; then the Perl way took precedence over being literally
-identical to the TA-LIB C way.
+being wrapped in two or more ways; choose your own perferences.  In a few
+cases, those objectives were conflicting; then the Perl way took precedence
+over being literally identical to the TA-LIB C way.
 
 Although SWIG is capable of generating wrappers to many languages, makefiles
-in this directory tree support perl only.  Taking perl as example, one can
+in this directory tree support Perl only.  Taking Perl as example, one can
 extend it to other laungages, if needed.
 
 First Thing
@@ -32,8 +32,8 @@ with the "Installation" section.
 
 Installation
 ============
-You need to have SWIG installed at your system. Get it from
-http://www.swig.org.  The swig executable must be present on your search
+To build the wrapper, you need to have SWIG installed at your system. Get it
+from http://www.swig.org.  The swig executable must be present on your search
 path. Verify it at command prompt:
 > swig -version
 
@@ -42,13 +42,14 @@ higher versions within the 1.3.x familly.  If you have a lower SWIG version,
 better upgrade.
 
 Obviously, you need also perl installed at your system (Perl5).  The project
-is tested with perl 5.6.1.  It should work with newer perl releases as well.
+is tested with perl v5.6.1 and v5.8.4.  It should work with newer perl
+releases as well.
 
 Further, you need a C/C++ compiler, the same as used to compile the perl
 executable you use.  At the end, we will be building perl modules.  If you
 use ActivePerl on Windows (from ActiveState), you most probably need Visual
-C++ version 6.0.  If you use Linux, you probably need gcc, etc.  To find out, 
-try:
+C++ version 6.0.  If you use Linux, you probably need gcc, etc.  To find it
+out, try:
 > perl -V
 
 Building the Perl module
@@ -69,7 +70,7 @@ make - Linux/gcc
 ----------------
 First, make sure that the proper ta-lib library is already build in
 ta-lib/c/lib.  The wrapper links only with Release Multithreaded Static
-variant so you need libta_libc_cmr.a and the family.
+variant so you need have libta_libc_cmr.a.
 
 cd swig/make/perl/linux/g++
 make
@@ -88,8 +89,7 @@ ta-lib/swig/src/demo/perl and - even better - at the test scripts in
 ta-lib/swig/src/tools/test_perl.  The test scripts tend to be complete so there
 is an example for every function, constant, or type.
 
-The module (currently) covers ta_defs, ta_common, ta_data, ta_func,
-ta_abstract.  
+The module covers all TA-LIB functions, a few exceptions exist.
 
 In general, the following usage rules apply:
  * structs are turned to Perl classes, so can be created using 'new'
@@ -142,18 +142,29 @@ characters are ignored. Dash separators for date, colons for time.
 
 * Do not call &TA_HistoryAlloc and &TA_HistoryFree directly.  Simply use
 &TA_History::new.  The parameters to &new are the same as to
-TA_HistoryAlloc(). The last three parameters are optional and default to
-NULL, NULL, TA_ALL. 
+TA_HistoryAlloc(). 
 E.g.:
-    my $hist = new TA_History($udBase, "US.NASDAQ.STOCKS", "LNUX", $TA_DAILY);
+    my $haParam = new TA_HistoryAllocParam;  # my $haParam = {}; works too
+    $haParam->{category} = "US.NASDAQ.STOCKS";
+    $haParam->{symbol} = "LNUX";
+    $haParam->{period} = $TA_DAILY;
+    $haParam->{field} = $TA_ALL;
+    my $hist = new TA_History($udBase, $haParam);
     if ($hist->{retCode} == $TA_SUCCESS) {
         ...
     }
 Alternatively:
-    my $hist = $udBase->History("US.NASDAQ.STOCKS", "LNUX", $TA_DAILY);
+    my $hist = $udBase->History($haParam);
     if ($hist->{retCode} == $TA_SUCCESS) {
         ...
     }
+Alternatively:
+    my $hist = $udBase->History({
+            category => "US.NASDAQ.STOCKS", 
+            symbol => "LNUX", 
+            period => $TA_DAILY,
+            field => $TA_ALL,
+        });
 
 * Note that TA_History objects are read-only.
 
@@ -163,6 +174,26 @@ arrays.  Examples:
     $close_series = $hist->{close};
     print $$close_series[0], "\n";
     print "@$close_series\n";
+
+* Note that each access to a tied member variable is going through the
+thunk code from Perl to C and back, so for the sake of performance, 
+consider copying the history arrays to Perl arrays.
+Eg.
+    # slow
+    for ($i = 0;  $i < $history->{nbBars};  $i++) {
+        print $history->{close}[$i], "\n";
+    }
+    # fast
+    @close = @{ $history->{close} };
+    for $close (@close) {
+        print $close, "\n";
+    }
+
+* If you do this for the timestamp array, note that the Perl array contains
+only the references to C Timestamp structs, not the object themselves.
+The C structs fall under the authority of C hence are not reference-counted.
+This means that if you undef the history, the references to timestamps become
+garbage.
 
 * Insead of doing:
     $retCode = TA_UDBaseAlloc(\$udBase);
@@ -215,6 +246,18 @@ Example (default optInTimePeriod):
 
 More examples in swig/src/tools/test_perl/ta_func.t
 
+* Several complex TA-LIB functions accept a pointer to a struct containing
+the parameters for the function invocation.  This is to avoid long argument
+lists in function signatures.  Using this in Perl is rather inconvenient,
+meaning that a specific object has to be created, and each of it's fields has
+to be initialised explicitly through tied variables.  A simpler way exists
+if you use the object-oriented interface of the wrapper.  Instead of passing
+a reference to a specific object type as required by TA-LIB, you may pass
+a reference to a (possibly unnamed) plain hash.  
+This works for the following functions: TA_History (see example above), 
+AddDataSource, TradeLogAdd.
+
+
 Good luck!
 Pawel Konieczny, konieczp-at-users.sourceforge.net 
 
@@ -222,12 +265,7 @@ Pawel Konieczny, konieczp-at-users.sourceforge.net
 Open issues/To do
 =================
 
-* How to generate submodules, e.g. Finance::TA::func
-  - answer: use %import, see SWIG examples
 * How to write log files to stdout
 * How to define a custom TA fatal handler in Perl
 * Get parameters on "use"-line for &TA_Initialize
-* Allow to pass hash table to &TA_AddDataSourceParam::new with initial values
-* Add member functions to TA_Timestamp
-* Wrap ta_pm 
 
