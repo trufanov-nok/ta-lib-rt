@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 74 }
+BEGIN { plan tests => 81 }
 
 use Finance::TA;
 
@@ -116,5 +116,23 @@ ok( $info->{dataSet}{data}[6]{value}, $TA_MAType_KAMA );
 ok( $info->{defaultValue}, $TA_MAType_SMA );
 ok( $info->{hint}, qr/Moving Average/ );
 ok( $info->{helpFile}, undef );
+
+print "Testing calling function by name...\n";
+no strict 'refs';
+
+my $funcName = "MAX";
+my $inReal = [2, 3, 1, 4, 2];
+my $optInTimePeriod = 2;
+my @params = (0, $#$inReal, $inReal, $optInTimePeriod);
+my @results = &{ "TA_" . $funcName }(@params);
+
+ok( @results, 3 );
+my ($retCode, $begIdx, $outReal) = @results;
+ok( $retCode, $TA_SUCCESS );
+ok( $begIdx, 1 );
+ok( $$outReal[0], 3 );
+ok( $$outReal[1], 3 );
+ok( $$outReal[2], 4 );
+ok( $$outReal[3], 4 );
 
 # No need to deallocate $fh or $fi
