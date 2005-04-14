@@ -25,7 +25,6 @@ CFG=perl - Win32 Release
 # PROP Scc_ProjName ""
 # PROP Scc_LocalPath ""
 CPP=cl.exe
-F90=df.exe
 MTL=midl.exe
 RSC=rc.exe
 # PROP BASE Use_MFC 0
@@ -39,6 +38,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "..\..\..\temp\perl\cdr"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
+F90=df.exe
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "EXAMPLE_EXPORTS" /YX /FD /c
 # ADD CPP /nologo /MD /W3 /O1 /I "..\..\..\..\c\include" /I "$(PERL5_INCLUDE)" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MSWIN32" /D "_CONSOLE" /D "NO_STRICT" /D "PERL_MSVCRT_READFIX" /D "PERL_CAPI" /YX /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
@@ -112,7 +112,7 @@ SOURCE=..\..\..\src\interface\ta_libc.perl.swg
 SOURCE=..\..\..\src\interface\ta_libc.swg
 USERDEP__TA_LI="..\..\..\src\interface\perl.pm"	
 # Begin Custom Build
-InputDir=\devel\ta-lib\swig\src\interface
+InputDir=\ta-lib\swig\src\interface
 InputPath=..\..\..\src\interface\ta_libc.swg
 InputName=ta_libc
 
@@ -123,7 +123,7 @@ BuildCmds= \
 	echo Make also sure that swig and perl are on search path: \
 	echo %PATH% \
 	echo on \
-	swig -perl5 -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include -I$(InputDir) $(InputPath) \
+	swig -perl -module "Finance::TA" -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include -I$(InputDir) $(InputPath) \
 	perl -pe "s/^\x25(OWNER|ITERATORS)/our \x25\1/" ..\..\..\temp\perl\wrap\TA.pm >..\..\..\lib\perl\Finance\TA.pm \
 	type ..\..\..\src\interface\perl.pm >>..\..\..\lib\perl\Finance\TA.pm \
 	

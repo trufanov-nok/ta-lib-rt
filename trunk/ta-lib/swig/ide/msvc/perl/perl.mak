@@ -128,8 +128,8 @@ USERDEP__TA_LI="..\..\..\src\interface\perl.pm"
 	echo Make also sure that swig and perl are on search path: 
 	echo %PATH% 
 	echo on 
-	swig -perl5 -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include -I$(InputDir) $(InputPath) 
-	perl -pe "s/^\x25(OWNER|ITERATORS)/our \x25\1/" ..\..\..\temp\perl\wrap\TA.pm >..\..\..\lib\perl\Finance\TA.pm
+	swig -perl -module "Finance::TA" -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include -I$(InputDir) $(InputPath) 
+	perl -pe "s/^\x25(OWNER|ITERATORS)/our \x25\1/" ..\..\..\temp\perl\wrap\TA.pm >..\..\..\lib\perl\Finance\TA.pm 
 	type ..\..\..\src\interface\perl.pm >>..\..\..\lib\perl\Finance\TA.pm
 << 
 	
