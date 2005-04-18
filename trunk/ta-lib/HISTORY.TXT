@@ -1,3 +1,10 @@
+V0.1.4 (April 2005)
+  - 64 bits support.
+  - Partial Python support.
+  - New TA_DISABLE_PRICE_VALIDATION flag.
+  - 26 new candlestick functions.
+  - Fix #1117866,1117656
+
 V0.1.3 (January 2005)
   - 12 new candlestick functions.
   - Excel now handles default values.
@@ -34,7 +41,7 @@ V0.0.8 (April 2003)
 
 V0.0.7 (January 2003)
   - Excel Add-In implemented.
-  - Add: MFI,MIDPRICE,MIDPOINT,TRIMA,MACDEXT,ROCP,STOCHF,AVGPRICE                   
+  - Add: MFI,MIDPRICE,MIDPOINT,TRIMA,MACDEXT,ROCP,STOCHF,AVGPRICE
   - Fix #660248,660250,660449,644512
 
 V0.0.6 (October 2002)
@@ -72,4 +79,6 @@ V0.0.1 (September 2001)
   - Alpha Release on Windows.
   - Include ta_yahoo.exe demo application.  
 
-Info: http://ta-lib.org
+Info:  http://ta-lib.org
+Forum: http://tadoc.org/forum
+
