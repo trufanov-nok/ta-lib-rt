@@ -1,35 +1,42 @@
-V0.1.3 (January 2005)
+0.1.4 (April 2005)
 
 New Features
 ============
-  - New candlestick functions:
-      CDL2CROWS          Two Crows 
-      CDL3INSIDE         Three Inside Up/Down 
-      CDL3LINESTRIKE     Three-Line Strike 
-      CDL3OUTSIDE        Three Outside Up/Down 
-      CDL3WHITESOLDIERS  Three Advancing White Soldiers 
-      CDLADVANCEBLOCK    Advance Block 
-      CDLDARKCLOUDCOVER  Dark Cloud Cover 
-      CDLINNECK          In-Neck Pattern 
-      CDLONNECK          On-Neck Pattern 
-      CDLPIERCING        Piercing Pattern 
-      CDLSTALLEDPATTERN  Stalled Pattern 
-      CDLTHRUSTING       Thrusting Pattern
+- 64 bits support.
+- Initial version for Python integration (SWIG).
+- New TA_DISABLE_PRICE_VALIDATION flag (TA_HistoryAlloc)
+- New candlestick functions:
+    CDL3STARSINSOUTH    Three Stars In The South
+    CDLBELTHOLD         Belt-hold
+    CDLBREAKAWAY        Breakaway
+    CDLCLOSINGMARUBOZU  Closing Marubozu
+    CDLCONCEALBABYSWALL Concealing Baby Swallow
+    CDLCOUNTERATTACK    Counterattack
+    CDLDOJI             Doji
+    CDLDRAGONFLYDOJI    Dragonfly Doji
+    CDLGAPSIDESIDEWHITE Up/Down-gap side-by-side white lines
+    CDLGRAVESTONEDOJI   Gravestone Doji
+    CDLHOMINGPIGEON     Homing Pigeon
+    CDLKICKING          Kicking
+    CDLKICKINGBYLENGTH  Kicking-bull/bear determined by the longer marubozu
+    CDLLADDERBOTTOM     Ladder Bottom
+    CDLLONGLEGGEDDOJI   Long Legged Doji
+    CDLMARUBOZU         Marubozu
+    CDLMATCHINGLOW      Matching Low
+    CDLMATHOLD          Mat Hold
+    CDLRICKSHAWMAN      Rickshaw Man
+    CDLRISEFALL3METHODS Rising/Falling Three Methods
+    CDLSEPARATINGLINES  Separating Lines
+    CDLSTICKSANDWICH    Stick Sandwich
+    CDLTAKURI           Takuri
+    CDLTASUKIGAP        Tasuki Gap
+    CDLUNIQUE3RIVER     Unique 3 River
+    CDLXSIDEGAP3METHODS Upside/Downside Gap Three Methods
 
-  - Excel: Default value for unspecified parameters now handled.
-  
-  - Excel: Function wizard display the default values.
-  
-  - .NET Visual Studio 2005 support (Beta)
-
-  - Perl binaries now included in Win32 packages.
-  
 Fixes
 =====
-#1090231: TA_MINUS_DI/TA_PLUS_DI bug on period of 1
-#1089506: TA_SAR/TA_PLUS_DM bug on .NET
-#1072276: .NET exception on initialization
-#1023151: ASCII Data source - File name with space (Linux only)
+#1117866: APO/PPO bug when slow/fast period parameter inverted.
+#1117656: outNbElement incorrect for TRIX and STOCHRSI
 
 Thanks to all contributors.
 
