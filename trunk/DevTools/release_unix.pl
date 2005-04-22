@@ -22,7 +22,8 @@ sub Main
    # Adapt these to your setup
    $release_dir = "/mnt/hgfs/Release/";  # Where packaged release is put.
    $unix_dir    = "/home/buzzo/";        # User home directory.
-   $root_cvs = ":ext:fortier\@cvs.sourceforge.net:/cvsroot/ta-lib"; # CVS access   
+   # $root_cvs = ":ext:fortier\@cvs.sourceforge.net:/cvsroot/ta-lib"; # CVS access   
+   $root_cvs = ":pserver:anonymous\@cvs.sourceforge.net:/cvsroot/ta-lib";
 
    # Get the "x.y.z" string for this release. This is done by compiling and
    # running the TA-Lib function returning the version.
