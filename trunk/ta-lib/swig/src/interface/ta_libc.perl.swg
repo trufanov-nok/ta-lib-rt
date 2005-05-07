@@ -13,7 +13,7 @@
 */
 
 
-/* Some TA functions operate (return) string tables
+/* Some TA functions operate on (return) string tables
  * being (pointers to) arrays of pointers to char arrays
  * and having a size field.
  * They are being converted to native Perl lists of strings.
@@ -27,10 +27,10 @@
 {
     /* Copy the strings from **$1 to a Perl array */
     if ( *$1 && (*$1)->SIZE_FIELD > 0) {
-        int new_argvi = argvi + (*$1)->SIZE_FIELD;
+        int new_items = argvi + (*$1)->SIZE_FIELD;
         unsigned int elem;
-        if (new_argvi > items) {
-            EXTEND(sp,(new_argvi-items));
+        if (new_items > items) {
+            EXTEND(sp,(new_items-items));
         }
         for (elem = 0;  elem < (*$1)->SIZE_FIELD;  elem++) {
             ST(argvi) = sv_newmortal();
@@ -61,10 +61,10 @@
 {
     /* Copy the strings from *$1 to a Perl array */
     if ( $1->SIZE_FIELD > 0) {
-        int new_argvi = argvi + $1->SIZE_FIELD;
+        int new_items = argvi + $1->SIZE_FIELD;
         unsigned int elem;
-	    if (new_argvi > items) {
-                EXTEND(sp,(new_argvi-items));
+	    if (new_items > items) {
+                EXTEND(sp,(new_items-items));
 	    }
         for (elem = 0;  elem < $1->SIZE_FIELD;  elem++) {
             ST(argvi) = sv_newmortal();
@@ -95,10 +95,10 @@
 {
     /* Copy the strings from **$1 to a Perl array */
     if ( *$1 && (*$1)->SIZE_FIELD > 0) {
-        int new_argvi = argvi + (*$1)->SIZE_FIELD;
+        int new_items = argvi + (*$1)->SIZE_FIELD;
         unsigned int elem;
-        if (new_argvi > items) {
-            EXTEND(sp,(new_argvi-items));
+        if (new_items > items) {
+            EXTEND(sp,(new_items-items));
         }
         for (elem = 0;  elem < (*$1)->SIZE_FIELD;  elem++) {
             ST(argvi) = sv_newmortal();
@@ -260,8 +260,7 @@
 	sv = newSVnv($1[idx]);
         if (av_store(av, idx, sv) == 0) SvREFCNT_dec(sv);	
     };
-    $result = newRV((SV*)av);
-    sv_2mortal($result);
+    $result = sv_2mortal(newRV_noinc((SV*)av));
     argvi++;    
 }
 
@@ -277,8 +276,7 @@
 	sv = newSViv($1[idx]);
         if (av_store(av, idx, sv) == 0) SvREFCNT_dec(sv);	
     };
-    $result = newRV((SV*)av);
-    sv_2mortal($result);
+    $result = sv_2mortal(newRV_noinc((SV*)av));
     argvi++;    
 }
 
@@ -290,9 +288,9 @@
 
 %typemap(out) const TYPE *ARRAY 
 {
-    AV *myav;
+    AV *av;
     SV **svs;
-    unsigned int i = 0;
+    unsigned int idx = 0;
 
     /* this is not the most efficient way of creating an array
      * it creates much too many mortals
@@ -301,14 +299,13 @@
      * TODO: optimize it here
      */
     svs = (SV **) malloc(array_size1 * sizeof(SV *));
-    for (i = 0; i < array_size1 ; i++) {
-        svs[i] = sv_newmortal();
-        SWIG_MakePtr((SV*)svs[i], (void *) &$1[i], $1_descriptor, SWIG_SHADOW);
+    for (idx = 0; idx < array_size1 ; idx++) {
+        svs[idx] = sv_newmortal();
+        SWIG_MakePtr((SV*)svs[idx], (void *) &$1[idx], $1_descriptor, SWIG_SHADOW);
     };
-    myav =  av_make(array_size1,svs);
+    av =  av_make(array_size1,svs);
     free(svs);
-    $result = newRV((SV*)myav);
-    sv_2mortal($result);
+    $result = sv_2mortal(newRV_noinc((SV*)av));
     argvi++;    
 }
 
@@ -324,9 +321,9 @@
 
 %typemap(out) const TYPE **ARRAY 
 {
-    AV *myav;
+    AV *av;
     SV **svs;
-    unsigned int i = 0;
+    unsigned int idx = 0;
 
     /* as in the previous case
      * this is not the most efficient way of creating an array
@@ -336,14 +333,13 @@
      * TODO: optimize it here
      */
     svs = (SV **) malloc(array_size1 * sizeof(SV *));
-    for (i = 0; i < array_size1 ; i++) {
-        svs[i] = sv_newmortal();
-        SWIG_MakePtr((SV*)svs[i], (void *) $1[i], $*1_descriptor, SWIG_SHADOW);
+    for (idx = 0; idx < array_size1 ; idx++) {
+        svs[idx] = sv_newmortal();
+        SWIG_MakePtr((SV*)svs[idx], (void *) $1[idx], $*1_descriptor, SWIG_SHADOW);
     };
-    myav =  av_make(array_size1,svs);
+    av =  av_make(array_size1,svs);
     free(svs);
-    $result = newRV((SV*)myav);
-    sv_2mortal($result);
+    $result = sv_2mortal(newRV_noinc((SV*)av));
     argvi++;
 }
 
@@ -526,7 +522,7 @@
 /* On output, the arrays are converted to Perl arrays and returned as
  * Perl references on the output stack
  */
-%typemap(argout) double *OUT_ARRAY, float *OUT_ARRAY, int *OUT_ARRAY
+%typemap(argout) double *OUT_ARRAY, float *OUT_ARRAY
 {
     AV *av;
     int idx;
@@ -543,8 +539,7 @@
     if (argvi >= items) {
         EXTEND(sp,1);
     }
-    $result = newRV((SV*)av);
-    sv_2mortal($result);
+    $result = sv_2mortal(newRV_noinc((SV*)av));
     argvi++;
 }
 
@@ -565,8 +560,7 @@
     if (argvi >= items) {
         EXTEND(sp,1);
     }
-    $result = newRV((SV*)av);
-    sv_2mortal($result);
+    $result = sv_2mortal(newRV_noinc((SV*)av));
     argvi++;
 }
 
