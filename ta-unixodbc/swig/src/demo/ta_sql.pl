@@ -9,21 +9,28 @@ use strict;
 
 
 my %tableAction = (
-    -c  => [ "DISPLAY_CATEGORIES",     $TA_DAILY     ],
-    -s  => [ "DISPLAY_SYMBOLS",        $TA_DAILY     ],
-    -d  => [ "DISPLAY_HISTORIC_DATA",  $TA_DAILY     ],
-    -dd => [ "DISPLAY_HISTORIC_DATA",  $TA_DAILY     ],
-    -dw => [ "DISPLAY_HISTORIC_DATA",  $TA_WEEKLY    ],
-    -dm => [ "DISPLAY_HISTORIC_DATA",  $TA_MONTHLY   ],
-    -dq => [ "DISPLAY_HISTORIC_DATA",  $TA_QUARTERLY ],
-    -dy => [ "DISPLAY_HISTORIC_DATA",  $TA_YEARLY    ],
+    -c   => [ "DISPLAY_CATEGORIES",     $TA_DAILY     ],
+    -s   => [ "DISPLAY_SYMBOLS",        $TA_DAILY     ],
+    -d   => [ "DISPLAY_HISTORIC_DATA",  $TA_DAILY     ],
+    -dd  => [ "DISPLAY_HISTORIC_DATA",  $TA_DAILY     ],
+    -dw  => [ "DISPLAY_HISTORIC_DATA",  $TA_WEEKLY    ],
+    -dm  => [ "DISPLAY_HISTORIC_DATA",  $TA_MONTHLY   ],
+    -dq  => [ "DISPLAY_HISTORIC_DATA",  $TA_QUARTERLY ],
+    -dy  => [ "DISPLAY_HISTORIC_DATA",  $TA_YEARLY    ],
+    -d1  => [ "DISPLAY_HISTORIC_DATA",  $TA_1MIN      ],
+    -d5  => [ "DISPLAY_HISTORIC_DATA",  $TA_5MINS     ],
+    -d10 => [ "DISPLAY_HISTORIC_DATA",  $TA_10MINS    ],
+    -d15 => [ "DISPLAY_HISTORIC_DATA",  $TA_15MINS    ],
+    -d30 => [ "DISPLAY_HISTORIC_DATA",  $TA_30MINS    ],
+    -d1H => [ "DISPLAY_HISTORIC_DATA",  $TA_1HOUR     ],
 );
 
 
 my %tableOption = (
     -z => [ $TA_REPLACE_ZERO_PRICE_BAR, 0 ],
-    -t => [ 0, $TA_USE_TOTAL_VOLUME ],
+    -t => [ 0, $TA_USE_TOTAL_VOLUME | $TA_USE_TOTAL_OPENINTEREST ],
     -i => [ 0, $TA_ALLOW_INCOMPLETE_PRICE_BARS ],
+    -f => [ 0, $TA_DISABLE_PRICE_VALIDATION ],
 );
 
 
@@ -41,12 +48,14 @@ Usage: ta_sql -c    <opt> <loc> <catsql>
       -c     Display all supported categories
       -s     Display all symbols for a given category
       -d<p>  Display market data for the specified <p> period. Use
-             \"d,w,m,q,y\" for \"daily,weekly,monthly,quarterly,yearly\"
+             \"d,w,m,q,y\" for \"daily,weekly,monthly,quarterly,yearly,\"
+             \"1,5\" for \"1min,5mins\"
 
     <opt> are optional switches:
       -z TA_REPLACE_ZERO_PRICE_BAR flag for TA_AddDataSource.
-      -t TA_USE_TOTAL_VOLUME flag for TA_HistoryAlloc.
-      -i TA_ALLOW_INCOMPLETE_PRICE_BARS flag for TA_AddDataSource.
+      -t TA_USE_TOTAL_VOLUME and OPENINTEREST flag for TA_HistoryAlloc.
+      -i TA_ALLOW_INCOMPLETE_PRICE_BARS flag for TA_HistoryAlloc.
+      -f TA_DISABLE_PRICE_VALIDATION flag for TA_HistoryAlloc.
 
       -u=<str>  Specify the username for TA_AddDataSource.
       -p=<str>  Specify the password for TA_AddDataSource.
@@ -59,8 +68,9 @@ Usage: ta_sql -c    <opt> <loc> <catsql>
     <infosql> is the TA_AddDataSource info parameter.
 
   Market data output is \"Date,Open,High,Low,Close,Volume\"
+  or \"Date,Time,Open,High,Low,Close,Volume\" for intraday data.
 
-  Check http://ta-lib.org/d_source/d_sql.html for usage examples.\"
+  Check http://ta-lib.org/d_source/d_sql.html for usage examples.
 
   For help, try the mailing list at http://ta-lib.org
 
@@ -84,6 +94,7 @@ sub print_error {
 
 sub print_data {
     my ($udb, $haParam) = @_;
+    my $intraday = ($haParam->{period} < $TA_DAILY);
 
     my $history = $udb->History($haParam);
     ($history->{retCode} == $TA_SUCCESS) or print_error( $history->{retCode} ) and return -1;
@@ -103,10 +114,12 @@ sub print_data {
     my $nbBars    = $history->{nbBars};
 
     for ( my $i = 0; $i < $nbBars; $i++ ) {
-        #print $timestamp[$i];
+        #print $timestamp[$i]->GetStringDate();
         printf "%02u-%02u-%02u", $timestamp[$i]{year},
                                  $timestamp[$i]{month},
                                  $timestamp[$i]{day};
+
+        print ',',$timestamp[$i]->GetStringTime() if $intraday;
 
         printf ",%.2f", $open[$i]   if defined @open;
         printf ",%.2f", $high[$i]   if defined @high;
