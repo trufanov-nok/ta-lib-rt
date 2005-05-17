@@ -51,6 +51,8 @@ $(TARGET): $(OBJECTS)
 	$(CC) -o $(TARGET) $(OBJECTS) $(LIBRARY) $(STDLIB)
 
 clean:
-	-rm -f $(OBJECTS) $(TARGET)
+	-rm -f $(OBJECTS) $(TARGET) $(SOURCES)
 	-rm -f *~ core
 
+$(SOURCES): ../../../../../ta-lib/c/src/demo/ta_sql/ta_sql.c gen_ta_sql.pl
+	perl gen_ta_sql.pl <$< >$@
