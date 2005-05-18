@@ -42,14 +42,14 @@ ta_sql V$ta_ver - SQL for market data
 
 Usage: ta_sql -c    <opt> <loc> <catsql>
        ta_sql -s    <opt> <loc> <catsql> <cat> <symsql>
-       ta_sql -d<p> <opt> <loc> <catsql> <cat> <symsql> <sym> <infosql>
+       ta_sql -d<p> <opt> <loc> <catsql> <cat> <symsql> <sym> <infosql> [period]
 
     Specify one of the following action switch:
       -c     Display all supported categories
       -s     Display all symbols for a given category
       -d<p>  Display market data for the specified <p> period. Use
              \"d,w,m,q,y\" for \"daily,weekly,monthly,quarterly,yearly,\"
-             \"1,5\" for \"1min,5mins\"
+             \"1,5,10,15,30,1H\" for \"1,5,10,15,30mins,1hour\"
 
     <opt> are optional switches:
       -z TA_REPLACE_ZERO_PRICE_BAR flag for TA_AddDataSource.
@@ -66,6 +66,7 @@ Usage: ta_sql -c    <opt> <loc> <catsql>
     <symsql>  is the TA_AddDataSource symbol parameter.
     <sym>     is a string of a given symbol.
     <infosql> is the TA_AddDataSource info parameter.
+    [period]  optional value in sec specifying the database period.
 
   Market data output is \"Date,Open,High,Low,Close,Volume\"
   or \"Date,Time,Open,High,Low,Close,Volume\" for intraday data.
@@ -216,6 +217,7 @@ $dsParam->{symbol}   = shift;
 $haParam->{symbol}   = shift;
 $dsParam->{info}     = shift;
 $dsParam->{info}     ||= ""; # info must be set even if not used
+$dsParam->{period}   = shift;
 
 
 # Add the data source.
