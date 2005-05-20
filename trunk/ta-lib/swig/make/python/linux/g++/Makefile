@@ -26,37 +26,36 @@ CC         = gcc
 LDFLAGS    = -shared -fPIC
 LDLIBS     = -lpthread -lcurl
 
-all: $(TOPDIR)/lib/python/_ta_lib.so $(TOPDIR)/lib/python/ta_lib.py
+all: $(TOPDIR)/lib/python/_TaLib.so $(TOPDIR)/lib/python/TaLib.py
 
 clean:
 	rm -f $(WRAPDIR)/*.c
 	rm -f $(WRAPDIR)/*.py
 	rm -f $(TEMPDIR)/*.o
 
-$(TOPDIR)/lib/python/_ta_lib.so: \
+$(TOPDIR)/lib/python/_TaLib.so: \
 		$(TEMPDIR)/ta_libc_wrap.o \
 		$(TOPDIR)/../c/lib/libta_libc_cmr.a
-	$(CC) $(LDFLAGS) -o $@ $< \
-		$(TOPDIR)/../c/lib/libta_libc_cmr.a $(LDLIBS)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-$(TOPDIR)/lib/python/ta_lib.py: \
-		$(WRAPDIR)/ta_lib.py
-	cp $(WRAPDIR)/ta_lib.py $@
+$(TOPDIR)/lib/python/TaLib.py: \
+		$(WRAPDIR)/TaLib.py
+	cp $< $@
 
 $(WRAPDIR)/ta_lib.py $(WRAPDIR)/ta_libc_wrap.c: \
 		$(TOPDIR)/src/interface/ta_libc.swg \
 		$(TOPDIR)/src/interface/ta_libc.python.swg \
 		$(TOPDIR)/src/interface/ta_func.swg
-	swig -python -module "ta_lib" -modern -Fstandard -o $(WRAPDIR)/ta_libc_wrap.c \
+	swig -python -module TaLib -modern -Fstandard -o $(WRAPDIR)/ta_libc_wrap.c \
 		-I$(TOPDIR)/src/interface -I$(TOPDIR)/../c/include \
 		$<
 
-install: $(INSTDIR)/_ta_lib.so $(INSTDIR)/ta_lib.py
+install: $(INSTDIR)/_TaLib.so $(INSTDIR)/TaLib.py
 
-$(INSTDIR)/_ta_lib.so: $(TOPDIR)/lib/python/_ta_lib.so
-	cp -f $(TOPDIR)/lib/python/_ta_lib.so $(INSTDIR)/_ta_lib.so
+$(INSTDIR)/_TaLib.so: $(TOPDIR)/lib/python/_TaLib.so
+	cp -f $< $@
 
-$(INSTDIR)/ta_lib.py: $(TOPDIR)/lib/python/ta_lib.py
-	cp -f $(TOPDIR)/lib/python/ta_lib.py $(INSTDIR)/ta_lib.py
+$(INSTDIR)/TaLib.py: $(TOPDIR)/lib/python/TaLib.py
+	cp -f $< $@
 
 .PHONY: all clean install
