@@ -50,12 +50,18 @@ $(WRAPDIR)/ta_lib.py $(WRAPDIR)/ta_libc_wrap.c: \
 		-I$(TOPDIR)/src/interface -I$(TOPDIR)/../c/include \
 		$<
 
-install: $(INSTDIR)/_TaLib.so $(INSTDIR)/TaLib.py
+install: $(INSTDIR)/_TaLib.so $(INSTDIR)/TaLib.py $(INSTDIR)/TaLib.pyc $(INSTDIR)/TaLib.pyo
 
 $(INSTDIR)/_TaLib.so: $(TOPDIR)/lib/python/_TaLib.so
 	cp -f $< $@
 
 $(INSTDIR)/TaLib.py: $(TOPDIR)/lib/python/TaLib.py
 	cp -f $< $@
+
+$(INSTDIR)/TaLib.pyc: $(INSTDIR)/_TaLib.so $(INSTDIR)/TaLib.py
+	python -c 'import TaLib'
+
+$(INSTDIR)/TaLib.pyo: $(INSTDIR)/_TaLib.so $(INSTDIR)/TaLib.py
+	python -O -c 'import TaLib'
 
 .PHONY: all clean install
