@@ -45,6 +45,7 @@ $(TOPDIR)/lib/python/ta_lib.py: \
 
 $(WRAPDIR)/ta_lib.py $(WRAPDIR)/ta_libc_wrap.c: \
 		$(TOPDIR)/src/interface/ta_libc.swg \
+		$(TOPDIR)/src/interface/ta_libc.python.swg \
 		$(TOPDIR)/src/interface/ta_func.swg
 	swig -python -module "ta_lib" -modern -Fstandard -o $(WRAPDIR)/ta_libc_wrap.c \
 		-I$(TOPDIR)/src/interface -I$(TOPDIR)/../c/include \
