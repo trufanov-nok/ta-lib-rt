@@ -16,7 +16,7 @@ print "Testing ta_defs...";
 class ta_defs_test(unittest.TestCase):
 
     def testConstants(self):
-        print 'Testing Constants...'
+        #print 'Testing Constants...'
         self.assert_( TA_INTEGER_MIN )
         self.assert_( TA_INTEGER_MAX )
         self.assertEqual( TA_REAL_MIN, -3e+37 )
@@ -25,7 +25,7 @@ class ta_defs_test(unittest.TestCase):
         self.assertEqual( TA_REAL_DEFAULT, -4e+37 )
 
     def test_TA_RetCode(self):
-        print 'Testing TA_RetCode...'
+        #print 'Testing TA_RetCode...'
         self.assertEqual( TA_SUCCESS, 0 )
         self.assertEqual( TA_LIB_NOT_INITIALIZE, 1 )
         self.assertEqual( TA_BAD_PARAM, 2 )
@@ -163,12 +163,12 @@ class ta_defs_test(unittest.TestCase):
         self.assertEqual( TA_UNKNOWN_ERR, 0xFFFF )
 
     def test_TA_Compatibility(self):
-        print "Testing TA_Compatibility..."
+        #print "Testing TA_Compatibility..."
         self.assertEqual( TA_COMPATIBILITY_DEFAULT, 0 )
         self.assertEqual( TA_COMPATIBILITY_METASTOCK, 1 )
 
     def test_TA_MAType(self):
-        print "Testing TA_MAType..."
+        #print "Testing TA_MAType..."
         self.assertEqual( TA_MAType_SMA, 0 )
         self.assertEqual( TA_MAType_EMA, 1 )
         self.assertEqual( TA_MAType_WMA, 2 )
@@ -180,7 +180,7 @@ class ta_defs_test(unittest.TestCase):
         self.assertEqual( TA_MAType_T3, 8 )
 
     def test_TA_FuncUnstId(self):
-        print "Testing TA_FuncUnstId..."
+        #print "Testing TA_FuncUnstId..."
         self.assertEqual( TA_FUNC_UNST_EMA, 0 )
         self.assertEqual( TA_FUNC_UNST_HT_TRENDLINE, 1 )
         self.assertEqual( TA_FUNC_UNST_KAMA, 2 )
