@@ -76,9 +76,8 @@ class ta_common_test(unittest.TestCase):
         self.assertEqual( rci.infoStr, 'TA_Initialize was not sucessfully called' )
 
         # Using constructor parameter
-        # ...not supported (yet); it is a Perl module extension, I don't know how to do it in Python
-        #self.assertEqual( TA_RetCodeInfo(2).enumStr, 'TA_BAD_PARAM' )
-        #self.assertEqual( TA_RetCodeInfo(2).infoStr, 'A parameter is out of range' )
+        self.assertEqual( TA_RetCodeInfo(2).enumStr, 'TA_BAD_PARAM' )
+        self.assertEqual( TA_RetCodeInfo(2).infoStr, 'A parameter is out of range' )
 
     def test_TA_DayOfWeek(self):
         self.assertEqual( TA_SUNDAY,    0 )
@@ -117,11 +116,10 @@ class ta_common_test(unittest.TestCase):
         self.assertEqual( timedate[3], 55 )
 
         # Testing param handling of TA_Timestamp constructor
-        # ...not supported (yet); it is a Perl module extension, I don't know how to do it in Python
-        #self.assertEqual( TA_TimestampEqual(ts, TA_Timestamp(2004, 2, 28, 9, 11, 55)) )
-        #self.assertEqual( TA_TimestampDateEqual(ts, TA_Timestamp(2004, 2, 28)) )
-        #self.assertEqual( TA_TimestampEqual(ts, TA_Timestamp("2004-02-28 09:11:55")) )
-        #self.assertEqual( TA_TimestampDateEqual(ts, TA_Timestamp("2004-02-28")) )
+        self.assert_( TA_TimestampEqual(ts, TA_Timestamp(2004, 2, 28, 9, 11, 55)) )
+        self.assert_( TA_TimestampDateEqual(ts, TA_Timestamp(2004, 2, 28)) )
+        self.assert_( TA_TimestampEqual(ts, TA_Timestamp("2004-02-28 09:11:55")) )
+        self.assert_( TA_TimestampDateEqual(ts, TA_Timestamp("2004-02-28")) )
 
         self.assertEqual( TA_SetDateNow(ts), TA_SUCCESS )
         self.assertEqual( TA_SetTimeNow(ts), TA_SUCCESS )
@@ -173,11 +171,10 @@ class ta_common_test(unittest.TestCase):
         self.assertEqual( (TA_TimestampDeltaDay(ts,ts2))[1], 2 )
 
     def test_TA_Initialize(self):
-        self.assertEqual( TA_Initialize(None), TA_SUCCESS )
-        #self.assertEqual( TA_Initialize(None), TA_SUCCESS )     # implicit call to &TA_Shutdown - Perl only
-        #self.assertEqual( TA_Initialize(), TA_SUCCESS )         # ...only in Perl
+        self.assertEqual( TA_Initialize(), TA_SUCCESS )
+        self.assertEqual( TA_Initialize(None), TA_SUCCESS )      # implicit call to TA_Shutdown
         self.assertEqual( TA_Shutdown(), TA_SUCCESS )
-        #self.assertEqual( TA_Shutdown(), TA_SUCCESS )           # accepted, no-op, but only in Perl
+        self.assertEqual( TA_Shutdown(), TA_SUCCESS )            # accepted, no-op
         param = TA_InitializeParam()
         param.userLocalDrive = '.'
         self.assertEqual( TA_Initialize(param), TA_SUCCESS )
