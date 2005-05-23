@@ -39,8 +39,11 @@ $(TOPDIR)/lib/python/_TaLib.so: \
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 $(TOPDIR)/lib/python/TaLib.py: \
-		$(WRAPDIR)/TaLib.py
+		$(WRAPDIR)/TaLib.py \
+		$(TOPDIR)/src/interface/python.py 
 	cp $< $@
+	cat $(TOPDIR)/src/interface/python.py >>$@
+
 
 $(WRAPDIR)/ta_lib.py $(WRAPDIR)/ta_libc_wrap.c: \
 		$(TOPDIR)/src/interface/ta_libc.swg \
