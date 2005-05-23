@@ -123,9 +123,11 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
         PyObject *o = PySequence_GetItem(input,i);
         if (!PyFloat_Check(o)) {
             PyErr_SetString(PyExc_ValueError,"Expecting a sequence of floats");
+            Py_DECREF(o);
             return 0;
         }
         ptr[i] = PyFloat_AsDouble(o);
+        Py_DECREF(o);
     }
     return 1;
 }
