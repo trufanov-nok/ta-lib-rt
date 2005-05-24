@@ -78,3 +78,14 @@ def TA_Shutdown():
 
 
 
+# A way to automatically initialize and shutdown
+
+class TA_Initialization:
+    def __init__( self ):
+        TA_Initialize()
+
+    def __del__(self):
+        TA_Shutdown()
+
+# a singleton object
+_initialization_object = TA_Initialization()
