@@ -10,8 +10,6 @@ sys.path.insert(0,'../../../lib/python')
 
 from TaLib import *
 
-print "TA-Lib ", TA_GetVersionString()
-print "Testing ta_common...";
 
 
 class ta_common_test(unittest.TestCase):
@@ -182,4 +180,6 @@ class ta_common_test(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    print "TA-Lib ", TA_GetVersionString()
+    print "Testing ta_common...";
     unittest.main()
