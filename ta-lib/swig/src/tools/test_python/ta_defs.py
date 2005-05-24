@@ -9,9 +9,6 @@ sys.path.insert(0,'../../../lib/python')
 
 from TaLib import *
 
-print "TA-Lib ", TA_GetVersionString()
-print "Testing ta_defs...";
-
 
 class ta_defs_test(unittest.TestCase):
 
@@ -207,4 +204,6 @@ class ta_defs_test(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    print "TA-Lib ", TA_GetVersionString()
+    print "Testing ta_defs...";
     unittest.main()
