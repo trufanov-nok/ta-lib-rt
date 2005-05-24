@@ -254,7 +254,7 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
 
         for (idx = 0; idx < outNbElement; idx++) {
             PyObject *o = PyFloat_FromDouble($1[idx]);
-            PyList_SetItem(list,idx,o);
+            PyList_SET_ITEM(list,idx,o);
         }
         $result = t_output_helper($result, list);
     }
@@ -268,7 +268,7 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
 
         for (idx = 0; idx < outNbElement; idx++) {
             PyObject *o = PyInt_FromLong($1[idx]);
-            PyList_SetItem(list,idx,o);
+            PyList_SET_ITEM(list,idx,o);
         }
         $result = t_output_helper($result, list);
     }
