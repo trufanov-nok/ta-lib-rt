@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="TA.Lib.Timeseries" Collapsed="true">
+    <Position X="1" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>IEIAAAQAABAAYAAAQgQAAAAgAIwBAQAAAAIAIgGAAAI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TA.Lib.Timeseries&lt;TVal&gt;" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="3.25" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TA.Lib.Timestamps" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>AAAAAAAAAEAAAAAACAAAAAIABAAAAACAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TA.Lib.Timeseries&lt;TSer, TVar, TVal&gt;" Collapsed="true">
+    <Position X="2" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>oAQEBIAAIAAEQgiADAEgIABAQE0QgSAEARYDSAUAmBI=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TA.Lib.TimeseriesMacd" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>AAAACAAAAAAABAAAAAAAAAAAAAAgAABAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TA.Lib.TimeseriesAroon" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAEAQAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TA.Lib.Variable" Collapsed="true">
+    <Position X="0.5" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Variable.cs</FileName>
+      <HashCode>AAAAAAQAABAAAAAAQAQAAAAAAAQBAAAAAAAAAACAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TA.Lib.Variable&lt;TVal&gt;" Collapsed="true">
+    <Position X="3.5" Y="6" Width="3" />
+    <TypeIdentifier>
+      <FileName>Variable.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TA.Lib.Variable&lt;TSer, TVar, TVal&gt;" Collapsed="true">
+    <Position X="2.25" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Variable.cs</FileName>
+      <HashCode>AAAAAQAABEAEAAAAGAIAYEQAIAAAAIAEAQAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TA.Lib.Index" Collapsed="true">
+    <Position X="8" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Index.cs</FileName>
+      <HashCode>AgAAAgIAAAAAAAAAAAAAAAAAAAEAAAAAAQIAAAQAgAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TA.Lib.Iter" Collapsed="true">
+    <Position X="8" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Iter.cs</FileName>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TA.Lib.Value&lt;T&gt;" Collapsed="true">
+    <Position X="9.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Value.cs</FileName>
+      <HashCode>AAABAAAAAAAAAAAAEAAAAAAAEBAAABAAAAAAAAAAAAg=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="TA.Lib.IValueIter" Collapsed="true">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Interface.cs</FileName>
+      <HashCode>gAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAGAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="TA.Lib.SyncMode" Collapsed="true">
+    <Position X="9.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>CAAAAAAAAACAAAAAAAAAAAAAAEEgEAAAgAAQAAAAQAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TA.Lib.Interpolation" Collapsed="true">
+    <Position X="7.75" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>AAEAQAAgAAAEAAAAAAAAAAIAABAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TA.Lib.TimestampType" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAAAAAAAAAAAQA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TA.Lib.NaturalPeriod" Collapsed="true">
+    <Position X="9.75" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>AAAAAAAAJAAAAAAAAAAAAAAAAAAAACIEAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TA.Lib.Periodicity" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>BAAgIQAAIEAxQMCAoARAAAAAMggKECMEAAQABAIADBA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TA.Lib.PeriodConvertionFlags" Collapsed="true">
+    <Position X="9.75" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Timeseries.cs</FileName>
+      <HashCode>AAAAAIAABAAAAAAAAAAAAAEAAAAAQCAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

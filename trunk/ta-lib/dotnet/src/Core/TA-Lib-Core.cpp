@@ -47,4 +47,4 @@
 
 #include "stdafx.h"
 
-#include "Core.h"
+#include "TA-Lib-Core.h"
