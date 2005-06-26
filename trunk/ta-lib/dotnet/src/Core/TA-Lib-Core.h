@@ -55,20 +55,22 @@ namespace TA
 {
    namespace Lib
    {
-      public ref class Core
+	  public ref class Core abstract sealed
 	  {
 	  public:
          #include "ta_defs.h"
 
       private:
-		  ref struct TA_CandleSetting {
-              enum class TA_CandleSettingType settingType;
+		  ref class TA_CandleSetting sealed 
+		  {
+		  public:
+			  enum class TA_CandleSettingType settingType;
               enum class TA_RangeType rangeType;
               int     avgPeriod;
               double  factor;
          };
 
-         ref class TA_GlobalsType
+         ref class TA_GlobalsType sealed
 		 {
          public:
             TA_GlobalsType()
@@ -78,6 +80,10 @@ namespace TA
 				for( int i=0; i < (int)TA_FuncUnstId::TA_FUNC_UNST_ALL; i++ )
 					unstablePeriod[i] = 0;
 				candleSettings = gcnew cli::array<TA_CandleSetting^>((int)TA_CandleSettingType::TA_AllCandleSettings);
+				for( int j=0; j < candleSettings->Length; j++ )
+				{
+					candleSettings[j] = gcnew TA_CandleSetting();					
+				}
             }
 
             /* For handling the compatibility with other software */
@@ -97,8 +103,8 @@ namespace TA
                                 cli::array<double>^ inReal_0,
                                 int           optInTimePeriod_0, /* From 1 to 200 */
                                 double        optInK_1,
-                                [OutAttribute]int^ outBegIdx,
-                                [OutAttribute]int^ outNbElement,
+                                [Out]int% outBegIdx,
+                                [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
          static  enum class TA_RetCode TA_INT_EMA( int           startIdx,
@@ -106,24 +112,24 @@ namespace TA
                                 cli::array<float>^ inReal_0,
                                 int           optInTimePeriod_0, /* From 1 to 200 */
                                 double        optInK_1,
-                                [OutAttribute]int^ outBegIdx,
-                                [OutAttribute]int^ outNbElement,
+                                [Out]int% outBegIdx,
+                                [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
          static  enum class TA_RetCode TA_INT_SMA( int     startIdx,
                                 int     endIdx,
                                 cli::array<double>^ inReal_0,
                                 int     optInTimePeriod_0, /* From 1 to 200 */
-                                [OutAttribute]int^ outBegIdx,
-                                [OutAttribute]int^ outNbElement,
+                                [Out]int% outBegIdx,
+                                [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
          static  enum class TA_RetCode TA_INT_SMA( int     startIdx,
                                 int     endIdx,
                                 cli::array<float>^ inReal_0,
                                 int     optInTimePeriod_0, /* From 1 to 200 */
-                                [OutAttribute]int^ outBegIdx,
-                                [OutAttribute]int^ outNbElement,
+                                [Out]int% outBegIdx,
+                                [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0 );
 
          static  enum class TA_RetCode TA_INT_MACD( int    startIdx,
@@ -132,8 +138,8 @@ namespace TA
                                  int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
                                  int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
                                  int    optInSignalPeriod_2, /* From 1 to 200 */
-                                 [OutAttribute]int^ outBegIdx,
-                                 [OutAttribute]int^ outNbElement,
+                                 [Out]int% outBegIdx,
+                                 [Out]int% outNbElement,
                                  cli::array<double>^ outMACD_0,
                                  cli::array<double>^ outMACDSignal_1,
                                  cli::array<double>^ outMACDHist_2 );
@@ -144,8 +150,8 @@ namespace TA
                                  int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
                                  int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
                                  int    optInSignalPeriod_2, /* From 1 to 200 */
-                                 [OutAttribute]int^ outBegIdx,
-                                 [OutAttribute]int^ outNbElement,
+                                 [Out]int% outBegIdx,
+                                 [Out]int% outNbElement,
                                  cli::array<double>^ outMACD_0,
                                  cli::array<double>^ outMACDSignal_1,
                                  cli::array<double>^ outMACDHist_2 );
@@ -156,8 +162,8 @@ namespace TA
                                int    optInFastPeriod_0, /* From 1 to 200 */
                                int    optInSlowPeriod_1, /* From 1 to 200 */
                                TA_MAType optInMethod_2,
-                               [OutAttribute]int^ outBegIdx,
-                               [OutAttribute]int^ outNbElement,
+                               [Out]int% outBegIdx,
+                               [Out]int% outNbElement,
                                cli::array<double>^ outReal_0,
                                cli::array<double>^ tempBuffer,
                                unsigned int  doPercentageOutput );
@@ -168,8 +174,8 @@ namespace TA
                                int    optInFastPeriod_0, /* From 1 to 200 */
                                int    optInSlowPeriod_1, /* From 1 to 200 */
                                TA_MAType optInMethod_2,
-                               [OutAttribute]int^ outBegIdx,
-                               [OutAttribute]int^ outNbElement,
+                               [Out]int% outBegIdx,
+                               [Out]int% outNbElement,
                                cli::array<double>^ outReal_0,
                                cli::array<double>^ tempBuffer,
                                unsigned int  doPercentageOutput );
@@ -178,16 +184,16 @@ namespace TA
                                 int    endIdx,
 								cli::array<double>^ inReal_0,
                                 int    optInTimePeriod_0,                       
-                                [OutAttribute]int^ outBegIdx,
-                                [OutAttribute]int^ outNbElement,
+                                [Out]int% outBegIdx,
+                                [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
          static  enum class TA_RetCode TA_INT_VAR( int    startIdx,
                                 int    endIdx,
                                 cli::array<float>^ inReal_0,
                                 int    optInTimePeriod_0,                       
-                                [OutAttribute]int^ outBegIdx,
-                                [OutAttribute]int^ outNbElement,
+                                [Out]int% outBegIdx,
+                                [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
          static void TA_INT_stddev_using_precalc_ma( cli::array<double>^  inReal,
@@ -205,7 +211,7 @@ namespace TA
                                               cli::array<double>^ output);
 
       public:
-         Core()
+         static Core()
          {
             // Initialize global settings
             TA_Globals = gcnew TA_GlobalsType;
@@ -300,15 +306,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode MAX( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_MAX Core::MAX
@@ -320,15 +326,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode MIN( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_MIN Core::MIN
@@ -345,8 +351,8 @@ namespace TA
                                               double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                                               double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
                                               TA_MAType     optInMAType,
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outRealUpperBand,
                                               cli::array<double>^  outRealMiddleBand,
                                               cli::array<double>^  outRealLowerBand );
@@ -357,8 +363,8 @@ namespace TA
                                               double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                                               double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
                                               TA_MAType     optInMAType,
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outRealUpperBand,
                                               cli::array<double>^  outRealMiddleBand,
                                               cli::array<double>^  outRealLowerBand );
@@ -372,15 +378,15 @@ namespace TA
                                             int    endIdx,
                                             cli::array<double>^ inReal,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
          static enum class TA_RetCode DEMA( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
 
          #define TA_DEMA Core::DEMA
@@ -392,15 +398,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode EMA( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_EMA Core::EMA
@@ -411,14 +417,14 @@ namespace TA
          static enum class TA_RetCode HT_TRENDLINE( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<double>^ inReal,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<double>^  outReal );
          static enum class TA_RetCode HT_TRENDLINE( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<float>^ inReal,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<double>^  outReal );
 
          #define TA_HT_TRENDLINE Core::HT_TRENDLINE
@@ -430,15 +436,15 @@ namespace TA
                                             int    endIdx,
                                             cli::array<double>^ inReal,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
          static enum class TA_RetCode KAMA( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
 
          #define TA_KAMA Core::KAMA
@@ -451,16 +457,16 @@ namespace TA
                                           cli::array<double>^ inReal,
                                           int           optInTimePeriod, /* From 1 to 100000 */
                                           TA_MAType     optInMAType,
-                                          [OutAttribute]int^ outBegIdx,
-                                          [OutAttribute]int^ outNbElement,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
          static enum class TA_RetCode MA( int    startIdx,
                                           int    endIdx,
                                           cli::array<float>^ inReal,
                                           int           optInTimePeriod, /* From 1 to 100000 */
                                           TA_MAType     optInMAType,
-                                          [OutAttribute]int^ outBegIdx,
-                                          [OutAttribute]int^ outNbElement,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
 
          #define TA_MA Core::MA
@@ -474,8 +480,8 @@ namespace TA
                                             cli::array<double>^ inReal,
                                             double        optInFastLimit, /* From 0.01 to 0.99 */
                                             double        optInSlowLimit, /* From 0.01 to 0.99 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outMAMA,
                                             cli::array<double>^  outFAMA );
          static enum class TA_RetCode MAMA( int    startIdx,
@@ -483,8 +489,8 @@ namespace TA
                                             cli::array<float>^ inReal,
                                             double        optInFastLimit, /* From 0.01 to 0.99 */
                                             double        optInSlowLimit, /* From 0.01 to 0.99 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outMAMA,
                                             cli::array<double>^  outFAMA );
 
@@ -498,16 +504,16 @@ namespace TA
                                                 cli::array<double>^ inHigh,
                                                 cli::array<double>^ inLow,
                                                 int           optInTimePeriod, /* From 2 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode MIDPRICE( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inHigh,
                                                 cli::array<float>^ inLow,
                                                 int           optInTimePeriod, /* From 2 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_MIDPRICE Core::MIDPRICE
@@ -519,15 +525,15 @@ namespace TA
                                                 int    endIdx,
                                                 cli::array<double>^ inReal,
                                                 int           optInTimePeriod, /* From 2 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode MIDPOINT( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inReal,
                                                 int           optInTimePeriod, /* From 2 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_MIDPOINT Core::MIDPOINT
@@ -542,8 +548,8 @@ namespace TA
                                            cli::array<double>^ inLow,
                                            double        optInAcceleration, /* From 0 to TA_REAL_MAX */
                                            double        optInMaximum, /* From 0 to TA_REAL_MAX */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode SAR( int    startIdx,
                                            int    endIdx,
@@ -551,8 +557,8 @@ namespace TA
                                            cli::array<float>^ inLow,
                                            double        optInAcceleration, /* From 0 to TA_REAL_MAX */
                                            double        optInMaximum, /* From 0 to TA_REAL_MAX */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_SAR Core::SAR
@@ -579,8 +585,8 @@ namespace TA
                                               double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
                                               double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
                                               double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outReal );
          static enum class TA_RetCode SAREXT( int    startIdx,
                                               int    endIdx,
@@ -594,8 +600,8 @@ namespace TA
                                               double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
                                               double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
                                               double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outReal );
 
          #define TA_SAREXT Core::SAREXT
@@ -607,15 +613,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode SMA( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_SMA Core::SMA
@@ -629,16 +635,16 @@ namespace TA
                                           cli::array<double>^ inReal,
                                           int           optInTimePeriod, /* From 2 to 100000 */
                                           double        optInVFactor, /* From 0 to 1 */
-                                          [OutAttribute]int^ outBegIdx,
-                                          [OutAttribute]int^ outNbElement,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
          static enum class TA_RetCode T3( int    startIdx,
                                           int    endIdx,
                                           cli::array<float>^ inReal,
                                           int           optInTimePeriod, /* From 2 to 100000 */
                                           double        optInVFactor, /* From 0 to 1 */
-                                          [OutAttribute]int^ outBegIdx,
-                                          [OutAttribute]int^ outNbElement,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
 
          #define TA_T3 Core::T3
@@ -650,15 +656,15 @@ namespace TA
                                             int    endIdx,
                                             cli::array<double>^ inReal,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
          static enum class TA_RetCode TEMA( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
 
          #define TA_TEMA Core::TEMA
@@ -670,15 +676,15 @@ namespace TA
                                              int    endIdx,
                                              cli::array<double>^ inReal,
                                              int           optInTimePeriod, /* From 2 to 100000 */
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outReal );
          static enum class TA_RetCode TRIMA( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
                                              int           optInTimePeriod, /* From 2 to 100000 */
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outReal );
 
          #define TA_TRIMA Core::TRIMA
@@ -690,15 +696,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode WMA( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_WMA Core::WMA
@@ -712,8 +718,8 @@ namespace TA
                                            cli::array<double>^ inLow,
                                            cli::array<double>^ inClose,
                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode ATR( int    startIdx,
                                            int    endIdx,
@@ -721,8 +727,8 @@ namespace TA
                                            cli::array<float>^ inLow,
                                            cli::array<float>^ inClose,
                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_ATR Core::ATR
@@ -735,16 +741,16 @@ namespace TA
                                               cli::array<double>^ inHigh,
                                               cli::array<double>^ inLow,
                                               cli::array<double>^ inClose,
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outReal );
          static enum class TA_RetCode TRANGE( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inHigh,
                                               cli::array<float>^ inLow,
                                               cli::array<float>^ inClose,
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outReal );
 
          #define TA_TRANGE Core::TRANGE
@@ -758,8 +764,8 @@ namespace TA
                                            cli::array<double>^ inLow,
                                            cli::array<double>^ inClose,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode ADX( int    startIdx,
                                            int    endIdx,
@@ -767,8 +773,8 @@ namespace TA
                                            cli::array<float>^ inLow,
                                            cli::array<float>^ inClose,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_ADX Core::ADX
@@ -782,8 +788,8 @@ namespace TA
                                             cli::array<double>^ inLow,
                                             cli::array<double>^ inClose,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
          static enum class TA_RetCode ADXR( int    startIdx,
                                             int    endIdx,
@@ -791,8 +797,8 @@ namespace TA
                                             cli::array<float>^ inLow,
                                             cli::array<float>^ inClose,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
 
          #define TA_ADXR Core::ADXR
@@ -807,8 +813,8 @@ namespace TA
                                            int           optInFastPeriod, /* From 2 to 100000 */
                                            int           optInSlowPeriod, /* From 2 to 100000 */
                                            TA_MAType     optInMAType,
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode APO( int    startIdx,
                                            int    endIdx,
@@ -816,8 +822,8 @@ namespace TA
                                            int           optInFastPeriod, /* From 2 to 100000 */
                                            int           optInSlowPeriod, /* From 2 to 100000 */
                                            TA_MAType     optInMAType,
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_APO Core::APO
@@ -830,8 +836,8 @@ namespace TA
                                              cli::array<double>^ inHigh,
                                              cli::array<double>^ inLow,
                                              int           optInTimePeriod, /* From 2 to 100000 */
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outAroonDown,
                                              cli::array<double>^  outAroonUp );
          static enum class TA_RetCode AROON( int    startIdx,
@@ -839,8 +845,8 @@ namespace TA
                                              cli::array<float>^ inHigh,
                                              cli::array<float>^ inLow,
                                              int           optInTimePeriod, /* From 2 to 100000 */
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outAroonDown,
                                              cli::array<double>^  outAroonUp );
 
@@ -854,16 +860,16 @@ namespace TA
                                                 cli::array<double>^ inHigh,
                                                 cli::array<double>^ inLow,
                                                 int           optInTimePeriod, /* From 2 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode AROONOSC( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inHigh,
                                                 cli::array<float>^ inLow,
                                                 int           optInTimePeriod, /* From 2 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_AROONOSC Core::AROONOSC
@@ -877,8 +883,8 @@ namespace TA
                                            cli::array<double>^ inLow,
                                            cli::array<double>^ inClose,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode CCI( int    startIdx,
                                            int    endIdx,
@@ -886,8 +892,8 @@ namespace TA
                                            cli::array<float>^ inLow,
                                            cli::array<float>^ inClose,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_CCI Core::CCI
@@ -901,8 +907,8 @@ namespace TA
                                           cli::array<double>^ inLow,
                                           cli::array<double>^ inClose,
                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                          [OutAttribute]int^ outBegIdx,
-                                          [OutAttribute]int^ outNbElement,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
          static enum class TA_RetCode DX( int    startIdx,
                                           int    endIdx,
@@ -910,8 +916,8 @@ namespace TA
                                           cli::array<float>^ inLow,
                                           cli::array<float>^ inClose,
                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                          [OutAttribute]int^ outBegIdx,
-                                          [OutAttribute]int^ outNbElement,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
 
          #define TA_DX Core::DX
@@ -927,8 +933,8 @@ namespace TA
                                             int           optInFastPeriod, /* From 2 to 100000 */
                                             int           optInSlowPeriod, /* From 2 to 100000 */
                                             int           optInSignalPeriod, /* From 1 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outMACD,
                                             cli::array<double>^  outMACDSignal,
                                             cli::array<double>^  outMACDHist );
@@ -938,8 +944,8 @@ namespace TA
                                             int           optInFastPeriod, /* From 2 to 100000 */
                                             int           optInSlowPeriod, /* From 2 to 100000 */
                                             int           optInSignalPeriod, /* From 1 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outMACD,
                                             cli::array<double>^  outMACDSignal,
                                             cli::array<double>^  outMACDHist );
@@ -962,8 +968,8 @@ namespace TA
                                                TA_MAType     optInSlowMAType,
                                                int           optInSignalPeriod, /* From 1 to 100000 */
                                                TA_MAType     optInSignalMAType,
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outMACD,
                                                cli::array<double>^  outMACDSignal,
                                                cli::array<double>^  outMACDHist );
@@ -976,8 +982,8 @@ namespace TA
                                                TA_MAType     optInSlowMAType,
                                                int           optInSignalPeriod, /* From 1 to 100000 */
                                                TA_MAType     optInSignalMAType,
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outMACD,
                                                cli::array<double>^  outMACDSignal,
                                                cli::array<double>^  outMACDHist );
@@ -991,8 +997,8 @@ namespace TA
                                                int    endIdx,
                                                cli::array<double>^ inReal,
                                                int           optInSignalPeriod, /* From 1 to 100000 */
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outMACD,
                                                cli::array<double>^  outMACDSignal,
                                                cli::array<double>^  outMACDHist );
@@ -1000,8 +1006,8 @@ namespace TA
                                                int    endIdx,
                                                cli::array<float>^ inReal,
                                                int           optInSignalPeriod, /* From 1 to 100000 */
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outMACD,
                                                cli::array<double>^  outMACDSignal,
                                                cli::array<double>^  outMACDHist );
@@ -1018,8 +1024,8 @@ namespace TA
                                            cli::array<double>^ inClose,
                                            cli::array<int>^ inVolume,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode MFI( int    startIdx,
                                            int    endIdx,
@@ -1028,8 +1034,8 @@ namespace TA
                                            cli::array<float>^ inClose,
                                            cli::array<int>^ inVolume,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_MFI Core::MFI
@@ -1043,8 +1049,8 @@ namespace TA
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
                                                 int           optInTimePeriod, /* From 1 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode MINUS_DI( int    startIdx,
                                                 int    endIdx,
@@ -1052,8 +1058,8 @@ namespace TA
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
                                                 int           optInTimePeriod, /* From 1 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_MINUS_DI Core::MINUS_DI
@@ -1066,16 +1072,16 @@ namespace TA
                                                 cli::array<double>^ inHigh,
                                                 cli::array<double>^ inLow,
                                                 int           optInTimePeriod, /* From 1 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode MINUS_DM( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inHigh,
                                                 cli::array<float>^ inLow,
                                                 int           optInTimePeriod, /* From 1 to 100000 */
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_MINUS_DM Core::MINUS_DM
@@ -1087,15 +1093,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode MOM( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_MOM Core::MOM
@@ -1110,8 +1116,8 @@ namespace TA
                                            int           optInFastPeriod, /* From 2 to 100000 */
                                            int           optInSlowPeriod, /* From 2 to 100000 */
                                            TA_MAType     optInMAType,
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode PPO( int    startIdx,
                                            int    endIdx,
@@ -1119,8 +1125,8 @@ namespace TA
                                            int           optInFastPeriod, /* From 2 to 100000 */
                                            int           optInSlowPeriod, /* From 2 to 100000 */
                                            TA_MAType     optInMAType,
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_PPO Core::PPO
@@ -1134,8 +1140,8 @@ namespace TA
                                                cli::array<double>^ inLow,
                                                cli::array<double>^ inClose,
                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outReal );
          static enum class TA_RetCode PLUS_DI( int    startIdx,
                                                int    endIdx,
@@ -1143,8 +1149,8 @@ namespace TA
                                                cli::array<float>^ inLow,
                                                cli::array<float>^ inClose,
                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outReal );
 
          #define TA_PLUS_DI Core::PLUS_DI
@@ -1157,16 +1163,16 @@ namespace TA
                                                cli::array<double>^ inHigh,
                                                cli::array<double>^ inLow,
                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outReal );
          static enum class TA_RetCode PLUS_DM( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inHigh,
                                                cli::array<float>^ inLow,
                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outReal );
 
          #define TA_PLUS_DM Core::PLUS_DM
@@ -1178,15 +1184,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode ROC( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_ROC Core::ROC
@@ -1198,15 +1204,15 @@ namespace TA
                                             int    endIdx,
                                             cli::array<double>^ inReal,
                                             int           optInTimePeriod, /* From 1 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
          static enum class TA_RetCode ROCP( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
                                             int           optInTimePeriod, /* From 1 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
 
          #define TA_ROCP Core::ROCP
@@ -1218,15 +1224,15 @@ namespace TA
                                             int    endIdx,
                                             cli::array<double>^ inReal,
                                             int           optInTimePeriod, /* From 1 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
          static enum class TA_RetCode ROCR( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
                                             int           optInTimePeriod, /* From 1 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
 
          #define TA_ROCR Core::ROCR
@@ -1238,15 +1244,15 @@ namespace TA
                                                int    endIdx,
                                                cli::array<double>^ inReal,
                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outReal );
          static enum class TA_RetCode ROCR100( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inReal,
                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outReal );
 
          #define TA_ROCR100 Core::ROCR100
@@ -1258,15 +1264,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode RSI( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_RSI Core::RSI
@@ -1287,8 +1293,8 @@ namespace TA
                                              TA_MAType     optInSlowK_MAType,
                                              int           optInSlowD_Period, /* From 1 to 100000 */
                                              TA_MAType     optInSlowD_MAType,
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outSlowK,
                                              cli::array<double>^  outSlowD );
          static enum class TA_RetCode STOCH( int    startIdx,
@@ -1301,8 +1307,8 @@ namespace TA
                                              TA_MAType     optInSlowK_MAType,
                                              int           optInSlowD_Period, /* From 1 to 100000 */
                                              TA_MAType     optInSlowD_MAType,
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outSlowK,
                                              cli::array<double>^  outSlowD );
 
@@ -1320,8 +1326,8 @@ namespace TA
                                               int           optInFastK_Period, /* From 1 to 100000 */
                                               int           optInFastD_Period, /* From 1 to 100000 */
                                               TA_MAType     optInFastD_MAType,
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outFastK,
                                               cli::array<double>^  outFastD );
          static enum class TA_RetCode STOCHF( int    startIdx,
@@ -1332,8 +1338,8 @@ namespace TA
                                               int           optInFastK_Period, /* From 1 to 100000 */
                                               int           optInFastD_Period, /* From 1 to 100000 */
                                               TA_MAType     optInFastD_MAType,
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outFastK,
                                               cli::array<double>^  outFastD );
 
@@ -1351,8 +1357,8 @@ namespace TA
                                                 int           optInFastK_Period, /* From 1 to 100000 */
                                                 int           optInFastD_Period, /* From 1 to 100000 */
                                                 TA_MAType     optInFastD_MAType,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outFastK,
                                                 cli::array<double>^  outFastD );
          static enum class TA_RetCode STOCHRSI( int    startIdx,
@@ -1362,8 +1368,8 @@ namespace TA
                                                 int           optInFastK_Period, /* From 1 to 100000 */
                                                 int           optInFastD_Period, /* From 1 to 100000 */
                                                 TA_MAType     optInFastD_MAType,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outFastK,
                                                 cli::array<double>^  outFastD );
 
@@ -1376,15 +1382,15 @@ namespace TA
                                             int    endIdx,
                                             cli::array<double>^ inReal,
                                             int           optInTimePeriod, /* From 1 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
          static enum class TA_RetCode TRIX( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
                                             int           optInTimePeriod, /* From 1 to 100000 */
-                                            [OutAttribute]int^ outBegIdx,
-                                            [OutAttribute]int^ outNbElement,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
                                             cli::array<double>^  outReal );
 
          #define TA_TRIX Core::TRIX
@@ -1398,8 +1404,8 @@ namespace TA
                                              cli::array<double>^ inLow,
                                              cli::array<double>^ inClose,
                                              int           optInTimePeriod, /* From 2 to 100000 */
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outReal );
          static enum class TA_RetCode WILLR( int    startIdx,
                                              int    endIdx,
@@ -1407,8 +1413,8 @@ namespace TA
                                              cli::array<float>^ inLow,
                                              cli::array<float>^ inClose,
                                              int           optInTimePeriod, /* From 2 to 100000 */
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outReal );
 
          #define TA_WILLR Core::WILLR
@@ -1419,14 +1425,14 @@ namespace TA
          static enum class TA_RetCode HT_DCPERIOD( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inReal,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<double>^  outReal );
          static enum class TA_RetCode HT_DCPERIOD( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inReal,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<double>^  outReal );
 
          #define TA_HT_DCPERIOD Core::HT_DCPERIOD
@@ -1437,14 +1443,14 @@ namespace TA
          static enum class TA_RetCode HT_DCPHASE( int    startIdx,
                                                   int    endIdx,
                                                   cli::array<double>^ inReal,
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<double>^  outReal );
          static enum class TA_RetCode HT_DCPHASE( int    startIdx,
                                                   int    endIdx,
                                                   cli::array<float>^ inReal,
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<double>^  outReal );
 
          #define TA_HT_DCPHASE Core::HT_DCPHASE
@@ -1455,15 +1461,15 @@ namespace TA
          static enum class TA_RetCode HT_PHASOR( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<double>^ inReal,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<double>^  outInPhase,
                                                  cli::array<double>^  outQuadrature );
          static enum class TA_RetCode HT_PHASOR( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<float>^ inReal,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<double>^  outInPhase,
                                                  cli::array<double>^  outQuadrature );
 
@@ -1475,15 +1481,15 @@ namespace TA
          static enum class TA_RetCode HT_SINE( int    startIdx,
                                                int    endIdx,
                                                cli::array<double>^ inReal,
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outSine,
                                                cli::array<double>^  outLeadSine );
          static enum class TA_RetCode HT_SINE( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inReal,
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<double>^  outSine,
                                                cli::array<double>^  outLeadSine );
 
@@ -1495,14 +1501,14 @@ namespace TA
          static enum class TA_RetCode HT_TRENDMODE( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<double>^ inReal,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
          static enum class TA_RetCode HT_TRENDMODE( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<float>^ inReal,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_HT_TRENDMODE Core::HT_TRENDMODE
@@ -1516,8 +1522,8 @@ namespace TA
                                           cli::array<double>^ inLow,
                                           cli::array<double>^ inClose,
                                           cli::array<int>^ inVolume,
-                                          [OutAttribute]int^ outBegIdx,
-                                          [OutAttribute]int^ outNbElement,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
          static enum class TA_RetCode AD( int    startIdx,
                                           int    endIdx,
@@ -1525,8 +1531,8 @@ namespace TA
                                           cli::array<float>^ inLow,
                                           cli::array<float>^ inClose,
                                           cli::array<int>^ inVolume,
-                                          [OutAttribute]int^ outBegIdx,
-                                          [OutAttribute]int^ outNbElement,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
 
          #define TA_AD Core::AD
@@ -1543,8 +1549,8 @@ namespace TA
                                              cli::array<int>^ inVolume,
                                              int           optInFastPeriod, /* From 2 to 100000 */
                                              int           optInSlowPeriod, /* From 2 to 100000 */
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outReal );
          static enum class TA_RetCode ADOSC( int    startIdx,
                                              int    endIdx,
@@ -1554,8 +1560,8 @@ namespace TA
                                              cli::array<int>^ inVolume,
                                              int           optInFastPeriod, /* From 2 to 100000 */
                                              int           optInSlowPeriod, /* From 2 to 100000 */
-                                             [OutAttribute]int^ outBegIdx,
-                                             [OutAttribute]int^ outNbElement,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
                                              cli::array<double>^  outReal );
 
          #define TA_ADOSC Core::ADOSC
@@ -1567,15 +1573,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            cli::array<int>^ inVolume,
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<int>^  outInteger );
          static enum class TA_RetCode OBV( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            cli::array<int>^ inVolume,
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<int>^  outInteger );
 
          #define TA_OBV Core::OBV
@@ -1589,8 +1595,8 @@ namespace TA
                                                  cli::array<double>^ inHigh,
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
          static enum class TA_RetCode CDL2CROWS( int    startIdx,
                                                  int    endIdx,
@@ -1598,8 +1604,8 @@ namespace TA
                                                  cli::array<float>^ inHigh,
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDL2CROWS Core::CDL2CROWS
@@ -1613,8 +1619,8 @@ namespace TA
                                                       cli::array<double>^ inHigh,
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
          static enum class TA_RetCode CDL3BLACKCROWS( int    startIdx,
                                                       int    endIdx,
@@ -1622,8 +1628,8 @@ namespace TA
                                                       cli::array<float>^ inHigh,
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDL3BLACKCROWS Core::CDL3BLACKCROWS
@@ -1637,8 +1643,8 @@ namespace TA
                                                   cli::array<double>^ inHigh,
                                                   cli::array<double>^ inLow,
                                                   cli::array<double>^ inClose,
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<int>^  outInteger );
          static enum class TA_RetCode CDL3INSIDE( int    startIdx,
                                                   int    endIdx,
@@ -1646,8 +1652,8 @@ namespace TA
                                                   cli::array<float>^ inHigh,
                                                   cli::array<float>^ inLow,
                                                   cli::array<float>^ inClose,
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<int>^  outInteger );
 
          #define TA_CDL3INSIDE Core::CDL3INSIDE
@@ -1661,8 +1667,8 @@ namespace TA
                                                       cli::array<double>^ inHigh,
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
          static enum class TA_RetCode CDL3LINESTRIKE( int    startIdx,
                                                       int    endIdx,
@@ -1670,8 +1676,8 @@ namespace TA
                                                       cli::array<float>^ inHigh,
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDL3LINESTRIKE Core::CDL3LINESTRIKE
@@ -1685,8 +1691,8 @@ namespace TA
                                                    cli::array<double>^ inHigh,
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
          static enum class TA_RetCode CDL3OUTSIDE( int    startIdx,
                                                    int    endIdx,
@@ -1694,8 +1700,8 @@ namespace TA
                                                    cli::array<float>^ inHigh,
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDL3OUTSIDE Core::CDL3OUTSIDE
@@ -1709,8 +1715,8 @@ namespace TA
                                                         cli::array<double>^ inHigh,
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
          static enum class TA_RetCode CDL3STARSINSOUTH( int    startIdx,
                                                         int    endIdx,
@@ -1718,8 +1724,8 @@ namespace TA
                                                         cli::array<float>^ inHigh,
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDL3STARSINSOUTH Core::CDL3STARSINSOUTH
@@ -1733,8 +1739,8 @@ namespace TA
                                                          cli::array<double>^ inHigh,
                                                          cli::array<double>^ inLow,
                                                          cli::array<double>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
          static enum class TA_RetCode CDL3WHITESOLDIERS( int    startIdx,
                                                          int    endIdx,
@@ -1742,8 +1748,8 @@ namespace TA
                                                          cli::array<float>^ inHigh,
                                                          cli::array<float>^ inLow,
                                                          cli::array<float>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
 
          #define TA_CDL3WHITESOLDIERS Core::CDL3WHITESOLDIERS
@@ -1758,8 +1764,8 @@ namespace TA
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
                                                         double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLABANDONEDBABY( int    startIdx,
                                                         int    endIdx,
@@ -1768,8 +1774,8 @@ namespace TA
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
                                                         double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDLABANDONEDBABY Core::CDLABANDONEDBABY
@@ -1783,8 +1789,8 @@ namespace TA
                                                        cli::array<double>^ inHigh,
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLADVANCEBLOCK( int    startIdx,
                                                        int    endIdx,
@@ -1792,8 +1798,8 @@ namespace TA
                                                        cli::array<float>^ inHigh,
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLADVANCEBLOCK Core::CDLADVANCEBLOCK
@@ -1807,8 +1813,8 @@ namespace TA
                                                    cli::array<double>^ inHigh,
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLBELTHOLD( int    startIdx,
                                                    int    endIdx,
@@ -1816,8 +1822,8 @@ namespace TA
                                                    cli::array<float>^ inHigh,
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLBELTHOLD Core::CDLBELTHOLD
@@ -1831,8 +1837,8 @@ namespace TA
                                                     cli::array<double>^ inHigh,
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLBREAKAWAY( int    startIdx,
                                                     int    endIdx,
@@ -1840,8 +1846,8 @@ namespace TA
                                                     cli::array<float>^ inHigh,
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLBREAKAWAY Core::CDLBREAKAWAY
@@ -1855,8 +1861,8 @@ namespace TA
                                                           cli::array<double>^ inHigh,
                                                           cli::array<double>^ inLow,
                                                           cli::array<double>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLCLOSINGMARUBOZU( int    startIdx,
                                                           int    endIdx,
@@ -1864,8 +1870,8 @@ namespace TA
                                                           cli::array<float>^ inHigh,
                                                           cli::array<float>^ inLow,
                                                           cli::array<float>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
 
          #define TA_CDLCLOSINGMARUBOZU Core::CDLCLOSINGMARUBOZU
@@ -1879,8 +1885,8 @@ namespace TA
                                                            cli::array<double>^ inHigh,
                                                            cli::array<double>^ inLow,
                                                            cli::array<double>^ inClose,
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLCONCEALBABYSWALL( int    startIdx,
                                                            int    endIdx,
@@ -1888,8 +1894,8 @@ namespace TA
                                                            cli::array<float>^ inHigh,
                                                            cli::array<float>^ inLow,
                                                            cli::array<float>^ inClose,
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<int>^  outInteger );
 
          #define TA_CDLCONCEALBABYSWALL Core::CDLCONCEALBABYSWALL
@@ -1903,8 +1909,8 @@ namespace TA
                                                         cli::array<double>^ inHigh,
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLCOUNTERATTACK( int    startIdx,
                                                         int    endIdx,
@@ -1912,8 +1918,8 @@ namespace TA
                                                         cli::array<float>^ inHigh,
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDLCOUNTERATTACK Core::CDLCOUNTERATTACK
@@ -1928,8 +1934,8 @@ namespace TA
                                                          cli::array<double>^ inLow,
                                                          cli::array<double>^ inClose,
                                                          double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLDARKCLOUDCOVER( int    startIdx,
                                                          int    endIdx,
@@ -1938,8 +1944,8 @@ namespace TA
                                                          cli::array<float>^ inLow,
                                                          cli::array<float>^ inClose,
                                                          double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
 
          #define TA_CDLDARKCLOUDCOVER Core::CDLDARKCLOUDCOVER
@@ -1953,8 +1959,8 @@ namespace TA
                                                cli::array<double>^ inHigh,
                                                cli::array<double>^ inLow,
                                                cli::array<double>^ inClose,
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLDOJI( int    startIdx,
                                                int    endIdx,
@@ -1962,8 +1968,8 @@ namespace TA
                                                cli::array<float>^ inHigh,
                                                cli::array<float>^ inLow,
                                                cli::array<float>^ inClose,
-                                               [OutAttribute]int^ outBegIdx,
-                                               [OutAttribute]int^ outNbElement,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
                                                cli::array<int>^  outInteger );
 
          #define TA_CDLDOJI Core::CDLDOJI
@@ -1977,8 +1983,8 @@ namespace TA
                                                    cli::array<double>^ inHigh,
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLDOJISTAR( int    startIdx,
                                                    int    endIdx,
@@ -1986,8 +1992,8 @@ namespace TA
                                                    cli::array<float>^ inHigh,
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLDOJISTAR Core::CDLDOJISTAR
@@ -2001,8 +2007,8 @@ namespace TA
                                                         cli::array<double>^ inHigh,
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLDRAGONFLYDOJI( int    startIdx,
                                                         int    endIdx,
@@ -2010,8 +2016,8 @@ namespace TA
                                                         cli::array<float>^ inHigh,
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDLDRAGONFLYDOJI Core::CDLDRAGONFLYDOJI
@@ -2025,8 +2031,8 @@ namespace TA
                                                     cli::array<double>^ inHigh,
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLENGULFING( int    startIdx,
                                                     int    endIdx,
@@ -2034,8 +2040,8 @@ namespace TA
                                                     cli::array<float>^ inHigh,
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLENGULFING Core::CDLENGULFING
@@ -2050,8 +2056,8 @@ namespace TA
                                                           cli::array<double>^ inLow,
                                                           cli::array<double>^ inClose,
                                                           double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLEVENINGDOJISTAR( int    startIdx,
                                                           int    endIdx,
@@ -2060,8 +2066,8 @@ namespace TA
                                                           cli::array<float>^ inLow,
                                                           cli::array<float>^ inClose,
                                                           double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
 
          #define TA_CDLEVENINGDOJISTAR Core::CDLEVENINGDOJISTAR
@@ -2076,8 +2082,8 @@ namespace TA
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLEVENINGSTAR( int    startIdx,
                                                       int    endIdx,
@@ -2086,8 +2092,8 @@ namespace TA
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLEVENINGSTAR Core::CDLEVENINGSTAR
@@ -2101,8 +2107,8 @@ namespace TA
                                                            cli::array<double>^ inHigh,
                                                            cli::array<double>^ inLow,
                                                            cli::array<double>^ inClose,
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLGAPSIDESIDEWHITE( int    startIdx,
                                                            int    endIdx,
@@ -2110,8 +2116,8 @@ namespace TA
                                                            cli::array<float>^ inHigh,
                                                            cli::array<float>^ inLow,
                                                            cli::array<float>^ inClose,
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<int>^  outInteger );
 
          #define TA_CDLGAPSIDESIDEWHITE Core::CDLGAPSIDESIDEWHITE
@@ -2125,8 +2131,8 @@ namespace TA
                                                          cli::array<double>^ inHigh,
                                                          cli::array<double>^ inLow,
                                                          cli::array<double>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLGRAVESTONEDOJI( int    startIdx,
                                                          int    endIdx,
@@ -2134,8 +2140,8 @@ namespace TA
                                                          cli::array<float>^ inHigh,
                                                          cli::array<float>^ inLow,
                                                          cli::array<float>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
 
          #define TA_CDLGRAVESTONEDOJI Core::CDLGRAVESTONEDOJI
@@ -2149,8 +2155,8 @@ namespace TA
                                                  cli::array<double>^ inHigh,
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLHAMMER( int    startIdx,
                                                  int    endIdx,
@@ -2158,8 +2164,8 @@ namespace TA
                                                  cli::array<float>^ inHigh,
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLHAMMER Core::CDLHAMMER
@@ -2173,8 +2179,8 @@ namespace TA
                                                      cli::array<double>^ inHigh,
                                                      cli::array<double>^ inLow,
                                                      cli::array<double>^ inClose,
-                                                     [OutAttribute]int^ outBegIdx,
-                                                     [OutAttribute]int^ outNbElement,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNbElement,
                                                      cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLHANGINGMAN( int    startIdx,
                                                      int    endIdx,
@@ -2182,8 +2188,8 @@ namespace TA
                                                      cli::array<float>^ inHigh,
                                                      cli::array<float>^ inLow,
                                                      cli::array<float>^ inClose,
-                                                     [OutAttribute]int^ outBegIdx,
-                                                     [OutAttribute]int^ outNbElement,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNbElement,
                                                      cli::array<int>^  outInteger );
 
          #define TA_CDLHANGINGMAN Core::CDLHANGINGMAN
@@ -2197,8 +2203,8 @@ namespace TA
                                                  cli::array<double>^ inHigh,
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLHARAMI( int    startIdx,
                                                  int    endIdx,
@@ -2206,8 +2212,8 @@ namespace TA
                                                  cli::array<float>^ inHigh,
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLHARAMI Core::CDLHARAMI
@@ -2221,8 +2227,8 @@ namespace TA
                                                       cli::array<double>^ inHigh,
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLHARAMICROSS( int    startIdx,
                                                       int    endIdx,
@@ -2230,8 +2236,8 @@ namespace TA
                                                       cli::array<float>^ inHigh,
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLHARAMICROSS Core::CDLHARAMICROSS
@@ -2245,8 +2251,8 @@ namespace TA
                                                    cli::array<double>^ inHigh,
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLHIGHWAVE( int    startIdx,
                                                    int    endIdx,
@@ -2254,8 +2260,8 @@ namespace TA
                                                    cli::array<float>^ inHigh,
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLHIGHWAVE Core::CDLHIGHWAVE
@@ -2269,8 +2275,8 @@ namespace TA
                                                        cli::array<double>^ inHigh,
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLHOMINGPIGEON( int    startIdx,
                                                        int    endIdx,
@@ -2278,8 +2284,8 @@ namespace TA
                                                        cli::array<float>^ inHigh,
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLHOMINGPIGEON Core::CDLHOMINGPIGEON
@@ -2293,8 +2299,8 @@ namespace TA
                                                           cli::array<double>^ inHigh,
                                                           cli::array<double>^ inLow,
                                                           cli::array<double>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLIDENTICAL3CROWS( int    startIdx,
                                                           int    endIdx,
@@ -2302,8 +2308,8 @@ namespace TA
                                                           cli::array<float>^ inHigh,
                                                           cli::array<float>^ inLow,
                                                           cli::array<float>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
 
          #define TA_CDLIDENTICAL3CROWS Core::CDLIDENTICAL3CROWS
@@ -2317,8 +2323,8 @@ namespace TA
                                                  cli::array<double>^ inHigh,
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLINNECK( int    startIdx,
                                                  int    endIdx,
@@ -2326,8 +2332,8 @@ namespace TA
                                                  cli::array<float>^ inHigh,
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLINNECK Core::CDLINNECK
@@ -2341,8 +2347,8 @@ namespace TA
                                                          cli::array<double>^ inHigh,
                                                          cli::array<double>^ inLow,
                                                          cli::array<double>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLINVERTEDHAMMER( int    startIdx,
                                                          int    endIdx,
@@ -2350,8 +2356,8 @@ namespace TA
                                                          cli::array<float>^ inHigh,
                                                          cli::array<float>^ inLow,
                                                          cli::array<float>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
 
          #define TA_CDLINVERTEDHAMMER Core::CDLINVERTEDHAMMER
@@ -2365,8 +2371,8 @@ namespace TA
                                                   cli::array<double>^ inHigh,
                                                   cli::array<double>^ inLow,
                                                   cli::array<double>^ inClose,
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLKICKING( int    startIdx,
                                                   int    endIdx,
@@ -2374,8 +2380,8 @@ namespace TA
                                                   cli::array<float>^ inHigh,
                                                   cli::array<float>^ inLow,
                                                   cli::array<float>^ inClose,
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<int>^  outInteger );
 
          #define TA_CDLKICKING Core::CDLKICKING
@@ -2389,8 +2395,8 @@ namespace TA
                                                           cli::array<double>^ inHigh,
                                                           cli::array<double>^ inLow,
                                                           cli::array<double>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLKICKINGBYLENGTH( int    startIdx,
                                                           int    endIdx,
@@ -2398,8 +2404,8 @@ namespace TA
                                                           cli::array<float>^ inHigh,
                                                           cli::array<float>^ inLow,
                                                           cli::array<float>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
 
          #define TA_CDLKICKINGBYLENGTH Core::CDLKICKINGBYLENGTH
@@ -2413,8 +2419,8 @@ namespace TA
                                                        cli::array<double>^ inHigh,
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLLADDERBOTTOM( int    startIdx,
                                                        int    endIdx,
@@ -2422,8 +2428,8 @@ namespace TA
                                                        cli::array<float>^ inHigh,
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLLADDERBOTTOM Core::CDLLADDERBOTTOM
@@ -2437,8 +2443,8 @@ namespace TA
                                                          cli::array<double>^ inHigh,
                                                          cli::array<double>^ inLow,
                                                          cli::array<double>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLLONGLEGGEDDOJI( int    startIdx,
                                                          int    endIdx,
@@ -2446,8 +2452,8 @@ namespace TA
                                                          cli::array<float>^ inHigh,
                                                          cli::array<float>^ inLow,
                                                          cli::array<float>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
 
          #define TA_CDLLONGLEGGEDDOJI Core::CDLLONGLEGGEDDOJI
@@ -2461,8 +2467,8 @@ namespace TA
                                                    cli::array<double>^ inHigh,
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLLONGLINE( int    startIdx,
                                                    int    endIdx,
@@ -2470,8 +2476,8 @@ namespace TA
                                                    cli::array<float>^ inHigh,
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLLONGLINE Core::CDLLONGLINE
@@ -2485,8 +2491,8 @@ namespace TA
                                                    cli::array<double>^ inHigh,
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLMARUBOZU( int    startIdx,
                                                    int    endIdx,
@@ -2494,8 +2500,8 @@ namespace TA
                                                    cli::array<float>^ inHigh,
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLMARUBOZU Core::CDLMARUBOZU
@@ -2510,8 +2516,8 @@ namespace TA
                                                   cli::array<double>^ inLow,
                                                   cli::array<double>^ inClose,
                                                   double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLMATHOLD( int    startIdx,
                                                   int    endIdx,
@@ -2520,8 +2526,8 @@ namespace TA
                                                   cli::array<float>^ inLow,
                                                   cli::array<float>^ inClose,
                                                   double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<int>^  outInteger );
 
          #define TA_CDLMATHOLD Core::CDLMATHOLD
@@ -2535,8 +2541,8 @@ namespace TA
                                                       cli::array<double>^ inHigh,
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLMATCHINGLOW( int    startIdx,
                                                       int    endIdx,
@@ -2544,8 +2550,8 @@ namespace TA
                                                       cli::array<float>^ inHigh,
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLMATCHINGLOW Core::CDLMATCHINGLOW
@@ -2560,8 +2566,8 @@ namespace TA
                                                           cli::array<double>^ inLow,
                                                           cli::array<double>^ inClose,
                                                           double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLMORNINGDOJISTAR( int    startIdx,
                                                           int    endIdx,
@@ -2570,8 +2576,8 @@ namespace TA
                                                           cli::array<float>^ inLow,
                                                           cli::array<float>^ inClose,
                                                           double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
 
          #define TA_CDLMORNINGDOJISTAR Core::CDLMORNINGDOJISTAR
@@ -2586,8 +2592,8 @@ namespace TA
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLMORNINGSTAR( int    startIdx,
                                                       int    endIdx,
@@ -2596,8 +2602,8 @@ namespace TA
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLMORNINGSTAR Core::CDLMORNINGSTAR
@@ -2611,8 +2617,8 @@ namespace TA
                                                  cli::array<double>^ inHigh,
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLONNECK( int    startIdx,
                                                  int    endIdx,
@@ -2620,8 +2626,8 @@ namespace TA
                                                  cli::array<float>^ inHigh,
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLONNECK Core::CDLONNECK
@@ -2635,8 +2641,8 @@ namespace TA
                                                    cli::array<double>^ inHigh,
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLPIERCING( int    startIdx,
                                                    int    endIdx,
@@ -2644,8 +2650,8 @@ namespace TA
                                                    cli::array<float>^ inHigh,
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
-                                                   [OutAttribute]int^ outBegIdx,
-                                                   [OutAttribute]int^ outNbElement,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLPIERCING Core::CDLPIERCING
@@ -2659,8 +2665,8 @@ namespace TA
                                                       cli::array<double>^ inHigh,
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLRICKSHAWMAN( int    startIdx,
                                                       int    endIdx,
@@ -2668,8 +2674,8 @@ namespace TA
                                                       cli::array<float>^ inHigh,
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLRICKSHAWMAN Core::CDLRICKSHAWMAN
@@ -2683,8 +2689,8 @@ namespace TA
                                                            cli::array<double>^ inHigh,
                                                            cli::array<double>^ inLow,
                                                            cli::array<double>^ inClose,
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLRISEFALL3METHODS( int    startIdx,
                                                            int    endIdx,
@@ -2692,8 +2698,8 @@ namespace TA
                                                            cli::array<float>^ inHigh,
                                                            cli::array<float>^ inLow,
                                                            cli::array<float>^ inClose,
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<int>^  outInteger );
 
          #define TA_CDLRISEFALL3METHODS Core::CDLRISEFALL3METHODS
@@ -2707,8 +2713,8 @@ namespace TA
                                                           cli::array<double>^ inHigh,
                                                           cli::array<double>^ inLow,
                                                           cli::array<double>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLSEPARATINGLINES( int    startIdx,
                                                           int    endIdx,
@@ -2716,8 +2722,8 @@ namespace TA
                                                           cli::array<float>^ inHigh,
                                                           cli::array<float>^ inLow,
                                                           cli::array<float>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
 
          #define TA_CDLSEPARATINGLINES Core::CDLSEPARATINGLINES
@@ -2731,8 +2737,8 @@ namespace TA
                                                        cli::array<double>^ inHigh,
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLSHOOTINGSTAR( int    startIdx,
                                                        int    endIdx,
@@ -2740,8 +2746,8 @@ namespace TA
                                                        cli::array<float>^ inHigh,
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLSHOOTINGSTAR Core::CDLSHOOTINGSTAR
@@ -2755,8 +2761,8 @@ namespace TA
                                                     cli::array<double>^ inHigh,
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLSHORTLINE( int    startIdx,
                                                     int    endIdx,
@@ -2764,8 +2770,8 @@ namespace TA
                                                     cli::array<float>^ inHigh,
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLSHORTLINE Core::CDLSHORTLINE
@@ -2779,8 +2785,8 @@ namespace TA
                                                       cli::array<double>^ inHigh,
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLSPINNINGTOP( int    startIdx,
                                                       int    endIdx,
@@ -2788,8 +2794,8 @@ namespace TA
                                                       cli::array<float>^ inHigh,
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
-                                                      [OutAttribute]int^ outBegIdx,
-                                                      [OutAttribute]int^ outNbElement,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLSPINNINGTOP Core::CDLSPINNINGTOP
@@ -2803,8 +2809,8 @@ namespace TA
                                                          cli::array<double>^ inHigh,
                                                          cli::array<double>^ inLow,
                                                          cli::array<double>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLSTALLEDPATTERN( int    startIdx,
                                                          int    endIdx,
@@ -2812,8 +2818,8 @@ namespace TA
                                                          cli::array<float>^ inHigh,
                                                          cli::array<float>^ inLow,
                                                          cli::array<float>^ inClose,
-                                                         [OutAttribute]int^ outBegIdx,
-                                                         [OutAttribute]int^ outNbElement,
+                                                         [Out]int%    outBegIdx,
+                                                         [Out]int%    outNbElement,
                                                          cli::array<int>^  outInteger );
 
          #define TA_CDLSTALLEDPATTERN Core::CDLSTALLEDPATTERN
@@ -2827,8 +2833,8 @@ namespace TA
                                                         cli::array<double>^ inHigh,
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLSTICKSANDWICH( int    startIdx,
                                                         int    endIdx,
@@ -2836,8 +2842,8 @@ namespace TA
                                                         cli::array<float>^ inHigh,
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
-                                                        [OutAttribute]int^ outBegIdx,
-                                                        [OutAttribute]int^ outNbElement,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNbElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDLSTICKSANDWICH Core::CDLSTICKSANDWICH
@@ -2851,8 +2857,8 @@ namespace TA
                                                  cli::array<double>^ inHigh,
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLTAKURI( int    startIdx,
                                                  int    endIdx,
@@ -2860,8 +2866,8 @@ namespace TA
                                                  cli::array<float>^ inHigh,
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLTAKURI Core::CDLTAKURI
@@ -2875,8 +2881,8 @@ namespace TA
                                                     cli::array<double>^ inHigh,
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLTASUKIGAP( int    startIdx,
                                                     int    endIdx,
@@ -2884,8 +2890,8 @@ namespace TA
                                                     cli::array<float>^ inHigh,
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLTASUKIGAP Core::CDLTASUKIGAP
@@ -2899,8 +2905,8 @@ namespace TA
                                                     cli::array<double>^ inHigh,
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLTHRUSTING( int    startIdx,
                                                     int    endIdx,
@@ -2908,8 +2914,8 @@ namespace TA
                                                     cli::array<float>^ inHigh,
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
-                                                    [OutAttribute]int^ outBegIdx,
-                                                    [OutAttribute]int^ outNbElement,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLTHRUSTING Core::CDLTHRUSTING
@@ -2923,8 +2929,8 @@ namespace TA
                                                   cli::array<double>^ inHigh,
                                                   cli::array<double>^ inLow,
                                                   cli::array<double>^ inClose,
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLTRISTAR( int    startIdx,
                                                   int    endIdx,
@@ -2932,8 +2938,8 @@ namespace TA
                                                   cli::array<float>^ inHigh,
                                                   cli::array<float>^ inLow,
                                                   cli::array<float>^ inClose,
-                                                  [OutAttribute]int^ outBegIdx,
-                                                  [OutAttribute]int^ outNbElement,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
                                                   cli::array<int>^  outInteger );
 
          #define TA_CDLTRISTAR Core::CDLTRISTAR
@@ -2947,8 +2953,8 @@ namespace TA
                                                        cli::array<double>^ inHigh,
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLUNIQUE3RIVER( int    startIdx,
                                                        int    endIdx,
@@ -2956,8 +2962,8 @@ namespace TA
                                                        cli::array<float>^ inHigh,
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLUNIQUE3RIVER Core::CDLUNIQUE3RIVER
@@ -2971,8 +2977,8 @@ namespace TA
                                                           cli::array<double>^ inHigh,
                                                           cli::array<double>^ inLow,
                                                           cli::array<double>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLUPSIDEGAP2CROWS( int    startIdx,
                                                           int    endIdx,
@@ -2980,8 +2986,8 @@ namespace TA
                                                           cli::array<float>^ inHigh,
                                                           cli::array<float>^ inLow,
                                                           cli::array<float>^ inClose,
-                                                          [OutAttribute]int^ outBegIdx,
-                                                          [OutAttribute]int^ outNbElement,
+                                                          [Out]int%    outBegIdx,
+                                                          [Out]int%    outNbElement,
                                                           cli::array<int>^  outInteger );
 
          #define TA_CDLUPSIDEGAP2CROWS Core::CDLUPSIDEGAP2CROWS
@@ -2995,8 +3001,8 @@ namespace TA
                                                            cli::array<double>^ inHigh,
                                                            cli::array<double>^ inLow,
                                                            cli::array<double>^ inClose,
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<int>^  outInteger );
          static enum class TA_RetCode CDLXSIDEGAP3METHODS( int    startIdx,
                                                            int    endIdx,
@@ -3004,8 +3010,8 @@ namespace TA
                                                            cli::array<float>^ inHigh,
                                                            cli::array<float>^ inLow,
                                                            cli::array<float>^ inClose,
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<int>^  outInteger );
 
          #define TA_CDLXSIDEGAP3METHODS Core::CDLXSIDEGAP3METHODS
@@ -3018,16 +3024,16 @@ namespace TA
                                               cli::array<double>^ inReal0,
                                               cli::array<double>^ inReal1,
                                               int           optInTimePeriod, /* From 1 to 100000 */
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outReal );
          static enum class TA_RetCode CORREL( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inReal0,
                                               cli::array<float>^ inReal1,
                                               int           optInTimePeriod, /* From 1 to 100000 */
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outReal );
 
          #define TA_CORREL Core::CORREL
@@ -3039,15 +3045,15 @@ namespace TA
                                                  int    endIdx,
                                                  cli::array<double>^ inReal,
                                                  int           optInTimePeriod, /* From 2 to 100000 */
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<double>^  outReal );
          static enum class TA_RetCode LINEARREG( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<float>^ inReal,
                                                  int           optInTimePeriod, /* From 2 to 100000 */
-                                                 [OutAttribute]int^ outBegIdx,
-                                                 [OutAttribute]int^ outNbElement,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
                                                  cli::array<double>^  outReal );
 
          #define TA_LINEARREG Core::LINEARREG
@@ -3059,15 +3065,15 @@ namespace TA
                                                        int    endIdx,
                                                        cli::array<double>^ inReal,
                                                        int           optInTimePeriod, /* From 2 to 100000 */
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<double>^  outReal );
          static enum class TA_RetCode LINEARREG_SLOPE( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inReal,
                                                        int           optInTimePeriod, /* From 2 to 100000 */
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<double>^  outReal );
 
          #define TA_LINEARREG_SLOPE Core::LINEARREG_SLOPE
@@ -3079,15 +3085,15 @@ namespace TA
                                                        int    endIdx,
                                                        cli::array<double>^ inReal,
                                                        int           optInTimePeriod, /* From 2 to 100000 */
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<double>^  outReal );
          static enum class TA_RetCode LINEARREG_ANGLE( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inReal,
                                                        int           optInTimePeriod, /* From 2 to 100000 */
-                                                       [OutAttribute]int^ outBegIdx,
-                                                       [OutAttribute]int^ outNbElement,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
                                                        cli::array<double>^  outReal );
 
          #define TA_LINEARREG_ANGLE Core::LINEARREG_ANGLE
@@ -3099,15 +3105,15 @@ namespace TA
                                                            int    endIdx,
                                                            cli::array<double>^ inReal,
                                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<double>^  outReal );
          static enum class TA_RetCode LINEARREG_INTERCEPT( int    startIdx,
                                                            int    endIdx,
                                                            cli::array<float>^ inReal,
                                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                                           [OutAttribute]int^ outBegIdx,
-                                                           [OutAttribute]int^ outNbElement,
+                                                           [Out]int%    outBegIdx,
+                                                           [Out]int%    outNbElement,
                                                            cli::array<double>^  outReal );
 
          #define TA_LINEARREG_INTERCEPT Core::LINEARREG_INTERCEPT
@@ -3121,16 +3127,16 @@ namespace TA
                                               cli::array<double>^ inReal,
                                               int           optInTimePeriod, /* From 2 to 100000 */
                                               double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outReal );
          static enum class TA_RetCode STDDEV( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inReal,
                                               int           optInTimePeriod, /* From 2 to 100000 */
                                               double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                              [OutAttribute]int^ outBegIdx,
-                                              [OutAttribute]int^ outNbElement,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
                                               cli::array<double>^  outReal );
 
          #define TA_STDDEV Core::STDDEV
@@ -3142,15 +3148,15 @@ namespace TA
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode TSF( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_TSF Core::TSF
@@ -3164,16 +3170,16 @@ namespace TA
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 1 to 100000 */
                                            double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
          static enum class TA_RetCode VAR( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 1 to 100000 */
                                            double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                           [OutAttribute]int^ outBegIdx,
-                                           [OutAttribute]int^ outNbElement,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
                                            cli::array<double>^  outReal );
 
          #define TA_VAR Core::VAR
@@ -3187,8 +3193,8 @@ namespace TA
                                                 cli::array<double>^ inHigh,
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode AVGPRICE( int    startIdx,
                                                 int    endIdx,
@@ -3196,8 +3202,8 @@ namespace TA
                                                 cli::array<float>^ inHigh,
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_AVGPRICE Core::AVGPRICE
@@ -3209,15 +3215,15 @@ namespace TA
                                                 int    endIdx,
                                                 cli::array<double>^ inHigh,
                                                 cli::array<double>^ inLow,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode MEDPRICE( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inHigh,
                                                 cli::array<float>^ inLow,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_MEDPRICE Core::MEDPRICE
@@ -3230,16 +3236,16 @@ namespace TA
                                                 cli::array<double>^ inHigh,
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode TYPPRICE( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inHigh,
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_TYPPRICE Core::TYPPRICE
@@ -3252,16 +3258,16 @@ namespace TA
                                                 cli::array<double>^ inHigh,
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
          static enum class TA_RetCode WCLPRICE( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inHigh,
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
-                                                [OutAttribute]int^ outBegIdx,
-                                                [OutAttribute]int^ outNbElement,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_WCLPRICE Core::WCLPRICE

@@ -6,7 +6,7 @@ namespace TA.Lib
 {
     public class Index
     {
-        private int[] mOffset;
+        private int[] mOffset;        
         private IValueIter[] mValueIter;
         private int mLeftToIterate;
         private int mTimestampOffset;
