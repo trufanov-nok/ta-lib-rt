@@ -17,8 +17,7 @@ sub removeFile
            and (not $z =~ /Repository/)
            and (not $z =~ /Root/)
            and (not $z =~ /TALib_Prefix.pch/) 
-           and (not $z =~ /TA.pm/)
-           and (not $z =~ /ta.dll/) )
+           and (not $z =~ /TA.pm/))
       {
          unlink( $z );
       }
@@ -158,7 +157,6 @@ sub removeBinFromPackage
    execProg($a, $b." \\ta-lib\\excel\\ta-lib.xll" );
    execProg($a, $b." \\ta-lib\\dotnet\\src\\Core\\Debug\\TA-Lib-Core.dll"  );
    execProg($a, $b." \\ta-lib\\dotnet\\src\\Core\\Release\\TA-Lib-Core.dll"  );
-   execProg($a, $b." \\ta-lib\\swig\\lib\\perl\\ta.dll"  );
    execProg($a, $b." \\ta-lib\\swig\\lib\\perl\\Finance\\TA.pm"  );
 }
 
