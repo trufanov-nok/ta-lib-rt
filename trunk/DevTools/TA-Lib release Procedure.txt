@@ -57,7 +57,8 @@ Publish Procedure
      Add files:
         ta_yahoo.exe 		i386	Other 
         WebFetch.exe  		i386	Other 
-        ta-lib-0.0.2-borl.zip 	i386 	Source .zip 
+        ta-lib-0.0.2
+-borl.zip 	i386 	Source .zip 
         ta-lib-0.0.2-msvc.zip 	i386 	Source .zip 
         ta-lib-0.0.2-src.zip 1	Any 	Source .zip 
         HISTORY.TXT   		Any 	text 
@@ -70,13 +71,46 @@ Publish Procedure
 Promotion
 =========
 - Post a news on SourceForge "TA-LIB X.Y.Z Released"
-- Signal the people monitoring SourceForge released.
-- Post the news on TA-LIB mailing list.
-- Post the news on tadoc.org
-- Post the news on freshmeat
+  Use changelog format below.
 
-Notes Example
-=============
+- Signal the people monitoring SourceForge released.
+
+- Post the news on Yahoo! TA-Lib mailing list.
+  Cut&Paste Sourceforge change log.
+
+- Post the news on tadoc.org
+  Cut&Paste Sourceforge change log.
+  
+- Post the news on freshmeat
+  Re-use previous Freshmeat Format.
+
+- Post the news on misc.invest.technical
+  Cut&Paste Freshmeat Description and add links.
+  http://groups-beta.google.com/group/misc.invest.technical
+  Title: TA-Lib Release x.x.x - Open-source Library
+
+- Post the news on Yahoo! XLTrader mailing list.
+  Post only if new technical analysis function added.
+  Use Excel specific Format below.
+
+XLTrader Release Header Post
+===============================
+Title: TA-Lib 0.1.4 Released
+TA-Lib provides a free and open-source Excel add-ins with
+more than 120 technical analysis functions.
+
+This release adds recognition of 26 more candlestick patterns
+and a few bug fixes.
+
+Download: http://ta-lib.org
+Forum   : http://tadoc.org
+
+Regards,
+
+\Mario Fortier
+
+SourceForge Notes Example
+=========================
 TA-LIB is a C/C++/Excel library for technical analysis of financial data. 
 More info at http://ta-lib.org
 
@@ -91,8 +125,8 @@ ta_yahoo.exe is an utility for fetching online data.
 ta_sql.exe is an utility to fetch data from SQL databases.
 
 
-Changes Example
-==============
+SourceForge Changes Example
+===========================
 V0.1.1 (January 2004)
 
 - New SQL/ODBC and MySQL data sources.
