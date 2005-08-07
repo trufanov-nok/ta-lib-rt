@@ -109,6 +109,8 @@ package Finance::TA;
 *TA_FatalReport = *Finance::TAc::TA_FatalReport;
 *TA_FatalReportToBuffer = *Finance::TAc::TA_FatalReportToBuffer;
 *TA_RegressionTest = *Finance::TAc::TA_RegressionTest;
+*TA_SRand = *Finance::TAc::TA_SRand;
+*TA_Rand = *Finance::TAc::TA_Rand;
 *TA_UDBaseAlloc = *Finance::TAc::TA_UDBaseAlloc;
 *TA_UDBaseFree = *Finance::TAc::TA_UDBaseFree;
 *TA_AddDataSource = *Finance::TAc::TA_AddDataSource;
