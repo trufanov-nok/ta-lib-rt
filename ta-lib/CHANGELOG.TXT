@@ -1,42 +1,34 @@
-0.1.4 (April 2005)
+0.1.5 (December 2005)
 
 New Features
 ============
-- 64 bits support.
-- Initial version for Python integration (SWIG).
-- New TA_DISABLE_PRICE_VALIDATION flag (TA_HistoryAlloc)
-- New candlestick functions:
-    CDL3STARSINSOUTH    Three Stars In The South
-    CDLBELTHOLD         Belt-hold
-    CDLBREAKAWAY        Breakaway
-    CDLCLOSINGMARUBOZU  Closing Marubozu
-    CDLCONCEALBABYSWALL Concealing Baby Swallow
-    CDLCOUNTERATTACK    Counterattack
-    CDLDOJI             Doji
-    CDLDRAGONFLYDOJI    Dragonfly Doji
-    CDLGAPSIDESIDEWHITE Up/Down-gap side-by-side white lines
-    CDLGRAVESTONEDOJI   Gravestone Doji
-    CDLHOMINGPIGEON     Homing Pigeon
-    CDLKICKING          Kicking
-    CDLKICKINGBYLENGTH  Kicking-bull/bear determined by the longer marubozu
-    CDLLADDERBOTTOM     Ladder Bottom
-    CDLLONGLEGGEDDOJI   Long Legged Doji
-    CDLMARUBOZU         Marubozu
-    CDLMATCHINGLOW      Matching Low
-    CDLMATHOLD          Mat Hold
-    CDLRICKSHAWMAN      Rickshaw Man
-    CDLRISEFALL3METHODS Rising/Falling Three Methods
-    CDLSEPARATINGLINES  Separating Lines
-    CDLSTICKSANDWICH    Stick Sandwich
-    CDLTAKURI           Takuri
-    CDLTASUKIGAP        Tasuki Gap
-    CDLUNIQUE3RIVER     Unique 3 River
-    CDLXSIDEGAP3METHODS Upside/Downside Gap Three Methods
+- .NET assembly is now 'verifiable'. That makes TA-Lib conform
+  for uses in places like Microsoft SQL stored procedure.
 
+- Code adapted for new C++/CLI syntax in Visual Studio 2005
+
+- User can now specify a timeout on data access.
+  See TA_HistoryAllocParam in ta_data.h
+
+- Flexible handling of end-of-period timestamps.
+  See TA_SOURCE_USES_END_OF_PERIOD and
+  TA_USE_END_OF_PERIOD in ta_data.h
+    
+- Pseudo-Random (Mersenne Twister algorithm).
+  See TA_Rand() and TA_SRand() in ta_common.h
+  
 Fixes
 =====
 #1117866: APO/PPO bug when slow/fast period parameter inverted.
 #1117656: outNbElement incorrect for TRIX and STOCHRSI
+#1199526: Out-of-bound access with CDLTRISTAR
+#1200995: Memory leak in Perl wrapper
+#1229243: TA_HistoryBuilder() leaks memory (on failure case).
+#1238365: Candlestick errors when using TA_SetCandleSettings.
+#1241498: TA_AddDataSource() done twice cause TA_HistoryAlloc() to fail.
+#1293953: TA_AddTimeToTimestamp() problem when src/dst are same pointer.
+#1359452: AD range not working as expected.
+#1365319: BBAND/STDDEV problem with very small input variations.
 
 Thanks to all contributors.
 
