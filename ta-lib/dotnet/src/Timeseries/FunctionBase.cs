@@ -1,3 +1,10 @@
+/****************************** BIG WARNING ********************
+ *   Only the code in TA-Lib-Core for .NET is mature.
+ * 
+ *   All code in TA-Lib-Timeseries is in development and is 
+ *   not yet ready for use in applications.
+ ****************************** BIG WARNING ********************/
+
 using System;
 
 namespace TA.Lib
@@ -214,7 +221,7 @@ namespace TA.Lib
 		public Timeseries<double> Exec( Timeseries<double> input )
 		{
 			Pre();
-			for( int i=0; i < input.Length; i++ )
+            foreach( Index idx in input )
 			{
 				Iter();
 			}

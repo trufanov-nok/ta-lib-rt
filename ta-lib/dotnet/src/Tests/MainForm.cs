@@ -13,12 +13,28 @@ namespace Tests
         public MainForm()
         {
             InitializeComponent();
+            performTests();
+        }
+
+        private void performTests()
+        {
+            button1.Enabled = false;
+            button2.Enabled = false;
+            new CoreTests();
+            new TimeseriesRequirementTests();
+            Log.AppendText("\nTest Completed");
+            button1.Enabled = true;
+            button2.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new CoreTests();
-            new TimeseriesRequirementTests();            
+            performTests();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

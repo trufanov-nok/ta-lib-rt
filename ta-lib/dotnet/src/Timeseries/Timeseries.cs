@@ -1,7 +1,18 @@
+/****************************** BIG WARNING ********************
+ *   Only the code in TA-Lib-Core for .NET is mature.
+ * 
+ *   All code in TA-Lib-Timeseries is in development and is 
+ *   not yet ready for use in applications.
+ ****************************** BIG WARNING ********************/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TA.Lib;
+
+// Constructor Logic.
+// Call the base.Init()
+// Call Local InitMembers();
 
 namespace TA.Lib
 {
@@ -16,21 +27,28 @@ namespace TA.Lib
         public Timeseries() 
         {
             base.Init();
-            Console.WriteLine("Hello");
+            InitMembers();
         }
 
         /// <summary>
-        /// Build a time series using an array of DateTime.
+        /// Build a time series using an array of DateTime. Typically used to set
+        /// the timestamps before adding data using plain arrays.
         /// </summary>
-        /// <param name="dateTime"></param>
+        /// <param name="dateTime">An array of timestamps using the .NET DateTime.</param>
         public Timeseries(DateTime[] dateTime)
         {
             base.Init(dateTime);
+            InitMembers();
         }
 
+        /// <summary>
+        /// Build a time series using the timestamps of an existing Timeseries.
+        /// </summary>
+        /// <param name="dateTime">The reference Timestamps.</param>
         public Timeseries(Timestamps timestamps)
         {
             base.Init(timestamps);
+            InitMembers();
         }
 
         // Utility used by constructors
@@ -82,11 +100,20 @@ namespace TA.Lib
             // Create a time series with default DateTime
             DateTime[] tempDateTime;
             tempDateTime = new DateTime[size];
+            for (int i = 1; i < tempDateTime.Length; i++)
+            {
+                tempDateTime[i] = tempDateTime[i - 1].AddDays(1.0);
+            }
             Timeseries ts = new Timeseries(tempDateTime);
 
             // Add a variable with random values.
             double[] tempValue;
             tempValue = new double[size];
+            for (int i = 1; i < tempValue.Length; i++)
+            {
+                // TODO Replace with true random (eventually).
+                tempValue[i] = tempValue[i - 1] + 1;
+            }
             ts.AddVariable("Random", tempValue);
             return ts;
         }
@@ -109,24 +136,34 @@ namespace TA.Lib
             // Create a time series with default DateTime
             DateTime[] tempDateTime;
             tempDateTime = new DateTime[size];
+            for (int i = 1; i < tempDateTime.Length; i++)
+            {
+                tempDateTime[i] = tempDateTime[i - 1].AddDays(1.0);
+            }
             Timeseries ts = new Timeseries(tempDateTime);
 
             double[] tempValue;
+            double[] data = new double[size];
+            for (int i = 1; i < data.Length; i++)
+            {
+                // TODO Replace with true random (eventually).
+                data[i] = data[i - 1] + 1;
+            }
 
             // Add a low variable with random values.
-            tempValue = new double[size];
+            tempValue = (double[])data.Clone();
             ts.AddVariable("Low", tempValue);
 
             // Add a high variable with random values >= low
-            tempValue = new double[size];
+            tempValue = (double[])data.Clone();
             ts.AddVariable("High", tempValue);
 
             // Add an open variable at a random point between high and low.
-            tempValue = new double[size];
+            tempValue = (double[])data.Clone();
             ts.AddVariable("Open", tempValue);
 
             // Add an open variable at a random point between high and low.
-            tempValue = new double[size];
+            tempValue = (double[])data.Clone();
             ts.AddVariable("Close", tempValue);
 
             return ts;
@@ -422,9 +459,9 @@ namespace TA.Lib
         {
             get { return this["Volume"]; }
         }
-        #endregion
+        #endregion      
 
-    }
+}
 
     public class Timeseries<TVal> :
         Timeseries<Timeseries<TVal>, Variable<TVal>, TVal>
@@ -551,14 +588,6 @@ namespace TA.Lib
     public enum Interpolation
     {
         /// <summary>
-        /// For a Variable, the value UseDefault means to use the algorithm
-        /// defined by the Interpolation property of the parent timeseries.
-        /// For a Timeseries, the value UseDefault is equivalent to
-        /// the value Linear.
-        /// </summary>
-        UseDefault,
-
-        /// <summary>
         /// Missing values are same as their oldest neighbor value.
         /// </summary>
         OldestNeighbor,
@@ -569,23 +598,27 @@ namespace TA.Lib
         NewestNeighbor,
 
         /// <summary>
+        /// Missing values are replaced by the value specificed by
+        /// the property 'FixValue'.
+        /// </summary>
+        FixValue,
+
+        /// <summary>
         /// The missing values are the average of the oldest and
         /// more recent neighbor.
+        /// Important: For TimeSeries of user defined type, this 
+        /// will act like OldestNeighbor.
         /// </summary>
         AvgNeighbors,
 
         /// <summary>
         /// The slope is calculated between the oldest and more 
         /// recent neighbors. The missing values are then replace
-        /// according to the linear equation 'y=mx+b'
+        /// according to the linear equation 'y=mx+b'.
+        /// Important: For TimeSeries of user defined type, this 
+        /// will act like OldestNeighbor.        
         /// </summary>
-        Linear,
-
-        /// <summary>
-        /// Missing values are replaced by the value specificed by
-        /// the floating-point property 'FixValue'.
-        /// </summary>
-        FixValue
+        Linear
     }
 
     /// <summary>
@@ -862,87 +895,14 @@ namespace TA.Lib
 
     #endregion
         
-    #region Timestamps
-    /// <summary>
-	/// Object to provide access to timestamps.
-	/// </summary>
-	[Serializable()]
-	public class Timestamps
-	{
-		#region Constructors
-		internal Timestamps( IValueIter parent, DateTime []array )
-		{
-			// Make a copy of the provided DateTime array.
-			mParent = parent;
-			mTimestamps = (DateTime[])array.Clone();
-		}
 
-		internal Timestamps( IValueIter parent, Timestamps timestamps )
-		{
-			// Reference on same data of an existing Timestamps.
-			mParent = parent;
-			if( timestamps.mTimestamps == null)
-			{
-				mTimestamps = timestamps.mTimestamps;
-			}
-			else
-			{
-				dateTime = new DateTime(1971,1,1);
-			}
-		}
-
-		internal Timestamps(IValueIter parent)
-		{
-			mParent = parent;	
-			dateTime = new DateTime(1971,1,1);
-		}
-		#endregion
-
-		/// <summary>
-		/// Access to the DateTime for the parent timeseries.
-		/// </summary>
-		public DateTime this [Index index]
-		{
-			get 
-			{
-                int idx = index.TimestampOffset;
-				if( mTimestamps == null )
-					return dateTime.AddDays(idx);
-				else
-					return mTimestamps[idx];
-			}
-		}
-
-		#region Internal Members
-		internal bool IsSyncWith(IValueIter otherObject)
-		{
-			// TODO Check for sync. For now assume all input
-			// are synchronized.
-			return true;
-		}
-        internal bool IsSyncWith(Timestamps timeStamps)
-        {
-            // TODO Check for sync. For now assume all input
-            // are synchronized.
-            return true;
-        }
-		#endregion
-
-		#region Private Members
-		private DateTime dateTime;
-		private IValueIter mParent;		
-		private DateTime []mTimestamps;
-		#endregion
-	}
-	#endregion
-
-	#region Timeseries
+	#region Timeseries Generic Base
 	/// <summary>
 	/// Time series allows to aglomerate variables and keep 
 	/// these synchronize with a common set of timestamps.
 	/// </summary>
 	[Serializable()]
-    public abstract class Timeseries<TSer, TVar, TVal> : IValueIter
+    public abstract class Timeseries<TSer, TVar, TVal> : IValueIter, IEnumerable<Index>
         where TSer : Timeseries<TSer, TVar, TVal>
         where TVar : Variable<TSer, TVar, TVal>
     {
@@ -955,17 +915,17 @@ namespace TA.Lib
 		protected void Init(DateTime []dateTime)
 		{
             InitMembers();
-            Timestamps = new Timestamps(this,dateTime);            
+            this.Timestamps = new Timestamps(this,dateTime);            
 		}
 
 		protected void Init(Timestamps timestamps)
 		{
             InitMembers();
-			Timestamps = new Timestamps(this, timestamps);			
+			this.Timestamps = new Timestamps(this, timestamps);			
 		}
 		#endregion
 
-        #region Factories        
+        #region Factories
         internal abstract TVar createVariable();
         internal abstract TVar createVariable(TVal[] val);
 
@@ -973,13 +933,6 @@ namespace TA.Lib
         internal abstract TSer createTimeseries(DateTime[] dateTime);
         internal abstract TSer createTimeseries(Timestamps timestamps);
         #endregion
-
-        /// <summary>
-        /// Array of Timestamps.
-        /// Accessible with index that range from 0 to Length-1
-        /// when Length >= 1
-        /// </summary>
-        public Timestamps Timestamps;
 
 		#region Public Factories
 		/// <summary>
@@ -1025,6 +978,13 @@ namespace TA.Lib
 			return createTimeseries();
 		}
 		#endregion
+
+        /// <summary>
+        /// Array of Timestamps.
+        /// Accessible with index that range from 0 to Length-1
+        /// when Length >= 1
+        /// </summary>
+        public Timestamps Timestamps;
 		
 		#region AddVariable
 		/// <summary>
@@ -1142,14 +1102,11 @@ namespace TA.Lib
 				TVar newVar = createVariable(value.mData);
 
 				// Put the new variable in mVariable.
-				int idx = mVariable.IndexOfKey(variableName); 
-				if( idx == -1 )
-					mVariable.Add(variableName,newVar);
-				else
-				{
-					// TODO Speed optimization by re-using existing variable?
-					mVariable.Values[idx] = newVar;
-				}
+                if (mVariable.ContainsKey(variableName))
+                {
+                    mVariable.Remove(variableName);
+                }
+		        mVariable.Add(variableName,newVar);
 
 				// TODO Find the new common range.				
 
@@ -1253,7 +1210,11 @@ namespace TA.Lib
 		private TVar mDefault;
         private SyncMode mSyncMode;
 
-        private int mCommonSize;
+        // Variable identifying the common region.
+        private int mOffsetMinStart;
+        private int mOffsetMaxStart;
+        private int mOffsetMinEnd;
+        private int mOffsetMaxEnd;
 
         TimestampType mTimestampType;
         NaturalPeriod mNaturalPeriod;
@@ -1266,7 +1227,7 @@ namespace TA.Lib
 
         private void InitMembers()
         {
-            mVariable = new SortedList<string,TVar>();
+            mVariable = new SortedList<string,TVar>();            
             mSyncMode = SyncMode.Mode8;
             mNaturalPeriod = NaturalPeriod.Year;
             mTimestampType = TimestampType.Exact;
@@ -1274,6 +1235,28 @@ namespace TA.Lib
             mPadding = false;
             mPeriodicity = Periodicity.PerDaily;
             mInterpolation = Interpolation.Linear;
+        }
+
+        private void UpdateOffsets()
+        {
+            // Iterate among all variables.
+            bool firstTime = true;
+            foreach (TVar v in this.Variables())
+            {
+                int start = v.Timestamps.Offset;
+                int end = start + v.Timestamps.Length;
+
+                if (firstTime == true)
+                {
+                    mOffsetMinStart = start;
+                    mOffsetMaxStart = start;
+                    mOffsetMinEnd = end;
+                    mOffsetMaxEnd = end;
+                    firstTime = false;
+                }
+                if (firstTime == true)
+                    throw new InternalError();
+            }
         }
         #endregion
 
@@ -1322,7 +1305,7 @@ namespace TA.Lib
                 mNaturalPeriod = value;
             }
         }
-
+        
         /// <summary>
         /// When Length is different than zero, Length represents the
         /// range of the index [0..Length-1]
@@ -1331,7 +1314,8 @@ namespace TA.Lib
         {
             get
             {
-                return mCommonSize;
+                // TODO LEngth veray depending if padding or not.
+                return this.Timestamps.Length;
             }
         }
 
@@ -1445,29 +1429,46 @@ namespace TA.Lib
 
         public Timestamps GetTimestamps()
         {
-            throw new Exception("The method or operation is not implemented.");
+            return this.Timestamps;
         }
 
         public int GetStartTimestampOffset()
         {
-            throw new Exception("The method or operation is not implemented.");
+            if (Padding == true)
+                return 0;
+
+            // Find the common starting point among all the variables.
+            // TODO Return right value.
+            return 0;
         }
 
         public int GetEndTimestampOffset()
         {
-            throw new Exception("The method or operation is not implemented.");
+            if (Padding == true)
+            {
+                int length = this.Timestamps.Length;
+                if (length != -1) return length;                
+            }
+
+            // Find the ending point among all the variables.
+            return 10; // TODO REturn the rigth value.
         }
 
         public void SetIndexCache(Index index, int value)
         {
-            throw new Exception("The method or operation is not implemented.");
+            mIndexRef = index;
+            mIndexCache = value;
         }
 
         public int GetIndexCache(Index index)
         {
-            throw new Exception("The method or operation is not implemented.");
+            if (index.Equals(mIndexRef))
+                return mIndexCache;
+            else
+                return -1;
         }
-
+        private Index mIndexRef = null;
+        private int mIndexCache = -1;
         #endregion
 
         // Implementing the enumerable pattern
@@ -1488,7 +1489,7 @@ namespace TA.Lib
         }
         internal bool IndexValid(int index)
         {
-            return (index < mCommonSize);
+            return (index < this.Timestamps.Offset);
         }
         #endregion
 
@@ -1498,7 +1499,29 @@ namespace TA.Lib
             throw new Exception("The method or operation is not implemented.");
         }
         #endregion
-    }
+
+        #region IEnumerable<Index> Members
+        public IEnumerator<Index> GetEnumerator()
+        {
+            Index mIndex = new Index(this);
+            while (mIndex.LeftToIterate != 0)
+            {
+                yield return mIndex;
+                mIndex.Next();
+            }
+            yield break;
+        }
+        #endregion
+
+        #region IEnumerable Members
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
+}
 
 	#region Built-in Return Values
 	/// <summary>
@@ -1574,9 +1597,7 @@ namespace TA.Lib
 		internal Variable mUp;
 		internal Variable mDown;
 	}
-	#endregion
-
-	#endregion
+#endregion
 }
 #region deprecated
 /* About Timeseries<double>
@@ -1770,4 +1791,5 @@ public class Timeseries : TimeseriesBase
     }
     #endregion
 }*/  
+#endregion
 #endregion

@@ -1,3 +1,10 @@
+/****************************** BIG WARNING ********************
+ *   Only the code in TA-Lib-Core for .NET is mature.
+ * 
+ *   All code in TA-Lib-Timeseries is in development and is 
+ *   not yet ready for use in applications.
+ ****************************** BIG WARNING ********************/
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -148,7 +155,7 @@ namespace TA.Lib
             // Allocate the output and call the function (as needed).
             Variable newVar;
             Timeseries retObject = new Timeseries(mParent.Timestamps);
-            int lookback = 2; // Core.SMA_Lookback(period);
+            int lookback = Core.SMA_Lookback(period);
             int size = mData.Length - lookback;
             if (size <= 0)
                 newVar = new Variable(retObject, new double[0]);
@@ -156,8 +163,8 @@ namespace TA.Lib
             {
                 double[] output;
                 output = new double[size];
-                //int outBegIdx, outNbElement;
-                //Core.SMA( 0, size-1, mData, period, out outBegIdx, out outNbElement, output );                
+                int outBegIdx, outNbElement;
+                Core.SMA( 0, size-1, mData, period, out outBegIdx, out outNbElement, output );                
                 output = mData;
                 // TODO Throw exception on retCode != TA_SUCCESS
                 newVar = new Variable(retObject, output);

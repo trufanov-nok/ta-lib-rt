@@ -1,3 +1,9 @@
+/****************************** BIG WARNING ********************
+ *   Only the code in TA-Lib-Core for .NET is mature.
+ * 
+ *   All code in TA-Lib-Timeseries is in development and is 
+ *   not yet ready for use in applications.
+ ****************************** BIG WARNING ********************/
 using System;
 using System.Collections;
 using TA.Lib;
@@ -6,7 +12,7 @@ namespace TA.Lib
 {
     public class Index
     {
-        private int[] mOffset;        
+        private int[] mStartOffset;        
         private IValueIter[] mValueIter;
         private int mLeftToIterate;
         private int mTimestampOffset;
@@ -27,10 +33,11 @@ namespace TA.Lib
                 mLeftToIterate = 0;
                 return;
             }
+            
 
             // Each ValueIter have a corresponding "offset" maintained
             // locally in the Index object.
-            mOffset = new int[list.Length];            
+            mStartOffset = new int[list.Length];            
 
             // Validate all synchronized.
             // At the same time, identify the common range.            
@@ -39,7 +46,7 @@ namespace TA.Lib
             IValueIter valueIter = list[0];
             endCommonRange = valueIter.GetEndTimestampOffset();
             begCommonRange = valueIter.GetStartTimestampOffset();
-            mOffset[0] = begCommonRange;
+            mStartOffset[0] = begCommonRange;
             if (list.Length > 1)
             {
                 Timestamps refTimestamps = valueIter.GetTimestamps();
@@ -50,7 +57,7 @@ namespace TA.Lib
                         throw new Exception("Iteration possible only for synchronized Timeseries and Variable");
                     int temp = valueIter.GetStartTimestampOffset();
                     if (temp > begCommonRange) begCommonRange = temp;
-                    mOffset[i] = temp;
+                    mStartOffset[i] = temp;
                     temp = valueIter.GetEndTimestampOffset();
                     if (temp < endCommonRange) endCommonRange = temp;
                 }
@@ -70,7 +77,7 @@ namespace TA.Lib
             // offset for each ValueIter.
             for (int i = 0; i < list.Length; i++)
             {
-                mOffset[i] = begCommonRange - mOffset[i];
+                mStartOffset[i] = begCommonRange - mStartOffset[i];
             }
 
             // Calculate the starting offset for the timestamp array.
@@ -92,7 +99,7 @@ namespace TA.Lib
             // Adjust position for all the valueIter.
             for (int i = 0; i < mValueIter.Length; i++)
             {
-                mOffset[i]++;
+                mStartOffset[i]++;
             }
             mTimestampOffset++;
             return true;
@@ -104,7 +111,7 @@ namespace TA.Lib
             // to this ValueIter. Use cache info when available.
             int iterIdx = vi.GetIndexCache(this);
             if (iterIdx != -1)
-                return mOffset[iterIdx];
+                return mStartOffset[iterIdx];
 
             // Not in the cache, so do a sequential
             // search for the right mOffset.
@@ -113,7 +120,7 @@ namespace TA.Lib
                 if (vi.Equals(mValueIter[i]))
                 {
                     vi.SetIndexCache(this, i);
-                    return mOffset[i];
+                    return mStartOffset[i];
                 }
             }
 

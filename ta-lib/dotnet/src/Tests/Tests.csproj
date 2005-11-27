@@ -27,11 +27,13 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>$(SolutionDir)\Debug\</OutputPath>
+    <OutputPath>.\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunFxCop>false</RunFxCop>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,6 +50,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="TA-Lib-Core, Version=1.0.2053.37787, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Debug\TA-Lib-Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoreTests.cs" />
@@ -90,10 +96,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\TA-Lib-Core.vcproj">
-      <Project>{667AF01A-5614-4446-9DCC-744D27906E5B}</Project>
-      <Name>TA-Lib-Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Timeseries\TA-Lib-Timeseries.csproj">
       <Project>{69896EF6-AB5D-4FE7-A2A1-36B159A4AB38}</Project>
       <Name>TA-Lib-Timeseries</Name>
