@@ -924,6 +924,26 @@ namespace TA
          #define TA_CCI Core::CCI
          #define TA_CCI_Lookback Core::CCI_Lookback
 
+         static int CMO_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode CMO( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode CMO( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_CMO Core::CMO
+         #define TA_CMO_Lookback Core::CMO_Lookback
+
          static int DX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          static enum class TA_RetCode DX( int    startIdx,

@@ -12,10 +12,10 @@ the same directory as your application.
 Two versions are available.
 
 (1) Assembly for Release:
-  ta-lib\dotnet\src\Core\Release\TA-Lib-Core.dll
+  ta-lib\dotnet\src\Release\TA-Lib-Core.dll
 
 (2) Assembly for Debug:
-  ta-lib\dotnet\src\Core\Debug\TA-Lib-Core.dll
+  ta-lib\dotnet\src\Debug\TA-Lib-Core.dll
 
 The assembly are not shared (or strongly named) and
 consequently does not require to be added to the GAC.
@@ -29,8 +29,8 @@ Only the TA functions are currently implemented for
 the .NET platform.
 
 WARNING: Ignore code under the Timeseries directory. This code
-         code is in development an is not ready to be used within
-         application.
+         is in development an is not ready to be used within
+         an application.
 
 How to rebuild the TA-LIB assembly?
 ===================================
