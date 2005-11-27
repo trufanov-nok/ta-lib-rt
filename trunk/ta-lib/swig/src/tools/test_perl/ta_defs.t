@@ -6,9 +6,9 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 175 }
+BEGIN { plan tests => 176 }
 
-use Finance::TA v0.1.3;
+use Finance::TA v0.1.5;
 
 print "TA-Lib ", TA_GetVersionString(), "\n";
 print "Testing ta_defs...\n";
@@ -181,19 +181,20 @@ ok( $TA_FUNC_UNST_T3, 4 );
 ok( $TA_FUNC_UNST_ATR, 5 );
 ok( $TA_FUNC_UNST_ADX, 6 );
 ok( $TA_FUNC_UNST_ADXR, 7 );
-ok( $TA_FUNC_UNST_DX, 8 );
-ok( $TA_FUNC_UNST_MFI, 9 );
-ok( $TA_FUNC_UNST_MINUS_DI, 10 );
-ok( $TA_FUNC_UNST_MINUS_DM, 11 );
-ok( $TA_FUNC_UNST_PLUS_DI, 12 );
-ok( $TA_FUNC_UNST_PLUS_DM, 13 );
-ok( $TA_FUNC_UNST_RSI, 14 );
-ok( $TA_FUNC_UNST_STOCHRSI, 15 );
-ok( $TA_FUNC_UNST_HT_DCPERIOD, 16 );
-ok( $TA_FUNC_UNST_HT_DCPHASE, 17 );
-ok( $TA_FUNC_UNST_HT_PHASOR, 18 );
-ok( $TA_FUNC_UNST_HT_SINE, 19 );
-ok( $TA_FUNC_UNST_HT_TRENDMODE, 20 );
+ok( $TA_FUNC_UNST_CMO, 8 );
+ok( $TA_FUNC_UNST_DX, 9 );
+ok( $TA_FUNC_UNST_MFI, 10 );
+ok( $TA_FUNC_UNST_MINUS_DI, 11 );
+ok( $TA_FUNC_UNST_MINUS_DM, 12 );
+ok( $TA_FUNC_UNST_PLUS_DI, 13 );
+ok( $TA_FUNC_UNST_PLUS_DM, 14 );
+ok( $TA_FUNC_UNST_RSI, 15 );
+ok( $TA_FUNC_UNST_STOCHRSI, 16 );
+ok( $TA_FUNC_UNST_HT_DCPERIOD, 17 );
+ok( $TA_FUNC_UNST_HT_DCPHASE, 18 );
+ok( $TA_FUNC_UNST_HT_PHASOR, 19 );
+ok( $TA_FUNC_UNST_HT_SINE, 20 );
+ok( $TA_FUNC_UNST_HT_TRENDMODE, 21 );
 ok( $TA_FUNC_UNST_ALL > 0 );
 ok( $TA_FUNC_UNST_NONE, -1 );
 
