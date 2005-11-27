@@ -2,8 +2,12 @@
 
 New Features
 ============
-- .NET assembly is now 'verifiable'. That makes TA-Lib conform
-  for uses in places like Microsoft SQL stored procedure.
+- New technical analysis functions:
+    BOP : Balance of power
+    CMO : Chande Momentum Oscillator
+    
+- .NET assembly is 'verifiable'. TA-Lib is now conform for
+  uses in places like Microsoft SQL stored procedure.
 
 - Code adapted for new C++/CLI syntax in Visual Studio 2005
 
@@ -29,6 +33,7 @@ Fixes
 #1293953: TA_AddTimeToTimestamp() problem when src/dst are same pointer.
 #1359452: AD range not working as expected.
 #1365319: BBAND/STDDEV problem with very small input variations.
+#1367269: outBegIdx incorrect when startidx != 0 for some functions.
 
 Thanks to all contributors.
 
