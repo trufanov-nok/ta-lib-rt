@@ -5,7 +5,7 @@ package Finance::TA;
 
 use strict;
 
-our $VERSION = v0.1.3;
+our $VERSION = v0.1.5;
 
 package Finance::TA::TA_Timestamp;
 
