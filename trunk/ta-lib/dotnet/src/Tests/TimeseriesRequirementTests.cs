@@ -38,21 +38,15 @@ namespace Tests
 		/// </summary>		
 		public TimeseriesRequirementTests()
 		{
-/*
-            // Generic used as usual.
-            MyGeneric<double> obj1 = MyGeneric<double>.Factory();
-            double d = obj1.NoOp(1.0);
-
-            // Alias to the generic with default type int.
-            MyGeneric obj2 = MyGeneric.Factory();
-            int i = obj2.NoOp(0);
-*/
 			R1();
+            /*
+            R2();
+            R25();
 
 			// Test Use Cases
 			//UC1();
 			UC2();
-			UC3();
+			UC3();*/
 		}
 
 		public static void R1()
@@ -61,28 +55,29 @@ namespace Tests
 			Timeseries ts1 = Timeseries.RandomTimeseries(10);
 			Timeseries ts2 = Timeseries.RandomTimeseriesOHLC(20);
 			
-			// (R-25) Rename a variable
+			// Rename a variable
 			ts1.Rename("Random","Var1");
 
 			// Apply operator. Modify the default variable directly.
-			ts1.Apply.Sma(15);
+			ts1.Apply.Sma(3);
 			
 			// ApplyTo operator. Modify a named variable directly.
 			ts1.ApplyTo("Var1").Sma(10);
 
-			// Add a "SMA_13" variable.
-			ts1.Add.Sma(13);
+			// Add a "SMA_4" variable.
+			ts1.Add.Sma(4);
 
 			// Example of chaining (modify the default).
 			ts1.Apply.Sma(12).Apply.Sma(4);
 
 			// Example of chaining (creating a new variable this time, not touching ts1).
-			Variable z = ts1["SMA_13"];
+			Variable z = ts1["SMA_4"];
 
+            /*
 			// (R-1)
-			foreach( Index idx in new Iter(ts1) )
+			foreach( Index idx in ts1 )
 			{
-				double e = ts1["SMA_13"][idx];
+				double e = ts1["SMA_4"][idx];
 			}
             
 			Timeseries ts3 = Timeseries.RandomTimeseriesOHLC(20);
@@ -94,15 +89,63 @@ namespace Tests
 			foreach( Variable var in ts4.Variables() )
 			{
 				Console.WriteLine( "[{0}]", var.Name );
-			}
-			
-			// User can always call the Core TA-Lib directly.			
-			double []input = new double[100];
-			double []output = new double[100];
-		    /*System.ValueType*/ int outBegIdx=0;
-            /*System.ValueType*/ int outNbElement=0;
-			Core.SMA( 0, 99, input, 12, out outBegIdx, out outNbElement, output );
+			}*/			
 		}
+
+        public static void R2()
+        {            
+            Timeseries ts1 = Timeseries.RandomTimeseries(10);
+            Timeseries ts2 = Timeseries.RandomTimeseriesOHLC(20);
+
+            // By default "Padding" is false.
+            if (ts1.Padding != false)
+            {
+                throw new Exception("Unexpected default value");
+            }
+
+            // Test "tail" padding.
+            ts1["Var2"] = ts2;
+            if (ts1.Length != 10)
+            {
+                // Without padding the size of the smallest variable is expected.
+                throw new Exception("Unexpected variable size when padding disabled.");
+            }
+            ts1.Padding = true;
+            if (ts1.Length != 20)
+            {
+                throw new Exception("Unexpected variable size when padding enabled.");
+            }
+        }
+
+        public static void R25()
+        {
+            // Create a timeseries to work with.
+            Timeseries ts1 = Timeseries.RandomTimeseries(1);
+            ts1.Rename("Test1");
+            if (ts1.Length != 1)
+            {
+                throw new Exception("Unexpected number of variable.");
+            }
+            // The only timeseries should now be named "Test1"
+            Variable v = ts1["Test1"];
+            if (ts1["Test1"].Name != "Test1")
+            {
+                throw new Exception("Unexpected name.");
+            }
+            // Add a new variable. Should not affect the existing variable.
+            // Verify that indexor still return the right object.
+            ts1["Test"] = ts1["Test1"].Sma(12);
+            if (ts1.Length != 2)
+            {
+                throw new Exception("Unexpected number of variable.");
+            }
+            if (v.Equals(ts1["Test1"]) == false)
+            {
+                throw new Exception("Wrong object returned.");
+            }
+        }
+        
+
 /*
 		#region UC-1
 		class MyIndicator : FunctionBase<double,double>
