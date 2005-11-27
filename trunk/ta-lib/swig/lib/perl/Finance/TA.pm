@@ -676,6 +676,8 @@ our %ITERATORS = ();
 *swig_field_set = *Finance::TAc::TA_HistoryAllocParam_field_set;
 *swig_flags_get = *Finance::TAc::TA_HistoryAllocParam_flags_get;
 *swig_flags_set = *Finance::TAc::TA_HistoryAllocParam_flags_set;
+*swig_timeout_get = *Finance::TAc::TA_HistoryAllocParam_timeout_get;
+*swig_timeout_set = *Finance::TAc::TA_HistoryAllocParam_timeout_set;
 sub new {
     my $pkg = shift;
     my $self = Finance::TAc::new_TA_HistoryAllocParam(@_);
