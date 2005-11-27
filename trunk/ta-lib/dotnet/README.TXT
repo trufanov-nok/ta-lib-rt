@@ -28,6 +28,10 @@ These assemblies can be used with Mono as well.
 Only the TA functions are currently implemented for
 the .NET platform.
 
+WARNING: Ignore code under the Timeseries directory. This code
+         code is in development an is not ready to be used within
+         application.
+
 How to rebuild the TA-LIB assembly?
 ===================================
 Using Visual Studio, open the following
@@ -51,4 +55,5 @@ settings, the GAC or the registry.
 Comments/Help
 =============
 Visit http://ta-lib.org and subscribe to the mailing list.
+
 
