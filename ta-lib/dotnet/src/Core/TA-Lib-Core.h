@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2004, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2005, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -44,6 +44,7 @@
  *  050703 MF     First version with all the TA functions.
  *  112304 PSG    Fix #1072276 for TA_CandleDefaultSettings size.
  *  123004 RM,MF  Adapt code to work with Visual Studio 2005
+ *  112605 MF     New TA_BOP (Balance Of Power) function.
  */
 
 #pragma once
@@ -874,6 +875,30 @@ namespace TA
 
          #define TA_AROONOSC Core::AROONOSC
          #define TA_AROONOSC_Lookback Core::AROONOSC_Lookback
+
+         static int BOP_Lookback( void );
+
+         static enum class TA_RetCode BOP( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inOpen,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           cli::array<double>^ inClose,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode BOP( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inOpen,
+                                           cli::array<float>^ inHigh,
+                                           cli::array<float>^ inLow,
+                                           cli::array<float>^ inClose,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_BOP Core::BOP
+         #define TA_BOP_Lookback Core::BOP_Lookback
 
          static int CCI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
