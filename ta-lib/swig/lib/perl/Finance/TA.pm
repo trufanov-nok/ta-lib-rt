@@ -171,8 +171,12 @@ package Finance::TA;
 *TA_AROON_Lookback = *Finance::TAc::TA_AROON_Lookback;
 *TA_AROONOSC = *Finance::TAc::TA_AROONOSC;
 *TA_AROONOSC_Lookback = *Finance::TAc::TA_AROONOSC_Lookback;
+*TA_BOP = *Finance::TAc::TA_BOP;
+*TA_BOP_Lookback = *Finance::TAc::TA_BOP_Lookback;
 *TA_CCI = *Finance::TAc::TA_CCI;
 *TA_CCI_Lookback = *Finance::TAc::TA_CCI_Lookback;
+*TA_CMO = *Finance::TAc::TA_CMO;
+*TA_CMO_Lookback = *Finance::TAc::TA_CMO_Lookback;
 *TA_DX = *Finance::TAc::TA_DX;
 *TA_DX_Lookback = *Finance::TAc::TA_DX_Lookback;
 *TA_MACD = *Finance::TAc::TA_MACD;
@@ -1447,6 +1451,7 @@ package Finance::TA;
 *TA_FUNC_UNST_ATR = *Finance::TAc::TA_FUNC_UNST_ATR;
 *TA_FUNC_UNST_ADX = *Finance::TAc::TA_FUNC_UNST_ADX;
 *TA_FUNC_UNST_ADXR = *Finance::TAc::TA_FUNC_UNST_ADXR;
+*TA_FUNC_UNST_CMO = *Finance::TAc::TA_FUNC_UNST_CMO;
 *TA_FUNC_UNST_DX = *Finance::TAc::TA_FUNC_UNST_DX;
 *TA_FUNC_UNST_MFI = *Finance::TAc::TA_FUNC_UNST_MFI;
 *TA_FUNC_UNST_MINUS_DI = *Finance::TAc::TA_FUNC_UNST_MINUS_DI;
@@ -1649,7 +1654,7 @@ package Finance::TA;
 
 use strict;
 
-our $VERSION = v0.1.3;
+our $VERSION = v0.1.5;
 
 package Finance::TA::TA_Timestamp;
 
