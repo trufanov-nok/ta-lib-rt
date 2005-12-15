@@ -1,3 +1,12 @@
+V0.1.5 (December 2005)
+  - Java ports of all TA functions.
+  - New BOP and CMO functions.
+  - .NET assembly now verifiable.  
+  - Support for end-of-period.
+  - Portable random generator.
+  - Fix #1117656,1117866,1199526,1200995,1229243,1238365,1241498
+  - Fix #1293953,1359452,1365319,1367155,1367269
+  
 V0.1.4 (April 2005)
   - 64 bits support.
   - Partial Python support.
