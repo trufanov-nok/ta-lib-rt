@@ -91,7 +91,7 @@ public class CoreTest extends TestCase {
         if( retCode == TA_RetCode.TA_SUCCESS )
         {
            // Will display "1   2   2.0   1.5"
-	   System.out.println( outBegIdx.value + "    " + 
+	       System.out.println( outBegIdx.value + "    " + 
                                outNbElement.value + "    " + 
                                output[0] + "    " + 
                                output[1] );

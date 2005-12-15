@@ -99,7 +99,7 @@ namespace TA
 
          static TA_GlobalsType^ TA_Globals;
 
-         static  enum class TA_RetCode TA_INT_EMA( int           startIdx,
+         static  enum class TA_RetCode INT_EMA( int           startIdx,
                                 int           endIdx,
                                 cli::array<double>^ inReal_0,
                                 int           optInTimePeriod_0, /* From 1 to 200 */
@@ -108,7 +108,7 @@ namespace TA
                                 [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
-         static  enum class TA_RetCode TA_INT_EMA( int           startIdx,
+         static  enum class TA_RetCode INT_EMA( int           startIdx,
                                 int           endIdx,
                                 cli::array<float>^ inReal_0,
                                 int           optInTimePeriod_0, /* From 1 to 200 */
@@ -117,7 +117,7 @@ namespace TA
                                 [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
-         static  enum class TA_RetCode TA_INT_SMA( int     startIdx,
+         static  enum class TA_RetCode INT_SMA( int     startIdx,
                                 int     endIdx,
                                 cli::array<double>^ inReal_0,
                                 int     optInTimePeriod_0, /* From 1 to 200 */
@@ -125,7 +125,7 @@ namespace TA
                                 [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
-         static  enum class TA_RetCode TA_INT_SMA( int     startIdx,
+         static  enum class TA_RetCode INT_SMA( int     startIdx,
                                 int     endIdx,
                                 cli::array<float>^ inReal_0,
                                 int     optInTimePeriod_0, /* From 1 to 200 */
@@ -133,7 +133,7 @@ namespace TA
                                 [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0 );
 
-         static  enum class TA_RetCode TA_INT_MACD( int    startIdx,
+         static  enum class TA_RetCode INT_MACD( int    startIdx,
                                  int    endIdx,
                                  cli::array<double>^ inReal_0,
                                  int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
@@ -145,7 +145,7 @@ namespace TA
                                  cli::array<double>^ outMACDSignal_1,
                                  cli::array<double>^ outMACDHist_2 );
 
-         static  enum class TA_RetCode TA_INT_MACD( int    startIdx,
+         static  enum class TA_RetCode INT_MACD( int    startIdx,
                                  int    endIdx,
                                  cli::array<float>^ inReal_0,
                                  int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
@@ -157,31 +157,31 @@ namespace TA
                                  cli::array<double>^ outMACDSignal_1,
                                  cli::array<double>^ outMACDHist_2 );
 
-         static  enum class TA_RetCode TA_INT_PO( int    startIdx,
+         static  enum class TA_RetCode INT_PO( int    startIdx,
                                int    endIdx,
                                cli::array<double>^ inReal_0,
                                int    optInFastPeriod_0, /* From 1 to 200 */
                                int    optInSlowPeriod_1, /* From 1 to 200 */
-                               TA_MAType optInMethod_2,
+							   TA_MAType optInMethod_2,
                                [Out]int% outBegIdx,
                                [Out]int% outNbElement,
                                cli::array<double>^ outReal_0,
                                cli::array<double>^ tempBuffer,
-                               unsigned int  doPercentageOutput );
+                               int  doPercentageOutput );
 
-         static  enum class TA_RetCode TA_INT_PO( int    startIdx,
+         static  enum class TA_RetCode INT_PO( int    startIdx,
                                int    endIdx,
                                cli::array<float>^ inReal_0,
                                int    optInFastPeriod_0, /* From 1 to 200 */
                                int    optInSlowPeriod_1, /* From 1 to 200 */
-                               TA_MAType optInMethod_2,
+							   TA_MAType optInMethod_2,
                                [Out]int% outBegIdx,
                                [Out]int% outNbElement,
                                cli::array<double>^ outReal_0,
                                cli::array<double>^ tempBuffer,
-                               unsigned int  doPercentageOutput );
+                               int  doPercentageOutput );
 
-         static  enum class TA_RetCode TA_INT_VAR( int    startIdx,
+         static  enum class TA_RetCode INT_VAR( int    startIdx,
                                 int    endIdx,
 								cli::array<double>^ inReal_0,
                                 int    optInTimePeriod_0,                       
@@ -189,7 +189,7 @@ namespace TA
                                 [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
-         static  enum class TA_RetCode TA_INT_VAR( int    startIdx,
+         static  enum class TA_RetCode INT_VAR( int    startIdx,
                                 int    endIdx,
                                 cli::array<float>^ inReal_0,
                                 int    optInTimePeriod_0,                       
@@ -197,14 +197,14 @@ namespace TA
                                 [Out]int% outNbElement,
                                 cli::array<double>^ outReal_0);
 
-         static void TA_INT_stddev_using_precalc_ma( cli::array<double>^  inReal,
+         static void INT_stddev_using_precalc_ma( cli::array<double>^  inReal,
                                               cli::array<double>^ inMovAvg,
                                               int inMovAvgBegIdx,
                                               int inMovAvgNbElement,
                                               int timePeriod,
                                               cli::array<double>^ output );
 
-         static void TA_INT_stddev_using_precalc_ma( cli::array<float>^ inReal,
+         static void INT_stddev_using_precalc_ma( cli::array<float>^ inReal,
                                               cli::array<double>^ inMovAvg,
                                               int inMovAvgBegIdx,
                                               int inMovAvgNbElement,
