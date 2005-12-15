@@ -6,7 +6,6 @@
 	ProjectGUID="{667AF01A-5614-4446-9DCC-744D27906E5B}"
 	RootNamespace="TALibCore"
 	Keyword="ManagedCProj"
-	SignManifests="true"
 	>
 	<Platforms>
 		<Platform
