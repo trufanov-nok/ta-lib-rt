@@ -160,7 +160,7 @@ public class Core {
 		return TA_RetCode.TA_SUCCESS;
 	}
 	
-	/** ** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE *** */
+	/**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
  public int MAX_Lookback( int optInTimePeriod )
 {
  return (optInTimePeriod-1);
