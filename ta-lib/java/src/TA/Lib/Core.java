@@ -47,25 +47,25 @@
 package TA.Lib;
 
 public class Core {
-
+	
 	private int[] unstablePeriod;
-
+	
 	private TA_CandleSetting[] candleSettings;
-
+	
 	private TA_Compatibility compatibility;
-
+	
 	/** Creates a new instance of Core */
 	public Core() {
 		unstablePeriod = new int[TA.Lib.TA_FuncUnstId.TA_FUNC_UNST_ALL
-				.ordinal()];
+		                         .ordinal()];
 		for (int i = 0; i < unstablePeriod.length; i++) {
 			unstablePeriod[i] = 0;
 		}
 		compatibility = TA_Compatibility.TA_COMPATIBILITY_DEFAULT;
 		candleSettings = new TA_CandleSetting[TA.Lib.TA_CandleSettingType.TA_AllCandleSettings
-				.ordinal()];
+		                                      .ordinal()];
 	}
-
+	
 	public TA_RetCode SetCandleSettings(TA_CandleSettingType settingType,
 			TA_RangeType rangeType, int avgPeriod, double factor) {
 		if (settingType.ordinal() >= TA_CandleSettingType.TA_AllCandleSettings
@@ -77,7 +77,7 @@ public class Core {
 		candleSettings[settingType.ordinal()].factor = factor;
 		return TA_RetCode.TA_SUCCESS;
 	}
-
+	
 	final private TA_CandleSetting TA_CandleDefaultSettings[] = {
 			/*
 			 * real body is long when it's longer than the average of the 10
@@ -142,7 +142,7 @@ public class Core {
 			 */
 			new TA_CandleSetting(TA_CandleSettingType.TA_Equal,
 					TA_RangeType.TA_RangeType_HighLow, 5, 0.05) };
-
+	
 	public TA_RetCode RestoreCandleDefaultSettings(
 			TA_CandleSettingType settingType) {
 		int i;
@@ -155,16 +155,14 @@ public class Core {
 			}
 		} else {
 			candleSettings[settingType.ordinal()]
-					.CopyFrom(TA_CandleDefaultSettings[settingType.ordinal()]);
+			               .CopyFrom(TA_CandleDefaultSettings[settingType.ordinal()]);
 		}
 		return TA_RetCode.TA_SUCCESS;
 	}
-
-/**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE *** */
+	
+	/** ** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE *** */
  public int MAX_Lookback( int optInTimePeriod )
 {
-
-
  return (optInTimePeriod-1);
 }
  public TA_RetCode MAX( int startIdx,
@@ -175,16 +173,9 @@ public class Core {
  MInteger outNbElement,
  double outReal[] )
 {
-
  double highest, tmp;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, today, i, highestIdx;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -196,8 +187,6 @@ public class Core {
  nbInitialElementNeeded = (optInTimePeriod-1);
  if( startIdx < nbInitialElementNeeded )
  startIdx = nbInitialElementNeeded;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -209,11 +198,9 @@ public class Core {
  trailingIdx = startIdx-nbInitialElementNeeded;
  highestIdx = -1;
  highest = 0.0;
-
  while( today <= endIdx )
  {
  tmp = inReal[today];
-
  if( highestIdx < trailingIdx )
  {
  highestIdx = trailingIdx;
@@ -234,14 +221,12 @@ public class Core {
  highestIdx = today;
  highest = tmp;
  }
-
  outReal[outIdx++] = highest;
  trailingIdx++;
  today++;
  }
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MAX( int startIdx,
@@ -255,7 +240,6 @@ public class Core {
  double highest, tmp;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, today, i, highestIdx;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -312,8 +296,6 @@ public class Core {
 /* Generated */ 
  public int MIN_Lookback( int optInTimePeriod )
 {
-
-
  return (optInTimePeriod-1);
 }
  public TA_RetCode MIN( int startIdx,
@@ -324,16 +306,9 @@ public class Core {
  MInteger outNbElement,
  double outReal[] )
 {
-
  double lowest, tmp;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, lowestIdx, today, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -345,8 +320,6 @@ public class Core {
  nbInitialElementNeeded = (optInTimePeriod-1);
  if( startIdx < nbInitialElementNeeded )
  startIdx = nbInitialElementNeeded;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -358,11 +331,9 @@ public class Core {
  trailingIdx = startIdx-nbInitialElementNeeded;
  lowestIdx = -1;
  lowest = 0.0;
-
  while( today <= endIdx )
  {
  tmp = inReal[today];
-
  if( lowestIdx < trailingIdx )
  {
  lowestIdx = trailingIdx;
@@ -383,14 +354,12 @@ public class Core {
  lowestIdx = today;
  lowest = tmp;
  }
-
  outReal[outIdx++] = lowest;
  trailingIdx++;
  today++;
  }
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MIN( int startIdx,
@@ -404,7 +373,6 @@ public class Core {
  double lowest, tmp;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, lowestIdx, today, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -464,11 +432,6 @@ public class Core {
  double optInNbDevDn,
  TA_MAType optInMAType )
 {
-
-  ;
-  ;
-
-
  return  MA_Lookback ( optInTimePeriod, optInMAType );
 }
  public TA_RetCode BBANDS( int startIdx,
@@ -484,18 +447,11 @@ public class Core {
  double outRealMiddleBand[],
  double outRealLowerBand[] )
 {
-
  TA_RetCode retCode;
  int i;
  double tempReal, tempReal2;
   double []tempBuffer1 ;
   double []tempBuffer2 ;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -504,12 +460,10 @@ public class Core {
  optInTimePeriod = 5;
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInNbDevUp ==  (-4e+37)  )
  optInNbDevUp = 2.000000e+0;
  else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInNbDevDn ==  (-4e+37)  )
  optInNbDevDn = 2.000000e+0;
  else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
@@ -539,14 +493,11 @@ public class Core {
  retCode =  MA ( startIdx, endIdx, inReal,
  optInTimePeriod, optInMAType,
  outBegIdx, outNbElement, tempBuffer1 );
-
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
  {
   outNbElement.value = 0 ;
  return retCode;
  }
-
-
  if( optInMAType ==  TA_MAType. TA_MAType_SMA )
  {
   INT_stddev_using_precalc_ma ( inReal, tempBuffer1,
@@ -555,11 +506,9 @@ public class Core {
  }
  else
  {
-
  retCode =  STDDEV ( (int) outBegIdx.value , endIdx, inReal,
  optInTimePeriod, 1.0,
  outBegIdx, outNbElement, tempBuffer2 );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outNbElement.value = 0 ;
@@ -574,7 +523,6 @@ public class Core {
  {
  if( optInNbDevUp == 1.0 )
  {
-
  for( i=0; i < (int) outNbElement.value ; i++ )
  {
  tempReal = tempBuffer2[i];
@@ -585,7 +533,6 @@ public class Core {
  }
  else
  {
-
  for( i=0; i < (int) outNbElement.value ; i++ )
  {
  tempReal = tempBuffer2[i] * optInNbDevUp;
@@ -597,7 +544,6 @@ public class Core {
  }
  else if( optInNbDevUp == 1.0 )
  {
-
  for( i=0; i < (int) outNbElement.value ; i++ )
  {
  tempReal = tempBuffer2[i];
@@ -608,7 +554,6 @@ public class Core {
  }
  else if( optInNbDevDn == 1.0 )
  {
-
  for( i=0; i < (int) outNbElement.value ; i++ )
  {
  tempReal = tempBuffer2[i];
@@ -619,7 +564,6 @@ public class Core {
  }
  else
  {
-
  for( i=0; i < (int) outNbElement.value ; i++ )
  {
  tempReal = tempBuffer2[i];
@@ -628,7 +572,6 @@ public class Core {
  outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
  }
  }
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode BBANDS( int startIdx,
@@ -649,7 +592,6 @@ public class Core {
  double tempReal, tempReal2;
   double []tempBuffer1 ;
   double []tempBuffer2 ;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -761,7 +703,6 @@ public class Core {
  MInteger outNbElement,
  double outReal[] )
 {
-
   double []firstEMA ;
   double []secondEMA ;
  double k;
@@ -771,12 +712,6 @@ public class Core {
   MInteger secondEMANbElement = new MInteger() ;
  int tempInt, outIdx, firstEMAIdx, lookbackTotal, lookbackEMA;
  TA_RetCode retCode;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -787,15 +722,10 @@ public class Core {
  return  TA_RetCode. TA_BAD_PARAM;
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
-
-
  lookbackEMA =  EMA_Lookback ( optInTimePeriod );
  lookbackTotal = lookbackEMA * 2;
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  return  TA_RetCode. TA_SUCCESS;
  if( inReal == outReal )
@@ -805,9 +735,6 @@ public class Core {
  tempInt = lookbackTotal+(endIdx-startIdx)+1;
   firstEMA = new double[tempInt] ;
  }
-
-
-
  k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
  retCode =  INT_EMA ( startIdx-lookbackEMA, endIdx, inReal,
  optInTimePeriod, k,
@@ -815,11 +742,8 @@ public class Core {
  firstEMA );
  if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( firstEMANbElement.value  == 0) )
  {
-  ;
  return retCode;
  }
-
-
   secondEMA = new double[ firstEMANbElement.value ] ;
  retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
  optInTimePeriod, k,
@@ -827,12 +751,6 @@ public class Core {
  secondEMA );
  if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( secondEMANbElement.value  == 0) )
  {
-
-
-
-  ;
-
-  ;
  return retCode;
  }
  firstEMAIdx =  secondEMABegIdx.value ;
@@ -842,16 +760,8 @@ public class Core {
  outReal[outIdx] = (2.0*firstEMA[firstEMAIdx++]) - secondEMA[outIdx];
  outIdx++;
  }
-
-
-
-
-  ;
-
-  ;
   outBegIdx.value  =  firstEMABegIdx.value  +  secondEMABegIdx.value ;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode DEMA( int startIdx,
@@ -871,7 +781,6 @@ public class Core {
   MInteger secondEMANbElement = new MInteger() ;
  int tempInt, outIdx, firstEMAIdx, lookbackTotal, lookbackEMA;
  TA_RetCode retCode;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -888,7 +797,6 @@ public class Core {
  startIdx = lookbackTotal;
  if( startIdx > endIdx )
  return  TA_RetCode. TA_SUCCESS;
-
  tempInt = lookbackTotal+(endIdx-startIdx)+1;
   firstEMA = new double[tempInt] ;
  k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
@@ -898,7 +806,6 @@ public class Core {
  firstEMA );
  if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( firstEMANbElement.value  == 0) )
  {
-  ;
  return retCode;
  }
   secondEMA = new double[ firstEMANbElement.value ] ;
@@ -908,9 +815,6 @@ public class Core {
  secondEMA );
  if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( secondEMANbElement.value  == 0) )
  {
-
-  ;
-  ;
  return retCode;
  }
  firstEMAIdx =  secondEMABegIdx.value ;
@@ -920,9 +824,6 @@ public class Core {
  outReal[outIdx] = (2.0*firstEMA[firstEMAIdx++]) - secondEMA[outIdx];
  outIdx++;
  }
-
-  ;
-  ;
   outBegIdx.value  =  firstEMABegIdx.value  +  secondEMABegIdx.value ;
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
@@ -930,7 +831,6 @@ public class Core {
 /* Generated */ 
  public int EMA_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod - 1 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_EMA.ordinal()]) ;
 }
  public TA_RetCode EMA( int startIdx,
@@ -941,13 +841,6 @@ public class Core {
  MInteger outNbElement,
  double outReal[] )
 {
-
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -975,8 +868,6 @@ public TA_RetCode INT_EMA( int startIdx,
  lookbackTotal =  EMA_Lookback ( optInTimePeriod );
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -991,7 +882,6 @@ public TA_RetCode INT_EMA( int startIdx,
  tempReal = 0.0;
  while( i-- > 0 )
  tempReal += inReal[today++];
-
  prevMA = tempReal / optInTimePeriod;
  }
  else
@@ -1001,20 +891,14 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  while( today <= startIdx )
  prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
-
-
  outReal[0] = prevMA;
  outIdx = 1;
-
-
  while( today <= endIdx )
  {
  prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
  outReal[outIdx++] = prevMA;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode EMA( int startIdx,
@@ -1025,7 +909,6 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
  {
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -1039,16 +922,6 @@ public TA_RetCode INT_EMA( int startIdx,
   ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
  outBegIdx, outNbElement, outReal );
  }
-
-
-
-
-
-
-
-
-
-
  public TA_RetCode INT_EMA( int startIdx,
  int endIdx,
   float  []inReal,
@@ -1108,75 +981,48 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx, i;
  int lookbackTotal, today;
  double tempReal, tempReal2;
-
  double adjustedPrevPeriod, period;
-
-
  int trailingWMAIdx;
  double periodWMASum, periodWMASub, trailingWMAValue;
  double smoothedValue;
-
-
  double iTrend1, iTrend2, iTrend3;
-
-
   final double a  = 0.0962;
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
-
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
-
  double rad2Deg;
-
  double todayValue, smoothPeriod;
   int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
  int idx;
-
-
  int DCPeriodInt;
  double DCPeriod;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
   { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-
  iTrend1 = iTrend2 = iTrend3 = 0.0;
-
-
  tempReal =  Math.atan (1);
  rad2Deg = 45.0/tempReal;
  lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDLINE.ordinal()]) ;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  trailingWMAIdx = startIdx - lookbackTotal;
  today = trailingWMAIdx;
@@ -1189,7 +1035,6 @@ public TA_RetCode INT_EMA( int startIdx,
  tempReal = inReal[today++];
  periodWMASub += tempReal;
  periodWMASum += tempReal*3.0;
-
  trailingWMAValue = 0.0;
  i = 34;
  do
@@ -1198,41 +1043,33 @@ public TA_RetCode INT_EMA( int startIdx,
   { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  } while( --i != 0);
  hilbertIdx = 0;
-
   { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
   { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
   { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
   { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-
  period = 0.0;
  outIdx = 0;
-
  prevI2 = prevQ2 = 0.0;
  Re = Im = 0.0;
  I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
  I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
  smoothPeriod = 0.0;
-
  for( i=0; i <  50 ; i++ )
  smoothPrice[i] = 0.0;
  while( today <= endIdx )
  {
  adjustedPrevPeriod = (0.075*period)+0.54;
-
  todayValue = inReal[today];
   { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  smoothPrice[smoothPrice_Idx] = smoothedValue;
-
  if( (today%2) == 0 )
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
  if( ++hilbertIdx == 3 )
  hilbertIdx = 0;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
  I1ForOddPrev3 = I1ForOddPrev2;
@@ -1240,19 +1077,15 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  else
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
  I1ForEvenPrev3 = I1ForEvenPrev2;
  I1ForEvenPrev2 = detrender;
  }
-
-
  Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
  Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
  prevQ2 = Q2;
@@ -1271,37 +1104,27 @@ public TA_RetCode INT_EMA( int startIdx,
  else if( period > 50 )
  period = 50;
  period = (0.2*period) + (0.8 * tempReal);
-
  smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-
-
  DCPeriod = smoothPeriod+0.5;
  DCPeriodInt = (int)DCPeriod;
  idx = today;
  tempReal = 0.0;
  for( i=0; i < DCPeriodInt; i++ )
  tempReal += inReal[idx--];
-
  if( DCPeriodInt > 0 )
  tempReal = tempReal/(double)DCPeriodInt;
-
  tempReal2 = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
  iTrend3 = iTrend2;
  iTrend2 = iTrend1;
  iTrend1 = tempReal;
-
  if( today >= startIdx )
  {
  outReal[outIdx++] = tempReal2;
  }
-
-
   { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
  today++;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode HT_TRENDLINE( int startIdx,
@@ -1323,21 +1146,19 @@ public TA_RetCode INT_EMA( int startIdx,
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
  double rad2Deg;
  double todayValue, smoothPeriod;
-
   int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
  int idx;
  int DCPeriodInt;
  double DCPeriod;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -1462,7 +1283,6 @@ public TA_RetCode INT_EMA( int startIdx,
 /* Generated */ 
  public int KAMA_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
 }
  public TA_RetCode KAMA( int startIdx,
@@ -1473,22 +1293,13 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
   final double constMax  = 2.0/(30.0+1.0);
   final double constDiff  = 2.0/(2.0+1.0) - constMax;
-
  double tempReal, tempReal2;
  double sumROC1, periodROC, prevKAMA;
  int i, today, outIdx, lookbackTotal;
  int trailingIdx;
  double trailingValue;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -1502,8 +1313,6 @@ public TA_RetCode INT_EMA( int startIdx,
  lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -1521,19 +1330,14 @@ public TA_RetCode INT_EMA( int startIdx,
  sumROC1 +=  Math.abs (tempReal);
  }
  prevKAMA = inReal[today-1];
-
  tempReal = inReal[today];
  tempReal2 = inReal[trailingIdx++];
  periodROC = tempReal-tempReal2;
  trailingValue = tempReal2;
-
-
  if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001)) )
  tempReal = 1.0;
  else
  tempReal =  Math.abs (periodROC/sumROC1);
-
-
  tempReal = (tempReal*constDiff)+constMax;
  tempReal *= tempReal;
  prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
@@ -1545,25 +1349,17 @@ public TA_RetCode INT_EMA( int startIdx,
  sumROC1 -=  Math.abs (trailingValue-tempReal2);
  sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
  trailingValue = tempReal2;
-
-
  if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
  tempReal = 1.0;
  else
  tempReal =  Math.abs (periodROC/sumROC1);
-
-
  tempReal = (tempReal*constDiff)+constMax;
  tempReal *= tempReal;
  prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
  }
-
-
  outReal[0] = prevKAMA;
  outIdx = 1;
   outBegIdx.value  = today-1;
-
-
  while( today <= endIdx )
  {
  tempReal = inReal[today];
@@ -1572,22 +1368,16 @@ public TA_RetCode INT_EMA( int startIdx,
  sumROC1 -=  Math.abs (trailingValue-tempReal2);
  sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
  trailingValue = tempReal2;
-
-
  if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
  tempReal = 1.0;
  else
  tempReal =  Math.abs (periodROC / sumROC1);
-
-
  tempReal = (tempReal*constDiff)+constMax;
  tempReal *= tempReal;
  prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
  outReal[outIdx++] = prevKAMA;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode KAMA( int startIdx,
@@ -1605,7 +1395,6 @@ public TA_RetCode INT_EMA( int startIdx,
  int i, today, outIdx, lookbackTotal;
  int trailingIdx;
  double trailingValue;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -1690,54 +1479,41 @@ public TA_RetCode INT_EMA( int startIdx,
  public int MA_Lookback( int optInTimePeriod,
  TA_MAType optInMAType )
 {
-
  int retValue;
-
  if( optInTimePeriod <= 1 )
  return 0;
-
  switch( optInMAType )
  {
  case  TA_MAType_SMA :
  retValue =  SMA_Lookback ( optInTimePeriod );
  break;
-
  case  TA_MAType_EMA :
  retValue =  EMA_Lookback ( optInTimePeriod );
  break;
-
  case  TA_MAType_WMA :
  retValue =  WMA_Lookback ( optInTimePeriod );
  break;
-
  case  TA_MAType_DEMA :
  retValue =  DEMA_Lookback ( optInTimePeriod );
  break;
-
  case  TA_MAType_TEMA :
  retValue =  TEMA_Lookback ( optInTimePeriod );
  break;
-
  case  TA_MAType_TRIMA :
  retValue =  TRIMA_Lookback ( optInTimePeriod );
  break;
-
  case  TA_MAType_KAMA :
  retValue =  KAMA_Lookback ( optInTimePeriod );
  break;
-
  case  TA_MAType_MAMA :
  retValue =  MAMA_Lookback ( 0.5, 0.05 );
  break;
-
  case  TA_MAType_T3 :
  retValue =  T3_Lookback ( optInTimePeriod, 0.7 );
  break;
-
  default:
  retValue = 0;
  }
-
  return retValue;
 }
  public TA_RetCode MA( int startIdx,
@@ -1749,18 +1525,10 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
   double []dummyBuffer ;
  TA_RetCode retCode;
-
  int nbElement;
  int outIdx, todayIdx;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -1784,58 +1552,46 @@ public TA_RetCode INT_EMA( int startIdx,
  retCode =  INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
  break;
-
  case  TA_MAType_EMA :
  retCode =  INT_EMA ( startIdx, endIdx, inReal,
  optInTimePeriod,  ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
  outBegIdx, outNbElement, outReal );
  break;
-
  case  TA_MAType_WMA :
  retCode =  WMA ( startIdx, endIdx, inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
  break;
-
  case  TA_MAType_DEMA :
  retCode =  DEMA ( startIdx, endIdx, inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
  break;
-
  case  TA_MAType_TEMA :
  retCode =  TEMA ( startIdx, endIdx, inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
  break;
-
  case  TA_MAType_TRIMA :
  retCode =  TRIMA ( startIdx, endIdx, inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
  break;
-
  case  TA_MAType_KAMA :
  retCode =  KAMA ( startIdx, endIdx, inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
  break;
-
  case  TA_MAType_MAMA :
   dummyBuffer = new double[(endIdx-startIdx+1)] ;
  retCode =  MAMA ( startIdx, endIdx, inReal, 0.5, 0.05,
  outBegIdx, outNbElement,
  outReal, dummyBuffer );
-
-  ;
  break;
-
  case  TA_MAType_T3 :
  retCode =  T3 ( startIdx, endIdx, inReal,
  optInTimePeriod, 0.7,
  outBegIdx, outNbElement, outReal );
  break;
-
  default:
  retCode =  TA_RetCode. TA_BAD_PARAM;
  break;
  }
-
  return retCode;
 }
  public TA_RetCode MA( int startIdx,
@@ -1851,7 +1607,6 @@ public TA_RetCode INT_EMA( int startIdx,
  TA_RetCode retCode;
  int nbElement;
  int outIdx, todayIdx;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -1905,7 +1660,6 @@ public TA_RetCode INT_EMA( int startIdx,
  retCode =  MAMA ( startIdx, endIdx, inReal, 0.5, 0.05,
  outBegIdx, outNbElement,
  outReal, dummyBuffer );
-  ;
  break;
  case  TA_MAType_T3 :
  retCode =  T3 ( startIdx, endIdx, inReal,
@@ -1922,8 +1676,6 @@ public TA_RetCode INT_EMA( int startIdx,
  public int MAMA_Lookback( double optInFastLimit,
  double optInSlowLimit )
 {
-  ;
-  ;
  return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
 }
  public TA_RetCode MAMA( int startIdx,
@@ -1936,44 +1688,26 @@ public TA_RetCode INT_EMA( int startIdx,
  double outMAMA[],
  double outFAMA[] )
 {
-
-
  int outIdx, i;
  int lookbackTotal, today;
  double tempReal, tempReal2;
-
  double adjustedPrevPeriod, period;
-
-
  int trailingWMAIdx;
  double periodWMASum, periodWMASub, trailingWMAValue;
  double smoothedValue;
-
-
   final double a  = 0.0962;
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
-
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
-
  double rad2Deg;
-
  double mama,fama,todayValue,prevPhase;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -1982,7 +1716,6 @@ public TA_RetCode INT_EMA( int startIdx,
  optInFastLimit = 5.000000e-1;
  else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInSlowLimit ==  (-4e+37)  )
  optInSlowLimit = 5.000000e-2;
  else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
@@ -1991,15 +1724,12 @@ public TA_RetCode INT_EMA( int startIdx,
  lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  trailingWMAIdx = startIdx - lookbackTotal;
  today = trailingWMAIdx;
@@ -2012,7 +1742,6 @@ public TA_RetCode INT_EMA( int startIdx,
  tempReal = inReal[today++];
  periodWMASub += tempReal;
  periodWMASum += tempReal*3.0;
-
  trailingWMAValue = 0.0;
  i = 9;
  do
@@ -2021,45 +1750,35 @@ public TA_RetCode INT_EMA( int startIdx,
   { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  } while( --i != 0);
  hilbertIdx = 0;
-
   { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
   { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
   { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
   { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-
  period = 0.0;
  outIdx = 0;
-
  prevI2 = prevQ2 = 0.0;
  Re = Im = 0.0;
  mama = fama = 0.0;
  I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
  I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-
  prevPhase = 0.0;
  while( today <= endIdx )
  {
  adjustedPrevPeriod = (0.075*period)+0.54;
-
  todayValue = inReal[today];
   { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-
  if( (today%2) == 0 )
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
  if( ++hilbertIdx == 3 )
  hilbertIdx = 0;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
  I1ForOddPrev3 = I1ForOddPrev2;
  I1ForOddPrev2 = detrender;
-
-
  if( I1ForEvenPrev3 != 0.0 )
  tempReal2 = ( Math.atan (Q1/I1ForEvenPrev3)*rad2Deg);
  else
@@ -2067,31 +1786,23 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  else
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
  I1ForEvenPrev3 = I1ForEvenPrev2;
  I1ForEvenPrev2 = detrender;
-
-
  if( I1ForOddPrev3 != 0.0 )
  tempReal2 = ( Math.atan (Q1/I1ForOddPrev3)*rad2Deg);
  else
  tempReal2 = 0.0;
  }
-
-
  tempReal = prevPhase - tempReal2;
  prevPhase = tempReal2;
  if( tempReal < 1.0 )
  tempReal = 1.0;
-
-
  if( tempReal > 1.0 )
  {
  tempReal = optInFastLimit/tempReal;
@@ -2102,8 +1813,6 @@ public TA_RetCode INT_EMA( int startIdx,
  {
  tempReal = optInFastLimit;
  }
-
-
  mama = (tempReal*todayValue)+((1-tempReal)*mama);
  tempReal *= 0.5;
  fama = (tempReal*mama)+((1-tempReal)*fama);
@@ -2112,8 +1821,6 @@ public TA_RetCode INT_EMA( int startIdx,
  outMAMA[outIdx] = mama;
  outFAMA[outIdx++] = fama;
  }
-
-
  Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
  Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
  prevQ2 = Q2;
@@ -2132,14 +1839,9 @@ public TA_RetCode INT_EMA( int startIdx,
  else if( period > 50 )
  period = 50;
  period = (0.2*period) + (0.8 * tempReal);
-
-
  today++;
  }
-
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MAMA( int startIdx,
@@ -2163,16 +1865,15 @@ public TA_RetCode INT_EMA( int startIdx,
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
  double rad2Deg;
  double mama,fama,todayValue,prevPhase;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -2312,7 +2013,6 @@ public TA_RetCode INT_EMA( int startIdx,
 /* Generated */ 
  public int MIDPRICE_Lookback( int optInTimePeriod )
 {
-
  return (optInTimePeriod-1);
 }
  public TA_RetCode MIDPRICE( int startIdx,
@@ -2324,16 +2024,9 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  double lowest, highest, tmp;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, today, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -2345,8 +2038,6 @@ public TA_RetCode INT_EMA( int startIdx,
  nbInitialElementNeeded = (optInTimePeriod-1);
  if( startIdx < nbInitialElementNeeded )
  startIdx = nbInitialElementNeeded;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -2356,7 +2047,6 @@ public TA_RetCode INT_EMA( int startIdx,
  outIdx = 0;
  today = startIdx;
  trailingIdx = startIdx-nbInitialElementNeeded;
-
  while( today <= endIdx )
  {
  lowest = inLow[trailingIdx];
@@ -2369,13 +2059,11 @@ public TA_RetCode INT_EMA( int startIdx,
  tmp = inHigh[i];
  if( tmp > highest) highest = tmp;
  }
-
  outReal[outIdx++] = (highest+lowest)/2.0;
  today++;
  }
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MIDPRICE( int startIdx,
@@ -2390,7 +2078,6 @@ public TA_RetCode INT_EMA( int startIdx,
  double lowest, highest, tmp;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, today, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -2433,7 +2120,6 @@ public TA_RetCode INT_EMA( int startIdx,
 /* Generated */ 
  public int MIDPOINT_Lookback( int optInTimePeriod )
 {
-
  return (optInTimePeriod-1);
 }
  public TA_RetCode MIDPOINT( int startIdx,
@@ -2444,17 +2130,9 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  double lowest, highest, tmp;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, today, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -2466,8 +2144,6 @@ public TA_RetCode INT_EMA( int startIdx,
  nbInitialElementNeeded = (optInTimePeriod-1);
  if( startIdx < nbInitialElementNeeded )
  startIdx = nbInitialElementNeeded;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -2477,7 +2153,6 @@ public TA_RetCode INT_EMA( int startIdx,
  outIdx = 0;
  today = startIdx;
  trailingIdx = startIdx-nbInitialElementNeeded;
-
  while( today <= endIdx )
  {
  lowest = inReal[trailingIdx++];
@@ -2488,13 +2163,11 @@ public TA_RetCode INT_EMA( int startIdx,
  if( tmp < lowest ) lowest= tmp;
  else if( tmp > highest) highest = tmp;
  }
-
  outReal[outIdx++] = (highest+lowest)/2.0;
  today++;
  }
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MIDPOINT( int startIdx,
@@ -2508,7 +2181,6 @@ public TA_RetCode INT_EMA( int startIdx,
  double lowest, highest, tmp;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, today, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -2550,9 +2222,6 @@ public TA_RetCode INT_EMA( int startIdx,
  public int SAR_Lookback( double optInAcceleration,
  double optInMaximum )
 {
-
-  ;
-  ;
  return 1;
 }
  public TA_RetCode SAR( int startIdx,
@@ -2565,23 +2234,13 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  TA_RetCode retCode;
-
  int isLong;
  int todayIdx, outIdx;
-
   MInteger tempInt = new MInteger() ;
-
  double newHigh, newLow, prevHigh, prevLow;
  double af, ep, sar;
-  double []ep_temp = new double[1]; ;
-
-
-
-
-
-
+  double []ep_temp = new double[1] ;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -2590,15 +2249,12 @@ public TA_RetCode INT_EMA( int startIdx,
  optInAcceleration = 2.000000e-2;
  else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInMaximum ==  (-4e+37)  )
  optInMaximum = 2.000000e-1;
  else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < 1 )
  startIdx = 1;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -2615,26 +2271,17 @@ public TA_RetCode INT_EMA( int startIdx,
  isLong = 0;
  else
  isLong = 1;
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
-
   outBegIdx.value  = startIdx;
  outIdx = 0;
-
-
  todayIdx = startIdx;
-
  newHigh = inHigh[todayIdx-1];
  newLow = inLow[todayIdx-1];
-
-  ;
-  ;
-
  if( isLong == 1 )
  {
  ep = inHigh[todayIdx];
@@ -2645,11 +2292,8 @@ public TA_RetCode INT_EMA( int startIdx,
  ep = inLow[todayIdx];
  sar = newHigh;
  }
-
-  ;
  newLow = inLow[todayIdx];
  newHigh = inHigh[todayIdx];
-
  while( todayIdx <= endIdx )
  {
  prevLow = newLow;
@@ -2657,33 +2301,20 @@ public TA_RetCode INT_EMA( int startIdx,
  newLow = inLow[todayIdx];
  newHigh = inHigh[todayIdx];
  todayIdx++;
-
-  ;
-  ;
-
  if( isLong == 1 )
  {
-
  if( newLow <= sar )
  {
-
  isLong = 0;
  sar = ep;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
  sar = newHigh;
-
-
  outReal[outIdx++] = sar;
-
-
  af = optInAcceleration;
  ep = newLow;
-
-
  sar = sar + af * (ep - sar);
-  ;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
@@ -2691,12 +2322,7 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  else
  {
-
-
-
  outReal[outIdx++] = sar;
-
-
  if( newHigh > ep )
  {
  ep = newHigh;
@@ -2704,10 +2330,7 @@ public TA_RetCode INT_EMA( int startIdx,
  if( af > optInMaximum )
  af = optInMaximum;
  }
-
-
  sar = sar + af * (ep - sar);
-  ;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
@@ -2716,27 +2339,18 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  else
  {
-
  if( newHigh >= sar )
  {
-
  isLong = 1;
  sar = ep;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
  sar = newLow;
-
-
  outReal[outIdx++] = sar;
-
-
  af = optInAcceleration;
  ep = newHigh;
-
-
  sar = sar + af * (ep - sar);
-  ;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
@@ -2744,12 +2358,7 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  else
  {
-
-
-
  outReal[outIdx++] = sar;
-
-
  if( newLow < ep )
  {
  ep = newLow;
@@ -2757,10 +2366,7 @@ public TA_RetCode INT_EMA( int startIdx,
  if( af > optInMaximum )
  af = optInMaximum;
  }
-
-
  sar = sar + af * (ep - sar);
-  ;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
@@ -2768,9 +2374,7 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  }
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode SAR( int startIdx,
@@ -2789,8 +2393,7 @@ public TA_RetCode INT_EMA( int startIdx,
   MInteger tempInt = new MInteger() ;
  double newHigh, newLow, prevHigh, prevLow;
  double af, ep, sar;
-  double []ep_temp = new double[1]; ;
-
+  double []ep_temp = new double[1] ;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -2832,8 +2435,6 @@ public TA_RetCode INT_EMA( int startIdx,
  todayIdx = startIdx;
  newHigh = inHigh[todayIdx-1];
  newLow = inLow[todayIdx-1];
-  ;
-  ;
  if( isLong == 1 )
  {
  ep = inHigh[todayIdx];
@@ -2844,7 +2445,6 @@ public TA_RetCode INT_EMA( int startIdx,
  ep = inLow[todayIdx];
  sar = newHigh;
  }
-  ;
  newLow = inLow[todayIdx];
  newHigh = inHigh[todayIdx];
  while( todayIdx <= endIdx )
@@ -2854,8 +2454,6 @@ public TA_RetCode INT_EMA( int startIdx,
  newLow = inLow[todayIdx];
  newHigh = inHigh[todayIdx];
  todayIdx++;
-  ;
-  ;
  if( isLong == 1 )
  {
  if( newLow <= sar )
@@ -2870,7 +2468,6 @@ public TA_RetCode INT_EMA( int startIdx,
  af = optInAcceleration;
  ep = newLow;
  sar = sar + af * (ep - sar);
-  ;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
@@ -2887,7 +2484,6 @@ public TA_RetCode INT_EMA( int startIdx,
  af = optInMaximum;
  }
  sar = sar + af * (ep - sar);
-  ;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
@@ -2908,7 +2504,6 @@ public TA_RetCode INT_EMA( int startIdx,
  af = optInAcceleration;
  ep = newHigh;
  sar = sar + af * (ep - sar);
-  ;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
@@ -2925,7 +2520,6 @@ public TA_RetCode INT_EMA( int startIdx,
  af = optInMaximum;
  }
  sar = sar + af * (ep - sar);
-  ;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
@@ -2946,15 +2540,6 @@ public TA_RetCode INT_EMA( int startIdx,
  double optInAccelerationShort,
  double optInAccelerationMaxShort )
 {
-
-  ;
-  ;
-  ;
-  ;
-  ;
-  ;
-  ;
-  ;
  return 1;
 }
  public TA_RetCode SAREXT( int startIdx,
@@ -2973,23 +2558,13 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  TA_RetCode retCode;
-
  int isLong;
  int todayIdx, outIdx;
-
   MInteger tempInt = new MInteger() ;
-
  double newHigh, newLow, prevHigh, prevLow;
  double afLong, afShort, ep, sar;
-  double []ep_temp = new double[1]; ;
-
-
-
-
-
-
+  double []ep_temp = new double[1] ;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -2998,45 +2573,36 @@ public TA_RetCode INT_EMA( int startIdx,
  optInStartValue = 0.000000e+0;
  else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInOffsetOnReverse ==  (-4e+37)  )
  optInOffsetOnReverse = 0.000000e+0;
  else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInAccelerationInitLong ==  (-4e+37)  )
  optInAccelerationInitLong = 2.000000e-2;
  else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInAccelerationLong ==  (-4e+37)  )
  optInAccelerationLong = 2.000000e-2;
  else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInAccelerationMaxLong ==  (-4e+37)  )
  optInAccelerationMaxLong = 2.000000e-1;
  else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInAccelerationInitShort ==  (-4e+37)  )
  optInAccelerationInitShort = 2.000000e-2;
  else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInAccelerationShort ==  (-4e+37)  )
  optInAccelerationShort = 2.000000e-2;
  else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInAccelerationMaxShort ==  (-4e+37)  )
  optInAccelerationMaxShort = 2.000000e-1;
  else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < 1 )
  startIdx = 1;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -3045,21 +2611,14 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  afLong = optInAccelerationInitLong;
  afShort = optInAccelerationInitShort;
-
  if( afLong > optInAccelerationMaxLong )
  afLong = optInAccelerationInitLong = optInAccelerationMaxLong;
-
  if( optInAccelerationLong > optInAccelerationMaxLong )
  optInAccelerationLong = optInAccelerationMaxLong;
-
  if( afShort > optInAccelerationMaxShort)
  afShort = optInAccelerationInitShort = optInAccelerationMaxShort;
-
  if( optInAccelerationShort > optInAccelerationMaxShort )
  optInAccelerationShort = optInAccelerationMaxShort;
-
-
-
  if(optInStartValue == 0)
  {
  retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
@@ -3069,7 +2628,6 @@ public TA_RetCode INT_EMA( int startIdx,
  isLong = 0;
  else
  isLong = 1;
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
@@ -3085,20 +2643,11 @@ public TA_RetCode INT_EMA( int startIdx,
  {
  isLong = 0;
  }
-
   outBegIdx.value  = startIdx;
  outIdx = 0;
-
-
-
  todayIdx = startIdx;
-
  newHigh = inHigh[todayIdx-1];
  newLow = inLow[todayIdx-1];
-
-  ;
-  ;
-
  if(optInStartValue == 0)
  {
  if( isLong == 1 )
@@ -3122,11 +2671,8 @@ public TA_RetCode INT_EMA( int startIdx,
  ep = inLow[todayIdx];
  sar =  Math.abs (optInStartValue);
  }
-
-  ;
  newLow = inLow[todayIdx];
  newHigh = inHigh[todayIdx];
-
  while( todayIdx <= endIdx )
  {
  prevLow = newLow;
@@ -3134,35 +2680,22 @@ public TA_RetCode INT_EMA( int startIdx,
  newLow = inLow[todayIdx];
  newHigh = inHigh[todayIdx];
  todayIdx++;
-
-  ;
-  ;
-
  if( isLong == 1 )
  {
-
  if( newLow <= sar )
  {
-
  isLong = 0;
  sar = ep;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
  sar = newHigh;
-
-
  if( optInOffsetOnReverse != 0.0 )
  sar += sar * optInOffsetOnReverse;
  outReal[outIdx++] = -sar;
-
-
  afShort = optInAccelerationInitShort;
  ep = newLow;
-
-
  sar = sar + afShort * (ep - sar);
-  ;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
@@ -3170,12 +2703,7 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  else
  {
-
-
-
  outReal[outIdx++] = sar;
-
-
  if( newHigh > ep )
  {
  ep = newHigh;
@@ -3183,10 +2711,7 @@ public TA_RetCode INT_EMA( int startIdx,
  if( afLong > optInAccelerationMaxLong )
  afLong = optInAccelerationMaxLong;
  }
-
-
  sar = sar + afLong * (ep - sar);
-  ;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
@@ -3195,29 +2720,20 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  else
  {
-
  if( newHigh >= sar )
  {
-
  isLong = 1;
  sar = ep;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
  sar = newLow;
-
-
  if( optInOffsetOnReverse != 0.0 )
  sar -= sar * optInOffsetOnReverse;
  outReal[outIdx++] = sar;
-
-
  afLong = optInAccelerationInitLong;
  ep = newHigh;
-
-
  sar = sar + afLong * (ep - sar);
-  ;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
@@ -3225,12 +2741,7 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  else
  {
-
-
-
  outReal[outIdx++] = -sar;
-
-
  if( newLow < ep )
  {
  ep = newLow;
@@ -3238,10 +2749,7 @@ public TA_RetCode INT_EMA( int startIdx,
  if( afShort > optInAccelerationMaxShort )
  afShort = optInAccelerationMaxShort;
  }
-
-
  sar = sar + afShort * (ep - sar);
-  ;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
@@ -3249,9 +2757,7 @@ public TA_RetCode INT_EMA( int startIdx,
  }
  }
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode SAREXT( int startIdx,
@@ -3276,8 +2782,7 @@ public TA_RetCode INT_EMA( int startIdx,
   MInteger tempInt = new MInteger() ;
  double newHigh, newLow, prevHigh, prevLow;
  double afLong, afShort, ep, sar;
-  double []ep_temp = new double[1]; ;
-
+  double []ep_temp = new double[1] ;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -3361,8 +2866,6 @@ public TA_RetCode INT_EMA( int startIdx,
  todayIdx = startIdx;
  newHigh = inHigh[todayIdx-1];
  newLow = inLow[todayIdx-1];
-  ;
-  ;
  if(optInStartValue == 0)
  {
  if( isLong == 1 )
@@ -3386,7 +2889,6 @@ public TA_RetCode INT_EMA( int startIdx,
  ep = inLow[todayIdx];
  sar =  Math.abs (optInStartValue);
  }
-  ;
  newLow = inLow[todayIdx];
  newHigh = inHigh[todayIdx];
  while( todayIdx <= endIdx )
@@ -3396,8 +2898,6 @@ public TA_RetCode INT_EMA( int startIdx,
  newLow = inLow[todayIdx];
  newHigh = inHigh[todayIdx];
  todayIdx++;
-  ;
-  ;
  if( isLong == 1 )
  {
  if( newLow <= sar )
@@ -3414,7 +2914,6 @@ public TA_RetCode INT_EMA( int startIdx,
  afShort = optInAccelerationInitShort;
  ep = newLow;
  sar = sar + afShort * (ep - sar);
-  ;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
@@ -3431,7 +2930,6 @@ public TA_RetCode INT_EMA( int startIdx,
  afLong = optInAccelerationMaxLong;
  }
  sar = sar + afLong * (ep - sar);
-  ;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
@@ -3454,7 +2952,6 @@ public TA_RetCode INT_EMA( int startIdx,
  afLong = optInAccelerationInitLong;
  ep = newHigh;
  sar = sar + afLong * (ep - sar);
-  ;
  if( sar > prevLow )
  sar = prevLow;
  if( sar > newLow )
@@ -3471,7 +2968,6 @@ public TA_RetCode INT_EMA( int startIdx,
  afShort = optInAccelerationMaxShort;
  }
  sar = sar + afShort * (ep - sar);
-  ;
  if( sar < prevHigh )
  sar = prevHigh;
  if( sar < newHigh )
@@ -3485,8 +2981,6 @@ public TA_RetCode INT_EMA( int startIdx,
 /* Generated */ 
  public int SMA_Lookback( int optInTimePeriod )
 {
-
-
  return optInTimePeriod - 1;
 }
  public TA_RetCode SMA( int startIdx,
@@ -3497,13 +2991,6 @@ public TA_RetCode INT_EMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -3516,16 +3003,6 @@ public TA_RetCode INT_EMA( int startIdx,
  inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
 }
-
-
-
-
-
-
-
-
-
-
 TA_RetCode INT_SMA( int startIdx,
  int endIdx,
   double  inReal[],
@@ -3539,20 +3016,14 @@ TA_RetCode INT_SMA( int startIdx,
  lookbackTotal = (optInTimePeriod-1);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  periodTotal = 0;
  trailingIdx = startIdx-lookbackTotal;
-
  i=trailingIdx;
  if( optInTimePeriod > 1 )
  {
@@ -3567,11 +3038,8 @@ TA_RetCode INT_SMA( int startIdx,
  periodTotal -= inReal[trailingIdx++];
  outReal[outIdx++] = tempReal / optInTimePeriod;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode SMA( int startIdx,
@@ -3582,7 +3050,6 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
  {
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -3595,15 +3062,6 @@ TA_RetCode INT_SMA( int startIdx,
  inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
  }
-
-
-
-
-
-
-
-
-
  TA_RetCode INT_SMA( int startIdx,
  int endIdx,
   float  inReal[],
@@ -3647,8 +3105,6 @@ TA_RetCode INT_SMA( int startIdx,
  public int T3_Lookback( int optInTimePeriod,
  double optInVFactor )
 {
-
-  ;
  return 6 * (optInTimePeriod-1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
 }
  public TA_RetCode T3( int startIdx,
@@ -3660,20 +3116,12 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int outIdx, lookbackTotal;
  int today, i;
  double k, one_minus_k;
  double e1, e2, e3, e4, e5, e6;
  double c1, c2, c3, c4;
  double tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -3682,7 +3130,6 @@ TA_RetCode INT_SMA( int startIdx,
  optInTimePeriod = 5;
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInVFactor ==  (-4e+37)  )
  optInVFactor = 7.000000e-1;
  else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
@@ -3690,28 +3137,20 @@ TA_RetCode INT_SMA( int startIdx,
  lookbackTotal = 6 * (optInTimePeriod - 1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
  if( startIdx <= lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  today = startIdx - lookbackTotal;
-
  k = 2.0/(optInTimePeriod+1.0);
  one_minus_k = 1.0-k;
-
-
  tempReal = inReal[today++];
  for( i=optInTimePeriod-1; i > 0 ; i-- )
  tempReal += inReal[today++];
  e1 = tempReal / optInTimePeriod;
-
-
  tempReal = e1;
  for( i=optInTimePeriod-1; i > 0 ; i-- )
  {
@@ -3719,8 +3158,6 @@ TA_RetCode INT_SMA( int startIdx,
  tempReal += e1;
  }
  e2 = tempReal / optInTimePeriod;
-
-
  tempReal = e2;
  for( i=optInTimePeriod-1; i > 0 ; i-- )
  {
@@ -3729,8 +3166,6 @@ TA_RetCode INT_SMA( int startIdx,
  tempReal += e2;
  }
  e3 = tempReal / optInTimePeriod;
-
-
  tempReal = e3;
  for( i=optInTimePeriod-1; i > 0 ; i-- )
  {
@@ -3740,8 +3175,6 @@ TA_RetCode INT_SMA( int startIdx,
  tempReal += e3;
  }
  e4 = tempReal / optInTimePeriod;
-
-
  tempReal = e4;
  for( i=optInTimePeriod-1; i > 0 ; i-- )
  {
@@ -3752,8 +3185,6 @@ TA_RetCode INT_SMA( int startIdx,
  tempReal += e4;
  }
  e5 = tempReal / optInTimePeriod;
-
-
  tempReal = e5;
  for( i=optInTimePeriod-1; i > 0 ; i-- )
  {
@@ -3765,11 +3196,8 @@ TA_RetCode INT_SMA( int startIdx,
  tempReal += e5;
  }
  e6 = tempReal / optInTimePeriod;
-
-
  while( today <= startIdx )
  {
-
  e1 = (k*inReal[today++])+(one_minus_k*e1);
  e2 = (k*e1)+(one_minus_k*e2);
  e3 = (k*e2)+(one_minus_k*e3);
@@ -3777,19 +3205,13 @@ TA_RetCode INT_SMA( int startIdx,
  e5 = (k*e4)+(one_minus_k*e5);
  e6 = (k*e5)+(one_minus_k*e6);
  }
-
-
  tempReal = optInVFactor * optInVFactor;
  c1 = -(tempReal * optInVFactor);
  c2 = 3.0 * (tempReal - c1);
  c3 = -6.0 * tempReal - 3.0 * (optInVFactor-c1);
  c4 = 1.0 + 3.0 * optInVFactor - c1 + 3.0 * tempReal;
-
-
  outIdx = 0;
  outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
-
-
  while( today <= endIdx )
  {
  e1 = (k*inReal[today++])+(one_minus_k*e1);
@@ -3801,7 +3223,6 @@ TA_RetCode INT_SMA( int startIdx,
  outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
  }
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode T3( int startIdx,
@@ -3819,7 +3240,6 @@ TA_RetCode INT_SMA( int startIdx,
  double e1, e2, e3, e4, e5, e6;
  double c1, c2, c3, c4;
  double tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -3926,11 +3346,7 @@ TA_RetCode INT_SMA( int startIdx,
 /* Generated */ 
  public int TEMA_Lookback( int optInTimePeriod )
 {
-
-
-
  int retValue =  EMA_Lookback ( optInTimePeriod );
-
  return retValue * 3;
 }
  public TA_RetCode TEMA( int startIdx,
@@ -3941,28 +3357,18 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
   double []firstEMA ;
   double []secondEMA ;
  double k;
-
   MInteger firstEMABegIdx = new MInteger() ;
   MInteger firstEMANbElement = new MInteger() ;
   MInteger secondEMABegIdx = new MInteger() ;
   MInteger secondEMANbElement = new MInteger() ;
   MInteger thirdEMABegIdx = new MInteger() ;
   MInteger thirdEMANbElement = new MInteger() ;
-
  int tempInt, outIdx, lookbackTotal, lookbackEMA;
  int firstEMAIdx, secondEMAIdx;
-
  TA_RetCode retCode;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -3973,19 +3379,12 @@ TA_RetCode INT_SMA( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
-
-
  lookbackEMA =  EMA_Lookback ( optInTimePeriod );
  lookbackTotal = lookbackEMA * 3;
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  return  TA_RetCode. TA_SUCCESS;
-
-
  tempInt = lookbackTotal+(endIdx-startIdx)+1;
   firstEMA = new double[tempInt] ;
  k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
@@ -3995,11 +3394,8 @@ TA_RetCode INT_SMA( int startIdx,
  firstEMA );
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( firstEMANbElement.value  == 0) )
  {
-  ;
  return retCode;
  }
-
-
   secondEMA = new double[ firstEMANbElement.value ] ;
  retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
  optInTimePeriod, k,
@@ -4007,20 +3403,14 @@ TA_RetCode INT_SMA( int startIdx,
  secondEMA );
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( secondEMANbElement.value  == 0) )
  {
-  ;
-  ;
  return retCode;
  }
-
-
  retCode =  INT_EMA ( 0,  secondEMANbElement.value -1, secondEMA,
  optInTimePeriod, k,
   thirdEMABegIdx ,  thirdEMANbElement ,
  outReal );
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( thirdEMANbElement.value  == 0) )
  {
-  ;
-  ;
  return retCode;
  }
  firstEMAIdx =  thirdEMABegIdx.value  +  secondEMABegIdx.value ;
@@ -4032,11 +3422,7 @@ TA_RetCode INT_SMA( int startIdx,
  outReal[outIdx] += (3.0*firstEMA[firstEMAIdx++]) - (3.0*secondEMA[secondEMAIdx++]);
  outIdx++;
  }
-
-  ;
-  ;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode TEMA( int startIdx,
@@ -4059,7 +3445,6 @@ TA_RetCode INT_SMA( int startIdx,
  int tempInt, outIdx, lookbackTotal, lookbackEMA;
  int firstEMAIdx, secondEMAIdx;
  TA_RetCode retCode;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -4085,7 +3470,6 @@ TA_RetCode INT_SMA( int startIdx,
  firstEMA );
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( firstEMANbElement.value  == 0) )
  {
-  ;
  return retCode;
  }
   secondEMA = new double[ firstEMANbElement.value ] ;
@@ -4095,8 +3479,6 @@ TA_RetCode INT_SMA( int startIdx,
  secondEMA );
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( secondEMANbElement.value  == 0) )
  {
-  ;
-  ;
  return retCode;
  }
  retCode =  INT_EMA ( 0,  secondEMANbElement.value -1, secondEMA,
@@ -4105,8 +3487,6 @@ TA_RetCode INT_SMA( int startIdx,
  outReal );
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( thirdEMANbElement.value  == 0) )
  {
-  ;
-  ;
  return retCode;
  }
  firstEMAIdx =  thirdEMABegIdx.value  +  secondEMABegIdx.value ;
@@ -4118,15 +3498,12 @@ TA_RetCode INT_SMA( int startIdx,
  outReal[outIdx] += (3.0*firstEMA[firstEMAIdx++]) - (3.0*secondEMA[secondEMAIdx++]);
  outIdx++;
  }
-  ;
-  ;
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
  }
 /* Generated */ 
  public int TRIMA_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod-1;
 }
  public TA_RetCode TRIMA( int startIdx,
@@ -4137,21 +3514,12 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int lookbackTotal;
-
  double numerator;
  double numeratorSub;
  double numeratorAdd;
-
  int i, outIdx, todayIdx, trailingIdx, middleIdx;
  double factor, tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -4163,8 +3531,6 @@ TA_RetCode INT_SMA( int startIdx,
  lookbackTotal = (optInTimePeriod-1);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -4172,7 +3538,6 @@ TA_RetCode INT_SMA( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  outIdx = 0;
-
  if( (optInTimePeriod % 2) == 1 )
  {
  i = (optInTimePeriod>>1);
@@ -4197,30 +3562,21 @@ TA_RetCode INT_SMA( int startIdx,
  numeratorAdd += tempReal;
  numerator += numeratorAdd;
  }
-
-
  outIdx = 0;
  tempReal = inReal[trailingIdx++];
  outReal[outIdx++] = numerator * factor;
  todayIdx++;
  while( todayIdx <= endIdx )
  {
-
  numerator -= numeratorSub;
  numeratorSub -= tempReal;
  tempReal = inReal[middleIdx++];
  numeratorSub += tempReal;
-
-
  numerator += numeratorAdd;
  numeratorAdd -= tempReal;
  tempReal = inReal[todayIdx++];
  numeratorAdd += tempReal;
-
-
  numerator += tempReal;
-
-
  tempReal = inReal[trailingIdx++];
  outReal[outIdx++] = numerator * factor;
  }
@@ -4234,9 +3590,7 @@ TA_RetCode INT_SMA( int startIdx,
  middleIdx = trailingIdx + i - 1;
  todayIdx = middleIdx + i;
  numerator = 0.0;
-
  numeratorSub = 0.0;
-
  for( i=middleIdx; i >= trailingIdx; i-- )
  {
  tempReal = inReal[i];
@@ -4251,39 +3605,27 @@ TA_RetCode INT_SMA( int startIdx,
  numeratorAdd += tempReal;
  numerator += numeratorAdd;
  }
-
-
  outIdx = 0;
  tempReal = inReal[trailingIdx++];
  outReal[outIdx++] = numerator * factor;
  todayIdx++;
  while( todayIdx <= endIdx )
  {
-
  numerator -= numeratorSub;
  numeratorSub -= tempReal;
  tempReal = inReal[middleIdx++];
  numeratorSub += tempReal;
-
-
  numeratorAdd -= tempReal;
  numerator += numeratorAdd;
  tempReal = inReal[todayIdx++];
  numeratorAdd += tempReal;
-
-
  numerator += tempReal;
-
-
  tempReal = inReal[trailingIdx++];
  outReal[outIdx++] = numerator * factor;
  }
-
  }
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode TRIMA( int startIdx,
@@ -4300,7 +3642,6 @@ TA_RetCode INT_SMA( int startIdx,
  double numeratorAdd;
  int i, outIdx, todayIdx, trailingIdx, middleIdx;
  double factor, tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -4412,7 +3753,6 @@ TA_RetCode INT_SMA( int startIdx,
 /* Generated */ 
  public int WMA_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod - 1;
 }
  public TA_RetCode WMA( int startIdx,
@@ -4423,16 +3763,9 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int inIdx, outIdx, i, trailingIdx, divider;
  double periodSum, periodSub, tempReal, trailingValue;
  int lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -4444,8 +3777,6 @@ TA_RetCode INT_SMA( int startIdx,
  lookbackTotal = optInTimePeriod-1;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -4456,14 +3787,12 @@ TA_RetCode INT_SMA( int startIdx,
  {
   outBegIdx.value  = startIdx;
   outNbElement.value  = endIdx-startIdx+1;
-  System.arraycopy(inReal,0,outReal,0,(int) outNbElement.value ) ;
+  System.arraycopy(inReal,startIdx,outReal,0,(int) outNbElement.value ) ;
  return  TA_RetCode. TA_SUCCESS;
  }
  divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
  outIdx = 0;
  trailingIdx = startIdx - lookbackTotal;
-
-
  periodSum = periodSub = (double)0.0;
  inIdx=trailingIdx;
  i = 1;
@@ -4475,8 +3804,6 @@ TA_RetCode INT_SMA( int startIdx,
  i++;
  }
  trailingValue = 0.0;
-
-
  while( inIdx <= endIdx )
  {
  tempReal = inReal[inIdx++];
@@ -4484,18 +3811,11 @@ TA_RetCode INT_SMA( int startIdx,
  periodSub -= trailingValue;
  periodSum += tempReal*optInTimePeriod;
  trailingValue = inReal[trailingIdx++];
-
-
  outReal[outIdx++] = periodSum / divider;
-
-
  periodSum -= periodSub;
  }
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode WMA( int startIdx,
@@ -4509,7 +3829,6 @@ TA_RetCode INT_SMA( int startIdx,
  int inIdx, outIdx, i, trailingIdx, divider;
  double periodSum, periodSub, tempReal, trailingValue;
  int lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -4531,7 +3850,7 @@ TA_RetCode INT_SMA( int startIdx,
  {
   outBegIdx.value  = startIdx;
   outNbElement.value  = endIdx-startIdx+1;
-  System.arraycopy(inReal,0,outReal,0,(int) outNbElement.value ) ;
+  System.arraycopy(inReal,startIdx,outReal,0,(int) outNbElement.value ) ;
  return  TA_RetCode. TA_SUCCESS;
  }
  divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
@@ -4577,22 +3896,14 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  TA_RetCode retCode;
  int outIdx, today, lookbackTotal;
  int nbATR;
   MInteger outBegIdx1 = new MInteger() ;
   MInteger outNbElement1 = new MInteger() ;
-
  double prevATR;
   double []tempBuffer ;
-  double []prevATRTemp = new double[1]; ;
-
-
-
-
-
-
+  double []prevATRTemp = new double[1] ;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -4603,38 +3914,24 @@ TA_RetCode INT_SMA( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-
-
  lookbackTotal =  ATR_Lookback ( optInTimePeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  return  TA_RetCode. TA_SUCCESS;
-
-
  if( optInTimePeriod <= 1 )
  {
-
  return  TRANGE ( startIdx, endIdx,
  inHigh, inLow, inClose,
  outBegIdx, outNbElement, outReal );
  }
-
-
   tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
-
-
  retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
  inHigh, inLow, inClose,
   outBegIdx1 ,  outNbElement1 ,
  tempBuffer );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
-  ;
  return retCode;
  }
  retCode =  INT_SMA ( optInTimePeriod-1,
@@ -4642,16 +3939,13 @@ TA_RetCode INT_SMA( int startIdx,
  tempBuffer, optInTimePeriod,
   outBegIdx1 ,  outNbElement1 ,
  prevATRTemp );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
-  ;
  return retCode;
  }
  prevATR = prevATRTemp[0];
  today = optInTimePeriod;
  outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ATR.ordinal()]) ;
-
  while( outIdx != 0 )
  {
  prevATR *= optInTimePeriod - 1;
@@ -4661,10 +3955,7 @@ TA_RetCode INT_SMA( int startIdx,
  }
  outIdx = 1;
  outReal[0] = prevATR;
-
-
  nbATR = (endIdx - startIdx)+1;
-
  while( --nbATR != 0 )
  {
  prevATR *= optInTimePeriod - 1;
@@ -4672,12 +3963,8 @@ TA_RetCode INT_SMA( int startIdx,
  prevATR /= optInTimePeriod;
  outReal[outIdx++] = prevATR;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
-  ;
-
  return retCode;
 }
  public TA_RetCode ATR( int startIdx,
@@ -4697,8 +3984,7 @@ TA_RetCode INT_SMA( int startIdx,
   MInteger outNbElement1 = new MInteger() ;
  double prevATR;
   double []tempBuffer ;
-  double []prevATRTemp = new double[1]; ;
-
+  double []prevATRTemp = new double[1] ;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -4727,7 +4013,6 @@ TA_RetCode INT_SMA( int startIdx,
  tempBuffer );
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
-  ;
  return retCode;
  }
  retCode =  INT_SMA ( optInTimePeriod-1,
@@ -4737,7 +4022,6 @@ TA_RetCode INT_SMA( int startIdx,
  prevATRTemp );
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
-  ;
  return retCode;
  }
  prevATR = prevATRTemp[0];
@@ -4762,14 +4046,11 @@ TA_RetCode INT_SMA( int startIdx,
  }
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-  ;
  return retCode;
  }
 /* Generated */ 
  public int TRANGE_Lookback( )
 {
-
-
  return 1;
 }
  public TA_RetCode TRANGE( int startIdx,
@@ -4781,57 +4062,40 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int today, outIdx;
  double val2, val3, greatest;
  double tempCY, tempLT, tempHT;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
  if( startIdx < 1 )
  startIdx = 1;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
  outIdx = 0;
  today = startIdx;
  while( today <= endIdx )
  {
-
-
  tempLT = inLow[today];
  tempHT = inHigh[today];
  tempCY = inClose[today-1];
  greatest = tempHT - tempLT;
-
  val2 =  Math.abs ( tempCY - tempHT );
  if( val2 > greatest )
  greatest = val2;
-
  val3 =  Math.abs ( tempCY - tempLT );
  if( val3 > greatest )
  greatest = val3;
-
  outReal[outIdx++] = greatest;
  today++;
  }
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode TRANGE( int startIdx,
@@ -4846,7 +4110,6 @@ TA_RetCode INT_SMA( int startIdx,
  int today, outIdx;
  double val2, val3, greatest;
  double tempCY, tempLT, tempHT;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -4883,7 +4146,6 @@ TA_RetCode INT_SMA( int startIdx,
 /* Generated */ 
  public int ADX_Lookback( int optInTimePeriod )
 {
-
  if( optInTimePeriod > 1 )
  return (2 * optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
  else
@@ -4899,13 +4161,11 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int today, lookbackTotal, outIdx;
  double prevHigh, prevLow, prevClose;
  double prevMinusDM, prevPlusDM, prevTR;
  double tempReal, tempReal2, diffP, diffM;
  double minusDI, plusDI, sumDX, prevADX;
-
  int i;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
@@ -4919,12 +4179,8 @@ TA_RetCode INT_SMA( int startIdx,
  lookbackTotal = (2*optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
  else
  lookbackTotal = 2;
-
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -4932,10 +4188,7 @@ TA_RetCode INT_SMA( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  outIdx = 0;
-
-
   outBegIdx.value  = today = startIdx;
-
  prevMinusDM = 0.0;
  prevPlusDM = 0.0;
  prevTR = 0.0;
@@ -4946,185 +4199,132 @@ TA_RetCode INT_SMA( int startIdx,
  i = optInTimePeriod-1;
  while( i-- > 0 )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
  else if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR += tempReal;
  prevClose = inClose[today];
  }
-
-
  sumDX = 0.0;
  i = optInTimePeriod;
  while( i-- > 0 )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  prevMinusDM -= prevMinusDM/optInTimePeriod;
  prevPlusDM -= prevPlusDM/optInTimePeriod;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
  else if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
-
-
  if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
  {
  minusDI =  (100.0*(prevMinusDM/prevTR)) ;
  plusDI =  (100.0*(prevPlusDM/prevTR)) ;
-
  tempReal = minusDI+plusDI;
  if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
  sumDX +=  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
  }
  }
-
-
  prevADX =  (sumDX / optInTimePeriod) ;
-
-
  i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()]) ;
  while( i-- > 0 )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  prevMinusDM -= prevMinusDM/optInTimePeriod;
  prevPlusDM -= prevPlusDM/optInTimePeriod;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
  else if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
-
  if( prevTR != 0.0 )
  {
-
  minusDI =  (100.0*(prevMinusDM/prevTR)) ;
  plusDI =  (100.0*(prevPlusDM/prevTR)) ;
  tempReal = minusDI+plusDI;
  if( tempReal != 0.0 )
  {
  tempReal =  (100.0*( Math.abs (minusDI-plusDI)/tempReal)) ;
-
  prevADX =  (((prevADX*(optInTimePeriod-1))+tempReal)/optInTimePeriod) ;
  }
  }
  }
-
-
  outReal[0] = prevADX;
  outIdx = 1;
-
-
  while( today < endIdx )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  prevMinusDM -= prevMinusDM/optInTimePeriod;
  prevPlusDM -= prevPlusDM/optInTimePeriod;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
  else if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
-
  if( prevTR != 0.0 )
  {
-
  minusDI =  (100.0*(prevMinusDM/prevTR)) ;
  plusDI =  (100.0*(prevPlusDM/prevTR)) ;
  tempReal = minusDI+plusDI;
  if( tempReal != 0.0 )
  {
  tempReal =  (100.0*( Math.abs (minusDI-plusDI)/tempReal)) ;
-
  prevADX =  (((prevADX*(optInTimePeriod-1))+tempReal)/optInTimePeriod) ;
  }
  }
-
-
  outReal[outIdx++] = prevADX;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode ADX( int startIdx,
@@ -5306,7 +4506,6 @@ TA_RetCode INT_SMA( int startIdx,
 /* Generated */ 
  public int ADXR_Lookback( int optInTimePeriod )
 {
-
  if( optInTimePeriod > 1 )
  return optInTimePeriod +  ADX_Lookback ( optInTimePeriod) - 1;
  else
@@ -5322,16 +4521,9 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
   double []adx ;
  int adxrLookback, i, j, outIdx, nbElement;
  TA_RetCode retCode;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -5341,41 +4533,30 @@ TA_RetCode INT_SMA( int startIdx,
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
  adxrLookback =  ADXR_Lookback ( optInTimePeriod );
-
  if( startIdx < adxrLookback )
  startIdx = adxrLookback;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   adx = new double[endIdx-startIdx+optInTimePeriod] ;
  retCode =  ADX ( startIdx-(optInTimePeriod-1), endIdx,
  inHigh, inLow, inClose,
  optInTimePeriod, outBegIdx, outNbElement, adx );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
-  ;
  return retCode;
  }
-
  i = optInTimePeriod-1;
  j = 0;
  outIdx = 0;
  nbElement = endIdx-startIdx+2;
  while( --nbElement != 0 )
  outReal[outIdx++] =  ((adx[i++]+adx[j++])/2.0) ;
-
-  ;
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode ADXR( int startIdx,
@@ -5391,7 +4572,6 @@ TA_RetCode INT_SMA( int startIdx,
   double []adx ;
  int adxrLookback, i, j, outIdx, nbElement;
  TA_RetCode retCode;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -5415,7 +4595,6 @@ TA_RetCode INT_SMA( int startIdx,
  optInTimePeriod, outBegIdx, outNbElement, adx );
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
-  ;
  return retCode;
  }
  i = optInTimePeriod-1;
@@ -5424,7 +4603,6 @@ TA_RetCode INT_SMA( int startIdx,
  nbElement = endIdx-startIdx+2;
  while( --nbElement != 0 )
  outReal[outIdx++] =  ((adx[i++]+adx[j++])/2.0) ;
-  ;
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
@@ -5434,9 +4612,6 @@ TA_RetCode INT_SMA( int startIdx,
  int optInSlowPeriod,
  TA_MAType optInMAType )
 {
-
-
-
  return  MA_Lookback (  (((optInSlowPeriod) > (optInFastPeriod)) ? (optInSlowPeriod) : (optInFastPeriod)) , optInMAType );
 }
  public TA_RetCode APO( int startIdx,
@@ -5449,15 +4624,8 @@ TA_RetCode INT_SMA( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
   double []tempBuffer ;
  TA_RetCode retCode;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -5466,8 +4634,6 @@ TA_RetCode INT_SMA( int startIdx,
  optInFastPeriod = 12;
  else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
  optInSlowPeriod = 26;
  else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
@@ -5483,9 +4649,6 @@ TA_RetCode INT_SMA( int startIdx,
  outReal,
  tempBuffer,
  0 );
-
-  ;
-
  return retCode;
 }
 TA_RetCode INT_PO( int startIdx,
@@ -5501,47 +4664,38 @@ TA_RetCode INT_PO( int startIdx,
  int doPercentageOutput )
 {
  TA_RetCode retCode;
-
  double tempReal;
  int tempInteger;
   MInteger outBegIdx1 = new MInteger() ;
   MInteger outNbElement1 = new MInteger() ;
   MInteger outBegIdx2 = new MInteger() ;
   MInteger outNbElement2 = new MInteger() ;
-
  int i, j;
  if( optInSlowPeriod < optInFastPeriod )
  {
-
  tempInteger = optInSlowPeriod;
  optInSlowPeriod = optInFastPeriod;
  optInFastPeriod = tempInteger;
  }
-
-
  retCode =  MA ( startIdx, endIdx,
  inReal,
  optInFastPeriod,
  optInMethod_2,
   outBegIdx2 ,  outNbElement2 ,
  tempBuffer );
-
  if( retCode ==  TA_RetCode. TA_SUCCESS )
  {
-
  retCode =  MA ( startIdx, endIdx,
  inReal,
  optInSlowPeriod,
  optInMethod_2,
   outBegIdx1 ,  outNbElement1 ,
  outReal );
-
  if( retCode ==  TA_RetCode. TA_SUCCESS )
  {
  tempInteger =  outBegIdx1.value  -  outBegIdx2.value ;
  if( doPercentageOutput != 0 )
  {
-
  for( i=0,j=tempInteger; i <  outNbElement1.value ; i++, j++ )
  {
  tempReal = outReal[i];
@@ -5553,22 +4707,18 @@ TA_RetCode INT_PO( int startIdx,
  }
  else
  {
-
  for( i=0,j=tempInteger; i <  outNbElement1.value ; i++, j++ )
  outReal[i] = tempBuffer[j]-outReal[i];
  }
-
   outBegIdx.value  =  outBegIdx1.value ;
   outNbElement.value  =  outNbElement1.value ;
  }
  }
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  }
-
  return retCode;
 }
  public TA_RetCode APO( int startIdx,
@@ -5583,7 +4733,6 @@ TA_RetCode INT_PO( int startIdx,
  {
   double []tempBuffer ;
  TA_RetCode retCode;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -5607,7 +4756,6 @@ TA_RetCode INT_PO( int startIdx,
  outReal,
  tempBuffer,
  0 );
-  ;
  return retCode;
  }
  TA_RetCode INT_PO( int startIdx,
@@ -5683,7 +4831,6 @@ TA_RetCode INT_PO( int startIdx,
 /* Generated */ 
  public int AROON_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod;
 }
  public TA_RetCode AROON( int startIdx,
@@ -5696,16 +4843,9 @@ TA_RetCode INT_PO( int startIdx,
  double outAroonDown[],
  double outAroonUp[] )
 {
-
  double lowest, highest, tmp, factor;
  int outIdx;
  int trailingIdx, lowestIdx, highestIdx, today, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -5716,8 +4856,6 @@ TA_RetCode INT_PO( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < optInTimePeriod )
  startIdx = optInTimePeriod;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -5732,10 +4870,8 @@ TA_RetCode INT_PO( int startIdx,
  lowest = 0.0;
  highest = 0.0;
  factor = (double)100.0/(double)optInTimePeriod;
-
  while( today <= endIdx )
  {
-
  tmp = inLow[today];
  if( lowestIdx < trailingIdx )
  {
@@ -5757,8 +4893,6 @@ TA_RetCode INT_PO( int startIdx,
  lowestIdx = today;
  lowest = tmp;
  }
-
-
  tmp = inHigh[today];
  if( highestIdx < trailingIdx )
  {
@@ -5782,14 +4916,12 @@ TA_RetCode INT_PO( int startIdx,
  }
  outAroonUp[outIdx] = factor*(optInTimePeriod-(today-highestIdx));
  outAroonDown[outIdx] = factor*(optInTimePeriod-(today-lowestIdx));
-
  outIdx++;
  trailingIdx++;
  today++;
  }
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode AROON( int startIdx,
@@ -5805,7 +4937,6 @@ TA_RetCode INT_PO( int startIdx,
  double lowest, highest, tmp, factor;
  int outIdx;
  int trailingIdx, lowestIdx, highestIdx, today, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -5887,7 +5018,6 @@ TA_RetCode INT_PO( int startIdx,
 /* Generated */ 
  public int AROONOSC_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod;
 }
  public TA_RetCode AROONOSC( int startIdx,
@@ -5899,16 +5029,9 @@ TA_RetCode INT_PO( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  double lowest, highest, tmp, factor, aroon;
  int outIdx;
  int trailingIdx, lowestIdx, highestIdx, today, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -5919,8 +5042,6 @@ TA_RetCode INT_PO( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < optInTimePeriod )
  startIdx = optInTimePeriod;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -5935,10 +5056,8 @@ TA_RetCode INT_PO( int startIdx,
  lowest = 0.0;
  highest = 0.0;
  factor = (double)100.0/(double)optInTimePeriod;
-
  while( today <= endIdx )
  {
-
  tmp = inLow[today];
  if( lowestIdx < trailingIdx )
  {
@@ -5960,8 +5079,6 @@ TA_RetCode INT_PO( int startIdx,
  lowestIdx = today;
  lowest = tmp;
  }
-
-
  tmp = inHigh[today];
  if( highestIdx < trailingIdx )
  {
@@ -5985,14 +5102,12 @@ TA_RetCode INT_PO( int startIdx,
  }
  aroon = factor*(highestIdx-lowestIdx);
  outReal[outIdx] = aroon;
-
  outIdx++;
  trailingIdx++;
  today++;
  }
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode AROONOSC( int startIdx,
@@ -6007,7 +5122,6 @@ TA_RetCode INT_PO( int startIdx,
  double lowest, highest, tmp, factor, aroon;
  int outIdx;
  int trailingIdx, lowestIdx, highestIdx, today, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -6089,7 +5203,6 @@ TA_RetCode INT_PO( int startIdx,
 /* Generated */ 
  public int BOP_Lookback( )
 {
-
  return 0;
 }
  public TA_RetCode BOP( int startIdx,
@@ -6102,21 +5215,13 @@ TA_RetCode INT_PO( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx, i;
  double tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
  outIdx = 0;
-
  for( i=startIdx; i <= endIdx; i++ )
  {
  tempReal = inHigh[i]-inLow[i];
@@ -6125,10 +5230,8 @@ TA_RetCode INT_PO( int startIdx,
  else
  outReal[outIdx++] = (inClose[i] - inOpen[i])/tempReal;
  }
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode BOP( int startIdx,
@@ -6143,7 +5246,6 @@ TA_RetCode INT_PO( int startIdx,
  {
  int outIdx, i;
  double tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -6164,7 +5266,6 @@ TA_RetCode INT_PO( int startIdx,
 /* Generated */ 
  public int CCI_Lookback( int optInTimePeriod )
 {
-
  return (optInTimePeriod-1);
 }
  public TA_RetCode CCI( int startIdx,
@@ -6177,17 +5278,9 @@ TA_RetCode INT_PO( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  double tempReal, tempReal2, theAverage, lastValue;
  int i, j, outIdx, lookbackTotal;
   int circBuffer_Idx  = 0; double []circBuffer; int maxIdx_circBuffer  = (30-1) ;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -6199,8 +5292,6 @@ TA_RetCode INT_PO( int startIdx,
  lookbackTotal = (optInTimePeriod-1);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -6223,8 +5314,6 @@ TA_RetCode INT_PO( int startIdx,
  {
  lastValue = (inHigh[i]+inLow[i]+inClose[i])/3;
  circBuffer[circBuffer_Idx] = lastValue;
-
-
  theAverage = 0;
  for( j=0; j < optInTimePeriod; j++ )
  theAverage += circBuffer[j];
@@ -6232,30 +5321,18 @@ TA_RetCode INT_PO( int startIdx,
  tempReal2 = 0;
  for( j=0; j < optInTimePeriod; j++ )
  tempReal2 +=  Math.abs (circBuffer[j]-theAverage);
-
-
  tempReal = lastValue-theAverage;
-
  if( (tempReal != 0.0) && (tempReal2 != 0.0) )
  {
  outReal[outIdx++] = tempReal/(0.015*(tempReal2/optInTimePeriod));
  }
  else
  outReal[outIdx++] = 0.0;
-
-
   { circBuffer_Idx ++; if( circBuffer_Idx  > maxIdx_circBuffer  ) circBuffer_Idx  = 0; } ;
-
  i++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
-
-  ;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CCI( int startIdx,
@@ -6271,7 +5348,6 @@ TA_RetCode INT_PO( int startIdx,
  double tempReal, tempReal2, theAverage, lastValue;
  int i, j, outIdx, lookbackTotal;
   int circBuffer_Idx  = 0; double []circBuffer; int maxIdx_circBuffer  = (30-1) ;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -6324,19 +5400,15 @@ TA_RetCode INT_PO( int startIdx,
  } while( i <= endIdx );
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-  ;
  return  TA_RetCode. TA_SUCCESS;
  }
 /* Generated */ 
  public int CMO_Lookback( int optInTimePeriod )
 {
-
  int retValue;
-
  retValue = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
  if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK )
  retValue--;
-
  return retValue;
 }
  public TA_RetCode CMO( int startIdx,
@@ -6347,18 +5419,10 @@ TA_RetCode INT_PO( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx;
-
  int today, lookbackTotal, unstablePeriod, i;
  double prevGain, prevLoss, prevValue, savePrevValue;
  double tempValue1, tempValue2, tempValue3, tempValue4;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -6369,29 +5433,22 @@ TA_RetCode INT_PO( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-
-
  lookbackTotal =  CMO_Lookback ( optInTimePeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  return  TA_RetCode. TA_SUCCESS;
-
  outIdx = 0;
  if( optInTimePeriod == 1 )
  {
   outBegIdx.value  = startIdx;
  i = (endIdx-startIdx)+1;
   outNbElement.value  = i;
-  System.arraycopy(inReal,0,outReal,0,i) ;
+  System.arraycopy(inReal,startIdx,outReal,0,i) ;
  return  TA_RetCode. TA_SUCCESS;
  }
  today = startIdx-lookbackTotal;
  prevValue = inReal[today];
-
  unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
  if( (unstablePeriod == 0) &&
  ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
@@ -6409,28 +5466,20 @@ TA_RetCode INT_PO( int startIdx,
  else
  prevGain += tempValue2;
  }
-
-
  tempValue1 = prevLoss/optInTimePeriod;
  tempValue2 = prevGain/optInTimePeriod;
  tempValue3 = tempValue2-tempValue1;
  tempValue4 = tempValue1+tempValue2;
-
-
  if( ! (((-0.00000001)<tempValue4)&&(tempValue4<0.00000001))  )
  outReal[outIdx++] = 100*(tempValue3/tempValue4);
  else
  outReal[outIdx++] = 0.0;
-
-
  if( today > endIdx )
  {
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  today -= optInTimePeriod;
  prevValue = savePrevValue;
  }
@@ -6464,17 +5513,14 @@ TA_RetCode INT_PO( int startIdx,
  tempValue1 = inReal[today];
  tempValue2 = tempValue1 - prevValue;
  prevValue = tempValue1;
-
  prevLoss *= (optInTimePeriod-1);
  prevGain *= (optInTimePeriod-1);
  if( tempValue2 < 0 )
  prevLoss -= tempValue2;
  else
  prevGain += tempValue2;
-
  prevLoss /= optInTimePeriod;
  prevGain /= optInTimePeriod;
-
  today++;
  }
  }
@@ -6483,14 +5529,12 @@ TA_RetCode INT_PO( int startIdx,
  tempValue1 = inReal[today++];
  tempValue2 = tempValue1 - prevValue;
  prevValue = tempValue1;
-
  prevLoss *= (optInTimePeriod-1);
  prevGain *= (optInTimePeriod-1);
  if( tempValue2 < 0 )
  prevLoss -= tempValue2;
  else
  prevGain += tempValue2;
-
  prevLoss /= optInTimePeriod;
  prevGain /= optInTimePeriod;
  if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
@@ -6498,10 +5542,8 @@ TA_RetCode INT_PO( int startIdx,
  else
  outReal[outIdx++] = 0.0;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CMO( int startIdx,
@@ -6516,7 +5558,6 @@ TA_RetCode INT_PO( int startIdx,
  int today, lookbackTotal, unstablePeriod, i;
  double prevGain, prevLoss, prevValue, savePrevValue;
  double tempValue1, tempValue2, tempValue3, tempValue4;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -6538,7 +5579,7 @@ TA_RetCode INT_PO( int startIdx,
   outBegIdx.value  = startIdx;
  i = (endIdx-startIdx)+1;
   outNbElement.value  = i;
-  System.arraycopy(inReal,0,outReal,0,i) ;
+  System.arraycopy(inReal,startIdx,outReal,0,i) ;
  return  TA_RetCode. TA_SUCCESS;
  }
  today = startIdx-lookbackTotal;
@@ -6643,7 +5684,6 @@ TA_RetCode INT_PO( int startIdx,
 /* Generated */ 
  public int DX_Lookback( int optInTimePeriod )
 {
-
  if( optInTimePeriod > 1 )
  return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
  else
@@ -6659,13 +5699,11 @@ TA_RetCode INT_PO( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int today, lookbackTotal, outIdx;
  double prevHigh, prevLow, prevClose;
  double prevMinusDM, prevPlusDM, prevTR;
  double tempReal, tempReal2, diffP, diffM;
  double minusDI, plusDI;
-
  int i;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
@@ -6679,12 +5717,8 @@ TA_RetCode INT_PO( int startIdx,
  lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
  else
  lookbackTotal = 2;
-
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -6692,10 +5726,7 @@ TA_RetCode INT_PO( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  outIdx = 0;
-
-
   outBegIdx.value  = today = startIdx;
-
  prevMinusDM = 0.0;
  prevPlusDM = 0.0;
  prevTR = 0.0;
@@ -6710,22 +5741,17 @@ TA_RetCode INT_PO( int startIdx,
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
  else if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR += tempReal;
  prevClose = inClose[today];
@@ -6733,37 +5759,27 @@ TA_RetCode INT_PO( int startIdx,
  i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()])  + 1;
  while( i-- != 0 )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  prevMinusDM -= prevMinusDM/optInTimePeriod;
  prevPlusDM -= prevPlusDM/optInTimePeriod;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
  else if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
  }
-
-
  if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
  {
  minusDI =  (100.0*(prevMinusDM/prevTR)) ;
@@ -6777,44 +5793,32 @@ TA_RetCode INT_PO( int startIdx,
  else
  outReal[0] = 0.0;
  outIdx = 1;
-
  while( today < endIdx )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  prevMinusDM -= prevMinusDM/optInTimePeriod;
  prevPlusDM -= prevPlusDM/optInTimePeriod;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
  else if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
-
-
  if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001)) )
  {
  minusDI =  (100.0*(prevMinusDM/prevTR)) ;
  plusDI =  (100.0*(prevPlusDM/prevTR)) ;
-
  tempReal = minusDI+plusDI;
  if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001)) )
  outReal[outIdx] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
@@ -6825,9 +5829,7 @@ TA_RetCode INT_PO( int startIdx,
  outReal[outIdx] = outReal[outIdx-1];
  outIdx++;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode DX( int startIdx,
@@ -6981,12 +5983,10 @@ TA_RetCode INT_PO( int startIdx,
  int tempInteger;
  if( optInSlowPeriod < optInFastPeriod )
  {
-
  tempInteger = optInSlowPeriod;
  optInSlowPeriod = optInFastPeriod;
  optInFastPeriod = tempInteger;
  }
-
  return  EMA_Lookback ( optInSlowPeriod )
  +  EMA_Lookback ( optInSignalPeriod );
 }
@@ -7002,13 +6002,6 @@ TA_RetCode INT_PO( int startIdx,
  double outMACDSignal[],
  double outMACDHist[] )
 {
-
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -7017,14 +6010,10 @@ TA_RetCode INT_PO( int startIdx,
  optInFastPeriod = 12;
  else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
  optInSlowPeriod = 26;
  else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
  optInSignalPeriod = 9;
  else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
@@ -7064,13 +6053,10 @@ TA_RetCode INT_MACD( int startIdx,
  int i;
  if( optInSlowPeriod < optInFastPeriod )
  {
-
  tempInteger = optInSlowPeriod;
  optInSlowPeriod = optInFastPeriod;
  optInFastPeriod = tempInteger;
  }
-
-
  if( optInSlowPeriod != 0 )
  k1 =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
  else
@@ -7078,7 +6064,6 @@ TA_RetCode INT_MACD( int startIdx,
  optInSlowPeriod = 26;
  k1 = (double)0.075;
  }
-
  if( optInFastPeriod != 0 )
  k2 =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
  else
@@ -7086,23 +6071,17 @@ TA_RetCode INT_MACD( int startIdx,
  optInFastPeriod = 12;
  k2 = (double)0.15;
  }
-
  lookbackSignal =  EMA_Lookback ( optInSignalPeriod_2 );
  lookbackTotal = lookbackSignal;
  lookbackTotal +=  EMA_Lookback ( optInSlowPeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  tempInteger = (endIdx-startIdx)+1+lookbackSignal;
   fastEMABuffer = new double[tempInteger] ;
   slowEMABuffer = new double[tempInteger] ;
@@ -7110,31 +6089,21 @@ TA_RetCode INT_MACD( int startIdx,
  retCode =  INT_EMA ( tempInteger, endIdx,
  inReal, optInSlowPeriod, k1,
   outBegIdx1 ,  outNbElement1 , slowEMABuffer );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return retCode;
  }
-
-
  retCode =  INT_EMA ( tempInteger, endIdx,
  inReal, optInFastPeriod, k2,
   outBegIdx2 ,  outNbElement2 , fastEMABuffer );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return retCode;
  }
-
-
  if( ( outBegIdx1.value  != tempInteger) ||
  ( outBegIdx2.value  != tempInteger) ||
  ( outNbElement1.value  !=  outNbElement2.value ) ||
@@ -7142,44 +6111,24 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
  }
-
-
  for( i=0; i <  outNbElement1.value ; i++ )
  fastEMABuffer[i] = fastEMABuffer[i] - slowEMABuffer[i];
-
-
-
-  System.arraycopy(fastEMABuffer,0,outMACD,0,(endIdx-startIdx)+1) ;
-
-
+  System.arraycopy(fastEMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
  retCode =  INT_EMA ( 0,  outNbElement1.value -1,
  fastEMABuffer, optInSignalPeriod_2,  ((double)2.0 / ((double)(optInSignalPeriod_2 + 1))) ,
   outBegIdx2 ,  outNbElement2 , outMACDSignal );
-
-
-  ;
-  ;
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
-
-
  for( i=0; i <  outNbElement2.value ; i++ )
  outMACDHist[i] = outMACD[i]-outMACDSignal[i];
-
-
-
   outBegIdx.value  = startIdx;
   outNbElement.value  =  outNbElement2.value ;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MACD( int startIdx,
@@ -7194,7 +6143,6 @@ TA_RetCode INT_MACD( int startIdx,
  double outMACDSignal[],
  double outMACDHist[] )
  {
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -7286,8 +6234,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return retCode;
  }
  retCode =  INT_EMA ( tempInteger, endIdx,
@@ -7297,8 +6243,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return retCode;
  }
  if( ( outBegIdx1.value  != tempInteger) ||
@@ -7308,18 +6252,14 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
  }
  for( i=0; i <  outNbElement1.value ; i++ )
  fastEMABuffer[i] = fastEMABuffer[i] - slowEMABuffer[i];
-  System.arraycopy(fastEMABuffer,0,outMACD,0,(endIdx-startIdx)+1) ;
+  System.arraycopy(fastEMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
  retCode =  INT_EMA ( 0,  outNbElement1.value -1,
  fastEMABuffer, optInSignalPeriod_2,  ((double)2.0 / ((double)(optInSignalPeriod_2 + 1))) ,
   outBegIdx2 ,  outNbElement2 , outMACDSignal );
-  ;
-  ;
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
@@ -7340,17 +6280,11 @@ TA_RetCode INT_MACD( int startIdx,
  int optInSignalPeriod,
  TA_MAType optInSignalMAType )
 {
-
-
  int tempInteger, lookbackLargest;
-
-
  lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
  tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
  if( tempInteger > lookbackLargest )
  lookbackLargest = tempInteger;
-
-
  return lookbackLargest +  MA_Lookback ( optInSignalPeriod, optInSignalMAType );
 }
  public TA_RetCode MACDEXT( int startIdx,
@@ -7368,7 +6302,6 @@ TA_RetCode INT_MACD( int startIdx,
  double outMACDSignal[],
  double outMACDHist[] )
 {
-
   double []slowMABuffer ;
   double []fastMABuffer ;
  TA_RetCode retCode;
@@ -7380,12 +6313,6 @@ TA_RetCode INT_MACD( int startIdx,
  int lookbackTotal, lookbackSignal, lookbackLargest;
  int i;
  TA_MAType tempMAType;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -7404,37 +6331,27 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
  if( optInSlowPeriod < optInFastPeriod )
  {
-
  tempInteger = optInSlowPeriod;
  optInSlowPeriod = optInFastPeriod;
  optInFastPeriod = tempInteger;
-
  tempMAType = optInSlowMAType;
  optInSlowMAType = optInFastMAType;
  optInFastMAType = tempMAType;
  }
-
-
  lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
  tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
  if( tempInteger > lookbackLargest )
  lookbackLargest = tempInteger;
-
-
  lookbackSignal =  MA_Lookback ( optInSignalPeriod, optInSignalMAType );
  lookbackTotal = lookbackSignal+lookbackLargest;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  tempInteger = (endIdx-startIdx)+1+lookbackSignal;
   fastMABuffer = new double[tempInteger] ;
   slowMABuffer = new double[tempInteger] ;
@@ -7443,32 +6360,22 @@ TA_RetCode INT_MACD( int startIdx,
  inReal, optInSlowPeriod, optInSlowMAType,
   outBegIdx1 ,  outNbElement1 ,
  slowMABuffer );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return retCode;
  }
-
-
  retCode =  MA ( tempInteger, endIdx,
  inReal, optInFastPeriod, optInFastMAType,
   outBegIdx2 ,  outNbElement2 ,
  fastMABuffer );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return retCode;
  }
-
-
  if( ( outBegIdx1.value  != tempInteger) ||
  ( outBegIdx2.value  != tempInteger) ||
  ( outNbElement1.value  !=  outNbElement2.value ) ||
@@ -7476,41 +6383,24 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
  }
-
-
  for( i=0; i <  outNbElement1.value ; i++ )
  fastMABuffer[i] = fastMABuffer[i] - slowMABuffer[i];
-
-
-  System.arraycopy(fastMABuffer,0,outMACD,0,(endIdx-startIdx)+1) ;
-
-
+  System.arraycopy(fastMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
  retCode =  MA ( 0,  outNbElement1.value -1,
  fastMABuffer, optInSignalPeriod, optInSignalMAType,
   outBegIdx2 ,  outNbElement2 , outMACDSignal );
-
-  ;
-  ;
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
-
-
  for( i=0; i <  outNbElement2.value ; i++ )
  outMACDHist[i] = outMACD[i]-outMACDSignal[i];
-
-
   outBegIdx.value  = startIdx;
   outNbElement.value  =  outNbElement2.value ;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MACDEXT( int startIdx,
@@ -7539,7 +6429,6 @@ TA_RetCode INT_MACD( int startIdx,
  int lookbackTotal, lookbackSignal, lookbackLargest;
  int i;
  TA_MAType tempMAType;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -7591,8 +6480,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return retCode;
  }
  retCode =  MA ( tempInteger, endIdx,
@@ -7603,8 +6490,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return retCode;
  }
  if( ( outBegIdx1.value  != tempInteger) ||
@@ -7614,18 +6499,14 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-  ;
-  ;
  return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
  }
  for( i=0; i <  outNbElement1.value ; i++ )
  fastMABuffer[i] = fastMABuffer[i] - slowMABuffer[i];
-  System.arraycopy(fastMABuffer,0,outMACD,0,(endIdx-startIdx)+1) ;
+  System.arraycopy(fastMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
  retCode =  MA ( 0,  outNbElement1.value -1,
  fastMABuffer, optInSignalPeriod, optInSignalMAType,
   outBegIdx2 ,  outNbElement2 , outMACDSignal );
-  ;
-  ;
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
@@ -7654,13 +6535,6 @@ TA_RetCode INT_MACD( int startIdx,
  double outMACDSignal[],
  double outMACDHist[] )
 {
-
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -7689,7 +6563,6 @@ TA_RetCode INT_MACD( int startIdx,
  double outMACDSignal[],
  double outMACDHist[] )
  {
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -7711,7 +6584,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int MFI_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
 }
  public TA_RetCode MFI( int startIdx,
@@ -7725,18 +6597,10 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  double posSumMF, negSumMF, prevValue;
  double tempValue1, tempValue2;
  int lookbackTotal, outIdx, i, today;
-
   int mflow_Idx  = 0; MoneyFlow []mflow; int maxIdx_mflow  = (50-1) ;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -7745,28 +6609,19 @@ TA_RetCode INT_MACD( int startIdx,
  optInTimePeriod = 14;
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-  { if( optInTimePeriod <= 0 ) return TA_RetCode. TA_ALLOC_ERR; mflow = new MoneyFlow[optInTimePeriod]; maxIdx_mflow  = (optInTimePeriod-1); } ;
-
+  { if( optInTimePeriod <= 0 ) return TA_RetCode. TA_ALLOC_ERR; mflow = new MoneyFlow[optInTimePeriod]; for( int _mflow_index =0; _mflow_index <mflow.length; _mflow_index ++) { mflow[_mflow_index ]=new MoneyFlow(); } maxIdx_mflow  = (optInTimePeriod-1); } ;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-
-
  lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
-  ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
  outIdx = 0;
  today = startIdx-lookbackTotal;
  prevValue = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-
  posSumMF = 0.0;
  negSumMF = 0.0;
  today++;
@@ -7788,7 +6643,6 @@ TA_RetCode INT_MACD( int startIdx,
  posSumMF += tempValue1;
   (mflow[mflow_Idx]). negative = 0.0;
  }
-
   { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
  }
  if( today > startIdx )
@@ -7805,7 +6659,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  posSumMF -=  (mflow[mflow_Idx]). positive;
  negSumMF -=  (mflow[mflow_Idx]). negative;
-
  tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
  tempValue2 = tempValue1 - prevValue;
  prevValue = tempValue1;
@@ -7822,7 +6675,6 @@ TA_RetCode INT_MACD( int startIdx,
  posSumMF += tempValue1;
   (mflow[mflow_Idx]). negative = 0.0;
  }
-
   { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
  }
  }
@@ -7830,7 +6682,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  posSumMF -=  (mflow[mflow_Idx]). positive;
  negSumMF -=  (mflow[mflow_Idx]). negative;
-
  tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
  tempValue2 = tempValue1 - prevValue;
  prevValue = tempValue1;
@@ -7847,21 +6698,15 @@ TA_RetCode INT_MACD( int startIdx,
  posSumMF += tempValue1;
   (mflow[mflow_Idx]). negative = 0.0;
  }
-
  tempValue1 = posSumMF+negSumMF;
  if( tempValue1 < 1.0 )
  outReal[outIdx++] = 0.0;
  else
  outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
-
   { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
  }
-
-  ;
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MFI( int startIdx,
@@ -7879,7 +6724,6 @@ TA_RetCode INT_MACD( int startIdx,
  double tempValue1, tempValue2;
  int lookbackTotal, outIdx, i, today;
   int mflow_Idx  = 0; MoneyFlow []mflow; int maxIdx_mflow  = (50-1) ;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -7888,7 +6732,7 @@ TA_RetCode INT_MACD( int startIdx,
  optInTimePeriod = 14;
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-  { if( optInTimePeriod <= 0 ) return TA_RetCode. TA_ALLOC_ERR; mflow = new MoneyFlow[optInTimePeriod]; maxIdx_mflow  = (optInTimePeriod-1); } ;
+  { if( optInTimePeriod <= 0 ) return TA_RetCode. TA_ALLOC_ERR; mflow = new MoneyFlow[optInTimePeriod]; for( int _mflow_index =0; _mflow_index <mflow.length; _mflow_index ++) { mflow[_mflow_index ]=new MoneyFlow(); } maxIdx_mflow  = (optInTimePeriod-1); } ;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
@@ -7896,7 +6740,6 @@ TA_RetCode INT_MACD( int startIdx,
  startIdx = lookbackTotal;
  if( startIdx > endIdx )
  {
-  ;
  return  TA_RetCode. TA_SUCCESS;
  }
  outIdx = 0;
@@ -7985,7 +6828,6 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
   { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
  }
-  ;
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
@@ -7993,8 +6835,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int MINUS_DI_Lookback( int optInTimePeriod )
 {
-
-
  if( optInTimePeriod > 1 )
  return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
  else
@@ -8010,13 +6850,10 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int today, lookbackTotal, outIdx;
  double prevHigh, prevLow, prevClose;
  double prevMinusDM, prevTR;
  double tempReal, tempReal2, diffP, diffM;
-
  int i;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
@@ -8030,12 +6867,8 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
  else
  lookbackTotal = 1;
-
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -8043,8 +6876,6 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  outIdx = 0;
-
-
  if( optInTimePeriod <= 1 )
  {
   outBegIdx.value  = startIdx;
@@ -8063,7 +6894,6 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffM > 0) && (diffP < diffM) )
  {
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
  outReal[outIdx++] = (double)0.0;
@@ -8074,14 +6904,10 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = (double)0.0;
  prevClose = inClose[today];
  }
-
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
   outBegIdx.value  = today = startIdx;
-
  prevMinusDM = 0.0;
  prevTR = 0.0;
  today = startIdx - lookbackTotal;
@@ -8095,16 +6921,13 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR += tempReal;
  prevClose = inClose[today];
@@ -8112,7 +6935,6 @@ TA_RetCode INT_MACD( int startIdx,
  i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()])  + 1;
  while( i-- != 0 )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
@@ -8122,16 +6944,12 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
  }
  else
  {
-
  prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
@@ -8141,10 +6959,8 @@ TA_RetCode INT_MACD( int startIdx,
  else
  outReal[0] = 0.0;
  outIdx = 1;
-
  while( today < endIdx )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
@@ -8154,29 +6970,21 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
  }
  else
  {
-
  prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
-
-
  if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
  outReal[outIdx++] =  (100.0*(prevMinusDM/prevTR)) ;
  else
  outReal[outIdx++] = 0.0;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MINUS_DI( int startIdx,
@@ -8329,7 +7137,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int MINUS_DM_Lookback( int optInTimePeriod )
 {
-
  if( optInTimePeriod > 1 )
  return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
  else
@@ -8344,18 +7151,11 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int today, lookbackTotal, outIdx;
  double prevHigh, prevLow, tempReal;
  double prevMinusDM;
  double diffP, diffM;
  int i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -8368,12 +7168,8 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
  else
  lookbackTotal = 1;
-
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -8381,8 +7177,6 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  outIdx = 0;
-
-
  if( optInTimePeriod <= 1 )
  {
   outBegIdx.value  = startIdx;
@@ -8400,20 +7194,15 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  outReal[outIdx++] = diffM;
  }
  else
  outReal[outIdx++] = 0;
  }
-
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
   outBegIdx.value  = startIdx;
-
  prevMinusDM = 0.0;
  today = startIdx - lookbackTotal;
  prevHigh = inHigh[today];
@@ -8428,17 +7217,11 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM += diffM;
  }
  }
-
-
-
-
  i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()]) ;
  while( i-- != 0 )
  {
@@ -8451,18 +7234,15 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
  }
  else
  {
-
  prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
  }
  }
  outReal[0] = prevMinusDM;
  outIdx = 1;
-
  while( today < endIdx )
  {
  today++;
@@ -8472,23 +7252,17 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  if( (diffM > 0) && (diffP < diffM) )
  {
-
  prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
  }
  else
  {
-
  prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
  }
-
  outReal[outIdx++] = prevMinusDM;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MINUS_DM( int startIdx,
@@ -8505,7 +7279,6 @@ TA_RetCode INT_MACD( int startIdx,
  double prevMinusDM;
  double diffP, diffM;
  int i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -8618,10 +7391,7 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int MOM_Lookback( int optInTimePeriod )
 {
-
-
  return optInTimePeriod;
-
 }
  public TA_RetCode MOM( int startIdx,
  int endIdx,
@@ -8631,15 +7401,7 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int inIdx, outIdx, trailingIdx;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -8650,8 +7412,6 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < optInTimePeriod )
  startIdx = optInTimePeriod;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -8661,14 +7421,10 @@ TA_RetCode INT_MACD( int startIdx,
  outIdx = 0;
  inIdx = startIdx;
  trailingIdx = startIdx - optInTimePeriod;
-
  while( inIdx <= endIdx )
  outReal[outIdx++] = inReal[inIdx++] - inReal[trailingIdx++];
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MOM( int startIdx,
@@ -8680,7 +7436,6 @@ TA_RetCode INT_MACD( int startIdx,
  double outReal[] )
  {
  int inIdx, outIdx, trailingIdx;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -8711,9 +7466,6 @@ TA_RetCode INT_MACD( int startIdx,
  int optInSlowPeriod,
  TA_MAType optInMAType )
 {
-
-
-
  return  MA_Lookback (  (((optInSlowPeriod) > (optInFastPeriod)) ? (optInSlowPeriod) : (optInFastPeriod)) , optInMAType );
 }
  public TA_RetCode PPO( int startIdx,
@@ -8726,15 +7478,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
   double []tempBuffer ;
  TA_RetCode retCode;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -8743,8 +7488,6 @@ TA_RetCode INT_MACD( int startIdx,
  optInFastPeriod = 12;
  else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
  optInSlowPeriod = 26;
  else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
@@ -8759,9 +7502,6 @@ TA_RetCode INT_MACD( int startIdx,
  outReal,
  tempBuffer,
  1 );
-
-  ;
-
  return retCode;
 }
  public TA_RetCode PPO( int startIdx,
@@ -8776,7 +7516,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
   double []tempBuffer ;
  TA_RetCode retCode;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -8799,14 +7538,11 @@ TA_RetCode INT_MACD( int startIdx,
  outReal,
  tempBuffer,
  1 );
-  ;
  return retCode;
  }
 /* Generated */ 
  public int PLUS_DI_Lookback( int optInTimePeriod )
 {
-
-
  if( optInTimePeriod > 1 )
  return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
  else
@@ -8822,13 +7558,10 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int today, lookbackTotal, outIdx;
  double prevHigh, prevLow, prevClose;
  double prevPlusDM, prevTR;
  double tempReal, tempReal2, diffP, diffM;
-
  int i;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
@@ -8842,12 +7575,8 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
  else
  lookbackTotal = 1;
-
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -8855,8 +7584,6 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  outIdx = 0;
-
-
  if( optInTimePeriod <= 1 )
  {
   outBegIdx.value  = startIdx;
@@ -8875,7 +7602,6 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffP > 0) && (diffP > diffM) )
  {
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
  outReal[outIdx++] = (double)0.0;
@@ -8886,14 +7612,10 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = (double)0.0;
  prevClose = inClose[today];
  }
-
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
   outBegIdx.value  = today = startIdx;
-
  prevPlusDM = 0.0;
  prevTR = 0.0;
  today = startIdx - lookbackTotal;
@@ -8907,16 +7629,13 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
  prevHigh = tempReal;
-
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
  if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR += tempReal;
  prevClose = inClose[today];
@@ -8924,7 +7643,6 @@ TA_RetCode INT_MACD( int startIdx,
  i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()])  + 1;
  while( i-- != 0 )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
@@ -8934,16 +7652,12 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
  }
  else
  {
-
  prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
@@ -8953,10 +7667,8 @@ TA_RetCode INT_MACD( int startIdx,
  else
  outReal[0] = 0.0;
  outIdx = 1;
-
  while( today < endIdx )
  {
-
  today++;
  tempReal = inHigh[today];
  diffP = tempReal-prevHigh;
@@ -8966,30 +7678,21 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
  }
  else
  {
-
  prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
  }
-
-
   { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
  prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
  prevClose = inClose[today];
-
-
  if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
  outReal[outIdx++] =  (100.0*(prevPlusDM/prevTR)) ;
  else
  outReal[outIdx++] = 0.0;
-
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode PLUS_DI( int startIdx,
@@ -9142,7 +7845,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int PLUS_DM_Lookback( int optInTimePeriod )
 {
-
  if( optInTimePeriod > 1 )
  return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
  else
@@ -9157,18 +7859,11 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int today, lookbackTotal, outIdx;
  double prevHigh, prevLow, tempReal;
  double prevPlusDM;
  double diffP, diffM;
  int i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9181,12 +7876,8 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
  else
  lookbackTotal = 1;
-
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
@@ -9194,8 +7885,6 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  outIdx = 0;
-
-
  if( optInTimePeriod <= 1 )
  {
   outBegIdx.value  = startIdx;
@@ -9213,20 +7902,15 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffP > 0) && (diffP > diffM) )
  {
-
  outReal[outIdx++] = diffP;
  }
  else
  outReal[outIdx++] = 0;
  }
-
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
   outBegIdx.value  = startIdx;
-
  prevPlusDM = 0.0;
  today = startIdx - lookbackTotal;
  prevHigh = inHigh[today];
@@ -9241,17 +7925,11 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM += diffP;
  }
  }
-
-
-
-
  i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()]) ;
  while( i-- != 0 )
  {
@@ -9264,18 +7942,15 @@ TA_RetCode INT_MACD( int startIdx,
  prevLow = tempReal;
  if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
  }
  else
  {
-
  prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
  }
  }
  outReal[0] = prevPlusDM;
  outIdx = 1;
-
  while( today < endIdx )
  {
  today++;
@@ -9285,23 +7960,17 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inLow[today];
  diffM = prevLow-tempReal;
  prevLow = tempReal;
-
  if( (diffP > 0) && (diffP > diffM) )
  {
-
  prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
  }
  else
  {
-
  prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
  }
-
  outReal[outIdx++] = prevPlusDM;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode PLUS_DM( int startIdx,
@@ -9318,7 +7987,6 @@ TA_RetCode INT_MACD( int startIdx,
  double prevPlusDM;
  double diffP, diffM;
  int i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9431,8 +8099,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int ROC_Lookback( int optInTimePeriod )
 {
-
-
  return optInTimePeriod;
 }
  public TA_RetCode ROC( int startIdx,
@@ -9443,15 +8109,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int inIdx, outIdx, trailingIdx;
  double tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9462,20 +8121,15 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < optInTimePeriod )
  startIdx = optInTimePeriod;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  outIdx = 0;
  inIdx = startIdx;
  trailingIdx = startIdx - optInTimePeriod;
-
  while( inIdx <= endIdx )
  {
  tempReal = inReal[trailingIdx++];
@@ -9485,11 +8139,8 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = 0.0;
  inIdx++;
  }
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode ROC( int startIdx,
@@ -9502,7 +8153,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  int inIdx, outIdx, trailingIdx;
  double tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9538,7 +8188,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int ROCP_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod;
 }
  public TA_RetCode ROCP( int startIdx,
@@ -9549,16 +8198,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int inIdx, outIdx, trailingIdx;
  double tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9569,20 +8210,15 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < optInTimePeriod )
  startIdx = optInTimePeriod;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  outIdx = 0;
  inIdx = startIdx;
  trailingIdx = startIdx - optInTimePeriod;
-
  while( inIdx <= endIdx )
  {
  tempReal = inReal[trailingIdx++];
@@ -9590,14 +8226,10 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = (inReal[inIdx]-tempReal)/tempReal;
  else
  outReal[outIdx++] = 0.0;
-
  inIdx++;
  }
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode ROCP( int startIdx,
@@ -9610,7 +8242,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  int inIdx, outIdx, trailingIdx;
  double tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9646,8 +8277,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int ROCR_Lookback( int optInTimePeriod )
 {
-
-
  return optInTimePeriod;
 }
  public TA_RetCode ROCR( int startIdx,
@@ -9658,16 +8287,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int inIdx, outIdx, trailingIdx;
  double tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9678,20 +8299,15 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < optInTimePeriod )
  startIdx = optInTimePeriod;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  outIdx = 0;
  inIdx = startIdx;
  trailingIdx = startIdx - optInTimePeriod;
-
  while( inIdx <= endIdx )
  {
  tempReal = inReal[trailingIdx++];
@@ -9699,14 +8315,10 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = (inReal[inIdx] / tempReal);
  else
  outReal[outIdx++] = 0.0;
-
  inIdx++;
  }
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode ROCR( int startIdx,
@@ -9719,7 +8331,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  int inIdx, outIdx, trailingIdx;
  double tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9755,7 +8366,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int ROCR100_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod;
 }
  public TA_RetCode ROCR100( int startIdx,
@@ -9766,16 +8376,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int inIdx, outIdx, trailingIdx;
  double tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9786,20 +8388,15 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
  if( startIdx < optInTimePeriod )
  startIdx = optInTimePeriod;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  outIdx = 0;
  inIdx = startIdx;
  trailingIdx = startIdx - optInTimePeriod;
-
  while( inIdx <= endIdx )
  {
  tempReal = inReal[trailingIdx++];
@@ -9807,14 +8404,10 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = (inReal[inIdx] / tempReal)*100.0;
  else
  outReal[outIdx++] = 0.0;
-
  inIdx++;
  }
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode ROCR100( int startIdx,
@@ -9827,7 +8420,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  int inIdx, outIdx, trailingIdx;
  double tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9863,13 +8455,10 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int RSI_Lookback( int optInTimePeriod )
 {
-
  int retValue;
-
  retValue = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
  if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK )
  retValue--;
-
  return retValue;
 }
  public TA_RetCode RSI( int startIdx,
@@ -9880,18 +8469,10 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx;
-
  int today, lookbackTotal, unstablePeriod, i;
  double prevGain, prevLoss, prevValue, savePrevValue;
  double tempValue1, tempValue2;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -9902,29 +8483,22 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_BAD_PARAM;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-
-
  lookbackTotal =  RSI_Lookback ( optInTimePeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  return  TA_RetCode. TA_SUCCESS;
-
  outIdx = 0;
  if( optInTimePeriod == 1 )
  {
   outBegIdx.value  = startIdx;
  i = (endIdx-startIdx)+1;
   outNbElement.value  = i;
-  System.arraycopy(inReal,0,outReal,0,i) ;
+  System.arraycopy(inReal,startIdx,outReal,0,i) ;
  return  TA_RetCode. TA_SUCCESS;
  }
  today = startIdx-lookbackTotal;
  prevValue = inReal[today];
-
  unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
  if( (unstablePeriod == 0) &&
  ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
@@ -9942,27 +8516,19 @@ TA_RetCode INT_MACD( int startIdx,
  else
  prevGain += tempValue2;
  }
-
-
  tempValue1 = prevLoss/optInTimePeriod;
  tempValue2 = prevGain/optInTimePeriod;
-
-
  tempValue1 = tempValue2+tempValue1;
  if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
  outReal[outIdx++] = 100*(tempValue2/tempValue1);
  else
  outReal[outIdx++] = 0.0;
-
-
  if( today > endIdx )
  {
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  today -= optInTimePeriod;
  prevValue = savePrevValue;
  }
@@ -9996,17 +8562,14 @@ TA_RetCode INT_MACD( int startIdx,
  tempValue1 = inReal[today];
  tempValue2 = tempValue1 - prevValue;
  prevValue = tempValue1;
-
  prevLoss *= (optInTimePeriod-1);
  prevGain *= (optInTimePeriod-1);
  if( tempValue2 < 0 )
  prevLoss -= tempValue2;
  else
  prevGain += tempValue2;
-
  prevLoss /= optInTimePeriod;
  prevGain /= optInTimePeriod;
-
  today++;
  }
  }
@@ -10015,14 +8578,12 @@ TA_RetCode INT_MACD( int startIdx,
  tempValue1 = inReal[today++];
  tempValue2 = tempValue1 - prevValue;
  prevValue = tempValue1;
-
  prevLoss *= (optInTimePeriod-1);
  prevGain *= (optInTimePeriod-1);
  if( tempValue2 < 0 )
  prevLoss -= tempValue2;
  else
  prevGain += tempValue2;
-
  prevLoss /= optInTimePeriod;
  prevGain /= optInTimePeriod;
  tempValue1 = prevGain+prevLoss;
@@ -10031,10 +8592,8 @@ TA_RetCode INT_MACD( int startIdx,
  else
  outReal[outIdx++] = 0.0;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode RSI( int startIdx,
@@ -10049,7 +8608,6 @@ TA_RetCode INT_MACD( int startIdx,
  int today, lookbackTotal, unstablePeriod, i;
  double prevGain, prevLoss, prevValue, savePrevValue;
  double tempValue1, tempValue2;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -10071,7 +8629,7 @@ TA_RetCode INT_MACD( int startIdx,
   outBegIdx.value  = startIdx;
  i = (endIdx-startIdx)+1;
   outNbElement.value  = i;
-  System.arraycopy(inReal,0,outReal,0,i) ;
+  System.arraycopy(inReal,startIdx,outReal,0,i) ;
  return  TA_RetCode. TA_SUCCESS;
  }
  today = startIdx-lookbackTotal;
@@ -10180,19 +8738,10 @@ TA_RetCode INT_MACD( int startIdx,
  int optInSlowD_Period,
  TA_MAType optInSlowD_MAType )
 {
-
-
  int retValue;
-
-
  retValue = (optInFastK_Period - 1);
-
-
  retValue +=  MA_Lookback ( optInSlowK_Period, optInSlowK_MAType );
-
-
  retValue +=  MA_Lookback ( optInSlowD_Period, optInSlowD_MAType );
-
  return retValue;
 }
  public TA_RetCode STOCH( int startIdx,
@@ -10210,7 +8759,6 @@ TA_RetCode INT_MACD( int startIdx,
  double outSlowK[],
  double outSlowD[] )
 {
-
  TA_RetCode retCode;
  double lowest, highest, tmp, diff;
   double []tempBuffer ;
@@ -10225,8 +8773,6 @@ TA_RetCode INT_MACD( int startIdx,
  optInFastK_Period = 5;
  else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInSlowK_Period ==  ( Integer.MIN_VALUE )  )
  optInSlowK_Period = 3;
  else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
@@ -10241,11 +8787,8 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = lookbackK + lookbackDSlow + lookbackKSlow;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
-
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
@@ -10271,12 +8814,8 @@ TA_RetCode INT_MACD( int startIdx,
  {
   tempBuffer = new double[endIdx-today+1] ;
  }
-
-
-
  while( today <= endIdx )
  {
-
  tmp = inLow[today];
  if( lowestIdx < trailingIdx )
  {
@@ -10300,8 +8839,6 @@ TA_RetCode INT_MACD( int startIdx,
  lowest = tmp;
  diff = (highest - lowest)/100.0;
  }
-
-
  tmp = inHigh[today];
  if( highestIdx < trailingIdx )
  {
@@ -10325,13 +8862,10 @@ TA_RetCode INT_MACD( int startIdx,
  highest = tmp;
  diff = (highest - lowest)/100.0;
  }
-
-
  if( diff != 0.0 )
  tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
  else
  tempBuffer[outIdx++] = 0.0;
-
  trailingIdx++;
  today++;
  }
@@ -10339,16 +8873,8 @@ TA_RetCode INT_MACD( int startIdx,
  tempBuffer, optInSlowK_Period,
  optInSlowK_MAType,
  outBegIdx, outNbElement, tempBuffer );
-
-
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
  {
-
-
-
-  ;
-
-
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
@@ -10357,24 +8883,14 @@ TA_RetCode INT_MACD( int startIdx,
  tempBuffer, optInSlowD_Period,
  optInSlowD_MAType,
  outBegIdx, outNbElement, outSlowD );
-  System.arraycopy(tempBuffer,0,outSlowK,0,(int) outNbElement.value ) ;
-
-
-
-
-
-  ;
-
-
+  System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int) outNbElement.value ) ;
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
-
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode STOCH( int startIdx,
@@ -10493,8 +9009,6 @@ TA_RetCode INT_MACD( int startIdx,
  outBegIdx, outNbElement, tempBuffer );
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
  {
-
-  ;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
@@ -10503,9 +9017,7 @@ TA_RetCode INT_MACD( int startIdx,
  tempBuffer, optInSlowD_Period,
  optInSlowD_MAType,
  outBegIdx, outNbElement, outSlowD );
-  System.arraycopy(tempBuffer,0,outSlowK,0,(int) outNbElement.value ) ;
-
-  ;
+  System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int) outNbElement.value ) ;
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
@@ -10520,15 +9032,9 @@ TA_RetCode INT_MACD( int startIdx,
  int optInFastD_Period,
  TA_MAType optInFastD_MAType )
 {
-
  int retValue;
-
-
  retValue = (optInFastK_Period - 1);
-
-
  retValue +=  MA_Lookback ( optInFastD_Period, optInFastD_MAType );
-
  return retValue;
 }
  public TA_RetCode STOCHF( int startIdx,
@@ -10544,7 +9050,6 @@ TA_RetCode INT_MACD( int startIdx,
  double outFastK[],
  double outFastD[] )
 {
-
  TA_RetCode retCode;
  double lowest, highest, tmp, diff;
   double []tempBuffer ;
@@ -10559,8 +9064,6 @@ TA_RetCode INT_MACD( int startIdx,
  optInFastK_Period = 5;
  else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
  optInFastD_Period = 3;
  else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
@@ -10570,11 +9073,8 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = lookbackK + lookbackFastD;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
-
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
@@ -10600,12 +9100,8 @@ TA_RetCode INT_MACD( int startIdx,
  {
   tempBuffer = new double[endIdx-today+1] ;
  }
-
-
-
  while( today <= endIdx )
  {
-
  tmp = inLow[today];
  if( lowestIdx < trailingIdx )
  {
@@ -10629,8 +9125,6 @@ TA_RetCode INT_MACD( int startIdx,
  lowest = tmp;
  diff = (highest - lowest)/100.0;
  }
-
-
  tmp = inHigh[today];
  if( highestIdx < trailingIdx )
  {
@@ -10654,13 +9148,10 @@ TA_RetCode INT_MACD( int startIdx,
  highest = tmp;
  diff = (highest - lowest)/100.0;
  }
-
-
  if( diff != 0.0 )
  tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
  else
  tempBuffer[outIdx++] = 0.0;
-
  trailingIdx++;
  today++;
  }
@@ -10668,38 +9159,20 @@ TA_RetCode INT_MACD( int startIdx,
  tempBuffer, optInFastD_Period,
  optInFastD_MAType,
  outBegIdx, outNbElement, outFastD );
-
-
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value ) == 0 )
  {
-
-
-
-  ;
-
-
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
-  System.arraycopy(tempBuffer,0,outFastK,0,(int) outNbElement.value ) ;
-
-
-
-
-
-  ;
-
-
+  System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int) outNbElement.value ) ;
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
-
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode STOCHF( int startIdx,
@@ -10811,15 +9284,11 @@ TA_RetCode INT_MACD( int startIdx,
  outBegIdx, outNbElement, outFastD );
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value ) == 0 )
  {
-
-  ;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
-  System.arraycopy(tempBuffer,0,outFastK,0,(int) outNbElement.value ) ;
-
-  ;
+  System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int) outNbElement.value ) ;
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  {
   outBegIdx.value = 0 ;
@@ -10835,11 +9304,8 @@ TA_RetCode INT_MACD( int startIdx,
  int optInFastD_Period,
  TA_MAType optInFastD_MAType )
 {
-
  int retValue;
-
  retValue =  RSI_Lookback ( optInTimePeriod ) +  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-
  return retValue;
 }
  public TA_RetCode STOCHRSI( int startIdx,
@@ -10854,20 +9320,12 @@ TA_RetCode INT_MACD( int startIdx,
  double outFastK[],
  double outFastD[] )
 {
-
   double []tempRSIBuffer ;
-
  TA_RetCode retCode;
  int lookbackTotal, lookbackSTOCHF, tempArraySize;
   MInteger outBegIdx1 = new MInteger() ;
   MInteger outBegIdx2 = new MInteger() ;
   MInteger outNbElement1 = new MInteger() ;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -10876,42 +9334,29 @@ TA_RetCode INT_MACD( int startIdx,
  optInTimePeriod = 14;
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
  optInFastK_Period = 5;
  else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
  optInFastD_Period = 3;
  else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
-
-
  lookbackSTOCHF =  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
  lookbackTotal =  RSI_Lookback ( optInTimePeriod ) + lookbackSTOCHF;
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
-
  tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCHF;
-
   tempRSIBuffer = new double[tempArraySize] ;
-
  retCode =  RSI (startIdx-lookbackSTOCHF,
  endIdx,
  inReal,
@@ -10919,15 +9364,12 @@ TA_RetCode INT_MACD( int startIdx,
   outBegIdx1 ,
   outNbElement1 ,
  tempRSIBuffer);
-
  if( retCode !=  TA_RetCode. TA_SUCCESS ||  outNbElement1.value  == 0 )
  {
-  ;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
-
  retCode =  STOCHF (0,
  tempArraySize-1,
  tempRSIBuffer,
@@ -10940,16 +9382,12 @@ TA_RetCode INT_MACD( int startIdx,
  outNbElement,
  outFastK,
  outFastD);
-
-  ;
-
  if( retCode !=  TA_RetCode. TA_SUCCESS || ((int) outNbElement.value ) == 0 )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
  }
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode STOCHRSI( int startIdx,
@@ -10970,7 +9408,6 @@ TA_RetCode INT_MACD( int startIdx,
   MInteger outBegIdx1 = new MInteger() ;
   MInteger outBegIdx2 = new MInteger() ;
   MInteger outNbElement1 = new MInteger() ;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -11011,7 +9448,6 @@ TA_RetCode INT_MACD( int startIdx,
  tempRSIBuffer);
  if( retCode !=  TA_RetCode. TA_SUCCESS ||  outNbElement1.value  == 0 )
  {
-  ;
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return retCode;
@@ -11028,7 +9464,6 @@ TA_RetCode INT_MACD( int startIdx,
  outNbElement,
  outFastK,
  outFastD);
-  ;
  if( retCode !=  TA_RetCode. TA_SUCCESS || ((int) outNbElement.value ) == 0 )
  {
   outBegIdx.value = 0 ;
@@ -11040,7 +9475,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int TRIX_Lookback( int optInTimePeriod )
 {
-
  int emaLookback =  EMA_Lookback ( optInTimePeriod );
  return (emaLookback*3) +  ROCR_Lookback ( 1 );
 }
@@ -11052,7 +9486,6 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  double k;
   double []tempBuffer ;
   MInteger nbElement = new MInteger() ;
@@ -11061,12 +9494,6 @@ TA_RetCode INT_MACD( int startIdx,
  int emaLookback, rocLookback;
  TA_RetCode retCode;
  int nbElementToOutput;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -11078,20 +9505,15 @@ TA_RetCode INT_MACD( int startIdx,
  emaLookback =  EMA_Lookback ( optInTimePeriod );
  rocLookback =  ROCR_Lookback ( 1 );
  totalLookback = (emaLookback*3) + rocLookback;
-
  if( startIdx < totalLookback )
  startIdx = totalLookback;
-
-
  if( startIdx > endIdx )
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
-
  nbElementToOutput = (endIdx-startIdx)+1+totalLookback;
   tempBuffer = new double[nbElementToOutput] ;
  k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
@@ -11103,13 +9525,9 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
-  ;
  return retCode;
  }
-
  nbElementToOutput--;
-
-
  nbElementToOutput -= emaLookback;
  retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
  optInTimePeriod, k,
@@ -11119,11 +9537,8 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
-  ;
  return retCode;
  }
-
-
  nbElementToOutput -= emaLookback;
  retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
  optInTimePeriod, k,
@@ -11133,25 +9548,19 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
-  ;
  return retCode;
  }
-
-
  nbElementToOutput -= emaLookback;
  retCode =  ROC ( 0, nbElementToOutput,
  tempBuffer,
  1,  begIdx , outNbElement,
  outReal );
-
-  ;
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
  return retCode;
  }
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode TRIX( int startIdx,
@@ -11170,7 +9579,6 @@ TA_RetCode INT_MACD( int startIdx,
  int emaLookback, rocLookback;
  TA_RetCode retCode;
  int nbElementToOutput;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -11202,7 +9610,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
-  ;
  return retCode;
  }
  nbElementToOutput--;
@@ -11215,7 +9622,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
-  ;
  return retCode;
  }
  nbElementToOutput -= emaLookback;
@@ -11227,7 +9633,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
   outNbElement.value = 0 ;
   outBegIdx.value = 0 ;
-  ;
  return retCode;
  }
  nbElementToOutput -= emaLookback;
@@ -11235,7 +9640,6 @@ TA_RetCode INT_MACD( int startIdx,
  tempBuffer,
  1,  begIdx , outNbElement,
  outReal );
-  ;
  if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
  {
   outNbElement.value = 0 ;
@@ -11247,8 +9651,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int WILLR_Lookback( int optInTimePeriod )
 {
-
-
  return (optInTimePeriod-1);
 }
  public TA_RetCode WILLR( int startIdx,
@@ -11261,17 +9663,10 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  double lowest, highest, tmp, diff;
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, lowestIdx, highestIdx;
  int today, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -11283,26 +9678,20 @@ TA_RetCode INT_MACD( int startIdx,
  nbInitialElementNeeded = (optInTimePeriod-1);
  if( startIdx < nbInitialElementNeeded )
  startIdx = nbInitialElementNeeded;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
  diff = 0.0;
  outIdx = 0;
  today = startIdx;
  trailingIdx = startIdx-nbInitialElementNeeded;
  lowestIdx = highestIdx = -1;
  diff = highest = lowest = 0.0;
-
  while( today <= endIdx )
  {
-
  tmp = inLow[today];
  if( lowestIdx < trailingIdx )
  {
@@ -11326,8 +9715,6 @@ TA_RetCode INT_MACD( int startIdx,
  lowest = tmp;
  diff = (highest - lowest)/(-100.0);
  }
-
-
  tmp = inHigh[today];
  if( highestIdx < trailingIdx )
  {
@@ -11351,18 +9738,15 @@ TA_RetCode INT_MACD( int startIdx,
  highest = tmp;
  diff = (highest - lowest)/(-100.0);
  }
-
  if( diff != 0.0 )
  outReal[outIdx++] = (highest-inClose[today])/diff;
  else
  outReal[outIdx++] = 0.0;
-
  trailingIdx++;
  today++;
  }
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode WILLR( int startIdx,
@@ -11379,7 +9763,6 @@ TA_RetCode INT_MACD( int startIdx,
  int outIdx, nbInitialElementNeeded;
  int trailingIdx, lowestIdx, highestIdx;
  int today, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -11465,9 +9848,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int HT_DCPERIOD_Lookback( )
 {
-
-
-
  return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPERIOD.ordinal()]) ;
 }
  public TA_RetCode HT_DCPERIOD( int startIdx,
@@ -11477,44 +9857,26 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int outIdx, i;
  int lookbackTotal, today;
  double tempReal, tempReal2;
-
  double adjustedPrevPeriod, period;
-
-
  int trailingWMAIdx;
  double periodWMASum, periodWMASub, trailingWMAValue;
  double smoothedValue;
-
-
   final double a  = 0.0962;
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
-
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
-
  double rad2Deg;
-
  double todayValue, smoothPeriod;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -11523,15 +9885,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPERIOD.ordinal()]) ;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  trailingWMAIdx = startIdx - lookbackTotal;
  today = trailingWMAIdx;
@@ -11544,7 +9903,6 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inReal[today++];
  periodWMASub += tempReal;
  periodWMASum += tempReal*3.0;
-
  trailingWMAValue = 0.0;
  i = 9;
  do
@@ -11553,15 +9911,12 @@ TA_RetCode INT_MACD( int startIdx,
   { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  } while( --i != 0);
  hilbertIdx = 0;
-
   { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
   { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
   { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
   { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-
  period = 0.0;
  outIdx = 0;
-
  prevI2 = prevQ2 = 0.0;
  Re = Im = 0.0;
  I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
@@ -11570,20 +9925,16 @@ TA_RetCode INT_MACD( int startIdx,
  while( today <= endIdx )
  {
  adjustedPrevPeriod = (0.075*period)+0.54;
-
  todayValue = inReal[today];
   { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-
  if( (today%2) == 0 )
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
  if( ++hilbertIdx == 3 )
  hilbertIdx = 0;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
  I1ForOddPrev3 = I1ForOddPrev2;
@@ -11591,19 +9942,15 @@ TA_RetCode INT_MACD( int startIdx,
  }
  else
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
  I1ForEvenPrev3 = I1ForEvenPrev2;
  I1ForEvenPrev2 = detrender;
  }
-
-
  Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
  Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
  prevQ2 = Q2;
@@ -11622,20 +9969,14 @@ TA_RetCode INT_MACD( int startIdx,
  else if( period > 50 )
  period = 50;
  period = (0.2*period) + (0.8 * tempReal);
-
  smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-
  if( today >= startIdx )
  {
  outReal[outIdx++] = smoothPeriod;
  }
-
-
  today++;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode HT_DCPERIOD( int startIdx,
@@ -11656,16 +9997,15 @@ TA_RetCode INT_MACD( int startIdx,
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
  double rad2Deg;
  double todayValue, smoothPeriod;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -11780,71 +10120,47 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx, i;
  int lookbackTotal, today;
  double tempReal, tempReal2;
-
  double adjustedPrevPeriod, period;
-
-
  int trailingWMAIdx;
  double periodWMASum, periodWMASub, trailingWMAValue;
  double smoothedValue;
-
-
   final double a  = 0.0962;
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
-
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
-
  double rad2Deg, constDeg2RadBy360;
-
  double todayValue, smoothPeriod;
   int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
  int idx;
-
-
  int DCPeriodInt;
  double DCPhase, DCPeriod, imagPart, realPart;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
   { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-
-
  tempReal =  Math.atan (1);
  rad2Deg = 45.0/tempReal;
  constDeg2RadBy360 = tempReal*8.0;
  lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPHASE.ordinal()]) ;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  trailingWMAIdx = startIdx - lookbackTotal;
  today = trailingWMAIdx;
@@ -11857,7 +10173,6 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inReal[today++];
  periodWMASub += tempReal;
  periodWMASum += tempReal*3.0;
-
  trailingWMAValue = 0.0;
  i = 34;
  do
@@ -11866,42 +10181,34 @@ TA_RetCode INT_MACD( int startIdx,
   { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  } while( --i != 0);
  hilbertIdx = 0;
-
   { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
   { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
   { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
   { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-
  period = 0.0;
  outIdx = 0;
-
  prevI2 = prevQ2 = 0.0;
  Re = Im = 0.0;
  I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
  I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
  smoothPeriod = 0.0;
-
  for( i=0; i <  50 ; i++ )
  smoothPrice[i] = 0.0;
  DCPhase = 0.0;
  while( today <= endIdx )
  {
  adjustedPrevPeriod = (0.075*period)+0.54;
-
  todayValue = inReal[today];
   { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  smoothPrice[smoothPrice_Idx] = smoothedValue;
-
  if( (today%2) == 0 )
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
  if( ++hilbertIdx == 3 )
  hilbertIdx = 0;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
  I1ForOddPrev3 = I1ForOddPrev2;
@@ -11909,19 +10216,15 @@ TA_RetCode INT_MACD( int startIdx,
  }
  else
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
  I1ForEvenPrev3 = I1ForEvenPrev2;
  I1ForEvenPrev2 = detrender;
  }
-
-
  Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
  Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
  prevQ2 = Q2;
@@ -11940,10 +10243,7 @@ TA_RetCode INT_MACD( int startIdx,
  else if( period > 50 )
  period = 50;
  period = (0.2*period) + (0.8 * tempReal);
-
  smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-
-
  DCPeriod = smoothPeriod+0.5;
  DCPeriodInt = (int)DCPeriod;
  realPart = 0.0;
@@ -11960,7 +10260,6 @@ TA_RetCode INT_MACD( int startIdx,
  else
  idx--;
  }
-
  tempReal =  Math.abs (imagPart);
  if( tempReal > 0.0 )
  DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
@@ -11972,26 +10271,19 @@ TA_RetCode INT_MACD( int startIdx,
  DCPhase += 90.0;
  }
  DCPhase += 90.0;
-
-
  DCPhase += 360.0 / smoothPeriod;
  if( imagPart < 0.0 )
  DCPhase += 180.0;
  if( DCPhase > 315.0 )
  DCPhase -= 360.0;
-
  if( today >= startIdx )
  {
  outReal[outIdx++] = DCPhase;
  }
-
-
   { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
  today++;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode HT_DCPHASE( int startIdx,
@@ -12012,21 +10304,19 @@ TA_RetCode INT_MACD( int startIdx,
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
  double rad2Deg, constDeg2RadBy360;
  double todayValue, smoothPeriod;
-
   int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
  int idx;
  int DCPeriodInt;
  double DCPhase, DCPeriod, imagPart, realPart;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -12172,9 +10462,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int HT_PHASOR_Lookback( )
 {
-
-
-
  return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_PHASOR.ordinal()]) ;
 }
  public TA_RetCode HT_PHASOR( int startIdx,
@@ -12185,44 +10472,26 @@ TA_RetCode INT_MACD( int startIdx,
  double outInPhase[],
  double outQuadrature[] )
 {
-
-
  int outIdx, i;
  int lookbackTotal, today;
  double tempReal, tempReal2;
-
  double adjustedPrevPeriod, period;
-
-
  int trailingWMAIdx;
  double periodWMASum, periodWMASub, trailingWMAValue;
  double smoothedValue;
-
-
   final double a  = 0.0962;
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
-
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
-
  double rad2Deg;
-
  double todayValue;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -12231,15 +10500,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_PHASOR.ordinal()]) ;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  trailingWMAIdx = startIdx - lookbackTotal;
  today = trailingWMAIdx;
@@ -12252,7 +10518,6 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inReal[today++];
  periodWMASub += tempReal;
  periodWMASum += tempReal*3.0;
-
  trailingWMAValue = 0.0;
  i = 9;
  do
@@ -12261,15 +10526,12 @@ TA_RetCode INT_MACD( int startIdx,
   { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  } while( --i != 0);
  hilbertIdx = 0;
-
   { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
   { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
   { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
   { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-
  period = 0.0;
  outIdx = 0;
-
  prevI2 = prevQ2 = 0.0;
  Re = Im = 0.0;
  I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
@@ -12277,13 +10539,10 @@ TA_RetCode INT_MACD( int startIdx,
  while( today <= endIdx )
  {
  adjustedPrevPeriod = (0.075*period)+0.54;
-
  todayValue = inReal[today];
   { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-
  if( (today%2) == 0 )
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
  if( today >= startIdx )
@@ -12295,16 +10554,13 @@ TA_RetCode INT_MACD( int startIdx,
   { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
  if( ++hilbertIdx == 3 )
  hilbertIdx = 0;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
  I1ForOddPrev3 = I1ForOddPrev2;
  I1ForOddPrev2 = detrender;
-
  }
  else
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
  if( today >= startIdx )
@@ -12314,14 +10570,11 @@ TA_RetCode INT_MACD( int startIdx,
  }
   { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
  I1ForEvenPrev3 = I1ForEvenPrev2;
  I1ForEvenPrev2 = detrender;
  }
-
-
  Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
  Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
  prevQ2 = Q2;
@@ -12340,14 +10593,9 @@ TA_RetCode INT_MACD( int startIdx,
  else if( period > 50 )
  period = 50;
  period = (0.2*period) + (0.8 * tempReal);
-
-
  today++;
  }
-
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode HT_PHASOR( int startIdx,
@@ -12369,16 +10617,15 @@ TA_RetCode INT_MACD( int startIdx,
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
  double rad2Deg;
  double todayValue;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -12498,56 +10745,35 @@ TA_RetCode INT_MACD( int startIdx,
  double outSine[],
  double outLeadSine[] )
 {
-
  int outIdx, i;
  int lookbackTotal, today;
  double tempReal, tempReal2;
-
  double adjustedPrevPeriod, period;
-
-
  int trailingWMAIdx;
  double periodWMASum, periodWMASub, trailingWMAValue;
  double smoothedValue;
-
-
   final double a  = 0.0962;
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
-
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
-
  double rad2Deg, deg2Rad, constDeg2RadBy360;
-
  double todayValue, smoothPeriod;
   int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
  int idx;
-
-
  int DCPeriodInt;
  double DCPhase, DCPeriod, imagPart, realPart;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
   { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-
-
  tempReal =  Math.atan (1);
  rad2Deg = 45.0/tempReal;
  deg2Rad = 1.0/rad2Deg;
@@ -12555,15 +10781,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_SINE.ordinal()]) ;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  trailingWMAIdx = startIdx - lookbackTotal;
  today = trailingWMAIdx;
@@ -12576,7 +10799,6 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inReal[today++];
  periodWMASub += tempReal;
  periodWMASum += tempReal*3.0;
-
  trailingWMAValue = 0.0;
  i = 34;
  do
@@ -12585,42 +10807,34 @@ TA_RetCode INT_MACD( int startIdx,
   { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  } while( --i != 0);
  hilbertIdx = 0;
-
   { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
   { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
   { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
   { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-
  period = 0.0;
  outIdx = 0;
-
  prevI2 = prevQ2 = 0.0;
  Re = Im = 0.0;
  I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
  I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
  smoothPeriod = 0.0;
-
  for( i=0; i <  50 ; i++ )
  smoothPrice[i] = 0.0;
  DCPhase = 0.0;
  while( today <= endIdx )
  {
  adjustedPrevPeriod = (0.075*period)+0.54;
-
  todayValue = inReal[today];
   { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  smoothPrice[smoothPrice_Idx] = smoothedValue;
-
  if( (today%2) == 0 )
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
  if( ++hilbertIdx == 3 )
  hilbertIdx = 0;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
  I1ForOddPrev3 = I1ForOddPrev2;
@@ -12628,19 +10842,15 @@ TA_RetCode INT_MACD( int startIdx,
  }
  else
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
  I1ForEvenPrev3 = I1ForEvenPrev2;
  I1ForEvenPrev2 = detrender;
  }
-
-
  Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
  Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
  prevQ2 = Q2;
@@ -12659,10 +10869,7 @@ TA_RetCode INT_MACD( int startIdx,
  else if( period > 50 )
  period = 50;
  period = (0.2*period) + (0.8 * tempReal);
-
  smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-
-
  DCPeriod = smoothPeriod+0.5;
  DCPeriodInt = (int)DCPeriod;
  realPart = 0.0;
@@ -12679,7 +10886,6 @@ TA_RetCode INT_MACD( int startIdx,
  else
  idx--;
  }
-
  tempReal =  Math.abs (imagPart);
  if( tempReal > 0.0 )
  DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
@@ -12691,27 +10897,20 @@ TA_RetCode INT_MACD( int startIdx,
  DCPhase += 90.0;
  }
  DCPhase += 90.0;
-
-
  DCPhase += 360.0 / smoothPeriod;
  if( imagPart < 0.0 )
  DCPhase += 180.0;
  if( DCPhase > 315.0 )
  DCPhase -= 360.0;
-
  if( today >= startIdx )
  {
  outSine[outIdx] =  Math.sin (DCPhase*deg2Rad);
  outLeadSine[outIdx++] =  Math.sin ((DCPhase+45)*deg2Rad);
  }
-
-
   { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
  today++;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode HT_SINE( int startIdx,
@@ -12733,21 +10932,19 @@ TA_RetCode INT_MACD( int startIdx,
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
  double rad2Deg, deg2Rad, constDeg2RadBy360;
  double todayValue, smoothPeriod;
-
   int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
  int idx;
  int DCPeriodInt;
  double DCPhase, DCPeriod, imagPart, realPart;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -12904,71 +11101,44 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  int outIdx, i;
  int lookbackTotal, today;
  double tempReal, tempReal2;
-
  double adjustedPrevPeriod, period;
-
-
  int trailingWMAIdx;
  double periodWMASum, periodWMASub, trailingWMAValue;
  double smoothedValue;
-
-
  double iTrend1, iTrend2, iTrend3;
-
-
   final double a  = 0.0962;
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
-
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
-
  double rad2Deg, deg2Rad, constDeg2RadBy360;
-
  double todayValue, smoothPeriod;
   int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
  int idx;
-
-
  int DCPeriodInt;
  double DCPhase, DCPeriod, imagPart, realPart;
-
-
  int daysInTrend, trend;
  double prevDCPhase, trendline;
  double prevSine, prevLeadSine, sine, leadSine;
-
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
   { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-
  iTrend1 = iTrend2 = iTrend3 = 0.0;
  daysInTrend = 0;
  prevDCPhase = DCPhase = 0.0;
  prevSine = sine = 0.0;
  prevLeadSine = leadSine = 0.0;
-
-
  tempReal =  Math.atan (1);
  rad2Deg = 45.0/tempReal;
  deg2Rad = 1.0/rad2Deg;
@@ -12976,15 +11146,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDMODE.ordinal()]) ;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  trailingWMAIdx = startIdx - lookbackTotal;
  today = trailingWMAIdx;
@@ -12997,7 +11164,6 @@ TA_RetCode INT_MACD( int startIdx,
  tempReal = inReal[today++];
  periodWMASub += tempReal;
  periodWMASum += tempReal*3.0;
-
  trailingWMAValue = 0.0;
  i = 34;
  do
@@ -13006,42 +11172,34 @@ TA_RetCode INT_MACD( int startIdx,
   { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  } while( --i != 0);
  hilbertIdx = 0;
-
   { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
   { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
   { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
   { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-
  period = 0.0;
  outIdx = 0;
-
  prevI2 = prevQ2 = 0.0;
  Re = Im = 0.0;
  I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
  I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
  smoothPeriod = 0.0;
-
  for( i=0; i <  50 ; i++ )
  smoothPrice[i] = 0.0;
  DCPhase = 0.0;
  while( today <= endIdx )
  {
  adjustedPrevPeriod = (0.075*period)+0.54;
-
  todayValue = inReal[today];
   { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
  smoothPrice[smoothPrice_Idx] = smoothedValue;
-
  if( (today%2) == 0 )
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
  if( ++hilbertIdx == 3 )
  hilbertIdx = 0;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
  I1ForOddPrev3 = I1ForOddPrev2;
@@ -13049,19 +11207,15 @@ TA_RetCode INT_MACD( int startIdx,
  }
  else
  {
-
   { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
   { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-
  Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
  I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
  I1ForEvenPrev3 = I1ForEvenPrev2;
  I1ForEvenPrev2 = detrender;
  }
-
-
  Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
  Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
  prevQ2 = Q2;
@@ -13080,10 +11234,7 @@ TA_RetCode INT_MACD( int startIdx,
  else if( period > 50 )
  period = 50;
  period = (0.2*period) + (0.8 * tempReal);
-
  smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-
-
  prevDCPhase = DCPhase;
  DCPeriod = smoothPeriod+0.5;
  DCPeriodInt = (int)DCPeriod;
@@ -13101,7 +11252,6 @@ TA_RetCode INT_MACD( int startIdx,
  else
  idx--;
  }
-
  tempReal =  Math.abs (imagPart);
  if( tempReal > 0.0 )
  DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
@@ -13113,74 +11263,54 @@ TA_RetCode INT_MACD( int startIdx,
  DCPhase += 90.0;
  }
  DCPhase += 90.0;
-
-
  DCPhase += 360.0 / smoothPeriod;
  if( imagPart < 0.0 )
  DCPhase += 180.0;
  if( DCPhase > 315.0 )
  DCPhase -= 360.0;
-
  prevSine = sine;
  prevLeadSine = leadSine;
  sine =  Math.sin (DCPhase*deg2Rad);
  leadSine =  Math.sin ((DCPhase+45)*deg2Rad);
-
-
  DCPeriod = smoothPeriod+0.5;
  DCPeriodInt = (int)DCPeriod;
  idx = today;
  tempReal = 0.0;
  for( i=0; i < DCPeriodInt; i++ )
  tempReal += inReal[idx--];
-
  if( DCPeriodInt > 0 )
  tempReal = tempReal/(double)DCPeriodInt;
-
  trendline = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
  iTrend3 = iTrend2;
  iTrend2 = iTrend1;
  iTrend1 = tempReal;
-
-
  trend = 1;
-
-
  if( ((sine > leadSine) && (prevSine <= prevLeadSine)) ||
  ((sine < leadSine) && (prevSine >= prevLeadSine)) )
  {
  daysInTrend = 0;
  trend = 0;
  }
-
  daysInTrend++;
-
  if( daysInTrend < (0.5*smoothPeriod) )
  trend = 0;
-
  tempReal = DCPhase - prevDCPhase;
  if( (smoothPeriod != 0.0) &&
  ((tempReal > (0.67*360.0/smoothPeriod)) && (tempReal < (1.5*360.0/smoothPeriod))) )
  {
  trend = 0;
  }
-
  tempReal = smoothPrice[smoothPrice_Idx];
  if( (trendline != 0.0) && ( Math.abs ( (tempReal - trendline)/trendline ) >= 0.015) )
  trend = 1;
-
  if( today >= startIdx )
  {
  outInteger[outIdx++] = trend;
  }
-
-
   { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
  today++;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode HT_TRENDMODE( int startIdx,
@@ -13202,16 +11332,15 @@ TA_RetCode INT_MACD( int startIdx,
   final double b  = 0.5769;
  double hilbertTempReal;
  int hilbertIdx;
-  double []detrender_Odd = new double[3]; ; double []detrender_Even = new double[3]; ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-  double []Q1_Odd = new double[3]; ; double []Q1_Even = new double[3]; ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-  double []jI_Odd = new double[3]; ; double []jI_Even = new double[3]; ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-  double []jQ_Odd = new double[3]; ; double []jQ_Even = new double[3]; ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+  double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+  double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+  double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+  double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
  double Q2, I2, prevQ2, prevI2, Re, Im;
  double I1ForOddPrev2, I1ForOddPrev3;
  double I1ForEvenPrev2, I1ForEvenPrev3;
  double rad2Deg, deg2Rad, constDeg2RadBy360;
  double todayValue, smoothPeriod;
-
   int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
  int idx;
  int DCPeriodInt;
@@ -13219,7 +11348,6 @@ TA_RetCode INT_MACD( int startIdx,
  int daysInTrend, trend;
  double prevDCPhase, trendline;
  double prevSine, prevLeadSine, sine, leadSine;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13407,9 +11535,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int AD_Lookback( )
 {
-
-
-
  return 0;
 }
  public TA_RetCode AD( int startIdx,
@@ -13422,17 +11547,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int nbBar, currentBar, outIdx;
-
  double high, low, close, tmp;
  double ad;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13443,23 +11560,18 @@ TA_RetCode INT_MACD( int startIdx,
  currentBar = startIdx;
  outIdx = 0;
  ad = 0.0;
-
  while( nbBar != 0 )
  {
  high = inHigh[currentBar];
  low = inLow[currentBar];
  tmp = high-low;
  close = inClose[currentBar];
-
  if( tmp > 0.0 )
  ad += (((close-low)-(high-close))/tmp)*((double)inVolume[currentBar]);
-
  outReal[outIdx++] = ad;
-
  currentBar++;
  nbBar--;
  }
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode AD( int startIdx,
@@ -13475,7 +11587,6 @@ TA_RetCode INT_MACD( int startIdx,
  int nbBar, currentBar, outIdx;
  double high, low, close, tmp;
  double ad;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13504,17 +11615,11 @@ TA_RetCode INT_MACD( int startIdx,
  public int ADOSC_Lookback( int optInFastPeriod,
  int optInSlowPeriod )
 {
-
-
-
  int slowestPeriod;
-
  if( optInFastPeriod < optInSlowPeriod )
  slowestPeriod = optInSlowPeriod;
  else
  slowestPeriod = optInFastPeriod;
-
-
  return  EMA_Lookback ( slowestPeriod );
 }
  public TA_RetCode ADOSC( int startIdx,
@@ -13529,21 +11634,12 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
-
  int today, outIdx, lookbackTotal;
  int slowestPeriod;
  double high, low, close, tmp;
-
  double slowEMA, slowk, one_minus_slowk;
  double fastEMA, fastk, one_minus_fastk;
  double ad;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13552,8 +11648,6 @@ TA_RetCode INT_MACD( int startIdx,
  optInFastPeriod = 3;
  else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
-
  if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
  optInSlowPeriod = 10;
  else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
@@ -13562,52 +11656,40 @@ TA_RetCode INT_MACD( int startIdx,
  slowestPeriod = optInSlowPeriod;
  else
  slowestPeriod = optInFastPeriod;
-
-
  lookbackTotal =  EMA_Lookback ( slowestPeriod );
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  today = startIdx-lookbackTotal;
  ad = 0.0;
  fastk =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
  one_minus_fastk = 1.0 - fastk;
-
  slowk =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
  one_minus_slowk = 1.0 - slowk;
   { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
  fastEMA = ad;
  slowEMA = ad;
-
-
  while( today < startIdx )
  {
   { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
  fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
  slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
  }
-
-
  outIdx = 0;
  while( today <= endIdx )
  {
   { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
  fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
  slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
-
  outReal[outIdx++] = fastEMA - slowEMA;
  }
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode ADOSC( int startIdx,
@@ -13628,7 +11710,6 @@ TA_RetCode INT_MACD( int startIdx,
  double slowEMA, slowk, one_minus_slowk;
  double fastEMA, fastk, one_minus_fastk;
  double ad;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13684,9 +11765,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int OBV_Lookback( )
 {
-
-
-
  return 0;
 }
  public TA_RetCode OBV( int startIdx,
@@ -13697,16 +11775,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  int i;
  int prevOBV, outIdx;
  double prevReal, tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13714,7 +11785,6 @@ TA_RetCode INT_MACD( int startIdx,
  prevOBV = inVolume[startIdx];
  prevReal = inReal[startIdx];
  outIdx = 0;
-
  for(i=startIdx; i <= endIdx; i++ )
  {
  tempReal = inReal[i];
@@ -13722,14 +11792,11 @@ TA_RetCode INT_MACD( int startIdx,
  prevOBV += inVolume[i];
  else if( tempReal < prevReal )
  prevOBV -= inVolume[i];
-
  outInteger[outIdx++] = prevOBV;
  prevReal = tempReal;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode OBV( int startIdx,
@@ -13743,7 +11810,6 @@ TA_RetCode INT_MACD( int startIdx,
  int i;
  int prevOBV, outIdx;
  double prevReal, tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13768,7 +11834,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDL2CROWS_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  + 2;
 }
  public TA_RetCode CDL2CROWS( int startIdx,
@@ -13781,15 +11846,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyLongPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13797,20 +11855,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDL2CROWS_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -13835,11 +11887,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDL2CROWS( int startIdx,
@@ -13854,7 +11903,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyLongPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13901,7 +11949,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDL3BLACKCROWS_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  + 3;
 }
  public TA_RetCode CDL3BLACKCROWS( int startIdx,
@@ -13914,15 +11961,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []ShadowVeryShortPeriodTotal = new double[3]; ;
+  double []ShadowVeryShortPeriodTotal = new double[3] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -13930,22 +11970,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDL3BLACKCROWS_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowVeryShortPeriodTotal[2] = 0;
  ShadowVeryShortPeriodTotal[1] = 0;
  ShadowVeryShortPeriodTotal[0] = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = ShadowVeryShortTrailingIdx;
  while( i < startIdx ) {
  ShadowVeryShortPeriodTotal[2] +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
@@ -13960,13 +11994,10 @@ TA_RetCode INT_MACD( int startIdx,
  if(  ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  == 1 &&
   ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == -1 &&
   ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i-1] < inOpen[i-2] && inOpen[i-1] > inClose[i-2] &&
  inOpen[i] < inOpen[i-1] && inOpen[i] > inClose[i-1] &&
  inHigh[i-3] > inClose[i-2] &&
@@ -13982,11 +12013,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDL3BLACKCROWS( int startIdx,
@@ -13999,9 +12027,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []ShadowVeryShortPeriodTotal = new double[3]; ;
+  double []ShadowVeryShortPeriodTotal = new double[3] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14033,13 +12060,10 @@ TA_RetCode INT_MACD( int startIdx,
  if(  ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  == 1 &&
   ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == -1 &&
   ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i-1] < inOpen[i-2] && inOpen[i-1] > inClose[i-2] &&
  inOpen[i] < inOpen[i-1] && inOpen[i] > inClose[i-1] &&
  inHigh[i-3] > inClose[i-2] &&
@@ -14062,7 +12086,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDL3INSIDE_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 2;
 }
  public TA_RetCode CDL3INSIDE( int startIdx,
@@ -14075,15 +12098,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14091,22 +12107,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDL3INSIDE_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -14139,11 +12149,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDL3INSIDE( int startIdx,
@@ -14158,7 +12165,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14215,7 +12221,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDL3LINESTRIKE_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  + 3;
 }
  public TA_RetCode CDL3LINESTRIKE( int startIdx,
@@ -14228,15 +12233,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []NearPeriodTotal = new double[4]; ;
+  double []NearPeriodTotal = new double[4] ;
  int i, outIdx, totIdx, NearTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14244,21 +12242,15 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDL3LINESTRIKE_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  NearPeriodTotal[3] = 0;
  NearPeriodTotal[2] = 0;
  NearTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
-
  i = NearTrailingIdx;
  while( i < startIdx ) {
  NearPeriodTotal[3] +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) ) ;
@@ -14272,10 +12264,8 @@ TA_RetCode INT_MACD( int startIdx,
  if(  ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  ==  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  &&
   ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  ==  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  &&
-
  inOpen[i-2] >=  (((inOpen[i-3]) < (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i-2] <=  (((inOpen[i-3]) > (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i-1] >=  (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i-1] <=  (((inOpen[i-2]) > (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  (
@@ -14302,11 +12292,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  NearTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDL3LINESTRIKE( int startIdx,
@@ -14319,9 +12306,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []NearPeriodTotal = new double[4]; ;
+  double []NearPeriodTotal = new double[4] ;
  int i, outIdx, totIdx, NearTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14351,10 +12337,8 @@ TA_RetCode INT_MACD( int startIdx,
  if(  ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  ==  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  &&
   ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  ==  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  &&
-
  inOpen[i-2] >=  (((inOpen[i-3]) < (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i-2] <=  (((inOpen[i-3]) > (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i-1] >=  (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i-1] <=  (((inOpen[i-2]) > (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  (
@@ -14388,7 +12372,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDL3OUTSIDE_Lookback( )
 {
-
  return 3;
 }
  public TA_RetCode CDL3OUTSIDE( int startIdx,
@@ -14401,14 +12384,7 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  int i, outIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14416,17 +12392,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDL3OUTSIDE_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  i = startIdx;
  outIdx = 0;
  do
@@ -14446,11 +12417,8 @@ TA_RetCode INT_MACD( int startIdx,
  outInteger[outIdx++] = 0;
  i++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDL3OUTSIDE( int startIdx,
@@ -14464,7 +12432,6 @@ TA_RetCode INT_MACD( int startIdx,
  int outInteger[] )
  {
  int i, outIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14504,7 +12471,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDL3STARSINSOUTH_Lookback( )
 {
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) > ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) : ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ))  +
  2;
 }
@@ -14518,17 +12484,10 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyLongPeriodTotal, BodyShortPeriodTotal, ShadowLongPeriodTotal;
-  double []ShadowVeryShortPeriodTotal = new double[2]; ;
+  double []ShadowVeryShortPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx,
  lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14536,17 +12495,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDL3STARSINSOUTH_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  ShadowLongPeriodTotal = 0;
@@ -14556,7 +12510,6 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
  BodyShortPeriodTotal = 0;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
@@ -14585,17 +12538,13 @@ TA_RetCode INT_MACD( int startIdx,
  if(  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == -1 &&
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
-
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod)  != 0.0? ShadowLongPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  &&
  inOpen[i-1] > inClose[i-2] && inOpen[i-1] <= inHigh[i-2] &&
  inLow[i-1] < inClose[i-2] &&
  inLow[i-1] >= inLow[i-2] &&
-
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyShortPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
@@ -14619,11 +12568,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDL3STARSINSOUTH( int startIdx,
@@ -14637,10 +12583,9 @@ TA_RetCode INT_MACD( int startIdx,
  int outInteger[] )
  {
  double BodyLongPeriodTotal, BodyShortPeriodTotal, ShadowLongPeriodTotal;
-  double []ShadowVeryShortPeriodTotal = new double[2]; ;
+  double []ShadowVeryShortPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx,
  lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14691,17 +12636,13 @@ TA_RetCode INT_MACD( int startIdx,
  if(  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == -1 &&
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
-
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod)  != 0.0? ShadowLongPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  &&
  inOpen[i-1] > inClose[i-2] && inOpen[i-1] <= inHigh[i-2] &&
  inLow[i-1] < inClose[i-2] &&
  inLow[i-1] >= inLow[i-2] &&
-
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyShortPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
@@ -14732,7 +12673,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDL3WHITESOLDIERS_Lookback( )
 {
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ) > ( ((( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ) : ( ((( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ))  +
  2;
 }
@@ -14746,18 +12686,11 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []ShadowVeryShortPeriodTotal = new double[3]; ;
-  double []NearPeriodTotal = new double[3]; ;
-  double []FarPeriodTotal = new double[3]; ;
+  double []ShadowVeryShortPeriodTotal = new double[3] ;
+  double []NearPeriodTotal = new double[3] ;
+  double []FarPeriodTotal = new double[3] ;
  double BodyShortPeriodTotal;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, NearTrailingIdx, FarTrailingIdx, BodyShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14765,17 +12698,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDL3WHITESOLDIERS_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowVeryShortPeriodTotal[2] = 0;
  ShadowVeryShortPeriodTotal[1] = 0;
  ShadowVeryShortPeriodTotal[0] = 0;
@@ -14790,7 +12718,6 @@ TA_RetCode INT_MACD( int startIdx,
  FarTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ;
  BodyShortPeriodTotal = 0;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = ShadowVeryShortTrailingIdx;
  while( i < startIdx ) {
  ShadowVeryShortPeriodTotal[2] +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
@@ -14821,22 +12748,17 @@ TA_RetCode INT_MACD( int startIdx,
  {
  if(  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == 1 &&
   ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == 1 &&
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == 1 &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inClose[i] > inClose[i-1] && inClose[i-1] > inClose[i-2] &&
  inOpen[i-1] > inOpen[i-2] &&
  inOpen[i-1] <= inClose[i-2] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i] > inOpen[i-1] &&
  inOpen[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  >  ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  != 0.0? FarPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  != 0.0? FarPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyShortPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
  outInteger[outIdx++] = 100;
@@ -14858,11 +12780,8 @@ TA_RetCode INT_MACD( int startIdx,
  FarTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDL3WHITESOLDIERS( int startIdx,
@@ -14875,12 +12794,11 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []ShadowVeryShortPeriodTotal = new double[3]; ;
-  double []NearPeriodTotal = new double[3]; ;
-  double []FarPeriodTotal = new double[3]; ;
+  double []ShadowVeryShortPeriodTotal = new double[3] ;
+  double []NearPeriodTotal = new double[3] ;
+  double []FarPeriodTotal = new double[3] ;
  double BodyShortPeriodTotal;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, NearTrailingIdx, FarTrailingIdx, BodyShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -14938,22 +12856,17 @@ TA_RetCode INT_MACD( int startIdx,
  {
  if(  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == 1 &&
   ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == 1 &&
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == 1 &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inClose[i] > inClose[i-1] && inClose[i-1] > inClose[i-2] &&
  inOpen[i-1] > inOpen[i-2] &&
  inOpen[i-1] <= inClose[i-2] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i] > inOpen[i-1] &&
  inOpen[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  >  ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  != 0.0? FarPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  != 0.0? FarPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyShortPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
  outInteger[outIdx++] = 100;
@@ -14982,9 +12895,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLABANDONEDBABY_Lookback( double optInPenetration )
 {
-
-  ;
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ))  +
  2;
 }
@@ -14999,15 +12909,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15019,24 +12922,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLABANDONEDBABY_Lookback (optInPenetration);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyDojiPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyDojiTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -15086,11 +12983,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyDojiTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLABANDONEDBABY( int startIdx,
@@ -15106,7 +13000,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15186,7 +13079,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLADVANCEBLOCK_Lookback( )
 {
-
  return  ((( ((( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ) > ( ((( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ) : ( ((( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( ((( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ) > ( ((( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ) : ( ((( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  +
  2;
 }
@@ -15200,20 +13092,13 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []ShadowShortPeriodTotal = new double[3]; ;
-  double []ShadowLongPeriodTotal = new double[2]; ;
-  double []NearPeriodTotal = new double[3]; ;
-  double []FarPeriodTotal = new double[3]; ;
+  double []ShadowShortPeriodTotal = new double[3] ;
+  double []ShadowLongPeriodTotal = new double[2] ;
+  double []NearPeriodTotal = new double[3] ;
+  double []FarPeriodTotal = new double[3] ;
  double BodyLongPeriodTotal;
  int i, outIdx, totIdx, BodyLongTrailingIdx, ShadowShortTrailingIdx, ShadowLongTrailingIdx, NearTrailingIdx,
  FarTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15221,17 +13106,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLADVANCEBLOCK_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowShortPeriodTotal[2] = 0;
  ShadowShortPeriodTotal[1] = 0;
  ShadowShortPeriodTotal[0] = 0;
@@ -15249,7 +13129,6 @@ TA_RetCode INT_MACD( int startIdx,
  FarTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod) ;
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = ShadowShortTrailingIdx;
  while( i < startIdx ) {
  ShadowShortPeriodTotal[2] +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
@@ -15294,21 +13173,14 @@ TA_RetCode INT_MACD( int startIdx,
  inOpen[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod)  != 0.0? ShadowShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  (
-
-
  (
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  != 0.0? FarPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  ) ||
-
-
  (
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  != 0.0? FarPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  ) ||
-
-
  (
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  &&
@@ -15317,8 +13189,6 @@ TA_RetCode INT_MACD( int startIdx,
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod)  != 0.0? ShadowShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
  ) ||
-
-
  (
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod)  != 0.0? ShadowLongPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
@@ -15348,11 +13218,8 @@ TA_RetCode INT_MACD( int startIdx,
  FarTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLADVANCEBLOCK( int startIdx,
@@ -15365,14 +13232,13 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []ShadowShortPeriodTotal = new double[3]; ;
-  double []ShadowLongPeriodTotal = new double[2]; ;
-  double []NearPeriodTotal = new double[3]; ;
-  double []FarPeriodTotal = new double[3]; ;
+  double []ShadowShortPeriodTotal = new double[3] ;
+  double []ShadowLongPeriodTotal = new double[2] ;
+  double []NearPeriodTotal = new double[3] ;
+  double []FarPeriodTotal = new double[3] ;
  double BodyLongPeriodTotal;
  int i, outIdx, totIdx, BodyLongTrailingIdx, ShadowShortTrailingIdx, ShadowLongTrailingIdx, NearTrailingIdx,
  FarTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15447,21 +13313,14 @@ TA_RetCode INT_MACD( int startIdx,
  inOpen[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod)  != 0.0? ShadowShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  (
-
-
  (
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  != 0.0? FarPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  ) ||
-
-
  (
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  != 0.0? FarPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Far.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  ) ||
-
-
  (
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  &&
@@ -15470,8 +13329,6 @@ TA_RetCode INT_MACD( int startIdx,
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod)  != 0.0? ShadowShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
  ) ||
-
-
  (
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod)  != 0.0? ShadowLongPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
@@ -15508,7 +13365,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLBELTHOLD_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLBELTHOLD( int startIdx,
@@ -15521,15 +13377,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15537,22 +13386,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLBELTHOLD_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -15587,11 +13430,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLBELTHOLD( int startIdx,
@@ -15606,7 +13446,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15665,7 +13504,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLBREAKAWAY_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  + 4;
 }
  public TA_RetCode CDLBREAKAWAY( int startIdx,
@@ -15678,15 +13516,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyLongPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15694,20 +13525,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLBREAKAWAY_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-4] - inOpen[i-4] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-4] - inLow[i-4] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-4] - ( inClose[i-4] >= inOpen[i-4] ? inClose[i-4] : inOpen[i-4] ) )  + ( ( inClose[i-4] >= inOpen[i-4] ? inOpen[i-4] : inClose[i-4] ) - inLow[i-4] )  : 0 ) ) ) ;
@@ -15745,11 +13570,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLBREAKAWAY( int startIdx,
@@ -15764,7 +13586,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyLongPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15824,7 +13645,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLCLOSINGMARUBOZU_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLCLOSINGMARUBOZU( int startIdx,
@@ -15837,15 +13657,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15853,22 +13666,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLCLOSINGMARUBOZU_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -15903,11 +13710,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLCLOSINGMARUBOZU( int startIdx,
@@ -15922,7 +13726,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15981,7 +13784,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLCONCEALBABYSWALL_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  + 3;
 }
  public TA_RetCode CDLCONCEALBABYSWALL( int startIdx,
@@ -15994,15 +13796,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []ShadowVeryShortPeriodTotal = new double[4]; ;
+  double []ShadowVeryShortPeriodTotal = new double[4] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16010,22 +13805,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLCONCEALBABYSWALL_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowVeryShortPeriodTotal[3] = 0;
  ShadowVeryShortPeriodTotal[2] = 0;
  ShadowVeryShortPeriodTotal[1] = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = ShadowVeryShortTrailingIdx;
  while( i < startIdx ) {
  ShadowVeryShortPeriodTotal[3] +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) ) ;
@@ -16041,14 +13830,11 @@ TA_RetCode INT_MACD( int startIdx,
   ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == -1 &&
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
-
   ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( (((inOpen[i-1]) > (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  < (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  )  &&
-
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inHigh[i-1] > inClose[i-2] &&
  inHigh[i] > inHigh[i-1] && inLow[i] < inLow[i-1]
@@ -16062,11 +13848,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLCONCEALBABYSWALL( int startIdx,
@@ -16079,9 +13862,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []ShadowVeryShortPeriodTotal = new double[4]; ;
+  double []ShadowVeryShortPeriodTotal = new double[4] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16114,14 +13896,11 @@ TA_RetCode INT_MACD( int startIdx,
   ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == -1 &&
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
-
   ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( (((inOpen[i-1]) > (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  < (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  )  &&
-
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inHigh[i-1] > inClose[i-2] &&
  inHigh[i] > inHigh[i-1] && inLow[i] < inLow[i-1]
@@ -16142,7 +13921,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLCOUNTERATTACK_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -16156,16 +13934,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double EqualPeriodTotal;
-  double []BodyLongPeriodTotal = new double[2]; ;
+  double []BodyLongPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, EqualTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16173,23 +13944,17 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLCOUNTERATTACK_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  EqualPeriodTotal = 0;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
  BodyLongPeriodTotal[1] = 0;
  BodyLongPeriodTotal[0] = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = EqualTrailingIdx;
  while( i < startIdx ) {
  EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -16222,11 +13987,8 @@ TA_RetCode INT_MACD( int startIdx,
  EqualTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLCOUNTERATTACK( int startIdx,
@@ -16240,9 +14002,8 @@ TA_RetCode INT_MACD( int startIdx,
  int outInteger[] )
  {
  double EqualPeriodTotal;
-  double []BodyLongPeriodTotal = new double[2]; ;
+  double []BodyLongPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, EqualTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16300,9 +14061,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLDARKCLOUDCOVER_Lookback( double optInPenetration )
 {
-
-  ;
-
  return  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  + 1;
 }
  public TA_RetCode CDLDARKCLOUDCOVER( int startIdx,
@@ -16316,15 +14074,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyLongPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16336,20 +14087,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLDARKCLOUDCOVER_Lookback (optInPenetration);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -16373,11 +14118,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLDARKCLOUDCOVER( int startIdx,
@@ -16393,7 +14135,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyLongPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16443,7 +14184,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLDOJI_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
 }
  public TA_RetCode CDLDOJI( int startIdx,
@@ -16456,15 +14196,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16472,20 +14205,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLDOJI_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyDojiPeriodTotal = 0;
  BodyDojiTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
-
  i = BodyDojiTrailingIdx;
  while( i < startIdx ) {
  BodyDojiPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -16502,11 +14229,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  BodyDojiTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLDOJI( int startIdx,
@@ -16521,7 +14245,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16560,7 +14283,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLDOJISTAR_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 1;
 }
  public TA_RetCode CDLDOJISTAR( int startIdx,
@@ -16573,15 +14295,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16589,22 +14304,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLDOJISTAR_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyDojiPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyDojiTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-1 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -16633,11 +14342,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyDojiTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLDOJISTAR( int startIdx,
@@ -16652,7 +14358,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16705,7 +14410,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLDRAGONFLYDOJI_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLDRAGONFLYDOJI( int startIdx,
@@ -16718,15 +14422,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16734,22 +14431,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLDRAGONFLYDOJI_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyDojiPeriodTotal = 0;
  BodyDojiTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = BodyDojiTrailingIdx;
  while( i < startIdx ) {
  BodyDojiPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -16777,11 +14468,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyDojiTrailingIdx++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLDRAGONFLYDOJI( int startIdx,
@@ -16796,7 +14484,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16848,7 +14535,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLENGULFING_Lookback( )
 {
-
  return 2;
 }
  public TA_RetCode CDLENGULFING( int startIdx,
@@ -16861,14 +14547,7 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  int i, outIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16876,17 +14555,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLENGULFING_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  i = startIdx;
  outIdx = 0;
  do
@@ -16904,11 +14578,8 @@ TA_RetCode INT_MACD( int startIdx,
  outInteger[outIdx++] = 0;
  i++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLENGULFING( int startIdx,
@@ -16922,7 +14593,6 @@ TA_RetCode INT_MACD( int startIdx,
  int outInteger[] )
  {
  int i, outIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16960,9 +14630,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLEVENINGDOJISTAR_Lookback( double optInPenetration )
 {
-
-  ;
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ))  +
  2;
 }
@@ -16977,15 +14644,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16997,24 +14657,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLEVENINGDOJISTAR_Lookback (optInPenetration);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyDojiPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyDojiTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -17053,11 +14707,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyDojiTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLEVENINGDOJISTAR( int startIdx,
@@ -17073,7 +14724,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17142,9 +14792,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLEVENINGSTAR_Lookback( double optInPenetration )
 {
-
-  ;
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 2;
 }
  public TA_RetCode CDLEVENINGSTAR( int startIdx,
@@ -17158,15 +14805,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyShortPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal2;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17178,23 +14818,17 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLEVENINGSTAR_Lookback (optInPenetration);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyShortPeriodTotal2 = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -17228,11 +14862,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLEVENINGSTAR( int startIdx,
@@ -17248,7 +14879,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyShortPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal2;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17311,7 +14941,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLGAPSIDESIDEWHITE_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ))  + 2;
 }
  public TA_RetCode CDLGAPSIDESIDEWHITE( int startIdx,
@@ -17324,15 +14953,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double NearPeriodTotal, EqualPeriodTotal;
  int i, outIdx, NearTrailingIdx, EqualTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17340,22 +14962,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLGAPSIDESIDEWHITE_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  NearPeriodTotal = 0;
  EqualPeriodTotal = 0;
  NearTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
-
  i = NearTrailingIdx;
  while( i < startIdx ) {
  NearPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -17392,11 +15008,8 @@ TA_RetCode INT_MACD( int startIdx,
  NearTrailingIdx++;
  EqualTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLGAPSIDESIDEWHITE( int startIdx,
@@ -17411,7 +15024,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double NearPeriodTotal, EqualPeriodTotal;
  int i, outIdx, NearTrailingIdx, EqualTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17472,7 +15084,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLGRAVESTONEDOJI_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLGRAVESTONEDOJI( int startIdx,
@@ -17485,15 +15096,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17501,22 +15105,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLGRAVESTONEDOJI_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyDojiPeriodTotal = 0;
  BodyDojiTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = BodyDojiTrailingIdx;
  while( i < startIdx ) {
  BodyDojiPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -17544,11 +15142,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyDojiTrailingIdx++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLGRAVESTONEDOJI( int startIdx,
@@ -17563,7 +15158,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17615,7 +15209,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLHAMMER_Lookback( )
 {
-
  return  ((( ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -17629,15 +15222,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal, NearPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx, NearTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17645,17 +15231,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLHAMMER_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
  ShadowLongPeriodTotal = 0;
@@ -17664,7 +15245,6 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
  NearPeriodTotal = 0;
  NearTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -17711,11 +15291,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx++;
  NearTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLHAMMER( int startIdx,
@@ -17730,7 +15307,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal, NearPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx, NearTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17805,7 +15381,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLHANGINGMAN_Lookback( )
 {
-
  return  ((( ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -17819,15 +15394,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal, NearPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx, NearTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17835,17 +15403,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLHANGINGMAN_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
  ShadowLongPeriodTotal = 0;
@@ -17854,7 +15417,6 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
  NearPeriodTotal = 0;
  NearTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -17901,11 +15463,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx++;
  NearTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLHANGINGMAN( int startIdx,
@@ -17920,7 +15479,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal, NearPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx, NearTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -17995,7 +15553,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLHARAMI_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 1;
 }
  public TA_RetCode CDLHARAMI( int startIdx,
@@ -18008,15 +15565,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18024,22 +15574,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLHARAMI_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-1 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -18068,11 +15612,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLHARAMI( int startIdx,
@@ -18087,7 +15628,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18140,7 +15680,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLHARAMICROSS_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 1;
 }
  public TA_RetCode CDLHARAMICROSS( int startIdx,
@@ -18153,15 +15692,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18169,22 +15701,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLHARAMICROSS_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyDojiPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyDojiTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-1 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -18213,11 +15739,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyDojiTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLHARAMICROSS( int startIdx,
@@ -18232,7 +15755,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18285,7 +15807,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLHIGHWAVE_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryLong.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLHIGHWAVE( int startIdx,
@@ -18298,15 +15819,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal, ShadowPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18314,22 +15828,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLHIGHWAVE_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
  ShadowPeriodTotal = 0;
  ShadowTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryLong.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -18355,11 +15863,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyTrailingIdx++;
  ShadowTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLHIGHWAVE( int startIdx,
@@ -18374,7 +15879,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal, ShadowPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18424,7 +15928,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLHOMINGPIGEON_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 1;
 }
  public TA_RetCode CDLHOMINGPIGEON( int startIdx,
@@ -18437,15 +15940,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18453,22 +15949,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLHOMINGPIGEON_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -18499,11 +15989,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLHOMINGPIGEON( int startIdx,
@@ -18518,7 +16005,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18573,7 +16059,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLIDENTICAL3CROWS_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ))  +
  2;
 }
@@ -18587,16 +16072,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []ShadowVeryShortPeriodTotal = new double[3]; ;
-  double []EqualPeriodTotal = new double[3]; ;
+  double []ShadowVeryShortPeriodTotal = new double[3] ;
+  double []EqualPeriodTotal = new double[3] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, EqualTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18604,17 +16082,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLIDENTICAL3CROWS_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowVeryShortPeriodTotal[2] = 0;
  ShadowVeryShortPeriodTotal[1] = 0;
  ShadowVeryShortPeriodTotal[0] = 0;
@@ -18623,7 +16096,6 @@ TA_RetCode INT_MACD( int startIdx,
  EqualPeriodTotal[1] = 0;
  EqualPeriodTotal[0] = 0;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
-
  i = ShadowVeryShortTrailingIdx;
  while( i < startIdx ) {
  ShadowVeryShortPeriodTotal[2] +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
@@ -18642,20 +16114,15 @@ TA_RetCode INT_MACD( int startIdx,
  do
  {
  if(  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == -1 &&
-
   ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
-
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
-
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inClose[i-2] > inClose[i-1] &&
  inClose[i-1] > inClose[i] &&
-
  inOpen[i-1] <= inClose[i-2] +  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i-1] >= inClose[i-2] -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i] >= inClose[i-1] -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
@@ -18672,11 +16139,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx++;
  EqualTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLIDENTICAL3CROWS( int startIdx,
@@ -18689,10 +16153,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []ShadowVeryShortPeriodTotal = new double[3]; ;
-  double []EqualPeriodTotal = new double[3]; ;
+  double []ShadowVeryShortPeriodTotal = new double[3] ;
+  double []EqualPeriodTotal = new double[3] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, EqualTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18732,20 +16195,15 @@ TA_RetCode INT_MACD( int startIdx,
  do
  {
  if(  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  == -1 &&
-
   ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
-
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
-
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inClose[i-2] > inClose[i-1] &&
  inClose[i-1] > inClose[i] &&
-
  inOpen[i-1] <= inClose[i-2] +  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i-1] >= inClose[i-2] -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
  inOpen[i] >= inClose[i-1] -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
@@ -18769,7 +16227,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLINNECK_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -18783,15 +16240,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double EqualPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, EqualTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18799,22 +16249,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLINNECK_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  EqualPeriodTotal = 0;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = EqualTrailingIdx;
  while( i < startIdx ) {
  EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -18846,11 +16290,8 @@ TA_RetCode INT_MACD( int startIdx,
  EqualTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLINNECK( int startIdx,
@@ -18865,7 +16306,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double EqualPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, EqualTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18921,7 +16361,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLINVERTEDHAMMER_Lookback( )
 {
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -18935,15 +16374,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -18951,24 +16383,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLINVERTEDHAMMER_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
  ShadowLongPeriodTotal = 0;
  ShadowLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ;
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -19005,11 +16431,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowLongTrailingIdx++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLINVERTEDHAMMER( int startIdx,
@@ -19024,7 +16447,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19087,7 +16509,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLKICKING_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -19101,16 +16522,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []ShadowVeryShortPeriodTotal = new double[2]; ;
-  double []BodyLongPeriodTotal = new double[2]; ;
+  double []ShadowVeryShortPeriodTotal = new double[2] ;
+  double []BodyLongPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19118,24 +16532,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLKICKING_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowVeryShortPeriodTotal[1] = 0;
  ShadowVeryShortPeriodTotal[0] = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
  BodyLongPeriodTotal[1] = 0;
  BodyLongPeriodTotal[0] = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = ShadowVeryShortTrailingIdx;
  while( i < startIdx ) {
  ShadowVeryShortPeriodTotal[1] +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -19153,15 +16561,12 @@ TA_RetCode INT_MACD( int startIdx,
  do
  {
  if(  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == - ( inClose[i] >= inOpen[i] ? 1 : -1 )  &&
-
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  (
  (  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&  ( inLow[i] > inHigh[i-1] )  )
  ||
@@ -19181,11 +16586,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLKICKING( int startIdx,
@@ -19198,10 +16600,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []ShadowVeryShortPeriodTotal = new double[2]; ;
-  double []BodyLongPeriodTotal = new double[2]; ;
+  double []ShadowVeryShortPeriodTotal = new double[2] ;
+  double []BodyLongPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19238,15 +16639,12 @@ TA_RetCode INT_MACD( int startIdx,
  do
  {
  if(  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == - ( inClose[i] >= inOpen[i] ? 1 : -1 )  &&
-
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  (
  (  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&  ( inLow[i] > inHigh[i-1] )  )
  ||
@@ -19273,7 +16671,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLKICKINGBYLENGTH_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -19287,16 +16684,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []ShadowVeryShortPeriodTotal = new double[2]; ;
-  double []BodyLongPeriodTotal = new double[2]; ;
+  double []ShadowVeryShortPeriodTotal = new double[2] ;
+  double []BodyLongPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19304,24 +16694,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLKICKINGBYLENGTH_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowVeryShortPeriodTotal[1] = 0;
  ShadowVeryShortPeriodTotal[0] = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
  BodyLongPeriodTotal[1] = 0;
  BodyLongPeriodTotal[0] = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = ShadowVeryShortTrailingIdx;
  while( i < startIdx ) {
  ShadowVeryShortPeriodTotal[1] +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -19339,15 +16723,12 @@ TA_RetCode INT_MACD( int startIdx,
  do
  {
  if(  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == - ( inClose[i] >= inOpen[i] ? 1 : -1 )  &&
-
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  (
  (  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&  ( inLow[i] > inHigh[i-1] )  )
  ||
@@ -19367,11 +16748,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLKICKINGBYLENGTH( int startIdx,
@@ -19384,10 +16762,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []ShadowVeryShortPeriodTotal = new double[2]; ;
-  double []BodyLongPeriodTotal = new double[2]; ;
+  double []ShadowVeryShortPeriodTotal = new double[2] ;
+  double []BodyLongPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, ShadowVeryShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19424,15 +16801,12 @@ TA_RetCode INT_MACD( int startIdx,
  do
  {
  if(  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == - ( inClose[i] >= inOpen[i] ? 1 : -1 )  &&
-
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  (
  (  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&  ( inLow[i] > inHigh[i-1] )  )
  ||
@@ -19459,7 +16833,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLLADDERBOTTOM_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  + 4;
 }
  public TA_RetCode CDLLADDERBOTTOM( int startIdx,
@@ -19472,15 +16845,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double ShadowVeryShortPeriodTotal;
  int i, outIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19488,20 +16854,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLLADDERBOTTOM_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = ShadowVeryShortTrailingIdx;
  while( i < startIdx ) {
  ShadowVeryShortPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -19529,11 +16889,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLLADDERBOTTOM( int startIdx,
@@ -19548,7 +16905,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double ShadowVeryShortPeriodTotal;
  int i, outIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19598,7 +16954,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLLONGLEGGEDDOJI_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLLONGLEGGEDDOJI( int startIdx,
@@ -19611,15 +16966,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, ShadowLongPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19627,22 +16975,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLLONGLEGGEDDOJI_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyDojiPeriodTotal = 0;
  BodyDojiTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
  ShadowLongPeriodTotal = 0;
  ShadowLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ;
-
  i = BodyDojiTrailingIdx;
  while( i < startIdx ) {
  BodyDojiPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -19671,11 +17013,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyDojiTrailingIdx++;
  ShadowLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLLONGLEGGEDDOJI( int startIdx,
@@ -19690,7 +17029,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, ShadowLongPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19743,7 +17081,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLLONGLINE_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLLONGLINE( int startIdx,
@@ -19756,15 +17093,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal, ShadowPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19772,22 +17102,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLLONGLINE_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  ShadowPeriodTotal = 0;
  ShadowTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -19813,11 +17137,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyTrailingIdx++;
  ShadowTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLLONGLINE( int startIdx,
@@ -19832,7 +17153,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal, ShadowPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19882,7 +17202,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLMARUBOZU_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLMARUBOZU( int startIdx,
@@ -19895,15 +17214,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -19911,22 +17223,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLMARUBOZU_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -19953,11 +17259,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLMARUBOZU( int startIdx,
@@ -19972,7 +17275,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20023,8 +17325,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLMATHOLD_Lookback( double optInPenetration )
 {
-
-  ;
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 4;
 }
  public TA_RetCode CDLMATHOLD( int startIdx,
@@ -20038,15 +17338,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []BodyPeriodTotal = new double[5]; ;
+  double []BodyPeriodTotal = new double[5] ;
  int i, outIdx, totIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20058,17 +17351,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLMATHOLD_Lookback (optInPenetration);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal[4] = 0;
  BodyPeriodTotal[3] = 0;
  BodyPeriodTotal[2] = 0;
@@ -20076,7 +17364,6 @@ TA_RetCode INT_MACD( int startIdx,
  BodyPeriodTotal[0] = 0;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = BodyShortTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal[3] +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) ) ;
@@ -20098,24 +17385,17 @@ TA_RetCode INT_MACD( int startIdx,
   ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  == 1 &&
   ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  == -1 &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == 1 &&
-
   ( (((inOpen[i-3]) < (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  > (((inOpen[i-4]) > (inClose[i-4])) ? (inOpen[i-4]) : (inClose[i-4]))  )  &&
-
   (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  < inClose[i-4] &&
   (((inOpen[i-1]) < (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  < inClose[i-4] &&
-
   (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  > inClose[i-4] -  ( Math.abs ( inClose[i-4] - inOpen[i-4] ) )  * optInPenetration &&
   (((inOpen[i-1]) < (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  > inClose[i-4] -  ( Math.abs ( inClose[i-4] - inOpen[i-4] ) )  * optInPenetration &&
-
   (((inClose[i-2]) > (inOpen[i-2])) ? (inClose[i-2]) : (inOpen[i-2]))  < inOpen[i-3] &&
   (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))  <  (((inClose[i-2]) > (inOpen[i-2])) ? (inClose[i-2]) : (inOpen[i-2]))  &&
-
  inOpen[i] > inClose[i-1] &&
-
  inClose[i] >  ((( (((inHigh[i-3]) > (inHigh[i-2])) ? (inHigh[i-3]) : (inHigh[i-2])) ) > (inHigh[i-1])) ? ( (((inHigh[i-3]) > (inHigh[i-2])) ? (inHigh[i-3]) : (inHigh[i-2])) ) : (inHigh[i-1])) 
  )
  outInteger[outIdx++] = 100;
@@ -20129,11 +17409,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyShortTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLMATHOLD( int startIdx,
@@ -20147,9 +17424,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []BodyPeriodTotal = new double[5]; ;
+  double []BodyPeriodTotal = new double[5] ;
  int i, outIdx, totIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20195,24 +17471,17 @@ TA_RetCode INT_MACD( int startIdx,
   ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[3] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  == 1 &&
   ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  == -1 &&
   ( inClose[i] >= inOpen[i] ? 1 : -1 )  == 1 &&
-
   ( (((inOpen[i-3]) < (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  > (((inOpen[i-4]) > (inClose[i-4])) ? (inOpen[i-4]) : (inClose[i-4]))  )  &&
-
   (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  < inClose[i-4] &&
   (((inOpen[i-1]) < (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  < inClose[i-4] &&
-
   (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  > inClose[i-4] -  ( Math.abs ( inClose[i-4] - inOpen[i-4] ) )  * optInPenetration &&
   (((inOpen[i-1]) < (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  > inClose[i-4] -  ( Math.abs ( inClose[i-4] - inOpen[i-4] ) )  * optInPenetration &&
-
   (((inClose[i-2]) > (inOpen[i-2])) ? (inClose[i-2]) : (inOpen[i-2]))  < inOpen[i-3] &&
   (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))  <  (((inClose[i-2]) > (inOpen[i-2])) ? (inClose[i-2]) : (inOpen[i-2]))  &&
-
  inOpen[i] > inClose[i-1] &&
-
  inClose[i] >  ((( (((inHigh[i-3]) > (inHigh[i-2])) ? (inHigh[i-3]) : (inHigh[i-2])) ) > (inHigh[i-1])) ? ( (((inHigh[i-3]) > (inHigh[i-2])) ? (inHigh[i-3]) : (inHigh[i-2])) ) : (inHigh[i-1])) 
  )
  outInteger[outIdx++] = 100;
@@ -20233,7 +17502,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLMATCHINGLOW_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  + 1;
 }
  public TA_RetCode CDLMATCHINGLOW( int startIdx,
@@ -20246,15 +17514,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double EqualPeriodTotal;
  int i, outIdx, EqualTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20262,20 +17523,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLMATCHINGLOW_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  EqualPeriodTotal = 0;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
-
  i = EqualTrailingIdx;
  while( i < startIdx ) {
  EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -20297,11 +17552,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  EqualTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLMATCHINGLOW( int startIdx,
@@ -20316,7 +17568,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double EqualPeriodTotal;
  int i, outIdx, EqualTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20360,8 +17611,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLMORNINGDOJISTAR_Lookback( double optInPenetration )
 {
-
-  ;
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ))  +
  2;
 }
@@ -20376,15 +17625,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20396,24 +17638,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLMORNINGDOJISTAR_Lookback (optInPenetration);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyDojiPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyDojiTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -20452,11 +17688,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyDojiTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLMORNINGDOJISTAR( int startIdx,
@@ -20472,7 +17705,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20541,8 +17773,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLMORNINGSTAR_Lookback( double optInPenetration )
 {
-
-  ;
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 2;
 }
  public TA_RetCode CDLMORNINGSTAR( int startIdx,
@@ -20556,15 +17786,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyShortPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal2;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20576,23 +17799,17 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLMORNINGSTAR_Lookback (optInPenetration);
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyShortPeriodTotal2 = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -20626,11 +17843,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLMORNINGSTAR( int startIdx,
@@ -20646,7 +17860,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyShortPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal2;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20709,7 +17922,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLONNECK_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -20723,15 +17935,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double EqualPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, EqualTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20739,22 +17944,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLONNECK_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  EqualPeriodTotal = 0;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = EqualTrailingIdx;
  while( i < startIdx ) {
  EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -20786,11 +17985,8 @@ TA_RetCode INT_MACD( int startIdx,
  EqualTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLONNECK( int startIdx,
@@ -20805,7 +18001,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double EqualPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, EqualTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20861,7 +18056,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLPIERCING_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  + 1;
 }
  public TA_RetCode CDLPIERCING( int startIdx,
@@ -20874,15 +18068,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []BodyLongPeriodTotal = new double[2]; ;
+  double []BodyLongPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -20890,21 +18077,15 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLPIERCING_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal[1] = 0;
  BodyLongPeriodTotal[0] = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal[1] +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -20932,11 +18113,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLPIERCING( int startIdx,
@@ -20949,9 +18127,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []BodyLongPeriodTotal = new double[2]; ;
+  double []BodyLongPeriodTotal = new double[2] ;
  int i, outIdx, totIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21002,7 +18179,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLRICKSHAWMAN_Lookback( )
 {
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLRICKSHAWMAN( int startIdx,
@@ -21015,15 +18191,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, ShadowLongPeriodTotal, NearPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowLongTrailingIdx, NearTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21031,24 +18200,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLRICKSHAWMAN_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyDojiPeriodTotal = 0;
  BodyDojiTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
  ShadowLongPeriodTotal = 0;
  ShadowLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ;
  NearPeriodTotal = 0;
  NearTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
-
  i = BodyDojiTrailingIdx;
  while( i < startIdx ) {
  BodyDojiPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -21089,11 +18252,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowLongTrailingIdx++;
  NearTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLRICKSHAWMAN( int startIdx,
@@ -21108,7 +18268,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, ShadowLongPeriodTotal, NearPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowLongTrailingIdx, NearTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21175,7 +18334,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLRISEFALL3METHODS_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 4;
 }
  public TA_RetCode CDLRISEFALL3METHODS( int startIdx,
@@ -21188,15 +18346,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []BodyPeriodTotal = new double[5]; ;
+  double []BodyPeriodTotal = new double[5] ;
  int i, outIdx, totIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21204,17 +18355,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLRISEFALL3METHODS_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal[4] = 0;
  BodyPeriodTotal[3] = 0;
  BodyPeriodTotal[2] = 0;
@@ -21222,7 +18368,6 @@ TA_RetCode INT_MACD( int startIdx,
  BodyPeriodTotal[0] = 0;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = BodyShortTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal[3] +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-3] - inOpen[i-3] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-3] - inLow[i-3] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-3] - ( inClose[i-3] >= inOpen[i-3] ? inClose[i-3] : inOpen[i-3] ) )  + ( ( inClose[i-3] >= inOpen[i-3] ? inOpen[i-3] : inClose[i-3] ) - inLow[i-3] )  : 0 ) ) ) ;
@@ -21246,21 +18391,16 @@ TA_RetCode INT_MACD( int startIdx,
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  == - ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  &&
   ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  ==  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  &&
   ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  ==  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  &&
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == - ( inClose[i] >= inOpen[i] ? 1 : -1 )  &&
-
   (((inOpen[i-3]) < (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  < inHigh[i-4] &&  (((inOpen[i-3]) > (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  > inLow[i-4] &&
   (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  < inHigh[i-4] &&  (((inOpen[i-2]) > (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  > inLow[i-4] &&
   (((inOpen[i-1]) < (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  < inHigh[i-4] &&  (((inOpen[i-1]) > (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  > inLow[i-4] &&
-
  inClose[i-2] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  < inClose[i-3] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  &&
  inClose[i-1] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  < inClose[i-2] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  &&
-
  inOpen[i] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  > inClose[i-1] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  &&
-
  inClose[i] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  > inClose[i-4] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 ) 
  )
  outInteger[outIdx++] = 100 *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 ) ;
@@ -21275,11 +18415,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyShortTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLRISEFALL3METHODS( int startIdx,
@@ -21292,9 +18429,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []BodyPeriodTotal = new double[5]; ;
+  double []BodyPeriodTotal = new double[5] ;
  int i, outIdx, totIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21338,21 +18474,16 @@ TA_RetCode INT_MACD( int startIdx,
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i] - inOpen[i] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyPeriodTotal[0] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  == - ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  &&
   ( inClose[i-3] >= inOpen[i-3] ? 1 : -1 )  ==  ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  &&
   ( inClose[i-2] >= inOpen[i-2] ? 1 : -1 )  ==  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  &&
   ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == - ( inClose[i] >= inOpen[i] ? 1 : -1 )  &&
-
   (((inOpen[i-3]) < (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  < inHigh[i-4] &&  (((inOpen[i-3]) > (inClose[i-3])) ? (inOpen[i-3]) : (inClose[i-3]))  > inLow[i-4] &&
   (((inOpen[i-2]) < (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  < inHigh[i-4] &&  (((inOpen[i-2]) > (inClose[i-2])) ? (inOpen[i-2]) : (inClose[i-2]))  > inLow[i-4] &&
   (((inOpen[i-1]) < (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  < inHigh[i-4] &&  (((inOpen[i-1]) > (inClose[i-1])) ? (inOpen[i-1]) : (inClose[i-1]))  > inLow[i-4] &&
-
  inClose[i-2] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  < inClose[i-3] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  &&
  inClose[i-1] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  < inClose[i-2] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  &&
-
  inOpen[i] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  > inClose[i-1] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  &&
-
  inClose[i] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 )  > inClose[i-4] *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 ) 
  )
  outInteger[outIdx++] = 100 *  ( inClose[i-4] >= inOpen[i-4] ? 1 : -1 ) ;
@@ -21374,7 +18505,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLSEPARATINGLINES_Lookback( )
 {
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -21388,15 +18518,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double ShadowVeryShortPeriodTotal, BodyLongPeriodTotal, EqualPeriodTotal;
  int i, outIdx, ShadowVeryShortTrailingIdx, BodyLongTrailingIdx, EqualTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21404,24 +18527,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLSEPARATINGLINES_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  EqualPeriodTotal = 0;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
-
  i = ShadowVeryShortTrailingIdx;
  while( i < startIdx ) {
  ShadowVeryShortPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -21467,11 +18584,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  EqualTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLSEPARATINGLINES( int startIdx,
@@ -21486,7 +18600,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double ShadowVeryShortPeriodTotal, BodyLongPeriodTotal, EqualPeriodTotal;
  int i, outIdx, ShadowVeryShortTrailingIdx, BodyLongTrailingIdx, EqualTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21558,7 +18671,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLSHOOTINGSTAR_Lookback( )
 {
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -21572,15 +18684,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21588,24 +18693,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLSHOOTINGSTAR_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
  ShadowLongPeriodTotal = 0;
  ShadowLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowLong.ordinal()].avgPeriod) ;
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -21642,11 +18741,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowLongTrailingIdx++;
  ShadowVeryShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLSHOOTINGSTAR( int startIdx,
@@ -21661,7 +18757,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowLongTrailingIdx, ShadowVeryShortTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21724,7 +18819,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLSHORTLINE_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLSHORTLINE( int startIdx,
@@ -21737,15 +18831,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal, ShadowPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21753,22 +18840,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLSHORTLINE_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
  ShadowPeriodTotal = 0;
  ShadowTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowShort.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -21794,11 +18875,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyTrailingIdx++;
  ShadowTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLSHORTLINE( int startIdx,
@@ -21813,7 +18891,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal, ShadowPeriodTotal;
  int i, outIdx, BodyTrailingIdx, ShadowTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21863,7 +18940,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLSPINNINGTOP_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
 }
  public TA_RetCode CDLSPINNINGTOP( int startIdx,
@@ -21876,15 +18952,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal;
  int i, outIdx, BodyTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21892,20 +18961,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLSPINNINGTOP_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -21925,11 +18988,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  BodyTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLSPINNINGTOP( int startIdx,
@@ -21944,7 +19004,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal;
  int i, outIdx, BodyTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -21986,7 +19045,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLSTALLEDPATTERN_Lookback( )
 {
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ) > ( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ) : ( ((( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ))  +
  2;
 }
@@ -22000,18 +19058,11 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
-  double []BodyLongPeriodTotal = new double[3]; ;
-  double []NearPeriodTotal = new double[3]; ;
+  double []BodyLongPeriodTotal = new double[3] ;
+  double []NearPeriodTotal = new double[3] ;
  double BodyShortPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, totIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, ShadowVeryShortTrailingIdx, NearTrailingIdx,
  lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22019,17 +19070,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLSTALLEDPATTERN_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal[2] = 0;
  BodyLongPeriodTotal[1] = 0;
  BodyLongPeriodTotal[0] = 0;
@@ -22042,7 +19088,6 @@ TA_RetCode INT_MACD( int startIdx,
  NearPeriodTotal[1] = 0;
  NearPeriodTotal[0] = 0;
  NearTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx ) {
  BodyLongPeriodTotal[2] +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
@@ -22075,13 +19120,10 @@ TA_RetCode INT_MACD( int startIdx,
  inClose[i] > inClose[i-1] && inClose[i-1] > inClose[i-2] &&
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i-1] > inOpen[i-2] &&
  inOpen[i-1] <= inClose[i-2] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyShortPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i] >= inClose[i-1] -  ( Math.abs ( inClose[i] - inOpen[i] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
  outInteger[outIdx++] = -100;
@@ -22102,11 +19144,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx++;
  NearTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLSTALLEDPATTERN( int startIdx,
@@ -22119,12 +19158,11 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
-  double []BodyLongPeriodTotal = new double[3]; ;
-  double []NearPeriodTotal = new double[3]; ;
+  double []BodyLongPeriodTotal = new double[3] ;
+  double []NearPeriodTotal = new double[3] ;
  double BodyShortPeriodTotal, ShadowVeryShortPeriodTotal;
  int i, outIdx, totIdx, BodyLongTrailingIdx, BodyShortTrailingIdx, ShadowVeryShortTrailingIdx, NearTrailingIdx,
  lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22182,13 +19220,10 @@ TA_RetCode INT_MACD( int startIdx,
  inClose[i] > inClose[i-1] && inClose[i-1] > inClose[i-2] &&
   ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  >  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  != 0.0? BodyLongPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
   ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  != 0.0? ShadowVeryShortPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i-1] > inOpen[i-2] &&
  inOpen[i-1] <= inClose[i-2] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[2] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
   ( Math.abs ( inClose[i] - inOpen[i] ) )  <  ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  != 0.0? BodyShortPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-
  inOpen[i] >= inClose[i-1] -  ( Math.abs ( inClose[i] - inOpen[i] ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal[1] / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
  outInteger[outIdx++] = -100;
@@ -22216,7 +19251,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLSTICKSANDWICH_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  + 2;
 }
  public TA_RetCode CDLSTICKSANDWICH( int startIdx,
@@ -22229,15 +19263,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double EqualPeriodTotal;
  int i, outIdx, EqualTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22245,20 +19272,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLSTICKSANDWICH_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  EqualPeriodTotal = 0;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
-
  i = EqualTrailingIdx;
  while( i < startIdx ) {
  EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
@@ -22282,11 +19303,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  EqualTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLSTICKSANDWICH( int startIdx,
@@ -22301,7 +19319,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double EqualPeriodTotal;
  int i, outIdx, EqualTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22347,7 +19364,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLTAKURI_Lookback( )
 {
-
  return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryLong.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryLong.ordinal()].avgPeriod) )) ;
 }
  public TA_RetCode CDLTAKURI( int startIdx,
@@ -22360,15 +19376,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal, ShadowVeryLongPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowVeryShortTrailingIdx, ShadowVeryLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22376,24 +19385,18 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLTAKURI_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyDojiPeriodTotal = 0;
  BodyDojiTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
  ShadowVeryShortPeriodTotal = 0;
  ShadowVeryShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryShort.ordinal()].avgPeriod) ;
  ShadowVeryLongPeriodTotal = 0;
  ShadowVeryLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_ShadowVeryLong.ordinal()].avgPeriod) ;
-
  i = BodyDojiTrailingIdx;
  while( i < startIdx ) {
  BodyDojiPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -22429,11 +19432,8 @@ TA_RetCode INT_MACD( int startIdx,
  ShadowVeryShortTrailingIdx++;
  ShadowVeryLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLTAKURI( int startIdx,
@@ -22448,7 +19448,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal, ShadowVeryLongPeriodTotal;
  int i, outIdx, BodyDojiTrailingIdx, ShadowVeryShortTrailingIdx, ShadowVeryLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22510,7 +19509,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLTASUKIGAP_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  + 2;
 }
  public TA_RetCode CDLTASUKIGAP( int startIdx,
@@ -22523,15 +19521,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double NearPeriodTotal;
  int i, outIdx, NearTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22539,20 +19530,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLTASUKIGAP_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  NearPeriodTotal = 0;
  NearTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
-
  i = NearTrailingIdx;
  while( i < startIdx ) {
  NearPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -22570,7 +19555,6 @@ TA_RetCode INT_MACD( int startIdx,
  inOpen[i] < inClose[i-1] && inOpen[i] > inOpen[i-1] &&
  inClose[i] < inOpen[i-1] &&
  inClose[i] >  (((inClose[i-2]) > (inOpen[i-2])) ? (inClose[i-2]) : (inOpen[i-2]))  &&
-
   Math.abs ( ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  -  ( Math.abs ( inClose[i] - inOpen[i] ) ) ) <  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  ) ||
  (
@@ -22580,7 +19564,6 @@ TA_RetCode INT_MACD( int startIdx,
  inOpen[i] < inOpen[i-1] && inOpen[i] > inClose[i-1] &&
  inClose[i] > inOpen[i-1] &&
  inClose[i] <  (((inClose[i-2]) < (inOpen[i-2])) ? (inClose[i-2]) : (inOpen[i-2]))  &&
-
   Math.abs ( ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  -  ( Math.abs ( inClose[i] - inOpen[i] ) ) ) <  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
  )
@@ -22591,11 +19574,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  NearTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLTASUKIGAP( int startIdx,
@@ -22610,7 +19590,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double NearPeriodTotal;
  int i, outIdx, NearTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22643,7 +19622,6 @@ TA_RetCode INT_MACD( int startIdx,
  inOpen[i] < inClose[i-1] && inOpen[i] > inOpen[i-1] &&
  inClose[i] < inOpen[i-1] &&
  inClose[i] >  (((inClose[i-2]) > (inOpen[i-2])) ? (inClose[i-2]) : (inOpen[i-2]))  &&
-
   Math.abs ( ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  -  ( Math.abs ( inClose[i] - inOpen[i] ) ) ) <  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  ) ||
  (
@@ -22653,7 +19631,6 @@ TA_RetCode INT_MACD( int startIdx,
  inOpen[i] < inOpen[i-1] && inOpen[i] > inClose[i-1] &&
  inClose[i] > inOpen[i-1] &&
  inClose[i] <  (((inClose[i-2]) < (inOpen[i-2])) ? (inClose[i-2]) : (inOpen[i-2]))  &&
-
   Math.abs ( ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  -  ( Math.abs ( inClose[i] - inOpen[i] ) ) ) <  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
  )
  )
@@ -22671,7 +19648,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLTHRUSTING_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  +
  1;
 }
@@ -22685,15 +19661,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double EqualPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, EqualTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22701,22 +19670,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLTHRUSTING_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  EqualPeriodTotal = 0;
  EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
  BodyLongPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
-
  i = EqualTrailingIdx;
  while( i < startIdx ) {
  EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
@@ -22748,11 +19711,8 @@ TA_RetCode INT_MACD( int startIdx,
  EqualTrailingIdx++;
  BodyLongTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLTHRUSTING( int startIdx,
@@ -22767,7 +19727,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double EqualPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, EqualTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22823,7 +19782,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLTRISTAR_Lookback( )
 {
-
  return  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod)  + 2;
 }
  public TA_RetCode CDLTRISTAR( int startIdx,
@@ -22836,15 +19794,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyPeriodTotal;
  int i, outIdx, BodyTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22852,20 +19803,14 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLTRISTAR_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyPeriodTotal = 0;
  BodyTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ;
-
  i = BodyTrailingIdx;
  while( i < startIdx-2 ) {
  BodyPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -22897,11 +19842,8 @@ TA_RetCode INT_MACD( int startIdx,
  i++;
  BodyTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLTRISTAR( int startIdx,
@@ -22916,7 +19858,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyPeriodTotal;
  int i, outIdx, BodyTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22970,7 +19911,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLUNIQUE3RIVER_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 2;
 }
  public TA_RetCode CDLUNIQUE3RIVER( int startIdx,
@@ -22983,15 +19923,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -22999,22 +19932,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLUNIQUE3RIVER_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -23047,11 +19974,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLUNIQUE3RIVER( int startIdx,
@@ -23066,7 +19990,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23123,7 +20046,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLUPSIDEGAP2CROWS_Lookback( )
 {
-
  return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 2;
 }
  public TA_RetCode CDLUPSIDEGAP2CROWS( int startIdx,
@@ -23136,15 +20058,8 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23152,22 +20067,16 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLUPSIDEGAP2CROWS_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  BodyLongPeriodTotal = 0;
  BodyShortPeriodTotal = 0;
  BodyLongTrailingIdx = startIdx -2 -  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ;
  BodyShortTrailingIdx = startIdx -1 -  (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ;
-
  i = BodyLongTrailingIdx;
  while( i < startIdx-2 ) {
  BodyLongPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i] - inLow[i] )  : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) )  + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] )  : 0 ) ) ) ;
@@ -23200,11 +20109,8 @@ TA_RetCode INT_MACD( int startIdx,
  BodyLongTrailingIdx++;
  BodyShortTrailingIdx++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLUPSIDEGAP2CROWS( int startIdx,
@@ -23219,7 +20125,6 @@ TA_RetCode INT_MACD( int startIdx,
  {
  double BodyShortPeriodTotal, BodyLongPeriodTotal;
  int i, outIdx, BodyShortTrailingIdx, BodyLongTrailingIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23276,7 +20181,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLXSIDEGAP3METHODS_Lookback( )
 {
-
  return 2;
 }
  public TA_RetCode CDLXSIDEGAP3METHODS( int startIdx,
@@ -23289,14 +20193,7 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
-
  int i, outIdx, lookbackTotal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23304,17 +20201,12 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal =  CDLXSIDEGAP3METHODS_Lookback ();
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  i = startIdx;
  outIdx = 0;
  do
@@ -23340,11 +20232,8 @@ TA_RetCode INT_MACD( int startIdx,
  outInteger[outIdx++] = 0;
  i++;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CDLXSIDEGAP3METHODS( int startIdx,
@@ -23358,7 +20247,6 @@ TA_RetCode INT_MACD( int startIdx,
  int outInteger[] )
  {
  int i, outIdx, lookbackTotal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23404,7 +20292,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CORREL_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod-1;
 }
  public TA_RetCode CORREL( int startIdx,
@@ -23416,16 +20303,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  double sumXY, sumX, sumY, sumX2, sumY2, x, y, trailingX, trailingY;
  double tempReal;
  int lookbackTotal, today, trailingIdx, outIdx;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23437,26 +20317,20 @@ TA_RetCode INT_MACD( int startIdx,
  lookbackTotal = optInTimePeriod-1;
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
   outBegIdx.value  = startIdx;
  trailingIdx = startIdx - lookbackTotal;
-
-
  sumXY = sumX = sumY = sumX2 = sumY2 = 0.0;
  for( today=trailingIdx; today <= startIdx; today++ )
  {
  x = inReal0[today];
  sumX += x;
  sumX2 += x*x;
-
  y = inReal1[today];
  sumXY += x*y;
  sumY += y;
@@ -23469,24 +20343,17 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[0] = (sumXY-((sumX*sumY)/optInTimePeriod)) /  Math.sqrt (tempReal);
  else
  outReal[0] = 0.0;
-
-
  outIdx = 1;
  while( today <= endIdx )
  {
-
  sumX -= trailingX;
  sumX2 -= trailingX*trailingX;
-
  sumXY -= trailingX*trailingY;
  sumY -= trailingY;
  sumY2 -= trailingY*trailingY;
-
-
  x = inReal0[today];
  sumX += x;
  sumX2 += x*x;
-
  y = inReal1[today++];
  sumXY += x*y;
  sumY += y;
@@ -23499,9 +20366,7 @@ TA_RetCode INT_MACD( int startIdx,
  else
  outReal[outIdx++] = 0.0;
  }
-
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode CORREL( int startIdx,
@@ -23516,7 +20381,6 @@ TA_RetCode INT_MACD( int startIdx,
  double sumXY, sumX, sumY, sumX2, sumY2, x, y, trailingX, trailingY;
  double tempReal;
  int lookbackTotal, today, trailingIdx, outIdx;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23583,7 +20447,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int LINEARREG_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod-1;
 }
  public TA_RetCode LINEARREG( int startIdx,
@@ -23594,22 +20457,12 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx;
-
  int today, lookbackTotal;
  double SumX, SumXY, SumY, SumXSqr, Divisor;
-
  double m, b;
  int i;
-
  double tempValue1;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23619,25 +20472,19 @@ TA_RetCode INT_MACD( int startIdx,
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
  lookbackTotal =  LINEARREG_Lookback ( optInTimePeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
  outIdx = 0;
  today = startIdx;
-
  SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
  SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
  Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
-
  while( today <= endIdx )
  {
  SumXY = 0;
@@ -23652,10 +20499,8 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = b + m * (double)(optInTimePeriod-1);
  today++;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode LINEARREG( int startIdx,
@@ -23672,7 +20517,6 @@ TA_RetCode INT_MACD( int startIdx,
  double m, b;
  int i;
  double tempValue1;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23716,7 +20560,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int LINEARREG_SLOPE_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod-1;
 }
  public TA_RetCode LINEARREG_SLOPE( int startIdx,
@@ -23727,21 +20570,11 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx;
-
  int today, lookbackTotal;
  double SumX, SumXY, SumY, SumXSqr, Divisor;
-
  int i;
-
  double tempValue1;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23751,25 +20584,19 @@ TA_RetCode INT_MACD( int startIdx,
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
  lookbackTotal =  LINEARREG_SLOPE_Lookback ( optInTimePeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
  outIdx = 0;
  today = startIdx;
-
  SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
  SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
  Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
-
  while( today <= endIdx )
  {
  SumXY = 0;
@@ -23782,10 +20609,8 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = ( optInTimePeriod * SumXY - SumX * SumY) / Divisor;
  today++;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode LINEARREG_SLOPE( int startIdx,
@@ -23801,7 +20626,6 @@ TA_RetCode INT_MACD( int startIdx,
  double SumX, SumXY, SumY, SumXSqr, Divisor;
  int i;
  double tempValue1;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23843,7 +20667,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int LINEARREG_ANGLE_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod-1;
 }
  public TA_RetCode LINEARREG_ANGLE( int startIdx,
@@ -23854,23 +20677,12 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx;
-
  int today, lookbackTotal;
  double SumX, SumXY, SumY, SumXSqr, Divisor;
-
  double m;
-
  int i;
-
  double tempValue1;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23880,25 +20692,19 @@ TA_RetCode INT_MACD( int startIdx,
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
  lookbackTotal =  LINEARREG_ANGLE_Lookback ( optInTimePeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
  outIdx = 0;
  today = startIdx;
-
  SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
  SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
  Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
-
  while( today <= endIdx )
  {
  SumXY = 0;
@@ -23912,10 +20718,8 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = m * ( 180.0 /  3.14159265358979323846  );
  today++;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode LINEARREG_ANGLE( int startIdx,
@@ -23932,7 +20736,6 @@ TA_RetCode INT_MACD( int startIdx,
  double m;
  int i;
  double tempValue1;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -23975,7 +20778,6 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int LINEARREG_INTERCEPT_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod-1;
 }
  public TA_RetCode LINEARREG_INTERCEPT( int startIdx,
@@ -23986,22 +20788,12 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx;
-
  int today, lookbackTotal;
  double SumX, SumXY, SumY, SumXSqr, Divisor;
-
  double m;
  int i;
-
  double tempValue1;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24011,25 +20803,19 @@ TA_RetCode INT_MACD( int startIdx,
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
  lookbackTotal =  LINEARREG_INTERCEPT_Lookback ( optInTimePeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
  outIdx = 0;
  today = startIdx;
-
  SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
  SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
  Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
-
  while( today <= endIdx )
  {
  SumXY = 0;
@@ -24043,10 +20829,8 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[outIdx++] = ( SumY - m * SumX ) / (double)optInTimePeriod;
  today++;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode LINEARREG_INTERCEPT( int startIdx,
@@ -24063,7 +20847,6 @@ TA_RetCode INT_MACD( int startIdx,
  double m;
  int i;
  double tempValue1;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24107,9 +20890,6 @@ TA_RetCode INT_MACD( int startIdx,
  public int STDDEV_Lookback( int optInTimePeriod,
  double optInNbDev )
 {
-
-
-
  return  VAR_Lookback ( optInTimePeriod, optInNbDev );
 }
  public TA_RetCode STDDEV( int startIdx,
@@ -24121,16 +20901,9 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int i;
  TA_RetCode retCode;
  double tempReal;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24139,7 +20912,6 @@ TA_RetCode INT_MACD( int startIdx,
  optInTimePeriod = 5;
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInNbDev ==  (-4e+37)  )
  optInNbDev = 1.000000e+0;
  else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
@@ -24147,7 +20919,6 @@ TA_RetCode INT_MACD( int startIdx,
  retCode =  INT_VAR ( startIdx, endIdx,
  inReal, optInTimePeriod,
  outBegIdx, outNbElement, outReal );
-
  if( retCode !=  TA_RetCode. TA_SUCCESS )
  return retCode;
  if( optInNbDev != 1.0 )
@@ -24172,7 +20943,6 @@ TA_RetCode INT_MACD( int startIdx,
  outReal[i] = (double)0.0;
  }
  }
-
  return  TA_RetCode. TA_SUCCESS;
 }
 void INT_stddev_using_precalc_ma(  double  inReal[],
@@ -24184,37 +20954,28 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
 {
  double tempReal, periodTotal2, meanValue2;
  int outIdx;
-
-
  int startSum, endSum;
-
  startSum = 1+inMovAvgBegIdx-timePeriod;
  endSum = inMovAvgBegIdx;
-
  periodTotal2 = 0;
-
  for( outIdx = startSum; outIdx < endSum; outIdx++)
  {
  tempReal = inReal[outIdx];
  tempReal *= tempReal;
  periodTotal2 += tempReal;
  }
-
  for( outIdx=0; outIdx < inMovAvgNbElement; outIdx++, startSum++, endSum++ )
  {
  tempReal = inReal[endSum];
  tempReal *= tempReal;
  periodTotal2 += tempReal;
  meanValue2 = periodTotal2/timePeriod;
-
  tempReal = inReal[startSum];
  tempReal *= tempReal;
  periodTotal2 -= tempReal;
-
  tempReal = inMovAvg[outIdx];
  tempReal *= tempReal;
  meanValue2 -= tempReal;
-
  if( ! (meanValue2<0.00000001)  )
  output[outIdx] =  Math.sqrt (meanValue2);
  else
@@ -24233,7 +20994,6 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  int i;
  TA_RetCode retCode;
  double tempReal;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24275,14 +21035,6 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  }
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
-
-
-
-
-
  void INT_stddev_using_precalc_ma(  float  inReal[],
  double inMovAvg[],
  int inMovAvgBegIdx,
@@ -24323,7 +21075,6 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
 /* Generated */ 
  public int TSF_Lookback( int optInTimePeriod )
 {
-
  return optInTimePeriod-1;
 }
  public TA_RetCode TSF( int startIdx,
@@ -24334,22 +21085,12 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx;
-
  int today, lookbackTotal;
  double SumX, SumXY, SumY, SumXSqr, Divisor;
-
  double m, b;
  int i;
-
  double tempValue1;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24359,25 +21100,19 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
  lookbackTotal =  TSF_Lookback ( optInTimePeriod );
-
  if( startIdx < lookbackTotal )
  startIdx = lookbackTotal;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
  outIdx = 0;
  today = startIdx;
-
  SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
  SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
  Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
-
  while( today <= endIdx )
  {
  SumXY = 0;
@@ -24392,10 +21127,8 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  outReal[outIdx++] = b + m * (double)optInTimePeriod;
  today++;
  }
-
   outBegIdx.value  = startIdx;
   outNbElement.value  = outIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode TSF( int startIdx,
@@ -24412,7 +21145,6 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  double m, b;
  int i;
  double tempValue1;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24457,9 +21189,6 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  public int VAR_Lookback( int optInTimePeriod,
  double optInNbDev )
 {
-
-  ;
-
  return optInTimePeriod-1;
 }
  public TA_RetCode VAR( int startIdx,
@@ -24471,13 +21200,6 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  MInteger outNbElement,
  double outReal[] )
 {
-
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24486,7 +21208,6 @@ void INT_stddev_using_precalc_ma(  double  inReal[],
  optInTimePeriod = 5;
  else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
  return  TA_RetCode. TA_BAD_PARAM;
-
  if( optInNbDev ==  (-4e+37)  )
  optInNbDev = 1.000000e+0;
  else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
@@ -24508,21 +21229,15 @@ public TA_RetCode INT_VAR( int startIdx,
  nbInitialElementNeeded = (optInTimePeriod-1);
  if( startIdx < nbInitialElementNeeded )
  startIdx = nbInitialElementNeeded;
-
-
  if( startIdx > endIdx )
  {
   outBegIdx.value = 0 ;
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
-
-
-
  periodTotal1 = 0;
  periodTotal2 = 0;
  trailingIdx = startIdx-nbInitialElementNeeded;
-
  i=trailingIdx;
  if( optInTimePeriod > 1 )
  {
@@ -24542,19 +21257,14 @@ public TA_RetCode INT_VAR( int startIdx,
  periodTotal2 += tempReal;
  meanValue1 = periodTotal1 / optInTimePeriod;
  meanValue2 = periodTotal2 / optInTimePeriod;
-
  tempReal = inReal[trailingIdx++];
  periodTotal1 -= tempReal;
  tempReal *= tempReal;
  periodTotal2 -= tempReal;
-
  outReal[outIdx++] = meanValue2-meanValue1*meanValue1;
  } while( i <= endIdx );
-
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode VAR( int startIdx,
@@ -24566,7 +21276,6 @@ public TA_RetCode INT_VAR( int startIdx,
  MInteger outNbElement,
  double outReal[] )
  {
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24583,15 +21292,6 @@ public TA_RetCode INT_VAR( int startIdx,
  optInTimePeriod,
  outBegIdx, outNbElement, outReal );
  }
-
-
-
-
-
-
-
-
-
  public TA_RetCode INT_VAR( int startIdx,
  int endIdx,
   float  inReal[],
@@ -24646,9 +21346,6 @@ public TA_RetCode INT_VAR( int startIdx,
 /* Generated */ 
  public int AVGPRICE_Lookback( )
 {
-
-
-
  return 0;
 }
  public TA_RetCode AVGPRICE( int startIdx,
@@ -24661,20 +21358,12 @@ public TA_RetCode INT_VAR( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
  outIdx = 0;
-
  for( i=startIdx; i <= endIdx; i++ )
  {
  outReal[outIdx++] = ( inHigh [i] +
@@ -24682,10 +21371,8 @@ public TA_RetCode INT_VAR( int startIdx,
  inClose[i] +
  inOpen [i]) / 4;
  }
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode AVGPRICE( int startIdx,
@@ -24699,7 +21386,6 @@ public TA_RetCode INT_VAR( int startIdx,
  double outReal[] )
  {
  int outIdx, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24719,9 +21405,6 @@ public TA_RetCode INT_VAR( int startIdx,
 /* Generated */ 
  public int MEDPRICE_Lookback( )
 {
-
-
-
  return 0;
 }
  public TA_RetCode MEDPRICE( int startIdx,
@@ -24732,28 +21415,18 @@ public TA_RetCode INT_VAR( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
  outIdx = 0;
-
  for( i=startIdx; i <= endIdx; i++ )
  {
  outReal[outIdx++] = (inHigh[i]+inLow[i])/2.0;
  }
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode MEDPRICE( int startIdx,
@@ -24765,7 +21438,6 @@ public TA_RetCode INT_VAR( int startIdx,
  double outReal[] )
  {
  int outIdx, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24782,10 +21454,6 @@ public TA_RetCode INT_VAR( int startIdx,
 /* Generated */ 
  public int TYPPRICE_Lookback( )
 {
-
-
-
-
  return 0;
 }
  public TA_RetCode TYPPRICE( int startIdx,
@@ -24797,30 +21465,20 @@ public TA_RetCode INT_VAR( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
  outIdx = 0;
-
  for( i= startIdx; i <= endIdx; i++ )
  {
  outReal[outIdx++] = ( inHigh [i] +
  inLow [i] +
  inClose[i] ) / 3.0;
  }
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode TYPPRICE( int startIdx,
@@ -24833,7 +21491,6 @@ public TA_RetCode INT_VAR( int startIdx,
  double outReal[] )
  {
  int outIdx, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24852,9 +21509,6 @@ public TA_RetCode INT_VAR( int startIdx,
 /* Generated */ 
  public int WCLPRICE_Lookback( )
 {
-
-
-
  return 0;
 }
  public TA_RetCode WCLPRICE( int startIdx,
@@ -24866,30 +21520,20 @@ public TA_RetCode INT_VAR( int startIdx,
  MInteger outNbElement,
  double outReal[] )
 {
-
  int outIdx, i;
-
-
-
-
-
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
  return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
  outIdx = 0;
-
  for( i= startIdx; i <= endIdx; i++ )
  {
  outReal[outIdx++] = ( inHigh [i] +
  inLow [i] +
  (inClose[i]*2.0) ) / 4.0;
  }
-
   outNbElement.value  = outIdx;
   outBegIdx.value  = startIdx;
-
  return  TA_RetCode. TA_SUCCESS;
 }
  public TA_RetCode WCLPRICE( int startIdx,
@@ -24902,7 +21546,6 @@ public TA_RetCode INT_VAR( int startIdx,
  double outReal[] )
  {
  int outIdx, i;
-
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -24919,6 +21562,6 @@ public TA_RetCode INT_VAR( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
 /* Generated */ 
-/**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
-
+	/**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
+	
 }
