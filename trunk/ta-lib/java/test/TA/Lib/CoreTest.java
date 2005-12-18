@@ -48,16 +48,50 @@ package TA.Lib;
 
 import junit.framework.*;
 
-public class CoreTest extends TestCase {
+public class CoreTest extends TestCase {	
+    private double input[];
+    private int inputInt[];
+    private double output[];
+    private int outputInt[];
+    private MInteger outBegIdx; 
+    private MInteger outNbElement;
+    private TA_RetCode retCode;
+    private TA.Lib.Core lib;
+    private int lookback;
     
     public CoreTest(String testName) {
         super(testName);
+        // Create the library (typically done only once).
+        lib = new TA.Lib.Core();
+        input = new double[200];
+        inputInt = new int[200];        
+        output = new double[200];
+        outputInt = new int[200];
+        outBegIdx = new MInteger();
+        outNbElement = new MInteger();
     }
 
-    protected void setUp() throws Exception {
+    protected void setUp() {
+    	for( int i=0; i < input.length; i++ )
+    	{
+    		input[i] = (double)i;
+    		inputInt[i] = i;
+    	}
+    	for( int i=0; i < output.length; i++ )
+    	{
+    		output[i] = (double)-999999.0;
+    		outputInt[i] = -999999;
+    	}
+    	outBegIdx.value = -1;
+    	outNbElement.value = -1;
+    	retCode = TA_RetCode.TA_INTERNAL_ERROR;
+    	lookback = -1;
     }
 
-    protected void tearDown() throws Exception {
+    protected void tearDown() 
+    {
+    	assertEquals(retCode.toString(),TA_RetCode.TA_SUCCESS.toString());
+    	assertEquals(lookback,outBegIdx.value);
     }
 
     public static Test suite() {
@@ -66,35 +100,49 @@ public class CoreTest extends TestCase {
         return suite;
     }
 
+    public void testMFI()
+    {
+    	 lookback = lib.MFI_Lookback(2);
+         retCode = lib.MFI(0,input.length-1,input,input,input,inputInt,2,outBegIdx,outNbElement,output);    
+    }
+    
+    public void testHT()
+    {
+    	lookback = lib.HT_TRENDMODE_Lookback();
+    	retCode = lib.HT_TRENDMODE(0,input.length-1,input,outBegIdx,outNbElement,outputInt);
+    }
+   
+    public void testMA_MAMA()
+    {
+        lookback = lib.MA_Lookback(10,TA_MAType.TA_MAType_MAMA);
+        retCode = lib.MA(0,input.length-1,input,10,TA_MAType.TA_MAType_MAMA,outBegIdx,outNbElement,output);        
+    }
+    
+    public void testMA_SMA()
+    {
+        lookback = lib.MA_Lookback(10,TA_MAType.TA_MAType_SMA);
+        retCode = lib.MA(0,input.length-1,input,10,TA_MAType.TA_MAType_SMA,outBegIdx,outNbElement,output);
+        assertEquals(outBegIdx.value,9);
+    }
     public void testSimpleCall() {        
-        // Create the library (typically done only once).
-        TA.Lib.Core lib = new TA.Lib.Core();
                 
         // Create Input/Output arrays.
-        double input[] = new double[3];
-        double output[] = new double[2];
         input[0] = 2.0;
         input[1] = 1.2;
         input[2] = 1.5;
-        
-        // Create two mutable Integer objects to facilitate multiple 
-        // return values from a single function call.
-        MInteger outBegIdx = new MInteger();
-        MInteger outNbElement = new MInteger();
-        
+                
         // Do the TA function call
-        TA_RetCode retCode = lib.MAX( 0, 2, input, 2,
-                                      outBegIdx, outNbElement,
-                                      output );
+        retCode = lib.MAX( 0, 2, input, 2,
+                           outBegIdx, outNbElement,
+                           output );
         
-        // Use the results.
-        if( retCode == TA_RetCode.TA_SUCCESS )
-        {
-           // Will display "1   2   2.0   1.5"
-	       System.out.println( outBegIdx.value + "    " + 
-                               outNbElement.value + "    " + 
-                               output[0] + "    " + 
-                               output[1] );
-        }
+        // Test the results.
+        assertEquals( retCode, TA_RetCode.TA_SUCCESS);
+        assertEquals( outBegIdx.value, 1 );
+        assertEquals( outNbElement.value, 2 );
+        assertEquals( output[0], 2.0 );
+        assertEquals( output[1], 1.5 );
+        
+        lookback = lib.MAX_Lookback(2);
     }    
 }
