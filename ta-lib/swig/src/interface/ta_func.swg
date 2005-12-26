@@ -2185,6 +2185,46 @@ int TA_CDLHIGHWAVE_Lookback( void );
 
 
 /*
+ * TA_CDLHIKKAKE - Hikkake Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLHIKKAKE( int           START_IDX,
+                          int           END_IDX,
+                          const double *IN_ARRAY /* inOpen */,
+                          const double *IN_ARRAY /* inHigh */,
+                          const double *IN_ARRAY /* inLow */,
+                          const double *IN_ARRAY /* inClose */,
+                          int          *BEG_IDX,
+                          int          *OUT_SIZE,
+                          int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLHIKKAKE_Lookback( void );
+
+
+/*
+ * TA_CDLHIKKAKEMOD - Modified Hikkake Pattern
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLHIKKAKEMOD( int           START_IDX,
+                             int           END_IDX,
+                             const double *IN_ARRAY /* inOpen */,
+                             const double *IN_ARRAY /* inHigh */,
+                             const double *IN_ARRAY /* inLow */,
+                             const double *IN_ARRAY /* inClose */,
+                             int          *BEG_IDX,
+                             int          *OUT_SIZE,
+                             int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLHIKKAKEMOD_Lookback( void );
+
+
+/*
  * TA_CDLHOMINGPIGEON - Homing Pigeon
  * 
  * Input  = Open, High, Low, Close
