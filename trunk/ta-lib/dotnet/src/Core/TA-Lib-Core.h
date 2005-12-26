@@ -2312,6 +2312,54 @@ namespace TA
          #define TA_CDLHIGHWAVE Core::CDLHIGHWAVE
          #define TA_CDLHIGHWAVE_Lookback Core::CDLHIGHWAVE_Lookback
 
+         static int CDLHIKKAKE_Lookback( void );
+
+         static enum class TA_RetCode CDLHIKKAKE( int    startIdx,
+                                                  int    endIdx,
+                                                  cli::array<double>^ inOpen,
+                                                  cli::array<double>^ inHigh,
+                                                  cli::array<double>^ inLow,
+                                                  cli::array<double>^ inClose,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
+                                                  cli::array<int>^  outInteger );
+         static enum class TA_RetCode CDLHIKKAKE( int    startIdx,
+                                                  int    endIdx,
+                                                  cli::array<float>^ inOpen,
+                                                  cli::array<float>^ inHigh,
+                                                  cli::array<float>^ inLow,
+                                                  cli::array<float>^ inClose,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
+                                                  cli::array<int>^  outInteger );
+
+         #define TA_CDLHIKKAKE Core::CDLHIKKAKE
+         #define TA_CDLHIKKAKE_Lookback Core::CDLHIKKAKE_Lookback
+
+         static int CDLHIKKAKEMOD_Lookback( void );
+
+         static enum class TA_RetCode CDLHIKKAKEMOD( int    startIdx,
+                                                     int    endIdx,
+                                                     cli::array<double>^ inOpen,
+                                                     cli::array<double>^ inHigh,
+                                                     cli::array<double>^ inLow,
+                                                     cli::array<double>^ inClose,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNbElement,
+                                                     cli::array<int>^  outInteger );
+         static enum class TA_RetCode CDLHIKKAKEMOD( int    startIdx,
+                                                     int    endIdx,
+                                                     cli::array<float>^ inOpen,
+                                                     cli::array<float>^ inHigh,
+                                                     cli::array<float>^ inLow,
+                                                     cli::array<float>^ inClose,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNbElement,
+                                                     cli::array<int>^  outInteger );
+
+         #define TA_CDLHIKKAKEMOD Core::CDLHIKKAKEMOD
+         #define TA_CDLHIKKAKEMOD_Lookback Core::CDLHIKKAKEMOD_Lookback
+
          static int CDLHOMINGPIGEON_Lookback( void );
 
          static enum class TA_RetCode CDLHOMINGPIGEON( int    startIdx,
