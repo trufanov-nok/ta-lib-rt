@@ -7,7 +7,9 @@ New Features
 - Added technical analysis functions:
     BOP : Balance of power
     CMO : Chande Momentum Oscillator
-    
+
+- New candlestick Hikkake pattern recognition.
+
 - .NET assembly is 'verifiable'. TA-Lib is now conform for
   uses in places like Microsoft SQL stored procedure.
 

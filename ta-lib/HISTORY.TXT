@@ -1,6 +1,6 @@
 V0.1.5 (December 2005)
   - Java ports of all TA functions.
-  - New BOP and CMO functions.
+  - New BOP, CMO and Hikkake functions.
   - .NET assembly now verifiable.  
   - Support for end-of-period.
   - Portable random generator.
