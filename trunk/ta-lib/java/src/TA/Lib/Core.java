@@ -15928,7 +15928,7 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLHIKKAKE_Lookback( )
 {
- return 2;
+ return 5;
 }
  public TA_RetCode CDLHIKKAKE( int startIdx,
  int endIdx,
@@ -15940,7 +15940,7 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
 {
- int i, outIdx, lookbackTotal, patternIdx, zeroIdx;
+ int i, outIdx, lookbackTotal, patternIdx, patternResult;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -15954,9 +15954,29 @@ TA_RetCode INT_MACD( int startIdx,
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
+ patternIdx = 0;
+ patternResult = 0;
+ i = startIdx - 3;
+ while( i < startIdx ) {
+ if( inHigh[i-1] < inHigh[i-2] && inLow[i-1] > inLow[i-2] &&
+ ( ( inHigh[i] < inHigh[i-1] && inLow[i] < inLow[i-1] )
+ ||
+ ( inHigh[i] > inHigh[i-1] && inLow[i] > inLow[i-1] )
+ )
+ ) {
+ patternResult = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
+ patternIdx = i;
+ } else
+ if( i <= patternIdx+3 &&
+ ( ( patternResult > 0 && inClose[i] > inHigh[patternIdx-1] )
+ ||
+ ( patternResult < 0 && inClose[i] < inLow[patternIdx-1] )
+ )
+ )
+ patternIdx = 0;
+ i++;
+ }
  i = startIdx;
- zeroIdx = -3-1;
- patternIdx = zeroIdx;
  outIdx = 0;
  do
  {
@@ -15966,17 +15986,18 @@ TA_RetCode INT_MACD( int startIdx,
  ( inHigh[i] > inHigh[i-1] && inLow[i] > inLow[i-1] )
  )
  ) {
- outInteger[outIdx++] = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
+ patternResult = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
  patternIdx = i;
+ outInteger[outIdx++] = patternResult;
  } else
  if( i <= patternIdx+3 &&
- ( ( outInteger[patternIdx-startIdx] > 0 && inClose[i] > inHigh[patternIdx-1] )
+ ( ( patternResult > 0 && inClose[i] > inHigh[patternIdx-1] )
  ||
- ( outInteger[patternIdx-startIdx] < 0 && inClose[i] < inLow[patternIdx-1] )
+ ( patternResult < 0 && inClose[i] < inLow[patternIdx-1] )
  )
  ) {
- outInteger[outIdx++] = outInteger[patternIdx-startIdx] + 100 * ( outInteger[patternIdx-startIdx] > 0 ? 1 : -1 );
- patternIdx = zeroIdx;
+ outInteger[outIdx++] = patternResult + 100 * ( patternResult > 0 ? 1 : -1 );
+ patternIdx = 0;
  } else
  outInteger[outIdx++] = 0;
  i++;
@@ -15995,7 +16016,7 @@ TA_RetCode INT_MACD( int startIdx,
  MInteger outNbElement,
  int outInteger[] )
  {
- int i, outIdx, lookbackTotal, patternIdx, zeroIdx;
+ int i, outIdx, lookbackTotal, patternIdx, patternResult;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16009,9 +16030,29 @@ TA_RetCode INT_MACD( int startIdx,
   outNbElement.value = 0 ;
  return  TA_RetCode. TA_SUCCESS;
  }
+ patternIdx = 0;
+ patternResult = 0;
+ i = startIdx - 3;
+ while( i < startIdx ) {
+ if( inHigh[i-1] < inHigh[i-2] && inLow[i-1] > inLow[i-2] &&
+ ( ( inHigh[i] < inHigh[i-1] && inLow[i] < inLow[i-1] )
+ ||
+ ( inHigh[i] > inHigh[i-1] && inLow[i] > inLow[i-1] )
+ )
+ ) {
+ patternResult = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
+ patternIdx = i;
+ } else
+ if( i <= patternIdx+3 &&
+ ( ( patternResult > 0 && inClose[i] > inHigh[patternIdx-1] )
+ ||
+ ( patternResult < 0 && inClose[i] < inLow[patternIdx-1] )
+ )
+ )
+ patternIdx = 0;
+ i++;
+ }
  i = startIdx;
- zeroIdx = -3-1;
- patternIdx = zeroIdx;
  outIdx = 0;
  do
  {
@@ -16021,17 +16062,18 @@ TA_RetCode INT_MACD( int startIdx,
  ( inHigh[i] > inHigh[i-1] && inLow[i] > inLow[i-1] )
  )
  ) {
- outInteger[outIdx++] = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
+ patternResult = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
  patternIdx = i;
+ outInteger[outIdx++] = patternResult;
  } else
  if( i <= patternIdx+3 &&
- ( ( outInteger[patternIdx-startIdx] > 0 && inClose[i] > inHigh[patternIdx-1] )
+ ( ( patternResult > 0 && inClose[i] > inHigh[patternIdx-1] )
  ||
- ( outInteger[patternIdx-startIdx] < 0 && inClose[i] < inLow[patternIdx-1] )
+ ( patternResult < 0 && inClose[i] < inLow[patternIdx-1] )
  )
  ) {
- outInteger[outIdx++] = outInteger[patternIdx-startIdx] + 100 * ( outInteger[patternIdx-startIdx] > 0 ? 1 : -1 );
- patternIdx = zeroIdx;
+ outInteger[outIdx++] = patternResult + 100 * ( patternResult > 0 ? 1 : -1 );
+ patternIdx = 0;
  } else
  outInteger[outIdx++] = 0;
  i++;
@@ -16043,7 +16085,7 @@ TA_RetCode INT_MACD( int startIdx,
 /* Generated */ 
  public int CDLHIKKAKEMOD_Lookback( )
 {
- return  (((3) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) +2)) ? (3) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) +2)) ;
+ return  (((1) > ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) )) ? (1) : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ))  + 5;
 }
  public TA_RetCode CDLHIKKAKEMOD( int startIdx,
  int endIdx,
@@ -16056,7 +16098,7 @@ TA_RetCode INT_MACD( int startIdx,
  int outInteger[] )
 {
  double NearPeriodTotal;
- int i, outIdx, NearTrailingIdx, lookbackTotal, patternIdx, zeroIdx;
+ int i, outIdx, NearTrailingIdx, lookbackTotal, patternIdx, patternResult;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16071,15 +16113,42 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  NearPeriodTotal = 0;
- NearTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
+ NearTrailingIdx = startIdx - 3 -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
  i = NearTrailingIdx;
- while( i < startIdx ) {
+ while( i < startIdx - 3 ) {
  NearPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
  i++;
  }
+ patternIdx = 0;
+ patternResult = 0;
+ i = startIdx - 3;
+ while( i < startIdx ) {
+ if( inHigh[i-2] < inHigh[i-3] && inLow[i-2] > inLow[i-3] &&
+ inHigh[i-1] < inHigh[i-2] && inLow[i-1] > inLow[i-2] &&
+ ( ( inHigh[i] < inHigh[i-1] && inLow[i] < inLow[i-1] &&
+ inClose[i-2] <= inLow[i-2] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
+ )
+ ||
+ ( inHigh[i] > inHigh[i-1] && inLow[i] > inLow[i-1] &&
+ inClose[i-2] >= inHigh[i-2] -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
+ )
+ )
+ ) {
+ patternResult = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
+ patternIdx = i;
+ } else
+ if( i <= patternIdx+3 &&
+ ( ( patternResult > 0 && inClose[i] > inHigh[patternIdx-1] )
+ ||
+ ( patternResult < 0 && inClose[i] < inLow[patternIdx-1] )
+ )
+ )
+ patternIdx = 0;
+ NearPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[NearTrailingIdx-2] - inOpen[NearTrailingIdx-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[NearTrailingIdx-2] - inLow[NearTrailingIdx-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[NearTrailingIdx-2] - ( inClose[NearTrailingIdx-2] >= inOpen[NearTrailingIdx-2] ? inClose[NearTrailingIdx-2] : inOpen[NearTrailingIdx-2] ) )  + ( ( inClose[NearTrailingIdx-2] >= inOpen[NearTrailingIdx-2] ? inOpen[NearTrailingIdx-2] : inClose[NearTrailingIdx-2] ) - inLow[NearTrailingIdx-2] )  : 0 ) ) ) ;
+ NearTrailingIdx++;
+ i++;
+ }
  i = startIdx;
- zeroIdx = -4-1;
- patternIdx = zeroIdx;
  outIdx = 0;
  do
  {
@@ -16094,17 +16163,18 @@ TA_RetCode INT_MACD( int startIdx,
  )
  )
  ) {
- outInteger[outIdx++] = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
+ patternResult = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
  patternIdx = i;
+ outInteger[outIdx++] = patternResult;
  } else
  if( i <= patternIdx+3 &&
- ( ( outInteger[patternIdx-startIdx] > 0 && inClose[i] > inHigh[patternIdx-1] )
+ ( ( patternResult > 0 && inClose[i] > inHigh[patternIdx-1] )
  ||
- ( outInteger[patternIdx-startIdx] < 0 && inClose[i] < inLow[patternIdx-1] )
+ ( patternResult < 0 && inClose[i] < inLow[patternIdx-1] )
  )
  ) {
- outInteger[outIdx++] = outInteger[patternIdx-startIdx] + 100 * ( outInteger[patternIdx-startIdx] > 0 ? 1 : -1 );
- patternIdx = zeroIdx;
+ outInteger[outIdx++] = patternResult + 100 * ( patternResult > 0 ? 1 : -1 );
+ patternIdx = 0;
  } else
  outInteger[outIdx++] = 0;
  NearPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[NearTrailingIdx-2] - inOpen[NearTrailingIdx-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[NearTrailingIdx-2] - inLow[NearTrailingIdx-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[NearTrailingIdx-2] - ( inClose[NearTrailingIdx-2] >= inOpen[NearTrailingIdx-2] ? inClose[NearTrailingIdx-2] : inOpen[NearTrailingIdx-2] ) )  + ( ( inClose[NearTrailingIdx-2] >= inOpen[NearTrailingIdx-2] ? inOpen[NearTrailingIdx-2] : inClose[NearTrailingIdx-2] ) - inLow[NearTrailingIdx-2] )  : 0 ) ) ) ;
@@ -16126,7 +16196,7 @@ TA_RetCode INT_MACD( int startIdx,
  int outInteger[] )
  {
  double NearPeriodTotal;
- int i, outIdx, NearTrailingIdx, lookbackTotal, patternIdx, zeroIdx;
+ int i, outIdx, NearTrailingIdx, lookbackTotal, patternIdx, patternResult;
  if( startIdx < 0 )
  return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
  if( (endIdx < 0) || (endIdx < startIdx))
@@ -16141,15 +16211,42 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
  NearPeriodTotal = 0;
- NearTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
+ NearTrailingIdx = startIdx - 3 -  (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod) ;
  i = NearTrailingIdx;
- while( i < startIdx ) {
+ while( i < startIdx - 3 ) {
  NearPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) ) ;
  i++;
  }
+ patternIdx = 0;
+ patternResult = 0;
+ i = startIdx - 3;
+ while( i < startIdx ) {
+ if( inHigh[i-2] < inHigh[i-3] && inLow[i-2] > inLow[i-3] &&
+ inHigh[i-1] < inHigh[i-2] && inLow[i-1] > inLow[i-2] &&
+ ( ( inHigh[i] < inHigh[i-1] && inLow[i] < inLow[i-1] &&
+ inClose[i-2] <= inLow[i-2] +  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
+ )
+ ||
+ ( inHigh[i] > inHigh[i-1] && inLow[i] > inLow[i-1] &&
+ inClose[i-2] >= inHigh[i-2] -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  != 0.0? NearPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) ) 
+ )
+ )
+ ) {
+ patternResult = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
+ patternIdx = i;
+ } else
+ if( i <= patternIdx+3 &&
+ ( ( patternResult > 0 && inClose[i] > inHigh[patternIdx-1] )
+ ||
+ ( patternResult < 0 && inClose[i] < inLow[patternIdx-1] )
+ )
+ )
+ patternIdx = 0;
+ NearPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[NearTrailingIdx-2] - inOpen[NearTrailingIdx-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[NearTrailingIdx-2] - inLow[NearTrailingIdx-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[NearTrailingIdx-2] - ( inClose[NearTrailingIdx-2] >= inOpen[NearTrailingIdx-2] ? inClose[NearTrailingIdx-2] : inOpen[NearTrailingIdx-2] ) )  + ( ( inClose[NearTrailingIdx-2] >= inOpen[NearTrailingIdx-2] ? inOpen[NearTrailingIdx-2] : inClose[NearTrailingIdx-2] ) - inLow[NearTrailingIdx-2] )  : 0 ) ) ) ;
+ NearTrailingIdx++;
+ i++;
+ }
  i = startIdx;
- zeroIdx = -4-1;
- patternIdx = zeroIdx;
  outIdx = 0;
  do
  {
@@ -16164,17 +16261,18 @@ TA_RetCode INT_MACD( int startIdx,
  )
  )
  ) {
- outInteger[outIdx++] = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
+ patternResult = 100 * ( inHigh[i] < inHigh[i-1] ? 1 : -1 );
  patternIdx = i;
+ outInteger[outIdx++] = patternResult;
  } else
  if( i <= patternIdx+3 &&
- ( ( outInteger[patternIdx-startIdx] > 0 && inClose[i] > inHigh[patternIdx-1] )
+ ( ( patternResult > 0 && inClose[i] > inHigh[patternIdx-1] )
  ||
- ( outInteger[patternIdx-startIdx] < 0 && inClose[i] < inLow[patternIdx-1] )
+ ( patternResult < 0 && inClose[i] < inLow[patternIdx-1] )
  )
  ) {
- outInteger[outIdx++] = outInteger[patternIdx-startIdx] + 100 * ( outInteger[patternIdx-startIdx] > 0 ? 1 : -1 );
- patternIdx = zeroIdx;
+ outInteger[outIdx++] = patternResult + 100 * ( patternResult > 0 ? 1 : -1 );
+ patternIdx = 0;
  } else
  outInteger[outIdx++] = 0;
  NearPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-2] - inOpen[i-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-2] - inLow[i-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-2] - ( inClose[i-2] >= inOpen[i-2] ? inClose[i-2] : inOpen[i-2] ) )  + ( ( inClose[i-2] >= inOpen[i-2] ? inOpen[i-2] : inClose[i-2] ) - inLow[i-2] )  : 0 ) ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[NearTrailingIdx-2] - inOpen[NearTrailingIdx-2] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[NearTrailingIdx-2] - inLow[NearTrailingIdx-2] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Near.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[NearTrailingIdx-2] - ( inClose[NearTrailingIdx-2] >= inOpen[NearTrailingIdx-2] ? inClose[NearTrailingIdx-2] : inOpen[NearTrailingIdx-2] ) )  + ( ( inClose[NearTrailingIdx-2] >= inOpen[NearTrailingIdx-2] ? inOpen[NearTrailingIdx-2] : inClose[NearTrailingIdx-2] ) - inLow[NearTrailingIdx-2] )  : 0 ) ) ) ;
