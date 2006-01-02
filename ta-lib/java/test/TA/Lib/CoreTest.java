@@ -107,7 +107,7 @@ public class CoreTest extends TestCase {
     }
     
     public void testHT()
-    {
+    {    	
     	lookback = lib.HT_TRENDMODE_Lookback();
     	retCode = lib.HT_TRENDMODE(0,input.length-1,input,outBegIdx,outNbElement,outputInt);
     }
