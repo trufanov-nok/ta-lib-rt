@@ -9649,6 +9649,77 @@ TA_RetCode INT_MACD( int startIdx,
  return  TA_RetCode. TA_SUCCESS;
  }
 /* Generated */ 
+ public int ULTOSC_Lookback( int optInTimePeriod1,
+ int optInTimePeriod2,
+ int optInTimePeriod3 )
+{
+ return 0;
+}
+ public TA_RetCode ULTOSC( int startIdx,
+ int endIdx,
+ double inHigh[],
+ double inLow[],
+ double inClose[],
+ int optInTimePeriod1,
+ int optInTimePeriod2,
+ int optInTimePeriod3,
+ MInteger outBegIdx,
+ MInteger outNbElement,
+ double outReal[] )
+{
+ if( startIdx < 0 )
+ return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+ if( (endIdx < 0) || (endIdx < startIdx))
+ return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+ if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
+ optInTimePeriod1 = 7;
+ else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
+ return  TA_RetCode. TA_BAD_PARAM;
+ if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
+ optInTimePeriod2 = 14;
+ else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
+ return  TA_RetCode. TA_BAD_PARAM;
+ if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
+ optInTimePeriod3 = 28;
+ else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
+ return  TA_RetCode. TA_BAD_PARAM;
+ *outBegIdx = 0;
+ *outNbElement = 0;
+ return TA_SUCCESS;
+}
+ public TA_RetCode ULTOSC( int startIdx,
+ int endIdx,
+ float inHigh[],
+ float inLow[],
+ float inClose[],
+ int optInTimePeriod1,
+ int optInTimePeriod2,
+ int optInTimePeriod3,
+ MInteger outBegIdx,
+ MInteger outNbElement,
+ double outReal[] )
+ {
+ if( startIdx < 0 )
+ return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+ if( (endIdx < 0) || (endIdx < startIdx))
+ return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+ if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
+ optInTimePeriod1 = 7;
+ else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
+ return  TA_RetCode. TA_BAD_PARAM;
+ if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
+ optInTimePeriod2 = 14;
+ else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
+ return  TA_RetCode. TA_BAD_PARAM;
+ if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
+ optInTimePeriod3 = 28;
+ else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
+ return  TA_RetCode. TA_BAD_PARAM;
+ *outBegIdx = 0;
+ *outNbElement = 0;
+ return TA_SUCCESS;
+ }
+/* Generated */ 
  public int WILLR_Lookback( int optInTimePeriod )
 {
  return (optInTimePeriod-1);
