@@ -1441,6 +1441,36 @@ namespace TA
          #define TA_TRIX Core::TRIX
          #define TA_TRIX_Lookback Core::TRIX_Lookback
 
+         static int ULTOSC_Lookback( int           optInTimePeriod1, /* From 1 to 100000 */
+                                   int           optInTimePeriod2, /* From 1 to 100000 */
+                                   int           optInTimePeriod3 );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode ULTOSC( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              int           optInTimePeriod1, /* From 1 to 100000 */
+                                              int           optInTimePeriod2, /* From 1 to 100000 */
+                                              int           optInTimePeriod3, /* From 1 to 100000 */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outReal );
+         static enum class TA_RetCode ULTOSC( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<float>^ inHigh,
+                                              cli::array<float>^ inLow,
+                                              cli::array<float>^ inClose,
+                                              int           optInTimePeriod1, /* From 1 to 100000 */
+                                              int           optInTimePeriod2, /* From 1 to 100000 */
+                                              int           optInTimePeriod3, /* From 1 to 100000 */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outReal );
+
+         #define TA_ULTOSC Core::ULTOSC
+         #define TA_ULTOSC_Lookback Core::ULTOSC_Lookback
+
          static int WILLR_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          static enum class TA_RetCode WILLR( int    startIdx,
