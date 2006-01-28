@@ -217,6 +217,8 @@ package Finance::TA;
 *TA_STOCHRSI_Lookback = *Finance::TAc::TA_STOCHRSI_Lookback;
 *TA_TRIX = *Finance::TAc::TA_TRIX;
 *TA_TRIX_Lookback = *Finance::TAc::TA_TRIX_Lookback;
+*TA_ULTOSC = *Finance::TAc::TA_ULTOSC;
+*TA_ULTOSC_Lookback = *Finance::TAc::TA_ULTOSC_Lookback;
 *TA_WILLR = *Finance::TAc::TA_WILLR;
 *TA_WILLR_Lookback = *Finance::TAc::TA_WILLR_Lookback;
 *TA_HT_DCPERIOD = *Finance::TAc::TA_HT_DCPERIOD;
