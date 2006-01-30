@@ -40,8 +40,8 @@ namespace TA.Lib
 
 		internal Timestamps(IValueIter parent, int size )
 		{
-			mParent = parent;	
-			mStartDateTime = new DateTime(1971,1,1);
+			mParent = parent;
+            mStartDateTime = new DateTime(0);
             mLength = size;
             mTotalLength = mLength;
 		}
@@ -56,7 +56,7 @@ namespace TA.Lib
 			{
                 int idx = index.TimestampOffset;
 				if( mTimestamps == null )
-					return mStartDateTime.AddDays(idx);
+					return mStartDateTime.AddMilliseconds(idx);
 				else
 					return mTimestamps[idx];
 			}

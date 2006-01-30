@@ -23,12 +23,17 @@ namespace TA.Lib
 
         public IEnumerator<Index> GetEnumerator()
         {
-            while (mIndex.LeftToIterate != 0)
+            if (mIndex.Size != 0)
             {
+                mIndex.Lock = true;
                 yield return mIndex;
-                mIndex.Next();
-            }
-            yield break;
+                while (mIndex.PositionToEnd != 0)
+                {
+                    mIndex.Next();
+                    yield return mIndex;
+                }
+                mIndex.Lock = false;
+            }    
         }
     }
 }

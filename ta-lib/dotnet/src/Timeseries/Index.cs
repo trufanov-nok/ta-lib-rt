@@ -10,91 +10,181 @@ using TA.Lib;
 
 namespace TA.Lib
 {
+    
     public class Index
     {
         private int[] mStartOffset;        
-        private IValueIter[] mValueIter;
-        private int mLeftToIterate;
+        private IValueIter[] mValueIter;        
+        private int mPosition;
+        private int mSize;
         private int mTimestampOffset;
 
-        public int LeftToIterate
+        public int PositionToEnd
         {
             get
             {
-                return mLeftToIterate;
+                if( mSize == 0 )
+                    return -1;
+                else
+                    return mSize-mPosition-1;
             }
         }
 
-        internal Index(params IValueIter[] list)
+        public int Position
         {
-            // Handle special case of empty list.
-            if (list.Length == 0)
+            get
             {
-                mLeftToIterate = 0;
-                return;
+                return mPosition;
             }
-            
+        }
 
-            // Each ValueIter have a corresponding "offset" maintained
-            // locally in the Index object.
-            mStartOffset = new int[list.Length];            
+        public int Size
+        {
+            get
+            {
+                return mSize;
+            }
+        }
 
-            // Validate all synchronized.
-            // At the same time, identify the common range.            
-            int begCommonRange;
-            int endCommonRange;
+        // Find the common range among an array of IValueIter
+        // Return false if a common range cannot be find.
+        static public bool FindCommonRange(IValueIter[] list, out int beginCommonRange, out int endCommonRange)
+        {
             IValueIter valueIter = list[0];
-            endCommonRange = valueIter.GetEndTimestampOffset();
-            begCommonRange = valueIter.GetStartTimestampOffset();
-            mStartOffset[0] = begCommonRange;
+            if (valueIter.GetCommonRange(out beginCommonRange, out endCommonRange) == false)
+            {
+                // Common range does not have elements.
+                return false;
+            }
+
             if (list.Length > 1)
             {
                 Timestamps refTimestamps = valueIter.GetTimestamps();
                 for (int i = 1; i < list.Length; i++)
                 {
                     valueIter = list[i];
-                    if (!valueIter.GetTimestamps().Equals(refTimestamps))
-                        throw new Exception("Iteration possible only for synchronized Timeseries and Variable");
-                    int temp = valueIter.GetStartTimestampOffset();
-                    if (temp > begCommonRange) begCommonRange = temp;
-                    mStartOffset[i] = temp;
-                    temp = valueIter.GetEndTimestampOffset();
-                    if (temp < endCommonRange) endCommonRange = temp;
+                    int tempBegin, tempEnd;
+                    if (valueIter.GetCommonRange(out tempBegin, out tempEnd) == false)
+                    {
+                        // Common range does not have elements.
+                        return false;
+                    }
+                    if (tempBegin > beginCommonRange) beginCommonRange = tempBegin;
+                    if (tempEnd < endCommonRange) endCommonRange = tempEnd;
                 }
             }
 
-            // The number of elements left to be iterated.
-            mLeftToIterate = endCommonRange - begCommonRange + 1;
+            return true;
+        }
 
-            // Handle case of an empty ValueIter or no common range.
-            if (mLeftToIterate <= 0)
+
+        internal Index(params IValueIter[] list)
+        {
+            // Default.
+            mPosition = -1;            
+
+            // Handle case of empty list.
+            if (list.Length == 0)
+                return;
+
+            // Find the total number of ValueIter and
+            // verify all synchronized.
+            // At the same time, identify the common range.
+            int beginCommonRange = int.MinValue;
+            int endCommonRange = int.MaxValue;
+            IValueIter valueIter = list[0];
+            if (valueIter.GetCommonRange(out beginCommonRange, out endCommonRange) == false)
             {
-                mLeftToIterate = 0;
+                // Common range does not have elements.
+                return;
+            }
+            Timestamps refTimestamps = valueIter.GetTimestamps();
+            int nbValueIter = valueIter.NbValueIter();
+
+            // Handle case of Timeseries with no variables.
+            if (nbValueIter == 0)
+            {
                 return;
             }
 
-            // Now that the common range is known, adjust the starting 
-            // offset for each ValueIter.
-            for (int i = 0; i < list.Length; i++)
+            for (int i = 1; i < list.Length; i++)                
             {
-                mStartOffset[i] = begCommonRange - mStartOffset[i];
+                valueIter = list[i];
+                if (!valueIter.GetTimestamps().Equals(refTimestamps))
+                {
+                    throw new Exception("Iteration possible only among synchronized Timeseries and Variables");
+                }
+
+                int temp = valueIter.NbValueIter();
+                // Handle case of Timeseries with no variables.
+                if (temp == 0)
+                {
+                    return;
+                }
+                nbValueIter += temp;
+
+                int tempBegin, tempEnd;
+                if (valueIter.GetCommonRange(out tempBegin, out tempEnd) == false)
+                {
+                    // Common range does not have elements.
+                    return;
+                }
+                if (tempBegin > beginCommonRange) beginCommonRange = tempBegin;
+                if (tempEnd < endCommonRange) endCommonRange = tempEnd;                
+            }
+
+            // TODO: Remove once FindCommonRange is confirm bug free.
+            int begCommonRange2;
+            int endCommonRange2;
+            if (FindCommonRange(list, out begCommonRange2, out endCommonRange2) == false)
+            {
+                throw new Exception("Iteration possible only for synchronized Timeseries and Variable");
+            }
+
+            if ((begCommonRange2 != beginCommonRange) || (endCommonRange2 != endCommonRange))
+            {
+                throw new Exception("Internal Bug!");
+            }
+
+            // The number of elements left to be iterated.            
+            int positionToEnd = endCommonRange - beginCommonRange + 1;
+
+            // Handle case of all empty variables or no common range.
+            if ( positionToEnd <= 0 )
+            {
+                return;
+            }
+
+            // Each ValueIter will have a corresponding "offset" owned
+            // by the Index object.
+            mStartOffset = new int[nbValueIter];
+
+            // Keep references on ALL ValueIter.
+            mValueIter = new IValueIter[nbValueIter];
+
+            // Get the starting offsets and reference on every ValueIter.
+            int arrayPos = 0;
+            for (int i = 0; i < list.Length; i++)
+            {             
+                list[i].SetValueIterInfo( ref mValueIter, ref mStartOffset, ref arrayPos, beginCommonRange);
             }
 
             // Calculate the starting offset for the timestamp array.
-            mTimestampOffset = begCommonRange;
+            mTimestampOffset = beginCommonRange;
 
-            // Keep a reference on the list of ValueIter
-            mValueIter = list;
+            // Now ready for first iteration.
+            // Set variable allowing the user to identify the position
+            // within the iterations.
+            mPosition = 0;
+            mSize = positionToEnd;
         }
 
         internal bool Next()
         {
-            if (mLeftToIterate == 0)
+            if (mPosition == mSize)
                 return false;
             else
-            {
-                mLeftToIterate--;
-            }
+                mPosition++;
 
             // Adjust position for all the valueIter.
             for (int i = 0; i < mValueIter.Length; i++)
@@ -112,12 +202,12 @@ namespace TA.Lib
             int iterIdx = vi.GetIndexCache(this);
             if (iterIdx != -1)
                 return mStartOffset[iterIdx];
-
+            
             // Not in the cache, so do a sequential
             // search for the right mOffset.
             for (int i = 0; i < mValueIter.Length; i++)
-            {
-                if (vi.Equals(mValueIter[i]))
+            {                
+                if (mValueIter[i].IsSame(vi))
                 {
                     vi.SetIndexCache(this, i);
                     return mStartOffset[i];
@@ -136,5 +226,24 @@ namespace TA.Lib
                 return mTimestampOffset;
             }
         }
+
+        // Locking allows to properly prevent and/or handle safely changes to 
+        // the objects being iterated.
+        private bool mLock = false;
+        public bool Lock
+        {
+            get { return mLock; }
+            set 
+            {
+                if (value != mLock)
+                {
+                   for (int i = 0; i < mValueIter.Length; i++)
+                   {
+                      mValueIter[i].Lock = value;
+                   }
+                }
+                mLock = value; 
+            }
+        }	
     }
 }
