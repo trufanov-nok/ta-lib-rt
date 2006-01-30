@@ -144,10 +144,50 @@ namespace TA.Lib
 
         #region Built-in Functions
         /// <summary>
+        /// Create a variable using a deleguate functions
+        /// that returns a value for each position 'n'
+        /// within the current common range of the timeseries.
+        /// 
+        /// 'n' goes from 0 to the (number of timestamps)-1
+        /// 
+        /// The added variable is named "Sequence".
+        /// 
+        /// Example:
+        ///   Add a variable containing the sequence {0,1,2,3,4...}
+        ///      Timeseries ts = ...;
+        ///      ts.Add.Sequence( delguate(int n) { return n; } );
+        /// </summary>
+        /// 
+        public delegate double SequenceFunction(int n);
+
+        public Timeseries Sequence( SequenceFunction f )
+        {            
+            Variable newVar;            
+            Timeseries retObject = new Timeseries(mParent.Timestamps);
+            int size = mData.Length;
+            if (mData.Length <= 0)
+                newVar = new Variable(retObject, new double[0]);
+            else
+            {
+                double[] output;
+                output = new double[size];
+
+                for (int n = 0; n < size; n++)
+                {
+                    output[n] = f(n);
+                }
+                newVar = new Variable(retObject, output);
+            }
+
+            // Add the new variable to the new time series.
+            retObject["Sequence"] = newVar;
+            return retObject;
+        }
+        
         /// Simple Moving average
         /// </summary>
         /// <param name="period"></param>
-        /// <returns>Variable named "SMA_X" where X is the period.</returns>
+        /// <returns>Variable named "Sma".</returns>
         public Timeseries Sma(int period)
         {
             // TODO Find the common range of the inputs.
@@ -164,14 +204,14 @@ namespace TA.Lib
                 double[] output;
                 output = new double[size];
                 int outBegIdx, outNbElement;
-                Core.SMA( 0, size-1, mData, period, out outBegIdx, out outNbElement, output );                
-                output = mData;
+                Core.SMA(0, mData.Length-1, mData, period, out outBegIdx, out outNbElement, output);
+                
                 // TODO Throw exception on retCode != TA_SUCCESS
-                newVar = new Variable(retObject, output);
+                newVar = new Variable(retObject, output, outBegIdx);
             }
 
             // Add the new variable to the new time series.
-            retObject["SMA_" + period] = newVar;
+            retObject["Sma"] = newVar;
             return retObject;
         }
         #endregion
@@ -232,8 +272,8 @@ namespace TA.Lib
     /// </summary>
     [Serializable()]
     public class Variable<TSer,TVar,TVal> : IValueIter
-        where TSer:Timeseries<TSer,TVar,TVal>
-        where TVar:Variable<TSer,TVar,TVal>
+        where TSer:Timeseries<TSer,TVar,TVal>,IValueIter
+        where TVar:Variable<TSer,TVar,TVal>,IValueIter
     {    
         #region Constructors
         internal Variable(){}
@@ -263,21 +303,19 @@ namespace TA.Lib
         {
             return mParent.Timestamps;
         }
-
-        int IValueIter.GetStartTimestampOffset()
-        {
-            if( mData.Length > 0 )
-               return mTimestampsOffset;
-            else
-               return -1;
-        }
-
-        int IValueIter.GetEndTimestampOffset()
+        bool IValueIter.GetCommonRange(out int begin, out int end)
         {
             if (mData.Length > 0)
-                return mTimestampsOffset + mData.Length - 1;
+            {
+                begin = mTimestampsOffset;
+                end = mTimestampsOffset + mData.Length - 1;
+                return true;
+            }
             else
-                return -1;
+            {
+                begin = end = -1;
+                return false;
+            }
         }
 
         void IValueIter.SetIndexCache(Index index, int value)
@@ -293,6 +331,41 @@ namespace TA.Lib
             else
                 return -1;
         }
+
+        bool IValueIter.IsSame(IValueIter objectToBeTested)
+        {
+            return this.Equals(objectToBeTested);
+        }
+
+        bool IValueIter.Lock
+        {
+            // TODO: Really lock the object
+            set { mLock = value; }
+            get 
+            { 
+                // Also considered lock if parent Timeseries is lock.
+                return( mLock || mParent.Lock );
+            }             
+        }
+
+        int IValueIter.NbValueIter()
+        {
+            // A Variable is always only one ValueIter.
+            return 1;
+        }
+
+
+        void IValueIter.SetValueIterInfo(ref IValueIter[] iterRef,
+                                         ref int[] begOffset,
+                                         ref int arrayIdx,
+                                         int commonBegIndex)
+        {
+            iterRef[arrayIdx] = this;
+            begOffset[arrayIdx] = commonBegIndex-mTimestampsOffset;
+            arrayIdx++;
+        }
+
+        private bool mLock = false;
 
         private Index mIndexRef = null;
         private int mIndexCache = -1;
@@ -384,13 +457,12 @@ namespace TA.Lib
 
         #region Internal members
         internal TVal[] mData;
+        
         internal TSer mParent;
+        // Offset in Timestamps of the parent Timeseries.
+        internal int mTimestampsOffset;
         #endregion
 
-        #region Private members
-        // Offset in Timestamps of the parent Timeseries.
-        private int mTimestampsOffset;
-        #endregion        
     
         internal void StartFillup(TVal p)
         {

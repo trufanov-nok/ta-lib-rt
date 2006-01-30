@@ -51,7 +51,15 @@ namespace TA.Lib
             InitMembers();
         }
 
-        // Utility used by constructors
+        /// <summary>
+        /// Build a time series of a specific size using unspecified timestamps.
+        /// </summary>
+        public Timeseries(int size)
+        {
+            base.Init(size);
+            InitMembers();
+        }
+
         private void InitMembers()
         {
             Add = new AddOp(this);
@@ -68,6 +76,11 @@ namespace TA.Lib
         internal override Variable createVariable(double[] val)
         {
             return new Variable(this, val);
+        }
+
+        internal override Variable createVariable(double[] val, int offset)
+        {
+            return new Variable(this, val, offset);
         }
 
         internal override Timeseries createTimeseries()
@@ -184,6 +197,48 @@ namespace TA.Lib
             /// Constructor
             /// </summary>
             internal AddOp(Timeseries parent) { mParent = parent; }
+
+            /// <summary>
+            /// Create a variable using a deleguate functions
+            /// that returns a value for each position 'n'.
+            /// 
+            /// 'n' goes from 0 to the (number of timestamps)-1
+            /// 
+            /// The added variable is named "Sequence".
+            /// </summary>            
+            public Variable Sequence(Variable.SequenceFunction f)
+            {
+                // Do Variable.Sequence on the default.
+                Variable parentVar = mParent.Default;
+                if( parentVar != null )
+                {
+                     Timeseries ts = parentVar.Sequence(f);
+                     return mParent[ts.Default.Name] = ts.Default;
+                }
+
+                // If here, it means that there is NO variable
+                // in the parent Timeseries. Create a variable that 
+                // covers the whole range of the Timestamps.
+                int size = mParent.Timestamps.Length;
+                Variable newVar;
+                if (size <= 0)
+                    newVar = new Variable(mParent, new double[0]);
+                else
+                {
+                    double[] output;
+                    output = new double[size];
+
+                    for (int n = 0; n < size; n++)
+                    {
+                        output[n] = f(n);
+                    }
+                    newVar = new Variable(mParent, output);
+                }
+
+                // Add the new variable.
+                mParent["Sequence"] = newVar;
+                return newVar;
+            }
 
             /// <summary>
             /// Simple Moving average
@@ -499,6 +554,11 @@ namespace TA.Lib
         internal override Variable<TVal> createVariable(TVal[] val)
         {
             return new Variable<TVal>(this, val);
+        }
+
+        internal override Variable<TVal> createVariable(TVal[] val, int offset)
+        {
+            return new Variable<TVal>(this, val, offset);
         }
 
         internal override Timeseries<TVal> createTimeseries()
@@ -903,8 +963,8 @@ namespace TA.Lib
 	/// </summary>
 	[Serializable()]
     public abstract class Timeseries<TSer, TVar, TVal> : IValueIter, IEnumerable<Index>
-        where TSer : Timeseries<TSer, TVar, TVal>
-        where TVar : Variable<TSer, TVar, TVal>
+        where TSer : Timeseries<TSer, TVar, TVal>, IValueIter
+        where TVar : Variable<TSer, TVar, TVal>, IValueIter
     {
 		#region Initializer
 		protected void Init()
@@ -923,11 +983,19 @@ namespace TA.Lib
             InitMembers();
 			this.Timestamps = new Timestamps(this, timestamps);			
 		}
+
+        protected void Init(int size)
+        {
+            InitMembers();
+            this.Timestamps = new Timestamps(this, size);
+
+        }
 		#endregion
 
-        #region Factories
+        #region Internal Factories
         internal abstract TVar createVariable();
         internal abstract TVar createVariable(TVal[] val);
+        internal abstract TVar createVariable(TVal[] val, int offset );
 
         internal abstract TSer createTimeseries();
         internal abstract TSer createTimeseries(DateTime[] dateTime);
@@ -1099,7 +1167,7 @@ namespace TA.Lib
 				}
 
 				// Create a new variable pointing on the same timestamps/data.
-				TVar newVar = createVariable(value.mData);
+				TVar newVar = createVariable(value.mData,value.mTimestampsOffset);
 
 				// Put the new variable in mVariable.
                 if (mVariable.ContainsKey(variableName))
@@ -1427,46 +1495,94 @@ namespace TA.Lib
 
         #region IValueIter Members
 
-        public Timestamps GetTimestamps()
-        {
+        Timestamps IValueIter.GetTimestamps()
+        {            
             return this.Timestamps;
         }
 
-        public int GetStartTimestampOffset()
-        {
-            if (Padding == true)
-                return 0;
-
-            // Find the common starting point among all the variables.
-            // TODO Return right value.
-            return 0;
-        }
-
-        public int GetEndTimestampOffset()
+        bool IValueIter.GetCommonRange( out int begin, out int end )
         {
             if (Padding == true)
             {
-                int length = this.Timestamps.Length;
-                if (length != -1) return length;                
+                if (this.Timestamps.Length > 0)
+                {
+                    begin = 0;
+                    end = this.Timestamps.Length;
+                    return true;
+                }
+                else
+                {
+                    begin = end = -1;
+                    return false;
+                }
             }
 
-            // Find the ending point among all the variables.
-            return 10; // TODO REturn the rigth value.
+            // TODO: Speed optimize once FindCommonRange is proven well debug.
+            IValueIter[] list = new IValueIter[mVariable.Count];
+            for( int i =0; i < list.Length; i++ )
+            {
+                list[i] = mVariable.Values[i] as IValueIter; 
+            }
+            return Index.FindCommonRange(list, out begin, out end);            
         }
 
-        public void SetIndexCache(Index index, int value)
+        void IValueIter.SetIndexCache(Index index, int value)
         {
             mIndexRef = index;
             mIndexCache = value;
         }
 
-        public int GetIndexCache(Index index)
+        int IValueIter.GetIndexCache(Index index)
         {
             if (index.Equals(mIndexRef))
                 return mIndexCache;
             else
                 return -1;
         }
+
+        bool IValueIter.IsSame(IValueIter objectToBeTested)
+        {
+            // Check if 'this'
+            if (this.Equals(objectToBeTested))
+                return true;
+
+            // Check if the tested object can be found among
+            // all variables.             
+            foreach(KeyValuePair<string,TVar> p in mVariable)
+            {
+                if( p.Value.Equals(objectToBeTested) == true )
+                    return true;
+            }
+
+            // This object is not related to this TimeSeries.
+            return false;
+        }
+
+        int IValueIter.NbValueIter()
+        {
+            // A Timeseries has as much ValueIter as variable.
+            return mVariable.Count;
+        }
+
+
+        void IValueIter.SetValueIterInfo(ref IValueIter[] iterRef,
+                                         ref int[] begOffset,
+                                         ref int arrayIdx,
+                                         int commonBegIndex)
+        {
+            foreach (TVar v in mVariable.Values)
+            {
+                (v as IValueIter).SetValueIterInfo(ref iterRef, ref begOffset, ref arrayIdx, commonBegIndex);
+            }
+        }
+
+        bool IValueIter.Lock
+        {
+            // TODO: Really lock the object
+            set { mLock = value; }
+            get { return mLock; }
+        }
+        private bool mLock = false;
         private Index mIndexRef = null;
         private int mIndexCache = -1;
         #endregion
@@ -1504,20 +1620,25 @@ namespace TA.Lib
         public IEnumerator<Index> GetEnumerator()
         {
             Index mIndex = new Index(this);
-            while (mIndex.LeftToIterate != 0)
+            if (mIndex.Size != 0)
             {
+                mIndex.Lock = true;
                 yield return mIndex;
-                mIndex.Next();
-            }
-            yield break;
+                while (mIndex.PositionToEnd != 0)
+                {                    
+                    mIndex.Next();
+                    yield return mIndex;
+                } 
+                mIndex.Lock = false;               
+            }            
         }
         #endregion
 
+        
         #region IEnumerable Members
-
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new Exception("The method or operation is not implemented.");
+            return GetEnumerator();
         }
 
         #endregion
