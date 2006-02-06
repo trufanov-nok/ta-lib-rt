@@ -7,26 +7,51 @@
 using System;
 using System.Collections;
 using TA.Lib;
+using System.Collections.Generic;
 
 namespace TA.Lib
 {
-    
+
+    // Index hides all the complexity related to offset within data during 
+    // iteration of the values within the timeseries and variable.
     public class Index
     {
+        // Offsets within the data arrays of each variable.
         private int[] mStartOffset;        
-        private IValueIter[] mValueIter;        
-        private int mPosition;
-        private int mSize;
+
+        // Offset within the timestamp array.
         private int mTimestampOffset;
 
+        // Offset from the perspective of the foreach() user.
+        private int mPosition;
+
+        // One of the variable timestamps is selected
+        // to be the reference.
+        private Timestamps mRefTimestamps;
+
+        // Keep a reference on all ValueIter during iteration.        
+        private IValueIter[] mValueIter;
+
+        // Total number of iteration from the perspective of the foreach() user.
+        private int mSize;
+
+        // Temporary back offset. User set this offset by using the
+        // substraction operator:
+        //
+        // foreach( Index i in ts )
+        // {
+        //    ...
+        //    double d = ts[i-1];
+        // }
+        private int mBackOffset;
+    
+        // Public property so that the foreach() loop can identify
+        // where it stands among all the iterations.
         public int PositionToEnd
         {
             get
             {
-                if( mSize == 0 )
-                    return -1;
-                else
-                    return mSize-mPosition-1;
+                return mSize - mPosition - 1;               
             }
         }
 
@@ -43,6 +68,14 @@ namespace TA.Lib
             get
             {
                 return mSize;
+            }
+        }
+
+        internal Timestamps RefTimestamps
+        {
+            get
+            {
+                return mRefTimestamps;
             }
         }
 
@@ -80,15 +113,11 @@ namespace TA.Lib
 
         internal Index(params IValueIter[] list)
         {
-            // Default.
-            mPosition = -1;            
-
             // Handle case of empty list.
             if (list.Length == 0)
                 return;
 
-            // Find the total number of ValueIter and
-            // verify all synchronized.
+            // Find the total number of ValueIter and verify all synchronized.
             // At the same time, identify the common range.
             int beginCommonRange = int.MinValue;
             int endCommonRange = int.MaxValue;
@@ -98,7 +127,7 @@ namespace TA.Lib
                 // Common range does not have elements.
                 return;
             }
-            Timestamps refTimestamps = valueIter.GetTimestamps();
+            Timestamps mRefTimestamps = valueIter.GetTimestamps();
             int nbValueIter = valueIter.NbValueIter();
 
             // Handle case of Timeseries with no variables.
@@ -110,7 +139,9 @@ namespace TA.Lib
             for (int i = 1; i < list.Length; i++)                
             {
                 valueIter = list[i];
-                if (!valueIter.GetTimestamps().Equals(refTimestamps))
+
+                // Could be speed optimized...
+                if (!valueIter.GetTimestamps().IsSyncWith(mRefTimestamps))
                 {
                     throw new Exception("Iteration possible only among synchronized Timeseries and Variables");
                 }
@@ -173,35 +204,24 @@ namespace TA.Lib
             mTimestampOffset = beginCommonRange;
 
             // Now ready for first iteration.
-            // Set variable allowing the user to identify the position
-            // within the iterations.
-            mPosition = 0;
+            // Iterator will work only when mSize != 0.
             mSize = positionToEnd;
-        }
-
-        internal bool Next()
-        {
-            if (mPosition == mSize)
-                return false;
-            else
-                mPosition++;
-
-            // Adjust position for all the valueIter.
-            for (int i = 0; i < mValueIter.Length; i++)
-            {
-                mStartOffset[i]++;
-            }
-            mTimestampOffset++;
-            return true;
         }
 
         internal int Offset(IValueIter vi)
         {
+            // Reset the back offset.
+            // It is assumed that the ValueIter will
+            // call the Offset() function only once
+            // for the current data access.
+            int backOffset = mBackOffset;
+            mBackOffset = 0;
+
             // Find which of the mOffset correspond
             // to this ValueIter. Use cache info when available.
             int iterIdx = vi.GetIndexCache(this);
             if (iterIdx != -1)
-                return mStartOffset[iterIdx];
+                return mStartOffset[iterIdx]-backOffset;
             
             // Not in the cache, so do a sequential
             // search for the right mOffset.
@@ -210,7 +230,7 @@ namespace TA.Lib
                 if (mValueIter[i].IsSame(vi))
                 {
                     vi.SetIndexCache(this, i);
-                    return mStartOffset[i];
+                    return mStartOffset[i]-backOffset;
                 }
             }
 
@@ -230,7 +250,7 @@ namespace TA.Lib
         // Locking allows to properly prevent and/or handle safely changes to 
         // the objects being iterated.
         private bool mLock = false;
-        public bool Lock
+        private bool Lock
         {
             get { return mLock; }
             set 
@@ -245,5 +265,40 @@ namespace TA.Lib
                 mLock = value; 
             }
         }	
+
+        // Return an enumerator for this index.
+        public IEnumerator<Index> GetEnumerator()
+        {
+            if (mSize != 0)
+            {
+                Lock = true;
+                mPosition = 0;
+                yield return this;
+                while (++mPosition != mSize)
+                {
+                    // Adjust position for all the valueIter.
+                    for (int i = 0; i < mValueIter.Length; i++)
+                    {
+                        mStartOffset[i]++;
+                    }
+                    mTimestampOffset++;
+                    //mBackOffset = 0; 
+                    yield return this;                    
+                }
+                Lock = false;
+            }
+        }
+
+        public static Index operator -(Index a, int b)
+        {
+            a.mBackOffset = b;
+            return a;
+        }
+
+        public Index Prev(int backOffset)
+        {
+            this.mBackOffset = backOffset;
+            return this;
+        }
     }
 }

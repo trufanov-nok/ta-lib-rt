@@ -56,5 +56,9 @@ namespace TA.Lib
         // that would affect its timestamp common range 
         // while being lock.
         bool Lock {get; set;}
+
+        // All ValueIter must offer a mean to iterate using
+        // an index object.
+        IEnumerator<Index> GetEnumerator();
     }
 }

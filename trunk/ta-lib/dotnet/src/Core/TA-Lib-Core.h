@@ -341,6 +341,26 @@ namespace TA
          #define TA_MIN Core::MIN
          #define TA_MIN_Lookback Core::MIN_Lookback
 
+         static int SUM_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode SUM( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode SUM( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_SUM Core::SUM
+         #define TA_SUM_Lookback Core::SUM_Lookback
+
          static int BBANDS_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                                    double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                                    double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */

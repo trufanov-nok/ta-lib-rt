@@ -244,10 +244,21 @@ namespace TA.Lib
             /// Simple Moving average
             /// </summary>
             /// <param name="period"></param>
-            /// <returns>Add variable named "SMA_X" where X is the period.</returns>
+            /// <returns>Add variable named "Sma".</returns>
             public Variable Sma(int period)
             {
                 Timeseries ts = mParent.Default.Sma(period);
+                return mParent[ts.Default.Name] = ts.Default;
+            }
+
+            /// <summary>
+            /// Summation over the specificed period.
+            /// </summary>
+            /// <param name="period"></param>
+            /// <returns>Add variable named "Sum".</returns>
+            public Variable Sum(int period)
+            {
+                Timeseries ts = mParent.Default.Sum(period);
                 return mParent[ts.Default.Name] = ts.Default;
             }
         }
@@ -281,6 +292,17 @@ namespace TA.Lib
             {
                 return mParent.Default.Apply.Sma(period);
             }
+
+            /// <summary>
+            /// Summation over the specified period.
+            /// Perform the function on the default variable.
+            /// </summary>
+            /// <param name="period"></param>
+            /// <returns>A reference on the transformed variable.</returns>
+            public Variable Sum(int period)
+            {
+                return mParent.Default.Apply.Sum(period);
+            }
         }
 
         /// <summary>
@@ -305,7 +327,7 @@ namespace TA.Lib
         /// Simple moving average.
         /// </summary>
         /// <param name="period"></param>
-        /// <returns>A new time series with a variable named "SMA_x" where x is the period.</returns>
+        /// <returns>A new time series with a variable named "Sma".</returns>
         public Timeseries Sma(int period)
         {
             // TODO Speed optimize. In the meantime, this is
@@ -313,6 +335,22 @@ namespace TA.Lib
             Timeseries ts = new Timeseries(Timestamps);
             ts["_"] = Default;
             ts.Add.Sma(period);
+            ts.Delete("_");
+            return ts;
+        }
+
+        /// <summary>
+        /// Summation over the specified period.
+        /// </summary>
+        /// <param name="period"></param>
+        /// <returns>A new time series with a variable named "Sum".</returns>
+        public Timeseries Sum(int period)
+        {
+            // TODO Speed optimize. In the meantime, this is
+            // a good test.
+            Timeseries ts = new Timeseries(Timestamps);
+            ts["_"] = Default;
+            ts.Add.Sum(period);
             ts.Delete("_");
             return ts;
         }
@@ -975,20 +1013,33 @@ namespace TA.Lib
 		protected void Init(DateTime []dateTime)
 		{
             InitMembers();
-            this.Timestamps = new Timestamps(this,dateTime);            
+            this.Timestamps = new Timestamps(this,dateTime);
+            mInitialized = true;
 		}
 
 		protected void Init(Timestamps timestamps)
 		{
             InitMembers();
-			this.Timestamps = new Timestamps(this, timestamps);			
+			this.Timestamps = new Timestamps(this, timestamps);
+            mInitialized = true;
 		}
 
         protected void Init(int size)
         {
             InitMembers();
             this.Timestamps = new Timestamps(this, size);
+            mInitialized = true;
+        }
 
+        // Special initializer when an empty Timeseries
+        // gets its first variable inserted.
+        internal void InitFromFirstVariable(Timestamps timestamps)
+        {
+            if (this.mInitialized == true)
+            {
+                throw new Exception("Internal Error: Should never re-initialize timeseries");
+            }
+            Init(timestamps);
         }
 		#endregion
 
@@ -1070,6 +1121,14 @@ namespace TA.Lib
 			this[variableName] = x;
 			return x;
 		}
+
+        // Add an un-initialized variable.
+        public TVar AddVariable(string variableName)
+        {
+            TVar x = createVariable();
+            this[variableName] = x;
+            return x;
+        }
 		#endregion
 
 		#region Reference on reserved variable name
@@ -1142,32 +1201,69 @@ namespace TA.Lib
 			mVariable.RemoveAt(idx);
 		}
 
+        /// <summary>
+        /// Access to values of the default variable.
+        /// </summary>
+        public TVal this[Index idx]
+        {
+            get
+            {
+                return this.Default[idx];
+            }
+            set
+            {
+                this.Default[idx] = value;
+            }
+        }
+
 		/// <summary>
 		/// Access by name to variable belonging to this Timeseries.
 		/// </summary>
 		public TVar this [string variableName]
 		{
 			get { 
-				// TODO Should return an exception if not found.
-				int idx = mVariable.IndexOfKey(variableName); 
+				int idx = mVariable.IndexOfKey(variableName);
+                if (idx == -1)
+                {
+                    // When not found, create an unitialized variable.
+                    // It is up to the context of the variable operation
+                    // to determine if this should be an error or not.
+                    TVar newVar = createVariable();
+                    mVariable.Add( variableName, newVar );
+                    return newVar;
+                }
+
+                // Return the existing variable.
 				return mVariable.Values[idx];
 			}
 
 			set { 
-				// If no timestamps, take the one from this new variable.
-				if( Timestamps == null )
-				{
-					Timestamps = value.Parent.Timestamps;
-				}
+                TVar newVar;
 
-                // Verify if same DateTime array, if not, check for synchronization
-				else if( value.Parent.Timestamps.IsSyncWith( Timestamps ) == false ) 
-				{
-				    // TODO All the sync logic					
-				}
+                // When assignment from an uninitialized variable, just create
+                // a new uninitialized variable with the same name for this object.
+                if (value.mInitialized == false)
+                    newVar = createVariable();
+                else
+                {
+                    // If no timestamps, take the one from this new variable.
+                    if (Timestamps == null)
+                    {
+                        Timestamps = value.Parent.Timestamps;
+                        mInitialized = true;
+                    }
 
-				// Create a new variable pointing on the same timestamps/data.
-				TVar newVar = createVariable(value.mData,value.mTimestampsOffset);
+                    // Verify if same DateTime array, if not, check for synchronization
+                    else if (value.Parent.Timestamps.IsSyncWith(Timestamps) == false)
+                    {
+                        // TODO All the sync logic					
+                    }
+
+                    // Create a new variable pointing on the same timestamps/data.
+                    newVar = createVariable(value.mData, value.mTimestampsOffset);
+
+                    // TODO Adjust the new common range.				
+                }
 
 				// Put the new variable in mVariable.
                 if (mVariable.ContainsKey(variableName))
@@ -1175,8 +1271,6 @@ namespace TA.Lib
                     mVariable.Remove(variableName);
                 }
 		        mVariable.Add(variableName,newVar);
-
-				// TODO Find the new common range.				
 
 				// Update default variable according to sort logic.
 				mDefault = mVariable.Values[0];
@@ -1275,6 +1369,10 @@ namespace TA.Lib
 		#endregion
 
 		#region Private members
+        // A Timeseries is considered initialized when 
+        // the timestamps are known.
+        private bool mInitialized;
+
 		private TVar mDefault;
         private SyncMode mSyncMode;
 
@@ -1284,24 +1382,25 @@ namespace TA.Lib
         private int mOffsetMinEnd;
         private int mOffsetMaxEnd;
 
-        TimestampType mTimestampType;
-        NaturalPeriod mNaturalPeriod;
-        Periodicity mPeriodicity;
+        private TimestampType mTimestampType;
+        private NaturalPeriod mNaturalPeriod;
+        private Periodicity mPeriodicity;
 
-        bool mAllowEmptyVariables;
-        bool mPadding;
+        private bool mAllowEmptyVariables;
+        private bool mPadding;
 
-        Interpolation mInterpolation;
+        private Interpolation mInterpolation;
 
         private void InitMembers()
         {
+            mInitialized = false;
             mVariable = new SortedList<string,TVar>();            
             mSyncMode = SyncMode.Mode8;
             mNaturalPeriod = NaturalPeriod.Year;
             mTimestampType = TimestampType.Exact;
             mAllowEmptyVariables = true;
             mPadding = false;
-            mPeriodicity = Periodicity.PerDaily;
+            mPeriodicity = Periodicity.PerUnknown;
             mInterpolation = Interpolation.Linear;
         }
 
@@ -1343,6 +1442,21 @@ namespace TA.Lib
 		#endregion
 
         #region Properties
+
+        public bool Initialized
+        {
+            /// <summary>
+            /// True when this timeseries have its timestamps initialized.
+            /// A timeseries not initialized can contain only un-initialized (empty)
+            /// variables.
+            /// The first variable added or initialized with values will dictate
+            /// the timestamps for this Timeseries.
+            /// </summary>
+            get
+            {
+                return mInitialized;
+            }
+        }
 
         /// <summary>
         /// Control the TimestampType for this timeseries.
@@ -1466,6 +1580,18 @@ namespace TA.Lib
             set
             {
                 mInterpolation = value;
+            }
+        }
+
+        /// <summary>
+        /// Indicates if the timeseries is uniform or not.
+        /// </summary>
+        public bool Uniform
+        {
+            get
+            {
+                // TODO To be implemented.
+                return true;
             }
         }
         #endregion
@@ -1620,27 +1746,15 @@ namespace TA.Lib
         public IEnumerator<Index> GetEnumerator()
         {
             Index mIndex = new Index(this);
-            if (mIndex.Size != 0)
-            {
-                mIndex.Lock = true;
-                yield return mIndex;
-                while (mIndex.PositionToEnd != 0)
-                {                    
-                    mIndex.Next();
-                    yield return mIndex;
-                } 
-                mIndex.Lock = false;               
-            }            
+            return mIndex.GetEnumerator();          
         }
         #endregion
-
         
         #region IEnumerable Members
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
-
         #endregion
 }
 

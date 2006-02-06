@@ -98,17 +98,27 @@ namespace TA.Lib
 
 
 		#region Internal Members
-		internal bool IsSyncWith(IValueIter otherObject)
-		{
-			// TODO Check for sync. For now assume all input
-			// are synchronized.
-			return true;
-		}
         internal bool IsSyncWith(Timestamps timeStamps)
         {
-            // TODO Check for sync. For now assume all input
-            // are synchronized.
-            return true;
+            // If exact same object, it is synchronized...
+            if (this.Equals(timeStamps)) 
+                return true;
+
+            // If both are positional, synchronization is assumed
+            // because the timestamps are alway {0,1,2,3...}
+            if (this.mTimestamps == null)
+            {
+                if (timeStamps.mTimestamps == null)
+                    return true;
+
+                // Positional can be synchronized only with another
+                // positional timestamps.
+                return false;
+            }
+            
+            // TODO Implement identification of Timeseries with
+            // same DateTime among their common range.
+            return false;
         }
 		#endregion
 

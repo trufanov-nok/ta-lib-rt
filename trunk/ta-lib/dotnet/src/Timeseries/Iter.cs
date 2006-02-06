@@ -12,28 +12,18 @@ using System.Text;
 namespace TA.Lib
 {
     public class Iter
-    {
-        private Index mIndex;
+    {        
+        private IValueIter[] mValueIter;
 
         public Iter(params IValueIter[] list)
         {
-            // Create an Index object.
-            mIndex = new Index(list);
+            mValueIter = list.Clone() as IValueIter[];
         }
 
         public IEnumerator<Index> GetEnumerator()
         {
-            if (mIndex.Size != 0)
-            {
-                mIndex.Lock = true;
-                yield return mIndex;
-                while (mIndex.PositionToEnd != 0)
-                {
-                    mIndex.Next();
-                    yield return mIndex;
-                }
-                mIndex.Lock = false;
-            }    
+            Index mIndex = new Index(mValueIter);
+            return mIndex.GetEnumerator();
         }
     }
 }
