@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections;
 
 namespace TA.Lib
 {
@@ -131,13 +132,12 @@ namespace TA.Lib
         {
             Timeseries ts = new Timeseries(a.Parent.Timestamps);
             Variable vd = ts["Result"];
-
-            vd.StartFillup(0.0);
+            
             foreach (Index idx in new Iter(a,vd))
             {
                 vd[idx] = a[idx] / b;
             }
-            vd.EndFillup();
+            
             return ts;
         }
         #endregion
@@ -271,12 +271,16 @@ namespace TA.Lib
     /// A variable ALWAYS belongs to one and only one Timeseries generic object.
     /// </summary>
     [Serializable()]
-    public class Variable<TSer,TVar,TVal> : IValueIter
+    public class Variable<TSer, TVar, TVal> : IValueIter, IEnumerable<Index>
         where TSer:Timeseries<TSer,TVar,TVal>,IValueIter
         where TVar:Variable<TSer,TVar,TVal>,IValueIter
     {    
         #region Constructors
-        internal Variable(){}
+        internal Variable()
+        {
+            // Required because serializable, but not expecteed to be called for now...
+            throw new Exception("Variable default contrustor unexpectably called.");
+        }
 
         internal Variable(TSer parent)            
         {
@@ -287,6 +291,7 @@ namespace TA.Lib
         {
             mParent = parent;
             mData = newData;
+            mInitialized = true;
             //Values = new Values<TVal>(parent, mData);            
         }
 
@@ -295,6 +300,7 @@ namespace TA.Lib
             mParent = parent;
             mData = newData;
             mTimestampsOffset = offset;
+            mInitialized = true;
         }
         #endregion
 
@@ -418,7 +424,25 @@ namespace TA.Lib
         public TVal this[Index idx]
         {
             get { return mData[idx.Offset(this)]; }
-            set { }
+            set 
+            {
+                if (mInitialized == false)
+                {
+                    // This is the first time data is added to
+                    // this variable.
+
+                    // Is this the first variable being initialized 
+                    // for the parent Timeseries?
+                    // If yes, initialize the parent Timeseries first.
+                    if( mParent.Initialized == true )
+                       mParent.InitFromFirstVariable(idx.RefTimestamps);
+                                        
+                    mData = new TVal[idx.Size]; // TODO Minimize size using idx.Position
+                    mTimestampsOffset = 0; // TODO Compute this correctly.
+                    mInitialized = true;
+                }
+                mData[idx.Position] = value; // TODO Use proper offset.
+            }
         }
         #endregion
 
@@ -456,24 +480,18 @@ namespace TA.Lib
         #endregion
 
         #region Internal members
+
+        // A variable is considered initialized when 
+        // there is at least one value inserted.
+        internal bool mInitialized;
+
         internal TVal[] mData;
         
         internal TSer mParent;
         // Offset in Timestamps of the parent Timeseries.
         internal int mTimestampsOffset;
         #endregion
-
     
-        internal void StartFillup(TVal p)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        internal void EndFillup()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
         /*#region Arithmetic Operator
         // TODO Implement operator properly.
         /// <summary>
@@ -521,6 +539,21 @@ namespace TA.Lib
             return ts;
         }   
         #endregion*/
+
+        #region IEnumerable<Index> Members
+        public IEnumerator<Index> GetEnumerator()
+        {
+            Index mIndex = new Index(this);
+            return mIndex.GetEnumerator();
+        }
+        #endregion
+
+        #region IEnumerable Members
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+        #endregion
     }
     #endregion
 }
