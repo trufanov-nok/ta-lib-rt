@@ -427,6 +427,51 @@ public class Core {
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
+   public int SUM_Lookback( int optInTimePeriod )
+   {
+      return 0;
+   }
+   public TA_RetCode SUM( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode SUM( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
    public int BBANDS_Lookback( int optInTimePeriod,
       double optInNbDevUp,
       double optInNbDevDn,
@@ -517,7 +562,7 @@ public class Core {
       }
       if( tempBuffer1 != outRealMiddleBand )
       {
-         System.arraycopy(tempBuffer1,0,outRealMiddleBand,0, outNbElement.value ) ;
+         System.arraycopy(tempBuffer1,0,outRealMiddleBand,0,outNbElement.value) ;
       }
       if( optInNbDevUp == optInNbDevDn )
       {
@@ -744,7 +789,7 @@ public class Core {
       {
          return retCode;
       }
-      secondEMA = new double[ firstEMANbElement.value ] ;
+      secondEMA = new double[firstEMANbElement.value] ;
       retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
          optInTimePeriod, k,
          secondEMABegIdx ,  secondEMANbElement ,
@@ -808,7 +853,7 @@ public class Core {
       {
          return retCode;
       }
-      secondEMA = new double[ firstEMANbElement.value ] ;
+      secondEMA = new double[firstEMANbElement.value] ;
       retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
          optInTimePeriod, k,
          secondEMABegIdx ,  secondEMANbElement ,
@@ -3396,7 +3441,7 @@ public class Core {
       {
          return retCode;
       }
-      secondEMA = new double[ firstEMANbElement.value ] ;
+      secondEMA = new double[firstEMANbElement.value] ;
       retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
          optInTimePeriod, k,
          secondEMABegIdx ,  secondEMANbElement ,
@@ -3472,7 +3517,7 @@ public class Core {
       {
          return retCode;
       }
-      secondEMA = new double[ firstEMANbElement.value ] ;
+      secondEMA = new double[firstEMANbElement.value] ;
       retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
          optInTimePeriod, k,
          secondEMABegIdx ,  secondEMANbElement ,
@@ -3787,7 +3832,7 @@ public class Core {
       {
          outBegIdx.value  = startIdx;
          outNbElement.value  = endIdx-startIdx+1;
-         System.arraycopy(inReal,startIdx,outReal,0,(int) outNbElement.value ) ;
+         System.arraycopy(inReal,startIdx,outReal,0,(int)outNbElement.value) ;
          return  TA_RetCode. TA_SUCCESS;
       }
       divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
@@ -3850,7 +3895,7 @@ public class Core {
       {
          outBegIdx.value  = startIdx;
          outNbElement.value  = endIdx-startIdx+1;
-         System.arraycopy(inReal,startIdx,outReal,0,(int) outNbElement.value ) ;
+         System.arraycopy(inReal,startIdx,outReal,0,(int)outNbElement.value) ;
          return  TA_RetCode. TA_SUCCESS;
       }
       divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
@@ -8883,7 +8928,7 @@ public class Core {
          tempBuffer, optInSlowD_Period,
          optInSlowD_MAType,
          outBegIdx, outNbElement, outSlowD );
-      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int) outNbElement.value ) ;
+      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNbElement.value) ;
       if( retCode !=  TA_RetCode. TA_SUCCESS )
       {
          outBegIdx.value = 0 ;
@@ -9017,7 +9062,7 @@ public class Core {
          tempBuffer, optInSlowD_Period,
          optInSlowD_MAType,
          outBegIdx, outNbElement, outSlowD );
-      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int) outNbElement.value ) ;
+      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNbElement.value) ;
       if( retCode !=  TA_RetCode. TA_SUCCESS )
       {
          outBegIdx.value = 0 ;
@@ -9165,7 +9210,7 @@ public class Core {
          outNbElement.value = 0 ;
          return retCode;
       }
-      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int) outNbElement.value ) ;
+      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNbElement.value) ;
       if( retCode !=  TA_RetCode. TA_SUCCESS )
       {
          outBegIdx.value = 0 ;
@@ -9288,7 +9333,7 @@ public class Core {
          outNbElement.value = 0 ;
          return retCode;
       }
-      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int) outNbElement.value ) ;
+      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNbElement.value) ;
       if( retCode !=  TA_RetCode. TA_SUCCESS )
       {
          outBegIdx.value = 0 ;
@@ -9653,7 +9698,8 @@ public class Core {
       int optInTimePeriod2,
       int optInTimePeriod3 )
    {
-      return 0;
+      int maxPeriod =  ((( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) > (optInTimePeriod3)) ? ( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) : (optInTimePeriod3)) ;
+      return  SMA_Lookback ( maxPeriod ) + 1;
    }
    public TA_RetCode ULTOSC( int startIdx,
       int endIdx,
@@ -9667,6 +9713,17 @@ public class Core {
       MInteger outNbElement,
       double outReal[] )
    {
+      double a1Total, a2Total, a3Total;
+      double b1Total, b2Total, b3Total;
+      double trueHigh, trueLow, trueRange, closeMinusTrueLow;
+      double tempDouble;
+      int lookbackTotal;
+      int longestPeriod, longestIndex;
+      int i,j,today,outIdx;
+      int trailingIdx1, trailingIdx2, trailingIdx3;
+      int []usedFlag = new int[3] ;
+      int []periods = new int[3] ;
+      int []sortedPeriods = new int[3] ;
       if( startIdx < 0 )
          return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -9683,8 +9740,74 @@ public class Core {
          optInTimePeriod3 = 28;
       else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
          return  TA_RetCode. TA_BAD_PARAM;
-      outNbElement.value  = 0;
-      outBegIdx.value  = 0;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      periods[0] = optInTimePeriod1;
+      periods[1] = optInTimePeriod2;
+      periods[2] = optInTimePeriod3;
+      usedFlag[0] = 0;
+      usedFlag[1] = 0;
+      usedFlag[2] = 0;
+      for ( i = 0; i < 3; ++i )
+      {
+         longestPeriod = 0;
+         longestIndex = 0;
+         for ( j = 0; j < 3; ++j )
+         {
+            if ( (usedFlag[j] == 0) && (periods[j] > longestPeriod) )
+            {
+               longestPeriod = periods[j];
+               longestIndex = j;
+            }
+         }
+         usedFlag[longestIndex] = 1;
+         sortedPeriods[i] = longestPeriod;
+      }
+      optInTimePeriod1 = sortedPeriods[0];
+      optInTimePeriod2 = sortedPeriods[1];
+      optInTimePeriod3 = sortedPeriods[2];
+      lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
+      if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
+      if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
+      a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a1Total += closeMinusTrueLow; b1Total += trueRange; }
+      a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a2Total += closeMinusTrueLow; b2Total += trueRange; }
+      a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a3Total += closeMinusTrueLow; b3Total += trueRange; }
+      today = startIdx;
+      outIdx = 0;
+      trailingIdx1 = today - optInTimePeriod1;
+      trailingIdx2 = today - optInTimePeriod2;
+      trailingIdx3 = today - optInTimePeriod3;
+      while( today <= endIdx )
+      {
+         trueHigh = (((inHigh[today]) > (inClose[today-1])) ? (inHigh[today]) : (inClose[today-1])) ; trueLow = (((inLow[today]) < (inClose[today-1])) ? (inLow[today]) : (inClose[today-1])) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = trueHigh - trueLow;
+         a1Total += closeMinusTrueLow;
+         a2Total += closeMinusTrueLow;
+         a3Total += closeMinusTrueLow;
+         b1Total += trueRange;
+         b2Total += trueRange;
+         b3Total += trueRange;
+         trueHigh = (((inHigh[trailingIdx1]) > (inClose[trailingIdx1-1])) ? (inHigh[trailingIdx1]) : (inClose[trailingIdx1-1])) ; trueLow = (((inLow[trailingIdx1]) < (inClose[trailingIdx1-1])) ? (inLow[trailingIdx1]) : (inClose[trailingIdx1-1])) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = trueHigh - trueLow;
+         a1Total -= closeMinusTrueLow;
+         b1Total -= trueRange;
+         trueHigh = (((inHigh[trailingIdx2]) > (inClose[trailingIdx2-1])) ? (inHigh[trailingIdx2]) : (inClose[trailingIdx2-1])) ; trueLow = (((inLow[trailingIdx2]) < (inClose[trailingIdx2-1])) ? (inLow[trailingIdx2]) : (inClose[trailingIdx2-1])) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = trueHigh - trueLow;
+         a2Total -= closeMinusTrueLow;
+         b2Total -= trueRange;
+         trueHigh = (((inHigh[trailingIdx3]) > (inClose[trailingIdx3-1])) ? (inHigh[trailingIdx3]) : (inClose[trailingIdx3-1])) ; trueLow = (((inLow[trailingIdx3]) < (inClose[trailingIdx3-1])) ? (inLow[trailingIdx3]) : (inClose[trailingIdx3-1])) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = trueHigh - trueLow;
+         a3Total -= closeMinusTrueLow;
+         b3Total -= trueRange;
+         tempDouble = 0.0;
+         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) tempDouble += 4.0*a1Total/b1Total;
+         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) tempDouble += 2.0*a2Total/b2Total;
+         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) tempDouble += a3Total/b3Total;
+         outReal[outIdx] = 100.0 * (tempDouble / 7.0);
+         outIdx++;
+         today++;
+         trailingIdx1++;
+         trailingIdx2++;
+         trailingIdx3++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
       return  TA_RetCode. TA_SUCCESS;
    }
    public TA_RetCode ULTOSC( int startIdx,
@@ -9699,6 +9822,17 @@ public class Core {
       MInteger outNbElement,
       double outReal[] )
    {
+      double a1Total, a2Total, a3Total;
+      double b1Total, b2Total, b3Total;
+      double trueHigh, trueLow, trueRange, closeMinusTrueLow;
+      double tempDouble;
+      int lookbackTotal;
+      int longestPeriod, longestIndex;
+      int i,j,today,outIdx;
+      int trailingIdx1, trailingIdx2, trailingIdx3;
+      int []usedFlag = new int[3] ;
+      int []periods = new int[3] ;
+      int []sortedPeriods = new int[3] ;
       if( startIdx < 0 )
          return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -9715,8 +9849,74 @@ public class Core {
          optInTimePeriod3 = 28;
       else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
          return  TA_RetCode. TA_BAD_PARAM;
-      outNbElement.value  = 0;
-      outBegIdx.value  = 0;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      periods[0] = optInTimePeriod1;
+      periods[1] = optInTimePeriod2;
+      periods[2] = optInTimePeriod3;
+      usedFlag[0] = 0;
+      usedFlag[1] = 0;
+      usedFlag[2] = 0;
+      for ( i = 0; i < 3; ++i )
+      {
+         longestPeriod = 0;
+         longestIndex = 0;
+         for ( j = 0; j < 3; ++j )
+         {
+            if ( (usedFlag[j] == 0) && (periods[j] > longestPeriod) )
+            {
+               longestPeriod = periods[j];
+               longestIndex = j;
+            }
+         }
+         usedFlag[longestIndex] = 1;
+         sortedPeriods[i] = longestPeriod;
+      }
+      optInTimePeriod1 = sortedPeriods[0];
+      optInTimePeriod2 = sortedPeriods[1];
+      optInTimePeriod3 = sortedPeriods[2];
+      lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
+      if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
+      if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
+      a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a1Total += closeMinusTrueLow; b1Total += trueRange; }
+      a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a2Total += closeMinusTrueLow; b2Total += trueRange; }
+      a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a3Total += closeMinusTrueLow; b3Total += trueRange; }
+      today = startIdx;
+      outIdx = 0;
+      trailingIdx1 = today - optInTimePeriod1;
+      trailingIdx2 = today - optInTimePeriod2;
+      trailingIdx3 = today - optInTimePeriod3;
+      while( today <= endIdx )
+      {
+         trueHigh = (((inHigh[today]) > (inClose[today-1])) ? (inHigh[today]) : (inClose[today-1])) ; trueLow = (((inLow[today]) < (inClose[today-1])) ? (inLow[today]) : (inClose[today-1])) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = trueHigh - trueLow;
+         a1Total += closeMinusTrueLow;
+         a2Total += closeMinusTrueLow;
+         a3Total += closeMinusTrueLow;
+         b1Total += trueRange;
+         b2Total += trueRange;
+         b3Total += trueRange;
+         trueHigh = (((inHigh[trailingIdx1]) > (inClose[trailingIdx1-1])) ? (inHigh[trailingIdx1]) : (inClose[trailingIdx1-1])) ; trueLow = (((inLow[trailingIdx1]) < (inClose[trailingIdx1-1])) ? (inLow[trailingIdx1]) : (inClose[trailingIdx1-1])) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = trueHigh - trueLow;
+         a1Total -= closeMinusTrueLow;
+         b1Total -= trueRange;
+         trueHigh = (((inHigh[trailingIdx2]) > (inClose[trailingIdx2-1])) ? (inHigh[trailingIdx2]) : (inClose[trailingIdx2-1])) ; trueLow = (((inLow[trailingIdx2]) < (inClose[trailingIdx2-1])) ? (inLow[trailingIdx2]) : (inClose[trailingIdx2-1])) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = trueHigh - trueLow;
+         a2Total -= closeMinusTrueLow;
+         b2Total -= trueRange;
+         trueHigh = (((inHigh[trailingIdx3]) > (inClose[trailingIdx3-1])) ? (inHigh[trailingIdx3]) : (inClose[trailingIdx3-1])) ; trueLow = (((inLow[trailingIdx3]) < (inClose[trailingIdx3-1])) ? (inLow[trailingIdx3]) : (inClose[trailingIdx3-1])) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = trueHigh - trueLow;
+         a3Total -= closeMinusTrueLow;
+         b3Total -= trueRange;
+         tempDouble = 0.0;
+         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) tempDouble += 4.0*a1Total/b1Total;
+         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) tempDouble += 2.0*a2Total/b2Total;
+         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) tempDouble += a3Total/b3Total;
+         outReal[outIdx] = 100.0 * (tempDouble / 7.0);
+         outIdx++;
+         today++;
+         trailingIdx1++;
+         trailingIdx2++;
+         trailingIdx3++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
