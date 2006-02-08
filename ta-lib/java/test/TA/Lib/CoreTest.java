@@ -124,6 +124,14 @@ public class CoreTest extends TestCase {
         retCode = lib.MA(0,input.length-1,input,10,TA_MAType.TA_MAType_SMA,outBegIdx,outNbElement,output);
         assertEquals(outBegIdx.value,9);
     }
+    
+    public void testCMO()
+    {
+    	lookback = lib.CMO_Lookback(10);
+    	retCode = lib.CMO(0,input.length-1,input,10,outBegIdx,outNbElement,output);
+    	assertEquals(100.0,output[0]);
+    }
+    
     public void testSimpleCall() {        
                 
         // Create Input/Output arrays.
