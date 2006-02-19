@@ -47,6 +47,7 @@
 package TA.Lib;
 
 import junit.framework.*;
+import java.util.Arrays;
 
 public class CoreTest extends TestCase {	
     private double input[];
@@ -152,5 +153,43 @@ public class CoreTest extends TestCase {
         assertEquals( output[1], 1.5 );
         
         lookback = lib.MAX_Lookback(2);
-    }    
+    }  
+    
+       public final static double FLT_EPSILON = 1.192092896e-07;
+       public final static double TA_REAL_MIN = (-3e+37);
+       
+       public void testCMO2()
+       {          
+          // initialize inputRandFltEpsilon
+          double[] inputRandFltEpsilon = new double[100];
+          for (int i = 0; i < inputRandFltEpsilon.length; i++)
+          {
+             int sign = ((int) Math.random()) % 2;
+             double data = (sign != 0 ? 1.0 : -1.0) * (FLT_EPSILON);
+             inputRandFltEpsilon[i]= data;
+          }
+          // set default integer input option
+          int optInTimePeriod = Integer.MIN_VALUE;
+          
+          // set output buffer
+          double[] output = new double[100];
+          Arrays.fill(output, TA_REAL_MIN);
+          
+          MInteger outBegIdx = new MInteger();
+          MInteger outNbElement = new MInteger();
+          
+          retCode = lib.CMO(0,inputRandFltEpsilon.length-1,inputRandFltEpsilon,optInTimePeriod,outBegIdx,outNbElement,output);
+          assertEquals( output[0], 0.0 );
+          assertEquals( output[1], 0.0 );
+          assertEquals( output[85], 0.0 );
+          assertEquals( output[86], TA_REAL_MIN );
+          /*
+          System.out.println("outBegIdx="+outBegIdx.value+",outNbElement="+outNbElement.value);
+
+          for(int i=0;i<output.length;i++)
+          {
+             System.out.println("["+i+"]="+output[i]);
+          }*/
+       }
+
 }

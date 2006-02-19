@@ -5582,8 +5582,9 @@ public class Core {
             prevGain += tempValue2;
          prevLoss /= optInTimePeriod;
          prevGain /= optInTimePeriod;
+         tempValue1 = prevGain+prevLoss;
          if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/(prevGain+prevLoss));
+            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
          else
             outReal[outIdx++] = 0.0;
       }
@@ -5717,8 +5718,9 @@ public class Core {
             prevGain += tempValue2;
          prevLoss /= optInTimePeriod;
          prevGain /= optInTimePeriod;
+         tempValue1 = prevGain+prevLoss;
          if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/(prevGain+prevLoss));
+            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
          else
             outReal[outIdx++] = 0.0;
       }
@@ -9715,8 +9717,8 @@ public class Core {
    {
       double a1Total, a2Total, a3Total;
       double b1Total, b2Total, b3Total;
-      double trueHigh, trueLow, trueRange, closeMinusTrueLow;
-      double tempDouble;
+      double trueLow, trueRange, closeMinusTrueLow;
+      double tempDouble, tempHT, tempLT, tempCY;
       int lookbackTotal;
       int longestPeriod, longestIndex;
       int i,j,today,outIdx;
@@ -9769,9 +9771,9 @@ public class Core {
       lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
       if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
-      a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a1Total += closeMinusTrueLow; b1Total += trueRange; }
-      a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a2Total += closeMinusTrueLow; b2Total += trueRange; }
-      a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a3Total += closeMinusTrueLow; b3Total += trueRange; }
+      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
+      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
+      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
       today = startIdx;
       outIdx = 0;
       trailingIdx1 = today - optInTimePeriod1;
@@ -9779,25 +9781,25 @@ public class Core {
       trailingIdx3 = today - optInTimePeriod3;
       while( today <= endIdx )
       {
-         trueHigh = (((inHigh[today]) > (inClose[today-1])) ? (inHigh[today]) : (inClose[today-1])) ; trueLow = (((inLow[today]) < (inClose[today-1])) ? (inLow[today]) : (inClose[today-1])) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = trueHigh - trueLow;
+         { tempLT = inLow[today]; tempHT = inHigh[today]; tempCY = inClose[today-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a1Total += closeMinusTrueLow;
          a2Total += closeMinusTrueLow;
          a3Total += closeMinusTrueLow;
          b1Total += trueRange;
          b2Total += trueRange;
          b3Total += trueRange;
-         trueHigh = (((inHigh[trailingIdx1]) > (inClose[trailingIdx1-1])) ? (inHigh[trailingIdx1]) : (inClose[trailingIdx1-1])) ; trueLow = (((inLow[trailingIdx1]) < (inClose[trailingIdx1-1])) ? (inLow[trailingIdx1]) : (inClose[trailingIdx1-1])) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = trueHigh - trueLow;
+         { tempLT = inLow[trailingIdx1]; tempHT = inHigh[trailingIdx1]; tempCY = inClose[trailingIdx1-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a1Total -= closeMinusTrueLow;
          b1Total -= trueRange;
-         trueHigh = (((inHigh[trailingIdx2]) > (inClose[trailingIdx2-1])) ? (inHigh[trailingIdx2]) : (inClose[trailingIdx2-1])) ; trueLow = (((inLow[trailingIdx2]) < (inClose[trailingIdx2-1])) ? (inLow[trailingIdx2]) : (inClose[trailingIdx2-1])) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = trueHigh - trueLow;
+         { tempLT = inLow[trailingIdx2]; tempHT = inHigh[trailingIdx2]; tempCY = inClose[trailingIdx2-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a2Total -= closeMinusTrueLow;
          b2Total -= trueRange;
-         trueHigh = (((inHigh[trailingIdx3]) > (inClose[trailingIdx3-1])) ? (inHigh[trailingIdx3]) : (inClose[trailingIdx3-1])) ; trueLow = (((inLow[trailingIdx3]) < (inClose[trailingIdx3-1])) ? (inLow[trailingIdx3]) : (inClose[trailingIdx3-1])) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = trueHigh - trueLow;
+         { tempLT = inLow[trailingIdx3]; tempHT = inHigh[trailingIdx3]; tempCY = inClose[trailingIdx3-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a3Total -= closeMinusTrueLow;
          b3Total -= trueRange;
          tempDouble = 0.0;
-         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) tempDouble += 4.0*a1Total/b1Total;
-         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) tempDouble += 2.0*a2Total/b2Total;
+         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) tempDouble += 4.0*(a1Total/b1Total);
+         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) tempDouble += 2.0*(a2Total/b2Total);
          if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) tempDouble += a3Total/b3Total;
          outReal[outIdx] = 100.0 * (tempDouble / 7.0);
          outIdx++;
@@ -9824,8 +9826,8 @@ public class Core {
    {
       double a1Total, a2Total, a3Total;
       double b1Total, b2Total, b3Total;
-      double trueHigh, trueLow, trueRange, closeMinusTrueLow;
-      double tempDouble;
+      double trueLow, trueRange, closeMinusTrueLow;
+      double tempDouble, tempHT, tempLT, tempCY;
       int lookbackTotal;
       int longestPeriod, longestIndex;
       int i,j,today,outIdx;
@@ -9878,9 +9880,9 @@ public class Core {
       lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
       if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
-      a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a1Total += closeMinusTrueLow; b1Total += trueRange; }
-      a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a2Total += closeMinusTrueLow; b2Total += trueRange; }
-      a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3; i < startIdx; ++i ) { trueHigh = (((inHigh[i]) > (inClose[i-1])) ? (inHigh[i]) : (inClose[i-1])) ; trueLow = (((inLow[i]) < (inClose[i-1])) ? (inLow[i]) : (inClose[i-1])) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = trueHigh - trueLow;  a3Total += closeMinusTrueLow; b3Total += trueRange; }
+      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
+      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
+      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
       today = startIdx;
       outIdx = 0;
       trailingIdx1 = today - optInTimePeriod1;
@@ -9888,25 +9890,25 @@ public class Core {
       trailingIdx3 = today - optInTimePeriod3;
       while( today <= endIdx )
       {
-         trueHigh = (((inHigh[today]) > (inClose[today-1])) ? (inHigh[today]) : (inClose[today-1])) ; trueLow = (((inLow[today]) < (inClose[today-1])) ? (inLow[today]) : (inClose[today-1])) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = trueHigh - trueLow;
+         { tempLT = inLow[today]; tempHT = inHigh[today]; tempCY = inClose[today-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a1Total += closeMinusTrueLow;
          a2Total += closeMinusTrueLow;
          a3Total += closeMinusTrueLow;
          b1Total += trueRange;
          b2Total += trueRange;
          b3Total += trueRange;
-         trueHigh = (((inHigh[trailingIdx1]) > (inClose[trailingIdx1-1])) ? (inHigh[trailingIdx1]) : (inClose[trailingIdx1-1])) ; trueLow = (((inLow[trailingIdx1]) < (inClose[trailingIdx1-1])) ? (inLow[trailingIdx1]) : (inClose[trailingIdx1-1])) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = trueHigh - trueLow;
+         { tempLT = inLow[trailingIdx1]; tempHT = inHigh[trailingIdx1]; tempCY = inClose[trailingIdx1-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a1Total -= closeMinusTrueLow;
          b1Total -= trueRange;
-         trueHigh = (((inHigh[trailingIdx2]) > (inClose[trailingIdx2-1])) ? (inHigh[trailingIdx2]) : (inClose[trailingIdx2-1])) ; trueLow = (((inLow[trailingIdx2]) < (inClose[trailingIdx2-1])) ? (inLow[trailingIdx2]) : (inClose[trailingIdx2-1])) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = trueHigh - trueLow;
+         { tempLT = inLow[trailingIdx2]; tempHT = inHigh[trailingIdx2]; tempCY = inClose[trailingIdx2-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a2Total -= closeMinusTrueLow;
          b2Total -= trueRange;
-         trueHigh = (((inHigh[trailingIdx3]) > (inClose[trailingIdx3-1])) ? (inHigh[trailingIdx3]) : (inClose[trailingIdx3-1])) ; trueLow = (((inLow[trailingIdx3]) < (inClose[trailingIdx3-1])) ? (inLow[trailingIdx3]) : (inClose[trailingIdx3-1])) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = trueHigh - trueLow;
+         { tempLT = inLow[trailingIdx3]; tempHT = inHigh[trailingIdx3]; tempCY = inClose[trailingIdx3-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a3Total -= closeMinusTrueLow;
          b3Total -= trueRange;
          tempDouble = 0.0;
-         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) tempDouble += 4.0*a1Total/b1Total;
-         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) tempDouble += 2.0*a2Total/b2Total;
+         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) tempDouble += 4.0*(a1Total/b1Total);
+         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) tempDouble += 2.0*(a2Total/b2Total);
          if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) tempDouble += a3Total/b3Total;
          outReal[outIdx] = 100.0 * (tempDouble / 7.0);
          outIdx++;
