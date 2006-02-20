@@ -163,6 +163,10 @@ public class Core {
    /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
    public int MAX_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return (optInTimePeriod-1);
    }
    public TA_RetCode MAX( int startIdx,
@@ -296,6 +300,10 @@ public class Core {
    /* Generated */
    public int MIN_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return (optInTimePeriod-1);
    }
    public TA_RetCode MIN( int startIdx,
@@ -429,6 +437,10 @@ public class Core {
    /* Generated */
    public int SUM_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return 0;
    }
    public TA_RetCode SUM( int startIdx,
@@ -477,6 +489,18 @@ public class Core {
       double optInNbDevDn,
       TA_MAType optInMAType )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInNbDevUp ==  (-4e+37)  )
+         optInNbDevUp = 2.000000e+0;
+      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
+         return -1;
+      if( optInNbDevDn ==  (-4e+37)  )
+         optInNbDevDn = 2.000000e+0;
+      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
+         return -1;
       return  MA_Lookback ( optInTimePeriod, optInMAType );
    }
    public TA_RetCode BBANDS( int startIdx,
@@ -738,6 +762,10 @@ public class Core {
    /* Generated */
    public int DEMA_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return  EMA_Lookback ( optInTimePeriod ) * 2;
    }
    public TA_RetCode DEMA( int startIdx,
@@ -876,6 +904,10 @@ public class Core {
    /* Generated */
    public int EMA_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod - 1 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_EMA.ordinal()]) ;
    }
    public TA_RetCode EMA( int startIdx,
@@ -1328,6 +1360,10 @@ public class Core {
    /* Generated */
    public int KAMA_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
    }
    public TA_RetCode KAMA( int startIdx,
@@ -1525,6 +1561,10 @@ public class Core {
       TA_MAType optInMAType )
    {
       int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       if( optInTimePeriod <= 1 )
          return 0;
       switch( optInMAType )
@@ -1721,6 +1761,14 @@ public class Core {
    public int MAMA_Lookback( double optInFastLimit,
       double optInSlowLimit )
    {
+      if( optInFastLimit ==  (-4e+37)  )
+         optInFastLimit = 5.000000e-1;
+      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
+         return -1;
+      if( optInSlowLimit ==  (-4e+37)  )
+         optInSlowLimit = 5.000000e-2;
+      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
+         return -1;
       return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
    }
    public TA_RetCode MAMA( int startIdx,
@@ -2058,6 +2106,10 @@ public class Core {
    /* Generated */
    public int MIDPRICE_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return (optInTimePeriod-1);
    }
    public TA_RetCode MIDPRICE( int startIdx,
@@ -2165,6 +2217,10 @@ public class Core {
    /* Generated */
    public int MIDPOINT_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return (optInTimePeriod-1);
    }
    public TA_RetCode MIDPOINT( int startIdx,
@@ -2267,6 +2323,14 @@ public class Core {
    public int SAR_Lookback( double optInAcceleration,
       double optInMaximum )
    {
+      if( optInAcceleration ==  (-4e+37)  )
+         optInAcceleration = 2.000000e-2;
+      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
+         return -1;
+      if( optInMaximum ==  (-4e+37)  )
+         optInMaximum = 2.000000e-1;
+      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
+         return -1;
       return 1;
    }
    public TA_RetCode SAR( int startIdx,
@@ -2585,6 +2649,38 @@ public class Core {
       double optInAccelerationShort,
       double optInAccelerationMaxShort )
    {
+      if( optInStartValue ==  (-4e+37)  )
+         optInStartValue = 0.000000e+0;
+      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
+         return -1;
+      if( optInOffsetOnReverse ==  (-4e+37)  )
+         optInOffsetOnReverse = 0.000000e+0;
+      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationInitLong ==  (-4e+37)  )
+         optInAccelerationInitLong = 2.000000e-2;
+      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationLong ==  (-4e+37)  )
+         optInAccelerationLong = 2.000000e-2;
+      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationMaxLong ==  (-4e+37)  )
+         optInAccelerationMaxLong = 2.000000e-1;
+      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationInitShort ==  (-4e+37)  )
+         optInAccelerationInitShort = 2.000000e-2;
+      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationShort ==  (-4e+37)  )
+         optInAccelerationShort = 2.000000e-2;
+      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationMaxShort ==  (-4e+37)  )
+         optInAccelerationMaxShort = 2.000000e-1;
+      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
+         return -1;
       return 1;
    }
    public TA_RetCode SAREXT( int startIdx,
@@ -3026,6 +3122,10 @@ public class Core {
    /* Generated */
    public int SMA_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod - 1;
    }
    public TA_RetCode SMA( int startIdx,
@@ -3150,6 +3250,14 @@ public class Core {
    public int T3_Lookback( int optInTimePeriod,
       double optInVFactor )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInVFactor ==  (-4e+37)  )
+         optInVFactor = 7.000000e-1;
+      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
+         return -1;
       return 6 * (optInTimePeriod-1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
    }
    public TA_RetCode T3( int startIdx,
@@ -3391,7 +3499,12 @@ public class Core {
    /* Generated */
    public int TEMA_Lookback( int optInTimePeriod )
    {
-      int retValue =  EMA_Lookback ( optInTimePeriod );
+      int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      retValue =  EMA_Lookback ( optInTimePeriod );
       return retValue * 3;
    }
    public TA_RetCode TEMA( int startIdx,
@@ -3549,6 +3662,10 @@ public class Core {
    /* Generated */
    public int TRIMA_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod-1;
    }
    public TA_RetCode TRIMA( int startIdx,
@@ -3798,6 +3915,10 @@ public class Core {
    /* Generated */
    public int WMA_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod - 1;
    }
    public TA_RetCode WMA( int startIdx,
@@ -3929,6 +4050,10 @@ public class Core {
    /* Generated */
    public int ATR_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ATR.ordinal()]) ;
    }
    public TA_RetCode ATR( int startIdx,
@@ -4191,6 +4316,10 @@ public class Core {
    /* Generated */
    public int ADX_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       if( optInTimePeriod > 1 )
          return (2 * optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
       else
@@ -4551,6 +4680,10 @@ public class Core {
    /* Generated */
    public int ADXR_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       if( optInTimePeriod > 1 )
          return optInTimePeriod +  ADX_Lookback ( optInTimePeriod) - 1;
       else
@@ -4657,6 +4790,14 @@ public class Core {
       int optInSlowPeriod,
       TA_MAType optInMAType )
    {
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return -1;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return -1;
       return  MA_Lookback (  (((optInSlowPeriod) > (optInFastPeriod)) ? (optInSlowPeriod) : (optInFastPeriod)) , optInMAType );
    }
    public TA_RetCode APO( int startIdx,
@@ -4876,6 +5017,10 @@ public class Core {
    /* Generated */
    public int AROON_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod;
    }
    public TA_RetCode AROON( int startIdx,
@@ -5063,6 +5208,10 @@ public class Core {
    /* Generated */
    public int AROONOSC_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod;
    }
    public TA_RetCode AROONOSC( int startIdx,
@@ -5311,6 +5460,10 @@ public class Core {
    /* Generated */
    public int CCI_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return (optInTimePeriod-1);
    }
    public TA_RetCode CCI( int startIdx,
@@ -5451,6 +5604,10 @@ public class Core {
    public int CMO_Lookback( int optInTimePeriod )
    {
       int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       retValue = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
       if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK )
          retValue--;
@@ -5731,6 +5888,10 @@ public class Core {
    /* Generated */
    public int DX_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       if( optInTimePeriod > 1 )
          return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
       else
@@ -6028,6 +6189,18 @@ public class Core {
       int optInSignalPeriod )
    {
       int tempInteger;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return -1;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return -1;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return -1;
       if( optInSlowPeriod < optInFastPeriod )
       {
          tempInteger = optInSlowPeriod;
@@ -6328,6 +6501,18 @@ public class Core {
       TA_MAType optInSignalMAType )
    {
       int tempInteger, lookbackLargest;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return -1;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return -1;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return -1;
       lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
       tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
       if( tempInteger > lookbackLargest )
@@ -6569,6 +6754,10 @@ public class Core {
    /* Generated */
    public int MACDFIX_Lookback( int optInSignalPeriod )
    {
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return -1;
       return  EMA_Lookback ( 26 )
          +  EMA_Lookback ( optInSignalPeriod );
    }
@@ -6631,6 +6820,10 @@ public class Core {
    /* Generated */
    public int MFI_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
    }
    public TA_RetCode MFI( int startIdx,
@@ -6882,6 +7075,10 @@ public class Core {
    /* Generated */
    public int MINUS_DI_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       if( optInTimePeriod > 1 )
          return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
       else
@@ -7184,6 +7381,10 @@ public class Core {
    /* Generated */
    public int MINUS_DM_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       if( optInTimePeriod > 1 )
          return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
       else
@@ -7438,6 +7639,10 @@ public class Core {
    /* Generated */
    public int MOM_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod;
    }
    public TA_RetCode MOM( int startIdx,
@@ -7513,6 +7718,14 @@ public class Core {
       int optInSlowPeriod,
       TA_MAType optInMAType )
    {
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return -1;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return -1;
       return  MA_Lookback (  (((optInSlowPeriod) > (optInFastPeriod)) ? (optInSlowPeriod) : (optInFastPeriod)) , optInMAType );
    }
    public TA_RetCode PPO( int startIdx,
@@ -7590,6 +7803,10 @@ public class Core {
    /* Generated */
    public int PLUS_DI_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       if( optInTimePeriod > 1 )
          return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
       else
@@ -7892,6 +8109,10 @@ public class Core {
    /* Generated */
    public int PLUS_DM_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       if( optInTimePeriod > 1 )
          return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
       else
@@ -8146,6 +8367,10 @@ public class Core {
    /* Generated */
    public int ROC_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod;
    }
    public TA_RetCode ROC( int startIdx,
@@ -8235,6 +8460,10 @@ public class Core {
    /* Generated */
    public int ROCP_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod;
    }
    public TA_RetCode ROCP( int startIdx,
@@ -8324,6 +8553,10 @@ public class Core {
    /* Generated */
    public int ROCR_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod;
    }
    public TA_RetCode ROCR( int startIdx,
@@ -8413,6 +8646,10 @@ public class Core {
    /* Generated */
    public int ROCR100_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod;
    }
    public TA_RetCode ROCR100( int startIdx,
@@ -8503,6 +8740,10 @@ public class Core {
    public int RSI_Lookback( int optInTimePeriod )
    {
       int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       retValue = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
       if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK )
          retValue--;
@@ -8786,6 +9027,18 @@ public class Core {
       TA_MAType optInSlowD_MAType )
    {
       int retValue;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return -1;
+      if( (int)optInSlowK_Period ==  ( Integer.MIN_VALUE )  )
+         optInSlowK_Period = 3;
+      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
+         return -1;
+      if( (int)optInSlowD_Period ==  ( Integer.MIN_VALUE )  )
+         optInSlowD_Period = 3;
+      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
+         return -1;
       retValue = (optInFastK_Period - 1);
       retValue +=  MA_Lookback ( optInSlowK_Period, optInSlowK_MAType );
       retValue +=  MA_Lookback ( optInSlowD_Period, optInSlowD_MAType );
@@ -9080,6 +9333,14 @@ public class Core {
       TA_MAType optInFastD_MAType )
    {
       int retValue;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return -1;
+      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return -1;
       retValue = (optInFastK_Period - 1);
       retValue +=  MA_Lookback ( optInFastD_Period, optInFastD_MAType );
       return retValue;
@@ -9352,6 +9613,18 @@ public class Core {
       TA_MAType optInFastD_MAType )
    {
       int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return -1;
+      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return -1;
       retValue =  RSI_Lookback ( optInTimePeriod ) +  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
       return retValue;
    }
@@ -9522,7 +9795,12 @@ public class Core {
    /* Generated */
    public int TRIX_Lookback( int optInTimePeriod )
    {
-      int emaLookback =  EMA_Lookback ( optInTimePeriod );
+      int emaLookback;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      emaLookback =  EMA_Lookback ( optInTimePeriod );
       return (emaLookback*3) +  ROCR_Lookback ( 1 );
    }
    public TA_RetCode TRIX( int startIdx,
@@ -9700,7 +9978,20 @@ public class Core {
       int optInTimePeriod2,
       int optInTimePeriod3 )
    {
-      int maxPeriod =  ((( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) > (optInTimePeriod3)) ? ( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) : (optInTimePeriod3)) ;
+      int maxPeriod;
+      if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod1 = 7;
+      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
+         return -1;
+      if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod2 = 14;
+      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
+         return -1;
+      if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod3 = 28;
+      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
+         return -1;
+      maxPeriod =  ((( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) > (optInTimePeriod3)) ? ( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) : (optInTimePeriod3)) ;
       return  SMA_Lookback ( maxPeriod ) + 1;
    }
    public TA_RetCode ULTOSC( int startIdx,
@@ -9924,6 +10215,10 @@ public class Core {
    /* Generated */
    public int WILLR_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return (optInTimePeriod-1);
    }
    public TA_RetCode WILLR( int startIdx,
@@ -11889,6 +12184,14 @@ public class Core {
       int optInSlowPeriod )
    {
       int slowestPeriod;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 3;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return -1;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 10;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return -1;
       if( optInFastPeriod < optInSlowPeriod )
          slowestPeriod = optInSlowPeriod;
       else
@@ -13168,6 +13471,10 @@ public class Core {
    /* Generated */
    public int CDLABANDONEDBABY_Lookback( double optInPenetration )
    {
+      if( optInPenetration ==  (-4e+37)  )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return -1;
       return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ))  +
          2;
    }
@@ -14334,6 +14641,10 @@ public class Core {
    /* Generated */
    public int CDLDARKCLOUDCOVER_Lookback( double optInPenetration )
    {
+      if( optInPenetration ==  (-4e+37)  )
+         optInPenetration = 5.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return -1;
       return  (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod)  + 1;
    }
    public TA_RetCode CDLDARKCLOUDCOVER( int startIdx,
@@ -14903,6 +15214,10 @@ public class Core {
    /* Generated */
    public int CDLEVENINGDOJISTAR_Lookback( double optInPenetration )
    {
+      if( optInPenetration ==  (-4e+37)  )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return -1;
       return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ))  +
          2;
    }
@@ -15065,6 +15380,10 @@ public class Core {
    /* Generated */
    public int CDLEVENINGSTAR_Lookback( double optInPenetration )
    {
+      if( optInPenetration ==  (-4e+37)  )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return -1;
       return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 2;
    }
    public TA_RetCode CDLEVENINGSTAR( int startIdx,
@@ -17956,6 +18275,10 @@ public class Core {
    /* Generated */
    public int CDLMATHOLD_Lookback( double optInPenetration )
    {
+      if( optInPenetration ==  (-4e+37)  )
+         optInPenetration = 5.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return -1;
       return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 4;
    }
    public TA_RetCode CDLMATHOLD( int startIdx,
@@ -18242,6 +18565,10 @@ public class Core {
    /* Generated */
    public int CDLMORNINGDOJISTAR_Lookback( double optInPenetration )
    {
+      if( optInPenetration ==  (-4e+37)  )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return -1;
       return  ((( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) )) ? ( ((( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyDoji.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ))  +
          2;
    }
@@ -18404,6 +18731,10 @@ public class Core {
    /* Generated */
    public int CDLMORNINGSTAR_Lookback( double optInPenetration )
    {
+      if( optInPenetration ==  (-4e+37)  )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return -1;
       return  ((( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) > ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) )) ? ( (this.candleSettings[TA_CandleSettingType.TA_BodyShort.ordinal()].avgPeriod) ) : ( (this.candleSettings[TA_CandleSettingType.TA_BodyLong.ordinal()].avgPeriod) ))  + 2;
    }
    public TA_RetCode CDLMORNINGSTAR( int startIdx,
@@ -20923,6 +21254,10 @@ public class Core {
    /* Generated */
    public int CORREL_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod-1;
    }
    public TA_RetCode CORREL( int startIdx,
@@ -21078,6 +21413,10 @@ public class Core {
    /* Generated */
    public int LINEARREG_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod-1;
    }
    public TA_RetCode LINEARREG( int startIdx,
@@ -21191,6 +21530,10 @@ public class Core {
    /* Generated */
    public int LINEARREG_SLOPE_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod-1;
    }
    public TA_RetCode LINEARREG_SLOPE( int startIdx,
@@ -21298,6 +21641,10 @@ public class Core {
    /* Generated */
    public int LINEARREG_ANGLE_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod-1;
    }
    public TA_RetCode LINEARREG_ANGLE( int startIdx,
@@ -21409,6 +21756,10 @@ public class Core {
    /* Generated */
    public int LINEARREG_INTERCEPT_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod-1;
    }
    public TA_RetCode LINEARREG_INTERCEPT( int startIdx,
@@ -21521,6 +21872,14 @@ public class Core {
    public int STDDEV_Lookback( int optInTimePeriod,
       double optInNbDev )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInNbDev ==  (-4e+37)  )
+         optInNbDev = 1.000000e+0;
+      else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
+         return -1;
       return  VAR_Lookback ( optInTimePeriod, optInNbDev );
    }
    public TA_RetCode STDDEV( int startIdx,
@@ -21706,6 +22065,10 @@ public class Core {
    /* Generated */
    public int TSF_Lookback( int optInTimePeriod )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
       return optInTimePeriod-1;
    }
    public TA_RetCode TSF( int startIdx,
@@ -21820,6 +22183,14 @@ public class Core {
    public int VAR_Lookback( int optInTimePeriod,
       double optInNbDev )
    {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInNbDev ==  (-4e+37)  )
+         optInNbDev = 1.000000e+0;
+      else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
+         return -1;
       return optInTimePeriod-1;
    }
    public TA_RetCode VAR( int startIdx,

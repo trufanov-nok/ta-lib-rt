@@ -178,7 +178,9 @@ public class CoreTest extends TestCase {
           MInteger outBegIdx = new MInteger();
           MInteger outNbElement = new MInteger();
           
+          int lookback = lib.CMO_Lookback(optInTimePeriod);
           retCode = lib.CMO(0,inputRandFltEpsilon.length-1,inputRandFltEpsilon,optInTimePeriod,outBegIdx,outNbElement,output);
+          assertEquals( lookback, outBegIdx.value );
           assertEquals( output[0], 0.0 );
           assertEquals( output[1], 0.0 );
           assertEquals( output[85], 0.0 );
