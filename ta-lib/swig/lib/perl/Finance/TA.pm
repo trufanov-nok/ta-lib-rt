@@ -125,6 +125,8 @@ package Finance::TA;
 *TA_MAX_Lookback = *Finance::TAc::TA_MAX_Lookback;
 *TA_MIN = *Finance::TAc::TA_MIN;
 *TA_MIN_Lookback = *Finance::TAc::TA_MIN_Lookback;
+*TA_SUM = *Finance::TAc::TA_SUM;
+*TA_SUM_Lookback = *Finance::TAc::TA_SUM_Lookback;
 *TA_BBANDS = *Finance::TAc::TA_BBANDS;
 *TA_BBANDS_Lookback = *Finance::TAc::TA_BBANDS_Lookback;
 *TA_DEMA = *Finance::TAc::TA_DEMA;
