@@ -70,7 +70,7 @@ public class Core {
          .ordinal()];
       for(int i=0;i<candleSettings.length;i++){
          candleSettings[i] = new TA_CandleSetting(TA_CandleDefaultSettings[i]);
-      }      
+      }
    }
    
    public TA_RetCode SetCandleSettings(TA_CandleSettingType settingType,
@@ -169,14 +169,14 @@ public class Core {
    
    public void SetUnstablePeriod(TA_FuncUnstId id, int period)
    {
-      unstablePeriod[id.ordinal()] = period;   
+      unstablePeriod[id.ordinal()] = period;
    }
    
    public int GetUnstablePeriod(TA_FuncUnstId id)
    {
       return unstablePeriod[id.ordinal()];
    }
-
+   
    public void SetCompatibility(TA_Compatibility compatibility)
    {
       this.compatibility = compatibility;
@@ -10089,14 +10089,14 @@ public class Core {
       lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
       if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
-      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
-      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
-      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
+      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
+      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
+      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
       today = startIdx;
       outIdx = 0;
-      trailingIdx1 = today - optInTimePeriod1;
-      trailingIdx2 = today - optInTimePeriod2;
-      trailingIdx3 = today - optInTimePeriod3;
+      trailingIdx1 = today - optInTimePeriod1 + 1;
+      trailingIdx2 = today - optInTimePeriod2 + 1;
+      trailingIdx3 = today - optInTimePeriod3 + 1;
       while( today <= endIdx )
       {
          { tempLT = inLow[today]; tempHT = inHigh[today]; tempCY = inClose[today-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
@@ -10198,14 +10198,14 @@ public class Core {
       lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
       if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
-      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
-      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
-      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
+      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
+      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
+      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
       today = startIdx;
       outIdx = 0;
-      trailingIdx1 = today - optInTimePeriod1;
-      trailingIdx2 = today - optInTimePeriod2;
-      trailingIdx3 = today - optInTimePeriod3;
+      trailingIdx1 = today - optInTimePeriod1 + 1;
+      trailingIdx2 = today - optInTimePeriod2 + 1;
+      trailingIdx3 = today - optInTimePeriod3 + 1;
       while( today <= endIdx )
       {
          { tempLT = inLow[today]; tempHT = inHigh[today]; tempCY = inClose[today-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
