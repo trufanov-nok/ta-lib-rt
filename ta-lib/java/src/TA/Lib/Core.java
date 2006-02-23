@@ -36,12 +36,16 @@
  *  Initial  Name/description
  *  -------------------------------------------------------------------
  *  MF       Mario Fortier
+ *  BT       Barry Tsung
  *
  * Change history:
  *
  *  MMDDYY BY     Description
  *  -------------------------------------------------------------------
  *  121005 MF     First Version
+ *  022206 BT     1. initialization of candleSettings
+ *                2. add SetCompatibility and GetCompatibility
+ *                3. add SetUnstablePeriod, GetUnstablePeriod
  */
 
 package TA.Lib;
@@ -64,6 +68,9 @@ public class Core {
       compatibility = TA_Compatibility.TA_COMPATIBILITY_DEFAULT;
       candleSettings = new TA_CandleSetting[TA.Lib.TA_CandleSettingType.TA_AllCandleSettings
          .ordinal()];
+      for(int i=0;i<candleSettings.length;i++){
+         candleSettings[i] = new TA_CandleSetting(TA_CandleDefaultSettings[i]);
+      }      
    }
    
    public TA_RetCode SetCandleSettings(TA_CandleSettingType settingType,
@@ -158,6 +165,26 @@ public class Core {
             .CopyFrom(TA_CandleDefaultSettings[settingType.ordinal()]);
       }
       return TA_RetCode.TA_SUCCESS;
+   }
+   
+   public void SetUnstablePeriod(TA_FuncUnstId id, int period)
+   {
+      unstablePeriod[id.ordinal()] = period;   
+   }
+   
+   public int GetUnstablePeriod(TA_FuncUnstId id)
+   {
+      return unstablePeriod[id.ordinal()];
+   }
+
+   public void SetCompatibility(TA_Compatibility compatibility)
+   {
+      this.compatibility = compatibility;
+   }
+   
+   TA_Compatibility getCompatibility()
+   {
+      return compatibility;
    }
    
    /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
