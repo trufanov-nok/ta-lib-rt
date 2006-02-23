@@ -36,12 +36,14 @@
  *  Initial  Name/description
  *  -------------------------------------------------------------------
  *  MF       Mario Fortier
+ *  BT       Barry Tsung
  *
  * Change history:
  *
  *  MMDDYY BY     Description
  *  -------------------------------------------------------------------
  *  121005 MF     First Version
+ *  022206 BT     add copy constructor
  */
 
 package TA.Lib;
@@ -58,6 +60,14 @@ public class TA_CandleSetting {
         rangeType = p_rangeType;
         avgPeriod = p_avgPeriod;
         factor = p_factor;
+    }
+
+    public TA_CandleSetting(TA_CandleSetting that)
+    {
+       this.settingType = that.settingType;
+       this.rangeType = that.rangeType;
+       this.avgPeriod = that.avgPeriod;
+       this.factor = that.factor;       
     }
     
     public void CopyFrom( TA_CandleSetting src )
