@@ -62,9 +62,6 @@ public class Core {
    public Core() {
       unstablePeriod = new int[TA.Lib.TA_FuncUnstId.TA_FUNC_UNST_ALL
          .ordinal()];
-      for (int i = 0; i < unstablePeriod.length; i++) {
-         unstablePeriod[i] = 0;
-      }
       compatibility = TA_Compatibility.TA_COMPATIBILITY_DEFAULT;
       candleSettings = new TA_CandleSetting[TA.Lib.TA_CandleSettingType.TA_AllCandleSettings
          .ordinal()];
@@ -167,9 +164,13 @@ public class Core {
       return TA_RetCode.TA_SUCCESS;
    }
    
-   public void SetUnstablePeriod(TA_FuncUnstId id, int period)
+   public TA_RetCode SetUnstablePeriod(TA_FuncUnstId id, int period)
    {
+      if (id.ordinal() >= TA_FuncUnstId.TA_FUNC_UNST_ALL
+        .ordinal())
+            return TA_RetCode.TA_BAD_PARAM;
       unstablePeriod[id.ordinal()] = period;
+      return TA_RetCode.TA_SUCCESS;
    }
    
    public int GetUnstablePeriod(TA_FuncUnstId id)
@@ -182,7 +183,7 @@ public class Core {
       this.compatibility = compatibility;
    }
    
-   TA_Compatibility getCompatibility()
+   public TA_Compatibility getCompatibility()
    {
       return compatibility;
    }
