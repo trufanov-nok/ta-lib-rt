@@ -1,44 +1,20 @@
-0.1.5 (January 2006)
+0.2 (Plan for mid 2006)
 
 New Features
 ============
-- Java port of all TA functions.
+- Regression test of Java port.
 
 - Added technical analysis functions:
-    BOP : Balance of power
-    CMO : Chande Momentum Oscillator
+    ULTOSC : Ultimate Oscillator
 
-- New candlestick Hikkake pattern recognition.
+Major Changes
+=============
+- TA-Data deprecated (see new FIDAL project on SourceForge)
+- TA-PM deprecated
 
-- .NET assembly is 'verifiable'. TA-Lib is now conform for
-  uses in places like Microsoft SQL stored procedure.
-
-- Code adapted for new C++/CLI syntax in Visual Studio 2005
-
-- User can now specify a timeout on data access.
-  See TA_HistoryAllocParam in ta_data.h
-
-- Flexible handling of end-of-period timestamps.
-  See TA_SOURCE_USES_END_OF_PERIOD and
-  TA_USE_END_OF_PERIOD in ta_data.h
-    
-- Pseudo-Random (Mersenne Twister algorithm).
-  See TA_Rand() and TA_SRand() in ta_common.h
-  
 Fixes
 =====
-#1117656: outNbElement incorrect for TRIX and STOCHRSI
-#1117866: APO/PPO bug when slow/fast period parameter inverted.
-#1199526: Out-of-bound access with CDLTRISTAR
-#1200995: Memory leak in Perl wrapper
-#1229243: TA_HistoryBuilder() leaks memory (on failure case).
-#1238365: Candlestick errors when using TA_SetCandleSettings.
-#1241498: TA_AddDataSource() done twice cause TA_HistoryAlloc() to fail.
-#1293953: TA_AddTimeToTimestamp() problem when src/dst are same pointer.
-#1359452: AD range not working as expected.
-#1365319: BBAND/STDDEV problem with very small input variations.
-#1367155: FreeBSD compile errors
-#1367269: outBegIdx incorrect when startidx != 0 for some functions.
+- Many fix of Java port.
 
 Thanks to all contributors.
 
