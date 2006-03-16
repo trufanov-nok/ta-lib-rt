@@ -167,8 +167,8 @@ public class Core {
    public TA_RetCode SetUnstablePeriod(TA_FuncUnstId id, int period)
    {
       if (id.ordinal() >= TA_FuncUnstId.TA_FUNC_UNST_ALL
-        .ordinal())
-            return TA_RetCode.TA_BAD_PARAM;
+         .ordinal())
+         return TA_RetCode.TA_BAD_PARAM;
       unstablePeriod[id.ordinal()] = period;
       return TA_RetCode.TA_SUCCESS;
    }
