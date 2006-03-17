@@ -253,8 +253,6 @@ sub testBin
       $cmdPrefix = "./";
       execProg( $binDir, $cmdPrefix."gen_code" );
       execProg( $binDir, $cmdPrefix."ta_regtest" );
-      execProg( $binDir, $cmdPrefix."ta_yahoo -dd us.nasdaq.stock MSFT >nul:" );
-      execProg( $binDir, $cmdPrefix."gen_rdata -v us y_us.dat" );
    }
    else
    {
@@ -266,14 +264,6 @@ sub testBin
       if( $fastOption eq 0 )
       {
          execProg( $binDir, $cmdPrefix."gen_code" );
-         execProg( $binDir, $cmdPrefix."gen_data" );
-         execProg( $binDir, $cmdPrefix."ta_yahoo -c" );
-         execProg( $binDir, $cmdPrefix."ta_yahoo -s us.nasdaq.stock >nul:" );
-         # execProg( $binDir, $cmdPrefix."ta_yahoo -dd us.nasdaq.stock MSFT >nul:" );
-         execProg( $binDir, $cmdPrefix."gen_rdata -v us y_us.dat" );
-         execProg( $binDir, $cmdPrefix."gen_rdata -v ca y_ca.dat" );
-         # execProg( $binDir, $cmdPrefix."webfetch http://ta-lib.org >nul:" );
-         # execProg( $binDir, $cmdPrefix."webfetch ta-lib.org >nul:" );
       }
    }
 }
@@ -354,7 +344,8 @@ sub testMSVC
       # If "cdr" test the Perl interface   
       if( $_[1] eq "cdr" )    
       {
-         testPerl($_[0],$_[4]);
+	 # Hard code output path (for now...)
+         testPerl($_[0],"..\\..\\..\\..\\..\\");
       }
    }
 }
