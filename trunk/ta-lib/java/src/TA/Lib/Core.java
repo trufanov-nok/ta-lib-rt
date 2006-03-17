@@ -469,7 +469,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return -1;
-      return 0;
+      return optInTimePeriod-1;
    }
    public TA_RetCode SUM( int startIdx,
       int endIdx,
@@ -479,6 +479,8 @@ public class Core {
       MInteger outNbElement,
       double outReal[] )
    {
+      double periodTotal, tempReal;
+      int i, outIdx, trailingIdx, lookbackTotal;
       if( startIdx < 0 )
          return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -487,8 +489,33 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      lookbackTotal = (optInTimePeriod-1);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      periodTotal = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      i=trailingIdx;
+      if( optInTimePeriod > 1 )
+      {
+         while( i < startIdx )
+            periodTotal += inReal[i++];
+      }
+      outIdx = 0;
+      do
+      {
+         periodTotal += inReal[i++];
+         tempReal = periodTotal;
+         periodTotal -= inReal[trailingIdx++];
+         outReal[outIdx++] = tempReal;
+      } while( i <= endIdx );
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
       return  TA_RetCode. TA_SUCCESS;
    }
    public TA_RetCode SUM( int startIdx,
@@ -499,6 +526,8 @@ public class Core {
       MInteger outNbElement,
       double outReal[] )
    {
+      double periodTotal, tempReal;
+      int i, outIdx, trailingIdx, lookbackTotal;
       if( startIdx < 0 )
          return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -507,8 +536,33 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      lookbackTotal = (optInTimePeriod-1);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      periodTotal = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      i=trailingIdx;
+      if( optInTimePeriod > 1 )
+      {
+         while( i < startIdx )
+            periodTotal += inReal[i++];
+      }
+      outIdx = 0;
+      do
+      {
+         periodTotal += inReal[i++];
+         tempReal = periodTotal;
+         periodTotal -= inReal[trailingIdx++];
+         outReal[outIdx++] = tempReal;
+      } while( i <= endIdx );
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
