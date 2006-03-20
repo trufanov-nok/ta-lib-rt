@@ -95,6 +95,30 @@ SOURCE=..\..\..\..\c\include\ta_libc.h
 SOURCE=..\..\..\..\c\include\ta_pm.h
 # End Source File
 # End Group
+# Begin Group "test_perl"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\..\..\src\tools\test_perl\runtests.pl
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\src\tools\test_perl\ta_abstract.t
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\src\tools\test_perl\ta_common.t
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\src\tools\test_perl\ta_defs.t
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\..\src\tools\test_perl\ta_func.t
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=..\..\..\src\interface\perl.pm
@@ -112,7 +136,7 @@ SOURCE=..\..\..\src\interface\ta_libc.perl.swg
 SOURCE=..\..\..\src\interface\ta_libc.swg
 USERDEP__TA_LI="..\..\..\src\interface\perl.pm"	
 # Begin Custom Build
-InputDir=\ta-lib\swig\src\interface
+InputDir=\ta-lib\trunk\ta-lib\swig\src\interface
 InputPath=..\..\..\src\interface\ta_libc.swg
 InputName=ta_libc
 
