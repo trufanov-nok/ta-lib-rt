@@ -42,7 +42,9 @@ sub Main
    {
      execProg( $user_dir, 'rm -r -f '.$top_dir );
      execProg( $user_dir, 'mkdir '.$top_dir );
+     print( "\nStarting copy..." );
      execProg( $top_dir,  "cp -r ".$source_dir."ta-lib ." );
+     print( "done.\n" );
    }
 
    testGCC( $top_dir."ta-lib/", "cmd", $fastOption, 0, $release_dir."log/", 0 );
