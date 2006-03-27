@@ -2784,10 +2784,6 @@
 				RelativePath="..\..\..\c\src\ta_func\ta_utility.h"
 				>
 			</File>
-			<File
-				RelativePath=".\TestRef.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
