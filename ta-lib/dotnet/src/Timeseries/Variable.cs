@@ -1,3 +1,49 @@
+/* TA-Lib Copyright (c) 1999-2006, Mario Fortier
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or
+ * without modification, are permitted provided that the following
+ * conditions are met:
+ *
+ * - Redistributions of source code must retain the above copyright
+ *   notice, this list of conditions and the following disclaimer.
+ *
+ * - Redistributions in binary form must reproduce the above copyright
+ *   notice, this list of conditions and the following disclaimer in
+ *   the documentation and/or other materials provided with the
+ *   distribution.
+ *
+ * - Neither name of author nor the names of its contributors
+ *   may be used to endorse or promote products derived from this
+ *   software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* List of contributors:
+ *
+ *  Initial  Name/description
+ *  -------------------------------------------------------------------
+ *  MF       Mario Fortier
+ *
+ * Change history:
+ *
+ *  MMDDYY BY     Description
+ *  -------------------------------------------------------------------
+ *  010105 MF     Initial Coding.
+ */
+
 /****************************** BIG WARNING ********************
  *   Only the code in TA-Lib-Core for .NET is mature.
  * 
@@ -98,6 +144,12 @@ namespace TA.Lib
             {
                 // TODO Direct buffer speed optimization (in-place change).
                 Timeseries ts = mVarParent.Sma(period);
+                return mVarParent.mParent[mVarParent.Name] = ts.Default;
+            }
+
+            public Variable Sum(int period)
+            {
+                Timeseries ts = mVarParent.Sum(period);
                 return mVarParent.mParent[mVarParent.Name] = ts.Default;
             }
 
@@ -214,6 +266,33 @@ namespace TA.Lib
             retObject["Sma"] = newVar;
             return retObject;
         }
+
+        public Timeseries Sum(int period)
+        {
+            // TODO Find the common range of the inputs.
+
+            // Allocate the output and call the function (as needed).
+            Variable newVar;
+            Timeseries retObject = new Timeseries(mParent.Timestamps);
+            int lookback = Core.SUM_Lookback(period);
+            int size = mData.Length - lookback;
+            if (size <= 0)
+                newVar = new Variable(retObject, new double[0]);
+            else
+            {
+                double[] output;
+                output = new double[size];
+                int outBegIdx, outNbElement;
+                Core.SUM(0, mData.Length - 1, mData, period, out outBegIdx, out outNbElement, output);
+
+                // TODO Throw exception on retCode != TA_SUCCESS
+                newVar = new Variable(retObject, output, outBegIdx);
+            }
+
+            // Add the new variable to the new time series.
+            retObject["Sum"] = newVar;
+            return retObject;
+        }
         #endregion
 
         #region Misc Utility
@@ -301,6 +380,13 @@ namespace TA.Lib
             mData = newData;
             mTimestampsOffset = offset;
             mInitialized = true;
+        }
+        #endregion
+
+        #region operator
+        public static Iter operator &(Variable<TSer, TVar, TVal> a, IValueIter b)
+        {
+            return new Iter(a,b);
         }
         #endregion
 
@@ -434,7 +520,7 @@ namespace TA.Lib
                     // Is this the first variable being initialized 
                     // for the parent Timeseries?
                     // If yes, initialize the parent Timeseries first.
-                    if( mParent.Initialized == true )
+                    if( mParent.Initialized == false )
                        mParent.InitFromFirstVariable(idx.RefTimestamps);
                                         
                     mData = new TVal[idx.Size]; // TODO Minimize size using idx.Position

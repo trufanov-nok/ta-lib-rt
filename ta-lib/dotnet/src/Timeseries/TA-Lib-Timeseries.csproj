@@ -85,9 +85,6 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <Reference Include="TA-Lib-Core, Version=1.0.2053.37787, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs">
@@ -108,7 +105,15 @@
     <Compile Include="Variable.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Timeseries.cd" />
+    <None Include="Timeseries.cd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\TA-Lib-Core.vcproj">
+      <Project>{667AF01A-5614-4446-9DCC-744D27906E5B}</Project>
+      <Name>TA-Lib-Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
