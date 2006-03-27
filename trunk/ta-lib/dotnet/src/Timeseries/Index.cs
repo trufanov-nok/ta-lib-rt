@@ -1,9 +1,56 @@
+/* TA-Lib Copyright (c) 1999-2006, Mario Fortier
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or
+ * without modification, are permitted provided that the following
+ * conditions are met:
+ *
+ * - Redistributions of source code must retain the above copyright
+ *   notice, this list of conditions and the following disclaimer.
+ *
+ * - Redistributions in binary form must reproduce the above copyright
+ *   notice, this list of conditions and the following disclaimer in
+ *   the documentation and/or other materials provided with the
+ *   distribution.
+ *
+ * - Neither name of author nor the names of its contributors
+ *   may be used to endorse or promote products derived from this
+ *   software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* List of contributors:
+ *
+ *  Initial  Name/description
+ *  -------------------------------------------------------------------
+ *  MF       Mario Fortier
+ *
+ * Change history:
+ *
+ *  MMDDYY BY     Description
+ *  -------------------------------------------------------------------
+ *  010105 MF     Initial Coding.
+ */
+
 /****************************** BIG WARNING ********************
  *   Only the code in TA-Lib-Core for .NET is mature.
  * 
  *   All code in TA-Lib-Timeseries is in development and is 
  *   not yet ready for use in applications.
  ****************************** BIG WARNING ********************/
+
 using System;
 using System.Collections;
 using TA.Lib;
@@ -117,59 +164,77 @@ namespace TA.Lib
             if (list.Length == 0)
                 return;
 
+            // Get the first IValueIter with defined timestamps.
+            IValueIter valueIter = list[0];
+            mRefTimestamps = valueIter.GetTimestamps();
+            for (int i = 1; (mRefTimestamps == null) && (i < list.Length); i++)
+            {
+                valueIter = list[i];
+                mRefTimestamps = valueIter.GetTimestamps();
+            }
+
+            // All IValueIter have no timestamps/content yet.
+            if (mRefTimestamps == null)
+                return;
+
             // Find the total number of ValueIter and verify all synchronized.
             // At the same time, identify the common range.
             int beginCommonRange = int.MinValue;
             int endCommonRange = int.MaxValue;
-            IValueIter valueIter = list[0];
-            if (valueIter.GetCommonRange(out beginCommonRange, out endCommonRange) == false)
-            {
-                // Common range does not have elements.
-                return;
-            }
-            Timestamps mRefTimestamps = valueIter.GetTimestamps();
+            valueIter = list[0];
             int nbValueIter = valueIter.NbValueIter();
-
-            // Handle case of Timeseries with no variables.
-            if (nbValueIter == 0)
+            if (nbValueIter != 0)
             {
-                return;
+                if (valueIter.GetCommonRange(out beginCommonRange, out endCommonRange) == false)
+                {
+                    // Common range does not have elements.
+                    return;
+                }
             }
-
+            
             for (int i = 1; i < list.Length; i++)                
             {
                 valueIter = list[i];
 
                 // Could be speed optimized...
-                if (!valueIter.GetTimestamps().IsSyncWith(mRefTimestamps))
+                Timestamps t = valueIter.GetTimestamps();
+                if (t != null)
                 {
-                    throw new Exception("Iteration possible only among synchronized Timeseries and Variables");
-                }
+                    if (!t.IsSyncWith(mRefTimestamps))
+                    {
+                        throw new Exception("Iteration possible only among synchronized Timeseries and Variables");
+                    }
 
-                int temp = valueIter.NbValueIter();
-                // Handle case of Timeseries with no variables.
-                if (temp == 0)
-                {
-                    return;
-                }
-                nbValueIter += temp;
+                    int temp = valueIter.NbValueIter();
+                    if (temp != 0)
+                    {
+                        nbValueIter += temp;
 
-                int tempBegin, tempEnd;
-                if (valueIter.GetCommonRange(out tempBegin, out tempEnd) == false)
-                {
-                    // Common range does not have elements.
-                    return;
+                        int tempBegin, tempEnd;
+                        if (valueIter.GetCommonRange(out tempBegin, out tempEnd) == false)
+                        {
+                            // Common range does not have elements.
+                            return;
+                        }
+                        if (tempBegin > beginCommonRange) beginCommonRange = tempBegin;
+                        if (tempEnd < endCommonRange) endCommonRange = tempEnd;
+                    }
                 }
-                if (tempBegin > beginCommonRange) beginCommonRange = tempBegin;
-                if (tempEnd < endCommonRange) endCommonRange = tempEnd;                
+            }
+
+            // Handle case with no IValueIter.
+            // (Keep in mind the case of Timeseries with no variable).
+            if (nbValueIter == 0)
+            {
+                return;
             }
 
             // TODO: Remove once FindCommonRange is confirm bug free.
-            int begCommonRange2;
-            int endCommonRange2;
+            int begCommonRange2 = int.MinValue;
+            int endCommonRange2 = int.MaxValue;
             if (FindCommonRange(list, out begCommonRange2, out endCommonRange2) == false)
             {
-                throw new Exception("Iteration possible only for synchronized Timeseries and Variable");
+                throw new Exception("FindCommonRange: Iteration possible only for synchronized Timeseries and Variable");
             }
 
             if ((begCommonRange2 != beginCommonRange) || (endCommonRange2 != endCommonRange))

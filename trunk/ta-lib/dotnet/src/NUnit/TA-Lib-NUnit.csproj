@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SanityTests.cs" />
+    <Compile Include="SanityTests.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="testdata.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Timeseries\TA-Lib-Timeseries.csproj">
