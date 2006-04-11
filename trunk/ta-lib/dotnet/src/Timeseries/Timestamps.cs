@@ -65,7 +65,14 @@ namespace TA.Lib
 	public class Timestamps
 	{
 		#region Constructors
-		internal Timestamps( IValueIter parent, DateTime []array )
+        /*internal Timestamps(IValueIter parent)
+        {
+            // Initialize the Timestamps as being "positional".
+            mParent = parent;
+            mStartDateTime = timestamps.mStartDateTime;
+        }*/
+
+		internal Timestamps( ValueIter parent, DateTime []array )
 		{
 			// Make a copy of the provided DateTime array.
 			mParent = parent;
@@ -74,17 +81,22 @@ namespace TA.Lib
             mTotalLength = mLength;
 		}
 
-		internal Timestamps( IValueIter parent, Timestamps timestamps )
-		{
-			// Reference on same data of an existing Timestamps.
-			mParent = parent;
-			mTimestamps = timestamps.mTimestamps;
+        internal Timestamps(ValueIter parent, Timestamps timestamps)
+        {
+            /*if (timestamps == null)
+            {
+                // Initialize as "positional" when Timestamps is null.
+                Timestamps(parent);
+            }*/
+            // Reference on same data of an existing Timestamps.
+            mParent = parent;
+            mTimestamps = timestamps.mTimestamps;
             mStartDateTime = timestamps.mStartDateTime;
             mLength = timestamps.Length;
             mTotalLength = mLength;
         }
 
-		internal Timestamps(IValueIter parent, int size )
+		internal Timestamps(ValueIter parent, int size )
 		{
 			mParent = parent;
             mStartDateTime = new DateTime(0);
@@ -121,6 +133,16 @@ namespace TA.Lib
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        internal void AdjustLength(int newValue )
+        {
+            // As data is removed or added the corresponding 
+            // timestamps must also be removed or added.
+            throw new Exception("Not Implemented");
+        }
+
+        /// <summary>
         /// Allows to set/get the offset this Timestamps
         /// is using within the timestamps that were
         /// specified at creation.
@@ -141,7 +163,6 @@ namespace TA.Lib
                 mLength = mTotalLength - mOffset;
             }
         }
-
 
 		#region Internal Members
         internal bool IsSyncWith(Timestamps timeStamps)
@@ -169,7 +190,10 @@ namespace TA.Lib
             
             return false;
         }
-		#endregion
+
+        // A Timestamps always belong to one and only one parent object.
+        internal ValueIter mParent;
+        #endregion
 
 		#region Private Members
 
@@ -178,16 +202,13 @@ namespace TA.Lib
 		private DateTime mStartDateTime;
         private DateTime[] mTimestamps;
 
-        // A Timestamps always belong to one and only one parent object.
-        private IValueIter mParent;		
-
         // An offset into the mTimestamps
         private int mOffset;
 
         // How many values available within the timestamps (starting at mOffset).
         private int mLength;
 
-        // Length that was provided on construction.
+        // Length that was provided on construction or after a length adjustment.
         private int mTotalLength;
 		#endregion
 	}

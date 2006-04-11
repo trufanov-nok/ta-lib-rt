@@ -95,13 +95,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Index.cs" />
-    <Compile Include="Interface.cs" />
     <Compile Include="Iter.cs" />
     <Compile Include="Timeseries.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Timestamps.cs" />
     <Compile Include="Value.cs" />
+    <Compile Include="ValueIter.cs" />
     <Compile Include="Variable.cs" />
   </ItemGroup>
   <ItemGroup>
