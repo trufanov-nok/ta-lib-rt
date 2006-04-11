@@ -107,6 +107,25 @@ namespace TA.Lib
             InitMembers();
         }
 
+
+        /// <summary>
+        /// Special constructor when creating a "place holder" timeseries
+        /// for an existing variable.
+        /// 
+        /// This occur when the use does soemthing like:
+        ///    Variable v = new Varaible();
+        /// 
+        /// Since Varaible must always belong to a Timeseries, in that
+        /// case the variable belongs to this invisble "place holder" 
+        /// timeseries.
+        /// </summary>
+        internal Timeseries(Variable v)
+        {
+            base.Init();
+            InitMembers();
+            InternalSetVar("Default",v);
+        }
+        
         private void InitMembers()
         {
             Add = new AddOp(this);
@@ -628,6 +647,12 @@ namespace TA.Lib
         {
             base.Init(timestamps);
         }
+
+        internal Timeseries(Variable<TVal> v)
+        {
+            base.Init();
+            InternalSetVar("Default", v);
+        }
         #endregion
 
         #region Internal Factories
@@ -769,87 +794,51 @@ namespace TA.Lib
     /// <summary>
     /// The timeseries timestamps can have different representation that are
     /// more convenient to the domain of the application.
-    /// 
-    /// As an example, the study of market data is often done with "Exact" 
-    /// daily timestamps. This allow, among other thing, to align and 
-    /// compare multiple securities, say, Microsoft against the Dow Jones index.
-    /// 
-    /// In the case that the user would prefer to align and compare the movement
-    /// over a natural period, say compare the daily 1988 rain precipitation 
-    /// against 1989, the timestamp cannot be "exact" anymore. The alignement 
-    /// shoult use only the month/day field, and the year field should be "mask". The 
-    /// "Wrapped" type allows such timestamps that covers only a natural period.
-    /// 
-    /// Finally, it is possible to align the data up to a user
-    /// defined event. As an example, financial contract expiration
-    /// are not always at a fix moment in time. The timestamps express
-    /// instead the delta of time until expiration. This is an example
-    /// of usage of the "Countdown" timestamps.
     /// </summary>
-    public enum TimestampType
+    public enum Timebase
     {
         /// <summary>
         /// Each Timestamps are represented by the field
-        ///  Year, month, day, hour, minute and seconds.
+        ///  Year, month, day, hour, minute, seconds and milliseconds.
         /// </summary>
-        Exact,
+        Infinite,
 
         /// <summary>
-        /// Each Timestamps are express with a subset
-        /// of field to cover a natural period. As an example,
-        /// a timeseries covering a natural period of an
-        /// hour will have only the minutes and seconds field
-        /// to be used for data alignement.
-        /// The Timeseries property 'NaturalPeriod' must also
-        /// be initialized to the desired time span.
+        /// The range of the timestamps covers a year.
         /// </summary>
-        Wrapped,
+        OneYear,
 
         /// <summary>
-        /// The timestamps represent a delta until expiration. The last index 
-        /// will represent the expiration time and represents 0 Year, 0 Month, 
-        /// 0 Day, 0 Hour, 0 Minute and 0 seconds
+        /// The range of the timestamps covers a month.
         /// </summary>
-        Countdown
-    }
-
-    /// <summary>
-    /// When the TimestampsType is "Wrapped", the natural period can be set 
-    /// as either: 1 year, 1 month, 1 day, 1 hour or 1 minute. 
-    /// The timestamps are accordingly truncated. 
-    /// 
-    /// Example: the user might choose to span a time series over 
-    /// a period of 1 year. In that case, the "year" field is ignored. 
-    /// All values will be synchronized using their month, day, hour, 
-    /// minute and second only.
-    /// </summary>
-    public enum NaturalPeriod
-    {
-        /// <summary>
-        /// Value when not applicable.
-        /// </summary>
-        None,
+        OneMonth,
 
         /// <summary>
-        /// Data span over a period of 1 year.
+        /// The range of the timestamps covers a day.
         /// </summary>
-        Year,
+        OneDay,
+
         /// <summary>
-        /// Data span over a period of 1 month.
+        /// The range of the timestamps covers an hour.
         /// </summary>
-        Month,
+        OneHour,
+
         /// <summary>
-        /// Data span over a period of 1 day.
+        /// The range of the timestamps covers a minute.
         /// </summary>
-        Day,
+        OneMinute,
+
         /// <summary>
-        /// Data span over a period of 1 hour.
+        /// The range of the timestamps covers a second.
         /// </summary>
-        Hour,
+        OneSecond,
+
         /// <summary>
-        /// Data span over a period of 1 minute.
+        /// The first moment is "0", the second "1" and so on...
+        /// The year,month,day,hour,minute,second and millisecond field
+        /// are unused.
         /// </summary>
-        Minute
+        None
     }
 
     /// <summary>
@@ -996,7 +985,7 @@ namespace TA.Lib
     }
 
     /// <summary>
-    /// Allows to control the algorithm used on period compression and expansion.
+    /// Allows to control the algorithm used on time compression and expansion.
     /// </summary>
     [FlagsAttribute]
     public enum PeriodConvertionFlags
@@ -1007,6 +996,7 @@ namespace TA.Lib
         /// of the corresponding existing variable.
         /// </summary>
         UseAverage,
+
         /// <summary>
         /// The volume is compress by calculating the average of
         /// all the values of the existing Volume variable.
@@ -1047,9 +1037,9 @@ namespace TA.Lib
 	/// these synchronize with a common set of timestamps.
 	/// </summary>
     [Serializable()]
-    public abstract class Timeseries<TSer, TVar, TVal> : IValueIter, IEnumerable<Index>
-        where TSer : Timeseries<TSer, TVar, TVal>, IValueIter
-        where TVar : Variable<TSer, TVar, TVal>, IValueIter
+    public abstract class Timeseries<TSer, TVar, TVal> : ValueIter, IEnumerable<Index>
+        where TSer : Timeseries<TSer, TVar, TVal>
+        where TVar : Variable<TSer, TVar, TVal>
     {
 		#region Initializer
 		protected void Init()
@@ -1060,34 +1050,44 @@ namespace TA.Lib
 		protected void Init(DateTime []dateTime)
 		{
             InitMembers();
-            this.Timestamps = new Timestamps(this,dateTime);
-            mInitialized = true;
-		}
+            initTimestamps( new Timestamps(this,dateTime) );
+        }
 
 		protected void Init(Timestamps timestamps)
 		{
-            InitMembers();
-			this.Timestamps = new Timestamps(this, timestamps);
-            mInitialized = true;
+            InitMembers();            
+			initTimestamps( new Timestamps(this, timestamps) );
 		}
 
         protected void Init(int size)
         {
             InitMembers();
-            this.Timestamps = new Timestamps(this, size);
-            mInitialized = true;
+            mTimebase = Timebase.None;
+            initTimestamps( new Timestamps(this, size) );
         }
 
-        // Special initializer when an empty Timeseries
-        // gets its first variable inserted.
-        internal void InitFromFirstVariable(Timestamps timestamps)
+        // Special initializer when an empty Timeseries gets its 
+        // first variable inserted during an Index iteration.
+        internal void InitFromFirstVariable(Index idx)
         {
             if (this.mInitialized == true)
             {
                 throw new Exception("Internal Error: Should never re-initialize timeseries");
             }
-            Init(timestamps);
+
+            initTimestamps( idx.RefTimestamps );
         }
+
+        // This should remain the only function to 
+        // initialize mTimestamps.
+        private void initTimestamps(Timestamps value)
+        {
+            if (mTimestamps != null) throw new InternalError();
+            if (mInitialized == true) throw new InternalError();
+            mTimestamps = value;
+            mInitialized = true;
+        }
+
 		#endregion
 
         #region Internal Factories
@@ -1150,7 +1150,16 @@ namespace TA.Lib
         /// Accessible with index that range from 0 to Length-1
         /// when Length >= 1
         /// </summary>
-        public Timestamps Timestamps;
+        private Timestamps mTimestamps;        
+
+        public Timestamps Timestamps
+        {            
+            get
+            {
+                return mTimestamps;
+            }
+            set { /* Do Nothing */ }
+        }
 		
 		#region AddVariable
 		/// <summary>
@@ -1164,6 +1173,12 @@ namespace TA.Lib
 		/// <returns>The newly added variable.</returns>
 		public TVar AddVariable( string variableName, TVal []data )
 		{
+            // If not initialized, create Timestamps with a Timebase of None.
+            if (mInitialized == false)
+            {
+                mTimebase = Timebase.None;
+                initTimestamps( new Timestamps(this, data.Length) );
+            }
 			TVar x  = createVariable(data);
 			this[variableName] = x;
 			return x;
@@ -1172,6 +1187,11 @@ namespace TA.Lib
         // Add an un-initialized variable.
         public TVar AddVariable(string variableName)
         {
+            if (mInitialized == false)
+            {
+                mTimebase = Timebase.None;
+                initTimestamps( new Timestamps(this,0) );
+            }
             TVar x = createVariable();
             this[variableName] = x;
             return x;
@@ -1296,10 +1316,9 @@ namespace TA.Lib
                 else
                 {
                     // If no timestamps, take the one from this new variable.
-                    if (Timestamps == null)
+                    if (mTimestamps == null)
                     {
-                        Timestamps = value.Parent.Timestamps;
-                        mInitialized = true;
+                        initTimestamps( value.Parent.Timestamps );
                     }
 
                     // Verify if same DateTime array, if not, check for synchronization
@@ -1312,19 +1331,24 @@ namespace TA.Lib
                     newVar = createVariable(value.mData, value.mTimestampsOffset);
 
                     // TODO Adjust the new common range.				
+                    InternalSetVar(variableName, newVar);
                 }
 
-				// Put the new variable in mVariable.
-                if (mVariable.ContainsKey(variableName))
-                {
-                    mVariable.Remove(variableName);
-                }
-		        mVariable.Add(variableName,newVar);
-
-				// Update default variable according to sort logic.
-				mDefault = mVariable.Values[0];
 			}
 		}
+
+        protected void InternalSetVar(string variableName, TVar newVar)
+        {
+            // Put the new variable in mVariable.
+            if (mVariable.ContainsKey(variableName))
+            {
+                mVariable.Remove(variableName);
+            }
+            mVariable.Add(variableName, newVar);
+
+            // Update default variable according to sort logic.
+            mDefault = mVariable.Values[0];
+        }
 
 		/// <summary>
 		/// Add a variable to this time series with the specified name.
@@ -1418,6 +1442,7 @@ namespace TA.Lib
 		#endregion
 
 		#region Private members
+
         // A Timeseries is considered initialized when 
         // the timestamps are known.
         private bool mInitialized;
@@ -1425,14 +1450,14 @@ namespace TA.Lib
 		private TVar mDefault;
         private SyncMode mSyncMode;
 
+        private Timebase mTimebase;
+
         // Variable identifying the common region.
         private int mOffsetMinStart;
         private int mOffsetMaxStart;
         private int mOffsetMinEnd;
         private int mOffsetMaxEnd;
 
-        private TimestampType mTimestampType;
-        private NaturalPeriod mNaturalPeriod;
         private Periodicity mPeriodicity;
 
         private bool mAllowEmptyVariables;
@@ -1445,12 +1470,11 @@ namespace TA.Lib
             mInitialized = false;
             mVariable = new SortedList<string,TVar>();            
             mSyncMode = SyncMode.Mode8;
-            mNaturalPeriod = NaturalPeriod.Year;
-            mTimestampType = TimestampType.Exact;
             mAllowEmptyVariables = true;
             mPadding = false;
             mPeriodicity = Periodicity.PerUnknown;
             mInterpolation = Interpolation.Linear;
+            mTimebase = Timebase.Infinite;
         }
 
         private void UpdateOffsets()
@@ -1496,10 +1520,19 @@ namespace TA.Lib
         {
             /// <summary>
             /// True when this timeseries have its timestamps initialized.
-            /// A timeseries not initialized can contain only un-initialized (empty)
-            /// variables.
-            /// The first variable added or initialized with values will dictate
-            /// the timestamps for this Timeseries.
+            /// 
+            /// In the case that the timestamps were not specified on creation,
+            /// the initialization will occur on the first occurence of:
+            /// 
+            ///  - Adding a non-empty variable. In which case this timeseries
+            ///    will inherit the same Timestamps and Timebase that were used 
+            ///    to produce that variable.
+            /// 
+            ///  OR
+            /// 
+            ///  - Adding data to an empty variable already belonging to this
+            ///    timeseries. In which case this timeseries will have a 
+            ///    Timebase "None".
             /// </summary>
             get
             {
@@ -1507,33 +1540,42 @@ namespace TA.Lib
             }
         }
 
-        /// <summary>
-        /// Control the TimestampType for this timeseries.
-        /// </summary>
-        public TimestampType TimestampType
+        public Timebase Timebase
         {
+            /// <summary>
+            /// Get the Timebase.
+            /// </summary>
             get
             {
-                return mTimestampType;
+                return mTimebase;
             }
-            set
-            {
-                mTimestampType = value;
-            }
-        }
 
-        /// <summary>
-        /// Control the NaturalPeriod for this timeseries.
-        /// </summary>
-        public NaturalPeriod NaturalPeriod
-        {
-            get
-            {
-                return mNaturalPeriod;
-            }
+            /// <summary>
+            /// Set the Timebase.
+            /// Valide transitions are:
+            ///   Infinite  -- to --> OneYear,OneMonth,OneDay,OneMinute,OneSecond,None
+            ///   OneYear   -- to --> OneMonth,OneDay,OneMinute,OneSecond,None
+            ///   OneMonth  -- to --> OneDay,OneMinute,OneSecond,None
+            ///   OneDay    -- to --> OneMinute,OneSecond,None
+            ///   OneMinute -- to --> OneSecond,None
+            ///   OneSecond -- to --> None
+            /// 
+            /// Once Timebase is none, it is not possible to change further this
+            /// property.
+            /// </summary>
             set
             {
-                mNaturalPeriod = value;
+                // TODO Check for all valid transition.
+
+                // Do nothing if no Timebase change.
+                if( value == mTimebase ) return;
+
+                if (mTimebase == Timebase.None)
+                {
+                    throw new Exception("Invalid Timebase property transition");
+                }
+                
+                mTimebase = value;
             }
         }
         
@@ -1653,7 +1695,7 @@ namespace TA.Lib
 		/// </summary>
 		/// <param name="seriesA"> is the 1st of the 2 series being synchronized.</param>
 		/// <param name="seriesB"> is the 2nd of the 2 series being synchronized.</param>
-		public static void Sync( IValueIter seriesA, IValueIter seriesB )
+		public static void Sync( ValueIter seriesA, ValueIter seriesB )
 		{
 			Sync( seriesA, seriesB, SyncMode.Mode8 );
 		}									  
@@ -1663,19 +1705,19 @@ namespace TA.Lib
 		/// <param name="seriesA"> is the 1st of the 2 series being synchronized.</param>
 		/// <param name="seriesB"> is the 2nd of the 2 series being synchronized.</param>
 		/// <param name="mode"> is the SyncMode to be used.</param>
-		public static void Sync( IValueIter seriesA, IValueIter seriesB, SyncMode mode )
+		public static void Sync( ValueIter seriesA, ValueIter seriesB, SyncMode mode )
 		{
 		}
 		#endregion
 
-        #region IValueIter Members
+        #region ValueIter Members
 
-        Timestamps IValueIter.GetTimestamps()
+        internal sealed override Timestamps GetTimestamps()
         {            
             return this.Timestamps;
         }
 
-        bool IValueIter.GetCommonRange( out int begin, out int end )
+        internal sealed override bool GetCommonRange(out int begin, out int end)
         {
             if (Padding == true)
             {
@@ -1693,29 +1735,15 @@ namespace TA.Lib
             }
 
             // TODO: Speed optimize once FindCommonRange is proven well debug.
-            IValueIter[] list = new IValueIter[mVariable.Count];
+            ValueIter[] list = new ValueIter[mVariable.Count];
             for( int i =0; i < list.Length; i++ )
             {
-                list[i] = mVariable.Values[i] as IValueIter; 
+                list[i] = mVariable.Values[i] as ValueIter; 
             }
             return Index.FindCommonRange(list, out begin, out end);            
         }
 
-        void IValueIter.SetIndexCache(Index index, int value)
-        {
-            mIndexRef = index;
-            mIndexCache = value;
-        }
-
-        int IValueIter.GetIndexCache(Index index)
-        {
-            if (index.Equals(mIndexRef))
-                return mIndexCache;
-            else
-                return -1;
-        }
-
-        bool IValueIter.IsSame(IValueIter objectToBeTested)
+        internal sealed override bool IsSame(ValueIter objectToBeTested)
         {
             // Check if 'this'
             if (this.Equals(objectToBeTested))
@@ -1733,33 +1761,30 @@ namespace TA.Lib
             return false;
         }
 
-        int IValueIter.NbValueIter()
+        internal sealed override int NbValueIter()
         {
             // A Timeseries has as much ValueIter as variable.
             return mVariable.Count;
         }
 
 
-        void IValueIter.SetValueIterInfo(ref IValueIter[] iterRef,
-                                         ref int[] begOffset,
-                                         ref int arrayIdx,
-                                         int commonBegIndex)
+        internal sealed override void SetValueIterInfo( ref ValueIterInfo[] iterRef,                                                        
+                                                        ref int arrayIdx,
+                                                        int commonBegIndex)
         {
             foreach (TVar v in mVariable.Values)
             {
-                (v as IValueIter).SetValueIterInfo(ref iterRef, ref begOffset, ref arrayIdx, commonBegIndex);
+                (v as ValueIter).SetValueIterInfo(ref iterRef, ref arrayIdx, commonBegIndex);
             }
         }
 
-        bool IValueIter.Lock
+        internal sealed override bool Lock
         {
             // TODO: Really lock the object
             set { mLock = value; }
             get { return mLock; }
         }
         private bool mLock = false;
-        private Index mIndexRef = null;
-        private int mIndexCache = -1;
         #endregion
 
         // Implementing the enumerable pattern
@@ -1792,7 +1817,7 @@ namespace TA.Lib
         #endregion
 
         #region IEnumerable<Index> Members
-        public IEnumerator<Index> GetEnumerator()
+        public override IEnumerator<Index> GetEnumerator()
         {
             Index mIndex = new Index(this);
             return mIndex.GetEnumerator();          
@@ -1803,6 +1828,13 @@ namespace TA.Lib
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+        #endregion
+
+        #region operator
+        public static Iter operator &(Timeseries<TSer, TVar, TVal> a, ValueIter b)
+        {
+            return new Iter(a, b);
         }
         #endregion
 }

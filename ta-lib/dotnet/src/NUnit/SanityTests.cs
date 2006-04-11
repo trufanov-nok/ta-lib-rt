@@ -200,7 +200,7 @@ namespace SanityTests
 
         [Test]
         public void UC5()
-        {
+       { 
             // Initialize using arrays.
             Timeseries ts = new Timeseries();
             ts.AddVariable("Open", TestData.DailySample.Open);
@@ -208,11 +208,16 @@ namespace SanityTests
             ts.AddVariable("Low", TestData.DailySample.Low);
             ts.AddVariable("Close", TestData.DailySample.Close);
             ts.AddVariable("Volume", TestData.DailySample.Volume);
+            
+            ts["Vydia"] = Vidya(ts["Close"], 14, 7);
 
-            Timeseries ts2 = Vidya(ts, 14, 7);
-            foreach (Index i in ts2)
+            //87.625
+            //87.5036
+            //...
+            //108.3335
+            foreach (Index i in ts["Vydia"])
             {
-                Console.WriteLine("{0} {1}", ts2.Timestamps[i], ts2[i]);
+                Console.WriteLine("{0} {1}", ts.Timestamps[i], ts["Vydia"][i]);
             }
 
             T[] fibarray = new T[4];
@@ -249,17 +254,13 @@ namespace SanityTests
 
         }
 
-        public Timeseries Vidya( Timeseries input, int length, int smooth )
+        public Variable Vidya( Variable close, int length, int smooth )
         {
             double sc = 2 / (smooth + 1);
 
-            Timeseries output = new Timeseries();
-            Timeseries temp   = new Timeseries();
-
-            Variable close = input["Close"];
-            Variable vidya = output["Vidya"];
-            Variable up    = temp["Up"];
-            Variable dn    = temp["Dn"];
+            Variable up    = new Variable();
+            Variable dn    = new Variable();
+            Variable vidya = new Variable();
             
             foreach (Index i in close )
             {
@@ -271,18 +272,18 @@ namespace SanityTests
                 }
             }
             
-            temp["UpSum"] = up.Sum(length);
-            temp["DnSum"] = dn.Sum(length);
+            up.Apply.Sum(length);
+            dn.Apply.Sum(length);
             
             double absCMO = 0.0;
-            foreach (Index i in (close & temp))
+            foreach (Index i in (close & up & dn) )
             {
                 if (i.Position == 0)
                     vidya[i] = close[i];
                 else
                 {
-                    double upSum = temp["UpSum"][i];
-                    double dnSum = temp["DnSum"][i];
+                    double upSum = up[i];
+                    double dnSum = dn[i];
                     if (upSum + dnSum > 0.0)
                         absCMO = Math.Abs((upSum - dnSum) / (upSum + dnSum));
 
@@ -290,8 +291,7 @@ namespace SanityTests
                 }
             }
 
-            return output;
+            return vidya;
         }
     }
-
 }

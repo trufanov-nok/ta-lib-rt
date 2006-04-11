@@ -58,14 +58,10 @@ using System.Collections.Generic;
 
 namespace TA.Lib
 {
-
     // Index hides all the complexity related to offset within data during 
     // iteration of the values within the timeseries and variable.
     public class Index
     {
-        // Offsets within the data arrays of each variable.
-        private int[] mStartOffset;        
-
         // Offset within the timestamp array.
         private int mTimestampOffset;
 
@@ -76,8 +72,12 @@ namespace TA.Lib
         // to be the reference.
         private Timestamps mRefTimestamps;
 
-        // Keep a reference on all ValueIter during iteration.        
-        private IValueIter[] mValueIter;
+        // Info for each ValueIter provided by the user for this iteration.
+        private ValueIterInfo[] mValueIter;
+
+        // Info for each new ValueIter (new variable) being initialized
+        // during this iteration.
+        private List<ValueIterInfo> mNewValueIter;
 
         // Total number of iteration from the perspective of the foreach() user.
         private int mSize;
@@ -128,9 +128,9 @@ namespace TA.Lib
 
         // Find the common range among an array of IValueIter
         // Return false if a common range cannot be find.
-        static public bool FindCommonRange(IValueIter[] list, out int beginCommonRange, out int endCommonRange)
+        static public bool FindCommonRange(ValueIter[] list, out int beginCommonRange, out int endCommonRange)
         {
-            IValueIter valueIter = list[0];
+            ValueIter valueIter = list[0];
             if (valueIter.GetCommonRange(out beginCommonRange, out endCommonRange) == false)
             {
                 // Common range does not have elements.
@@ -158,14 +158,14 @@ namespace TA.Lib
         }
 
 
-        internal Index(params IValueIter[] list)
+        internal Index(params ValueIter[] list)
         {
             // Handle case of empty list.
             if (list.Length == 0)
                 return;
 
             // Get the first IValueIter with defined timestamps.
-            IValueIter valueIter = list[0];
+            ValueIter valueIter = list[0];
             mRefTimestamps = valueIter.GetTimestamps();
             for (int i = 1; (mRefTimestamps == null) && (i < list.Length); i++)
             {
@@ -251,18 +251,18 @@ namespace TA.Lib
                 return;
             }
 
-            // Each ValueIter will have a corresponding "offset" owned
-            // by the Index object.
-            mStartOffset = new int[nbValueIter];
+            // Each ValueIter will have a corresponding ValueIterInfo structure.
+            mValueIter = new ValueIterInfo[nbValueIter];
 
-            // Keep references on ALL ValueIter.
-            mValueIter = new IValueIter[nbValueIter];
+            // Keep reference on new ValueIter initialize during the 
+            // iteration.
+            mNewValueIter = new List<ValueIterInfo>(10);
 
             // Get the starting offsets and reference on every ValueIter.
             int arrayPos = 0;
             for (int i = 0; i < list.Length; i++)
             {             
-                list[i].SetValueIterInfo( ref mValueIter, ref mStartOffset, ref arrayPos, beginCommonRange);
+                list[i].SetValueIterInfo( ref mValueIter, ref arrayPos, beginCommonRange);
             }
 
             // Calculate the starting offset for the timestamp array.
@@ -273,7 +273,24 @@ namespace TA.Lib
             mSize = positionToEnd;
         }
 
-        internal int Offset(IValueIter vi)
+        // Allow addition of new empty variables during iteration.
+        internal void AddNewValueIter( ValueIter vi, int startOffset )
+        {
+            // TODO Remove this sanity test eventually.
+            if (vi.NbValueIter() != 1)
+            {
+                // Shall never happen since only variable can be added,
+                // not a timeseries.
+                throw new InternalError();
+            }
+                
+            ValueIterInfo newInfo = new ValueIterInfo();
+            newInfo.mValueIter = vi;
+            newInfo.mStartOffset = startOffset;
+            mNewValueIter.Add(newInfo);
+        }
+
+        internal int Offset(ValueIter vi)
         {
             // Reset the back offset.
             // It is assumed that the ValueIter will
@@ -284,23 +301,43 @@ namespace TA.Lib
 
             // Find which of the mOffset correspond
             // to this ValueIter. Use cache info when available.
-            int iterIdx = vi.GetIndexCache(this);
-            if (iterIdx != -1)
-                return mStartOffset[iterIdx]-backOffset;
+            ValueIterInfo cachedInfo = vi.GetIndexCache(this);
+            if (cachedInfo != null )
+                return cachedInfo.mStartOffset-backOffset;
             
             // Not in the cache, so do a sequential
             // search for the right mOffset.
             for (int i = 0; i < mValueIter.Length; i++)
             {                
-                if (mValueIter[i].IsSame(vi))
+                if (mValueIter[i].mValueIter.IsSame(vi))
                 {
-                    vi.SetIndexCache(this, i);
-                    return mStartOffset[i]-backOffset;
+                    vi.SetIndexCache(this, mValueIter[i]);
+                    return mValueIter[i].mStartOffset-backOffset;
                 }
             }
 
-            // Attempt to use this Index on a Variable or Timeseries
-            // that is not part of the Iter object.
+            // Not in the list of ValueIter specified by 
+            // the user prior to iteration, so search in the 
+            // list of newValueIter added during iteration.            
+            foreach (ValueIterInfo i in mNewValueIter)
+            {
+                if( i.mValueIter.IsSame(vi) )
+                {
+                    vi.SetIndexCache(this, i);
+                    return i.mStartOffset - backOffset;
+                }
+            }
+
+            
+            // Attempt to use this Index on an invalid Variable.
+            // All non-empty variable must be specified in the 
+            // foreach statement.
+            //
+            // Example:
+            //    foreach( Index i in (close&open) ) { ... }
+            //
+            //    Access to variable other than close and open 
+            //    will cause this exception to occur.
             throw new Exception("Variable not accessible with this index");
         }
 
@@ -324,7 +361,14 @@ namespace TA.Lib
                 {
                    for (int i = 0; i < mValueIter.Length; i++)
                    {
-                      mValueIter[i].Lock = value;
+                      mValueIter[i].mValueIter.Lock = value;
+                   }
+                   if (mNewValueIter.Count != 0)
+                   {
+                       foreach (ValueIterInfo i in mNewValueIter)
+                       {
+                           i.mValueIter.Lock = value;
+                       }
                    }
                 }
                 mLock = value; 
@@ -344,7 +388,14 @@ namespace TA.Lib
                     // Adjust position for all the valueIter.
                     for (int i = 0; i < mValueIter.Length; i++)
                     {
-                        mStartOffset[i]++;
+                        mValueIter[i].mStartOffset++;
+                    }
+                    if (mNewValueIter.Count != 0)
+                    {
+                        foreach (ValueIterInfo i in mNewValueIter)
+                        {
+                            i.mStartOffset++;
+                        }
                     }
                     mTimestampOffset++;
                     //mBackOffset = 0; 

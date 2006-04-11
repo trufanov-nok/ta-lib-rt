@@ -61,13 +61,53 @@ namespace TA.Lib
     // Alias to generic for user convenience.
     public sealed partial class Variable :
         Variable<Timeseries, Variable, double>
-    {}
+    {
+        #region Constructors
+        public Variable() : base()
+        {
+            InitMembers();
+        }
+
+        internal Variable(Timeseries parent)
+            : base(parent)
+        {
+            InitMembers();
+        }
+
+        internal Variable(Timeseries parent, double[] newData)
+            : base(parent, newData)
+        {
+            InitMembers();
+        }
+
+        internal Variable(Timeseries parent, double[] newData, int offset)
+            : base(parent, newData, offset)
+        {
+            InitMembers();
+        }
+
+        // Utility function for constructors
+        private void InitMembers()
+        {
+            Apply = new ApplyOp(this);
+        }
+        #endregion
+
+        #region Internal Factories
+        internal override Timeseries createTimeseries()
+        {
+            return new Timeseries(this);
+        }
+        #endregion
+    }
 
     public sealed class Variable<TVal> :
         Variable<Timeseries<TVal>, Variable<TVal>, TVal>
     {
         #region Constructors
-        internal Variable() : base() {}
+        public Variable()
+        {
+        }
 
         internal Variable(Timeseries<TVal> parent)
             : base(parent)
@@ -84,6 +124,14 @@ namespace TA.Lib
         {
         }
         #endregion
+
+        #region Internal Factories
+        internal override Timeseries<TVal> createTimeseries()
+        {
+            return new Timeseries<TVal>(this);
+        }
+        #endregion
+
     }
 
     #region Variable Generated section
@@ -94,34 +142,6 @@ namespace TA.Lib
     [Serializable()]
     public sealed partial class Variable
     {
-        #region Constructors
-        internal Variable() : base() { InitMembers(); }
-
-        internal Variable(Timeseries parent)
-            : base(parent)
-        {
-            InitMembers();
-        }
-
-        internal Variable(Timeseries parent, double[] newData)
-            : base( parent, newData )
-        {
-            InitMembers();
-        }
-
-        internal Variable(Timeseries parent, double[] newData, int offset)
-            : base(parent,newData,offset)
-        {
-            InitMembers();
-        }
-
-        // Utility function for constructors
-        private void InitMembers()
-        {
-            Apply = new ApplyOp(this);
-        }
-        #endregion
-
         #region ApplyOp
         /// <summary>
         /// Allows to conveniently transform a variable.
@@ -344,21 +364,21 @@ namespace TA.Lib
 
     #endregion
 
+
     #region Variable Generic
     /// <summary>
     /// Variable generic holds distinct value for distinct moment in time.
     /// A variable ALWAYS belongs to one and only one Timeseries generic object.
     /// </summary>
     [Serializable()]
-    public class Variable<TSer, TVar, TVal> : IValueIter, IEnumerable<Index>
-        where TSer:Timeseries<TSer,TVar,TVal>,IValueIter
-        where TVar:Variable<TSer,TVar,TVal>,IValueIter
+    public abstract class Variable<TSer, TVar, TVal> : ValueIter, IEnumerable<Index>
+        where TSer:Timeseries<TSer,TVar,TVal>
+        where TVar:Variable<TSer,TVar,TVal>
     {    
         #region Constructors
-        internal Variable()
+        public Variable()
         {
-            // Required because serializable, but not expecteed to be called for now...
-            throw new Exception("Variable default contrustor unexpectably called.");
+            mParent = createTimeseries();
         }
 
         internal Variable(TSer parent)            
@@ -383,19 +403,23 @@ namespace TA.Lib
         }
         #endregion
 
+        #region Internal Factories
+        internal abstract TSer createTimeseries();
+        #endregion
+
         #region operator
-        public static Iter operator &(Variable<TSer, TVar, TVal> a, IValueIter b)
+        public static Iter operator &(Variable<TSer, TVar, TVal> a, ValueIter b)
         {
             return new Iter(a,b);
         }
         #endregion
 
-        #region IValueIter Members
-        Timestamps IValueIter.GetTimestamps()
+        #region ValueIter Members
+        internal sealed override Timestamps GetTimestamps()
         {
             return mParent.Timestamps;
         }
-        bool IValueIter.GetCommonRange(out int begin, out int end)
+        internal sealed override bool GetCommonRange(out int begin, out int end)
         {
             if (mData.Length > 0)
             {
@@ -410,26 +434,12 @@ namespace TA.Lib
             }
         }
 
-        void IValueIter.SetIndexCache(Index index, int value)
-        {
-            mIndexRef = index;
-            mIndexCache = value;
-        }
-
-        int IValueIter.GetIndexCache(Index index)
-        {
-            if (index.Equals(mIndexRef))
-                return mIndexCache;
-            else
-                return -1;
-        }
-
-        bool IValueIter.IsSame(IValueIter objectToBeTested)
+        internal sealed override bool IsSame(ValueIter objectToBeTested)
         {
             return this.Equals(objectToBeTested);
         }
 
-        bool IValueIter.Lock
+        internal sealed override bool Lock
         {
             // TODO: Really lock the object
             set { mLock = value; }
@@ -440,27 +450,29 @@ namespace TA.Lib
             }             
         }
 
-        int IValueIter.NbValueIter()
+        internal sealed override int NbValueIter()
         {
             // A Variable is always only one ValueIter.
             return 1;
         }
 
 
-        void IValueIter.SetValueIterInfo(ref IValueIter[] iterRef,
-                                         ref int[] begOffset,
-                                         ref int arrayIdx,
-                                         int commonBegIndex)
+        internal sealed override void SetValueIterInfo(ref ValueIterInfo[] iterRef,                                                       
+                                                       ref int arrayIdx,
+                                                       int commonBegIndex)
         {
-            iterRef[arrayIdx] = this;
-            begOffset[arrayIdx] = commonBegIndex-mTimestampsOffset;
+            // TODO Sanity test. Can be removed later.
+            if (iterRef[arrayIdx] != null)
+            {
+                throw new InternalError();
+            }
+            iterRef[arrayIdx] = new ValueIterInfo();
+            iterRef[arrayIdx].mValueIter = this;
+            iterRef[arrayIdx].mStartOffset = commonBegIndex - mTimestampsOffset;
             arrayIdx++;
         }
 
         private bool mLock = false;
-
-        private Index mIndexRef = null;
-        private int mIndexCache = -1;
         #endregion
 
         /// <summary>
@@ -520,14 +532,26 @@ namespace TA.Lib
                     // Is this the first variable being initialized 
                     // for the parent Timeseries?
                     // If yes, initialize the parent Timeseries first.
-                    if( mParent.Initialized == false )
-                       mParent.InitFromFirstVariable(idx.RefTimestamps);
-                                        
-                    mData = new TVal[idx.Size]; // TODO Minimize size using idx.Position
-                    mTimestampsOffset = 0; // TODO Compute this correctly.
+                    if (mParent.Initialized == false)
+                        mParent.InitFromFirstVariable(idx);
+                    else
+                    {
+                        // TODO Handle when the timeseries is already
+                        // initialized.
+                        throw new Exception("Not Implemented Feature");
+                    }
+                    
+                    // TODO Compute these correctly.
+                    mData = new TVal[idx.Size-idx.Position]; 
+                    mTimestampsOffset = idx.Position; 
                     mInitialized = true;
+
+                    // Add the new variable to the index.
+                    idx.AddNewValueIter(this, 0);
+                    mData[0] = value;
+                    return;
                 }
-                mData[idx.Position] = value; // TODO Use proper offset.
+                mData[idx.Offset(this)] = value;
             }
         }
         #endregion
@@ -627,7 +651,7 @@ namespace TA.Lib
         #endregion*/
 
         #region IEnumerable<Index> Members
-        public IEnumerator<Index> GetEnumerator()
+        public override IEnumerator<Index> GetEnumerator()
         {
             Index mIndex = new Index(this);
             return mIndex.GetEnumerator();

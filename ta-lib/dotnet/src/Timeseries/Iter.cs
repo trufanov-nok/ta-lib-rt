@@ -59,11 +59,22 @@ namespace TA.Lib
 {
     public class Iter
     {        
-        private IValueIter[] mValueIter;
+        private ValueIter[] mValueIter;
 
-        public Iter(params IValueIter[] list)
+        public Iter(params ValueIter[] list)
         {
-            mValueIter = list.Clone() as IValueIter[];
+            mValueIter = list.Clone() as ValueIter[];
+        }
+
+        internal Iter(ValueIter a, ValueIter[] list)
+        {
+            mValueIter = new ValueIter[list.Length + 1];
+            int i;
+            for( i=0; i < list.Length; i++ )
+            {
+                mValueIter[i] = list[i];
+            }
+            mValueIter[i] = a;
         }
 
         public IEnumerator<Index> GetEnumerator()
@@ -72,19 +83,21 @@ namespace TA.Lib
             return mIndex.GetEnumerator();
         }       
 
-        /* The follwoing four functions provides a convenient syntax
+        /* The following functions provides a convenient syntax
          * to build an Iter without doing new.
          * Example: "foreach( Index i in a&b&c ) { ... }"
-         *
-        public static Iter operator & ( IValueIter a, IValueIter b )
-        {
-            return new Iter(a, b);
-        }
-        public static Iter operator &(IValueIter a, Iter b)
+         */
+        public static Iter operator &(ValueIter a, Iter b)
         {
             return new Iter(a, b.mValueIter );
         }
-        public static Iter operator &(Iter a, IValueIter b)
+
+        public static Iter operator &(Iter a, ValueIter b )
+        {
+            return new Iter(b, a.mValueIter);
+        }
+
+        /*public static Iter operator &(Iter a, IValueIter b)
         {
             return new Iter(a.mValueIter, b);
         }
