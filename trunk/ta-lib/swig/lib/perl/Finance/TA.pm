@@ -748,7 +748,6 @@ package Finance::TA;
 *TA_Equal = *Finance::TAc::TA_Equal;
 *TA_AllCandleSettings = *Finance::TAc::TA_AllCandleSettings;
 *TA_FUNC_FLG_OVERLAP = *Finance::TAc::TA_FUNC_FLG_OVERLAP;
-*TA_FUNC_FLG_INDICATOR = *Finance::TAc::TA_FUNC_FLG_INDICATOR;
 *TA_FUNC_FLG_VOLUME = *Finance::TAc::TA_FUNC_FLG_VOLUME;
 *TA_FUNC_FLG_UNST_PER = *Finance::TAc::TA_FUNC_FLG_UNST_PER;
 *TA_FUNC_FLG_CANDLESTICK = *Finance::TAc::TA_FUNC_FLG_CANDLESTICK;
