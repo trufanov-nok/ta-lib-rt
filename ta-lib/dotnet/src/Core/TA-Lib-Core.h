@@ -52,253 +52,255 @@
 using namespace System;
 using namespace System::Runtime::InteropServices;
 
-namespace TA
+namespace TicTacTec
 {
-   namespace Lib
-   {
-	  public ref class Core abstract sealed
-	  {
-	  public:
-         #include "ta_defs.h"
-
-      private:
-		  ref class TA_CandleSetting sealed 
+	namespace TA
+	{
+	   namespace Lib
+	   {
+		  public ref class Core abstract sealed
 		  {
 		  public:
-			  enum class TA_CandleSettingType settingType;
-              enum class TA_RangeType rangeType;
-              int     avgPeriod;
-              double  factor;
-         };
+			 #include "ta_defs.h"
 
-         ref class TA_GlobalsType sealed
-		 {
-         public:
-            TA_GlobalsType()
-			{
-				unstablePeriod = gcnew cli::array<unsigned int>((int)TA_FuncUnstId::TA_FUNC_UNST_ALL);
-				compatibility = NAMESPACE(TA_Compatibility)TA_COMPATIBILITY_DEFAULT;
-				for( int i=0; i < (int)TA_FuncUnstId::TA_FUNC_UNST_ALL; i++ )
-					unstablePeriod[i] = 0;
-				candleSettings = gcnew cli::array<TA_CandleSetting^>((int)TA_CandleSettingType::TA_AllCandleSettings);
-				for( int j=0; j < candleSettings->Length; j++ )
-				{
-					candleSettings[j] = gcnew TA_CandleSetting();					
-				}
-            }
+		  private:
+			  ref class TA_CandleSetting sealed 
+			  {
+			  public:
+				  enum class TA_CandleSettingType settingType;
+				  enum class TA_RangeType rangeType;
+				  int     avgPeriod;
+				  double  factor;
+			 };
 
-            /* For handling the compatibility with other software */
-            TA_Compatibility compatibility;
-
-            /* For handling the unstable period of some TA function. */
-			cli::array<unsigned int>^ unstablePeriod;
-
-            /* For handling the candlestick global settings */
-			cli::array<TA_CandleSetting^>^ candleSettings;
-         };
-
-         static TA_GlobalsType^ TA_Globals;
-
-         static  enum class TA_RetCode INT_EMA( int           startIdx,
-                                int           endIdx,
-                                cli::array<double>^ inReal_0,
-                                int           optInTimePeriod_0, /* From 1 to 200 */
-                                double        optInK_1,
-                                [Out]int% outBegIdx,
-                                [Out]int% outNbElement,
-                                cli::array<double>^ outReal_0);
-
-         static  enum class TA_RetCode INT_EMA( int           startIdx,
-                                int           endIdx,
-                                cli::array<float>^ inReal_0,
-                                int           optInTimePeriod_0, /* From 1 to 200 */
-                                double        optInK_1,
-                                [Out]int% outBegIdx,
-                                [Out]int% outNbElement,
-                                cli::array<double>^ outReal_0);
-
-         static  enum class TA_RetCode INT_SMA( int     startIdx,
-                                int     endIdx,
-                                cli::array<double>^ inReal_0,
-                                int     optInTimePeriod_0, /* From 1 to 200 */
-                                [Out]int% outBegIdx,
-                                [Out]int% outNbElement,
-                                cli::array<double>^ outReal_0);
-
-         static  enum class TA_RetCode INT_SMA( int     startIdx,
-                                int     endIdx,
-                                cli::array<float>^ inReal_0,
-                                int     optInTimePeriod_0, /* From 1 to 200 */
-                                [Out]int% outBegIdx,
-                                [Out]int% outNbElement,
-                                cli::array<double>^ outReal_0 );
-
-         static  enum class TA_RetCode INT_MACD( int    startIdx,
-                                 int    endIdx,
-                                 cli::array<double>^ inReal_0,
-                                 int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
-                                 int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
-                                 int    optInSignalPeriod_2, /* From 1 to 200 */
-                                 [Out]int% outBegIdx,
-                                 [Out]int% outNbElement,
-                                 cli::array<double>^ outMACD_0,
-                                 cli::array<double>^ outMACDSignal_1,
-                                 cli::array<double>^ outMACDHist_2 );
-
-         static  enum class TA_RetCode INT_MACD( int    startIdx,
-                                 int    endIdx,
-                                 cli::array<float>^ inReal_0,
-                                 int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
-                                 int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
-                                 int    optInSignalPeriod_2, /* From 1 to 200 */
-                                 [Out]int% outBegIdx,
-                                 [Out]int% outNbElement,
-                                 cli::array<double>^ outMACD_0,
-                                 cli::array<double>^ outMACDSignal_1,
-                                 cli::array<double>^ outMACDHist_2 );
-
-         static  enum class TA_RetCode INT_PO( int    startIdx,
-                               int    endIdx,
-                               cli::array<double>^ inReal_0,
-                               int    optInFastPeriod_0, /* From 1 to 200 */
-                               int    optInSlowPeriod_1, /* From 1 to 200 */
-							   TA_MAType optInMethod_2,
-                               [Out]int% outBegIdx,
-                               [Out]int% outNbElement,
-                               cli::array<double>^ outReal_0,
-                               cli::array<double>^ tempBuffer,
-                               int  doPercentageOutput );
-
-         static  enum class TA_RetCode INT_PO( int    startIdx,
-                               int    endIdx,
-                               cli::array<float>^ inReal_0,
-                               int    optInFastPeriod_0, /* From 1 to 200 */
-                               int    optInSlowPeriod_1, /* From 1 to 200 */
-							   TA_MAType optInMethod_2,
-                               [Out]int% outBegIdx,
-                               [Out]int% outNbElement,
-                               cli::array<double>^ outReal_0,
-                               cli::array<double>^ tempBuffer,
-                               int  doPercentageOutput );
-
-         static  enum class TA_RetCode INT_VAR( int    startIdx,
-                                int    endIdx,
-								cli::array<double>^ inReal_0,
-                                int    optInTimePeriod_0,                       
-                                [Out]int% outBegIdx,
-                                [Out]int% outNbElement,
-                                cli::array<double>^ outReal_0);
-
-         static  enum class TA_RetCode INT_VAR( int    startIdx,
-                                int    endIdx,
-                                cli::array<float>^ inReal_0,
-                                int    optInTimePeriod_0,                       
-                                [Out]int% outBegIdx,
-                                [Out]int% outNbElement,
-                                cli::array<double>^ outReal_0);
-
-         static void INT_stddev_using_precalc_ma( cli::array<double>^  inReal,
-                                              cli::array<double>^ inMovAvg,
-                                              int inMovAvgBegIdx,
-                                              int inMovAvgNbElement,
-                                              int timePeriod,
-                                              cli::array<double>^ output );
-
-         static void INT_stddev_using_precalc_ma( cli::array<float>^ inReal,
-                                              cli::array<double>^ inMovAvg,
-                                              int inMovAvgBegIdx,
-                                              int inMovAvgNbElement,
-                                              int timePeriod,
-                                              cli::array<double>^ output);
-
-      public:
-         static Core()
-         {
-            // Initialize global settings
-            TA_Globals = gcnew TA_GlobalsType;
-            /* Set the default value to global variables */
-			TA_RestoreCandleDefaultSettings( TA_CandleSettingType::TA_AllCandleSettings );
-         }
-
-         static  enum class TA_RetCode SetUnstablePeriod(  enum class TA_FuncUnstId id,
-                                                           unsigned int  unstablePeriod );
-
-         static unsigned int GetUnstablePeriod( TA_FuncUnstId id );
-
-         static  enum class TA_RetCode SetCompatibility( enum class TA_Compatibility value );
-         static  enum class TA_Compatibility GetCompatibility( void );
-
-		 static  enum class TA_RetCode TA_SetCandleSettings(  enum class TA_CandleSettingType settingType, 
-                                                              enum class TA_RangeType rangeType,
-                                                              int avgPeriod, 
-                                                              double factor )
-         {    
-			 if( settingType >= TA_CandleSettingType::TA_AllCandleSettings )
+			 ref class TA_GlobalsType sealed
 			 {
-				 return TA_RetCode::TA_BAD_PARAM;
+			 public:
+				TA_GlobalsType()
+				{
+					unstablePeriod = gcnew cli::array<unsigned int>((int)TA_FuncUnstId::TA_FUNC_UNST_ALL);
+					compatibility = NAMESPACE(TA_Compatibility)TA_COMPATIBILITY_DEFAULT;
+					for( int i=0; i < (int)TA_FuncUnstId::TA_FUNC_UNST_ALL; i++ )
+						unstablePeriod[i] = 0;
+					candleSettings = gcnew cli::array<TA_CandleSetting^>((int)TA_CandleSettingType::TA_AllCandleSettings);
+					for( int j=0; j < candleSettings->Length; j++ )
+					{
+						candleSettings[j] = gcnew TA_CandleSetting();					
+					}
+				}
+
+				/* For handling the compatibility with other software */
+				TA_Compatibility compatibility;
+
+				/* For handling the unstable period of some TA function. */
+				cli::array<unsigned int>^ unstablePeriod;
+
+				/* For handling the candlestick global settings */
+				cli::array<TA_CandleSetting^>^ candleSettings;
+			 };
+
+			 static TA_GlobalsType^ TA_Globals;
+
+			 static  enum class TA_RetCode INT_EMA( int           startIdx,
+									int           endIdx,
+									cli::array<double>^ inReal_0,
+									int           optInTimePeriod_0, /* From 1 to 200 */
+									double        optInK_1,
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0);
+
+			 static  enum class TA_RetCode INT_EMA( int           startIdx,
+									int           endIdx,
+									cli::array<float>^ inReal_0,
+									int           optInTimePeriod_0, /* From 1 to 200 */
+									double        optInK_1,
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0);
+
+			 static  enum class TA_RetCode INT_SMA( int     startIdx,
+									int     endIdx,
+									cli::array<double>^ inReal_0,
+									int     optInTimePeriod_0, /* From 1 to 200 */
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0);
+
+			 static  enum class TA_RetCode INT_SMA( int     startIdx,
+									int     endIdx,
+									cli::array<float>^ inReal_0,
+									int     optInTimePeriod_0, /* From 1 to 200 */
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0 );
+
+			 static  enum class TA_RetCode INT_MACD( int    startIdx,
+									 int    endIdx,
+									 cli::array<double>^ inReal_0,
+									 int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
+									 int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
+									 int    optInSignalPeriod_2, /* From 1 to 200 */
+									 [Out]int% outBegIdx,
+									 [Out]int% outNbElement,
+									 cli::array<double>^ outMACD_0,
+									 cli::array<double>^ outMACDSignal_1,
+									 cli::array<double>^ outMACDHist_2 );
+
+			 static  enum class TA_RetCode INT_MACD( int    startIdx,
+									 int    endIdx,
+									 cli::array<float>^ inReal_0,
+									 int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
+									 int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
+									 int    optInSignalPeriod_2, /* From 1 to 200 */
+									 [Out]int% outBegIdx,
+									 [Out]int% outNbElement,
+									 cli::array<double>^ outMACD_0,
+									 cli::array<double>^ outMACDSignal_1,
+									 cli::array<double>^ outMACDHist_2 );
+
+			 static  enum class TA_RetCode INT_PO( int    startIdx,
+								   int    endIdx,
+								   cli::array<double>^ inReal_0,
+								   int    optInFastPeriod_0, /* From 1 to 200 */
+								   int    optInSlowPeriod_1, /* From 1 to 200 */
+								   TA_MAType optInMethod_2,
+								   [Out]int% outBegIdx,
+								   [Out]int% outNbElement,
+								   cli::array<double>^ outReal_0,
+								   cli::array<double>^ tempBuffer,
+								   int  doPercentageOutput );
+
+			 static  enum class TA_RetCode INT_PO( int    startIdx,
+								   int    endIdx,
+								   cli::array<float>^ inReal_0,
+								   int    optInFastPeriod_0, /* From 1 to 200 */
+								   int    optInSlowPeriod_1, /* From 1 to 200 */
+								   TA_MAType optInMethod_2,
+								   [Out]int% outBegIdx,
+								   [Out]int% outNbElement,
+								   cli::array<double>^ outReal_0,
+								   cli::array<double>^ tempBuffer,
+								   int  doPercentageOutput );
+
+			 static  enum class TA_RetCode INT_VAR( int    startIdx,
+									int    endIdx,
+									cli::array<double>^ inReal_0,
+									int    optInTimePeriod_0,                       
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0);
+
+			 static  enum class TA_RetCode INT_VAR( int    startIdx,
+									int    endIdx,
+									cli::array<float>^ inReal_0,
+									int    optInTimePeriod_0,                       
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0);
+
+			 static void INT_stddev_using_precalc_ma( cli::array<double>^  inReal,
+												  cli::array<double>^ inMovAvg,
+												  int inMovAvgBegIdx,
+												  int inMovAvgNbElement,
+												  int timePeriod,
+												  cli::array<double>^ output );
+
+			 static void INT_stddev_using_precalc_ma( cli::array<float>^ inReal,
+												  cli::array<double>^ inMovAvg,
+												  int inMovAvgBegIdx,
+												  int inMovAvgNbElement,
+												  int timePeriod,
+												  cli::array<double>^ output);
+
+		  public:
+			 static Core()
+			 {
+				// Initialize global settings
+				TA_Globals = gcnew TA_GlobalsType;
+				/* Set the default value to global variables */
+				TA_RestoreCandleDefaultSettings( TA_CandleSettingType::TA_AllCandleSettings );
 			 }
-			 TA_Globals->candleSettings[(int)settingType]->settingType = settingType;
-			 TA_Globals->candleSettings[(int)settingType]->rangeType = rangeType;
-			 TA_Globals->candleSettings[(int)settingType]->avgPeriod = avgPeriod;
-			 TA_Globals->candleSettings[(int)settingType]->factor = factor;
-			 return TA_RetCode::TA_SUCCESS;
-         }
 
-		 
-         static enum class TA_RetCode TA_RestoreCandleDefaultSettings( TA_CandleSettingType settingType )
-         {			
-			switch( settingType )
-			{
-			case TA_CandleSettingType::TA_BodyLong:
-				TA_SetCandleSettings( TA_CandleSettingType::TA_BodyLong, TA_RangeType::TA_RangeType_RealBody, 10, 1.0 );
-			   break;
-			case TA_CandleSettingType::TA_BodyVeryLong:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyVeryLong, TA_RangeType::TA_RangeType_RealBody, 10, 3.0 );
-			   break;
-			case TA_CandleSettingType::TA_BodyShort:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyShort, TA_RangeType::TA_RangeType_RealBody, 10, 1.0 );
-			   break;
-			case TA_CandleSettingType::TA_BodyDoji:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyDoji, TA_RangeType::TA_RangeType_HighLow, 10, 0.1 );
-			   break;
-			case TA_CandleSettingType::TA_ShadowLong:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowLong, TA_RangeType::TA_RangeType_RealBody, 0, 1.0 );
-			   break;
-			case TA_CandleSettingType::TA_ShadowVeryLong:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowVeryLong, TA_RangeType::TA_RangeType_RealBody, 0, 2.0 );
-			   break;
-			case TA_CandleSettingType::TA_ShadowShort:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowShort, TA_RangeType::TA_RangeType_Shadows, 10, 1.0 );
-			   break;
-			case TA_CandleSettingType::TA_ShadowVeryShort:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowVeryShort, TA_RangeType::TA_RangeType_HighLow, 10, 0.1 );
-			   break;
-			case TA_CandleSettingType::TA_Near:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_Near, TA_RangeType::TA_RangeType_HighLow, 5, 0.2 );
-			   break;
-			case TA_CandleSettingType::TA_Far:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_Far, TA_RangeType::TA_RangeType_HighLow, 5, 0.6 );
-			   break;
-			case TA_CandleSettingType::TA_Equal:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_Equal, TA_RangeType::TA_RangeType_HighLow, 5, 0.05);
-			   break;
-			case TA_CandleSettingType::TA_AllCandleSettings:
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyLong, TA_RangeType::TA_RangeType_RealBody, 10, 1.0 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyVeryLong, TA_RangeType::TA_RangeType_RealBody, 10, 3.0 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyShort, TA_RangeType::TA_RangeType_RealBody, 10, 1.0 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyDoji, TA_RangeType::TA_RangeType_HighLow, 10, 0.1 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowLong, TA_RangeType::TA_RangeType_RealBody, 0, 1.0 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowVeryLong, TA_RangeType::TA_RangeType_RealBody, 0, 2.0 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowShort, TA_RangeType::TA_RangeType_Shadows, 10, 1.0 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowVeryShort, TA_RangeType::TA_RangeType_HighLow, 10, 0.1 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_Near, TA_RangeType::TA_RangeType_HighLow, 5, 0.2 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_Far, TA_RangeType::TA_RangeType_HighLow, 5, 0.6 );
-			   TA_SetCandleSettings( TA_CandleSettingType::TA_Equal, TA_RangeType::TA_RangeType_HighLow, 5, 0.05);
-			   break;
-			}
+			 static  enum class TA_RetCode SetUnstablePeriod(  enum class TA_FuncUnstId id,
+															   unsigned int  unstablePeriod );
 
-			return TA_RetCode::TA_SUCCESS;
-         }
+			 static unsigned int GetUnstablePeriod( TA_FuncUnstId id );
+
+			 static  enum class TA_RetCode SetCompatibility( enum class TA_Compatibility value );
+			 static  enum class TA_Compatibility GetCompatibility( void );
+
+			 static  enum class TA_RetCode TA_SetCandleSettings(  enum class TA_CandleSettingType settingType, 
+																  enum class TA_RangeType rangeType,
+																  int avgPeriod, 
+																  double factor )
+			 {    
+				 if( settingType >= TA_CandleSettingType::TA_AllCandleSettings )
+				 {
+					 return TA_RetCode::TA_BAD_PARAM;
+				 }
+				 TA_Globals->candleSettings[(int)settingType]->settingType = settingType;
+				 TA_Globals->candleSettings[(int)settingType]->rangeType = rangeType;
+				 TA_Globals->candleSettings[(int)settingType]->avgPeriod = avgPeriod;
+				 TA_Globals->candleSettings[(int)settingType]->factor = factor;
+				 return TA_RetCode::TA_SUCCESS;
+			 }
+
+			 
+			 static enum class TA_RetCode TA_RestoreCandleDefaultSettings( TA_CandleSettingType settingType )
+			 {			
+				switch( settingType )
+				{
+				case TA_CandleSettingType::TA_BodyLong:
+					TA_SetCandleSettings( TA_CandleSettingType::TA_BodyLong, TA_RangeType::TA_RangeType_RealBody, 10, 1.0 );
+				   break;
+				case TA_CandleSettingType::TA_BodyVeryLong:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyVeryLong, TA_RangeType::TA_RangeType_RealBody, 10, 3.0 );
+				   break;
+				case TA_CandleSettingType::TA_BodyShort:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyShort, TA_RangeType::TA_RangeType_RealBody, 10, 1.0 );
+				   break;
+				case TA_CandleSettingType::TA_BodyDoji:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyDoji, TA_RangeType::TA_RangeType_HighLow, 10, 0.1 );
+				   break;
+				case TA_CandleSettingType::TA_ShadowLong:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowLong, TA_RangeType::TA_RangeType_RealBody, 0, 1.0 );
+				   break;
+				case TA_CandleSettingType::TA_ShadowVeryLong:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowVeryLong, TA_RangeType::TA_RangeType_RealBody, 0, 2.0 );
+				   break;
+				case TA_CandleSettingType::TA_ShadowShort:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowShort, TA_RangeType::TA_RangeType_Shadows, 10, 1.0 );
+				   break;
+				case TA_CandleSettingType::TA_ShadowVeryShort:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowVeryShort, TA_RangeType::TA_RangeType_HighLow, 10, 0.1 );
+				   break;
+				case TA_CandleSettingType::TA_Near:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_Near, TA_RangeType::TA_RangeType_HighLow, 5, 0.2 );
+				   break;
+				case TA_CandleSettingType::TA_Far:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_Far, TA_RangeType::TA_RangeType_HighLow, 5, 0.6 );
+				   break;
+				case TA_CandleSettingType::TA_Equal:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_Equal, TA_RangeType::TA_RangeType_HighLow, 5, 0.05);
+				   break;
+				case TA_CandleSettingType::TA_AllCandleSettings:
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyLong, TA_RangeType::TA_RangeType_RealBody, 10, 1.0 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyVeryLong, TA_RangeType::TA_RangeType_RealBody, 10, 3.0 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyShort, TA_RangeType::TA_RangeType_RealBody, 10, 1.0 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_BodyDoji, TA_RangeType::TA_RangeType_HighLow, 10, 0.1 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowLong, TA_RangeType::TA_RangeType_RealBody, 0, 1.0 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowVeryLong, TA_RangeType::TA_RangeType_RealBody, 0, 2.0 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowShort, TA_RangeType::TA_RangeType_Shadows, 10, 1.0 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_ShadowVeryShort, TA_RangeType::TA_RangeType_HighLow, 10, 0.1 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_Near, TA_RangeType::TA_RangeType_HighLow, 5, 0.2 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_Far, TA_RangeType::TA_RangeType_HighLow, 5, 0.6 );
+				   TA_SetCandleSettings( TA_CandleSettingType::TA_Equal, TA_RangeType::TA_RangeType_HighLow, 5, 0.05);
+				   break;
+				}
+
+				return TA_RetCode::TA_SUCCESS;
+			 }
 
 /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
          static int MAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
@@ -3418,6 +3420,7 @@ namespace TA
 
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
 
-  	   };
-   }
+  		   };
+	   }
+	}
 }
