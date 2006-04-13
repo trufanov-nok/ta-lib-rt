@@ -52,8 +52,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import TA.Lib.Core;
-import TA.Lib.TA_RetCode;
+import com.tictactec.ta.lib.Core;
+import com.tictactec.ta.lib.TA_RetCode;
 
 public class CoreMetaInfo
 {

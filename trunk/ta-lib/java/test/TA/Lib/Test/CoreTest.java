@@ -44,10 +44,11 @@
  *  121005 MF     First Version
  */
 
-package TA.Lib;
+package TA.Lib.Test;
 
 import junit.framework.*;
 import java.util.Arrays;
+import com.tictactec.ta.lib.*;
 
 public class CoreTest extends TestCase {	
     private double input[];
@@ -57,7 +58,7 @@ public class CoreTest extends TestCase {
     private MInteger outBegIdx; 
     private MInteger outNbElement;
     private TA_RetCode retCode;
-    private TA.Lib.Core lib;
+    private Core lib;
     private int lookback;
 
     static public double[] close = new double[] {91.500000,94.815000,94.375000,95.095000,93.780000,94.625000,92.530000,92.750000,90.315000,92.470000,96.125000,
@@ -109,7 +110,7 @@ public class CoreTest extends TestCase {
     public CoreTest(String testName) {
         super(testName);
         // Create the library (typically done only once).
-        lib = new TA.Lib.Core();
+        lib = new Core();
         input = new double[200];
         inputInt = new int[200];        
         output = new double[200];

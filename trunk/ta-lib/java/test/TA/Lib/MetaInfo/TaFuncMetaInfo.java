@@ -49,9 +49,9 @@ package TA.Lib.MetaInfo;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import TA.Lib.Core;
-import TA.Lib.MInteger;
-import TA.Lib.TA_RetCode;
+import com.tictactec.ta.lib.Core;
+import com.tictactec.ta.lib.MInteger;
+import com.tictactec.ta.lib.TA_RetCode;
 
 public class TaFuncMetaInfo extends TaFuncSignature
 {

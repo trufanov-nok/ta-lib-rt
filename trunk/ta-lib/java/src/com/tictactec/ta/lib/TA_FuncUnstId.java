@@ -44,7 +44,7 @@
  *  121005 MF     First Version
  */
 
-package TA.Lib;
+package com.tictactec.ta.lib;
 
 public enum TA_FuncUnstId {
 /* 000 */  TA_FUNC_UNST_EMA,

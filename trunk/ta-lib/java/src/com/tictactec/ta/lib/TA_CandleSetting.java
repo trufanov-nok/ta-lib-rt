@@ -46,7 +46,7 @@
  *  022206 BT     add copy constructor
  */
 
-package TA.Lib;
+package com.tictactec.ta.lib;
 
 public class TA_CandleSetting {
     

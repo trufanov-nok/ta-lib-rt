@@ -44,7 +44,7 @@
  *  121005 MF     First Version
  */
 
-package TA.Lib;
+package com.tictactec.ta.lib;
 
 public enum TA_CandleSettingType 
 {

@@ -44,7 +44,7 @@
  *  121005 MF     First Version
  */
 
-package TA.Lib;
+package com.tictactec.ta.lib;
 
 /* 'Boxing' of an int.
  * Used instead of auto-boxing because it provides a "mutable" Integer 
