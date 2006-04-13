@@ -44,9 +44,10 @@
  *  121005 MF     First Version
  */
 
-package TA.Lib;
+package TA.Lib.Test;
 
 import junit.framework.*;
+import com.tictactec.ta.lib.*;
 
 /**
  *

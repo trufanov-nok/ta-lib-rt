@@ -48,7 +48,7 @@
  *                3. add SetUnstablePeriod, GetUnstablePeriod
  */
 
-package TA.Lib;
+package com.tictactec.ta.lib;
 
 public class Core {
    
@@ -60,10 +60,10 @@ public class Core {
    
    /** Creates a new instance of Core */
    public Core() {
-      unstablePeriod = new int[TA.Lib.TA_FuncUnstId.TA_FUNC_UNST_ALL
+      unstablePeriod = new int[com.tictactec.ta.lib.TA_FuncUnstId.TA_FUNC_UNST_ALL
          .ordinal()];
       compatibility = TA_Compatibility.TA_COMPATIBILITY_DEFAULT;
-      candleSettings = new TA_CandleSetting[TA.Lib.TA_CandleSettingType.TA_AllCandleSettings
+      candleSettings = new TA_CandleSetting[com.tictactec.ta.lib.TA_CandleSettingType.TA_AllCandleSettings
          .ordinal()];
       for(int i=0;i<candleSettings.length;i++){
          candleSettings[i] = new TA_CandleSetting(TA_CandleDefaultSettings[i]);

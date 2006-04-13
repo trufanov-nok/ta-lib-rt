@@ -52,9 +52,9 @@ import java.util.List;
 import java.util.Arrays;
 
 
-import TA.Lib.Core;
-import TA.Lib.MInteger;
-import TA.Lib.TA_RetCode;
+import com.tictactec.ta.lib.Core;
+import com.tictactec.ta.lib.MInteger;
+import com.tictactec.ta.lib.TA_RetCode;
 import TA.Lib.MetaInfo.TaFuncClosure;
 import TA.Lib.MetaInfo.TaFuncMetaInfo;
 

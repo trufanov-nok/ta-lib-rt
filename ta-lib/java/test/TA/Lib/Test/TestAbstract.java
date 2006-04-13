@@ -47,7 +47,7 @@
 package TA.Lib.Test;
 
 import junit.framework.TestCase;
-import TA.Lib.Core;
+import com.tictactec.ta.lib.Core;
 import TA.Lib.MetaInfo.CoreMetaInfo;
 
 public class TestAbstract extends TestCase 
