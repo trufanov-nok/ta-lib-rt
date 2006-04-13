@@ -12,9 +12,9 @@ using namespace System::Runtime::InteropServices;
 [assembly:AssemblyTitleAttribute("TALibCore")];
 [assembly:AssemblyDescriptionAttribute("")];
 [assembly:AssemblyConfigurationAttribute("")];
-[assembly:AssemblyCompanyAttribute("Buzz Inc.")];
+[assembly:AssemblyCompanyAttribute("TicTacTec")];
 [assembly:AssemblyProductAttribute("TALibCore")];
-[assembly:AssemblyCopyrightAttribute("Copyright © Buzz Inc. 2005")];
+[assembly:AssemblyCopyrightAttribute("Copyright © TicTacTec 2006")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 

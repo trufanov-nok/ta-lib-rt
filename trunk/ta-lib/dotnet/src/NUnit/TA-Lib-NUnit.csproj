@@ -48,9 +48,9 @@
     <Compile Include="testdata.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Timeseries\TA-Lib-Timeseries.csproj">
-      <Project>{69896EF6-AB5D-4FE7-A2A1-36B159A4AB38}</Project>
-      <Name>TA-Lib-Timeseries</Name>
+    <ProjectReference Include="..\Core\TA-Lib-Core.vcproj">
+      <Project>{667AF01A-5614-4446-9DCC-744D27906E5B}</Project>
+      <Name>TA-Lib-Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
