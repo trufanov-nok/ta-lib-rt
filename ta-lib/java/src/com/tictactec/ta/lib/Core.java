@@ -10091,7 +10091,7 @@ public class Core {
       double a1Total, a2Total, a3Total;
       double b1Total, b2Total, b3Total;
       double trueLow, trueRange, closeMinusTrueLow;
-      double tempDouble, tempHT, tempLT, tempCY;
+      double tempDouble, output, tempHT, tempLT, tempCY;
       int lookbackTotal;
       int longestPeriod, longestIndex;
       int i,j,today,outIdx;
@@ -10138,9 +10138,9 @@ public class Core {
          usedFlag[longestIndex] = 1;
          sortedPeriods[i] = longestPeriod;
       }
-      optInTimePeriod1 = sortedPeriods[0];
+      optInTimePeriod1 = sortedPeriods[2];
       optInTimePeriod2 = sortedPeriods[1];
-      optInTimePeriod3 = sortedPeriods[2];
+      optInTimePeriod3 = sortedPeriods[0];
       lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
       if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
@@ -10161,6 +10161,10 @@ public class Core {
          b1Total += trueRange;
          b2Total += trueRange;
          b3Total += trueRange;
+         output = 0.0;
+         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) output += 4.0*(a1Total/b1Total);
+         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) output += 2.0*(a2Total/b2Total);
+         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) output += a3Total/b3Total;
          { tempLT = inLow[trailingIdx1]; tempHT = inHigh[trailingIdx1]; tempCY = inClose[trailingIdx1-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a1Total -= closeMinusTrueLow;
          b1Total -= trueRange;
@@ -10170,11 +10174,7 @@ public class Core {
          { tempLT = inLow[trailingIdx3]; tempHT = inHigh[trailingIdx3]; tempCY = inClose[trailingIdx3-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a3Total -= closeMinusTrueLow;
          b3Total -= trueRange;
-         tempDouble = 0.0;
-         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) tempDouble += 4.0*(a1Total/b1Total);
-         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) tempDouble += 2.0*(a2Total/b2Total);
-         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) tempDouble += a3Total/b3Total;
-         outReal[outIdx] = 100.0 * (tempDouble / 7.0);
+         outReal[outIdx] = 100.0 * (output / 7.0);
          outIdx++;
          today++;
          trailingIdx1++;
@@ -10200,7 +10200,7 @@ public class Core {
       double a1Total, a2Total, a3Total;
       double b1Total, b2Total, b3Total;
       double trueLow, trueRange, closeMinusTrueLow;
-      double tempDouble, tempHT, tempLT, tempCY;
+      double tempDouble, output, tempHT, tempLT, tempCY;
       int lookbackTotal;
       int longestPeriod, longestIndex;
       int i,j,today,outIdx;
@@ -10247,9 +10247,9 @@ public class Core {
          usedFlag[longestIndex] = 1;
          sortedPeriods[i] = longestPeriod;
       }
-      optInTimePeriod1 = sortedPeriods[0];
+      optInTimePeriod1 = sortedPeriods[2];
       optInTimePeriod2 = sortedPeriods[1];
-      optInTimePeriod3 = sortedPeriods[2];
+      optInTimePeriod3 = sortedPeriods[0];
       lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
       if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
@@ -10270,6 +10270,10 @@ public class Core {
          b1Total += trueRange;
          b2Total += trueRange;
          b3Total += trueRange;
+         output = 0.0;
+         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) output += 4.0*(a1Total/b1Total);
+         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) output += 2.0*(a2Total/b2Total);
+         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) output += a3Total/b3Total;
          { tempLT = inLow[trailingIdx1]; tempHT = inHigh[trailingIdx1]; tempCY = inClose[trailingIdx1-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a1Total -= closeMinusTrueLow;
          b1Total -= trueRange;
@@ -10279,11 +10283,7 @@ public class Core {
          { tempLT = inLow[trailingIdx3]; tempHT = inHigh[trailingIdx3]; tempCY = inClose[trailingIdx3-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
          a3Total -= closeMinusTrueLow;
          b3Total -= trueRange;
-         tempDouble = 0.0;
-         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) tempDouble += 4.0*(a1Total/b1Total);
-         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) tempDouble += 2.0*(a2Total/b2Total);
-         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) tempDouble += a3Total/b3Total;
-         outReal[outIdx] = 100.0 * (tempDouble / 7.0);
+         outReal[outIdx] = 100.0 * (output / 7.0);
          outIdx++;
          today++;
          trailingIdx1++;
