@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2005, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -49,6 +49,7 @@
  *  031504 MF   Adapt to a few changes to ta_abstract.h
  *  121504 MF   Add support of optional parameter and display default
  *              in the function wizard.
+ *  041806 MF   Adapt to latest TA-Lib interface changes.
  */
 
 #include <xlw/xlw.h>
@@ -129,11 +130,6 @@ ArrayPtrs inputPtrs[NB_MAX_input];
 ArrayPtrs outputPtrs[NB_MAX_output];
 double *outputExcel;
 int outputExcelSize;
-
-#ifdef DEBUG
-   // Coredump file, only used while debugging...
-   FILE *outCoredump;
-#endif
 
 // Sometimes xlAutoClose can be called without
 // a following xlAutoOpen. Example: Do change
@@ -237,15 +233,8 @@ static int doInitialization(void)
       XlfExcel::Instance().SendMessage("Initializing TA-Lib...");
 
       // Initialize TA-Lib
-      TA_InitializeParam initParam;
-      memset( &initParam, 0, sizeof( TA_InitializeParam ) );
 
-      #ifdef DEBUG
-         outCoredump = fopen( "g:\\ta-lib\\c\\bin\\coredump.txt", "w" );
-         initParam.logOutput = outCoredump;
-      #endif
-
-      retCode = TA_Initialize( &initParam );
+      retCode = TA_Initialize();
 
       if( retCode != TA_SUCCESS )
       {
@@ -1146,7 +1135,6 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
              break;
 
           case TA_Input_Price:      
-             TA_Timestamp *timestamp = NULL;
              TA_Real      *open = NULL;
              TA_Real      *high = NULL;
              TA_Real      *low = NULL;
@@ -1166,9 +1154,8 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
                 volume = &(get_int_input(curExcelParam++)[commonBegIdx]);
              if( paramInfo->flags & TA_IN_PRICE_OPENINTEREST )
                 openInterest = &(get_int_input(curExcelParam++)[commonBegIdx]);
-             /* if( paramInfo->flags & TA_IN_PRICE_TIMESTAMP ) Not supported */
 
-             retCode = TA_SetInputParamPricePtr( paramsForTALib, i, timestamp,
+             retCode = TA_SetInputParamPricePtr( paramsForTALib, i,
                                                  open, high, low, close,
                                                  volume, openInterest );
              if( retCode != TA_SUCCESS )
