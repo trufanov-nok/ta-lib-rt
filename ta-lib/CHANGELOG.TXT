@@ -6,11 +6,17 @@ New Features
 
 - Added technical analysis functions:
     ULTOSC : Ultimate Oscillator
-
+    NATR   : Normalized Average True Range
+    
 Major Changes
 =============
 - TA-Data deprecated (see new FIDAL project on SourceForge)
 - TA-PM deprecated
+
+API Changes
+===========
+- TA_SetInputParamPricePtr(): TA_Timestamps parameter removed.
+- TA_Initialize(): does not require parameter anymore.
 
 Fixes
 =====

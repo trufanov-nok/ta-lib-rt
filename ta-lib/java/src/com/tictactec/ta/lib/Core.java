@@ -4301,6 +4301,195 @@ public class Core {
       return retCode;
    }
    /* Generated */
+   public int NATR_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
+   }
+   public TA_RetCode NATR( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int outIdx, today, lookbackTotal;
+      int nbATR;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      double prevATR, tempValue;
+      double []tempBuffer ;
+      double []prevATRTemp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  NATR_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      if( optInTimePeriod <= 1 )
+      {
+         return  TRANGE ( startIdx, endIdx,
+            inHigh, inLow, inClose,
+            outBegIdx, outNbElement, outReal );
+      }
+      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
+      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
+         inHigh, inLow, inClose,
+         outBegIdx1 ,  outNbElement1 ,
+         tempBuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      retCode =  INT_SMA ( optInTimePeriod-1,
+         optInTimePeriod-1,
+         tempBuffer, optInTimePeriod,
+         outBegIdx1 ,  outNbElement1 ,
+         prevATRTemp );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      prevATR = prevATRTemp[0];
+      today = optInTimePeriod;
+      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
+      while( outIdx != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         outIdx--;
+      }
+      outIdx = 1;
+      tempValue = inClose[today];
+      if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
+         outReal[0] = (prevATR/tempValue)*100.0;
+      else
+         outReal[0] = 0.0;
+      nbATR = (endIdx - startIdx)+1;
+      while( --nbATR != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         tempValue = inClose[today];
+         if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
+            outReal[outIdx] = (prevATR/tempValue)*100.0;
+         else
+            outReal[0] = 0.0;
+         outIdx++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return retCode;
+   }
+   public TA_RetCode NATR( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int outIdx, today, lookbackTotal;
+      int nbATR;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      double prevATR, tempValue;
+      double []tempBuffer ;
+      double []prevATRTemp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  NATR_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      if( optInTimePeriod <= 1 )
+      {
+         return  TRANGE ( startIdx, endIdx,
+            inHigh, inLow, inClose,
+            outBegIdx, outNbElement, outReal );
+      }
+      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
+      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
+         inHigh, inLow, inClose,
+         outBegIdx1 ,  outNbElement1 ,
+         tempBuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      retCode =  INT_SMA ( optInTimePeriod-1,
+         optInTimePeriod-1,
+         tempBuffer, optInTimePeriod,
+         outBegIdx1 ,  outNbElement1 ,
+         prevATRTemp );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      prevATR = prevATRTemp[0];
+      today = optInTimePeriod;
+      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
+      while( outIdx != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         outIdx--;
+      }
+      outIdx = 1;
+      tempValue = inClose[today];
+      if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
+         outReal[0] = (prevATR/tempValue)*100.0;
+      else
+         outReal[0] = 0.0;
+      nbATR = (endIdx - startIdx)+1;
+      while( --nbATR != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         tempValue = inClose[today];
+         if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
+            outReal[outIdx] = (prevATR/tempValue)*100.0;
+         else
+            outReal[0] = 0.0;
+         outIdx++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return retCode;
+   }
+   /* Generated */
    public int TRANGE_Lookback( )
    {
       return 1;
