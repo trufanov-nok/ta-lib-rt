@@ -757,6 +757,30 @@ namespace TicTacTec
          #define TA_ATR Core::ATR
          #define TA_ATR_Lookback Core::ATR_Lookback
 
+         static int NATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode NATR( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inHigh,
+                                            cli::array<double>^ inLow,
+                                            cli::array<double>^ inClose,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+         static enum class TA_RetCode NATR( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inHigh,
+                                            cli::array<float>^ inLow,
+                                            cli::array<float>^ inClose,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+
+         #define TA_NATR Core::NATR
+         #define TA_NATR_Lookback Core::NATR_Lookback
+
          static int TRANGE_Lookback( void );
 
          static enum class TA_RetCode TRANGE( int    startIdx,
