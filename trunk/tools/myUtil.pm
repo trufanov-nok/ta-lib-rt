@@ -17,7 +17,8 @@ sub removeFile
            and (not $z =~ /Repository/)
            and (not $z =~ /Root/)
            and (not $z =~ /TALib_Prefix.pch/) 
-           and (not $z =~ /TA.pm/))
+           and (not $z =~ /TA.pm/)
+           and (not $z =~ /java/))
       {
          unlink( $z );
       }
