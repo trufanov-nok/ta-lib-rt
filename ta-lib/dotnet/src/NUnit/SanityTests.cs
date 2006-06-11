@@ -62,8 +62,8 @@ namespace SanityTests
             int length =TestData.DailySample.Close.Length;
             double[] output = new double[length];
             int outBegIdx, outNbElement;
-            TA.Lib.Core.TA_RetCode retCode = Core.SMA(0,length-1,TestData.DailySample.Close, 12, out outBegIdx, out outNbElement, output );
-            Assert.AreEqual(TA.Lib.Core.TA_RetCode.TA_SUCCESS.ToString(), retCode.ToString());
+            Core.TA_RetCode retCode = Core.SMA(0,length-1,TestData.DailySample.Close, 12, out outBegIdx, out outNbElement, output );
+            Assert.AreEqual(Core.TA_RetCode.TA_SUCCESS.ToString(), retCode.ToString());            
         }
     }
 }
