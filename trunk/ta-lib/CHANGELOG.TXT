@@ -1,26 +1,31 @@
-0.2 (Plan for mid 2006)
+0.2 (June 2006)
 
 New Features
 ============
-- Regression test of Java port.
-
 - Added technical analysis functions:
     ULTOSC : Ultimate Oscillator
     NATR   : Normalized Average True Range
-    
+
+- Enhanced JUnit of Java port.
+
 Major Changes
 =============
-- TA-Data deprecated (see new FIDAL project on SourceForge)
-- TA-PM deprecated
+- TA-Data is now an independant project (see fidalsoft.org)
+- TA-PM deprecated for lack of participation.
+- .NET Timeseries deprecated for lack of participation.
+- TA-Lib has no dependency anymore (libcurl dependency eliminated).
 
 API Changes
 ===========
-- TA_SetInputParamPricePtr(): TA_Timestamps parameter removed.
-- TA_Initialize(): does not require parameter anymore.
+- TA_SetInputParamPricePtr() TA_Timestamps parameters removed.
+- TA_Initialize() is now parameterless.
+- New .NET namespage: TicTacTec.TA.Lib
+- New Java namespace: com.tictactec.ta.lib
 
 Fixes
 =====
-- Many fix of Java port.
+Many fix of Java port.
+#1434450: CMO not handling divide by zero
 
 Thanks to all contributors.
 
