@@ -1,3 +1,9 @@
+V0.2 (June 2006)
+  - Many bug fix for Java.
+  - New ULTOSC and NATR functions.
+  - Major clean-up. Removal of TA-PM and TA-Data.
+  - Fix #1434450
+  
 V0.1.5 (January 2006)
   - Java ports of all TA functions.
   - New BOP, CMO and Hikkake functions.
