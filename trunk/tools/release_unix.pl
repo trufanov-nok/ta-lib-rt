@@ -22,8 +22,6 @@ sub Main
    # Adapt these to your setup
    $release_dir = "/mnt/hgfs/Release/";  # Where packaged release is put.
    $unix_dir    = "/home/buzzo/";        # User home directory.
-   # $root_cvs = ":ext:fortier\@cvs.sourceforge.net:/cvsroot/ta-lib"; # CVS access   
-   $root_cvs = ":pserver:anonymous\@cvs.sourceforge.net:/cvsroot/ta-lib";
 
    # Get the "x.y.z" string for this release. This is done by compiling and
    # running the TA-Lib function returning the version.
@@ -33,7 +31,6 @@ sub Main
 
    # Clean-up destination directory.
    execProgForce( $release_dir, "rm -r -f ta-lib-*.tar.gz" );
-   execProgForce( $release_dir, "rm -r -f ta-unixodbc-*.tar.gz" );
 
    # Clean-up release directory on unix.
    # The source code tree and builds are done in that directory.
@@ -42,24 +39,17 @@ sub Main
    mkdir( $unix_dir."release" );
    mkdir( $unix_dir."release/build" );
 
-   # Make the ta-unixodbc package.
-   $a = "cvs -z3 -q -d".$root_cvs." export -Dtomorrow ta-unixodbc";
-   execProg( $unix_dir."release/build", $a );
-   execProg( $unix_dir."release/build", "tar cvf ta-unixodbc-".$versionSuffix."-src.tar ta-unixodbc >tar.out" );
-   execProg( $unix_dir."release/build", "gzip ta-unixodbc-".$versionSuffix."-src.tar" );
-
-   execProg( $unix_dir."release/build/", "cp ta-unixodbc-".$versionSuffix."-src.tar.gz ".$release_dir );
-
    # Get the ta-lib package from CVS
-   $a = "cvs -z3 -q -d".$root_cvs." export -Dtomorrow ta-lib";
+   # svn.sourceforge.net = 66.35.250.140 : DNS broken on my setup
+   $a = "svn export https://66.35.250.140/svnroot/ta-lib/trunk/ta-lib ./ta-lib";
    execProg( $unix_dir."release/build", $a );
 
    # Remove Win32 Binaries from the local view.
-   $a = "rm ".$unix_dir."release/build/ta-lib/excel/ta-lib.xll";
+   $a = "rm -r -f ".$unix_dir."release/build/ta-lib/excel/ta-lib.xll";
    execProg( $unix_dir."release/build", $a );
-   $a = "rm ".$unix_dir."release/build/ta-lib/swig/lib/perl/ta.dll";
+   $a = "rm -r -f ".$unix_dir."release/build/ta-lib/swig/lib/perl/ta.dll";
    execProg( $unix_dir."release/build", $a );
-   $a = "rm ".$unix_dir."release/build/ta-lib/swig/lib/perl/Finance/TA.pm";
+   $a = "rm -r -f ".$unix_dir."release/build/ta-lib/swig/lib/perl/Finance/TA.pm";
    execProg( $unix_dir."release/build", $a );
 
    # Build the Source Package

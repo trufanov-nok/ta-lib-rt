@@ -1,6 +1,6 @@
 #!/usr/perl/bin
 
-# This script get the latest source from CVS and build from scratch all 
+# This script get the latest source from SVN and build from scratch all 
 # the files that are part of a release.
 
 # You will need CVS access and modify the following.
@@ -16,54 +16,36 @@ sub Main
    $versionSuffix = &libversion();
    print "Packaging ".$versionSuffix."\n";
 
-   $root_dir = "p:\\";
+   $root_dir = "..\\";
 
    if( $ARGV[0] eq "-fast" )
    {
 	print "Fast Option Set: Skipping clean-up and some tests\n";
 	$fastOption = 1;
    }
+
    
    # Clean-up packaging directory
    if( $fastOption eq 1 )
    {
       removeAllTempFile( $root_dir."release\\build\\ta-lib\\" );
       removeAllBinFile ( $root_dir."release\\build\\ta-lib\\", 0 );
-      removeAllBinFile ( $root_dir."release\\build\\ta-unixodbc\\", 0 );
-      removeAllTempFile( $root_dir."release\\build\\ta-unixodbc\\" );
-      removeAllBinFile ( $root_dir."release\\build\\ta-mysql\\", 0 );
-      removeAllTempFile( $root_dir."release\\build\\ta-mysql\\" );
    }
    else
    {
       removeRelease( $root_dir );
 
-      # Copy CVS locally
-      $a = "cvs -z3 -q -d".$root_cvs." export -Dtomorrow ta-mysql";
-      execProgForce( $root_dir."release\\build\\", $a );
-      $a = "cvs -z3 -q -d".$root_cvs." export -Dtomorrow ta-lib";
+      # Get a clean copy locally
+      $a = "svn export https://svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib .\\ta-lib";
       execProg( $root_dir."release\\build\\", $a );
    }
 
    ###########################################################################
-   # Package ta_mysql
-   ###########################################################################
-   $ta_mysql_dir = $root_dir."release\\build\\ta-mysql\\";
-
-   buildMSVC($ta_mysql_dir, "cdr", 1, $root_dir."release\\log\\", "ta_mysql" );
-   buildMSVC($ta_mysql_dir, "cdd", 1, $root_dir."release\\log\\", "ta_mysql" );
-   removeAllTempFile($ta_mysql_dir);
-
-   $a = "zip -r -o -q ".$root_dir."release\\ta-mysql-".$versionSuffix."-msvc.zip ta-mysql\\*.*";
-   execProg( $root_dir."release\\build\\", $a );
-   removeAllBinFile($ta_mysql_dir, 0 );
-   
-   ###########################################################################
    # Package ta_lib
    ###########################################################################
    # Make the 'src' package
-   $packageName = $root_dir."release\\ta-lib-".$versionSuffix."-src.zip";
-   $a = "zip -r -o -q ".$packageName." ta-lib\\*.*";
+   $packageName = "ta-lib-".$versionSuffix."-src.zip";
+   $a = "zip -r -o -q ..\\".$packageName." ta-lib\\*.*";
    execProg( $root_dir."release\\build\\", $a );
 
    # Remove the Excel/Perl/.NET binaries from the package.
@@ -71,59 +53,62 @@ sub Main
    # the CVS import.
    removeBinFromPackage( $root_dir, $packageName );
 
+   # Log dire relative to the makefiles.
+   my $log_dir = "..\\..\\..\\..\\..\\..\\..\\..\\release\\log\\";
+   
    # Make the MSVC package
    my $keepTheLib =1;
    my $skipAllTests = $fastOption;
    testMSVC($root_dir."release\\build\\ta-lib\\", "cdr", $fastOption,
-	    $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	    $keepTheLib, $log_dir, $skipAllTests );
     
    testMSVC($root_dir."release\\build\\ta-lib\\", "csd", $fastOption,
-	    $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	    $keepTheLib, $log_dir, $skipAllTests );
     
    testMSVC($root_dir."release\\build\\ta-lib\\", "cmd", $fastOption,
-	    $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	    $keepTheLib, $log_dir, $skipAllTests );
     
    testMSVC($root_dir."release\\build\\ta-lib\\", "cmr", $fastOption,
-	    $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	    $keepTheLib, $log_dir, $skipAllTests );
     
    testMSVC($root_dir."release\\build\\ta-lib\\", "cdd", $fastOption,
-	    $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	    $keepTheLib, $log_dir, $skipAllTests );
     
    testMSVC($root_dir."release\\build\\ta-lib\\", "csr", $fastOption,
-	    $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	    $keepTheLib, $log_dir, $skipAllTests );
     
    removeAllTempFile($root_dir."release\\build\\ta-lib\\");
 
-   $a = "zip -r -o -q ".$root_dir."release\\ta-lib-".$versionSuffix."-msvc.zip ta-lib\\*.*";
+   $packageName = "ta-lib-".$versionSuffix."-msvc.zip";
+   
+   $a = "zip -r -o -q ..\\".$packageName." ta-lib\\*.*";
    execProg( $root_dir."release\\build\\", $a );
-
-   # Keep a copy of WebFetch.exe, ta_yahoo.exe and ta_sql.exe
-   execProg( $root_dir."release\\build\\ta-lib\\C\\BIN\\", "copy ta_yahoo.exe ".$root_dir."release" );
-   execProg( $root_dir."release\\build\\ta-lib\\C\\BIN\\", "copy WebFetch.exe ".$root_dir."release" );
-   execProg( $root_dir."release\\build\\ta-lib\\C\\BIN\\", "copy ta_sql.exe ".$root_dir."release" );
 
    removeAllBinFile($root_dir."release\\build\\ta-lib\\", 0 );
 
    # Make the Borland package (1 means 'keep the lib')
    testBorland($root_dir."release\\build\\ta-lib\\", "csd", $fastOption,
-	       $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	       $keepTheLib, $log_dir, $skipAllTests );
        
    testBorland($root_dir."release\\build\\ta-lib\\", "cmd", $fastOption,
-	       $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	       $keepTheLib, $log_dir, $skipAllTests );
        
    testBorland($root_dir."release\\build\\ta-lib\\", "cmr", $fastOption,
-	       $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	       $keepTheLib, $log_dir, $skipAllTests );
        
    testBorland($root_dir."release\\build\\ta-lib\\", "csr", $fastOption,
-	       $keepTheLib, $root_dir."release\\log\\", $skipAllTests );
+	       $keepTheLib, $log_dir, $skipAllTests );
        
    removeAllTempFile($root_dir."release\\build\\ta-lib\\");
 
-   $a = "zip -r -o -q ".$root_dir."release\\ta-lib-".$versionSuffix."-borl.zip ta-lib\\*.*";
+   $packageName = "ta-lib-".$versionSuffix."-borl.zip";
+   
+
+   $a = "zip -r -o -q ..\\".$packageName." ta-lib\\*.*";
    execProg( $root_dir."release\\build\\", $a );
 
-   execProg( $root_dir."release\\build\\ta-lib\\", "copy CHANGELOG.TXT ".$root_dir."release" );
-   execProg( $root_dir."release\\build\\ta-lib\\", "copy HISTORY.TXT ".$root_dir."release" );
+   execProg( $root_dir."release\\build\\ta-lib\\", "copy CHANGELOG.TXT ..\\.." );
+   execProg( $root_dir."release\\build\\ta-lib\\", "copy HISTORY.TXT ..\\.." );
 
    print "\n* Packaging completed with Success *\n";
 }
