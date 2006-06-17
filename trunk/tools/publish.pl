@@ -8,7 +8,8 @@
 #
 # This script FTP these files on SourceForge.
 
-execProg( "/mnt/hgfs/Release", "ncftpput upload.sourceforge.net incoming *" );
+$ip = "66.35.250.221"; # For upload.sourceforge.net
+execProg( "/mnt/hgfs/Release", "ncftpput $ip incoming *" );
 
 sub execProg
 {
