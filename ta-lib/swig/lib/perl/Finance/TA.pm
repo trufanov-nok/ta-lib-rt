@@ -336,46 +336,6 @@ package Finance::TA;
 *TA_GetOptInputParameterInfo = *Finance::TAc::TA_GetOptInputParameterInfo;
 *TA_GetOutputParameterInfo = *Finance::TAc::TA_GetOutputParameterInfo;
 
-############# Class : Finance::TA::TA_StringTable ##############
-
-package Finance::TA::TA_StringTable;
-@ISA = qw( Finance::TA );
-our %OWNER = ();
-our %ITERATORS = ();
-*swig_size_get = *Finance::TAc::TA_StringTable_size_get;
-*swig_size_set = *Finance::TAc::TA_StringTable_size_set;
-*swig_string_get = *Finance::TAc::TA_StringTable_string_get;
-*swig_string_set = *Finance::TAc::TA_StringTable_string_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_StringTable(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_StringTable($self);
-        delete $OWNER{$self};
-    }
-}
-
-sub DISOWN {
-    my $self = shift;
-    my $ptr = tied(%$self);
-    delete $OWNER{$ptr};
-}
-
-sub ACQUIRE {
-    my $self = shift;
-    my $ptr = tied(%$self);
-    $OWNER{$ptr} = 1;
-}
-
-
 ############# Class : Finance::TA::TA_RetCodeInfo ##############
 
 package Finance::TA::TA_RetCodeInfo;
@@ -458,23 +418,6 @@ our %ITERATORS = ();
 *swig_nbOutput_set = *Finance::TAc::TA_FuncInfo_nbOutput_set;
 *swig_handle_get = *Finance::TAc::TA_FuncInfo_handle_get;
 *swig_handle_set = *Finance::TAc::TA_FuncInfo_handle_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_FuncInfo(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_FuncInfo($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -506,23 +449,6 @@ our %ITERATORS = ();
 *swig_suggested_end_set = *Finance::TAc::TA_RealRange_suggested_end_set;
 *swig_suggested_increment_get = *Finance::TAc::TA_RealRange_suggested_increment_get;
 *swig_suggested_increment_set = *Finance::TAc::TA_RealRange_suggested_increment_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_RealRange(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_RealRange($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -552,23 +478,6 @@ our %ITERATORS = ();
 *swig_suggested_end_set = *Finance::TAc::TA_IntegerRange_suggested_end_set;
 *swig_suggested_increment_get = *Finance::TAc::TA_IntegerRange_suggested_increment_get;
 *swig_suggested_increment_set = *Finance::TAc::TA_IntegerRange_suggested_increment_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_IntegerRange(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_IntegerRange($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -592,23 +501,6 @@ our %ITERATORS = ();
 *swig_value_set = *Finance::TAc::TA_RealDataPair_value_set;
 *swig_string_get = *Finance::TAc::TA_RealDataPair_string_get;
 *swig_string_set = *Finance::TAc::TA_RealDataPair_string_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_RealDataPair(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_RealDataPair($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -632,23 +524,6 @@ our %ITERATORS = ();
 *swig_value_set = *Finance::TAc::TA_IntegerDataPair_value_set;
 *swig_string_get = *Finance::TAc::TA_IntegerDataPair_string_get;
 *swig_string_set = *Finance::TAc::TA_IntegerDataPair_string_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_IntegerDataPair(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_IntegerDataPair($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -672,23 +547,6 @@ our %ITERATORS = ();
 *swig_data_set = *Finance::TAc::TA_RealList_data_set;
 *swig_nbElement_get = *Finance::TAc::TA_RealList_nbElement_get;
 *swig_nbElement_set = *Finance::TAc::TA_RealList_nbElement_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_RealList(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_RealList($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -712,23 +570,6 @@ our %ITERATORS = ();
 *swig_data_set = *Finance::TAc::TA_IntegerList_data_set;
 *swig_nbElement_get = *Finance::TAc::TA_IntegerList_nbElement_get;
 *swig_nbElement_set = *Finance::TAc::TA_IntegerList_nbElement_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_IntegerList(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_IntegerList($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -754,23 +595,6 @@ our %ITERATORS = ();
 *swig_paramName_set = *Finance::TAc::TA_InputParameterInfo_paramName_set;
 *swig_flags_get = *Finance::TAc::TA_InputParameterInfo_flags_get;
 *swig_flags_set = *Finance::TAc::TA_InputParameterInfo_flags_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_InputParameterInfo(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_InputParameterInfo($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -806,23 +630,6 @@ our %ITERATORS = ();
 *swig_hint_set = *Finance::TAc::TA_OptInputParameterInfo_hint_set;
 *swig_helpFile_get = *Finance::TAc::TA_OptInputParameterInfo_helpFile_get;
 *swig_helpFile_set = *Finance::TAc::TA_OptInputParameterInfo_helpFile_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_OptInputParameterInfo(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_OptInputParameterInfo($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);
@@ -848,59 +655,6 @@ our %ITERATORS = ();
 *swig_paramName_set = *Finance::TAc::TA_OutputParameterInfo_paramName_set;
 *swig_flags_get = *Finance::TAc::TA_OutputParameterInfo_flags_get;
 *swig_flags_set = *Finance::TAc::TA_OutputParameterInfo_flags_set;
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_OutputParameterInfo(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_OutputParameterInfo($self);
-        delete $OWNER{$self};
-    }
-}
-
-sub DISOWN {
-    my $self = shift;
-    my $ptr = tied(%$self);
-    delete $OWNER{$ptr};
-}
-
-sub ACQUIRE {
-    my $self = shift;
-    my $ptr = tied(%$self);
-    $OWNER{$ptr} = 1;
-}
-
-
-############# Class : Finance::TA::TA_ParamHolder ##############
-
-package Finance::TA::TA_ParamHolder;
-@ISA = qw( Finance::TA );
-our %OWNER = ();
-our %ITERATORS = ();
-sub new {
-    my $pkg = shift;
-    my $self = Finance::TAc::new_TA_ParamHolder(@_);
-    bless $self, $pkg if defined($self);
-}
-
-sub DESTROY {
-    return unless $_[0]->isa('HASH');
-    my $self = tied(%{$_[0]});
-    return unless defined $self;
-    delete $ITERATORS{$self};
-    if (exists $OWNER{$self}) {
-        Finance::TAc::delete_TA_ParamHolder($self);
-        delete $OWNER{$self};
-    }
-}
-
 sub DISOWN {
     my $self = shift;
     my $ptr = tied(%$self);

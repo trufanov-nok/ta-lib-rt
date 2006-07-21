@@ -16,7 +16,6 @@
  * It has also to define typemaps for:
  *      TA_Real *ARRAY
  *      TA_Integer *ARRAY
- *      TA_Timestamp *ARRAY
  * and generic typemap macros for ARRAYs:
  *      MEMBER_ARRAY
  *      MEMBER_PTRARRAY
@@ -24,9 +23,6 @@
  * Also some typemaps have to be defined for specific TA interface files 
  * (see below).
  */
-
-/* include some helper typemaps */
-%include "pytuplehlp.swg"
 
 %define STRING_TABLE(TYPE, SIZE_FIELD)
 /* TODO */
