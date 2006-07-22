@@ -34,9 +34,12 @@ WARNING: Ignore code under the Timeseries directory. This code
 
 How to rebuild the TA-LIB assembly?
 ===================================
-Using Visual Studio, open the following
-solution file and rebuild TA-Lib-Core:
-  ta-lib\dotnet\src\TA-Lib.sln
+Using Visual Studio open ta-lib\dotnet\src\TA-Lib.sln and
+rebuild TA-Lib-Core only.
+
+Rebuild TA-Lib-NUnit only if you have NUnit installed. NUnit is 
+optional. It is intended to be used for an automated unit 
+testing of TA-Lib for the .NET platform.
 
 There is no makefile provided for Mono.
 
