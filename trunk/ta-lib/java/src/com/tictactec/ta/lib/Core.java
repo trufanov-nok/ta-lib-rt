@@ -21964,7 +21964,7 @@ public class Core {
             SumXY += (double)i * tempValue1;
          }
          m = ( optInTimePeriod * SumXY - SumX * SumY) / Divisor;
-         outReal[outIdx++] = m * ( 180.0 /  3.14159265358979323846  );
+         outReal[outIdx++] =  Math.atan (m) * ( 180.0 /  3.14159265358979323846  );
          today++;
       }
       outBegIdx.value  = startIdx;
@@ -22017,7 +22017,7 @@ public class Core {
             SumXY += (double)i * tempValue1;
          }
          m = ( optInTimePeriod * SumXY - SumX * SumY) / Divisor;
-         outReal[outIdx++] = m * ( 180.0 /  3.14159265358979323846  );
+         outReal[outIdx++] =  Math.atan (m) * ( 180.0 /  3.14159265358979323846  );
          today++;
       }
       outBegIdx.value  = startIdx;
