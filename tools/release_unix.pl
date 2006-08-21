@@ -1,70 +1,118 @@
-#!/usr/bin/perl
+# -*-Perl-*-
+eval 'exec perl -S $0 ${1+"$@"}'
+   if 0;
 
-# This script is intended ONLY for maintainers doing a TA-Lib release.
-#
-# This script must be run on Linux. It generates the packages for the linux 
-# version of TA-Lib.
-# 
-# It requires SourceForge CVS access to TA-Lib. You will need to change 
-# the $root_cvs with your user name.
-# 
-# In my setup, Linux runs in a VMWare machine and access the
-# host windows file system through /mnt/hgfs. If you wish to
-# do diferently, adjust the "_dir" variables.
-# 
-# This script requires myUtil.pm and, of course, the GCC compiler.
+use strict;
+use Getopt::Long;
 
-use Cwd;
-use myUtil;
+my $usage = "Usage: release_unix.pl -version VERSION [-rpm] [-deb] [-source srcdir]\n";
 
-sub Main
+my($version, $rpm, $deb, $srcdir);
+
+GetOptions( 'version=s' => \$version,
+	    'rpm' => \$rpm,
+	    'deb' => \$deb,
+	    'source=s' => \$srcdir
+) or die $usage;
+
+die $usage if not defined $version;
+
+my $workdir = $ENV{'HOME'} . "/ta-lib-$version-work";
+
+# Remove existing directory if it exists
+system( "rm -Rf $workdir" ) if( -d $workdir );
+system( "mkdir -p $workdir" ) == 0 or die "Cannot create directory $workdir";
+system( "mkdir -p $workdir/dist" ) == 0 or die "Cannot create directory $workdir/dist";
+
+if( not defined $srcdir )
 {
-   # Adapt these to your setup
-   $release_dir = "/mnt/hgfs/Release/";  # Where packaged release is put.
-   $unix_dir    = "/home/buzzo/";        # User home directory.
-
-   # Get the "x.y.z" string for this release. This is done by compiling and
-   # running the TA-Lib function returning the version.
-   $versionSuffix = &libversion();
-   
-   print "Packaging ".$versionSuffix."\n";
-
-   # Clean-up destination directory.
-   execProgForce( $release_dir, "rm -r -f ta-lib-*.tar.gz" );
-
-   # Clean-up release directory on unix.
-   # The source code tree and builds are done in that directory.
-   removeRelease( $unix_dir );
-   execProgForce( $unix_dir."build", "rm -r -f ta-lib-*" );
-   mkdir( $unix_dir."release" );
-   mkdir( $unix_dir."release/build" );
-
-   # Get the ta-lib package from CVS
-   # svn.sourceforge.net = 66.35.250.140 : DNS broken on my setup
-   $a = "svn export https://66.35.250.140/svnroot/ta-lib/trunk/ta-lib ./ta-lib";
-   execProg( $unix_dir."release/build", $a );
-
-   # Remove Win32 Binaries from the local view.
-   $a = "rm -r -f ".$unix_dir."release/build/ta-lib/excel/ta-lib.xll";
-   execProg( $unix_dir."release/build", $a );
-   $a = "rm -r -f ".$unix_dir."release/build/ta-lib/swig/lib/perl/ta.dll";
-   execProg( $unix_dir."release/build", $a );
-   $a = "rm -r -f ".$unix_dir."release/build/ta-lib/swig/lib/perl/Finance/TA.pm";
-   execProg( $unix_dir."release/build", $a );
-
-   # Build the Source Package
-   execProg( $unix_dir."release/build", "tar cvf ta-lib-".$versionSuffix."-src.tar ta-lib >tar.out" );
-   execProg( $unix_dir."release/build", "gzip ta-lib-".$versionSuffix."-src.tar" );
-
-   # Run tests
-   testGCC( $unix_dir."release/build/ta-lib/", "cmd", 0, 0, $release_dir."log/", 0 );
-   testGCC( $unix_dir."release/build/ta-lib/", "csd", 0, 0, $release_dir."log/", 0 );
-   testGCC( $unix_dir."release/build/ta-lib/", "cmr", 0, 0, $release_dir."log/", 0 );
-   testGCC( $unix_dir."release/build/ta-lib/", "csr", 0, 0, $release_dir."log/", 0 );
-
-   execProg( $unix_dir."release/build/", "cp ta-lib-".$versionSuffix."-src.tar.gz ".$release_dir );
-
-   print "*** Unix Packaging Completed";
+    # Get the latest code from SVN
+    system( "svn co https://svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib/c/ $workdir/ta-lib" ) == 0 or die "Failed to checkout latest SVN code.";
+    
+    # Enable exec permission here, until we figure out how to do it in SVN instead.
+    system( "chmod guo+x $workdir/ta-lib/autogen.sh" ) == 0 or die "Failed to set exec permission for autogen.sh";
+}else
+{
+    # Copy srcdir into build tree
+    print "Acquiring sources...\n";
+    system( "cp $srcdir $workdir/ta-lib -R" ) == 0 or die "Failed to copy source directory.";
 }
 
-&Main;
+print "Setting up autoconf...\n";
+
+# Create the autoconf files by running autogen.sh
+chdir "$workdir/ta-lib" or die "Cannot chdir to $workdir/ta-lib";
+
+# Change the version number in configure.in
+my $tmp = `mktemp`; chomp($tmp);
+system( "cp configure.in $tmp" ) == 0 or die "Failed to copy configure.in";
+system( "sed -e 's/\\[SVN\\]/\[$version\]/g' < $tmp > configure.in" ) == 0 or die "Failed to modify configure version number.";
+unlink $tmp or die "Failed to remove $tmp";
+system( "./autogen.sh" ) == 0 or die "Failed to autoconf files.";
+
+# Create the "source" package
+chdir( "$workdir" ) or die "Failed to chdir to $workdir";
+system( "tar -cf ta-lib-$version-src.tar --exclude=.svn --exclude=make --exclude=ide --exclude=temp --exclude=lib --exclude=bin  ta-lib" ) == 0 or die "Failed to create tarball.";
+system( "gzip --best ta-lib-$version-src.tar" ) == 0 or die "Failed to gzip tarball.";
+system( "mv ta-lib-$version-src.tar.gz $workdir/dist/" ) == 0 or die "Failed to move tarball into dist dir";
+
+if( defined $rpm )
+{
+    print "Setting up RPM...\n";
+    # Setup RPM directories
+    system( "mkdir -p $workdir/rpm" ) == 0 or die "Failed to create RPM directory.";
+    system( "mkdir -p $workdir/rpm/SOURCES" ) == 0 or die "Failed to create RPM directory.";
+    system( "mkdir -p $workdir/rpm/SPECS" ) == 0 or die "Failed to create RPM directory.";
+    system( "mkdir -p $workdir/rpm/BUILD" ) == 0 or die "Failed to create RPM directory.";
+    system( "mkdir -p $workdir/rpm/RPMS" ) == 0 or die "Failed to create RPM directory.";
+    system( "mkdir -p $workdir/rpm/RPMS/i386"  == 0) or die "Failed to create RPM directory.";
+    system( "mkdir -p $workdir/rpm/SRPMS" ) == 0 or die "Failed to create RPM directory.";
+    system( "mkdir -p $workdir/rpm/ROOT" ) == 0 or die "Failed to create RPM directory.";
+
+    # Setup this directory with RPM
+    system( "echo \'%_topdir $workdir/rpm\' > ~/.rpmmacros" ) == 0 or die "Failed to configure RPM";
+
+    # Copy the sources into the RPM build directory.
+    chdir "$workdir/ta-lib";
+    system( "cp -R * $workdir/rpm/BUILD/" );
+}
+chdir "$workdir/ta-lib";
+
+print "Compiling sources...\n";
+
+# Build and test these sources.
+system( "CFLAGS=\"-O2 -g0 -pipe -march=i686\" ./configure --prefix=/usr" );
+system( "make -j3" );
+
+print "Running tests...\n";
+
+# Do the tests
+system( "$workdir/ta-lib/src/tools/ta_regtest/ta_regtest" ) == 0 or die "Regression test failed.";
+
+if( defined $rpm )
+{
+    print "Building RPMs...\n";
+    # Build the RPM
+    system( "rpmbuild -ba ta-lib.spec --buildroot $workdir/rpm/ROOT/" ) == 0 or die "Failed to build RPM";
+
+    # Copy RPMs into the dist directory.
+    system( "cp $workdir/rpm/RPMS/i386/*.rpm $workdir/dist/" ) == 0 or die "Failed to copy RPMs";
+}
+
+#Build the .deb package (requires DPKG)
+if( defined $deb )
+{
+    print "Building deb packages...\n";
+    # Create a directory to install into
+    system( "mkdir -p $workdir/inst" ) == 0 or die "Failed to create instdir";
+    system( "mkdir -p $workdir/inst/DEBIAN" ) == 0 or die "Failed to create instdir";
+    
+    # Install into this directory
+    system( "make DESTDIR=$workdir/inst install" ) == 0 or die "Failed to install ta-lib.";
+
+    # Copy dpkg file to control flie
+    system( "cp ta-lib.dpkg $workdir/inst/DEBIAN/control" ) == 0 or die "Failed to copy dpkg file.";
+
+    # Build a package of the installation.
+    system( "dpkg --build $workdir/inst/ $workdir/dist/ta-lib-$version.deb" ) or die "Failed to build debian package.";
+}
