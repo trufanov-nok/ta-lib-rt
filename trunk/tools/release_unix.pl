@@ -114,5 +114,5 @@ if( defined $deb )
     system( "cp ta-lib.dpkg $workdir/inst/DEBIAN/control" ) == 0 or die "Failed to copy dpkg file.";
 
     # Build a package of the installation.
-    system( "dpkg --build $workdir/inst/ $workdir/dist/ta-lib-$version.deb" ) or die "Failed to build debian package.";
+    system( "dpkg --build $workdir/inst/ $workdir/dist/ta-lib-$version.deb" ) == 0 or die "Failed to build debian package.";
 }
