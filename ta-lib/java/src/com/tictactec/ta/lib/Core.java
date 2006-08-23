@@ -4591,10 +4591,7 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return -1;
-      if( optInTimePeriod > 1 )
-         return (2 * optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
-      else
-         return 2;
+      return (2 * optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
    }
    public TA_RetCode ADX( int startIdx,
       int endIdx,
@@ -4620,10 +4617,7 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = (2*optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
-      else
-         lookbackTotal = 2;
+      lookbackTotal = (2*optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
@@ -4692,7 +4686,7 @@ public class Core {
             minusDI =  (100.0*(prevMinusDM/prevTR)) ;
             plusDI =  (100.0*(prevPlusDM/prevTR)) ;
             tempReal = minusDI+plusDI;
-            if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
                sumDX +=  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
          }
       }
@@ -4720,12 +4714,12 @@ public class Core {
          { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
          prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
          prevClose = inClose[today];
-         if( prevTR != 0.0 )
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
          {
             minusDI =  (100.0*(prevMinusDM/prevTR)) ;
             plusDI =  (100.0*(prevPlusDM/prevTR)) ;
             tempReal = minusDI+plusDI;
-            if( tempReal != 0.0 )
+            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
             {
                tempReal =  (100.0*( Math.abs (minusDI-plusDI)/tempReal)) ;
                prevADX =  (((prevADX*(optInTimePeriod-1))+tempReal)/optInTimePeriod) ;
@@ -4756,12 +4750,12 @@ public class Core {
          { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
          prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
          prevClose = inClose[today];
-         if( prevTR != 0.0 )
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
          {
             minusDI =  (100.0*(prevMinusDM/prevTR)) ;
             plusDI =  (100.0*(prevPlusDM/prevTR)) ;
             tempReal = minusDI+plusDI;
-            if( tempReal != 0.0 )
+            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
             {
                tempReal =  (100.0*( Math.abs (minusDI-plusDI)/tempReal)) ;
                prevADX =  (((prevADX*(optInTimePeriod-1))+tempReal)/optInTimePeriod) ;
@@ -4796,10 +4790,7 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = (2*optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
-      else
-         lookbackTotal = 2;
+      lookbackTotal = (2*optInTimePeriod) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ADX.ordinal()])  - 1;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
@@ -4868,7 +4859,7 @@ public class Core {
             minusDI =  (100.0*(prevMinusDM/prevTR)) ;
             plusDI =  (100.0*(prevPlusDM/prevTR)) ;
             tempReal = minusDI+plusDI;
-            if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
                sumDX +=  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
          }
       }
@@ -4896,12 +4887,12 @@ public class Core {
          { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
          prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
          prevClose = inClose[today];
-         if( prevTR != 0.0 )
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
          {
             minusDI =  (100.0*(prevMinusDM/prevTR)) ;
             plusDI =  (100.0*(prevPlusDM/prevTR)) ;
             tempReal = minusDI+plusDI;
-            if( tempReal != 0.0 )
+            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
             {
                tempReal =  (100.0*( Math.abs (minusDI-plusDI)/tempReal)) ;
                prevADX =  (((prevADX*(optInTimePeriod-1))+tempReal)/optInTimePeriod) ;
@@ -4932,12 +4923,12 @@ public class Core {
          { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
          prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
          prevClose = inClose[today];
-         if( prevTR != 0.0 )
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
          {
             minusDI =  (100.0*(prevMinusDM/prevTR)) ;
             plusDI =  (100.0*(prevPlusDM/prevTR)) ;
             tempReal = minusDI+plusDI;
-            if( tempReal != 0.0 )
+            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
             {
                tempReal =  (100.0*( Math.abs (minusDI-plusDI)/tempReal)) ;
                prevADX =  (((prevADX*(optInTimePeriod-1))+tempReal)/optInTimePeriod) ;
