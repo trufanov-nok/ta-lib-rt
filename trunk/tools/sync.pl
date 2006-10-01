@@ -18,63 +18,38 @@ sub Main
    cleanupFile( '..\ta-lib\*\*.txt' );
    cleanupFile( '..\ta-lib\*\*\*.txt' );
    cleanupFile( '..\ta-lib\*\*\*\*.txt' );
-   cleanupFile( '..\ta-lib\*\*\*\*\*.txt' );
 
    cleanupFile( '..\ta-lib\c\src\ta_abstract\templates\*.*.template' );
    
    cleanupFile( '..\ta-lib\c\src\*.c' );
    cleanupFile( '..\ta-lib\c\src\*\*.c' );
-   cleanupFile( '..\ta-lib\c\src\*\*\*.c' );
-   cleanupFile( '..\ta-lib\c\src\*\*\*\*.c' );
-   cleanupFile( '..\ta-lib\c\src\*\*\*\*\*.c' );
 
    cleanupFile( '..\ta-lib\c\src\*.h' );
    cleanupFile( '..\ta-lib\c\src\*\*.h' );
-   cleanupFile( '..\ta-lib\c\src\*\*\*.h' );
-   cleanupFile( '..\ta-lib\c\src\*\*\*\*.h' );
-   cleanupFile( '..\ta-lib\c\src\*\*\*\*\*.h' );
 
    cleanupFile( '..\ta-lib\c\README' );
    cleanupFile( '..\ta-lib\c\*\README' );
    cleanupFile( '..\ta-lib\c\*\*\README' );
-   cleanupFile( '..\ta-lib\c\*\*\*\README' );
-   cleanupFile( '..\ta-lib\c\*\*\*\*\README' );
-
-   cleanupFile( '..\ta-lib\c\ta_common\kazlib\CHANGES' );
 
    # Remove temporary and backup files.
    removeFile( '..\ta-lib\c\temp\*.*' );
    removeFile( '..\ta-lib\c\temp\*\*.*' );
-   removeFile( '..\ta-lib\c\temp\*\*\*.*' );
-   removeFile( '..\ta-lib\c\temp\*\*\*\*.*' );
 
    removeFile( '..\ta-lib\*\*.bak' );
    removeFile( '..\ta-lib\*\*\*.bak' );
    removeFile( '..\ta-lib\*\*\*\*.bak' );
-   removeFile( '..\ta-lib\*\*\*\*\*.bak' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*.bak' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\*.bak' );
 
    removeFile( '..\ta-lib\*\*.~*' );
    removeFile( '..\ta-lib\*\*\*.~*' );
    removeFile( '..\ta-lib\*\*\*\*.~*' );
-   removeFile( '..\ta-lib\*\*\*\*\*.~*' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*.~*' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\*.~*' );
 
    removeFile( '..\ta-lib\*\*.*~' );
    removeFile( '..\ta-lib\*\*\*.*~' );
    removeFile( '..\ta-lib\*\*\*\*.*~' );
-   removeFile( '..\ta-lib\*\*\*\*\*.*~' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*.*~' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\*.*~' );
 
    removeFile( '..\ta-lib\*\.*.swp' );
    removeFile( '..\ta-lib\*\*\.*.swp' );
    removeFile( '..\ta-lib\*\*\*\.*.swp' );
-   removeFile( '..\ta-lib\*\*\*\*\.*.swp' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.swp' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.swp' );
 
    # Clean-up MSVC project directory.
    removeFile( '..\ta-lib\c\ide\msvc\*\*.ncb' );
@@ -100,93 +75,62 @@ sub Main
    removeFile( '..\ta-lib\*\.*.lib' );
    removeFile( '..\ta-lib\*\*\.*.lib' );
    removeFile( '..\ta-lib\*\*\*\.*.lib' );
-   removeFile( '..\ta-lib\*\*\*\*\.*.lib' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.lib' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.lib' );
 
    removeFile( '..\ta-lib\*\.*.obj' );
    removeFile( '..\ta-lib\*\*\.*.obj' );
    removeFile( '..\ta-lib\*\*\*\.*.obj' );
-   removeFile( '..\ta-lib\*\*\*\*\.*.obj' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.obj' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.obj' );
 
    removeFile( '..\ta-lib\*\.*.exe' );
    removeFile( '..\ta-lib\*\*\.*.exe' );
    removeFile( '..\ta-lib\*\*\*\.*.exe' );
-   removeFile( '..\ta-lib\*\*\*\*\.*.exe' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.exe' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.exe' );
 
    removeFile( '..\ta-lib\*\.*.dat' );
    removeFile( '..\ta-lib\*\*\.*.dat' );
    removeFile( '..\ta-lib\*\*\*\.*.dat' );
-   removeFile( '..\ta-lib\*\*\*\*\.*.dat' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.dat' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.dat' );
 
    removeFile( '..\ta-lib\*\.*.zip' );
    removeFile( '..\ta-lib\*\*\.*.zip' );
    removeFile( '..\ta-lib\*\*\*\.*.zip' );
-   removeFile( '..\ta-lib\*\*\*\*\.*.zip' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.zip' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.zip' );
 
    removeFile( '..\ta-lib\*\.*.rar' );
    removeFile( '..\ta-lib\*\*\.*.rar' );
    removeFile( '..\ta-lib\*\*\*\.*.rar' );
    removeFile( '..\ta-lib\*\*\*\*\.*.rar' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.rar' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.rar' );
 
    removeFile( '..\ta-lib\*\.*.jpg' );
    removeFile( '..\ta-lib\*\*\.*.jpg' );
    removeFile( '..\ta-lib\*\*\*\.*.jpg' );
    removeFile( '..\ta-lib\*\*\*\*\.*.jpg' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.jpg' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.jpg' );
 
    removeFile( '..\ta-lib\*\.*.mpg' );
    removeFile( '..\ta-lib\*\*\.*.mpg' );
    removeFile( '..\ta-lib\*\*\*\.*.mpg' );
    removeFile( '..\ta-lib\*\*\*\*\.*.mpg' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.mpg' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.mpg' );
 
    removeFile( '..\ta-lib\*\.*.jpeg' );
    removeFile( '..\ta-lib\*\*\.*.jpeg' );
    removeFile( '..\ta-lib\*\*\*\.*.jpeg' );
    removeFile( '..\ta-lib\*\*\*\*\.*.jpeg' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.jpeg' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.jpeg' );
 
    removeFile( '..\ta-lib\*\.*.mpeg' );
    removeFile( '..\ta-lib\*\*\.*.mpeg' );
    removeFile( '..\ta-lib\*\*\*\.*.mpeg' );
    removeFile( '..\ta-lib\*\*\*\*\.*.mpeg' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.mpeg' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.mpeg' );
 
    removeFile( '..\ta-lib\*\.*.gif' );
    removeFile( '..\ta-lib\*\*\.*.gif' );
    removeFile( '..\ta-lib\*\*\*\.*.gif' );
    removeFile( '..\ta-lib\*\*\*\*\.*.gif' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.gif' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.gif' );
 
    removeFile( '..\ta-lib\*\.*.wmv' );
    removeFile( '..\ta-lib\*\*\.*.wmv' );
    removeFile( '..\ta-lib\*\*\*\.*.wmv' );
    removeFile( '..\ta-lib\*\*\*\*\.*.wmv' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.wmv' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.wmv' );
 
    removeFile( '..\ta-lib\*\.*.asx' );
    removeFile( '..\ta-lib\*\*\.*.asx' );
    removeFile( '..\ta-lib\*\*\*\.*.asx' );
    removeFile( '..\ta-lib\*\*\*\*\.*.asx' );
-   removeFile( '..\ta-lib\*\*\*\*\*\.*.asx' );
-   removeFile( '..\ta-lib\*\*\*\*\*\*\.*.asx' );
 }
 
 sub cleanupFile
@@ -197,9 +141,10 @@ sub cleanupFile
    {
       $cmd = "./UDDU/dos2unix/Release/dos2unix ".$z;
 
-      if( $z =~ /ta_regtest\/sampling/ ) 
+      if(    ($z =~ /ta_regtest\/sampling/)
+          or ($z =~ /\.svn/) ) 
       { 
-          print "Skipping ".$line."\n";
+          print "Skipping ".$z."\n";
       }
       else
       {
