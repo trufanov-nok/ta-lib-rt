@@ -8,13 +8,11 @@ Packaging Procedure
                        - gen_make
                        - build all libs variant, do gen_code and regression tests.
                        - build Perl binaries and run regression tests.
-                       - build all ta-mysql variant.
   -fast option: Do not gen_make or clean. Do only a subset of tests.
   -clean option: Do only gen_make and clean
 
 (2) Linux Testing
 [UNIX]test_unix.pl
-  (in /Shared/DevTools directory)
   no option: The script perform all tests by making a complete copy
              of the ta-lib directory
 
@@ -24,16 +22,15 @@ Packaging Procedure
 (4) .NET Assemblies
 [Windows] Build the Debug and Release assembly.
 
-(5) CVS finalization
-[Windows] Make sure the CVS is in synch. Further steps will be done
-          using the CVS repository.
+(5) SVN finalization
+[Windows] Make sure the SVN is in synch. Further steps will be done
+          using the SVN repository.
 
 (6) Build Win32 Packages
 [WINDOWS]release.pl 
   no option: 
     - Erase release and all sub-directory
     - Build a temporary view from the repository in release/build
-    - do 'src' packaging in "release"
     - Build MSVC release and package
     - Build Borland release and package
     - Text file in release
@@ -45,7 +42,7 @@ Packaging Procedure
     - Run all unix tests in the temp directory
     - move that tar.gz in "release"
 
-(8) Add CVS tag "release-x-y-z" (Tag Settings -> do not set any options).
+(8) Add SVN tag "release-x-y-z" (Tag Settings -> do not set any options).
 
 Publish Procedure
 =================
