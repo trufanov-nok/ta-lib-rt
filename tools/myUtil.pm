@@ -4,12 +4,92 @@ use strict;
 use base 'Exporter';
 use Cwd;
 
-our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile removeRelease removeAllBinFile testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage);
 
-sub removeFile
+our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile createWorkdir removeAllBinFile testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage getWorkdir);
+
+my $workdir = "";
+my $userdir = "";
+
+# User directory.
+sub getUserdir
 {
-   my @files = glob $_[0];
+   if( $userdir ne "" ) 
+   {
+      return $userdir;
+   }
 
+   if( $^O ne "MSWin32" )
+   {   	
+      # On my setup, both my unix and win32 machines share the
+      # same user directory intended for my projects.
+      # If that shared directory is found, use it instead.
+      # If not use a local directory in the OS user account.
+      # \Mario
+      my $temp = "/mnt/hgfs/ta-lib-user/";
+      if( -e $temp && -d $temp )
+      {
+         $userdir = $temp;
+      }
+      else
+      {
+         $userdir = $ENV{'HOME'};
+      }
+   }
+   else
+   {
+      # Running on win32 machine. 
+      $userdir = $ENV{'HOME'}."//";
+   }
+   
+   return $userdir;
+}
+
+# The workdir is intended for all intermediate files.
+
+#   - All output logs while running the scripts.
+#   - Destination for the files produced by the scripts.
+sub getWorkdir
+{  
+   if( $workdir ne "" ) 
+   {
+      return $workdir;
+   }
+
+   if( $^O ne "MSWin32" )
+   {   	
+      $workdir = &getUserdir()."ta-lib-work/";
+   }
+   else
+   {
+      $workdir = &getUserdir()."ta-lib-work\\";
+   }
+   
+   return $workdir;
+}
+
+# copyFile( pattern, destinationPath )
+# 
+# This function supports only one wildcard '*' in the pattern.
+#
+# Examples:
+#    copyFile( 'c:\*.c', 'c:\dest' );
+#    copyFile( '/mnt/hgfs/include/*.h', '/user/root/include/' );
+sub copyFile
+{
+   # 
+   my $temp = $_[0];
+   my $dest = $_[1];
+  
+   if( $^O eq "MSWin32" )
+   {   	   
+     #Handle special case for win32
+     #Glob requires double backslash for '\' and a '\ ' for space.
+     $temp =~ s/\\/\\\\/g; 
+     $temp =~ s/\ /\\ /g;
+   }
+ 
+   my @files = glob($temp);
+      
    foreach my $z (@files)
    {
       if( (not $z =~ /HOLDER/) 
@@ -18,17 +98,60 @@ sub removeFile
            and (not $z =~ /Root/)
            and (not $z =~ /TALib_Prefix.pch/) 
            and (not $z =~ /TA.pm/)
-           and (not $z =~ /java/))
+           and (not $z =~ /java/)
+           and (not $z =~ /\.svn/) )
       {
-         unlink( $z );
+         copy( $z );	      
+      }
+   }	
+}
+
+sub removeFile
+{
+   my $temp = $_[0];
+  
+   if( $^O eq "MSWin32" )
+   {   	   
+     #Handle special case for win32
+     #Glob requires double backslash for '\' and a '\ ' for space.
+     $temp =~ s/\\/\\\\/g; 
+     $temp =~ s/\ /\\ /g;
+   }
+ 
+   #print "[".$temp."]\n";
+
+   my @files = glob($temp);
+      
+   foreach my $z (@files)
+   {
+      if( (not $z =~ /HOLDER/) 
+           and (not $z =~ /Entries/) 
+           and (not $z =~ /Repository/)
+           and (not $z =~ /Root/)
+           and (not $z =~ /TALib_Prefix.pch/) 
+           and (not $z =~ /TA.pm/)
+           and (not $z =~ /java/)
+           and (not $z =~ /\.svn/) )
+      {
+         unlink( $z );	      
       }
    }
 }
 
 sub removeFileAndDirectory
 {
-   my @files = glob $_[0];
+   my $temp = $_[0];
 
+   if( $^O eq "MSWin32" )
+   {   	   
+     #Handle special case for win32
+     #Glob requires double backslash for '\' and a '\ ' for space.
+     $temp =~ s/\\/\\\\/g; 
+     $temp =~ s/\ /\\ /g;
+   }
+   
+   my @files = glob($temp);
+   
    foreach my $z (@files)
    {
       unlink( $z );
@@ -36,37 +159,45 @@ sub removeFileAndDirectory
    }
 }
 
-sub removeRelease
+sub createWorkdir
 {
-   my $base = $_[0];
+   # Create the directories (ignore errors if they do already exist).
+   my $workdir = &getWorkdir();
+   mkdir( $workdir );
+   mkdir( $workdir."log" );
+   mkdir( $workdir."dist" );
+   mkdir( $workdir."temp" );
+   
    if( $^O ne "MSWin32" )
-   {   
-      execProgForce( $base, "rm -r -f release/build >/dev/null" );
-      execProgForce( $base, "rm -r -f release/* >/dev/null" );
-      execProgForce( $base, "mkdir release >/dev/null" );
-      execProgForce( $base, "mkdir release/build >/dev/null" );
-      execProgForce( $base, "mkdir release/log >/dev/null" );
+   {         
+	   #execProgForce( $userdir, "mkdir ta-lib-work >/dev/null" );
+	   #execProgForce( $userdir, "mkdir ta-lib-work/log   >/dev/null" );
+	   #execProgForce( $userdir, "mkdir ta-lib-work/dist  >/dev/null" );
+	   #execProgForce( $userdir, "mkdir ta-lib-work/temp  >/dev/null" );
+	   #execProgForce( $userdir, "mkdir ta-lib-work/temp/unix  >/dev/null" );
+      mkdir( $workdir."temp/unix" );
    }
    else
    {
-      removeFileAndDirectory( $base.'release\*\*\*\*\*\*\*\*\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*\*\*\*\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*\*\*\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*\*\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*\*' );
-      removeFileAndDirectory( $base.'release\*\*' );
-      removeFileAndDirectory( $base.'release\*' );
-
-      mkdir( $base.'release' );
-      mkdir( $base.'release\log' );
-      mkdir( $base.'release\build' );
+      mkdir( $workdir."temp\\win32" );
    }
+
+   # Do some clean-up from (potential) previous execution.
+   if( $^O ne "MSWin32" )
+   {         
+      unlink( $workdir."log/stderr_unix.txt" );
+      unlink( $workdir."log/stdout_unix.txt" );	   
+      removeFile( $workdir."log/*_gcc_*.txt" );
+      removeFile( $workdir."temp/unix/*" );
+   }
+   else
+   {
+      unlink( $workdir."log\\stderr_win32.txt" );
+      unlink( $workdir."log\\stdout_win32.txt" );
+      unlink( $workdir,"log\\perl_msvc.txt" );
+      removeFile( $workdir."log\\win_ta*.txt" );
+      removeFile( $workdir."temp\\win32\\*" );
+   }  
 }
 
 sub removeAllTempFile
@@ -86,7 +217,7 @@ sub removeAllTempFile
    removeFile( $_[0].'swig\temp\*\*\*.*' );
    
    removeFile( $_[0].'excel\temp\*.*' );
-
+   
    removeFile( $_[0].'*\*.pdb' );
    removeFile( $_[0].'*\*\*.pdb' );
    removeFile( $_[0].'*\*\*\*.pdb' );
@@ -107,7 +238,6 @@ sub removeAllTempFile
    removeFile( $_[0].'*\*\*\*\*.obj' );
    removeFile( $_[0].'*\*\*\*\*\*.obj' );
    removeFile( $_[0].'*\*\*\*\*\*\*.obj' );
-
 
    removeFile( $_[0].'*\*.pch' );
    removeFile( $_[0].'*\*\*.pch' );
@@ -143,9 +273,9 @@ sub removeAllBinFile
       removeFile( $_[0].'c\lib\*.*' );
       removeFile( $_[0].'swig\lib\perl\*.*' );
       removeFile( $_[0].'swig\lib\perl\Finance\*.*' );
-      #removeFile( $_[0].'excel\ta-lib.xll' );
-      #removeFile( $_[0].'dotnet\src\Core\Release\*.*' );
-      #removeFile( $_[0].'dotnet\src\Core\Debug\*.*' );
+      removeFile( $_[0].'excel\ta-lib.xll' );
+      removeFile( $_[0].'dotnet\src\Core\Release\*.*' );
+      removeFile( $_[0].'dotnet\src\Core\Debug\*.*' );
    }
 
    removeFile( $_[0].'c\bin\*.*' );
@@ -183,14 +313,14 @@ sub execProg
       print "\nSignalNum = ".$signal_num;
       print "\nDumpCore  = ".$dumped_core."\n";
       print "\n========================================";
-      if( $^O ne "MSWin32" )
+      if( $^O ne "MSWin32" )     
       {
-         chdir( '/mnt/hgfs/Release/log' );
+         chdir( &getWorkdir().'log' );
          system( 'grep arning *.txt' );
       }
       else
       {
-         chdir( '..\release\log' );
+         chdir( &getWorkdir().'log' );
          print( "\n" );
          system( 'find /C "arning" *.txt' );
       }
@@ -217,29 +347,73 @@ sub execProgForce
 
 sub libversion
 {
+   my $workdir = &getWorkdir()."temp";	
+   my $dir = &cwd();
+   my $filesuffix;
+
+   if( $^O eq "MSWin32" )
+   {
+     $filesuffix = "_win32";
+   }
+   else
+   {
+     $filesuffix = "_unix";
+   }
+   
+   chdir( $workdir );
+   
+   # Clean-up some files from (potentially) previous run.   
+   unlink( "tmpVer".$filesuffix );
+   unlink( "version".$filesuffix.".c" );
+   
+   # Create a C program to get the info from the TA-Lib source code itself.
+   open VERSION_C, ">version".$filesuffix.".c" or die "Can't create version_x.c file";
+   printf VERSION_C "/* This program simply output the string hard coded in the library */\n";
+   printf VERSION_C "#include <stdio.h>\n";
+   if( $^O eq "MSWin32" )
+   {
+   printf VERSION_C "#include \"$dir\\..\\ta-lib\\c\\src\\ta_common\\ta_version.c\"\n";
+   }
+   else
+   {
+   printf VERSION_C "#include \"$dir/../ta-lib/c/src/ta_common/ta_version.c\"\n";
+   }   
+   printf VERSION_C "\n";
+   printf VERSION_C "int main( int argc, char *argv[] )\n";
+   printf VERSION_C "{\n";
+   printf VERSION_C "   (void)argc;\n";
+   printf VERSION_C "   (void)argv;\n";
+   printf VERSION_C "   printf( TA_GetVersionString() );\n";
+   printf VERSION_C "\n";
+   printf VERSION_C "   return 0;\n";
+   printf VERSION_C "}\n";
+   close VERSION_C;
+   
    if( $^O eq "MSWin32" )
    {   
-      unlink( "version.exe" );
-      unlink( "tmpVer" );
-      execProg( '..\script', 'cl -nologo version.c' );
-      execProg( '..\script', 'version.exe >tmpVer' );
-      unlink( "version.obj" );
-      unlink( "version.exe" );
+      unlink( "version_win32.exe" );
+      execProg( $workdir, "cl -nologo version".$filesuffix.".c" );
+      execProg( $workdir, "version_win32.exe >tmpVer".$filesuffix );
+      unlink( "version_win32.obj" );
+      unlink( "version_win32.exe" );
    }
    else
    {
       unlink( "a.out" );
-      unlink( "tmpVer" );
-      execProg( '/mnt/hgfs/Shared/script', 'gcc version.c >/dev/null' );
-      execProg( '/mnt/hgfs/Shared/script', './a.out >tmpVer' );
+      unlink( "tmpVer".$filesuffix );
+      execProg( $workdir, "gcc version".$filesuffix.".c >/dev/null" );
+      execProg( $workdir, "./a.out >tmpVer".$filesuffix );
       unlink( "a.out" );
    }
 
-   open(TMPVERFILE, "tmpVer" );
+   open TMPVERFILE, "tmpVer".$filesuffix;
    my $versionString = <TMPVERFILE>;
    my @versionFields = split(/ /, $versionString);
    #print "[".@versionFields[0]."]";
-   
+   close TMPVERFILE;
+   unlink( "tmpVer".$filesuffix );
+   unlink( "version".$filesuffix.".c" );
+   chdir( $dir );
    return @versionFields[0];
 }
 
@@ -280,7 +454,7 @@ sub buildMSVC
    removeAllBinFile( $base, $keepLib );
    removeAllTempFile( $base );
    my $a = $base."c\\make\\".$libVariant."\\win32\\msvc";
-   my $b = "nmake /NOLOGO ".">".$log_path.$lib_name."_msvc_".$libVariant.".txt";
+   my $b = "nmake /NOLOGO ".">\"".$log_path.$lib_name."_msvc_".$libVariant.".txt\"";
    execProg( $a, $b );
 }
 
@@ -290,10 +464,10 @@ sub testPerl
    my $log_path   = $_[1];
 	
    my $a = $base."swig\\ide\\msvc\\perl";
-   my $b = "nmake /NOLOGO perl.mak >".$log_path."perl_msvc.txt";
+   my $b = "nmake /NOLOGO perl.mak >\"".&getWorkdir()."\\log\\win_ta_lib_perl.txt\"";
    execProg( $a, $b );
    $a = $base."swig\\src\\tools\\test_perl";
-   $b = "perl runtests.pl >".$log_path."perl_msvc.txt";
+   $b = "perl runtests.pl >\"".&getWorkdir()."\\log\\perl_msvc.txt\"";
    execProg( $a, $b );
 }
 
@@ -308,7 +482,7 @@ sub buildBorland
    removeAllBinFile( $base, $keepLib );
    removeAllTempFile( $base );
    my $a = $base."c\\make\\".$libVariant."\\win32\\borland";
-   my $b = "make ".">".$log_path.$lib_name."_borl_".$libVariant.".txt";
+   my $b = "make ".">\"".$log_path.$lib_name."_borl_".$libVariant.".txt\"";
    execProg( $a, $b );
 }
 
@@ -323,7 +497,7 @@ sub buildGCC
    removeAllBinFile( $base, $keepLib );
    removeAllTempFile( $base );
    my $a = $base."c/make/".$libVariant."/linux/g++";
-   my $b = "make >".$log_path.$lib_name."_gcc_".$libVariant.".txt";
+   my $b = "make >\"".$log_path.$lib_name."_gcc_".$libVariant.".txt\"";
    execProg( $a, $b );
 }
 
@@ -346,7 +520,7 @@ sub testMSVC
       if( $_[1] eq "cdr" )    
       {
 	 # Hard code output path (for now...)
-         testPerl($_[0],"..\\..\\..\\..\\..\\");
+         testPerl($_[0]);
       }
    }
 }
