@@ -2,17 +2,23 @@
 
 # This script performs an extensive number of tests for TA-Lib.
 # 
-# It builds multiple variant of the library and run the ta_regtest executable
-# or script for each.
-#
+# It builds multiple variant of the library and runs ta_regtest for each.
+# 
 # This script is for Win32, another one called "test_unix.pl" is intended
-# for Linux.
+# for unix.
 # 
 # This script is intended for maintainers of TA-Lib, not for the
 # end-user of TA-Lib.
+# 
+# The script assume the following directory structure:
+#      ta-lib/tools
+#      ta-lib/ta-lib/c
+#
+# The script must be run from the tools directory.
+# 
+# Temporary files are put in the user home directory ("Documents And Settings\UserName").
 
 use Cwd;
-use File::DosGlob 'glob';
 use myUtil;
 
 sub Main
@@ -23,6 +29,7 @@ sub Main
    print "Testing ".$versionSuffix."\n";
 
    $root_dir = "..\\";
+   $workdir = &getWorkdir();
 
    if( $ARGV[0] eq "-fast" )
    {
@@ -35,21 +42,23 @@ sub Main
       system( "perl sync.pl" );
       removeAllTempFile($root_dir."ta-lib\\");
       removeAllBinFile($root_dir."ta-lib\\", 0 );
-      removeRelease($root_dir);
+      createWorkdir();
       exit(0);        
    }
    else
    {
-     removeRelease($root_dir);   
+     createWorkdir();   
    }
 
-   open(STDOUT, ">".$root_dir."\\release\\log\\stdout.txt" ) or die;
-   open(STDERR, ">".$root_dir."\\release\\log\\stderr.txt" ) or die;
+   open(OLD_STDERR,">&STDERR") or die "Failed to save STDERR";
+   open(OLD_STDOUT,">&STDOUT") or die "Failed to save STDOUT";
+   open(STDOUT, ">".$workdir."log\\stdout_win32.txt" ) or die;
+   open(STDERR, ">".$workdir."log\\stderr_win32.txt" ) or die;
 
    if( $fastOption eq 0 )
    {
-      removeAllTempFile($root_dir."ta-lib\\");
-      removeAllBinFile($root_dir."ta-lib\\", 0);
+      removeAllTempFile($workdir."ta-lib\\");
+      removeAllBinFile($workdir."ta-lib\\", 0);
 
       # Generate TA-Lib WIN32 Makefiles
       $dir = cwd;
@@ -61,51 +70,55 @@ sub Main
       system( "perl sync.pl" );
    }
 
-   $testOutDir = "..\\..\\..\\..\\..\\..\\";
    # Test one build of each compiler for TA-Lib. Allows to detect early on compile errors.
    # Remaining library variant are tested later.
-   testMSVC($root_dir."ta-lib\\", "cdr", $fastOption, 0, $testOutDir."release\\log\\", 0 );
-   testBorland($root_dir."ta-lib\\", "cmd", $fastOption, 0, $testOutDir."release\\log\\", 0 );
+   testMSVC($root_dir."ta-lib\\", "cdr", $fastOption, 0, $workdir."log\\", 0 );
+   testBorland($root_dir."ta-lib\\", "cmd", $fastOption, 0, $workdir."log\\", 0 );
    
    # Test remaining MSVC variant
    if( $fastOption eq 0 )
    {
       # Compile and test all remaining variant.
-      testMSVC($root_dir."ta-lib\\", "csd", $fastOption, 0, $testOutDir."release\\log\\", 0 );
-      testMSVC($root_dir."ta-lib\\", "cmd", $fastOption, 0, $testOutDir."release\\log\\", 0 );
-      testMSVC($root_dir."ta-lib\\", "csr", $fastOption, 0, $testOutDir."release\\log\\", 0 );
-      testMSVC($root_dir."ta-lib\\", "cdd", $fastOption, 0, $testOutDir."release\\log\\", 0 );
-      testMSVC($root_dir."ta-lib\\", "cmr", $fastOption, 0, $testOutDir."release\\log\\", 0 );
+      testMSVC($root_dir."ta-lib\\", "csd", $fastOption, 0, $workdir."log\\", 0 );
+      testMSVC($root_dir."ta-lib\\", "cmd", $fastOption, 0, $workdir."log\\", 0 );
+      testMSVC($root_dir."ta-lib\\", "csr", $fastOption, 0, $workdir."log\\", 0 );
+      testMSVC($root_dir."ta-lib\\", "cdd", $fastOption, 0, $workdir."log\\", 0 );
+      testMSVC($root_dir."ta-lib\\", "cmr", $fastOption, 0, $workdir."log\\", 0 );
    }
    else
    {
       # Just compile a few variant.
-      testMSVC($root_dir."ta-lib\\", "cmr", $fastOption, 0, $testOutDir."release\\log\\", 1 );
-      testMSVC($root_dir."ta-lib\\", "csd", $fastOption, 0, $testOutDir."release\\log\\", 1 );
+      testMSVC($root_dir."ta-lib\\", "cmr", $fastOption, 0, $workdir."log\\", 1 );
+      testMSVC($root_dir."ta-lib\\", "csd", $fastOption, 0, $workdir."log\\", 1 );
    }
 
    # Test remaining Borland variant
    if( $fastOption eq 0 )
    {
       # Compile and test all remaining variant.
-      testBorland($root_dir."ta-lib\\", "csd", $fastOption, 0, $testOutDir."release\\log\\", 0 );
-      testBorland($root_dir."ta-lib\\", "cmr", $fastOption, 0, $testOutDir."release\\log\\", 0 );
-      testBorland($root_dir."ta-lib\\", "csr", $fastOption, 0, $testOutDir."release\\log\\", 0 );
+      testBorland($root_dir."ta-lib\\", "csd", $fastOption, 0, $workdir."log\\", 0 );
+      testBorland($root_dir."ta-lib\\", "cmr", $fastOption, 0, $workdir."log\\", 0 );
+      testBorland($root_dir."ta-lib\\", "csr", $fastOption, 0, $workdir."log\\", 0 );
    }
    else
    {
       # Just compile a variant.
-      testBorland($root_dir."ta-lib\\", "csr", $fastOption, 0, $testOutDir."release\\log\\", 1 );
+      testBorland($root_dir."ta-lib\\", "csr", $fastOption, 0, $workdir."log\\", 1 );
    }
 
    # Check for warnings.
-   execProgForce( $root_dir."release\\log",  'find "arning" *.txt' );
+   execProgForce( $workdir."log\\",  'find "arning" *.txt' );
 
    # Clean-up everything because usually the test are followed
-   # with a sync with the remote CVS repository.
+   # with a sync with the remote SVN repository.
    removeAllBinFile( $root_dir."ta-lib\\", 0 );
    removeAllTempFile( $root_dir."ta-lib\\" );
 
+   print( "\n* Testing Completed with Success *\n" );
+   close STDOUT;
+   close STDERR;
+   open(STDOUT,">&OLD_STDOUT") or warn "Failed to restore STDOUT";
+   open(STDERR,">&OLD_STDERR") or warn "Failed to restore STDERR";   
    print( "\n* Testing Completed with Success *\n" );
 }
 
