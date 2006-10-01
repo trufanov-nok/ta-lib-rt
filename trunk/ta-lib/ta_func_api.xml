@@ -1,0 +1,5266 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FinancialFunctions>
+	<!-- MAX -->
+	<FinancialFunction>
+		<ShortName>MAX</ShortName>
+		<FullName>Highest value over a specified period</FullName>
+		<ShortDescription>Highest value over a specified period</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Math Operators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MIN -->
+	<FinancialFunction>
+		<ShortName>MIN</ShortName>
+		<FullName>Lowest value over a specified period</FullName>
+		<ShortDescription>Lowest value over a specified period</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Math Operators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- SUM -->
+	<FinancialFunction>
+		<ShortName>SUM</ShortName>
+		<FullName>Summation</FullName>
+		<ShortDescription>Summation</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Math Operators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- BBANDS -->
+	<FinancialFunction>
+		<ShortName>BBANDS</ShortName>
+		<FullName>Bollinger Bands</FullName>
+		<ShortDescription>Bollinger Bands</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>5</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Deviations up</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>2</Precision>
+					<SuggestedStart>-2.000000</SuggestedStart>
+					<SuggestedEnd>2.000000</SuggestedEnd>
+					<SuggestedIncrement>0.200000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>2.000000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Deviations down</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>2</Precision>
+					<SuggestedStart>-2.000000</SuggestedStart>
+					<SuggestedEnd>2.000000</SuggestedEnd>
+					<SuggestedIncrement>0.200000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>2.000000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>MA Type</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outRealUpperBand</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outRealMiddleBand</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outRealLowerBand</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- DEMA -->
+	<FinancialFunction>
+		<ShortName>DEMA</ShortName>
+		<FullName>Double Exponential Moving Average</FullName>
+		<ShortDescription>Double Exponential Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- EMA -->
+	<FinancialFunction>
+		<ShortName>EMA</ShortName>
+		<FullName>Exponential Moving Average</FullName>
+		<ShortDescription>Exponential Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- HT_TRENDLINE -->
+	<FinancialFunction>
+		<ShortName>HT_TRENDLINE</ShortName>
+		<FullName>Hilbert Transform - Instantaneous Trendline</FullName>
+		<ShortDescription>Hilbert Transform - Instantaneous Trendline</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- KAMA -->
+	<FinancialFunction>
+		<ShortName>KAMA</ShortName>
+		<FullName>Kaufman Adaptive Moving Average</FullName>
+		<ShortDescription>Kaufman Adaptive Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MA -->
+	<FinancialFunction>
+		<ShortName>MA</ShortName>
+		<FullName>All Moving Average</FullName>
+		<ShortDescription>All Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>MA Type</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MAMA -->
+	<FinancialFunction>
+		<ShortName>MAMA</ShortName>
+		<FullName>MESA Adaptive Moving Average</FullName>
+		<ShortDescription>MESA Adaptive Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Fast Limit</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.010000</Minimum>
+					<Maximum>0.990000</Maximum>
+					<Precision>2</Precision>
+					<SuggestedStart>0.210000</SuggestedStart>
+					<SuggestedEnd>0.800000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.500000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow Limit</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.010000</Minimum>
+					<Maximum>0.990000</Maximum>
+					<Precision>2</Precision>
+					<SuggestedStart>0.010000</SuggestedStart>
+					<SuggestedEnd>0.600000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.050000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMAMA</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outFAMA</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MIDPRICE -->
+	<FinancialFunction>
+		<ShortName>MIDPRICE</ShortName>
+		<FullName>Midpoint Price over period</FullName>
+		<ShortDescription>Midpoint Price over period</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MIDPOINT -->
+	<FinancialFunction>
+		<ShortName>MIDPOINT</ShortName>
+		<FullName>MidPoint over period</FullName>
+		<ShortDescription>MidPoint over period</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- SAR -->
+	<FinancialFunction>
+		<ShortName>SAR</ShortName>
+		<FullName>Parabolic SAR</FullName>
+		<ShortDescription>Parabolic SAR</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Acceleration Factor</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.010000</SuggestedStart>
+					<SuggestedEnd>0.200000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.020000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>AF Maximum</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.200000</SuggestedStart>
+					<SuggestedEnd>0.400000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.200000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- SAREXT -->
+	<FinancialFunction>
+		<ShortName>SAREXT</ShortName>
+		<FullName>Parabolic SAR - Extended</FullName>
+		<ShortDescription>Parabolic SAR - Extended</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Start Value</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.000000</SuggestedStart>
+					<SuggestedEnd>0.000000</SuggestedEnd>
+					<SuggestedIncrement>0.000000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.000000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Offset on Reverse</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.010000</SuggestedStart>
+					<SuggestedEnd>0.150000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.000000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>AF Init Long</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.010000</SuggestedStart>
+					<SuggestedEnd>0.190000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.020000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>AF Long</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.010000</SuggestedStart>
+					<SuggestedEnd>0.200000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.020000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>AF Max Long</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.200000</SuggestedStart>
+					<SuggestedEnd>0.400000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.200000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>AF Init Short</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.010000</SuggestedStart>
+					<SuggestedEnd>0.190000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.020000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>AF Short</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.010000</SuggestedStart>
+					<SuggestedEnd>0.200000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.020000</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>AF Max Short</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>4</Precision>
+					<SuggestedStart>0.200000</SuggestedStart>
+					<SuggestedEnd>0.400000</SuggestedEnd>
+					<SuggestedIncrement>0.010000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.200000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- SMA -->
+	<FinancialFunction>
+		<ShortName>SMA</ShortName>
+		<FullName>Simple Moving Average</FullName>
+		<ShortDescription>Simple Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- T3 -->
+	<FinancialFunction>
+		<ShortName>T3</ShortName>
+		<FullName>Triple Exponential Moving Average (T3)</FullName>
+		<ShortDescription>Triple Exponential Moving Average (T3)</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>5</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Volume Factor</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>1.000000</Maximum>
+					<Precision>2</Precision>
+					<SuggestedStart>0.010000</SuggestedStart>
+					<SuggestedEnd>1.000000</SuggestedEnd>
+					<SuggestedIncrement>0.050000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.700000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- TEMA -->
+	<FinancialFunction>
+		<ShortName>TEMA</ShortName>
+		<FullName>Triple Exponential Moving Average</FullName>
+		<ShortDescription>Triple Exponential Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- TRIMA -->
+	<FinancialFunction>
+		<ShortName>TRIMA</ShortName>
+		<FullName>Triangular Moving Average</FullName>
+		<ShortDescription>Triangular Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- WMA -->
+	<FinancialFunction>
+		<ShortName>WMA</ShortName>
+		<FullName>Weighted Moving Average</FullName>
+		<ShortDescription>Weighted Moving Average</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ATR -->
+	<FinancialFunction>
+		<ShortName>ATR</ShortName>
+		<FullName>Average True Range</FullName>
+		<ShortDescription>Average True Range</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- NATR -->
+	<FinancialFunction>
+		<ShortName>NATR</ShortName>
+		<FullName>Normalized Average True Range</FullName>
+		<ShortDescription>Normalized Average True Range</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- TRANGE -->
+	<FinancialFunction>
+		<ShortName>TRANGE</ShortName>
+		<FullName>True Range</FullName>
+		<ShortDescription>True Range</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ADX -->
+	<FinancialFunction>
+		<ShortName>ADX</ShortName>
+		<FullName>Average Directional Movement Index</FullName>
+		<ShortDescription>Average Directional Movement Index</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ADXR -->
+	<FinancialFunction>
+		<ShortName>ADXR</ShortName>
+		<FullName>Average Directional Movement Index Rating</FullName>
+		<ShortDescription>Average Directional Movement Index Rating</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- APO -->
+	<FinancialFunction>
+		<ShortName>APO</ShortName>
+		<FullName>Absolute Price Oscillator</FullName>
+		<ShortDescription>Absolute Price Oscillator</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Fast Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>12</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>26</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>MA Type</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- AROON -->
+	<FinancialFunction>
+		<ShortName>AROON</ShortName>
+		<FullName>Aroon</FullName>
+		<ShortDescription>Aroon</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outAroonDown</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outAroonUp</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- AROONOSC -->
+	<FinancialFunction>
+		<ShortName>AROONOSC</ShortName>
+		<FullName>Aroon Oscillator</FullName>
+		<ShortDescription>Aroon Oscillator</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- BOP -->
+	<FinancialFunction>
+		<ShortName>BOP</ShortName>
+		<FullName>Balance Of Power</FullName>
+		<ShortDescription>Balance Of Power</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CCI -->
+	<FinancialFunction>
+		<ShortName>CCI</ShortName>
+		<FullName>Commodity Channel Index</FullName>
+		<ShortDescription>Commodity Channel Index</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CMO -->
+	<FinancialFunction>
+		<ShortName>CMO</ShortName>
+		<FullName>Chande Momentum Oscillator</FullName>
+		<ShortDescription>Chande Momentum Oscillator</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- DX -->
+	<FinancialFunction>
+		<ShortName>DX</ShortName>
+		<FullName>Directional Movement Index</FullName>
+		<ShortDescription>Directional Movement Index</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MACD -->
+	<FinancialFunction>
+		<ShortName>MACD</ShortName>
+		<FullName>Moving Average Convergence/Divergence</FullName>
+		<ShortDescription>Moving Average Convergence/Divergence</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Fast Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>12</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>26</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Signal Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>9</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACD</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACDSignal</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACDHist</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MACDEXT -->
+	<FinancialFunction>
+		<ShortName>MACDEXT</ShortName>
+		<FullName>MACD with controllable MA type</FullName>
+		<ShortDescription>MACD with controllable MA type</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Fast Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>12</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Fast MA</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>26</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow MA</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Signal Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>9</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Signal MA</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACD</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACDSignal</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACDHist</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MACDFIX -->
+	<FinancialFunction>
+		<ShortName>MACDFIX</ShortName>
+		<FullName>Moving Average Convergence/Divergence Fix 12/26</FullName>
+		<ShortDescription>Moving Average Convergence/Divergence Fix 12/26</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Signal Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>9</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACD</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACDSignal</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMACDHist</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MFI -->
+	<FinancialFunction>
+		<ShortName>MFI</ShortName>
+		<FullName>Money Flow Index</FullName>
+		<ShortDescription>Money Flow Index</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Volume</Type>
+				<Name>Volume</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MINUS_DI -->
+	<FinancialFunction>
+		<ShortName>MINUS_DI</ShortName>
+		<FullName>Minus Directional Indicator</FullName>
+		<ShortDescription>Minus Directional Indicator</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MINUS_DM -->
+	<FinancialFunction>
+		<ShortName>MINUS_DM</ShortName>
+		<FullName>Minus Directional Movement</FullName>
+		<ShortDescription>Minus Directional Movement</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MOM -->
+	<FinancialFunction>
+		<ShortName>MOM</ShortName>
+		<FullName>Momentum</FullName>
+		<ShortDescription>Momentum</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>10</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- PPO -->
+	<FinancialFunction>
+		<ShortName>PPO</ShortName>
+		<FullName>Percentage Price Oscillator</FullName>
+		<ShortDescription>Percentage Price Oscillator</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Fast Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>12</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>26</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>MA Type</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- PLUS_DI -->
+	<FinancialFunction>
+		<ShortName>PLUS_DI</ShortName>
+		<FullName>Plus Directional Indicator</FullName>
+		<ShortDescription>Plus Directional Indicator</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- PLUS_DM -->
+	<FinancialFunction>
+		<ShortName>PLUS_DM</ShortName>
+		<FullName>Plus Directional Movement</FullName>
+		<ShortDescription>Plus Directional Movement</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ROC -->
+	<FinancialFunction>
+		<ShortName>ROC</ShortName>
+		<FullName>Rate of change : ((price/prevPrice)-1)*100</FullName>
+		<ShortDescription>Rate of change : ((price/prevPrice)-1)*100</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>10</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ROCP -->
+	<FinancialFunction>
+		<ShortName>ROCP</ShortName>
+		<FullName>Rate of change Percentage: (price-prevPrice)/prevPrice</FullName>
+		<ShortDescription>Rate of change Percentage: (price-prevPrice)/prevPrice</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>10</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ROCR -->
+	<FinancialFunction>
+		<ShortName>ROCR</ShortName>
+		<FullName>Rate of change ratio: (price/prevPrice)</FullName>
+		<ShortDescription>Rate of change ratio: (price/prevPrice)</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>10</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ROCR100 -->
+	<FinancialFunction>
+		<ShortName>ROCR100</ShortName>
+		<FullName>Rate of change ratio 100 scale: (price/prevPrice)*100</FullName>
+		<ShortDescription>Rate of change ratio 100 scale: (price/prevPrice)*100</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>10</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- RSI -->
+	<FinancialFunction>
+		<ShortName>RSI</ShortName>
+		<FullName>Relative Strength Index</FullName>
+		<ShortDescription>Relative Strength Index</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- STOCH -->
+	<FinancialFunction>
+		<ShortName>STOCH</ShortName>
+		<FullName>Stochastic</FullName>
+		<ShortDescription>Stochastic</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Fast-K Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>5</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow-K Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>3</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow-K MA</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow-D Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>3</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow-D MA</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outSlowK</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outSlowD</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- STOCHF -->
+	<FinancialFunction>
+		<ShortName>STOCHF</ShortName>
+		<FullName>Stochastic Fast</FullName>
+		<ShortDescription>Stochastic Fast</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Fast-K Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>5</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Fast-D Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>3</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Fast-D MA</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outFastK</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outFastD</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- STOCHRSI -->
+	<FinancialFunction>
+		<ShortName>STOCHRSI</ShortName>
+		<FullName>Stochastic Relative Strength Index</FullName>
+		<ShortDescription>Stochastic Relative Strength Index</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Fast-K Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>5</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Fast-D Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>3</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Fast-D MA</Name>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outFastK</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outFastD</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- TRIX -->
+	<FinancialFunction>
+		<ShortName>TRIX</ShortName>
+		<FullName>1-day Rate-Of-Change (ROC) of a Triple Smooth EMA</FullName>
+		<ShortDescription>1-day Rate-Of-Change (ROC) of a Triple Smooth EMA</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ULTOSC -->
+	<FinancialFunction>
+		<ShortName>ULTOSC</ShortName>
+		<FullName>Ultimate Oscillator</FullName>
+		<ShortDescription>Ultimate Oscillator</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>First Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>7</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Second Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Third Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>28</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- WILLR -->
+	<FinancialFunction>
+		<ShortName>WILLR</ShortName>
+		<FullName>Williams' %R</FullName>
+		<ShortDescription>Williams' %R</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Momentum Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- HT_DCPERIOD -->
+	<FinancialFunction>
+		<ShortName>HT_DCPERIOD</ShortName>
+		<FullName>Hilbert Transform - Dominant Cycle Period</FullName>
+		<ShortDescription>Hilbert Transform - Dominant Cycle Period</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Cycle Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- HT_DCPHASE -->
+	<FinancialFunction>
+		<ShortName>HT_DCPHASE</ShortName>
+		<FullName>Hilbert Transform - Dominant Cycle Phase</FullName>
+		<ShortDescription>Hilbert Transform - Dominant Cycle Phase</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Cycle Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- HT_PHASOR -->
+	<FinancialFunction>
+		<ShortName>HT_PHASOR</ShortName>
+		<FullName>Hilbert Transform - Phasor Components</FullName>
+		<ShortDescription>Hilbert Transform - Phasor Components</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Cycle Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outInPhase</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outQuadrature</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- HT_SINE -->
+	<FinancialFunction>
+		<ShortName>HT_SINE</ShortName>
+		<FullName>Hilbert Transform - SineWave</FullName>
+		<ShortDescription>Hilbert Transform - SineWave</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Cycle Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outSine</Name>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outLeadSine</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- HT_TRENDMODE -->
+	<FinancialFunction>
+		<ShortName>HT_TRENDMODE</ShortName>
+		<FullName>Hilbert Transform - Trend vs Cycle Mode</FullName>
+		<ShortDescription>Hilbert Transform - Trend vs Cycle Mode</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Cycle Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- AD -->
+	<FinancialFunction>
+		<ShortName>AD</ShortName>
+		<FullName>Chaikin A/D Line</FullName>
+		<ShortDescription>Chaikin A/D Line</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Volume Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Volume</Type>
+				<Name>Volume</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ADOSC -->
+	<FinancialFunction>
+		<ShortName>ADOSC</ShortName>
+		<FullName>Chaikin A/D Oscillator</FullName>
+		<ShortDescription>Chaikin A/D Oscillator</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Volume Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Volume</Type>
+				<Name>Volume</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Fast Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>3</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Slow Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>10</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- OBV -->
+	<FinancialFunction>
+		<ShortName>OBV</ShortName>
+		<FullName>On Balance Volume</FullName>
+		<ShortDescription>On Balance Volume</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Volume Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Volume</Type>
+				<Name>Volume</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDL2CROWS -->
+	<FinancialFunction>
+		<ShortName>CDL2CROWS</ShortName>
+		<FullName>Two Crows</FullName>
+		<ShortDescription>Two Crows</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDL3BLACKCROWS -->
+	<FinancialFunction>
+		<ShortName>CDL3BLACKCROWS</ShortName>
+		<FullName>Three Black Crows</FullName>
+		<ShortDescription>Three Black Crows</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDL3INSIDE -->
+	<FinancialFunction>
+		<ShortName>CDL3INSIDE</ShortName>
+		<FullName>Three Inside Up/Down</FullName>
+		<ShortDescription>Three Inside Up/Down</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDL3LINESTRIKE -->
+	<FinancialFunction>
+		<ShortName>CDL3LINESTRIKE</ShortName>
+		<FullName>Three-Line Strike </FullName>
+		<ShortDescription>Three-Line Strike </ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDL3OUTSIDE -->
+	<FinancialFunction>
+		<ShortName>CDL3OUTSIDE</ShortName>
+		<FullName>Three Outside Up/Down</FullName>
+		<ShortDescription>Three Outside Up/Down</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDL3STARSINSOUTH -->
+	<FinancialFunction>
+		<ShortName>CDL3STARSINSOUTH</ShortName>
+		<FullName>Three Stars In The South</FullName>
+		<ShortDescription>Three Stars In The South</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDL3WHITESOLDIERS -->
+	<FinancialFunction>
+		<ShortName>CDL3WHITESOLDIERS</ShortName>
+		<FullName>Three Advancing White Soldiers</FullName>
+		<ShortDescription>Three Advancing White Soldiers</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLABANDONEDBABY -->
+	<FinancialFunction>
+		<ShortName>CDLABANDONEDBABY</ShortName>
+		<FullName>Abandoned Baby</FullName>
+		<ShortDescription>Abandoned Baby</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Penetration</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>0</Precision>
+					<SuggestedStart>0.000000</SuggestedStart>
+					<SuggestedEnd>0.000000</SuggestedEnd>
+					<SuggestedIncrement>0.000000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.300000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLADVANCEBLOCK -->
+	<FinancialFunction>
+		<ShortName>CDLADVANCEBLOCK</ShortName>
+		<FullName>Advance Block</FullName>
+		<ShortDescription>Advance Block</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLBELTHOLD -->
+	<FinancialFunction>
+		<ShortName>CDLBELTHOLD</ShortName>
+		<FullName>Belt-hold</FullName>
+		<ShortDescription>Belt-hold</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLBREAKAWAY -->
+	<FinancialFunction>
+		<ShortName>CDLBREAKAWAY</ShortName>
+		<FullName>Breakaway</FullName>
+		<ShortDescription>Breakaway</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLCLOSINGMARUBOZU -->
+	<FinancialFunction>
+		<ShortName>CDLCLOSINGMARUBOZU</ShortName>
+		<FullName>Closing Marubozu</FullName>
+		<ShortDescription>Closing Marubozu</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLCONCEALBABYSWALL -->
+	<FinancialFunction>
+		<ShortName>CDLCONCEALBABYSWALL</ShortName>
+		<FullName>Concealing Baby Swallow</FullName>
+		<ShortDescription>Concealing Baby Swallow</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLCOUNTERATTACK -->
+	<FinancialFunction>
+		<ShortName>CDLCOUNTERATTACK</ShortName>
+		<FullName>Counterattack</FullName>
+		<ShortDescription>Counterattack</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLDARKCLOUDCOVER -->
+	<FinancialFunction>
+		<ShortName>CDLDARKCLOUDCOVER</ShortName>
+		<FullName>Dark Cloud Cover</FullName>
+		<ShortDescription>Dark Cloud Cover</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Penetration</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>0</Precision>
+					<SuggestedStart>0.000000</SuggestedStart>
+					<SuggestedEnd>0.000000</SuggestedEnd>
+					<SuggestedIncrement>0.000000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.500000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLDOJI -->
+	<FinancialFunction>
+		<ShortName>CDLDOJI</ShortName>
+		<FullName>Doji</FullName>
+		<ShortDescription>Doji</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLDOJISTAR -->
+	<FinancialFunction>
+		<ShortName>CDLDOJISTAR</ShortName>
+		<FullName>Doji Star</FullName>
+		<ShortDescription>Doji Star</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLDRAGONFLYDOJI -->
+	<FinancialFunction>
+		<ShortName>CDLDRAGONFLYDOJI</ShortName>
+		<FullName>Dragonfly Doji</FullName>
+		<ShortDescription>Dragonfly Doji</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLENGULFING -->
+	<FinancialFunction>
+		<ShortName>CDLENGULFING</ShortName>
+		<FullName>Engulfing Pattern</FullName>
+		<ShortDescription>Engulfing Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLEVENINGDOJISTAR -->
+	<FinancialFunction>
+		<ShortName>CDLEVENINGDOJISTAR</ShortName>
+		<FullName>Evening Doji Star</FullName>
+		<ShortDescription>Evening Doji Star</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Penetration</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>0</Precision>
+					<SuggestedStart>0.000000</SuggestedStart>
+					<SuggestedEnd>0.000000</SuggestedEnd>
+					<SuggestedIncrement>0.000000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.300000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLEVENINGSTAR -->
+	<FinancialFunction>
+		<ShortName>CDLEVENINGSTAR</ShortName>
+		<FullName>Evening Star</FullName>
+		<ShortDescription>Evening Star</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Penetration</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>0</Precision>
+					<SuggestedStart>0.000000</SuggestedStart>
+					<SuggestedEnd>0.000000</SuggestedEnd>
+					<SuggestedIncrement>0.000000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.300000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLGAPSIDESIDEWHITE -->
+	<FinancialFunction>
+		<ShortName>CDLGAPSIDESIDEWHITE</ShortName>
+		<FullName>Up/Down-gap side-by-side white lines</FullName>
+		<ShortDescription>Up/Down-gap side-by-side white lines</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLGRAVESTONEDOJI -->
+	<FinancialFunction>
+		<ShortName>CDLGRAVESTONEDOJI</ShortName>
+		<FullName>Gravestone Doji</FullName>
+		<ShortDescription>Gravestone Doji</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLHAMMER -->
+	<FinancialFunction>
+		<ShortName>CDLHAMMER</ShortName>
+		<FullName>Hammer</FullName>
+		<ShortDescription>Hammer</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLHANGINGMAN -->
+	<FinancialFunction>
+		<ShortName>CDLHANGINGMAN</ShortName>
+		<FullName>Hanging Man</FullName>
+		<ShortDescription>Hanging Man</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLHARAMI -->
+	<FinancialFunction>
+		<ShortName>CDLHARAMI</ShortName>
+		<FullName>Harami Pattern</FullName>
+		<ShortDescription>Harami Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLHARAMICROSS -->
+	<FinancialFunction>
+		<ShortName>CDLHARAMICROSS</ShortName>
+		<FullName>Harami Cross Pattern</FullName>
+		<ShortDescription>Harami Cross Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLHIGHWAVE -->
+	<FinancialFunction>
+		<ShortName>CDLHIGHWAVE</ShortName>
+		<FullName>High-Wave Candle</FullName>
+		<ShortDescription>High-Wave Candle</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLHIKKAKE -->
+	<FinancialFunction>
+		<ShortName>CDLHIKKAKE</ShortName>
+		<FullName>Hikkake Pattern</FullName>
+		<ShortDescription>Hikkake Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLHIKKAKEMOD -->
+	<FinancialFunction>
+		<ShortName>CDLHIKKAKEMOD</ShortName>
+		<FullName>Modified Hikkake Pattern</FullName>
+		<ShortDescription>Modified Hikkake Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLHOMINGPIGEON -->
+	<FinancialFunction>
+		<ShortName>CDLHOMINGPIGEON</ShortName>
+		<FullName>Homing Pigeon</FullName>
+		<ShortDescription>Homing Pigeon</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLIDENTICAL3CROWS -->
+	<FinancialFunction>
+		<ShortName>CDLIDENTICAL3CROWS</ShortName>
+		<FullName>Identical Three Crows</FullName>
+		<ShortDescription>Identical Three Crows</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLINNECK -->
+	<FinancialFunction>
+		<ShortName>CDLINNECK</ShortName>
+		<FullName>In-Neck Pattern</FullName>
+		<ShortDescription>In-Neck Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLINVERTEDHAMMER -->
+	<FinancialFunction>
+		<ShortName>CDLINVERTEDHAMMER</ShortName>
+		<FullName>Inverted Hammer</FullName>
+		<ShortDescription>Inverted Hammer</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLKICKING -->
+	<FinancialFunction>
+		<ShortName>CDLKICKING</ShortName>
+		<FullName>Kicking</FullName>
+		<ShortDescription>Kicking</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLKICKINGBYLENGTH -->
+	<FinancialFunction>
+		<ShortName>CDLKICKINGBYLENGTH</ShortName>
+		<FullName>Kicking - bull/bear determined by the longer marubozu</FullName>
+		<ShortDescription>Kicking - bull/bear determined by the longer marubozu</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLLADDERBOTTOM -->
+	<FinancialFunction>
+		<ShortName>CDLLADDERBOTTOM</ShortName>
+		<FullName>Ladder Bottom</FullName>
+		<ShortDescription>Ladder Bottom</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLLONGLEGGEDDOJI -->
+	<FinancialFunction>
+		<ShortName>CDLLONGLEGGEDDOJI</ShortName>
+		<FullName>Long Legged Doji</FullName>
+		<ShortDescription>Long Legged Doji</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLLONGLINE -->
+	<FinancialFunction>
+		<ShortName>CDLLONGLINE</ShortName>
+		<FullName>Long Line Candle</FullName>
+		<ShortDescription>Long Line Candle</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLMARUBOZU -->
+	<FinancialFunction>
+		<ShortName>CDLMARUBOZU</ShortName>
+		<FullName>Marubozu</FullName>
+		<ShortDescription>Marubozu</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLMATHOLD -->
+	<FinancialFunction>
+		<ShortName>CDLMATHOLD</ShortName>
+		<FullName>Mat Hold</FullName>
+		<ShortDescription>Mat Hold</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Penetration</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>0</Precision>
+					<SuggestedStart>0.000000</SuggestedStart>
+					<SuggestedEnd>0.000000</SuggestedEnd>
+					<SuggestedIncrement>0.000000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.500000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLMATCHINGLOW -->
+	<FinancialFunction>
+		<ShortName>CDLMATCHINGLOW</ShortName>
+		<FullName>Matching Low</FullName>
+		<ShortDescription>Matching Low</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLMORNINGDOJISTAR -->
+	<FinancialFunction>
+		<ShortName>CDLMORNINGDOJISTAR</ShortName>
+		<FullName>Morning Doji Star</FullName>
+		<ShortDescription>Morning Doji Star</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Penetration</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>0</Precision>
+					<SuggestedStart>0.000000</SuggestedStart>
+					<SuggestedEnd>0.000000</SuggestedEnd>
+					<SuggestedIncrement>0.000000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.300000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLMORNINGSTAR -->
+	<FinancialFunction>
+		<ShortName>CDLMORNINGSTAR</ShortName>
+		<FullName>Morning Star</FullName>
+		<ShortDescription>Morning Star</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Penetration</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>0.000000</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>0</Precision>
+					<SuggestedStart>0.000000</SuggestedStart>
+					<SuggestedEnd>0.000000</SuggestedEnd>
+					<SuggestedIncrement>0.000000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>0.300000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLONNECK -->
+	<FinancialFunction>
+		<ShortName>CDLONNECK</ShortName>
+		<FullName>On-Neck Pattern</FullName>
+		<ShortDescription>On-Neck Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLPIERCING -->
+	<FinancialFunction>
+		<ShortName>CDLPIERCING</ShortName>
+		<FullName>Piercing Pattern</FullName>
+		<ShortDescription>Piercing Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLRICKSHAWMAN -->
+	<FinancialFunction>
+		<ShortName>CDLRICKSHAWMAN</ShortName>
+		<FullName>Rickshaw Man</FullName>
+		<ShortDescription>Rickshaw Man</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLRISEFALL3METHODS -->
+	<FinancialFunction>
+		<ShortName>CDLRISEFALL3METHODS</ShortName>
+		<FullName>Rising/Falling Three Methods</FullName>
+		<ShortDescription>Rising/Falling Three Methods</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLSEPARATINGLINES -->
+	<FinancialFunction>
+		<ShortName>CDLSEPARATINGLINES</ShortName>
+		<FullName>Separating Lines</FullName>
+		<ShortDescription>Separating Lines</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLSHOOTINGSTAR -->
+	<FinancialFunction>
+		<ShortName>CDLSHOOTINGSTAR</ShortName>
+		<FullName>Shooting Star</FullName>
+		<ShortDescription>Shooting Star</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLSHORTLINE -->
+	<FinancialFunction>
+		<ShortName>CDLSHORTLINE</ShortName>
+		<FullName>Short Line Candle</FullName>
+		<ShortDescription>Short Line Candle</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLSPINNINGTOP -->
+	<FinancialFunction>
+		<ShortName>CDLSPINNINGTOP</ShortName>
+		<FullName>Spinning Top</FullName>
+		<ShortDescription>Spinning Top</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLSTALLEDPATTERN -->
+	<FinancialFunction>
+		<ShortName>CDLSTALLEDPATTERN</ShortName>
+		<FullName>Stalled Pattern</FullName>
+		<ShortDescription>Stalled Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLSTICKSANDWICH -->
+	<FinancialFunction>
+		<ShortName>CDLSTICKSANDWICH</ShortName>
+		<FullName>Stick Sandwich</FullName>
+		<ShortDescription>Stick Sandwich</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLTAKURI -->
+	<FinancialFunction>
+		<ShortName>CDLTAKURI</ShortName>
+		<FullName>Takuri (Dragonfly Doji with very long lower shadow)</FullName>
+		<ShortDescription>Takuri (Dragonfly Doji with very long lower shadow)</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLTASUKIGAP -->
+	<FinancialFunction>
+		<ShortName>CDLTASUKIGAP</ShortName>
+		<FullName>Tasuki Gap</FullName>
+		<ShortDescription>Tasuki Gap</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLTHRUSTING -->
+	<FinancialFunction>
+		<ShortName>CDLTHRUSTING</ShortName>
+		<FullName>Thrusting Pattern</FullName>
+		<ShortDescription>Thrusting Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLTRISTAR -->
+	<FinancialFunction>
+		<ShortName>CDLTRISTAR</ShortName>
+		<FullName>Tristar Pattern</FullName>
+		<ShortDescription>Tristar Pattern</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLUNIQUE3RIVER -->
+	<FinancialFunction>
+		<ShortName>CDLUNIQUE3RIVER</ShortName>
+		<FullName>Unique 3 River</FullName>
+		<ShortDescription>Unique 3 River</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLUPSIDEGAP2CROWS -->
+	<FinancialFunction>
+		<ShortName>CDLUPSIDEGAP2CROWS</ShortName>
+		<FullName>Upside Gap Two Crows</FullName>
+		<ShortDescription>Upside Gap Two Crows</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CDLXSIDEGAP3METHODS -->
+	<FinancialFunction>
+		<ShortName>CDLXSIDEGAP3METHODS</ShortName>
+		<FullName>Upside/Downside Gap Three Methods</FullName>
+		<ShortDescription>Upside/Downside Gap Three Methods</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Pattern Recognition</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- CORREL -->
+	<FinancialFunction>
+		<ShortName>CORREL</ShortName>
+		<FullName>Pearson's Correlation Coefficient (r)</FullName>
+		<ShortDescription>Pearson's Correlation Coefficient (r)</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal0</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal1</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- LINEARREG -->
+	<FinancialFunction>
+		<ShortName>LINEARREG</ShortName>
+		<FullName>Linear Regression</FullName>
+		<ShortDescription>Linear Regression</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- LINEARREG_SLOPE -->
+	<FinancialFunction>
+		<ShortName>LINEARREG_SLOPE</ShortName>
+		<FullName>Linear Regression Slope</FullName>
+		<ShortDescription>Linear Regression Slope</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- LINEARREG_ANGLE -->
+	<FinancialFunction>
+		<ShortName>LINEARREG_ANGLE</ShortName>
+		<FullName>Linear Regression Angle</FullName>
+		<ShortDescription>Linear Regression Angle</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- LINEARREG_INTERCEPT -->
+	<FinancialFunction>
+		<ShortName>LINEARREG_INTERCEPT</ShortName>
+		<FullName>Linear Regression Intercept</FullName>
+		<ShortDescription>Linear Regression Intercept</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- STDDEV -->
+	<FinancialFunction>
+		<ShortName>STDDEV</ShortName>
+		<FullName>Standard Deviation</FullName>
+		<ShortDescription>Standard Deviation</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>5</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Deviations</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>2</Precision>
+					<SuggestedStart>-2.000000</SuggestedStart>
+					<SuggestedEnd>2.000000</SuggestedEnd>
+					<SuggestedIncrement>0.200000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>1.000000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- TSF -->
+	<FinancialFunction>
+		<ShortName>TSF</ShortName>
+		<FullName>Time Series Forecast</FullName>
+		<ShortDescription>Time Series Forecast</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>14</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- VAR -->
+	<FinancialFunction>
+		<ShortName>VAR</ShortName>
+		<FullName>Variance</FullName>
+		<ShortDescription>Variance</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>1</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>5</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Deviations</Name>
+				<Type>Double</Type>
+				<Range>
+					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
+					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Precision>2</Precision>
+					<SuggestedStart>-2.000000</SuggestedStart>
+					<SuggestedEnd>2.000000</SuggestedEnd>
+					<SuggestedIncrement>0.200000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>1.000000</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- AVGPRICE -->
+	<FinancialFunction>
+		<ShortName>AVGPRICE</ShortName>
+		<FullName>Average Price</FullName>
+		<ShortDescription>Average Price</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Price Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Open</Type>
+				<Name>Open</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MEDPRICE -->
+	<FinancialFunction>
+		<ShortName>MEDPRICE</ShortName>
+		<FullName>Median Price</FullName>
+		<ShortDescription>Median Price</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Price Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- TYPPRICE -->
+	<FinancialFunction>
+		<ShortName>TYPPRICE</ShortName>
+		<FullName>Typical Price</FullName>
+		<ShortDescription>Typical Price</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Price Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- WCLPRICE -->
+	<FinancialFunction>
+		<ShortName>WCLPRICE</ShortName>
+		<FullName>Weighted Close Price</FullName>
+		<ShortDescription>Weighted Close Price</ShortDescription>
+		<LongDescription>(null)</LongDescription>
+		<GroupId>Price Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>High</Type>
+				<Name>High</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Low</Type>
+				<Name>Low</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+</FinancialFunctions>
