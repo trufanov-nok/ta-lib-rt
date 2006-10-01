@@ -335,6 +335,7 @@ package Finance::TA;
 *TA_GetInputParameterInfo = *Finance::TAc::TA_GetInputParameterInfo;
 *TA_GetOptInputParameterInfo = *Finance::TAc::TA_GetOptInputParameterInfo;
 *TA_GetOutputParameterInfo = *Finance::TAc::TA_GetOutputParameterInfo;
+*TA_FunctionDescriptionXML = *Finance::TAc::TA_FunctionDescriptionXML;
 
 ############# Class : Finance::TA::TA_RetCodeInfo ##############
 

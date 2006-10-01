@@ -1,31 +1,21 @@
-0.2 (June 2006)
+Version 0.3 (Planned for January 2007)
 
 New Features
 ============
-- Added technical analysis functions:
-    ULTOSC : Ultimate Oscillator
-    NATR   : Normalized Average True Range
-
-- Enhanced JUnit of Java port.
-
-Major Changes
-=============
-- TA-Data is now an independant project (see fidalsoft.org)
-- TA-PM deprecated for lack of participation.
-- .NET Timeseries deprecated for lack of participation.
-- TA-Lib has no dependency anymore (libcurl dependency eliminated).
-
-API Changes
-===========
-- TA_SetInputParamPricePtr() TA_Timestamps parameters removed.
-- TA_Initialize() is now parameterless.
-- New .NET namespage: TicTacTec.TA.Lib
-- New Java namespace: com.tictactec.ta.lib
+- Debian and RPM packaging available.
+- Java JAR packaging available.
+- New TA_FunctionDescription() returns XML description of API.
+- New func_api.xml file generated in root directory of the package.
 
 Fixes
 =====
-Many fix of Java port.
-#1434450: CMO not handling divide by zero
+#1526632 : Fix bug in LINEARREG_ANGLE
+#1544555 : Now do proper divide by zero detection in TA_ADX
+
+Other Changes
+=============
+- func_list.txt moved in root directory of the package.
+
 
 Thanks to all contributors.
 
