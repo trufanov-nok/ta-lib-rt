@@ -5,7 +5,7 @@
 		<ShortName>MAX</ShortName>
 		<FullName>Highest value over a specified period</FullName>
 		<ShortDescription>Highest value over a specified period</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Math Operators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -16,6 +16,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -31,6 +33,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -41,7 +46,7 @@
 		<ShortName>MIN</ShortName>
 		<FullName>Lowest value over a specified period</FullName>
 		<ShortDescription>Lowest value over a specified period</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Math Operators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -52,6 +57,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -67,6 +74,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -77,7 +87,7 @@
 		<ShortName>SUM</ShortName>
 		<FullName>Summation</FullName>
 		<ShortDescription>Summation</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Math Operators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -88,6 +98,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -103,6 +115,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -113,7 +128,7 @@
 		<ShortName>BBANDS</ShortName>
 		<FullName>Bollinger Bands</FullName>
 		<ShortDescription>Bollinger Bands</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -124,6 +139,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -136,10 +153,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Deviations up</Name>
+				<ShortDescription>Deviation multiplier for upper band</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -149,10 +168,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Deviations down</Name>
+				<ShortDescription>Deviation multiplier for lower band</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -162,6 +183,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>MA Type</Name>
+				<ShortDescription>Type of Moving Average</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
@@ -170,14 +193,23 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outRealUpperBand</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outRealMiddleBand</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outRealLowerBand</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -188,7 +220,7 @@
 		<ShortName>DEMA</ShortName>
 		<FullName>Double Exponential Moving Average</FullName>
 		<ShortDescription>Double Exponential Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -199,6 +231,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -214,6 +248,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -224,7 +261,7 @@
 		<ShortName>EMA</ShortName>
 		<FullName>Exponential Moving Average</FullName>
 		<ShortDescription>Exponential Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -235,6 +272,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -250,6 +289,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -260,7 +302,7 @@
 		<ShortName>HT_TRENDLINE</ShortName>
 		<FullName>Hilbert Transform - Instantaneous Trendline</FullName>
 		<ShortDescription>Hilbert Transform - Instantaneous Trendline</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -272,6 +314,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -282,7 +327,7 @@
 		<ShortName>KAMA</ShortName>
 		<FullName>Kaufman Adaptive Moving Average</FullName>
 		<ShortDescription>Kaufman Adaptive Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -293,6 +338,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -308,6 +355,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -318,7 +368,7 @@
 		<ShortName>MA</ShortName>
 		<FullName>All Moving Average</FullName>
 		<ShortDescription>All Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -329,6 +379,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -341,6 +393,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>MA Type</Name>
+				<ShortDescription>Type of Moving Average</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
@@ -349,6 +403,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -359,7 +416,7 @@
 		<ShortName>MAMA</ShortName>
 		<FullName>MESA Adaptive Moving Average</FullName>
 		<ShortDescription>MESA Adaptive Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -370,6 +427,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Fast Limit</Name>
+				<ShortDescription>Upper limit use in the adaptive algorithm</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.010000</Minimum>
@@ -383,6 +442,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow Limit</Name>
+				<ShortDescription>Lower limit use in the adaptive algorithm</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.010000</Minimum>
@@ -399,10 +460,16 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMAMA</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outFAMA</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -413,7 +480,7 @@
 		<ShortName>MIDPRICE</ShortName>
 		<FullName>Midpoint Price over period</FullName>
 		<ShortDescription>Midpoint Price over period</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -428,6 +495,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -443,6 +512,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -453,7 +525,7 @@
 		<ShortName>MIDPOINT</ShortName>
 		<FullName>MidPoint over period</FullName>
 		<ShortDescription>MidPoint over period</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -464,6 +536,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -479,6 +553,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -489,7 +566,7 @@
 		<ShortName>SAR</ShortName>
 		<FullName>Parabolic SAR</FullName>
 		<ShortDescription>Parabolic SAR</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -504,10 +581,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Acceleration Factor</Name>
+				<ShortDescription>Acceleration Factor used up to the Maximum value</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -517,10 +596,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Maximum</Name>
+				<ShortDescription>Acceleration Factor Maximum value</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -533,6 +614,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -543,7 +627,7 @@
 		<ShortName>SAREXT</ShortName>
 		<FullName>Parabolic SAR - Extended</FullName>
 		<ShortDescription>Parabolic SAR - Extended</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -558,10 +642,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Start Value</Name>
+				<ShortDescription>Start value and direction. 0 for Auto, &gt;0 for Long, &lt;0 for Short</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -571,10 +657,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Offset on Reverse</Name>
+				<ShortDescription>Percent offset added/removed to initial stop on short/long reversal</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.150000</SuggestedEnd>
@@ -584,10 +672,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Init Long</Name>
+				<ShortDescription>Acceleration Factor initial value for the Long direction</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.190000</SuggestedEnd>
@@ -597,10 +687,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Long</Name>
+				<ShortDescription>Acceleration Factor for the Long direction</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -610,10 +702,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Max Long</Name>
+				<ShortDescription>Acceleration Factor maximum value for the Long direction</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -623,10 +717,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Init Short</Name>
+				<ShortDescription>Acceleration Factor initial value for the Short direction</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.190000</SuggestedEnd>
@@ -636,10 +732,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Short</Name>
+				<ShortDescription>Acceleration Factor for the Short direction</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -649,10 +747,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Max Short</Name>
+				<ShortDescription>Acceleration Factor maximum value for the Short direction</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -665,6 +765,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -675,7 +778,7 @@
 		<ShortName>SMA</ShortName>
 		<FullName>Simple Moving Average</FullName>
 		<ShortDescription>Simple Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -686,6 +789,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -701,6 +806,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -711,7 +819,7 @@
 		<ShortName>T3</ShortName>
 		<FullName>Triple Exponential Moving Average (T3)</FullName>
 		<ShortDescription>Triple Exponential Moving Average (T3)</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -722,6 +830,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -734,6 +844,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Volume Factor</Name>
+				<ShortDescription>Volume Factor</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
@@ -750,6 +862,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -760,7 +875,7 @@
 		<ShortName>TEMA</ShortName>
 		<FullName>Triple Exponential Moving Average</FullName>
 		<ShortDescription>Triple Exponential Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -771,6 +886,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -786,6 +903,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -796,7 +916,7 @@
 		<ShortName>TRIMA</ShortName>
 		<FullName>Triangular Moving Average</FullName>
 		<ShortDescription>Triangular Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -807,6 +927,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -822,6 +944,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -832,7 +957,7 @@
 		<ShortName>WMA</ShortName>
 		<FullName>Weighted Moving Average</FullName>
 		<ShortDescription>Weighted Moving Average</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -843,6 +968,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -858,6 +985,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -868,7 +998,7 @@
 		<ShortName>ATR</ShortName>
 		<FullName>Average True Range</FullName>
 		<ShortDescription>Average True Range</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Volatility Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -887,6 +1017,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -902,6 +1034,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -912,7 +1047,7 @@
 		<ShortName>NATR</ShortName>
 		<FullName>Normalized Average True Range</FullName>
 		<ShortDescription>Normalized Average True Range</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Volatility Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -931,6 +1066,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -946,6 +1083,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -956,7 +1096,7 @@
 		<ShortName>TRANGE</ShortName>
 		<FullName>True Range</FullName>
 		<ShortDescription>True Range</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Volatility Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -976,6 +1116,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -986,7 +1129,7 @@
 		<ShortName>ADX</ShortName>
 		<FullName>Average Directional Movement Index</FullName>
 		<ShortDescription>Average Directional Movement Index</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1005,6 +1148,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1020,6 +1165,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1030,7 +1178,7 @@
 		<ShortName>ADXR</ShortName>
 		<FullName>Average Directional Movement Index Rating</FullName>
 		<ShortDescription>Average Directional Movement Index Rating</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1049,6 +1197,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1064,6 +1214,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1074,7 +1227,7 @@
 		<ShortName>APO</ShortName>
 		<FullName>Absolute Price Oscillator</FullName>
 		<ShortDescription>Absolute Price Oscillator</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1085,6 +1238,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Fast Period</Name>
+				<ShortDescription>Number of period for the fast MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1097,6 +1252,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow Period</Name>
+				<ShortDescription>Number of period for the slow MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1109,6 +1266,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>MA Type</Name>
+				<ShortDescription>Type of Moving Average</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
@@ -1117,6 +1276,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1127,7 +1289,7 @@
 		<ShortName>AROON</ShortName>
 		<FullName>Aroon</FullName>
 		<ShortDescription>Aroon</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1142,6 +1304,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1157,10 +1321,16 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outAroonDown</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outAroonUp</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1171,7 +1341,7 @@
 		<ShortName>AROONOSC</ShortName>
 		<FullName>Aroon Oscillator</FullName>
 		<ShortDescription>Aroon Oscillator</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1186,6 +1356,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1201,6 +1373,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1211,7 +1386,7 @@
 		<ShortName>BOP</ShortName>
 		<FullName>Balance Of Power</FullName>
 		<ShortDescription>Balance Of Power</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1235,6 +1410,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1245,7 +1423,7 @@
 		<ShortName>CCI</ShortName>
 		<FullName>Commodity Channel Index</FullName>
 		<ShortDescription>Commodity Channel Index</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1264,6 +1442,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1279,6 +1459,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1289,7 +1472,7 @@
 		<ShortName>CMO</ShortName>
 		<FullName>Chande Momentum Oscillator</FullName>
 		<ShortDescription>Chande Momentum Oscillator</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1300,6 +1483,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1315,6 +1500,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1325,7 +1513,7 @@
 		<ShortName>DX</ShortName>
 		<FullName>Directional Movement Index</FullName>
 		<ShortDescription>Directional Movement Index</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1344,6 +1532,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1359,6 +1549,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1369,7 +1562,7 @@
 		<ShortName>MACD</ShortName>
 		<FullName>Moving Average Convergence/Divergence</FullName>
 		<ShortDescription>Moving Average Convergence/Divergence</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1380,6 +1573,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Fast Period</Name>
+				<ShortDescription>Number of period for the fast MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1392,6 +1587,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow Period</Name>
+				<ShortDescription>Number of period for the slow MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1404,6 +1601,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Signal Period</Name>
+				<ShortDescription>Smoothing for the signal line (nb of period)</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1419,14 +1618,23 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACD</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACDSignal</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACDHist</Name>
+				<Flags>
+					<Flag>Histogram</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1437,7 +1645,7 @@
 		<ShortName>MACDEXT</ShortName>
 		<FullName>MACD with controllable MA type</FullName>
 		<ShortDescription>MACD with controllable MA type</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1448,6 +1656,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Fast Period</Name>
+				<ShortDescription>Number of period for the fast MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1460,11 +1670,15 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Fast MA</Name>
+				<ShortDescription>Type of Moving Average for fast MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow Period</Name>
+				<ShortDescription>Number of period for the slow MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1477,11 +1691,15 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow MA</Name>
+				<ShortDescription>Type of Moving Average for slow MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Signal Period</Name>
+				<ShortDescription>Smoothing for the signal line (nb of period)</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1494,6 +1712,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Signal MA</Name>
+				<ShortDescription>Type of Moving Average for signal line</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
@@ -1502,14 +1722,23 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACD</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACDSignal</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACDHist</Name>
+				<Flags>
+					<Flag>Histogram</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1520,7 +1749,7 @@
 		<ShortName>MACDFIX</ShortName>
 		<FullName>Moving Average Convergence/Divergence Fix 12/26</FullName>
 		<ShortDescription>Moving Average Convergence/Divergence Fix 12/26</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1531,6 +1760,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Signal Period</Name>
+				<ShortDescription>Smoothing for the signal line (nb of period)</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1546,14 +1777,23 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACD</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACDSignal</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outMACDHist</Name>
+				<Flags>
+					<Flag>Histogram</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1564,7 +1804,7 @@
 		<ShortName>MFI</ShortName>
 		<FullName>Money Flow Index</FullName>
 		<ShortDescription>Money Flow Index</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1587,6 +1827,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1602,6 +1844,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1612,7 +1857,7 @@
 		<ShortName>MINUS_DI</ShortName>
 		<FullName>Minus Directional Indicator</FullName>
 		<ShortDescription>Minus Directional Indicator</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1631,6 +1876,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1646,6 +1893,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1656,7 +1906,7 @@
 		<ShortName>MINUS_DM</ShortName>
 		<FullName>Minus Directional Movement</FullName>
 		<ShortDescription>Minus Directional Movement</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1671,6 +1921,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1686,6 +1938,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1696,7 +1951,7 @@
 		<ShortName>MOM</ShortName>
 		<FullName>Momentum</FullName>
 		<ShortDescription>Momentum</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1707,6 +1962,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1722,6 +1979,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1732,7 +1992,7 @@
 		<ShortName>PPO</ShortName>
 		<FullName>Percentage Price Oscillator</FullName>
 		<ShortDescription>Percentage Price Oscillator</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1743,6 +2003,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Fast Period</Name>
+				<ShortDescription>Number of period for the fast MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1755,6 +2017,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow Period</Name>
+				<ShortDescription>Number of period for the slow MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -1767,6 +2031,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>MA Type</Name>
+				<ShortDescription>Type of Moving Average</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
@@ -1775,6 +2041,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1785,7 +2054,7 @@
 		<ShortName>PLUS_DI</ShortName>
 		<FullName>Plus Directional Indicator</FullName>
 		<ShortDescription>Plus Directional Indicator</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1804,6 +2073,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1819,6 +2090,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1829,7 +2103,7 @@
 		<ShortName>PLUS_DM</ShortName>
 		<FullName>Plus Directional Movement</FullName>
 		<ShortDescription>Plus Directional Movement</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1844,6 +2118,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1859,6 +2135,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1869,7 +2148,7 @@
 		<ShortName>ROC</ShortName>
 		<FullName>Rate of change : ((price/prevPrice)-1)*100</FullName>
 		<ShortDescription>Rate of change : ((price/prevPrice)-1)*100</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1880,6 +2159,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1895,6 +2176,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1905,7 +2189,7 @@
 		<ShortName>ROCP</ShortName>
 		<FullName>Rate of change Percentage: (price-prevPrice)/prevPrice</FullName>
 		<ShortDescription>Rate of change Percentage: (price-prevPrice)/prevPrice</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1916,6 +2200,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1931,6 +2217,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1941,7 +2230,7 @@
 		<ShortName>ROCR</ShortName>
 		<FullName>Rate of change ratio: (price/prevPrice)</FullName>
 		<ShortDescription>Rate of change ratio: (price/prevPrice)</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1952,6 +2241,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -1967,6 +2258,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -1977,7 +2271,7 @@
 		<ShortName>ROCR100</ShortName>
 		<FullName>Rate of change ratio 100 scale: (price/prevPrice)*100</FullName>
 		<ShortDescription>Rate of change ratio 100 scale: (price/prevPrice)*100</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -1988,6 +2282,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2003,6 +2299,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2013,7 +2312,7 @@
 		<ShortName>RSI</ShortName>
 		<FullName>Relative Strength Index</FullName>
 		<ShortDescription>Relative Strength Index</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2024,6 +2323,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -2039,6 +2340,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2049,7 +2353,7 @@
 		<ShortName>STOCH</ShortName>
 		<FullName>Stochastic</FullName>
 		<ShortDescription>Stochastic</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2068,6 +2372,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Fast-K Period</Name>
+				<ShortDescription>Time period for building the Fast-K line</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2080,6 +2386,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow-K Period</Name>
+				<ShortDescription>Smoothing for making the Slow-K line. Usually set to 3</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2092,11 +2400,15 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow-K MA</Name>
+				<ShortDescription>Type of Moving Average for Slow-K</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow-D Period</Name>
+				<ShortDescription>Smoothing for making the Slow-D line</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2109,6 +2421,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow-D MA</Name>
+				<ShortDescription>Type of Moving Average for Slow-D</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
@@ -2117,10 +2431,16 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outSlowK</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outSlowD</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2131,7 +2451,7 @@
 		<ShortName>STOCHF</ShortName>
 		<FullName>Stochastic Fast</FullName>
 		<ShortDescription>Stochastic Fast</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2150,6 +2470,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Fast-K Period</Name>
+				<ShortDescription>Time period for building the Fast-K line</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2162,6 +2484,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Fast-D Period</Name>
+				<ShortDescription>Smoothing for making the Fast-D line. Usually set to 3</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2174,6 +2498,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Fast-D MA</Name>
+				<ShortDescription>Type of Moving Average for Fast-D</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
@@ -2182,10 +2508,16 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outFastK</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outFastD</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2196,7 +2528,7 @@
 		<ShortName>STOCHRSI</ShortName>
 		<FullName>Stochastic Relative Strength Index</FullName>
 		<ShortDescription>Stochastic Relative Strength Index</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2207,6 +2539,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -2219,6 +2553,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Fast-K Period</Name>
+				<ShortDescription>Time period for building the Fast-K line</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2231,6 +2567,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Fast-D Period</Name>
+				<ShortDescription>Smoothing for making the Fast-D line. Usually set to 3</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2243,6 +2581,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Fast-D MA</Name>
+				<ShortDescription>Type of Moving Average for Fast-D</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>MA Type</Type>
 				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
@@ -2251,10 +2591,16 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outFastK</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outFastD</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2265,7 +2611,7 @@
 		<ShortName>TRIX</ShortName>
 		<FullName>1-day Rate-Of-Change (ROC) of a Triple Smooth EMA</FullName>
 		<ShortDescription>1-day Rate-Of-Change (ROC) of a Triple Smooth EMA</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2276,6 +2622,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2291,6 +2639,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2301,7 +2652,7 @@
 		<ShortName>ULTOSC</ShortName>
 		<FullName>Ultimate Oscillator</FullName>
 		<ShortDescription>Ultimate Oscillator</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2320,6 +2671,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>First Period</Name>
+				<ShortDescription>Number of bars for 1st period.</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2332,6 +2685,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Second Period</Name>
+				<ShortDescription>Number of bars fro 2nd period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2344,6 +2699,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Third Period</Name>
+				<ShortDescription>Number of bars for 3rd period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -2359,6 +2716,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2368,8 +2728,8 @@
 	<FinancialFunction>
 		<ShortName>WILLR</ShortName>
 		<FullName>Williams' %R</FullName>
-		<ShortDescription>Williams' %R</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<ShortDescription>Williams&apos; %R</ShortDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Momentum Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2388,6 +2748,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -2403,6 +2765,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2413,7 +2778,7 @@
 		<ShortName>HT_DCPERIOD</ShortName>
 		<FullName>Hilbert Transform - Dominant Cycle Period</FullName>
 		<ShortDescription>Hilbert Transform - Dominant Cycle Period</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Cycle Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2425,6 +2790,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2435,7 +2803,7 @@
 		<ShortName>HT_DCPHASE</ShortName>
 		<FullName>Hilbert Transform - Dominant Cycle Phase</FullName>
 		<ShortDescription>Hilbert Transform - Dominant Cycle Phase</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Cycle Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2447,6 +2815,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2457,7 +2828,7 @@
 		<ShortName>HT_PHASOR</ShortName>
 		<FullName>Hilbert Transform - Phasor Components</FullName>
 		<ShortDescription>Hilbert Transform - Phasor Components</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Cycle Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2469,10 +2840,16 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outInPhase</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outQuadrature</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2483,7 +2860,7 @@
 		<ShortName>HT_SINE</ShortName>
 		<FullName>Hilbert Transform - SineWave</FullName>
 		<ShortDescription>Hilbert Transform - SineWave</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Cycle Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2495,10 +2872,16 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outSine</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outLeadSine</Name>
+				<Flags>
+					<Flag>Dashed Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2509,7 +2892,7 @@
 		<ShortName>HT_TRENDMODE</ShortName>
 		<FullName>Hilbert Transform - Trend vs Cycle Mode</FullName>
 		<ShortDescription>Hilbert Transform - Trend vs Cycle Mode</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Cycle Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2521,6 +2904,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2531,7 +2917,7 @@
 		<ShortName>AD</ShortName>
 		<FullName>Chaikin A/D Line</FullName>
 		<ShortDescription>Chaikin A/D Line</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Volume Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2555,6 +2941,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2565,7 +2954,7 @@
 		<ShortName>ADOSC</ShortName>
 		<FullName>Chaikin A/D Oscillator</FullName>
 		<ShortDescription>Chaikin A/D Oscillator</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Volume Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2588,6 +2977,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Fast Period</Name>
+				<ShortDescription>Number of period for the fast MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -2600,6 +2991,8 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow Period</Name>
+				<ShortDescription>Number of period for the slow MA</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -2615,6 +3008,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2625,7 +3021,7 @@
 		<ShortName>OBV</ShortName>
 		<FullName>On Balance Volume</FullName>
 		<ShortDescription>On Balance Volume</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Volume Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2641,6 +3037,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2651,7 +3050,7 @@
 		<ShortName>CDL2CROWS</ShortName>
 		<FullName>Two Crows</FullName>
 		<ShortDescription>Two Crows</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2675,6 +3074,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2685,7 +3087,7 @@
 		<ShortName>CDL3BLACKCROWS</ShortName>
 		<FullName>Three Black Crows</FullName>
 		<ShortDescription>Three Black Crows</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2709,6 +3111,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2719,7 +3124,7 @@
 		<ShortName>CDL3INSIDE</ShortName>
 		<FullName>Three Inside Up/Down</FullName>
 		<ShortDescription>Three Inside Up/Down</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2743,6 +3148,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2753,7 +3161,7 @@
 		<ShortName>CDL3LINESTRIKE</ShortName>
 		<FullName>Three-Line Strike </FullName>
 		<ShortDescription>Three-Line Strike </ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2777,6 +3185,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2787,7 +3198,7 @@
 		<ShortName>CDL3OUTSIDE</ShortName>
 		<FullName>Three Outside Up/Down</FullName>
 		<ShortDescription>Three Outside Up/Down</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2811,6 +3222,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2821,7 +3235,7 @@
 		<ShortName>CDL3STARSINSOUTH</ShortName>
 		<FullName>Three Stars In The South</FullName>
 		<ShortDescription>Three Stars In The South</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2845,6 +3259,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2855,7 +3272,7 @@
 		<ShortName>CDL3WHITESOLDIERS</ShortName>
 		<FullName>Three Advancing White Soldiers</FullName>
 		<ShortDescription>Three Advancing White Soldiers</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2879,6 +3296,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2889,7 +3309,7 @@
 		<ShortName>CDLABANDONEDBABY</ShortName>
 		<FullName>Abandoned Baby</FullName>
 		<ShortDescription>Abandoned Baby</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2912,10 +3332,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Penetration</Name>
+				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -2928,6 +3350,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2938,7 +3363,7 @@
 		<ShortName>CDLADVANCEBLOCK</ShortName>
 		<FullName>Advance Block</FullName>
 		<ShortDescription>Advance Block</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2962,6 +3387,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -2972,7 +3400,7 @@
 		<ShortName>CDLBELTHOLD</ShortName>
 		<FullName>Belt-hold</FullName>
 		<ShortDescription>Belt-hold</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -2996,6 +3424,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3006,7 +3437,7 @@
 		<ShortName>CDLBREAKAWAY</ShortName>
 		<FullName>Breakaway</FullName>
 		<ShortDescription>Breakaway</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3030,6 +3461,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3040,7 +3474,7 @@
 		<ShortName>CDLCLOSINGMARUBOZU</ShortName>
 		<FullName>Closing Marubozu</FullName>
 		<ShortDescription>Closing Marubozu</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3064,6 +3498,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3074,7 +3511,7 @@
 		<ShortName>CDLCONCEALBABYSWALL</ShortName>
 		<FullName>Concealing Baby Swallow</FullName>
 		<ShortDescription>Concealing Baby Swallow</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3098,6 +3535,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3108,7 +3548,7 @@
 		<ShortName>CDLCOUNTERATTACK</ShortName>
 		<FullName>Counterattack</FullName>
 		<ShortDescription>Counterattack</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3132,6 +3572,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3142,7 +3585,7 @@
 		<ShortName>CDLDARKCLOUDCOVER</ShortName>
 		<FullName>Dark Cloud Cover</FullName>
 		<ShortDescription>Dark Cloud Cover</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3165,10 +3608,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Penetration</Name>
+				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -3181,6 +3626,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3191,7 +3639,7 @@
 		<ShortName>CDLDOJI</ShortName>
 		<FullName>Doji</FullName>
 		<ShortDescription>Doji</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3215,6 +3663,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3225,7 +3676,7 @@
 		<ShortName>CDLDOJISTAR</ShortName>
 		<FullName>Doji Star</FullName>
 		<ShortDescription>Doji Star</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3249,6 +3700,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3259,7 +3713,7 @@
 		<ShortName>CDLDRAGONFLYDOJI</ShortName>
 		<FullName>Dragonfly Doji</FullName>
 		<ShortDescription>Dragonfly Doji</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3283,6 +3737,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3293,7 +3750,7 @@
 		<ShortName>CDLENGULFING</ShortName>
 		<FullName>Engulfing Pattern</FullName>
 		<ShortDescription>Engulfing Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3317,6 +3774,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3327,7 +3787,7 @@
 		<ShortName>CDLEVENINGDOJISTAR</ShortName>
 		<FullName>Evening Doji Star</FullName>
 		<ShortDescription>Evening Doji Star</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3350,10 +3810,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Penetration</Name>
+				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -3366,6 +3828,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3376,7 +3841,7 @@
 		<ShortName>CDLEVENINGSTAR</ShortName>
 		<FullName>Evening Star</FullName>
 		<ShortDescription>Evening Star</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3399,10 +3864,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Penetration</Name>
+				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -3415,6 +3882,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3425,7 +3895,7 @@
 		<ShortName>CDLGAPSIDESIDEWHITE</ShortName>
 		<FullName>Up/Down-gap side-by-side white lines</FullName>
 		<ShortDescription>Up/Down-gap side-by-side white lines</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3449,6 +3919,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3459,7 +3932,7 @@
 		<ShortName>CDLGRAVESTONEDOJI</ShortName>
 		<FullName>Gravestone Doji</FullName>
 		<ShortDescription>Gravestone Doji</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3483,6 +3956,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3493,7 +3969,7 @@
 		<ShortName>CDLHAMMER</ShortName>
 		<FullName>Hammer</FullName>
 		<ShortDescription>Hammer</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3517,6 +3993,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3527,7 +4006,7 @@
 		<ShortName>CDLHANGINGMAN</ShortName>
 		<FullName>Hanging Man</FullName>
 		<ShortDescription>Hanging Man</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3551,6 +4030,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3561,7 +4043,7 @@
 		<ShortName>CDLHARAMI</ShortName>
 		<FullName>Harami Pattern</FullName>
 		<ShortDescription>Harami Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3585,6 +4067,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3595,7 +4080,7 @@
 		<ShortName>CDLHARAMICROSS</ShortName>
 		<FullName>Harami Cross Pattern</FullName>
 		<ShortDescription>Harami Cross Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3619,6 +4104,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3629,7 +4117,7 @@
 		<ShortName>CDLHIGHWAVE</ShortName>
 		<FullName>High-Wave Candle</FullName>
 		<ShortDescription>High-Wave Candle</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3653,6 +4141,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3663,7 +4154,7 @@
 		<ShortName>CDLHIKKAKE</ShortName>
 		<FullName>Hikkake Pattern</FullName>
 		<ShortDescription>Hikkake Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3687,6 +4178,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3697,7 +4191,7 @@
 		<ShortName>CDLHIKKAKEMOD</ShortName>
 		<FullName>Modified Hikkake Pattern</FullName>
 		<ShortDescription>Modified Hikkake Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3721,6 +4215,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3731,7 +4228,7 @@
 		<ShortName>CDLHOMINGPIGEON</ShortName>
 		<FullName>Homing Pigeon</FullName>
 		<ShortDescription>Homing Pigeon</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3755,6 +4252,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3765,7 +4265,7 @@
 		<ShortName>CDLIDENTICAL3CROWS</ShortName>
 		<FullName>Identical Three Crows</FullName>
 		<ShortDescription>Identical Three Crows</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3789,6 +4289,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3799,7 +4302,7 @@
 		<ShortName>CDLINNECK</ShortName>
 		<FullName>In-Neck Pattern</FullName>
 		<ShortDescription>In-Neck Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3823,6 +4326,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3833,7 +4339,7 @@
 		<ShortName>CDLINVERTEDHAMMER</ShortName>
 		<FullName>Inverted Hammer</FullName>
 		<ShortDescription>Inverted Hammer</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3857,6 +4363,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3867,7 +4376,7 @@
 		<ShortName>CDLKICKING</ShortName>
 		<FullName>Kicking</FullName>
 		<ShortDescription>Kicking</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3891,6 +4400,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3901,7 +4413,7 @@
 		<ShortName>CDLKICKINGBYLENGTH</ShortName>
 		<FullName>Kicking - bull/bear determined by the longer marubozu</FullName>
 		<ShortDescription>Kicking - bull/bear determined by the longer marubozu</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3925,6 +4437,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3935,7 +4450,7 @@
 		<ShortName>CDLLADDERBOTTOM</ShortName>
 		<FullName>Ladder Bottom</FullName>
 		<ShortDescription>Ladder Bottom</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3959,6 +4474,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -3969,7 +4487,7 @@
 		<ShortName>CDLLONGLEGGEDDOJI</ShortName>
 		<FullName>Long Legged Doji</FullName>
 		<ShortDescription>Long Legged Doji</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3993,6 +4511,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4003,7 +4524,7 @@
 		<ShortName>CDLLONGLINE</ShortName>
 		<FullName>Long Line Candle</FullName>
 		<ShortDescription>Long Line Candle</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4027,6 +4548,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4037,7 +4561,7 @@
 		<ShortName>CDLMARUBOZU</ShortName>
 		<FullName>Marubozu</FullName>
 		<ShortDescription>Marubozu</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4061,6 +4585,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4071,7 +4598,7 @@
 		<ShortName>CDLMATHOLD</ShortName>
 		<FullName>Mat Hold</FullName>
 		<ShortDescription>Mat Hold</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4094,10 +4621,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Penetration</Name>
+				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -4110,6 +4639,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4120,7 +4652,7 @@
 		<ShortName>CDLMATCHINGLOW</ShortName>
 		<FullName>Matching Low</FullName>
 		<ShortDescription>Matching Low</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4144,6 +4676,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4154,7 +4689,7 @@
 		<ShortName>CDLMORNINGDOJISTAR</ShortName>
 		<FullName>Morning Doji Star</FullName>
 		<ShortDescription>Morning Doji Star</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4177,10 +4712,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Penetration</Name>
+				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -4193,6 +4730,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4203,7 +4743,7 @@
 		<ShortName>CDLMORNINGSTAR</ShortName>
 		<FullName>Morning Star</FullName>
 		<ShortDescription>Morning Star</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4226,10 +4766,12 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Penetration</Name>
+				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -4242,6 +4784,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4252,7 +4797,7 @@
 		<ShortName>CDLONNECK</ShortName>
 		<FullName>On-Neck Pattern</FullName>
 		<ShortDescription>On-Neck Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4276,6 +4821,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4286,7 +4834,7 @@
 		<ShortName>CDLPIERCING</ShortName>
 		<FullName>Piercing Pattern</FullName>
 		<ShortDescription>Piercing Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4310,6 +4858,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4320,7 +4871,7 @@
 		<ShortName>CDLRICKSHAWMAN</ShortName>
 		<FullName>Rickshaw Man</FullName>
 		<ShortDescription>Rickshaw Man</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4344,6 +4895,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4354,7 +4908,7 @@
 		<ShortName>CDLRISEFALL3METHODS</ShortName>
 		<FullName>Rising/Falling Three Methods</FullName>
 		<ShortDescription>Rising/Falling Three Methods</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4378,6 +4932,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4388,7 +4945,7 @@
 		<ShortName>CDLSEPARATINGLINES</ShortName>
 		<FullName>Separating Lines</FullName>
 		<ShortDescription>Separating Lines</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4412,6 +4969,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4422,7 +4982,7 @@
 		<ShortName>CDLSHOOTINGSTAR</ShortName>
 		<FullName>Shooting Star</FullName>
 		<ShortDescription>Shooting Star</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4446,6 +5006,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4456,7 +5019,7 @@
 		<ShortName>CDLSHORTLINE</ShortName>
 		<FullName>Short Line Candle</FullName>
 		<ShortDescription>Short Line Candle</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4480,6 +5043,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4490,7 +5056,7 @@
 		<ShortName>CDLSPINNINGTOP</ShortName>
 		<FullName>Spinning Top</FullName>
 		<ShortDescription>Spinning Top</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4514,6 +5080,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4524,7 +5093,7 @@
 		<ShortName>CDLSTALLEDPATTERN</ShortName>
 		<FullName>Stalled Pattern</FullName>
 		<ShortDescription>Stalled Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4548,6 +5117,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4558,7 +5130,7 @@
 		<ShortName>CDLSTICKSANDWICH</ShortName>
 		<FullName>Stick Sandwich</FullName>
 		<ShortDescription>Stick Sandwich</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4582,6 +5154,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4592,7 +5167,7 @@
 		<ShortName>CDLTAKURI</ShortName>
 		<FullName>Takuri (Dragonfly Doji with very long lower shadow)</FullName>
 		<ShortDescription>Takuri (Dragonfly Doji with very long lower shadow)</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4616,6 +5191,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4626,7 +5204,7 @@
 		<ShortName>CDLTASUKIGAP</ShortName>
 		<FullName>Tasuki Gap</FullName>
 		<ShortDescription>Tasuki Gap</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4650,6 +5228,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4660,7 +5241,7 @@
 		<ShortName>CDLTHRUSTING</ShortName>
 		<FullName>Thrusting Pattern</FullName>
 		<ShortDescription>Thrusting Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4684,6 +5265,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4694,7 +5278,7 @@
 		<ShortName>CDLTRISTAR</ShortName>
 		<FullName>Tristar Pattern</FullName>
 		<ShortDescription>Tristar Pattern</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4718,6 +5302,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4728,7 +5315,7 @@
 		<ShortName>CDLUNIQUE3RIVER</ShortName>
 		<FullName>Unique 3 River</FullName>
 		<ShortDescription>Unique 3 River</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4752,6 +5339,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4762,7 +5352,7 @@
 		<ShortName>CDLUPSIDEGAP2CROWS</ShortName>
 		<FullName>Upside Gap Two Crows</FullName>
 		<ShortDescription>Upside Gap Two Crows</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4786,6 +5376,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4796,7 +5389,7 @@
 		<ShortName>CDLXSIDEGAP3METHODS</ShortName>
 		<FullName>Upside/Downside Gap Three Methods</FullName>
 		<ShortDescription>Upside/Downside Gap Three Methods</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Pattern Recognition</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4820,6 +5413,9 @@
 			<OutputArgument>
 				<Type>Integer Array</Type>
 				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4829,8 +5425,8 @@
 	<FinancialFunction>
 		<ShortName>CORREL</ShortName>
 		<FullName>Pearson's Correlation Coefficient (r)</FullName>
-		<ShortDescription>Pearson's Correlation Coefficient (r)</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<ShortDescription>Pearson&apos;s Correlation Coefficient (r)</ShortDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Statistic Functions</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4845,6 +5441,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -4860,6 +5458,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4870,7 +5471,7 @@
 		<ShortName>LINEARREG</ShortName>
 		<FullName>Linear Regression</FullName>
 		<ShortDescription>Linear Regression</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Statistic Functions</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4881,6 +5482,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -4896,6 +5499,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4906,7 +5512,7 @@
 		<ShortName>LINEARREG_SLOPE</ShortName>
 		<FullName>Linear Regression Slope</FullName>
 		<ShortDescription>Linear Regression Slope</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Statistic Functions</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4917,6 +5523,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -4932,6 +5540,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4942,7 +5553,7 @@
 		<ShortName>LINEARREG_ANGLE</ShortName>
 		<FullName>Linear Regression Angle</FullName>
 		<ShortDescription>Linear Regression Angle</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Statistic Functions</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4953,6 +5564,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -4968,6 +5581,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -4978,7 +5594,7 @@
 		<ShortName>LINEARREG_INTERCEPT</ShortName>
 		<FullName>Linear Regression Intercept</FullName>
 		<ShortDescription>Linear Regression Intercept</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Statistic Functions</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4989,6 +5605,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -5004,6 +5622,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -5014,7 +5635,7 @@
 		<ShortName>STDDEV</ShortName>
 		<FullName>Standard Deviation</FullName>
 		<ShortDescription>Standard Deviation</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Statistic Functions</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -5025,6 +5646,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -5037,10 +5660,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Deviations</Name>
+				<ShortDescription>Nb of deviations</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -5053,6 +5678,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -5063,7 +5691,7 @@
 		<ShortName>TSF</ShortName>
 		<FullName>Time Series Forecast</FullName>
 		<ShortDescription>Time Series Forecast</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Statistic Functions</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -5074,6 +5702,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>2</Minimum>
@@ -5089,6 +5719,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -5099,7 +5732,7 @@
 		<ShortName>VAR</ShortName>
 		<FullName>Variance</FullName>
 		<ShortDescription>Variance</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Statistic Functions</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -5110,6 +5743,8 @@
 		<OptionalInputArguments>
 			<OptionalInputArgument>
 				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Integer</Type>
 				<Range>
 					<Minimum>1</Minimum>
@@ -5122,10 +5757,12 @@
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Deviations</Name>
+				<ShortDescription>Nb of deviations</ShortDescription>
+				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -5138,6 +5775,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -5148,7 +5788,7 @@
 		<ShortName>AVGPRICE</ShortName>
 		<FullName>Average Price</FullName>
 		<ShortDescription>Average Price</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Price Transform</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -5172,6 +5812,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -5182,7 +5825,7 @@
 		<ShortName>MEDPRICE</ShortName>
 		<FullName>Median Price</FullName>
 		<ShortDescription>Median Price</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Price Transform</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -5198,6 +5841,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -5208,7 +5854,7 @@
 		<ShortName>TYPPRICE</ShortName>
 		<FullName>Typical Price</FullName>
 		<ShortDescription>Typical Price</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Price Transform</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -5228,6 +5874,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
@@ -5238,7 +5887,7 @@
 		<ShortName>WCLPRICE</ShortName>
 		<FullName>Weighted Close Price</FullName>
 		<ShortDescription>Weighted Close Price</ShortDescription>
-		<LongDescription>(null)</LongDescription>
+		<LongDescription></LongDescription>
 		<GroupId>Price Transform</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -5258,6 +5907,9 @@
 			<OutputArgument>
 				<Type>Double Array</Type>
 				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
 			</OutputArgument>
 		</OutputArguments>
 	</FinancialFunction>
