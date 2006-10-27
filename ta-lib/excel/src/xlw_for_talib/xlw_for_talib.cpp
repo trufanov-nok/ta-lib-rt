@@ -36,7 +36,7 @@
  *  Initial  Name/description
  *  -------------------------------------------------------------------
  *  MF       Mario Fortier
- *
+ *  ND       ndoss
  *
  * Change history:
  *
@@ -50,7 +50,16 @@
  *  121504 MF   Add support of optional parameter and display default
  *              in the function wizard.
  *  041806 MF   Adapt to latest TA-Lib interface changes.
+ *  102606 ND   Code to make TA-Lib use reverse cell orders.
  */
+
+// The released version of TA-Lib process the cells in a
+// top-down order (left-right).
+//
+// By uncomenting the following, you can reverse the logic to
+// be down-up (right-left).
+
+//#define DOWN_UP_CELL_ORDER 1
 
 #include <xlw/xlw.h>
 #include <iostream>
@@ -59,6 +68,11 @@
 #include "Win32StreamBuf.h"
 #include "ta_libc.h"
 #include "ta_memory.h"
+
+#if defined( DOWN_UP_CELL_ORDER )
+  // Include the std::reverse and std::swap_ranges algorithm
+  #include <algorithm>
+#endif
 
 extern "C" double trio_nan(void);
 
@@ -91,6 +105,10 @@ static int lengthDefault( const TA_OptInputParameterInfo *paramInfo );
 static void concatDefault( char *out, const TA_OptInputParameterInfo *paramInfo );
 
 static void displayError( TA_RetCode theRetCode );
+
+#if defined( DOWN_UP_CELL_ORDER )
+static void reverseTAOutput(double *in, int rows, int cols);
+#endif
 
 // In this file you will see often reference to "TA-Lib parameters"
 // against "excel parameters". Many conversion code exist because
@@ -331,6 +349,16 @@ static int doShutdown(void)
 /*********************/
 /* Utility functions */
 /*********************/
+
+#if defined( DOWN_UP_CELL_ORDER )
+void reverseTAOutput(double *in, int rows, int cols)
+{
+  double *firstRow = in;
+  double *lastRow  = in + (rows-1)*cols;
+  for ( ; firstRow < lastRow; firstRow+=cols, lastRow-=cols)
+     std::swap_ranges(firstRow, firstRow+cols, lastRow);
+}
+#endif
 
 // Character used when building a string representing the list of data pairs.
 #define EQUAL_CHAR  '='
@@ -892,6 +920,11 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
              FREE_ALL_ALLOC;
              return XlfOper::Error(xlerrValue);
           }
+
+          #if defined( DOWN_UP_CELL_ORDER )
+             // Reverse the input
+             std::reverse(temp.begin(), temp.end());
+          #endif
  
           // 'input' will contain only the valid data among the
           // cells provided by excel.
@@ -1435,6 +1468,10 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
 
     while( outIdx < excelArraySize )
        outputExcel[outIdx++] = nanValue;
+
+    #if defined( DOWN_UP_CELL_ORDER )
+       reverseTAOutput(outputExcel, excelArraySize, nbOutput);
+    #endif
 
     // Package the output using Xlf and we are done!
     XlfOper &retOper = XlfOper(excelArraySize,funcInfo->nbOutput,outputExcel);
