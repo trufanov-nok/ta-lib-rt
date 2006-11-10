@@ -54,8 +54,6 @@ package Finance::TA;
 *TA_SetRetCodeInfo = *Finance::TAc::TA_SetRetCodeInfo;
 *TA_Initialize = *Finance::TAc::TA_Initialize;
 *TA_Shutdown = *Finance::TAc::TA_Shutdown;
-*TA_SRand = *Finance::TAc::TA_SRand;
-*TA_Rand = *Finance::TAc::TA_Rand;
 *TA_MAX = *Finance::TAc::TA_MAX;
 *TA_MAX_Lookback = *Finance::TAc::TA_MAX_Lookback;
 *TA_MIN = *Finance::TAc::TA_MIN;

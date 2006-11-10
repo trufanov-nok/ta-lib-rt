@@ -15,7 +15,7 @@ Fixes
 Other Changes
 =============
 - func_list.txt moved in root directory of the package.
-
+- Removed dependencies on trio and Mersenne Twister functions.
 
 Thanks to all contributors.
 
