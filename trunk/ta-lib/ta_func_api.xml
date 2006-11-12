@@ -157,8 +157,8 @@
 				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -172,8 +172,8 @@
 				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -586,7 +586,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -601,7 +601,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -646,8 +646,8 @@
 				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -662,7 +662,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.150000</SuggestedEnd>
@@ -677,7 +677,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.190000</SuggestedEnd>
@@ -692,7 +692,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -707,7 +707,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -722,7 +722,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.190000</SuggestedEnd>
@@ -737,7 +737,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -752,7 +752,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -3035,8 +3035,8 @@
 		</RequiredInputArguments>
 		<OutputArguments>
 			<OutputArgument>
-				<Type>Integer Array</Type>
-				<Name>outInteger</Name>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
 				<Flags>
 					<Flag>Line</Flag>
 				</Flags>
@@ -3337,7 +3337,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -3613,7 +3613,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -3815,7 +3815,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -3869,7 +3869,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -4626,7 +4626,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -4717,7 +4717,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -4771,7 +4771,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -5664,8 +5664,8 @@
 				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -5761,8 +5761,8 @@
 				<LongDescription></LongDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
