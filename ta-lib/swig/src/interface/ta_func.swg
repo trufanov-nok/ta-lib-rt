@@ -1015,7 +1015,7 @@ TA_RetCode TA_MFI( int           START_IDX,
                    const double *IN_ARRAY /* inHigh */,
                    const double *IN_ARRAY /* inLow */,
                    const double *IN_ARRAY /* inClose */,
-                   const int    *IN_ARRAY /* inVolume */,
+                   const double *IN_ARRAY /* inVolume */,
                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
                    int          *BEG_IDX,
                    int          *OUT_SIZE,
@@ -1619,7 +1619,7 @@ TA_RetCode TA_AD( int           START_IDX,
                   const double *IN_ARRAY /* inHigh */,
                   const double *IN_ARRAY /* inLow */,
                   const double *IN_ARRAY /* inClose */,
-                  const int    *IN_ARRAY /* inVolume */,
+                  const double *IN_ARRAY /* inVolume */,
                   int          *BEG_IDX,
                   int          *OUT_SIZE,
                   double       *OUT_ARRAY /* outReal */ );
@@ -1648,7 +1648,7 @@ TA_RetCode TA_ADOSC( int           START_IDX,
                      const double *IN_ARRAY /* inHigh */,
                      const double *IN_ARRAY /* inLow */,
                      const double *IN_ARRAY /* inClose */,
-                     const int    *IN_ARRAY /* inVolume */,
+                     const double *IN_ARRAY /* inVolume */,
                      int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
                      int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
                      int          *BEG_IDX,
@@ -1663,16 +1663,16 @@ int TA_ADOSC_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
  * TA_OBV - On Balance Volume
  * 
  * Input  = double, Volume
- * Output = int
+ * Output = double
  * 
  */
 TA_RetCode TA_OBV( int           START_IDX,
                    int           END_IDX,
                    const double *IN_ARRAY /* inReal */,
-                   const int    *IN_ARRAY /* inVolume */,
+                   const double *IN_ARRAY /* inVolume */,
                    int          *BEG_IDX,
                    int          *OUT_SIZE,
-                   int          *OUT_ARRAY /* outInteger */ );
+                   double       *OUT_ARRAY /* outReal */ );
 
 int TA_OBV_Lookback( void );
 

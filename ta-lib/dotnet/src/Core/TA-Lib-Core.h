@@ -1113,7 +1113,7 @@ namespace TicTacTec
                                            cli::array<double>^ inHigh,
                                            cli::array<double>^ inLow,
                                            cli::array<double>^ inClose,
-                                           cli::array<int>^ inVolume,
+                                           cli::array<double>^ inVolume,
                                            int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNbElement,
@@ -1123,7 +1123,7 @@ namespace TicTacTec
                                            cli::array<float>^ inHigh,
                                            cli::array<float>^ inLow,
                                            cli::array<float>^ inClose,
-                                           cli::array<int>^ inVolume,
+                                           cli::array<float>^ inVolume,
                                            int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNbElement,
@@ -1642,7 +1642,7 @@ namespace TicTacTec
                                           cli::array<double>^ inHigh,
                                           cli::array<double>^ inLow,
                                           cli::array<double>^ inClose,
-                                          cli::array<int>^ inVolume,
+                                          cli::array<double>^ inVolume,
                                           [Out]int%    outBegIdx,
                                           [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
@@ -1651,7 +1651,7 @@ namespace TicTacTec
                                           cli::array<float>^ inHigh,
                                           cli::array<float>^ inLow,
                                           cli::array<float>^ inClose,
-                                          cli::array<int>^ inVolume,
+                                          cli::array<float>^ inVolume,
                                           [Out]int%    outBegIdx,
                                           [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
@@ -1667,7 +1667,7 @@ namespace TicTacTec
                                              cli::array<double>^ inHigh,
                                              cli::array<double>^ inLow,
                                              cli::array<double>^ inClose,
-                                             cli::array<int>^ inVolume,
+                                             cli::array<double>^ inVolume,
                                              int           optInFastPeriod, /* From 2 to 100000 */
                                              int           optInSlowPeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
@@ -1678,7 +1678,7 @@ namespace TicTacTec
                                              cli::array<float>^ inHigh,
                                              cli::array<float>^ inLow,
                                              cli::array<float>^ inClose,
-                                             cli::array<int>^ inVolume,
+                                             cli::array<float>^ inVolume,
                                              int           optInFastPeriod, /* From 2 to 100000 */
                                              int           optInSlowPeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
@@ -1693,17 +1693,17 @@ namespace TicTacTec
          static enum class TA_RetCode OBV( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inReal,
-                                           cli::array<int>^ inVolume,
+                                           cli::array<double>^ inVolume,
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNbElement,
-                                           cli::array<int>^  outInteger );
+                                           cli::array<double>^  outReal );
          static enum class TA_RetCode OBV( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
-                                           cli::array<int>^ inVolume,
+                                           cli::array<float>^ inVolume,
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNbElement,
-                                           cli::array<int>^  outInteger );
+                                           cli::array<double>^  outReal );
 
          #define TA_OBV Core::OBV
          #define TA_OBV_Lookback Core::OBV_Lookback
