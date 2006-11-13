@@ -51,6 +51,7 @@
  *              in the function wizard.
  *  041806 MF   Adapt to latest TA-Lib interface changes.
  *  102606 ND   Code to make TA-Lib use reverse cell orders.
+ *  111306 MF   volume and oi now double + remove trio dependency.
  */
 
 // The released version of TA-Lib process the cells in a
@@ -73,8 +74,6 @@
   // Include the std::reverse and std::swap_ranges algorithm
   #include <algorithm>
 #endif
-
-extern "C" double trio_nan(void);
 
 //#define DEBUG
 
@@ -175,7 +174,6 @@ static void allocGlobals(void)
 {
    memset( inputPtrs,  0, sizeof(ArrayPtrs)*NB_MAX_input );
    memset( outputPtrs, 0, sizeof(ArrayPtrs)*NB_MAX_output );
-   nanValue = trio_nan();
    outputExcelSize = 0;
    outputExcel     = NULL;
 }
@@ -1168,12 +1166,12 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
              break;
 
           case TA_Input_Price:      
-             TA_Real      *open = NULL;
-             TA_Real      *high = NULL;
-             TA_Real      *low = NULL;
-             TA_Real      *close = NULL;
-             TA_Integer   *volume = NULL;
-             TA_Integer   *openInterest = NULL;
+             TA_Real   *open = NULL;
+             TA_Real   *high = NULL;
+             TA_Real   *low = NULL;
+             TA_Real   *close = NULL;
+             TA_Real   *volume = NULL;
+             TA_Real   *openInterest = NULL;
 
              if( paramInfo->flags & TA_IN_PRICE_OPEN )
                 open = &(get_double_input(curExcelParam++)[commonBegIdx]);
@@ -1184,9 +1182,9 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
              if( paramInfo->flags & TA_IN_PRICE_CLOSE )
                 close = &(get_double_input(curExcelParam++)[commonBegIdx]);
              if( paramInfo->flags & TA_IN_PRICE_VOLUME )
-                volume = &(get_int_input(curExcelParam++)[commonBegIdx]);
+                volume = &(get_double_input(curExcelParam++)[commonBegIdx]);
              if( paramInfo->flags & TA_IN_PRICE_OPENINTEREST )
-                openInterest = &(get_int_input(curExcelParam++)[commonBegIdx]);
+                openInterest = &(get_double_input(curExcelParam++)[commonBegIdx]);
 
              retCode = TA_SetInputParamPricePtr( paramsForTALib, i,
                                                  open, high, low, close,

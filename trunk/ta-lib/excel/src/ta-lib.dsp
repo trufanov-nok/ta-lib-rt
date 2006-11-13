@@ -4,7 +4,7 @@
 
 # TARGTYPE "Win32 (x86) Static Library" 0x0104
 
-CFG=xlw - Win32 OnTheEdgeRelease
+CFG=xlw - Win32 Release
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
@@ -13,7 +13,7 @@ CFG=xlw - Win32 OnTheEdgeRelease
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "ta-lib.mak" CFG="xlw - Win32 OnTheEdgeRelease"
+!MESSAGE NMAKE /f "ta-lib.mak" CFG="xlw - Win32 Release"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
@@ -22,6 +22,8 @@ CFG=xlw - Win32 OnTheEdgeRelease
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
 CPP=cl.exe
 RSC=rc.exe
 # PROP BASE Use_MFC 0
@@ -125,6 +127,10 @@ SOURCE=.\xlw\xlw.h
 # Begin Source File
 
 SOURCE=.\xlw\excel32.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\xlw\trio\trionan.c
 # End Source File
 # Begin Source File
 
