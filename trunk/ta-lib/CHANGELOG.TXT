@@ -16,6 +16,7 @@ Other Changes
 =============
 - func_list.txt moved in root directory of the package.
 - Removed dependencies on trio and Mersenne Twister functions.
+- Volume and Open Interest are now double instead of integers.
 
 Thanks to all contributors.
 
