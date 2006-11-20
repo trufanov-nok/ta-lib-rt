@@ -189,991 +189,138 @@ public class Core {
    }
    
    /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
-   public int MAX_Lookback( int optInTimePeriod )
+   public int AD_Lookback( )
    {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return (optInTimePeriod-1);
+      return 0;
    }
-   public TA_RetCode MAX( int startIdx,
+   public TA_RetCode AD( int startIdx,
       int endIdx,
-      double inReal[],
-      int optInTimePeriod,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      double inVolume[],
       MInteger outBegIdx,
       MInteger outNbElement,
       double outReal[] )
    {
-      double highest, tmp;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, today, i, highestIdx;
+      int nbBar, currentBar, outIdx;
+      double high, low, close, tmp;
+      double ad;
       if( startIdx < 0 )
          return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
       if( (endIdx < 0) || (endIdx < startIdx))
          return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      highestIdx = -1;
-      highest = 0.0;
-      while( today <= endIdx )
-      {
-         tmp = inReal[today];
-         if( highestIdx < trailingIdx )
-         {
-            highestIdx = trailingIdx;
-            highest = inReal[highestIdx];
-            i = highestIdx;
-            while( ++i<=today )
-            {
-               tmp = inReal[i];
-               if( tmp > highest )
-               {
-                  highestIdx = i;
-                  highest = tmp;
-               }
-            }
-         }
-         else if( tmp >= highest )
-         {
-            highestIdx = today;
-            highest = tmp;
-         }
-         outReal[outIdx++] = highest;
-         trailingIdx++;
-         today++;
-      }
+      nbBar = endIdx-startIdx+1;
+      outNbElement.value  = nbBar;
       outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
+      currentBar = startIdx;
+      outIdx = 0;
+      ad = 0.0;
+      while( nbBar != 0 )
+      {
+         high = inHigh[currentBar];
+         low = inLow[currentBar];
+         tmp = high-low;
+         close = inClose[currentBar];
+         if( tmp > 0.0 )
+            ad += (((close-low)-(high-close))/tmp)*((double)inVolume[currentBar]);
+         outReal[outIdx++] = ad;
+         currentBar++;
+         nbBar--;
+      }
       return  TA_RetCode. TA_SUCCESS;
    }
-   public TA_RetCode MAX( int startIdx,
+   public TA_RetCode AD( int startIdx,
       int endIdx,
-      float inReal[],
-      int optInTimePeriod,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      float inVolume[],
       MInteger outBegIdx,
       MInteger outNbElement,
       double outReal[] )
    {
-      double highest, tmp;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, today, i, highestIdx;
+      int nbBar, currentBar, outIdx;
+      double high, low, close, tmp;
+      double ad;
       if( startIdx < 0 )
          return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
       if( (endIdx < 0) || (endIdx < startIdx))
          return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      highestIdx = -1;
-      highest = 0.0;
-      while( today <= endIdx )
-      {
-         tmp = inReal[today];
-         if( highestIdx < trailingIdx )
-         {
-            highestIdx = trailingIdx;
-            highest = inReal[highestIdx];
-            i = highestIdx;
-            while( ++i<=today )
-            {
-               tmp = inReal[i];
-               if( tmp > highest )
-               {
-                  highestIdx = i;
-                  highest = tmp;
-               }
-            }
-         }
-         else if( tmp >= highest )
-         {
-            highestIdx = today;
-            highest = tmp;
-         }
-         outReal[outIdx++] = highest;
-         trailingIdx++;
-         today++;
-      }
+      nbBar = endIdx-startIdx+1;
+      outNbElement.value  = nbBar;
       outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MIN_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return (optInTimePeriod-1);
-   }
-   public TA_RetCode MIN( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double lowest, tmp;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, lowestIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
+      currentBar = startIdx;
       outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      lowestIdx = -1;
-      lowest = 0.0;
-      while( today <= endIdx )
+      ad = 0.0;
+      while( nbBar != 0 )
       {
-         tmp = inReal[today];
-         if( lowestIdx < trailingIdx )
-         {
-            lowestIdx = trailingIdx;
-            lowest = inReal[lowestIdx];
-            i = lowestIdx;
-            while( ++i<=today )
-            {
-               tmp = inReal[i];
-               if( tmp < lowest )
-               {
-                  lowestIdx = i;
-                  lowest = tmp;
-               }
-            }
-         }
-         else if( tmp <= lowest )
-         {
-            lowestIdx = today;
-            lowest = tmp;
-         }
-         outReal[outIdx++] = lowest;
-         trailingIdx++;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MIN( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double lowest, tmp;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, lowestIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      lowestIdx = -1;
-      lowest = 0.0;
-      while( today <= endIdx )
-      {
-         tmp = inReal[today];
-         if( lowestIdx < trailingIdx )
-         {
-            lowestIdx = trailingIdx;
-            lowest = inReal[lowestIdx];
-            i = lowestIdx;
-            while( ++i<=today )
-            {
-               tmp = inReal[i];
-               if( tmp < lowest )
-               {
-                  lowestIdx = i;
-                  lowest = tmp;
-               }
-            }
-         }
-         else if( tmp <= lowest )
-         {
-            lowestIdx = today;
-            lowest = tmp;
-         }
-         outReal[outIdx++] = lowest;
-         trailingIdx++;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int SUM_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod-1;
-   }
-   public TA_RetCode SUM( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double periodTotal, tempReal;
-      int i, outIdx, trailingIdx, lookbackTotal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal = (optInTimePeriod-1);
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      periodTotal = 0;
-      trailingIdx = startIdx-lookbackTotal;
-      i=trailingIdx;
-      if( optInTimePeriod > 1 )
-      {
-         while( i < startIdx )
-            periodTotal += inReal[i++];
-      }
-      outIdx = 0;
-      do
-      {
-         periodTotal += inReal[i++];
-         tempReal = periodTotal;
-         periodTotal -= inReal[trailingIdx++];
-         outReal[outIdx++] = tempReal;
-      } while( i <= endIdx );
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode SUM( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double periodTotal, tempReal;
-      int i, outIdx, trailingIdx, lookbackTotal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal = (optInTimePeriod-1);
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      periodTotal = 0;
-      trailingIdx = startIdx-lookbackTotal;
-      i=trailingIdx;
-      if( optInTimePeriod > 1 )
-      {
-         while( i < startIdx )
-            periodTotal += inReal[i++];
-      }
-      outIdx = 0;
-      do
-      {
-         periodTotal += inReal[i++];
-         tempReal = periodTotal;
-         periodTotal -= inReal[trailingIdx++];
-         outReal[outIdx++] = tempReal;
-      } while( i <= endIdx );
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int BBANDS_Lookback( int optInTimePeriod,
-      double optInNbDevUp,
-      double optInNbDevDn,
-      TA_MAType optInMAType )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( optInNbDevUp ==  (-4e+37)  )
-         optInNbDevUp = 2.000000e+0;
-      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
-         return -1;
-      if( optInNbDevDn ==  (-4e+37)  )
-         optInNbDevDn = 2.000000e+0;
-      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
-         return -1;
-      return  MA_Lookback ( optInTimePeriod, optInMAType );
-   }
-   public TA_RetCode BBANDS( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      double optInNbDevUp,
-      double optInNbDevDn,
-      TA_MAType optInMAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outRealUpperBand[],
-      double outRealMiddleBand[],
-      double outRealLowerBand[] )
-   {
-      TA_RetCode retCode;
-      int i;
-      double tempReal, tempReal2;
-      double []tempBuffer1 ;
-      double []tempBuffer2 ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInNbDevUp ==  (-4e+37)  )
-         optInNbDevUp = 2.000000e+0;
-      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInNbDevDn ==  (-4e+37)  )
-         optInNbDevDn = 2.000000e+0;
-      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( inReal == outRealUpperBand )
-      {
-         tempBuffer1 = outRealMiddleBand;
-         tempBuffer2 = outRealLowerBand;
-      }
-      else if( inReal == outRealLowerBand )
-      {
-         tempBuffer1 = outRealMiddleBand;
-         tempBuffer2 = outRealUpperBand;
-      }
-      else if( inReal == outRealMiddleBand )
-      {
-         tempBuffer1 = outRealLowerBand;
-         tempBuffer2 = outRealUpperBand;
-      }
-      else
-      {
-         tempBuffer1 = outRealMiddleBand;
-         tempBuffer2 = outRealUpperBand;
-      }
-      if( (tempBuffer1 == inReal) || (tempBuffer2 == inReal) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      retCode =  MA ( startIdx, endIdx, inReal,
-         optInTimePeriod, optInMAType,
-         outBegIdx, outNbElement, tempBuffer1 );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      if( optInMAType ==  TA_MAType. TA_MAType_SMA )
-      {
-         INT_stddev_using_precalc_ma ( inReal, tempBuffer1,
-            (int) outBegIdx.value , (int) outNbElement.value ,
-            optInTimePeriod, tempBuffer2 );
-      }
-      else
-      {
-         retCode =  STDDEV ( (int) outBegIdx.value , endIdx, inReal,
-            optInTimePeriod, 1.0,
-            outBegIdx, outNbElement, tempBuffer2 );
-         if( retCode !=  TA_RetCode. TA_SUCCESS )
-         {
-            outNbElement.value = 0 ;
-            return retCode;
-         }
-      }
-      if( tempBuffer1 != outRealMiddleBand )
-      {
-         System.arraycopy(tempBuffer1,0,outRealMiddleBand,0,outNbElement.value) ;
-      }
-      if( optInNbDevUp == optInNbDevDn )
-      {
-         if( optInNbDevUp == 1.0 )
-         {
-            for( i=0; i < (int) outNbElement.value ; i++ )
-            {
-               tempReal = tempBuffer2[i];
-               tempReal2 = outRealMiddleBand[i];
-               outRealUpperBand[i] = tempReal2 + tempReal;
-               outRealLowerBand[i] = tempReal2 - tempReal;
-            }
-         }
-         else
-         {
-            for( i=0; i < (int) outNbElement.value ; i++ )
-            {
-               tempReal = tempBuffer2[i] * optInNbDevUp;
-               tempReal2 = outRealMiddleBand[i];
-               outRealUpperBand[i] = tempReal2 + tempReal;
-               outRealLowerBand[i] = tempReal2 - tempReal;
-            }
-         }
-      }
-      else if( optInNbDevUp == 1.0 )
-      {
-         for( i=0; i < (int) outNbElement.value ; i++ )
-         {
-            tempReal = tempBuffer2[i];
-            tempReal2 = outRealMiddleBand[i];
-            outRealUpperBand[i] = tempReal2 + tempReal;
-            outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
-         }
-      }
-      else if( optInNbDevDn == 1.0 )
-      {
-         for( i=0; i < (int) outNbElement.value ; i++ )
-         {
-            tempReal = tempBuffer2[i];
-            tempReal2 = outRealMiddleBand[i];
-            outRealLowerBand[i] = tempReal2 - tempReal;
-            outRealUpperBand[i] = tempReal2 + (tempReal * optInNbDevUp);
-         }
-      }
-      else
-      {
-         for( i=0; i < (int) outNbElement.value ; i++ )
-         {
-            tempReal = tempBuffer2[i];
-            tempReal2 = outRealMiddleBand[i];
-            outRealUpperBand[i] = tempReal2 + (tempReal * optInNbDevUp);
-            outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
-         }
-      }
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode BBANDS( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      double optInNbDevUp,
-      double optInNbDevDn,
-      TA_MAType optInMAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outRealUpperBand[],
-      double outRealMiddleBand[],
-      double outRealLowerBand[] )
-   {
-      TA_RetCode retCode;
-      int i;
-      double tempReal, tempReal2;
-      double []tempBuffer1 ;
-      double []tempBuffer2 ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInNbDevUp ==  (-4e+37)  )
-         optInNbDevUp = 2.000000e+0;
-      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInNbDevDn ==  (-4e+37)  )
-         optInNbDevDn = 2.000000e+0;
-      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      tempBuffer1 = outRealMiddleBand;
-      tempBuffer2 = outRealLowerBand;
-      retCode =  MA ( startIdx, endIdx, inReal,
-         optInTimePeriod, optInMAType,
-         outBegIdx, outNbElement, tempBuffer1 );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      if( optInMAType ==  TA_MAType. TA_MAType_SMA )
-      {
-         INT_stddev_using_precalc_ma ( inReal, tempBuffer1,
-            (int) outBegIdx.value , (int) outNbElement.value ,
-            optInTimePeriod, tempBuffer2 );
-      }
-      else
-      {
-         retCode =  STDDEV ( (int) outBegIdx.value , endIdx, inReal,
-            optInTimePeriod, 1.0,
-            outBegIdx, outNbElement, tempBuffer2 );
-         if( retCode !=  TA_RetCode. TA_SUCCESS )
-         {
-            outNbElement.value = 0 ;
-            return retCode;
-         }
-      }
-      if( optInNbDevUp == optInNbDevDn )
-      {
-         if( optInNbDevUp == 1.0 )
-         {
-            for( i=0; i < (int) outNbElement.value ; i++ )
-            {
-               tempReal = tempBuffer2[i];
-               tempReal2 = outRealMiddleBand[i];
-               outRealUpperBand[i] = tempReal2 + tempReal;
-               outRealLowerBand[i] = tempReal2 - tempReal;
-            }
-         }
-         else
-         {
-            for( i=0; i < (int) outNbElement.value ; i++ )
-            {
-               tempReal = tempBuffer2[i] * optInNbDevUp;
-               tempReal2 = outRealMiddleBand[i];
-               outRealUpperBand[i] = tempReal2 + tempReal;
-               outRealLowerBand[i] = tempReal2 - tempReal;
-            }
-         }
-      }
-      else if( optInNbDevUp == 1.0 )
-      {
-         for( i=0; i < (int) outNbElement.value ; i++ )
-         {
-            tempReal = tempBuffer2[i];
-            tempReal2 = outRealMiddleBand[i];
-            outRealUpperBand[i] = tempReal2 + tempReal;
-            outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
-         }
-      }
-      else if( optInNbDevDn == 1.0 )
-      {
-         for( i=0; i < (int) outNbElement.value ; i++ )
-         {
-            tempReal = tempBuffer2[i];
-            tempReal2 = outRealMiddleBand[i];
-            outRealLowerBand[i] = tempReal2 - tempReal;
-            outRealUpperBand[i] = tempReal2 + (tempReal * optInNbDevUp);
-         }
-      }
-      else
-      {
-         for( i=0; i < (int) outNbElement.value ; i++ )
-         {
-            tempReal = tempBuffer2[i];
-            tempReal2 = outRealMiddleBand[i];
-            outRealUpperBand[i] = tempReal2 + (tempReal * optInNbDevUp);
-            outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
-         }
+         high = inHigh[currentBar];
+         low = inLow[currentBar];
+         tmp = high-low;
+         close = inClose[currentBar];
+         if( tmp > 0.0 )
+            ad += (((close-low)-(high-close))/tmp)*((double)inVolume[currentBar]);
+         outReal[outIdx++] = ad;
+         currentBar++;
+         nbBar--;
       }
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
-   public int DEMA_Lookback( int optInTimePeriod )
+   public int ADOSC_Lookback( int optInFastPeriod,
+      int optInSlowPeriod )
    {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      int slowestPeriod;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 3;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
          return -1;
-      return  EMA_Lookback ( optInTimePeriod ) * 2;
-   }
-   public TA_RetCode DEMA( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double []firstEMA ;
-      double []secondEMA ;
-      double k;
-      MInteger firstEMABegIdx = new MInteger() ;
-      MInteger firstEMANbElement = new MInteger() ;
-      MInteger secondEMABegIdx = new MInteger() ;
-      MInteger secondEMANbElement = new MInteger() ;
-      int tempInt, outIdx, firstEMAIdx, lookbackTotal, lookbackEMA;
-      TA_RetCode retCode;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outNbElement.value = 0 ;
-      outBegIdx.value = 0 ;
-      lookbackEMA =  EMA_Lookback ( optInTimePeriod );
-      lookbackTotal = lookbackEMA * 2;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      if( inReal == outReal )
-         firstEMA = outReal;
-      else
-      {
-         tempInt = lookbackTotal+(endIdx-startIdx)+1;
-         firstEMA = new double[tempInt] ;
-      }
-      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
-      retCode =  INT_EMA ( startIdx-lookbackEMA, endIdx, inReal,
-         optInTimePeriod, k,
-         firstEMABegIdx ,  firstEMANbElement ,
-         firstEMA );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( firstEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      secondEMA = new double[firstEMANbElement.value] ;
-      retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
-         optInTimePeriod, k,
-         secondEMABegIdx ,  secondEMANbElement ,
-         secondEMA );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( secondEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      firstEMAIdx =  secondEMABegIdx.value ;
-      outIdx = 0;
-      while( outIdx <  secondEMANbElement.value  )
-      {
-         outReal[outIdx] = (2.0*firstEMA[firstEMAIdx++]) - secondEMA[outIdx];
-         outIdx++;
-      }
-      outBegIdx.value  =  firstEMABegIdx.value  +  secondEMABegIdx.value ;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode DEMA( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double []firstEMA ;
-      double []secondEMA ;
-      double k;
-      MInteger firstEMABegIdx = new MInteger() ;
-      MInteger firstEMANbElement = new MInteger() ;
-      MInteger secondEMABegIdx = new MInteger() ;
-      MInteger secondEMANbElement = new MInteger() ;
-      int tempInt, outIdx, firstEMAIdx, lookbackTotal, lookbackEMA;
-      TA_RetCode retCode;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outNbElement.value = 0 ;
-      outBegIdx.value = 0 ;
-      lookbackEMA =  EMA_Lookback ( optInTimePeriod );
-      lookbackTotal = lookbackEMA * 2;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      tempInt = lookbackTotal+(endIdx-startIdx)+1;
-      firstEMA = new double[tempInt] ;
-      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
-      retCode =  INT_EMA ( startIdx-lookbackEMA, endIdx, inReal,
-         optInTimePeriod, k,
-         firstEMABegIdx ,  firstEMANbElement ,
-         firstEMA );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( firstEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      secondEMA = new double[firstEMANbElement.value] ;
-      retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
-         optInTimePeriod, k,
-         secondEMABegIdx ,  secondEMANbElement ,
-         secondEMA );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( secondEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      firstEMAIdx =  secondEMABegIdx.value ;
-      outIdx = 0;
-      while( outIdx <  secondEMANbElement.value  )
-      {
-         outReal[outIdx] = (2.0*firstEMA[firstEMAIdx++]) - secondEMA[outIdx];
-         outIdx++;
-      }
-      outBegIdx.value  =  firstEMABegIdx.value  +  secondEMABegIdx.value ;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int EMA_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 10;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
          return -1;
-      return optInTimePeriod - 1 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_EMA.ordinal()]) ;
-   }
-   public TA_RetCode EMA( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      return  INT_EMA ( startIdx, endIdx, inReal,
-         optInTimePeriod,
-         ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
-         outBegIdx, outNbElement, outReal );
-   }
-   public TA_RetCode INT_EMA( int startIdx,
-      int endIdx,
-      double  []inReal,
-      int optInTimePeriod,
-      double optInK_1,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double []outReal )
-   {
-      double tempReal, prevMA;
-      int i, today, outIdx, lookbackTotal;
-      lookbackTotal =  EMA_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_DEFAULT )
-      {
-         today = startIdx-lookbackTotal;
-         i = optInTimePeriod;
-         tempReal = 0.0;
-         while( i-- > 0 )
-            tempReal += inReal[today++];
-         prevMA = tempReal / optInTimePeriod;
-      }
+      if( optInFastPeriod < optInSlowPeriod )
+         slowestPeriod = optInSlowPeriod;
       else
-      {
-         prevMA = inReal[0];
-         today = 1;
-      }
-      while( today <= startIdx )
-         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
-      outReal[0] = prevMA;
-      outIdx = 1;
-      while( today <= endIdx )
-      {
-         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
-         outReal[outIdx++] = prevMA;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
+         slowestPeriod = optInFastPeriod;
+      return  EMA_Lookback ( slowestPeriod );
    }
-   public TA_RetCode EMA( int startIdx,
+   public TA_RetCode ADOSC( int startIdx,
       int endIdx,
-      float inReal[],
-      int optInTimePeriod,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      double inVolume[],
+      int optInFastPeriod,
+      int optInSlowPeriod,
       MInteger outBegIdx,
       MInteger outNbElement,
       double outReal[] )
    {
+      int today, outIdx, lookbackTotal;
+      int slowestPeriod;
+      double high, low, close, tmp;
+      double slowEMA, slowk, one_minus_slowk;
+      double fastEMA, fastk, one_minus_fastk;
+      double ad;
       if( startIdx < 0 )
          return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
       if( (endIdx < 0) || (endIdx < startIdx))
          return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 3;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
          return  TA_RetCode. TA_BAD_PARAM;
-      return  INT_EMA ( startIdx, endIdx, inReal,
-         optInTimePeriod,
-         ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
-         outBegIdx, outNbElement, outReal );
-   }
-   public TA_RetCode INT_EMA( int startIdx,
-      int endIdx,
-      float  []inReal,
-      int optInTimePeriod,
-      double optInK_1,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double []outReal )
-   {
-      double tempReal, prevMA;
-      int i, today, outIdx, lookbackTotal;
-      lookbackTotal =  EMA_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_DEFAULT )
-      {
-         today = startIdx-lookbackTotal;
-         i = optInTimePeriod;
-         tempReal = 0.0;
-         while( i-- > 0 )
-            tempReal += inReal[today++];
-         prevMA = tempReal / optInTimePeriod;
-      }
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 10;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInFastPeriod < optInSlowPeriod )
+         slowestPeriod = optInSlowPeriod;
       else
-      {
-         prevMA = inReal[0];
-         today = 1;
-      }
-      while( today <= startIdx )
-         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
-      outReal[0] = prevMA;
-      outIdx = 1;
-      while( today <= endIdx )
-      {
-         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
-         outReal[outIdx++] = prevMA;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int HT_TRENDLINE_Lookback( )
-   {
-      return 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDLINE.ordinal()]) ;
-   }
-   public TA_RetCode HT_TRENDLINE( int startIdx,
-      int endIdx,
-      double inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      double iTrend1, iTrend2, iTrend3;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg;
-      double todayValue, smoothPeriod;
-      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
-      int idx;
-      int DCPeriodInt;
-      double DCPeriod;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-      iTrend1 = iTrend2 = iTrend3 = 0.0;
-      tempReal =  Math.atan (1);
-      rad2Deg = 45.0/tempReal;
-      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDLINE.ordinal()]) ;
+         slowestPeriod = optInFastPeriod;
+      lookbackTotal =  EMA_Lookback ( slowestPeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
@@ -1183,392 +330,67 @@ public class Core {
          return  TA_RetCode. TA_SUCCESS;
       }
       outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 34;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      for( i=0; i <  50 ; i++ )
-         smoothPrice[i] = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         smoothPrice[smoothPrice_Idx] = smoothedValue;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         idx = today;
-         tempReal = 0.0;
-         for( i=0; i < DCPeriodInt; i++ )
-            tempReal += inReal[idx--];
-         if( DCPeriodInt > 0 )
-            tempReal = tempReal/(double)DCPeriodInt;
-         tempReal2 = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
-         iTrend3 = iTrend2;
-         iTrend2 = iTrend1;
-         iTrend1 = tempReal;
-         if( today >= startIdx )
-         {
-            outReal[outIdx++] = tempReal2;
-         }
-         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode HT_TRENDLINE( int startIdx,
-      int endIdx,
-      float inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      double iTrend1, iTrend2, iTrend3;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg;
-      double todayValue, smoothPeriod;
-      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
-      int idx;
-      int DCPeriodInt;
-      double DCPeriod;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-      iTrend1 = iTrend2 = iTrend3 = 0.0;
-      tempReal =  Math.atan (1);
-      rad2Deg = 45.0/tempReal;
-      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDLINE.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 34;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      for( i=0; i <  50 ; i++ )
-         smoothPrice[i] = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         smoothPrice[smoothPrice_Idx] = smoothedValue;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         idx = today;
-         tempReal = 0.0;
-         for( i=0; i < DCPeriodInt; i++ )
-            tempReal += inReal[idx--];
-         if( DCPeriodInt > 0 )
-            tempReal = tempReal/(double)DCPeriodInt;
-         tempReal2 = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
-         iTrend3 = iTrend2;
-         iTrend2 = iTrend1;
-         iTrend1 = tempReal;
-         if( today >= startIdx )
-         {
-            outReal[outIdx++] = tempReal2;
-         }
-         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int KAMA_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
-   }
-   public TA_RetCode KAMA( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      final double constMax  = 2.0/(30.0+1.0);
-      final double constDiff  = 2.0/(2.0+1.0) - constMax;
-      double tempReal, tempReal2;
-      double sumROC1, periodROC, prevKAMA;
-      int i, today, outIdx, lookbackTotal;
-      int trailingIdx;
-      double trailingValue;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      sumROC1 = 0.0;
       today = startIdx-lookbackTotal;
-      trailingIdx = today;
-      i = optInTimePeriod;
-      while( i-- > 0 )
+      ad = 0.0;
+      fastk =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
+      one_minus_fastk = 1.0 - fastk;
+      slowk =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
+      one_minus_slowk = 1.0 - slowk;
+      { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
+      fastEMA = ad;
+      slowEMA = ad;
+      while( today < startIdx )
       {
-         tempReal = inReal[today++];
-         tempReal -= inReal[today];
-         sumROC1 +=  Math.abs (tempReal);
+         { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
+         fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
+         slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
       }
-      prevKAMA = inReal[today-1];
-      tempReal = inReal[today];
-      tempReal2 = inReal[trailingIdx++];
-      periodROC = tempReal-tempReal2;
-      trailingValue = tempReal2;
-      if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001)) )
-         tempReal = 1.0;
-      else
-         tempReal =  Math.abs (periodROC/sumROC1);
-      tempReal = (tempReal*constDiff)+constMax;
-      tempReal *= tempReal;
-      prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
-      while( today <= startIdx )
-      {
-         tempReal = inReal[today];
-         tempReal2 = inReal[trailingIdx++];
-         periodROC = tempReal-tempReal2;
-         sumROC1 -=  Math.abs (trailingValue-tempReal2);
-         sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
-         trailingValue = tempReal2;
-         if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
-            tempReal = 1.0;
-         else
-            tempReal =  Math.abs (periodROC/sumROC1);
-         tempReal = (tempReal*constDiff)+constMax;
-         tempReal *= tempReal;
-         prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
-      }
-      outReal[0] = prevKAMA;
-      outIdx = 1;
-      outBegIdx.value  = today-1;
+      outIdx = 0;
       while( today <= endIdx )
       {
-         tempReal = inReal[today];
-         tempReal2 = inReal[trailingIdx++];
-         periodROC = tempReal-tempReal2;
-         sumROC1 -=  Math.abs (trailingValue-tempReal2);
-         sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
-         trailingValue = tempReal2;
-         if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
-            tempReal = 1.0;
-         else
-            tempReal =  Math.abs (periodROC / sumROC1);
-         tempReal = (tempReal*constDiff)+constMax;
-         tempReal *= tempReal;
-         prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
-         outReal[outIdx++] = prevKAMA;
+         { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
+         fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
+         slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
+         outReal[outIdx++] = fastEMA - slowEMA;
       }
       outNbElement.value  = outIdx;
       return  TA_RetCode. TA_SUCCESS;
    }
-   public TA_RetCode KAMA( int startIdx,
+   public TA_RetCode ADOSC( int startIdx,
       int endIdx,
-      float inReal[],
-      int optInTimePeriod,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      float inVolume[],
+      int optInFastPeriod,
+      int optInSlowPeriod,
       MInteger outBegIdx,
       MInteger outNbElement,
       double outReal[] )
    {
-      final double constMax  = 2.0/(30.0+1.0);
-      final double constDiff  = 2.0/(2.0+1.0) - constMax;
-      double tempReal, tempReal2;
-      double sumROC1, periodROC, prevKAMA;
-      int i, today, outIdx, lookbackTotal;
-      int trailingIdx;
-      double trailingValue;
+      int today, outIdx, lookbackTotal;
+      int slowestPeriod;
+      double high, low, close, tmp;
+      double slowEMA, slowk, one_minus_slowk;
+      double fastEMA, fastk, one_minus_fastk;
+      double ad;
       if( startIdx < 0 )
          return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
       if( (endIdx < 0) || (endIdx < startIdx))
          return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 3;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
          return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 10;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInFastPeriod < optInSlowPeriod )
+         slowestPeriod = optInSlowPeriod;
+      else
+         slowestPeriod = optInFastPeriod;
+      lookbackTotal =  EMA_Lookback ( slowestPeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
@@ -1577,3011 +399,31 @@ public class Core {
          outNbElement.value = 0 ;
          return  TA_RetCode. TA_SUCCESS;
       }
-      sumROC1 = 0.0;
+      outBegIdx.value  = startIdx;
       today = startIdx-lookbackTotal;
-      trailingIdx = today;
-      i = optInTimePeriod;
-      while( i-- > 0 )
+      ad = 0.0;
+      fastk =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
+      one_minus_fastk = 1.0 - fastk;
+      slowk =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
+      one_minus_slowk = 1.0 - slowk;
+      { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
+      fastEMA = ad;
+      slowEMA = ad;
+      while( today < startIdx )
       {
-         tempReal = inReal[today++];
-         tempReal -= inReal[today];
-         sumROC1 +=  Math.abs (tempReal);
+         { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
+         fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
+         slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
       }
-      prevKAMA = inReal[today-1];
-      tempReal = inReal[today];
-      tempReal2 = inReal[trailingIdx++];
-      periodROC = tempReal-tempReal2;
-      trailingValue = tempReal2;
-      if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001)) )
-         tempReal = 1.0;
-      else
-         tempReal =  Math.abs (periodROC/sumROC1);
-      tempReal = (tempReal*constDiff)+constMax;
-      tempReal *= tempReal;
-      prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
-      while( today <= startIdx )
-      {
-         tempReal = inReal[today];
-         tempReal2 = inReal[trailingIdx++];
-         periodROC = tempReal-tempReal2;
-         sumROC1 -=  Math.abs (trailingValue-tempReal2);
-         sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
-         trailingValue = tempReal2;
-         if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
-            tempReal = 1.0;
-         else
-            tempReal =  Math.abs (periodROC/sumROC1);
-         tempReal = (tempReal*constDiff)+constMax;
-         tempReal *= tempReal;
-         prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
-      }
-      outReal[0] = prevKAMA;
-      outIdx = 1;
-      outBegIdx.value  = today-1;
+      outIdx = 0;
       while( today <= endIdx )
       {
-         tempReal = inReal[today];
-         tempReal2 = inReal[trailingIdx++];
-         periodROC = tempReal-tempReal2;
-         sumROC1 -=  Math.abs (trailingValue-tempReal2);
-         sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
-         trailingValue = tempReal2;
-         if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
-            tempReal = 1.0;
-         else
-            tempReal =  Math.abs (periodROC / sumROC1);
-         tempReal = (tempReal*constDiff)+constMax;
-         tempReal *= tempReal;
-         prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
-         outReal[outIdx++] = prevKAMA;
+         { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
+         fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
+         slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
+         outReal[outIdx++] = fastEMA - slowEMA;
       }
       outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MA_Lookback( int optInTimePeriod,
-      TA_MAType optInMAType )
-   {
-      int retValue;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( optInTimePeriod <= 1 )
-         return 0;
-      switch( optInMAType )
-      {
-         case  TA_MAType_SMA :
-            retValue =  SMA_Lookback ( optInTimePeriod );
-         break;
-         case  TA_MAType_EMA :
-            retValue =  EMA_Lookback ( optInTimePeriod );
-         break;
-         case  TA_MAType_WMA :
-            retValue =  WMA_Lookback ( optInTimePeriod );
-         break;
-         case  TA_MAType_DEMA :
-            retValue =  DEMA_Lookback ( optInTimePeriod );
-         break;
-         case  TA_MAType_TEMA :
-            retValue =  TEMA_Lookback ( optInTimePeriod );
-         break;
-         case  TA_MAType_TRIMA :
-            retValue =  TRIMA_Lookback ( optInTimePeriod );
-         break;
-         case  TA_MAType_KAMA :
-            retValue =  KAMA_Lookback ( optInTimePeriod );
-         break;
-         case  TA_MAType_MAMA :
-            retValue =  MAMA_Lookback ( 0.5, 0.05 );
-         break;
-         case  TA_MAType_T3 :
-            retValue =  T3_Lookback ( optInTimePeriod, 0.7 );
-         break;
-         default:
-            retValue = 0;
-      }
-      return retValue;
-   }
-   public TA_RetCode MA( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      TA_MAType optInMAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double []dummyBuffer ;
-      TA_RetCode retCode;
-      int nbElement;
-      int outIdx, todayIdx;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod == 1 )
-      {
-         nbElement = endIdx-startIdx+1;
-         outNbElement.value  = nbElement;
-         for( todayIdx=startIdx, outIdx=0; outIdx < nbElement; outIdx++, todayIdx++ )
-            outReal[outIdx] = inReal[todayIdx];
-         outBegIdx.value  = startIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      switch( optInMAType )
-      {
-         case  TA_MAType_SMA :
-            retCode =  INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_EMA :
-            retCode =  INT_EMA ( startIdx, endIdx, inReal,
-            optInTimePeriod,  ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_WMA :
-            retCode =  WMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_DEMA :
-            retCode =  DEMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_TEMA :
-            retCode =  TEMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_TRIMA :
-            retCode =  TRIMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_KAMA :
-            retCode =  KAMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_MAMA :
-            dummyBuffer = new double[(endIdx-startIdx+1)] ;
-         retCode =  MAMA ( startIdx, endIdx, inReal, 0.5, 0.05,
-            outBegIdx, outNbElement,
-            outReal, dummyBuffer );
-         break;
-         case  TA_MAType_T3 :
-            retCode =  T3 ( startIdx, endIdx, inReal,
-            optInTimePeriod, 0.7,
-            outBegIdx, outNbElement, outReal );
-         break;
-         default:
-            retCode =  TA_RetCode. TA_BAD_PARAM;
-         break;
-      }
-      return retCode;
-   }
-   public TA_RetCode MA( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      TA_MAType optInMAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double []dummyBuffer ;
-      TA_RetCode retCode;
-      int nbElement;
-      int outIdx, todayIdx;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod == 1 )
-      {
-         nbElement = endIdx-startIdx+1;
-         outNbElement.value  = nbElement;
-         for( todayIdx=startIdx, outIdx=0; outIdx < nbElement; outIdx++, todayIdx++ )
-            outReal[outIdx] = inReal[todayIdx];
-         outBegIdx.value  = startIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      switch( optInMAType )
-      {
-         case  TA_MAType_SMA :
-            retCode =  INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_EMA :
-            retCode =  INT_EMA ( startIdx, endIdx, inReal,
-            optInTimePeriod,  ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_WMA :
-            retCode =  WMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_DEMA :
-            retCode =  DEMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_TEMA :
-            retCode =  TEMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_TRIMA :
-            retCode =  TRIMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_KAMA :
-            retCode =  KAMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
-         break;
-         case  TA_MAType_MAMA :
-            dummyBuffer = new double[(endIdx-startIdx+1)] ;
-         retCode =  MAMA ( startIdx, endIdx, inReal, 0.5, 0.05,
-            outBegIdx, outNbElement,
-            outReal, dummyBuffer );
-         break;
-         case  TA_MAType_T3 :
-            retCode =  T3 ( startIdx, endIdx, inReal,
-            optInTimePeriod, 0.7,
-            outBegIdx, outNbElement, outReal );
-         break;
-         default:
-            retCode =  TA_RetCode. TA_BAD_PARAM;
-         break;
-      }
-      return retCode;
-   }
-   /* Generated */
-   public int MAMA_Lookback( double optInFastLimit,
-      double optInSlowLimit )
-   {
-      if( optInFastLimit ==  (-4e+37)  )
-         optInFastLimit = 5.000000e-1;
-      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
-         return -1;
-      if( optInSlowLimit ==  (-4e+37)  )
-         optInSlowLimit = 5.000000e-2;
-      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
-         return -1;
-      return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
-   }
-   public TA_RetCode MAMA( int startIdx,
-      int endIdx,
-      double inReal[],
-      double optInFastLimit,
-      double optInSlowLimit,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMAMA[],
-      double outFAMA[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg;
-      double mama,fama,todayValue,prevPhase;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( optInFastLimit ==  (-4e+37)  )
-         optInFastLimit = 5.000000e-1;
-      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInSlowLimit ==  (-4e+37)  )
-         optInSlowLimit = 5.000000e-2;
-      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
-      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 9;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      mama = fama = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      prevPhase = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-            if( I1ForEvenPrev3 != 0.0 )
-               tempReal2 = ( Math.atan (Q1/I1ForEvenPrev3)*rad2Deg);
-            else
-               tempReal2 = 0.0;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-            if( I1ForOddPrev3 != 0.0 )
-               tempReal2 = ( Math.atan (Q1/I1ForOddPrev3)*rad2Deg);
-            else
-               tempReal2 = 0.0;
-         }
-         tempReal = prevPhase - tempReal2;
-         prevPhase = tempReal2;
-         if( tempReal < 1.0 )
-            tempReal = 1.0;
-         if( tempReal > 1.0 )
-         {
-            tempReal = optInFastLimit/tempReal;
-            if( tempReal < optInSlowLimit )
-               tempReal = optInSlowLimit;
-         }
-         else
-         {
-            tempReal = optInFastLimit;
-         }
-         mama = (tempReal*todayValue)+((1-tempReal)*mama);
-         tempReal *= 0.5;
-         fama = (tempReal*mama)+((1-tempReal)*fama);
-         if( today >= startIdx )
-         {
-            outMAMA[outIdx] = mama;
-            outFAMA[outIdx++] = fama;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MAMA( int startIdx,
-      int endIdx,
-      float inReal[],
-      double optInFastLimit,
-      double optInSlowLimit,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMAMA[],
-      double outFAMA[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg;
-      double mama,fama,todayValue,prevPhase;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( optInFastLimit ==  (-4e+37)  )
-         optInFastLimit = 5.000000e-1;
-      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInSlowLimit ==  (-4e+37)  )
-         optInSlowLimit = 5.000000e-2;
-      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
-      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 9;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      mama = fama = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      prevPhase = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-            if( I1ForEvenPrev3 != 0.0 )
-               tempReal2 = ( Math.atan (Q1/I1ForEvenPrev3)*rad2Deg);
-            else
-               tempReal2 = 0.0;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-            if( I1ForOddPrev3 != 0.0 )
-               tempReal2 = ( Math.atan (Q1/I1ForOddPrev3)*rad2Deg);
-            else
-               tempReal2 = 0.0;
-         }
-         tempReal = prevPhase - tempReal2;
-         prevPhase = tempReal2;
-         if( tempReal < 1.0 )
-            tempReal = 1.0;
-         if( tempReal > 1.0 )
-         {
-            tempReal = optInFastLimit/tempReal;
-            if( tempReal < optInSlowLimit )
-               tempReal = optInSlowLimit;
-         }
-         else
-         {
-            tempReal = optInFastLimit;
-         }
-         mama = (tempReal*todayValue)+((1-tempReal)*mama);
-         tempReal *= 0.5;
-         fama = (tempReal*mama)+((1-tempReal)*fama);
-         if( today >= startIdx )
-         {
-            outMAMA[outIdx] = mama;
-            outFAMA[outIdx++] = fama;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MIDPRICE_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return (optInTimePeriod-1);
-   }
-   public TA_RetCode MIDPRICE( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double lowest, highest, tmp;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      while( today <= endIdx )
-      {
-         lowest = inLow[trailingIdx];
-         highest = inHigh[trailingIdx];
-         trailingIdx++;
-         for( i=trailingIdx; i <= today; i++ )
-         {
-            tmp = inLow[i];
-            if( tmp < lowest ) lowest= tmp;
-            tmp = inHigh[i];
-            if( tmp > highest) highest = tmp;
-         }
-         outReal[outIdx++] = (highest+lowest)/2.0;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MIDPRICE( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double lowest, highest, tmp;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      while( today <= endIdx )
-      {
-         lowest = inLow[trailingIdx];
-         highest = inHigh[trailingIdx];
-         trailingIdx++;
-         for( i=trailingIdx; i <= today; i++ )
-         {
-            tmp = inLow[i];
-            if( tmp < lowest ) lowest= tmp;
-            tmp = inHigh[i];
-            if( tmp > highest) highest = tmp;
-         }
-         outReal[outIdx++] = (highest+lowest)/2.0;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MIDPOINT_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return (optInTimePeriod-1);
-   }
-   public TA_RetCode MIDPOINT( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double lowest, highest, tmp;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      while( today <= endIdx )
-      {
-         lowest = inReal[trailingIdx++];
-         highest = lowest;
-         for( i=trailingIdx; i <= today; i++ )
-         {
-            tmp = inReal[i];
-            if( tmp < lowest ) lowest= tmp;
-            else if( tmp > highest) highest = tmp;
-         }
-         outReal[outIdx++] = (highest+lowest)/2.0;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MIDPOINT( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double lowest, highest, tmp;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      while( today <= endIdx )
-      {
-         lowest = inReal[trailingIdx++];
-         highest = lowest;
-         for( i=trailingIdx; i <= today; i++ )
-         {
-            tmp = inReal[i];
-            if( tmp < lowest ) lowest= tmp;
-            else if( tmp > highest) highest = tmp;
-         }
-         outReal[outIdx++] = (highest+lowest)/2.0;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int SAR_Lookback( double optInAcceleration,
-      double optInMaximum )
-   {
-      if( optInAcceleration ==  (-4e+37)  )
-         optInAcceleration = 2.000000e-2;
-      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
-         return -1;
-      if( optInMaximum ==  (-4e+37)  )
-         optInMaximum = 2.000000e-1;
-      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
-         return -1;
-      return 1;
-   }
-   public TA_RetCode SAR( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double optInAcceleration,
-      double optInMaximum,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      TA_RetCode retCode;
-      int isLong;
-      int todayIdx, outIdx;
-      MInteger tempInt = new MInteger() ;
-      double newHigh, newLow, prevHigh, prevLow;
-      double af, ep, sar;
-      double []ep_temp = new double[1] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( optInAcceleration ==  (-4e+37)  )
-         optInAcceleration = 2.000000e-2;
-      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInMaximum ==  (-4e+37)  )
-         optInMaximum = 2.000000e-1;
-      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < 1 )
-         startIdx = 1;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      af = optInAcceleration;
-      if( af > optInMaximum )
-         af = optInAcceleration = optInMaximum;
-      retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
-         tempInt ,  tempInt ,
-         ep_temp );
-      if( ep_temp[0] > 0 )
-         isLong = 0;
-      else
-         isLong = 1;
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      outBegIdx.value  = startIdx;
-      outIdx = 0;
-      todayIdx = startIdx;
-      newHigh = inHigh[todayIdx-1];
-      newLow = inLow[todayIdx-1];
-      if( isLong == 1 )
-      {
-         ep = inHigh[todayIdx];
-         sar = newLow;
-      }
-      else
-      {
-         ep = inLow[todayIdx];
-         sar = newHigh;
-      }
-      newLow = inLow[todayIdx];
-      newHigh = inHigh[todayIdx];
-      while( todayIdx <= endIdx )
-      {
-         prevLow = newLow;
-         prevHigh = newHigh;
-         newLow = inLow[todayIdx];
-         newHigh = inHigh[todayIdx];
-         todayIdx++;
-         if( isLong == 1 )
-         {
-            if( newLow <= sar )
-            {
-               isLong = 0;
-               sar = ep;
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-               outReal[outIdx++] = sar;
-               af = optInAcceleration;
-               ep = newLow;
-               sar = sar + af * (ep - sar);
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-            }
-            else
-            {
-               outReal[outIdx++] = sar;
-               if( newHigh > ep )
-               {
-                  ep = newHigh;
-                  af += optInAcceleration;
-                  if( af > optInMaximum )
-                     af = optInMaximum;
-               }
-               sar = sar + af * (ep - sar);
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-            }
-         }
-         else
-         {
-            if( newHigh >= sar )
-            {
-               isLong = 1;
-               sar = ep;
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-               outReal[outIdx++] = sar;
-               af = optInAcceleration;
-               ep = newHigh;
-               sar = sar + af * (ep - sar);
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-            }
-            else
-            {
-               outReal[outIdx++] = sar;
-               if( newLow < ep )
-               {
-                  ep = newLow;
-                  af += optInAcceleration;
-                  if( af > optInMaximum )
-                     af = optInMaximum;
-               }
-               sar = sar + af * (ep - sar);
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-            }
-         }
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode SAR( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      double optInAcceleration,
-      double optInMaximum,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      TA_RetCode retCode;
-      int isLong;
-      int todayIdx, outIdx;
-      MInteger tempInt = new MInteger() ;
-      double newHigh, newLow, prevHigh, prevLow;
-      double af, ep, sar;
-      double []ep_temp = new double[1] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( optInAcceleration ==  (-4e+37)  )
-         optInAcceleration = 2.000000e-2;
-      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInMaximum ==  (-4e+37)  )
-         optInMaximum = 2.000000e-1;
-      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < 1 )
-         startIdx = 1;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      af = optInAcceleration;
-      if( af > optInMaximum )
-         af = optInAcceleration = optInMaximum;
-      retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
-         tempInt ,  tempInt ,
-         ep_temp );
-      if( ep_temp[0] > 0 )
-         isLong = 0;
-      else
-         isLong = 1;
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      outBegIdx.value  = startIdx;
-      outIdx = 0;
-      todayIdx = startIdx;
-      newHigh = inHigh[todayIdx-1];
-      newLow = inLow[todayIdx-1];
-      if( isLong == 1 )
-      {
-         ep = inHigh[todayIdx];
-         sar = newLow;
-      }
-      else
-      {
-         ep = inLow[todayIdx];
-         sar = newHigh;
-      }
-      newLow = inLow[todayIdx];
-      newHigh = inHigh[todayIdx];
-      while( todayIdx <= endIdx )
-      {
-         prevLow = newLow;
-         prevHigh = newHigh;
-         newLow = inLow[todayIdx];
-         newHigh = inHigh[todayIdx];
-         todayIdx++;
-         if( isLong == 1 )
-         {
-            if( newLow <= sar )
-            {
-               isLong = 0;
-               sar = ep;
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-               outReal[outIdx++] = sar;
-               af = optInAcceleration;
-               ep = newLow;
-               sar = sar + af * (ep - sar);
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-            }
-            else
-            {
-               outReal[outIdx++] = sar;
-               if( newHigh > ep )
-               {
-                  ep = newHigh;
-                  af += optInAcceleration;
-                  if( af > optInMaximum )
-                     af = optInMaximum;
-               }
-               sar = sar + af * (ep - sar);
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-            }
-         }
-         else
-         {
-            if( newHigh >= sar )
-            {
-               isLong = 1;
-               sar = ep;
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-               outReal[outIdx++] = sar;
-               af = optInAcceleration;
-               ep = newHigh;
-               sar = sar + af * (ep - sar);
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-            }
-            else
-            {
-               outReal[outIdx++] = sar;
-               if( newLow < ep )
-               {
-                  ep = newLow;
-                  af += optInAcceleration;
-                  if( af > optInMaximum )
-                     af = optInMaximum;
-               }
-               sar = sar + af * (ep - sar);
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-            }
-         }
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int SAREXT_Lookback( double optInStartValue,
-      double optInOffsetOnReverse,
-      double optInAccelerationInitLong,
-      double optInAccelerationLong,
-      double optInAccelerationMaxLong,
-      double optInAccelerationInitShort,
-      double optInAccelerationShort,
-      double optInAccelerationMaxShort )
-   {
-      if( optInStartValue ==  (-4e+37)  )
-         optInStartValue = 0.000000e+0;
-      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
-         return -1;
-      if( optInOffsetOnReverse ==  (-4e+37)  )
-         optInOffsetOnReverse = 0.000000e+0;
-      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
-         return -1;
-      if( optInAccelerationInitLong ==  (-4e+37)  )
-         optInAccelerationInitLong = 2.000000e-2;
-      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
-         return -1;
-      if( optInAccelerationLong ==  (-4e+37)  )
-         optInAccelerationLong = 2.000000e-2;
-      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
-         return -1;
-      if( optInAccelerationMaxLong ==  (-4e+37)  )
-         optInAccelerationMaxLong = 2.000000e-1;
-      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
-         return -1;
-      if( optInAccelerationInitShort ==  (-4e+37)  )
-         optInAccelerationInitShort = 2.000000e-2;
-      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
-         return -1;
-      if( optInAccelerationShort ==  (-4e+37)  )
-         optInAccelerationShort = 2.000000e-2;
-      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
-         return -1;
-      if( optInAccelerationMaxShort ==  (-4e+37)  )
-         optInAccelerationMaxShort = 2.000000e-1;
-      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
-         return -1;
-      return 1;
-   }
-   public TA_RetCode SAREXT( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double optInStartValue,
-      double optInOffsetOnReverse,
-      double optInAccelerationInitLong,
-      double optInAccelerationLong,
-      double optInAccelerationMaxLong,
-      double optInAccelerationInitShort,
-      double optInAccelerationShort,
-      double optInAccelerationMaxShort,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      TA_RetCode retCode;
-      int isLong;
-      int todayIdx, outIdx;
-      MInteger tempInt = new MInteger() ;
-      double newHigh, newLow, prevHigh, prevLow;
-      double afLong, afShort, ep, sar;
-      double []ep_temp = new double[1] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( optInStartValue ==  (-4e+37)  )
-         optInStartValue = 0.000000e+0;
-      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInOffsetOnReverse ==  (-4e+37)  )
-         optInOffsetOnReverse = 0.000000e+0;
-      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationInitLong ==  (-4e+37)  )
-         optInAccelerationInitLong = 2.000000e-2;
-      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationLong ==  (-4e+37)  )
-         optInAccelerationLong = 2.000000e-2;
-      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationMaxLong ==  (-4e+37)  )
-         optInAccelerationMaxLong = 2.000000e-1;
-      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationInitShort ==  (-4e+37)  )
-         optInAccelerationInitShort = 2.000000e-2;
-      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationShort ==  (-4e+37)  )
-         optInAccelerationShort = 2.000000e-2;
-      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationMaxShort ==  (-4e+37)  )
-         optInAccelerationMaxShort = 2.000000e-1;
-      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < 1 )
-         startIdx = 1;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      afLong = optInAccelerationInitLong;
-      afShort = optInAccelerationInitShort;
-      if( afLong > optInAccelerationMaxLong )
-         afLong = optInAccelerationInitLong = optInAccelerationMaxLong;
-      if( optInAccelerationLong > optInAccelerationMaxLong )
-         optInAccelerationLong = optInAccelerationMaxLong;
-      if( afShort > optInAccelerationMaxShort)
-         afShort = optInAccelerationInitShort = optInAccelerationMaxShort;
-      if( optInAccelerationShort > optInAccelerationMaxShort )
-         optInAccelerationShort = optInAccelerationMaxShort;
-      if(optInStartValue == 0)
-      {
-         retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
-            tempInt ,  tempInt ,
-            ep_temp );
-         if( ep_temp[0] > 0 )
-            isLong = 0;
-         else
-            isLong = 1;
-         if( retCode !=  TA_RetCode. TA_SUCCESS )
-         {
-            outBegIdx.value = 0 ;
-            outNbElement.value = 0 ;
-            return retCode;
-         }
-      }
-      else if( optInStartValue > 0 )
-      {
-         isLong = 1;
-      }
-      else
-      {
-         isLong = 0;
-      }
-      outBegIdx.value  = startIdx;
-      outIdx = 0;
-      todayIdx = startIdx;
-      newHigh = inHigh[todayIdx-1];
-      newLow = inLow[todayIdx-1];
-      if(optInStartValue == 0)
-      {
-         if( isLong == 1 )
-         {
-            ep = inHigh[todayIdx];
-            sar = newLow;
-         }
-         else
-         {
-            ep = inLow[todayIdx];
-            sar = newHigh;
-         }
-      }
-      else if ( optInStartValue > 0 )
-      {
-         ep = inHigh[todayIdx];
-         sar = optInStartValue;
-      }
-      else
-      {
-         ep = inLow[todayIdx];
-         sar =  Math.abs (optInStartValue);
-      }
-      newLow = inLow[todayIdx];
-      newHigh = inHigh[todayIdx];
-      while( todayIdx <= endIdx )
-      {
-         prevLow = newLow;
-         prevHigh = newHigh;
-         newLow = inLow[todayIdx];
-         newHigh = inHigh[todayIdx];
-         todayIdx++;
-         if( isLong == 1 )
-         {
-            if( newLow <= sar )
-            {
-               isLong = 0;
-               sar = ep;
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-               if( optInOffsetOnReverse != 0.0 )
-                  sar += sar * optInOffsetOnReverse;
-               outReal[outIdx++] = -sar;
-               afShort = optInAccelerationInitShort;
-               ep = newLow;
-               sar = sar + afShort * (ep - sar);
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-            }
-            else
-            {
-               outReal[outIdx++] = sar;
-               if( newHigh > ep )
-               {
-                  ep = newHigh;
-                  afLong += optInAccelerationLong;
-                  if( afLong > optInAccelerationMaxLong )
-                     afLong = optInAccelerationMaxLong;
-               }
-               sar = sar + afLong * (ep - sar);
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-            }
-         }
-         else
-         {
-            if( newHigh >= sar )
-            {
-               isLong = 1;
-               sar = ep;
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-               if( optInOffsetOnReverse != 0.0 )
-                  sar -= sar * optInOffsetOnReverse;
-               outReal[outIdx++] = sar;
-               afLong = optInAccelerationInitLong;
-               ep = newHigh;
-               sar = sar + afLong * (ep - sar);
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-            }
-            else
-            {
-               outReal[outIdx++] = -sar;
-               if( newLow < ep )
-               {
-                  ep = newLow;
-                  afShort += optInAccelerationShort;
-                  if( afShort > optInAccelerationMaxShort )
-                     afShort = optInAccelerationMaxShort;
-               }
-               sar = sar + afShort * (ep - sar);
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-            }
-         }
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode SAREXT( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      double optInStartValue,
-      double optInOffsetOnReverse,
-      double optInAccelerationInitLong,
-      double optInAccelerationLong,
-      double optInAccelerationMaxLong,
-      double optInAccelerationInitShort,
-      double optInAccelerationShort,
-      double optInAccelerationMaxShort,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      TA_RetCode retCode;
-      int isLong;
-      int todayIdx, outIdx;
-      MInteger tempInt = new MInteger() ;
-      double newHigh, newLow, prevHigh, prevLow;
-      double afLong, afShort, ep, sar;
-      double []ep_temp = new double[1] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( optInStartValue ==  (-4e+37)  )
-         optInStartValue = 0.000000e+0;
-      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInOffsetOnReverse ==  (-4e+37)  )
-         optInOffsetOnReverse = 0.000000e+0;
-      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationInitLong ==  (-4e+37)  )
-         optInAccelerationInitLong = 2.000000e-2;
-      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationLong ==  (-4e+37)  )
-         optInAccelerationLong = 2.000000e-2;
-      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationMaxLong ==  (-4e+37)  )
-         optInAccelerationMaxLong = 2.000000e-1;
-      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationInitShort ==  (-4e+37)  )
-         optInAccelerationInitShort = 2.000000e-2;
-      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationShort ==  (-4e+37)  )
-         optInAccelerationShort = 2.000000e-2;
-      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInAccelerationMaxShort ==  (-4e+37)  )
-         optInAccelerationMaxShort = 2.000000e-1;
-      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < 1 )
-         startIdx = 1;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      afLong = optInAccelerationInitLong;
-      afShort = optInAccelerationInitShort;
-      if( afLong > optInAccelerationMaxLong )
-         afLong = optInAccelerationInitLong = optInAccelerationMaxLong;
-      if( optInAccelerationLong > optInAccelerationMaxLong )
-         optInAccelerationLong = optInAccelerationMaxLong;
-      if( afShort > optInAccelerationMaxShort)
-         afShort = optInAccelerationInitShort = optInAccelerationMaxShort;
-      if( optInAccelerationShort > optInAccelerationMaxShort )
-         optInAccelerationShort = optInAccelerationMaxShort;
-      if(optInStartValue == 0)
-      {
-         retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
-            tempInt ,  tempInt ,
-            ep_temp );
-         if( ep_temp[0] > 0 )
-            isLong = 0;
-         else
-            isLong = 1;
-         if( retCode !=  TA_RetCode. TA_SUCCESS )
-         {
-            outBegIdx.value = 0 ;
-            outNbElement.value = 0 ;
-            return retCode;
-         }
-      }
-      else if( optInStartValue > 0 )
-      {
-         isLong = 1;
-      }
-      else
-      {
-         isLong = 0;
-      }
-      outBegIdx.value  = startIdx;
-      outIdx = 0;
-      todayIdx = startIdx;
-      newHigh = inHigh[todayIdx-1];
-      newLow = inLow[todayIdx-1];
-      if(optInStartValue == 0)
-      {
-         if( isLong == 1 )
-         {
-            ep = inHigh[todayIdx];
-            sar = newLow;
-         }
-         else
-         {
-            ep = inLow[todayIdx];
-            sar = newHigh;
-         }
-      }
-      else if ( optInStartValue > 0 )
-      {
-         ep = inHigh[todayIdx];
-         sar = optInStartValue;
-      }
-      else
-      {
-         ep = inLow[todayIdx];
-         sar =  Math.abs (optInStartValue);
-      }
-      newLow = inLow[todayIdx];
-      newHigh = inHigh[todayIdx];
-      while( todayIdx <= endIdx )
-      {
-         prevLow = newLow;
-         prevHigh = newHigh;
-         newLow = inLow[todayIdx];
-         newHigh = inHigh[todayIdx];
-         todayIdx++;
-         if( isLong == 1 )
-         {
-            if( newLow <= sar )
-            {
-               isLong = 0;
-               sar = ep;
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-               if( optInOffsetOnReverse != 0.0 )
-                  sar += sar * optInOffsetOnReverse;
-               outReal[outIdx++] = -sar;
-               afShort = optInAccelerationInitShort;
-               ep = newLow;
-               sar = sar + afShort * (ep - sar);
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-            }
-            else
-            {
-               outReal[outIdx++] = sar;
-               if( newHigh > ep )
-               {
-                  ep = newHigh;
-                  afLong += optInAccelerationLong;
-                  if( afLong > optInAccelerationMaxLong )
-                     afLong = optInAccelerationMaxLong;
-               }
-               sar = sar + afLong * (ep - sar);
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-            }
-         }
-         else
-         {
-            if( newHigh >= sar )
-            {
-               isLong = 1;
-               sar = ep;
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-               if( optInOffsetOnReverse != 0.0 )
-                  sar -= sar * optInOffsetOnReverse;
-               outReal[outIdx++] = sar;
-               afLong = optInAccelerationInitLong;
-               ep = newHigh;
-               sar = sar + afLong * (ep - sar);
-               if( sar > prevLow )
-                  sar = prevLow;
-               if( sar > newLow )
-                  sar = newLow;
-            }
-            else
-            {
-               outReal[outIdx++] = -sar;
-               if( newLow < ep )
-               {
-                  ep = newLow;
-                  afShort += optInAccelerationShort;
-                  if( afShort > optInAccelerationMaxShort )
-                     afShort = optInAccelerationMaxShort;
-               }
-               sar = sar + afShort * (ep - sar);
-               if( sar < prevHigh )
-                  sar = prevHigh;
-               if( sar < newHigh )
-                  sar = newHigh;
-            }
-         }
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int SMA_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod - 1;
-   }
-   public TA_RetCode SMA( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      return  INT_SMA ( startIdx, endIdx,
-         inReal, optInTimePeriod,
-         outBegIdx, outNbElement, outReal );
-   }
-   TA_RetCode INT_SMA( int startIdx,
-      int endIdx,
-      double  inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double periodTotal, tempReal;
-      int i, outIdx, trailingIdx, lookbackTotal;
-      lookbackTotal = (optInTimePeriod-1);
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      periodTotal = 0;
-      trailingIdx = startIdx-lookbackTotal;
-      i=trailingIdx;
-      if( optInTimePeriod > 1 )
-      {
-         while( i < startIdx )
-            periodTotal += inReal[i++];
-      }
-      outIdx = 0;
-      do
-      {
-         periodTotal += inReal[i++];
-         tempReal = periodTotal;
-         periodTotal -= inReal[trailingIdx++];
-         outReal[outIdx++] = tempReal / optInTimePeriod;
-      } while( i <= endIdx );
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode SMA( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      return  INT_SMA ( startIdx, endIdx,
-         inReal, optInTimePeriod,
-         outBegIdx, outNbElement, outReal );
-   }
-   TA_RetCode INT_SMA( int startIdx,
-      int endIdx,
-      float  inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double periodTotal, tempReal;
-      int i, outIdx, trailingIdx, lookbackTotal;
-      lookbackTotal = (optInTimePeriod-1);
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      periodTotal = 0;
-      trailingIdx = startIdx-lookbackTotal;
-      i=trailingIdx;
-      if( optInTimePeriod > 1 )
-      {
-         while( i < startIdx )
-            periodTotal += inReal[i++];
-      }
-      outIdx = 0;
-      do
-      {
-         periodTotal += inReal[i++];
-         tempReal = periodTotal;
-         periodTotal -= inReal[trailingIdx++];
-         outReal[outIdx++] = tempReal / optInTimePeriod;
-      } while( i <= endIdx );
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int T3_Lookback( int optInTimePeriod,
-      double optInVFactor )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( optInVFactor ==  (-4e+37)  )
-         optInVFactor = 7.000000e-1;
-      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
-         return -1;
-      return 6 * (optInTimePeriod-1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
-   }
-   public TA_RetCode T3( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      double optInVFactor,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, lookbackTotal;
-      int today, i;
-      double k, one_minus_k;
-      double e1, e2, e3, e4, e5, e6;
-      double c1, c2, c3, c4;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInVFactor ==  (-4e+37)  )
-         optInVFactor = 7.000000e-1;
-      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal = 6 * (optInTimePeriod - 1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
-      if( startIdx <= lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      today = startIdx - lookbackTotal;
-      k = 2.0/(optInTimePeriod+1.0);
-      one_minus_k = 1.0-k;
-      tempReal = inReal[today++];
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-         tempReal += inReal[today++];
-      e1 = tempReal / optInTimePeriod;
-      tempReal = e1;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         tempReal += e1;
-      }
-      e2 = tempReal / optInTimePeriod;
-      tempReal = e2;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         tempReal += e2;
-      }
-      e3 = tempReal / optInTimePeriod;
-      tempReal = e3;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         tempReal += e3;
-      }
-      e4 = tempReal / optInTimePeriod;
-      tempReal = e4;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         e4 = (k*e3)+(one_minus_k*e4);
-         tempReal += e4;
-      }
-      e5 = tempReal / optInTimePeriod;
-      tempReal = e5;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         e4 = (k*e3)+(one_minus_k*e4);
-         e5 = (k*e4)+(one_minus_k*e5);
-         tempReal += e5;
-      }
-      e6 = tempReal / optInTimePeriod;
-      while( today <= startIdx )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         e4 = (k*e3)+(one_minus_k*e4);
-         e5 = (k*e4)+(one_minus_k*e5);
-         e6 = (k*e5)+(one_minus_k*e6);
-      }
-      tempReal = optInVFactor * optInVFactor;
-      c1 = -(tempReal * optInVFactor);
-      c2 = 3.0 * (tempReal - c1);
-      c3 = -6.0 * tempReal - 3.0 * (optInVFactor-c1);
-      c4 = 1.0 + 3.0 * optInVFactor - c1 + 3.0 * tempReal;
-      outIdx = 0;
-      outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
-      while( today <= endIdx )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         e4 = (k*e3)+(one_minus_k*e4);
-         e5 = (k*e4)+(one_minus_k*e5);
-         e6 = (k*e5)+(one_minus_k*e6);
-         outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode T3( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      double optInVFactor,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, lookbackTotal;
-      int today, i;
-      double k, one_minus_k;
-      double e1, e2, e3, e4, e5, e6;
-      double c1, c2, c3, c4;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInVFactor ==  (-4e+37)  )
-         optInVFactor = 7.000000e-1;
-      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal = 6 * (optInTimePeriod - 1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
-      if( startIdx <= lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      today = startIdx - lookbackTotal;
-      k = 2.0/(optInTimePeriod+1.0);
-      one_minus_k = 1.0-k;
-      tempReal = inReal[today++];
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-         tempReal += inReal[today++];
-      e1 = tempReal / optInTimePeriod;
-      tempReal = e1;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         tempReal += e1;
-      }
-      e2 = tempReal / optInTimePeriod;
-      tempReal = e2;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         tempReal += e2;
-      }
-      e3 = tempReal / optInTimePeriod;
-      tempReal = e3;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         tempReal += e3;
-      }
-      e4 = tempReal / optInTimePeriod;
-      tempReal = e4;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         e4 = (k*e3)+(one_minus_k*e4);
-         tempReal += e4;
-      }
-      e5 = tempReal / optInTimePeriod;
-      tempReal = e5;
-      for( i=optInTimePeriod-1; i > 0 ; i-- )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         e4 = (k*e3)+(one_minus_k*e4);
-         e5 = (k*e4)+(one_minus_k*e5);
-         tempReal += e5;
-      }
-      e6 = tempReal / optInTimePeriod;
-      while( today <= startIdx )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         e4 = (k*e3)+(one_minus_k*e4);
-         e5 = (k*e4)+(one_minus_k*e5);
-         e6 = (k*e5)+(one_minus_k*e6);
-      }
-      tempReal = optInVFactor * optInVFactor;
-      c1 = -(tempReal * optInVFactor);
-      c2 = 3.0 * (tempReal - c1);
-      c3 = -6.0 * tempReal - 3.0 * (optInVFactor-c1);
-      c4 = 1.0 + 3.0 * optInVFactor - c1 + 3.0 * tempReal;
-      outIdx = 0;
-      outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
-      while( today <= endIdx )
-      {
-         e1 = (k*inReal[today++])+(one_minus_k*e1);
-         e2 = (k*e1)+(one_minus_k*e2);
-         e3 = (k*e2)+(one_minus_k*e3);
-         e4 = (k*e3)+(one_minus_k*e4);
-         e5 = (k*e4)+(one_minus_k*e5);
-         e6 = (k*e5)+(one_minus_k*e6);
-         outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int TEMA_Lookback( int optInTimePeriod )
-   {
-      int retValue;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      retValue =  EMA_Lookback ( optInTimePeriod );
-      return retValue * 3;
-   }
-   public TA_RetCode TEMA( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double []firstEMA ;
-      double []secondEMA ;
-      double k;
-      MInteger firstEMABegIdx = new MInteger() ;
-      MInteger firstEMANbElement = new MInteger() ;
-      MInteger secondEMABegIdx = new MInteger() ;
-      MInteger secondEMANbElement = new MInteger() ;
-      MInteger thirdEMABegIdx = new MInteger() ;
-      MInteger thirdEMANbElement = new MInteger() ;
-      int tempInt, outIdx, lookbackTotal, lookbackEMA;
-      int firstEMAIdx, secondEMAIdx;
-      TA_RetCode retCode;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outNbElement.value = 0 ;
-      outBegIdx.value = 0 ;
-      lookbackEMA =  EMA_Lookback ( optInTimePeriod );
-      lookbackTotal = lookbackEMA * 3;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      tempInt = lookbackTotal+(endIdx-startIdx)+1;
-      firstEMA = new double[tempInt] ;
-      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
-      retCode =  INT_EMA ( startIdx-(lookbackEMA*2), endIdx, inReal,
-         optInTimePeriod, k,
-         firstEMABegIdx ,  firstEMANbElement ,
-         firstEMA );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( firstEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      secondEMA = new double[firstEMANbElement.value] ;
-      retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
-         optInTimePeriod, k,
-         secondEMABegIdx ,  secondEMANbElement ,
-         secondEMA );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( secondEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      retCode =  INT_EMA ( 0,  secondEMANbElement.value -1, secondEMA,
-         optInTimePeriod, k,
-         thirdEMABegIdx ,  thirdEMANbElement ,
-         outReal );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( thirdEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      firstEMAIdx =  thirdEMABegIdx.value  +  secondEMABegIdx.value ;
-      secondEMAIdx =  thirdEMABegIdx.value ;
-      outBegIdx.value  = firstEMAIdx +  firstEMABegIdx.value ;
-      outIdx = 0;
-      while( outIdx <  thirdEMANbElement.value  )
-      {
-         outReal[outIdx] += (3.0*firstEMA[firstEMAIdx++]) - (3.0*secondEMA[secondEMAIdx++]);
-         outIdx++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode TEMA( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double []firstEMA ;
-      double []secondEMA ;
-      double k;
-      MInteger firstEMABegIdx = new MInteger() ;
-      MInteger firstEMANbElement = new MInteger() ;
-      MInteger secondEMABegIdx = new MInteger() ;
-      MInteger secondEMANbElement = new MInteger() ;
-      MInteger thirdEMABegIdx = new MInteger() ;
-      MInteger thirdEMANbElement = new MInteger() ;
-      int tempInt, outIdx, lookbackTotal, lookbackEMA;
-      int firstEMAIdx, secondEMAIdx;
-      TA_RetCode retCode;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outNbElement.value = 0 ;
-      outBegIdx.value = 0 ;
-      lookbackEMA =  EMA_Lookback ( optInTimePeriod );
-      lookbackTotal = lookbackEMA * 3;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      tempInt = lookbackTotal+(endIdx-startIdx)+1;
-      firstEMA = new double[tempInt] ;
-      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
-      retCode =  INT_EMA ( startIdx-(lookbackEMA*2), endIdx, inReal,
-         optInTimePeriod, k,
-         firstEMABegIdx ,  firstEMANbElement ,
-         firstEMA );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( firstEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      secondEMA = new double[firstEMANbElement.value] ;
-      retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
-         optInTimePeriod, k,
-         secondEMABegIdx ,  secondEMANbElement ,
-         secondEMA );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( secondEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      retCode =  INT_EMA ( 0,  secondEMANbElement.value -1, secondEMA,
-         optInTimePeriod, k,
-         thirdEMABegIdx ,  thirdEMANbElement ,
-         outReal );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( thirdEMANbElement.value  == 0) )
-      {
-         return retCode;
-      }
-      firstEMAIdx =  thirdEMABegIdx.value  +  secondEMABegIdx.value ;
-      secondEMAIdx =  thirdEMABegIdx.value ;
-      outBegIdx.value  = firstEMAIdx +  firstEMABegIdx.value ;
-      outIdx = 0;
-      while( outIdx <  thirdEMANbElement.value  )
-      {
-         outReal[outIdx] += (3.0*firstEMA[firstEMAIdx++]) - (3.0*secondEMA[secondEMAIdx++]);
-         outIdx++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int TRIMA_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod-1;
-   }
-   public TA_RetCode TRIMA( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int lookbackTotal;
-      double numerator;
-      double numeratorSub;
-      double numeratorAdd;
-      int i, outIdx, todayIdx, trailingIdx, middleIdx;
-      double factor, tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal = (optInTimePeriod-1);
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( (optInTimePeriod % 2) == 1 )
-      {
-         i = (optInTimePeriod>>1);
-         factor = (i+1)*(i+1);
-         factor = 1.0/factor;
-         trailingIdx = startIdx-lookbackTotal;
-         middleIdx = trailingIdx + i;
-         todayIdx = middleIdx + i;
-         numerator = 0.0;
-         numeratorSub = 0.0;
-         for( i=middleIdx; i >= trailingIdx; i-- )
-         {
-            tempReal = inReal[i];
-            numeratorSub += tempReal;
-            numerator += numeratorSub;
-         }
-         numeratorAdd = 0.0;
-         middleIdx++;
-         for( i=middleIdx; i <= todayIdx; i++ )
-         {
-            tempReal = inReal[i];
-            numeratorAdd += tempReal;
-            numerator += numeratorAdd;
-         }
-         outIdx = 0;
-         tempReal = inReal[trailingIdx++];
-         outReal[outIdx++] = numerator * factor;
-         todayIdx++;
-         while( todayIdx <= endIdx )
-         {
-            numerator -= numeratorSub;
-            numeratorSub -= tempReal;
-            tempReal = inReal[middleIdx++];
-            numeratorSub += tempReal;
-            numerator += numeratorAdd;
-            numeratorAdd -= tempReal;
-            tempReal = inReal[todayIdx++];
-            numeratorAdd += tempReal;
-            numerator += tempReal;
-            tempReal = inReal[trailingIdx++];
-            outReal[outIdx++] = numerator * factor;
-         }
-      }
-      else
-      {
-         i = (optInTimePeriod>>1);
-         factor = i*(i+1);
-         factor = 1.0/factor;
-         trailingIdx = startIdx-lookbackTotal;
-         middleIdx = trailingIdx + i - 1;
-         todayIdx = middleIdx + i;
-         numerator = 0.0;
-         numeratorSub = 0.0;
-         for( i=middleIdx; i >= trailingIdx; i-- )
-         {
-            tempReal = inReal[i];
-            numeratorSub += tempReal;
-            numerator += numeratorSub;
-         }
-         numeratorAdd = 0.0;
-         middleIdx++;
-         for( i=middleIdx; i <= todayIdx; i++ )
-         {
-            tempReal = inReal[i];
-            numeratorAdd += tempReal;
-            numerator += numeratorAdd;
-         }
-         outIdx = 0;
-         tempReal = inReal[trailingIdx++];
-         outReal[outIdx++] = numerator * factor;
-         todayIdx++;
-         while( todayIdx <= endIdx )
-         {
-            numerator -= numeratorSub;
-            numeratorSub -= tempReal;
-            tempReal = inReal[middleIdx++];
-            numeratorSub += tempReal;
-            numeratorAdd -= tempReal;
-            numerator += numeratorAdd;
-            tempReal = inReal[todayIdx++];
-            numeratorAdd += tempReal;
-            numerator += tempReal;
-            tempReal = inReal[trailingIdx++];
-            outReal[outIdx++] = numerator * factor;
-         }
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode TRIMA( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int lookbackTotal;
-      double numerator;
-      double numeratorSub;
-      double numeratorAdd;
-      int i, outIdx, todayIdx, trailingIdx, middleIdx;
-      double factor, tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal = (optInTimePeriod-1);
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( (optInTimePeriod % 2) == 1 )
-      {
-         i = (optInTimePeriod>>1);
-         factor = (i+1)*(i+1);
-         factor = 1.0/factor;
-         trailingIdx = startIdx-lookbackTotal;
-         middleIdx = trailingIdx + i;
-         todayIdx = middleIdx + i;
-         numerator = 0.0;
-         numeratorSub = 0.0;
-         for( i=middleIdx; i >= trailingIdx; i-- )
-         {
-            tempReal = inReal[i];
-            numeratorSub += tempReal;
-            numerator += numeratorSub;
-         }
-         numeratorAdd = 0.0;
-         middleIdx++;
-         for( i=middleIdx; i <= todayIdx; i++ )
-         {
-            tempReal = inReal[i];
-            numeratorAdd += tempReal;
-            numerator += numeratorAdd;
-         }
-         outIdx = 0;
-         tempReal = inReal[trailingIdx++];
-         outReal[outIdx++] = numerator * factor;
-         todayIdx++;
-         while( todayIdx <= endIdx )
-         {
-            numerator -= numeratorSub;
-            numeratorSub -= tempReal;
-            tempReal = inReal[middleIdx++];
-            numeratorSub += tempReal;
-            numerator += numeratorAdd;
-            numeratorAdd -= tempReal;
-            tempReal = inReal[todayIdx++];
-            numeratorAdd += tempReal;
-            numerator += tempReal;
-            tempReal = inReal[trailingIdx++];
-            outReal[outIdx++] = numerator * factor;
-         }
-      }
-      else
-      {
-         i = (optInTimePeriod>>1);
-         factor = i*(i+1);
-         factor = 1.0/factor;
-         trailingIdx = startIdx-lookbackTotal;
-         middleIdx = trailingIdx + i - 1;
-         todayIdx = middleIdx + i;
-         numerator = 0.0;
-         numeratorSub = 0.0;
-         for( i=middleIdx; i >= trailingIdx; i-- )
-         {
-            tempReal = inReal[i];
-            numeratorSub += tempReal;
-            numerator += numeratorSub;
-         }
-         numeratorAdd = 0.0;
-         middleIdx++;
-         for( i=middleIdx; i <= todayIdx; i++ )
-         {
-            tempReal = inReal[i];
-            numeratorAdd += tempReal;
-            numerator += numeratorAdd;
-         }
-         outIdx = 0;
-         tempReal = inReal[trailingIdx++];
-         outReal[outIdx++] = numerator * factor;
-         todayIdx++;
-         while( todayIdx <= endIdx )
-         {
-            numerator -= numeratorSub;
-            numeratorSub -= tempReal;
-            tempReal = inReal[middleIdx++];
-            numeratorSub += tempReal;
-            numeratorAdd -= tempReal;
-            numerator += numeratorAdd;
-            tempReal = inReal[todayIdx++];
-            numeratorAdd += tempReal;
-            numerator += tempReal;
-            tempReal = inReal[trailingIdx++];
-            outReal[outIdx++] = numerator * factor;
-         }
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int WMA_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod - 1;
-   }
-   public TA_RetCode WMA( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, i, trailingIdx, divider;
-      double periodSum, periodSub, tempReal, trailingValue;
-      int lookbackTotal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal = optInTimePeriod-1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      if( optInTimePeriod == 1 )
-      {
-         outBegIdx.value  = startIdx;
-         outNbElement.value  = endIdx-startIdx+1;
-         System.arraycopy(inReal,startIdx,outReal,0,(int)outNbElement.value) ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
-      outIdx = 0;
-      trailingIdx = startIdx - lookbackTotal;
-      periodSum = periodSub = (double)0.0;
-      inIdx=trailingIdx;
-      i = 1;
-      while( inIdx < startIdx )
-      {
-         tempReal = inReal[inIdx++];
-         periodSub += tempReal;
-         periodSum += tempReal*i;
-         i++;
-      }
-      trailingValue = 0.0;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[inIdx++];
-         periodSub += tempReal;
-         periodSub -= trailingValue;
-         periodSum += tempReal*optInTimePeriod;
-         trailingValue = inReal[trailingIdx++];
-         outReal[outIdx++] = periodSum / divider;
-         periodSum -= periodSub;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode WMA( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, i, trailingIdx, divider;
-      double periodSum, periodSub, tempReal, trailingValue;
-      int lookbackTotal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal = optInTimePeriod-1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      if( optInTimePeriod == 1 )
-      {
-         outBegIdx.value  = startIdx;
-         outNbElement.value  = endIdx-startIdx+1;
-         System.arraycopy(inReal,startIdx,outReal,0,(int)outNbElement.value) ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
-      outIdx = 0;
-      trailingIdx = startIdx - lookbackTotal;
-      periodSum = periodSub = (double)0.0;
-      inIdx=trailingIdx;
-      i = 1;
-      while( inIdx < startIdx )
-      {
-         tempReal = inReal[inIdx++];
-         periodSub += tempReal;
-         periodSum += tempReal*i;
-         i++;
-      }
-      trailingValue = 0.0;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[inIdx++];
-         periodSub += tempReal;
-         periodSub -= trailingValue;
-         periodSum += tempReal*optInTimePeriod;
-         trailingValue = inReal[trailingIdx++];
-         outReal[outIdx++] = periodSum / divider;
-         periodSum -= periodSub;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int ATR_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ATR.ordinal()]) ;
-   }
-   public TA_RetCode ATR( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      TA_RetCode retCode;
-      int outIdx, today, lookbackTotal;
-      int nbATR;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      double prevATR;
-      double []tempBuffer ;
-      double []prevATRTemp = new double[1] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal =  ATR_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      if( optInTimePeriod <= 1 )
-      {
-         return  TRANGE ( startIdx, endIdx,
-            inHigh, inLow, inClose,
-            outBegIdx, outNbElement, outReal );
-      }
-      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
-      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
-         inHigh, inLow, inClose,
-         outBegIdx1 ,  outNbElement1 ,
-         tempBuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         return retCode;
-      }
-      retCode =  INT_SMA ( optInTimePeriod-1,
-         optInTimePeriod-1,
-         tempBuffer, optInTimePeriod,
-         outBegIdx1 ,  outNbElement1 ,
-         prevATRTemp );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         return retCode;
-      }
-      prevATR = prevATRTemp[0];
-      today = optInTimePeriod;
-      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ATR.ordinal()]) ;
-      while( outIdx != 0 )
-      {
-         prevATR *= optInTimePeriod - 1;
-         prevATR += tempBuffer[today++];
-         prevATR /= optInTimePeriod;
-         outIdx--;
-      }
-      outIdx = 1;
-      outReal[0] = prevATR;
-      nbATR = (endIdx - startIdx)+1;
-      while( --nbATR != 0 )
-      {
-         prevATR *= optInTimePeriod - 1;
-         prevATR += tempBuffer[today++];
-         prevATR /= optInTimePeriod;
-         outReal[outIdx++] = prevATR;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return retCode;
-   }
-   public TA_RetCode ATR( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      TA_RetCode retCode;
-      int outIdx, today, lookbackTotal;
-      int nbATR;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      double prevATR;
-      double []tempBuffer ;
-      double []prevATRTemp = new double[1] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal =  ATR_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      if( optInTimePeriod <= 1 )
-      {
-         return  TRANGE ( startIdx, endIdx,
-            inHigh, inLow, inClose,
-            outBegIdx, outNbElement, outReal );
-      }
-      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
-      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
-         inHigh, inLow, inClose,
-         outBegIdx1 ,  outNbElement1 ,
-         tempBuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         return retCode;
-      }
-      retCode =  INT_SMA ( optInTimePeriod-1,
-         optInTimePeriod-1,
-         tempBuffer, optInTimePeriod,
-         outBegIdx1 ,  outNbElement1 ,
-         prevATRTemp );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         return retCode;
-      }
-      prevATR = prevATRTemp[0];
-      today = optInTimePeriod;
-      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ATR.ordinal()]) ;
-      while( outIdx != 0 )
-      {
-         prevATR *= optInTimePeriod - 1;
-         prevATR += tempBuffer[today++];
-         prevATR /= optInTimePeriod;
-         outIdx--;
-      }
-      outIdx = 1;
-      outReal[0] = prevATR;
-      nbATR = (endIdx - startIdx)+1;
-      while( --nbATR != 0 )
-      {
-         prevATR *= optInTimePeriod - 1;
-         prevATR += tempBuffer[today++];
-         prevATR /= optInTimePeriod;
-         outReal[outIdx++] = prevATR;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return retCode;
-   }
-   /* Generated */
-   public int NATR_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
-   }
-   public TA_RetCode NATR( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      TA_RetCode retCode;
-      int outIdx, today, lookbackTotal;
-      int nbATR;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      double prevATR, tempValue;
-      double []tempBuffer ;
-      double []prevATRTemp = new double[1] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal =  NATR_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      if( optInTimePeriod <= 1 )
-      {
-         return  TRANGE ( startIdx, endIdx,
-            inHigh, inLow, inClose,
-            outBegIdx, outNbElement, outReal );
-      }
-      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
-      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
-         inHigh, inLow, inClose,
-         outBegIdx1 ,  outNbElement1 ,
-         tempBuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         return retCode;
-      }
-      retCode =  INT_SMA ( optInTimePeriod-1,
-         optInTimePeriod-1,
-         tempBuffer, optInTimePeriod,
-         outBegIdx1 ,  outNbElement1 ,
-         prevATRTemp );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         return retCode;
-      }
-      prevATR = prevATRTemp[0];
-      today = optInTimePeriod;
-      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
-      while( outIdx != 0 )
-      {
-         prevATR *= optInTimePeriod - 1;
-         prevATR += tempBuffer[today++];
-         prevATR /= optInTimePeriod;
-         outIdx--;
-      }
-      outIdx = 1;
-      tempValue = inClose[today];
-      if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
-         outReal[0] = (prevATR/tempValue)*100.0;
-      else
-         outReal[0] = 0.0;
-      nbATR = (endIdx - startIdx)+1;
-      while( --nbATR != 0 )
-      {
-         prevATR *= optInTimePeriod - 1;
-         prevATR += tempBuffer[today++];
-         prevATR /= optInTimePeriod;
-         tempValue = inClose[today];
-         if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
-            outReal[outIdx] = (prevATR/tempValue)*100.0;
-         else
-            outReal[0] = 0.0;
-         outIdx++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return retCode;
-   }
-   public TA_RetCode NATR( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      TA_RetCode retCode;
-      int outIdx, today, lookbackTotal;
-      int nbATR;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      double prevATR, tempValue;
-      double []tempBuffer ;
-      double []prevATRTemp = new double[1] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal =  NATR_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      if( optInTimePeriod <= 1 )
-      {
-         return  TRANGE ( startIdx, endIdx,
-            inHigh, inLow, inClose,
-            outBegIdx, outNbElement, outReal );
-      }
-      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
-      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
-         inHigh, inLow, inClose,
-         outBegIdx1 ,  outNbElement1 ,
-         tempBuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         return retCode;
-      }
-      retCode =  INT_SMA ( optInTimePeriod-1,
-         optInTimePeriod-1,
-         tempBuffer, optInTimePeriod,
-         outBegIdx1 ,  outNbElement1 ,
-         prevATRTemp );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         return retCode;
-      }
-      prevATR = prevATRTemp[0];
-      today = optInTimePeriod;
-      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
-      while( outIdx != 0 )
-      {
-         prevATR *= optInTimePeriod - 1;
-         prevATR += tempBuffer[today++];
-         prevATR /= optInTimePeriod;
-         outIdx--;
-      }
-      outIdx = 1;
-      tempValue = inClose[today];
-      if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
-         outReal[0] = (prevATR/tempValue)*100.0;
-      else
-         outReal[0] = 0.0;
-      nbATR = (endIdx - startIdx)+1;
-      while( --nbATR != 0 )
-      {
-         prevATR *= optInTimePeriod - 1;
-         prevATR += tempBuffer[today++];
-         prevATR /= optInTimePeriod;
-         tempValue = inClose[today];
-         if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
-            outReal[outIdx] = (prevATR/tempValue)*100.0;
-         else
-            outReal[0] = 0.0;
-         outIdx++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return retCode;
-   }
-   /* Generated */
-   public int TRANGE_Lookback( )
-   {
-      return 1;
-   }
-   public TA_RetCode TRANGE( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, outIdx;
-      double val2, val3, greatest;
-      double tempCY, tempLT, tempHT;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( startIdx < 1 )
-         startIdx = 1;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      while( today <= endIdx )
-      {
-         tempLT = inLow[today];
-         tempHT = inHigh[today];
-         tempCY = inClose[today-1];
-         greatest = tempHT - tempLT;
-         val2 =  Math.abs ( tempCY - tempHT );
-         if( val2 > greatest )
-            greatest = val2;
-         val3 =  Math.abs ( tempCY - tempLT );
-         if( val3 > greatest )
-            greatest = val3;
-         outReal[outIdx++] = greatest;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode TRANGE( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, outIdx;
-      double val2, val3, greatest;
-      double tempCY, tempLT, tempHT;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( startIdx < 1 )
-         startIdx = 1;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      while( today <= endIdx )
-      {
-         tempLT = inLow[today];
-         tempHT = inHigh[today];
-         tempCY = inClose[today-1];
-         greatest = tempHT - tempLT;
-         val2 =  Math.abs ( tempCY - tempHT );
-         if( val2 > greatest )
-            greatest = val2;
-         val3 =  Math.abs ( tempCY - tempLT );
-         if( val3 > greatest )
-            greatest = val3;
-         outReal[outIdx++] = greatest;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
@@ -5657,6 +1499,512 @@ public class Core {
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
+   public int ATR_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ATR.ordinal()]) ;
+   }
+   public TA_RetCode ATR( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int outIdx, today, lookbackTotal;
+      int nbATR;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      double prevATR;
+      double []tempBuffer ;
+      double []prevATRTemp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  ATR_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      if( optInTimePeriod <= 1 )
+      {
+         return  TRANGE ( startIdx, endIdx,
+            inHigh, inLow, inClose,
+            outBegIdx, outNbElement, outReal );
+      }
+      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
+      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
+         inHigh, inLow, inClose,
+         outBegIdx1 ,  outNbElement1 ,
+         tempBuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      retCode =  INT_SMA ( optInTimePeriod-1,
+         optInTimePeriod-1,
+         tempBuffer, optInTimePeriod,
+         outBegIdx1 ,  outNbElement1 ,
+         prevATRTemp );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      prevATR = prevATRTemp[0];
+      today = optInTimePeriod;
+      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ATR.ordinal()]) ;
+      while( outIdx != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         outIdx--;
+      }
+      outIdx = 1;
+      outReal[0] = prevATR;
+      nbATR = (endIdx - startIdx)+1;
+      while( --nbATR != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         outReal[outIdx++] = prevATR;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return retCode;
+   }
+   public TA_RetCode ATR( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int outIdx, today, lookbackTotal;
+      int nbATR;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      double prevATR;
+      double []tempBuffer ;
+      double []prevATRTemp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  ATR_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      if( optInTimePeriod <= 1 )
+      {
+         return  TRANGE ( startIdx, endIdx,
+            inHigh, inLow, inClose,
+            outBegIdx, outNbElement, outReal );
+      }
+      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
+      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
+         inHigh, inLow, inClose,
+         outBegIdx1 ,  outNbElement1 ,
+         tempBuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      retCode =  INT_SMA ( optInTimePeriod-1,
+         optInTimePeriod-1,
+         tempBuffer, optInTimePeriod,
+         outBegIdx1 ,  outNbElement1 ,
+         prevATRTemp );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      prevATR = prevATRTemp[0];
+      today = optInTimePeriod;
+      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_ATR.ordinal()]) ;
+      while( outIdx != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         outIdx--;
+      }
+      outIdx = 1;
+      outReal[0] = prevATR;
+      nbATR = (endIdx - startIdx)+1;
+      while( --nbATR != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         outReal[outIdx++] = prevATR;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return retCode;
+   }
+   /* Generated */
+   public int AVGPRICE_Lookback( )
+   {
+      return 0;
+   }
+   public TA_RetCode AVGPRICE( int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      outIdx = 0;
+      for( i=startIdx; i <= endIdx; i++ )
+      {
+         outReal[outIdx++] = ( inHigh [i] +
+            inLow [i] +
+            inClose[i] +
+            inOpen [i]) / 4;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode AVGPRICE( int startIdx,
+      int endIdx,
+      float inOpen[],
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      outIdx = 0;
+      for( i=startIdx; i <= endIdx; i++ )
+      {
+         outReal[outIdx++] = ( inHigh [i] +
+            inLow [i] +
+            inClose[i] +
+            inOpen [i]) / 4;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int BBANDS_Lookback( int optInTimePeriod,
+      double optInNbDevUp,
+      double optInNbDevDn,
+      TA_MAType optInMAType )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInNbDevUp ==  (-4e+37)  )
+         optInNbDevUp = 2.000000e+0;
+      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
+         return -1;
+      if( optInNbDevDn ==  (-4e+37)  )
+         optInNbDevDn = 2.000000e+0;
+      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
+         return -1;
+      return  MA_Lookback ( optInTimePeriod, optInMAType );
+   }
+   public TA_RetCode BBANDS( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      double optInNbDevUp,
+      double optInNbDevDn,
+      TA_MAType optInMAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outRealUpperBand[],
+      double outRealMiddleBand[],
+      double outRealLowerBand[] )
+   {
+      TA_RetCode retCode;
+      int i;
+      double tempReal, tempReal2;
+      double []tempBuffer1 ;
+      double []tempBuffer2 ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInNbDevUp ==  (-4e+37)  )
+         optInNbDevUp = 2.000000e+0;
+      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInNbDevDn ==  (-4e+37)  )
+         optInNbDevDn = 2.000000e+0;
+      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( inReal == outRealUpperBand )
+      {
+         tempBuffer1 = outRealMiddleBand;
+         tempBuffer2 = outRealLowerBand;
+      }
+      else if( inReal == outRealLowerBand )
+      {
+         tempBuffer1 = outRealMiddleBand;
+         tempBuffer2 = outRealUpperBand;
+      }
+      else if( inReal == outRealMiddleBand )
+      {
+         tempBuffer1 = outRealLowerBand;
+         tempBuffer2 = outRealUpperBand;
+      }
+      else
+      {
+         tempBuffer1 = outRealMiddleBand;
+         tempBuffer2 = outRealUpperBand;
+      }
+      if( (tempBuffer1 == inReal) || (tempBuffer2 == inReal) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      retCode =  MA ( startIdx, endIdx, inReal,
+         optInTimePeriod, optInMAType,
+         outBegIdx, outNbElement, tempBuffer1 );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      if( optInMAType ==  TA_MAType. TA_MAType_SMA )
+      {
+         INT_stddev_using_precalc_ma ( inReal, tempBuffer1,
+            (int) outBegIdx.value , (int) outNbElement.value ,
+            optInTimePeriod, tempBuffer2 );
+      }
+      else
+      {
+         retCode =  STDDEV ( (int) outBegIdx.value , endIdx, inReal,
+            optInTimePeriod, 1.0,
+            outBegIdx, outNbElement, tempBuffer2 );
+         if( retCode !=  TA_RetCode. TA_SUCCESS )
+         {
+            outNbElement.value = 0 ;
+            return retCode;
+         }
+      }
+      if( tempBuffer1 != outRealMiddleBand )
+      {
+         System.arraycopy(tempBuffer1,0,outRealMiddleBand,0,outNbElement.value) ;
+      }
+      if( optInNbDevUp == optInNbDevDn )
+      {
+         if( optInNbDevUp == 1.0 )
+         {
+            for( i=0; i < (int) outNbElement.value ; i++ )
+            {
+               tempReal = tempBuffer2[i];
+               tempReal2 = outRealMiddleBand[i];
+               outRealUpperBand[i] = tempReal2 + tempReal;
+               outRealLowerBand[i] = tempReal2 - tempReal;
+            }
+         }
+         else
+         {
+            for( i=0; i < (int) outNbElement.value ; i++ )
+            {
+               tempReal = tempBuffer2[i] * optInNbDevUp;
+               tempReal2 = outRealMiddleBand[i];
+               outRealUpperBand[i] = tempReal2 + tempReal;
+               outRealLowerBand[i] = tempReal2 - tempReal;
+            }
+         }
+      }
+      else if( optInNbDevUp == 1.0 )
+      {
+         for( i=0; i < (int) outNbElement.value ; i++ )
+         {
+            tempReal = tempBuffer2[i];
+            tempReal2 = outRealMiddleBand[i];
+            outRealUpperBand[i] = tempReal2 + tempReal;
+            outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
+         }
+      }
+      else if( optInNbDevDn == 1.0 )
+      {
+         for( i=0; i < (int) outNbElement.value ; i++ )
+         {
+            tempReal = tempBuffer2[i];
+            tempReal2 = outRealMiddleBand[i];
+            outRealLowerBand[i] = tempReal2 - tempReal;
+            outRealUpperBand[i] = tempReal2 + (tempReal * optInNbDevUp);
+         }
+      }
+      else
+      {
+         for( i=0; i < (int) outNbElement.value ; i++ )
+         {
+            tempReal = tempBuffer2[i];
+            tempReal2 = outRealMiddleBand[i];
+            outRealUpperBand[i] = tempReal2 + (tempReal * optInNbDevUp);
+            outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
+         }
+      }
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode BBANDS( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      double optInNbDevUp,
+      double optInNbDevDn,
+      TA_MAType optInMAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outRealUpperBand[],
+      double outRealMiddleBand[],
+      double outRealLowerBand[] )
+   {
+      TA_RetCode retCode;
+      int i;
+      double tempReal, tempReal2;
+      double []tempBuffer1 ;
+      double []tempBuffer2 ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInNbDevUp ==  (-4e+37)  )
+         optInNbDevUp = 2.000000e+0;
+      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInNbDevDn ==  (-4e+37)  )
+         optInNbDevDn = 2.000000e+0;
+      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      tempBuffer1 = outRealMiddleBand;
+      tempBuffer2 = outRealLowerBand;
+      retCode =  MA ( startIdx, endIdx, inReal,
+         optInTimePeriod, optInMAType,
+         outBegIdx, outNbElement, tempBuffer1 );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      if( optInMAType ==  TA_MAType. TA_MAType_SMA )
+      {
+         INT_stddev_using_precalc_ma ( inReal, tempBuffer1,
+            (int) outBegIdx.value , (int) outNbElement.value ,
+            optInTimePeriod, tempBuffer2 );
+      }
+      else
+      {
+         retCode =  STDDEV ( (int) outBegIdx.value , endIdx, inReal,
+            optInTimePeriod, 1.0,
+            outBegIdx, outNbElement, tempBuffer2 );
+         if( retCode !=  TA_RetCode. TA_SUCCESS )
+         {
+            outNbElement.value = 0 ;
+            return retCode;
+         }
+      }
+      if( optInNbDevUp == optInNbDevDn )
+      {
+         if( optInNbDevUp == 1.0 )
+         {
+            for( i=0; i < (int) outNbElement.value ; i++ )
+            {
+               tempReal = tempBuffer2[i];
+               tempReal2 = outRealMiddleBand[i];
+               outRealUpperBand[i] = tempReal2 + tempReal;
+               outRealLowerBand[i] = tempReal2 - tempReal;
+            }
+         }
+         else
+         {
+            for( i=0; i < (int) outNbElement.value ; i++ )
+            {
+               tempReal = tempBuffer2[i] * optInNbDevUp;
+               tempReal2 = outRealMiddleBand[i];
+               outRealUpperBand[i] = tempReal2 + tempReal;
+               outRealLowerBand[i] = tempReal2 - tempReal;
+            }
+         }
+      }
+      else if( optInNbDevUp == 1.0 )
+      {
+         for( i=0; i < (int) outNbElement.value ; i++ )
+         {
+            tempReal = tempBuffer2[i];
+            tempReal2 = outRealMiddleBand[i];
+            outRealUpperBand[i] = tempReal2 + tempReal;
+            outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
+         }
+      }
+      else if( optInNbDevDn == 1.0 )
+      {
+         for( i=0; i < (int) outNbElement.value ; i++ )
+         {
+            tempReal = tempBuffer2[i];
+            tempReal2 = outRealMiddleBand[i];
+            outRealLowerBand[i] = tempReal2 - tempReal;
+            outRealUpperBand[i] = tempReal2 + (tempReal * optInNbDevUp);
+         }
+      }
+      else
+      {
+         for( i=0; i < (int) outNbElement.value ; i++ )
+         {
+            tempReal = tempBuffer2[i];
+            tempReal2 = outRealMiddleBand[i];
+            outRealUpperBand[i] = tempReal2 + (tempReal * optInNbDevUp);
+            outRealLowerBand[i] = tempReal2 - (tempReal * optInNbDevDn);
+         }
+      }
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
    public int BOP_Lookback( )
    {
       return 0;
@@ -5860,6813 +2208,6 @@ public class Core {
       } while( i <= endIdx );
       outNbElement.value  = outIdx;
       outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int CMO_Lookback( int optInTimePeriod )
-   {
-      int retValue;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      retValue = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
-      if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK )
-         retValue--;
-      return retValue;
-   }
-   public TA_RetCode CMO( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx;
-      int today, lookbackTotal, unstablePeriod, i;
-      double prevGain, prevLoss, prevValue, savePrevValue;
-      double tempValue1, tempValue2, tempValue3, tempValue4;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal =  CMO_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      outIdx = 0;
-      if( optInTimePeriod == 1 )
-      {
-         outBegIdx.value  = startIdx;
-         i = (endIdx-startIdx)+1;
-         outNbElement.value  = i;
-         System.arraycopy(inReal,startIdx,outReal,0,i) ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      today = startIdx-lookbackTotal;
-      prevValue = inReal[today];
-      unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
-      if( (unstablePeriod == 0) &&
-         ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
-      {
-         savePrevValue = prevValue;
-         prevGain = 0.0;
-         prevLoss = 0.0;
-         for( i=optInTimePeriod; i > 0; i-- )
-         {
-            tempValue1 = inReal[today++];
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            if( tempValue2 < 0 )
-               prevLoss -= tempValue2;
-            else
-               prevGain += tempValue2;
-         }
-         tempValue1 = prevLoss/optInTimePeriod;
-         tempValue2 = prevGain/optInTimePeriod;
-         tempValue3 = tempValue2-tempValue1;
-         tempValue4 = tempValue1+tempValue2;
-         if( ! (((-0.00000001)<tempValue4)&&(tempValue4<0.00000001))  )
-            outReal[outIdx++] = 100*(tempValue3/tempValue4);
-         else
-            outReal[outIdx++] = 0.0;
-         if( today > endIdx )
-         {
-            outBegIdx.value  = startIdx;
-            outNbElement.value  = outIdx;
-            return  TA_RetCode. TA_SUCCESS;
-         }
-         today -= optInTimePeriod;
-         prevValue = savePrevValue;
-      }
-      prevGain = 0.0;
-      prevLoss = 0.0;
-      today++;
-      for( i=optInTimePeriod; i > 0; i-- )
-      {
-         tempValue1 = inReal[today++];
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         if( tempValue2 < 0 )
-            prevLoss -= tempValue2;
-         else
-            prevGain += tempValue2;
-      }
-      prevLoss /= optInTimePeriod;
-      prevGain /= optInTimePeriod;
-      if( today > startIdx )
-      {
-         tempValue1 = prevGain+prevLoss;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      else
-      {
-         while( today < startIdx )
-         {
-            tempValue1 = inReal[today];
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            prevLoss *= (optInTimePeriod-1);
-            prevGain *= (optInTimePeriod-1);
-            if( tempValue2 < 0 )
-               prevLoss -= tempValue2;
-            else
-               prevGain += tempValue2;
-            prevLoss /= optInTimePeriod;
-            prevGain /= optInTimePeriod;
-            today++;
-         }
-      }
-      while( today <= endIdx )
-      {
-         tempValue1 = inReal[today++];
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         prevLoss *= (optInTimePeriod-1);
-         prevGain *= (optInTimePeriod-1);
-         if( tempValue2 < 0 )
-            prevLoss -= tempValue2;
-         else
-            prevGain += tempValue2;
-         prevLoss /= optInTimePeriod;
-         prevGain /= optInTimePeriod;
-         tempValue1 = prevGain+prevLoss;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode CMO( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx;
-      int today, lookbackTotal, unstablePeriod, i;
-      double prevGain, prevLoss, prevValue, savePrevValue;
-      double tempValue1, tempValue2, tempValue3, tempValue4;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal =  CMO_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      outIdx = 0;
-      if( optInTimePeriod == 1 )
-      {
-         outBegIdx.value  = startIdx;
-         i = (endIdx-startIdx)+1;
-         outNbElement.value  = i;
-         System.arraycopy(inReal,startIdx,outReal,0,i) ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      today = startIdx-lookbackTotal;
-      prevValue = inReal[today];
-      unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
-      if( (unstablePeriod == 0) &&
-         ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
-      {
-         savePrevValue = prevValue;
-         prevGain = 0.0;
-         prevLoss = 0.0;
-         for( i=optInTimePeriod; i > 0; i-- )
-         {
-            tempValue1 = inReal[today++];
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            if( tempValue2 < 0 )
-               prevLoss -= tempValue2;
-            else
-               prevGain += tempValue2;
-         }
-         tempValue1 = prevLoss/optInTimePeriod;
-         tempValue2 = prevGain/optInTimePeriod;
-         tempValue3 = tempValue2-tempValue1;
-         tempValue4 = tempValue1+tempValue2;
-         if( ! (((-0.00000001)<tempValue4)&&(tempValue4<0.00000001))  )
-            outReal[outIdx++] = 100*(tempValue3/tempValue4);
-         else
-            outReal[outIdx++] = 0.0;
-         if( today > endIdx )
-         {
-            outBegIdx.value  = startIdx;
-            outNbElement.value  = outIdx;
-            return  TA_RetCode. TA_SUCCESS;
-         }
-         today -= optInTimePeriod;
-         prevValue = savePrevValue;
-      }
-      prevGain = 0.0;
-      prevLoss = 0.0;
-      today++;
-      for( i=optInTimePeriod; i > 0; i-- )
-      {
-         tempValue1 = inReal[today++];
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         if( tempValue2 < 0 )
-            prevLoss -= tempValue2;
-         else
-            prevGain += tempValue2;
-      }
-      prevLoss /= optInTimePeriod;
-      prevGain /= optInTimePeriod;
-      if( today > startIdx )
-      {
-         tempValue1 = prevGain+prevLoss;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      else
-      {
-         while( today < startIdx )
-         {
-            tempValue1 = inReal[today];
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            prevLoss *= (optInTimePeriod-1);
-            prevGain *= (optInTimePeriod-1);
-            if( tempValue2 < 0 )
-               prevLoss -= tempValue2;
-            else
-               prevGain += tempValue2;
-            prevLoss /= optInTimePeriod;
-            prevGain /= optInTimePeriod;
-            today++;
-         }
-      }
-      while( today <= endIdx )
-      {
-         tempValue1 = inReal[today++];
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         prevLoss *= (optInTimePeriod-1);
-         prevGain *= (optInTimePeriod-1);
-         if( tempValue2 < 0 )
-            prevLoss -= tempValue2;
-         else
-            prevGain += tempValue2;
-         prevLoss /= optInTimePeriod;
-         prevGain /= optInTimePeriod;
-         tempValue1 = prevGain+prevLoss;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int DX_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( optInTimePeriod > 1 )
-         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
-      else
-         return 2;
-   }
-   public TA_RetCode DX( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, prevClose;
-      double prevMinusDM, prevPlusDM, prevTR;
-      double tempReal, tempReal2, diffP, diffM;
-      double minusDI, plusDI;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
-      else
-         lookbackTotal = 2;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      outBegIdx.value  = today = startIdx;
-      prevMinusDM = 0.0;
-      prevPlusDM = 0.0;
-      prevTR = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      prevClose = inClose[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-         else if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR += tempReal;
-         prevClose = inClose[today];
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()])  + 1;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         prevMinusDM -= prevMinusDM/optInTimePeriod;
-         prevPlusDM -= prevPlusDM/optInTimePeriod;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-         else if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-      }
-      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-      {
-         minusDI =  (100.0*(prevMinusDM/prevTR)) ;
-         plusDI =  (100.0*(prevPlusDM/prevTR)) ;
-         tempReal = minusDI+plusDI;
-         if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
-            outReal[0] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
-         else
-            outReal[0] = 0.0;
-      }
-      else
-         outReal[0] = 0.0;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         prevMinusDM -= prevMinusDM/optInTimePeriod;
-         prevPlusDM -= prevPlusDM/optInTimePeriod;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-         else if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001)) )
-         {
-            minusDI =  (100.0*(prevMinusDM/prevTR)) ;
-            plusDI =  (100.0*(prevPlusDM/prevTR)) ;
-            tempReal = minusDI+plusDI;
-            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001)) )
-               outReal[outIdx] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
-            else
-               outReal[outIdx] = outReal[outIdx-1];
-         }
-         else
-            outReal[outIdx] = outReal[outIdx-1];
-         outIdx++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode DX( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, prevClose;
-      double prevMinusDM, prevPlusDM, prevTR;
-      double tempReal, tempReal2, diffP, diffM;
-      double minusDI, plusDI;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
-      else
-         lookbackTotal = 2;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      outBegIdx.value  = today = startIdx;
-      prevMinusDM = 0.0;
-      prevPlusDM = 0.0;
-      prevTR = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      prevClose = inClose[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-         else if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR += tempReal;
-         prevClose = inClose[today];
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()])  + 1;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         prevMinusDM -= prevMinusDM/optInTimePeriod;
-         prevPlusDM -= prevPlusDM/optInTimePeriod;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-         else if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-      }
-      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-      {
-         minusDI =  (100.0*(prevMinusDM/prevTR)) ;
-         plusDI =  (100.0*(prevPlusDM/prevTR)) ;
-         tempReal = minusDI+plusDI;
-         if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
-            outReal[0] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
-         else
-            outReal[0] = 0.0;
-      }
-      else
-         outReal[0] = 0.0;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         prevMinusDM -= prevMinusDM/optInTimePeriod;
-         prevPlusDM -= prevPlusDM/optInTimePeriod;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-         else if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001)) )
-         {
-            minusDI =  (100.0*(prevMinusDM/prevTR)) ;
-            plusDI =  (100.0*(prevPlusDM/prevTR)) ;
-            tempReal = minusDI+plusDI;
-            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001)) )
-               outReal[outIdx] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
-            else
-               outReal[outIdx] = outReal[outIdx-1];
-         }
-         else
-            outReal[outIdx] = outReal[outIdx-1];
-         outIdx++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MACD_Lookback( int optInFastPeriod,
-      int optInSlowPeriod,
-      int optInSignalPeriod )
-   {
-      int tempInteger;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return -1;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return -1;
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return -1;
-      if( optInSlowPeriod < optInFastPeriod )
-      {
-         tempInteger = optInSlowPeriod;
-         optInSlowPeriod = optInFastPeriod;
-         optInFastPeriod = tempInteger;
-      }
-      return  EMA_Lookback ( optInSlowPeriod )
-         +  EMA_Lookback ( optInSignalPeriod );
-   }
-   public TA_RetCode MACD( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      int optInSignalPeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMACD[],
-      double outMACDSignal[],
-      double outMACDHist[] )
-   {
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      return  INT_MACD ( startIdx, endIdx, inReal,
-         optInFastPeriod,
-         optInSlowPeriod,
-         optInSignalPeriod,
-         outBegIdx,
-         outNbElement,
-         outMACD,
-         outMACDSignal,
-         outMACDHist );
-   }
-   TA_RetCode INT_MACD( int startIdx,
-      int endIdx,
-      double  inReal[],
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      int optInSignalPeriod_2,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMACD[],
-      double outMACDSignal[],
-      double outMACDHist[] )
-   {
-      double []slowEMABuffer ;
-      double []fastEMABuffer ;
-      double k1, k2;
-      TA_RetCode retCode;
-      int tempInteger;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      MInteger outBegIdx2 = new MInteger() ;
-      MInteger outNbElement2 = new MInteger() ;
-      int lookbackTotal, lookbackSignal;
-      int i;
-      if( optInSlowPeriod < optInFastPeriod )
-      {
-         tempInteger = optInSlowPeriod;
-         optInSlowPeriod = optInFastPeriod;
-         optInFastPeriod = tempInteger;
-      }
-      if( optInSlowPeriod != 0 )
-         k1 =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
-      else
-      {
-         optInSlowPeriod = 26;
-         k1 = (double)0.075;
-      }
-      if( optInFastPeriod != 0 )
-         k2 =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
-      else
-      {
-         optInFastPeriod = 12;
-         k2 = (double)0.15;
-      }
-      lookbackSignal =  EMA_Lookback ( optInSignalPeriod_2 );
-      lookbackTotal = lookbackSignal;
-      lookbackTotal +=  EMA_Lookback ( optInSlowPeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      tempInteger = (endIdx-startIdx)+1+lookbackSignal;
-      fastEMABuffer = new double[tempInteger] ;
-      slowEMABuffer = new double[tempInteger] ;
-      tempInteger = startIdx-lookbackSignal;
-      retCode =  INT_EMA ( tempInteger, endIdx,
-         inReal, optInSlowPeriod, k1,
-         outBegIdx1 ,  outNbElement1 , slowEMABuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      retCode =  INT_EMA ( tempInteger, endIdx,
-         inReal, optInFastPeriod, k2,
-         outBegIdx2 ,  outNbElement2 , fastEMABuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      if( ( outBegIdx1.value  != tempInteger) ||
-         ( outBegIdx2.value  != tempInteger) ||
-         ( outNbElement1.value  !=  outNbElement2.value ) ||
-         ( outNbElement1.value  != (endIdx-startIdx)+1+lookbackSignal) )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
-      }
-      for( i=0; i <  outNbElement1.value ; i++ )
-         fastEMABuffer[i] = fastEMABuffer[i] - slowEMABuffer[i];
-      System.arraycopy(fastEMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
-      retCode =  INT_EMA ( 0,  outNbElement1.value -1,
-         fastEMABuffer, optInSignalPeriod_2,  ((double)2.0 / ((double)(optInSignalPeriod_2 + 1))) ,
-         outBegIdx2 ,  outNbElement2 , outMACDSignal );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      for( i=0; i <  outNbElement2.value ; i++ )
-         outMACDHist[i] = outMACD[i]-outMACDSignal[i];
-      outBegIdx.value  = startIdx;
-      outNbElement.value  =  outNbElement2.value ;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MACD( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      int optInSignalPeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMACD[],
-      double outMACDSignal[],
-      double outMACDHist[] )
-   {
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      return  INT_MACD ( startIdx, endIdx, inReal,
-         optInFastPeriod,
-         optInSlowPeriod,
-         optInSignalPeriod,
-         outBegIdx,
-         outNbElement,
-         outMACD,
-         outMACDSignal,
-         outMACDHist );
-   }
-   TA_RetCode INT_MACD( int startIdx,
-      int endIdx,
-      float  inReal[],
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      int optInSignalPeriod_2,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMACD[],
-      double outMACDSignal[],
-      double outMACDHist[] )
-   {
-      double []slowEMABuffer ;
-      double []fastEMABuffer ;
-      double k1, k2;
-      TA_RetCode retCode;
-      int tempInteger;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      MInteger outBegIdx2 = new MInteger() ;
-      MInteger outNbElement2 = new MInteger() ;
-      int lookbackTotal, lookbackSignal;
-      int i;
-      if( optInSlowPeriod < optInFastPeriod )
-      {
-         tempInteger = optInSlowPeriod;
-         optInSlowPeriod = optInFastPeriod;
-         optInFastPeriod = tempInteger;
-      }
-      if( optInSlowPeriod != 0 )
-         k1 =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
-      else
-      {
-         optInSlowPeriod = 26;
-         k1 = (double)0.075;
-      }
-      if( optInFastPeriod != 0 )
-         k2 =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
-      else
-      {
-         optInFastPeriod = 12;
-         k2 = (double)0.15;
-      }
-      lookbackSignal =  EMA_Lookback ( optInSignalPeriod_2 );
-      lookbackTotal = lookbackSignal;
-      lookbackTotal +=  EMA_Lookback ( optInSlowPeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      tempInteger = (endIdx-startIdx)+1+lookbackSignal;
-      fastEMABuffer = new double[tempInteger] ;
-      slowEMABuffer = new double[tempInteger] ;
-      tempInteger = startIdx-lookbackSignal;
-      retCode =  INT_EMA ( tempInteger, endIdx,
-         inReal, optInSlowPeriod, k1,
-         outBegIdx1 ,  outNbElement1 , slowEMABuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      retCode =  INT_EMA ( tempInteger, endIdx,
-         inReal, optInFastPeriod, k2,
-         outBegIdx2 ,  outNbElement2 , fastEMABuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      if( ( outBegIdx1.value  != tempInteger) ||
-         ( outBegIdx2.value  != tempInteger) ||
-         ( outNbElement1.value  !=  outNbElement2.value ) ||
-         ( outNbElement1.value  != (endIdx-startIdx)+1+lookbackSignal) )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
-      }
-      for( i=0; i <  outNbElement1.value ; i++ )
-         fastEMABuffer[i] = fastEMABuffer[i] - slowEMABuffer[i];
-      System.arraycopy(fastEMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
-      retCode =  INT_EMA ( 0,  outNbElement1.value -1,
-         fastEMABuffer, optInSignalPeriod_2,  ((double)2.0 / ((double)(optInSignalPeriod_2 + 1))) ,
-         outBegIdx2 ,  outNbElement2 , outMACDSignal );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      for( i=0; i <  outNbElement2.value ; i++ )
-         outMACDHist[i] = outMACD[i]-outMACDSignal[i];
-      outBegIdx.value  = startIdx;
-      outNbElement.value  =  outNbElement2.value ;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MACDEXT_Lookback( int optInFastPeriod,
-      TA_MAType optInFastMAType,
-      int optInSlowPeriod,
-      TA_MAType optInSlowMAType,
-      int optInSignalPeriod,
-      TA_MAType optInSignalMAType )
-   {
-      int tempInteger, lookbackLargest;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return -1;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return -1;
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return -1;
-      lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
-      tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
-      if( tempInteger > lookbackLargest )
-         lookbackLargest = tempInteger;
-      return lookbackLargest +  MA_Lookback ( optInSignalPeriod, optInSignalMAType );
-   }
-   public TA_RetCode MACDEXT( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInFastPeriod,
-      TA_MAType optInFastMAType,
-      int optInSlowPeriod,
-      TA_MAType optInSlowMAType,
-      int optInSignalPeriod,
-      TA_MAType optInSignalMAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMACD[],
-      double outMACDSignal[],
-      double outMACDHist[] )
-   {
-      double []slowMABuffer ;
-      double []fastMABuffer ;
-      TA_RetCode retCode;
-      int tempInteger;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      MInteger outBegIdx2 = new MInteger() ;
-      MInteger outNbElement2 = new MInteger() ;
-      int lookbackTotal, lookbackSignal, lookbackLargest;
-      int i;
-      TA_MAType tempMAType;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInSlowPeriod < optInFastPeriod )
-      {
-         tempInteger = optInSlowPeriod;
-         optInSlowPeriod = optInFastPeriod;
-         optInFastPeriod = tempInteger;
-         tempMAType = optInSlowMAType;
-         optInSlowMAType = optInFastMAType;
-         optInFastMAType = tempMAType;
-      }
-      lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
-      tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
-      if( tempInteger > lookbackLargest )
-         lookbackLargest = tempInteger;
-      lookbackSignal =  MA_Lookback ( optInSignalPeriod, optInSignalMAType );
-      lookbackTotal = lookbackSignal+lookbackLargest;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      tempInteger = (endIdx-startIdx)+1+lookbackSignal;
-      fastMABuffer = new double[tempInteger] ;
-      slowMABuffer = new double[tempInteger] ;
-      tempInteger = startIdx-lookbackSignal;
-      retCode =  MA ( tempInteger, endIdx,
-         inReal, optInSlowPeriod, optInSlowMAType,
-         outBegIdx1 ,  outNbElement1 ,
-         slowMABuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      retCode =  MA ( tempInteger, endIdx,
-         inReal, optInFastPeriod, optInFastMAType,
-         outBegIdx2 ,  outNbElement2 ,
-         fastMABuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      if( ( outBegIdx1.value  != tempInteger) ||
-         ( outBegIdx2.value  != tempInteger) ||
-         ( outNbElement1.value  !=  outNbElement2.value ) ||
-         ( outNbElement1.value  != (endIdx-startIdx)+1+lookbackSignal) )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
-      }
-      for( i=0; i <  outNbElement1.value ; i++ )
-         fastMABuffer[i] = fastMABuffer[i] - slowMABuffer[i];
-      System.arraycopy(fastMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
-      retCode =  MA ( 0,  outNbElement1.value -1,
-         fastMABuffer, optInSignalPeriod, optInSignalMAType,
-         outBegIdx2 ,  outNbElement2 , outMACDSignal );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      for( i=0; i <  outNbElement2.value ; i++ )
-         outMACDHist[i] = outMACD[i]-outMACDSignal[i];
-      outBegIdx.value  = startIdx;
-      outNbElement.value  =  outNbElement2.value ;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MACDEXT( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInFastPeriod,
-      TA_MAType optInFastMAType,
-      int optInSlowPeriod,
-      TA_MAType optInSlowMAType,
-      int optInSignalPeriod,
-      TA_MAType optInSignalMAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMACD[],
-      double outMACDSignal[],
-      double outMACDHist[] )
-   {
-      double []slowMABuffer ;
-      double []fastMABuffer ;
-      TA_RetCode retCode;
-      int tempInteger;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      MInteger outBegIdx2 = new MInteger() ;
-      MInteger outNbElement2 = new MInteger() ;
-      int lookbackTotal, lookbackSignal, lookbackLargest;
-      int i;
-      TA_MAType tempMAType;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInSlowPeriod < optInFastPeriod )
-      {
-         tempInteger = optInSlowPeriod;
-         optInSlowPeriod = optInFastPeriod;
-         optInFastPeriod = tempInteger;
-         tempMAType = optInSlowMAType;
-         optInSlowMAType = optInFastMAType;
-         optInFastMAType = tempMAType;
-      }
-      lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
-      tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
-      if( tempInteger > lookbackLargest )
-         lookbackLargest = tempInteger;
-      lookbackSignal =  MA_Lookback ( optInSignalPeriod, optInSignalMAType );
-      lookbackTotal = lookbackSignal+lookbackLargest;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      tempInteger = (endIdx-startIdx)+1+lookbackSignal;
-      fastMABuffer = new double[tempInteger] ;
-      slowMABuffer = new double[tempInteger] ;
-      tempInteger = startIdx-lookbackSignal;
-      retCode =  MA ( tempInteger, endIdx,
-         inReal, optInSlowPeriod, optInSlowMAType,
-         outBegIdx1 ,  outNbElement1 ,
-         slowMABuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      retCode =  MA ( tempInteger, endIdx,
-         inReal, optInFastPeriod, optInFastMAType,
-         outBegIdx2 ,  outNbElement2 ,
-         fastMABuffer );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      if( ( outBegIdx1.value  != tempInteger) ||
-         ( outBegIdx2.value  != tempInteger) ||
-         ( outNbElement1.value  !=  outNbElement2.value ) ||
-         ( outNbElement1.value  != (endIdx-startIdx)+1+lookbackSignal) )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
-      }
-      for( i=0; i <  outNbElement1.value ; i++ )
-         fastMABuffer[i] = fastMABuffer[i] - slowMABuffer[i];
-      System.arraycopy(fastMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
-      retCode =  MA ( 0,  outNbElement1.value -1,
-         fastMABuffer, optInSignalPeriod, optInSignalMAType,
-         outBegIdx2 ,  outNbElement2 , outMACDSignal );
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      for( i=0; i <  outNbElement2.value ; i++ )
-         outMACDHist[i] = outMACD[i]-outMACDSignal[i];
-      outBegIdx.value  = startIdx;
-      outNbElement.value  =  outNbElement2.value ;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MACDFIX_Lookback( int optInSignalPeriod )
-   {
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return -1;
-      return  EMA_Lookback ( 26 )
-         +  EMA_Lookback ( optInSignalPeriod );
-   }
-   public TA_RetCode MACDFIX( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInSignalPeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMACD[],
-      double outMACDSignal[],
-      double outMACDHist[] )
-   {
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      return  INT_MACD ( startIdx, endIdx, inReal,
-         0,
-         0,
-         optInSignalPeriod,
-         outBegIdx,
-         outNbElement,
-         outMACD,
-         outMACDSignal,
-         outMACDHist );
-   }
-   public TA_RetCode MACDFIX( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInSignalPeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outMACD[],
-      double outMACDSignal[],
-      double outMACDHist[] )
-   {
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      return  INT_MACD ( startIdx, endIdx, inReal,
-         0,
-         0,
-         optInSignalPeriod,
-         outBegIdx,
-         outNbElement,
-         outMACD,
-         outMACDSignal,
-         outMACDHist );
-   }
-   /* Generated */
-   public int MFI_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
-   }
-   public TA_RetCode MFI( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int inVolume[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double posSumMF, negSumMF, prevValue;
-      double tempValue1, tempValue2;
-      int lookbackTotal, outIdx, i, today;
-      int mflow_Idx  = 0; MoneyFlow []mflow; int maxIdx_mflow  = (50-1) ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      { if( optInTimePeriod <= 0 ) return TA_RetCode. TA_ALLOC_ERR; mflow = new MoneyFlow[optInTimePeriod]; for( int _mflow_index =0; _mflow_index <mflow.length; _mflow_index ++) { mflow[_mflow_index ]=new MoneyFlow(); } maxIdx_mflow  = (optInTimePeriod-1); } ;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx-lookbackTotal;
-      prevValue = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-      posSumMF = 0.0;
-      negSumMF = 0.0;
-      today++;
-      for( i=optInTimePeriod; i > 0; i-- )
-      {
-         tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         tempValue1 *= inVolume[today++];
-         if( tempValue2 < 0 )
-         {
-            (mflow[mflow_Idx]). negative = tempValue1;
-            negSumMF += tempValue1;
-            (mflow[mflow_Idx]). positive = 0.0;
-         }
-         else
-         {
-            (mflow[mflow_Idx]). positive = tempValue1;
-            posSumMF += tempValue1;
-            (mflow[mflow_Idx]). negative = 0.0;
-         }
-         { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
-      }
-      if( today > startIdx )
-      {
-         tempValue1 = posSumMF+negSumMF;
-         if( tempValue1 < 1.0 )
-            outReal[outIdx++] = 0.0;
-         else
-            outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
-      }
-      else
-      {
-         while( today < startIdx )
-         {
-            posSumMF -=  (mflow[mflow_Idx]). positive;
-            negSumMF -=  (mflow[mflow_Idx]). negative;
-            tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            tempValue1 *= inVolume[today++];
-            if( tempValue2 < 0 )
-            {
-               (mflow[mflow_Idx]). negative = tempValue1;
-               negSumMF += tempValue1;
-               (mflow[mflow_Idx]). positive = 0.0;
-            }
-            else
-            {
-               (mflow[mflow_Idx]). positive = tempValue1;
-               posSumMF += tempValue1;
-               (mflow[mflow_Idx]). negative = 0.0;
-            }
-            { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
-         }
-      }
-      while( today <= endIdx )
-      {
-         posSumMF -=  (mflow[mflow_Idx]). positive;
-         negSumMF -=  (mflow[mflow_Idx]). negative;
-         tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         tempValue1 *= inVolume[today++];
-         if( tempValue2 < 0 )
-         {
-            (mflow[mflow_Idx]). negative = tempValue1;
-            negSumMF += tempValue1;
-            (mflow[mflow_Idx]). positive = 0.0;
-         }
-         else
-         {
-            (mflow[mflow_Idx]). positive = tempValue1;
-            posSumMF += tempValue1;
-            (mflow[mflow_Idx]). negative = 0.0;
-         }
-         tempValue1 = posSumMF+negSumMF;
-         if( tempValue1 < 1.0 )
-            outReal[outIdx++] = 0.0;
-         else
-            outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
-         { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MFI( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int inVolume[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double posSumMF, negSumMF, prevValue;
-      double tempValue1, tempValue2;
-      int lookbackTotal, outIdx, i, today;
-      int mflow_Idx  = 0; MoneyFlow []mflow; int maxIdx_mflow  = (50-1) ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      { if( optInTimePeriod <= 0 ) return TA_RetCode. TA_ALLOC_ERR; mflow = new MoneyFlow[optInTimePeriod]; for( int _mflow_index =0; _mflow_index <mflow.length; _mflow_index ++) { mflow[_mflow_index ]=new MoneyFlow(); } maxIdx_mflow  = (optInTimePeriod-1); } ;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx-lookbackTotal;
-      prevValue = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-      posSumMF = 0.0;
-      negSumMF = 0.0;
-      today++;
-      for( i=optInTimePeriod; i > 0; i-- )
-      {
-         tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         tempValue1 *= inVolume[today++];
-         if( tempValue2 < 0 )
-         {
-            (mflow[mflow_Idx]). negative = tempValue1;
-            negSumMF += tempValue1;
-            (mflow[mflow_Idx]). positive = 0.0;
-         }
-         else
-         {
-            (mflow[mflow_Idx]). positive = tempValue1;
-            posSumMF += tempValue1;
-            (mflow[mflow_Idx]). negative = 0.0;
-         }
-         { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
-      }
-      if( today > startIdx )
-      {
-         tempValue1 = posSumMF+negSumMF;
-         if( tempValue1 < 1.0 )
-            outReal[outIdx++] = 0.0;
-         else
-            outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
-      }
-      else
-      {
-         while( today < startIdx )
-         {
-            posSumMF -=  (mflow[mflow_Idx]). positive;
-            negSumMF -=  (mflow[mflow_Idx]). negative;
-            tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            tempValue1 *= inVolume[today++];
-            if( tempValue2 < 0 )
-            {
-               (mflow[mflow_Idx]). negative = tempValue1;
-               negSumMF += tempValue1;
-               (mflow[mflow_Idx]). positive = 0.0;
-            }
-            else
-            {
-               (mflow[mflow_Idx]). positive = tempValue1;
-               posSumMF += tempValue1;
-               (mflow[mflow_Idx]). negative = 0.0;
-            }
-            { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
-         }
-      }
-      while( today <= endIdx )
-      {
-         posSumMF -=  (mflow[mflow_Idx]). positive;
-         negSumMF -=  (mflow[mflow_Idx]). negative;
-         tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         tempValue1 *= inVolume[today++];
-         if( tempValue2 < 0 )
-         {
-            (mflow[mflow_Idx]). negative = tempValue1;
-            negSumMF += tempValue1;
-            (mflow[mflow_Idx]). positive = 0.0;
-         }
-         else
-         {
-            (mflow[mflow_Idx]). positive = tempValue1;
-            posSumMF += tempValue1;
-            (mflow[mflow_Idx]). negative = 0.0;
-         }
-         tempValue1 = posSumMF+negSumMF;
-         if( tempValue1 < 1.0 )
-            outReal[outIdx++] = 0.0;
-         else
-            outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
-         { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MINUS_DI_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( optInTimePeriod > 1 )
-         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
-      else
-         return 1;
-   }
-   public TA_RetCode MINUS_DI( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, prevClose;
-      double prevMinusDM, prevTR;
-      double tempReal, tempReal2, diffP, diffM;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
-      else
-         lookbackTotal = 1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( optInTimePeriod <= 1 )
-      {
-         outBegIdx.value  = startIdx;
-         today = startIdx-1;
-         prevHigh = inHigh[today];
-         prevLow = inLow[today];
-         prevClose = inClose[today];
-         while( today < endIdx )
-         {
-            today++;
-            tempReal = inHigh[today];
-            diffP = tempReal-prevHigh;
-            prevHigh = tempReal;
-            tempReal = inLow[today];
-            diffM = prevLow-tempReal;
-            prevLow = tempReal;
-            if( (diffM > 0) && (diffP < diffM) )
-            {
-               { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-               if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
-                  outReal[outIdx++] = (double)0.0;
-               else
-                  outReal[outIdx++] = diffM/tempReal;
-            }
-            else
-               outReal[outIdx++] = (double)0.0;
-            prevClose = inClose[today];
-         }
-         outNbElement.value  = outIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = today = startIdx;
-      prevMinusDM = 0.0;
-      prevTR = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      prevClose = inClose[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR += tempReal;
-         prevClose = inClose[today];
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()])  + 1;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
-         }
-         else
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-      }
-      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-         outReal[0] =  (100.0*(prevMinusDM/prevTR)) ;
-      else
-         outReal[0] = 0.0;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
-         }
-         else
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-            outReal[outIdx++] =  (100.0*(prevMinusDM/prevTR)) ;
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MINUS_DI( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, prevClose;
-      double prevMinusDM, prevTR;
-      double tempReal, tempReal2, diffP, diffM;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
-      else
-         lookbackTotal = 1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( optInTimePeriod <= 1 )
-      {
-         outBegIdx.value  = startIdx;
-         today = startIdx-1;
-         prevHigh = inHigh[today];
-         prevLow = inLow[today];
-         prevClose = inClose[today];
-         while( today < endIdx )
-         {
-            today++;
-            tempReal = inHigh[today];
-            diffP = tempReal-prevHigh;
-            prevHigh = tempReal;
-            tempReal = inLow[today];
-            diffM = prevLow-tempReal;
-            prevLow = tempReal;
-            if( (diffM > 0) && (diffP < diffM) )
-            {
-               { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-               if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
-                  outReal[outIdx++] = (double)0.0;
-               else
-                  outReal[outIdx++] = diffM/tempReal;
-            }
-            else
-               outReal[outIdx++] = (double)0.0;
-            prevClose = inClose[today];
-         }
-         outNbElement.value  = outIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = today = startIdx;
-      prevMinusDM = 0.0;
-      prevTR = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      prevClose = inClose[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR += tempReal;
-         prevClose = inClose[today];
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()])  + 1;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
-         }
-         else
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-      }
-      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-         outReal[0] =  (100.0*(prevMinusDM/prevTR)) ;
-      else
-         outReal[0] = 0.0;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
-         }
-         else
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-            outReal[outIdx++] =  (100.0*(prevMinusDM/prevTR)) ;
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MINUS_DM_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( optInTimePeriod > 1 )
-         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
-      else
-         return 1;
-   }
-   public TA_RetCode MINUS_DM( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, tempReal;
-      double prevMinusDM;
-      double diffP, diffM;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
-      else
-         lookbackTotal = 1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( optInTimePeriod <= 1 )
-      {
-         outBegIdx.value  = startIdx;
-         today = startIdx-1;
-         prevHigh = inHigh[today];
-         prevLow = inLow[today];
-         while( today < endIdx )
-         {
-            today++;
-            tempReal = inHigh[today];
-            diffP = tempReal-prevHigh;
-            prevHigh = tempReal;
-            tempReal = inLow[today];
-            diffM = prevLow-tempReal;
-            prevLow = tempReal;
-            if( (diffM > 0) && (diffP < diffM) )
-            {
-               outReal[outIdx++] = diffM;
-            }
-            else
-               outReal[outIdx++] = 0;
-         }
-         outNbElement.value  = outIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      prevMinusDM = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()]) ;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
-         }
-         else
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
-         }
-      }
-      outReal[0] = prevMinusDM;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
-         }
-         else
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
-         }
-         outReal[outIdx++] = prevMinusDM;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MINUS_DM( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, tempReal;
-      double prevMinusDM;
-      double diffP, diffM;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
-      else
-         lookbackTotal = 1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( optInTimePeriod <= 1 )
-      {
-         outBegIdx.value  = startIdx;
-         today = startIdx-1;
-         prevHigh = inHigh[today];
-         prevLow = inLow[today];
-         while( today < endIdx )
-         {
-            today++;
-            tempReal = inHigh[today];
-            diffP = tempReal-prevHigh;
-            prevHigh = tempReal;
-            tempReal = inLow[today];
-            diffM = prevLow-tempReal;
-            prevLow = tempReal;
-            if( (diffM > 0) && (diffP < diffM) )
-            {
-               outReal[outIdx++] = diffM;
-            }
-            else
-               outReal[outIdx++] = 0;
-         }
-         outNbElement.value  = outIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      prevMinusDM = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM += diffM;
-         }
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()]) ;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
-         }
-         else
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
-         }
-      }
-      outReal[0] = prevMinusDM;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffM > 0) && (diffP < diffM) )
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
-         }
-         else
-         {
-            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
-         }
-         outReal[outIdx++] = prevMinusDM;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MOM_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod;
-   }
-   public TA_RetCode MOM( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-         outReal[outIdx++] = inReal[inIdx++] - inReal[trailingIdx++];
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MOM( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-         outReal[outIdx++] = inReal[inIdx++] - inReal[trailingIdx++];
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int PPO_Lookback( int optInFastPeriod,
-      int optInSlowPeriod,
-      TA_MAType optInMAType )
-   {
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return -1;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return -1;
-      return  MA_Lookback (  (((optInSlowPeriod) > (optInFastPeriod)) ? (optInSlowPeriod) : (optInFastPeriod)) , optInMAType );
-   }
-   public TA_RetCode PPO( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      TA_MAType optInMAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double []tempBuffer ;
-      TA_RetCode retCode;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      tempBuffer = new double[endIdx-startIdx+1] ;
-      retCode =  INT_PO ( startIdx, endIdx, inReal,
-         optInFastPeriod,
-         optInSlowPeriod,
-         optInMAType,
-         outBegIdx,
-         outNbElement,
-         outReal,
-         tempBuffer,
-         1 );
-      return retCode;
-   }
-   public TA_RetCode PPO( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      TA_MAType optInMAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double []tempBuffer ;
-      TA_RetCode retCode;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      tempBuffer = new double[endIdx-startIdx+1] ;
-      retCode =  INT_PO ( startIdx, endIdx, inReal,
-         optInFastPeriod,
-         optInSlowPeriod,
-         optInMAType,
-         outBegIdx,
-         outNbElement,
-         outReal,
-         tempBuffer,
-         1 );
-      return retCode;
-   }
-   /* Generated */
-   public int PLUS_DI_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( optInTimePeriod > 1 )
-         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
-      else
-         return 1;
-   }
-   public TA_RetCode PLUS_DI( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, prevClose;
-      double prevPlusDM, prevTR;
-      double tempReal, tempReal2, diffP, diffM;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
-      else
-         lookbackTotal = 1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( optInTimePeriod <= 1 )
-      {
-         outBegIdx.value  = startIdx;
-         today = startIdx-1;
-         prevHigh = inHigh[today];
-         prevLow = inLow[today];
-         prevClose = inClose[today];
-         while( today < endIdx )
-         {
-            today++;
-            tempReal = inHigh[today];
-            diffP = tempReal-prevHigh;
-            prevHigh = tempReal;
-            tempReal = inLow[today];
-            diffM = prevLow-tempReal;
-            prevLow = tempReal;
-            if( (diffP > 0) && (diffP > diffM) )
-            {
-               { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-               if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
-                  outReal[outIdx++] = (double)0.0;
-               else
-                  outReal[outIdx++] = diffP/tempReal;
-            }
-            else
-               outReal[outIdx++] = (double)0.0;
-            prevClose = inClose[today];
-         }
-         outNbElement.value  = outIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = today = startIdx;
-      prevPlusDM = 0.0;
-      prevTR = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      prevClose = inClose[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR += tempReal;
-         prevClose = inClose[today];
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()])  + 1;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
-         }
-         else
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-      }
-      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-         outReal[0] =  (100.0*(prevPlusDM/prevTR)) ;
-      else
-         outReal[0] = 0.0;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
-         }
-         else
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-            outReal[outIdx++] =  (100.0*(prevPlusDM/prevTR)) ;
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode PLUS_DI( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, prevClose;
-      double prevPlusDM, prevTR;
-      double tempReal, tempReal2, diffP, diffM;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
-      else
-         lookbackTotal = 1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( optInTimePeriod <= 1 )
-      {
-         outBegIdx.value  = startIdx;
-         today = startIdx-1;
-         prevHigh = inHigh[today];
-         prevLow = inLow[today];
-         prevClose = inClose[today];
-         while( today < endIdx )
-         {
-            today++;
-            tempReal = inHigh[today];
-            diffP = tempReal-prevHigh;
-            prevHigh = tempReal;
-            tempReal = inLow[today];
-            diffM = prevLow-tempReal;
-            prevLow = tempReal;
-            if( (diffP > 0) && (diffP > diffM) )
-            {
-               { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-               if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
-                  outReal[outIdx++] = (double)0.0;
-               else
-                  outReal[outIdx++] = diffP/tempReal;
-            }
-            else
-               outReal[outIdx++] = (double)0.0;
-            prevClose = inClose[today];
-         }
-         outNbElement.value  = outIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = today = startIdx;
-      prevPlusDM = 0.0;
-      prevTR = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      prevClose = inClose[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR += tempReal;
-         prevClose = inClose[today];
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()])  + 1;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
-         }
-         else
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-      }
-      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-         outReal[0] =  (100.0*(prevPlusDM/prevTR)) ;
-      else
-         outReal[0] = 0.0;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
-         }
-         else
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
-         }
-         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
-         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
-         prevClose = inClose[today];
-         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
-            outReal[outIdx++] =  (100.0*(prevPlusDM/prevTR)) ;
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int PLUS_DM_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( optInTimePeriod > 1 )
-         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
-      else
-         return 1;
-   }
-   public TA_RetCode PLUS_DM( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, tempReal;
-      double prevPlusDM;
-      double diffP, diffM;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
-      else
-         lookbackTotal = 1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( optInTimePeriod <= 1 )
-      {
-         outBegIdx.value  = startIdx;
-         today = startIdx-1;
-         prevHigh = inHigh[today];
-         prevLow = inLow[today];
-         while( today < endIdx )
-         {
-            today++;
-            tempReal = inHigh[today];
-            diffP = tempReal-prevHigh;
-            prevHigh = tempReal;
-            tempReal = inLow[today];
-            diffM = prevLow-tempReal;
-            prevLow = tempReal;
-            if( (diffP > 0) && (diffP > diffM) )
-            {
-               outReal[outIdx++] = diffP;
-            }
-            else
-               outReal[outIdx++] = 0;
-         }
-         outNbElement.value  = outIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      prevPlusDM = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()]) ;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
-         }
-         else
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
-         }
-      }
-      outReal[0] = prevPlusDM;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
-         }
-         else
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
-         }
-         outReal[outIdx++] = prevPlusDM;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode PLUS_DM( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, lookbackTotal, outIdx;
-      double prevHigh, prevLow, tempReal;
-      double prevPlusDM;
-      double diffP, diffM;
-      int i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInTimePeriod > 1 )
-         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
-      else
-         lookbackTotal = 1;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      if( optInTimePeriod <= 1 )
-      {
-         outBegIdx.value  = startIdx;
-         today = startIdx-1;
-         prevHigh = inHigh[today];
-         prevLow = inLow[today];
-         while( today < endIdx )
-         {
-            today++;
-            tempReal = inHigh[today];
-            diffP = tempReal-prevHigh;
-            prevHigh = tempReal;
-            tempReal = inLow[today];
-            diffM = prevLow-tempReal;
-            prevLow = tempReal;
-            if( (diffP > 0) && (diffP > diffM) )
-            {
-               outReal[outIdx++] = diffP;
-            }
-            else
-               outReal[outIdx++] = 0;
-         }
-         outNbElement.value  = outIdx;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      prevPlusDM = 0.0;
-      today = startIdx - lookbackTotal;
-      prevHigh = inHigh[today];
-      prevLow = inLow[today];
-      i = optInTimePeriod-1;
-      while( i-- > 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM += diffP;
-         }
-      }
-      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()]) ;
-      while( i-- != 0 )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
-         }
-         else
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
-         }
-      }
-      outReal[0] = prevPlusDM;
-      outIdx = 1;
-      while( today < endIdx )
-      {
-         today++;
-         tempReal = inHigh[today];
-         diffP = tempReal-prevHigh;
-         prevHigh = tempReal;
-         tempReal = inLow[today];
-         diffM = prevLow-tempReal;
-         prevLow = tempReal;
-         if( (diffP > 0) && (diffP > diffM) )
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
-         }
-         else
-         {
-            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
-         }
-         outReal[outIdx++] = prevPlusDM;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int ROC_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod;
-   }
-   public TA_RetCode ROC( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[trailingIdx++];
-         if( tempReal != 0.0 )
-            outReal[outIdx++] = ((inReal[inIdx] / tempReal)-1.0)*100.0;
-         else
-            outReal[outIdx++] = 0.0;
-         inIdx++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode ROC( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[trailingIdx++];
-         if( tempReal != 0.0 )
-            outReal[outIdx++] = ((inReal[inIdx] / tempReal)-1.0)*100.0;
-         else
-            outReal[outIdx++] = 0.0;
-         inIdx++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int ROCP_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod;
-   }
-   public TA_RetCode ROCP( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[trailingIdx++];
-         if( tempReal != 0.0 )
-            outReal[outIdx++] = (inReal[inIdx]-tempReal)/tempReal;
-         else
-            outReal[outIdx++] = 0.0;
-         inIdx++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode ROCP( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[trailingIdx++];
-         if( tempReal != 0.0 )
-            outReal[outIdx++] = (inReal[inIdx]-tempReal)/tempReal;
-         else
-            outReal[outIdx++] = 0.0;
-         inIdx++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int ROCR_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod;
-   }
-   public TA_RetCode ROCR( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[trailingIdx++];
-         if( tempReal != 0.0 )
-            outReal[outIdx++] = (inReal[inIdx] / tempReal);
-         else
-            outReal[outIdx++] = 0.0;
-         inIdx++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode ROCR( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[trailingIdx++];
-         if( tempReal != 0.0 )
-            outReal[outIdx++] = (inReal[inIdx] / tempReal);
-         else
-            outReal[outIdx++] = 0.0;
-         inIdx++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int ROCR100_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod;
-   }
-   public TA_RetCode ROCR100( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[trailingIdx++];
-         if( tempReal != 0.0 )
-            outReal[outIdx++] = (inReal[inIdx] / tempReal)*100.0;
-         else
-            outReal[outIdx++] = 0.0;
-         inIdx++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode ROCR100( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int inIdx, outIdx, trailingIdx;
-      double tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( startIdx < optInTimePeriod )
-         startIdx = optInTimePeriod;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      inIdx = startIdx;
-      trailingIdx = startIdx - optInTimePeriod;
-      while( inIdx <= endIdx )
-      {
-         tempReal = inReal[trailingIdx++];
-         if( tempReal != 0.0 )
-            outReal[outIdx++] = (inReal[inIdx] / tempReal)*100.0;
-         else
-            outReal[outIdx++] = 0.0;
-         inIdx++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int RSI_Lookback( int optInTimePeriod )
-   {
-      int retValue;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      retValue = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
-      if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK )
-         retValue--;
-      return retValue;
-   }
-   public TA_RetCode RSI( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx;
-      int today, lookbackTotal, unstablePeriod, i;
-      double prevGain, prevLoss, prevValue, savePrevValue;
-      double tempValue1, tempValue2;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal =  RSI_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      outIdx = 0;
-      if( optInTimePeriod == 1 )
-      {
-         outBegIdx.value  = startIdx;
-         i = (endIdx-startIdx)+1;
-         outNbElement.value  = i;
-         System.arraycopy(inReal,startIdx,outReal,0,i) ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      today = startIdx-lookbackTotal;
-      prevValue = inReal[today];
-      unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
-      if( (unstablePeriod == 0) &&
-         ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
-      {
-         savePrevValue = prevValue;
-         prevGain = 0.0;
-         prevLoss = 0.0;
-         for( i=optInTimePeriod; i > 0; i-- )
-         {
-            tempValue1 = inReal[today++];
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            if( tempValue2 < 0 )
-               prevLoss -= tempValue2;
-            else
-               prevGain += tempValue2;
-         }
-         tempValue1 = prevLoss/optInTimePeriod;
-         tempValue2 = prevGain/optInTimePeriod;
-         tempValue1 = tempValue2+tempValue1;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100*(tempValue2/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-         if( today > endIdx )
-         {
-            outBegIdx.value  = startIdx;
-            outNbElement.value  = outIdx;
-            return  TA_RetCode. TA_SUCCESS;
-         }
-         today -= optInTimePeriod;
-         prevValue = savePrevValue;
-      }
-      prevGain = 0.0;
-      prevLoss = 0.0;
-      today++;
-      for( i=optInTimePeriod; i > 0; i-- )
-      {
-         tempValue1 = inReal[today++];
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         if( tempValue2 < 0 )
-            prevLoss -= tempValue2;
-         else
-            prevGain += tempValue2;
-      }
-      prevLoss /= optInTimePeriod;
-      prevGain /= optInTimePeriod;
-      if( today > startIdx )
-      {
-         tempValue1 = prevGain+prevLoss;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*(prevGain/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      else
-      {
-         while( today < startIdx )
-         {
-            tempValue1 = inReal[today];
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            prevLoss *= (optInTimePeriod-1);
-            prevGain *= (optInTimePeriod-1);
-            if( tempValue2 < 0 )
-               prevLoss -= tempValue2;
-            else
-               prevGain += tempValue2;
-            prevLoss /= optInTimePeriod;
-            prevGain /= optInTimePeriod;
-            today++;
-         }
-      }
-      while( today <= endIdx )
-      {
-         tempValue1 = inReal[today++];
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         prevLoss *= (optInTimePeriod-1);
-         prevGain *= (optInTimePeriod-1);
-         if( tempValue2 < 0 )
-            prevLoss -= tempValue2;
-         else
-            prevGain += tempValue2;
-         prevLoss /= optInTimePeriod;
-         prevGain /= optInTimePeriod;
-         tempValue1 = prevGain+prevLoss;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*(prevGain/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode RSI( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx;
-      int today, lookbackTotal, unstablePeriod, i;
-      double prevGain, prevLoss, prevValue, savePrevValue;
-      double tempValue1, tempValue2;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackTotal =  RSI_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-         return  TA_RetCode. TA_SUCCESS;
-      outIdx = 0;
-      if( optInTimePeriod == 1 )
-      {
-         outBegIdx.value  = startIdx;
-         i = (endIdx-startIdx)+1;
-         outNbElement.value  = i;
-         System.arraycopy(inReal,startIdx,outReal,0,i) ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      today = startIdx-lookbackTotal;
-      prevValue = inReal[today];
-      unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
-      if( (unstablePeriod == 0) &&
-         ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
-      {
-         savePrevValue = prevValue;
-         prevGain = 0.0;
-         prevLoss = 0.0;
-         for( i=optInTimePeriod; i > 0; i-- )
-         {
-            tempValue1 = inReal[today++];
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            if( tempValue2 < 0 )
-               prevLoss -= tempValue2;
-            else
-               prevGain += tempValue2;
-         }
-         tempValue1 = prevLoss/optInTimePeriod;
-         tempValue2 = prevGain/optInTimePeriod;
-         tempValue1 = tempValue2+tempValue1;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100*(tempValue2/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-         if( today > endIdx )
-         {
-            outBegIdx.value  = startIdx;
-            outNbElement.value  = outIdx;
-            return  TA_RetCode. TA_SUCCESS;
-         }
-         today -= optInTimePeriod;
-         prevValue = savePrevValue;
-      }
-      prevGain = 0.0;
-      prevLoss = 0.0;
-      today++;
-      for( i=optInTimePeriod; i > 0; i-- )
-      {
-         tempValue1 = inReal[today++];
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         if( tempValue2 < 0 )
-            prevLoss -= tempValue2;
-         else
-            prevGain += tempValue2;
-      }
-      prevLoss /= optInTimePeriod;
-      prevGain /= optInTimePeriod;
-      if( today > startIdx )
-      {
-         tempValue1 = prevGain+prevLoss;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*(prevGain/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      else
-      {
-         while( today < startIdx )
-         {
-            tempValue1 = inReal[today];
-            tempValue2 = tempValue1 - prevValue;
-            prevValue = tempValue1;
-            prevLoss *= (optInTimePeriod-1);
-            prevGain *= (optInTimePeriod-1);
-            if( tempValue2 < 0 )
-               prevLoss -= tempValue2;
-            else
-               prevGain += tempValue2;
-            prevLoss /= optInTimePeriod;
-            prevGain /= optInTimePeriod;
-            today++;
-         }
-      }
-      while( today <= endIdx )
-      {
-         tempValue1 = inReal[today++];
-         tempValue2 = tempValue1 - prevValue;
-         prevValue = tempValue1;
-         prevLoss *= (optInTimePeriod-1);
-         prevGain *= (optInTimePeriod-1);
-         if( tempValue2 < 0 )
-            prevLoss -= tempValue2;
-         else
-            prevGain += tempValue2;
-         prevLoss /= optInTimePeriod;
-         prevGain /= optInTimePeriod;
-         tempValue1 = prevGain+prevLoss;
-         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
-            outReal[outIdx++] = 100.0*(prevGain/tempValue1);
-         else
-            outReal[outIdx++] = 0.0;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int STOCH_Lookback( int optInFastK_Period,
-      int optInSlowK_Period,
-      TA_MAType optInSlowK_MAType,
-      int optInSlowD_Period,
-      TA_MAType optInSlowD_MAType )
-   {
-      int retValue;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return -1;
-      if( (int)optInSlowK_Period ==  ( Integer.MIN_VALUE )  )
-         optInSlowK_Period = 3;
-      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
-         return -1;
-      if( (int)optInSlowD_Period ==  ( Integer.MIN_VALUE )  )
-         optInSlowD_Period = 3;
-      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
-         return -1;
-      retValue = (optInFastK_Period - 1);
-      retValue +=  MA_Lookback ( optInSlowK_Period, optInSlowK_MAType );
-      retValue +=  MA_Lookback ( optInSlowD_Period, optInSlowD_MAType );
-      return retValue;
-   }
-   public TA_RetCode STOCH( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInFastK_Period,
-      int optInSlowK_Period,
-      TA_MAType optInSlowK_MAType,
-      int optInSlowD_Period,
-      TA_MAType optInSlowD_MAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outSlowK[],
-      double outSlowD[] )
-   {
-      TA_RetCode retCode;
-      double lowest, highest, tmp, diff;
-      double []tempBuffer ;
-      int outIdx, lowestIdx, highestIdx;
-      int lookbackTotal, lookbackK, lookbackKSlow, lookbackDSlow;
-      int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowK_Period ==  ( Integer.MIN_VALUE )  )
-         optInSlowK_Period = 3;
-      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowD_Period ==  ( Integer.MIN_VALUE )  )
-         optInSlowD_Period = 3;
-      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackK = optInFastK_Period-1;
-      lookbackKSlow =  MA_Lookback ( optInSlowK_Period, optInSlowK_MAType );
-      lookbackDSlow =  MA_Lookback ( optInSlowD_Period, optInSlowD_MAType );
-      lookbackTotal = lookbackK + lookbackDSlow + lookbackKSlow;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      trailingIdx = startIdx-lookbackTotal;
-      today = trailingIdx+lookbackK;
-      lowestIdx = highestIdx = -1;
-      diff = highest = lowest = 0.0;
-      if( (outSlowK == inHigh) ||
-         (outSlowK == inLow) ||
-         (outSlowK == inClose) )
-      {
-         tempBuffer = outSlowK;
-      }
-      else if( (outSlowD == inHigh) ||
-         (outSlowD == inLow) ||
-         (outSlowD == inClose) )
-      {
-         tempBuffer = outSlowD;
-      }
-      else
-      {
-         tempBuffer = new double[endIdx-today+1] ;
-      }
-      while( today <= endIdx )
-      {
-         tmp = inLow[today];
-         if( lowestIdx < trailingIdx )
-         {
-            lowestIdx = trailingIdx;
-            lowest = inLow[lowestIdx];
-            i = lowestIdx;
-            while( ++i<=today )
-            {
-               tmp = inLow[i];
-               if( tmp < lowest )
-               {
-                  lowestIdx = i;
-                  lowest = tmp;
-               }
-            }
-            diff = (highest - lowest)/100.0;
-         }
-         else if( tmp <= lowest )
-         {
-            lowestIdx = today;
-            lowest = tmp;
-            diff = (highest - lowest)/100.0;
-         }
-         tmp = inHigh[today];
-         if( highestIdx < trailingIdx )
-         {
-            highestIdx = trailingIdx;
-            highest = inHigh[highestIdx];
-            i = highestIdx;
-            while( ++i<=today )
-            {
-               tmp = inHigh[i];
-               if( tmp > highest )
-               {
-                  highestIdx = i;
-                  highest = tmp;
-               }
-            }
-            diff = (highest - lowest)/100.0;
-         }
-         else if( tmp >= highest )
-         {
-            highestIdx = today;
-            highest = tmp;
-            diff = (highest - lowest)/100.0;
-         }
-         if( diff != 0.0 )
-            tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
-         else
-            tempBuffer[outIdx++] = 0.0;
-         trailingIdx++;
-         today++;
-      }
-      retCode =  MA ( 0, outIdx-1,
-         tempBuffer, optInSlowK_Period,
-         optInSlowK_MAType,
-         outBegIdx, outNbElement, tempBuffer );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      retCode =  MA ( 0, (int) outNbElement.value -1,
-         tempBuffer, optInSlowD_Period,
-         optInSlowD_MAType,
-         outBegIdx, outNbElement, outSlowD );
-      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNbElement.value) ;
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode STOCH( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInFastK_Period,
-      int optInSlowK_Period,
-      TA_MAType optInSlowK_MAType,
-      int optInSlowD_Period,
-      TA_MAType optInSlowD_MAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outSlowK[],
-      double outSlowD[] )
-   {
-      TA_RetCode retCode;
-      double lowest, highest, tmp, diff;
-      double []tempBuffer ;
-      int outIdx, lowestIdx, highestIdx;
-      int lookbackTotal, lookbackK, lookbackKSlow, lookbackDSlow;
-      int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowK_Period ==  ( Integer.MIN_VALUE )  )
-         optInSlowK_Period = 3;
-      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowD_Period ==  ( Integer.MIN_VALUE )  )
-         optInSlowD_Period = 3;
-      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackK = optInFastK_Period-1;
-      lookbackKSlow =  MA_Lookback ( optInSlowK_Period, optInSlowK_MAType );
-      lookbackDSlow =  MA_Lookback ( optInSlowD_Period, optInSlowD_MAType );
-      lookbackTotal = lookbackK + lookbackDSlow + lookbackKSlow;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      trailingIdx = startIdx-lookbackTotal;
-      today = trailingIdx+lookbackK;
-      lowestIdx = highestIdx = -1;
-      diff = highest = lowest = 0.0;
-      tempBuffer = new double[endIdx-today+1] ;
-      while( today <= endIdx )
-      {
-         tmp = inLow[today];
-         if( lowestIdx < trailingIdx )
-         {
-            lowestIdx = trailingIdx;
-            lowest = inLow[lowestIdx];
-            i = lowestIdx;
-            while( ++i<=today )
-            {
-               tmp = inLow[i];
-               if( tmp < lowest )
-               {
-                  lowestIdx = i;
-                  lowest = tmp;
-               }
-            }
-            diff = (highest - lowest)/100.0;
-         }
-         else if( tmp <= lowest )
-         {
-            lowestIdx = today;
-            lowest = tmp;
-            diff = (highest - lowest)/100.0;
-         }
-         tmp = inHigh[today];
-         if( highestIdx < trailingIdx )
-         {
-            highestIdx = trailingIdx;
-            highest = inHigh[highestIdx];
-            i = highestIdx;
-            while( ++i<=today )
-            {
-               tmp = inHigh[i];
-               if( tmp > highest )
-               {
-                  highestIdx = i;
-                  highest = tmp;
-               }
-            }
-            diff = (highest - lowest)/100.0;
-         }
-         else if( tmp >= highest )
-         {
-            highestIdx = today;
-            highest = tmp;
-            diff = (highest - lowest)/100.0;
-         }
-         if( diff != 0.0 )
-            tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
-         else
-            tempBuffer[outIdx++] = 0.0;
-         trailingIdx++;
-         today++;
-      }
-      retCode =  MA ( 0, outIdx-1,
-         tempBuffer, optInSlowK_Period,
-         optInSlowK_MAType,
-         outBegIdx, outNbElement, tempBuffer );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      retCode =  MA ( 0, (int) outNbElement.value -1,
-         tempBuffer, optInSlowD_Period,
-         optInSlowD_MAType,
-         outBegIdx, outNbElement, outSlowD );
-      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNbElement.value) ;
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int STOCHF_Lookback( int optInFastK_Period,
-      int optInFastD_Period,
-      TA_MAType optInFastD_MAType )
-   {
-      int retValue;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return -1;
-      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return -1;
-      retValue = (optInFastK_Period - 1);
-      retValue +=  MA_Lookback ( optInFastD_Period, optInFastD_MAType );
-      return retValue;
-   }
-   public TA_RetCode STOCHF( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInFastK_Period,
-      int optInFastD_Period,
-      TA_MAType optInFastD_MAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outFastK[],
-      double outFastD[] )
-   {
-      TA_RetCode retCode;
-      double lowest, highest, tmp, diff;
-      double []tempBuffer ;
-      int outIdx, lowestIdx, highestIdx;
-      int lookbackTotal, lookbackK, lookbackFastD;
-      int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackK = optInFastK_Period-1;
-      lookbackFastD =  MA_Lookback ( optInFastD_Period, optInFastD_MAType );
-      lookbackTotal = lookbackK + lookbackFastD;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      trailingIdx = startIdx-lookbackTotal;
-      today = trailingIdx+lookbackK;
-      lowestIdx = highestIdx = -1;
-      diff = highest = lowest = 0.0;
-      if( (outFastK == inHigh) ||
-         (outFastK == inLow) ||
-         (outFastK == inClose) )
-      {
-         tempBuffer = outFastK;
-      }
-      else if( (outFastD == inHigh) ||
-         (outFastD == inLow) ||
-         (outFastD == inClose) )
-      {
-         tempBuffer = outFastD;
-      }
-      else
-      {
-         tempBuffer = new double[endIdx-today+1] ;
-      }
-      while( today <= endIdx )
-      {
-         tmp = inLow[today];
-         if( lowestIdx < trailingIdx )
-         {
-            lowestIdx = trailingIdx;
-            lowest = inLow[lowestIdx];
-            i = lowestIdx;
-            while( ++i<=today )
-            {
-               tmp = inLow[i];
-               if( tmp < lowest )
-               {
-                  lowestIdx = i;
-                  lowest = tmp;
-               }
-            }
-            diff = (highest - lowest)/100.0;
-         }
-         else if( tmp <= lowest )
-         {
-            lowestIdx = today;
-            lowest = tmp;
-            diff = (highest - lowest)/100.0;
-         }
-         tmp = inHigh[today];
-         if( highestIdx < trailingIdx )
-         {
-            highestIdx = trailingIdx;
-            highest = inHigh[highestIdx];
-            i = highestIdx;
-            while( ++i<=today )
-            {
-               tmp = inHigh[i];
-               if( tmp > highest )
-               {
-                  highestIdx = i;
-                  highest = tmp;
-               }
-            }
-            diff = (highest - lowest)/100.0;
-         }
-         else if( tmp >= highest )
-         {
-            highestIdx = today;
-            highest = tmp;
-            diff = (highest - lowest)/100.0;
-         }
-         if( diff != 0.0 )
-            tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
-         else
-            tempBuffer[outIdx++] = 0.0;
-         trailingIdx++;
-         today++;
-      }
-      retCode =  MA ( 0, outIdx-1,
-         tempBuffer, optInFastD_Period,
-         optInFastD_MAType,
-         outBegIdx, outNbElement, outFastD );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value ) == 0 )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNbElement.value) ;
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode STOCHF( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInFastK_Period,
-      int optInFastD_Period,
-      TA_MAType optInFastD_MAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outFastK[],
-      double outFastD[] )
-   {
-      TA_RetCode retCode;
-      double lowest, highest, tmp, diff;
-      double []tempBuffer ;
-      int outIdx, lowestIdx, highestIdx;
-      int lookbackTotal, lookbackK, lookbackFastD;
-      int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackK = optInFastK_Period-1;
-      lookbackFastD =  MA_Lookback ( optInFastD_Period, optInFastD_MAType );
-      lookbackTotal = lookbackK + lookbackFastD;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      trailingIdx = startIdx-lookbackTotal;
-      today = trailingIdx+lookbackK;
-      lowestIdx = highestIdx = -1;
-      diff = highest = lowest = 0.0;
-      tempBuffer = new double[endIdx-today+1] ;
-      while( today <= endIdx )
-      {
-         tmp = inLow[today];
-         if( lowestIdx < trailingIdx )
-         {
-            lowestIdx = trailingIdx;
-            lowest = inLow[lowestIdx];
-            i = lowestIdx;
-            while( ++i<=today )
-            {
-               tmp = inLow[i];
-               if( tmp < lowest )
-               {
-                  lowestIdx = i;
-                  lowest = tmp;
-               }
-            }
-            diff = (highest - lowest)/100.0;
-         }
-         else if( tmp <= lowest )
-         {
-            lowestIdx = today;
-            lowest = tmp;
-            diff = (highest - lowest)/100.0;
-         }
-         tmp = inHigh[today];
-         if( highestIdx < trailingIdx )
-         {
-            highestIdx = trailingIdx;
-            highest = inHigh[highestIdx];
-            i = highestIdx;
-            while( ++i<=today )
-            {
-               tmp = inHigh[i];
-               if( tmp > highest )
-               {
-                  highestIdx = i;
-                  highest = tmp;
-               }
-            }
-            diff = (highest - lowest)/100.0;
-         }
-         else if( tmp >= highest )
-         {
-            highestIdx = today;
-            highest = tmp;
-            diff = (highest - lowest)/100.0;
-         }
-         if( diff != 0.0 )
-            tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
-         else
-            tempBuffer[outIdx++] = 0.0;
-         trailingIdx++;
-         today++;
-      }
-      retCode =  MA ( 0, outIdx-1,
-         tempBuffer, optInFastD_Period,
-         optInFastD_MAType,
-         outBegIdx, outNbElement, outFastD );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value ) == 0 )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNbElement.value) ;
-      if( retCode !=  TA_RetCode. TA_SUCCESS )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int STOCHRSI_Lookback( int optInTimePeriod,
-      int optInFastK_Period,
-      int optInFastD_Period,
-      TA_MAType optInFastD_MAType )
-   {
-      int retValue;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return -1;
-      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return -1;
-      retValue =  RSI_Lookback ( optInTimePeriod ) +  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-      return retValue;
-   }
-   public TA_RetCode STOCHRSI( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      int optInFastK_Period,
-      int optInFastD_Period,
-      TA_MAType optInFastD_MAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outFastK[],
-      double outFastD[] )
-   {
-      double []tempRSIBuffer ;
-      TA_RetCode retCode;
-      int lookbackTotal, lookbackSTOCHF, tempArraySize;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outBegIdx2 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackSTOCHF =  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-      lookbackTotal =  RSI_Lookback ( optInTimePeriod ) + lookbackSTOCHF;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCHF;
-      tempRSIBuffer = new double[tempArraySize] ;
-      retCode =  RSI (startIdx-lookbackSTOCHF,
-         endIdx,
-         inReal,
-         optInTimePeriod,
-         outBegIdx1 ,
-         outNbElement1 ,
-         tempRSIBuffer);
-      if( retCode !=  TA_RetCode. TA_SUCCESS ||  outNbElement1.value  == 0 )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      retCode =  STOCHF (0,
-         tempArraySize-1,
-         tempRSIBuffer,
-         tempRSIBuffer,
-         tempRSIBuffer,
-         optInFastK_Period,
-         optInFastD_Period,
-         optInFastD_MAType,
-         outBegIdx2 ,
-         outNbElement,
-         outFastK,
-         outFastD);
-      if( retCode !=  TA_RetCode. TA_SUCCESS || ((int) outNbElement.value ) == 0 )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode STOCHRSI( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      int optInFastK_Period,
-      int optInFastD_Period,
-      TA_MAType optInFastD_MAType,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outFastK[],
-      double outFastD[] )
-   {
-      double []tempRSIBuffer ;
-      TA_RetCode retCode;
-      int lookbackTotal, lookbackSTOCHF, tempArraySize;
-      MInteger outBegIdx1 = new MInteger() ;
-      MInteger outBegIdx2 = new MInteger() ;
-      MInteger outNbElement1 = new MInteger() ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      lookbackSTOCHF =  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-      lookbackTotal =  RSI_Lookback ( optInTimePeriod ) + lookbackSTOCHF;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCHF;
-      tempRSIBuffer = new double[tempArraySize] ;
-      retCode =  RSI (startIdx-lookbackSTOCHF,
-         endIdx,
-         inReal,
-         optInTimePeriod,
-         outBegIdx1 ,
-         outNbElement1 ,
-         tempRSIBuffer);
-      if( retCode !=  TA_RetCode. TA_SUCCESS ||  outNbElement1.value  == 0 )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      retCode =  STOCHF (0,
-         tempArraySize-1,
-         tempRSIBuffer,
-         tempRSIBuffer,
-         tempRSIBuffer,
-         optInFastK_Period,
-         optInFastD_Period,
-         optInFastD_MAType,
-         outBegIdx2 ,
-         outNbElement,
-         outFastK,
-         outFastD);
-      if( retCode !=  TA_RetCode. TA_SUCCESS || ((int) outNbElement.value ) == 0 )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return retCode;
-      }
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int TRIX_Lookback( int optInTimePeriod )
-   {
-      int emaLookback;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      emaLookback =  EMA_Lookback ( optInTimePeriod );
-      return (emaLookback*3) +  ROCR_Lookback ( 1 );
-   }
-   public TA_RetCode TRIX( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double k;
-      double []tempBuffer ;
-      MInteger nbElement = new MInteger() ;
-      MInteger begIdx = new MInteger() ;
-      int totalLookback;
-      int emaLookback, rocLookback;
-      TA_RetCode retCode;
-      int nbElementToOutput;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      emaLookback =  EMA_Lookback ( optInTimePeriod );
-      rocLookback =  ROCR_Lookback ( 1 );
-      totalLookback = (emaLookback*3) + rocLookback;
-      if( startIdx < totalLookback )
-         startIdx = totalLookback;
-      if( startIdx > endIdx )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      nbElementToOutput = (endIdx-startIdx)+1+totalLookback;
-      tempBuffer = new double[nbElementToOutput] ;
-      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
-      retCode =  INT_EMA ( (startIdx-totalLookback), endIdx, inReal,
-         optInTimePeriod, k,
-         begIdx ,  nbElement ,
-         tempBuffer );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return retCode;
-      }
-      nbElementToOutput--;
-      nbElementToOutput -= emaLookback;
-      retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
-         optInTimePeriod, k,
-         begIdx ,  nbElement ,
-         tempBuffer );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return retCode;
-      }
-      nbElementToOutput -= emaLookback;
-      retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
-         optInTimePeriod, k,
-         begIdx ,  nbElement ,
-         tempBuffer );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return retCode;
-      }
-      nbElementToOutput -= emaLookback;
-      retCode =  ROC ( 0, nbElementToOutput,
-         tempBuffer,
-         1,  begIdx , outNbElement,
-         outReal );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return retCode;
-      }
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode TRIX( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double k;
-      double []tempBuffer ;
-      MInteger nbElement = new MInteger() ;
-      MInteger begIdx = new MInteger() ;
-      int totalLookback;
-      int emaLookback, rocLookback;
-      TA_RetCode retCode;
-      int nbElementToOutput;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      emaLookback =  EMA_Lookback ( optInTimePeriod );
-      rocLookback =  ROCR_Lookback ( 1 );
-      totalLookback = (emaLookback*3) + rocLookback;
-      if( startIdx < totalLookback )
-         startIdx = totalLookback;
-      if( startIdx > endIdx )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      nbElementToOutput = (endIdx-startIdx)+1+totalLookback;
-      tempBuffer = new double[nbElementToOutput] ;
-      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
-      retCode =  INT_EMA ( (startIdx-totalLookback), endIdx, inReal,
-         optInTimePeriod, k,
-         begIdx ,  nbElement ,
-         tempBuffer );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return retCode;
-      }
-      nbElementToOutput--;
-      nbElementToOutput -= emaLookback;
-      retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
-         optInTimePeriod, k,
-         begIdx ,  nbElement ,
-         tempBuffer );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return retCode;
-      }
-      nbElementToOutput -= emaLookback;
-      retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
-         optInTimePeriod, k,
-         begIdx ,  nbElement ,
-         tempBuffer );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return retCode;
-      }
-      nbElementToOutput -= emaLookback;
-      retCode =  ROC ( 0, nbElementToOutput,
-         tempBuffer,
-         1,  begIdx , outNbElement,
-         outReal );
-      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
-      {
-         outNbElement.value = 0 ;
-         outBegIdx.value = 0 ;
-         return retCode;
-      }
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int ULTOSC_Lookback( int optInTimePeriod1,
-      int optInTimePeriod2,
-      int optInTimePeriod3 )
-   {
-      int maxPeriod;
-      if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod1 = 7;
-      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
-         return -1;
-      if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod2 = 14;
-      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
-         return -1;
-      if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod3 = 28;
-      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
-         return -1;
-      maxPeriod =  ((( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) > (optInTimePeriod3)) ? ( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) : (optInTimePeriod3)) ;
-      return  SMA_Lookback ( maxPeriod ) + 1;
-   }
-   public TA_RetCode ULTOSC( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInTimePeriod1,
-      int optInTimePeriod2,
-      int optInTimePeriod3,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double a1Total, a2Total, a3Total;
-      double b1Total, b2Total, b3Total;
-      double trueLow, trueRange, closeMinusTrueLow;
-      double tempDouble, output, tempHT, tempLT, tempCY;
-      int lookbackTotal;
-      int longestPeriod, longestIndex;
-      int i,j,today,outIdx;
-      int trailingIdx1, trailingIdx2, trailingIdx3;
-      int []usedFlag = new int[3] ;
-      int []periods = new int[3] ;
-      int []sortedPeriods = new int[3] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod1 = 7;
-      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod2 = 14;
-      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod3 = 28;
-      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      periods[0] = optInTimePeriod1;
-      periods[1] = optInTimePeriod2;
-      periods[2] = optInTimePeriod3;
-      usedFlag[0] = 0;
-      usedFlag[1] = 0;
-      usedFlag[2] = 0;
-      for ( i = 0; i < 3; ++i )
-      {
-         longestPeriod = 0;
-         longestIndex = 0;
-         for ( j = 0; j < 3; ++j )
-         {
-            if ( (usedFlag[j] == 0) && (periods[j] > longestPeriod) )
-            {
-               longestPeriod = periods[j];
-               longestIndex = j;
-            }
-         }
-         usedFlag[longestIndex] = 1;
-         sortedPeriods[i] = longestPeriod;
-      }
-      optInTimePeriod1 = sortedPeriods[2];
-      optInTimePeriod2 = sortedPeriods[1];
-      optInTimePeriod3 = sortedPeriods[0];
-      lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
-      if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
-      if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
-      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
-      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
-      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
-      today = startIdx;
-      outIdx = 0;
-      trailingIdx1 = today - optInTimePeriod1 + 1;
-      trailingIdx2 = today - optInTimePeriod2 + 1;
-      trailingIdx3 = today - optInTimePeriod3 + 1;
-      while( today <= endIdx )
-      {
-         { tempLT = inLow[today]; tempHT = inHigh[today]; tempCY = inClose[today-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
-         a1Total += closeMinusTrueLow;
-         a2Total += closeMinusTrueLow;
-         a3Total += closeMinusTrueLow;
-         b1Total += trueRange;
-         b2Total += trueRange;
-         b3Total += trueRange;
-         output = 0.0;
-         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) output += 4.0*(a1Total/b1Total);
-         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) output += 2.0*(a2Total/b2Total);
-         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) output += a3Total/b3Total;
-         { tempLT = inLow[trailingIdx1]; tempHT = inHigh[trailingIdx1]; tempCY = inClose[trailingIdx1-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
-         a1Total -= closeMinusTrueLow;
-         b1Total -= trueRange;
-         { tempLT = inLow[trailingIdx2]; tempHT = inHigh[trailingIdx2]; tempCY = inClose[trailingIdx2-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
-         a2Total -= closeMinusTrueLow;
-         b2Total -= trueRange;
-         { tempLT = inLow[trailingIdx3]; tempHT = inHigh[trailingIdx3]; tempCY = inClose[trailingIdx3-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
-         a3Total -= closeMinusTrueLow;
-         b3Total -= trueRange;
-         outReal[outIdx] = 100.0 * (output / 7.0);
-         outIdx++;
-         today++;
-         trailingIdx1++;
-         trailingIdx2++;
-         trailingIdx3++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode ULTOSC( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInTimePeriod1,
-      int optInTimePeriod2,
-      int optInTimePeriod3,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double a1Total, a2Total, a3Total;
-      double b1Total, b2Total, b3Total;
-      double trueLow, trueRange, closeMinusTrueLow;
-      double tempDouble, output, tempHT, tempLT, tempCY;
-      int lookbackTotal;
-      int longestPeriod, longestIndex;
-      int i,j,today,outIdx;
-      int trailingIdx1, trailingIdx2, trailingIdx3;
-      int []usedFlag = new int[3] ;
-      int []periods = new int[3] ;
-      int []sortedPeriods = new int[3] ;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod1 = 7;
-      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod2 = 14;
-      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod3 = 28;
-      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
-      periods[0] = optInTimePeriod1;
-      periods[1] = optInTimePeriod2;
-      periods[2] = optInTimePeriod3;
-      usedFlag[0] = 0;
-      usedFlag[1] = 0;
-      usedFlag[2] = 0;
-      for ( i = 0; i < 3; ++i )
-      {
-         longestPeriod = 0;
-         longestIndex = 0;
-         for ( j = 0; j < 3; ++j )
-         {
-            if ( (usedFlag[j] == 0) && (periods[j] > longestPeriod) )
-            {
-               longestPeriod = periods[j];
-               longestIndex = j;
-            }
-         }
-         usedFlag[longestIndex] = 1;
-         sortedPeriods[i] = longestPeriod;
-      }
-      optInTimePeriod1 = sortedPeriods[2];
-      optInTimePeriod2 = sortedPeriods[1];
-      optInTimePeriod3 = sortedPeriods[0];
-      lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
-      if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
-      if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
-      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
-      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
-      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
-      today = startIdx;
-      outIdx = 0;
-      trailingIdx1 = today - optInTimePeriod1 + 1;
-      trailingIdx2 = today - optInTimePeriod2 + 1;
-      trailingIdx3 = today - optInTimePeriod3 + 1;
-      while( today <= endIdx )
-      {
-         { tempLT = inLow[today]; tempHT = inHigh[today]; tempCY = inClose[today-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
-         a1Total += closeMinusTrueLow;
-         a2Total += closeMinusTrueLow;
-         a3Total += closeMinusTrueLow;
-         b1Total += trueRange;
-         b2Total += trueRange;
-         b3Total += trueRange;
-         output = 0.0;
-         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) output += 4.0*(a1Total/b1Total);
-         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) output += 2.0*(a2Total/b2Total);
-         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) output += a3Total/b3Total;
-         { tempLT = inLow[trailingIdx1]; tempHT = inHigh[trailingIdx1]; tempCY = inClose[trailingIdx1-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
-         a1Total -= closeMinusTrueLow;
-         b1Total -= trueRange;
-         { tempLT = inLow[trailingIdx2]; tempHT = inHigh[trailingIdx2]; tempCY = inClose[trailingIdx2-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
-         a2Total -= closeMinusTrueLow;
-         b2Total -= trueRange;
-         { tempLT = inLow[trailingIdx3]; tempHT = inHigh[trailingIdx3]; tempCY = inClose[trailingIdx3-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
-         a3Total -= closeMinusTrueLow;
-         b3Total -= trueRange;
-         outReal[outIdx] = 100.0 * (output / 7.0);
-         outIdx++;
-         today++;
-         trailingIdx1++;
-         trailingIdx2++;
-         trailingIdx3++;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int WILLR_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return (optInTimePeriod-1);
-   }
-   public TA_RetCode WILLR( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double lowest, highest, tmp, diff;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, lowestIdx, highestIdx;
-      int today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      diff = 0.0;
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      lowestIdx = highestIdx = -1;
-      diff = highest = lowest = 0.0;
-      while( today <= endIdx )
-      {
-         tmp = inLow[today];
-         if( lowestIdx < trailingIdx )
-         {
-            lowestIdx = trailingIdx;
-            lowest = inLow[lowestIdx];
-            i = lowestIdx;
-            while( ++i<=today )
-            {
-               tmp = inLow[i];
-               if( tmp < lowest )
-               {
-                  lowestIdx = i;
-                  lowest = tmp;
-               }
-            }
-            diff = (highest - lowest)/(-100.0);
-         }
-         else if( tmp <= lowest )
-         {
-            lowestIdx = today;
-            lowest = tmp;
-            diff = (highest - lowest)/(-100.0);
-         }
-         tmp = inHigh[today];
-         if( highestIdx < trailingIdx )
-         {
-            highestIdx = trailingIdx;
-            highest = inHigh[highestIdx];
-            i = highestIdx;
-            while( ++i<=today )
-            {
-               tmp = inHigh[i];
-               if( tmp > highest )
-               {
-                  highestIdx = i;
-                  highest = tmp;
-               }
-            }
-            diff = (highest - lowest)/(-100.0);
-         }
-         else if( tmp >= highest )
-         {
-            highestIdx = today;
-            highest = tmp;
-            diff = (highest - lowest)/(-100.0);
-         }
-         if( diff != 0.0 )
-            outReal[outIdx++] = (highest-inClose[today])/diff;
-         else
-            outReal[outIdx++] = 0.0;
-         trailingIdx++;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode WILLR( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      double lowest, highest, tmp, diff;
-      int outIdx, nbInitialElementNeeded;
-      int trailingIdx, lowestIdx, highestIdx;
-      int today, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      nbInitialElementNeeded = (optInTimePeriod-1);
-      if( startIdx < nbInitialElementNeeded )
-         startIdx = nbInitialElementNeeded;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      diff = 0.0;
-      outIdx = 0;
-      today = startIdx;
-      trailingIdx = startIdx-nbInitialElementNeeded;
-      lowestIdx = highestIdx = -1;
-      diff = highest = lowest = 0.0;
-      while( today <= endIdx )
-      {
-         tmp = inLow[today];
-         if( lowestIdx < trailingIdx )
-         {
-            lowestIdx = trailingIdx;
-            lowest = inLow[lowestIdx];
-            i = lowestIdx;
-            while( ++i<=today )
-            {
-               tmp = inLow[i];
-               if( tmp < lowest )
-               {
-                  lowestIdx = i;
-                  lowest = tmp;
-               }
-            }
-            diff = (highest - lowest)/(-100.0);
-         }
-         else if( tmp <= lowest )
-         {
-            lowestIdx = today;
-            lowest = tmp;
-            diff = (highest - lowest)/(-100.0);
-         }
-         tmp = inHigh[today];
-         if( highestIdx < trailingIdx )
-         {
-            highestIdx = trailingIdx;
-            highest = inHigh[highestIdx];
-            i = highestIdx;
-            while( ++i<=today )
-            {
-               tmp = inHigh[i];
-               if( tmp > highest )
-               {
-                  highestIdx = i;
-                  highest = tmp;
-               }
-            }
-            diff = (highest - lowest)/(-100.0);
-         }
-         else if( tmp >= highest )
-         {
-            highestIdx = today;
-            highest = tmp;
-            diff = (highest - lowest)/(-100.0);
-         }
-         if( diff != 0.0 )
-            outReal[outIdx++] = (highest-inClose[today])/diff;
-         else
-            outReal[outIdx++] = 0.0;
-         trailingIdx++;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int HT_DCPERIOD_Lookback( )
-   {
-      return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPERIOD.ordinal()]) ;
-   }
-   public TA_RetCode HT_DCPERIOD( int startIdx,
-      int endIdx,
-      double inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg;
-      double todayValue, smoothPeriod;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
-      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPERIOD.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 9;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         if( today >= startIdx )
-         {
-            outReal[outIdx++] = smoothPeriod;
-         }
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode HT_DCPERIOD( int startIdx,
-      int endIdx,
-      float inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg;
-      double todayValue, smoothPeriod;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
-      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPERIOD.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 9;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         if( today >= startIdx )
-         {
-            outReal[outIdx++] = smoothPeriod;
-         }
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int HT_DCPHASE_Lookback( )
-   {
-      return 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPHASE.ordinal()]) ;
-   }
-   public TA_RetCode HT_DCPHASE( int startIdx,
-      int endIdx,
-      double inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg, constDeg2RadBy360;
-      double todayValue, smoothPeriod;
-      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
-      int idx;
-      int DCPeriodInt;
-      double DCPhase, DCPeriod, imagPart, realPart;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-      tempReal =  Math.atan (1);
-      rad2Deg = 45.0/tempReal;
-      constDeg2RadBy360 = tempReal*8.0;
-      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPHASE.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 34;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      for( i=0; i <  50 ; i++ )
-         smoothPrice[i] = 0.0;
-      DCPhase = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         smoothPrice[smoothPrice_Idx] = smoothedValue;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         realPart = 0.0;
-         imagPart = 0.0;
-         idx = smoothPrice_Idx;
-         for( i=0; i < DCPeriodInt; i++ )
-         {
-            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
-            tempReal2 = smoothPrice[idx];
-            realPart +=  Math.sin (tempReal)*tempReal2;
-            imagPart +=  Math.cos (tempReal)*tempReal2;
-            if( idx == 0 )
-               idx =  50 -1;
-            else
-               idx--;
-         }
-         tempReal =  Math.abs (imagPart);
-         if( tempReal > 0.0 )
-            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
-         else if( tempReal <= 0.01 )
-         {
-            if( realPart < 0.0 )
-               DCPhase -= 90.0;
-            else if( realPart > 0.0 )
-               DCPhase += 90.0;
-         }
-         DCPhase += 90.0;
-         DCPhase += 360.0 / smoothPeriod;
-         if( imagPart < 0.0 )
-            DCPhase += 180.0;
-         if( DCPhase > 315.0 )
-            DCPhase -= 360.0;
-         if( today >= startIdx )
-         {
-            outReal[outIdx++] = DCPhase;
-         }
-         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode HT_DCPHASE( int startIdx,
-      int endIdx,
-      float inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg, constDeg2RadBy360;
-      double todayValue, smoothPeriod;
-      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
-      int idx;
-      int DCPeriodInt;
-      double DCPhase, DCPeriod, imagPart, realPart;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-      tempReal =  Math.atan (1);
-      rad2Deg = 45.0/tempReal;
-      constDeg2RadBy360 = tempReal*8.0;
-      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPHASE.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 34;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      for( i=0; i <  50 ; i++ )
-         smoothPrice[i] = 0.0;
-      DCPhase = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         smoothPrice[smoothPrice_Idx] = smoothedValue;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         realPart = 0.0;
-         imagPart = 0.0;
-         idx = smoothPrice_Idx;
-         for( i=0; i < DCPeriodInt; i++ )
-         {
-            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
-            tempReal2 = smoothPrice[idx];
-            realPart +=  Math.sin (tempReal)*tempReal2;
-            imagPart +=  Math.cos (tempReal)*tempReal2;
-            if( idx == 0 )
-               idx =  50 -1;
-            else
-               idx--;
-         }
-         tempReal =  Math.abs (imagPart);
-         if( tempReal > 0.0 )
-            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
-         else if( tempReal <= 0.01 )
-         {
-            if( realPart < 0.0 )
-               DCPhase -= 90.0;
-            else if( realPart > 0.0 )
-               DCPhase += 90.0;
-         }
-         DCPhase += 90.0;
-         DCPhase += 360.0 / smoothPeriod;
-         if( imagPart < 0.0 )
-            DCPhase += 180.0;
-         if( DCPhase > 315.0 )
-            DCPhase -= 360.0;
-         if( today >= startIdx )
-         {
-            outReal[outIdx++] = DCPhase;
-         }
-         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int HT_PHASOR_Lookback( )
-   {
-      return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_PHASOR.ordinal()]) ;
-   }
-   public TA_RetCode HT_PHASOR( int startIdx,
-      int endIdx,
-      double inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outInPhase[],
-      double outQuadrature[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg;
-      double todayValue;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
-      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_PHASOR.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 9;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            if( today >= startIdx )
-            {
-               outQuadrature[outIdx] = Q1;
-               outInPhase[outIdx++] = I1ForEvenPrev3;
-            }
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            if( today >= startIdx )
-            {
-               outQuadrature[outIdx] = Q1;
-               outInPhase[outIdx++] = I1ForOddPrev3;
-            }
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode HT_PHASOR( int startIdx,
-      int endIdx,
-      float inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outInPhase[],
-      double outQuadrature[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg;
-      double todayValue;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
-      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_PHASOR.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 9;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            if( today >= startIdx )
-            {
-               outQuadrature[outIdx] = Q1;
-               outInPhase[outIdx++] = I1ForEvenPrev3;
-            }
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            if( today >= startIdx )
-            {
-               outQuadrature[outIdx] = Q1;
-               outInPhase[outIdx++] = I1ForOddPrev3;
-            }
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int HT_SINE_Lookback( )
-   {
-      return 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_SINE.ordinal()]) ;
-   }
-   public TA_RetCode HT_SINE( int startIdx,
-      int endIdx,
-      double inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outSine[],
-      double outLeadSine[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg, deg2Rad, constDeg2RadBy360;
-      double todayValue, smoothPeriod;
-      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
-      int idx;
-      int DCPeriodInt;
-      double DCPhase, DCPeriod, imagPart, realPart;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-      tempReal =  Math.atan (1);
-      rad2Deg = 45.0/tempReal;
-      deg2Rad = 1.0/rad2Deg;
-      constDeg2RadBy360 = tempReal*8.0;
-      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_SINE.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 34;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      for( i=0; i <  50 ; i++ )
-         smoothPrice[i] = 0.0;
-      DCPhase = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         smoothPrice[smoothPrice_Idx] = smoothedValue;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         realPart = 0.0;
-         imagPart = 0.0;
-         idx = smoothPrice_Idx;
-         for( i=0; i < DCPeriodInt; i++ )
-         {
-            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
-            tempReal2 = smoothPrice[idx];
-            realPart +=  Math.sin (tempReal)*tempReal2;
-            imagPart +=  Math.cos (tempReal)*tempReal2;
-            if( idx == 0 )
-               idx =  50 -1;
-            else
-               idx--;
-         }
-         tempReal =  Math.abs (imagPart);
-         if( tempReal > 0.0 )
-            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
-         else if( tempReal <= 0.01 )
-         {
-            if( realPart < 0.0 )
-               DCPhase -= 90.0;
-            else if( realPart > 0.0 )
-               DCPhase += 90.0;
-         }
-         DCPhase += 90.0;
-         DCPhase += 360.0 / smoothPeriod;
-         if( imagPart < 0.0 )
-            DCPhase += 180.0;
-         if( DCPhase > 315.0 )
-            DCPhase -= 360.0;
-         if( today >= startIdx )
-         {
-            outSine[outIdx] =  Math.sin (DCPhase*deg2Rad);
-            outLeadSine[outIdx++] =  Math.sin ((DCPhase+45)*deg2Rad);
-         }
-         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode HT_SINE( int startIdx,
-      int endIdx,
-      float inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outSine[],
-      double outLeadSine[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg, deg2Rad, constDeg2RadBy360;
-      double todayValue, smoothPeriod;
-      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
-      int idx;
-      int DCPeriodInt;
-      double DCPhase, DCPeriod, imagPart, realPart;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-      tempReal =  Math.atan (1);
-      rad2Deg = 45.0/tempReal;
-      deg2Rad = 1.0/rad2Deg;
-      constDeg2RadBy360 = tempReal*8.0;
-      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_SINE.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 34;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      for( i=0; i <  50 ; i++ )
-         smoothPrice[i] = 0.0;
-      DCPhase = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         smoothPrice[smoothPrice_Idx] = smoothedValue;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         realPart = 0.0;
-         imagPart = 0.0;
-         idx = smoothPrice_Idx;
-         for( i=0; i < DCPeriodInt; i++ )
-         {
-            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
-            tempReal2 = smoothPrice[idx];
-            realPart +=  Math.sin (tempReal)*tempReal2;
-            imagPart +=  Math.cos (tempReal)*tempReal2;
-            if( idx == 0 )
-               idx =  50 -1;
-            else
-               idx--;
-         }
-         tempReal =  Math.abs (imagPart);
-         if( tempReal > 0.0 )
-            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
-         else if( tempReal <= 0.01 )
-         {
-            if( realPart < 0.0 )
-               DCPhase -= 90.0;
-            else if( realPart > 0.0 )
-               DCPhase += 90.0;
-         }
-         DCPhase += 90.0;
-         DCPhase += 360.0 / smoothPeriod;
-         if( imagPart < 0.0 )
-            DCPhase += 180.0;
-         if( DCPhase > 315.0 )
-            DCPhase -= 360.0;
-         if( today >= startIdx )
-         {
-            outSine[outIdx] =  Math.sin (DCPhase*deg2Rad);
-            outLeadSine[outIdx++] =  Math.sin ((DCPhase+45)*deg2Rad);
-         }
-         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int HT_TRENDMODE_Lookback( )
-   {
-      return 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDMODE.ordinal()]) ;
-   }
-   public TA_RetCode HT_TRENDMODE( int startIdx,
-      int endIdx,
-      double inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      int outInteger[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      double iTrend1, iTrend2, iTrend3;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg, deg2Rad, constDeg2RadBy360;
-      double todayValue, smoothPeriod;
-      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
-      int idx;
-      int DCPeriodInt;
-      double DCPhase, DCPeriod, imagPart, realPart;
-      int daysInTrend, trend;
-      double prevDCPhase, trendline;
-      double prevSine, prevLeadSine, sine, leadSine;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-      iTrend1 = iTrend2 = iTrend3 = 0.0;
-      daysInTrend = 0;
-      prevDCPhase = DCPhase = 0.0;
-      prevSine = sine = 0.0;
-      prevLeadSine = leadSine = 0.0;
-      tempReal =  Math.atan (1);
-      rad2Deg = 45.0/tempReal;
-      deg2Rad = 1.0/rad2Deg;
-      constDeg2RadBy360 = tempReal*8.0;
-      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDMODE.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 34;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      for( i=0; i <  50 ; i++ )
-         smoothPrice[i] = 0.0;
-      DCPhase = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         smoothPrice[smoothPrice_Idx] = smoothedValue;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         prevDCPhase = DCPhase;
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         realPart = 0.0;
-         imagPart = 0.0;
-         idx = smoothPrice_Idx;
-         for( i=0; i < DCPeriodInt; i++ )
-         {
-            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
-            tempReal2 = smoothPrice[idx];
-            realPart +=  Math.sin (tempReal)*tempReal2;
-            imagPart +=  Math.cos (tempReal)*tempReal2;
-            if( idx == 0 )
-               idx =  50 -1;
-            else
-               idx--;
-         }
-         tempReal =  Math.abs (imagPart);
-         if( tempReal > 0.0 )
-            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
-         else if( tempReal <= 0.01 )
-         {
-            if( realPart < 0.0 )
-               DCPhase -= 90.0;
-            else if( realPart > 0.0 )
-               DCPhase += 90.0;
-         }
-         DCPhase += 90.0;
-         DCPhase += 360.0 / smoothPeriod;
-         if( imagPart < 0.0 )
-            DCPhase += 180.0;
-         if( DCPhase > 315.0 )
-            DCPhase -= 360.0;
-         prevSine = sine;
-         prevLeadSine = leadSine;
-         sine =  Math.sin (DCPhase*deg2Rad);
-         leadSine =  Math.sin ((DCPhase+45)*deg2Rad);
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         idx = today;
-         tempReal = 0.0;
-         for( i=0; i < DCPeriodInt; i++ )
-            tempReal += inReal[idx--];
-         if( DCPeriodInt > 0 )
-            tempReal = tempReal/(double)DCPeriodInt;
-         trendline = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
-         iTrend3 = iTrend2;
-         iTrend2 = iTrend1;
-         iTrend1 = tempReal;
-         trend = 1;
-         if( ((sine > leadSine) && (prevSine <= prevLeadSine)) ||
-            ((sine < leadSine) && (prevSine >= prevLeadSine)) )
-         {
-            daysInTrend = 0;
-            trend = 0;
-         }
-         daysInTrend++;
-         if( daysInTrend < (0.5*smoothPeriod) )
-            trend = 0;
-         tempReal = DCPhase - prevDCPhase;
-         if( (smoothPeriod != 0.0) &&
-            ((tempReal > (0.67*360.0/smoothPeriod)) && (tempReal < (1.5*360.0/smoothPeriod))) )
-         {
-            trend = 0;
-         }
-         tempReal = smoothPrice[smoothPrice_Idx];
-         if( (trendline != 0.0) && ( Math.abs ( (tempReal - trendline)/trendline ) >= 0.015) )
-            trend = 1;
-         if( today >= startIdx )
-         {
-            outInteger[outIdx++] = trend;
-         }
-         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode HT_TRENDMODE( int startIdx,
-      int endIdx,
-      float inReal[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      int outInteger[] )
-   {
-      int outIdx, i;
-      int lookbackTotal, today;
-      double tempReal, tempReal2;
-      double adjustedPrevPeriod, period;
-      int trailingWMAIdx;
-      double periodWMASum, periodWMASub, trailingWMAValue;
-      double smoothedValue;
-      double iTrend1, iTrend2, iTrend3;
-      final double a  = 0.0962;
-      final double b  = 0.5769;
-      double hilbertTempReal;
-      int hilbertIdx;
-      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
-      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
-      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
-      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
-      double Q2, I2, prevQ2, prevI2, Re, Im;
-      double I1ForOddPrev2, I1ForOddPrev3;
-      double I1ForEvenPrev2, I1ForEvenPrev3;
-      double rad2Deg, deg2Rad, constDeg2RadBy360;
-      double todayValue, smoothPeriod;
-      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
-      int idx;
-      int DCPeriodInt;
-      double DCPhase, DCPeriod, imagPart, realPart;
-      int daysInTrend, trend;
-      double prevDCPhase, trendline;
-      double prevSine, prevLeadSine, sine, leadSine;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
-      iTrend1 = iTrend2 = iTrend3 = 0.0;
-      daysInTrend = 0;
-      prevDCPhase = DCPhase = 0.0;
-      prevSine = sine = 0.0;
-      prevLeadSine = leadSine = 0.0;
-      tempReal =  Math.atan (1);
-      rad2Deg = 45.0/tempReal;
-      deg2Rad = 1.0/rad2Deg;
-      constDeg2RadBy360 = tempReal*8.0;
-      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDMODE.ordinal()]) ;
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      trailingWMAIdx = startIdx - lookbackTotal;
-      today = trailingWMAIdx;
-      tempReal = inReal[today++];
-      periodWMASub = tempReal;
-      periodWMASum = tempReal;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*2.0;
-      tempReal = inReal[today++];
-      periodWMASub += tempReal;
-      periodWMASum += tempReal*3.0;
-      trailingWMAValue = 0.0;
-      i = 34;
-      do
-      {
-         tempReal = inReal[today++];
-         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-      } while( --i != 0);
-      hilbertIdx = 0;
-      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
-      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
-      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
-      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
-      period = 0.0;
-      outIdx = 0;
-      prevI2 = prevQ2 = 0.0;
-      Re = Im = 0.0;
-      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
-      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
-      smoothPeriod = 0.0;
-      for( i=0; i <  50 ; i++ )
-         smoothPrice[i] = 0.0;
-      DCPhase = 0.0;
-      while( today <= endIdx )
-      {
-         adjustedPrevPeriod = (0.075*period)+0.54;
-         todayValue = inReal[today];
-         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
-         smoothPrice[smoothPrice_Idx] = smoothedValue;
-         if( (today%2) == 0 )
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
-            if( ++hilbertIdx == 3 )
-               hilbertIdx = 0;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
-            I1ForOddPrev3 = I1ForOddPrev2;
-            I1ForOddPrev2 = detrender;
-         }
-         else
-         {
-            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
-            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
-            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
-            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
-            I1ForEvenPrev3 = I1ForEvenPrev2;
-            I1ForEvenPrev2 = detrender;
-         }
-         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
-         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
-         prevQ2 = Q2;
-         prevI2 = I2;
-         tempReal = period;
-         if( (Im != 0.0) && (Re != 0.0) )
-            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
-         tempReal2 = 1.5*tempReal;
-         if( period > tempReal2)
-            period = tempReal2;
-         tempReal2 = 0.67*tempReal;
-         if( period < tempReal2 )
-            period = tempReal2;
-         if( period < 6 )
-            period = 6;
-         else if( period > 50 )
-            period = 50;
-         period = (0.2*period) + (0.8 * tempReal);
-         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
-         prevDCPhase = DCPhase;
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         realPart = 0.0;
-         imagPart = 0.0;
-         idx = smoothPrice_Idx;
-         for( i=0; i < DCPeriodInt; i++ )
-         {
-            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
-            tempReal2 = smoothPrice[idx];
-            realPart +=  Math.sin (tempReal)*tempReal2;
-            imagPart +=  Math.cos (tempReal)*tempReal2;
-            if( idx == 0 )
-               idx =  50 -1;
-            else
-               idx--;
-         }
-         tempReal =  Math.abs (imagPart);
-         if( tempReal > 0.0 )
-            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
-         else if( tempReal <= 0.01 )
-         {
-            if( realPart < 0.0 )
-               DCPhase -= 90.0;
-            else if( realPart > 0.0 )
-               DCPhase += 90.0;
-         }
-         DCPhase += 90.0;
-         DCPhase += 360.0 / smoothPeriod;
-         if( imagPart < 0.0 )
-            DCPhase += 180.0;
-         if( DCPhase > 315.0 )
-            DCPhase -= 360.0;
-         prevSine = sine;
-         prevLeadSine = leadSine;
-         sine =  Math.sin (DCPhase*deg2Rad);
-         leadSine =  Math.sin ((DCPhase+45)*deg2Rad);
-         DCPeriod = smoothPeriod+0.5;
-         DCPeriodInt = (int)DCPeriod;
-         idx = today;
-         tempReal = 0.0;
-         for( i=0; i < DCPeriodInt; i++ )
-            tempReal += inReal[idx--];
-         if( DCPeriodInt > 0 )
-            tempReal = tempReal/(double)DCPeriodInt;
-         trendline = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
-         iTrend3 = iTrend2;
-         iTrend2 = iTrend1;
-         iTrend1 = tempReal;
-         trend = 1;
-         if( ((sine > leadSine) && (prevSine <= prevLeadSine)) ||
-            ((sine < leadSine) && (prevSine >= prevLeadSine)) )
-         {
-            daysInTrend = 0;
-            trend = 0;
-         }
-         daysInTrend++;
-         if( daysInTrend < (0.5*smoothPeriod) )
-            trend = 0;
-         tempReal = DCPhase - prevDCPhase;
-         if( (smoothPeriod != 0.0) &&
-            ((tempReal > (0.67*360.0/smoothPeriod)) && (tempReal < (1.5*360.0/smoothPeriod))) )
-         {
-            trend = 0;
-         }
-         tempReal = smoothPrice[smoothPrice_Idx];
-         if( (trendline != 0.0) && ( Math.abs ( (tempReal - trendline)/trendline ) >= 0.015) )
-            trend = 1;
-         if( today >= startIdx )
-         {
-            outInteger[outIdx++] = trend;
-         }
-         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
-         today++;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int AD_Lookback( )
-   {
-      return 0;
-   }
-   public TA_RetCode AD( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int inVolume[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int nbBar, currentBar, outIdx;
-      double high, low, close, tmp;
-      double ad;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      nbBar = endIdx-startIdx+1;
-      outNbElement.value  = nbBar;
-      outBegIdx.value  = startIdx;
-      currentBar = startIdx;
-      outIdx = 0;
-      ad = 0.0;
-      while( nbBar != 0 )
-      {
-         high = inHigh[currentBar];
-         low = inLow[currentBar];
-         tmp = high-low;
-         close = inClose[currentBar];
-         if( tmp > 0.0 )
-            ad += (((close-low)-(high-close))/tmp)*((double)inVolume[currentBar]);
-         outReal[outIdx++] = ad;
-         currentBar++;
-         nbBar--;
-      }
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode AD( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int inVolume[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int nbBar, currentBar, outIdx;
-      double high, low, close, tmp;
-      double ad;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      nbBar = endIdx-startIdx+1;
-      outNbElement.value  = nbBar;
-      outBegIdx.value  = startIdx;
-      currentBar = startIdx;
-      outIdx = 0;
-      ad = 0.0;
-      while( nbBar != 0 )
-      {
-         high = inHigh[currentBar];
-         low = inLow[currentBar];
-         tmp = high-low;
-         close = inClose[currentBar];
-         if( tmp > 0.0 )
-            ad += (((close-low)-(high-close))/tmp)*((double)inVolume[currentBar]);
-         outReal[outIdx++] = ad;
-         currentBar++;
-         nbBar--;
-      }
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int ADOSC_Lookback( int optInFastPeriod,
-      int optInSlowPeriod )
-   {
-      int slowestPeriod;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 3;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return -1;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 10;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return -1;
-      if( optInFastPeriod < optInSlowPeriod )
-         slowestPeriod = optInSlowPeriod;
-      else
-         slowestPeriod = optInFastPeriod;
-      return  EMA_Lookback ( slowestPeriod );
-   }
-   public TA_RetCode ADOSC( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      int inVolume[],
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, outIdx, lookbackTotal;
-      int slowestPeriod;
-      double high, low, close, tmp;
-      double slowEMA, slowk, one_minus_slowk;
-      double fastEMA, fastk, one_minus_fastk;
-      double ad;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 3;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 10;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInFastPeriod < optInSlowPeriod )
-         slowestPeriod = optInSlowPeriod;
-      else
-         slowestPeriod = optInFastPeriod;
-      lookbackTotal =  EMA_Lookback ( slowestPeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      today = startIdx-lookbackTotal;
-      ad = 0.0;
-      fastk =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
-      one_minus_fastk = 1.0 - fastk;
-      slowk =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
-      one_minus_slowk = 1.0 - slowk;
-      { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
-      fastEMA = ad;
-      slowEMA = ad;
-      while( today < startIdx )
-      {
-         { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
-         fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
-         slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
-      }
-      outIdx = 0;
-      while( today <= endIdx )
-      {
-         { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
-         fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
-         slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
-         outReal[outIdx++] = fastEMA - slowEMA;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode ADOSC( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      int inVolume[],
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int today, outIdx, lookbackTotal;
-      int slowestPeriod;
-      double high, low, close, tmp;
-      double slowEMA, slowk, one_minus_slowk;
-      double fastEMA, fastk, one_minus_fastk;
-      double ad;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
-         optInFastPeriod = 3;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
-         optInSlowPeriod = 10;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      if( optInFastPeriod < optInSlowPeriod )
-         slowestPeriod = optInSlowPeriod;
-      else
-         slowestPeriod = optInFastPeriod;
-      lookbackTotal =  EMA_Lookback ( slowestPeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outBegIdx.value  = startIdx;
-      today = startIdx-lookbackTotal;
-      ad = 0.0;
-      fastk =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
-      one_minus_fastk = 1.0 - fastk;
-      slowk =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
-      one_minus_slowk = 1.0 - slowk;
-      { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
-      fastEMA = ad;
-      slowEMA = ad;
-      while( today < startIdx )
-      {
-         { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
-         fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
-         slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
-      }
-      outIdx = 0;
-      while( today <= endIdx )
-      {
-         { high = inHigh[today]; low = inLow[today]; tmp = high-low; close = inClose[today]; if( tmp > 0.0 ) ad += (((close-low)-(high-close))/tmp)*((double)inVolume[today]); today++; } ;
-         fastEMA = (fastk*ad)+(one_minus_fastk*fastEMA);
-         slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
-         outReal[outIdx++] = fastEMA - slowEMA;
-      }
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int OBV_Lookback( )
-   {
-      return 0;
-   }
-   public TA_RetCode OBV( int startIdx,
-      int endIdx,
-      double inReal[],
-      int inVolume[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      int outInteger[] )
-   {
-      int i;
-      int prevOBV, outIdx;
-      double prevReal, tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      prevOBV = inVolume[startIdx];
-      prevReal = inReal[startIdx];
-      outIdx = 0;
-      for(i=startIdx; i <= endIdx; i++ )
-      {
-         tempReal = inReal[i];
-         if( tempReal > prevReal )
-            prevOBV += inVolume[i];
-         else if( tempReal < prevReal )
-            prevOBV -= inVolume[i];
-         outInteger[outIdx++] = prevOBV;
-         prevReal = tempReal;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode OBV( int startIdx,
-      int endIdx,
-      float inReal[],
-      int inVolume[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      int outInteger[] )
-   {
-      int i;
-      int prevOBV, outIdx;
-      double prevReal, tempReal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      prevOBV = inVolume[startIdx];
-      prevReal = inReal[startIdx];
-      outIdx = 0;
-      for(i=startIdx; i <= endIdx; i++ )
-      {
-         tempReal = inReal[i];
-         if( tempReal > prevReal )
-            prevOBV += inVolume[i];
-         else if( tempReal < prevReal )
-            prevOBV -= inVolume[i];
-         outInteger[outIdx++] = prevOBV;
-         prevReal = tempReal;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
@@ -18535,6 +8076,115 @@ public class Core {
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
+   public int CDLMATCHINGLOW_Lookback( )
+   {
+      return  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  + 1;
+   }
+   public TA_RetCode CDLMATCHINGLOW( int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      int outInteger[] )
+   {
+      double EqualPeriodTotal;
+      int i, outIdx, EqualTrailingIdx, lookbackTotal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      lookbackTotal =  CDLMATCHINGLOW_Lookback ();
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      EqualPeriodTotal = 0;
+      EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
+      i = EqualTrailingIdx;
+      while( i < startIdx ) {
+         EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
+         i++;
+      }
+      i = startIdx;
+      outIdx = 0;
+      do
+      {
+         if(  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
+            ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
+            inClose[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
+            inClose[i] >= inClose[i-1] -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )
+            )
+            outInteger[outIdx++] = 100;
+         else
+            outInteger[outIdx++] = 0;
+         EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[EqualTrailingIdx-1] - inOpen[EqualTrailingIdx-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[EqualTrailingIdx-1] - inLow[EqualTrailingIdx-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[EqualTrailingIdx-1] - ( inClose[EqualTrailingIdx-1] >= inOpen[EqualTrailingIdx-1] ? inClose[EqualTrailingIdx-1] : inOpen[EqualTrailingIdx-1] ) )  + ( ( inClose[EqualTrailingIdx-1] >= inOpen[EqualTrailingIdx-1] ? inOpen[EqualTrailingIdx-1] : inClose[EqualTrailingIdx-1] ) - inLow[EqualTrailingIdx-1] )  : 0 ) ) ) ;
+         i++;
+         EqualTrailingIdx++;
+      } while( i <= endIdx );
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode CDLMATCHINGLOW( int startIdx,
+      int endIdx,
+      float inOpen[],
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      int outInteger[] )
+   {
+      double EqualPeriodTotal;
+      int i, outIdx, EqualTrailingIdx, lookbackTotal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      lookbackTotal =  CDLMATCHINGLOW_Lookback ();
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      EqualPeriodTotal = 0;
+      EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
+      i = EqualTrailingIdx;
+      while( i < startIdx ) {
+         EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
+         i++;
+      }
+      i = startIdx;
+      outIdx = 0;
+      do
+      {
+         if(  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
+            ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
+            inClose[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
+            inClose[i] >= inClose[i-1] -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )
+            )
+            outInteger[outIdx++] = 100;
+         else
+            outInteger[outIdx++] = 0;
+         EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[EqualTrailingIdx-1] - inOpen[EqualTrailingIdx-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[EqualTrailingIdx-1] - inLow[EqualTrailingIdx-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[EqualTrailingIdx-1] - ( inClose[EqualTrailingIdx-1] >= inOpen[EqualTrailingIdx-1] ? inClose[EqualTrailingIdx-1] : inOpen[EqualTrailingIdx-1] ) )  + ( ( inClose[EqualTrailingIdx-1] >= inOpen[EqualTrailingIdx-1] ? inOpen[EqualTrailingIdx-1] : inClose[EqualTrailingIdx-1] ) - inLow[EqualTrailingIdx-1] )  : 0 ) ) ) ;
+         i++;
+         EqualTrailingIdx++;
+      } while( i <= endIdx );
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
    public int CDLMATHOLD_Lookback( double optInPenetration )
    {
       if( optInPenetration ==  (-4e+37)  )
@@ -18710,115 +8360,6 @@ public class Core {
          i++;
          BodyShortTrailingIdx++;
          BodyLongTrailingIdx++;
-      } while( i <= endIdx );
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int CDLMATCHINGLOW_Lookback( )
-   {
-      return  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  + 1;
-   }
-   public TA_RetCode CDLMATCHINGLOW( int startIdx,
-      int endIdx,
-      double inOpen[],
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      int outInteger[] )
-   {
-      double EqualPeriodTotal;
-      int i, outIdx, EqualTrailingIdx, lookbackTotal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      lookbackTotal =  CDLMATCHINGLOW_Lookback ();
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      EqualPeriodTotal = 0;
-      EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
-      i = EqualTrailingIdx;
-      while( i < startIdx ) {
-         EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
-         i++;
-      }
-      i = startIdx;
-      outIdx = 0;
-      do
-      {
-         if(  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
-            ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
-            inClose[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-            inClose[i] >= inClose[i-1] -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )
-            )
-            outInteger[outIdx++] = 100;
-         else
-            outInteger[outIdx++] = 0;
-         EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[EqualTrailingIdx-1] - inOpen[EqualTrailingIdx-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[EqualTrailingIdx-1] - inLow[EqualTrailingIdx-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[EqualTrailingIdx-1] - ( inClose[EqualTrailingIdx-1] >= inOpen[EqualTrailingIdx-1] ? inClose[EqualTrailingIdx-1] : inOpen[EqualTrailingIdx-1] ) )  + ( ( inClose[EqualTrailingIdx-1] >= inOpen[EqualTrailingIdx-1] ? inOpen[EqualTrailingIdx-1] : inClose[EqualTrailingIdx-1] ) - inLow[EqualTrailingIdx-1] )  : 0 ) ) ) ;
-         i++;
-         EqualTrailingIdx++;
-      } while( i <= endIdx );
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode CDLMATCHINGLOW( int startIdx,
-      int endIdx,
-      float inOpen[],
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      int outInteger[] )
-   {
-      double EqualPeriodTotal;
-      int i, outIdx, EqualTrailingIdx, lookbackTotal;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      lookbackTotal =  CDLMATCHINGLOW_Lookback ();
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      EqualPeriodTotal = 0;
-      EqualTrailingIdx = startIdx -  (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod) ;
-      i = EqualTrailingIdx;
-      while( i < startIdx ) {
-         EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) ) ;
-         i++;
-      }
-      i = startIdx;
-      outIdx = 0;
-      do
-      {
-         if(  ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 )  == -1 &&
-            ( inClose[i] >= inOpen[i] ? 1 : -1 )  == -1 &&
-            inClose[i] <= inClose[i-1] +  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )  &&
-            inClose[i] >= inClose[i-1] -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].factor)  * ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  != 0.0? EqualPeriodTotal / (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].avgPeriod)  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  ) / ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? 2.0 : 1.0 ) )
-            )
-            outInteger[outIdx++] = 100;
-         else
-            outInteger[outIdx++] = 0;
-         EqualPeriodTotal +=  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[i-1] - inLow[i-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) )  + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] )  : 0 ) ) )  -  ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_RealBody ? ( Math.abs ( inClose[EqualTrailingIdx-1] - inOpen[EqualTrailingIdx-1] ) )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_HighLow ? ( inHigh[EqualTrailingIdx-1] - inLow[EqualTrailingIdx-1] )  : ( (this.candleSettings[TA_CandleSettingType.TA_Equal.ordinal()].rangeType)  == TA_RangeType. TA_RangeType_Shadows ? ( inHigh[EqualTrailingIdx-1] - ( inClose[EqualTrailingIdx-1] >= inOpen[EqualTrailingIdx-1] ? inClose[EqualTrailingIdx-1] : inOpen[EqualTrailingIdx-1] ) )  + ( ( inClose[EqualTrailingIdx-1] >= inOpen[EqualTrailingIdx-1] ? inOpen[EqualTrailingIdx-1] : inClose[EqualTrailingIdx-1] ) - inLow[EqualTrailingIdx-1] )  : 0 ) ) ) ;
-         i++;
-         EqualTrailingIdx++;
       } while( i <= endIdx );
       outNbElement.value  = outIdx;
       outBegIdx.value  = startIdx;
@@ -21514,6 +11055,291 @@ public class Core {
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
+   public int CMO_Lookback( int optInTimePeriod )
+   {
+      int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      retValue = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
+      if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK )
+         retValue--;
+      return retValue;
+   }
+   public TA_RetCode CMO( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int today, lookbackTotal, unstablePeriod, i;
+      double prevGain, prevLoss, prevValue, savePrevValue;
+      double tempValue1, tempValue2, tempValue3, tempValue4;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  CMO_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      outIdx = 0;
+      if( optInTimePeriod == 1 )
+      {
+         outBegIdx.value  = startIdx;
+         i = (endIdx-startIdx)+1;
+         outNbElement.value  = i;
+         System.arraycopy(inReal,startIdx,outReal,0,i) ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      today = startIdx-lookbackTotal;
+      prevValue = inReal[today];
+      unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
+      if( (unstablePeriod == 0) &&
+         ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
+      {
+         savePrevValue = prevValue;
+         prevGain = 0.0;
+         prevLoss = 0.0;
+         for( i=optInTimePeriod; i > 0; i-- )
+         {
+            tempValue1 = inReal[today++];
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            if( tempValue2 < 0 )
+               prevLoss -= tempValue2;
+            else
+               prevGain += tempValue2;
+         }
+         tempValue1 = prevLoss/optInTimePeriod;
+         tempValue2 = prevGain/optInTimePeriod;
+         tempValue3 = tempValue2-tempValue1;
+         tempValue4 = tempValue1+tempValue2;
+         if( ! (((-0.00000001)<tempValue4)&&(tempValue4<0.00000001))  )
+            outReal[outIdx++] = 100*(tempValue3/tempValue4);
+         else
+            outReal[outIdx++] = 0.0;
+         if( today > endIdx )
+         {
+            outBegIdx.value  = startIdx;
+            outNbElement.value  = outIdx;
+            return  TA_RetCode. TA_SUCCESS;
+         }
+         today -= optInTimePeriod;
+         prevValue = savePrevValue;
+      }
+      prevGain = 0.0;
+      prevLoss = 0.0;
+      today++;
+      for( i=optInTimePeriod; i > 0; i-- )
+      {
+         tempValue1 = inReal[today++];
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         if( tempValue2 < 0 )
+            prevLoss -= tempValue2;
+         else
+            prevGain += tempValue2;
+      }
+      prevLoss /= optInTimePeriod;
+      prevGain /= optInTimePeriod;
+      if( today > startIdx )
+      {
+         tempValue1 = prevGain+prevLoss;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      else
+      {
+         while( today < startIdx )
+         {
+            tempValue1 = inReal[today];
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            prevLoss *= (optInTimePeriod-1);
+            prevGain *= (optInTimePeriod-1);
+            if( tempValue2 < 0 )
+               prevLoss -= tempValue2;
+            else
+               prevGain += tempValue2;
+            prevLoss /= optInTimePeriod;
+            prevGain /= optInTimePeriod;
+            today++;
+         }
+      }
+      while( today <= endIdx )
+      {
+         tempValue1 = inReal[today++];
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         prevLoss *= (optInTimePeriod-1);
+         prevGain *= (optInTimePeriod-1);
+         if( tempValue2 < 0 )
+            prevLoss -= tempValue2;
+         else
+            prevGain += tempValue2;
+         prevLoss /= optInTimePeriod;
+         prevGain /= optInTimePeriod;
+         tempValue1 = prevGain+prevLoss;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode CMO( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int today, lookbackTotal, unstablePeriod, i;
+      double prevGain, prevLoss, prevValue, savePrevValue;
+      double tempValue1, tempValue2, tempValue3, tempValue4;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  CMO_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      outIdx = 0;
+      if( optInTimePeriod == 1 )
+      {
+         outBegIdx.value  = startIdx;
+         i = (endIdx-startIdx)+1;
+         outNbElement.value  = i;
+         System.arraycopy(inReal,startIdx,outReal,0,i) ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      today = startIdx-lookbackTotal;
+      prevValue = inReal[today];
+      unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_CMO.ordinal()]) ;
+      if( (unstablePeriod == 0) &&
+         ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
+      {
+         savePrevValue = prevValue;
+         prevGain = 0.0;
+         prevLoss = 0.0;
+         for( i=optInTimePeriod; i > 0; i-- )
+         {
+            tempValue1 = inReal[today++];
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            if( tempValue2 < 0 )
+               prevLoss -= tempValue2;
+            else
+               prevGain += tempValue2;
+         }
+         tempValue1 = prevLoss/optInTimePeriod;
+         tempValue2 = prevGain/optInTimePeriod;
+         tempValue3 = tempValue2-tempValue1;
+         tempValue4 = tempValue1+tempValue2;
+         if( ! (((-0.00000001)<tempValue4)&&(tempValue4<0.00000001))  )
+            outReal[outIdx++] = 100*(tempValue3/tempValue4);
+         else
+            outReal[outIdx++] = 0.0;
+         if( today > endIdx )
+         {
+            outBegIdx.value  = startIdx;
+            outNbElement.value  = outIdx;
+            return  TA_RetCode. TA_SUCCESS;
+         }
+         today -= optInTimePeriod;
+         prevValue = savePrevValue;
+      }
+      prevGain = 0.0;
+      prevLoss = 0.0;
+      today++;
+      for( i=optInTimePeriod; i > 0; i-- )
+      {
+         tempValue1 = inReal[today++];
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         if( tempValue2 < 0 )
+            prevLoss -= tempValue2;
+         else
+            prevGain += tempValue2;
+      }
+      prevLoss /= optInTimePeriod;
+      prevGain /= optInTimePeriod;
+      if( today > startIdx )
+      {
+         tempValue1 = prevGain+prevLoss;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      else
+      {
+         while( today < startIdx )
+         {
+            tempValue1 = inReal[today];
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            prevLoss *= (optInTimePeriod-1);
+            prevGain *= (optInTimePeriod-1);
+            if( tempValue2 < 0 )
+               prevLoss -= tempValue2;
+            else
+               prevGain += tempValue2;
+            prevLoss /= optInTimePeriod;
+            prevGain /= optInTimePeriod;
+            today++;
+         }
+      }
+      while( today <= endIdx )
+      {
+         tempValue1 = inReal[today++];
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         prevLoss *= (optInTimePeriod-1);
+         prevGain *= (optInTimePeriod-1);
+         if( tempValue2 < 0 )
+            prevLoss -= tempValue2;
+         else
+            prevGain += tempValue2;
+         prevLoss /= optInTimePeriod;
+         prevGain /= optInTimePeriod;
+         tempValue1 = prevGain+prevLoss;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100.0*((prevGain-prevLoss)/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
    public int CORREL_Lookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
@@ -21673,6 +11499,2788 @@ public class Core {
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
+   public int DEMA_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return  EMA_Lookback ( optInTimePeriod ) * 2;
+   }
+   public TA_RetCode DEMA( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double []firstEMA ;
+      double []secondEMA ;
+      double k;
+      MInteger firstEMABegIdx = new MInteger() ;
+      MInteger firstEMANbElement = new MInteger() ;
+      MInteger secondEMABegIdx = new MInteger() ;
+      MInteger secondEMANbElement = new MInteger() ;
+      int tempInt, outIdx, firstEMAIdx, lookbackTotal, lookbackEMA;
+      TA_RetCode retCode;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outNbElement.value = 0 ;
+      outBegIdx.value = 0 ;
+      lookbackEMA =  EMA_Lookback ( optInTimePeriod );
+      lookbackTotal = lookbackEMA * 2;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      if( inReal == outReal )
+         firstEMA = outReal;
+      else
+      {
+         tempInt = lookbackTotal+(endIdx-startIdx)+1;
+         firstEMA = new double[tempInt] ;
+      }
+      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
+      retCode =  INT_EMA ( startIdx-lookbackEMA, endIdx, inReal,
+         optInTimePeriod, k,
+         firstEMABegIdx ,  firstEMANbElement ,
+         firstEMA );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( firstEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      secondEMA = new double[firstEMANbElement.value] ;
+      retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
+         optInTimePeriod, k,
+         secondEMABegIdx ,  secondEMANbElement ,
+         secondEMA );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( secondEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      firstEMAIdx =  secondEMABegIdx.value ;
+      outIdx = 0;
+      while( outIdx <  secondEMANbElement.value  )
+      {
+         outReal[outIdx] = (2.0*firstEMA[firstEMAIdx++]) - secondEMA[outIdx];
+         outIdx++;
+      }
+      outBegIdx.value  =  firstEMABegIdx.value  +  secondEMABegIdx.value ;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode DEMA( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double []firstEMA ;
+      double []secondEMA ;
+      double k;
+      MInteger firstEMABegIdx = new MInteger() ;
+      MInteger firstEMANbElement = new MInteger() ;
+      MInteger secondEMABegIdx = new MInteger() ;
+      MInteger secondEMANbElement = new MInteger() ;
+      int tempInt, outIdx, firstEMAIdx, lookbackTotal, lookbackEMA;
+      TA_RetCode retCode;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outNbElement.value = 0 ;
+      outBegIdx.value = 0 ;
+      lookbackEMA =  EMA_Lookback ( optInTimePeriod );
+      lookbackTotal = lookbackEMA * 2;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      tempInt = lookbackTotal+(endIdx-startIdx)+1;
+      firstEMA = new double[tempInt] ;
+      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
+      retCode =  INT_EMA ( startIdx-lookbackEMA, endIdx, inReal,
+         optInTimePeriod, k,
+         firstEMABegIdx ,  firstEMANbElement ,
+         firstEMA );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( firstEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      secondEMA = new double[firstEMANbElement.value] ;
+      retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
+         optInTimePeriod, k,
+         secondEMABegIdx ,  secondEMANbElement ,
+         secondEMA );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS) || ( secondEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      firstEMAIdx =  secondEMABegIdx.value ;
+      outIdx = 0;
+      while( outIdx <  secondEMANbElement.value  )
+      {
+         outReal[outIdx] = (2.0*firstEMA[firstEMAIdx++]) - secondEMA[outIdx];
+         outIdx++;
+      }
+      outBegIdx.value  =  firstEMABegIdx.value  +  secondEMABegIdx.value ;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int DX_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInTimePeriod > 1 )
+         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
+      else
+         return 2;
+   }
+   public TA_RetCode DX( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, prevClose;
+      double prevMinusDM, prevPlusDM, prevTR;
+      double tempReal, tempReal2, diffP, diffM;
+      double minusDI, plusDI;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
+      else
+         lookbackTotal = 2;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      outBegIdx.value  = today = startIdx;
+      prevMinusDM = 0.0;
+      prevPlusDM = 0.0;
+      prevTR = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      prevClose = inClose[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+         else if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR += tempReal;
+         prevClose = inClose[today];
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()])  + 1;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         prevMinusDM -= prevMinusDM/optInTimePeriod;
+         prevPlusDM -= prevPlusDM/optInTimePeriod;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+         else if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+      }
+      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+      {
+         minusDI =  (100.0*(prevMinusDM/prevTR)) ;
+         plusDI =  (100.0*(prevPlusDM/prevTR)) ;
+         tempReal = minusDI+plusDI;
+         if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
+            outReal[0] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
+         else
+            outReal[0] = 0.0;
+      }
+      else
+         outReal[0] = 0.0;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         prevMinusDM -= prevMinusDM/optInTimePeriod;
+         prevPlusDM -= prevPlusDM/optInTimePeriod;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+         else if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001)) )
+         {
+            minusDI =  (100.0*(prevMinusDM/prevTR)) ;
+            plusDI =  (100.0*(prevPlusDM/prevTR)) ;
+            tempReal = minusDI+plusDI;
+            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001)) )
+               outReal[outIdx] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
+            else
+               outReal[outIdx] = outReal[outIdx-1];
+         }
+         else
+            outReal[outIdx] = outReal[outIdx-1];
+         outIdx++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode DX( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, prevClose;
+      double prevMinusDM, prevPlusDM, prevTR;
+      double tempReal, tempReal2, diffP, diffM;
+      double minusDI, plusDI;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()]) ;
+      else
+         lookbackTotal = 2;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      outBegIdx.value  = today = startIdx;
+      prevMinusDM = 0.0;
+      prevPlusDM = 0.0;
+      prevTR = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      prevClose = inClose[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+         else if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR += tempReal;
+         prevClose = inClose[today];
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_DX.ordinal()])  + 1;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         prevMinusDM -= prevMinusDM/optInTimePeriod;
+         prevPlusDM -= prevPlusDM/optInTimePeriod;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+         else if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+      }
+      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+      {
+         minusDI =  (100.0*(prevMinusDM/prevTR)) ;
+         plusDI =  (100.0*(prevPlusDM/prevTR)) ;
+         tempReal = minusDI+plusDI;
+         if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
+            outReal[0] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
+         else
+            outReal[0] = 0.0;
+      }
+      else
+         outReal[0] = 0.0;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         prevMinusDM -= prevMinusDM/optInTimePeriod;
+         prevPlusDM -= prevPlusDM/optInTimePeriod;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+         else if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001)) )
+         {
+            minusDI =  (100.0*(prevMinusDM/prevTR)) ;
+            plusDI =  (100.0*(prevPlusDM/prevTR)) ;
+            tempReal = minusDI+plusDI;
+            if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001)) )
+               outReal[outIdx] =  (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
+            else
+               outReal[outIdx] = outReal[outIdx-1];
+         }
+         else
+            outReal[outIdx] = outReal[outIdx-1];
+         outIdx++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int EMA_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod - 1 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_EMA.ordinal()]) ;
+   }
+   public TA_RetCode EMA( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      return  INT_EMA ( startIdx, endIdx, inReal,
+         optInTimePeriod,
+         ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
+         outBegIdx, outNbElement, outReal );
+   }
+   public TA_RetCode INT_EMA( int startIdx,
+      int endIdx,
+      double  []inReal,
+      int optInTimePeriod,
+      double optInK_1,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double []outReal )
+   {
+      double tempReal, prevMA;
+      int i, today, outIdx, lookbackTotal;
+      lookbackTotal =  EMA_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_DEFAULT )
+      {
+         today = startIdx-lookbackTotal;
+         i = optInTimePeriod;
+         tempReal = 0.0;
+         while( i-- > 0 )
+            tempReal += inReal[today++];
+         prevMA = tempReal / optInTimePeriod;
+      }
+      else
+      {
+         prevMA = inReal[0];
+         today = 1;
+      }
+      while( today <= startIdx )
+         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
+      outReal[0] = prevMA;
+      outIdx = 1;
+      while( today <= endIdx )
+      {
+         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
+         outReal[outIdx++] = prevMA;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode EMA( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      return  INT_EMA ( startIdx, endIdx, inReal,
+         optInTimePeriod,
+         ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
+         outBegIdx, outNbElement, outReal );
+   }
+   public TA_RetCode INT_EMA( int startIdx,
+      int endIdx,
+      float  []inReal,
+      int optInTimePeriod,
+      double optInK_1,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double []outReal )
+   {
+      double tempReal, prevMA;
+      int i, today, outIdx, lookbackTotal;
+      lookbackTotal =  EMA_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_DEFAULT )
+      {
+         today = startIdx-lookbackTotal;
+         i = optInTimePeriod;
+         tempReal = 0.0;
+         while( i-- > 0 )
+            tempReal += inReal[today++];
+         prevMA = tempReal / optInTimePeriod;
+      }
+      else
+      {
+         prevMA = inReal[0];
+         today = 1;
+      }
+      while( today <= startIdx )
+         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
+      outReal[0] = prevMA;
+      outIdx = 1;
+      while( today <= endIdx )
+      {
+         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
+         outReal[outIdx++] = prevMA;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int HT_DCPERIOD_Lookback( )
+   {
+      return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPERIOD.ordinal()]) ;
+   }
+   public TA_RetCode HT_DCPERIOD( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg;
+      double todayValue, smoothPeriod;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
+      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPERIOD.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 9;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         if( today >= startIdx )
+         {
+            outReal[outIdx++] = smoothPeriod;
+         }
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode HT_DCPERIOD( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg;
+      double todayValue, smoothPeriod;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
+      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPERIOD.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 9;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         if( today >= startIdx )
+         {
+            outReal[outIdx++] = smoothPeriod;
+         }
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int HT_DCPHASE_Lookback( )
+   {
+      return 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPHASE.ordinal()]) ;
+   }
+   public TA_RetCode HT_DCPHASE( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg, constDeg2RadBy360;
+      double todayValue, smoothPeriod;
+      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
+      int idx;
+      int DCPeriodInt;
+      double DCPhase, DCPeriod, imagPart, realPart;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
+      tempReal =  Math.atan (1);
+      rad2Deg = 45.0/tempReal;
+      constDeg2RadBy360 = tempReal*8.0;
+      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPHASE.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 34;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      for( i=0; i <  50 ; i++ )
+         smoothPrice[i] = 0.0;
+      DCPhase = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         smoothPrice[smoothPrice_Idx] = smoothedValue;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         realPart = 0.0;
+         imagPart = 0.0;
+         idx = smoothPrice_Idx;
+         for( i=0; i < DCPeriodInt; i++ )
+         {
+            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
+            tempReal2 = smoothPrice[idx];
+            realPart +=  Math.sin (tempReal)*tempReal2;
+            imagPart +=  Math.cos (tempReal)*tempReal2;
+            if( idx == 0 )
+               idx =  50 -1;
+            else
+               idx--;
+         }
+         tempReal =  Math.abs (imagPart);
+         if( tempReal > 0.0 )
+            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
+         else if( tempReal <= 0.01 )
+         {
+            if( realPart < 0.0 )
+               DCPhase -= 90.0;
+            else if( realPart > 0.0 )
+               DCPhase += 90.0;
+         }
+         DCPhase += 90.0;
+         DCPhase += 360.0 / smoothPeriod;
+         if( imagPart < 0.0 )
+            DCPhase += 180.0;
+         if( DCPhase > 315.0 )
+            DCPhase -= 360.0;
+         if( today >= startIdx )
+         {
+            outReal[outIdx++] = DCPhase;
+         }
+         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode HT_DCPHASE( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg, constDeg2RadBy360;
+      double todayValue, smoothPeriod;
+      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
+      int idx;
+      int DCPeriodInt;
+      double DCPhase, DCPeriod, imagPart, realPart;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
+      tempReal =  Math.atan (1);
+      rad2Deg = 45.0/tempReal;
+      constDeg2RadBy360 = tempReal*8.0;
+      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_DCPHASE.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 34;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      for( i=0; i <  50 ; i++ )
+         smoothPrice[i] = 0.0;
+      DCPhase = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         smoothPrice[smoothPrice_Idx] = smoothedValue;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         realPart = 0.0;
+         imagPart = 0.0;
+         idx = smoothPrice_Idx;
+         for( i=0; i < DCPeriodInt; i++ )
+         {
+            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
+            tempReal2 = smoothPrice[idx];
+            realPart +=  Math.sin (tempReal)*tempReal2;
+            imagPart +=  Math.cos (tempReal)*tempReal2;
+            if( idx == 0 )
+               idx =  50 -1;
+            else
+               idx--;
+         }
+         tempReal =  Math.abs (imagPart);
+         if( tempReal > 0.0 )
+            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
+         else if( tempReal <= 0.01 )
+         {
+            if( realPart < 0.0 )
+               DCPhase -= 90.0;
+            else if( realPart > 0.0 )
+               DCPhase += 90.0;
+         }
+         DCPhase += 90.0;
+         DCPhase += 360.0 / smoothPeriod;
+         if( imagPart < 0.0 )
+            DCPhase += 180.0;
+         if( DCPhase > 315.0 )
+            DCPhase -= 360.0;
+         if( today >= startIdx )
+         {
+            outReal[outIdx++] = DCPhase;
+         }
+         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int HT_PHASOR_Lookback( )
+   {
+      return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_PHASOR.ordinal()]) ;
+   }
+   public TA_RetCode HT_PHASOR( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outInPhase[],
+      double outQuadrature[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg;
+      double todayValue;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
+      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_PHASOR.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 9;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            if( today >= startIdx )
+            {
+               outQuadrature[outIdx] = Q1;
+               outInPhase[outIdx++] = I1ForEvenPrev3;
+            }
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            if( today >= startIdx )
+            {
+               outQuadrature[outIdx] = Q1;
+               outInPhase[outIdx++] = I1ForOddPrev3;
+            }
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode HT_PHASOR( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outInPhase[],
+      double outQuadrature[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg;
+      double todayValue;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
+      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_PHASOR.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 9;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            if( today >= startIdx )
+            {
+               outQuadrature[outIdx] = Q1;
+               outInPhase[outIdx++] = I1ForEvenPrev3;
+            }
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            if( today >= startIdx )
+            {
+               outQuadrature[outIdx] = Q1;
+               outInPhase[outIdx++] = I1ForOddPrev3;
+            }
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int HT_SINE_Lookback( )
+   {
+      return 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_SINE.ordinal()]) ;
+   }
+   public TA_RetCode HT_SINE( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outSine[],
+      double outLeadSine[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg, deg2Rad, constDeg2RadBy360;
+      double todayValue, smoothPeriod;
+      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
+      int idx;
+      int DCPeriodInt;
+      double DCPhase, DCPeriod, imagPart, realPart;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
+      tempReal =  Math.atan (1);
+      rad2Deg = 45.0/tempReal;
+      deg2Rad = 1.0/rad2Deg;
+      constDeg2RadBy360 = tempReal*8.0;
+      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_SINE.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 34;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      for( i=0; i <  50 ; i++ )
+         smoothPrice[i] = 0.0;
+      DCPhase = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         smoothPrice[smoothPrice_Idx] = smoothedValue;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         realPart = 0.0;
+         imagPart = 0.0;
+         idx = smoothPrice_Idx;
+         for( i=0; i < DCPeriodInt; i++ )
+         {
+            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
+            tempReal2 = smoothPrice[idx];
+            realPart +=  Math.sin (tempReal)*tempReal2;
+            imagPart +=  Math.cos (tempReal)*tempReal2;
+            if( idx == 0 )
+               idx =  50 -1;
+            else
+               idx--;
+         }
+         tempReal =  Math.abs (imagPart);
+         if( tempReal > 0.0 )
+            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
+         else if( tempReal <= 0.01 )
+         {
+            if( realPart < 0.0 )
+               DCPhase -= 90.0;
+            else if( realPart > 0.0 )
+               DCPhase += 90.0;
+         }
+         DCPhase += 90.0;
+         DCPhase += 360.0 / smoothPeriod;
+         if( imagPart < 0.0 )
+            DCPhase += 180.0;
+         if( DCPhase > 315.0 )
+            DCPhase -= 360.0;
+         if( today >= startIdx )
+         {
+            outSine[outIdx] =  Math.sin (DCPhase*deg2Rad);
+            outLeadSine[outIdx++] =  Math.sin ((DCPhase+45)*deg2Rad);
+         }
+         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode HT_SINE( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outSine[],
+      double outLeadSine[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg, deg2Rad, constDeg2RadBy360;
+      double todayValue, smoothPeriod;
+      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
+      int idx;
+      int DCPeriodInt;
+      double DCPhase, DCPeriod, imagPart, realPart;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
+      tempReal =  Math.atan (1);
+      rad2Deg = 45.0/tempReal;
+      deg2Rad = 1.0/rad2Deg;
+      constDeg2RadBy360 = tempReal*8.0;
+      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_SINE.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 34;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      for( i=0; i <  50 ; i++ )
+         smoothPrice[i] = 0.0;
+      DCPhase = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         smoothPrice[smoothPrice_Idx] = smoothedValue;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         realPart = 0.0;
+         imagPart = 0.0;
+         idx = smoothPrice_Idx;
+         for( i=0; i < DCPeriodInt; i++ )
+         {
+            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
+            tempReal2 = smoothPrice[idx];
+            realPart +=  Math.sin (tempReal)*tempReal2;
+            imagPart +=  Math.cos (tempReal)*tempReal2;
+            if( idx == 0 )
+               idx =  50 -1;
+            else
+               idx--;
+         }
+         tempReal =  Math.abs (imagPart);
+         if( tempReal > 0.0 )
+            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
+         else if( tempReal <= 0.01 )
+         {
+            if( realPart < 0.0 )
+               DCPhase -= 90.0;
+            else if( realPart > 0.0 )
+               DCPhase += 90.0;
+         }
+         DCPhase += 90.0;
+         DCPhase += 360.0 / smoothPeriod;
+         if( imagPart < 0.0 )
+            DCPhase += 180.0;
+         if( DCPhase > 315.0 )
+            DCPhase -= 360.0;
+         if( today >= startIdx )
+         {
+            outSine[outIdx] =  Math.sin (DCPhase*deg2Rad);
+            outLeadSine[outIdx++] =  Math.sin ((DCPhase+45)*deg2Rad);
+         }
+         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int HT_TRENDLINE_Lookback( )
+   {
+      return 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDLINE.ordinal()]) ;
+   }
+   public TA_RetCode HT_TRENDLINE( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      double iTrend1, iTrend2, iTrend3;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg;
+      double todayValue, smoothPeriod;
+      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
+      int idx;
+      int DCPeriodInt;
+      double DCPeriod;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
+      iTrend1 = iTrend2 = iTrend3 = 0.0;
+      tempReal =  Math.atan (1);
+      rad2Deg = 45.0/tempReal;
+      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDLINE.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 34;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      for( i=0; i <  50 ; i++ )
+         smoothPrice[i] = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         smoothPrice[smoothPrice_Idx] = smoothedValue;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         idx = today;
+         tempReal = 0.0;
+         for( i=0; i < DCPeriodInt; i++ )
+            tempReal += inReal[idx--];
+         if( DCPeriodInt > 0 )
+            tempReal = tempReal/(double)DCPeriodInt;
+         tempReal2 = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
+         iTrend3 = iTrend2;
+         iTrend2 = iTrend1;
+         iTrend1 = tempReal;
+         if( today >= startIdx )
+         {
+            outReal[outIdx++] = tempReal2;
+         }
+         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode HT_TRENDLINE( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      double iTrend1, iTrend2, iTrend3;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg;
+      double todayValue, smoothPeriod;
+      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
+      int idx;
+      int DCPeriodInt;
+      double DCPeriod;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
+      iTrend1 = iTrend2 = iTrend3 = 0.0;
+      tempReal =  Math.atan (1);
+      rad2Deg = 45.0/tempReal;
+      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDLINE.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 34;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      for( i=0; i <  50 ; i++ )
+         smoothPrice[i] = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         smoothPrice[smoothPrice_Idx] = smoothedValue;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         idx = today;
+         tempReal = 0.0;
+         for( i=0; i < DCPeriodInt; i++ )
+            tempReal += inReal[idx--];
+         if( DCPeriodInt > 0 )
+            tempReal = tempReal/(double)DCPeriodInt;
+         tempReal2 = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
+         iTrend3 = iTrend2;
+         iTrend2 = iTrend1;
+         iTrend1 = tempReal;
+         if( today >= startIdx )
+         {
+            outReal[outIdx++] = tempReal2;
+         }
+         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int HT_TRENDMODE_Lookback( )
+   {
+      return 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDMODE.ordinal()]) ;
+   }
+   public TA_RetCode HT_TRENDMODE( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      int outInteger[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      double iTrend1, iTrend2, iTrend3;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg, deg2Rad, constDeg2RadBy360;
+      double todayValue, smoothPeriod;
+      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
+      int idx;
+      int DCPeriodInt;
+      double DCPhase, DCPeriod, imagPart, realPart;
+      int daysInTrend, trend;
+      double prevDCPhase, trendline;
+      double prevSine, prevLeadSine, sine, leadSine;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
+      iTrend1 = iTrend2 = iTrend3 = 0.0;
+      daysInTrend = 0;
+      prevDCPhase = DCPhase = 0.0;
+      prevSine = sine = 0.0;
+      prevLeadSine = leadSine = 0.0;
+      tempReal =  Math.atan (1);
+      rad2Deg = 45.0/tempReal;
+      deg2Rad = 1.0/rad2Deg;
+      constDeg2RadBy360 = tempReal*8.0;
+      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDMODE.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 34;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      for( i=0; i <  50 ; i++ )
+         smoothPrice[i] = 0.0;
+      DCPhase = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         smoothPrice[smoothPrice_Idx] = smoothedValue;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         prevDCPhase = DCPhase;
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         realPart = 0.0;
+         imagPart = 0.0;
+         idx = smoothPrice_Idx;
+         for( i=0; i < DCPeriodInt; i++ )
+         {
+            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
+            tempReal2 = smoothPrice[idx];
+            realPart +=  Math.sin (tempReal)*tempReal2;
+            imagPart +=  Math.cos (tempReal)*tempReal2;
+            if( idx == 0 )
+               idx =  50 -1;
+            else
+               idx--;
+         }
+         tempReal =  Math.abs (imagPart);
+         if( tempReal > 0.0 )
+            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
+         else if( tempReal <= 0.01 )
+         {
+            if( realPart < 0.0 )
+               DCPhase -= 90.0;
+            else if( realPart > 0.0 )
+               DCPhase += 90.0;
+         }
+         DCPhase += 90.0;
+         DCPhase += 360.0 / smoothPeriod;
+         if( imagPart < 0.0 )
+            DCPhase += 180.0;
+         if( DCPhase > 315.0 )
+            DCPhase -= 360.0;
+         prevSine = sine;
+         prevLeadSine = leadSine;
+         sine =  Math.sin (DCPhase*deg2Rad);
+         leadSine =  Math.sin ((DCPhase+45)*deg2Rad);
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         idx = today;
+         tempReal = 0.0;
+         for( i=0; i < DCPeriodInt; i++ )
+            tempReal += inReal[idx--];
+         if( DCPeriodInt > 0 )
+            tempReal = tempReal/(double)DCPeriodInt;
+         trendline = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
+         iTrend3 = iTrend2;
+         iTrend2 = iTrend1;
+         iTrend1 = tempReal;
+         trend = 1;
+         if( ((sine > leadSine) && (prevSine <= prevLeadSine)) ||
+            ((sine < leadSine) && (prevSine >= prevLeadSine)) )
+         {
+            daysInTrend = 0;
+            trend = 0;
+         }
+         daysInTrend++;
+         if( daysInTrend < (0.5*smoothPeriod) )
+            trend = 0;
+         tempReal = DCPhase - prevDCPhase;
+         if( (smoothPeriod != 0.0) &&
+            ((tempReal > (0.67*360.0/smoothPeriod)) && (tempReal < (1.5*360.0/smoothPeriod))) )
+         {
+            trend = 0;
+         }
+         tempReal = smoothPrice[smoothPrice_Idx];
+         if( (trendline != 0.0) && ( Math.abs ( (tempReal - trendline)/trendline ) >= 0.015) )
+            trend = 1;
+         if( today >= startIdx )
+         {
+            outInteger[outIdx++] = trend;
+         }
+         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode HT_TRENDMODE( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      int outInteger[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      double iTrend1, iTrend2, iTrend3;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg, deg2Rad, constDeg2RadBy360;
+      double todayValue, smoothPeriod;
+      int smoothPrice_Idx  = 0; double []smoothPrice; int maxIdx_smoothPrice  = ( 50 -1) ;
+      int idx;
+      int DCPeriodInt;
+      double DCPhase, DCPeriod, imagPart, realPart;
+      int daysInTrend, trend;
+      double prevDCPhase, trendline;
+      double prevSine, prevLeadSine, sine, leadSine;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      { smoothPrice = new double[maxIdx_smoothPrice +1]; } ;
+      iTrend1 = iTrend2 = iTrend3 = 0.0;
+      daysInTrend = 0;
+      prevDCPhase = DCPhase = 0.0;
+      prevSine = sine = 0.0;
+      prevLeadSine = leadSine = 0.0;
+      tempReal =  Math.atan (1);
+      rad2Deg = 45.0/tempReal;
+      deg2Rad = 1.0/rad2Deg;
+      constDeg2RadBy360 = tempReal*8.0;
+      lookbackTotal = 63 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_HT_TRENDMODE.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 34;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      smoothPeriod = 0.0;
+      for( i=0; i <  50 ; i++ )
+         smoothPrice[i] = 0.0;
+      DCPhase = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         smoothPrice[smoothPrice_Idx] = smoothedValue;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         smoothPeriod = (0.33*period)+(0.67*smoothPeriod);
+         prevDCPhase = DCPhase;
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         realPart = 0.0;
+         imagPart = 0.0;
+         idx = smoothPrice_Idx;
+         for( i=0; i < DCPeriodInt; i++ )
+         {
+            tempReal = ((double)i*constDeg2RadBy360)/(double)DCPeriodInt;
+            tempReal2 = smoothPrice[idx];
+            realPart +=  Math.sin (tempReal)*tempReal2;
+            imagPart +=  Math.cos (tempReal)*tempReal2;
+            if( idx == 0 )
+               idx =  50 -1;
+            else
+               idx--;
+         }
+         tempReal =  Math.abs (imagPart);
+         if( tempReal > 0.0 )
+            DCPhase =  Math.atan (realPart/imagPart)*rad2Deg;
+         else if( tempReal <= 0.01 )
+         {
+            if( realPart < 0.0 )
+               DCPhase -= 90.0;
+            else if( realPart > 0.0 )
+               DCPhase += 90.0;
+         }
+         DCPhase += 90.0;
+         DCPhase += 360.0 / smoothPeriod;
+         if( imagPart < 0.0 )
+            DCPhase += 180.0;
+         if( DCPhase > 315.0 )
+            DCPhase -= 360.0;
+         prevSine = sine;
+         prevLeadSine = leadSine;
+         sine =  Math.sin (DCPhase*deg2Rad);
+         leadSine =  Math.sin ((DCPhase+45)*deg2Rad);
+         DCPeriod = smoothPeriod+0.5;
+         DCPeriodInt = (int)DCPeriod;
+         idx = today;
+         tempReal = 0.0;
+         for( i=0; i < DCPeriodInt; i++ )
+            tempReal += inReal[idx--];
+         if( DCPeriodInt > 0 )
+            tempReal = tempReal/(double)DCPeriodInt;
+         trendline = (4.0*tempReal + 3.0*iTrend1 + 2.0*iTrend2 + iTrend3) / 10.0;
+         iTrend3 = iTrend2;
+         iTrend2 = iTrend1;
+         iTrend1 = tempReal;
+         trend = 1;
+         if( ((sine > leadSine) && (prevSine <= prevLeadSine)) ||
+            ((sine < leadSine) && (prevSine >= prevLeadSine)) )
+         {
+            daysInTrend = 0;
+            trend = 0;
+         }
+         daysInTrend++;
+         if( daysInTrend < (0.5*smoothPeriod) )
+            trend = 0;
+         tempReal = DCPhase - prevDCPhase;
+         if( (smoothPeriod != 0.0) &&
+            ((tempReal > (0.67*360.0/smoothPeriod)) && (tempReal < (1.5*360.0/smoothPeriod))) )
+         {
+            trend = 0;
+         }
+         tempReal = smoothPrice[smoothPrice_Idx];
+         if( (trendline != 0.0) && ( Math.abs ( (tempReal - trendline)/trendline ) >= 0.015) )
+            trend = 1;
+         if( today >= startIdx )
+         {
+            outInteger[outIdx++] = trend;
+         }
+         { smoothPrice_Idx ++; if( smoothPrice_Idx  > maxIdx_smoothPrice  ) smoothPrice_Idx  = 0; } ;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int KAMA_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
+   }
+   public TA_RetCode KAMA( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      final double constMax  = 2.0/(30.0+1.0);
+      final double constDiff  = 2.0/(2.0+1.0) - constMax;
+      double tempReal, tempReal2;
+      double sumROC1, periodROC, prevKAMA;
+      int i, today, outIdx, lookbackTotal;
+      int trailingIdx;
+      double trailingValue;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      sumROC1 = 0.0;
+      today = startIdx-lookbackTotal;
+      trailingIdx = today;
+      i = optInTimePeriod;
+      while( i-- > 0 )
+      {
+         tempReal = inReal[today++];
+         tempReal -= inReal[today];
+         sumROC1 +=  Math.abs (tempReal);
+      }
+      prevKAMA = inReal[today-1];
+      tempReal = inReal[today];
+      tempReal2 = inReal[trailingIdx++];
+      periodROC = tempReal-tempReal2;
+      trailingValue = tempReal2;
+      if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001)) )
+         tempReal = 1.0;
+      else
+         tempReal =  Math.abs (periodROC/sumROC1);
+      tempReal = (tempReal*constDiff)+constMax;
+      tempReal *= tempReal;
+      prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
+      while( today <= startIdx )
+      {
+         tempReal = inReal[today];
+         tempReal2 = inReal[trailingIdx++];
+         periodROC = tempReal-tempReal2;
+         sumROC1 -=  Math.abs (trailingValue-tempReal2);
+         sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
+         trailingValue = tempReal2;
+         if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
+            tempReal = 1.0;
+         else
+            tempReal =  Math.abs (periodROC/sumROC1);
+         tempReal = (tempReal*constDiff)+constMax;
+         tempReal *= tempReal;
+         prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
+      }
+      outReal[0] = prevKAMA;
+      outIdx = 1;
+      outBegIdx.value  = today-1;
+      while( today <= endIdx )
+      {
+         tempReal = inReal[today];
+         tempReal2 = inReal[trailingIdx++];
+         periodROC = tempReal-tempReal2;
+         sumROC1 -=  Math.abs (trailingValue-tempReal2);
+         sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
+         trailingValue = tempReal2;
+         if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
+            tempReal = 1.0;
+         else
+            tempReal =  Math.abs (periodROC / sumROC1);
+         tempReal = (tempReal*constDiff)+constMax;
+         tempReal *= tempReal;
+         prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
+         outReal[outIdx++] = prevKAMA;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode KAMA( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      final double constMax  = 2.0/(30.0+1.0);
+      final double constDiff  = 2.0/(2.0+1.0) - constMax;
+      double tempReal, tempReal2;
+      double sumROC1, periodROC, prevKAMA;
+      int i, today, outIdx, lookbackTotal;
+      int trailingIdx;
+      double trailingValue;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_KAMA.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      sumROC1 = 0.0;
+      today = startIdx-lookbackTotal;
+      trailingIdx = today;
+      i = optInTimePeriod;
+      while( i-- > 0 )
+      {
+         tempReal = inReal[today++];
+         tempReal -= inReal[today];
+         sumROC1 +=  Math.abs (tempReal);
+      }
+      prevKAMA = inReal[today-1];
+      tempReal = inReal[today];
+      tempReal2 = inReal[trailingIdx++];
+      periodROC = tempReal-tempReal2;
+      trailingValue = tempReal2;
+      if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001)) )
+         tempReal = 1.0;
+      else
+         tempReal =  Math.abs (periodROC/sumROC1);
+      tempReal = (tempReal*constDiff)+constMax;
+      tempReal *= tempReal;
+      prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
+      while( today <= startIdx )
+      {
+         tempReal = inReal[today];
+         tempReal2 = inReal[trailingIdx++];
+         periodROC = tempReal-tempReal2;
+         sumROC1 -=  Math.abs (trailingValue-tempReal2);
+         sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
+         trailingValue = tempReal2;
+         if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
+            tempReal = 1.0;
+         else
+            tempReal =  Math.abs (periodROC/sumROC1);
+         tempReal = (tempReal*constDiff)+constMax;
+         tempReal *= tempReal;
+         prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
+      }
+      outReal[0] = prevKAMA;
+      outIdx = 1;
+      outBegIdx.value  = today-1;
+      while( today <= endIdx )
+      {
+         tempReal = inReal[today];
+         tempReal2 = inReal[trailingIdx++];
+         periodROC = tempReal-tempReal2;
+         sumROC1 -=  Math.abs (trailingValue-tempReal2);
+         sumROC1 +=  Math.abs (tempReal-inReal[today-1]);
+         trailingValue = tempReal2;
+         if( (sumROC1 <= periodROC) ||  (((-0.00000001)<sumROC1)&&(sumROC1<0.00000001))  )
+            tempReal = 1.0;
+         else
+            tempReal =  Math.abs (periodROC / sumROC1);
+         tempReal = (tempReal*constDiff)+constMax;
+         tempReal *= tempReal;
+         prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
+         outReal[outIdx++] = prevKAMA;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
    public int LINEARREG_Lookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
@@ -21783,117 +14391,6 @@ public class Core {
          m = ( optInTimePeriod * SumXY - SumX * SumY) / Divisor;
          b = ( SumY - m * SumX ) / (double)optInTimePeriod;
          outReal[outIdx++] = b + m * (double)(optInTimePeriod-1);
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int LINEARREG_SLOPE_Lookback( int optInTimePeriod )
-   {
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return -1;
-      return optInTimePeriod-1;
-   }
-   public TA_RetCode LINEARREG_SLOPE( int startIdx,
-      int endIdx,
-      double inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx;
-      int today, lookbackTotal;
-      double SumX, SumXY, SumY, SumXSqr, Divisor;
-      int i;
-      double tempValue1;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal =  LINEARREG_SLOPE_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
-      SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
-      Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
-      while( today <= endIdx )
-      {
-         SumXY = 0;
-         SumY = 0;
-         for( i = optInTimePeriod; i-- != 0; )
-         {
-            SumY += tempValue1 = inReal[today - i];
-            SumXY += (double)i * tempValue1;
-         }
-         outReal[outIdx++] = ( optInTimePeriod * SumXY - SumX * SumY) / Divisor;
-         today++;
-      }
-      outBegIdx.value  = startIdx;
-      outNbElement.value  = outIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode LINEARREG_SLOPE( int startIdx,
-      int endIdx,
-      float inReal[],
-      int optInTimePeriod,
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx;
-      int today, lookbackTotal;
-      double SumX, SumXY, SumY, SumXSqr, Divisor;
-      int i;
-      double tempValue1;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return  TA_RetCode. TA_BAD_PARAM;
-      lookbackTotal =  LINEARREG_SLOPE_Lookback ( optInTimePeriod );
-      if( startIdx < lookbackTotal )
-         startIdx = lookbackTotal;
-      if( startIdx > endIdx )
-      {
-         outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
-         return  TA_RetCode. TA_SUCCESS;
-      }
-      outIdx = 0;
-      today = startIdx;
-      SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
-      SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
-      Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
-      while( today <= endIdx )
-      {
-         SumXY = 0;
-         SumY = 0;
-         for( i = optInTimePeriod; i-- != 0; )
-         {
-            SumY += tempValue1 = inReal[today - i];
-            SumXY += (double)i * tempValue1;
-         }
-         outReal[outIdx++] = ( optInTimePeriod * SumXY - SumX * SumY) / Divisor;
          today++;
       }
       outBegIdx.value  = startIdx;
@@ -22131,6 +14628,5224 @@ public class Core {
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
+   public int LINEARREG_SLOPE_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod-1;
+   }
+   public TA_RetCode LINEARREG_SLOPE( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int today, lookbackTotal;
+      double SumX, SumXY, SumY, SumXSqr, Divisor;
+      int i;
+      double tempValue1;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal =  LINEARREG_SLOPE_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
+      SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
+      Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
+      while( today <= endIdx )
+      {
+         SumXY = 0;
+         SumY = 0;
+         for( i = optInTimePeriod; i-- != 0; )
+         {
+            SumY += tempValue1 = inReal[today - i];
+            SumXY += (double)i * tempValue1;
+         }
+         outReal[outIdx++] = ( optInTimePeriod * SumXY - SumX * SumY) / Divisor;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode LINEARREG_SLOPE( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int today, lookbackTotal;
+      double SumX, SumXY, SumY, SumXSqr, Divisor;
+      int i;
+      double tempValue1;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal =  LINEARREG_SLOPE_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      SumX = optInTimePeriod * ( optInTimePeriod - 1 ) * 0.5;
+      SumXSqr = optInTimePeriod * ( optInTimePeriod - 1 ) * ( 2 * optInTimePeriod - 1 ) / 6;
+      Divisor = SumX * SumX - optInTimePeriod * SumXSqr;
+      while( today <= endIdx )
+      {
+         SumXY = 0;
+         SumY = 0;
+         for( i = optInTimePeriod; i-- != 0; )
+         {
+            SumY += tempValue1 = inReal[today - i];
+            SumXY += (double)i * tempValue1;
+         }
+         outReal[outIdx++] = ( optInTimePeriod * SumXY - SumX * SumY) / Divisor;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MA_Lookback( int optInTimePeriod,
+      TA_MAType optInMAType )
+   {
+      int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInTimePeriod <= 1 )
+         return 0;
+      switch( optInMAType )
+      {
+         case  TA_MAType_SMA :
+            retValue =  SMA_Lookback ( optInTimePeriod );
+         break;
+         case  TA_MAType_EMA :
+            retValue =  EMA_Lookback ( optInTimePeriod );
+         break;
+         case  TA_MAType_WMA :
+            retValue =  WMA_Lookback ( optInTimePeriod );
+         break;
+         case  TA_MAType_DEMA :
+            retValue =  DEMA_Lookback ( optInTimePeriod );
+         break;
+         case  TA_MAType_TEMA :
+            retValue =  TEMA_Lookback ( optInTimePeriod );
+         break;
+         case  TA_MAType_TRIMA :
+            retValue =  TRIMA_Lookback ( optInTimePeriod );
+         break;
+         case  TA_MAType_KAMA :
+            retValue =  KAMA_Lookback ( optInTimePeriod );
+         break;
+         case  TA_MAType_MAMA :
+            retValue =  MAMA_Lookback ( 0.5, 0.05 );
+         break;
+         case  TA_MAType_T3 :
+            retValue =  T3_Lookback ( optInTimePeriod, 0.7 );
+         break;
+         default:
+            retValue = 0;
+      }
+      return retValue;
+   }
+   public TA_RetCode MA( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      TA_MAType optInMAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double []dummyBuffer ;
+      TA_RetCode retCode;
+      int nbElement;
+      int outIdx, todayIdx;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod == 1 )
+      {
+         nbElement = endIdx-startIdx+1;
+         outNbElement.value  = nbElement;
+         for( todayIdx=startIdx, outIdx=0; outIdx < nbElement; outIdx++, todayIdx++ )
+            outReal[outIdx] = inReal[todayIdx];
+         outBegIdx.value  = startIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      switch( optInMAType )
+      {
+         case  TA_MAType_SMA :
+            retCode =  INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_EMA :
+            retCode =  INT_EMA ( startIdx, endIdx, inReal,
+            optInTimePeriod,  ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_WMA :
+            retCode =  WMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_DEMA :
+            retCode =  DEMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_TEMA :
+            retCode =  TEMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_TRIMA :
+            retCode =  TRIMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_KAMA :
+            retCode =  KAMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_MAMA :
+            dummyBuffer = new double[(endIdx-startIdx+1)] ;
+         retCode =  MAMA ( startIdx, endIdx, inReal, 0.5, 0.05,
+            outBegIdx, outNbElement,
+            outReal, dummyBuffer );
+         break;
+         case  TA_MAType_T3 :
+            retCode =  T3 ( startIdx, endIdx, inReal,
+            optInTimePeriod, 0.7,
+            outBegIdx, outNbElement, outReal );
+         break;
+         default:
+            retCode =  TA_RetCode. TA_BAD_PARAM;
+         break;
+      }
+      return retCode;
+   }
+   public TA_RetCode MA( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      TA_MAType optInMAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double []dummyBuffer ;
+      TA_RetCode retCode;
+      int nbElement;
+      int outIdx, todayIdx;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod == 1 )
+      {
+         nbElement = endIdx-startIdx+1;
+         outNbElement.value  = nbElement;
+         for( todayIdx=startIdx, outIdx=0; outIdx < nbElement; outIdx++, todayIdx++ )
+            outReal[outIdx] = inReal[todayIdx];
+         outBegIdx.value  = startIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      switch( optInMAType )
+      {
+         case  TA_MAType_SMA :
+            retCode =  INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_EMA :
+            retCode =  INT_EMA ( startIdx, endIdx, inReal,
+            optInTimePeriod,  ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_WMA :
+            retCode =  WMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_DEMA :
+            retCode =  DEMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_TEMA :
+            retCode =  TEMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_TRIMA :
+            retCode =  TRIMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_KAMA :
+            retCode =  KAMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNbElement, outReal );
+         break;
+         case  TA_MAType_MAMA :
+            dummyBuffer = new double[(endIdx-startIdx+1)] ;
+         retCode =  MAMA ( startIdx, endIdx, inReal, 0.5, 0.05,
+            outBegIdx, outNbElement,
+            outReal, dummyBuffer );
+         break;
+         case  TA_MAType_T3 :
+            retCode =  T3 ( startIdx, endIdx, inReal,
+            optInTimePeriod, 0.7,
+            outBegIdx, outNbElement, outReal );
+         break;
+         default:
+            retCode =  TA_RetCode. TA_BAD_PARAM;
+         break;
+      }
+      return retCode;
+   }
+   /* Generated */
+   public int MACD_Lookback( int optInFastPeriod,
+      int optInSlowPeriod,
+      int optInSignalPeriod )
+   {
+      int tempInteger;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return -1;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return -1;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return -1;
+      if( optInSlowPeriod < optInFastPeriod )
+      {
+         tempInteger = optInSlowPeriod;
+         optInSlowPeriod = optInFastPeriod;
+         optInFastPeriod = tempInteger;
+      }
+      return  EMA_Lookback ( optInSlowPeriod )
+         +  EMA_Lookback ( optInSignalPeriod );
+   }
+   public TA_RetCode MACD( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      int optInSignalPeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      return  INT_MACD ( startIdx, endIdx, inReal,
+         optInFastPeriod,
+         optInSlowPeriod,
+         optInSignalPeriod,
+         outBegIdx,
+         outNbElement,
+         outMACD,
+         outMACDSignal,
+         outMACDHist );
+   }
+   TA_RetCode INT_MACD( int startIdx,
+      int endIdx,
+      double  inReal[],
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      int optInSignalPeriod_2,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      double []slowEMABuffer ;
+      double []fastEMABuffer ;
+      double k1, k2;
+      TA_RetCode retCode;
+      int tempInteger;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      MInteger outBegIdx2 = new MInteger() ;
+      MInteger outNbElement2 = new MInteger() ;
+      int lookbackTotal, lookbackSignal;
+      int i;
+      if( optInSlowPeriod < optInFastPeriod )
+      {
+         tempInteger = optInSlowPeriod;
+         optInSlowPeriod = optInFastPeriod;
+         optInFastPeriod = tempInteger;
+      }
+      if( optInSlowPeriod != 0 )
+         k1 =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
+      else
+      {
+         optInSlowPeriod = 26;
+         k1 = (double)0.075;
+      }
+      if( optInFastPeriod != 0 )
+         k2 =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
+      else
+      {
+         optInFastPeriod = 12;
+         k2 = (double)0.15;
+      }
+      lookbackSignal =  EMA_Lookback ( optInSignalPeriod_2 );
+      lookbackTotal = lookbackSignal;
+      lookbackTotal +=  EMA_Lookback ( optInSlowPeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      tempInteger = (endIdx-startIdx)+1+lookbackSignal;
+      fastEMABuffer = new double[tempInteger] ;
+      slowEMABuffer = new double[tempInteger] ;
+      tempInteger = startIdx-lookbackSignal;
+      retCode =  INT_EMA ( tempInteger, endIdx,
+         inReal, optInSlowPeriod, k1,
+         outBegIdx1 ,  outNbElement1 , slowEMABuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      retCode =  INT_EMA ( tempInteger, endIdx,
+         inReal, optInFastPeriod, k2,
+         outBegIdx2 ,  outNbElement2 , fastEMABuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      if( ( outBegIdx1.value  != tempInteger) ||
+         ( outBegIdx2.value  != tempInteger) ||
+         ( outNbElement1.value  !=  outNbElement2.value ) ||
+         ( outNbElement1.value  != (endIdx-startIdx)+1+lookbackSignal) )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
+      }
+      for( i=0; i <  outNbElement1.value ; i++ )
+         fastEMABuffer[i] = fastEMABuffer[i] - slowEMABuffer[i];
+      System.arraycopy(fastEMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
+      retCode =  INT_EMA ( 0,  outNbElement1.value -1,
+         fastEMABuffer, optInSignalPeriod_2,  ((double)2.0 / ((double)(optInSignalPeriod_2 + 1))) ,
+         outBegIdx2 ,  outNbElement2 , outMACDSignal );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      for( i=0; i <  outNbElement2.value ; i++ )
+         outMACDHist[i] = outMACD[i]-outMACDSignal[i];
+      outBegIdx.value  = startIdx;
+      outNbElement.value  =  outNbElement2.value ;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MACD( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      int optInSignalPeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      return  INT_MACD ( startIdx, endIdx, inReal,
+         optInFastPeriod,
+         optInSlowPeriod,
+         optInSignalPeriod,
+         outBegIdx,
+         outNbElement,
+         outMACD,
+         outMACDSignal,
+         outMACDHist );
+   }
+   TA_RetCode INT_MACD( int startIdx,
+      int endIdx,
+      float  inReal[],
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      int optInSignalPeriod_2,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      double []slowEMABuffer ;
+      double []fastEMABuffer ;
+      double k1, k2;
+      TA_RetCode retCode;
+      int tempInteger;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      MInteger outBegIdx2 = new MInteger() ;
+      MInteger outNbElement2 = new MInteger() ;
+      int lookbackTotal, lookbackSignal;
+      int i;
+      if( optInSlowPeriod < optInFastPeriod )
+      {
+         tempInteger = optInSlowPeriod;
+         optInSlowPeriod = optInFastPeriod;
+         optInFastPeriod = tempInteger;
+      }
+      if( optInSlowPeriod != 0 )
+         k1 =  ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
+      else
+      {
+         optInSlowPeriod = 26;
+         k1 = (double)0.075;
+      }
+      if( optInFastPeriod != 0 )
+         k2 =  ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
+      else
+      {
+         optInFastPeriod = 12;
+         k2 = (double)0.15;
+      }
+      lookbackSignal =  EMA_Lookback ( optInSignalPeriod_2 );
+      lookbackTotal = lookbackSignal;
+      lookbackTotal +=  EMA_Lookback ( optInSlowPeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      tempInteger = (endIdx-startIdx)+1+lookbackSignal;
+      fastEMABuffer = new double[tempInteger] ;
+      slowEMABuffer = new double[tempInteger] ;
+      tempInteger = startIdx-lookbackSignal;
+      retCode =  INT_EMA ( tempInteger, endIdx,
+         inReal, optInSlowPeriod, k1,
+         outBegIdx1 ,  outNbElement1 , slowEMABuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      retCode =  INT_EMA ( tempInteger, endIdx,
+         inReal, optInFastPeriod, k2,
+         outBegIdx2 ,  outNbElement2 , fastEMABuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      if( ( outBegIdx1.value  != tempInteger) ||
+         ( outBegIdx2.value  != tempInteger) ||
+         ( outNbElement1.value  !=  outNbElement2.value ) ||
+         ( outNbElement1.value  != (endIdx-startIdx)+1+lookbackSignal) )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
+      }
+      for( i=0; i <  outNbElement1.value ; i++ )
+         fastEMABuffer[i] = fastEMABuffer[i] - slowEMABuffer[i];
+      System.arraycopy(fastEMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
+      retCode =  INT_EMA ( 0,  outNbElement1.value -1,
+         fastEMABuffer, optInSignalPeriod_2,  ((double)2.0 / ((double)(optInSignalPeriod_2 + 1))) ,
+         outBegIdx2 ,  outNbElement2 , outMACDSignal );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      for( i=0; i <  outNbElement2.value ; i++ )
+         outMACDHist[i] = outMACD[i]-outMACDSignal[i];
+      outBegIdx.value  = startIdx;
+      outNbElement.value  =  outNbElement2.value ;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MACDEXT_Lookback( int optInFastPeriod,
+      TA_MAType optInFastMAType,
+      int optInSlowPeriod,
+      TA_MAType optInSlowMAType,
+      int optInSignalPeriod,
+      TA_MAType optInSignalMAType )
+   {
+      int tempInteger, lookbackLargest;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return -1;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return -1;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return -1;
+      lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
+      tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
+      if( tempInteger > lookbackLargest )
+         lookbackLargest = tempInteger;
+      return lookbackLargest +  MA_Lookback ( optInSignalPeriod, optInSignalMAType );
+   }
+   public TA_RetCode MACDEXT( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInFastPeriod,
+      TA_MAType optInFastMAType,
+      int optInSlowPeriod,
+      TA_MAType optInSlowMAType,
+      int optInSignalPeriod,
+      TA_MAType optInSignalMAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      double []slowMABuffer ;
+      double []fastMABuffer ;
+      TA_RetCode retCode;
+      int tempInteger;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      MInteger outBegIdx2 = new MInteger() ;
+      MInteger outNbElement2 = new MInteger() ;
+      int lookbackTotal, lookbackSignal, lookbackLargest;
+      int i;
+      TA_MAType tempMAType;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInSlowPeriod < optInFastPeriod )
+      {
+         tempInteger = optInSlowPeriod;
+         optInSlowPeriod = optInFastPeriod;
+         optInFastPeriod = tempInteger;
+         tempMAType = optInSlowMAType;
+         optInSlowMAType = optInFastMAType;
+         optInFastMAType = tempMAType;
+      }
+      lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
+      tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
+      if( tempInteger > lookbackLargest )
+         lookbackLargest = tempInteger;
+      lookbackSignal =  MA_Lookback ( optInSignalPeriod, optInSignalMAType );
+      lookbackTotal = lookbackSignal+lookbackLargest;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      tempInteger = (endIdx-startIdx)+1+lookbackSignal;
+      fastMABuffer = new double[tempInteger] ;
+      slowMABuffer = new double[tempInteger] ;
+      tempInteger = startIdx-lookbackSignal;
+      retCode =  MA ( tempInteger, endIdx,
+         inReal, optInSlowPeriod, optInSlowMAType,
+         outBegIdx1 ,  outNbElement1 ,
+         slowMABuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      retCode =  MA ( tempInteger, endIdx,
+         inReal, optInFastPeriod, optInFastMAType,
+         outBegIdx2 ,  outNbElement2 ,
+         fastMABuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      if( ( outBegIdx1.value  != tempInteger) ||
+         ( outBegIdx2.value  != tempInteger) ||
+         ( outNbElement1.value  !=  outNbElement2.value ) ||
+         ( outNbElement1.value  != (endIdx-startIdx)+1+lookbackSignal) )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
+      }
+      for( i=0; i <  outNbElement1.value ; i++ )
+         fastMABuffer[i] = fastMABuffer[i] - slowMABuffer[i];
+      System.arraycopy(fastMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
+      retCode =  MA ( 0,  outNbElement1.value -1,
+         fastMABuffer, optInSignalPeriod, optInSignalMAType,
+         outBegIdx2 ,  outNbElement2 , outMACDSignal );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      for( i=0; i <  outNbElement2.value ; i++ )
+         outMACDHist[i] = outMACD[i]-outMACDSignal[i];
+      outBegIdx.value  = startIdx;
+      outNbElement.value  =  outNbElement2.value ;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MACDEXT( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInFastPeriod,
+      TA_MAType optInFastMAType,
+      int optInSlowPeriod,
+      TA_MAType optInSlowMAType,
+      int optInSignalPeriod,
+      TA_MAType optInSignalMAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      double []slowMABuffer ;
+      double []fastMABuffer ;
+      TA_RetCode retCode;
+      int tempInteger;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      MInteger outBegIdx2 = new MInteger() ;
+      MInteger outNbElement2 = new MInteger() ;
+      int lookbackTotal, lookbackSignal, lookbackLargest;
+      int i;
+      TA_MAType tempMAType;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInSlowPeriod < optInFastPeriod )
+      {
+         tempInteger = optInSlowPeriod;
+         optInSlowPeriod = optInFastPeriod;
+         optInFastPeriod = tempInteger;
+         tempMAType = optInSlowMAType;
+         optInSlowMAType = optInFastMAType;
+         optInFastMAType = tempMAType;
+      }
+      lookbackLargest =  MA_Lookback ( optInFastPeriod, optInFastMAType );
+      tempInteger =  MA_Lookback ( optInSlowPeriod, optInSlowMAType );
+      if( tempInteger > lookbackLargest )
+         lookbackLargest = tempInteger;
+      lookbackSignal =  MA_Lookback ( optInSignalPeriod, optInSignalMAType );
+      lookbackTotal = lookbackSignal+lookbackLargest;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      tempInteger = (endIdx-startIdx)+1+lookbackSignal;
+      fastMABuffer = new double[tempInteger] ;
+      slowMABuffer = new double[tempInteger] ;
+      tempInteger = startIdx-lookbackSignal;
+      retCode =  MA ( tempInteger, endIdx,
+         inReal, optInSlowPeriod, optInSlowMAType,
+         outBegIdx1 ,  outNbElement1 ,
+         slowMABuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      retCode =  MA ( tempInteger, endIdx,
+         inReal, optInFastPeriod, optInFastMAType,
+         outBegIdx2 ,  outNbElement2 ,
+         fastMABuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      if( ( outBegIdx1.value  != tempInteger) ||
+         ( outBegIdx2.value  != tempInteger) ||
+         ( outNbElement1.value  !=  outNbElement2.value ) ||
+         ( outNbElement1.value  != (endIdx-startIdx)+1+lookbackSignal) )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  ( TA_RetCode. TA_INTERNAL_ERROR) ;
+      }
+      for( i=0; i <  outNbElement1.value ; i++ )
+         fastMABuffer[i] = fastMABuffer[i] - slowMABuffer[i];
+      System.arraycopy(fastMABuffer,lookbackSignal,outMACD,0,(endIdx-startIdx)+1) ;
+      retCode =  MA ( 0,  outNbElement1.value -1,
+         fastMABuffer, optInSignalPeriod, optInSignalMAType,
+         outBegIdx2 ,  outNbElement2 , outMACDSignal );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      for( i=0; i <  outNbElement2.value ; i++ )
+         outMACDHist[i] = outMACD[i]-outMACDSignal[i];
+      outBegIdx.value  = startIdx;
+      outNbElement.value  =  outNbElement2.value ;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MACDFIX_Lookback( int optInSignalPeriod )
+   {
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return -1;
+      return  EMA_Lookback ( 26 )
+         +  EMA_Lookback ( optInSignalPeriod );
+   }
+   public TA_RetCode MACDFIX( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInSignalPeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      return  INT_MACD ( startIdx, endIdx, inReal,
+         0,
+         0,
+         optInSignalPeriod,
+         outBegIdx,
+         outNbElement,
+         outMACD,
+         outMACDSignal,
+         outMACDHist );
+   }
+   public TA_RetCode MACDFIX( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInSignalPeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInSignalPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      return  INT_MACD ( startIdx, endIdx, inReal,
+         0,
+         0,
+         optInSignalPeriod,
+         outBegIdx,
+         outNbElement,
+         outMACD,
+         outMACDSignal,
+         outMACDHist );
+   }
+   /* Generated */
+   public int MAMA_Lookback( double optInFastLimit,
+      double optInSlowLimit )
+   {
+      if( optInFastLimit ==  (-4e+37)  )
+         optInFastLimit = 5.000000e-1;
+      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
+         return -1;
+      if( optInSlowLimit ==  (-4e+37)  )
+         optInSlowLimit = 5.000000e-2;
+      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
+         return -1;
+      return 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
+   }
+   public TA_RetCode MAMA( int startIdx,
+      int endIdx,
+      double inReal[],
+      double optInFastLimit,
+      double optInSlowLimit,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMAMA[],
+      double outFAMA[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg;
+      double mama,fama,todayValue,prevPhase;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( optInFastLimit ==  (-4e+37)  )
+         optInFastLimit = 5.000000e-1;
+      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInSlowLimit ==  (-4e+37)  )
+         optInSlowLimit = 5.000000e-2;
+      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
+      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 9;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      mama = fama = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      prevPhase = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+            if( I1ForEvenPrev3 != 0.0 )
+               tempReal2 = ( Math.atan (Q1/I1ForEvenPrev3)*rad2Deg);
+            else
+               tempReal2 = 0.0;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+            if( I1ForOddPrev3 != 0.0 )
+               tempReal2 = ( Math.atan (Q1/I1ForOddPrev3)*rad2Deg);
+            else
+               tempReal2 = 0.0;
+         }
+         tempReal = prevPhase - tempReal2;
+         prevPhase = tempReal2;
+         if( tempReal < 1.0 )
+            tempReal = 1.0;
+         if( tempReal > 1.0 )
+         {
+            tempReal = optInFastLimit/tempReal;
+            if( tempReal < optInSlowLimit )
+               tempReal = optInSlowLimit;
+         }
+         else
+         {
+            tempReal = optInFastLimit;
+         }
+         mama = (tempReal*todayValue)+((1-tempReal)*mama);
+         tempReal *= 0.5;
+         fama = (tempReal*mama)+((1-tempReal)*fama);
+         if( today >= startIdx )
+         {
+            outMAMA[outIdx] = mama;
+            outFAMA[outIdx++] = fama;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MAMA( int startIdx,
+      int endIdx,
+      float inReal[],
+      double optInFastLimit,
+      double optInSlowLimit,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outMAMA[],
+      double outFAMA[] )
+   {
+      int outIdx, i;
+      int lookbackTotal, today;
+      double tempReal, tempReal2;
+      double adjustedPrevPeriod, period;
+      int trailingWMAIdx;
+      double periodWMASum, periodWMASub, trailingWMAValue;
+      double smoothedValue;
+      final double a  = 0.0962;
+      final double b  = 0.5769;
+      double hilbertTempReal;
+      int hilbertIdx;
+      double []detrender_Odd = new double[3] ; double []detrender_Even = new double[3] ; double detrender; double prev_detrender_Odd ; double prev_detrender_Even ; double prev_detrender_input_Odd ; double prev_detrender_input_Even ;
+      double []Q1_Odd = new double[3] ; double []Q1_Even = new double[3] ; double Q1; double prev_Q1_Odd ; double prev_Q1_Even ; double prev_Q1_input_Odd ; double prev_Q1_input_Even ;
+      double []jI_Odd = new double[3] ; double []jI_Even = new double[3] ; double jI; double prev_jI_Odd ; double prev_jI_Even ; double prev_jI_input_Odd ; double prev_jI_input_Even ;
+      double []jQ_Odd = new double[3] ; double []jQ_Even = new double[3] ; double jQ; double prev_jQ_Odd ; double prev_jQ_Even ; double prev_jQ_input_Odd ; double prev_jQ_input_Even ;
+      double Q2, I2, prevQ2, prevI2, Re, Im;
+      double I1ForOddPrev2, I1ForOddPrev3;
+      double I1ForEvenPrev2, I1ForEvenPrev3;
+      double rad2Deg;
+      double mama,fama,todayValue,prevPhase;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( optInFastLimit ==  (-4e+37)  )
+         optInFastLimit = 5.000000e-1;
+      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInSlowLimit ==  (-4e+37)  )
+         optInSlowLimit = 5.000000e-2;
+      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      rad2Deg = 180.0 / (4.0 *  Math.atan (1));
+      lookbackTotal = 32 +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MAMA.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      trailingWMAIdx = startIdx - lookbackTotal;
+      today = trailingWMAIdx;
+      tempReal = inReal[today++];
+      periodWMASub = tempReal;
+      periodWMASum = tempReal;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*2.0;
+      tempReal = inReal[today++];
+      periodWMASub += tempReal;
+      periodWMASum += tempReal*3.0;
+      trailingWMAValue = 0.0;
+      i = 9;
+      do
+      {
+         tempReal = inReal[today++];
+         { periodWMASub += tempReal; periodWMASub -= trailingWMAValue; periodWMASum += tempReal*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+      } while( --i != 0);
+      hilbertIdx = 0;
+      { detrender_Odd  [0] = 0.0; detrender_Odd  [1] = 0.0; detrender_Odd  [2] = 0.0; detrender_Even [0] = 0.0; detrender_Even [1] = 0.0; detrender_Even [2] = 0.0; detrender = 0.0; prev_detrender_Odd  = 0.0; prev_detrender_Even  = 0.0; prev_detrender_input_Odd  = 0.0; prev_detrender_input_Even  = 0.0; } ;
+      { Q1_Odd  [0] = 0.0; Q1_Odd  [1] = 0.0; Q1_Odd  [2] = 0.0; Q1_Even [0] = 0.0; Q1_Even [1] = 0.0; Q1_Even [2] = 0.0; Q1 = 0.0; prev_Q1_Odd  = 0.0; prev_Q1_Even  = 0.0; prev_Q1_input_Odd  = 0.0; prev_Q1_input_Even  = 0.0; } ;
+      { jI_Odd  [0] = 0.0; jI_Odd  [1] = 0.0; jI_Odd  [2] = 0.0; jI_Even [0] = 0.0; jI_Even [1] = 0.0; jI_Even [2] = 0.0; jI = 0.0; prev_jI_Odd  = 0.0; prev_jI_Even  = 0.0; prev_jI_input_Odd  = 0.0; prev_jI_input_Even  = 0.0; } ;
+      { jQ_Odd  [0] = 0.0; jQ_Odd  [1] = 0.0; jQ_Odd  [2] = 0.0; jQ_Even [0] = 0.0; jQ_Even [1] = 0.0; jQ_Even [2] = 0.0; jQ = 0.0; prev_jQ_Odd  = 0.0; prev_jQ_Even  = 0.0; prev_jQ_input_Odd  = 0.0; prev_jQ_input_Even  = 0.0; } ;
+      period = 0.0;
+      outIdx = 0;
+      prevI2 = prevQ2 = 0.0;
+      Re = Im = 0.0;
+      mama = fama = 0.0;
+      I1ForOddPrev3 = I1ForEvenPrev3 = 0.0;
+      I1ForOddPrev2 = I1ForEvenPrev2 = 0.0;
+      prevPhase = 0.0;
+      while( today <= endIdx )
+      {
+         adjustedPrevPeriod = (0.075*period)+0.54;
+         todayValue = inReal[today];
+         { periodWMASub += todayValue; periodWMASub -= trailingWMAValue; periodWMASum += todayValue*4.0; trailingWMAValue = inReal[trailingWMAIdx++]; smoothedValue = periodWMASum*0.1; periodWMASum -= periodWMASub; } ;
+         if( (today%2) == 0 )
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Even [hilbertIdx]; detrender_Even [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Even ; prev_detrender_Even  = b * prev_detrender_input_Even ; detrender += prev_detrender_Even ; prev_detrender_input_Even  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Even [hilbertIdx]; Q1_Even [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Even ; prev_Q1_Even  = b * prev_Q1_input_Even ; Q1 += prev_Q1_Even ; prev_Q1_input_Even  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForEvenPrev3; jI = -jI_Even [hilbertIdx]; jI_Even [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Even ; prev_jI_Even  = b * prev_jI_input_Even ; jI += prev_jI_Even ; prev_jI_input_Even  = I1ForEvenPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Even [hilbertIdx]; jQ_Even [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Even ; prev_jQ_Even  = b * prev_jQ_input_Even ; jQ += prev_jQ_Even ; prev_jQ_input_Even  = Q1; jQ *= adjustedPrevPeriod; } ;
+            if( ++hilbertIdx == 3 )
+               hilbertIdx = 0;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForEvenPrev3 - jQ)) + (0.8*prevI2);
+            I1ForOddPrev3 = I1ForOddPrev2;
+            I1ForOddPrev2 = detrender;
+            if( I1ForEvenPrev3 != 0.0 )
+               tempReal2 = ( Math.atan (Q1/I1ForEvenPrev3)*rad2Deg);
+            else
+               tempReal2 = 0.0;
+         }
+         else
+         {
+            { hilbertTempReal = a * smoothedValue; detrender = -detrender_Odd [hilbertIdx]; detrender_Odd [hilbertIdx] = hilbertTempReal; detrender += hilbertTempReal; detrender -= prev_detrender_Odd ; prev_detrender_Odd  = b * prev_detrender_input_Odd ; detrender += prev_detrender_Odd ; prev_detrender_input_Odd  = smoothedValue; detrender *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * detrender; Q1 = -Q1_Odd [hilbertIdx]; Q1_Odd [hilbertIdx] = hilbertTempReal; Q1 += hilbertTempReal; Q1 -= prev_Q1_Odd ; prev_Q1_Odd  = b * prev_Q1_input_Odd ; Q1 += prev_Q1_Odd ; prev_Q1_input_Odd  = detrender; Q1 *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * I1ForOddPrev3; jI = -jI_Odd [hilbertIdx]; jI_Odd [hilbertIdx] = hilbertTempReal; jI += hilbertTempReal; jI -= prev_jI_Odd ; prev_jI_Odd  = b * prev_jI_input_Odd ; jI += prev_jI_Odd ; prev_jI_input_Odd  = I1ForOddPrev3; jI *= adjustedPrevPeriod; } ;
+            { hilbertTempReal = a * Q1; jQ = -jQ_Odd [hilbertIdx]; jQ_Odd [hilbertIdx] = hilbertTempReal; jQ += hilbertTempReal; jQ -= prev_jQ_Odd ; prev_jQ_Odd  = b * prev_jQ_input_Odd ; jQ += prev_jQ_Odd ; prev_jQ_input_Odd  = Q1; jQ *= adjustedPrevPeriod; } ;
+            Q2 = (0.2*(Q1 + jI)) + (0.8*prevQ2);
+            I2 = (0.2*(I1ForOddPrev3 - jQ)) + (0.8*prevI2);
+            I1ForEvenPrev3 = I1ForEvenPrev2;
+            I1ForEvenPrev2 = detrender;
+            if( I1ForOddPrev3 != 0.0 )
+               tempReal2 = ( Math.atan (Q1/I1ForOddPrev3)*rad2Deg);
+            else
+               tempReal2 = 0.0;
+         }
+         tempReal = prevPhase - tempReal2;
+         prevPhase = tempReal2;
+         if( tempReal < 1.0 )
+            tempReal = 1.0;
+         if( tempReal > 1.0 )
+         {
+            tempReal = optInFastLimit/tempReal;
+            if( tempReal < optInSlowLimit )
+               tempReal = optInSlowLimit;
+         }
+         else
+         {
+            tempReal = optInFastLimit;
+         }
+         mama = (tempReal*todayValue)+((1-tempReal)*mama);
+         tempReal *= 0.5;
+         fama = (tempReal*mama)+((1-tempReal)*fama);
+         if( today >= startIdx )
+         {
+            outMAMA[outIdx] = mama;
+            outFAMA[outIdx++] = fama;
+         }
+         Re = (0.2*((I2*prevI2)+(Q2*prevQ2)))+(0.8*Re);
+         Im = (0.2*((I2*prevQ2)-(Q2*prevI2)))+(0.8*Im);
+         prevQ2 = Q2;
+         prevI2 = I2;
+         tempReal = period;
+         if( (Im != 0.0) && (Re != 0.0) )
+            period = 360.0 / ( Math.atan (Im/Re)*rad2Deg);
+         tempReal2 = 1.5*tempReal;
+         if( period > tempReal2)
+            period = tempReal2;
+         tempReal2 = 0.67*tempReal;
+         if( period < tempReal2 )
+            period = tempReal2;
+         if( period < 6 )
+            period = 6;
+         else if( period > 50 )
+            period = 50;
+         period = (0.2*period) + (0.8 * tempReal);
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MAX_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return (optInTimePeriod-1);
+   }
+   public TA_RetCode MAX( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double highest, tmp;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, today, i, highestIdx;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      highestIdx = -1;
+      highest = 0.0;
+      while( today <= endIdx )
+      {
+         tmp = inReal[today];
+         if( highestIdx < trailingIdx )
+         {
+            highestIdx = trailingIdx;
+            highest = inReal[highestIdx];
+            i = highestIdx;
+            while( ++i<=today )
+            {
+               tmp = inReal[i];
+               if( tmp > highest )
+               {
+                  highestIdx = i;
+                  highest = tmp;
+               }
+            }
+         }
+         else if( tmp >= highest )
+         {
+            highestIdx = today;
+            highest = tmp;
+         }
+         outReal[outIdx++] = highest;
+         trailingIdx++;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MAX( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double highest, tmp;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, today, i, highestIdx;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      highestIdx = -1;
+      highest = 0.0;
+      while( today <= endIdx )
+      {
+         tmp = inReal[today];
+         if( highestIdx < trailingIdx )
+         {
+            highestIdx = trailingIdx;
+            highest = inReal[highestIdx];
+            i = highestIdx;
+            while( ++i<=today )
+            {
+               tmp = inReal[i];
+               if( tmp > highest )
+               {
+                  highestIdx = i;
+                  highest = tmp;
+               }
+            }
+         }
+         else if( tmp >= highest )
+         {
+            highestIdx = today;
+            highest = tmp;
+         }
+         outReal[outIdx++] = highest;
+         trailingIdx++;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MEDPRICE_Lookback( )
+   {
+      return 0;
+   }
+   public TA_RetCode MEDPRICE( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      outIdx = 0;
+      for( i=startIdx; i <= endIdx; i++ )
+      {
+         outReal[outIdx++] = (inHigh[i]+inLow[i])/2.0;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MEDPRICE( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      outIdx = 0;
+      for( i=startIdx; i <= endIdx; i++ )
+      {
+         outReal[outIdx++] = (inHigh[i]+inLow[i])/2.0;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MFI_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
+   }
+   public TA_RetCode MFI( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      double inVolume[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double posSumMF, negSumMF, prevValue;
+      double tempValue1, tempValue2;
+      int lookbackTotal, outIdx, i, today;
+      int mflow_Idx  = 0; MoneyFlow []mflow; int maxIdx_mflow  = (50-1) ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      { if( optInTimePeriod <= 0 ) return TA_RetCode. TA_ALLOC_ERR; mflow = new MoneyFlow[optInTimePeriod]; for( int _mflow_index =0; _mflow_index <mflow.length; _mflow_index ++) { mflow[_mflow_index ]=new MoneyFlow(); } maxIdx_mflow  = (optInTimePeriod-1); } ;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx-lookbackTotal;
+      prevValue = (inHigh[today]+inLow[today]+inClose[today])/3.0;
+      posSumMF = 0.0;
+      negSumMF = 0.0;
+      today++;
+      for( i=optInTimePeriod; i > 0; i-- )
+      {
+         tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         tempValue1 *= inVolume[today++];
+         if( tempValue2 < 0 )
+         {
+            (mflow[mflow_Idx]). negative = tempValue1;
+            negSumMF += tempValue1;
+            (mflow[mflow_Idx]). positive = 0.0;
+         }
+         else
+         {
+            (mflow[mflow_Idx]). positive = tempValue1;
+            posSumMF += tempValue1;
+            (mflow[mflow_Idx]). negative = 0.0;
+         }
+         { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
+      }
+      if( today > startIdx )
+      {
+         tempValue1 = posSumMF+negSumMF;
+         if( tempValue1 < 1.0 )
+            outReal[outIdx++] = 0.0;
+         else
+            outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
+      }
+      else
+      {
+         while( today < startIdx )
+         {
+            posSumMF -=  (mflow[mflow_Idx]). positive;
+            negSumMF -=  (mflow[mflow_Idx]). negative;
+            tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            tempValue1 *= inVolume[today++];
+            if( tempValue2 < 0 )
+            {
+               (mflow[mflow_Idx]). negative = tempValue1;
+               negSumMF += tempValue1;
+               (mflow[mflow_Idx]). positive = 0.0;
+            }
+            else
+            {
+               (mflow[mflow_Idx]). positive = tempValue1;
+               posSumMF += tempValue1;
+               (mflow[mflow_Idx]). negative = 0.0;
+            }
+            { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
+         }
+      }
+      while( today <= endIdx )
+      {
+         posSumMF -=  (mflow[mflow_Idx]). positive;
+         negSumMF -=  (mflow[mflow_Idx]). negative;
+         tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         tempValue1 *= inVolume[today++];
+         if( tempValue2 < 0 )
+         {
+            (mflow[mflow_Idx]). negative = tempValue1;
+            negSumMF += tempValue1;
+            (mflow[mflow_Idx]). positive = 0.0;
+         }
+         else
+         {
+            (mflow[mflow_Idx]). positive = tempValue1;
+            posSumMF += tempValue1;
+            (mflow[mflow_Idx]). negative = 0.0;
+         }
+         tempValue1 = posSumMF+negSumMF;
+         if( tempValue1 < 1.0 )
+            outReal[outIdx++] = 0.0;
+         else
+            outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
+         { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MFI( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      float inVolume[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double posSumMF, negSumMF, prevValue;
+      double tempValue1, tempValue2;
+      int lookbackTotal, outIdx, i, today;
+      int mflow_Idx  = 0; MoneyFlow []mflow; int maxIdx_mflow  = (50-1) ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      { if( optInTimePeriod <= 0 ) return TA_RetCode. TA_ALLOC_ERR; mflow = new MoneyFlow[optInTimePeriod]; for( int _mflow_index =0; _mflow_index <mflow.length; _mflow_index ++) { mflow[_mflow_index ]=new MoneyFlow(); } maxIdx_mflow  = (optInTimePeriod-1); } ;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MFI.ordinal()]) ;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx-lookbackTotal;
+      prevValue = (inHigh[today]+inLow[today]+inClose[today])/3.0;
+      posSumMF = 0.0;
+      negSumMF = 0.0;
+      today++;
+      for( i=optInTimePeriod; i > 0; i-- )
+      {
+         tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         tempValue1 *= inVolume[today++];
+         if( tempValue2 < 0 )
+         {
+            (mflow[mflow_Idx]). negative = tempValue1;
+            negSumMF += tempValue1;
+            (mflow[mflow_Idx]). positive = 0.0;
+         }
+         else
+         {
+            (mflow[mflow_Idx]). positive = tempValue1;
+            posSumMF += tempValue1;
+            (mflow[mflow_Idx]). negative = 0.0;
+         }
+         { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
+      }
+      if( today > startIdx )
+      {
+         tempValue1 = posSumMF+negSumMF;
+         if( tempValue1 < 1.0 )
+            outReal[outIdx++] = 0.0;
+         else
+            outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
+      }
+      else
+      {
+         while( today < startIdx )
+         {
+            posSumMF -=  (mflow[mflow_Idx]). positive;
+            negSumMF -=  (mflow[mflow_Idx]). negative;
+            tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            tempValue1 *= inVolume[today++];
+            if( tempValue2 < 0 )
+            {
+               (mflow[mflow_Idx]). negative = tempValue1;
+               negSumMF += tempValue1;
+               (mflow[mflow_Idx]). positive = 0.0;
+            }
+            else
+            {
+               (mflow[mflow_Idx]). positive = tempValue1;
+               posSumMF += tempValue1;
+               (mflow[mflow_Idx]). negative = 0.0;
+            }
+            { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
+         }
+      }
+      while( today <= endIdx )
+      {
+         posSumMF -=  (mflow[mflow_Idx]). positive;
+         negSumMF -=  (mflow[mflow_Idx]). negative;
+         tempValue1 = (inHigh[today]+inLow[today]+inClose[today])/3.0;
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         tempValue1 *= inVolume[today++];
+         if( tempValue2 < 0 )
+         {
+            (mflow[mflow_Idx]). negative = tempValue1;
+            negSumMF += tempValue1;
+            (mflow[mflow_Idx]). positive = 0.0;
+         }
+         else
+         {
+            (mflow[mflow_Idx]). positive = tempValue1;
+            posSumMF += tempValue1;
+            (mflow[mflow_Idx]). negative = 0.0;
+         }
+         tempValue1 = posSumMF+negSumMF;
+         if( tempValue1 < 1.0 )
+            outReal[outIdx++] = 0.0;
+         else
+            outReal[outIdx++] = 100.0*(posSumMF/tempValue1);
+         { mflow_Idx ++; if( mflow_Idx  > maxIdx_mflow  ) mflow_Idx  = 0; } ;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MIDPOINT_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return (optInTimePeriod-1);
+   }
+   public TA_RetCode MIDPOINT( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double lowest, highest, tmp;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      while( today <= endIdx )
+      {
+         lowest = inReal[trailingIdx++];
+         highest = lowest;
+         for( i=trailingIdx; i <= today; i++ )
+         {
+            tmp = inReal[i];
+            if( tmp < lowest ) lowest= tmp;
+            else if( tmp > highest) highest = tmp;
+         }
+         outReal[outIdx++] = (highest+lowest)/2.0;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MIDPOINT( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double lowest, highest, tmp;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      while( today <= endIdx )
+      {
+         lowest = inReal[trailingIdx++];
+         highest = lowest;
+         for( i=trailingIdx; i <= today; i++ )
+         {
+            tmp = inReal[i];
+            if( tmp < lowest ) lowest= tmp;
+            else if( tmp > highest) highest = tmp;
+         }
+         outReal[outIdx++] = (highest+lowest)/2.0;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MIDPRICE_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return (optInTimePeriod-1);
+   }
+   public TA_RetCode MIDPRICE( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double lowest, highest, tmp;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      while( today <= endIdx )
+      {
+         lowest = inLow[trailingIdx];
+         highest = inHigh[trailingIdx];
+         trailingIdx++;
+         for( i=trailingIdx; i <= today; i++ )
+         {
+            tmp = inLow[i];
+            if( tmp < lowest ) lowest= tmp;
+            tmp = inHigh[i];
+            if( tmp > highest) highest = tmp;
+         }
+         outReal[outIdx++] = (highest+lowest)/2.0;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MIDPRICE( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double lowest, highest, tmp;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      while( today <= endIdx )
+      {
+         lowest = inLow[trailingIdx];
+         highest = inHigh[trailingIdx];
+         trailingIdx++;
+         for( i=trailingIdx; i <= today; i++ )
+         {
+            tmp = inLow[i];
+            if( tmp < lowest ) lowest= tmp;
+            tmp = inHigh[i];
+            if( tmp > highest) highest = tmp;
+         }
+         outReal[outIdx++] = (highest+lowest)/2.0;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MIN_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return (optInTimePeriod-1);
+   }
+   public TA_RetCode MIN( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double lowest, tmp;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, lowestIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      lowestIdx = -1;
+      lowest = 0.0;
+      while( today <= endIdx )
+      {
+         tmp = inReal[today];
+         if( lowestIdx < trailingIdx )
+         {
+            lowestIdx = trailingIdx;
+            lowest = inReal[lowestIdx];
+            i = lowestIdx;
+            while( ++i<=today )
+            {
+               tmp = inReal[i];
+               if( tmp < lowest )
+               {
+                  lowestIdx = i;
+                  lowest = tmp;
+               }
+            }
+         }
+         else if( tmp <= lowest )
+         {
+            lowestIdx = today;
+            lowest = tmp;
+         }
+         outReal[outIdx++] = lowest;
+         trailingIdx++;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MIN( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double lowest, tmp;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, lowestIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      lowestIdx = -1;
+      lowest = 0.0;
+      while( today <= endIdx )
+      {
+         tmp = inReal[today];
+         if( lowestIdx < trailingIdx )
+         {
+            lowestIdx = trailingIdx;
+            lowest = inReal[lowestIdx];
+            i = lowestIdx;
+            while( ++i<=today )
+            {
+               tmp = inReal[i];
+               if( tmp < lowest )
+               {
+                  lowestIdx = i;
+                  lowest = tmp;
+               }
+            }
+         }
+         else if( tmp <= lowest )
+         {
+            lowestIdx = today;
+            lowest = tmp;
+         }
+         outReal[outIdx++] = lowest;
+         trailingIdx++;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MINUS_DI_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInTimePeriod > 1 )
+         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
+      else
+         return 1;
+   }
+   public TA_RetCode MINUS_DI( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, prevClose;
+      double prevMinusDM, prevTR;
+      double tempReal, tempReal2, diffP, diffM;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
+      else
+         lookbackTotal = 1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( optInTimePeriod <= 1 )
+      {
+         outBegIdx.value  = startIdx;
+         today = startIdx-1;
+         prevHigh = inHigh[today];
+         prevLow = inLow[today];
+         prevClose = inClose[today];
+         while( today < endIdx )
+         {
+            today++;
+            tempReal = inHigh[today];
+            diffP = tempReal-prevHigh;
+            prevHigh = tempReal;
+            tempReal = inLow[today];
+            diffM = prevLow-tempReal;
+            prevLow = tempReal;
+            if( (diffM > 0) && (diffP < diffM) )
+            {
+               { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+               if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
+                  outReal[outIdx++] = (double)0.0;
+               else
+                  outReal[outIdx++] = diffM/tempReal;
+            }
+            else
+               outReal[outIdx++] = (double)0.0;
+            prevClose = inClose[today];
+         }
+         outNbElement.value  = outIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = today = startIdx;
+      prevMinusDM = 0.0;
+      prevTR = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      prevClose = inClose[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR += tempReal;
+         prevClose = inClose[today];
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()])  + 1;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
+         }
+         else
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+      }
+      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+         outReal[0] =  (100.0*(prevMinusDM/prevTR)) ;
+      else
+         outReal[0] = 0.0;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
+         }
+         else
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+            outReal[outIdx++] =  (100.0*(prevMinusDM/prevTR)) ;
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MINUS_DI( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, prevClose;
+      double prevMinusDM, prevTR;
+      double tempReal, tempReal2, diffP, diffM;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()]) ;
+      else
+         lookbackTotal = 1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( optInTimePeriod <= 1 )
+      {
+         outBegIdx.value  = startIdx;
+         today = startIdx-1;
+         prevHigh = inHigh[today];
+         prevLow = inLow[today];
+         prevClose = inClose[today];
+         while( today < endIdx )
+         {
+            today++;
+            tempReal = inHigh[today];
+            diffP = tempReal-prevHigh;
+            prevHigh = tempReal;
+            tempReal = inLow[today];
+            diffM = prevLow-tempReal;
+            prevLow = tempReal;
+            if( (diffM > 0) && (diffP < diffM) )
+            {
+               { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+               if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
+                  outReal[outIdx++] = (double)0.0;
+               else
+                  outReal[outIdx++] = diffM/tempReal;
+            }
+            else
+               outReal[outIdx++] = (double)0.0;
+            prevClose = inClose[today];
+         }
+         outNbElement.value  = outIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = today = startIdx;
+      prevMinusDM = 0.0;
+      prevTR = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      prevClose = inClose[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR += tempReal;
+         prevClose = inClose[today];
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DI.ordinal()])  + 1;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
+         }
+         else
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+      }
+      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+         outReal[0] =  (100.0*(prevMinusDM/prevTR)) ;
+      else
+         outReal[0] = 0.0;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
+         }
+         else
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+            outReal[outIdx++] =  (100.0*(prevMinusDM/prevTR)) ;
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MINUS_DM_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInTimePeriod > 1 )
+         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
+      else
+         return 1;
+   }
+   public TA_RetCode MINUS_DM( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, tempReal;
+      double prevMinusDM;
+      double diffP, diffM;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
+      else
+         lookbackTotal = 1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( optInTimePeriod <= 1 )
+      {
+         outBegIdx.value  = startIdx;
+         today = startIdx-1;
+         prevHigh = inHigh[today];
+         prevLow = inLow[today];
+         while( today < endIdx )
+         {
+            today++;
+            tempReal = inHigh[today];
+            diffP = tempReal-prevHigh;
+            prevHigh = tempReal;
+            tempReal = inLow[today];
+            diffM = prevLow-tempReal;
+            prevLow = tempReal;
+            if( (diffM > 0) && (diffP < diffM) )
+            {
+               outReal[outIdx++] = diffM;
+            }
+            else
+               outReal[outIdx++] = 0;
+         }
+         outNbElement.value  = outIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      prevMinusDM = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()]) ;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
+         }
+         else
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
+         }
+      }
+      outReal[0] = prevMinusDM;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
+         }
+         else
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
+         }
+         outReal[outIdx++] = prevMinusDM;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MINUS_DM( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, tempReal;
+      double prevMinusDM;
+      double diffP, diffM;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()])  - 1;
+      else
+         lookbackTotal = 1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( optInTimePeriod <= 1 )
+      {
+         outBegIdx.value  = startIdx;
+         today = startIdx-1;
+         prevHigh = inHigh[today];
+         prevLow = inLow[today];
+         while( today < endIdx )
+         {
+            today++;
+            tempReal = inHigh[today];
+            diffP = tempReal-prevHigh;
+            prevHigh = tempReal;
+            tempReal = inLow[today];
+            diffM = prevLow-tempReal;
+            prevLow = tempReal;
+            if( (diffM > 0) && (diffP < diffM) )
+            {
+               outReal[outIdx++] = diffM;
+            }
+            else
+               outReal[outIdx++] = 0;
+         }
+         outNbElement.value  = outIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      prevMinusDM = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM += diffM;
+         }
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_MINUS_DM.ordinal()]) ;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
+         }
+         else
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
+         }
+      }
+      outReal[0] = prevMinusDM;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffM > 0) && (diffP < diffM) )
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod) + diffM;
+         }
+         else
+         {
+            prevMinusDM = prevMinusDM - (prevMinusDM/optInTimePeriod);
+         }
+         outReal[outIdx++] = prevMinusDM;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int MOM_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod;
+   }
+   public TA_RetCode MOM( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+         outReal[outIdx++] = inReal[inIdx++] - inReal[trailingIdx++];
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode MOM( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+         outReal[outIdx++] = inReal[inIdx++] - inReal[trailingIdx++];
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int NATR_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
+   }
+   public TA_RetCode NATR( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int outIdx, today, lookbackTotal;
+      int nbATR;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      double prevATR, tempValue;
+      double []tempBuffer ;
+      double []prevATRTemp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  NATR_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      if( optInTimePeriod <= 1 )
+      {
+         return  TRANGE ( startIdx, endIdx,
+            inHigh, inLow, inClose,
+            outBegIdx, outNbElement, outReal );
+      }
+      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
+      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
+         inHigh, inLow, inClose,
+         outBegIdx1 ,  outNbElement1 ,
+         tempBuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      retCode =  INT_SMA ( optInTimePeriod-1,
+         optInTimePeriod-1,
+         tempBuffer, optInTimePeriod,
+         outBegIdx1 ,  outNbElement1 ,
+         prevATRTemp );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      prevATR = prevATRTemp[0];
+      today = optInTimePeriod;
+      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
+      while( outIdx != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         outIdx--;
+      }
+      outIdx = 1;
+      tempValue = inClose[today];
+      if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
+         outReal[0] = (prevATR/tempValue)*100.0;
+      else
+         outReal[0] = 0.0;
+      nbATR = (endIdx - startIdx)+1;
+      while( --nbATR != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         tempValue = inClose[today];
+         if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
+            outReal[outIdx] = (prevATR/tempValue)*100.0;
+         else
+            outReal[0] = 0.0;
+         outIdx++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return retCode;
+   }
+   public TA_RetCode NATR( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int outIdx, today, lookbackTotal;
+      int nbATR;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      double prevATR, tempValue;
+      double []tempBuffer ;
+      double []prevATRTemp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  NATR_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      if( optInTimePeriod <= 1 )
+      {
+         return  TRANGE ( startIdx, endIdx,
+            inHigh, inLow, inClose,
+            outBegIdx, outNbElement, outReal );
+      }
+      tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
+      retCode =  TRANGE ( (startIdx-lookbackTotal+1), endIdx,
+         inHigh, inLow, inClose,
+         outBegIdx1 ,  outNbElement1 ,
+         tempBuffer );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      retCode =  INT_SMA ( optInTimePeriod-1,
+         optInTimePeriod-1,
+         tempBuffer, optInTimePeriod,
+         outBegIdx1 ,  outNbElement1 ,
+         prevATRTemp );
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         return retCode;
+      }
+      prevATR = prevATRTemp[0];
+      today = optInTimePeriod;
+      outIdx =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_NATR.ordinal()]) ;
+      while( outIdx != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         outIdx--;
+      }
+      outIdx = 1;
+      tempValue = inClose[today];
+      if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
+         outReal[0] = (prevATR/tempValue)*100.0;
+      else
+         outReal[0] = 0.0;
+      nbATR = (endIdx - startIdx)+1;
+      while( --nbATR != 0 )
+      {
+         prevATR *= optInTimePeriod - 1;
+         prevATR += tempBuffer[today++];
+         prevATR /= optInTimePeriod;
+         tempValue = inClose[today];
+         if( ! (((-0.00000001)<tempValue)&&(tempValue<0.00000001))  )
+            outReal[outIdx] = (prevATR/tempValue)*100.0;
+         else
+            outReal[0] = 0.0;
+         outIdx++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return retCode;
+   }
+   /* Generated */
+   public int OBV_Lookback( )
+   {
+      return 0;
+   }
+   public TA_RetCode OBV( int startIdx,
+      int endIdx,
+      double inReal[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int i;
+      int outIdx;
+      double prevReal, tempReal, prevOBV;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      prevOBV = inVolume[startIdx];
+      prevReal = inReal[startIdx];
+      outIdx = 0;
+      for(i=startIdx; i <= endIdx; i++ )
+      {
+         tempReal = inReal[i];
+         if( tempReal > prevReal )
+            prevOBV += inVolume[i];
+         else if( tempReal < prevReal )
+            prevOBV -= inVolume[i];
+         outReal[outIdx++] = prevOBV;
+         prevReal = tempReal;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode OBV( int startIdx,
+      int endIdx,
+      float inReal[],
+      float inVolume[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int i;
+      int outIdx;
+      double prevReal, tempReal, prevOBV;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      prevOBV = inVolume[startIdx];
+      prevReal = inReal[startIdx];
+      outIdx = 0;
+      for(i=startIdx; i <= endIdx; i++ )
+      {
+         tempReal = inReal[i];
+         if( tempReal > prevReal )
+            prevOBV += inVolume[i];
+         else if( tempReal < prevReal )
+            prevOBV -= inVolume[i];
+         outReal[outIdx++] = prevOBV;
+         prevReal = tempReal;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int PLUS_DI_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInTimePeriod > 1 )
+         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
+      else
+         return 1;
+   }
+   public TA_RetCode PLUS_DI( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, prevClose;
+      double prevPlusDM, prevTR;
+      double tempReal, tempReal2, diffP, diffM;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
+      else
+         lookbackTotal = 1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( optInTimePeriod <= 1 )
+      {
+         outBegIdx.value  = startIdx;
+         today = startIdx-1;
+         prevHigh = inHigh[today];
+         prevLow = inLow[today];
+         prevClose = inClose[today];
+         while( today < endIdx )
+         {
+            today++;
+            tempReal = inHigh[today];
+            diffP = tempReal-prevHigh;
+            prevHigh = tempReal;
+            tempReal = inLow[today];
+            diffM = prevLow-tempReal;
+            prevLow = tempReal;
+            if( (diffP > 0) && (diffP > diffM) )
+            {
+               { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+               if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
+                  outReal[outIdx++] = (double)0.0;
+               else
+                  outReal[outIdx++] = diffP/tempReal;
+            }
+            else
+               outReal[outIdx++] = (double)0.0;
+            prevClose = inClose[today];
+         }
+         outNbElement.value  = outIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = today = startIdx;
+      prevPlusDM = 0.0;
+      prevTR = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      prevClose = inClose[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR += tempReal;
+         prevClose = inClose[today];
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()])  + 1;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
+         }
+         else
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+      }
+      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+         outReal[0] =  (100.0*(prevPlusDM/prevTR)) ;
+      else
+         outReal[0] = 0.0;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
+         }
+         else
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+            outReal[outIdx++] =  (100.0*(prevPlusDM/prevTR)) ;
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode PLUS_DI( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, prevClose;
+      double prevPlusDM, prevTR;
+      double tempReal, tempReal2, diffP, diffM;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()]) ;
+      else
+         lookbackTotal = 1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( optInTimePeriod <= 1 )
+      {
+         outBegIdx.value  = startIdx;
+         today = startIdx-1;
+         prevHigh = inHigh[today];
+         prevLow = inLow[today];
+         prevClose = inClose[today];
+         while( today < endIdx )
+         {
+            today++;
+            tempReal = inHigh[today];
+            diffP = tempReal-prevHigh;
+            prevHigh = tempReal;
+            tempReal = inLow[today];
+            diffM = prevLow-tempReal;
+            prevLow = tempReal;
+            if( (diffP > 0) && (diffP > diffM) )
+            {
+               { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+               if(  (((-0.00000001)<tempReal)&&(tempReal<0.00000001))  )
+                  outReal[outIdx++] = (double)0.0;
+               else
+                  outReal[outIdx++] = diffP/tempReal;
+            }
+            else
+               outReal[outIdx++] = (double)0.0;
+            prevClose = inClose[today];
+         }
+         outNbElement.value  = outIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = today = startIdx;
+      prevPlusDM = 0.0;
+      prevTR = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      prevClose = inClose[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR += tempReal;
+         prevClose = inClose[today];
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DI.ordinal()])  + 1;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
+         }
+         else
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+      }
+      if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+         outReal[0] =  (100.0*(prevPlusDM/prevTR)) ;
+      else
+         outReal[0] = 0.0;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
+         }
+         else
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
+         }
+         { tempReal = prevHigh-prevLow; tempReal2 = Math.abs (prevHigh-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs (prevLow-prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+         prevTR = prevTR - (prevTR/optInTimePeriod) + tempReal;
+         prevClose = inClose[today];
+         if( ! (((-0.00000001)<prevTR)&&(prevTR<0.00000001))  )
+            outReal[outIdx++] =  (100.0*(prevPlusDM/prevTR)) ;
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int PLUS_DM_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInTimePeriod > 1 )
+         return optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
+      else
+         return 1;
+   }
+   public TA_RetCode PLUS_DM( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, tempReal;
+      double prevPlusDM;
+      double diffP, diffM;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
+      else
+         lookbackTotal = 1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( optInTimePeriod <= 1 )
+      {
+         outBegIdx.value  = startIdx;
+         today = startIdx-1;
+         prevHigh = inHigh[today];
+         prevLow = inLow[today];
+         while( today < endIdx )
+         {
+            today++;
+            tempReal = inHigh[today];
+            diffP = tempReal-prevHigh;
+            prevHigh = tempReal;
+            tempReal = inLow[today];
+            diffM = prevLow-tempReal;
+            prevLow = tempReal;
+            if( (diffP > 0) && (diffP > diffM) )
+            {
+               outReal[outIdx++] = diffP;
+            }
+            else
+               outReal[outIdx++] = 0;
+         }
+         outNbElement.value  = outIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      prevPlusDM = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()]) ;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
+         }
+         else
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
+         }
+      }
+      outReal[0] = prevPlusDM;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
+         }
+         else
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
+         }
+         outReal[outIdx++] = prevPlusDM;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode PLUS_DM( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, lookbackTotal, outIdx;
+      double prevHigh, prevLow, tempReal;
+      double prevPlusDM;
+      double diffP, diffM;
+      int i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInTimePeriod > 1 )
+         lookbackTotal = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()])  - 1;
+      else
+         lookbackTotal = 1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( optInTimePeriod <= 1 )
+      {
+         outBegIdx.value  = startIdx;
+         today = startIdx-1;
+         prevHigh = inHigh[today];
+         prevLow = inLow[today];
+         while( today < endIdx )
+         {
+            today++;
+            tempReal = inHigh[today];
+            diffP = tempReal-prevHigh;
+            prevHigh = tempReal;
+            tempReal = inLow[today];
+            diffM = prevLow-tempReal;
+            prevLow = tempReal;
+            if( (diffP > 0) && (diffP > diffM) )
+            {
+               outReal[outIdx++] = diffP;
+            }
+            else
+               outReal[outIdx++] = 0;
+         }
+         outNbElement.value  = outIdx;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      prevPlusDM = 0.0;
+      today = startIdx - lookbackTotal;
+      prevHigh = inHigh[today];
+      prevLow = inLow[today];
+      i = optInTimePeriod-1;
+      while( i-- > 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM += diffP;
+         }
+      }
+      i =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_PLUS_DM.ordinal()]) ;
+      while( i-- != 0 )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
+         }
+         else
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
+         }
+      }
+      outReal[0] = prevPlusDM;
+      outIdx = 1;
+      while( today < endIdx )
+      {
+         today++;
+         tempReal = inHigh[today];
+         diffP = tempReal-prevHigh;
+         prevHigh = tempReal;
+         tempReal = inLow[today];
+         diffM = prevLow-tempReal;
+         prevLow = tempReal;
+         if( (diffP > 0) && (diffP > diffM) )
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod) + diffP;
+         }
+         else
+         {
+            prevPlusDM = prevPlusDM - (prevPlusDM/optInTimePeriod);
+         }
+         outReal[outIdx++] = prevPlusDM;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int PPO_Lookback( int optInFastPeriod,
+      int optInSlowPeriod,
+      TA_MAType optInMAType )
+   {
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return -1;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return -1;
+      return  MA_Lookback (  (((optInSlowPeriod) > (optInFastPeriod)) ? (optInSlowPeriod) : (optInFastPeriod)) , optInMAType );
+   }
+   public TA_RetCode PPO( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      TA_MAType optInMAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double []tempBuffer ;
+      TA_RetCode retCode;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      tempBuffer = new double[endIdx-startIdx+1] ;
+      retCode =  INT_PO ( startIdx, endIdx, inReal,
+         optInFastPeriod,
+         optInSlowPeriod,
+         optInMAType,
+         outBegIdx,
+         outNbElement,
+         outReal,
+         tempBuffer,
+         1 );
+      return retCode;
+   }
+   public TA_RetCode PPO( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      TA_MAType optInMAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double []tempBuffer ;
+      TA_RetCode retCode;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastPeriod ==  ( Integer.MIN_VALUE )  )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowPeriod ==  ( Integer.MIN_VALUE )  )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      tempBuffer = new double[endIdx-startIdx+1] ;
+      retCode =  INT_PO ( startIdx, endIdx, inReal,
+         optInFastPeriod,
+         optInSlowPeriod,
+         optInMAType,
+         outBegIdx,
+         outNbElement,
+         outReal,
+         tempBuffer,
+         1 );
+      return retCode;
+   }
+   /* Generated */
+   public int ROC_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod;
+   }
+   public TA_RetCode ROC( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[trailingIdx++];
+         if( tempReal != 0.0 )
+            outReal[outIdx++] = ((inReal[inIdx] / tempReal)-1.0)*100.0;
+         else
+            outReal[outIdx++] = 0.0;
+         inIdx++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode ROC( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[trailingIdx++];
+         if( tempReal != 0.0 )
+            outReal[outIdx++] = ((inReal[inIdx] / tempReal)-1.0)*100.0;
+         else
+            outReal[outIdx++] = 0.0;
+         inIdx++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int ROCP_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod;
+   }
+   public TA_RetCode ROCP( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[trailingIdx++];
+         if( tempReal != 0.0 )
+            outReal[outIdx++] = (inReal[inIdx]-tempReal)/tempReal;
+         else
+            outReal[outIdx++] = 0.0;
+         inIdx++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode ROCP( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[trailingIdx++];
+         if( tempReal != 0.0 )
+            outReal[outIdx++] = (inReal[inIdx]-tempReal)/tempReal;
+         else
+            outReal[outIdx++] = 0.0;
+         inIdx++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int ROCR_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod;
+   }
+   public TA_RetCode ROCR( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[trailingIdx++];
+         if( tempReal != 0.0 )
+            outReal[outIdx++] = (inReal[inIdx] / tempReal);
+         else
+            outReal[outIdx++] = 0.0;
+         inIdx++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode ROCR( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[trailingIdx++];
+         if( tempReal != 0.0 )
+            outReal[outIdx++] = (inReal[inIdx] / tempReal);
+         else
+            outReal[outIdx++] = 0.0;
+         inIdx++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int ROCR100_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod;
+   }
+   public TA_RetCode ROCR100( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[trailingIdx++];
+         if( tempReal != 0.0 )
+            outReal[outIdx++] = (inReal[inIdx] / tempReal)*100.0;
+         else
+            outReal[outIdx++] = 0.0;
+         inIdx++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode ROCR100( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, trailingIdx;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < optInTimePeriod )
+         startIdx = optInTimePeriod;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      inIdx = startIdx;
+      trailingIdx = startIdx - optInTimePeriod;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[trailingIdx++];
+         if( tempReal != 0.0 )
+            outReal[outIdx++] = (inReal[inIdx] / tempReal)*100.0;
+         else
+            outReal[outIdx++] = 0.0;
+         inIdx++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int RSI_Lookback( int optInTimePeriod )
+   {
+      int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      retValue = optInTimePeriod +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
+      if(  (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK )
+         retValue--;
+      return retValue;
+   }
+   public TA_RetCode RSI( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int today, lookbackTotal, unstablePeriod, i;
+      double prevGain, prevLoss, prevValue, savePrevValue;
+      double tempValue1, tempValue2;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  RSI_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      outIdx = 0;
+      if( optInTimePeriod == 1 )
+      {
+         outBegIdx.value  = startIdx;
+         i = (endIdx-startIdx)+1;
+         outNbElement.value  = i;
+         System.arraycopy(inReal,startIdx,outReal,0,i) ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      today = startIdx-lookbackTotal;
+      prevValue = inReal[today];
+      unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
+      if( (unstablePeriod == 0) &&
+         ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
+      {
+         savePrevValue = prevValue;
+         prevGain = 0.0;
+         prevLoss = 0.0;
+         for( i=optInTimePeriod; i > 0; i-- )
+         {
+            tempValue1 = inReal[today++];
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            if( tempValue2 < 0 )
+               prevLoss -= tempValue2;
+            else
+               prevGain += tempValue2;
+         }
+         tempValue1 = prevLoss/optInTimePeriod;
+         tempValue2 = prevGain/optInTimePeriod;
+         tempValue1 = tempValue2+tempValue1;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100*(tempValue2/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+         if( today > endIdx )
+         {
+            outBegIdx.value  = startIdx;
+            outNbElement.value  = outIdx;
+            return  TA_RetCode. TA_SUCCESS;
+         }
+         today -= optInTimePeriod;
+         prevValue = savePrevValue;
+      }
+      prevGain = 0.0;
+      prevLoss = 0.0;
+      today++;
+      for( i=optInTimePeriod; i > 0; i-- )
+      {
+         tempValue1 = inReal[today++];
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         if( tempValue2 < 0 )
+            prevLoss -= tempValue2;
+         else
+            prevGain += tempValue2;
+      }
+      prevLoss /= optInTimePeriod;
+      prevGain /= optInTimePeriod;
+      if( today > startIdx )
+      {
+         tempValue1 = prevGain+prevLoss;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100.0*(prevGain/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      else
+      {
+         while( today < startIdx )
+         {
+            tempValue1 = inReal[today];
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            prevLoss *= (optInTimePeriod-1);
+            prevGain *= (optInTimePeriod-1);
+            if( tempValue2 < 0 )
+               prevLoss -= tempValue2;
+            else
+               prevGain += tempValue2;
+            prevLoss /= optInTimePeriod;
+            prevGain /= optInTimePeriod;
+            today++;
+         }
+      }
+      while( today <= endIdx )
+      {
+         tempValue1 = inReal[today++];
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         prevLoss *= (optInTimePeriod-1);
+         prevGain *= (optInTimePeriod-1);
+         if( tempValue2 < 0 )
+            prevLoss -= tempValue2;
+         else
+            prevGain += tempValue2;
+         prevLoss /= optInTimePeriod;
+         prevGain /= optInTimePeriod;
+         tempValue1 = prevGain+prevLoss;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100.0*(prevGain/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode RSI( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int today, lookbackTotal, unstablePeriod, i;
+      double prevGain, prevLoss, prevValue, savePrevValue;
+      double tempValue1, tempValue2;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackTotal =  RSI_Lookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      outIdx = 0;
+      if( optInTimePeriod == 1 )
+      {
+         outBegIdx.value  = startIdx;
+         i = (endIdx-startIdx)+1;
+         outNbElement.value  = i;
+         System.arraycopy(inReal,startIdx,outReal,0,i) ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      today = startIdx-lookbackTotal;
+      prevValue = inReal[today];
+      unstablePeriod =  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_RSI.ordinal()]) ;
+      if( (unstablePeriod == 0) &&
+         ( (this.compatibility)  ==  TA_Compatibility. TA_COMPATIBILITY_METASTOCK))
+      {
+         savePrevValue = prevValue;
+         prevGain = 0.0;
+         prevLoss = 0.0;
+         for( i=optInTimePeriod; i > 0; i-- )
+         {
+            tempValue1 = inReal[today++];
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            if( tempValue2 < 0 )
+               prevLoss -= tempValue2;
+            else
+               prevGain += tempValue2;
+         }
+         tempValue1 = prevLoss/optInTimePeriod;
+         tempValue2 = prevGain/optInTimePeriod;
+         tempValue1 = tempValue2+tempValue1;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100*(tempValue2/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+         if( today > endIdx )
+         {
+            outBegIdx.value  = startIdx;
+            outNbElement.value  = outIdx;
+            return  TA_RetCode. TA_SUCCESS;
+         }
+         today -= optInTimePeriod;
+         prevValue = savePrevValue;
+      }
+      prevGain = 0.0;
+      prevLoss = 0.0;
+      today++;
+      for( i=optInTimePeriod; i > 0; i-- )
+      {
+         tempValue1 = inReal[today++];
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         if( tempValue2 < 0 )
+            prevLoss -= tempValue2;
+         else
+            prevGain += tempValue2;
+      }
+      prevLoss /= optInTimePeriod;
+      prevGain /= optInTimePeriod;
+      if( today > startIdx )
+      {
+         tempValue1 = prevGain+prevLoss;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100.0*(prevGain/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      else
+      {
+         while( today < startIdx )
+         {
+            tempValue1 = inReal[today];
+            tempValue2 = tempValue1 - prevValue;
+            prevValue = tempValue1;
+            prevLoss *= (optInTimePeriod-1);
+            prevGain *= (optInTimePeriod-1);
+            if( tempValue2 < 0 )
+               prevLoss -= tempValue2;
+            else
+               prevGain += tempValue2;
+            prevLoss /= optInTimePeriod;
+            prevGain /= optInTimePeriod;
+            today++;
+         }
+      }
+      while( today <= endIdx )
+      {
+         tempValue1 = inReal[today++];
+         tempValue2 = tempValue1 - prevValue;
+         prevValue = tempValue1;
+         prevLoss *= (optInTimePeriod-1);
+         prevGain *= (optInTimePeriod-1);
+         if( tempValue2 < 0 )
+            prevLoss -= tempValue2;
+         else
+            prevGain += tempValue2;
+         prevLoss /= optInTimePeriod;
+         prevGain /= optInTimePeriod;
+         tempValue1 = prevGain+prevLoss;
+         if( ! (((-0.00000001)<tempValue1)&&(tempValue1<0.00000001))  )
+            outReal[outIdx++] = 100.0*(prevGain/tempValue1);
+         else
+            outReal[outIdx++] = 0.0;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int SAR_Lookback( double optInAcceleration,
+      double optInMaximum )
+   {
+      if( optInAcceleration ==  (-4e+37)  )
+         optInAcceleration = 2.000000e-2;
+      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
+         return -1;
+      if( optInMaximum ==  (-4e+37)  )
+         optInMaximum = 2.000000e-1;
+      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
+         return -1;
+      return 1;
+   }
+   public TA_RetCode SAR( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double optInAcceleration,
+      double optInMaximum,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int isLong;
+      int todayIdx, outIdx;
+      MInteger tempInt = new MInteger() ;
+      double newHigh, newLow, prevHigh, prevLow;
+      double af, ep, sar;
+      double []ep_temp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( optInAcceleration ==  (-4e+37)  )
+         optInAcceleration = 2.000000e-2;
+      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInMaximum ==  (-4e+37)  )
+         optInMaximum = 2.000000e-1;
+      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < 1 )
+         startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      af = optInAcceleration;
+      if( af > optInMaximum )
+         af = optInAcceleration = optInMaximum;
+      retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
+         tempInt ,  tempInt ,
+         ep_temp );
+      if( ep_temp[0] > 0 )
+         isLong = 0;
+      else
+         isLong = 1;
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      outBegIdx.value  = startIdx;
+      outIdx = 0;
+      todayIdx = startIdx;
+      newHigh = inHigh[todayIdx-1];
+      newLow = inLow[todayIdx-1];
+      if( isLong == 1 )
+      {
+         ep = inHigh[todayIdx];
+         sar = newLow;
+      }
+      else
+      {
+         ep = inLow[todayIdx];
+         sar = newHigh;
+      }
+      newLow = inLow[todayIdx];
+      newHigh = inHigh[todayIdx];
+      while( todayIdx <= endIdx )
+      {
+         prevLow = newLow;
+         prevHigh = newHigh;
+         newLow = inLow[todayIdx];
+         newHigh = inHigh[todayIdx];
+         todayIdx++;
+         if( isLong == 1 )
+         {
+            if( newLow <= sar )
+            {
+               isLong = 0;
+               sar = ep;
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+               outReal[outIdx++] = sar;
+               af = optInAcceleration;
+               ep = newLow;
+               sar = sar + af * (ep - sar);
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+            }
+            else
+            {
+               outReal[outIdx++] = sar;
+               if( newHigh > ep )
+               {
+                  ep = newHigh;
+                  af += optInAcceleration;
+                  if( af > optInMaximum )
+                     af = optInMaximum;
+               }
+               sar = sar + af * (ep - sar);
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+            }
+         }
+         else
+         {
+            if( newHigh >= sar )
+            {
+               isLong = 1;
+               sar = ep;
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+               outReal[outIdx++] = sar;
+               af = optInAcceleration;
+               ep = newHigh;
+               sar = sar + af * (ep - sar);
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+            }
+            else
+            {
+               outReal[outIdx++] = sar;
+               if( newLow < ep )
+               {
+                  ep = newLow;
+                  af += optInAcceleration;
+                  if( af > optInMaximum )
+                     af = optInMaximum;
+               }
+               sar = sar + af * (ep - sar);
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+            }
+         }
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode SAR( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      double optInAcceleration,
+      double optInMaximum,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int isLong;
+      int todayIdx, outIdx;
+      MInteger tempInt = new MInteger() ;
+      double newHigh, newLow, prevHigh, prevLow;
+      double af, ep, sar;
+      double []ep_temp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( optInAcceleration ==  (-4e+37)  )
+         optInAcceleration = 2.000000e-2;
+      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInMaximum ==  (-4e+37)  )
+         optInMaximum = 2.000000e-1;
+      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < 1 )
+         startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      af = optInAcceleration;
+      if( af > optInMaximum )
+         af = optInAcceleration = optInMaximum;
+      retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
+         tempInt ,  tempInt ,
+         ep_temp );
+      if( ep_temp[0] > 0 )
+         isLong = 0;
+      else
+         isLong = 1;
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      outBegIdx.value  = startIdx;
+      outIdx = 0;
+      todayIdx = startIdx;
+      newHigh = inHigh[todayIdx-1];
+      newLow = inLow[todayIdx-1];
+      if( isLong == 1 )
+      {
+         ep = inHigh[todayIdx];
+         sar = newLow;
+      }
+      else
+      {
+         ep = inLow[todayIdx];
+         sar = newHigh;
+      }
+      newLow = inLow[todayIdx];
+      newHigh = inHigh[todayIdx];
+      while( todayIdx <= endIdx )
+      {
+         prevLow = newLow;
+         prevHigh = newHigh;
+         newLow = inLow[todayIdx];
+         newHigh = inHigh[todayIdx];
+         todayIdx++;
+         if( isLong == 1 )
+         {
+            if( newLow <= sar )
+            {
+               isLong = 0;
+               sar = ep;
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+               outReal[outIdx++] = sar;
+               af = optInAcceleration;
+               ep = newLow;
+               sar = sar + af * (ep - sar);
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+            }
+            else
+            {
+               outReal[outIdx++] = sar;
+               if( newHigh > ep )
+               {
+                  ep = newHigh;
+                  af += optInAcceleration;
+                  if( af > optInMaximum )
+                     af = optInMaximum;
+               }
+               sar = sar + af * (ep - sar);
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+            }
+         }
+         else
+         {
+            if( newHigh >= sar )
+            {
+               isLong = 1;
+               sar = ep;
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+               outReal[outIdx++] = sar;
+               af = optInAcceleration;
+               ep = newHigh;
+               sar = sar + af * (ep - sar);
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+            }
+            else
+            {
+               outReal[outIdx++] = sar;
+               if( newLow < ep )
+               {
+                  ep = newLow;
+                  af += optInAcceleration;
+                  if( af > optInMaximum )
+                     af = optInMaximum;
+               }
+               sar = sar + af * (ep - sar);
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+            }
+         }
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int SAREXT_Lookback( double optInStartValue,
+      double optInOffsetOnReverse,
+      double optInAccelerationInitLong,
+      double optInAccelerationLong,
+      double optInAccelerationMaxLong,
+      double optInAccelerationInitShort,
+      double optInAccelerationShort,
+      double optInAccelerationMaxShort )
+   {
+      if( optInStartValue ==  (-4e+37)  )
+         optInStartValue = 0.000000e+0;
+      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
+         return -1;
+      if( optInOffsetOnReverse ==  (-4e+37)  )
+         optInOffsetOnReverse = 0.000000e+0;
+      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationInitLong ==  (-4e+37)  )
+         optInAccelerationInitLong = 2.000000e-2;
+      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationLong ==  (-4e+37)  )
+         optInAccelerationLong = 2.000000e-2;
+      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationMaxLong ==  (-4e+37)  )
+         optInAccelerationMaxLong = 2.000000e-1;
+      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationInitShort ==  (-4e+37)  )
+         optInAccelerationInitShort = 2.000000e-2;
+      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationShort ==  (-4e+37)  )
+         optInAccelerationShort = 2.000000e-2;
+      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
+         return -1;
+      if( optInAccelerationMaxShort ==  (-4e+37)  )
+         optInAccelerationMaxShort = 2.000000e-1;
+      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
+         return -1;
+      return 1;
+   }
+   public TA_RetCode SAREXT( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double optInStartValue,
+      double optInOffsetOnReverse,
+      double optInAccelerationInitLong,
+      double optInAccelerationLong,
+      double optInAccelerationMaxLong,
+      double optInAccelerationInitShort,
+      double optInAccelerationShort,
+      double optInAccelerationMaxShort,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int isLong;
+      int todayIdx, outIdx;
+      MInteger tempInt = new MInteger() ;
+      double newHigh, newLow, prevHigh, prevLow;
+      double afLong, afShort, ep, sar;
+      double []ep_temp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( optInStartValue ==  (-4e+37)  )
+         optInStartValue = 0.000000e+0;
+      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInOffsetOnReverse ==  (-4e+37)  )
+         optInOffsetOnReverse = 0.000000e+0;
+      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationInitLong ==  (-4e+37)  )
+         optInAccelerationInitLong = 2.000000e-2;
+      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationLong ==  (-4e+37)  )
+         optInAccelerationLong = 2.000000e-2;
+      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationMaxLong ==  (-4e+37)  )
+         optInAccelerationMaxLong = 2.000000e-1;
+      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationInitShort ==  (-4e+37)  )
+         optInAccelerationInitShort = 2.000000e-2;
+      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationShort ==  (-4e+37)  )
+         optInAccelerationShort = 2.000000e-2;
+      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationMaxShort ==  (-4e+37)  )
+         optInAccelerationMaxShort = 2.000000e-1;
+      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < 1 )
+         startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      afLong = optInAccelerationInitLong;
+      afShort = optInAccelerationInitShort;
+      if( afLong > optInAccelerationMaxLong )
+         afLong = optInAccelerationInitLong = optInAccelerationMaxLong;
+      if( optInAccelerationLong > optInAccelerationMaxLong )
+         optInAccelerationLong = optInAccelerationMaxLong;
+      if( afShort > optInAccelerationMaxShort)
+         afShort = optInAccelerationInitShort = optInAccelerationMaxShort;
+      if( optInAccelerationShort > optInAccelerationMaxShort )
+         optInAccelerationShort = optInAccelerationMaxShort;
+      if(optInStartValue == 0)
+      {
+         retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
+            tempInt ,  tempInt ,
+            ep_temp );
+         if( ep_temp[0] > 0 )
+            isLong = 0;
+         else
+            isLong = 1;
+         if( retCode !=  TA_RetCode. TA_SUCCESS )
+         {
+            outBegIdx.value = 0 ;
+            outNbElement.value = 0 ;
+            return retCode;
+         }
+      }
+      else if( optInStartValue > 0 )
+      {
+         isLong = 1;
+      }
+      else
+      {
+         isLong = 0;
+      }
+      outBegIdx.value  = startIdx;
+      outIdx = 0;
+      todayIdx = startIdx;
+      newHigh = inHigh[todayIdx-1];
+      newLow = inLow[todayIdx-1];
+      if(optInStartValue == 0)
+      {
+         if( isLong == 1 )
+         {
+            ep = inHigh[todayIdx];
+            sar = newLow;
+         }
+         else
+         {
+            ep = inLow[todayIdx];
+            sar = newHigh;
+         }
+      }
+      else if ( optInStartValue > 0 )
+      {
+         ep = inHigh[todayIdx];
+         sar = optInStartValue;
+      }
+      else
+      {
+         ep = inLow[todayIdx];
+         sar =  Math.abs (optInStartValue);
+      }
+      newLow = inLow[todayIdx];
+      newHigh = inHigh[todayIdx];
+      while( todayIdx <= endIdx )
+      {
+         prevLow = newLow;
+         prevHigh = newHigh;
+         newLow = inLow[todayIdx];
+         newHigh = inHigh[todayIdx];
+         todayIdx++;
+         if( isLong == 1 )
+         {
+            if( newLow <= sar )
+            {
+               isLong = 0;
+               sar = ep;
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+               if( optInOffsetOnReverse != 0.0 )
+                  sar += sar * optInOffsetOnReverse;
+               outReal[outIdx++] = -sar;
+               afShort = optInAccelerationInitShort;
+               ep = newLow;
+               sar = sar + afShort * (ep - sar);
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+            }
+            else
+            {
+               outReal[outIdx++] = sar;
+               if( newHigh > ep )
+               {
+                  ep = newHigh;
+                  afLong += optInAccelerationLong;
+                  if( afLong > optInAccelerationMaxLong )
+                     afLong = optInAccelerationMaxLong;
+               }
+               sar = sar + afLong * (ep - sar);
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+            }
+         }
+         else
+         {
+            if( newHigh >= sar )
+            {
+               isLong = 1;
+               sar = ep;
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+               if( optInOffsetOnReverse != 0.0 )
+                  sar -= sar * optInOffsetOnReverse;
+               outReal[outIdx++] = sar;
+               afLong = optInAccelerationInitLong;
+               ep = newHigh;
+               sar = sar + afLong * (ep - sar);
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+            }
+            else
+            {
+               outReal[outIdx++] = -sar;
+               if( newLow < ep )
+               {
+                  ep = newLow;
+                  afShort += optInAccelerationShort;
+                  if( afShort > optInAccelerationMaxShort )
+                     afShort = optInAccelerationMaxShort;
+               }
+               sar = sar + afShort * (ep - sar);
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+            }
+         }
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode SAREXT( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      double optInStartValue,
+      double optInOffsetOnReverse,
+      double optInAccelerationInitLong,
+      double optInAccelerationLong,
+      double optInAccelerationMaxLong,
+      double optInAccelerationInitShort,
+      double optInAccelerationShort,
+      double optInAccelerationMaxShort,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      TA_RetCode retCode;
+      int isLong;
+      int todayIdx, outIdx;
+      MInteger tempInt = new MInteger() ;
+      double newHigh, newLow, prevHigh, prevLow;
+      double afLong, afShort, ep, sar;
+      double []ep_temp = new double[1] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( optInStartValue ==  (-4e+37)  )
+         optInStartValue = 0.000000e+0;
+      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInOffsetOnReverse ==  (-4e+37)  )
+         optInOffsetOnReverse = 0.000000e+0;
+      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationInitLong ==  (-4e+37)  )
+         optInAccelerationInitLong = 2.000000e-2;
+      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationLong ==  (-4e+37)  )
+         optInAccelerationLong = 2.000000e-2;
+      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationMaxLong ==  (-4e+37)  )
+         optInAccelerationMaxLong = 2.000000e-1;
+      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationInitShort ==  (-4e+37)  )
+         optInAccelerationInitShort = 2.000000e-2;
+      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationShort ==  (-4e+37)  )
+         optInAccelerationShort = 2.000000e-2;
+      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInAccelerationMaxShort ==  (-4e+37)  )
+         optInAccelerationMaxShort = 2.000000e-1;
+      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( startIdx < 1 )
+         startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      afLong = optInAccelerationInitLong;
+      afShort = optInAccelerationInitShort;
+      if( afLong > optInAccelerationMaxLong )
+         afLong = optInAccelerationInitLong = optInAccelerationMaxLong;
+      if( optInAccelerationLong > optInAccelerationMaxLong )
+         optInAccelerationLong = optInAccelerationMaxLong;
+      if( afShort > optInAccelerationMaxShort)
+         afShort = optInAccelerationInitShort = optInAccelerationMaxShort;
+      if( optInAccelerationShort > optInAccelerationMaxShort )
+         optInAccelerationShort = optInAccelerationMaxShort;
+      if(optInStartValue == 0)
+      {
+         retCode =  MINUS_DM ( startIdx, startIdx, inHigh, inLow, 1,
+            tempInt ,  tempInt ,
+            ep_temp );
+         if( ep_temp[0] > 0 )
+            isLong = 0;
+         else
+            isLong = 1;
+         if( retCode !=  TA_RetCode. TA_SUCCESS )
+         {
+            outBegIdx.value = 0 ;
+            outNbElement.value = 0 ;
+            return retCode;
+         }
+      }
+      else if( optInStartValue > 0 )
+      {
+         isLong = 1;
+      }
+      else
+      {
+         isLong = 0;
+      }
+      outBegIdx.value  = startIdx;
+      outIdx = 0;
+      todayIdx = startIdx;
+      newHigh = inHigh[todayIdx-1];
+      newLow = inLow[todayIdx-1];
+      if(optInStartValue == 0)
+      {
+         if( isLong == 1 )
+         {
+            ep = inHigh[todayIdx];
+            sar = newLow;
+         }
+         else
+         {
+            ep = inLow[todayIdx];
+            sar = newHigh;
+         }
+      }
+      else if ( optInStartValue > 0 )
+      {
+         ep = inHigh[todayIdx];
+         sar = optInStartValue;
+      }
+      else
+      {
+         ep = inLow[todayIdx];
+         sar =  Math.abs (optInStartValue);
+      }
+      newLow = inLow[todayIdx];
+      newHigh = inHigh[todayIdx];
+      while( todayIdx <= endIdx )
+      {
+         prevLow = newLow;
+         prevHigh = newHigh;
+         newLow = inLow[todayIdx];
+         newHigh = inHigh[todayIdx];
+         todayIdx++;
+         if( isLong == 1 )
+         {
+            if( newLow <= sar )
+            {
+               isLong = 0;
+               sar = ep;
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+               if( optInOffsetOnReverse != 0.0 )
+                  sar += sar * optInOffsetOnReverse;
+               outReal[outIdx++] = -sar;
+               afShort = optInAccelerationInitShort;
+               ep = newLow;
+               sar = sar + afShort * (ep - sar);
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+            }
+            else
+            {
+               outReal[outIdx++] = sar;
+               if( newHigh > ep )
+               {
+                  ep = newHigh;
+                  afLong += optInAccelerationLong;
+                  if( afLong > optInAccelerationMaxLong )
+                     afLong = optInAccelerationMaxLong;
+               }
+               sar = sar + afLong * (ep - sar);
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+            }
+         }
+         else
+         {
+            if( newHigh >= sar )
+            {
+               isLong = 1;
+               sar = ep;
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+               if( optInOffsetOnReverse != 0.0 )
+                  sar -= sar * optInOffsetOnReverse;
+               outReal[outIdx++] = sar;
+               afLong = optInAccelerationInitLong;
+               ep = newHigh;
+               sar = sar + afLong * (ep - sar);
+               if( sar > prevLow )
+                  sar = prevLow;
+               if( sar > newLow )
+                  sar = newLow;
+            }
+            else
+            {
+               outReal[outIdx++] = -sar;
+               if( newLow < ep )
+               {
+                  ep = newLow;
+                  afShort += optInAccelerationShort;
+                  if( afShort > optInAccelerationMaxShort )
+                     afShort = optInAccelerationMaxShort;
+               }
+               sar = sar + afShort * (ep - sar);
+               if( sar < prevHigh )
+                  sar = prevHigh;
+               if( sar < newHigh )
+                  sar = newHigh;
+            }
+         }
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int SMA_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod - 1;
+   }
+   public TA_RetCode SMA( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      return  INT_SMA ( startIdx, endIdx,
+         inReal, optInTimePeriod,
+         outBegIdx, outNbElement, outReal );
+   }
+   TA_RetCode INT_SMA( int startIdx,
+      int endIdx,
+      double  inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double periodTotal, tempReal;
+      int i, outIdx, trailingIdx, lookbackTotal;
+      lookbackTotal = (optInTimePeriod-1);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      periodTotal = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      i=trailingIdx;
+      if( optInTimePeriod > 1 )
+      {
+         while( i < startIdx )
+            periodTotal += inReal[i++];
+      }
+      outIdx = 0;
+      do
+      {
+         periodTotal += inReal[i++];
+         tempReal = periodTotal;
+         periodTotal -= inReal[trailingIdx++];
+         outReal[outIdx++] = tempReal / optInTimePeriod;
+      } while( i <= endIdx );
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode SMA( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      return  INT_SMA ( startIdx, endIdx,
+         inReal, optInTimePeriod,
+         outBegIdx, outNbElement, outReal );
+   }
+   TA_RetCode INT_SMA( int startIdx,
+      int endIdx,
+      float  inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double periodTotal, tempReal;
+      int i, outIdx, trailingIdx, lookbackTotal;
+      lookbackTotal = (optInTimePeriod-1);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      periodTotal = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      i=trailingIdx;
+      if( optInTimePeriod > 1 )
+      {
+         while( i < startIdx )
+            periodTotal += inReal[i++];
+      }
+      outIdx = 0;
+      do
+      {
+         periodTotal += inReal[i++];
+         tempReal = periodTotal;
+         periodTotal -= inReal[trailingIdx++];
+         outReal[outIdx++] = tempReal / optInTimePeriod;
+      } while( i <= endIdx );
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
    public int STDDEV_Lookback( int optInTimePeriod,
       double optInNbDev )
    {
@@ -22325,6 +20040,1824 @@ public class Core {
       }
    }
    /* Generated */
+   public int STOCH_Lookback( int optInFastK_Period,
+      int optInSlowK_Period,
+      TA_MAType optInSlowK_MAType,
+      int optInSlowD_Period,
+      TA_MAType optInSlowD_MAType )
+   {
+      int retValue;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return -1;
+      if( (int)optInSlowK_Period ==  ( Integer.MIN_VALUE )  )
+         optInSlowK_Period = 3;
+      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
+         return -1;
+      if( (int)optInSlowD_Period ==  ( Integer.MIN_VALUE )  )
+         optInSlowD_Period = 3;
+      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
+         return -1;
+      retValue = (optInFastK_Period - 1);
+      retValue +=  MA_Lookback ( optInSlowK_Period, optInSlowK_MAType );
+      retValue +=  MA_Lookback ( optInSlowD_Period, optInSlowD_MAType );
+      return retValue;
+   }
+   public TA_RetCode STOCH( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInFastK_Period,
+      int optInSlowK_Period,
+      TA_MAType optInSlowK_MAType,
+      int optInSlowD_Period,
+      TA_MAType optInSlowD_MAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outSlowK[],
+      double outSlowD[] )
+   {
+      TA_RetCode retCode;
+      double lowest, highest, tmp, diff;
+      double []tempBuffer ;
+      int outIdx, lowestIdx, highestIdx;
+      int lookbackTotal, lookbackK, lookbackKSlow, lookbackDSlow;
+      int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowK_Period ==  ( Integer.MIN_VALUE )  )
+         optInSlowK_Period = 3;
+      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowD_Period ==  ( Integer.MIN_VALUE )  )
+         optInSlowD_Period = 3;
+      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackK = optInFastK_Period-1;
+      lookbackKSlow =  MA_Lookback ( optInSlowK_Period, optInSlowK_MAType );
+      lookbackDSlow =  MA_Lookback ( optInSlowD_Period, optInSlowD_MAType );
+      lookbackTotal = lookbackK + lookbackDSlow + lookbackKSlow;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      today = trailingIdx+lookbackK;
+      lowestIdx = highestIdx = -1;
+      diff = highest = lowest = 0.0;
+      if( (outSlowK == inHigh) ||
+         (outSlowK == inLow) ||
+         (outSlowK == inClose) )
+      {
+         tempBuffer = outSlowK;
+      }
+      else if( (outSlowD == inHigh) ||
+         (outSlowD == inLow) ||
+         (outSlowD == inClose) )
+      {
+         tempBuffer = outSlowD;
+      }
+      else
+      {
+         tempBuffer = new double[endIdx-today+1] ;
+      }
+      while( today <= endIdx )
+      {
+         tmp = inLow[today];
+         if( lowestIdx < trailingIdx )
+         {
+            lowestIdx = trailingIdx;
+            lowest = inLow[lowestIdx];
+            i = lowestIdx;
+            while( ++i<=today )
+            {
+               tmp = inLow[i];
+               if( tmp < lowest )
+               {
+                  lowestIdx = i;
+                  lowest = tmp;
+               }
+            }
+            diff = (highest - lowest)/100.0;
+         }
+         else if( tmp <= lowest )
+         {
+            lowestIdx = today;
+            lowest = tmp;
+            diff = (highest - lowest)/100.0;
+         }
+         tmp = inHigh[today];
+         if( highestIdx < trailingIdx )
+         {
+            highestIdx = trailingIdx;
+            highest = inHigh[highestIdx];
+            i = highestIdx;
+            while( ++i<=today )
+            {
+               tmp = inHigh[i];
+               if( tmp > highest )
+               {
+                  highestIdx = i;
+                  highest = tmp;
+               }
+            }
+            diff = (highest - lowest)/100.0;
+         }
+         else if( tmp >= highest )
+         {
+            highestIdx = today;
+            highest = tmp;
+            diff = (highest - lowest)/100.0;
+         }
+         if( diff != 0.0 )
+            tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
+         else
+            tempBuffer[outIdx++] = 0.0;
+         trailingIdx++;
+         today++;
+      }
+      retCode =  MA ( 0, outIdx-1,
+         tempBuffer, optInSlowK_Period,
+         optInSlowK_MAType,
+         outBegIdx, outNbElement, tempBuffer );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      retCode =  MA ( 0, (int) outNbElement.value -1,
+         tempBuffer, optInSlowD_Period,
+         optInSlowD_MAType,
+         outBegIdx, outNbElement, outSlowD );
+      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNbElement.value) ;
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode STOCH( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInFastK_Period,
+      int optInSlowK_Period,
+      TA_MAType optInSlowK_MAType,
+      int optInSlowD_Period,
+      TA_MAType optInSlowD_MAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outSlowK[],
+      double outSlowD[] )
+   {
+      TA_RetCode retCode;
+      double lowest, highest, tmp, diff;
+      double []tempBuffer ;
+      int outIdx, lowestIdx, highestIdx;
+      int lookbackTotal, lookbackK, lookbackKSlow, lookbackDSlow;
+      int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowK_Period ==  ( Integer.MIN_VALUE )  )
+         optInSlowK_Period = 3;
+      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInSlowD_Period ==  ( Integer.MIN_VALUE )  )
+         optInSlowD_Period = 3;
+      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackK = optInFastK_Period-1;
+      lookbackKSlow =  MA_Lookback ( optInSlowK_Period, optInSlowK_MAType );
+      lookbackDSlow =  MA_Lookback ( optInSlowD_Period, optInSlowD_MAType );
+      lookbackTotal = lookbackK + lookbackDSlow + lookbackKSlow;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      today = trailingIdx+lookbackK;
+      lowestIdx = highestIdx = -1;
+      diff = highest = lowest = 0.0;
+      tempBuffer = new double[endIdx-today+1] ;
+      while( today <= endIdx )
+      {
+         tmp = inLow[today];
+         if( lowestIdx < trailingIdx )
+         {
+            lowestIdx = trailingIdx;
+            lowest = inLow[lowestIdx];
+            i = lowestIdx;
+            while( ++i<=today )
+            {
+               tmp = inLow[i];
+               if( tmp < lowest )
+               {
+                  lowestIdx = i;
+                  lowest = tmp;
+               }
+            }
+            diff = (highest - lowest)/100.0;
+         }
+         else if( tmp <= lowest )
+         {
+            lowestIdx = today;
+            lowest = tmp;
+            diff = (highest - lowest)/100.0;
+         }
+         tmp = inHigh[today];
+         if( highestIdx < trailingIdx )
+         {
+            highestIdx = trailingIdx;
+            highest = inHigh[highestIdx];
+            i = highestIdx;
+            while( ++i<=today )
+            {
+               tmp = inHigh[i];
+               if( tmp > highest )
+               {
+                  highestIdx = i;
+                  highest = tmp;
+               }
+            }
+            diff = (highest - lowest)/100.0;
+         }
+         else if( tmp >= highest )
+         {
+            highestIdx = today;
+            highest = tmp;
+            diff = (highest - lowest)/100.0;
+         }
+         if( diff != 0.0 )
+            tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
+         else
+            tempBuffer[outIdx++] = 0.0;
+         trailingIdx++;
+         today++;
+      }
+      retCode =  MA ( 0, outIdx-1,
+         tempBuffer, optInSlowK_Period,
+         optInSlowK_MAType,
+         outBegIdx, outNbElement, tempBuffer );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      retCode =  MA ( 0, (int) outNbElement.value -1,
+         tempBuffer, optInSlowD_Period,
+         optInSlowD_MAType,
+         outBegIdx, outNbElement, outSlowD );
+      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNbElement.value) ;
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int STOCHF_Lookback( int optInFastK_Period,
+      int optInFastD_Period,
+      TA_MAType optInFastD_MAType )
+   {
+      int retValue;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return -1;
+      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return -1;
+      retValue = (optInFastK_Period - 1);
+      retValue +=  MA_Lookback ( optInFastD_Period, optInFastD_MAType );
+      return retValue;
+   }
+   public TA_RetCode STOCHF( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInFastK_Period,
+      int optInFastD_Period,
+      TA_MAType optInFastD_MAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outFastK[],
+      double outFastD[] )
+   {
+      TA_RetCode retCode;
+      double lowest, highest, tmp, diff;
+      double []tempBuffer ;
+      int outIdx, lowestIdx, highestIdx;
+      int lookbackTotal, lookbackK, lookbackFastD;
+      int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackK = optInFastK_Period-1;
+      lookbackFastD =  MA_Lookback ( optInFastD_Period, optInFastD_MAType );
+      lookbackTotal = lookbackK + lookbackFastD;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      today = trailingIdx+lookbackK;
+      lowestIdx = highestIdx = -1;
+      diff = highest = lowest = 0.0;
+      if( (outFastK == inHigh) ||
+         (outFastK == inLow) ||
+         (outFastK == inClose) )
+      {
+         tempBuffer = outFastK;
+      }
+      else if( (outFastD == inHigh) ||
+         (outFastD == inLow) ||
+         (outFastD == inClose) )
+      {
+         tempBuffer = outFastD;
+      }
+      else
+      {
+         tempBuffer = new double[endIdx-today+1] ;
+      }
+      while( today <= endIdx )
+      {
+         tmp = inLow[today];
+         if( lowestIdx < trailingIdx )
+         {
+            lowestIdx = trailingIdx;
+            lowest = inLow[lowestIdx];
+            i = lowestIdx;
+            while( ++i<=today )
+            {
+               tmp = inLow[i];
+               if( tmp < lowest )
+               {
+                  lowestIdx = i;
+                  lowest = tmp;
+               }
+            }
+            diff = (highest - lowest)/100.0;
+         }
+         else if( tmp <= lowest )
+         {
+            lowestIdx = today;
+            lowest = tmp;
+            diff = (highest - lowest)/100.0;
+         }
+         tmp = inHigh[today];
+         if( highestIdx < trailingIdx )
+         {
+            highestIdx = trailingIdx;
+            highest = inHigh[highestIdx];
+            i = highestIdx;
+            while( ++i<=today )
+            {
+               tmp = inHigh[i];
+               if( tmp > highest )
+               {
+                  highestIdx = i;
+                  highest = tmp;
+               }
+            }
+            diff = (highest - lowest)/100.0;
+         }
+         else if( tmp >= highest )
+         {
+            highestIdx = today;
+            highest = tmp;
+            diff = (highest - lowest)/100.0;
+         }
+         if( diff != 0.0 )
+            tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
+         else
+            tempBuffer[outIdx++] = 0.0;
+         trailingIdx++;
+         today++;
+      }
+      retCode =  MA ( 0, outIdx-1,
+         tempBuffer, optInFastD_Period,
+         optInFastD_MAType,
+         outBegIdx, outNbElement, outFastD );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value ) == 0 )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNbElement.value) ;
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode STOCHF( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInFastK_Period,
+      int optInFastD_Period,
+      TA_MAType optInFastD_MAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outFastK[],
+      double outFastD[] )
+   {
+      TA_RetCode retCode;
+      double lowest, highest, tmp, diff;
+      double []tempBuffer ;
+      int outIdx, lowestIdx, highestIdx;
+      int lookbackTotal, lookbackK, lookbackFastD;
+      int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackK = optInFastK_Period-1;
+      lookbackFastD =  MA_Lookback ( optInFastD_Period, optInFastD_MAType );
+      lookbackTotal = lookbackK + lookbackFastD;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      today = trailingIdx+lookbackK;
+      lowestIdx = highestIdx = -1;
+      diff = highest = lowest = 0.0;
+      tempBuffer = new double[endIdx-today+1] ;
+      while( today <= endIdx )
+      {
+         tmp = inLow[today];
+         if( lowestIdx < trailingIdx )
+         {
+            lowestIdx = trailingIdx;
+            lowest = inLow[lowestIdx];
+            i = lowestIdx;
+            while( ++i<=today )
+            {
+               tmp = inLow[i];
+               if( tmp < lowest )
+               {
+                  lowestIdx = i;
+                  lowest = tmp;
+               }
+            }
+            diff = (highest - lowest)/100.0;
+         }
+         else if( tmp <= lowest )
+         {
+            lowestIdx = today;
+            lowest = tmp;
+            diff = (highest - lowest)/100.0;
+         }
+         tmp = inHigh[today];
+         if( highestIdx < trailingIdx )
+         {
+            highestIdx = trailingIdx;
+            highest = inHigh[highestIdx];
+            i = highestIdx;
+            while( ++i<=today )
+            {
+               tmp = inHigh[i];
+               if( tmp > highest )
+               {
+                  highestIdx = i;
+                  highest = tmp;
+               }
+            }
+            diff = (highest - lowest)/100.0;
+         }
+         else if( tmp >= highest )
+         {
+            highestIdx = today;
+            highest = tmp;
+            diff = (highest - lowest)/100.0;
+         }
+         if( diff != 0.0 )
+            tempBuffer[outIdx++] = (inClose[today]-lowest)/diff;
+         else
+            tempBuffer[outIdx++] = 0.0;
+         trailingIdx++;
+         today++;
+      }
+      retCode =  MA ( 0, outIdx-1,
+         tempBuffer, optInFastD_Period,
+         optInFastD_MAType,
+         outBegIdx, outNbElement, outFastD );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value ) == 0 )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNbElement.value) ;
+      if( retCode !=  TA_RetCode. TA_SUCCESS )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int STOCHRSI_Lookback( int optInTimePeriod,
+      int optInFastK_Period,
+      int optInFastD_Period,
+      TA_MAType optInFastD_MAType )
+   {
+      int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return -1;
+      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return -1;
+      retValue =  RSI_Lookback ( optInTimePeriod ) +  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+      return retValue;
+   }
+   public TA_RetCode STOCHRSI( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      int optInFastK_Period,
+      int optInFastD_Period,
+      TA_MAType optInFastD_MAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outFastK[],
+      double outFastD[] )
+   {
+      double []tempRSIBuffer ;
+      TA_RetCode retCode;
+      int lookbackTotal, lookbackSTOCHF, tempArraySize;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outBegIdx2 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackSTOCHF =  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+      lookbackTotal =  RSI_Lookback ( optInTimePeriod ) + lookbackSTOCHF;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCHF;
+      tempRSIBuffer = new double[tempArraySize] ;
+      retCode =  RSI (startIdx-lookbackSTOCHF,
+         endIdx,
+         inReal,
+         optInTimePeriod,
+         outBegIdx1 ,
+         outNbElement1 ,
+         tempRSIBuffer);
+      if( retCode !=  TA_RetCode. TA_SUCCESS ||  outNbElement1.value  == 0 )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      retCode =  STOCHF (0,
+         tempArraySize-1,
+         tempRSIBuffer,
+         tempRSIBuffer,
+         tempRSIBuffer,
+         optInFastK_Period,
+         optInFastD_Period,
+         optInFastD_MAType,
+         outBegIdx2 ,
+         outNbElement,
+         outFastK,
+         outFastD);
+      if( retCode !=  TA_RetCode. TA_SUCCESS || ((int) outNbElement.value ) == 0 )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode STOCHRSI( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      int optInFastK_Period,
+      int optInFastD_Period,
+      TA_MAType optInFastD_MAType,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outFastK[],
+      double outFastD[] )
+   {
+      double []tempRSIBuffer ;
+      TA_RetCode retCode;
+      int lookbackTotal, lookbackSTOCHF, tempArraySize;
+      MInteger outBegIdx1 = new MInteger() ;
+      MInteger outBegIdx2 = new MInteger() ;
+      MInteger outNbElement1 = new MInteger() ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInFastK_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInFastD_Period ==  ( Integer.MIN_VALUE )  )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      lookbackSTOCHF =  STOCHF_Lookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+      lookbackTotal =  RSI_Lookback ( optInTimePeriod ) + lookbackSTOCHF;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCHF;
+      tempRSIBuffer = new double[tempArraySize] ;
+      retCode =  RSI (startIdx-lookbackSTOCHF,
+         endIdx,
+         inReal,
+         optInTimePeriod,
+         outBegIdx1 ,
+         outNbElement1 ,
+         tempRSIBuffer);
+      if( retCode !=  TA_RetCode. TA_SUCCESS ||  outNbElement1.value  == 0 )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      retCode =  STOCHF (0,
+         tempArraySize-1,
+         tempRSIBuffer,
+         tempRSIBuffer,
+         tempRSIBuffer,
+         optInFastK_Period,
+         optInFastD_Period,
+         optInFastD_MAType,
+         outBegIdx2 ,
+         outNbElement,
+         outFastK,
+         outFastD);
+      if( retCode !=  TA_RetCode. TA_SUCCESS || ((int) outNbElement.value ) == 0 )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return retCode;
+      }
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int SUM_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod-1;
+   }
+   public TA_RetCode SUM( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double periodTotal, tempReal;
+      int i, outIdx, trailingIdx, lookbackTotal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal = (optInTimePeriod-1);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      periodTotal = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      i=trailingIdx;
+      if( optInTimePeriod > 1 )
+      {
+         while( i < startIdx )
+            periodTotal += inReal[i++];
+      }
+      outIdx = 0;
+      do
+      {
+         periodTotal += inReal[i++];
+         tempReal = periodTotal;
+         periodTotal -= inReal[trailingIdx++];
+         outReal[outIdx++] = tempReal;
+      } while( i <= endIdx );
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode SUM( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double periodTotal, tempReal;
+      int i, outIdx, trailingIdx, lookbackTotal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal = (optInTimePeriod-1);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      periodTotal = 0;
+      trailingIdx = startIdx-lookbackTotal;
+      i=trailingIdx;
+      if( optInTimePeriod > 1 )
+      {
+         while( i < startIdx )
+            periodTotal += inReal[i++];
+      }
+      outIdx = 0;
+      do
+      {
+         periodTotal += inReal[i++];
+         tempReal = periodTotal;
+         periodTotal -= inReal[trailingIdx++];
+         outReal[outIdx++] = tempReal;
+      } while( i <= endIdx );
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int T3_Lookback( int optInTimePeriod,
+      double optInVFactor )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      if( optInVFactor ==  (-4e+37)  )
+         optInVFactor = 7.000000e-1;
+      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
+         return -1;
+      return 6 * (optInTimePeriod-1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
+   }
+   public TA_RetCode T3( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      double optInVFactor,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, lookbackTotal;
+      int today, i;
+      double k, one_minus_k;
+      double e1, e2, e3, e4, e5, e6;
+      double c1, c2, c3, c4;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInVFactor ==  (-4e+37)  )
+         optInVFactor = 7.000000e-1;
+      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal = 6 * (optInTimePeriod - 1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
+      if( startIdx <= lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      today = startIdx - lookbackTotal;
+      k = 2.0/(optInTimePeriod+1.0);
+      one_minus_k = 1.0-k;
+      tempReal = inReal[today++];
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+         tempReal += inReal[today++];
+      e1 = tempReal / optInTimePeriod;
+      tempReal = e1;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         tempReal += e1;
+      }
+      e2 = tempReal / optInTimePeriod;
+      tempReal = e2;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         tempReal += e2;
+      }
+      e3 = tempReal / optInTimePeriod;
+      tempReal = e3;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         tempReal += e3;
+      }
+      e4 = tempReal / optInTimePeriod;
+      tempReal = e4;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         e4 = (k*e3)+(one_minus_k*e4);
+         tempReal += e4;
+      }
+      e5 = tempReal / optInTimePeriod;
+      tempReal = e5;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         e4 = (k*e3)+(one_minus_k*e4);
+         e5 = (k*e4)+(one_minus_k*e5);
+         tempReal += e5;
+      }
+      e6 = tempReal / optInTimePeriod;
+      while( today <= startIdx )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         e4 = (k*e3)+(one_minus_k*e4);
+         e5 = (k*e4)+(one_minus_k*e5);
+         e6 = (k*e5)+(one_minus_k*e6);
+      }
+      tempReal = optInVFactor * optInVFactor;
+      c1 = -(tempReal * optInVFactor);
+      c2 = 3.0 * (tempReal - c1);
+      c3 = -6.0 * tempReal - 3.0 * (optInVFactor-c1);
+      c4 = 1.0 + 3.0 * optInVFactor - c1 + 3.0 * tempReal;
+      outIdx = 0;
+      outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
+      while( today <= endIdx )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         e4 = (k*e3)+(one_minus_k*e4);
+         e5 = (k*e4)+(one_minus_k*e5);
+         e6 = (k*e5)+(one_minus_k*e6);
+         outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode T3( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      double optInVFactor,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, lookbackTotal;
+      int today, i;
+      double k, one_minus_k;
+      double e1, e2, e3, e4, e5, e6;
+      double c1, c2, c3, c4;
+      double tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( optInVFactor ==  (-4e+37)  )
+         optInVFactor = 7.000000e-1;
+      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal = 6 * (optInTimePeriod - 1) +  (this.unstablePeriod[TA_FuncUnstId.TA_FUNC_UNST_T3.ordinal()]) ;
+      if( startIdx <= lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      today = startIdx - lookbackTotal;
+      k = 2.0/(optInTimePeriod+1.0);
+      one_minus_k = 1.0-k;
+      tempReal = inReal[today++];
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+         tempReal += inReal[today++];
+      e1 = tempReal / optInTimePeriod;
+      tempReal = e1;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         tempReal += e1;
+      }
+      e2 = tempReal / optInTimePeriod;
+      tempReal = e2;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         tempReal += e2;
+      }
+      e3 = tempReal / optInTimePeriod;
+      tempReal = e3;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         tempReal += e3;
+      }
+      e4 = tempReal / optInTimePeriod;
+      tempReal = e4;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         e4 = (k*e3)+(one_minus_k*e4);
+         tempReal += e4;
+      }
+      e5 = tempReal / optInTimePeriod;
+      tempReal = e5;
+      for( i=optInTimePeriod-1; i > 0 ; i-- )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         e4 = (k*e3)+(one_minus_k*e4);
+         e5 = (k*e4)+(one_minus_k*e5);
+         tempReal += e5;
+      }
+      e6 = tempReal / optInTimePeriod;
+      while( today <= startIdx )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         e4 = (k*e3)+(one_minus_k*e4);
+         e5 = (k*e4)+(one_minus_k*e5);
+         e6 = (k*e5)+(one_minus_k*e6);
+      }
+      tempReal = optInVFactor * optInVFactor;
+      c1 = -(tempReal * optInVFactor);
+      c2 = 3.0 * (tempReal - c1);
+      c3 = -6.0 * tempReal - 3.0 * (optInVFactor-c1);
+      c4 = 1.0 + 3.0 * optInVFactor - c1 + 3.0 * tempReal;
+      outIdx = 0;
+      outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
+      while( today <= endIdx )
+      {
+         e1 = (k*inReal[today++])+(one_minus_k*e1);
+         e2 = (k*e1)+(one_minus_k*e2);
+         e3 = (k*e2)+(one_minus_k*e3);
+         e4 = (k*e3)+(one_minus_k*e4);
+         e5 = (k*e4)+(one_minus_k*e5);
+         e6 = (k*e5)+(one_minus_k*e6);
+         outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int TEMA_Lookback( int optInTimePeriod )
+   {
+      int retValue;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      retValue =  EMA_Lookback ( optInTimePeriod );
+      return retValue * 3;
+   }
+   public TA_RetCode TEMA( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double []firstEMA ;
+      double []secondEMA ;
+      double k;
+      MInteger firstEMABegIdx = new MInteger() ;
+      MInteger firstEMANbElement = new MInteger() ;
+      MInteger secondEMABegIdx = new MInteger() ;
+      MInteger secondEMANbElement = new MInteger() ;
+      MInteger thirdEMABegIdx = new MInteger() ;
+      MInteger thirdEMANbElement = new MInteger() ;
+      int tempInt, outIdx, lookbackTotal, lookbackEMA;
+      int firstEMAIdx, secondEMAIdx;
+      TA_RetCode retCode;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outNbElement.value = 0 ;
+      outBegIdx.value = 0 ;
+      lookbackEMA =  EMA_Lookback ( optInTimePeriod );
+      lookbackTotal = lookbackEMA * 3;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      tempInt = lookbackTotal+(endIdx-startIdx)+1;
+      firstEMA = new double[tempInt] ;
+      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
+      retCode =  INT_EMA ( startIdx-(lookbackEMA*2), endIdx, inReal,
+         optInTimePeriod, k,
+         firstEMABegIdx ,  firstEMANbElement ,
+         firstEMA );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( firstEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      secondEMA = new double[firstEMANbElement.value] ;
+      retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
+         optInTimePeriod, k,
+         secondEMABegIdx ,  secondEMANbElement ,
+         secondEMA );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( secondEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      retCode =  INT_EMA ( 0,  secondEMANbElement.value -1, secondEMA,
+         optInTimePeriod, k,
+         thirdEMABegIdx ,  thirdEMANbElement ,
+         outReal );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( thirdEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      firstEMAIdx =  thirdEMABegIdx.value  +  secondEMABegIdx.value ;
+      secondEMAIdx =  thirdEMABegIdx.value ;
+      outBegIdx.value  = firstEMAIdx +  firstEMABegIdx.value ;
+      outIdx = 0;
+      while( outIdx <  thirdEMANbElement.value  )
+      {
+         outReal[outIdx] += (3.0*firstEMA[firstEMAIdx++]) - (3.0*secondEMA[secondEMAIdx++]);
+         outIdx++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode TEMA( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double []firstEMA ;
+      double []secondEMA ;
+      double k;
+      MInteger firstEMABegIdx = new MInteger() ;
+      MInteger firstEMANbElement = new MInteger() ;
+      MInteger secondEMABegIdx = new MInteger() ;
+      MInteger secondEMANbElement = new MInteger() ;
+      MInteger thirdEMABegIdx = new MInteger() ;
+      MInteger thirdEMANbElement = new MInteger() ;
+      int tempInt, outIdx, lookbackTotal, lookbackEMA;
+      int firstEMAIdx, secondEMAIdx;
+      TA_RetCode retCode;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outNbElement.value = 0 ;
+      outBegIdx.value = 0 ;
+      lookbackEMA =  EMA_Lookback ( optInTimePeriod );
+      lookbackTotal = lookbackEMA * 3;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+         return  TA_RetCode. TA_SUCCESS;
+      tempInt = lookbackTotal+(endIdx-startIdx)+1;
+      firstEMA = new double[tempInt] ;
+      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
+      retCode =  INT_EMA ( startIdx-(lookbackEMA*2), endIdx, inReal,
+         optInTimePeriod, k,
+         firstEMABegIdx ,  firstEMANbElement ,
+         firstEMA );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( firstEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      secondEMA = new double[firstEMANbElement.value] ;
+      retCode =  INT_EMA ( 0,  firstEMANbElement.value -1, firstEMA,
+         optInTimePeriod, k,
+         secondEMABegIdx ,  secondEMANbElement ,
+         secondEMA );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( secondEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      retCode =  INT_EMA ( 0,  secondEMANbElement.value -1, secondEMA,
+         optInTimePeriod, k,
+         thirdEMABegIdx ,  thirdEMANbElement ,
+         outReal );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( thirdEMANbElement.value  == 0) )
+      {
+         return retCode;
+      }
+      firstEMAIdx =  thirdEMABegIdx.value  +  secondEMABegIdx.value ;
+      secondEMAIdx =  thirdEMABegIdx.value ;
+      outBegIdx.value  = firstEMAIdx +  firstEMABegIdx.value ;
+      outIdx = 0;
+      while( outIdx <  thirdEMANbElement.value  )
+      {
+         outReal[outIdx] += (3.0*firstEMA[firstEMAIdx++]) - (3.0*secondEMA[secondEMAIdx++]);
+         outIdx++;
+      }
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int TRANGE_Lookback( )
+   {
+      return 1;
+   }
+   public TA_RetCode TRANGE( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, outIdx;
+      double val2, val3, greatest;
+      double tempCY, tempLT, tempHT;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( startIdx < 1 )
+         startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      while( today <= endIdx )
+      {
+         tempLT = inLow[today];
+         tempHT = inHigh[today];
+         tempCY = inClose[today-1];
+         greatest = tempHT - tempLT;
+         val2 =  Math.abs ( tempCY - tempHT );
+         if( val2 > greatest )
+            greatest = val2;
+         val3 =  Math.abs ( tempCY - tempLT );
+         if( val3 > greatest )
+            greatest = val3;
+         outReal[outIdx++] = greatest;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode TRANGE( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int today, outIdx;
+      double val2, val3, greatest;
+      double tempCY, tempLT, tempHT;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( startIdx < 1 )
+         startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      today = startIdx;
+      while( today <= endIdx )
+      {
+         tempLT = inLow[today];
+         tempHT = inHigh[today];
+         tempCY = inClose[today-1];
+         greatest = tempHT - tempLT;
+         val2 =  Math.abs ( tempCY - tempHT );
+         if( val2 > greatest )
+            greatest = val2;
+         val3 =  Math.abs ( tempCY - tempLT );
+         if( val3 > greatest )
+            greatest = val3;
+         outReal[outIdx++] = greatest;
+         today++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int TRIMA_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod-1;
+   }
+   public TA_RetCode TRIMA( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int lookbackTotal;
+      double numerator;
+      double numeratorSub;
+      double numeratorAdd;
+      int i, outIdx, todayIdx, trailingIdx, middleIdx;
+      double factor, tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal = (optInTimePeriod-1);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( (optInTimePeriod % 2) == 1 )
+      {
+         i = (optInTimePeriod>>1);
+         factor = (i+1)*(i+1);
+         factor = 1.0/factor;
+         trailingIdx = startIdx-lookbackTotal;
+         middleIdx = trailingIdx + i;
+         todayIdx = middleIdx + i;
+         numerator = 0.0;
+         numeratorSub = 0.0;
+         for( i=middleIdx; i >= trailingIdx; i-- )
+         {
+            tempReal = inReal[i];
+            numeratorSub += tempReal;
+            numerator += numeratorSub;
+         }
+         numeratorAdd = 0.0;
+         middleIdx++;
+         for( i=middleIdx; i <= todayIdx; i++ )
+         {
+            tempReal = inReal[i];
+            numeratorAdd += tempReal;
+            numerator += numeratorAdd;
+         }
+         outIdx = 0;
+         tempReal = inReal[trailingIdx++];
+         outReal[outIdx++] = numerator * factor;
+         todayIdx++;
+         while( todayIdx <= endIdx )
+         {
+            numerator -= numeratorSub;
+            numeratorSub -= tempReal;
+            tempReal = inReal[middleIdx++];
+            numeratorSub += tempReal;
+            numerator += numeratorAdd;
+            numeratorAdd -= tempReal;
+            tempReal = inReal[todayIdx++];
+            numeratorAdd += tempReal;
+            numerator += tempReal;
+            tempReal = inReal[trailingIdx++];
+            outReal[outIdx++] = numerator * factor;
+         }
+      }
+      else
+      {
+         i = (optInTimePeriod>>1);
+         factor = i*(i+1);
+         factor = 1.0/factor;
+         trailingIdx = startIdx-lookbackTotal;
+         middleIdx = trailingIdx + i - 1;
+         todayIdx = middleIdx + i;
+         numerator = 0.0;
+         numeratorSub = 0.0;
+         for( i=middleIdx; i >= trailingIdx; i-- )
+         {
+            tempReal = inReal[i];
+            numeratorSub += tempReal;
+            numerator += numeratorSub;
+         }
+         numeratorAdd = 0.0;
+         middleIdx++;
+         for( i=middleIdx; i <= todayIdx; i++ )
+         {
+            tempReal = inReal[i];
+            numeratorAdd += tempReal;
+            numerator += numeratorAdd;
+         }
+         outIdx = 0;
+         tempReal = inReal[trailingIdx++];
+         outReal[outIdx++] = numerator * factor;
+         todayIdx++;
+         while( todayIdx <= endIdx )
+         {
+            numerator -= numeratorSub;
+            numeratorSub -= tempReal;
+            tempReal = inReal[middleIdx++];
+            numeratorSub += tempReal;
+            numeratorAdd -= tempReal;
+            numerator += numeratorAdd;
+            tempReal = inReal[todayIdx++];
+            numeratorAdd += tempReal;
+            numerator += tempReal;
+            tempReal = inReal[trailingIdx++];
+            outReal[outIdx++] = numerator * factor;
+         }
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode TRIMA( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int lookbackTotal;
+      double numerator;
+      double numeratorSub;
+      double numeratorAdd;
+      int i, outIdx, todayIdx, trailingIdx, middleIdx;
+      double factor, tempReal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal = (optInTimePeriod-1);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outIdx = 0;
+      if( (optInTimePeriod % 2) == 1 )
+      {
+         i = (optInTimePeriod>>1);
+         factor = (i+1)*(i+1);
+         factor = 1.0/factor;
+         trailingIdx = startIdx-lookbackTotal;
+         middleIdx = trailingIdx + i;
+         todayIdx = middleIdx + i;
+         numerator = 0.0;
+         numeratorSub = 0.0;
+         for( i=middleIdx; i >= trailingIdx; i-- )
+         {
+            tempReal = inReal[i];
+            numeratorSub += tempReal;
+            numerator += numeratorSub;
+         }
+         numeratorAdd = 0.0;
+         middleIdx++;
+         for( i=middleIdx; i <= todayIdx; i++ )
+         {
+            tempReal = inReal[i];
+            numeratorAdd += tempReal;
+            numerator += numeratorAdd;
+         }
+         outIdx = 0;
+         tempReal = inReal[trailingIdx++];
+         outReal[outIdx++] = numerator * factor;
+         todayIdx++;
+         while( todayIdx <= endIdx )
+         {
+            numerator -= numeratorSub;
+            numeratorSub -= tempReal;
+            tempReal = inReal[middleIdx++];
+            numeratorSub += tempReal;
+            numerator += numeratorAdd;
+            numeratorAdd -= tempReal;
+            tempReal = inReal[todayIdx++];
+            numeratorAdd += tempReal;
+            numerator += tempReal;
+            tempReal = inReal[trailingIdx++];
+            outReal[outIdx++] = numerator * factor;
+         }
+      }
+      else
+      {
+         i = (optInTimePeriod>>1);
+         factor = i*(i+1);
+         factor = 1.0/factor;
+         trailingIdx = startIdx-lookbackTotal;
+         middleIdx = trailingIdx + i - 1;
+         todayIdx = middleIdx + i;
+         numerator = 0.0;
+         numeratorSub = 0.0;
+         for( i=middleIdx; i >= trailingIdx; i-- )
+         {
+            tempReal = inReal[i];
+            numeratorSub += tempReal;
+            numerator += numeratorSub;
+         }
+         numeratorAdd = 0.0;
+         middleIdx++;
+         for( i=middleIdx; i <= todayIdx; i++ )
+         {
+            tempReal = inReal[i];
+            numeratorAdd += tempReal;
+            numerator += numeratorAdd;
+         }
+         outIdx = 0;
+         tempReal = inReal[trailingIdx++];
+         outReal[outIdx++] = numerator * factor;
+         todayIdx++;
+         while( todayIdx <= endIdx )
+         {
+            numerator -= numeratorSub;
+            numeratorSub -= tempReal;
+            tempReal = inReal[middleIdx++];
+            numeratorSub += tempReal;
+            numeratorAdd -= tempReal;
+            numerator += numeratorAdd;
+            tempReal = inReal[todayIdx++];
+            numeratorAdd += tempReal;
+            numerator += tempReal;
+            tempReal = inReal[trailingIdx++];
+            outReal[outIdx++] = numerator * factor;
+         }
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int TRIX_Lookback( int optInTimePeriod )
+   {
+      int emaLookback;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      emaLookback =  EMA_Lookback ( optInTimePeriod );
+      return (emaLookback*3) +  ROCR_Lookback ( 1 );
+   }
+   public TA_RetCode TRIX( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double k;
+      double []tempBuffer ;
+      MInteger nbElement = new MInteger() ;
+      MInteger begIdx = new MInteger() ;
+      int totalLookback;
+      int emaLookback, rocLookback;
+      TA_RetCode retCode;
+      int nbElementToOutput;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      emaLookback =  EMA_Lookback ( optInTimePeriod );
+      rocLookback =  ROCR_Lookback ( 1 );
+      totalLookback = (emaLookback*3) + rocLookback;
+      if( startIdx < totalLookback )
+         startIdx = totalLookback;
+      if( startIdx > endIdx )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      nbElementToOutput = (endIdx-startIdx)+1+totalLookback;
+      tempBuffer = new double[nbElementToOutput] ;
+      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
+      retCode =  INT_EMA ( (startIdx-totalLookback), endIdx, inReal,
+         optInTimePeriod, k,
+         begIdx ,  nbElement ,
+         tempBuffer );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return retCode;
+      }
+      nbElementToOutput--;
+      nbElementToOutput -= emaLookback;
+      retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
+         optInTimePeriod, k,
+         begIdx ,  nbElement ,
+         tempBuffer );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return retCode;
+      }
+      nbElementToOutput -= emaLookback;
+      retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
+         optInTimePeriod, k,
+         begIdx ,  nbElement ,
+         tempBuffer );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return retCode;
+      }
+      nbElementToOutput -= emaLookback;
+      retCode =  ROC ( 0, nbElementToOutput,
+         tempBuffer,
+         1,  begIdx , outNbElement,
+         outReal );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return retCode;
+      }
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode TRIX( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double k;
+      double []tempBuffer ;
+      MInteger nbElement = new MInteger() ;
+      MInteger begIdx = new MInteger() ;
+      int totalLookback;
+      int emaLookback, rocLookback;
+      TA_RetCode retCode;
+      int nbElementToOutput;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      emaLookback =  EMA_Lookback ( optInTimePeriod );
+      rocLookback =  ROCR_Lookback ( 1 );
+      totalLookback = (emaLookback*3) + rocLookback;
+      if( startIdx < totalLookback )
+         startIdx = totalLookback;
+      if( startIdx > endIdx )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      outBegIdx.value  = startIdx;
+      nbElementToOutput = (endIdx-startIdx)+1+totalLookback;
+      tempBuffer = new double[nbElementToOutput] ;
+      k =  ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
+      retCode =  INT_EMA ( (startIdx-totalLookback), endIdx, inReal,
+         optInTimePeriod, k,
+         begIdx ,  nbElement ,
+         tempBuffer );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return retCode;
+      }
+      nbElementToOutput--;
+      nbElementToOutput -= emaLookback;
+      retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
+         optInTimePeriod, k,
+         begIdx ,  nbElement ,
+         tempBuffer );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return retCode;
+      }
+      nbElementToOutput -= emaLookback;
+      retCode =  INT_EMA ( 0, nbElementToOutput, tempBuffer,
+         optInTimePeriod, k,
+         begIdx ,  nbElement ,
+         tempBuffer );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ( nbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return retCode;
+      }
+      nbElementToOutput -= emaLookback;
+      retCode =  ROC ( 0, nbElementToOutput,
+         tempBuffer,
+         1,  begIdx , outNbElement,
+         outReal );
+      if( (retCode !=  TA_RetCode. TA_SUCCESS ) || ((int) outNbElement.value  == 0) )
+      {
+         outNbElement.value = 0 ;
+         outBegIdx.value = 0 ;
+         return retCode;
+      }
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
    public int TSF_Lookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
@@ -22439,6 +21972,300 @@ public class Core {
       }
       outBegIdx.value  = startIdx;
       outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int TYPPRICE_Lookback( )
+   {
+      return 0;
+   }
+   public TA_RetCode TYPPRICE( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      outIdx = 0;
+      for( i= startIdx; i <= endIdx; i++ )
+      {
+         outReal[outIdx++] = ( inHigh [i] +
+            inLow [i] +
+            inClose[i] ) / 3.0;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode TYPPRICE( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int outIdx, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      outIdx = 0;
+      for( i= startIdx; i <= endIdx; i++ )
+      {
+         outReal[outIdx++] = ( inHigh [i] +
+            inLow [i] +
+            inClose[i] ) / 3.0;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int ULTOSC_Lookback( int optInTimePeriod1,
+      int optInTimePeriod2,
+      int optInTimePeriod3 )
+   {
+      int maxPeriod;
+      if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod1 = 7;
+      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
+         return -1;
+      if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod2 = 14;
+      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
+         return -1;
+      if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod3 = 28;
+      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
+         return -1;
+      maxPeriod =  ((( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) > (optInTimePeriod3)) ? ( (((optInTimePeriod1) > (optInTimePeriod2)) ? (optInTimePeriod1) : (optInTimePeriod2)) ) : (optInTimePeriod3)) ;
+      return  SMA_Lookback ( maxPeriod ) + 1;
+   }
+   public TA_RetCode ULTOSC( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod1,
+      int optInTimePeriod2,
+      int optInTimePeriod3,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double a1Total, a2Total, a3Total;
+      double b1Total, b2Total, b3Total;
+      double trueLow, trueRange, closeMinusTrueLow;
+      double tempDouble, output, tempHT, tempLT, tempCY;
+      int lookbackTotal;
+      int longestPeriod, longestIndex;
+      int i,j,today,outIdx;
+      int trailingIdx1, trailingIdx2, trailingIdx3;
+      int []usedFlag = new int[3] ;
+      int []periods = new int[3] ;
+      int []sortedPeriods = new int[3] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod1 = 7;
+      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod2 = 14;
+      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod3 = 28;
+      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      periods[0] = optInTimePeriod1;
+      periods[1] = optInTimePeriod2;
+      periods[2] = optInTimePeriod3;
+      usedFlag[0] = 0;
+      usedFlag[1] = 0;
+      usedFlag[2] = 0;
+      for ( i = 0; i < 3; ++i )
+      {
+         longestPeriod = 0;
+         longestIndex = 0;
+         for ( j = 0; j < 3; ++j )
+         {
+            if ( (usedFlag[j] == 0) && (periods[j] > longestPeriod) )
+            {
+               longestPeriod = periods[j];
+               longestIndex = j;
+            }
+         }
+         usedFlag[longestIndex] = 1;
+         sortedPeriods[i] = longestPeriod;
+      }
+      optInTimePeriod1 = sortedPeriods[2];
+      optInTimePeriod2 = sortedPeriods[1];
+      optInTimePeriod3 = sortedPeriods[0];
+      lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
+      if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
+      if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
+      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
+      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
+      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
+      today = startIdx;
+      outIdx = 0;
+      trailingIdx1 = today - optInTimePeriod1 + 1;
+      trailingIdx2 = today - optInTimePeriod2 + 1;
+      trailingIdx3 = today - optInTimePeriod3 + 1;
+      while( today <= endIdx )
+      {
+         { tempLT = inLow[today]; tempHT = inHigh[today]; tempCY = inClose[today-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
+         a1Total += closeMinusTrueLow;
+         a2Total += closeMinusTrueLow;
+         a3Total += closeMinusTrueLow;
+         b1Total += trueRange;
+         b2Total += trueRange;
+         b3Total += trueRange;
+         output = 0.0;
+         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) output += 4.0*(a1Total/b1Total);
+         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) output += 2.0*(a2Total/b2Total);
+         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) output += a3Total/b3Total;
+         { tempLT = inLow[trailingIdx1]; tempHT = inHigh[trailingIdx1]; tempCY = inClose[trailingIdx1-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
+         a1Total -= closeMinusTrueLow;
+         b1Total -= trueRange;
+         { tempLT = inLow[trailingIdx2]; tempHT = inHigh[trailingIdx2]; tempCY = inClose[trailingIdx2-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
+         a2Total -= closeMinusTrueLow;
+         b2Total -= trueRange;
+         { tempLT = inLow[trailingIdx3]; tempHT = inHigh[trailingIdx3]; tempCY = inClose[trailingIdx3-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
+         a3Total -= closeMinusTrueLow;
+         b3Total -= trueRange;
+         outReal[outIdx] = 100.0 * (output / 7.0);
+         outIdx++;
+         today++;
+         trailingIdx1++;
+         trailingIdx2++;
+         trailingIdx3++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode ULTOSC( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod1,
+      int optInTimePeriod2,
+      int optInTimePeriod3,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double a1Total, a2Total, a3Total;
+      double b1Total, b2Total, b3Total;
+      double trueLow, trueRange, closeMinusTrueLow;
+      double tempDouble, output, tempHT, tempLT, tempCY;
+      int lookbackTotal;
+      int longestPeriod, longestIndex;
+      int i,j,today,outIdx;
+      int trailingIdx1, trailingIdx2, trailingIdx3;
+      int []usedFlag = new int[3] ;
+      int []periods = new int[3] ;
+      int []sortedPeriods = new int[3] ;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod1 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod1 = 7;
+      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInTimePeriod2 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod2 = 14;
+      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      if( (int)optInTimePeriod3 ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod3 = 28;
+      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      periods[0] = optInTimePeriod1;
+      periods[1] = optInTimePeriod2;
+      periods[2] = optInTimePeriod3;
+      usedFlag[0] = 0;
+      usedFlag[1] = 0;
+      usedFlag[2] = 0;
+      for ( i = 0; i < 3; ++i )
+      {
+         longestPeriod = 0;
+         longestIndex = 0;
+         for ( j = 0; j < 3; ++j )
+         {
+            if ( (usedFlag[j] == 0) && (periods[j] > longestPeriod) )
+            {
+               longestPeriod = periods[j];
+               longestIndex = j;
+            }
+         }
+         usedFlag[longestIndex] = 1;
+         sortedPeriods[i] = longestPeriod;
+      }
+      optInTimePeriod1 = sortedPeriods[2];
+      optInTimePeriod2 = sortedPeriods[1];
+      optInTimePeriod3 = sortedPeriods[0];
+      lookbackTotal =  ULTOSC_Lookback ( optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
+      if( startIdx < lookbackTotal ) startIdx = lookbackTotal;
+      if( startIdx > endIdx ) return  TA_RetCode. TA_SUCCESS;
+      { a1Total = 0; b1Total = 0; for ( i = startIdx-optInTimePeriod1+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a1Total += closeMinusTrueLow; b1Total += trueRange; } } ;
+      { a2Total = 0; b2Total = 0; for ( i = startIdx-optInTimePeriod2+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a2Total += closeMinusTrueLow; b2Total += trueRange; } } ;
+      { a3Total = 0; b3Total = 0; for ( i = startIdx-optInTimePeriod3+1; i < startIdx; ++i ) { { tempLT = inLow[i]; tempHT = inHigh[i]; tempCY = inClose[i-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[i] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ; a3Total += closeMinusTrueLow; b3Total += trueRange; } } ;
+      today = startIdx;
+      outIdx = 0;
+      trailingIdx1 = today - optInTimePeriod1 + 1;
+      trailingIdx2 = today - optInTimePeriod2 + 1;
+      trailingIdx3 = today - optInTimePeriod3 + 1;
+      while( today <= endIdx )
+      {
+         { tempLT = inLow[today]; tempHT = inHigh[today]; tempCY = inClose[today-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[today] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
+         a1Total += closeMinusTrueLow;
+         a2Total += closeMinusTrueLow;
+         a3Total += closeMinusTrueLow;
+         b1Total += trueRange;
+         b2Total += trueRange;
+         b3Total += trueRange;
+         output = 0.0;
+         if( ! (((-0.00000001)<b1Total)&&(b1Total<0.00000001))  ) output += 4.0*(a1Total/b1Total);
+         if( ! (((-0.00000001)<b2Total)&&(b2Total<0.00000001))  ) output += 2.0*(a2Total/b2Total);
+         if( ! (((-0.00000001)<b3Total)&&(b3Total<0.00000001))  ) output += a3Total/b3Total;
+         { tempLT = inLow[trailingIdx1]; tempHT = inHigh[trailingIdx1]; tempCY = inClose[trailingIdx1-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx1] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
+         a1Total -= closeMinusTrueLow;
+         b1Total -= trueRange;
+         { tempLT = inLow[trailingIdx2]; tempHT = inHigh[trailingIdx2]; tempCY = inClose[trailingIdx2-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx2] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
+         a2Total -= closeMinusTrueLow;
+         b2Total -= trueRange;
+         { tempLT = inLow[trailingIdx3]; tempHT = inHigh[trailingIdx3]; tempCY = inClose[trailingIdx3-1]; trueLow = (((tempLT) < (tempCY)) ? (tempLT) : (tempCY)) ; closeMinusTrueLow = inClose[trailingIdx3] - trueLow; trueRange = tempHT - tempLT; tempDouble = Math.abs ( tempCY - tempHT ); if( tempDouble > trueRange ) trueRange = tempDouble; tempDouble = Math.abs ( tempCY - tempLT ); if( tempDouble > trueRange ) trueRange = tempDouble; } ;
+         a3Total -= closeMinusTrueLow;
+         b3Total -= trueRange;
+         outReal[outIdx] = 100.0 * (output / 7.0);
+         outIdx++;
+         today++;
+         trailingIdx1++;
+         trailingIdx2++;
+         trailingIdx3++;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
@@ -22608,169 +22435,6 @@ public class Core {
       return  TA_RetCode. TA_SUCCESS;
    }
    /* Generated */
-   public int AVGPRICE_Lookback( )
-   {
-      return 0;
-   }
-   public TA_RetCode AVGPRICE( int startIdx,
-      int endIdx,
-      double inOpen[],
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      outIdx = 0;
-      for( i=startIdx; i <= endIdx; i++ )
-      {
-         outReal[outIdx++] = ( inHigh [i] +
-            inLow [i] +
-            inClose[i] +
-            inOpen [i]) / 4;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode AVGPRICE( int startIdx,
-      int endIdx,
-      float inOpen[],
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      outIdx = 0;
-      for( i=startIdx; i <= endIdx; i++ )
-      {
-         outReal[outIdx++] = ( inHigh [i] +
-            inLow [i] +
-            inClose[i] +
-            inOpen [i]) / 4;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int MEDPRICE_Lookback( )
-   {
-      return 0;
-   }
-   public TA_RetCode MEDPRICE( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      outIdx = 0;
-      for( i=startIdx; i <= endIdx; i++ )
-      {
-         outReal[outIdx++] = (inHigh[i]+inLow[i])/2.0;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode MEDPRICE( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      outIdx = 0;
-      for( i=startIdx; i <= endIdx; i++ )
-      {
-         outReal[outIdx++] = (inHigh[i]+inLow[i])/2.0;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
-   public int TYPPRICE_Lookback( )
-   {
-      return 0;
-   }
-   public TA_RetCode TYPPRICE( int startIdx,
-      int endIdx,
-      double inHigh[],
-      double inLow[],
-      double inClose[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      outIdx = 0;
-      for( i= startIdx; i <= endIdx; i++ )
-      {
-         outReal[outIdx++] = ( inHigh [i] +
-            inLow [i] +
-            inClose[i] ) / 3.0;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   public TA_RetCode TYPPRICE( int startIdx,
-      int endIdx,
-      float inHigh[],
-      float inLow[],
-      float inClose[],
-      MInteger outBegIdx,
-      MInteger outNbElement,
-      double outReal[] )
-   {
-      int outIdx, i;
-      if( startIdx < 0 )
-         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
-      outIdx = 0;
-      for( i= startIdx; i <= endIdx; i++ )
-      {
-         outReal[outIdx++] = ( inHigh [i] +
-            inLow [i] +
-            inClose[i] ) / 3.0;
-      }
-      outNbElement.value  = outIdx;
-      outBegIdx.value  = startIdx;
-      return  TA_RetCode. TA_SUCCESS;
-   }
-   /* Generated */
    public int WCLPRICE_Lookback( )
    {
       return 0;
@@ -22820,6 +22484,342 @@ public class Core {
          outReal[outIdx++] = ( inHigh [i] +
             inLow [i] +
             (inClose[i]*2.0) ) / 4.0;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int WILLR_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return (optInTimePeriod-1);
+   }
+   public TA_RetCode WILLR( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double lowest, highest, tmp, diff;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, lowestIdx, highestIdx;
+      int today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      diff = 0.0;
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      lowestIdx = highestIdx = -1;
+      diff = highest = lowest = 0.0;
+      while( today <= endIdx )
+      {
+         tmp = inLow[today];
+         if( lowestIdx < trailingIdx )
+         {
+            lowestIdx = trailingIdx;
+            lowest = inLow[lowestIdx];
+            i = lowestIdx;
+            while( ++i<=today )
+            {
+               tmp = inLow[i];
+               if( tmp < lowest )
+               {
+                  lowestIdx = i;
+                  lowest = tmp;
+               }
+            }
+            diff = (highest - lowest)/(-100.0);
+         }
+         else if( tmp <= lowest )
+         {
+            lowestIdx = today;
+            lowest = tmp;
+            diff = (highest - lowest)/(-100.0);
+         }
+         tmp = inHigh[today];
+         if( highestIdx < trailingIdx )
+         {
+            highestIdx = trailingIdx;
+            highest = inHigh[highestIdx];
+            i = highestIdx;
+            while( ++i<=today )
+            {
+               tmp = inHigh[i];
+               if( tmp > highest )
+               {
+                  highestIdx = i;
+                  highest = tmp;
+               }
+            }
+            diff = (highest - lowest)/(-100.0);
+         }
+         else if( tmp >= highest )
+         {
+            highestIdx = today;
+            highest = tmp;
+            diff = (highest - lowest)/(-100.0);
+         }
+         if( diff != 0.0 )
+            outReal[outIdx++] = (highest-inClose[today])/diff;
+         else
+            outReal[outIdx++] = 0.0;
+         trailingIdx++;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode WILLR( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double lowest, highest, tmp, diff;
+      int outIdx, nbInitialElementNeeded;
+      int trailingIdx, lowestIdx, highestIdx;
+      int today, i;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      nbInitialElementNeeded = (optInTimePeriod-1);
+      if( startIdx < nbInitialElementNeeded )
+         startIdx = nbInitialElementNeeded;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      diff = 0.0;
+      outIdx = 0;
+      today = startIdx;
+      trailingIdx = startIdx-nbInitialElementNeeded;
+      lowestIdx = highestIdx = -1;
+      diff = highest = lowest = 0.0;
+      while( today <= endIdx )
+      {
+         tmp = inLow[today];
+         if( lowestIdx < trailingIdx )
+         {
+            lowestIdx = trailingIdx;
+            lowest = inLow[lowestIdx];
+            i = lowestIdx;
+            while( ++i<=today )
+            {
+               tmp = inLow[i];
+               if( tmp < lowest )
+               {
+                  lowestIdx = i;
+                  lowest = tmp;
+               }
+            }
+            diff = (highest - lowest)/(-100.0);
+         }
+         else if( tmp <= lowest )
+         {
+            lowestIdx = today;
+            lowest = tmp;
+            diff = (highest - lowest)/(-100.0);
+         }
+         tmp = inHigh[today];
+         if( highestIdx < trailingIdx )
+         {
+            highestIdx = trailingIdx;
+            highest = inHigh[highestIdx];
+            i = highestIdx;
+            while( ++i<=today )
+            {
+               tmp = inHigh[i];
+               if( tmp > highest )
+               {
+                  highestIdx = i;
+                  highest = tmp;
+               }
+            }
+            diff = (highest - lowest)/(-100.0);
+         }
+         else if( tmp >= highest )
+         {
+            highestIdx = today;
+            highest = tmp;
+            diff = (highest - lowest)/(-100.0);
+         }
+         if( diff != 0.0 )
+            outReal[outIdx++] = (highest-inClose[today])/diff;
+         else
+            outReal[outIdx++] = 0.0;
+         trailingIdx++;
+         today++;
+      }
+      outBegIdx.value  = startIdx;
+      outNbElement.value  = outIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
+   public int WMA_Lookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod - 1;
+   }
+   public TA_RetCode WMA( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, i, trailingIdx, divider;
+      double periodSum, periodSub, tempReal, trailingValue;
+      int lookbackTotal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal = optInTimePeriod-1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      if( optInTimePeriod == 1 )
+      {
+         outBegIdx.value  = startIdx;
+         outNbElement.value  = endIdx-startIdx+1;
+         System.arraycopy(inReal,startIdx,outReal,0,(int)outNbElement.value) ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
+      outIdx = 0;
+      trailingIdx = startIdx - lookbackTotal;
+      periodSum = periodSub = (double)0.0;
+      inIdx=trailingIdx;
+      i = 1;
+      while( inIdx < startIdx )
+      {
+         tempReal = inReal[inIdx++];
+         periodSub += tempReal;
+         periodSum += tempReal*i;
+         i++;
+      }
+      trailingValue = 0.0;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[inIdx++];
+         periodSub += tempReal;
+         periodSub -= trailingValue;
+         periodSum += tempReal*optInTimePeriod;
+         trailingValue = inReal[trailingIdx++];
+         outReal[outIdx++] = periodSum / divider;
+         periodSum -= periodSub;
+      }
+      outNbElement.value  = outIdx;
+      outBegIdx.value  = startIdx;
+      return  TA_RetCode. TA_SUCCESS;
+   }
+   public TA_RetCode WMA( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      int inIdx, outIdx, i, trailingIdx, divider;
+      double periodSum, periodSub, tempReal, trailingValue;
+      int lookbackTotal;
+      if( startIdx < 0 )
+         return  TA_RetCode. TA_OUT_OF_RANGE_START_INDEX;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return  TA_RetCode. TA_OUT_OF_RANGE_END_INDEX;
+      if( (int)optInTimePeriod ==  ( Integer.MIN_VALUE )  )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return  TA_RetCode. TA_BAD_PARAM;
+      lookbackTotal = optInTimePeriod-1;
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      if( optInTimePeriod == 1 )
+      {
+         outBegIdx.value  = startIdx;
+         outNbElement.value  = endIdx-startIdx+1;
+         System.arraycopy(inReal,startIdx,outReal,0,(int)outNbElement.value) ;
+         return  TA_RetCode. TA_SUCCESS;
+      }
+      divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
+      outIdx = 0;
+      trailingIdx = startIdx - lookbackTotal;
+      periodSum = periodSub = (double)0.0;
+      inIdx=trailingIdx;
+      i = 1;
+      while( inIdx < startIdx )
+      {
+         tempReal = inReal[inIdx++];
+         periodSub += tempReal;
+         periodSum += tempReal*i;
+         i++;
+      }
+      trailingValue = 0.0;
+      while( inIdx <= endIdx )
+      {
+         tempReal = inReal[inIdx++];
+         periodSub += tempReal;
+         periodSub -= trailingValue;
+         periodSum += tempReal*optInTimePeriod;
+         trailingValue = inReal[trailingIdx++];
+         outReal[outIdx++] = periodSum / divider;
+         periodSum -= periodSub;
       }
       outNbElement.value  = outIdx;
       outBegIdx.value  = startIdx;

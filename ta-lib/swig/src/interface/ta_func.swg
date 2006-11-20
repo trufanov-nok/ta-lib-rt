@@ -39,619 +39,57 @@
  */
  
 
-
-/******************************************
- * Group: [Math Operators]
- ******************************************/
-
 /*
- * TA_MAX - Highest value over a specified period
+ * TA_AD - Chaikin A/D Line
  * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_MAX( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_MAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_MIN - Lowest value over a specified period
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_MIN( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_MIN_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_SUM - Summation
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_SUM( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_SUM_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-
-/******************************************
- * Group: [Overlap Studies]
- ******************************************/
-
-/*
- * TA_BBANDS - Bollinger Bands
- * 
- * Input  = double
- * Output = double, double, double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * optInNbDevUp:(From TA_REAL_MIN to TA_REAL_MAX)
- *    Deviation multiplier for upper band
- * 
- * optInNbDevDn:(From TA_REAL_MIN to TA_REAL_MAX)
- *    Deviation multiplier for lower band
- * 
- * optInMAType:
- *    Type of Moving Average
- * 
- * 
- */
-TA_RetCode TA_BBANDS( int           START_IDX,
-                      int           END_IDX,
-                      const double *IN_ARRAY /* inReal */,
-                      int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                      double        OPT_REAL /* optInNbDevUp */, /* From TA_REAL_MIN to TA_REAL_MAX */
-                      double        OPT_REAL /* optInNbDevDn */, /* From TA_REAL_MIN to TA_REAL_MAX */
-                      TA_MAType     OPT_MATYPE /* optInMAType */,
-                      int          *BEG_IDX,
-                      int          *OUT_SIZE,
-                      double       *OUT_ARRAY /* outRealUpperBand */,
-                      double       *OUT_ARRAY /* outRealMiddleBand */,
-                      double       *OUT_ARRAY /* outRealLowerBand */ );
-
-int TA_BBANDS_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
-                      double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-                      double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-                      TA_MAType     optInMAType ); 
-
-/*
- * TA_DEMA - Double Exponential Moving Average
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_DEMA( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outReal */ );
-
-int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_EMA - Exponential Moving Average
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_EMA( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_EMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_HT_TRENDLINE - Hilbert Transform - Instantaneous Trendline
- * 
- * Input  = double
+ * Input  = High, Low, Close, Volume
  * Output = double
  * 
  */
-TA_RetCode TA_HT_TRENDLINE( int           START_IDX,
-                            int           END_IDX,
-                            const double *IN_ARRAY /* inReal */,
-                            int          *BEG_IDX,
-                            int          *OUT_SIZE,
-                            double       *OUT_ARRAY /* outReal */ );
-
-int TA_HT_TRENDLINE_Lookback( void );
-
-
-/*
- * TA_KAMA - Kaufman Adaptive Moving Average
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_KAMA( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outReal */ );
-
-int TA_KAMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_MA - All Moving Average
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * optInMAType:
- *    Type of Moving Average
- * 
- * 
- */
-TA_RetCode TA_MA( int           START_IDX,
+TA_RetCode TA_AD( int           START_IDX,
                   int           END_IDX,
-                  const double *IN_ARRAY /* inReal */,
-                  int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                  TA_MAType     OPT_MATYPE /* optInMAType */,
+                  const double *IN_ARRAY /* inHigh */,
+                  const double *IN_ARRAY /* inLow */,
+                  const double *IN_ARRAY /* inClose */,
+                  const double *IN_ARRAY /* inVolume */,
                   int          *BEG_IDX,
                   int          *OUT_SIZE,
                   double       *OUT_ARRAY /* outReal */ );
 
-int TA_MA_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
-                  TA_MAType     optInMAType ); 
-
-/*
- * TA_MAMA - MESA Adaptive Moving Average
- * 
- * Input  = double
- * Output = double, double
- * 
- * Optional Parameters
- * -------------------
- * optInFastLimit:(From 0.01 to 0.99)
- *    Upper limit use in the adaptive algorithm
- * 
- * optInSlowLimit:(From 0.01 to 0.99)
- *    Lower limit use in the adaptive algorithm
- * 
- * 
- */
-TA_RetCode TA_MAMA( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal */,
-                    double        OPT_REAL /* optInFastLimit */, /* From 0.01 to 0.99 */
-                    double        OPT_REAL /* optInSlowLimit */, /* From 0.01 to 0.99 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outMAMA */,
-                    double       *OUT_ARRAY /* outFAMA */ );
-
-int TA_MAMA_Lookback( double        optInFastLimit, /* From 0.01 to 0.99 */
-                    double        optInSlowLimit );  /* From 0.01 to 0.99 */
+int TA_AD_Lookback( void );
 
 
 /*
- * TA_MIDPRICE - Midpoint Price over period
+ * TA_ADOSC - Chaikin A/D Oscillator
  * 
- * Input  = High, Low
+ * Input  = High, Low, Close, Volume
  * Output = double
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
+ * optInFastPeriod:(From 2 to 100000)
+ *    Number of period for the fast MA
+ * 
+ * optInSlowPeriod:(From 2 to 100000)
+ *    Number of period for the slow MA
  * 
  * 
  */
-TA_RetCode TA_MIDPRICE( int           START_IDX,
-                        int           END_IDX,
-                        const double *IN_ARRAY /* inHigh */,
-                        const double *IN_ARRAY /* inLow */,
-                        int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                        int          *BEG_IDX,
-                        int          *OUT_SIZE,
-                        double       *OUT_ARRAY /* outReal */ );
-
-int TA_MIDPRICE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_MIDPOINT - MidPoint over period
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_MIDPOINT( int           START_IDX,
-                        int           END_IDX,
-                        const double *IN_ARRAY /* inReal */,
-                        int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                        int          *BEG_IDX,
-                        int          *OUT_SIZE,
-                        double       *OUT_ARRAY /* outReal */ );
-
-int TA_MIDPOINT_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_SAR - Parabolic SAR
- * 
- * Input  = High, Low
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInAcceleration:(From 0 to TA_REAL_MAX)
- *    Acceleration Factor used up to the Maximum value
- * 
- * optInMaximum:(From 0 to TA_REAL_MAX)
- *    Acceleration Factor Maximum value
- * 
- * 
- */
-TA_RetCode TA_SAR( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inHigh */,
-                   const double *IN_ARRAY /* inLow */,
-                   double        OPT_REAL /* optInAcceleration */, /* From 0 to TA_REAL_MAX */
-                   double        OPT_REAL /* optInMaximum */, /* From 0 to TA_REAL_MAX */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_SAR_Lookback( double        optInAcceleration, /* From 0 to TA_REAL_MAX */
-                   double        optInMaximum );  /* From 0 to TA_REAL_MAX */
-
-
-/*
- * TA_SAREXT - Parabolic SAR - Extended
- * 
- * Input  = High, Low
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInStartValue:(From TA_REAL_MIN to TA_REAL_MAX)
- *    Start value and direction. 0 for Auto, >0 for Long, <0 for Short
- * 
- * optInOffsetOnReverse:(From 0 to TA_REAL_MAX)
- *    Percent offset added/removed to initial stop on short/long reversal
- * 
- * optInAccelerationInitLong:(From 0 to TA_REAL_MAX)
- *    Acceleration Factor initial value for the Long direction
- * 
- * optInAccelerationLong:(From 0 to TA_REAL_MAX)
- *    Acceleration Factor for the Long direction
- * 
- * optInAccelerationMaxLong:(From 0 to TA_REAL_MAX)
- *    Acceleration Factor maximum value for the Long direction
- * 
- * optInAccelerationInitShort:(From 0 to TA_REAL_MAX)
- *    Acceleration Factor initial value for the Short direction
- * 
- * optInAccelerationShort:(From 0 to TA_REAL_MAX)
- *    Acceleration Factor for the Short direction
- * 
- * optInAccelerationMaxShort:(From 0 to TA_REAL_MAX)
- *    Acceleration Factor maximum value for the Short direction
- * 
- * 
- */
-TA_RetCode TA_SAREXT( int           START_IDX,
-                      int           END_IDX,
-                      const double *IN_ARRAY /* inHigh */,
-                      const double *IN_ARRAY /* inLow */,
-                      double        OPT_REAL /* optInStartValue */, /* From TA_REAL_MIN to TA_REAL_MAX */
-                      double        OPT_REAL /* optInOffsetOnReverse */, /* From 0 to TA_REAL_MAX */
-                      double        OPT_REAL /* optInAccelerationInitLong */, /* From 0 to TA_REAL_MAX */
-                      double        OPT_REAL /* optInAccelerationLong */, /* From 0 to TA_REAL_MAX */
-                      double        OPT_REAL /* optInAccelerationMaxLong */, /* From 0 to TA_REAL_MAX */
-                      double        OPT_REAL /* optInAccelerationInitShort */, /* From 0 to TA_REAL_MAX */
-                      double        OPT_REAL /* optInAccelerationShort */, /* From 0 to TA_REAL_MAX */
-                      double        OPT_REAL /* optInAccelerationMaxShort */, /* From 0 to TA_REAL_MAX */
-                      int          *BEG_IDX,
-                      int          *OUT_SIZE,
-                      double       *OUT_ARRAY /* outReal */ );
-
-int TA_SAREXT_Lookback( double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-                      double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-                      double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-                      double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-                      double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-                      double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-                      double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-                      double        optInAccelerationMaxShort );  /* From 0 to TA_REAL_MAX */
-
-
-/*
- * TA_SMA - Simple Moving Average
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_SMA( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_SMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_T3 - Triple Exponential Moving Average (T3)
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * optInVFactor:(From 0 to 1)
- *    Volume Factor
- * 
- * 
- */
-TA_RetCode TA_T3( int           START_IDX,
-                  int           END_IDX,
-                  const double *IN_ARRAY /* inReal */,
-                  int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                  double        OPT_REAL /* optInVFactor */, /* From 0 to 1 */
-                  int          *BEG_IDX,
-                  int          *OUT_SIZE,
-                  double       *OUT_ARRAY /* outReal */ );
-
-int TA_T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
-                  double        optInVFactor );  /* From 0 to 1 */
-
-
-/*
- * TA_TEMA - Triple Exponential Moving Average
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_TEMA( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outReal */ );
-
-int TA_TEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_TRIMA - Triangular Moving Average
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_TRIMA( int           START_IDX,
+TA_RetCode TA_ADOSC( int           START_IDX,
                      int           END_IDX,
-                     const double *IN_ARRAY /* inReal */,
-                     int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                     const double *IN_ARRAY /* inHigh */,
+                     const double *IN_ARRAY /* inLow */,
+                     const double *IN_ARRAY /* inClose */,
+                     const double *IN_ARRAY /* inVolume */,
+                     int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
+                     int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
                      int          *BEG_IDX,
                      int          *OUT_SIZE,
                      double       *OUT_ARRAY /* outReal */ );
 
-int TA_TRIMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+int TA_ADOSC_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                     int           optInSlowPeriod );  /* From 2 to 100000 */
 
-
-/*
- * TA_WMA - Weighted Moving Average
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_WMA( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_WMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-
-/******************************************
- * Group: [Volatility Indicators]
- ******************************************/
-
-/*
- * TA_ATR - Average True Range
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_ATR( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inHigh */,
-                   const double *IN_ARRAY /* inLow */,
-                   const double *IN_ARRAY /* inClose */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_ATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_NATR - Normalized Average True Range
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_NATR( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inHigh */,
-                    const double *IN_ARRAY /* inLow */,
-                    const double *IN_ARRAY /* inClose */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outReal */ );
-
-int TA_NATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_TRANGE - True Range
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- */
-TA_RetCode TA_TRANGE( int           START_IDX,
-                      int           END_IDX,
-                      const double *IN_ARRAY /* inHigh */,
-                      const double *IN_ARRAY /* inLow */,
-                      const double *IN_ARRAY /* inClose */,
-                      int          *BEG_IDX,
-                      int          *OUT_SIZE,
-                      double       *OUT_ARRAY /* outReal */ );
-
-int TA_TRANGE_Lookback( void );
-
-
-
-/******************************************
- * Group: [Momentum Indicators]
- ******************************************/
 
 /*
  * TA_ADX - Average Directional Movement Index
@@ -790,6 +228,92 @@ int TA_AROONOSC_Lookback( int           optInTimePeriod );  /* From 2 to 100000 
 
 
 /*
+ * TA_ATR - Average True Range
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_ATR( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inHigh */,
+                   const double *IN_ARRAY /* inLow */,
+                   const double *IN_ARRAY /* inClose */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_ATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_AVGPRICE - Average Price
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = double
+ * 
+ */
+TA_RetCode TA_AVGPRICE( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inOpen */,
+                        const double *IN_ARRAY /* inHigh */,
+                        const double *IN_ARRAY /* inLow */,
+                        const double *IN_ARRAY /* inClose */,
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outReal */ );
+
+int TA_AVGPRICE_Lookback( void );
+
+
+/*
+ * TA_BBANDS - Bollinger Bands
+ * 
+ * Input  = double
+ * Output = double, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * optInNbDevUp:(From TA_REAL_MIN to TA_REAL_MAX)
+ *    Deviation multiplier for upper band
+ * 
+ * optInNbDevDn:(From TA_REAL_MIN to TA_REAL_MAX)
+ *    Deviation multiplier for lower band
+ * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
+ * 
+ */
+TA_RetCode TA_BBANDS( int           START_IDX,
+                      int           END_IDX,
+                      const double *IN_ARRAY /* inReal */,
+                      int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                      double        OPT_REAL /* optInNbDevUp */, /* From TA_REAL_MIN to TA_REAL_MAX */
+                      double        OPT_REAL /* optInNbDevDn */, /* From TA_REAL_MIN to TA_REAL_MAX */
+                      TA_MAType     OPT_MATYPE /* optInMAType */,
+                      int          *BEG_IDX,
+                      int          *OUT_SIZE,
+                      double       *OUT_ARRAY /* outRealUpperBand */,
+                      double       *OUT_ARRAY /* outRealMiddleBand */,
+                      double       *OUT_ARRAY /* outRealLowerBand */ );
+
+int TA_BBANDS_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+                      double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+                      double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+                      TA_MAType     optInMAType ); 
+
+/*
  * TA_BOP - Balance Of Power
  * 
  * Input  = Open, High, Low, Close
@@ -834,853 +358,6 @@ TA_RetCode TA_CCI( int           START_IDX,
 
 int TA_CCI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
-
-/*
- * TA_CMO - Chande Momentum Oscillator
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_CMO( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_CMO_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_DX - Directional Movement Index
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_DX( int           START_IDX,
-                  int           END_IDX,
-                  const double *IN_ARRAY /* inHigh */,
-                  const double *IN_ARRAY /* inLow */,
-                  const double *IN_ARRAY /* inClose */,
-                  int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                  int          *BEG_IDX,
-                  int          *OUT_SIZE,
-                  double       *OUT_ARRAY /* outReal */ );
-
-int TA_DX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_MACD - Moving Average Convergence/Divergence
- * 
- * Input  = double
- * Output = double, double, double
- * 
- * Optional Parameters
- * -------------------
- * optInFastPeriod:(From 2 to 100000)
- *    Number of period for the fast MA
- * 
- * optInSlowPeriod:(From 2 to 100000)
- *    Number of period for the slow MA
- * 
- * optInSignalPeriod:(From 1 to 100000)
- *    Smoothing for the signal line (nb of period)
- * 
- * 
- */
-TA_RetCode TA_MACD( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
-                    int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
-                    int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outMACD */,
-                    double       *OUT_ARRAY /* outMACDSignal */,
-                    double       *OUT_ARRAY /* outMACDHist */ );
-
-int TA_MACD_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                    int           optInSlowPeriod, /* From 2 to 100000 */
-                    int           optInSignalPeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_MACDEXT - MACD with controllable MA type
- * 
- * Input  = double
- * Output = double, double, double
- * 
- * Optional Parameters
- * -------------------
- * optInFastPeriod:(From 2 to 100000)
- *    Number of period for the fast MA
- * 
- * optInFastMAType:
- *    Type of Moving Average for fast MA
- * 
- * optInSlowPeriod:(From 2 to 100000)
- *    Number of period for the slow MA
- * 
- * optInSlowMAType:
- *    Type of Moving Average for slow MA
- * 
- * optInSignalPeriod:(From 1 to 100000)
- *    Smoothing for the signal line (nb of period)
- * 
- * optInSignalMAType:
- *    Type of Moving Average for signal line
- * 
- * 
- */
-TA_RetCode TA_MACDEXT( int           START_IDX,
-                       int           END_IDX,
-                       const double *IN_ARRAY /* inReal */,
-                       int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
-                       TA_MAType     OPT_MATYPE /* optInFastMAType */,
-                       int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
-                       TA_MAType     OPT_MATYPE /* optInSlowMAType */,
-                       int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
-                       TA_MAType     OPT_MATYPE /* optInSignalMAType */,
-                       int          *BEG_IDX,
-                       int          *OUT_SIZE,
-                       double       *OUT_ARRAY /* outMACD */,
-                       double       *OUT_ARRAY /* outMACDSignal */,
-                       double       *OUT_ARRAY /* outMACDHist */ );
-
-int TA_MACDEXT_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                       TA_MAType     optInFastMAType,
-                       int           optInSlowPeriod, /* From 2 to 100000 */
-                       TA_MAType     optInSlowMAType,
-                       int           optInSignalPeriod, /* From 1 to 100000 */
-                       TA_MAType     optInSignalMAType ); 
-
-/*
- * TA_MACDFIX - Moving Average Convergence/Divergence Fix 12/26
- * 
- * Input  = double
- * Output = double, double, double
- * 
- * Optional Parameters
- * -------------------
- * optInSignalPeriod:(From 1 to 100000)
- *    Smoothing for the signal line (nb of period)
- * 
- * 
- */
-TA_RetCode TA_MACDFIX( int           START_IDX,
-                       int           END_IDX,
-                       const double *IN_ARRAY /* inReal */,
-                       int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
-                       int          *BEG_IDX,
-                       int          *OUT_SIZE,
-                       double       *OUT_ARRAY /* outMACD */,
-                       double       *OUT_ARRAY /* outMACDSignal */,
-                       double       *OUT_ARRAY /* outMACDHist */ );
-
-int TA_MACDFIX_Lookback( int           optInSignalPeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_MFI - Money Flow Index
- * 
- * Input  = High, Low, Close, Volume
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_MFI( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inHigh */,
-                   const double *IN_ARRAY /* inLow */,
-                   const double *IN_ARRAY /* inClose */,
-                   const double *IN_ARRAY /* inVolume */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_MFI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_MINUS_DI - Minus Directional Indicator
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_MINUS_DI( int           START_IDX,
-                        int           END_IDX,
-                        const double *IN_ARRAY /* inHigh */,
-                        const double *IN_ARRAY /* inLow */,
-                        const double *IN_ARRAY /* inClose */,
-                        int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                        int          *BEG_IDX,
-                        int          *OUT_SIZE,
-                        double       *OUT_ARRAY /* outReal */ );
-
-int TA_MINUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_MINUS_DM - Minus Directional Movement
- * 
- * Input  = High, Low
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_MINUS_DM( int           START_IDX,
-                        int           END_IDX,
-                        const double *IN_ARRAY /* inHigh */,
-                        const double *IN_ARRAY /* inLow */,
-                        int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                        int          *BEG_IDX,
-                        int          *OUT_SIZE,
-                        double       *OUT_ARRAY /* outReal */ );
-
-int TA_MINUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_MOM - Momentum
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_MOM( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_MOM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_PPO - Percentage Price Oscillator
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInFastPeriod:(From 2 to 100000)
- *    Number of period for the fast MA
- * 
- * optInSlowPeriod:(From 2 to 100000)
- *    Number of period for the slow MA
- * 
- * optInMAType:
- *    Type of Moving Average
- * 
- * 
- */
-TA_RetCode TA_PPO( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
-                   int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
-                   TA_MAType     OPT_MATYPE /* optInMAType */,
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_PPO_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                   int           optInSlowPeriod, /* From 2 to 100000 */
-                   TA_MAType     optInMAType ); 
-
-/*
- * TA_PLUS_DI - Plus Directional Indicator
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_PLUS_DI( int           START_IDX,
-                       int           END_IDX,
-                       const double *IN_ARRAY /* inHigh */,
-                       const double *IN_ARRAY /* inLow */,
-                       const double *IN_ARRAY /* inClose */,
-                       int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                       int          *BEG_IDX,
-                       int          *OUT_SIZE,
-                       double       *OUT_ARRAY /* outReal */ );
-
-int TA_PLUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_PLUS_DM - Plus Directional Movement
- * 
- * Input  = High, Low
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_PLUS_DM( int           START_IDX,
-                       int           END_IDX,
-                       const double *IN_ARRAY /* inHigh */,
-                       const double *IN_ARRAY /* inLow */,
-                       int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                       int          *BEG_IDX,
-                       int          *OUT_SIZE,
-                       double       *OUT_ARRAY /* outReal */ );
-
-int TA_PLUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_ROC - Rate of change : ((price/prevPrice)-1)*100
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_ROC( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_ROC_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_ROCP - Rate of change Percentage: (price-prevPrice)/prevPrice
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_ROCP( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outReal */ );
-
-int TA_ROCP_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_ROCR - Rate of change ratio: (price/prevPrice)
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_ROCR( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outReal */ );
-
-int TA_ROCR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_ROCR100 - Rate of change ratio 100 scale: (price/prevPrice)*100
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_ROCR100( int           START_IDX,
-                       int           END_IDX,
-                       const double *IN_ARRAY /* inReal */,
-                       int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                       int          *BEG_IDX,
-                       int          *OUT_SIZE,
-                       double       *OUT_ARRAY /* outReal */ );
-
-int TA_ROCR100_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_RSI - Relative Strength Index
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_RSI( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_RSI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_STOCH - Stochastic
- * 
- * Input  = High, Low, Close
- * Output = double, double
- * 
- * Optional Parameters
- * -------------------
- * optInFastK_Period:(From 1 to 100000)
- *    Time period for building the Fast-K line
- * 
- * optInSlowK_Period:(From 1 to 100000)
- *    Smoothing for making the Slow-K line. Usually set to 3
- * 
- * optInSlowK_MAType:
- *    Type of Moving Average for Slow-K
- * 
- * optInSlowD_Period:(From 1 to 100000)
- *    Smoothing for making the Slow-D line
- * 
- * optInSlowD_MAType:
- *    Type of Moving Average for Slow-D
- * 
- * 
- */
-TA_RetCode TA_STOCH( int           START_IDX,
-                     int           END_IDX,
-                     const double *IN_ARRAY /* inHigh */,
-                     const double *IN_ARRAY /* inLow */,
-                     const double *IN_ARRAY /* inClose */,
-                     int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
-                     int           OPT_INT /* optInSlowK_Period */, /* From 1 to 100000 */
-                     TA_MAType     OPT_MATYPE /* optInSlowK_MAType */,
-                     int           OPT_INT /* optInSlowD_Period */, /* From 1 to 100000 */
-                     TA_MAType     OPT_MATYPE /* optInSlowD_MAType */,
-                     int          *BEG_IDX,
-                     int          *OUT_SIZE,
-                     double       *OUT_ARRAY /* outSlowK */,
-                     double       *OUT_ARRAY /* outSlowD */ );
-
-int TA_STOCH_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
-                     int           optInSlowK_Period, /* From 1 to 100000 */
-                     TA_MAType     optInSlowK_MAType,
-                     int           optInSlowD_Period, /* From 1 to 100000 */
-                     TA_MAType     optInSlowD_MAType ); 
-
-/*
- * TA_STOCHF - Stochastic Fast
- * 
- * Input  = High, Low, Close
- * Output = double, double
- * 
- * Optional Parameters
- * -------------------
- * optInFastK_Period:(From 1 to 100000)
- *    Time period for building the Fast-K line
- * 
- * optInFastD_Period:(From 1 to 100000)
- *    Smoothing for making the Fast-D line. Usually set to 3
- * 
- * optInFastD_MAType:
- *    Type of Moving Average for Fast-D
- * 
- * 
- */
-TA_RetCode TA_STOCHF( int           START_IDX,
-                      int           END_IDX,
-                      const double *IN_ARRAY /* inHigh */,
-                      const double *IN_ARRAY /* inLow */,
-                      const double *IN_ARRAY /* inClose */,
-                      int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
-                      int           OPT_INT /* optInFastD_Period */, /* From 1 to 100000 */
-                      TA_MAType     OPT_MATYPE /* optInFastD_MAType */,
-                      int          *BEG_IDX,
-                      int          *OUT_SIZE,
-                      double       *OUT_ARRAY /* outFastK */,
-                      double       *OUT_ARRAY /* outFastD */ );
-
-int TA_STOCHF_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
-                      int           optInFastD_Period, /* From 1 to 100000 */
-                      TA_MAType     optInFastD_MAType ); 
-
-/*
- * TA_STOCHRSI - Stochastic Relative Strength Index
- * 
- * Input  = double
- * Output = double, double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * optInFastK_Period:(From 1 to 100000)
- *    Time period for building the Fast-K line
- * 
- * optInFastD_Period:(From 1 to 100000)
- *    Smoothing for making the Fast-D line. Usually set to 3
- * 
- * optInFastD_MAType:
- *    Type of Moving Average for Fast-D
- * 
- * 
- */
-TA_RetCode TA_STOCHRSI( int           START_IDX,
-                        int           END_IDX,
-                        const double *IN_ARRAY /* inReal */,
-                        int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                        int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
-                        int           OPT_INT /* optInFastD_Period */, /* From 1 to 100000 */
-                        TA_MAType     OPT_MATYPE /* optInFastD_MAType */,
-                        int          *BEG_IDX,
-                        int          *OUT_SIZE,
-                        double       *OUT_ARRAY /* outFastK */,
-                        double       *OUT_ARRAY /* outFastD */ );
-
-int TA_STOCHRSI_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
-                        int           optInFastK_Period, /* From 1 to 100000 */
-                        int           optInFastD_Period, /* From 1 to 100000 */
-                        TA_MAType     optInFastD_MAType ); 
-
-/*
- * TA_TRIX - 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 1 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_TRIX( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outReal */ );
-
-int TA_TRIX_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-
-/*
- * TA_ULTOSC - Ultimate Oscillator
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod1:(From 1 to 100000)
- *    Number of bars for 1st period.
- * 
- * optInTimePeriod2:(From 1 to 100000)
- *    Number of bars fro 2nd period
- * 
- * optInTimePeriod3:(From 1 to 100000)
- *    Number of bars for 3rd period
- * 
- * 
- */
-TA_RetCode TA_ULTOSC( int           START_IDX,
-                      int           END_IDX,
-                      const double *IN_ARRAY /* inHigh */,
-                      const double *IN_ARRAY /* inLow */,
-                      const double *IN_ARRAY /* inClose */,
-                      int           OPT_INT /* optInTimePeriod1 */, /* From 1 to 100000 */
-                      int           OPT_INT /* optInTimePeriod2 */, /* From 1 to 100000 */
-                      int           OPT_INT /* optInTimePeriod3 */, /* From 1 to 100000 */
-                      int          *BEG_IDX,
-                      int          *OUT_SIZE,
-                      double       *OUT_ARRAY /* outReal */ );
-
-int TA_ULTOSC_Lookback( int           optInTimePeriod1, /* From 1 to 100000 */
-                      int           optInTimePeriod2, /* From 1 to 100000 */
-                      int           optInTimePeriod3 );  /* From 1 to 100000 */
-
-
-/*
- * TA_WILLR - Williams' %R
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_WILLR( int           START_IDX,
-                     int           END_IDX,
-                     const double *IN_ARRAY /* inHigh */,
-                     const double *IN_ARRAY /* inLow */,
-                     const double *IN_ARRAY /* inClose */,
-                     int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                     int          *BEG_IDX,
-                     int          *OUT_SIZE,
-                     double       *OUT_ARRAY /* outReal */ );
-
-int TA_WILLR_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-
-/******************************************
- * Group: [Cycle Indicators]
- ******************************************/
-
-/*
- * TA_HT_DCPERIOD - Hilbert Transform - Dominant Cycle Period
- * 
- * Input  = double
- * Output = double
- * 
- */
-TA_RetCode TA_HT_DCPERIOD( int           START_IDX,
-                           int           END_IDX,
-                           const double *IN_ARRAY /* inReal */,
-                           int          *BEG_IDX,
-                           int          *OUT_SIZE,
-                           double       *OUT_ARRAY /* outReal */ );
-
-int TA_HT_DCPERIOD_Lookback( void );
-
-
-/*
- * TA_HT_DCPHASE - Hilbert Transform - Dominant Cycle Phase
- * 
- * Input  = double
- * Output = double
- * 
- */
-TA_RetCode TA_HT_DCPHASE( int           START_IDX,
-                          int           END_IDX,
-                          const double *IN_ARRAY /* inReal */,
-                          int          *BEG_IDX,
-                          int          *OUT_SIZE,
-                          double       *OUT_ARRAY /* outReal */ );
-
-int TA_HT_DCPHASE_Lookback( void );
-
-
-/*
- * TA_HT_PHASOR - Hilbert Transform - Phasor Components
- * 
- * Input  = double
- * Output = double, double
- * 
- */
-TA_RetCode TA_HT_PHASOR( int           START_IDX,
-                         int           END_IDX,
-                         const double *IN_ARRAY /* inReal */,
-                         int          *BEG_IDX,
-                         int          *OUT_SIZE,
-                         double       *OUT_ARRAY /* outInPhase */,
-                         double       *OUT_ARRAY /* outQuadrature */ );
-
-int TA_HT_PHASOR_Lookback( void );
-
-
-/*
- * TA_HT_SINE - Hilbert Transform - SineWave
- * 
- * Input  = double
- * Output = double, double
- * 
- */
-TA_RetCode TA_HT_SINE( int           START_IDX,
-                       int           END_IDX,
-                       const double *IN_ARRAY /* inReal */,
-                       int          *BEG_IDX,
-                       int          *OUT_SIZE,
-                       double       *OUT_ARRAY /* outSine */,
-                       double       *OUT_ARRAY /* outLeadSine */ );
-
-int TA_HT_SINE_Lookback( void );
-
-
-/*
- * TA_HT_TRENDMODE - Hilbert Transform - Trend vs Cycle Mode
- * 
- * Input  = double
- * Output = int
- * 
- */
-TA_RetCode TA_HT_TRENDMODE( int           START_IDX,
-                            int           END_IDX,
-                            const double *IN_ARRAY /* inReal */,
-                            int          *BEG_IDX,
-                            int          *OUT_SIZE,
-                            int          *OUT_ARRAY /* outInteger */ );
-
-int TA_HT_TRENDMODE_Lookback( void );
-
-
-
-/******************************************
- * Group: [Volume Indicators]
- ******************************************/
-
-/*
- * TA_AD - Chaikin A/D Line
- * 
- * Input  = High, Low, Close, Volume
- * Output = double
- * 
- */
-TA_RetCode TA_AD( int           START_IDX,
-                  int           END_IDX,
-                  const double *IN_ARRAY /* inHigh */,
-                  const double *IN_ARRAY /* inLow */,
-                  const double *IN_ARRAY /* inClose */,
-                  const double *IN_ARRAY /* inVolume */,
-                  int          *BEG_IDX,
-                  int          *OUT_SIZE,
-                  double       *OUT_ARRAY /* outReal */ );
-
-int TA_AD_Lookback( void );
-
-
-/*
- * TA_ADOSC - Chaikin A/D Oscillator
- * 
- * Input  = High, Low, Close, Volume
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInFastPeriod:(From 2 to 100000)
- *    Number of period for the fast MA
- * 
- * optInSlowPeriod:(From 2 to 100000)
- *    Number of period for the slow MA
- * 
- * 
- */
-TA_RetCode TA_ADOSC( int           START_IDX,
-                     int           END_IDX,
-                     const double *IN_ARRAY /* inHigh */,
-                     const double *IN_ARRAY /* inLow */,
-                     const double *IN_ARRAY /* inClose */,
-                     const double *IN_ARRAY /* inVolume */,
-                     int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
-                     int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
-                     int          *BEG_IDX,
-                     int          *OUT_SIZE,
-                     double       *OUT_ARRAY /* outReal */ );
-
-int TA_ADOSC_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                     int           optInSlowPeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_OBV - On Balance Volume
- * 
- * Input  = double, Volume
- * Output = double
- * 
- */
-TA_RetCode TA_OBV( int           START_IDX,
-                   int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
-                   const double *IN_ARRAY /* inVolume */,
-                   int          *BEG_IDX,
-                   int          *OUT_SIZE,
-                   double       *OUT_ARRAY /* outReal */ );
-
-int TA_OBV_Lookback( void );
-
-
-
-/******************************************
- * Group: [Pattern Recognition]
- ******************************************/
 
 /*
  * TA_CDL2CROWS - Two Crows
@@ -2511,6 +1188,26 @@ int TA_CDLMARUBOZU_Lookback( void );
 
 
 /*
+ * TA_CDLMATCHINGLOW - Matching Low
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = int
+ * 
+ */
+TA_RetCode TA_CDLMATCHINGLOW( int           START_IDX,
+                              int           END_IDX,
+                              const double *IN_ARRAY /* inOpen */,
+                              const double *IN_ARRAY /* inHigh */,
+                              const double *IN_ARRAY /* inLow */,
+                              const double *IN_ARRAY /* inClose */,
+                              int          *BEG_IDX,
+                              int          *OUT_SIZE,
+                              int          *OUT_ARRAY /* outInteger */ );
+
+int TA_CDLMATCHINGLOW_Lookback( void );
+
+
+/*
  * TA_CDLMATHOLD - Mat Hold
  * 
  * Input  = Open, High, Low, Close
@@ -2535,26 +1232,6 @@ TA_RetCode TA_CDLMATHOLD( int           START_IDX,
                           int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLMATHOLD_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
-
-
-/*
- * TA_CDLMATCHINGLOW - Matching Low
- * 
- * Input  = Open, High, Low, Close
- * Output = int
- * 
- */
-TA_RetCode TA_CDLMATCHINGLOW( int           START_IDX,
-                              int           END_IDX,
-                              const double *IN_ARRAY /* inOpen */,
-                              const double *IN_ARRAY /* inHigh */,
-                              const double *IN_ARRAY /* inLow */,
-                              const double *IN_ARRAY /* inClose */,
-                              int          *BEG_IDX,
-                              int          *OUT_SIZE,
-                              int          *OUT_ARRAY /* outInteger */ );
-
-int TA_CDLMATCHINGLOW_Lookback( void );
 
 
 /*
@@ -2951,10 +1628,29 @@ TA_RetCode TA_CDLXSIDEGAP3METHODS( int           START_IDX,
 int TA_CDLXSIDEGAP3METHODS_Lookback( void );
 
 
+/*
+ * TA_CMO - Chande Momentum Oscillator
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_CMO( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
 
-/******************************************
- * Group: [Statistic Functions]
- ******************************************/
+int TA_CMO_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
 
 /*
  * TA_CORREL - Pearson's Correlation Coefficient (r)
@@ -2982,6 +1678,208 @@ int TA_CORREL_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 /*
+ * TA_DEMA - Double Exponential Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_DEMA( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_DX - Directional Movement Index
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_DX( int           START_IDX,
+                  int           END_IDX,
+                  const double *IN_ARRAY /* inHigh */,
+                  const double *IN_ARRAY /* inLow */,
+                  const double *IN_ARRAY /* inClose */,
+                  int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                  int          *BEG_IDX,
+                  int          *OUT_SIZE,
+                  double       *OUT_ARRAY /* outReal */ );
+
+int TA_DX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_EMA - Exponential Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_EMA( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_EMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_HT_DCPERIOD - Hilbert Transform - Dominant Cycle Period
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_HT_DCPERIOD( int           START_IDX,
+                           int           END_IDX,
+                           const double *IN_ARRAY /* inReal */,
+                           int          *BEG_IDX,
+                           int          *OUT_SIZE,
+                           double       *OUT_ARRAY /* outReal */ );
+
+int TA_HT_DCPERIOD_Lookback( void );
+
+
+/*
+ * TA_HT_DCPHASE - Hilbert Transform - Dominant Cycle Phase
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_HT_DCPHASE( int           START_IDX,
+                          int           END_IDX,
+                          const double *IN_ARRAY /* inReal */,
+                          int          *BEG_IDX,
+                          int          *OUT_SIZE,
+                          double       *OUT_ARRAY /* outReal */ );
+
+int TA_HT_DCPHASE_Lookback( void );
+
+
+/*
+ * TA_HT_PHASOR - Hilbert Transform - Phasor Components
+ * 
+ * Input  = double
+ * Output = double, double
+ * 
+ */
+TA_RetCode TA_HT_PHASOR( int           START_IDX,
+                         int           END_IDX,
+                         const double *IN_ARRAY /* inReal */,
+                         int          *BEG_IDX,
+                         int          *OUT_SIZE,
+                         double       *OUT_ARRAY /* outInPhase */,
+                         double       *OUT_ARRAY /* outQuadrature */ );
+
+int TA_HT_PHASOR_Lookback( void );
+
+
+/*
+ * TA_HT_SINE - Hilbert Transform - SineWave
+ * 
+ * Input  = double
+ * Output = double, double
+ * 
+ */
+TA_RetCode TA_HT_SINE( int           START_IDX,
+                       int           END_IDX,
+                       const double *IN_ARRAY /* inReal */,
+                       int          *BEG_IDX,
+                       int          *OUT_SIZE,
+                       double       *OUT_ARRAY /* outSine */,
+                       double       *OUT_ARRAY /* outLeadSine */ );
+
+int TA_HT_SINE_Lookback( void );
+
+
+/*
+ * TA_HT_TRENDLINE - Hilbert Transform - Instantaneous Trendline
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_HT_TRENDLINE( int           START_IDX,
+                            int           END_IDX,
+                            const double *IN_ARRAY /* inReal */,
+                            int          *BEG_IDX,
+                            int          *OUT_SIZE,
+                            double       *OUT_ARRAY /* outReal */ );
+
+int TA_HT_TRENDLINE_Lookback( void );
+
+
+/*
+ * TA_HT_TRENDMODE - Hilbert Transform - Trend vs Cycle Mode
+ * 
+ * Input  = double
+ * Output = int
+ * 
+ */
+TA_RetCode TA_HT_TRENDMODE( int           START_IDX,
+                            int           END_IDX,
+                            const double *IN_ARRAY /* inReal */,
+                            int          *BEG_IDX,
+                            int          *OUT_SIZE,
+                            int          *OUT_ARRAY /* outInteger */ );
+
+int TA_HT_TRENDMODE_Lookback( void );
+
+
+/*
+ * TA_KAMA - Kaufman Adaptive Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_KAMA( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_KAMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
  * TA_LINEARREG - Linear Regression
  * 
  * Input  = double
@@ -3003,30 +1901,6 @@ TA_RetCode TA_LINEARREG( int           START_IDX,
                          double       *OUT_ARRAY /* outReal */ );
 
 int TA_LINEARREG_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-
-/*
- * TA_LINEARREG_SLOPE - Linear Regression Slope
- * 
- * Input  = double
- * Output = double
- * 
- * Optional Parameters
- * -------------------
- * optInTimePeriod:(From 2 to 100000)
- *    Number of period
- * 
- * 
- */
-TA_RetCode TA_LINEARREG_SLOPE( int           START_IDX,
-                               int           END_IDX,
-                               const double *IN_ARRAY /* inReal */,
-                               int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
-                               int          *BEG_IDX,
-                               int          *OUT_SIZE,
-                               double       *OUT_ARRAY /* outReal */ );
-
-int TA_LINEARREG_SLOPE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 /*
@@ -3078,6 +1952,779 @@ int TA_LINEARREG_INTERCEPT_Lookback( int           optInTimePeriod );  /* From 2
 
 
 /*
+ * TA_LINEARREG_SLOPE - Linear Regression Slope
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_LINEARREG_SLOPE( int           START_IDX,
+                               int           END_IDX,
+                               const double *IN_ARRAY /* inReal */,
+                               int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                               int          *BEG_IDX,
+                               int          *OUT_SIZE,
+                               double       *OUT_ARRAY /* outReal */ );
+
+int TA_LINEARREG_SLOPE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_MA - All Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
+ * 
+ */
+TA_RetCode TA_MA( int           START_IDX,
+                  int           END_IDX,
+                  const double *IN_ARRAY /* inReal */,
+                  int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                  TA_MAType     OPT_MATYPE /* optInMAType */,
+                  int          *BEG_IDX,
+                  int          *OUT_SIZE,
+                  double       *OUT_ARRAY /* outReal */ );
+
+int TA_MA_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                  TA_MAType     optInMAType ); 
+
+/*
+ * TA_MACD - Moving Average Convergence/Divergence
+ * 
+ * Input  = double
+ * Output = double, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInFastPeriod:(From 2 to 100000)
+ *    Number of period for the fast MA
+ * 
+ * optInSlowPeriod:(From 2 to 100000)
+ *    Number of period for the slow MA
+ * 
+ * optInSignalPeriod:(From 1 to 100000)
+ *    Smoothing for the signal line (nb of period)
+ * 
+ * 
+ */
+TA_RetCode TA_MACD( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
+                    int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
+                    int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outMACD */,
+                    double       *OUT_ARRAY /* outMACDSignal */,
+                    double       *OUT_ARRAY /* outMACDHist */ );
+
+int TA_MACD_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                    int           optInSlowPeriod, /* From 2 to 100000 */
+                    int           optInSignalPeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_MACDEXT - MACD with controllable MA type
+ * 
+ * Input  = double
+ * Output = double, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInFastPeriod:(From 2 to 100000)
+ *    Number of period for the fast MA
+ * 
+ * optInFastMAType:
+ *    Type of Moving Average for fast MA
+ * 
+ * optInSlowPeriod:(From 2 to 100000)
+ *    Number of period for the slow MA
+ * 
+ * optInSlowMAType:
+ *    Type of Moving Average for slow MA
+ * 
+ * optInSignalPeriod:(From 1 to 100000)
+ *    Smoothing for the signal line (nb of period)
+ * 
+ * optInSignalMAType:
+ *    Type of Moving Average for signal line
+ * 
+ * 
+ */
+TA_RetCode TA_MACDEXT( int           START_IDX,
+                       int           END_IDX,
+                       const double *IN_ARRAY /* inReal */,
+                       int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
+                       TA_MAType     OPT_MATYPE /* optInFastMAType */,
+                       int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
+                       TA_MAType     OPT_MATYPE /* optInSlowMAType */,
+                       int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
+                       TA_MAType     OPT_MATYPE /* optInSignalMAType */,
+                       int          *BEG_IDX,
+                       int          *OUT_SIZE,
+                       double       *OUT_ARRAY /* outMACD */,
+                       double       *OUT_ARRAY /* outMACDSignal */,
+                       double       *OUT_ARRAY /* outMACDHist */ );
+
+int TA_MACDEXT_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                       TA_MAType     optInFastMAType,
+                       int           optInSlowPeriod, /* From 2 to 100000 */
+                       TA_MAType     optInSlowMAType,
+                       int           optInSignalPeriod, /* From 1 to 100000 */
+                       TA_MAType     optInSignalMAType ); 
+
+/*
+ * TA_MACDFIX - Moving Average Convergence/Divergence Fix 12/26
+ * 
+ * Input  = double
+ * Output = double, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInSignalPeriod:(From 1 to 100000)
+ *    Smoothing for the signal line (nb of period)
+ * 
+ * 
+ */
+TA_RetCode TA_MACDFIX( int           START_IDX,
+                       int           END_IDX,
+                       const double *IN_ARRAY /* inReal */,
+                       int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
+                       int          *BEG_IDX,
+                       int          *OUT_SIZE,
+                       double       *OUT_ARRAY /* outMACD */,
+                       double       *OUT_ARRAY /* outMACDSignal */,
+                       double       *OUT_ARRAY /* outMACDHist */ );
+
+int TA_MACDFIX_Lookback( int           optInSignalPeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_MAMA - MESA Adaptive Moving Average
+ * 
+ * Input  = double
+ * Output = double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInFastLimit:(From 0.01 to 0.99)
+ *    Upper limit use in the adaptive algorithm
+ * 
+ * optInSlowLimit:(From 0.01 to 0.99)
+ *    Lower limit use in the adaptive algorithm
+ * 
+ * 
+ */
+TA_RetCode TA_MAMA( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    double        OPT_REAL /* optInFastLimit */, /* From 0.01 to 0.99 */
+                    double        OPT_REAL /* optInSlowLimit */, /* From 0.01 to 0.99 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outMAMA */,
+                    double       *OUT_ARRAY /* outFAMA */ );
+
+int TA_MAMA_Lookback( double        optInFastLimit, /* From 0.01 to 0.99 */
+                    double        optInSlowLimit );  /* From 0.01 to 0.99 */
+
+
+/*
+ * TA_MAX - Highest value over a specified period
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_MAX( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_MAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_MEDPRICE - Median Price
+ * 
+ * Input  = High, Low
+ * Output = double
+ * 
+ */
+TA_RetCode TA_MEDPRICE( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inHigh */,
+                        const double *IN_ARRAY /* inLow */,
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outReal */ );
+
+int TA_MEDPRICE_Lookback( void );
+
+
+/*
+ * TA_MFI - Money Flow Index
+ * 
+ * Input  = High, Low, Close, Volume
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_MFI( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inHigh */,
+                   const double *IN_ARRAY /* inLow */,
+                   const double *IN_ARRAY /* inClose */,
+                   const double *IN_ARRAY /* inVolume */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_MFI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_MIDPOINT - MidPoint over period
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_MIDPOINT( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inReal */,
+                        int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outReal */ );
+
+int TA_MIDPOINT_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_MIDPRICE - Midpoint Price over period
+ * 
+ * Input  = High, Low
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_MIDPRICE( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inHigh */,
+                        const double *IN_ARRAY /* inLow */,
+                        int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outReal */ );
+
+int TA_MIDPRICE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_MIN - Lowest value over a specified period
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_MIN( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_MIN_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_MINUS_DI - Minus Directional Indicator
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_MINUS_DI( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inHigh */,
+                        const double *IN_ARRAY /* inLow */,
+                        const double *IN_ARRAY /* inClose */,
+                        int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outReal */ );
+
+int TA_MINUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_MINUS_DM - Minus Directional Movement
+ * 
+ * Input  = High, Low
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_MINUS_DM( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inHigh */,
+                        const double *IN_ARRAY /* inLow */,
+                        int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outReal */ );
+
+int TA_MINUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_MOM - Momentum
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_MOM( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_MOM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_NATR - Normalized Average True Range
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_NATR( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inHigh */,
+                    const double *IN_ARRAY /* inLow */,
+                    const double *IN_ARRAY /* inClose */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_NATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_OBV - On Balance Volume
+ * 
+ * Input  = double, Volume
+ * Output = double
+ * 
+ */
+TA_RetCode TA_OBV( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   const double *IN_ARRAY /* inVolume */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_OBV_Lookback( void );
+
+
+/*
+ * TA_PLUS_DI - Plus Directional Indicator
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_PLUS_DI( int           START_IDX,
+                       int           END_IDX,
+                       const double *IN_ARRAY /* inHigh */,
+                       const double *IN_ARRAY /* inLow */,
+                       const double *IN_ARRAY /* inClose */,
+                       int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                       int          *BEG_IDX,
+                       int          *OUT_SIZE,
+                       double       *OUT_ARRAY /* outReal */ );
+
+int TA_PLUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_PLUS_DM - Plus Directional Movement
+ * 
+ * Input  = High, Low
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_PLUS_DM( int           START_IDX,
+                       int           END_IDX,
+                       const double *IN_ARRAY /* inHigh */,
+                       const double *IN_ARRAY /* inLow */,
+                       int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                       int          *BEG_IDX,
+                       int          *OUT_SIZE,
+                       double       *OUT_ARRAY /* outReal */ );
+
+int TA_PLUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_PPO - Percentage Price Oscillator
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInFastPeriod:(From 2 to 100000)
+ *    Number of period for the fast MA
+ * 
+ * optInSlowPeriod:(From 2 to 100000)
+ *    Number of period for the slow MA
+ * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
+ * 
+ */
+TA_RetCode TA_PPO( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
+                   int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
+                   TA_MAType     OPT_MATYPE /* optInMAType */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_PPO_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                   int           optInSlowPeriod, /* From 2 to 100000 */
+                   TA_MAType     optInMAType ); 
+
+/*
+ * TA_ROC - Rate of change : ((price/prevPrice)-1)*100
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_ROC( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_ROC_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_ROCP - Rate of change Percentage: (price-prevPrice)/prevPrice
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_ROCP( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_ROCP_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_ROCR - Rate of change ratio: (price/prevPrice)
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_ROCR( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_ROCR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_ROCR100 - Rate of change ratio 100 scale: (price/prevPrice)*100
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_ROCR100( int           START_IDX,
+                       int           END_IDX,
+                       const double *IN_ARRAY /* inReal */,
+                       int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                       int          *BEG_IDX,
+                       int          *OUT_SIZE,
+                       double       *OUT_ARRAY /* outReal */ );
+
+int TA_ROCR100_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
+ * TA_RSI - Relative Strength Index
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_RSI( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_RSI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_SAR - Parabolic SAR
+ * 
+ * Input  = High, Low
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInAcceleration:(From 0 to TA_REAL_MAX)
+ *    Acceleration Factor used up to the Maximum value
+ * 
+ * optInMaximum:(From 0 to TA_REAL_MAX)
+ *    Acceleration Factor Maximum value
+ * 
+ * 
+ */
+TA_RetCode TA_SAR( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inHigh */,
+                   const double *IN_ARRAY /* inLow */,
+                   double        OPT_REAL /* optInAcceleration */, /* From 0 to TA_REAL_MAX */
+                   double        OPT_REAL /* optInMaximum */, /* From 0 to TA_REAL_MAX */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_SAR_Lookback( double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+                   double        optInMaximum );  /* From 0 to TA_REAL_MAX */
+
+
+/*
+ * TA_SAREXT - Parabolic SAR - Extended
+ * 
+ * Input  = High, Low
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInStartValue:(From TA_REAL_MIN to TA_REAL_MAX)
+ *    Start value and direction. 0 for Auto, >0 for Long, <0 for Short
+ * 
+ * optInOffsetOnReverse:(From 0 to TA_REAL_MAX)
+ *    Percent offset added/removed to initial stop on short/long reversal
+ * 
+ * optInAccelerationInitLong:(From 0 to TA_REAL_MAX)
+ *    Acceleration Factor initial value for the Long direction
+ * 
+ * optInAccelerationLong:(From 0 to TA_REAL_MAX)
+ *    Acceleration Factor for the Long direction
+ * 
+ * optInAccelerationMaxLong:(From 0 to TA_REAL_MAX)
+ *    Acceleration Factor maximum value for the Long direction
+ * 
+ * optInAccelerationInitShort:(From 0 to TA_REAL_MAX)
+ *    Acceleration Factor initial value for the Short direction
+ * 
+ * optInAccelerationShort:(From 0 to TA_REAL_MAX)
+ *    Acceleration Factor for the Short direction
+ * 
+ * optInAccelerationMaxShort:(From 0 to TA_REAL_MAX)
+ *    Acceleration Factor maximum value for the Short direction
+ * 
+ * 
+ */
+TA_RetCode TA_SAREXT( int           START_IDX,
+                      int           END_IDX,
+                      const double *IN_ARRAY /* inHigh */,
+                      const double *IN_ARRAY /* inLow */,
+                      double        OPT_REAL /* optInStartValue */, /* From TA_REAL_MIN to TA_REAL_MAX */
+                      double        OPT_REAL /* optInOffsetOnReverse */, /* From 0 to TA_REAL_MAX */
+                      double        OPT_REAL /* optInAccelerationInitLong */, /* From 0 to TA_REAL_MAX */
+                      double        OPT_REAL /* optInAccelerationLong */, /* From 0 to TA_REAL_MAX */
+                      double        OPT_REAL /* optInAccelerationMaxLong */, /* From 0 to TA_REAL_MAX */
+                      double        OPT_REAL /* optInAccelerationInitShort */, /* From 0 to TA_REAL_MAX */
+                      double        OPT_REAL /* optInAccelerationShort */, /* From 0 to TA_REAL_MAX */
+                      double        OPT_REAL /* optInAccelerationMaxShort */, /* From 0 to TA_REAL_MAX */
+                      int          *BEG_IDX,
+                      int          *OUT_SIZE,
+                      double       *OUT_ARRAY /* outReal */ );
+
+int TA_SAREXT_Lookback( double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+                      double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+                      double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+                      double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+                      double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+                      double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+                      double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+                      double        optInAccelerationMaxShort );  /* From 0 to TA_REAL_MAX */
+
+
+/*
+ * TA_SMA - Simple Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_SMA( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_SMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
  * TA_STDDEV - Standard Deviation
  * 
  * Input  = double
@@ -3107,6 +2754,271 @@ int TA_STDDEV_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
 
 
 /*
+ * TA_STOCH - Stochastic
+ * 
+ * Input  = High, Low, Close
+ * Output = double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInFastK_Period:(From 1 to 100000)
+ *    Time period for building the Fast-K line
+ * 
+ * optInSlowK_Period:(From 1 to 100000)
+ *    Smoothing for making the Slow-K line. Usually set to 3
+ * 
+ * optInSlowK_MAType:
+ *    Type of Moving Average for Slow-K
+ * 
+ * optInSlowD_Period:(From 1 to 100000)
+ *    Smoothing for making the Slow-D line
+ * 
+ * optInSlowD_MAType:
+ *    Type of Moving Average for Slow-D
+ * 
+ * 
+ */
+TA_RetCode TA_STOCH( int           START_IDX,
+                     int           END_IDX,
+                     const double *IN_ARRAY /* inHigh */,
+                     const double *IN_ARRAY /* inLow */,
+                     const double *IN_ARRAY /* inClose */,
+                     int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
+                     int           OPT_INT /* optInSlowK_Period */, /* From 1 to 100000 */
+                     TA_MAType     OPT_MATYPE /* optInSlowK_MAType */,
+                     int           OPT_INT /* optInSlowD_Period */, /* From 1 to 100000 */
+                     TA_MAType     OPT_MATYPE /* optInSlowD_MAType */,
+                     int          *BEG_IDX,
+                     int          *OUT_SIZE,
+                     double       *OUT_ARRAY /* outSlowK */,
+                     double       *OUT_ARRAY /* outSlowD */ );
+
+int TA_STOCH_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
+                     int           optInSlowK_Period, /* From 1 to 100000 */
+                     TA_MAType     optInSlowK_MAType,
+                     int           optInSlowD_Period, /* From 1 to 100000 */
+                     TA_MAType     optInSlowD_MAType ); 
+
+/*
+ * TA_STOCHF - Stochastic Fast
+ * 
+ * Input  = High, Low, Close
+ * Output = double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInFastK_Period:(From 1 to 100000)
+ *    Time period for building the Fast-K line
+ * 
+ * optInFastD_Period:(From 1 to 100000)
+ *    Smoothing for making the Fast-D line. Usually set to 3
+ * 
+ * optInFastD_MAType:
+ *    Type of Moving Average for Fast-D
+ * 
+ * 
+ */
+TA_RetCode TA_STOCHF( int           START_IDX,
+                      int           END_IDX,
+                      const double *IN_ARRAY /* inHigh */,
+                      const double *IN_ARRAY /* inLow */,
+                      const double *IN_ARRAY /* inClose */,
+                      int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
+                      int           OPT_INT /* optInFastD_Period */, /* From 1 to 100000 */
+                      TA_MAType     OPT_MATYPE /* optInFastD_MAType */,
+                      int          *BEG_IDX,
+                      int          *OUT_SIZE,
+                      double       *OUT_ARRAY /* outFastK */,
+                      double       *OUT_ARRAY /* outFastD */ );
+
+int TA_STOCHF_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
+                      int           optInFastD_Period, /* From 1 to 100000 */
+                      TA_MAType     optInFastD_MAType ); 
+
+/*
+ * TA_STOCHRSI - Stochastic Relative Strength Index
+ * 
+ * Input  = double
+ * Output = double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * optInFastK_Period:(From 1 to 100000)
+ *    Time period for building the Fast-K line
+ * 
+ * optInFastD_Period:(From 1 to 100000)
+ *    Smoothing for making the Fast-D line. Usually set to 3
+ * 
+ * optInFastD_MAType:
+ *    Type of Moving Average for Fast-D
+ * 
+ * 
+ */
+TA_RetCode TA_STOCHRSI( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inReal */,
+                        int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                        int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
+                        int           OPT_INT /* optInFastD_Period */, /* From 1 to 100000 */
+                        TA_MAType     OPT_MATYPE /* optInFastD_MAType */,
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outFastK */,
+                        double       *OUT_ARRAY /* outFastD */ );
+
+int TA_STOCHRSI_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+                        int           optInFastK_Period, /* From 1 to 100000 */
+                        int           optInFastD_Period, /* From 1 to 100000 */
+                        TA_MAType     optInFastD_MAType ); 
+
+/*
+ * TA_SUM - Summation
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_SUM( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_SUM_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_T3 - Triple Exponential Moving Average (T3)
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * optInVFactor:(From 0 to 1)
+ *    Volume Factor
+ * 
+ * 
+ */
+TA_RetCode TA_T3( int           START_IDX,
+                  int           END_IDX,
+                  const double *IN_ARRAY /* inReal */,
+                  int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                  double        OPT_REAL /* optInVFactor */, /* From 0 to 1 */
+                  int          *BEG_IDX,
+                  int          *OUT_SIZE,
+                  double       *OUT_ARRAY /* outReal */ );
+
+int TA_T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+                  double        optInVFactor );  /* From 0 to 1 */
+
+
+/*
+ * TA_TEMA - Triple Exponential Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_TEMA( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_TEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_TRANGE - True Range
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ */
+TA_RetCode TA_TRANGE( int           START_IDX,
+                      int           END_IDX,
+                      const double *IN_ARRAY /* inHigh */,
+                      const double *IN_ARRAY /* inLow */,
+                      const double *IN_ARRAY /* inClose */,
+                      int          *BEG_IDX,
+                      int          *OUT_SIZE,
+                      double       *OUT_ARRAY /* outReal */ );
+
+int TA_TRANGE_Lookback( void );
+
+
+/*
+ * TA_TRIMA - Triangular Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_TRIMA( int           START_IDX,
+                     int           END_IDX,
+                     const double *IN_ARRAY /* inReal */,
+                     int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                     int          *BEG_IDX,
+                     int          *OUT_SIZE,
+                     double       *OUT_ARRAY /* outReal */ );
+
+int TA_TRIMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_TRIX - 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_TRIX( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_TRIX_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+/*
  * TA_TSF - Time Series Forecast
  * 
  * Input  = double
@@ -3128,6 +3040,61 @@ TA_RetCode TA_TSF( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_TSF_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_TYPPRICE - Typical Price
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ */
+TA_RetCode TA_TYPPRICE( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inHigh */,
+                        const double *IN_ARRAY /* inLow */,
+                        const double *IN_ARRAY /* inClose */,
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outReal */ );
+
+int TA_TYPPRICE_Lookback( void );
+
+
+/*
+ * TA_ULTOSC - Ultimate Oscillator
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod1:(From 1 to 100000)
+ *    Number of bars for 1st period.
+ * 
+ * optInTimePeriod2:(From 1 to 100000)
+ *    Number of bars fro 2nd period
+ * 
+ * optInTimePeriod3:(From 1 to 100000)
+ *    Number of bars for 3rd period
+ * 
+ * 
+ */
+TA_RetCode TA_ULTOSC( int           START_IDX,
+                      int           END_IDX,
+                      const double *IN_ARRAY /* inHigh */,
+                      const double *IN_ARRAY /* inLow */,
+                      const double *IN_ARRAY /* inClose */,
+                      int           OPT_INT /* optInTimePeriod1 */, /* From 1 to 100000 */
+                      int           OPT_INT /* optInTimePeriod2 */, /* From 1 to 100000 */
+                      int           OPT_INT /* optInTimePeriod3 */, /* From 1 to 100000 */
+                      int          *BEG_IDX,
+                      int          *OUT_SIZE,
+                      double       *OUT_ARRAY /* outReal */ );
+
+int TA_ULTOSC_Lookback( int           optInTimePeriod1, /* From 1 to 100000 */
+                      int           optInTimePeriod2, /* From 1 to 100000 */
+                      int           optInTimePeriod3 );  /* From 1 to 100000 */
 
 
 /*
@@ -3159,68 +3126,6 @@ int TA_VAR_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
                    double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
 
 
-
-/******************************************
- * Group: [Price Transform]
- ******************************************/
-
-/*
- * TA_AVGPRICE - Average Price
- * 
- * Input  = Open, High, Low, Close
- * Output = double
- * 
- */
-TA_RetCode TA_AVGPRICE( int           START_IDX,
-                        int           END_IDX,
-                        const double *IN_ARRAY /* inOpen */,
-                        const double *IN_ARRAY /* inHigh */,
-                        const double *IN_ARRAY /* inLow */,
-                        const double *IN_ARRAY /* inClose */,
-                        int          *BEG_IDX,
-                        int          *OUT_SIZE,
-                        double       *OUT_ARRAY /* outReal */ );
-
-int TA_AVGPRICE_Lookback( void );
-
-
-/*
- * TA_MEDPRICE - Median Price
- * 
- * Input  = High, Low
- * Output = double
- * 
- */
-TA_RetCode TA_MEDPRICE( int           START_IDX,
-                        int           END_IDX,
-                        const double *IN_ARRAY /* inHigh */,
-                        const double *IN_ARRAY /* inLow */,
-                        int          *BEG_IDX,
-                        int          *OUT_SIZE,
-                        double       *OUT_ARRAY /* outReal */ );
-
-int TA_MEDPRICE_Lookback( void );
-
-
-/*
- * TA_TYPPRICE - Typical Price
- * 
- * Input  = High, Low, Close
- * Output = double
- * 
- */
-TA_RetCode TA_TYPPRICE( int           START_IDX,
-                        int           END_IDX,
-                        const double *IN_ARRAY /* inHigh */,
-                        const double *IN_ARRAY /* inLow */,
-                        const double *IN_ARRAY /* inClose */,
-                        int          *BEG_IDX,
-                        int          *OUT_SIZE,
-                        double       *OUT_ARRAY /* outReal */ );
-
-int TA_TYPPRICE_Lookback( void );
-
-
 /*
  * TA_WCLPRICE - Weighted Close Price
  * 
@@ -3238,6 +3143,56 @@ TA_RetCode TA_WCLPRICE( int           START_IDX,
                         double       *OUT_ARRAY /* outReal */ );
 
 int TA_WCLPRICE_Lookback( void );
+
+
+/*
+ * TA_WILLR - Williams' %R
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_WILLR( int           START_IDX,
+                     int           END_IDX,
+                     const double *IN_ARRAY /* inHigh */,
+                     const double *IN_ARRAY /* inLow */,
+                     const double *IN_ARRAY /* inClose */,
+                     int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                     int          *BEG_IDX,
+                     int          *OUT_SIZE,
+                     double       *OUT_ARRAY /* outReal */ );
+
+int TA_WILLR_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_WMA - Weighted Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 2 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_WMA( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_WMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 /* Some TA functions takes a certain amount of input data

@@ -303,505 +303,58 @@ namespace TicTacTec
 			 }
 
 /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
-         static int MAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+         static int AD_Lookback( void );
 
-         static enum class TA_RetCode MAX( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode MAX( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_MAX Core::MAX
-         #define TA_MAX_Lookback Core::MAX_Lookback
-
-         static int MIN_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode MIN( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode MIN( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_MIN Core::MIN
-         #define TA_MIN_Lookback Core::MIN_Lookback
-
-         static int SUM_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode SUM( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode SUM( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_SUM Core::SUM
-         #define TA_SUM_Lookback Core::SUM_Lookback
-
-         static int BBANDS_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
-                                   double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   TA_MAType     optInMAType ); 
-         static enum class TA_RetCode BBANDS( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<double>^ inReal,
-                                              int           optInTimePeriod, /* From 2 to 100000 */
-                                              double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                              double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                              TA_MAType     optInMAType,
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outRealUpperBand,
-                                              cli::array<double>^  outRealMiddleBand,
-                                              cli::array<double>^  outRealLowerBand );
-         static enum class TA_RetCode BBANDS( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<float>^ inReal,
-                                              int           optInTimePeriod, /* From 2 to 100000 */
-                                              double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                              double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                              TA_MAType     optInMAType,
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outRealUpperBand,
-                                              cli::array<double>^  outRealMiddleBand,
-                                              cli::array<double>^  outRealLowerBand );
-
-         #define TA_BBANDS Core::BBANDS
-         #define TA_BBANDS_Lookback Core::BBANDS_Lookback
-
-         static int DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode DEMA( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inReal,
-                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-         static enum class TA_RetCode DEMA( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inReal,
-                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-
-         #define TA_DEMA Core::DEMA
-         #define TA_DEMA_Lookback Core::DEMA_Lookback
-
-         static int EMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode EMA( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode EMA( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_EMA Core::EMA
-         #define TA_EMA_Lookback Core::EMA_Lookback
-
-         static int HT_TRENDLINE_Lookback( void );
-
-         static enum class TA_RetCode HT_TRENDLINE( int    startIdx,
-                                                    int    endIdx,
-                                                    cli::array<double>^ inReal,
-                                                    [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
-                                                    cli::array<double>^  outReal );
-         static enum class TA_RetCode HT_TRENDLINE( int    startIdx,
-                                                    int    endIdx,
-                                                    cli::array<float>^ inReal,
-                                                    [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
-                                                    cli::array<double>^  outReal );
-
-         #define TA_HT_TRENDLINE Core::HT_TRENDLINE
-         #define TA_HT_TRENDLINE_Lookback Core::HT_TRENDLINE_Lookback
-
-         static int KAMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode KAMA( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inReal,
-                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-         static enum class TA_RetCode KAMA( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inReal,
-                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-
-         #define TA_KAMA Core::KAMA
-         #define TA_KAMA_Lookback Core::KAMA_Lookback
-
-         static int MA_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
-                               TA_MAType     optInMAType ); 
-         static enum class TA_RetCode MA( int    startIdx,
+         static enum class TA_RetCode AD( int    startIdx,
                                           int    endIdx,
-                                          cli::array<double>^ inReal,
-                                          int           optInTimePeriod, /* From 1 to 100000 */
-                                          TA_MAType     optInMAType,
+                                          cli::array<double>^ inHigh,
+                                          cli::array<double>^ inLow,
+                                          cli::array<double>^ inClose,
+                                          cli::array<double>^ inVolume,
                                           [Out]int%    outBegIdx,
                                           [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode MA( int    startIdx,
+         static enum class TA_RetCode AD( int    startIdx,
                                           int    endIdx,
-                                          cli::array<float>^ inReal,
-                                          int           optInTimePeriod, /* From 1 to 100000 */
-                                          TA_MAType     optInMAType,
+                                          cli::array<float>^ inHigh,
+                                          cli::array<float>^ inLow,
+                                          cli::array<float>^ inClose,
+                                          cli::array<float>^ inVolume,
                                           [Out]int%    outBegIdx,
                                           [Out]int%    outNbElement,
                                           cli::array<double>^  outReal );
 
-         #define TA_MA Core::MA
-         #define TA_MA_Lookback Core::MA_Lookback
+         #define TA_AD Core::AD
+         #define TA_AD_Lookback Core::AD_Lookback
 
-         static int MAMA_Lookback( double        optInFastLimit, /* From 0.01 to 0.99 */
-                                 double        optInSlowLimit );  /* From 0.01 to 0.99 */
+         static int ADOSC_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                                  int           optInSlowPeriod );  /* From 2 to 100000 */
 
-         static enum class TA_RetCode MAMA( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inReal,
-                                            double        optInFastLimit, /* From 0.01 to 0.99 */
-                                            double        optInSlowLimit, /* From 0.01 to 0.99 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outMAMA,
-                                            cli::array<double>^  outFAMA );
-         static enum class TA_RetCode MAMA( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inReal,
-                                            double        optInFastLimit, /* From 0.01 to 0.99 */
-                                            double        optInSlowLimit, /* From 0.01 to 0.99 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outMAMA,
-                                            cli::array<double>^  outFAMA );
-
-         #define TA_MAMA Core::MAMA
-         #define TA_MAMA_Lookback Core::MAMA_Lookback
-
-         static int MIDPRICE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode MIDPRICE( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<double>^ inHigh,
-                                                cli::array<double>^ inLow,
-                                                int           optInTimePeriod, /* From 2 to 100000 */
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-         static enum class TA_RetCode MIDPRICE( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<float>^ inHigh,
-                                                cli::array<float>^ inLow,
-                                                int           optInTimePeriod, /* From 2 to 100000 */
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-
-         #define TA_MIDPRICE Core::MIDPRICE
-         #define TA_MIDPRICE_Lookback Core::MIDPRICE_Lookback
-
-         static int MIDPOINT_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode MIDPOINT( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<double>^ inReal,
-                                                int           optInTimePeriod, /* From 2 to 100000 */
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-         static enum class TA_RetCode MIDPOINT( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<float>^ inReal,
-                                                int           optInTimePeriod, /* From 2 to 100000 */
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-
-         #define TA_MIDPOINT Core::MIDPOINT
-         #define TA_MIDPOINT_Lookback Core::MIDPOINT_Lookback
-
-         static int SAR_Lookback( double        optInAcceleration, /* From 0 to TA_REAL_MAX */
-                                double        optInMaximum );  /* From 0 to TA_REAL_MAX */
-
-         static enum class TA_RetCode SAR( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inHigh,
-                                           cli::array<double>^ inLow,
-                                           double        optInAcceleration, /* From 0 to TA_REAL_MAX */
-                                           double        optInMaximum, /* From 0 to TA_REAL_MAX */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode SAR( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inHigh,
-                                           cli::array<float>^ inLow,
-                                           double        optInAcceleration, /* From 0 to TA_REAL_MAX */
-                                           double        optInMaximum, /* From 0 to TA_REAL_MAX */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_SAR Core::SAR
-         #define TA_SAR_Lookback Core::SAR_Lookback
-
-         static int SAREXT_Lookback( double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationMaxShort );  /* From 0 to TA_REAL_MAX */
-
-         static enum class TA_RetCode SAREXT( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<double>^ inHigh,
-                                              cli::array<double>^ inLow,
-                                              double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                              double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outReal );
-         static enum class TA_RetCode SAREXT( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<float>^ inHigh,
-                                              cli::array<float>^ inLow,
-                                              double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                              double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-                                              double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outReal );
-
-         #define TA_SAREXT Core::SAREXT
-         #define TA_SAREXT_Lookback Core::SAREXT_Lookback
-
-         static int SMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode SMA( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode SMA( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_SMA Core::SMA
-         #define TA_SMA_Lookback Core::SMA_Lookback
-
-         static int T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
-                               double        optInVFactor );  /* From 0 to 1 */
-
-         static enum class TA_RetCode T3( int    startIdx,
-                                          int    endIdx,
-                                          cli::array<double>^ inReal,
-                                          int           optInTimePeriod, /* From 2 to 100000 */
-                                          double        optInVFactor, /* From 0 to 1 */
-                                          [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
-                                          cli::array<double>^  outReal );
-         static enum class TA_RetCode T3( int    startIdx,
-                                          int    endIdx,
-                                          cli::array<float>^ inReal,
-                                          int           optInTimePeriod, /* From 2 to 100000 */
-                                          double        optInVFactor, /* From 0 to 1 */
-                                          [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
-                                          cli::array<double>^  outReal );
-
-         #define TA_T3 Core::T3
-         #define TA_T3_Lookback Core::T3_Lookback
-
-         static int TEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode TEMA( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inReal,
-                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-         static enum class TA_RetCode TEMA( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inReal,
-                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-
-         #define TA_TEMA Core::TEMA
-         #define TA_TEMA_Lookback Core::TEMA_Lookback
-
-         static int TRIMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode TRIMA( int    startIdx,
+         static enum class TA_RetCode ADOSC( int    startIdx,
                                              int    endIdx,
-                                             cli::array<double>^ inReal,
-                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             cli::array<double>^ inClose,
+                                             cli::array<double>^ inVolume,
+                                             int           optInFastPeriod, /* From 2 to 100000 */
+                                             int           optInSlowPeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNbElement,
                                              cli::array<double>^  outReal );
-         static enum class TA_RetCode TRIMA( int    startIdx,
+         static enum class TA_RetCode ADOSC( int    startIdx,
                                              int    endIdx,
-                                             cli::array<float>^ inReal,
-                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             cli::array<float>^ inHigh,
+                                             cli::array<float>^ inLow,
+                                             cli::array<float>^ inClose,
+                                             cli::array<float>^ inVolume,
+                                             int           optInFastPeriod, /* From 2 to 100000 */
+                                             int           optInSlowPeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNbElement,
                                              cli::array<double>^  outReal );
 
-         #define TA_TRIMA Core::TRIMA
-         #define TA_TRIMA_Lookback Core::TRIMA_Lookback
-
-         static int WMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode WMA( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode WMA( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_WMA Core::WMA
-         #define TA_WMA_Lookback Core::WMA_Lookback
-
-         static int ATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode ATR( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inHigh,
-                                           cli::array<double>^ inLow,
-                                           cli::array<double>^ inClose,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode ATR( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inHigh,
-                                           cli::array<float>^ inLow,
-                                           cli::array<float>^ inClose,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_ATR Core::ATR
-         #define TA_ATR_Lookback Core::ATR_Lookback
-
-         static int NATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode NATR( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inHigh,
-                                            cli::array<double>^ inLow,
-                                            cli::array<double>^ inClose,
-                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-         static enum class TA_RetCode NATR( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inHigh,
-                                            cli::array<float>^ inLow,
-                                            cli::array<float>^ inClose,
-                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-
-         #define TA_NATR Core::NATR
-         #define TA_NATR_Lookback Core::NATR_Lookback
-
-         static int TRANGE_Lookback( void );
-
-         static enum class TA_RetCode TRANGE( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<double>^ inHigh,
-                                              cli::array<double>^ inLow,
-                                              cli::array<double>^ inClose,
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outReal );
-         static enum class TA_RetCode TRANGE( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<float>^ inHigh,
-                                              cli::array<float>^ inLow,
-                                              cli::array<float>^ inClose,
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outReal );
-
-         #define TA_TRANGE Core::TRANGE
-         #define TA_TRANGE_Lookback Core::TRANGE_Lookback
+         #define TA_ADOSC Core::ADOSC
+         #define TA_ADOSC_Lookback Core::ADOSC_Lookback
 
          static int ADX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
@@ -922,6 +475,86 @@ namespace TicTacTec
          #define TA_AROONOSC Core::AROONOSC
          #define TA_AROONOSC_Lookback Core::AROONOSC_Lookback
 
+         static int ATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode ATR( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           cli::array<double>^ inClose,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode ATR( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inHigh,
+                                           cli::array<float>^ inLow,
+                                           cli::array<float>^ inClose,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_ATR Core::ATR
+         #define TA_ATR_Lookback Core::ATR_Lookback
+
+         static int AVGPRICE_Lookback( void );
+
+         static enum class TA_RetCode AVGPRICE( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inOpen,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+         static enum class TA_RetCode AVGPRICE( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inOpen,
+                                                cli::array<float>^ inHigh,
+                                                cli::array<float>^ inLow,
+                                                cli::array<float>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+
+         #define TA_AVGPRICE Core::AVGPRICE
+         #define TA_AVGPRICE_Lookback Core::AVGPRICE_Lookback
+
+         static int BBANDS_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+                                   double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   TA_MAType     optInMAType ); 
+         static enum class TA_RetCode BBANDS( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inReal,
+                                              int           optInTimePeriod, /* From 2 to 100000 */
+                                              double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                              double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                              TA_MAType     optInMAType,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outRealUpperBand,
+                                              cli::array<double>^  outRealMiddleBand,
+                                              cli::array<double>^  outRealLowerBand );
+         static enum class TA_RetCode BBANDS( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<float>^ inReal,
+                                              int           optInTimePeriod, /* From 2 to 100000 */
+                                              double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                              double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                              TA_MAType     optInMAType,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outRealUpperBand,
+                                              cli::array<double>^  outRealMiddleBand,
+                                              cli::array<double>^  outRealLowerBand );
+
+         #define TA_BBANDS Core::BBANDS
+         #define TA_BBANDS_Lookback Core::BBANDS_Lookback
+
          static int BOP_Lookback( void );
 
          static enum class TA_RetCode BOP( int    startIdx,
@@ -969,744 +602,6 @@ namespace TicTacTec
 
          #define TA_CCI Core::CCI
          #define TA_CCI_Lookback Core::CCI_Lookback
-
-         static int CMO_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode CMO( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode CMO( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_CMO Core::CMO
-         #define TA_CMO_Lookback Core::CMO_Lookback
-
-         static int DX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode DX( int    startIdx,
-                                          int    endIdx,
-                                          cli::array<double>^ inHigh,
-                                          cli::array<double>^ inLow,
-                                          cli::array<double>^ inClose,
-                                          int           optInTimePeriod, /* From 2 to 100000 */
-                                          [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
-                                          cli::array<double>^  outReal );
-         static enum class TA_RetCode DX( int    startIdx,
-                                          int    endIdx,
-                                          cli::array<float>^ inHigh,
-                                          cli::array<float>^ inLow,
-                                          cli::array<float>^ inClose,
-                                          int           optInTimePeriod, /* From 2 to 100000 */
-                                          [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
-                                          cli::array<double>^  outReal );
-
-         #define TA_DX Core::DX
-         #define TA_DX_Lookback Core::DX_Lookback
-
-         static int MACD_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                                 int           optInSlowPeriod, /* From 2 to 100000 */
-                                 int           optInSignalPeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode MACD( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inReal,
-                                            int           optInFastPeriod, /* From 2 to 100000 */
-                                            int           optInSlowPeriod, /* From 2 to 100000 */
-                                            int           optInSignalPeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outMACD,
-                                            cli::array<double>^  outMACDSignal,
-                                            cli::array<double>^  outMACDHist );
-         static enum class TA_RetCode MACD( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inReal,
-                                            int           optInFastPeriod, /* From 2 to 100000 */
-                                            int           optInSlowPeriod, /* From 2 to 100000 */
-                                            int           optInSignalPeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outMACD,
-                                            cli::array<double>^  outMACDSignal,
-                                            cli::array<double>^  outMACDHist );
-
-         #define TA_MACD Core::MACD
-         #define TA_MACD_Lookback Core::MACD_Lookback
-
-         static int MACDEXT_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                                    TA_MAType     optInFastMAType,
-                                    int           optInSlowPeriod, /* From 2 to 100000 */
-                                    TA_MAType     optInSlowMAType,
-                                    int           optInSignalPeriod, /* From 1 to 100000 */
-                                    TA_MAType     optInSignalMAType ); 
-         static enum class TA_RetCode MACDEXT( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<double>^ inReal,
-                                               int           optInFastPeriod, /* From 2 to 100000 */
-                                               TA_MAType     optInFastMAType,
-                                               int           optInSlowPeriod, /* From 2 to 100000 */
-                                               TA_MAType     optInSlowMAType,
-                                               int           optInSignalPeriod, /* From 1 to 100000 */
-                                               TA_MAType     optInSignalMAType,
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outMACD,
-                                               cli::array<double>^  outMACDSignal,
-                                               cli::array<double>^  outMACDHist );
-         static enum class TA_RetCode MACDEXT( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<float>^ inReal,
-                                               int           optInFastPeriod, /* From 2 to 100000 */
-                                               TA_MAType     optInFastMAType,
-                                               int           optInSlowPeriod, /* From 2 to 100000 */
-                                               TA_MAType     optInSlowMAType,
-                                               int           optInSignalPeriod, /* From 1 to 100000 */
-                                               TA_MAType     optInSignalMAType,
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outMACD,
-                                               cli::array<double>^  outMACDSignal,
-                                               cli::array<double>^  outMACDHist );
-
-         #define TA_MACDEXT Core::MACDEXT
-         #define TA_MACDEXT_Lookback Core::MACDEXT_Lookback
-
-         static int MACDFIX_Lookback( int           optInSignalPeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode MACDFIX( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<double>^ inReal,
-                                               int           optInSignalPeriod, /* From 1 to 100000 */
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outMACD,
-                                               cli::array<double>^  outMACDSignal,
-                                               cli::array<double>^  outMACDHist );
-         static enum class TA_RetCode MACDFIX( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<float>^ inReal,
-                                               int           optInSignalPeriod, /* From 1 to 100000 */
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outMACD,
-                                               cli::array<double>^  outMACDSignal,
-                                               cli::array<double>^  outMACDHist );
-
-         #define TA_MACDFIX Core::MACDFIX
-         #define TA_MACDFIX_Lookback Core::MACDFIX_Lookback
-
-         static int MFI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode MFI( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inHigh,
-                                           cli::array<double>^ inLow,
-                                           cli::array<double>^ inClose,
-                                           cli::array<double>^ inVolume,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode MFI( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inHigh,
-                                           cli::array<float>^ inLow,
-                                           cli::array<float>^ inClose,
-                                           cli::array<float>^ inVolume,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_MFI Core::MFI
-         #define TA_MFI_Lookback Core::MFI_Lookback
-
-         static int MINUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode MINUS_DI( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<double>^ inHigh,
-                                                cli::array<double>^ inLow,
-                                                cli::array<double>^ inClose,
-                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-         static enum class TA_RetCode MINUS_DI( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<float>^ inHigh,
-                                                cli::array<float>^ inLow,
-                                                cli::array<float>^ inClose,
-                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-
-         #define TA_MINUS_DI Core::MINUS_DI
-         #define TA_MINUS_DI_Lookback Core::MINUS_DI_Lookback
-
-         static int MINUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode MINUS_DM( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<double>^ inHigh,
-                                                cli::array<double>^ inLow,
-                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-         static enum class TA_RetCode MINUS_DM( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<float>^ inHigh,
-                                                cli::array<float>^ inLow,
-                                                int           optInTimePeriod, /* From 1 to 100000 */
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-
-         #define TA_MINUS_DM Core::MINUS_DM
-         #define TA_MINUS_DM_Lookback Core::MINUS_DM_Lookback
-
-         static int MOM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode MOM( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode MOM( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_MOM Core::MOM
-         #define TA_MOM_Lookback Core::MOM_Lookback
-
-         static int PPO_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                                int           optInSlowPeriod, /* From 2 to 100000 */
-                                TA_MAType     optInMAType ); 
-         static enum class TA_RetCode PPO( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInFastPeriod, /* From 2 to 100000 */
-                                           int           optInSlowPeriod, /* From 2 to 100000 */
-                                           TA_MAType     optInMAType,
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode PPO( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInFastPeriod, /* From 2 to 100000 */
-                                           int           optInSlowPeriod, /* From 2 to 100000 */
-                                           TA_MAType     optInMAType,
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_PPO Core::PPO
-         #define TA_PPO_Lookback Core::PPO_Lookback
-
-         static int PLUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode PLUS_DI( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<double>^ inHigh,
-                                               cli::array<double>^ inLow,
-                                               cli::array<double>^ inClose,
-                                               int           optInTimePeriod, /* From 1 to 100000 */
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outReal );
-         static enum class TA_RetCode PLUS_DI( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<float>^ inHigh,
-                                               cli::array<float>^ inLow,
-                                               cli::array<float>^ inClose,
-                                               int           optInTimePeriod, /* From 1 to 100000 */
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outReal );
-
-         #define TA_PLUS_DI Core::PLUS_DI
-         #define TA_PLUS_DI_Lookback Core::PLUS_DI_Lookback
-
-         static int PLUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode PLUS_DM( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<double>^ inHigh,
-                                               cli::array<double>^ inLow,
-                                               int           optInTimePeriod, /* From 1 to 100000 */
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outReal );
-         static enum class TA_RetCode PLUS_DM( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<float>^ inHigh,
-                                               cli::array<float>^ inLow,
-                                               int           optInTimePeriod, /* From 1 to 100000 */
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outReal );
-
-         #define TA_PLUS_DM Core::PLUS_DM
-         #define TA_PLUS_DM_Lookback Core::PLUS_DM_Lookback
-
-         static int ROC_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode ROC( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode ROC( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_ROC Core::ROC
-         #define TA_ROC_Lookback Core::ROC_Lookback
-
-         static int ROCP_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode ROCP( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inReal,
-                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-         static enum class TA_RetCode ROCP( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inReal,
-                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-
-         #define TA_ROCP Core::ROCP
-         #define TA_ROCP_Lookback Core::ROCP_Lookback
-
-         static int ROCR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode ROCR( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inReal,
-                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-         static enum class TA_RetCode ROCR( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inReal,
-                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-
-         #define TA_ROCR Core::ROCR
-         #define TA_ROCR_Lookback Core::ROCR_Lookback
-
-         static int ROCR100_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode ROCR100( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<double>^ inReal,
-                                               int           optInTimePeriod, /* From 1 to 100000 */
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outReal );
-         static enum class TA_RetCode ROCR100( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<float>^ inReal,
-                                               int           optInTimePeriod, /* From 1 to 100000 */
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outReal );
-
-         #define TA_ROCR100 Core::ROCR100
-         #define TA_ROCR100_Lookback Core::ROCR100_Lookback
-
-         static int RSI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode RSI( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode RSI( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 2 to 100000 */
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_RSI Core::RSI
-         #define TA_RSI_Lookback Core::RSI_Lookback
-
-         static int STOCH_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
-                                  int           optInSlowK_Period, /* From 1 to 100000 */
-                                  TA_MAType     optInSlowK_MAType,
-                                  int           optInSlowD_Period, /* From 1 to 100000 */
-                                  TA_MAType     optInSlowD_MAType ); 
-         static enum class TA_RetCode STOCH( int    startIdx,
-                                             int    endIdx,
-                                             cli::array<double>^ inHigh,
-                                             cli::array<double>^ inLow,
-                                             cli::array<double>^ inClose,
-                                             int           optInFastK_Period, /* From 1 to 100000 */
-                                             int           optInSlowK_Period, /* From 1 to 100000 */
-                                             TA_MAType     optInSlowK_MAType,
-                                             int           optInSlowD_Period, /* From 1 to 100000 */
-                                             TA_MAType     optInSlowD_MAType,
-                                             [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
-                                             cli::array<double>^  outSlowK,
-                                             cli::array<double>^  outSlowD );
-         static enum class TA_RetCode STOCH( int    startIdx,
-                                             int    endIdx,
-                                             cli::array<float>^ inHigh,
-                                             cli::array<float>^ inLow,
-                                             cli::array<float>^ inClose,
-                                             int           optInFastK_Period, /* From 1 to 100000 */
-                                             int           optInSlowK_Period, /* From 1 to 100000 */
-                                             TA_MAType     optInSlowK_MAType,
-                                             int           optInSlowD_Period, /* From 1 to 100000 */
-                                             TA_MAType     optInSlowD_MAType,
-                                             [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
-                                             cli::array<double>^  outSlowK,
-                                             cli::array<double>^  outSlowD );
-
-         #define TA_STOCH Core::STOCH
-         #define TA_STOCH_Lookback Core::STOCH_Lookback
-
-         static int STOCHF_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
-                                   int           optInFastD_Period, /* From 1 to 100000 */
-                                   TA_MAType     optInFastD_MAType ); 
-         static enum class TA_RetCode STOCHF( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<double>^ inHigh,
-                                              cli::array<double>^ inLow,
-                                              cli::array<double>^ inClose,
-                                              int           optInFastK_Period, /* From 1 to 100000 */
-                                              int           optInFastD_Period, /* From 1 to 100000 */
-                                              TA_MAType     optInFastD_MAType,
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outFastK,
-                                              cli::array<double>^  outFastD );
-         static enum class TA_RetCode STOCHF( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<float>^ inHigh,
-                                              cli::array<float>^ inLow,
-                                              cli::array<float>^ inClose,
-                                              int           optInFastK_Period, /* From 1 to 100000 */
-                                              int           optInFastD_Period, /* From 1 to 100000 */
-                                              TA_MAType     optInFastD_MAType,
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outFastK,
-                                              cli::array<double>^  outFastD );
-
-         #define TA_STOCHF Core::STOCHF
-         #define TA_STOCHF_Lookback Core::STOCHF_Lookback
-
-         static int STOCHRSI_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
-                                     int           optInFastK_Period, /* From 1 to 100000 */
-                                     int           optInFastD_Period, /* From 1 to 100000 */
-                                     TA_MAType     optInFastD_MAType ); 
-         static enum class TA_RetCode STOCHRSI( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<double>^ inReal,
-                                                int           optInTimePeriod, /* From 2 to 100000 */
-                                                int           optInFastK_Period, /* From 1 to 100000 */
-                                                int           optInFastD_Period, /* From 1 to 100000 */
-                                                TA_MAType     optInFastD_MAType,
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outFastK,
-                                                cli::array<double>^  outFastD );
-         static enum class TA_RetCode STOCHRSI( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<float>^ inReal,
-                                                int           optInTimePeriod, /* From 2 to 100000 */
-                                                int           optInFastK_Period, /* From 1 to 100000 */
-                                                int           optInFastD_Period, /* From 1 to 100000 */
-                                                TA_MAType     optInFastD_MAType,
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outFastK,
-                                                cli::array<double>^  outFastD );
-
-         #define TA_STOCHRSI Core::STOCHRSI
-         #define TA_STOCHRSI_Lookback Core::STOCHRSI_Lookback
-
-         static int TRIX_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode TRIX( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<double>^ inReal,
-                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-         static enum class TA_RetCode TRIX( int    startIdx,
-                                            int    endIdx,
-                                            cli::array<float>^ inReal,
-                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                            [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
-                                            cli::array<double>^  outReal );
-
-         #define TA_TRIX Core::TRIX
-         #define TA_TRIX_Lookback Core::TRIX_Lookback
-
-         static int ULTOSC_Lookback( int           optInTimePeriod1, /* From 1 to 100000 */
-                                   int           optInTimePeriod2, /* From 1 to 100000 */
-                                   int           optInTimePeriod3 );  /* From 1 to 100000 */
-
-         static enum class TA_RetCode ULTOSC( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<double>^ inHigh,
-                                              cli::array<double>^ inLow,
-                                              cli::array<double>^ inClose,
-                                              int           optInTimePeriod1, /* From 1 to 100000 */
-                                              int           optInTimePeriod2, /* From 1 to 100000 */
-                                              int           optInTimePeriod3, /* From 1 to 100000 */
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outReal );
-         static enum class TA_RetCode ULTOSC( int    startIdx,
-                                              int    endIdx,
-                                              cli::array<float>^ inHigh,
-                                              cli::array<float>^ inLow,
-                                              cli::array<float>^ inClose,
-                                              int           optInTimePeriod1, /* From 1 to 100000 */
-                                              int           optInTimePeriod2, /* From 1 to 100000 */
-                                              int           optInTimePeriod3, /* From 1 to 100000 */
-                                              [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
-                                              cli::array<double>^  outReal );
-
-         #define TA_ULTOSC Core::ULTOSC
-         #define TA_ULTOSC_Lookback Core::ULTOSC_Lookback
-
-         static int WILLR_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode WILLR( int    startIdx,
-                                             int    endIdx,
-                                             cli::array<double>^ inHigh,
-                                             cli::array<double>^ inLow,
-                                             cli::array<double>^ inClose,
-                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                             [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
-                                             cli::array<double>^  outReal );
-         static enum class TA_RetCode WILLR( int    startIdx,
-                                             int    endIdx,
-                                             cli::array<float>^ inHigh,
-                                             cli::array<float>^ inLow,
-                                             cli::array<float>^ inClose,
-                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                             [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
-                                             cli::array<double>^  outReal );
-
-         #define TA_WILLR Core::WILLR
-         #define TA_WILLR_Lookback Core::WILLR_Lookback
-
-         static int HT_DCPERIOD_Lookback( void );
-
-         static enum class TA_RetCode HT_DCPERIOD( int    startIdx,
-                                                   int    endIdx,
-                                                   cli::array<double>^ inReal,
-                                                   [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
-                                                   cli::array<double>^  outReal );
-         static enum class TA_RetCode HT_DCPERIOD( int    startIdx,
-                                                   int    endIdx,
-                                                   cli::array<float>^ inReal,
-                                                   [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
-                                                   cli::array<double>^  outReal );
-
-         #define TA_HT_DCPERIOD Core::HT_DCPERIOD
-         #define TA_HT_DCPERIOD_Lookback Core::HT_DCPERIOD_Lookback
-
-         static int HT_DCPHASE_Lookback( void );
-
-         static enum class TA_RetCode HT_DCPHASE( int    startIdx,
-                                                  int    endIdx,
-                                                  cli::array<double>^ inReal,
-                                                  [Out]int%    outBegIdx,
-                                                  [Out]int%    outNbElement,
-                                                  cli::array<double>^  outReal );
-         static enum class TA_RetCode HT_DCPHASE( int    startIdx,
-                                                  int    endIdx,
-                                                  cli::array<float>^ inReal,
-                                                  [Out]int%    outBegIdx,
-                                                  [Out]int%    outNbElement,
-                                                  cli::array<double>^  outReal );
-
-         #define TA_HT_DCPHASE Core::HT_DCPHASE
-         #define TA_HT_DCPHASE_Lookback Core::HT_DCPHASE_Lookback
-
-         static int HT_PHASOR_Lookback( void );
-
-         static enum class TA_RetCode HT_PHASOR( int    startIdx,
-                                                 int    endIdx,
-                                                 cli::array<double>^ inReal,
-                                                 [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
-                                                 cli::array<double>^  outInPhase,
-                                                 cli::array<double>^  outQuadrature );
-         static enum class TA_RetCode HT_PHASOR( int    startIdx,
-                                                 int    endIdx,
-                                                 cli::array<float>^ inReal,
-                                                 [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
-                                                 cli::array<double>^  outInPhase,
-                                                 cli::array<double>^  outQuadrature );
-
-         #define TA_HT_PHASOR Core::HT_PHASOR
-         #define TA_HT_PHASOR_Lookback Core::HT_PHASOR_Lookback
-
-         static int HT_SINE_Lookback( void );
-
-         static enum class TA_RetCode HT_SINE( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<double>^ inReal,
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outSine,
-                                               cli::array<double>^  outLeadSine );
-         static enum class TA_RetCode HT_SINE( int    startIdx,
-                                               int    endIdx,
-                                               cli::array<float>^ inReal,
-                                               [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
-                                               cli::array<double>^  outSine,
-                                               cli::array<double>^  outLeadSine );
-
-         #define TA_HT_SINE Core::HT_SINE
-         #define TA_HT_SINE_Lookback Core::HT_SINE_Lookback
-
-         static int HT_TRENDMODE_Lookback( void );
-
-         static enum class TA_RetCode HT_TRENDMODE( int    startIdx,
-                                                    int    endIdx,
-                                                    cli::array<double>^ inReal,
-                                                    [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
-                                                    cli::array<int>^  outInteger );
-         static enum class TA_RetCode HT_TRENDMODE( int    startIdx,
-                                                    int    endIdx,
-                                                    cli::array<float>^ inReal,
-                                                    [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
-                                                    cli::array<int>^  outInteger );
-
-         #define TA_HT_TRENDMODE Core::HT_TRENDMODE
-         #define TA_HT_TRENDMODE_Lookback Core::HT_TRENDMODE_Lookback
-
-         static int AD_Lookback( void );
-
-         static enum class TA_RetCode AD( int    startIdx,
-                                          int    endIdx,
-                                          cli::array<double>^ inHigh,
-                                          cli::array<double>^ inLow,
-                                          cli::array<double>^ inClose,
-                                          cli::array<double>^ inVolume,
-                                          [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
-                                          cli::array<double>^  outReal );
-         static enum class TA_RetCode AD( int    startIdx,
-                                          int    endIdx,
-                                          cli::array<float>^ inHigh,
-                                          cli::array<float>^ inLow,
-                                          cli::array<float>^ inClose,
-                                          cli::array<float>^ inVolume,
-                                          [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
-                                          cli::array<double>^  outReal );
-
-         #define TA_AD Core::AD
-         #define TA_AD_Lookback Core::AD_Lookback
-
-         static int ADOSC_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                                  int           optInSlowPeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode ADOSC( int    startIdx,
-                                             int    endIdx,
-                                             cli::array<double>^ inHigh,
-                                             cli::array<double>^ inLow,
-                                             cli::array<double>^ inClose,
-                                             cli::array<double>^ inVolume,
-                                             int           optInFastPeriod, /* From 2 to 100000 */
-                                             int           optInSlowPeriod, /* From 2 to 100000 */
-                                             [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
-                                             cli::array<double>^  outReal );
-         static enum class TA_RetCode ADOSC( int    startIdx,
-                                             int    endIdx,
-                                             cli::array<float>^ inHigh,
-                                             cli::array<float>^ inLow,
-                                             cli::array<float>^ inClose,
-                                             cli::array<float>^ inVolume,
-                                             int           optInFastPeriod, /* From 2 to 100000 */
-                                             int           optInSlowPeriod, /* From 2 to 100000 */
-                                             [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
-                                             cli::array<double>^  outReal );
-
-         #define TA_ADOSC Core::ADOSC
-         #define TA_ADOSC_Lookback Core::ADOSC_Lookback
-
-         static int OBV_Lookback( void );
-
-         static enum class TA_RetCode OBV( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<double>^ inReal,
-                                           cli::array<double>^ inVolume,
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-         static enum class TA_RetCode OBV( int    startIdx,
-                                           int    endIdx,
-                                           cli::array<float>^ inReal,
-                                           cli::array<float>^ inVolume,
-                                           [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
-                                           cli::array<double>^  outReal );
-
-         #define TA_OBV Core::OBV
-         #define TA_OBV_Lookback Core::OBV_Lookback
 
          static int CDL2CROWS_Lookback( void );
 
@@ -2676,6 +1571,30 @@ namespace TicTacTec
          #define TA_CDLMARUBOZU Core::CDLMARUBOZU
          #define TA_CDLMARUBOZU_Lookback Core::CDLMARUBOZU_Lookback
 
+         static int CDLMATCHINGLOW_Lookback( void );
+
+         static enum class TA_RetCode CDLMATCHINGLOW( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<double>^ inOpen,
+                                                      cli::array<double>^ inHigh,
+                                                      cli::array<double>^ inLow,
+                                                      cli::array<double>^ inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
+                                                      cli::array<int>^  outInteger );
+         static enum class TA_RetCode CDLMATCHINGLOW( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<float>^ inOpen,
+                                                      cli::array<float>^ inHigh,
+                                                      cli::array<float>^ inLow,
+                                                      cli::array<float>^ inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNbElement,
+                                                      cli::array<int>^  outInteger );
+
+         #define TA_CDLMATCHINGLOW Core::CDLMATCHINGLOW
+         #define TA_CDLMATCHINGLOW_Lookback Core::CDLMATCHINGLOW_Lookback
+
          static int CDLMATHOLD_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
          static enum class TA_RetCode CDLMATHOLD( int    startIdx,
@@ -2701,30 +1620,6 @@ namespace TicTacTec
 
          #define TA_CDLMATHOLD Core::CDLMATHOLD
          #define TA_CDLMATHOLD_Lookback Core::CDLMATHOLD_Lookback
-
-         static int CDLMATCHINGLOW_Lookback( void );
-
-         static enum class TA_RetCode CDLMATCHINGLOW( int    startIdx,
-                                                      int    endIdx,
-                                                      cli::array<double>^ inOpen,
-                                                      cli::array<double>^ inHigh,
-                                                      cli::array<double>^ inLow,
-                                                      cli::array<double>^ inClose,
-                                                      [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
-                                                      cli::array<int>^  outInteger );
-         static enum class TA_RetCode CDLMATCHINGLOW( int    startIdx,
-                                                      int    endIdx,
-                                                      cli::array<float>^ inOpen,
-                                                      cli::array<float>^ inHigh,
-                                                      cli::array<float>^ inLow,
-                                                      cli::array<float>^ inClose,
-                                                      [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
-                                                      cli::array<int>^  outInteger );
-
-         #define TA_CDLMATCHINGLOW Core::CDLMATCHINGLOW
-         #define TA_CDLMATCHINGLOW_Lookback Core::CDLMATCHINGLOW_Lookback
 
          static int CDLMORNINGDOJISTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
@@ -3186,6 +2081,26 @@ namespace TicTacTec
          #define TA_CDLXSIDEGAP3METHODS Core::CDLXSIDEGAP3METHODS
          #define TA_CDLXSIDEGAP3METHODS_Lookback Core::CDLXSIDEGAP3METHODS_Lookback
 
+         static int CMO_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode CMO( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode CMO( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_CMO Core::CMO
+         #define TA_CMO_Lookback Core::CMO_Lookback
+
          static int CORREL_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
          static enum class TA_RetCode CORREL( int    startIdx,
@@ -3208,6 +2123,202 @@ namespace TicTacTec
          #define TA_CORREL Core::CORREL
          #define TA_CORREL_Lookback Core::CORREL_Lookback
 
+         static int DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode DEMA( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+         static enum class TA_RetCode DEMA( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inReal,
+                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+
+         #define TA_DEMA Core::DEMA
+         #define TA_DEMA_Lookback Core::DEMA_Lookback
+
+         static int DX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode DX( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inHigh,
+                                          cli::array<double>^ inLow,
+                                          cli::array<double>^ inClose,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
+                                          cli::array<double>^  outReal );
+         static enum class TA_RetCode DX( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<float>^ inHigh,
+                                          cli::array<float>^ inLow,
+                                          cli::array<float>^ inClose,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
+                                          cli::array<double>^  outReal );
+
+         #define TA_DX Core::DX
+         #define TA_DX_Lookback Core::DX_Lookback
+
+         static int EMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode EMA( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode EMA( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_EMA Core::EMA
+         #define TA_EMA_Lookback Core::EMA_Lookback
+
+         static int HT_DCPERIOD_Lookback( void );
+
+         static enum class TA_RetCode HT_DCPERIOD( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inReal,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
+                                                   cli::array<double>^  outReal );
+         static enum class TA_RetCode HT_DCPERIOD( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<float>^ inReal,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
+                                                   cli::array<double>^  outReal );
+
+         #define TA_HT_DCPERIOD Core::HT_DCPERIOD
+         #define TA_HT_DCPERIOD_Lookback Core::HT_DCPERIOD_Lookback
+
+         static int HT_DCPHASE_Lookback( void );
+
+         static enum class TA_RetCode HT_DCPHASE( int    startIdx,
+                                                  int    endIdx,
+                                                  cli::array<double>^ inReal,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
+                                                  cli::array<double>^  outReal );
+         static enum class TA_RetCode HT_DCPHASE( int    startIdx,
+                                                  int    endIdx,
+                                                  cli::array<float>^ inReal,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNbElement,
+                                                  cli::array<double>^  outReal );
+
+         #define TA_HT_DCPHASE Core::HT_DCPHASE
+         #define TA_HT_DCPHASE_Lookback Core::HT_DCPHASE_Lookback
+
+         static int HT_PHASOR_Lookback( void );
+
+         static enum class TA_RetCode HT_PHASOR( int    startIdx,
+                                                 int    endIdx,
+                                                 cli::array<double>^ inReal,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
+                                                 cli::array<double>^  outInPhase,
+                                                 cli::array<double>^  outQuadrature );
+         static enum class TA_RetCode HT_PHASOR( int    startIdx,
+                                                 int    endIdx,
+                                                 cli::array<float>^ inReal,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNbElement,
+                                                 cli::array<double>^  outInPhase,
+                                                 cli::array<double>^  outQuadrature );
+
+         #define TA_HT_PHASOR Core::HT_PHASOR
+         #define TA_HT_PHASOR_Lookback Core::HT_PHASOR_Lookback
+
+         static int HT_SINE_Lookback( void );
+
+         static enum class TA_RetCode HT_SINE( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inReal,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outSine,
+                                               cli::array<double>^  outLeadSine );
+         static enum class TA_RetCode HT_SINE( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<float>^ inReal,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outSine,
+                                               cli::array<double>^  outLeadSine );
+
+         #define TA_HT_SINE Core::HT_SINE
+         #define TA_HT_SINE_Lookback Core::HT_SINE_Lookback
+
+         static int HT_TRENDLINE_Lookback( void );
+
+         static enum class TA_RetCode HT_TRENDLINE( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<double>^ inReal,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
+                                                    cli::array<double>^  outReal );
+         static enum class TA_RetCode HT_TRENDLINE( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<float>^ inReal,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
+                                                    cli::array<double>^  outReal );
+
+         #define TA_HT_TRENDLINE Core::HT_TRENDLINE
+         #define TA_HT_TRENDLINE_Lookback Core::HT_TRENDLINE_Lookback
+
+         static int HT_TRENDMODE_Lookback( void );
+
+         static enum class TA_RetCode HT_TRENDMODE( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<double>^ inReal,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
+                                                    cli::array<int>^  outInteger );
+         static enum class TA_RetCode HT_TRENDMODE( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<float>^ inReal,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNbElement,
+                                                    cli::array<int>^  outInteger );
+
+         #define TA_HT_TRENDMODE Core::HT_TRENDMODE
+         #define TA_HT_TRENDMODE_Lookback Core::HT_TRENDMODE_Lookback
+
+         static int KAMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode KAMA( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+         static enum class TA_RetCode KAMA( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inReal,
+                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+
+         #define TA_KAMA Core::KAMA
+         #define TA_KAMA_Lookback Core::KAMA_Lookback
+
          static int LINEARREG_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          static enum class TA_RetCode LINEARREG( int    startIdx,
@@ -3227,26 +2338,6 @@ namespace TicTacTec
 
          #define TA_LINEARREG Core::LINEARREG
          #define TA_LINEARREG_Lookback Core::LINEARREG_Lookback
-
-         static int LINEARREG_SLOPE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
-
-         static enum class TA_RetCode LINEARREG_SLOPE( int    startIdx,
-                                                       int    endIdx,
-                                                       cli::array<double>^ inReal,
-                                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                                       [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
-                                                       cli::array<double>^  outReal );
-         static enum class TA_RetCode LINEARREG_SLOPE( int    startIdx,
-                                                       int    endIdx,
-                                                       cli::array<float>^ inReal,
-                                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                                       [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
-                                                       cli::array<double>^  outReal );
-
-         #define TA_LINEARREG_SLOPE Core::LINEARREG_SLOPE
-         #define TA_LINEARREG_SLOPE_Lookback Core::LINEARREG_SLOPE_Lookback
 
          static int LINEARREG_ANGLE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
@@ -3288,6 +2379,662 @@ namespace TicTacTec
          #define TA_LINEARREG_INTERCEPT Core::LINEARREG_INTERCEPT
          #define TA_LINEARREG_INTERCEPT_Lookback Core::LINEARREG_INTERCEPT_Lookback
 
+         static int LINEARREG_SLOPE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode LINEARREG_SLOPE( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inReal,
+                                                       int           optInTimePeriod, /* From 2 to 100000 */
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
+                                                       cli::array<double>^  outReal );
+         static enum class TA_RetCode LINEARREG_SLOPE( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<float>^ inReal,
+                                                       int           optInTimePeriod, /* From 2 to 100000 */
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNbElement,
+                                                       cli::array<double>^  outReal );
+
+         #define TA_LINEARREG_SLOPE Core::LINEARREG_SLOPE
+         #define TA_LINEARREG_SLOPE_Lookback Core::LINEARREG_SLOPE_Lookback
+
+         static int MA_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                               TA_MAType     optInMAType ); 
+         static enum class TA_RetCode MA( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inReal,
+                                          int           optInTimePeriod, /* From 1 to 100000 */
+                                          TA_MAType     optInMAType,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
+                                          cli::array<double>^  outReal );
+         static enum class TA_RetCode MA( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<float>^ inReal,
+                                          int           optInTimePeriod, /* From 1 to 100000 */
+                                          TA_MAType     optInMAType,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
+                                          cli::array<double>^  outReal );
+
+         #define TA_MA Core::MA
+         #define TA_MA_Lookback Core::MA_Lookback
+
+         static int MACD_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                                 int           optInSlowPeriod, /* From 2 to 100000 */
+                                 int           optInSignalPeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode MACD( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInFastPeriod, /* From 2 to 100000 */
+                                            int           optInSlowPeriod, /* From 2 to 100000 */
+                                            int           optInSignalPeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outMACD,
+                                            cli::array<double>^  outMACDSignal,
+                                            cli::array<double>^  outMACDHist );
+         static enum class TA_RetCode MACD( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inReal,
+                                            int           optInFastPeriod, /* From 2 to 100000 */
+                                            int           optInSlowPeriod, /* From 2 to 100000 */
+                                            int           optInSignalPeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outMACD,
+                                            cli::array<double>^  outMACDSignal,
+                                            cli::array<double>^  outMACDHist );
+
+         #define TA_MACD Core::MACD
+         #define TA_MACD_Lookback Core::MACD_Lookback
+
+         static int MACDEXT_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                                    TA_MAType     optInFastMAType,
+                                    int           optInSlowPeriod, /* From 2 to 100000 */
+                                    TA_MAType     optInSlowMAType,
+                                    int           optInSignalPeriod, /* From 1 to 100000 */
+                                    TA_MAType     optInSignalMAType ); 
+         static enum class TA_RetCode MACDEXT( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inReal,
+                                               int           optInFastPeriod, /* From 2 to 100000 */
+                                               TA_MAType     optInFastMAType,
+                                               int           optInSlowPeriod, /* From 2 to 100000 */
+                                               TA_MAType     optInSlowMAType,
+                                               int           optInSignalPeriod, /* From 1 to 100000 */
+                                               TA_MAType     optInSignalMAType,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outMACD,
+                                               cli::array<double>^  outMACDSignal,
+                                               cli::array<double>^  outMACDHist );
+         static enum class TA_RetCode MACDEXT( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<float>^ inReal,
+                                               int           optInFastPeriod, /* From 2 to 100000 */
+                                               TA_MAType     optInFastMAType,
+                                               int           optInSlowPeriod, /* From 2 to 100000 */
+                                               TA_MAType     optInSlowMAType,
+                                               int           optInSignalPeriod, /* From 1 to 100000 */
+                                               TA_MAType     optInSignalMAType,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outMACD,
+                                               cli::array<double>^  outMACDSignal,
+                                               cli::array<double>^  outMACDHist );
+
+         #define TA_MACDEXT Core::MACDEXT
+         #define TA_MACDEXT_Lookback Core::MACDEXT_Lookback
+
+         static int MACDFIX_Lookback( int           optInSignalPeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode MACDFIX( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inReal,
+                                               int           optInSignalPeriod, /* From 1 to 100000 */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outMACD,
+                                               cli::array<double>^  outMACDSignal,
+                                               cli::array<double>^  outMACDHist );
+         static enum class TA_RetCode MACDFIX( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<float>^ inReal,
+                                               int           optInSignalPeriod, /* From 1 to 100000 */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outMACD,
+                                               cli::array<double>^  outMACDSignal,
+                                               cli::array<double>^  outMACDHist );
+
+         #define TA_MACDFIX Core::MACDFIX
+         #define TA_MACDFIX_Lookback Core::MACDFIX_Lookback
+
+         static int MAMA_Lookback( double        optInFastLimit, /* From 0.01 to 0.99 */
+                                 double        optInSlowLimit );  /* From 0.01 to 0.99 */
+
+         static enum class TA_RetCode MAMA( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            double        optInFastLimit, /* From 0.01 to 0.99 */
+                                            double        optInSlowLimit, /* From 0.01 to 0.99 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outMAMA,
+                                            cli::array<double>^  outFAMA );
+         static enum class TA_RetCode MAMA( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inReal,
+                                            double        optInFastLimit, /* From 0.01 to 0.99 */
+                                            double        optInSlowLimit, /* From 0.01 to 0.99 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outMAMA,
+                                            cli::array<double>^  outFAMA );
+
+         #define TA_MAMA Core::MAMA
+         #define TA_MAMA_Lookback Core::MAMA_Lookback
+
+         static int MAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MAX( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode MAX( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_MAX Core::MAX
+         #define TA_MAX_Lookback Core::MAX_Lookback
+
+         static int MEDPRICE_Lookback( void );
+
+         static enum class TA_RetCode MEDPRICE( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+         static enum class TA_RetCode MEDPRICE( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inHigh,
+                                                cli::array<float>^ inLow,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+
+         #define TA_MEDPRICE Core::MEDPRICE
+         #define TA_MEDPRICE_Lookback Core::MEDPRICE_Lookback
+
+         static int MFI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MFI( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           cli::array<double>^ inClose,
+                                           cli::array<double>^ inVolume,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode MFI( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inHigh,
+                                           cli::array<float>^ inLow,
+                                           cli::array<float>^ inClose,
+                                           cli::array<float>^ inVolume,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_MFI Core::MFI
+         #define TA_MFI_Lookback Core::MFI_Lookback
+
+         static int MIDPOINT_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MIDPOINT( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+         static enum class TA_RetCode MIDPOINT( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+
+         #define TA_MIDPOINT Core::MIDPOINT
+         #define TA_MIDPOINT_Lookback Core::MIDPOINT_Lookback
+
+         static int MIDPRICE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MIDPRICE( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+         static enum class TA_RetCode MIDPRICE( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inHigh,
+                                                cli::array<float>^ inLow,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+
+         #define TA_MIDPRICE Core::MIDPRICE
+         #define TA_MIDPRICE_Lookback Core::MIDPRICE_Lookback
+
+         static int MIN_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MIN( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode MIN( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_MIN Core::MIN
+         #define TA_MIN_Lookback Core::MIN_Lookback
+
+         static int MINUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode MINUS_DI( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                int           optInTimePeriod, /* From 1 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+         static enum class TA_RetCode MINUS_DI( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inHigh,
+                                                cli::array<float>^ inLow,
+                                                cli::array<float>^ inClose,
+                                                int           optInTimePeriod, /* From 1 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+
+         #define TA_MINUS_DI Core::MINUS_DI
+         #define TA_MINUS_DI_Lookback Core::MINUS_DI_Lookback
+
+         static int MINUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode MINUS_DM( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                int           optInTimePeriod, /* From 1 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+         static enum class TA_RetCode MINUS_DM( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inHigh,
+                                                cli::array<float>^ inLow,
+                                                int           optInTimePeriod, /* From 1 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+
+         #define TA_MINUS_DM Core::MINUS_DM
+         #define TA_MINUS_DM_Lookback Core::MINUS_DM_Lookback
+
+         static int MOM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode MOM( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode MOM( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_MOM Core::MOM
+         #define TA_MOM_Lookback Core::MOM_Lookback
+
+         static int NATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode NATR( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inHigh,
+                                            cli::array<double>^ inLow,
+                                            cli::array<double>^ inClose,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+         static enum class TA_RetCode NATR( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inHigh,
+                                            cli::array<float>^ inLow,
+                                            cli::array<float>^ inClose,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+
+         #define TA_NATR Core::NATR
+         #define TA_NATR_Lookback Core::NATR_Lookback
+
+         static int OBV_Lookback( void );
+
+         static enum class TA_RetCode OBV( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           cli::array<double>^ inVolume,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode OBV( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           cli::array<float>^ inVolume,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_OBV Core::OBV
+         #define TA_OBV_Lookback Core::OBV_Lookback
+
+         static int PLUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode PLUS_DI( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inHigh,
+                                               cli::array<double>^ inLow,
+                                               cli::array<double>^ inClose,
+                                               int           optInTimePeriod, /* From 1 to 100000 */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outReal );
+         static enum class TA_RetCode PLUS_DI( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<float>^ inHigh,
+                                               cli::array<float>^ inLow,
+                                               cli::array<float>^ inClose,
+                                               int           optInTimePeriod, /* From 1 to 100000 */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outReal );
+
+         #define TA_PLUS_DI Core::PLUS_DI
+         #define TA_PLUS_DI_Lookback Core::PLUS_DI_Lookback
+
+         static int PLUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode PLUS_DM( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inHigh,
+                                               cli::array<double>^ inLow,
+                                               int           optInTimePeriod, /* From 1 to 100000 */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outReal );
+         static enum class TA_RetCode PLUS_DM( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<float>^ inHigh,
+                                               cli::array<float>^ inLow,
+                                               int           optInTimePeriod, /* From 1 to 100000 */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outReal );
+
+         #define TA_PLUS_DM Core::PLUS_DM
+         #define TA_PLUS_DM_Lookback Core::PLUS_DM_Lookback
+
+         static int PPO_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                                int           optInSlowPeriod, /* From 2 to 100000 */
+                                TA_MAType     optInMAType ); 
+         static enum class TA_RetCode PPO( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInFastPeriod, /* From 2 to 100000 */
+                                           int           optInSlowPeriod, /* From 2 to 100000 */
+                                           TA_MAType     optInMAType,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode PPO( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInFastPeriod, /* From 2 to 100000 */
+                                           int           optInSlowPeriod, /* From 2 to 100000 */
+                                           TA_MAType     optInMAType,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_PPO Core::PPO
+         #define TA_PPO_Lookback Core::PPO_Lookback
+
+         static int ROC_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode ROC( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode ROC( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_ROC Core::ROC
+         #define TA_ROC_Lookback Core::ROC_Lookback
+
+         static int ROCP_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode ROCP( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+         static enum class TA_RetCode ROCP( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inReal,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+
+         #define TA_ROCP Core::ROCP
+         #define TA_ROCP_Lookback Core::ROCP_Lookback
+
+         static int ROCR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode ROCR( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+         static enum class TA_RetCode ROCR( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inReal,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+
+         #define TA_ROCR Core::ROCR
+         #define TA_ROCR_Lookback Core::ROCR_Lookback
+
+         static int ROCR100_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode ROCR100( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inReal,
+                                               int           optInTimePeriod, /* From 1 to 100000 */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outReal );
+         static enum class TA_RetCode ROCR100( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<float>^ inReal,
+                                               int           optInTimePeriod, /* From 1 to 100000 */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNbElement,
+                                               cli::array<double>^  outReal );
+
+         #define TA_ROCR100 Core::ROCR100
+         #define TA_ROCR100_Lookback Core::ROCR100_Lookback
+
+         static int RSI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode RSI( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode RSI( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_RSI Core::RSI
+         #define TA_RSI_Lookback Core::RSI_Lookback
+
+         static int SAR_Lookback( double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+                                double        optInMaximum );  /* From 0 to TA_REAL_MAX */
+
+         static enum class TA_RetCode SAR( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+                                           double        optInMaximum, /* From 0 to TA_REAL_MAX */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode SAR( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inHigh,
+                                           cli::array<float>^ inLow,
+                                           double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+                                           double        optInMaximum, /* From 0 to TA_REAL_MAX */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_SAR Core::SAR
+         #define TA_SAR_Lookback Core::SAR_Lookback
+
+         static int SAREXT_Lookback( double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                   double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+                                   double        optInAccelerationMaxShort );  /* From 0 to TA_REAL_MAX */
+
+         static enum class TA_RetCode SAREXT( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                              double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outReal );
+         static enum class TA_RetCode SAREXT( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<float>^ inHigh,
+                                              cli::array<float>^ inLow,
+                                              double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                              double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+                                              double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outReal );
+
+         #define TA_SAREXT Core::SAREXT
+         #define TA_SAREXT_Lookback Core::SAREXT_Lookback
+
+         static int SMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode SMA( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode SMA( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_SMA Core::SMA
+         #define TA_SMA_Lookback Core::SMA_Lookback
+
          static int STDDEV_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                                    double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
 
@@ -3311,6 +3058,229 @@ namespace TicTacTec
          #define TA_STDDEV Core::STDDEV
          #define TA_STDDEV_Lookback Core::STDDEV_Lookback
 
+         static int STOCH_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
+                                  int           optInSlowK_Period, /* From 1 to 100000 */
+                                  TA_MAType     optInSlowK_MAType,
+                                  int           optInSlowD_Period, /* From 1 to 100000 */
+                                  TA_MAType     optInSlowD_MAType ); 
+         static enum class TA_RetCode STOCH( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             cli::array<double>^ inClose,
+                                             int           optInFastK_Period, /* From 1 to 100000 */
+                                             int           optInSlowK_Period, /* From 1 to 100000 */
+                                             TA_MAType     optInSlowK_MAType,
+                                             int           optInSlowD_Period, /* From 1 to 100000 */
+                                             TA_MAType     optInSlowD_MAType,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
+                                             cli::array<double>^  outSlowK,
+                                             cli::array<double>^  outSlowD );
+         static enum class TA_RetCode STOCH( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<float>^ inHigh,
+                                             cli::array<float>^ inLow,
+                                             cli::array<float>^ inClose,
+                                             int           optInFastK_Period, /* From 1 to 100000 */
+                                             int           optInSlowK_Period, /* From 1 to 100000 */
+                                             TA_MAType     optInSlowK_MAType,
+                                             int           optInSlowD_Period, /* From 1 to 100000 */
+                                             TA_MAType     optInSlowD_MAType,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
+                                             cli::array<double>^  outSlowK,
+                                             cli::array<double>^  outSlowD );
+
+         #define TA_STOCH Core::STOCH
+         #define TA_STOCH_Lookback Core::STOCH_Lookback
+
+         static int STOCHF_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
+                                   int           optInFastD_Period, /* From 1 to 100000 */
+                                   TA_MAType     optInFastD_MAType ); 
+         static enum class TA_RetCode STOCHF( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              int           optInFastK_Period, /* From 1 to 100000 */
+                                              int           optInFastD_Period, /* From 1 to 100000 */
+                                              TA_MAType     optInFastD_MAType,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outFastK,
+                                              cli::array<double>^  outFastD );
+         static enum class TA_RetCode STOCHF( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<float>^ inHigh,
+                                              cli::array<float>^ inLow,
+                                              cli::array<float>^ inClose,
+                                              int           optInFastK_Period, /* From 1 to 100000 */
+                                              int           optInFastD_Period, /* From 1 to 100000 */
+                                              TA_MAType     optInFastD_MAType,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outFastK,
+                                              cli::array<double>^  outFastD );
+
+         #define TA_STOCHF Core::STOCHF
+         #define TA_STOCHF_Lookback Core::STOCHF_Lookback
+
+         static int STOCHRSI_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+                                     int           optInFastK_Period, /* From 1 to 100000 */
+                                     int           optInFastD_Period, /* From 1 to 100000 */
+                                     TA_MAType     optInFastD_MAType ); 
+         static enum class TA_RetCode STOCHRSI( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                int           optInFastK_Period, /* From 1 to 100000 */
+                                                int           optInFastD_Period, /* From 1 to 100000 */
+                                                TA_MAType     optInFastD_MAType,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outFastK,
+                                                cli::array<double>^  outFastD );
+         static enum class TA_RetCode STOCHRSI( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                int           optInFastK_Period, /* From 1 to 100000 */
+                                                int           optInFastD_Period, /* From 1 to 100000 */
+                                                TA_MAType     optInFastD_MAType,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outFastK,
+                                                cli::array<double>^  outFastD );
+
+         #define TA_STOCHRSI Core::STOCHRSI
+         #define TA_STOCHRSI_Lookback Core::STOCHRSI_Lookback
+
+         static int SUM_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode SUM( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode SUM( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_SUM Core::SUM
+         #define TA_SUM_Lookback Core::SUM_Lookback
+
+         static int T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+                               double        optInVFactor );  /* From 0 to 1 */
+
+         static enum class TA_RetCode T3( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inReal,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          double        optInVFactor, /* From 0 to 1 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
+                                          cli::array<double>^  outReal );
+         static enum class TA_RetCode T3( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<float>^ inReal,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          double        optInVFactor, /* From 0 to 1 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNbElement,
+                                          cli::array<double>^  outReal );
+
+         #define TA_T3 Core::T3
+         #define TA_T3_Lookback Core::T3_Lookback
+
+         static int TEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode TEMA( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+         static enum class TA_RetCode TEMA( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inReal,
+                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+
+         #define TA_TEMA Core::TEMA
+         #define TA_TEMA_Lookback Core::TEMA_Lookback
+
+         static int TRANGE_Lookback( void );
+
+         static enum class TA_RetCode TRANGE( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outReal );
+         static enum class TA_RetCode TRANGE( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<float>^ inHigh,
+                                              cli::array<float>^ inLow,
+                                              cli::array<float>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outReal );
+
+         #define TA_TRANGE Core::TRANGE
+         #define TA_TRANGE_Lookback Core::TRANGE_Lookback
+
+         static int TRIMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode TRIMA( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
+                                             cli::array<double>^  outReal );
+         static enum class TA_RetCode TRIMA( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<float>^ inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
+                                             cli::array<double>^  outReal );
+
+         #define TA_TRIMA Core::TRIMA
+         #define TA_TRIMA_Lookback Core::TRIMA_Lookback
+
+         static int TRIX_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode TRIX( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+         static enum class TA_RetCode TRIX( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<float>^ inReal,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNbElement,
+                                            cli::array<double>^  outReal );
+
+         #define TA_TRIX Core::TRIX
+         #define TA_TRIX_Lookback Core::TRIX_Lookback
+
          static int TSF_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          static enum class TA_RetCode TSF( int    startIdx,
@@ -3330,6 +3300,58 @@ namespace TicTacTec
 
          #define TA_TSF Core::TSF
          #define TA_TSF_Lookback Core::TSF_Lookback
+
+         static int TYPPRICE_Lookback( void );
+
+         static enum class TA_RetCode TYPPRICE( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+         static enum class TA_RetCode TYPPRICE( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inHigh,
+                                                cli::array<float>^ inLow,
+                                                cli::array<float>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<double>^  outReal );
+
+         #define TA_TYPPRICE Core::TYPPRICE
+         #define TA_TYPPRICE_Lookback Core::TYPPRICE_Lookback
+
+         static int ULTOSC_Lookback( int           optInTimePeriod1, /* From 1 to 100000 */
+                                   int           optInTimePeriod2, /* From 1 to 100000 */
+                                   int           optInTimePeriod3 );  /* From 1 to 100000 */
+
+         static enum class TA_RetCode ULTOSC( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              int           optInTimePeriod1, /* From 1 to 100000 */
+                                              int           optInTimePeriod2, /* From 1 to 100000 */
+                                              int           optInTimePeriod3, /* From 1 to 100000 */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outReal );
+         static enum class TA_RetCode ULTOSC( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<float>^ inHigh,
+                                              cli::array<float>^ inLow,
+                                              cli::array<float>^ inClose,
+                                              int           optInTimePeriod1, /* From 1 to 100000 */
+                                              int           optInTimePeriod2, /* From 1 to 100000 */
+                                              int           optInTimePeriod3, /* From 1 to 100000 */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outReal );
+
+         #define TA_ULTOSC Core::ULTOSC
+         #define TA_ULTOSC_Lookback Core::ULTOSC_Lookback
 
          static int VAR_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
                                 double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
@@ -3354,72 +3376,6 @@ namespace TicTacTec
          #define TA_VAR Core::VAR
          #define TA_VAR_Lookback Core::VAR_Lookback
 
-         static int AVGPRICE_Lookback( void );
-
-         static enum class TA_RetCode AVGPRICE( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<double>^ inOpen,
-                                                cli::array<double>^ inHigh,
-                                                cli::array<double>^ inLow,
-                                                cli::array<double>^ inClose,
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-         static enum class TA_RetCode AVGPRICE( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<float>^ inOpen,
-                                                cli::array<float>^ inHigh,
-                                                cli::array<float>^ inLow,
-                                                cli::array<float>^ inClose,
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-
-         #define TA_AVGPRICE Core::AVGPRICE
-         #define TA_AVGPRICE_Lookback Core::AVGPRICE_Lookback
-
-         static int MEDPRICE_Lookback( void );
-
-         static enum class TA_RetCode MEDPRICE( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<double>^ inHigh,
-                                                cli::array<double>^ inLow,
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-         static enum class TA_RetCode MEDPRICE( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<float>^ inHigh,
-                                                cli::array<float>^ inLow,
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-
-         #define TA_MEDPRICE Core::MEDPRICE
-         #define TA_MEDPRICE_Lookback Core::MEDPRICE_Lookback
-
-         static int TYPPRICE_Lookback( void );
-
-         static enum class TA_RetCode TYPPRICE( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<double>^ inHigh,
-                                                cli::array<double>^ inLow,
-                                                cli::array<double>^ inClose,
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-         static enum class TA_RetCode TYPPRICE( int    startIdx,
-                                                int    endIdx,
-                                                cli::array<float>^ inHigh,
-                                                cli::array<float>^ inLow,
-                                                cli::array<float>^ inClose,
-                                                [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
-                                                cli::array<double>^  outReal );
-
-         #define TA_TYPPRICE Core::TYPPRICE
-         #define TA_TYPPRICE_Lookback Core::TYPPRICE_Lookback
-
          static int WCLPRICE_Lookback( void );
 
          static enum class TA_RetCode WCLPRICE( int    startIdx,
@@ -3441,6 +3397,50 @@ namespace TicTacTec
 
          #define TA_WCLPRICE Core::WCLPRICE
          #define TA_WCLPRICE_Lookback Core::WCLPRICE_Lookback
+
+         static int WILLR_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode WILLR( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             cli::array<double>^ inClose,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
+                                             cli::array<double>^  outReal );
+         static enum class TA_RetCode WILLR( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<float>^ inHigh,
+                                             cli::array<float>^ inLow,
+                                             cli::array<float>^ inClose,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNbElement,
+                                             cli::array<double>^  outReal );
+
+         #define TA_WILLR Core::WILLR
+         #define TA_WILLR_Lookback Core::WILLR_Lookback
+
+         static int WMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode WMA( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+         static enum class TA_RetCode WMA( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNbElement,
+                                           cli::array<double>^  outReal );
+
+         #define TA_WMA Core::WMA
+         #define TA_WMA_Lookback Core::WMA_Lookback
 
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
 
