@@ -102,7 +102,7 @@ typedef struct {} TA_FuncHandle;
 %immutable name;
 %immutable group;
 %immutable hint;
-%immutable helpFile;
+%immutable camelCaseName;
 %immutable flags;
 %immutable nbInput;
 %immutable nbOptInput;

@@ -5,7 +5,7 @@ package Finance::TA;
 
 use strict;
 
-our $VERSION = v0.2;
+our $VERSION = v0.3.0;
 
 package Finance::TA::TA_RetCodeInfo;
 

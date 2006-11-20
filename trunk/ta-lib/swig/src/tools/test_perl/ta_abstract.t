@@ -6,9 +6,9 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 81 }
+BEGIN { plan tests => 79 }
 
-use Finance::TA v0.2;
+use Finance::TA v0.3.0;
 
 print "TA-Lib ", TA_GetVersionString(), "\n";
 print "Testing ta_abstract...\n";
@@ -36,9 +36,9 @@ my ($fh, $fi);
 ok( TA_GetFuncHandle("BBANDS", \$fh), $TA_SUCCESS );
 ok( TA_GetFuncInfo($fh, \$fi), $TA_SUCCESS );
 ok( $fi->{name}, "BBANDS" );
+ok( $fi->{camelCaseName}, "Bbands" );
 ok( $fi->{group}, "Overlap Studies" );
 ok( $fi->{hint}, "Bollinger Bands" );
-ok( $fi->{helpFile}, undef );
 ok( $fi->{flags}, $TA_FUNC_FLG_OVERLAP );
 ok( $fi->{nbInput}, 1 );
 ok( $fi->{nbOptInput}, 4 );
@@ -71,7 +71,6 @@ ok( $info->{dataSet}{suggested_end}, 2.0 );
 ok( $info->{dataSet}{suggested_increment}, 0.2 );
 ok( $info->{defaultValue}, 2 );
 ok( $info->{hint}, qr/Deviation/ );
-ok( $info->{helpFile}, undef );
 
 # The same test as above, but using the object interface
 print "Testing func info (object-oriented)...\n";
@@ -86,7 +85,7 @@ ok( defined $fi );
 ok( $fi->{name}, "STOCH" );
 ok( $fi->{group}, "Momentum Indicators" );
 ok( $fi->{hint}, "Stochastic" );
-ok( $fi->{helpFile}, undef );
+ok( $fi->{camelCaseName}, "Stoch");
 ok( $fi->{flags}, 0 );
 ok( $fi->{nbInput}, 1 );
 ok( $fi->{nbOptInput}, 5 );
@@ -115,7 +114,6 @@ ok( $info->{dataSet}{data}[6]{string}, "KAMA" );
 ok( $info->{dataSet}{data}[6]{value}, $TA_MAType_KAMA );
 ok( $info->{defaultValue}, $TA_MAType_SMA );
 ok( $info->{hint}, qr/Moving Average/ );
-ok( $info->{helpFile}, undef );
 
 print "Testing calling function by name...\n";
 no strict 'refs';
