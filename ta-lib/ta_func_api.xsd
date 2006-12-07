@@ -89,17 +89,18 @@
       <xsd:enumeration value="Overlap" />
       <xsd:enumeration value="Volume" />
       <xsd:enumeration value="Candlestick" />
+	  <xsd:enumeration value="Unstable Period" />
     </xsd:restriction>
   </xsd:simpleType>
 
   <!--Optional flags for the output values.-->
   <xsd:simpleType name="OutputFlags">
     <xsd:restriction base="xsd:string">
-	    <xsd:enumeration value="Line" />
-	    <xsd:enumeration value="Dotted Line" />
-	    <xsd:enumeration value="Dashed Line" />
-	    <xsd:enumeration value="Dots" />
-	    <xsd:enumeration value="Histogram" />
+	  <xsd:enumeration value="Line" />
+	  <xsd:enumeration value="Dotted Line" />
+	  <xsd:enumeration value="Dashed Line" />
+	  <xsd:enumeration value="Dots" />
+	  <xsd:enumeration value="Histogram" />
       <xsd:enumeration value="Pattern Bool" />
       <xsd:enumeration value="Pattern Bull Bear" />
       <xsd:enumeration value="Pattern Strength" />
@@ -114,19 +115,25 @@
     <xsd:sequence>
       <!--Each function needs a short name. That name has to match
             the corresponding TA-Lib function.-->
-      <xsd:element name="ShortName" type="xsd:string" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="Abbreviation" type="xsd:string" minOccurs="1" maxOccurs="1" />
       <!--This is the full name of the function.-->
-      <xsd:element name="FullName" type="xsd:string" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="CamelCaseName" type="xsd:string" minOccurs="1" maxOccurs="1" />
       <!--A short description what the function is doing. This should be
             really short as it can be used for tooltips.-->
       <xsd:element name="ShortDescription" type="xsd:string" minOccurs="1" maxOccurs="1" />
       <!--A detailed description of the function. This can be displayed to
-            the user if he wants more information.-->
-      <xsd:element name="LongDescription" type="xsd:string" minOccurs="0" maxOccurs="1" />
+            the user if he wants more information. Not currently used.
+      <xsd:element name="LongDescription" type="xsd:string" minOccurs="0" maxOccurs="1" />-->
       <!--The group the function belongs to.-->
       <xsd:element name="GroupId" type="GroupId" minOccurs="1" maxOccurs="1" />
       <!--Flags that can be attached to the function.-->
-      <xsd:element name="Flags" type="FunctionFlags" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="Flags" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Flag" type="FunctionFlags" minOccurs="1" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
 
       <!--This section defines all the input arguments.-->
       <xsd:element name="RequiredInputArguments" minOccurs="1" maxOccurs="1">

@@ -398,6 +398,9 @@
 		<CamelCaseName>AvgPrice</CamelCaseName>
 		<ShortDescription>Average Price</ShortDescription>
 		<GroupId>Price Transform</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -434,6 +437,9 @@
 		<CamelCaseName>Bbands</CamelCaseName>
 		<ShortDescription>Bollinger Bands</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -459,8 +465,8 @@
 				<ShortDescription>Deviation multiplier for upper band</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -473,8 +479,8 @@
 				<ShortDescription>Deviation multiplier for lower band</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -604,6 +610,9 @@
 		<CamelCaseName>Cdl2Crows</CamelCaseName>
 		<ShortDescription>Two Crows</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -640,6 +649,9 @@
 		<CamelCaseName>Cdl3BlackCrows</CamelCaseName>
 		<ShortDescription>Three Black Crows</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -676,6 +688,9 @@
 		<CamelCaseName>Cdl3Inside</CamelCaseName>
 		<ShortDescription>Three Inside Up/Down</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -712,6 +727,9 @@
 		<CamelCaseName>Cdl3LineStrike</CamelCaseName>
 		<ShortDescription>Three-Line Strike </ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -748,6 +766,9 @@
 		<CamelCaseName>Cdl3Outside</CamelCaseName>
 		<ShortDescription>Three Outside Up/Down</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -784,6 +805,9 @@
 		<CamelCaseName>Cdl3StarsInSouth</CamelCaseName>
 		<ShortDescription>Three Stars In The South</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -820,6 +844,9 @@
 		<CamelCaseName>Cdl3WhiteSoldiers</CamelCaseName>
 		<ShortDescription>Three Advancing White Soldiers</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -856,6 +883,9 @@
 		<CamelCaseName>CdlAbandonedBaby</CamelCaseName>
 		<ShortDescription>Abandoned Baby</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -881,7 +911,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -908,6 +938,9 @@
 		<CamelCaseName>CdlAdvanceBlock</CamelCaseName>
 		<ShortDescription>Advance Block</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -944,6 +977,9 @@
 		<CamelCaseName>CdlBeltHold</CamelCaseName>
 		<ShortDescription>Belt-hold</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -980,6 +1016,9 @@
 		<CamelCaseName>CdlBreakaway</CamelCaseName>
 		<ShortDescription>Breakaway</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1016,6 +1055,9 @@
 		<CamelCaseName>CdlClosingMarubozu</CamelCaseName>
 		<ShortDescription>Closing Marubozu</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1052,6 +1094,9 @@
 		<CamelCaseName>CdlConcealBabysWall</CamelCaseName>
 		<ShortDescription>Concealing Baby Swallow</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1088,6 +1133,9 @@
 		<CamelCaseName>CdlCounterAttack</CamelCaseName>
 		<ShortDescription>Counterattack</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1124,6 +1172,9 @@
 		<CamelCaseName>CdlDarkCloudCover</CamelCaseName>
 		<ShortDescription>Dark Cloud Cover</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1149,7 +1200,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -1176,6 +1227,9 @@
 		<CamelCaseName>CdlDoji</CamelCaseName>
 		<ShortDescription>Doji</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1212,6 +1266,9 @@
 		<CamelCaseName>CdlDojiStar</CamelCaseName>
 		<ShortDescription>Doji Star</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1248,6 +1305,9 @@
 		<CamelCaseName>CdlDragonflyDoji</CamelCaseName>
 		<ShortDescription>Dragonfly Doji</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1284,6 +1344,9 @@
 		<CamelCaseName>CdlEngulfing</CamelCaseName>
 		<ShortDescription>Engulfing Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1320,6 +1383,9 @@
 		<CamelCaseName>CdlEveningDojiStar</CamelCaseName>
 		<ShortDescription>Evening Doji Star</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1345,7 +1411,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -1372,6 +1438,9 @@
 		<CamelCaseName>CdlEveningStar</CamelCaseName>
 		<ShortDescription>Evening Star</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1397,7 +1466,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -1424,6 +1493,9 @@
 		<CamelCaseName>CdlGapSideSideWhite</CamelCaseName>
 		<ShortDescription>Up/Down-gap side-by-side white lines</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1460,6 +1532,9 @@
 		<CamelCaseName>CdlGravestoneDoji</CamelCaseName>
 		<ShortDescription>Gravestone Doji</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1496,6 +1571,9 @@
 		<CamelCaseName>CdlHammer</CamelCaseName>
 		<ShortDescription>Hammer</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1532,6 +1610,9 @@
 		<CamelCaseName>CdlHangingMan</CamelCaseName>
 		<ShortDescription>Hanging Man</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1568,6 +1649,9 @@
 		<CamelCaseName>CdlHarami</CamelCaseName>
 		<ShortDescription>Harami Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1604,6 +1688,9 @@
 		<CamelCaseName>CdlHaramiCross</CamelCaseName>
 		<ShortDescription>Harami Cross Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1640,6 +1727,9 @@
 		<CamelCaseName>CdlHignWave</CamelCaseName>
 		<ShortDescription>High-Wave Candle</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1676,6 +1766,9 @@
 		<CamelCaseName>CdlHikkake</CamelCaseName>
 		<ShortDescription>Hikkake Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1712,6 +1805,9 @@
 		<CamelCaseName>CdlHikkakeMod</CamelCaseName>
 		<ShortDescription>Modified Hikkake Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1748,6 +1844,9 @@
 		<CamelCaseName>CdlHomingPigeon</CamelCaseName>
 		<ShortDescription>Homing Pigeon</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1784,6 +1883,9 @@
 		<CamelCaseName>CdlIdentical3Crows</CamelCaseName>
 		<ShortDescription>Identical Three Crows</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1820,6 +1922,9 @@
 		<CamelCaseName>CdlInNeck</CamelCaseName>
 		<ShortDescription>In-Neck Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1856,6 +1961,9 @@
 		<CamelCaseName>CdlInvertedHammer</CamelCaseName>
 		<ShortDescription>Inverted Hammer</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1892,6 +2000,9 @@
 		<CamelCaseName>CdlKicking</CamelCaseName>
 		<ShortDescription>Kicking</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1928,6 +2039,9 @@
 		<CamelCaseName>CdlKickingByLength</CamelCaseName>
 		<ShortDescription>Kicking - bull/bear determined by the longer marubozu</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -1964,6 +2078,9 @@
 		<CamelCaseName>CdlLadderBottom</CamelCaseName>
 		<ShortDescription>Ladder Bottom</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2000,6 +2117,9 @@
 		<CamelCaseName>CdlLongLeggedDoji</CamelCaseName>
 		<ShortDescription>Long Legged Doji</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2036,6 +2156,9 @@
 		<CamelCaseName>CdlLongLine</CamelCaseName>
 		<ShortDescription>Long Line Candle</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2072,6 +2195,9 @@
 		<CamelCaseName>CdlMarubozu</CamelCaseName>
 		<ShortDescription>Marubozu</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2108,6 +2234,9 @@
 		<CamelCaseName>CdlMatchingLow</CamelCaseName>
 		<ShortDescription>Matching Low</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2144,6 +2273,9 @@
 		<CamelCaseName>CdlMatHold</CamelCaseName>
 		<ShortDescription>Mat Hold</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2169,7 +2301,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -2196,6 +2328,9 @@
 		<CamelCaseName>CdlMorningDojiStar</CamelCaseName>
 		<ShortDescription>Morning Doji Star</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2221,7 +2356,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -2248,6 +2383,9 @@
 		<CamelCaseName>CdlMorningStar</CamelCaseName>
 		<ShortDescription>Morning Star</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2273,7 +2411,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -2300,6 +2438,9 @@
 		<CamelCaseName>CdlOnNeck</CamelCaseName>
 		<ShortDescription>On-Neck Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2336,6 +2477,9 @@
 		<CamelCaseName>CdlPiercing</CamelCaseName>
 		<ShortDescription>Piercing Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2372,6 +2516,9 @@
 		<CamelCaseName>CdlRickshawMan</CamelCaseName>
 		<ShortDescription>Rickshaw Man</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2408,6 +2555,9 @@
 		<CamelCaseName>CdlRiseFall3Methods</CamelCaseName>
 		<ShortDescription>Rising/Falling Three Methods</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2444,6 +2594,9 @@
 		<CamelCaseName>CdlSeperatingLines</CamelCaseName>
 		<ShortDescription>Separating Lines</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2480,6 +2633,9 @@
 		<CamelCaseName>CdlShootingStar</CamelCaseName>
 		<ShortDescription>Shooting Star</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2516,6 +2672,9 @@
 		<CamelCaseName>CdlShortLine</CamelCaseName>
 		<ShortDescription>Short Line Candle</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2552,6 +2711,9 @@
 		<CamelCaseName>CdlSpinningTop</CamelCaseName>
 		<ShortDescription>Spinning Top</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2588,6 +2750,9 @@
 		<CamelCaseName>CdlStalledPattern</CamelCaseName>
 		<ShortDescription>Stalled Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2624,6 +2789,9 @@
 		<CamelCaseName>CdlStickSandwhich</CamelCaseName>
 		<ShortDescription>Stick Sandwich</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2660,6 +2828,9 @@
 		<CamelCaseName>CdlTakuri</CamelCaseName>
 		<ShortDescription>Takuri (Dragonfly Doji with very long lower shadow)</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2696,6 +2867,9 @@
 		<CamelCaseName>CdlTasukiGap</CamelCaseName>
 		<ShortDescription>Tasuki Gap</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2732,6 +2906,9 @@
 		<CamelCaseName>CdlThrusting</CamelCaseName>
 		<ShortDescription>Thrusting Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2768,6 +2945,9 @@
 		<CamelCaseName>CdlTristar</CamelCaseName>
 		<ShortDescription>Tristar Pattern</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2804,6 +2984,9 @@
 		<CamelCaseName>CdlUnique3River</CamelCaseName>
 		<ShortDescription>Unique 3 River</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2840,6 +3023,9 @@
 		<CamelCaseName>CdlUpsideGap2Crows</CamelCaseName>
 		<ShortDescription>Upside Gap Two Crows</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2876,6 +3062,9 @@
 		<CamelCaseName>CdlXSideGap3Methods</CamelCaseName>
 		<ShortDescription>Upside/Downside Gap Three Methods</ShortDescription>
 		<GroupId>Pattern Recognition</GroupId>
+		<Flags>
+			<Flag>Candlestick</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Open</Type>
@@ -2994,6 +3183,9 @@
 		<CamelCaseName>Dema</CamelCaseName>
 		<ShortDescription>Double Exponential Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3080,6 +3272,9 @@
 		<CamelCaseName>Ema</CamelCaseName>
 		<ShortDescription>Exponential Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3229,6 +3424,9 @@
 		<CamelCaseName>HtTrendline</CamelCaseName>
 		<ShortDescription>Hilbert Transform - Instantaneous Trendline</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3277,6 +3475,9 @@
 		<CamelCaseName>Kama</CamelCaseName>
 		<ShortDescription>Kaufman Adaptive Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3316,6 +3517,9 @@
 		<CamelCaseName>LinearReg</CamelCaseName>
 		<ShortDescription>Linear Regression</ShortDescription>
 		<GroupId>Statistic Functions</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3394,6 +3598,9 @@
 		<CamelCaseName>LinearRegIntercept</CamelCaseName>
 		<ShortDescription>Linear Regression Intercept</ShortDescription>
 		<GroupId>Statistic Functions</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3472,6 +3679,9 @@
 		<CamelCaseName>MovingAverage</CamelCaseName>
 		<ShortDescription>All Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3746,6 +3956,9 @@
 		<CamelCaseName>Mama</CamelCaseName>
 		<ShortDescription>MESA Adaptive Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3807,6 +4020,9 @@
 		<CamelCaseName>Max</CamelCaseName>
 		<ShortDescription>Highest value over a specified period</ShortDescription>
 		<GroupId>Math Operators</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3846,6 +4062,9 @@
 		<CamelCaseName>MedPrice</CamelCaseName>
 		<ShortDescription>Median Price</ShortDescription>
 		<GroupId>Price Transform</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -3925,6 +4144,9 @@
 		<CamelCaseName>MidPoint</CamelCaseName>
 		<ShortDescription>MidPoint over period</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3964,6 +4186,9 @@
 		<CamelCaseName>MidPrice</CamelCaseName>
 		<ShortDescription>Midpoint Price over period</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4007,6 +4232,9 @@
 		<CamelCaseName>Min</CamelCaseName>
 		<ShortDescription>Lowest value over a specified period</ShortDescription>
 		<GroupId>Math Operators</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -4593,6 +4821,9 @@
 		<CamelCaseName>Sar</CamelCaseName>
 		<ShortDescription>Parabolic SAR</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4610,7 +4841,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -4624,7 +4855,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -4651,6 +4882,9 @@
 		<CamelCaseName>SarExt</CamelCaseName>
 		<ShortDescription>Parabolic SAR - Extended</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4667,8 +4901,8 @@
 				<ShortDescription>Start value and direction. 0 for Auto, &gt;0 for Long, &lt;0 for Short</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -4682,7 +4916,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.150000</SuggestedEnd>
@@ -4696,7 +4930,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.190000</SuggestedEnd>
@@ -4710,7 +4944,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -4724,7 +4958,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -4738,7 +4972,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.190000</SuggestedEnd>
@@ -4752,7 +4986,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -4766,7 +5000,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -4793,6 +5027,9 @@
 		<CamelCaseName>Sma</CamelCaseName>
 		<ShortDescription>Simple Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -4857,8 +5094,8 @@
 				<ShortDescription>Nb of deviations</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -5167,6 +5404,9 @@
 		<CamelCaseName>T3</CamelCaseName>
 		<ShortDescription>Triple Exponential Moving Average (T3)</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -5220,6 +5460,9 @@
 		<CamelCaseName>Tema</CamelCaseName>
 		<ShortDescription>Triple Exponential Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -5291,6 +5534,9 @@
 		<CamelCaseName>Trima</CamelCaseName>
 		<ShortDescription>Triangular Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -5369,6 +5615,9 @@
 		<CamelCaseName>Tsf</CamelCaseName>
 		<ShortDescription>Time Series Forecast</ShortDescription>
 		<GroupId>Statistic Functions</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -5408,6 +5657,9 @@
 		<CamelCaseName>TypPrice</CamelCaseName>
 		<ShortDescription>Typical Price</ShortDescription>
 		<GroupId>Price Transform</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -5538,8 +5790,8 @@
 				<ShortDescription>Nb of deviations</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002160000000000000000000.00</Minimum>
-					<Maximum>30000000000000002160000000000000000000.00</Maximum>
+					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
+					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -5566,6 +5818,9 @@
 		<CamelCaseName>WclPrice</CamelCaseName>
 		<ShortDescription>Weighted Close Price</ShortDescription>
 		<GroupId>Price Transform</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -5645,6 +5900,9 @@
 		<CamelCaseName>Wma</CamelCaseName>
 		<ShortDescription>Weighted Moving Average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
