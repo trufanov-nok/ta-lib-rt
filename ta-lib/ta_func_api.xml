@@ -106,6 +106,9 @@
 		<CamelCaseName>Adx</CamelCaseName>
 		<ShortDescription>Average Directional Movement Index</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -153,6 +156,9 @@
 		<CamelCaseName>Adxr</CamelCaseName>
 		<ShortDescription>Average Directional Movement Index Rating</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -351,6 +357,9 @@
 		<CamelCaseName>Atr</CamelCaseName>
 		<ShortDescription>Average True Range</ShortDescription>
 		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -465,8 +474,8 @@
 				<ShortDescription>Deviation multiplier for upper band</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -479,8 +488,8 @@
 				<ShortDescription>Deviation multiplier for lower band</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -911,7 +920,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -1200,7 +1209,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -1411,7 +1420,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -1466,7 +1475,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -2301,7 +2310,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -2356,7 +2365,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -2411,7 +2420,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>0</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -3101,6 +3110,9 @@
 		<CamelCaseName>Cmo</CamelCaseName>
 		<ShortDescription>Chande Momentum Oscillator</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3225,6 +3237,9 @@
 		<CamelCaseName>Dx</CamelCaseName>
 		<ShortDescription>Directional Movement Index</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -3274,6 +3289,7 @@
 		<GroupId>Overlap Studies</GroupId>
 		<Flags>
 			<Flag>Overlap</Flag>
+			<Flag>Unstable Period</Flag>
 		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3314,6 +3330,9 @@
 		<CamelCaseName>HtDcPeriod</CamelCaseName>
 		<ShortDescription>Hilbert Transform - Dominant Cycle Period</ShortDescription>
 		<GroupId>Cycle Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3338,6 +3357,9 @@
 		<CamelCaseName>HtDcPhase</CamelCaseName>
 		<ShortDescription>Hilbert Transform - Dominant Cycle Phase</ShortDescription>
 		<GroupId>Cycle Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3362,6 +3384,9 @@
 		<CamelCaseName>HtPhasor</CamelCaseName>
 		<ShortDescription>Hilbert Transform - Phasor Components</ShortDescription>
 		<GroupId>Cycle Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3393,6 +3418,9 @@
 		<CamelCaseName>HtSine</CamelCaseName>
 		<ShortDescription>Hilbert Transform - SineWave</ShortDescription>
 		<GroupId>Cycle Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3426,6 +3454,7 @@
 		<GroupId>Overlap Studies</GroupId>
 		<Flags>
 			<Flag>Overlap</Flag>
+			<Flag>Unstable Period</Flag>
 		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3451,6 +3480,9 @@
 		<CamelCaseName>HtTrendMode</CamelCaseName>
 		<ShortDescription>Hilbert Transform - Trend vs Cycle Mode</ShortDescription>
 		<GroupId>Cycle Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -3477,6 +3509,7 @@
 		<GroupId>Overlap Studies</GroupId>
 		<Flags>
 			<Flag>Overlap</Flag>
+			<Flag>Unstable Period</Flag>
 		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -3958,6 +3991,7 @@
 		<GroupId>Overlap Studies</GroupId>
 		<Flags>
 			<Flag>Overlap</Flag>
+			<Flag>Unstable Period</Flag>
 		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -4056,6 +4090,48 @@
 	</FinancialFunction>
 
 
+	<!-- MAXINDEX -->
+	<FinancialFunction>
+		<Abbreviation>MAXINDEX</Abbreviation>
+		<CamelCaseName>MaxIndex</CamelCaseName>
+		<ShortDescription>Index of highest value over a specified period</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- MEDPRICE -->
 	<FinancialFunction>
 		<Abbreviation>MEDPRICE</Abbreviation>
@@ -4093,6 +4169,9 @@
 		<CamelCaseName>Mfi</CamelCaseName>
 		<ShortDescription>Money Flow Index</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4268,12 +4347,155 @@
 	</FinancialFunction>
 
 
+	<!-- MININDEX -->
+	<FinancialFunction>
+		<Abbreviation>MININDEX</Abbreviation>
+		<CamelCaseName>MinIndex</CamelCaseName>
+		<ShortDescription>Index of lowest value over a specified period</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outInteger</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MINMAX -->
+	<FinancialFunction>
+		<Abbreviation>MINMAX</Abbreviation>
+		<CamelCaseName>MINMAX</CamelCaseName>
+		<ShortDescription>Lowest and highest values over a specified period</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMin</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outMax</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MINMAXINDEX -->
+	<FinancialFunction>
+		<Abbreviation>MINMAXINDEX</Abbreviation>
+		<CamelCaseName>MINMAXINDEX</CamelCaseName>
+		<ShortDescription>Indexes of lowest and highest values over a specified period</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>Time Period</Name>
+				<ShortDescription>Number of period</ShortDescription>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outMinIdx</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+			<OutputArgument>
+				<Type>Integer Array</Type>
+				<Name>outMaxIdx</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- MINUS_DI -->
 	<FinancialFunction>
 		<Abbreviation>MINUS_DI</Abbreviation>
 		<CamelCaseName>MinusDI</CamelCaseName>
 		<ShortDescription>Minus Directional Indicator</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4321,6 +4543,9 @@
 		<CamelCaseName>MinusDM</CamelCaseName>
 		<ShortDescription>Minus Directional Movement</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4403,6 +4628,9 @@
 		<CamelCaseName>Natr</CamelCaseName>
 		<ShortDescription>Normalized Average True Range</ShortDescription>
 		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4478,6 +4706,9 @@
 		<CamelCaseName>PlusDI</CamelCaseName>
 		<ShortDescription>Plus Directional Indicator</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4525,6 +4756,9 @@
 		<CamelCaseName>PlusDM</CamelCaseName>
 		<ShortDescription>Plus Directional Movement</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>High</Type>
@@ -4782,6 +5016,9 @@
 		<CamelCaseName>Rsi</CamelCaseName>
 		<ShortDescription>Relative Strength Index</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -4841,7 +5078,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -4855,7 +5092,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -4901,8 +5138,8 @@
 				<ShortDescription>Start value and direction. 0 for Auto, &gt;0 for Long, &lt;0 for Short</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.000000</SuggestedStart>
 					<SuggestedEnd>0.000000</SuggestedEnd>
@@ -4916,7 +5153,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.150000</SuggestedEnd>
@@ -4930,7 +5167,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.190000</SuggestedEnd>
@@ -4944,7 +5181,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -4958,7 +5195,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -4972,7 +5209,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.190000</SuggestedEnd>
@@ -4986,7 +5223,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.010000</SuggestedStart>
 					<SuggestedEnd>0.200000</SuggestedEnd>
@@ -5000,7 +5237,7 @@
 				<Type>Double</Type>
 				<Range>
 					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>4</Precision>
 					<SuggestedStart>0.200000</SuggestedStart>
 					<SuggestedEnd>0.400000</SuggestedEnd>
@@ -5094,8 +5331,8 @@
 				<ShortDescription>Nb of deviations</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>
@@ -5287,6 +5524,9 @@
 		<CamelCaseName>StochRsi</CamelCaseName>
 		<ShortDescription>Stochastic Relative Strength Index</ShortDescription>
 		<GroupId>Momentum Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -5406,6 +5646,7 @@
 		<GroupId>Overlap Studies</GroupId>
 		<Flags>
 			<Flag>Overlap</Flag>
+			<Flag>Unstable Period</Flag>
 		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
@@ -5790,8 +6031,8 @@
 				<ShortDescription>Nb of deviations</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-30000000000000002158062836758597337088.000000</Minimum>
+					<Maximum>30000000000000002158062836758597337088.000000</Maximum>
 					<Precision>2</Precision>
 					<SuggestedStart>-2.000000</SuggestedStart>
 					<SuggestedEnd>2.000000</SuggestedEnd>

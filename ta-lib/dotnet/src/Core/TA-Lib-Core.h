@@ -2558,6 +2558,26 @@ namespace TicTacTec
          #define TA_MAX Core::MAX
          #define TA_MAX_Lookback Core::MAX_Lookback
 
+         static int MAXINDEX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MAXINDEX( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<int>^  outInteger );
+         static enum class TA_RetCode MAXINDEX( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<int>^  outInteger );
+
+         #define TA_MAXINDEX Core::MAXINDEX
+         #define TA_MAXINDEX_Lookback Core::MAXINDEX_Lookback
+
          static int MEDPRICE_Lookback( void );
 
          static enum class TA_RetCode MEDPRICE( int    startIdx,
@@ -2665,6 +2685,70 @@ namespace TicTacTec
 
          #define TA_MIN Core::MIN
          #define TA_MIN_Lookback Core::MIN_Lookback
+
+         static int MININDEX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MININDEX( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<int>^  outInteger );
+         static enum class TA_RetCode MININDEX( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<float>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNbElement,
+                                                cli::array<int>^  outInteger );
+
+         #define TA_MININDEX Core::MININDEX
+         #define TA_MININDEX_Lookback Core::MININDEX_Lookback
+
+         static int MINMAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MINMAX( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inReal,
+                                              int           optInTimePeriod, /* From 2 to 100000 */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outMin,
+                                              cli::array<double>^  outMax );
+         static enum class TA_RetCode MINMAX( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<float>^ inReal,
+                                              int           optInTimePeriod, /* From 2 to 100000 */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNbElement,
+                                              cli::array<double>^  outMin,
+                                              cli::array<double>^  outMax );
+
+         #define TA_MINMAX Core::MINMAX
+         #define TA_MINMAX_Lookback Core::MINMAX_Lookback
+
+         static int MINMAXINDEX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         static enum class TA_RetCode MINMAXINDEX( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inReal,
+                                                   int           optInTimePeriod, /* From 2 to 100000 */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
+                                                   cli::array<int>^  outMinIdx,
+                                                   cli::array<int>^  outMaxIdx );
+         static enum class TA_RetCode MINMAXINDEX( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<float>^ inReal,
+                                                   int           optInTimePeriod, /* From 2 to 100000 */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNbElement,
+                                                   cli::array<int>^  outMinIdx,
+                                                   cli::array<int>^  outMaxIdx );
+
+         #define TA_MINMAXINDEX Core::MINMAXINDEX
+         #define TA_MINMAXINDEX_Lookback Core::MINMAXINDEX_Lookback
 
          static int MINUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
