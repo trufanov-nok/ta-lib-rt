@@ -1,36 +1,16 @@
 #!/usr/perl/bin
 
-# I like to maintain all my files in unix format (even on Win32).
-# This allows me to share easily my Win32 directories with a Linux
-# guess running on the same machine (using VMWare).
+# This script is used to clean-up my working SVN view.
+# 
+# It removes unecessary files, temporary and backup files.
 #
-# This script perform this "to Unix" conversion. At the same time,
-# verify to make sure that no unexpected binary files are left in
-# the development directory.
-#
+# The script also verifies that some SVN properties are
+# correctly set (base on the file extension).
 use File::DosGlob 'glob';
 use myUtil;
 
 sub Main
-{
-   # Bring all text file to the unix format.
-   cleanupFile( '..\ta-lib\*.txt' );
-   cleanupFile( '..\ta-lib\*\*.txt' );
-   cleanupFile( '..\ta-lib\*\*\*.txt' );
-   cleanupFile( '..\ta-lib\*\*\*\*.txt' );
-
-   cleanupFile( '..\ta-lib\c\src\ta_abstract\templates\*.*.template' );
-   
-   cleanupFile( '..\ta-lib\c\src\*.c' );
-   cleanupFile( '..\ta-lib\c\src\*\*.c' );
-
-   cleanupFile( '..\ta-lib\c\src\*.h' );
-   cleanupFile( '..\ta-lib\c\src\*\*.h' );
-
-   cleanupFile( '..\ta-lib\c\README' );
-   cleanupFile( '..\ta-lib\c\*\README' );
-   cleanupFile( '..\ta-lib\c\*\*\README' );
-
+{   
    # Remove temporary and backup files.
    removeFile( '..\ta-lib\c\temp\*.*' );
    removeFile( '..\ta-lib\c\temp\*\*.*' );
@@ -66,10 +46,9 @@ sub Main
    removeFile( '..\ta-lib\excel\src\xlw_for_talib\*.opt' );
    removeFile( '..\ta-lib\excel\src\xlw_for_talib\*.plg' );
 
-   # Clean-up any binaries files that I can think of. We
-   # wish to keep the development directory to contains 
-   # only the files to rebuild from scratch.
-   #
+   # Clean-up files that would be unexpected. We wish to keep the 
+   # development directory to contains only the files to rebuild 
+   # from scratch.
    # (the .NET dll and excel xll files are exceptions).
    #  
    removeFile( '..\ta-lib\*\.*.lib' );
@@ -97,6 +76,7 @@ sub Main
    removeFile( '..\ta-lib\*\*\*\.*.rar' );
    removeFile( '..\ta-lib\*\*\*\*\.*.rar' );
 
+   # No Media files expected
    removeFile( '..\ta-lib\*\.*.jpg' );
    removeFile( '..\ta-lib\*\*\.*.jpg' );
    removeFile( '..\ta-lib\*\*\*\.*.jpg' );
@@ -131,25 +111,58 @@ sub Main
    removeFile( '..\ta-lib\*\*\.*.asx' );
    removeFile( '..\ta-lib\*\*\*\.*.asx' );
    removeFile( '..\ta-lib\*\*\*\*\.*.asx' );
+
+   # Text files needs a SVN property to be set.
+   # This property allows proper end of line conversion
+   # between UNIX/DOS.
+   
+   makePortableEOL( '..\ta-lib\*.xml' );
+   makePortableEOL( '..\ta-lib\*.xsd' );
+   
+   makePortableEOL( '..\ta-lib\c\make\*\*\*\Makefile' );
+   makePortableEOL( '..\ta-lib\c\make\*\*\*\*\Makefile' );
+
+   makePortableEOL( '..\ta-lib\c\*.c' );
+   makePortableEOL( '..\ta-lib\c\*\*.c' );
+   makePortableEOL( '..\ta-lib\c\*\*\*.c' );
+   makePortableEOL( '..\ta-lib\c\*\*\*\*.c' );
+
+   makePortableEOL( '..\ta-lib\c\*.h' );
+   makePortableEOL( '..\ta-lib\c\*\*.h' );
+   makePortableEOL( '..\ta-lib\c\*\*\*.h' );
+   makePortableEOL( '..\ta-lib\c\*\*\*\*.h' );
+
+   makePortableEOL( '..\ta-lib\c\*.am' );
+   makePortableEOL( '..\ta-lib\c\*\*.am' );
+   makePortableEOL( '..\ta-lib\c\*\*\*.am' );
+   makePortableEOL( '..\ta-lib\c\*\*\*\*.am' );
+
+   # Some path goes 6 directory deep under ta-lib
+   # in the java directory.
+   makePortableEOL( '..\ta-lib\*.TXT' );
+   makePortableEOL( '..\ta-lib\*\*\*.TXT' );
+   makePortableEOL( '..\ta-lib\*\*\*\*.TXT' );
+   makePortableEOL( '..\ta-lib\*\*\*\*\*.TXT' );
+   makePortableEOL( '..\ta-lib\*\*\*\*\*\*.TXT' );
+   makePortableEOL( '..\ta-lib\*\*\*\*\*\*\*.TXT' );
+   
+   makePortableEOL( '..\ta-lib\*\*.java' );
+   makePortableEOL( '..\ta-lib\*\*\*\*.java' );
+   makePortableEOL( '..\ta-lib\*\*\*\*\*.java' );
+   makePortableEOL( '..\ta-lib\*\*\*\*\*\*.java' );
+   makePortableEOL( '..\ta-lib\*\*\*\*\*\*\*.java' );   
 }
 
-sub cleanupFile
+# Verify that SVN properties are set as expected.
+sub makePortableEOL
 {
    @files = glob $_[0];
 
    foreach $z (@files)
    {
-      $cmd = "./UDDU/dos2unix/Release/dos2unix ".$z;
-
-      if(    ($z =~ /ta_regtest\/sampling/)
-          or ($z =~ /\.svn/) ) 
-      { 
-          print "Skipping ".$z."\n";
-      }
-      else
-      {
-         system( $cmd );
-      }
+      # print "[".$z."]\n";
+      $cmd = "svn propset --quiet svn:eol-style native ".$z;
+      system( $cmd );
    }
 }
 
