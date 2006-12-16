@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -54,7 +54,7 @@ import java.util.Arrays;
 
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
-import com.tictactec.ta.lib.TA_RetCode;
+import com.tictactec.ta.lib.RetCode;
 import TA.Lib.MetaInfo.TaFuncClosure;
 import TA.Lib.MetaInfo.TaFuncMetaInfo;
 
@@ -110,8 +110,8 @@ public class TestAbstractClosure extends junit.framework.Assert implements TaFun
       int endIndex = inputData.size()-1;
       
       /* Do the function call. */
-      TA_RetCode retCode = mi.call(taCore, inArs, startIndex, endIndex, outArs, outBegIdx, outNbElement, options);
-      assertEquals(retCode, TA_RetCode.TA_SUCCESS);
+      RetCode retCode = mi.call(taCore, inArs, startIndex, endIndex, outArs, outBegIdx, outNbElement, options);
+      assertEquals(retCode, RetCode.Success);
       
       /* Verify consistency with Lookback */
 /*      
@@ -130,7 +130,7 @@ public class TestAbstractClosure extends junit.framework.Assert implements TaFun
        * In that case, outBegIdx should ALWAYS be zero.
        */
       retCode = mi.call(taCore, inArs, 0, 0, outArs, outBegIdx, outNbElement, options);
-      assertEquals(retCode, TA_RetCode.TA_SUCCESS );
+      assertEquals(retCode, RetCode.Success );
       assertEquals(outBegIdx.value, 0);
    }
    

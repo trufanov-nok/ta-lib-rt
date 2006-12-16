@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -53,7 +53,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.tictactec.ta.lib.Core;
-import com.tictactec.ta.lib.TA_RetCode;
+import com.tictactec.ta.lib.RetCode;
 
 public class CoreMetaInfo
 {
@@ -94,7 +94,7 @@ public class CoreMetaInfo
       for (Method taMethod : ms)
       {
          String fn = taMethod.getName();
-         if (taMethod.getReturnType().equals(TA_RetCode.class)
+         if (taMethod.getReturnType().equals(RetCode.class)
                && !fn.startsWith(INT_PREFIX))
          {
             String lookbackName = fn + LOOKBACK_SUFFIX;
