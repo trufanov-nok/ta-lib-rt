@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -51,7 +51,7 @@ import java.lang.reflect.Method;
 
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
-import com.tictactec.ta.lib.TA_RetCode;
+import com.tictactec.ta.lib.RetCode;
 
 public class TaFuncMetaInfo extends TaFuncSignature
 {
@@ -169,7 +169,7 @@ public class TaFuncMetaInfo extends TaFuncSignature
       return inVarTypes.length > 1 && outVarTypes.length > 1;
    }
 
-   public TA_RetCode call(Core taCore, Object[] inArs, int startIndex, int endIndex, Object[] outArs, MInteger outBegIdx, MInteger outNbElement, Object ... options) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException{
+   public RetCode call(Core taCore, Object[] inArs, int startIndex, int endIndex, Object[] outArs, MInteger outBegIdx, MInteger outNbElement, Object ... options) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException{
       Object[] parameters = new Object[inArs.length+outArs.length+options.length+TOTAL_FIX_PARAMETERS];
       parameters[0] = startIndex;
       parameters[1] = endIndex;
@@ -187,7 +187,7 @@ public class TaFuncMetaInfo extends TaFuncSignature
       {
          parameters[i++] = outArs[j];
       }     
-      return (TA_RetCode) getMethod().invoke(taCore, parameters);
+      return (RetCode) getMethod().invoke(taCore, parameters);
    }
    
    public int callLookback(Core taCore, Object ... options) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException

@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -57,7 +57,7 @@ public class CoreTest extends TestCase {
     private int outputInt[];
     private MInteger outBegIdx; 
     private MInteger outNbElement;
-    private TA_RetCode retCode;
+    private RetCode retCode;
     private Core lib;
     private int lookback;
 
@@ -93,16 +93,16 @@ public class CoreTest extends TestCase {
     	double macd[]   = new double[close.length];
     	double signal[] = new double[close.length];
     	double hist[]   = new double[close.length];
-   	    lookback = lib.MACD_Lookback(15,26,9);
-        retCode = lib.MACD(0,close.length-1,close,15,26,9,outBegIdx,outNbElement,macd,signal,hist);
+   	    lookback = lib.macdLookback(15,26,9);
+        retCode = lib.macd(0,close.length-1,close,15,26,9,outBegIdx,outNbElement,macd,signal,hist);
         
         double ema15[] = new double[close.length];
-   	    lookback = lib.EMA_Lookback(15);
-        retCode = lib.EMA(0,close.length-1,close,15,outBegIdx,outNbElement,ema15);
+   	    lookback = lib.emaLookback(15);
+        retCode = lib.ema(0,close.length-1,close,15,outBegIdx,outNbElement,ema15);
         
         double ema26[] = new double[close.length];
-   	    lookback = lib.EMA_Lookback(26);
-        retCode = lib.EMA(0,close.length-1,close,26,outBegIdx,outNbElement,ema26);
+   	    lookback = lib.emaLookback(26);
+        retCode = lib.ema(0,close.length-1,close,26,outBegIdx,outNbElement,ema26);
         
         // TODO Add tests of outputs
     }
@@ -132,13 +132,13 @@ public class CoreTest extends TestCase {
     	}
     	outBegIdx.value = -1;
     	outNbElement.value = -1;
-    	retCode = TA_RetCode.TA_INTERNAL_ERROR;
+    	retCode = RetCode.InternalError;
     	lookback = -1;
     }
 
     protected void tearDown() 
     {
-    	assertEquals(retCode.toString(),TA_RetCode.TA_SUCCESS.toString());
+    	assertEquals(retCode.toString(),RetCode.Success.toString());
     	assertEquals(lookback,outBegIdx.value);
     }
 
@@ -150,33 +150,33 @@ public class CoreTest extends TestCase {
 
     public void testMFI()
     {
-    	 lookback = lib.MFI_Lookback(2);
-         retCode = lib.MFI(0,input.length-1,input,input,input,inputInt,2,outBegIdx,outNbElement,output);    
+    	 lookback = lib.mfiLookback(2);
+         retCode = lib.mfi(0,input.length-1,input,input,input,input,2,outBegIdx,outNbElement,output);
     }
     
     public void testHT()
     {    	
-    	lookback = lib.HT_TRENDMODE_Lookback();
-    	retCode = lib.HT_TRENDMODE(0,input.length-1,input,outBegIdx,outNbElement,outputInt);
+    	lookback = lib.htTrendModeLookback();
+    	retCode = lib.htTrendMode(0,input.length-1,input,outBegIdx,outNbElement,outputInt);
     }
    
     public void testMA_MAMA()
     {
-        lookback = lib.MA_Lookback(10,TA_MAType.TA_MAType_MAMA);
-        retCode = lib.MA(0,input.length-1,input,10,TA_MAType.TA_MAType_MAMA,outBegIdx,outNbElement,output);        
+        lookback = lib.movingAverageLookback(10,MAType.Mama);
+        retCode = lib.movingAverage(0,input.length-1,input,10,MAType.Mama,outBegIdx,outNbElement,output);        
     }
     
     public void testMA_SMA()
     {
-        lookback = lib.MA_Lookback(10,TA_MAType.TA_MAType_SMA);
-        retCode = lib.MA(0,input.length-1,input,10,TA_MAType.TA_MAType_SMA,outBegIdx,outNbElement,output);
+        lookback = lib.movingAverageLookback(10,MAType.Sma);
+        retCode = lib.movingAverage(0,input.length-1,input,10,MAType.Sma,outBegIdx,outNbElement,output);
         assertEquals(outBegIdx.value,9);
     }
     
     public void testCMO()
     {
-    	lookback = lib.CMO_Lookback(10);
-    	retCode = lib.CMO(0,input.length-1,input,10,outBegIdx,outNbElement,output);
+    	lookback = lib.cmoLookback(10);
+    	retCode = lib.cmo(0,input.length-1,input,10,outBegIdx,outNbElement,output);
     	assertEquals(100.0,output[0]);
     }
     
@@ -188,18 +188,18 @@ public class CoreTest extends TestCase {
         input[2] = 1.5;
                 
         // Do the TA function call
-        retCode = lib.MAX( 0, 2, input, 2,
+        retCode = lib.max( 0, 2, input, 2,
                            outBegIdx, outNbElement,
                            output );
         
         // Test the results.
-        assertEquals( retCode, TA_RetCode.TA_SUCCESS);
+        assertEquals( retCode, RetCode.Success);
         assertEquals( outBegIdx.value, 1 );
         assertEquals( outNbElement.value, 2 );
         assertEquals( output[0], 2.0 );
         assertEquals( output[1], 1.5 );
         
-        lookback = lib.MAX_Lookback(2);
+        lookback = lib.maxLookback(2);
     }  
     
        public final static double FLT_EPSILON = 1.192092896e-07;
@@ -225,8 +225,8 @@ public class CoreTest extends TestCase {
           MInteger outBegIdx = new MInteger();
           MInteger outNbElement = new MInteger();
           
-          int lookback = lib.CMO_Lookback(optInTimePeriod);
-          retCode = lib.CMO(0,inputRandFltEpsilon.length-1,inputRandFltEpsilon,optInTimePeriod,outBegIdx,outNbElement,output);
+          int lookback = lib.cmoLookback(optInTimePeriod);
+          retCode = lib.cmo(0,inputRandFltEpsilon.length-1,inputRandFltEpsilon,optInTimePeriod,outBegIdx,outNbElement,output);
           assertEquals( lookback, outBegIdx.value );
           assertEquals( output[0], 0.0 );
           assertEquals( output[1], 0.0 );
