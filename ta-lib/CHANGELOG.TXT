@@ -2,10 +2,11 @@ Version 0.3 (Planned for January 2007)
 
 New Features
 ============
+- New Functions: MINMAX, MINMAXINDEX, MININDEX, MAXINDEX
 - Debian and RPM packaging available.
 - Java JAR packaging available.
 - New TA_FunctionDescription() returns XML description of API.
-- New func_api.xml file generated in root directory of the package.
+- New ta_func_api.xml file generated in root directory of the package.
 
 Fixes
 =====
@@ -14,7 +15,8 @@ Fixes
 
 Other Changes
 =============
-- func_list.txt moved in root directory of the package.
+- Java/.NET API changed to the right naming convention.
+- ta_func_list.txt moved in root directory of the package.
 - Removed dependencies on trio and Mersenne Twister functions.
 - Volume and Open Interest are now double instead of integers.
 
