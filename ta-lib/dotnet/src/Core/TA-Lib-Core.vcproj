@@ -2051,6 +2051,25 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_MAXINDEX.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_MEDPRICE.c">
 					<FileConfiguration
 						Name="Debug|Win32">
@@ -2128,6 +2147,63 @@
 				</File>
 				<File
 					RelativePath="..\..\..\c\src\ta_func\ta_MIN.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_MININDEX.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_MINMAX.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_MINMAXINDEX.c">
 					<FileConfiguration
 						Name="Debug|Win32">
 						<Tool
