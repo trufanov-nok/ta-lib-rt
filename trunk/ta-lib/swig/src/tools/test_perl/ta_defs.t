@@ -6,7 +6,7 @@
 use strict;
 use lib "../../../lib/perl";
 use Test;
-BEGIN { plan tests => 40 }
+BEGIN { plan tests => 38 }
 
 use Finance::TA v0.3.0;
 
@@ -36,11 +36,9 @@ ok( $TA_INPUT_NOT_ALL_INITIALIZE, 10 );
 ok( $TA_OUTPUT_NOT_ALL_INITIALIZE, 11 );
 ok( $TA_OUT_OF_RANGE_START_INDEX, 12 );
 ok( $TA_OUT_OF_RANGE_END_INDEX, 13 );
-ok( $TA_MEM_LEAK, 14 );
-ok( $TA_FATAL_ERR, 15 );
-ok( $TA_INVALID_LIST_TYPE, 16 );
-ok( $TA_BAD_OBJECT, 17 );
-ok( $TA_NOT_SUPPORTED, 18 );
+ok( $TA_INVALID_LIST_TYPE, 14 );
+ok( $TA_BAD_OBJECT, 15 );
+ok( $TA_NOT_SUPPORTED, 16 );
 ok( $TA_INTERNAL_ERROR, 5000 );
 ok( $TA_UNKNOWN_ERR, 0xFFFF );
 
