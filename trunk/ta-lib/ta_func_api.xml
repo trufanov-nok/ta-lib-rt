@@ -440,6 +440,34 @@
 	</FinancialFunction>
 
 
+	<!-- BETA -->
+	<FinancialFunction>
+		<Abbreviation>BETA</Abbreviation>
+		<CamelCaseName>Beta</CamelCaseName>
+		<ShortDescription>Beta</ShortDescription>
+		<GroupId>Statistic Functions</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal0</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal1</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- BBANDS -->
 	<FinancialFunction>
 		<Abbreviation>BBANDS</Abbreviation>

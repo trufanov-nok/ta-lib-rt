@@ -1729,6 +1729,109 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int betaLookback( )
+   {
+      return 0;
+   }
+   public RetCode beta( int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double S_xx = 0.0f;
+      double S_yy = 0.0f;
+      double S_xy = 0.0f;
+      double S_x = 0.0f;
+      double S_y = 0.0f;
+      double last_price_x = 0.0f;
+      double last_price_y = 0.0f;
+      double x;
+      double y;
+      double n = 0.0f;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outBegIdx.value = startIdx;
+      outNbElement.value = (startIdx-endIdx-1);
+      last_price_x = inReal0[startIdx];
+      last_price_y = inReal1[startIdx];
+      for( i = startIdx+1; i <= endIdx; i++ )
+      {
+         x = (inReal0[i]-last_price_x)/last_price_x;
+         y = (inReal1[i]-last_price_y)/last_price_y;
+         S_xx += x*x;
+         S_yy += y*y;
+         S_xy += x*y;
+         S_x += x;
+         S_y += y;
+         n += 1.0f;
+         outReal[i-1] = (n * S_xy - S_x * S_y) / (n * S_xx - S_x * S_x);
+         last_price_x = inReal0[i];
+         last_price_y = inReal1[i];
+      }
+      return RetCode.Success ;
+   }
+   public RetCode beta( int startIdx,
+      int endIdx,
+      float inReal0[],
+      float inReal1[],
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      double S_xx = 0.0f;
+      double S_yy = 0.0f;
+      double S_xy = 0.0f;
+      double S_x = 0.0f;
+      double S_y = 0.0f;
+      double last_price_x = 0.0f;
+      double last_price_y = 0.0f;
+      double x;
+      double y;
+      double n = 0.0f;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outBegIdx.value = startIdx;
+      outNbElement.value = (startIdx-endIdx-1);
+      last_price_x = inReal0[startIdx];
+      last_price_y = inReal1[startIdx];
+      for( i = startIdx+1; i <= endIdx; i++ )
+      {
+         x = (inReal0[i]-last_price_x)/last_price_x;
+         y = (inReal1[i]-last_price_y)/last_price_y;
+         S_xx += x*x;
+         S_yy += y*y;
+         S_xy += x*y;
+         S_x += x;
+         S_y += y;
+         n += 1.0f;
+         outReal[i-1] = (n * S_xy - S_x * S_y) / (n * S_xx - S_x * S_x);
+         last_price_x = inReal0[i];
+         last_price_y = inReal1[i];
+      }
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int bbandsLookback( int optInTimePeriod,
       double optInNbDevUp,
       double optInNbDevDn,
