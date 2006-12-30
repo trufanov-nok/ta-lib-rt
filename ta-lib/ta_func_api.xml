@@ -502,28 +502,28 @@
 				<ShortDescription>Deviation multiplier for upper band</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-3.000000e+37</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>2</Precision>
-					<SuggestedStart>-2.000000</SuggestedStart>
-					<SuggestedEnd>2.000000</SuggestedEnd>
-					<SuggestedIncrement>0.200000</SuggestedIncrement>
+					<SuggestedStart>-2.000000e+0</SuggestedStart>
+					<SuggestedEnd>2.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>2.000000e-1</SuggestedIncrement>
 				</Range>
-				<DefaultValue>2.000000</DefaultValue>
+				<DefaultValue>2.000000e+0</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Deviations down</Name>
 				<ShortDescription>Deviation multiplier for lower band</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-3.000000e+37</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>2</Precision>
-					<SuggestedStart>-2.000000</SuggestedStart>
-					<SuggestedEnd>2.000000</SuggestedEnd>
-					<SuggestedIncrement>0.200000</SuggestedIncrement>
+					<SuggestedStart>-2.000000e+0</SuggestedStart>
+					<SuggestedEnd>2.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>2.000000e-1</SuggestedIncrement>
 				</Range>
-				<DefaultValue>2.000000</DefaultValue>
+				<DefaultValue>2.000000e+0</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>MA Type</Name>
@@ -947,14 +947,14 @@
 				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>0</Precision>
-					<SuggestedStart>0.000000</SuggestedStart>
-					<SuggestedEnd>0.000000</SuggestedEnd>
-					<SuggestedIncrement>0.000000</SuggestedIncrement>
+					<SuggestedStart>0.000000e+0</SuggestedStart>
+					<SuggestedEnd>0.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.300000</DefaultValue>
+				<DefaultValue>3.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -1236,14 +1236,14 @@
 				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>0</Precision>
-					<SuggestedStart>0.000000</SuggestedStart>
-					<SuggestedEnd>0.000000</SuggestedEnd>
-					<SuggestedIncrement>0.000000</SuggestedIncrement>
+					<SuggestedStart>0.000000e+0</SuggestedStart>
+					<SuggestedEnd>0.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.500000</DefaultValue>
+				<DefaultValue>5.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -1447,14 +1447,14 @@
 				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>0</Precision>
-					<SuggestedStart>0.000000</SuggestedStart>
-					<SuggestedEnd>0.000000</SuggestedEnd>
-					<SuggestedIncrement>0.000000</SuggestedIncrement>
+					<SuggestedStart>0.000000e+0</SuggestedStart>
+					<SuggestedEnd>0.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.300000</DefaultValue>
+				<DefaultValue>3.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -1502,14 +1502,14 @@
 				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>0</Precision>
-					<SuggestedStart>0.000000</SuggestedStart>
-					<SuggestedEnd>0.000000</SuggestedEnd>
-					<SuggestedIncrement>0.000000</SuggestedIncrement>
+					<SuggestedStart>0.000000e+0</SuggestedStart>
+					<SuggestedEnd>0.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.300000</DefaultValue>
+				<DefaultValue>3.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -2337,14 +2337,14 @@
 				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>0</Precision>
-					<SuggestedStart>0.000000</SuggestedStart>
-					<SuggestedEnd>0.000000</SuggestedEnd>
-					<SuggestedIncrement>0.000000</SuggestedIncrement>
+					<SuggestedStart>0.000000e+0</SuggestedStart>
+					<SuggestedEnd>0.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.500000</DefaultValue>
+				<DefaultValue>5.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -2392,14 +2392,14 @@
 				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>0</Precision>
-					<SuggestedStart>0.000000</SuggestedStart>
-					<SuggestedEnd>0.000000</SuggestedEnd>
-					<SuggestedIncrement>0.000000</SuggestedIncrement>
+					<SuggestedStart>0.000000e+0</SuggestedStart>
+					<SuggestedEnd>0.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.300000</DefaultValue>
+				<DefaultValue>3.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -2447,14 +2447,14 @@
 				<ShortDescription>Percentage of penetration of a candle within another candle</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>0</Precision>
-					<SuggestedStart>0.000000</SuggestedStart>
-					<SuggestedEnd>0.000000</SuggestedEnd>
-					<SuggestedIncrement>0.000000</SuggestedIncrement>
+					<SuggestedStart>0.000000e+0</SuggestedStart>
+					<SuggestedEnd>0.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.300000</DefaultValue>
+				<DefaultValue>3.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -4033,28 +4033,28 @@
 				<ShortDescription>Upper limit use in the adaptive algorithm</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.010000</Minimum>
-					<Maximum>0.990000</Maximum>
+					<Minimum>1.000000e-2</Minimum>
+					<Maximum>9.900000e-1</Maximum>
 					<Precision>2</Precision>
-					<SuggestedStart>0.210000</SuggestedStart>
-					<SuggestedEnd>0.800000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>2.100000e-1</SuggestedStart>
+					<SuggestedEnd>8.000000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.500000</DefaultValue>
+				<DefaultValue>5.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Slow Limit</Name>
 				<ShortDescription>Lower limit use in the adaptive algorithm</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.010000</Minimum>
-					<Maximum>0.990000</Maximum>
+					<Minimum>1.000000e-2</Minimum>
+					<Maximum>9.900000e-1</Maximum>
 					<Precision>2</Precision>
-					<SuggestedStart>0.010000</SuggestedStart>
-					<SuggestedEnd>0.600000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>1.000000e-2</SuggestedStart>
+					<SuggestedEnd>6.000000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.050000</DefaultValue>
+				<DefaultValue>5.000000e-2</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -5105,28 +5105,28 @@
 				<ShortDescription>Acceleration Factor used up to the Maximum value</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.010000</SuggestedStart>
-					<SuggestedEnd>0.200000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>1.000000e-2</SuggestedStart>
+					<SuggestedEnd>2.000000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.020000</DefaultValue>
+				<DefaultValue>2.000000e-2</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Maximum</Name>
 				<ShortDescription>Acceleration Factor Maximum value</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.200000</SuggestedStart>
-					<SuggestedEnd>0.400000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>2.000000e-1</SuggestedStart>
+					<SuggestedEnd>4.000000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.200000</DefaultValue>
+				<DefaultValue>2.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -5166,112 +5166,112 @@
 				<ShortDescription>Start value and direction. 0 for Auto, &gt;0 for Long, &lt;0 for Short</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-3.000000e+37</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.000000</SuggestedStart>
-					<SuggestedEnd>0.000000</SuggestedEnd>
-					<SuggestedIncrement>0.000000</SuggestedIncrement>
+					<SuggestedStart>0.000000e+0</SuggestedStart>
+					<SuggestedEnd>0.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.000000</DefaultValue>
+				<DefaultValue>0.000000e+0</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Offset on Reverse</Name>
 				<ShortDescription>Percent offset added/removed to initial stop on short/long reversal</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.010000</SuggestedStart>
-					<SuggestedEnd>0.150000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>1.000000e-2</SuggestedStart>
+					<SuggestedEnd>1.500000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.000000</DefaultValue>
+				<DefaultValue>0.000000e+0</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Init Long</Name>
 				<ShortDescription>Acceleration Factor initial value for the Long direction</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.010000</SuggestedStart>
-					<SuggestedEnd>0.190000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>1.000000e-2</SuggestedStart>
+					<SuggestedEnd>1.900000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.020000</DefaultValue>
+				<DefaultValue>2.000000e-2</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Long</Name>
 				<ShortDescription>Acceleration Factor for the Long direction</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.010000</SuggestedStart>
-					<SuggestedEnd>0.200000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>1.000000e-2</SuggestedStart>
+					<SuggestedEnd>2.000000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.020000</DefaultValue>
+				<DefaultValue>2.000000e-2</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Max Long</Name>
 				<ShortDescription>Acceleration Factor maximum value for the Long direction</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.200000</SuggestedStart>
-					<SuggestedEnd>0.400000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>2.000000e-1</SuggestedStart>
+					<SuggestedEnd>4.000000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.200000</DefaultValue>
+				<DefaultValue>2.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Init Short</Name>
 				<ShortDescription>Acceleration Factor initial value for the Short direction</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.010000</SuggestedStart>
-					<SuggestedEnd>0.190000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>1.000000e-2</SuggestedStart>
+					<SuggestedEnd>1.900000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.020000</DefaultValue>
+				<DefaultValue>2.000000e-2</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Short</Name>
 				<ShortDescription>Acceleration Factor for the Short direction</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.010000</SuggestedStart>
-					<SuggestedEnd>0.200000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>1.000000e-2</SuggestedStart>
+					<SuggestedEnd>2.000000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.020000</DefaultValue>
+				<DefaultValue>2.000000e-2</DefaultValue>
 			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>AF Max Short</Name>
 				<ShortDescription>Acceleration Factor maximum value for the Short direction</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>4</Precision>
-					<SuggestedStart>0.200000</SuggestedStart>
-					<SuggestedEnd>0.400000</SuggestedEnd>
-					<SuggestedIncrement>0.010000</SuggestedIncrement>
+					<SuggestedStart>2.000000e-1</SuggestedStart>
+					<SuggestedEnd>4.000000e-1</SuggestedEnd>
+					<SuggestedIncrement>1.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.200000</DefaultValue>
+				<DefaultValue>2.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -5359,14 +5359,14 @@
 				<ShortDescription>Nb of deviations</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-3.000000e+37</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>2</Precision>
-					<SuggestedStart>-2.000000</SuggestedStart>
-					<SuggestedEnd>2.000000</SuggestedEnd>
-					<SuggestedIncrement>0.200000</SuggestedIncrement>
+					<SuggestedStart>-2.000000e+0</SuggestedStart>
+					<SuggestedEnd>2.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>2.000000e-1</SuggestedIncrement>
 				</Range>
-				<DefaultValue>1.000000</DefaultValue>
+				<DefaultValue>1.000000e+0</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -5701,14 +5701,14 @@
 				<ShortDescription>Volume Factor</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>0.000000</Minimum>
-					<Maximum>1.000000</Maximum>
+					<Minimum>0.000000e+0</Minimum>
+					<Maximum>1.000000e+0</Maximum>
 					<Precision>2</Precision>
-					<SuggestedStart>0.010000</SuggestedStart>
-					<SuggestedEnd>1.000000</SuggestedEnd>
-					<SuggestedIncrement>0.050000</SuggestedIncrement>
+					<SuggestedStart>1.000000e-2</SuggestedStart>
+					<SuggestedEnd>1.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>5.000000e-2</SuggestedIncrement>
 				</Range>
-				<DefaultValue>0.700000</DefaultValue>
+				<DefaultValue>7.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
@@ -6059,14 +6059,14 @@
 				<ShortDescription>Nb of deviations</ShortDescription>
 				<Type>Double</Type>
 				<Range>
-					<Minimum>-30000000000000002000000000000000000000.000000</Minimum>
-					<Maximum>30000000000000002000000000000000000000.000000</Maximum>
+					<Minimum>-3.000000e+37</Minimum>
+					<Maximum>3.000000e+37</Maximum>
 					<Precision>2</Precision>
-					<SuggestedStart>-2.000000</SuggestedStart>
-					<SuggestedEnd>2.000000</SuggestedEnd>
-					<SuggestedIncrement>0.200000</SuggestedIncrement>
+					<SuggestedStart>-2.000000e+0</SuggestedStart>
+					<SuggestedEnd>2.000000e+0</SuggestedEnd>
+					<SuggestedIncrement>2.000000e-1</SuggestedIncrement>
 				</Range>
-				<DefaultValue>1.000000</DefaultValue>
+				<DefaultValue>1.000000e+0</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
