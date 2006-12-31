@@ -44,7 +44,7 @@
  *  121005 MF     First Version
  */
 
-package TA.Lib.Test;
+package com.tictactec.ta.lib.test;
 
 import junit.framework.*;
 import java.util.Arrays;

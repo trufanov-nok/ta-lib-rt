@@ -44,7 +44,7 @@
  *  022206 BT     First Version
  */
 
-package TA.Lib.MetaInfo;
+package com.tictactec.ta.lib.meta;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
