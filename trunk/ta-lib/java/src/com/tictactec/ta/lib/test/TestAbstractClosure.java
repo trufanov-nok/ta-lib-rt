@@ -44,7 +44,7 @@
  *  022206 BT     First Version
  */
 
-package TA.Lib.Test;
+package com.tictactec.ta.lib.test;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -55,8 +55,8 @@ import java.util.Arrays;
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
-import TA.Lib.MetaInfo.TaFuncClosure;
-import TA.Lib.MetaInfo.TaFuncMetaInfo;
+import com.tictactec.ta.lib.meta.TaFuncClosure;
+import com.tictactec.ta.lib.meta.TaFuncMetaInfo;
 
 public class TestAbstractClosure extends junit.framework.Assert implements TaFuncClosure
 {

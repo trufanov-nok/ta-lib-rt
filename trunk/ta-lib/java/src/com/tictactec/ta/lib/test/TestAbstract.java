@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -44,11 +44,11 @@
  *  022206 BT     First Version
  */
 
-package TA.Lib.Test;
+package com.tictactec.ta.lib.test;
 
 import junit.framework.TestCase;
 import com.tictactec.ta.lib.Core;
-import TA.Lib.MetaInfo.CoreMetaInfo;
+import com.tictactec.ta.lib.meta.CoreMetaInfo;
 
 public class TestAbstract extends TestCase 
 {
