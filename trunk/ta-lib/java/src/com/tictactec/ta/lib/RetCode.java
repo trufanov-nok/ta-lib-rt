@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -46,18 +46,12 @@
 
 package com.tictactec.ta.lib;
 
-public enum TA_CandleSettingType 
+public enum RetCode
 {
-    TA_BodyLong,
-    TA_BodyVeryLong,
-    TA_BodyShort,
-    TA_BodyDoji,
-    TA_ShadowLong,
-    TA_ShadowVeryLong,
-    TA_ShadowShort,
-    TA_ShadowVeryShort,
-    TA_Near,
-    TA_Far,
-    TA_Equal,
-    TA_AllCandleSettings
+	Success,
+	BadParam,
+	OutOfRangeStartIndex,
+    OutOfRangeEndIndex,
+    AllocErr,
+    InternalError
 };

@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -46,30 +46,31 @@
 
 package com.tictactec.ta.lib;
 
-public enum TA_FuncUnstId {
-/* 000 */  TA_FUNC_UNST_EMA,
-/* 001 */  TA_FUNC_UNST_HT_TRENDLINE,
-/* 002 */  TA_FUNC_UNST_KAMA,
-/* 003 */  TA_FUNC_UNST_MAMA,
-/* 004 */  TA_FUNC_UNST_T3,
-/* 005 */  TA_FUNC_UNST_ATR,
-/* 006 */  TA_FUNC_UNST_NATR,
-/* 007 */  TA_FUNC_UNST_ADX,
-/* 008 */  TA_FUNC_UNST_ADXR,
-/* 009 */  TA_FUNC_UNST_CMO,
-/* 010 */  TA_FUNC_UNST_DX,
-/* 011 */  TA_FUNC_UNST_MFI,
-/* 012 */  TA_FUNC_UNST_MINUS_DI,
-/* 013 */  TA_FUNC_UNST_MINUS_DM,
-/* 014 */  TA_FUNC_UNST_PLUS_DI,
-/* 015 */  TA_FUNC_UNST_PLUS_DM,
-/* 016 */  TA_FUNC_UNST_RSI,
-/* 017 */  TA_FUNC_UNST_STOCHRSI,
-/* 018 */  TA_FUNC_UNST_HT_DCPERIOD,
-/* 019 */  TA_FUNC_UNST_HT_DCPHASE,
-/* 020 */  TA_FUNC_UNST_HT_PHASOR,
-/* 021 */  TA_FUNC_UNST_HT_SINE,
-/* 022 */  TA_FUNC_UNST_HT_TRENDMODE,
-           TA_FUNC_UNST_ALL,
-           TA_FUNC_UNST_NONE
+public enum FuncUnstId {
+	
+	  /* 000 */  Adx,
+	  /* 001 */  Adxr,
+	  /* 002 */  Atr,
+	  /* 003 */  Cmo,
+	  /* 004 */  Dx,
+	  /* 005 */  Ema,
+	  /* 006 */  HtDcPeriod,
+	  /* 007 */  HtDcPhase,
+	  /* 008 */  HtPhasor,
+	  /* 009 */  HtSine,
+	  /* 010 */  HtTrendline,
+	  /* 011 */  HtTrendMode,
+	  /* 012 */  Kama,
+	  /* 013 */  Mama,
+	  /* 014 */  Mfi,
+	  /* 015 */  MinusDI,
+	  /* 016 */  MinusDM,
+	  /* 017 */  Natr,
+	  /* 018 */  PlusDI,
+	  /* 019 */  PlusDM,
+	  /* 020 */  Rsi,
+	  /* 021 */  StochRsi,
+	  /* 022 */  T3,
+                 All,
+                 None
 };

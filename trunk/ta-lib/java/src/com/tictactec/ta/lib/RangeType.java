@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -36,50 +36,20 @@
  *  Initial  Name/description
  *  -------------------------------------------------------------------
  *  MF       Mario Fortier
- *  BT       Barry Tsung
  *
  * Change history:
  *
  *  MMDDYY BY     Description
  *  -------------------------------------------------------------------
  *  121005 MF     First Version
- *  022206 BT     add copy constructor
  */
 
 package com.tictactec.ta.lib;
 
-public class TA_CandleSetting {
-    
-    /** Creates a new instance of TA_CandleSetting */
-    public TA_CandleSetting( TA_CandleSettingType p_settingType, 
-                             TA_RangeType p_rangeType, 
-                             int p_avgPeriod, 
-                             double p_factor )
-    {
-        settingType = p_settingType;
-        rangeType = p_rangeType;
-        avgPeriod = p_avgPeriod;
-        factor = p_factor;
-    }
 
-    public TA_CandleSetting(TA_CandleSetting that)
-    {
-       this.settingType = that.settingType;
-       this.rangeType = that.rangeType;
-       this.avgPeriod = that.avgPeriod;
-       this.factor = that.factor;       
-    }
-    
-    public void CopyFrom( TA_CandleSetting src )
-    {
-       this.settingType = src.settingType;
-       this.rangeType = src.rangeType;
-       this.avgPeriod = src.avgPeriod;
-       this.factor = src.factor;
-    }
-    
-    TA_CandleSettingType    settingType;
-    TA_RangeType            rangeType;
-    int                     avgPeriod;
-    double                  factor;    
+public enum RangeType
+{ 
+    RealBody,
+    HighLow,
+    Shadows
 }

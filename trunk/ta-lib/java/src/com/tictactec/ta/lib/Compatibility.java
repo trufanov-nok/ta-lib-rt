@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -46,10 +46,8 @@
 
 package com.tictactec.ta.lib;
 
-
-public enum TA_RangeType
-{ 
-    TA_RangeType_RealBody,
-    TA_RangeType_HighLow,
-    TA_RangeType_Shadows
-}
+public enum Compatibility
+{
+    Default,
+    Metastock
+};

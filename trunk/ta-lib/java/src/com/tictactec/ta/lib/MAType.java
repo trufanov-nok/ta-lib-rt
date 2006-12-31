@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2006, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -46,15 +46,15 @@
 
 package com.tictactec.ta.lib;
 
-public enum TA_MAType 
+public enum MAType 
 {
-   TA_MAType_SMA,
-   TA_MAType_EMA,
-   TA_MAType_WMA,
-   TA_MAType_DEMA,
-   TA_MAType_TEMA,
-   TA_MAType_TRIMA,
-   TA_MAType_KAMA,
-   TA_MAType_MAMA,
-   TA_MAType_T3
+   Sma,
+   Ema,
+   Wma,
+   Dema,
+   Tema,
+   Trima,
+   Kama,
+   Mama,
+   T3
 };
