@@ -523,26 +523,6 @@ namespace TicTacTec
          #define TA_AVGPRICE Core::AvgPrice
          #define TA_AVGPRICE_Lookback Core::AvgPriceLookback
 
-         static int BetaLookback( void );
-
-         static enum class RetCode Beta( int    startIdx,
-                                         int    endIdx,
-                                         cli::array<double>^ inReal0,
-                                         cli::array<double>^ inReal1,
-                                         [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
-                                         cli::array<double>^  outReal );
-         static enum class RetCode Beta( int    startIdx,
-                                         int    endIdx,
-                                         cli::array<float>^ inReal0,
-                                         cli::array<float>^ inReal1,
-                                         [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
-                                         cli::array<double>^  outReal );
-
-         #define TA_BETA Core::Beta
-         #define TA_BETA_Lookback Core::BetaLookback
-
          static int BbandsLookback( int           optInTimePeriod, /* From 2 to 100000 */
                                   double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                                   double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
@@ -574,6 +554,28 @@ namespace TicTacTec
 
          #define TA_BBANDS Core::Bbands
          #define TA_BBANDS_Lookback Core::BbandsLookback
+
+         static int BetaLookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         static enum class RetCode Beta( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal0,
+                                         cli::array<double>^ inReal1,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNbElement,
+                                         cli::array<double>^  outReal );
+         static enum class RetCode Beta( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal0,
+                                         cli::array<float>^ inReal1,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNbElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_BETA Core::Beta
+         #define TA_BETA_Lookback Core::BetaLookback
 
          static int BopLookback( void );
 

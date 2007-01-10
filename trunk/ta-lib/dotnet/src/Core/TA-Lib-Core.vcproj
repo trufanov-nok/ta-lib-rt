@@ -417,7 +417,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_BETA.c">
+					RelativePath="..\..\..\c\src\ta_func\ta_BBANDS.c">
 					<FileConfiguration
 						Name="Debug|Win32">
 						<Tool
@@ -436,7 +436,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_BBANDS.c">
+					RelativePath="..\..\..\c\src\ta_func\ta_BETA.c">
 					<FileConfiguration
 						Name="Debug|Win32">
 						<Tool
