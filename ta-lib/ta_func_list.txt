@@ -7,8 +7,8 @@ AROON               Aroon
 AROONOSC            Aroon Oscillator
 ATR                 Average True Range
 AVGPRICE            Average Price
-BETA                Beta
 BBANDS              Bollinger Bands
+BETA                Beta
 BOP                 Balance Of Power
 CCI                 Commodity Channel Index
 CDL2CROWS           Two Crows

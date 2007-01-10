@@ -274,24 +274,6 @@ int TA_AVGPRICE_Lookback( void );
 
 
 /*
- * TA_BETA - Beta
- * 
- * Input  = double, double
- * Output = double
- * 
- */
-TA_RetCode TA_BETA( int           START_IDX,
-                    int           END_IDX,
-                    const double *IN_ARRAY /* inReal0 */,
-                    const double *IN_ARRAY /* inReal1 */,
-                    int          *BEG_IDX,
-                    int          *OUT_SIZE,
-                    double       *OUT_ARRAY /* outReal */ );
-
-int TA_BETA_Lookback( void );
-
-
-/*
  * TA_BBANDS - Bollinger Bands
  * 
  * Input  = double
@@ -330,6 +312,31 @@ int TA_BBANDS_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                       double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                       double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
                       TA_MAType     optInMAType ); 
+
+/*
+ * TA_BETA - Beta
+ * 
+ * Input  = double, double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_BETA( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal0 */,
+                    const double *IN_ARRAY /* inReal1 */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_BETA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
 
 /*
  * TA_BOP - Balance Of Power
