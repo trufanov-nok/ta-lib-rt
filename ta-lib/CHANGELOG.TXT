@@ -1,12 +1,13 @@
-Version 0.3 (Planned for January 2007)
+Version 0.3 (January 2007)
 
 New Features
 ============
-- New Functions: MINMAX, MINMAXINDEX, MININDEX, MAXINDEX
+- New Functions: BETA, MINMAX, MINMAXINDEX, MININDEX, MAXINDEX
 - Debian and RPM packaging available.
 - Java JAR packaging available.
 - New TA_FunctionDescription() returns XML description of API.
 - New ta_func_api.xml file generated in root directory of the package.
+- Support for unmanaged static libraries with Visual Studio 2005.
 
 Fixes
 =====
@@ -15,10 +16,11 @@ Fixes
 
 Other Changes
 =============
-- Java/.NET API changed to the right naming convention.
+- Better Java/.NET naming convention.
 - ta_func_list.txt moved in root directory of the package.
 - Removed dependencies on trio and Mersenne Twister functions.
 - Volume and Open Interest are now double instead of integers.
+- Add license specific to Excel users.
 
 Thanks to all contributors.
 
