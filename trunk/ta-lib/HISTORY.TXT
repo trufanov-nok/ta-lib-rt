@@ -1,3 +1,11 @@
+V0.3 (January 2007)
+  - New .NET and Java naming convention.
+  - XML interface description (See TA_FunctionDescription).
+  - Volume amd open interest now of double type.
+  - Add: BETA, MINMAX, MINMAXINDEX, MININDEX, MAXINDEX.
+  - New RPM, Debian, JAR and unmanaged library with VS2005. 
+  - Fix #1526632, #1544555
+
 V0.2 (June 2006)
   - Many bug fix for Java.
   - New ULTOSC and NATR functions.
