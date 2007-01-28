@@ -2,23 +2,29 @@
 
 How to use the ta-lib Excel Add-Ins?
 ====================================
-In Excel, select "Add-In", browse and select "ta-lib.xll".
+In Excel, select "Add-Ins", browse and select either "ta-lib.xll" or 
+"ta-lib-reverse.xll".
+
 All the TA functions will become visible in the "Function Wizard".
 
-Where is the documentation?
-===========================
-See http://ta-lib.org in the documentation section.
+What is the different between "ta-lib.xll" and "ta-lib-reverse.xll"?
+====================================================================
+They are the same except for the order used to process the input.
+
+"ta-lib.xll" performs the calculation from top to down or right to left.
+"ta-lib-reverse.xll" performs the calculation from down to top or left to right.
 
 License
 =======
-You can freely re-distribute ta-lib.xll, even with commercial products. 
-You must respect the LICENSE_EXCEL.TXT included in this package.
+You can freely re-distribute ta-lib.xll and ta-lib-reverse.xll, even with 
+closed source commercial products. You must respect the LICENSE_EXCEL.TXT 
+included in this package.
 
-How to re-build ta-lib.xll?
-===========================
+How to re-build the add-ins?
+============================
 See 'ta-lib\excel\src\ReadMe.txt'
 
-Comments/Help
-=============
+Documentation/Comments/Help
+===========================
   http://ta-lib.org
   http://tadoc.org
