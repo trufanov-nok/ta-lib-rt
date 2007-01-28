@@ -11,9 +11,8 @@ See http://ta-lib.org in the documentation section.
 
 License
 =======
-You can freely re-distribute ta-lib.xll, even with
-commercial products. You must respect the LICENSE.TXT
-included in this package.
+You can freely re-distribute ta-lib.xll, even with commercial products. 
+You must respect the LICENSE_EXCEL.TXT included in this package.
 
 How to re-build ta-lib.xll?
 ===========================
@@ -21,4 +20,5 @@ See 'ta-lib\excel\src\ReadMe.txt'
 
 Comments/Help
 =============
-Visit http://ta-lib.org and try the mailing list.
+  http://ta-lib.org
+  http://tadoc.org
