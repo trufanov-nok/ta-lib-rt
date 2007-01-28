@@ -13,13 +13,29 @@ Step # 1 : Build ta_libc_cdr.lib
     created in ta-lib\c\lib
 (5) Close this workspace.
 
-Step #2 : Build ta-lib.xll
+Step #2a : Build ta-lib.xll
 --------------------------
+You need to perform these steps only if the TA function
+inputs are top to down or left to right.
+
 (1) Open workspace: ta-lib\excel\src\ta-lib.dsw
 (2) Select "xlw_for_talib" as the active project.
 (3) Select the configuration "Win32 Release"
 (4) Build "xlw_for_talib". The file "ta-lib.xll" shall be
     created in the directory ta-lib\excel
+
+Step #2b : Build ta-lib-reverse.xll
+----------------------------------=
+You need to perform these steps only if the TA function
+inputs are down to top or right to left.
+
+(1) Open workspace: ta-lib\excel\src\ta-lib.dsw
+(2) Select "xlw_for_talib" as the active project.
+(3) Select the configuration "Win32 Release"
+(4) Make sure DOWN_UP_CELL_ORDER is defined at the top of xlw_for_talib.cpp
+(5) Build "xlw_for_talib". The file "ta-lib.xll" shall be
+    created in the directory ta-lib\excel
+
 
 Further information about XLW can be found here:
    http://xlw.sourceforge.net
