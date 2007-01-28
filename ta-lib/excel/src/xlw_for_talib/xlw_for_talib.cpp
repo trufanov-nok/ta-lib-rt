@@ -52,6 +52,7 @@
  *  041806 MF   Adapt to latest TA-Lib interface changes.
  *  102606 ND   Code to make TA-Lib use reverse cell orders.
  *  111306 MF   volume and oi now double + remove trio dependency.
+ *  012807 MF   Add back trio dependency.
  */
 
 // The released version of TA-Lib process the cells in a
@@ -74,6 +75,9 @@
   // Include the std::reverse and std::swap_ranges algorithm
   #include <algorithm>
 #endif
+
+     
+extern "C" double trio_nan(void); 
 
 //#define DEBUG
 
@@ -174,6 +178,7 @@ static void allocGlobals(void)
 {
    memset( inputPtrs,  0, sizeof(ArrayPtrs)*NB_MAX_input );
    memset( outputPtrs, 0, sizeof(ArrayPtrs)*NB_MAX_output );
+   nanValue = trio_nan();
    outputExcelSize = 0;
    outputExcel     = NULL;
 }
