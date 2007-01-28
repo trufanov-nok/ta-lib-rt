@@ -1,8 +1,4 @@
-* TA-LIB for .NET *
-
-Where is the documentation?
-===========================
-See http://ta-lib.org in the documentation section.
+* TA-Lib for .NET *
 
 How to use TA-Lib with .NET?
 ============================
@@ -25,23 +21,10 @@ can be used with any .NET language (C#,VB.NET,C++,J#...).
 
 These assemblies can be used with Mono as well.
 
-Only the TA functions are currently implemented for
-the .NET platform.
-
-WARNING: Ignore code under the Timeseries directory. This code
-         is in development an is not ready to be used within
-         an application.
-
 How to rebuild the TA-LIB assembly?
 ===================================
 Using Visual Studio open ta-lib\dotnet\src\TA-Lib.sln and
-rebuild TA-Lib-Core only.
-
-Rebuild TA-Lib-NUnit only if you have NUnit installed. NUnit is 
-optional. It is intended to be used for an automated unit 
-testing of TA-Lib for the .NET platform.
-
-There is no makefile provided for Mono.
+rebuild TA-Lib-Core.
 
 Can I re-distribute the TA-Lib assembly?
 ========================================
@@ -51,12 +34,11 @@ in this package.
 
 How to uninstall the library?
 =============================
-Just delete the ta-lib directory or all the 
-assembly. TA-LIB does not touch your system
-settings, the GAC or the registry.
+Just delete the ta-lib directory and assembly.
+TA-LIB does not touch your system settings, 
+the GAC or the registry.
 
 Comments/Help
 =============
-Visit http://ta-lib.org and subscribe to the mailing list.
-
-
+ http://ta-lib.org
+ http://tadoc.org
