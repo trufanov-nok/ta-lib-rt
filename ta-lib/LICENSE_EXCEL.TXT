@@ -1,6 +1,6 @@
 The following license applies only to the users of the Excel add-ins:
 
-TA-Lib Copyright (c) 1999-2006, Mario Fortier
+TA-Lib Copyright (c) 1999-2007, Mario Fortier
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or
