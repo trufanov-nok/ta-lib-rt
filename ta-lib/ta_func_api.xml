@@ -4139,9 +4139,6 @@
 		<CamelCaseName>MaxIndex</CamelCaseName>
 		<ShortDescription>Index of highest value over a specified period</ShortDescription>
 		<GroupId>Math Operators</GroupId>
-		<Flags>
-			<Flag>Overlap</Flag>
-		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -4396,9 +4393,6 @@
 		<CamelCaseName>MinIndex</CamelCaseName>
 		<ShortDescription>Index of lowest value over a specified period</ShortDescription>
 		<GroupId>Math Operators</GroupId>
-		<Flags>
-			<Flag>Overlap</Flag>
-		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -4487,9 +4481,6 @@
 		<CamelCaseName>MinMaxIndex</CamelCaseName>
 		<ShortDescription>Indexes of lowest and highest values over a specified period</ShortDescription>
 		<GroupId>Math Operators</GroupId>
-		<Flags>
-			<Flag>Overlap</Flag>
-		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
