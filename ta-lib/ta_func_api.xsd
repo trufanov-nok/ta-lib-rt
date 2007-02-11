@@ -89,24 +89,26 @@
       <xsd:enumeration value="Overlap" />
       <xsd:enumeration value="Volume" />
       <xsd:enumeration value="Candlestick" />
-	  <xsd:enumeration value="Unstable Period" />
+	    <xsd:enumeration value="Unstable Period" />
     </xsd:restriction>
   </xsd:simpleType>
 
   <!--Optional flags for the output values.-->
   <xsd:simpleType name="OutputFlags">
     <xsd:restriction base="xsd:string">
-	  <xsd:enumeration value="Line" />
-	  <xsd:enumeration value="Dotted Line" />
-	  <xsd:enumeration value="Dashed Line" />
-	  <xsd:enumeration value="Dots" />
-	  <xsd:enumeration value="Histogram" />
+	    <xsd:enumeration value="Line" />
+	    <xsd:enumeration value="Dotted Line" />
+	    <xsd:enumeration value="Dashed Line" />
+	    <xsd:enumeration value="Dots" />
+	    <xsd:enumeration value="Histogram" />
       <xsd:enumeration value="Pattern Bool" />
       <xsd:enumeration value="Pattern Bull Bear" />
       <xsd:enumeration value="Pattern Strength" />
       <xsd:enumeration value="Positive" />
       <xsd:enumeration value="Negative" />
       <xsd:enumeration value="Zero" />
+      <xsd:enumeration value="Upper Limit" />
+      <xsd:enumeration value="Lower Limit" />
     </xsd:restriction>
   </xsd:simpleType>
 

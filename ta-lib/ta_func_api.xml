@@ -509,7 +509,7 @@
 				<Type>Double Array</Type>
 				<Name>outRealUpperBand</Name>
 				<Flags>
-					<Flag>Line</Flag>
+					<Flag>Upper Limit</Flag>
 				</Flags>
 			</OutputArgument>
 			<OutputArgument>
@@ -523,7 +523,7 @@
 				<Type>Double Array</Type>
 				<Name>outRealLowerBand</Name>
 				<Flags>
-					<Flag>Line</Flag>
+					<Flag>Lower Limit</Flag>
 				</Flags>
 			</OutputArgument>
 		</OutputArguments>
