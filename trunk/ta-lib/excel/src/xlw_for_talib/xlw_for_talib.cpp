@@ -988,12 +988,12 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
              }
              else if( toDoMask & TA_IN_PRICE_VOLUME )
              {
-                inputInt = alloc_int_input( curExcelParam, excelArraySize );
+                inputDouble = alloc_double_input( curExcelParam, excelArraySize );
                 toDoMask &= ~TA_IN_PRICE_VOLUME;
              }
              else if( toDoMask & TA_IN_PRICE_OPENINTEREST )
              {
-                inputInt = alloc_int_input( curExcelParam, excelArraySize );
+                inputDouble = alloc_double_input( curExcelParam, excelArraySize );
                 toDoMask &= ~TA_IN_PRICE_OPENINTEREST;
              }
              else /*if( toDoMask & TA_IN_PRICE_TIMESTAMP ) Not supported */
