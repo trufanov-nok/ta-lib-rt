@@ -9,7 +9,7 @@
 # This script FTP these files on SourceForge.
 
 $ip = "66.35.250.221"; # For upload.sourceforge.net
-execProg( "/mnt/hgfs/Release", "ncftpput $ip incoming *" );
+execProg( "/mnt/hgfs/ta-lib-user/ta-lib-work/dist", "ncftpput $ip incoming *" );
 
 sub execProg
 {
@@ -20,7 +20,7 @@ sub execProg
 
    $exit_value  = $? >> 8;
    $signal_num  = $? & 127;
-  $dumped_core = $? & 128;
+   $dumped_core = $? & 128;
 
    if( ($exit_value) or
        ($signal_num) or

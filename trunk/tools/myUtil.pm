@@ -5,10 +5,13 @@ use base 'Exporter';
 use Cwd;
 
 
-our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile createWorkdir removeAllBinFile testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage getWorkdir);
+our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile createWorkdir removeAllBinFile testExcel testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage getReleasedir getLogdir getTempdir getWorkdir);
 
 my $workdir = "";
 my $userdir = "";
+my $releasedir = "";
+my $logdir = "";
+my $tempdir = "";
 
 # User directory.
 sub getUserdir
@@ -23,7 +26,7 @@ sub getUserdir
       # On my setup, both my unix and win32 machines share the
       # same user directory intended for my projects.
       # If that shared directory is found, use it instead.
-      # If not use a local directory in the OS user account.
+      # If not, use a local directory in the OS user account.
       # \Mario
       my $temp = "/mnt/hgfs/ta-lib-user/";
       if( -e $temp && -d $temp )
@@ -38,16 +41,17 @@ sub getUserdir
    else
    {
       # Running on win32 machine. 
-      $userdir = $ENV{'HOME'}."//";
+      #$userdir = $ENV{'HOME'}."\\";
+      $userdir = "p:\\temp\\";
    }
    
    return $userdir;
 }
 
-# The workdir is intended for all intermediate files.
-
+# The workdir is where all the processing take place.
 #   - All output logs while running the scripts.
 #   - Destination for the files produced by the scripts.
+#   - All intermediate files.
 sub getWorkdir
 {  
    if( $workdir ne "" ) 
@@ -65,6 +69,65 @@ sub getWorkdir
    }
    
    return $workdir;
+}
+
+# The release dir is the sub-directory of workdir intended to contains 
+# all the file being released.
+sub getReleasedir
+{
+   if( $releasedir ne "" ) 
+   {
+      return $releasedir;
+   }
+
+   if( $^O ne "MSWin32" )
+   {   	
+      $releasedir = &getWorkdir()."dist/";
+   }
+   else
+   {
+      $releasedir = &getWorkdir()."dist\\";
+   }
+   
+   return $releasedir;
+}
+
+sub getLogdir
+{
+   if( $logdir ne "" ) 
+   {
+      return $logdir;
+   }
+
+   if( $^O ne "MSWin32" )
+   {   	
+      $logdir = &getWorkdir()."log/";
+   }
+   else
+   {
+      $logdir = &getWorkdir()."log\\";
+   }
+   
+   return $logdir;
+}
+
+sub getTempdir
+{
+   if( $tempdir ne "" ) 
+   {
+      return $tempdir;
+   }
+
+   if( $^O ne "MSWin32" )
+   {   	
+      $tempdir = &getWorkdir()."temp/unix/";
+   }
+   else
+   {
+      $tempdir = &getWorkdir()."temp\\win32\\";
+   }
+   
+   return $tempdir;
 }
 
 # copyFile( pattern, destinationPath )
@@ -195,6 +258,7 @@ sub createWorkdir
       unlink( $workdir."log\\stderr_win32.txt" );
       unlink( $workdir."log\\stdout_win32.txt" );
       unlink( $workdir,"log\\perl_msvc.txt" );
+      unlink( $workdir."log\\win_excel.txt" );      
       removeFile( $workdir."log\\win_ta*.txt" );
       removeFile( $workdir."temp\\win32\\*" );
    }  
@@ -260,6 +324,13 @@ sub removeAllTempFile
    removeFile( $_[0].'*\*\*\*\*\*.opt' );
    removeFile( $_[0].'*\*\*\*\*\*\*.opt' );
 
+   removeFile( $_[0].'*\*.TXT~' );
+   removeFile( $_[0].'*\*\*.TXT~' );
+   removeFile( $_[0].'*\*\*\*.TXT~' );
+   removeFile( $_[0].'*\*\*\*\*.TXT~' );
+   removeFile( $_[0].'*\*\*\*\*\*.TXT~' );
+   removeFile( $_[0].'*\*\*\*\*\*\*.TXT~' );
+   
    removeFile( $_[0].'c\bin\*.dat' );
 }
 
@@ -273,7 +344,8 @@ sub removeAllBinFile
       removeFile( $_[0].'c\lib\*.*' );
       removeFile( $_[0].'swig\lib\perl\*.*' );
       removeFile( $_[0].'swig\lib\perl\Finance\*.*' );
-      removeFile( $_[0].'excel\ta-lib.xll' );
+      #removeFile( $_[0].'excel\ta-lib.xll' );
+      #removeFile( $_[0].'excel\ta-lib-reverse.xll' );
       removeFile( $_[0].'dotnet\src\Core\Release\*.*' );
       removeFile( $_[0].'dotnet\src\Core\Debug\*.*' );
    }
@@ -286,6 +358,7 @@ sub removeBinFromPackage
    my $a = $_[0]."release\\";
    my $b = "zip -d -o -q ".$_[1]; 
    execProg($a, $b." \\ta-lib\\excel\\ta-lib.xll" );
+   execProg($a, $b." \\ta-lib\\excel\\ta-lib-reverse.xll" );
    execProg($a, $b." \\ta-lib\\dotnet\\src\\Core\\Debug\\TA-Lib-Core.dll"  );
    execProg($a, $b." \\ta-lib\\dotnet\\src\\Core\\Release\\TA-Lib-Core.dll"  );
    execProg($a, $b." \\ta-lib\\swig\\lib\\perl\\Finance\\TA.pm"  );
@@ -295,9 +368,9 @@ sub execProg
 {
    my $dir = &cwd();
 
+   print "cd [".$_[0]."]";
    chdir( $_[0] );
    system( $_[1] );
-   # print $_[1];
 
    my $exit_value  = $? >> 8;
    my $signal_num  = $? & 127;
@@ -471,6 +544,29 @@ sub testPerl
    execProg( $a, $b );
 }
 
+sub testExcel
+{
+   my $base       = $_[0];
+   my $log_path   = $_[1];
+
+   removeFile( $base."excel\\ta-lib.xll" );
+   removeFile( $base."excel\\ta-lib-reverse.xll" );
+   
+   # Clean-up and build ta-lib-reverse.xll   
+   execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" Clean" );   
+   execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" Clean" );   
+   #execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" >\"".&getWorkdir()."\\log\\win_excel.txt\"" );
+   execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib_reverse.mak CFG=\"xlw_for_talib - Win32 Release\" >\"".&getLogdir()."win_excel.txt\"" );
+   
+   execProg( $base."excel", "copy ta-lib.xll ta-lib-reverse.xll" );
+
+   # Clean-up and build ta-lib.xll
+   removeFile( $base."excel\\ta-lib.xll" );
+   execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" Clean" );   
+   execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" Clean" );
+   execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" >>\"".&getLogdir()."win_excel.txt\"" );      
+}
+
 sub buildBorland
 {
    my $base       = $_[0];
@@ -516,11 +612,11 @@ sub testMSVC
    if( $_[5] eq 0 )
    {
       testBin($_[0],$_[2]);
-      # If "cdr" test the Perl interface   
+      # If "cdr" test the Excel and Perl interface
       if( $_[1] eq "cdr" )    
       {
-	 # Hard code output path (for now...)
          testPerl($_[0]);
+	 testExcel($_[0]);
       }
    }
 }

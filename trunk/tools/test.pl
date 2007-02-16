@@ -29,7 +29,7 @@ sub Main
    print "Testing ".$versionSuffix."\n";
 
    $root_dir = "..\\";
-   $workdir = &getWorkdir();
+   $workdir = &getWorkdir;
 
    if( $ARGV[0] eq "-fast" )
    {

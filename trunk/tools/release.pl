@@ -16,6 +16,11 @@ sub Main
    $versionSuffix = &libversion();
    print "Packaging ".$versionSuffix."\n";
 
+   open(OLD_STDERR,">&STDERR") or die "Failed to save STDERR";
+   open(OLD_STDOUT,">&STDOUT") or die "Failed to save STDOUT";
+   open(STDOUT, ">".&getLogdir."stdout_release_win32.txt" ) or die;
+   open(STDERR, ">".&getLogdir."stderr_release_win32.txt" ) or die;
+   
    $root_dir = "..\\";
 
    if( $ARGV[0] eq "-fast" )
@@ -23,93 +28,87 @@ sub Main
 	print "Fast Option Set: Skipping clean-up and some tests\n";
 	$fastOption = 1;
    }
-
-   
-   # Clean-up packaging directory
-   if( $fastOption eq 1 )
-   {
-      removeAllTempFile( $root_dir."release\\build\\ta-lib\\" );
-      removeAllBinFile ( $root_dir."release\\build\\ta-lib\\", 0 );
-   }
    else
    {
-      removeRelease( $root_dir );
-
-      # Get a clean copy locally
-      $a = "svn export https://svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib .\\ta-lib";
-      execProg( $root_dir."release\\build\\", $a );
+        $fastOption = 0;
    }
+     
+   # Get a SVN copy locally
+   $a = "svn export --force https://svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib .\\ta-lib";
+   execProg( &getTempdir, $a );
 
    ###########################################################################
    # Package ta_lib
    ###########################################################################
    # Make the 'src' package
-   $packageName = "ta-lib-".$versionSuffix."-src.zip";
-   $a = "zip -r -o -q ..\\".$packageName." ta-lib\\*.*";
-   execProg( $root_dir."release\\build\\", $a );
+   # No more SRC package. Developer must use SVN instead.
+   # 
+   # $packageName = "ta-lib-".$versionSuffix."-src.zip";
+   # $a = "zip -r -o -q ..\\".$packageName." ta-lib\\*.*";
+   # execProg( $root_dir."release\\build\\", $a );
 
    # Remove the Excel/Perl/.NET binaries from the package.
-   # These binaries were not build, they are coming from 
-   # the CVS import.
-   removeBinFromPackage( $root_dir, $packageName );
+   # These binaries are coming from the SVN import.
+   # removeBinFromPackage( $root_dir, $packageName );
 
-   # Log dire relative to the makefiles.
-   my $log_dir = "..\\..\\..\\..\\..\\..\\..\\..\\release\\log\\";
-   
    # Make the MSVC package
    my $keepTheLib =1;
    my $skipAllTests = $fastOption;
-   testMSVC($root_dir."release\\build\\ta-lib\\", "cdr", $fastOption,
-	    $keepTheLib, $log_dir, $skipAllTests );
+   testMSVC(&getTempdir."ta-lib\\", "cdr", $fastOption,
+	    $keepTheLib, &getLogdir, $skipAllTests );
+
+   testMSVC(&getTempdir."ta-lib\\", "csd", $fastOption,
+	    $keepTheLib, &getLogdir, $skipAllTests );
     
-   testMSVC($root_dir."release\\build\\ta-lib\\", "csd", $fastOption,
-	    $keepTheLib, $log_dir, $skipAllTests );
+   testMSVC(&getTempdir."ta-lib\\", "cmd", $fastOption,
+	    $keepTheLib, &getLogdir, $skipAllTests );
     
-   testMSVC($root_dir."release\\build\\ta-lib\\", "cmd", $fastOption,
-	    $keepTheLib, $log_dir, $skipAllTests );
+   testMSVC(&getTempdir."ta-lib\\", "cmr", $fastOption,
+	    $keepTheLib, &getLogdir, $skipAllTests );
     
-   testMSVC($root_dir."release\\build\\ta-lib\\", "cmr", $fastOption,
-	    $keepTheLib, $log_dir, $skipAllTests );
+   testMSVC(&getTempdir."ta-lib\\", "cdd", $fastOption,
+	    $keepTheLib, &getLogdir, $skipAllTests );
     
-   testMSVC($root_dir."release\\build\\ta-lib\\", "cdd", $fastOption,
-	    $keepTheLib, $log_dir, $skipAllTests );
+   testMSVC(&getTempdir."ta-lib\\", "csr", $fastOption,
+	    $keepTheLib, &getLogdir, $skipAllTests );
     
-   testMSVC($root_dir."release\\build\\ta-lib\\", "csr", $fastOption,
-	    $keepTheLib, $log_dir, $skipAllTests );
-    
-   removeAllTempFile($root_dir."release\\build\\ta-lib\\");
+   removeAllTempFile(&getTempdir."ta-lib\\");
 
    $packageName = "ta-lib-".$versionSuffix."-msvc.zip";
    
-   $a = "zip -r -o -q ..\\".$packageName." ta-lib\\*.*";
-   execProg( $root_dir."release\\build\\", $a );
+   $a = "zip -r -o -q ".&getReleasedir.$packageName." ta-lib\\*.*";
+   execProg( &getTempdir, $a );
 
-   removeAllBinFile($root_dir."release\\build\\ta-lib\\", 0 );
+   removeAllBinFile(&getTempdir."ta-lib\\", 0 );
 
    # Make the Borland package (1 means 'keep the lib')
-   testBorland($root_dir."release\\build\\ta-lib\\", "csd", $fastOption,
-	       $keepTheLib, $log_dir, $skipAllTests );
+   testBorland(&getTempdir."ta-lib\\", "csd", $fastOption,
+	       $keepTheLib, &getLogdir, $skipAllTests );
        
-   testBorland($root_dir."release\\build\\ta-lib\\", "cmd", $fastOption,
-	       $keepTheLib, $log_dir, $skipAllTests );
+   testBorland(&getTempdir."ta-lib\\", "cmd", $fastOption,
+	       $keepTheLib, &getLogdir, $skipAllTests );
        
-   testBorland($root_dir."release\\build\\ta-lib\\", "cmr", $fastOption,
-	       $keepTheLib, $log_dir, $skipAllTests );
+   testBorland(&getTempdir."ta-lib\\", "cmr", $fastOption,
+	       $keepTheLib, &getLogdir, $skipAllTests );
        
-   testBorland($root_dir."release\\build\\ta-lib\\", "csr", $fastOption,
-	       $keepTheLib, $log_dir, $skipAllTests );
+   testBorland(&getTempdir."ta-lib\\", "csr", $fastOption,
+	       $keepTheLib, &getLogdir, $skipAllTests );
        
-   removeAllTempFile($root_dir."release\\build\\ta-lib\\");
+   removeAllTempFile(&getTempdir."ta-lib\\");
 
    $packageName = "ta-lib-".$versionSuffix."-borl.zip";
-   
+ 
+   $a = "zip -r -o -q ".&getReleasedir.$packageName." ta-lib\\*.*";
+   execProg( &getTempdir, $a );
 
-   $a = "zip -r -o -q ..\\".$packageName." ta-lib\\*.*";
-   execProg( $root_dir."release\\build\\", $a );
+   execProg( &getTempdir."ta-lib\\", "copy CHANGELOG.TXT ".&getReleasedir );
+   execProg( &getTempdir."ta-lib\\", "copy HISTORY.TXT ".&getReleasedir );
 
-   execProg( $root_dir."release\\build\\ta-lib\\", "copy CHANGELOG.TXT ..\\.." );
-   execProg( $root_dir."release\\build\\ta-lib\\", "copy HISTORY.TXT ..\\.." );
-
+   print "\n* Packaging completed with Success *\n";
+   close STDOUT;
+   close STDERR;
+   open(STDOUT,">&OLD_STDOUT") or warn "Failed to restore STDOUT";
+   open(STDERR,">&OLD_STDERR") or warn "Failed to restore STDERR";
    print "\n* Packaging completed with Success *\n";
 }
 

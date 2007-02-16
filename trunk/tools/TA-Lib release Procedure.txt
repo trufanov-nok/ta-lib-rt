@@ -16,11 +16,11 @@ Packaging Procedure
   no option: The script perform all tests by making a complete copy
              of the ta-lib directory
 
-(3) Win32 Excel
-[Windows] Build ta-lib.xll
-
-(4) .NET Assemblies
+(3) .NET Assemblies
 [Windows] Build the Debug and Release assembly.
+
+(4) Java 
+[Windows] Using Eclipse, run NUnit.
 
 (5) SVN finalization
 [Windows] Make sure the SVN is in synch. Further steps will be done
@@ -33,9 +33,9 @@ Packaging Procedure
     - Build a temporary view from the repository in release/build
     - Build MSVC release and package
     - Build Borland release and package
-    - Text file in release
+    - Put text file in release
 
-(7) Build Linux Packages
+(7) Build Linux ReleasePackages
 [UNIX]release_unix.pl
     - Build a package from the repository
     - Un-tar the package
@@ -54,8 +54,7 @@ Publish Procedure
      Add files:
         ta_yahoo.exe 		i386	Other 
         WebFetch.exe  		i386	Other 
-        ta-lib-0.0.2
--borl.zip 	i386 	Source .zip 
+        ta-lib-0.0.2-borl.zip 	i386 	Source .zip 
         ta-lib-0.0.2-msvc.zip 	i386 	Source .zip 
         ta-lib-0.0.2-src.zip 1	Any 	Source .zip 
         HISTORY.TXT   		Any 	text 
@@ -108,18 +107,21 @@ Regards,
 
 SourceForge Notes Example
 =========================
-TA-LIB is a C/C++/Excel library for technical analysis of financial data. 
+TA-Lib is a C/C++, Java, .NET, Mono and Excel library for technical analysis of financial data.
+
 More info at http://ta-lib.org
 
-V0.1.1 (January 2004)
+V0.3.0 (January 2006)
 
-ta-lib-0.1.1-src.zip    - Source Code (all platforms)
-ta-lib-0.1.1-src.tar.gz - Source Code (all platforms)
-ta-lib-0.1.1-borl.zip   - Source Code (+Borland Binaries) 
-ta-lib-0.1.1-msvc.zip   - Source Code (+MSVC Binaries) 
+ta-lib-0.3.0.jar        - Java distribution package
+ta-lib-0.3.0.deb        - Debian distribution package
+ta-lib-0.3.0-1.i386.rpm - Red Hat distribution package
+ta-lib-0.3.0-src.tar.gz - Source Code (Linux/Unix only)
 
-ta_yahoo.exe is an utility for fetching online data.
-ta_sql.exe is an utility to fetch data from SQL databases.
+ta-lib-0.3.0-borl.zip   - Win32 with Borland Binaries
+ta-lib-0.3.0-msvc.zip   - Win32 with Microsoft Binaries
+
+All Win32 packages contains the .NET/Mono and Excel support.
 
 
 SourceForge Changes Example
