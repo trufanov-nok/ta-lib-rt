@@ -23,6 +23,7 @@ sub Main
    open(STDOUT, ">".$workdir."log/stdout_unix.txt" ) or die;
    open(STDERR, ">".$workdir."log/stderr_unix.txt" ) or die;
    
+   
    # Clean-up working directory
    createWorkdir();
 
@@ -36,7 +37,7 @@ sub Main
      # following successful tests on win32.
      if( -e $workdir.'temp/win32/sourcecopy' )
      {
-        $tempdir = $workdir.'temp/win32/sourcecopy';
+        $tempdir = $workdir.'temp/win32/sourcecopy/';
      }
      else
      { 
@@ -58,11 +59,11 @@ sub Main
    }
 
    print "\n*** Success - All Unix Tests Completed ***\n";
-   #close STDOUT;
-   #close STDERR;
-   #open(STDOUT,">&OLD_STDOUT") or warn "Failed to restore STDOUT";
-   #open(STDERR,">&OLD_STDERR") or warn "Failed to restore STDERR";
-   #print "\n*** Success - All Unix Tests Completed ***\n";
+   close STDOUT;
+   close STDERR;
+   open(STDOUT,">&OLD_STDOUT") or warn "Failed to restore STDOUT";
+   open(STDERR,">&OLD_STDERR") or warn "Failed to restore STDERR";
+   print "\n*** Success - All Unix Tests Completed ***\n";
 }
 
 &Main;				 
