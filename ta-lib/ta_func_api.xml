@@ -3753,7 +3753,7 @@
 	<FinancialFunction>
 		<Abbreviation>MA</Abbreviation>
 		<CamelCaseName>MovingAverage</CamelCaseName>
-		<ShortDescription>All Moving Average</ShortDescription>
+		<ShortDescription>Moving average</ShortDescription>
 		<GroupId>Overlap Studies</GroupId>
 		<Flags>
 			<Flag>Overlap</Flag>
@@ -4085,6 +4085,71 @@
 				<Name>outFAMA</Name>
 				<Flags>
 					<Flag>Dashed Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- MAVP -->
+	<FinancialFunction>
+		<Abbreviation>MAVP</Abbreviation>
+		<CamelCaseName>MovingAverageVariablePeriod</CamelCaseName>
+		<ShortDescription>Moving average with variable period</ShortDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+		</Flags>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Integer Array</Type>
+				<Name>inInteger</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OptionalInputArguments>
+			<OptionalInputArgument>
+				<Name>MA Type</Name>
+				<ShortDescription>Type of Moving Average</ShortDescription>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Minimum Period</Name>
+				<ShortDescription>Value less than minimum will be changed to Minimum period</ShortDescription>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>2</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>Maximum Period</Name>
+				<ShortDescription>Value higher than maximum will be changed to Maximum period</ShortDescription>
+				<Type>Integer</Type>
+				<Range>
+					<Minimum>2</Minimum>
+					<Maximum>100000</Maximum>
+					<SuggestedStart>100000</SuggestedStart>
+					<SuggestedEnd>100000</SuggestedEnd>
+					<SuggestedIncrement>100000</SuggestedIncrement>
+				</Range>
+				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
 				</Flags>
 			</OutputArgument>
 		</OutputArguments>
