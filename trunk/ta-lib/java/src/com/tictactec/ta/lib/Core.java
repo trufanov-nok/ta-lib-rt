@@ -16147,6 +16147,75 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int movingAverageVariablePeriodLookback( MAType optInMAType,
+      int optInMinPeriod,
+      int optInMaxPeriod )
+   {
+      if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
+         optInMinPeriod = 2;
+      else if( ((int)optInMinPeriod < 2) || ((int)optInMinPeriod > 100000) )
+         return -1;
+      if( (int)optInMaxPeriod == ( Integer.MIN_VALUE ) )
+         optInMaxPeriod = 30;
+      else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
+         return -1;
+      return 0;
+   }
+   public RetCode movingAverageVariablePeriod( int startIdx,
+      int endIdx,
+      double inReal[],
+      int inInteger[],
+      MAType optInMAType,
+      int optInMinPeriod,
+      int optInMaxPeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
+         optInMinPeriod = 2;
+      else if( ((int)optInMinPeriod < 2) || ((int)optInMinPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInMaxPeriod == ( Integer.MIN_VALUE ) )
+         optInMaxPeriod = 30;
+      else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
+         return RetCode.BadParam ;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      return TA_RetCode. TA_SUCCESS;
+   }
+   public RetCode movingAverageVariablePeriod( int startIdx,
+      int endIdx,
+      float inReal[],
+      int inInteger[],
+      MAType optInMAType,
+      int optInMinPeriod,
+      int optInMaxPeriod,
+      MInteger outBegIdx,
+      MInteger outNbElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
+         optInMinPeriod = 2;
+      else if( ((int)optInMinPeriod < 2) || ((int)optInMinPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInMaxPeriod == ( Integer.MIN_VALUE ) )
+         optInMaxPeriod = 30;
+      else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
+         return RetCode.BadParam ;
+      outBegIdx.value = 0 ;
+      outNbElement.value = 0 ;
+      return TA_RetCode. TA_SUCCESS;
+   }
+   /* Generated */
    public int maxLookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )

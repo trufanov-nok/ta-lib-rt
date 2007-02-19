@@ -88,11 +88,12 @@ LINEARREG           Linear Regression
 LINEARREG_ANGLE     Linear Regression Angle
 LINEARREG_INTERCEPT Linear Regression Intercept
 LINEARREG_SLOPE     Linear Regression Slope
-MA                  All Moving Average
+MA                  Moving average
 MACD                Moving Average Convergence/Divergence
 MACDEXT             MACD with controllable MA type
 MACDFIX             Moving Average Convergence/Divergence Fix 12/26
 MAMA                MESA Adaptive Moving Average
+MAVP                Moving average with variable period
 MAX                 Highest value over a specified period
 MAXINDEX            Index of highest value over a specified period
 MEDPRICE            Median Price

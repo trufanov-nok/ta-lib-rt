@@ -2560,6 +2560,34 @@ namespace TicTacTec
          #define TA_MAMA Core::Mama
          #define TA_MAMA_Lookback Core::MamaLookback
 
+         static int MovingAverageVariablePeriodLookback( MAType        optInMAType,
+                                                       int           optInMinPeriod, /* From 2 to 100000 */
+                                                       int           optInMaxPeriod );  /* From 2 to 100000 */
+
+         static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
+                                                                int    endIdx,
+                                                                cli::array<double>^ inReal,
+                                                                cli::array<int>^ inInteger,
+                                                                MAType        optInMAType,
+                                                                int           optInMinPeriod, /* From 2 to 100000 */
+                                                                int           optInMaxPeriod, /* From 2 to 100000 */
+                                                                [Out]int%    outBegIdx,
+                                                                [Out]int%    outNbElement,
+                                                                cli::array<double>^  outReal );
+         static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
+                                                                int    endIdx,
+                                                                cli::array<float>^ inReal,
+                                                                cli::array<int>^ inInteger,
+                                                                MAType        optInMAType,
+                                                                int           optInMinPeriod, /* From 2 to 100000 */
+                                                                int           optInMaxPeriod, /* From 2 to 100000 */
+                                                                [Out]int%    outBegIdx,
+                                                                [Out]int%    outNbElement,
+                                                                cli::array<double>^  outReal );
+
+         #define TA_MAVP Core::MovingAverageVariablePeriod
+         #define TA_MAVP_Lookback Core::MovingAverageVariablePeriodLookback
+
          static int MaxLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          static enum class RetCode Max( int    startIdx,
