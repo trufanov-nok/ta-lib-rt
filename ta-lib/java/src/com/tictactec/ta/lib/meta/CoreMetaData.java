@@ -3,7 +3,6 @@ package com.tictactec.ta.lib.meta;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.IncompleteAnnotationException;
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -29,7 +28,16 @@ import com.tictactec.ta.lib.meta.annotation.RealList;
 import com.tictactec.ta.lib.meta.annotation.RealRange;
 
 public class CoreMetaData implements Comparable {
+    
+    private static transient final String CONTACT_DEVELOPERS = "Contact developers";
+    private static transient final String INDEX_OUT_OF_BOUNDS = "Index out of bounds";
+    private static transient final String ILLEGAL_NUMBER_OF_ARGUMENTS = "Illegal number of arguments";
 
+    private static transient final String ARRAY_IS_NULL = "Array is null";
+    private static transient final String INT_ARRAY_EXPECTED = "int[] expected";
+    private static transient final String DOUBLE_ARRAY_EXPECTED = "double[] expected";
+    private static transient final String PRICEHOLDER_EXPECTED = "PriceHolder object expected";
+    
     private static transient final Class coreClass = CoreAnnotated.class;
     private static transient final String LOOKBACK_SUFFIX = "Lookback";
 
@@ -45,7 +53,7 @@ public class CoreMetaData implements Comparable {
     private transient Object callInputParams[] = null;
     private transient Object callOutputParams[] = null;
     private transient Object callOptInputParams[] = null;
-
+    
     
     protected CoreMetaData() {
         synchronized (coreClass) {
@@ -138,7 +146,7 @@ public class CoreMetaData implements Comparable {
 
     static CoreMetaData getFuncHandle(final String name) throws NoSuchMethodException {
         CoreMetaData mi = getAllFuncs().get(name.toUpperCase());
-        if (mi == null) throw new NoSuchMethodException(); //TODO:message
+        if (mi == null) throw new NoSuchMethodException(name.toUpperCase());
         mi.callInputParams = null;
         mi.callOutputParams = null;
         mi.callOptInputParams = null;
@@ -171,7 +179,7 @@ public class CoreMetaData implements Comparable {
 
     private Annotation getParameterInfo(final int paramIndex, Class paramAnnotation) {
         if (paramIndex < 0)
-            throw new IllegalArgumentException(); // TODO: add a message
+            throw new IllegalArgumentException(INDEX_OUT_OF_BOUNDS);
         int i = 0;
         for (Annotation[] annArray : function.getParameterAnnotations()) {
             for (Annotation ann : annArray) {
@@ -185,7 +193,7 @@ public class CoreMetaData implements Comparable {
 
     private Annotation getParameterInfo(final int paramIndex, Class paramAnnotation, Class paramExtraAnnotation) {
         if (paramIndex < 0)
-            throw new IllegalArgumentException(); // TODO: add a message
+            throw new IllegalArgumentException(INDEX_OUT_OF_BOUNDS);
         int i = 0;
         for (Annotation[] annArray : function.getParameterAnnotations()) {
             for (Annotation ann : annArray) {
@@ -292,7 +300,7 @@ public class CoreMetaData implements Comparable {
      */
     public void setOptInputParamInteger(final int paramIndex, final int value) throws IllegalArgumentException {
         OptInputParameterInfo param = getOptInputParameterInfo(paramIndex);
-        if (param==null) throw new IllegalArgumentException(); //TODO: message
+        if (param==null) throw new InternalError(CONTACT_DEVELOPERS);
         if (param.type()==OptInputParameterType.TA_OptInput_IntegerList) {
             IntegerList list = getOptInputIntegerList(paramIndex);
             for (int entry : list.value()) {
@@ -310,7 +318,7 @@ public class CoreMetaData implements Comparable {
                 return;
             }
         } 
-        throw new IllegalArgumentException(); //TODO: message
+        throw new InternalError(CONTACT_DEVELOPERS);
     }
 
     /**
@@ -327,8 +335,8 @@ public class CoreMetaData implements Comparable {
             setOptInputParamInteger(paramIndex, v.intValue());
         } catch (NumberFormatException e) {
             OptInputParameterInfo param = getOptInputParameterInfo(paramIndex);
-            if (param==null) throw new IllegalArgumentException(); //TODO: message
-            if (param.type()!=OptInputParameterType.TA_OptInput_IntegerList) throw new IllegalArgumentException(); //TODO: message
+            if (param==null) throw new InternalError(CONTACT_DEVELOPERS);
+            if (param.type()!=OptInputParameterType.TA_OptInput_IntegerList) throw new InternalError(CONTACT_DEVELOPERS);
 
             // FIXME: The correct implementation should be expose a field in @IntegerList informing
             // which Class should be taken for introspection.
@@ -343,7 +351,7 @@ public class CoreMetaData implements Comparable {
                     return;
                 }
             }
-            throw new IllegalArgumentException(); //TODO: message
+            throw new InternalError(CONTACT_DEVELOPERS);
         }
     }
 
@@ -357,7 +365,6 @@ public class CoreMetaData implements Comparable {
      */
     public void setOptInputParamReal(final int paramIndex, final double value) throws IllegalArgumentException {
         OptInputParameterInfo param = getOptInputParameterInfo(paramIndex);
-        if (param==null) throw new IllegalArgumentException(); //TODO: message
         if (param.type()==OptInputParameterType.TA_OptInput_RealList) {
             RealList list = getOptInputRealList(paramIndex);
             for (double entry : list.value()) {
@@ -375,7 +382,7 @@ public class CoreMetaData implements Comparable {
                 return;
             }
         }
-        throw new IllegalArgumentException(); //TODO: message
+        throw new InternalError(CONTACT_DEVELOPERS);
     }
 
     /**
@@ -392,7 +399,7 @@ public class CoreMetaData implements Comparable {
             setOptInputParamReal(paramIndex, v.doubleValue());
         } catch (NumberFormatException e) {
             OptInputParameterInfo param = getOptInputParameterInfo(paramIndex);
-            if (param==null) throw new IllegalArgumentException(); //TODO: message
+            if (param==null) throw new InternalError(CONTACT_DEVELOPERS);
             if (param.type()==OptInputParameterType.TA_OptInput_RealList) {
                 RealList list = getOptInputRealList(paramIndex);
                 for (int i=0; i<list.string().length; i++) {
@@ -404,24 +411,24 @@ public class CoreMetaData implements Comparable {
                     }
                 }
             }
-            throw new IllegalArgumentException(); //TODO: message
+            throw new InternalError(CONTACT_DEVELOPERS);
         }
     }
 
     public void setInputParamReal(final int paramIndex, final Object array) throws IllegalArgumentException, NullPointerException {
-        if (array==null) throw new NullPointerException(); // TODO: message
+        if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         InputParameterInfo param = getInputParameterInfo(paramIndex);
-        if ((param==null) || (param.type()!=InputParameterType.TA_Input_Real)) throw new IllegalArgumentException(); //TODO: message
-        if (! (array instanceof double[]) ) throw new IllegalArgumentException(); //TODO:message
+        if ((param==null) || (param.type()!=InputParameterType.TA_Input_Real)) throw new InternalError(CONTACT_DEVELOPERS);
+        if (! (array instanceof double[]) ) throw new IllegalArgumentException(DOUBLE_ARRAY_EXPECTED);
         if (callInputParams==null) callInputParams = new Object[getFuncInfo().nbInput()];
         callInputParams[paramIndex] = array;
     }
 
     public void setInputParamInteger(final int paramIndex, final Object array) throws IllegalArgumentException, NullPointerException {
-        if (array==null) throw new NullPointerException(); // TODO: message
+        if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         InputParameterInfo param = getInputParameterInfo(paramIndex);
-        if ((param==null) || (param.type()!=InputParameterType.TA_Input_Integer)) throw new IllegalArgumentException(); //TODO: message
-        if (! (array instanceof int[]) ) throw new IllegalArgumentException(); //TODO:message
+        if ((param==null) || (param.type()!=InputParameterType.TA_Input_Integer)) throw new InternalError(CONTACT_DEVELOPERS);
+        if (! (array instanceof int[]) ) throw new IllegalArgumentException(INT_ARRAY_EXPECTED);
         if (callInputParams==null) callInputParams = new Object[getFuncInfo().nbInput()];
         callInputParams[paramIndex] = array;
     }
@@ -431,34 +438,34 @@ public class CoreMetaData implements Comparable {
                 final double[] volume, final double[] openInterest)
             throws IllegalArgumentException, NullPointerException {
         InputParameterInfo param = getInputParameterInfo(paramIndex);
-        if ((param==null) || (param.type()!=InputParameterType.TA_Input_Price)) throw new IllegalArgumentException(); //TODO: message
+        if ((param==null) || (param.type()!=InputParameterType.TA_Input_Price)) throw new InternalError(CONTACT_DEVELOPERS);
         if (callInputParams==null) callInputParams = new Object[getFuncInfo().nbInput()];
         callInputParams[paramIndex] = new PriceHolder(param.flags(), open, high, low, close, volume, openInterest);
     }
 
     public void setInputParamPrice(final int paramIndex, final Object array) throws IllegalArgumentException, NullPointerException {
-        if (array==null) throw new NullPointerException(); // TODO: message
+        if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         InputParameterInfo param = getInputParameterInfo(paramIndex);
-        if ((param==null) || (param.type()!=InputParameterType.TA_Input_Price)) throw new IllegalArgumentException(); //TODO: message
-        if (! (array instanceof PriceHolder) ) throw new IllegalArgumentException(); //TODO:message
+        if ((param==null) || (param.type()!=InputParameterType.TA_Input_Price)) throw new InternalError(CONTACT_DEVELOPERS);
+        if (! (array instanceof PriceHolder) ) throw new IllegalArgumentException(PRICEHOLDER_EXPECTED);
         if (callInputParams==null) callInputParams = new Object[getFuncInfo().nbInput()];
         callInputParams[paramIndex] = array;
     }
 
     public void setOutputParamReal(final int paramIndex, Object array) throws IllegalArgumentException, NullPointerException, ClassCastException {
-        if (array==null) throw new NullPointerException(); // TODO: message
+        if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         OutputParameterInfo param = getOutputParameterInfo(paramIndex);
-        if ((param==null)||(param.type()!=OutputParameterType.TA_Output_Real)) throw new IllegalArgumentException(); //TODO: message
-        if (! (array instanceof double[]) ) throw new IllegalArgumentException(); //TODO:message
+        if ((param==null)||(param.type()!=OutputParameterType.TA_Output_Real)) throw new InternalError(CONTACT_DEVELOPERS);
+        if (! (array instanceof double[]) ) throw new IllegalArgumentException(DOUBLE_ARRAY_EXPECTED);
         if (callOutputParams==null) callOutputParams = new Object[getFuncInfo().nbOutput()];
         callOutputParams[paramIndex] = array;
     }
 
     public void setOutputParamInteger(final int paramIndex, Object array) throws IllegalArgumentException, NullPointerException, ClassCastException {
-        if (array==null) throw new NullPointerException(); // TODO: message
+        if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         OutputParameterInfo param = getOutputParameterInfo(paramIndex);
-        if ((param==null)||(param.type()!=OutputParameterType.TA_Output_Integer)) throw new IllegalArgumentException(); //TODO: message
-        if (! (array instanceof int[]) ) throw new IllegalArgumentException(); //TODO:message
+        if ((param==null)||(param.type()!=OutputParameterType.TA_Output_Integer)) throw new InternalError(CONTACT_DEVELOPERS);
+        if (! (array instanceof int[]) ) throw new IllegalArgumentException(INT_ARRAY_EXPECTED);
         if (callOutputParams==null) callOutputParams = new Object[getFuncInfo().nbOutput()];
         callOutputParams[paramIndex] = array;
     }
@@ -481,7 +488,7 @@ public class CoreMetaData implements Comparable {
         for (int i=0; i<size; i++) {
             if (callOptInputParams[i]==null) {
                 OptInputParameterInfo param = getOptInputParameterInfo(i);
-                if (param==null) throw new IllegalArgumentException(); //TODO: message
+                if (param==null) throw new InternalError(CONTACT_DEVELOPERS);
                 if (param.type()==OptInputParameterType.TA_OptInput_IntegerList) {
                     IntegerList list = getOptInputIntegerList(i);
                     callOptInputParams[i] = list.defaultValue();
@@ -495,7 +502,7 @@ public class CoreMetaData implements Comparable {
                     RealRange range = getOptInputRealRange(i);
                     callOptInputParams[i] = range.defaultValue();
                 } else {
-                    throw new InternalError(); // TODO: message
+                    throw new InternalError(CONTACT_DEVELOPERS);
                 }
             }
         }
@@ -550,7 +557,7 @@ public class CoreMetaData implements Comparable {
         }
         
         Class[] types = (Class[]) function.getGenericParameterTypes();
-        if (types.length != params.length) throw new IllegalArgumentException("Illegal number of argumens");
+        if (types.length != params.length) throw new IllegalArgumentException(ILLEGAL_NUMBER_OF_ARGUMENTS);
         //for (int i=0; i<types.length; i++) {
         //    if (! (params[i].getClass().isAssignableFrom(types[i])) ) {
         //        throw new IllegalArgumentException("Type mismatch on argument "+i+": "+types[i]);
@@ -558,101 +565,6 @@ public class CoreMetaData implements Comparable {
         //}
         
         function.invoke(taCore, params);
-    }
-
-    
-    public static void main(String[] args) {
-        
-        final class DumpGrp implements TaGrpService {
-            public void execute(String group, Set<CoreMetaData> set) {
-                System.out.println("GROUP "+group);
-                for (CoreMetaData mi : set) {
-                    System.out.println("        "+mi.name);
-                }
-                
-            }
-        }
-        
-        final class DumpFunc implements TaFuncService {
-            public void execute(CoreMetaData mi) {
-                System.out.println(mi.name);
-                for (int i = 0; i < mi.getFuncInfo().nbInput(); i++) {
-                    InputParameterInfo pinfo = mi.getInputParameterInfo(i);
-                    System.out.println("    " + pinfo.paramName());
-                    System.out.println("        " + pinfo.type());
-                }
-                for (int i = 0; i < mi.getFuncInfo().nbOptInput(); i++) {
-                    OptInputParameterInfo pinfo = mi.getOptInputParameterInfo(i);
-                    System.out.println("    " + pinfo.paramName());
-                    System.out.println("        " + pinfo.type());
-                    switch (pinfo.type()) {
-                    case TA_OptInput_RealRange:
-                        RealRange rrange = mi.getOptInputRealRange(i);
-                        System.out.println("            min="+rrange.min());
-                        System.out.println("            max="+rrange.max());
-                        System.out.println("            precision="+rrange.precision());
-                        System.out.println("            default="+rrange.defaultValue());
-                        break;
-                    case TA_OptInput_RealList:
-                        RealList rlist = mi.getOptInputRealList(i);
-                        System.out.print("            value=");
-                        for (double value : rlist.value()) {
-                            System.out.print(value); System.out.print(" ");
-                        }
-                        System.out.println();
-                        System.out.print("            string="+rlist.string());
-                        for (String string : rlist.string()) {
-                            System.out.print(string); System.out.print(" ");
-                        }
-                        System.out.println();
-                        break;
-                    case TA_OptInput_IntegerRange:
-                        IntegerRange irange = mi.getOptInputIntegerRange(i);
-                        System.out.println("            min="+irange.min());
-                        System.out.println("            max="+irange.max());
-                        System.out.println("            default="+irange.defaultValue());
-                        break;
-                    case TA_OptInput_IntegerList:
-                        IntegerList ilist = mi.getOptInputIntegerList(i);
-                        System.out.print("            value=");
-                        for (int value : ilist.value()) {
-                            System.out.print(value); System.out.print(" ");
-                        }
-                        System.out.println();
-                        System.out.print("            string=");
-                        for (String string : ilist.string()) {
-                            System.out.print(string); System.out.print(" ");
-                        }
-                        System.out.println();
-                        break;
-                    }
-                }
-                for (int i = 0; i < mi.getFuncInfo().nbOutput(); i++) {
-                    OutputParameterInfo pinfo = mi.getOutputParameterInfo(i);
-                    System.out.println("    " + pinfo.paramName());
-                    System.out.println("        " + pinfo.type());
-                }
-            }
-        }
-
-        TaGrpService grpServ = new DumpGrp();
-        try {
-            CoreMetaData.forEachGrp(grpServ);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        System.out.println("=  =  =  =  =  =  =  =  =  =  =  =  =");
-        
-        TaFuncService funcServ = new DumpFunc();
-        try {
-            CoreMetaData.forEachFunc(funcServ);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        System.out.println("=====================================");
     }
 
 }
