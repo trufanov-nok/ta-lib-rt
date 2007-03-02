@@ -9,7 +9,7 @@ public class PriceHolder {
     private int flags;
     List<double[]> list;
     
-    PriceHolder(int flags, double[] open, double[] high, double[] low, double[] close, double[] volume, double[] openInterest) {
+    public PriceHolder(int flags, double[] open, double[] high, double[] low, double[] close, double[] volume, double[] openInterest) {
         this.flags = flags;
         list = new ArrayList<double[]>();
         
@@ -45,6 +45,10 @@ public class PriceHolder {
     
     public Object[] toArray() {
         return list.toArray();
+    }
+    
+    public int size() {
+        return list.size();
     }
     
     private class NullArrayException extends NullPointerException {
