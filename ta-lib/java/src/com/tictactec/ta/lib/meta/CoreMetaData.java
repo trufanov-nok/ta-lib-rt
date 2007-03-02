@@ -522,7 +522,7 @@ public class CoreMetaData implements Comparable {
         int count = 0;
         for (Object item : callInputParams) {
             if (PriceHolder.class.isAssignableFrom(item.getClass())) {
-                count += Array.getLength(item);
+                count += ((PriceHolder)item).size();
             } else {
                 count++;
             }
@@ -537,8 +537,8 @@ public class CoreMetaData implements Comparable {
 
         for (Object item : callInputParams) {
             if (PriceHolder.class.isAssignableFrom(item.getClass())) {
-                for (int i=0; i<Array.getLength(item); i++) {
-                    params[count++] = Array.get(item, i);
+                for (int i=0; i<((PriceHolder)item).size(); i++) {
+                    params[count++] = ((PriceHolder)item).toArray()[i];
                 }
             } else {
                 params[count++] = item;
