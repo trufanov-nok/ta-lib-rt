@@ -16186,7 +16186,7 @@ public class Core {
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
       outNbElement.value = 0 ;
-      return RetCode.Success;
+      return RetCode.Success ;
    }
    public RetCode movingAverageVariablePeriod( int startIdx,
       int endIdx,
@@ -16213,7 +16213,7 @@ public class Core {
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
       outNbElement.value = 0 ;
-      return RetCode.Success;
+      return RetCode.Success ;
    }
    /* Generated */
    public int maxLookback( int optInTimePeriod )
