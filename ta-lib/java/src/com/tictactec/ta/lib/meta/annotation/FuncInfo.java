@@ -9,16 +9,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FuncInfo {
     String      name();
-    //String      camelCaseName();
     String      group();
 
-    // String hint();       // TODO: future
-    // String helpFile();   // TODO: future
+    String hint() default "";       // FIXME: fix gen_code
+    String helpFile() default "";
     int flags();
 
     int nbInput();
     int nbOptInput();
     int nbOutput();
-    
-    // Class handle(); // TODO: Discuss if necessary, etc.
 }
