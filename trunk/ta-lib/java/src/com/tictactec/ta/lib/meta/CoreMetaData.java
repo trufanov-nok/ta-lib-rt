@@ -1,8 +1,53 @@
+/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or
+ * without modification, are permitted provided that the following
+ * conditions are met:
+ *
+ * - Redistributions of source code must retain the above copyright
+ *   notice, this list of conditions and the following disclaimer.
+ *
+ * - Redistributions in binary form must reproduce the above copyright
+ *   notice, this list of conditions and the following disclaimer in
+ *   the documentation and/or other materials provided with the
+ *   distribution.
+ *
+ * - Neither name of author nor the names of its contributors
+ *   may be used to endorse or promote products derived from this
+ *   software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* List of contributors:
+ *
+ *  Initial  Name/description
+ *  -------------------------------------------------------------------
+ *  RG       Richard Gomes
+ *
+ * Change history:
+ *
+ *  YYYYMMDD BY     Description
+ *  -------------------------------------------------------------------
+ *  20070311 RG     First Version
+ */
+
 package com.tictactec.ta.lib.meta;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.IncompleteAnnotationException;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -27,6 +72,25 @@ import com.tictactec.ta.lib.meta.annotation.OutputParameterType;
 import com.tictactec.ta.lib.meta.annotation.RealList;
 import com.tictactec.ta.lib.meta.annotation.RealRange;
 
+/**
+ * CoreMetaData provides low level RTTI (Run Time Type Information) regarding TA functions and also provides methods
+ * for whom willing to call a certain TA function using late binding techiniques. These two functionalities let you
+ * call TA functions dinamically. Even if more TA functions are added by the time, your application code will be able
+ * to call all added functions by querying TA-Lib package about:
+ * 
+ * <li>TA functions available;
+ * <li>function groups the TA functions belong to;
+ * <li>input arguments of TA functions and also their run time type information;
+ * <li>output arguments of TA functions and also their run time type information;
+ * <li>optional input arguments of TA functions and also their run time type information;
+ *
+ * CoreMetaData is mostly intended for API developers and mimic as accurately as possible the functionality exposed by
+ * <i>ta_abstract.h</i> "C" header file.
+
+ * @see com.tictactec.ta.lib.meta.helpers.SimpleHelper is a simple API level helper class based on CoreMetaData
+ * @see com.tictactec.ta.lib.meta.CoreMetaDataCompatibility for a "C" style interface, mostly intended for those traslating "C" code to Java.
+ * @author Richard Gomes
+ */
 public class CoreMetaData implements Comparable {
     
     private static transient final String CONTACT_DEVELOPERS = "Contact developers";
@@ -415,6 +479,15 @@ public class CoreMetaData implements Comparable {
         }
     }
 
+    /**
+     * Assigns an Object which is expected to be assignment compatible of <b>double[]</b> to
+     * an input parameter which is expected to be assignment compatible of <b>double[]</b>.
+     * 
+     * @param paramIndex is the n-th input parameter
+     * @param array is an Object expected to be assignment compatible to <b>double[]</b>
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
+     */
     public void setInputParamReal(final int paramIndex, final Object array) throws IllegalArgumentException, NullPointerException {
         if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         InputParameterInfo param = getInputParameterInfo(paramIndex);
@@ -424,6 +497,15 @@ public class CoreMetaData implements Comparable {
         callInputParams[paramIndex] = array;
     }
 
+    /**
+     * Assigns an Object which is expected to be assignment compatible of <b>int[]</b> to
+     * an input parameter which is expected to be assignment compatible of <b>int[]</b>.
+     * 
+     * @param paramIndex is the n-th input parameter
+     * @param array is an Object expected to be assignment compatible to <b>int[]</b>
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
+     */
     public void setInputParamInteger(final int paramIndex, final Object array) throws IllegalArgumentException, NullPointerException {
         if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         InputParameterInfo param = getInputParameterInfo(paramIndex);
@@ -433,6 +515,22 @@ public class CoreMetaData implements Comparable {
         callInputParams[paramIndex] = array;
     }
 
+    /**
+     * Assigns Objects which are expected to be assignment compatible of <b>double[]</b> to
+     * an input parameter which is expected to be assignment compatible of <b>PriceHolder</b>.
+     * 
+     * <p>You only need to pass those parameters strictly needed by the n-th input parameter of a certain TA function.
+     * 
+     * @param paramIndex is the n-th input parameter
+     * @param open represents the open prices. This Object expected to be assignment compatible to <b>double[]</b>
+     * @param high represents the high prices. This Object expected to be assignment compatible to <b>double[]</b>
+     * @param low represents the low prices. This Object expected to be assignment compatible to <b>double[]</b>
+     * @param close represents the close prices. This Object expected to be assignment compatible to <b>double[]</b>
+     * @param volume represents the volume. This Object expected to be assignment compatible to <b>double[]</b>
+     * @param openInterest represents the open interest. This Object expected to be assignment compatible to <b>double[]</b>
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
+     */
     public void setInputParamPrice(final int paramIndex,
                 final double[] open, final double[] high, final double[] low, final double[] close,
                 final double[] volume, final double[] openInterest)
@@ -443,6 +541,15 @@ public class CoreMetaData implements Comparable {
         callInputParams[paramIndex] = new PriceHolder(param.flags(), open, high, low, close, volume, openInterest);
     }
 
+    /**
+     * Assigns an Object which are expected to be assignment compatible of <b>PriceHolder</b> to
+     * an input parameter which is expected to be assignment compatible of <b>PriceHolder</b>.
+     * 
+     * @param paramIndex is the n-th input parameter
+     * @param array is an Object expected to be assignment compatible to <b>PriceHolder</b>
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
+     */
     public void setInputParamPrice(final int paramIndex, final Object array) throws IllegalArgumentException, NullPointerException {
         if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         InputParameterInfo param = getInputParameterInfo(paramIndex);
@@ -452,6 +559,16 @@ public class CoreMetaData implements Comparable {
         callInputParams[paramIndex] = array;
     }
 
+    /**
+     * Assigns an Object which are expected to be assignment compatible of <b>double[]</b> to
+     * an output parameter which is expected to be assignment compatible of <b>double[]</b>.
+     * 
+     * @param paramIndex is the n-th output parameter
+     * @param array is an Object expected to be assignment compatible to <b>double[]</b>
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
+     * @throws ClassCastException
+     */
     public void setOutputParamReal(final int paramIndex, Object array) throws IllegalArgumentException, NullPointerException, ClassCastException {
         if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         OutputParameterInfo param = getOutputParameterInfo(paramIndex);
@@ -461,6 +578,16 @@ public class CoreMetaData implements Comparable {
         callOutputParams[paramIndex] = array;
     }
 
+    /**
+     * Assigns an Object which are expected to be assignment compatible of <b>int[]</b> to
+     * an output parameter which is expected to be assignment compatible of <b>int[]</b>.
+     * 
+     * @param paramIndex is the n-th output parameter
+     * @param array is an Object expected to be assignment compatible to <b>int[]</b>
+     * @throws IllegalArgumentException
+     * @throws NullPointerException
+     * @throws ClassCastException
+     */
     public void setOutputParamInteger(final int paramIndex, Object array) throws IllegalArgumentException, NullPointerException, ClassCastException {
         if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         OutputParameterInfo param = getOutputParameterInfo(paramIndex);
@@ -470,12 +597,26 @@ public class CoreMetaData implements Comparable {
         callOutputParams[paramIndex] = array;
     }
 
+    /**
+     * For each defined TA function executes the <b>TaFuncService.execute()</b> interface method of the implementation
+     * class passed ar argument. 
+     * 
+     * @param service is a <b>TaFuncService</b> implementation class
+     * @throws Exception
+     */
     static public void forEachFunc(TaFuncService service) throws Exception {
         for (CoreMetaData mi : getAllFuncs().values()) {
             service.execute(mi);
         }
     }
 
+    /**
+     * For each defined group of TA functions executes the <b>TaFuncService.execute()</b> interface method of the implementation
+     * class passed ar argument.
+     * 
+     * @param service
+     * @throws Exception
+     */
     static public void forEachGrp(TaGrpService service) throws Exception {
         for (String group : getAllGrps().keySet()) {
             service.execute(group, taGrpMap.get(group));
@@ -510,12 +651,39 @@ public class CoreMetaData implements Comparable {
     }
     
 
+    /**
+     * Returns the lookback.
+     * 
+     * <p> Lookback is the number of input data points to be consumed in order to calculate the first output data point. This value
+     * is affected by the optional input arguments passed to this TA function.
+     *  
+     * @return the lookback number of input points to be consumed before the first output data point is produced.
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
     public int getLookback() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         Object[] params = getOptInputParameters();
         return (Integer) lookback.invoke(taCore, params);
     }
     
     
+    /**
+     * Executes the calculations defined by this TA function.
+     * 
+     * <p> You need to provide input arguments where this TA function will obtain data from and output arguments where this
+     * TA function will write output data to.
+     * 
+     * @see com.tictactec.ta.lib.meta.helpers.SimpleHelper class for an example of use.
+     * 
+     * @param startIndex is the initial position of input data to be considered for TA function calculations
+     * @param endIndex is the final position of input data to be considered for TA function calculations
+     * @param outBegIdx is returned by this method and represents the initial position of output data returned by this TA function
+     * @param outNbElement is returned by this method and represents the quantity of output data returned by this TA function
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
     public void callFunc(final int startIndex, final int endIndex, MInteger outBegIdx, MInteger outNbElement) 
             throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 

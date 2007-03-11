@@ -42,10 +42,14 @@
  *  MMDDYY BY     Description
  *  -------------------------------------------------------------------
  *  022206 BT     First Version
+ *  031107 RG     Deprecated
  */
 
 package com.tictactec.ta.lib.meta;
 
+/**
+ * @deprecated in favor of interfaces TaFuncService and taGrpService
+ */
 public interface TaFuncClosure
 {
    void execute(TaFuncMetaInfo mi) throws Exception;
