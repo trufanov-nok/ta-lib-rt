@@ -42,6 +42,7 @@
  *  MMDDYY BY     Description
  *  -------------------------------------------------------------------
  *  022206 BT     First Version
+ *  031107 RG     Deprecated
  */
 
 package com.tictactec.ta.lib.meta;
@@ -53,6 +54,9 @@ import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
 
+/**
+ * @deprecated in favor of CoreMetaData class
+ */
 public class TaFuncMetaInfo extends TaFuncSignature
 {
    Method method;

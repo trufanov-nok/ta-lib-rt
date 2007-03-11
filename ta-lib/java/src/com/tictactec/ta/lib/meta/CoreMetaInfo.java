@@ -42,6 +42,7 @@
  *  MMDDYY BY     Description
  *  -------------------------------------------------------------------
  *  022206 BT     First Version
+ *  031107 RG     Deprecating this class in favor of CoreMetaData
  */
 
 package com.tictactec.ta.lib.meta;
@@ -55,6 +56,9 @@ import java.util.TreeMap;
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.RetCode;
 
+/**
+ * @deprecated in favor or CoreMetaData class
+ */
 public class CoreMetaInfo
 {
    static final Class coreClass = Core.class;

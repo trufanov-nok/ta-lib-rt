@@ -42,10 +42,14 @@
  *  MMDDYY BY     Description
  *  -------------------------------------------------------------------
  *  022206 BT     First Version
+ *  031107 RG     Deprecated
  */
 
 package com.tictactec.ta.lib.meta;
 
+/**
+ * @deprecated in favor of CoreMetaData
+ */
 public class TaFuncSignature implements Comparable
 {
    String name;
