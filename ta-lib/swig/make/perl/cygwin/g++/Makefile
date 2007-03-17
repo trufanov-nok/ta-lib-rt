@@ -8,7 +8,7 @@ CFLAGS     = -fpic -fno-strict-aliasing
 
 CC         = gcc
 LDFLAGS    = -shared
-LDLIBS     = -l pthread -l curl
+LDLIBS     = 
 
 TOPDIR=../../../..
 WRAPDIR=$(TOPDIR)/temp/perl/wrap
