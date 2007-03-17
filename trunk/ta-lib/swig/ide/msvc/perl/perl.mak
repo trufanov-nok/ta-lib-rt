@@ -24,8 +24,11 @@ NULL=
 NULL=nul
 !ENDIF 
 
-OUTDIR=.\..\..\..\temp\perl\cdr
-INTDIR=.\..\..\..\temp\perl\cdr
+CPP=cl.exe
+MTL=midl.exe
+RSC=rc.exe
+OUTDIR=.\..\..\..\temp\perl\wrap
+INTDIR=.\..\..\..\temp\perl\wrap
 
 ALL : "..\..\..\temp\perl\wrap\ta_libc_wrap.c" "..\..\..\temp\perl\wrap\TA.pm" "..\..\..\lib\perl\ta.dll"
 
@@ -43,7 +46,20 @@ CLEAN :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
 F90=df.exe
-CPP=cl.exe
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\perl.bsc" 
+BSC32_SBRS= \
+	
+LINK32=link.exe
+LINK32_FLAGS=..\..\..\..\c\lib\ta_libc_cdr.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib $(PERL5_INCLUDE)/$(PERL5_LIB) /nologo /dll /pdb:none /machine:I386 /out:"..\..\..\lib\perl\ta.dll" /implib:"$(OUTDIR)\ta.lib" 
+LINK32_OBJS= \
+	"$(INTDIR)\ta_libc_wrap.obj"
+
+"..\..\..\lib\perl\ta.dll" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
+    $(LINK32) @<<
+  $(LINK32_FLAGS) $(LINK32_OBJS)
+<<
+
 CPP_PROJ=/nologo /MD /W3 /O1 /I "..\..\..\..\c\include" /I "$(PERL5_INCLUDE)" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MSWIN32" /D "_CONSOLE" /D "NO_STRICT" /D "PERL_MSVCRT_READFIX" /D "PERL_CAPI" /Fp"$(INTDIR)\perl.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
 
 .c{$(INTDIR)}.obj::
@@ -76,23 +92,7 @@ CPP_PROJ=/nologo /MD /W3 /O1 /I "..\..\..\..\c\include" /I "$(PERL5_INCLUDE)" /D
    $(CPP_PROJ) $< 
 <<
 
-MTL=midl.exe
 MTL_PROJ=/nologo /D "NDEBUG" /mktyplib203 /win32 
-RSC=rc.exe
-BSC32=bscmake.exe
-BSC32_FLAGS=/nologo /o"$(OUTDIR)\perl.bsc" 
-BSC32_SBRS= \
-	
-LINK32=link.exe
-LINK32_FLAGS=..\..\..\..\c\lib\ta_libc_cdr.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib $(PERL5_INCLUDE)/$(PERL5_LIB) /nologo /dll /pdb:none /machine:I386 /out:"..\..\..\lib\perl\ta.dll" /implib:"$(OUTDIR)\ta.lib" 
-LINK32_OBJS= \
-	"$(INTDIR)\ta_libc_wrap.obj"
-
-"..\..\..\lib\perl\ta.dll" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
-    $(LINK32) @<<
-  $(LINK32_FLAGS) $(LINK32_OBJS)
-<<
-
 
 !IF "$(NO_EXTERNAL_DEPS)" != "1"
 !IF EXISTS("perl.dep")
@@ -114,12 +114,12 @@ CPP_SWITCHES=/nologo /MD /W3 /O1 /I "..\..\..\..\c\include" /I "$(PERL5_INCLUDE)
 
 
 SOURCE=..\..\..\src\interface\ta_libc.swg
-InputDir=\ta-lib\swig\src\interface
+InputDir=..\..\..\src\interface
 InputPath=..\..\..\src\interface\ta_libc.swg
 InputName=ta_libc
 USERDEP__TA_LI="..\..\..\src\interface\perl.pm"	
 
-"..\..\..\temp\perl\wrap\ta_libc_wrap.c"	"..\..\..\temp\perl\wrap\TA.pm" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)" $(USERDEP__TA_LI)
+"$(INTDIR)\ta_libc_wrap.c"	"$(INTDIR)\TA.pm" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)" $(USERDEP__TA_LI)
 	<<tempfile.bat 
 	@echo off 
 	echo In order to function correctly, please ensure the following environment variables are correctly set: 

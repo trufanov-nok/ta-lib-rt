@@ -34,8 +34,8 @@ RSC=rc.exe
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "..\..\..\temp\perl\cdr"
-# PROP Intermediate_Dir "..\..\..\temp\perl\cdr"
+# PROP Output_Dir "..\..\..\temp\perl\wrap"
+# PROP Intermediate_Dir "..\..\..\temp\perl\wrap"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 F90=df.exe
@@ -136,7 +136,7 @@ SOURCE=..\..\..\src\interface\ta_libc.perl.swg
 SOURCE=..\..\..\src\interface\ta_libc.swg
 USERDEP__TA_LI="..\..\..\src\interface\perl.pm"	
 # Begin Custom Build
-InputDir=\ta-lib\trunk\ta-lib\swig\src\interface
+InputDir=\Latest\TA-Lib\ta-lib\swig\src\interface
 InputPath=..\..\..\src\interface\ta_libc.swg
 InputName=ta_libc
 
