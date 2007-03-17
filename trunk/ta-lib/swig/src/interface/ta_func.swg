@@ -2173,37 +2173,36 @@ int TA_MAMA_Lookback( double        optInFastLimit, /* From 0.01 to 0.99 */
 /*
  * TA_MAVP - Moving average with variable period
  * 
- * Input  = double, int
+ * Input  = double, double
  * Output = double
  * 
  * Optional Parameters
  * -------------------
- * optInMAType:
- *    Type of Moving Average
- * 
  * optInMinPeriod:(From 2 to 100000)
  *    Value less than minimum will be changed to Minimum period
  * 
  * optInMaxPeriod:(From 2 to 100000)
  *    Value higher than maximum will be changed to Maximum period
  * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
  * 
  */
 TA_RetCode TA_MAVP( int           START_IDX,
                     int           END_IDX,
                     const double *IN_ARRAY /* inReal */,
-                    const int    *IN_ARRAY /* inInteger */,
-                    TA_MAType     OPT_MATYPE /* optInMAType */,
+                    const double *IN_ARRAY /* inPeriods */,
                     int           OPT_INT /* optInMinPeriod */, /* From 2 to 100000 */
                     int           OPT_INT /* optInMaxPeriod */, /* From 2 to 100000 */
+                    TA_MAType     OPT_MATYPE /* optInMAType */,
                     int          *BEG_IDX,
                     int          *OUT_SIZE,
                     double       *OUT_ARRAY /* outReal */ );
 
-int TA_MAVP_Lookback( TA_MAType     optInMAType,
-                    int           optInMinPeriod, /* From 2 to 100000 */
-                    int           optInMaxPeriod );  /* From 2 to 100000 */
-
+int TA_MAVP_Lookback( int           optInMinPeriod, /* From 2 to 100000 */
+                    int           optInMaxPeriod, /* From 2 to 100000 */
+                    TA_MAType     optInMAType ); 
 
 /*
  * TA_MAX - Highest value over a specified period
