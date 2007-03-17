@@ -2560,27 +2560,26 @@ namespace TicTacTec
          #define TA_MAMA Core::Mama
          #define TA_MAMA_Lookback Core::MamaLookback
 
-         static int MovingAverageVariablePeriodLookback( MAType        optInMAType,
-                                                       int           optInMinPeriod, /* From 2 to 100000 */
-                                                       int           optInMaxPeriod );  /* From 2 to 100000 */
-
+         static int MovingAverageVariablePeriodLookback( int           optInMinPeriod, /* From 2 to 100000 */
+                                                       int           optInMaxPeriod, /* From 2 to 100000 */
+                                                       MAType        optInMAType ); 
          static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
                                                                 int    endIdx,
                                                                 cli::array<double>^ inReal,
-                                                                cli::array<int>^ inInteger,
-                                                                MAType        optInMAType,
+                                                                cli::array<double>^ inPeriods,
                                                                 int           optInMinPeriod, /* From 2 to 100000 */
                                                                 int           optInMaxPeriod, /* From 2 to 100000 */
+                                                                MAType        optInMAType,
                                                                 [Out]int%    outBegIdx,
                                                                 [Out]int%    outNbElement,
                                                                 cli::array<double>^  outReal );
          static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
                                                                 int    endIdx,
                                                                 cli::array<float>^ inReal,
-                                                                cli::array<int>^ inInteger,
-                                                                MAType        optInMAType,
+                                                                cli::array<float>^ inPeriods,
                                                                 int           optInMinPeriod, /* From 2 to 100000 */
                                                                 int           optInMaxPeriod, /* From 2 to 100000 */
+                                                                MAType        optInMAType,
                                                                 [Out]int%    outBegIdx,
                                                                 [Out]int%    outNbElement,
                                                                 cli::array<double>^  outReal );
