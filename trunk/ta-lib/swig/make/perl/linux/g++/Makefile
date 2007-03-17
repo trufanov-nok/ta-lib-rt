@@ -27,7 +27,7 @@ endif
 
 CC         = gcc
 LDFLAGS    = -shared -fPIC
-LDLIBS     = -lpthread -lcurl
+LDLIBS     =
 
 all: $(TOPDIR)/lib/perl/TA.so $(TOPDIR)/lib/perl/Finance/TA.pm
 
