@@ -16147,9 +16147,9 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
-   public int movingAverageVariablePeriodLookback( MAType optInMAType,
-      int optInMinPeriod,
-      int optInMaxPeriod )
+   public int movingAverageVariablePeriodLookback( int optInMinPeriod,
+      int optInMaxPeriod,
+      MAType optInMAType )
    {
       if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
          optInMinPeriod = 2;
@@ -16159,19 +16159,25 @@ public class Core {
          optInMaxPeriod = 30;
       else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
          return -1;
-      return 0;
+      return movingAverageLookback (optInMaxPeriod, optInMAType);
    }
    public RetCode movingAverageVariablePeriod( int startIdx,
       int endIdx,
       double inReal[],
-      int inInteger[],
-      MAType optInMAType,
+      double inPeriods[],
       int optInMinPeriod,
       int optInMaxPeriod,
+      MAType optInMAType,
       MInteger outBegIdx,
       MInteger outNbElement,
       double outReal[] )
    {
+      int i, j, lookbackTotal, outputSize, tempInt, curPeriod;
+      int []localPeriodArray ;
+      double []localOutputArray ;
+      MInteger localBegIdx = new MInteger() ;
+      MInteger localNbElement = new MInteger() ;
+      RetCode retCode;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -16184,21 +16190,83 @@ public class Core {
          optInMaxPeriod = 30;
       else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
          return RetCode.BadParam ;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      lookbackTotal = movingAverageLookback (optInMaxPeriod,optInMAType);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      if( lookbackTotal > startIdx )
+         tempInt = lookbackTotal;
+      else
+         tempInt = startIdx;
+      if( tempInt > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outputSize = endIdx - tempInt + 1;
+      localOutputArray = new double[outputSize] ;
+      localPeriodArray = new int[outputSize] ;
+      for( i=0; i < outputSize; i++ )
+      {
+         tempInt = (int)(inPeriods[startIdx+i]);
+         if( tempInt < optInMinPeriod )
+            tempInt = optInMinPeriod;
+         else if( tempInt > optInMaxPeriod )
+            tempInt = optInMaxPeriod;
+         localPeriodArray[i] = tempInt;
+      }
+      for( i=0; i < outputSize; i++ )
+      {
+         curPeriod = localPeriodArray[i];
+         if( curPeriod != 0 )
+         {
+            retCode = movingAverage ( startIdx, endIdx, inReal,
+               curPeriod, optInMAType,
+               localBegIdx , localNbElement ,localOutputArray );
+            if( retCode != RetCode.Success )
+            {
+               outBegIdx.value = 0 ;
+               outNbElement.value = 0 ;
+               return retCode;
+            }
+            outReal[i] = localOutputArray[i];
+            for( j=i+1; j < outputSize; j++ )
+            {
+               if( localPeriodArray[j] == curPeriod )
+               {
+                  localPeriodArray[j] = 0;
+                  outReal[j] = localOutputArray[j];
+               }
+            }
+         }
+      }
+      outBegIdx.value = startIdx;
+      outNbElement.value = outputSize;
       return RetCode.Success ;
    }
    public RetCode movingAverageVariablePeriod( int startIdx,
       int endIdx,
       float inReal[],
-      int inInteger[],
-      MAType optInMAType,
+      float inPeriods[],
       int optInMinPeriod,
       int optInMaxPeriod,
+      MAType optInMAType,
       MInteger outBegIdx,
       MInteger outNbElement,
       double outReal[] )
    {
+      int i, j, lookbackTotal, outputSize, tempInt, curPeriod;
+      int []localPeriodArray ;
+      double []localOutputArray ;
+      MInteger localBegIdx = new MInteger() ;
+      MInteger localNbElement = new MInteger() ;
+      RetCode retCode;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -16211,8 +16279,64 @@ public class Core {
          optInMaxPeriod = 30;
       else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
          return RetCode.BadParam ;
-      outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      lookbackTotal = movingAverageLookback (optInMaxPeriod,optInMAType);
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      if( lookbackTotal > startIdx )
+         tempInt = lookbackTotal;
+      else
+         tempInt = startIdx;
+      if( tempInt > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNbElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outputSize = endIdx - tempInt + 1;
+      localOutputArray = new double[outputSize] ;
+      localPeriodArray = new int[outputSize] ;
+      for( i=0; i < outputSize; i++ )
+      {
+         tempInt = (int)(inPeriods[startIdx+i]);
+         if( tempInt < optInMinPeriod )
+            tempInt = optInMinPeriod;
+         else if( tempInt > optInMaxPeriod )
+            tempInt = optInMaxPeriod;
+         localPeriodArray[i] = tempInt;
+      }
+      for( i=0; i < outputSize; i++ )
+      {
+         curPeriod = localPeriodArray[i];
+         if( curPeriod != 0 )
+         {
+            retCode = movingAverage ( startIdx, endIdx, inReal,
+               curPeriod, optInMAType,
+               localBegIdx , localNbElement ,localOutputArray );
+            if( retCode != RetCode.Success )
+            {
+               outBegIdx.value = 0 ;
+               outNbElement.value = 0 ;
+               return retCode;
+            }
+            outReal[i] = localOutputArray[i];
+            for( j=i+1; j < outputSize; j++ )
+            {
+               if( localPeriodArray[j] == curPeriod )
+               {
+                  localPeriodArray[j] = 0;
+                  outReal[j] = localOutputArray[j];
+               }
+            }
+         }
+      }
+      outBegIdx.value = startIdx;
+      outNbElement.value = outputSize;
       return RetCode.Success ;
    }
    /* Generated */

@@ -4106,17 +4106,11 @@
 				<Name>inReal</Name>
 			</RequiredInputArgument>
 			<RequiredInputArgument>
-				<Type>Integer Array</Type>
-				<Name>inInteger</Name>
+				<Type>Double Array</Type>
+				<Name>inPeriods</Name>
 			</RequiredInputArgument>
 		</RequiredInputArguments>
 		<OptionalInputArguments>
-			<OptionalInputArgument>
-				<Name>MA Type</Name>
-				<ShortDescription>Type of Moving Average</ShortDescription>
-				<Type>MA Type</Type>
-				<DefaultValue>0</DefaultValue>
-			</OptionalInputArgument>
 			<OptionalInputArgument>
 				<Name>Minimum Period</Name>
 				<ShortDescription>Value less than minimum will be changed to Minimum period</ShortDescription>
@@ -4142,6 +4136,12 @@
 					<SuggestedIncrement>100000</SuggestedIncrement>
 				</Range>
 				<DefaultValue>30</DefaultValue>
+			</OptionalInputArgument>
+			<OptionalInputArgument>
+				<Name>MA Type</Name>
+				<ShortDescription>Type of Moving Average</ShortDescription>
+				<Type>MA Type</Type>
+				<DefaultValue>0</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
 		<OutputArguments>
