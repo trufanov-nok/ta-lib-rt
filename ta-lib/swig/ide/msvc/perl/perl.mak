@@ -51,7 +51,7 @@ BSC32_FLAGS=/nologo /o"$(OUTDIR)\perl.bsc"
 BSC32_SBRS= \
 	
 LINK32=link.exe
-LINK32_FLAGS=..\..\..\..\c\lib\ta_libc_cdr.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib $(PERL5_INCLUDE)/$(PERL5_LIB) /nologo /dll /pdb:none /machine:I386 /out:"..\..\..\lib\perl\ta.dll" /implib:"$(OUTDIR)\ta.lib" 
+LINK32_FLAGS=..\..\..\..\c\lib\ta_libc_cdr.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib $(PERL5_INCLUDE)/$(PERL5_LIB) /nologo /dll /pdb:none /machine:I386 /out:"..\..\..\lib\perl\ta.dll" /implib:"$(OUTDIR)\ta.lib" 
 LINK32_OBJS= \
 	"$(INTDIR)\ta_libc_wrap.obj"
 
@@ -104,7 +104,7 @@ MTL_PROJ=/nologo /D "NDEBUG" /mktyplib203 /win32
 
 
 !IF "$(CFG)" == "perl - Win32 Release"
-SOURCE=..\..\..\temp\perl\wrap\ta_libc_wrap.c
+SOURCE="$(INTDIR)\ta_libc_wrap.c"
 CPP_SWITCHES=/nologo /MD /W3 /O1 /I "..\..\..\..\c\include" /I "$(PERL5_INCLUDE)" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MSWIN32" /D "_CONSOLE" /D "NO_STRICT" /D "PERL_MSVCRT_READFIX" /D "PERL_CAPI" /Fp"$(INTDIR)\perl.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
 
 "$(INTDIR)\ta_libc_wrap.obj" : $(SOURCE) "$(INTDIR)"
@@ -119,7 +119,7 @@ InputPath=..\..\..\src\interface\ta_libc.swg
 InputName=ta_libc
 USERDEP__TA_LI="..\..\..\src\interface\perl.pm"	
 
-"$(INTDIR)\ta_libc_wrap.c"	"$(INTDIR)\TA.pm" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)" $(USERDEP__TA_LI)
+"..\..\..\temp\perl\wrap\ta_libc_wrap.c"	"..\..\..\temp\perl\wrap\TA.pm" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)" $(USERDEP__TA_LI)
 	<<tempfile.bat 
 	@echo off 
 	echo In order to function correctly, please ensure the following environment variables are correctly set: 
