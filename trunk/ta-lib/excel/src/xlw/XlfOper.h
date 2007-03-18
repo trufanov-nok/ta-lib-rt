@@ -95,6 +95,10 @@ public:
   bool IsMissing() const;
   //! Is the data an error ?
   bool IsError() const;
+  //! Is the data boolean ?
+  bool IsBool() const;
+
+  int XLType() const;
 
   //! Converts to a double.
   double AsDouble(int * pxlret = 0) const;

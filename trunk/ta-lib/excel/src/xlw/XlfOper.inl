@@ -144,6 +144,16 @@ INLINE bool XlfOper::IsError() const
   return lpxloper_->xltype == xltypeErr;
 }
 
+INLINE bool XlfOper::IsBool() const
+{
+  return lpxloper_->xltype == xltypeBool;
+}
+
+INLINE int XlfOper::XLType() const
+{
+  return lpxloper_->xltype;
+}
+
 /*!
 Forwards to XlfOper::AsDouble.
 */

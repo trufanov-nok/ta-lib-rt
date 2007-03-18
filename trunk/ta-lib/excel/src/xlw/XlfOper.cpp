@@ -180,13 +180,20 @@ int XlfOper::ConvertToDouble(double& d) const throw()
     XlfOper cast(&tmp);
     // Coerces to numeric type.
     xlret = Coerce(xltypeNum,cast);
-    if( cast.IsError() || cast.IsMissing() )
+    if( (xlret == xlretFailed) || cast.IsError() || cast.IsMissing() )
     {
         d = trio_nan();
         xlret = xlretSuccess;
     }
     else if (xlret == xlretSuccess)
       xlret = cast.ConvertToDouble(d);
+    else
+    {
+char buffer[100];
+sprintf( buffer, "ConvertToDouble xlret=%d, type=%d", xlret, cast.XLType() );
+        XlfExcel::Instance().MsgBox(buffer, "Debug");       
+    }
+
   }
   return xlret;
 };
