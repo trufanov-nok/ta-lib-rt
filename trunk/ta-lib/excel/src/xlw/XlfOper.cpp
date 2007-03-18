@@ -187,13 +187,6 @@ int XlfOper::ConvertToDouble(double& d) const throw()
     }
     else if (xlret == xlretSuccess)
       xlret = cast.ConvertToDouble(d);
-    else
-    {
-char buffer[100];
-sprintf( buffer, "ConvertToDouble xlret=%d, type=%d", xlret, cast.XLType() );
-        XlfExcel::Instance().MsgBox(buffer, "Debug");       
-    }
-
   }
   return xlret;
 };
