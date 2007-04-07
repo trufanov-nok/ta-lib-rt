@@ -11,8 +11,8 @@ What is the different between "ta-lib.xll" and "ta-lib-reverse.xll"?
 ====================================================================
 They are the same except for the order used to process the input.
 
-"ta-lib.xll" performs the calculation from top to down or right to left.
-"ta-lib-reverse.xll" performs the calculation from down to top or left to right.
+"ta-lib.xll" performs the calculation from top to down or left to right.
+"ta-lib-reverse.xll" performs the calculation from down to top or right to left.
 
 License
 =======
