@@ -55,7 +55,7 @@ using namespace System::Runtime::InteropServices;
 //   (*) Delay Signing is an advanced option - see the Microsoft CLR Framework
 //       documentation for more information on this.
 //
-//[assembly:AssemblyDelaySignAttribute(false)];
+[assembly:AssemblyDelaySignAttribute(false)];
 //[assembly:AssemblyKeyFileAttribute("")];
 //[assembly:AssemblyKeyNameAttribute("")];
 
