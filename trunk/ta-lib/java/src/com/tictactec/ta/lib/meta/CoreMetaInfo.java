@@ -57,7 +57,7 @@ import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.RetCode;
 
 /**
- * @deprecated in favor or CoreMetaData class
+ * @deprecated in favor of CoreMetaData class
  */
 public class CoreMetaInfo
 {

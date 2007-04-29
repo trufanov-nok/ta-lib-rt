@@ -46,89 +46,128 @@
 
 package com.tictactec.ta.lib.meta;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.tictactec.ta.lib.meta.annotation.InputFlags;
 
 /**
- * PriceHolder is reponsible for holding arrays relative to OHLCVI (open, high, low, close, volume, open interest) data points.
+ * PriceHolder is responsible for holding prices, which are composed by OHLCVI, i.e:
+ * open, high, low, close, volume and open interest.
+ * 
+ * <p>Indicators which take prices as input, only take subsets of OHLCVI components and one could think
+ * that PriceHolder could be used for such purpose. <i>This class is not intended to hold prices passed to indicators.</i>
+ * 
+ * <p>In order to avoid this kind of confusion, PriceHolder cannot be initialized with null arrays.
+ * PriceHoder also checks if all arrays passed to constructor have the same length.
+ * 
+ * @see PriceHolderInputParameter
  * 
  * @author Richard Gomes
  */
 public class PriceHolder {
-    private int flags;
-    List<double[]> list;
+
+    private double[] o;
+    private double[] h;
+    private double[] l;
+    private double[] c;
+    private double[] v;
+    private double[] i;
+    public final int length;
     
     /**
-     * Constructs a PriceHolder by passing the an int value defined by <b>InputFlags</b> and all <b>double[]</b> assignment
-     * compatible data point arrays which are referenced by the flags informed.
-     * 
-     * @param flags is an int built by ORing the values defined by InputFlags enum
+     * Stores all data point arrays in a PriceHolder instance
+     *  
      * @param open represent the open data points and is expected to be <b>double[]</b> assignment compatible.
      * @param high represent the high data points and is expected to be <b>double[]</b> assignment compatible.
      * @param low represent the low data points and is expected to be <b>double[]</b> assignment compatible.
      * @param close represent the close data points and is expected to be <b>double[]</b> assignment compatible.
      * @param volume represent the volume data points and is expected to be <b>double[]</b> assignment compatible.
      * @param openInterest represent the open interest data points and is expected to be <b>double[]</b> assignment compatible.
-     * @throws NullPointerException
+     * @throws NullPointerException if any arrays is null
+     * @throws IllegalArgumentException if sizes of arrays dont match
      */
-    public PriceHolder(int flags, double[] open, double[] high, double[] low, double[] close, double[] volume, double[] openInterest) 
-            throws NullPointerException {
+    public PriceHolder(double[] o, double[] h, double[] l, double[] c, double[] v, double[] i) 
+            throws NullPointerException, IllegalArgumentException {
 
-        this.flags = flags;
-        list = new ArrayList<double[]>();
+        if (o==null) throw new NullPointerException(); // TODO: message
+        if (h==null) throw new NullPointerException(); // TODO: message
+        if (l==null) throw new NullPointerException(); // TODO: message
+        if (c==null) throw new NullPointerException(); // TODO: message
+        if (v==null) throw new NullPointerException(); // TODO: message
+        if (i==null) throw new NullPointerException(); // TODO: message
         
-        if ((flags&InputFlags.TA_IN_PRICE_OPEN)!=0) {
-            if (open==null) throw new NullPointerException("open array is null");
-            list.add(open);
-        }
-        if ((flags&InputFlags.TA_IN_PRICE_HIGH)!=0) {
-            if (high==null) throw new NullPointerException("high array is null");
-            list.add(high);
-        }
-        if ((flags&InputFlags.TA_IN_PRICE_LOW)!=0) {
-            if (low==null) throw new NullPointerException("low array is null");
-            list.add(low);
-        }
-        if ((flags&InputFlags.TA_IN_PRICE_CLOSE)!=0) {
-            if (close==null) throw new NullPointerException("close array is null");
-            list.add(close);
-        }
-        if ((flags&InputFlags.TA_IN_PRICE_VOLUME)!=0) {
-            if (volume==null) throw new NullPointerException("volume array is null");
-            list.add(volume);
-        }
-        if ((flags&InputFlags.TA_IN_PRICE_OPENINTEREST)!=0) {
-            if (openInterest==null) throw new NullPointerException("open interest array is null");
-            list.add(openInterest);
-        }
+        length = o.length;
+        if (h.length != length) throw new IllegalArgumentException(); // TODO: message
+        if (l.length != length) throw new IllegalArgumentException(); // TODO: message
+        if (c.length != length) throw new IllegalArgumentException(); // TODO: message
+        if (v.length != length) throw new IllegalArgumentException(); // TODO: message
+        if (i.length != length) throw new IllegalArgumentException(); // TODO: message
+        
+        this.o = o;
+        this.h = h;
+        this.l = l;
+        this.c = c;
+        this.v = v;
+        this.i = i;
     }
     
     /**
-     * @return the flags informed when this object was constructed
+     * This method is deprecated. Use public field "length" instead.
+     * @deprecated
+     * @return length
      */
-    public int getFlags() {
-        return flags;
+    public int getSize() {
+        return length;
     }
     
     /**
-     * @return the arrays of data points informed when this object was constructed
+     * @return an Object[] which contais <b>all<b> data point arrays OHLCVI.
+     * @see PriceInputParameter overrides this method
      */
-    public Object[] toArray() {
-        return list.toArray();
+    public Object[] toArrays() {
+        Object objs[] = new Object[6];
+        int n = 0;
+        objs[n++] = o;
+        objs[n++] = h;
+        objs[n++] = l;
+        objs[n++] = c;
+        objs[n++] = v;
+        objs[n++] = i;
+        return objs;
     }
+
+    /**
+     * 
+     * @return the Open component
+     */
+    public double[] getO() { return o; }
     
     /**
-     * @return the maximun number of arrays of data points possibly hold by this class and is equilavent of:
-     * <pre>
-     * this.toArray().size();
-     * </pre> 
+     * 
+     * @return the High component
      */
-    public int size() {
-        return list.size();
-    }
+    public double[] getH() { return h; }
+    
+    /**
+     * 
+     * @return the Low component
+     */
+    public double[] getL() { return l; }
+    
+    /**
+     * 
+     * @return the Close component
+     */
+    public double[] getC() { return c; }
+    
+    /**
+     * 
+     * @return the Volume component
+     */
+    public double[] getV() { return v; }
+    
+    /**
+     * 
+     * @return the Open Interest component
+     */
+    public double[] getI() { return i; }
     
 }
-
 

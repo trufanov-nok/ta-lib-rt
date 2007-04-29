@@ -53,6 +53,7 @@ import java.util.Set;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.meta.CoreMetaData;
 import com.tictactec.ta.lib.meta.PriceHolder;
+import com.tictactec.ta.lib.meta.PriceInputParameter;
 import com.tictactec.ta.lib.meta.TaFuncService;
 import com.tictactec.ta.lib.meta.TaGrpService;
 import com.tictactec.ta.lib.meta.annotation.InputParameterInfo;
@@ -283,7 +284,7 @@ public class TestCoreMetaData {
             System.out.println("===============================================");
             System.out.println(func);
             int flags = calc.getMetaData().getInputParameterInfo(0).flags();
-            PriceHolder price = new PriceHolder(flags, open, high, low, close, null, null);
+            PriceHolder price = new PriceInputParameter(flags, open, high, low, close, null, null);
             calc.calculate(0, 59, new Object[] { price }, new Object[] { output1 }, lOutIdx, lOutSize);
             
             System.out.println("lookback="+calc.getLookback());

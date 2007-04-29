@@ -73,8 +73,8 @@ import com.tictactec.ta.lib.meta.annotation.RealList;
 import com.tictactec.ta.lib.meta.annotation.RealRange;
 
 /**
- * CoreMetaData provides low level RTTI (Run Time Type Information) regarding TA functions and also provides methods
- * for whom willing to call a certain TA function using late binding techiniques. These two functionalities let you
+ * CoreMetaData provides low level RTTI (Run Time Type Information) for TA functions. It also provides methods
+ * for those willing to call a certain TA function using late binding techniques. These two functionalities let you
  * call TA functions dinamically. Even if more TA functions are added by the time, your application code will be able
  * to call all added functions by querying TA-Lib package about:
  * 
@@ -100,7 +100,7 @@ public class CoreMetaData implements Comparable {
     private static transient final String ARRAY_IS_NULL = "Array is null";
     private static transient final String INT_ARRAY_EXPECTED = "int[] expected";
     private static transient final String DOUBLE_ARRAY_EXPECTED = "double[] expected";
-    private static transient final String PRICEHOLDER_EXPECTED = "PriceHolder object expected";
+    private static transient final String PRICE_EXPECTED = "PriceInputParameter object expected";
     
     private static transient final Class coreClass = CoreAnnotated.class;
     private static transient final String LOOKBACK_SUFFIX = "Lookback";
@@ -402,10 +402,10 @@ public class CoreMetaData implements Comparable {
             if (param==null) throw new InternalError(CONTACT_DEVELOPERS);
             if (param.type()!=OptInputParameterType.TA_OptInput_IntegerList) throw new InternalError(CONTACT_DEVELOPERS);
 
-            // FIXME: The correct implementation should be expose a field in @IntegerList informing
+            // FIXME: The correct implementation should expose a field in @IntegerList informing
             // which Class should be taken for introspection.
             // Currently, all IntegerList instances implicitly depend on MAType class
-            // but it may change someday.
+            // but it may change some day.
             
             MAType[] fields = MAType.values();
             for (MAType value : fields) {
@@ -517,7 +517,7 @@ public class CoreMetaData implements Comparable {
 
     /**
      * Assigns Objects which are expected to be assignment compatible of <b>double[]</b> to
-     * an input parameter which is expected to be assignment compatible of <b>PriceHolder</b>.
+     * an input parameter which is expected to be assignment compatible of <b>PriceInputParameter</b>.
      * 
      * <p>You only need to pass those parameters strictly needed by the n-th input parameter of a certain TA function.
      * 
@@ -538,15 +538,15 @@ public class CoreMetaData implements Comparable {
         InputParameterInfo param = getInputParameterInfo(paramIndex);
         if ((param==null) || (param.type()!=InputParameterType.TA_Input_Price)) throw new InternalError(CONTACT_DEVELOPERS);
         if (callInputParams==null) callInputParams = new Object[getFuncInfo().nbInput()];
-        callInputParams[paramIndex] = new PriceHolder(param.flags(), open, high, low, close, volume, openInterest);
+        callInputParams[paramIndex] = new PriceInputParameter(param.flags(), open, high, low, close, volume, openInterest);
     }
 
     /**
-     * Assigns an Object which are expected to be assignment compatible of <b>PriceHolder</b> to
-     * an input parameter which is expected to be assignment compatible of <b>PriceHolder</b>.
+     * Assigns an Object which are expected to be assignment compatible of <b>PriceInputParameter</b> to
+     * an input parameter which is expected to be assignment compatible of <b>PriceInputParameter</b>.
      * 
      * @param paramIndex is the n-th input parameter
-     * @param array is an Object expected to be assignment compatible to <b>PriceHolder</b>
+     * @param array is an Object expected to be assignment compatible to <b>PriceInputParameter</b>
      * @throws IllegalArgumentException
      * @throws NullPointerException
      */
@@ -554,7 +554,7 @@ public class CoreMetaData implements Comparable {
         if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         InputParameterInfo param = getInputParameterInfo(paramIndex);
         if ((param==null) || (param.type()!=InputParameterType.TA_Input_Price)) throw new InternalError(CONTACT_DEVELOPERS);
-        if (! (array instanceof PriceHolder) ) throw new IllegalArgumentException(PRICEHOLDER_EXPECTED);
+        if (! (array instanceof PriceInputParameter) ) throw new IllegalArgumentException(PRICE_EXPECTED);
         if (callInputParams==null) callInputParams = new Object[getFuncInfo().nbInput()];
         callInputParams[paramIndex] = array;
     }
@@ -689,8 +689,8 @@ public class CoreMetaData implements Comparable {
 
         int count = 0;
         for (Object item : callInputParams) {
-            if (PriceHolder.class.isAssignableFrom(item.getClass())) {
-                count += ((PriceHolder)item).size();
+            if (PriceInputParameter.class.isAssignableFrom(item.getClass())) {
+                count += ((PriceInputParameter)item).getCount();
             } else {
                 count++;
             }
@@ -704,9 +704,10 @@ public class CoreMetaData implements Comparable {
         params[count++] = endIndex;
 
         for (Object item : callInputParams) {
-            if (PriceHolder.class.isAssignableFrom(item.getClass())) {
-                for (int i=0; i<((PriceHolder)item).size(); i++) {
-                    params[count++] = ((PriceHolder)item).toArray()[i];
+            if (PriceInputParameter.class.isAssignableFrom(item.getClass())) {
+                Object objs[] = ((PriceInputParameter)item).toArrays();
+                for (int i=0; i<objs.length; i++) {
+                    params[count++] = objs[i];
                 }
             } else {
                 params[count++] = item;
