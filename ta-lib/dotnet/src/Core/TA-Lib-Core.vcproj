@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\c\src\ta_common; ..\..\..\dotnet\src\Core;..\..\..\c\include"
-				PreprocessorDefinitions="WIN32;_DEBUG"
+				PreprocessorDefinitions="WIN32;_DEBUG;CODE_ANALYSIS "
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="3"
@@ -186,18 +186,6 @@
 		<AssemblyReference
 			RelativePath="System.XML.dll"
 			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
-		/>
-		<AssemblyReference
-			RelativePath="o:\Program Files\Mailframe\StudioTools\nunit.framework.dll"
-			AssemblyName="nunit.framework, Version=2.3.6293.0, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL"
-		/>
-		<AssemblyReference
-			RelativePath="o:\Program Files\Mailframe\StudioTools\nunit.core.dll"
-			AssemblyName="nunit.core, Version=2.3.6293.0, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL"
-		/>
-		<AssemblyReference
-			RelativePath="o:\Program Files\Mailframe\StudioTools\nunit.common.dll"
-			AssemblyName="nunit.common, Version=2.3.6293.0, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL"
 		/>
 	</References>
 	<Files>
