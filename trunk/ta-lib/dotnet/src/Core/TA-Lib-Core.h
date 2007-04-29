@@ -56,7 +56,7 @@ namespace TicTacTec
 {
 	namespace TA
 	{
-	   namespace Lib
+	   namespace Library
 	   {
 		  public ref class Core abstract sealed
 		  {
@@ -312,7 +312,7 @@ namespace TicTacTec
                                        cli::array<double>^ inClose,
                                        cli::array<double>^ inVolume,
                                        [Out]int%    outBegIdx,
-                                       [Out]int%    outNbElement,
+                                       [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
          static enum class RetCode Ad( int    startIdx,
                                        int    endIdx,
@@ -321,7 +321,7 @@ namespace TicTacTec
                                        cli::array<float>^ inClose,
                                        cli::array<float>^ inVolume,
                                        [Out]int%    outBegIdx,
-                                       [Out]int%    outNbElement,
+                                       [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
 
          #define TA_AD Core::Ad
@@ -339,7 +339,7 @@ namespace TicTacTec
                                           int           optInFastPeriod, /* From 2 to 100000 */
                                           int           optInSlowPeriod, /* From 2 to 100000 */
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
          static enum class RetCode AdOsc( int    startIdx,
                                           int    endIdx,
@@ -350,7 +350,7 @@ namespace TicTacTec
                                           int           optInFastPeriod, /* From 2 to 100000 */
                                           int           optInSlowPeriod, /* From 2 to 100000 */
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
 
          #define TA_ADOSC Core::AdOsc
@@ -365,7 +365,7 @@ namespace TicTacTec
                                         cli::array<double>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Adx( int    startIdx,
                                         int    endIdx,
@@ -374,7 +374,7 @@ namespace TicTacTec
                                         cli::array<float>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_ADX Core::Adx
@@ -389,7 +389,7 @@ namespace TicTacTec
                                          cli::array<double>^ inClose,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode Adxr( int    startIdx,
                                          int    endIdx,
@@ -398,7 +398,7 @@ namespace TicTacTec
                                          cli::array<float>^ inClose,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_ADXR Core::Adxr
@@ -414,7 +414,7 @@ namespace TicTacTec
                                         int           optInSlowPeriod, /* From 2 to 100000 */
                                         MAType        optInMAType,
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Apo( int    startIdx,
                                         int    endIdx,
@@ -423,7 +423,7 @@ namespace TicTacTec
                                         int           optInSlowPeriod, /* From 2 to 100000 */
                                         MAType        optInMAType,
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_APO Core::Apo
@@ -437,7 +437,7 @@ namespace TicTacTec
                                           cli::array<double>^ inLow,
                                           int           optInTimePeriod, /* From 2 to 100000 */
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outAroonDown,
                                           cli::array<double>^  outAroonUp );
          static enum class RetCode Aroon( int    startIdx,
@@ -446,7 +446,7 @@ namespace TicTacTec
                                           cli::array<float>^ inLow,
                                           int           optInTimePeriod, /* From 2 to 100000 */
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outAroonDown,
                                           cli::array<double>^  outAroonUp );
 
@@ -461,7 +461,7 @@ namespace TicTacTec
                                              cli::array<double>^ inLow,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
          static enum class RetCode AroonOsc( int    startIdx,
                                              int    endIdx,
@@ -469,7 +469,7 @@ namespace TicTacTec
                                              cli::array<float>^ inLow,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
 
          #define TA_AROONOSC Core::AroonOsc
@@ -484,7 +484,7 @@ namespace TicTacTec
                                         cli::array<double>^ inClose,
                                         int           optInTimePeriod, /* From 1 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Atr( int    startIdx,
                                         int    endIdx,
@@ -493,7 +493,7 @@ namespace TicTacTec
                                         cli::array<float>^ inClose,
                                         int           optInTimePeriod, /* From 1 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_ATR Core::Atr
@@ -508,7 +508,7 @@ namespace TicTacTec
                                              cli::array<double>^ inLow,
                                              cli::array<double>^ inClose,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
          static enum class RetCode AvgPrice( int    startIdx,
                                              int    endIdx,
@@ -517,7 +517,7 @@ namespace TicTacTec
                                              cli::array<float>^ inLow,
                                              cli::array<float>^ inClose,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
 
          #define TA_AVGPRICE Core::AvgPrice
@@ -535,7 +535,7 @@ namespace TicTacTec
                                            double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
                                            MAType        optInMAType,
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outRealUpperBand,
                                            cli::array<double>^  outRealMiddleBand,
                                            cli::array<double>^  outRealLowerBand );
@@ -547,7 +547,7 @@ namespace TicTacTec
                                            double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
                                            MAType        optInMAType,
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outRealUpperBand,
                                            cli::array<double>^  outRealMiddleBand,
                                            cli::array<double>^  outRealLowerBand );
@@ -563,7 +563,7 @@ namespace TicTacTec
                                          cli::array<double>^ inReal1,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode Beta( int    startIdx,
                                          int    endIdx,
@@ -571,7 +571,7 @@ namespace TicTacTec
                                          cli::array<float>^ inReal1,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_BETA Core::Beta
@@ -586,7 +586,7 @@ namespace TicTacTec
                                         cli::array<double>^ inLow,
                                         cli::array<double>^ inClose,
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Bop( int    startIdx,
                                         int    endIdx,
@@ -595,7 +595,7 @@ namespace TicTacTec
                                         cli::array<float>^ inLow,
                                         cli::array<float>^ inClose,
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_BOP Core::Bop
@@ -610,7 +610,7 @@ namespace TicTacTec
                                         cli::array<double>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Cci( int    startIdx,
                                         int    endIdx,
@@ -619,7 +619,7 @@ namespace TicTacTec
                                         cli::array<float>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_CCI Core::Cci
@@ -634,7 +634,7 @@ namespace TicTacTec
                                               cli::array<double>^ inLow,
                                               cli::array<double>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
          static enum class RetCode Cdl2Crows( int    startIdx,
                                               int    endIdx,
@@ -643,7 +643,7 @@ namespace TicTacTec
                                               cli::array<float>^ inLow,
                                               cli::array<float>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
 
          #define TA_CDL2CROWS Core::Cdl2Crows
@@ -658,7 +658,7 @@ namespace TicTacTec
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
          static enum class RetCode Cdl3BlackCrows( int    startIdx,
                                                    int    endIdx,
@@ -667,7 +667,7 @@ namespace TicTacTec
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDL3BLACKCROWS Core::Cdl3BlackCrows
@@ -682,7 +682,7 @@ namespace TicTacTec
                                                cli::array<double>^ inLow,
                                                cli::array<double>^ inClose,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
          static enum class RetCode Cdl3Inside( int    startIdx,
                                                int    endIdx,
@@ -691,7 +691,7 @@ namespace TicTacTec
                                                cli::array<float>^ inLow,
                                                cli::array<float>^ inClose,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
 
          #define TA_CDL3INSIDE Core::Cdl3Inside
@@ -706,7 +706,7 @@ namespace TicTacTec
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
          static enum class RetCode Cdl3LineStrike( int    startIdx,
                                                    int    endIdx,
@@ -715,7 +715,7 @@ namespace TicTacTec
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDL3LINESTRIKE Core::Cdl3LineStrike
@@ -730,7 +730,7 @@ namespace TicTacTec
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
          static enum class RetCode Cdl3Outside( int    startIdx,
                                                 int    endIdx,
@@ -739,7 +739,7 @@ namespace TicTacTec
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
 
          #define TA_CDL3OUTSIDE Core::Cdl3Outside
@@ -754,7 +754,7 @@ namespace TicTacTec
                                                      cli::array<double>^ inLow,
                                                      cli::array<double>^ inClose,
                                                      [Out]int%    outBegIdx,
-                                                     [Out]int%    outNbElement,
+                                                     [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
          static enum class RetCode Cdl3StarsInSouth( int    startIdx,
                                                      int    endIdx,
@@ -763,7 +763,7 @@ namespace TicTacTec
                                                      cli::array<float>^ inLow,
                                                      cli::array<float>^ inClose,
                                                      [Out]int%    outBegIdx,
-                                                     [Out]int%    outNbElement,
+                                                     [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
 
          #define TA_CDL3STARSINSOUTH Core::Cdl3StarsInSouth
@@ -778,7 +778,7 @@ namespace TicTacTec
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
          static enum class RetCode Cdl3WhiteSoldiers( int    startIdx,
                                                       int    endIdx,
@@ -787,7 +787,7 @@ namespace TicTacTec
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDL3WHITESOLDIERS Core::Cdl3WhiteSoldiers
@@ -803,7 +803,7 @@ namespace TicTacTec
                                                      cli::array<double>^ inClose,
                                                      double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                      [Out]int%    outBegIdx,
-                                                     [Out]int%    outNbElement,
+                                                     [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
          static enum class RetCode CdlAbandonedBaby( int    startIdx,
                                                      int    endIdx,
@@ -813,7 +813,7 @@ namespace TicTacTec
                                                      cli::array<float>^ inClose,
                                                      double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                      [Out]int%    outBegIdx,
-                                                     [Out]int%    outNbElement,
+                                                     [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
 
          #define TA_CDLABANDONEDBABY Core::CdlAbandonedBaby
@@ -828,7 +828,7 @@ namespace TicTacTec
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
          static enum class RetCode CdlAdvanceBlock( int    startIdx,
                                                     int    endIdx,
@@ -837,7 +837,7 @@ namespace TicTacTec
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLADVANCEBLOCK Core::CdlAdvanceBlock
@@ -852,7 +852,7 @@ namespace TicTacTec
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
          static enum class RetCode CdlBeltHold( int    startIdx,
                                                 int    endIdx,
@@ -861,7 +861,7 @@ namespace TicTacTec
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
 
          #define TA_CDLBELTHOLD Core::CdlBeltHold
@@ -876,7 +876,7 @@ namespace TicTacTec
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
          static enum class RetCode CdlBreakaway( int    startIdx,
                                                  int    endIdx,
@@ -885,7 +885,7 @@ namespace TicTacTec
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLBREAKAWAY Core::CdlBreakaway
@@ -900,7 +900,7 @@ namespace TicTacTec
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
          static enum class RetCode CdlClosingMarubozu( int    startIdx,
                                                        int    endIdx,
@@ -909,7 +909,7 @@ namespace TicTacTec
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLCLOSINGMARUBOZU Core::CdlClosingMarubozu
@@ -924,7 +924,7 @@ namespace TicTacTec
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
                                                         [Out]int%    outBegIdx,
-                                                        [Out]int%    outNbElement,
+                                                        [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
          static enum class RetCode CdlConcealBabysWall( int    startIdx,
                                                         int    endIdx,
@@ -933,7 +933,7 @@ namespace TicTacTec
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
                                                         [Out]int%    outBegIdx,
-                                                        [Out]int%    outNbElement,
+                                                        [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDLCONCEALBABYSWALL Core::CdlConcealBabysWall
@@ -948,7 +948,7 @@ namespace TicTacTec
                                                      cli::array<double>^ inLow,
                                                      cli::array<double>^ inClose,
                                                      [Out]int%    outBegIdx,
-                                                     [Out]int%    outNbElement,
+                                                     [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
          static enum class RetCode CdlCounterAttack( int    startIdx,
                                                      int    endIdx,
@@ -957,7 +957,7 @@ namespace TicTacTec
                                                      cli::array<float>^ inLow,
                                                      cli::array<float>^ inClose,
                                                      [Out]int%    outBegIdx,
-                                                     [Out]int%    outNbElement,
+                                                     [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
 
          #define TA_CDLCOUNTERATTACK Core::CdlCounterAttack
@@ -973,7 +973,7 @@ namespace TicTacTec
                                                       cli::array<double>^ inClose,
                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
          static enum class RetCode CdlDarkCloudCover( int    startIdx,
                                                       int    endIdx,
@@ -983,7 +983,7 @@ namespace TicTacTec
                                                       cli::array<float>^ inClose,
                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLDARKCLOUDCOVER Core::CdlDarkCloudCover
@@ -998,7 +998,7 @@ namespace TicTacTec
                                             cli::array<double>^ inLow,
                                             cli::array<double>^ inClose,
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<int>^  outInteger );
          static enum class RetCode CdlDoji( int    startIdx,
                                             int    endIdx,
@@ -1007,7 +1007,7 @@ namespace TicTacTec
                                             cli::array<float>^ inLow,
                                             cli::array<float>^ inClose,
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<int>^  outInteger );
 
          #define TA_CDLDOJI Core::CdlDoji
@@ -1022,7 +1022,7 @@ namespace TicTacTec
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
          static enum class RetCode CdlDojiStar( int    startIdx,
                                                 int    endIdx,
@@ -1031,7 +1031,7 @@ namespace TicTacTec
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
 
          #define TA_CDLDOJISTAR Core::CdlDojiStar
@@ -1046,7 +1046,7 @@ namespace TicTacTec
                                                      cli::array<double>^ inLow,
                                                      cli::array<double>^ inClose,
                                                      [Out]int%    outBegIdx,
-                                                     [Out]int%    outNbElement,
+                                                     [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
          static enum class RetCode CdlDragonflyDoji( int    startIdx,
                                                      int    endIdx,
@@ -1055,7 +1055,7 @@ namespace TicTacTec
                                                      cli::array<float>^ inLow,
                                                      cli::array<float>^ inClose,
                                                      [Out]int%    outBegIdx,
-                                                     [Out]int%    outNbElement,
+                                                     [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
 
          #define TA_CDLDRAGONFLYDOJI Core::CdlDragonflyDoji
@@ -1070,7 +1070,7 @@ namespace TicTacTec
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
          static enum class RetCode CdlEngulfing( int    startIdx,
                                                  int    endIdx,
@@ -1079,7 +1079,7 @@ namespace TicTacTec
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLENGULFING Core::CdlEngulfing
@@ -1095,7 +1095,7 @@ namespace TicTacTec
                                                        cli::array<double>^ inClose,
                                                        double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
          static enum class RetCode CdlEveningDojiStar( int    startIdx,
                                                        int    endIdx,
@@ -1105,7 +1105,7 @@ namespace TicTacTec
                                                        cli::array<float>^ inClose,
                                                        double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLEVENINGDOJISTAR Core::CdlEveningDojiStar
@@ -1121,7 +1121,7 @@ namespace TicTacTec
                                                    cli::array<double>^ inClose,
                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
          static enum class RetCode CdlEveningStar( int    startIdx,
                                                    int    endIdx,
@@ -1131,7 +1131,7 @@ namespace TicTacTec
                                                    cli::array<float>^ inClose,
                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLEVENINGSTAR Core::CdlEveningStar
@@ -1146,7 +1146,7 @@ namespace TicTacTec
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
                                                         [Out]int%    outBegIdx,
-                                                        [Out]int%    outNbElement,
+                                                        [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
          static enum class RetCode CdlGapSideSideWhite( int    startIdx,
                                                         int    endIdx,
@@ -1155,7 +1155,7 @@ namespace TicTacTec
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
                                                         [Out]int%    outBegIdx,
-                                                        [Out]int%    outNbElement,
+                                                        [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDLGAPSIDESIDEWHITE Core::CdlGapSideSideWhite
@@ -1170,7 +1170,7 @@ namespace TicTacTec
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
          static enum class RetCode CdlGravestoneDoji( int    startIdx,
                                                       int    endIdx,
@@ -1179,7 +1179,7 @@ namespace TicTacTec
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLGRAVESTONEDOJI Core::CdlGravestoneDoji
@@ -1194,7 +1194,7 @@ namespace TicTacTec
                                               cli::array<double>^ inLow,
                                               cli::array<double>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
          static enum class RetCode CdlHammer( int    startIdx,
                                               int    endIdx,
@@ -1203,7 +1203,7 @@ namespace TicTacTec
                                               cli::array<float>^ inLow,
                                               cli::array<float>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
 
          #define TA_CDLHAMMER Core::CdlHammer
@@ -1218,7 +1218,7 @@ namespace TicTacTec
                                                   cli::array<double>^ inLow,
                                                   cli::array<double>^ inClose,
                                                   [Out]int%    outBegIdx,
-                                                  [Out]int%    outNbElement,
+                                                  [Out]int%    outNBElement,
                                                   cli::array<int>^  outInteger );
          static enum class RetCode CdlHangingMan( int    startIdx,
                                                   int    endIdx,
@@ -1227,7 +1227,7 @@ namespace TicTacTec
                                                   cli::array<float>^ inLow,
                                                   cli::array<float>^ inClose,
                                                   [Out]int%    outBegIdx,
-                                                  [Out]int%    outNbElement,
+                                                  [Out]int%    outNBElement,
                                                   cli::array<int>^  outInteger );
 
          #define TA_CDLHANGINGMAN Core::CdlHangingMan
@@ -1242,7 +1242,7 @@ namespace TicTacTec
                                               cli::array<double>^ inLow,
                                               cli::array<double>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
          static enum class RetCode CdlHarami( int    startIdx,
                                               int    endIdx,
@@ -1251,7 +1251,7 @@ namespace TicTacTec
                                               cli::array<float>^ inLow,
                                               cli::array<float>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
 
          #define TA_CDLHARAMI Core::CdlHarami
@@ -1266,7 +1266,7 @@ namespace TicTacTec
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
          static enum class RetCode CdlHaramiCross( int    startIdx,
                                                    int    endIdx,
@@ -1275,7 +1275,7 @@ namespace TicTacTec
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLHARAMICROSS Core::CdlHaramiCross
@@ -1290,7 +1290,7 @@ namespace TicTacTec
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
          static enum class RetCode CdlHignWave( int    startIdx,
                                                 int    endIdx,
@@ -1299,7 +1299,7 @@ namespace TicTacTec
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
 
          #define TA_CDLHIGHWAVE Core::CdlHignWave
@@ -1314,7 +1314,7 @@ namespace TicTacTec
                                                cli::array<double>^ inLow,
                                                cli::array<double>^ inClose,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
          static enum class RetCode CdlHikkake( int    startIdx,
                                                int    endIdx,
@@ -1323,7 +1323,7 @@ namespace TicTacTec
                                                cli::array<float>^ inLow,
                                                cli::array<float>^ inClose,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
 
          #define TA_CDLHIKKAKE Core::CdlHikkake
@@ -1338,7 +1338,7 @@ namespace TicTacTec
                                                   cli::array<double>^ inLow,
                                                   cli::array<double>^ inClose,
                                                   [Out]int%    outBegIdx,
-                                                  [Out]int%    outNbElement,
+                                                  [Out]int%    outNBElement,
                                                   cli::array<int>^  outInteger );
          static enum class RetCode CdlHikkakeMod( int    startIdx,
                                                   int    endIdx,
@@ -1347,7 +1347,7 @@ namespace TicTacTec
                                                   cli::array<float>^ inLow,
                                                   cli::array<float>^ inClose,
                                                   [Out]int%    outBegIdx,
-                                                  [Out]int%    outNbElement,
+                                                  [Out]int%    outNBElement,
                                                   cli::array<int>^  outInteger );
 
          #define TA_CDLHIKKAKEMOD Core::CdlHikkakeMod
@@ -1362,7 +1362,7 @@ namespace TicTacTec
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
          static enum class RetCode CdlHomingPigeon( int    startIdx,
                                                     int    endIdx,
@@ -1371,7 +1371,7 @@ namespace TicTacTec
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLHOMINGPIGEON Core::CdlHomingPigeon
@@ -1386,7 +1386,7 @@ namespace TicTacTec
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
          static enum class RetCode CdlIdentical3Crows( int    startIdx,
                                                        int    endIdx,
@@ -1395,7 +1395,7 @@ namespace TicTacTec
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLIDENTICAL3CROWS Core::CdlIdentical3Crows
@@ -1410,7 +1410,7 @@ namespace TicTacTec
                                               cli::array<double>^ inLow,
                                               cli::array<double>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
          static enum class RetCode CdlInNeck( int    startIdx,
                                               int    endIdx,
@@ -1419,7 +1419,7 @@ namespace TicTacTec
                                               cli::array<float>^ inLow,
                                               cli::array<float>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
 
          #define TA_CDLINNECK Core::CdlInNeck
@@ -1434,7 +1434,7 @@ namespace TicTacTec
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
          static enum class RetCode CdlInvertedHammer( int    startIdx,
                                                       int    endIdx,
@@ -1443,7 +1443,7 @@ namespace TicTacTec
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLINVERTEDHAMMER Core::CdlInvertedHammer
@@ -1458,7 +1458,7 @@ namespace TicTacTec
                                                cli::array<double>^ inLow,
                                                cli::array<double>^ inClose,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
          static enum class RetCode CdlKicking( int    startIdx,
                                                int    endIdx,
@@ -1467,7 +1467,7 @@ namespace TicTacTec
                                                cli::array<float>^ inLow,
                                                cli::array<float>^ inClose,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
 
          #define TA_CDLKICKING Core::CdlKicking
@@ -1482,7 +1482,7 @@ namespace TicTacTec
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
          static enum class RetCode CdlKickingByLength( int    startIdx,
                                                        int    endIdx,
@@ -1491,7 +1491,7 @@ namespace TicTacTec
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLKICKINGBYLENGTH Core::CdlKickingByLength
@@ -1506,7 +1506,7 @@ namespace TicTacTec
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
          static enum class RetCode CdlLadderBottom( int    startIdx,
                                                     int    endIdx,
@@ -1515,7 +1515,7 @@ namespace TicTacTec
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLLADDERBOTTOM Core::CdlLadderBottom
@@ -1530,7 +1530,7 @@ namespace TicTacTec
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
          static enum class RetCode CdlLongLeggedDoji( int    startIdx,
                                                       int    endIdx,
@@ -1539,7 +1539,7 @@ namespace TicTacTec
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLLONGLEGGEDDOJI Core::CdlLongLeggedDoji
@@ -1554,7 +1554,7 @@ namespace TicTacTec
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
          static enum class RetCode CdlLongLine( int    startIdx,
                                                 int    endIdx,
@@ -1563,7 +1563,7 @@ namespace TicTacTec
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
 
          #define TA_CDLLONGLINE Core::CdlLongLine
@@ -1578,7 +1578,7 @@ namespace TicTacTec
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
          static enum class RetCode CdlMarubozu( int    startIdx,
                                                 int    endIdx,
@@ -1587,7 +1587,7 @@ namespace TicTacTec
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
 
          #define TA_CDLMARUBOZU Core::CdlMarubozu
@@ -1602,7 +1602,7 @@ namespace TicTacTec
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
          static enum class RetCode CdlMatchingLow( int    startIdx,
                                                    int    endIdx,
@@ -1611,7 +1611,7 @@ namespace TicTacTec
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLMATCHINGLOW Core::CdlMatchingLow
@@ -1627,7 +1627,7 @@ namespace TicTacTec
                                                cli::array<double>^ inClose,
                                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
          static enum class RetCode CdlMatHold( int    startIdx,
                                                int    endIdx,
@@ -1637,7 +1637,7 @@ namespace TicTacTec
                                                cli::array<float>^ inClose,
                                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
 
          #define TA_CDLMATHOLD Core::CdlMatHold
@@ -1653,7 +1653,7 @@ namespace TicTacTec
                                                        cli::array<double>^ inClose,
                                                        double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
          static enum class RetCode CdlMorningDojiStar( int    startIdx,
                                                        int    endIdx,
@@ -1663,7 +1663,7 @@ namespace TicTacTec
                                                        cli::array<float>^ inClose,
                                                        double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLMORNINGDOJISTAR Core::CdlMorningDojiStar
@@ -1679,7 +1679,7 @@ namespace TicTacTec
                                                    cli::array<double>^ inClose,
                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
          static enum class RetCode CdlMorningStar( int    startIdx,
                                                    int    endIdx,
@@ -1689,7 +1689,7 @@ namespace TicTacTec
                                                    cli::array<float>^ inClose,
                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLMORNINGSTAR Core::CdlMorningStar
@@ -1704,7 +1704,7 @@ namespace TicTacTec
                                               cli::array<double>^ inLow,
                                               cli::array<double>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
          static enum class RetCode CdlOnNeck( int    startIdx,
                                               int    endIdx,
@@ -1713,7 +1713,7 @@ namespace TicTacTec
                                               cli::array<float>^ inLow,
                                               cli::array<float>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
 
          #define TA_CDLONNECK Core::CdlOnNeck
@@ -1728,7 +1728,7 @@ namespace TicTacTec
                                                 cli::array<double>^ inLow,
                                                 cli::array<double>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
          static enum class RetCode CdlPiercing( int    startIdx,
                                                 int    endIdx,
@@ -1737,7 +1737,7 @@ namespace TicTacTec
                                                 cli::array<float>^ inLow,
                                                 cli::array<float>^ inClose,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
 
          #define TA_CDLPIERCING Core::CdlPiercing
@@ -1752,7 +1752,7 @@ namespace TicTacTec
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
          static enum class RetCode CdlRickshawMan( int    startIdx,
                                                    int    endIdx,
@@ -1761,7 +1761,7 @@ namespace TicTacTec
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLRICKSHAWMAN Core::CdlRickshawMan
@@ -1776,7 +1776,7 @@ namespace TicTacTec
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
                                                         [Out]int%    outBegIdx,
-                                                        [Out]int%    outNbElement,
+                                                        [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
          static enum class RetCode CdlRiseFall3Methods( int    startIdx,
                                                         int    endIdx,
@@ -1785,7 +1785,7 @@ namespace TicTacTec
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
                                                         [Out]int%    outBegIdx,
-                                                        [Out]int%    outNbElement,
+                                                        [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDLRISEFALL3METHODS Core::CdlRiseFall3Methods
@@ -1800,7 +1800,7 @@ namespace TicTacTec
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
          static enum class RetCode CdlSeperatingLines( int    startIdx,
                                                        int    endIdx,
@@ -1809,7 +1809,7 @@ namespace TicTacTec
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLSEPARATINGLINES Core::CdlSeperatingLines
@@ -1824,7 +1824,7 @@ namespace TicTacTec
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
          static enum class RetCode CdlShootingStar( int    startIdx,
                                                     int    endIdx,
@@ -1833,7 +1833,7 @@ namespace TicTacTec
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLSHOOTINGSTAR Core::CdlShootingStar
@@ -1848,7 +1848,7 @@ namespace TicTacTec
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
          static enum class RetCode CdlShortLine( int    startIdx,
                                                  int    endIdx,
@@ -1857,7 +1857,7 @@ namespace TicTacTec
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLSHORTLINE Core::CdlShortLine
@@ -1872,7 +1872,7 @@ namespace TicTacTec
                                                    cli::array<double>^ inLow,
                                                    cli::array<double>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
          static enum class RetCode CdlSpinningTop( int    startIdx,
                                                    int    endIdx,
@@ -1881,7 +1881,7 @@ namespace TicTacTec
                                                    cli::array<float>^ inLow,
                                                    cli::array<float>^ inClose,
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
 
          #define TA_CDLSPINNINGTOP Core::CdlSpinningTop
@@ -1896,7 +1896,7 @@ namespace TicTacTec
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
          static enum class RetCode CdlStalledPattern( int    startIdx,
                                                       int    endIdx,
@@ -1905,7 +1905,7 @@ namespace TicTacTec
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLSTALLEDPATTERN Core::CdlStalledPattern
@@ -1920,7 +1920,7 @@ namespace TicTacTec
                                                       cli::array<double>^ inLow,
                                                       cli::array<double>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
          static enum class RetCode CdlStickSandwhich( int    startIdx,
                                                       int    endIdx,
@@ -1929,7 +1929,7 @@ namespace TicTacTec
                                                       cli::array<float>^ inLow,
                                                       cli::array<float>^ inClose,
                                                       [Out]int%    outBegIdx,
-                                                      [Out]int%    outNbElement,
+                                                      [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
 
          #define TA_CDLSTICKSANDWICH Core::CdlStickSandwhich
@@ -1944,7 +1944,7 @@ namespace TicTacTec
                                               cli::array<double>^ inLow,
                                               cli::array<double>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
          static enum class RetCode CdlTakuri( int    startIdx,
                                               int    endIdx,
@@ -1953,7 +1953,7 @@ namespace TicTacTec
                                               cli::array<float>^ inLow,
                                               cli::array<float>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
 
          #define TA_CDLTAKURI Core::CdlTakuri
@@ -1968,7 +1968,7 @@ namespace TicTacTec
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
          static enum class RetCode CdlTasukiGap( int    startIdx,
                                                  int    endIdx,
@@ -1977,7 +1977,7 @@ namespace TicTacTec
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLTASUKIGAP Core::CdlTasukiGap
@@ -1992,7 +1992,7 @@ namespace TicTacTec
                                                  cli::array<double>^ inLow,
                                                  cli::array<double>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
          static enum class RetCode CdlThrusting( int    startIdx,
                                                  int    endIdx,
@@ -2001,7 +2001,7 @@ namespace TicTacTec
                                                  cli::array<float>^ inLow,
                                                  cli::array<float>^ inClose,
                                                  [Out]int%    outBegIdx,
-                                                 [Out]int%    outNbElement,
+                                                 [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
 
          #define TA_CDLTHRUSTING Core::CdlThrusting
@@ -2016,7 +2016,7 @@ namespace TicTacTec
                                                cli::array<double>^ inLow,
                                                cli::array<double>^ inClose,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
          static enum class RetCode CdlTristar( int    startIdx,
                                                int    endIdx,
@@ -2025,7 +2025,7 @@ namespace TicTacTec
                                                cli::array<float>^ inLow,
                                                cli::array<float>^ inClose,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
 
          #define TA_CDLTRISTAR Core::CdlTristar
@@ -2040,7 +2040,7 @@ namespace TicTacTec
                                                     cli::array<double>^ inLow,
                                                     cli::array<double>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
          static enum class RetCode CdlUnique3River( int    startIdx,
                                                     int    endIdx,
@@ -2049,7 +2049,7 @@ namespace TicTacTec
                                                     cli::array<float>^ inLow,
                                                     cli::array<float>^ inClose,
                                                     [Out]int%    outBegIdx,
-                                                    [Out]int%    outNbElement,
+                                                    [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
 
          #define TA_CDLUNIQUE3RIVER Core::CdlUnique3River
@@ -2064,7 +2064,7 @@ namespace TicTacTec
                                                        cli::array<double>^ inLow,
                                                        cli::array<double>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
          static enum class RetCode CdlUpsideGap2Crows( int    startIdx,
                                                        int    endIdx,
@@ -2073,7 +2073,7 @@ namespace TicTacTec
                                                        cli::array<float>^ inLow,
                                                        cli::array<float>^ inClose,
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
 
          #define TA_CDLUPSIDEGAP2CROWS Core::CdlUpsideGap2Crows
@@ -2088,7 +2088,7 @@ namespace TicTacTec
                                                         cli::array<double>^ inLow,
                                                         cli::array<double>^ inClose,
                                                         [Out]int%    outBegIdx,
-                                                        [Out]int%    outNbElement,
+                                                        [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
          static enum class RetCode CdlXSideGap3Methods( int    startIdx,
                                                         int    endIdx,
@@ -2097,7 +2097,7 @@ namespace TicTacTec
                                                         cli::array<float>^ inLow,
                                                         cli::array<float>^ inClose,
                                                         [Out]int%    outBegIdx,
-                                                        [Out]int%    outNbElement,
+                                                        [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
 
          #define TA_CDLXSIDEGAP3METHODS Core::CdlXSideGap3Methods
@@ -2110,14 +2110,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Cmo( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_CMO Core::Cmo
@@ -2131,7 +2131,7 @@ namespace TicTacTec
                                            cli::array<double>^ inReal1,
                                            int           optInTimePeriod, /* From 1 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
          static enum class RetCode Correl( int    startIdx,
                                            int    endIdx,
@@ -2139,7 +2139,7 @@ namespace TicTacTec
                                            cli::array<float>^ inReal1,
                                            int           optInTimePeriod, /* From 1 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
 
          #define TA_CORREL Core::Correl
@@ -2152,14 +2152,14 @@ namespace TicTacTec
                                          cli::array<double>^ inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode Dema( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_DEMA Core::Dema
@@ -2174,7 +2174,7 @@ namespace TicTacTec
                                        cli::array<double>^ inClose,
                                        int           optInTimePeriod, /* From 2 to 100000 */
                                        [Out]int%    outBegIdx,
-                                       [Out]int%    outNbElement,
+                                       [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
          static enum class RetCode Dx( int    startIdx,
                                        int    endIdx,
@@ -2183,7 +2183,7 @@ namespace TicTacTec
                                        cli::array<float>^ inClose,
                                        int           optInTimePeriod, /* From 2 to 100000 */
                                        [Out]int%    outBegIdx,
-                                       [Out]int%    outNbElement,
+                                       [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
 
          #define TA_DX Core::Dx
@@ -2196,14 +2196,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Ema( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_EMA Core::Ema
@@ -2215,13 +2215,13 @@ namespace TicTacTec
                                                int    endIdx,
                                                cli::array<double>^ inReal,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<double>^  outReal );
          static enum class RetCode HtDcPeriod( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inReal,
                                                [Out]int%    outBegIdx,
-                                               [Out]int%    outNbElement,
+                                               [Out]int%    outNBElement,
                                                cli::array<double>^  outReal );
 
          #define TA_HT_DCPERIOD Core::HtDcPeriod
@@ -2233,13 +2233,13 @@ namespace TicTacTec
                                               int    endIdx,
                                               cli::array<double>^ inReal,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
          static enum class RetCode HtDcPhase( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inReal,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
 
          #define TA_HT_DCPHASE Core::HtDcPhase
@@ -2251,14 +2251,14 @@ namespace TicTacTec
                                              int    endIdx,
                                              cli::array<double>^ inReal,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outInPhase,
                                              cli::array<double>^  outQuadrature );
          static enum class RetCode HtPhasor( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outInPhase,
                                              cli::array<double>^  outQuadrature );
 
@@ -2271,14 +2271,14 @@ namespace TicTacTec
                                            int    endIdx,
                                            cli::array<double>^ inReal,
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outSine,
                                            cli::array<double>^  outLeadSine );
          static enum class RetCode HtSine( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outSine,
                                            cli::array<double>^  outLeadSine );
 
@@ -2291,13 +2291,13 @@ namespace TicTacTec
                                                 int    endIdx,
                                                 cli::array<double>^ inReal,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<double>^  outReal );
          static enum class RetCode HtTrendline( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inReal,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<double>^  outReal );
 
          #define TA_HT_TRENDLINE Core::HtTrendline
@@ -2309,13 +2309,13 @@ namespace TicTacTec
                                                 int    endIdx,
                                                 cli::array<double>^ inReal,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
          static enum class RetCode HtTrendMode( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inReal,
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
 
          #define TA_HT_TRENDMODE Core::HtTrendMode
@@ -2328,14 +2328,14 @@ namespace TicTacTec
                                          cli::array<double>^ inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode Kama( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_KAMA Core::Kama
@@ -2348,14 +2348,14 @@ namespace TicTacTec
                                               cli::array<double>^ inReal,
                                               int           optInTimePeriod, /* From 2 to 100000 */
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
          static enum class RetCode LinearReg( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inReal,
                                               int           optInTimePeriod, /* From 2 to 100000 */
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
 
          #define TA_LINEARREG Core::LinearReg
@@ -2368,14 +2368,14 @@ namespace TicTacTec
                                                    cli::array<double>^ inReal,
                                                    int           optInTimePeriod, /* From 2 to 100000 */
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<double>^  outReal );
          static enum class RetCode LinearRegAngle( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inReal,
                                                    int           optInTimePeriod, /* From 2 to 100000 */
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<double>^  outReal );
 
          #define TA_LINEARREG_ANGLE Core::LinearRegAngle
@@ -2388,14 +2388,14 @@ namespace TicTacTec
                                                        cli::array<double>^ inReal,
                                                        int           optInTimePeriod, /* From 2 to 100000 */
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<double>^  outReal );
          static enum class RetCode LinearRegIntercept( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inReal,
                                                        int           optInTimePeriod, /* From 2 to 100000 */
                                                        [Out]int%    outBegIdx,
-                                                       [Out]int%    outNbElement,
+                                                       [Out]int%    outNBElement,
                                                        cli::array<double>^  outReal );
 
          #define TA_LINEARREG_INTERCEPT Core::LinearRegIntercept
@@ -2408,14 +2408,14 @@ namespace TicTacTec
                                                    cli::array<double>^ inReal,
                                                    int           optInTimePeriod, /* From 2 to 100000 */
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<double>^  outReal );
          static enum class RetCode LinearRegSlope( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inReal,
                                                    int           optInTimePeriod, /* From 2 to 100000 */
                                                    [Out]int%    outBegIdx,
-                                                   [Out]int%    outNbElement,
+                                                   [Out]int%    outNBElement,
                                                    cli::array<double>^  outReal );
 
          #define TA_LINEARREG_SLOPE Core::LinearRegSlope
@@ -2429,7 +2429,7 @@ namespace TicTacTec
                                                   int           optInTimePeriod, /* From 1 to 100000 */
                                                   MAType        optInMAType,
                                                   [Out]int%    outBegIdx,
-                                                  [Out]int%    outNbElement,
+                                                  [Out]int%    outNBElement,
                                                   cli::array<double>^  outReal );
          static enum class RetCode MovingAverage( int    startIdx,
                                                   int    endIdx,
@@ -2437,7 +2437,7 @@ namespace TicTacTec
                                                   int           optInTimePeriod, /* From 1 to 100000 */
                                                   MAType        optInMAType,
                                                   [Out]int%    outBegIdx,
-                                                  [Out]int%    outNbElement,
+                                                  [Out]int%    outNBElement,
                                                   cli::array<double>^  outReal );
 
          #define TA_MA Core::MovingAverage
@@ -2454,7 +2454,7 @@ namespace TicTacTec
                                          int           optInSlowPeriod, /* From 2 to 100000 */
                                          int           optInSignalPeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outMACD,
                                          cli::array<double>^  outMACDSignal,
                                          cli::array<double>^  outMACDHist );
@@ -2465,7 +2465,7 @@ namespace TicTacTec
                                          int           optInSlowPeriod, /* From 2 to 100000 */
                                          int           optInSignalPeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outMACD,
                                          cli::array<double>^  outMACDSignal,
                                          cli::array<double>^  outMACDHist );
@@ -2489,7 +2489,7 @@ namespace TicTacTec
                                             int           optInSignalPeriod, /* From 1 to 100000 */
                                             MAType        optInSignalMAType,
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outMACD,
                                             cli::array<double>^  outMACDSignal,
                                             cli::array<double>^  outMACDHist );
@@ -2503,7 +2503,7 @@ namespace TicTacTec
                                             int           optInSignalPeriod, /* From 1 to 100000 */
                                             MAType        optInSignalMAType,
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outMACD,
                                             cli::array<double>^  outMACDSignal,
                                             cli::array<double>^  outMACDHist );
@@ -2518,7 +2518,7 @@ namespace TicTacTec
                                             cli::array<double>^ inReal,
                                             int           optInSignalPeriod, /* From 1 to 100000 */
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outMACD,
                                             cli::array<double>^  outMACDSignal,
                                             cli::array<double>^  outMACDHist );
@@ -2527,7 +2527,7 @@ namespace TicTacTec
                                             cli::array<float>^ inReal,
                                             int           optInSignalPeriod, /* From 1 to 100000 */
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outMACD,
                                             cli::array<double>^  outMACDSignal,
                                             cli::array<double>^  outMACDHist );
@@ -2544,7 +2544,7 @@ namespace TicTacTec
                                          double        optInFastLimit, /* From 0.01 to 0.99 */
                                          double        optInSlowLimit, /* From 0.01 to 0.99 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outMAMA,
                                          cli::array<double>^  outFAMA );
          static enum class RetCode Mama( int    startIdx,
@@ -2553,7 +2553,7 @@ namespace TicTacTec
                                          double        optInFastLimit, /* From 0.01 to 0.99 */
                                          double        optInSlowLimit, /* From 0.01 to 0.99 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outMAMA,
                                          cli::array<double>^  outFAMA );
 
@@ -2571,7 +2571,7 @@ namespace TicTacTec
                                                                 int           optInMaxPeriod, /* From 2 to 100000 */
                                                                 MAType        optInMAType,
                                                                 [Out]int%    outBegIdx,
-                                                                [Out]int%    outNbElement,
+                                                                [Out]int%    outNBElement,
                                                                 cli::array<double>^  outReal );
          static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
                                                                 int    endIdx,
@@ -2581,7 +2581,7 @@ namespace TicTacTec
                                                                 int           optInMaxPeriod, /* From 2 to 100000 */
                                                                 MAType        optInMAType,
                                                                 [Out]int%    outBegIdx,
-                                                                [Out]int%    outNbElement,
+                                                                [Out]int%    outNBElement,
                                                                 cli::array<double>^  outReal );
 
          #define TA_MAVP Core::MovingAverageVariablePeriod
@@ -2594,14 +2594,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Max( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_MAX Core::Max
@@ -2614,14 +2614,14 @@ namespace TicTacTec
                                              cli::array<double>^ inReal,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<int>^  outInteger );
          static enum class RetCode MaxIndex( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<int>^  outInteger );
 
          #define TA_MAXINDEX Core::MaxIndex
@@ -2634,14 +2634,14 @@ namespace TicTacTec
                                              cli::array<double>^ inHigh,
                                              cli::array<double>^ inLow,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
          static enum class RetCode MedPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inHigh,
                                              cli::array<float>^ inLow,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
 
          #define TA_MEDPRICE Core::MedPrice
@@ -2657,7 +2657,7 @@ namespace TicTacTec
                                         cli::array<double>^ inVolume,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Mfi( int    startIdx,
                                         int    endIdx,
@@ -2667,7 +2667,7 @@ namespace TicTacTec
                                         cli::array<float>^ inVolume,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_MFI Core::Mfi
@@ -2680,14 +2680,14 @@ namespace TicTacTec
                                              cli::array<double>^ inReal,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
          static enum class RetCode MidPoint( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
 
          #define TA_MIDPOINT Core::MidPoint
@@ -2701,7 +2701,7 @@ namespace TicTacTec
                                              cli::array<double>^ inLow,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
          static enum class RetCode MidPrice( int    startIdx,
                                              int    endIdx,
@@ -2709,7 +2709,7 @@ namespace TicTacTec
                                              cli::array<float>^ inLow,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
 
          #define TA_MIDPRICE Core::MidPrice
@@ -2722,14 +2722,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Min( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_MIN Core::Min
@@ -2742,14 +2742,14 @@ namespace TicTacTec
                                              cli::array<double>^ inReal,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<int>^  outInteger );
          static enum class RetCode MinIndex( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<int>^  outInteger );
 
          #define TA_MININDEX Core::MinIndex
@@ -2762,7 +2762,7 @@ namespace TicTacTec
                                            cli::array<double>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outMin,
                                            cli::array<double>^  outMax );
          static enum class RetCode MinMax( int    startIdx,
@@ -2770,7 +2770,7 @@ namespace TicTacTec
                                            cli::array<float>^ inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outMin,
                                            cli::array<double>^  outMax );
 
@@ -2784,7 +2784,7 @@ namespace TicTacTec
                                                 cli::array<double>^ inReal,
                                                 int           optInTimePeriod, /* From 2 to 100000 */
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outMinIdx,
                                                 cli::array<int>^  outMaxIdx );
          static enum class RetCode MinMaxIndex( int    startIdx,
@@ -2792,7 +2792,7 @@ namespace TicTacTec
                                                 cli::array<float>^ inReal,
                                                 int           optInTimePeriod, /* From 2 to 100000 */
                                                 [Out]int%    outBegIdx,
-                                                [Out]int%    outNbElement,
+                                                [Out]int%    outNBElement,
                                                 cli::array<int>^  outMinIdx,
                                                 cli::array<int>^  outMaxIdx );
 
@@ -2808,7 +2808,7 @@ namespace TicTacTec
                                             cli::array<double>^ inClose,
                                             int           optInTimePeriod, /* From 1 to 100000 */
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
          static enum class RetCode MinusDI( int    startIdx,
                                             int    endIdx,
@@ -2817,7 +2817,7 @@ namespace TicTacTec
                                             cli::array<float>^ inClose,
                                             int           optInTimePeriod, /* From 1 to 100000 */
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
 
          #define TA_MINUS_DI Core::MinusDI
@@ -2831,7 +2831,7 @@ namespace TicTacTec
                                             cli::array<double>^ inLow,
                                             int           optInTimePeriod, /* From 1 to 100000 */
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
          static enum class RetCode MinusDM( int    startIdx,
                                             int    endIdx,
@@ -2839,7 +2839,7 @@ namespace TicTacTec
                                             cli::array<float>^ inLow,
                                             int           optInTimePeriod, /* From 1 to 100000 */
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
 
          #define TA_MINUS_DM Core::MinusDM
@@ -2852,14 +2852,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 1 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Mom( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 1 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_MOM Core::Mom
@@ -2874,7 +2874,7 @@ namespace TicTacTec
                                          cli::array<double>^ inClose,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode Natr( int    startIdx,
                                          int    endIdx,
@@ -2883,7 +2883,7 @@ namespace TicTacTec
                                          cli::array<float>^ inClose,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_NATR Core::Natr
@@ -2896,14 +2896,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         cli::array<double>^ inVolume,
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Obv( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         cli::array<float>^ inVolume,
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_OBV Core::Obv
@@ -2918,7 +2918,7 @@ namespace TicTacTec
                                            cli::array<double>^ inClose,
                                            int           optInTimePeriod, /* From 1 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
          static enum class RetCode PlusDI( int    startIdx,
                                            int    endIdx,
@@ -2927,7 +2927,7 @@ namespace TicTacTec
                                            cli::array<float>^ inClose,
                                            int           optInTimePeriod, /* From 1 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
 
          #define TA_PLUS_DI Core::PlusDI
@@ -2941,7 +2941,7 @@ namespace TicTacTec
                                            cli::array<double>^ inLow,
                                            int           optInTimePeriod, /* From 1 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
          static enum class RetCode PlusDM( int    startIdx,
                                            int    endIdx,
@@ -2949,7 +2949,7 @@ namespace TicTacTec
                                            cli::array<float>^ inLow,
                                            int           optInTimePeriod, /* From 1 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
 
          #define TA_PLUS_DM Core::PlusDM
@@ -2965,7 +2965,7 @@ namespace TicTacTec
                                         int           optInSlowPeriod, /* From 2 to 100000 */
                                         MAType        optInMAType,
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Ppo( int    startIdx,
                                         int    endIdx,
@@ -2974,7 +2974,7 @@ namespace TicTacTec
                                         int           optInSlowPeriod, /* From 2 to 100000 */
                                         MAType        optInMAType,
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_PPO Core::Ppo
@@ -2987,14 +2987,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 1 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Roc( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 1 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_ROC Core::Roc
@@ -3007,14 +3007,14 @@ namespace TicTacTec
                                          cli::array<double>^ inReal,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode RocP( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_ROCP Core::RocP
@@ -3027,14 +3027,14 @@ namespace TicTacTec
                                          cli::array<double>^ inReal,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode RocR( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_ROCR Core::RocR
@@ -3047,14 +3047,14 @@ namespace TicTacTec
                                             cli::array<double>^ inReal,
                                             int           optInTimePeriod, /* From 1 to 100000 */
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
          static enum class RetCode RocR100( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
                                             int           optInTimePeriod, /* From 1 to 100000 */
                                             [Out]int%    outBegIdx,
-                                            [Out]int%    outNbElement,
+                                            [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
 
          #define TA_ROCR100 Core::RocR100
@@ -3067,14 +3067,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Rsi( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_RSI Core::Rsi
@@ -3090,7 +3090,7 @@ namespace TicTacTec
                                         double        optInAcceleration, /* From 0 to TA_REAL_MAX */
                                         double        optInMaximum, /* From 0 to TA_REAL_MAX */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Sar( int    startIdx,
                                         int    endIdx,
@@ -3099,7 +3099,7 @@ namespace TicTacTec
                                         double        optInAcceleration, /* From 0 to TA_REAL_MAX */
                                         double        optInMaximum, /* From 0 to TA_REAL_MAX */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_SAR Core::Sar
@@ -3127,7 +3127,7 @@ namespace TicTacTec
                                            double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
                                            double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
          static enum class RetCode SarExt( int    startIdx,
                                            int    endIdx,
@@ -3142,7 +3142,7 @@ namespace TicTacTec
                                            double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
                                            double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
 
          #define TA_SAREXT Core::SarExt
@@ -3155,14 +3155,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Sma( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_SMA Core::Sma
@@ -3177,7 +3177,7 @@ namespace TicTacTec
                                            int           optInTimePeriod, /* From 2 to 100000 */
                                            double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
          static enum class RetCode StdDev( int    startIdx,
                                            int    endIdx,
@@ -3185,7 +3185,7 @@ namespace TicTacTec
                                            int           optInTimePeriod, /* From 2 to 100000 */
                                            double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
 
          #define TA_STDDEV Core::StdDev
@@ -3207,7 +3207,7 @@ namespace TicTacTec
                                           int           optInSlowD_Period, /* From 1 to 100000 */
                                           MAType        optInSlowD_MAType,
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outSlowK,
                                           cli::array<double>^  outSlowD );
          static enum class RetCode Stoch( int    startIdx,
@@ -3221,7 +3221,7 @@ namespace TicTacTec
                                           int           optInSlowD_Period, /* From 1 to 100000 */
                                           MAType        optInSlowD_MAType,
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outSlowK,
                                           cli::array<double>^  outSlowD );
 
@@ -3240,7 +3240,7 @@ namespace TicTacTec
                                            int           optInFastD_Period, /* From 1 to 100000 */
                                            MAType        optInFastD_MAType,
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outFastK,
                                            cli::array<double>^  outFastD );
          static enum class RetCode StochF( int    startIdx,
@@ -3252,7 +3252,7 @@ namespace TicTacTec
                                            int           optInFastD_Period, /* From 1 to 100000 */
                                            MAType        optInFastD_MAType,
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outFastK,
                                            cli::array<double>^  outFastD );
 
@@ -3271,7 +3271,7 @@ namespace TicTacTec
                                              int           optInFastD_Period, /* From 1 to 100000 */
                                              MAType        optInFastD_MAType,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outFastK,
                                              cli::array<double>^  outFastD );
          static enum class RetCode StochRsi( int    startIdx,
@@ -3282,7 +3282,7 @@ namespace TicTacTec
                                              int           optInFastD_Period, /* From 1 to 100000 */
                                              MAType        optInFastD_MAType,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outFastK,
                                              cli::array<double>^  outFastD );
 
@@ -3296,14 +3296,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Sum( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_SUM Core::Sum
@@ -3318,7 +3318,7 @@ namespace TicTacTec
                                        int           optInTimePeriod, /* From 2 to 100000 */
                                        double        optInVFactor, /* From 0 to 1 */
                                        [Out]int%    outBegIdx,
-                                       [Out]int%    outNbElement,
+                                       [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
          static enum class RetCode T3( int    startIdx,
                                        int    endIdx,
@@ -3326,7 +3326,7 @@ namespace TicTacTec
                                        int           optInTimePeriod, /* From 2 to 100000 */
                                        double        optInVFactor, /* From 0 to 1 */
                                        [Out]int%    outBegIdx,
-                                       [Out]int%    outNbElement,
+                                       [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
 
          #define TA_T3 Core::T3
@@ -3339,14 +3339,14 @@ namespace TicTacTec
                                          cli::array<double>^ inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode Tema( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_TEMA Core::Tema
@@ -3360,7 +3360,7 @@ namespace TicTacTec
                                               cli::array<double>^ inLow,
                                               cli::array<double>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
          static enum class RetCode TrueRange( int    startIdx,
                                               int    endIdx,
@@ -3368,7 +3368,7 @@ namespace TicTacTec
                                               cli::array<float>^ inLow,
                                               cli::array<float>^ inClose,
                                               [Out]int%    outBegIdx,
-                                              [Out]int%    outNbElement,
+                                              [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
 
          #define TA_TRANGE Core::TrueRange
@@ -3381,14 +3381,14 @@ namespace TicTacTec
                                           cli::array<double>^ inReal,
                                           int           optInTimePeriod, /* From 2 to 100000 */
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
          static enum class RetCode Trima( int    startIdx,
                                           int    endIdx,
                                           cli::array<float>^ inReal,
                                           int           optInTimePeriod, /* From 2 to 100000 */
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
 
          #define TA_TRIMA Core::Trima
@@ -3401,14 +3401,14 @@ namespace TicTacTec
                                          cli::array<double>^ inReal,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
          static enum class RetCode Trix( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          [Out]int%    outBegIdx,
-                                         [Out]int%    outNbElement,
+                                         [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
 
          #define TA_TRIX Core::Trix
@@ -3421,14 +3421,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Tsf( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_TSF Core::Tsf
@@ -3442,7 +3442,7 @@ namespace TicTacTec
                                              cli::array<double>^ inLow,
                                              cli::array<double>^ inClose,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
          static enum class RetCode TypPrice( int    startIdx,
                                              int    endIdx,
@@ -3450,7 +3450,7 @@ namespace TicTacTec
                                              cli::array<float>^ inLow,
                                              cli::array<float>^ inClose,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
 
          #define TA_TYPPRICE Core::TypPrice
@@ -3469,7 +3469,7 @@ namespace TicTacTec
                                            int           optInTimePeriod2, /* From 1 to 100000 */
                                            int           optInTimePeriod3, /* From 1 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
          static enum class RetCode UltOsc( int    startIdx,
                                            int    endIdx,
@@ -3480,7 +3480,7 @@ namespace TicTacTec
                                            int           optInTimePeriod2, /* From 1 to 100000 */
                                            int           optInTimePeriod3, /* From 1 to 100000 */
                                            [Out]int%    outBegIdx,
-                                           [Out]int%    outNbElement,
+                                           [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
 
          #define TA_ULTOSC Core::UltOsc
@@ -3495,7 +3495,7 @@ namespace TicTacTec
                                              int           optInTimePeriod, /* From 1 to 100000 */
                                              double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
          static enum class RetCode Variance( int    startIdx,
                                              int    endIdx,
@@ -3503,7 +3503,7 @@ namespace TicTacTec
                                              int           optInTimePeriod, /* From 1 to 100000 */
                                              double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
 
          #define TA_VAR Core::Variance
@@ -3517,7 +3517,7 @@ namespace TicTacTec
                                              cli::array<double>^ inLow,
                                              cli::array<double>^ inClose,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
          static enum class RetCode WclPrice( int    startIdx,
                                              int    endIdx,
@@ -3525,7 +3525,7 @@ namespace TicTacTec
                                              cli::array<float>^ inLow,
                                              cli::array<float>^ inClose,
                                              [Out]int%    outBegIdx,
-                                             [Out]int%    outNbElement,
+                                             [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
 
          #define TA_WCLPRICE Core::WclPrice
@@ -3540,7 +3540,7 @@ namespace TicTacTec
                                           cli::array<double>^ inClose,
                                           int           optInTimePeriod, /* From 2 to 100000 */
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
          static enum class RetCode WillR( int    startIdx,
                                           int    endIdx,
@@ -3549,7 +3549,7 @@ namespace TicTacTec
                                           cli::array<float>^ inClose,
                                           int           optInTimePeriod, /* From 2 to 100000 */
                                           [Out]int%    outBegIdx,
-                                          [Out]int%    outNbElement,
+                                          [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
 
          #define TA_WILLR Core::WillR
@@ -3562,14 +3562,14 @@ namespace TicTacTec
                                         cli::array<double>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Wma( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
-                                        [Out]int%    outNbElement,
+                                        [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
 
          #define TA_WMA Core::Wma

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 
+using namespace System;
 using namespace System::Reflection;
 using namespace System::Runtime::CompilerServices;
 using namespace System::Runtime::InteropServices;
@@ -60,4 +61,4 @@ using namespace System::Runtime::InteropServices;
 //[assembly:AssemblyKeyNameAttribute("")];
 
 [assembly:ComVisible(false)];
-
+[assembly:CLSCompliant(true)];
