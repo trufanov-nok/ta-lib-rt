@@ -57,7 +57,7 @@ public @interface FuncInfo {
     String      name();
     String      group();
 
-    String hint() default "";       // FIXME: fix gen_code
+    String hint() default "";
     String helpFile() default "";
     int flags();
 
