@@ -200,7 +200,7 @@ public class Core {
       double inClose[],
       double inVolume[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int nbBar, currentBar, outIdx;
@@ -211,7 +211,7 @@ public class Core {
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
       nbBar = endIdx-startIdx+1;
-      outNbElement.value = nbBar;
+      outNBElement.value = nbBar;
       outBegIdx.value = startIdx;
       currentBar = startIdx;
       outIdx = 0;
@@ -237,7 +237,7 @@ public class Core {
       float inClose[],
       float inVolume[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int nbBar, currentBar, outIdx;
@@ -248,7 +248,7 @@ public class Core {
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
       nbBar = endIdx-startIdx+1;
-      outNbElement.value = nbBar;
+      outNBElement.value = nbBar;
       outBegIdx.value = startIdx;
       currentBar = startIdx;
       outIdx = 0;
@@ -295,7 +295,7 @@ public class Core {
       int optInFastPeriod,
       int optInSlowPeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, outIdx, lookbackTotal;
@@ -326,7 +326,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -353,7 +353,7 @@ public class Core {
          slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
          outReal[outIdx++] = fastEMA - slowEMA;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode adOsc( int startIdx,
@@ -365,7 +365,7 @@ public class Core {
       int optInFastPeriod,
       int optInSlowPeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, outIdx, lookbackTotal;
@@ -396,7 +396,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -423,7 +423,7 @@ public class Core {
          slowEMA = (slowk*ad)+(one_minus_slowk*slowEMA);
          outReal[outIdx++] = fastEMA - slowEMA;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -442,7 +442,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -465,7 +465,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -605,7 +605,7 @@ public class Core {
          }
          outReal[outIdx++] = prevADX;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode adx( int startIdx,
@@ -615,7 +615,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -638,7 +638,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -778,7 +778,7 @@ public class Core {
          }
          outReal[outIdx++] = prevADX;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -800,7 +800,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []adx ;
@@ -820,13 +820,13 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       adx = new double[endIdx-startIdx+optInTimePeriod] ;
       retCode = adx ( startIdx-(optInTimePeriod-1), endIdx,
          inHigh, inLow, inClose,
-         optInTimePeriod, outBegIdx, outNbElement, adx );
+         optInTimePeriod, outBegIdx, outNBElement, adx );
       if( retCode != RetCode.Success )
       {
          return retCode;
@@ -838,7 +838,7 @@ public class Core {
       while( --nbElement != 0 )
          outReal[outIdx++] = ((adx[i++]+adx[j++])/2.0) ;
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode adxr( int startIdx,
@@ -848,7 +848,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []adx ;
@@ -868,13 +868,13 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       adx = new double[endIdx-startIdx+optInTimePeriod] ;
       retCode = adx ( startIdx-(optInTimePeriod-1), endIdx,
          inHigh, inLow, inClose,
-         optInTimePeriod, outBegIdx, outNbElement, adx );
+         optInTimePeriod, outBegIdx, outNBElement, adx );
       if( retCode != RetCode.Success )
       {
          return retCode;
@@ -886,7 +886,7 @@ public class Core {
       while( --nbElement != 0 )
          outReal[outIdx++] = ((adx[i++]+adx[j++])/2.0) ;
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -911,7 +911,7 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []tempBuffer ;
@@ -935,7 +935,7 @@ public class Core {
          optInSlowPeriod,
          optInMAType,
          outBegIdx,
-         outNbElement,
+         outNBElement,
          outReal,
          tempBuffer,
          0 );
@@ -948,7 +948,7 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMethod_2,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[],
       double tempBuffer[],
       int doPercentageOutput )
@@ -1001,13 +1001,13 @@ public class Core {
                   outReal[i] = tempBuffer[j]-outReal[i];
             }
             outBegIdx.value = outBegIdx1.value ;
-            outNbElement.value = outNbElement1.value ;
+            outNBElement.value = outNbElement1.value ;
          }
       }
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
       }
       return retCode;
    }
@@ -1018,7 +1018,7 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []tempBuffer ;
@@ -1042,7 +1042,7 @@ public class Core {
          optInSlowPeriod,
          optInMAType,
          outBegIdx,
-         outNbElement,
+         outNBElement,
          outReal,
          tempBuffer,
          0 );
@@ -1055,7 +1055,7 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMethod_2,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[],
       double tempBuffer[],
       int doPercentageOutput )
@@ -1108,13 +1108,13 @@ public class Core {
                   outReal[i] = tempBuffer[j]-outReal[i];
             }
             outBegIdx.value = outBegIdx1.value ;
-            outNbElement.value = outNbElement1.value ;
+            outNBElement.value = outNbElement1.value ;
          }
       }
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
       }
       return retCode;
    }
@@ -1133,7 +1133,7 @@ public class Core {
       double inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outAroonDown[],
       double outAroonUp[] )
    {
@@ -1153,7 +1153,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -1215,7 +1215,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode aroon( int startIdx,
@@ -1224,7 +1224,7 @@ public class Core {
       float inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outAroonDown[],
       double outAroonUp[] )
    {
@@ -1244,7 +1244,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -1306,7 +1306,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -1324,7 +1324,7 @@ public class Core {
       double inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, highest, tmp, factor, aroon;
@@ -1343,7 +1343,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -1405,7 +1405,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode aroonOsc( int startIdx,
@@ -1414,7 +1414,7 @@ public class Core {
       float inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, highest, tmp, factor, aroon;
@@ -1433,7 +1433,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -1495,7 +1495,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -1514,7 +1514,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       RetCode retCode;
@@ -1534,7 +1534,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = atrLookback ( optInTimePeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -1544,7 +1544,7 @@ public class Core {
       {
          return trueRange ( startIdx, endIdx,
             inHigh, inLow, inClose,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
       }
       tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
       retCode = trueRange ( (startIdx-lookbackTotal+1), endIdx,
@@ -1585,7 +1585,7 @@ public class Core {
          outReal[outIdx++] = prevATR;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return retCode;
    }
    public RetCode atr( int startIdx,
@@ -1595,7 +1595,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       RetCode retCode;
@@ -1615,7 +1615,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = atrLookback ( optInTimePeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -1625,7 +1625,7 @@ public class Core {
       {
          return trueRange ( startIdx, endIdx,
             inHigh, inLow, inClose,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
       }
       tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
       retCode = trueRange ( (startIdx-lookbackTotal+1), endIdx,
@@ -1666,7 +1666,7 @@ public class Core {
          outReal[outIdx++] = prevATR;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return retCode;
    }
    /* Generated */
@@ -1681,7 +1681,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -1697,7 +1697,7 @@ public class Core {
             inClose[i] +
             inOpen [i]) / 4;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -1708,7 +1708,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -1724,7 +1724,7 @@ public class Core {
             inClose[i] +
             inOpen [i]) / 4;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -1756,7 +1756,7 @@ public class Core {
       double optInNbDevDn,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outRealUpperBand[],
       double outRealMiddleBand[],
       double outRealLowerBand[] )
@@ -1806,38 +1806,38 @@ public class Core {
          return RetCode.BadParam ;
       retCode = movingAverage ( startIdx, endIdx, inReal,
          optInTimePeriod, optInMAType,
-         outBegIdx, outNbElement, tempBuffer1 );
-      if( (retCode != RetCode.Success ) || ((int) outNbElement.value == 0) )
+         outBegIdx, outNBElement, tempBuffer1 );
+      if( (retCode != RetCode.Success ) || ((int) outNBElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       if( optInMAType == MAType.Sma )
       {
          TA_INT_stddev_using_precalc_ma ( inReal, tempBuffer1,
-            (int) outBegIdx.value , (int) outNbElement.value ,
+            (int) outBegIdx.value , (int) outNBElement.value ,
             optInTimePeriod, tempBuffer2 );
       }
       else
       {
          retCode = stdDev ( (int) outBegIdx.value , endIdx, inReal,
             optInTimePeriod, 1.0,
-            outBegIdx, outNbElement, tempBuffer2 );
+            outBegIdx, outNBElement, tempBuffer2 );
          if( retCode != RetCode.Success )
          {
-            outNbElement.value = 0 ;
+            outNBElement.value = 0 ;
             return retCode;
          }
       }
       if( tempBuffer1 != outRealMiddleBand )
       {
-         System.arraycopy(tempBuffer1,0,outRealMiddleBand,0,outNbElement.value) ;
+         System.arraycopy(tempBuffer1,0,outRealMiddleBand,0,outNBElement.value) ;
       }
       if( optInNbDevUp == optInNbDevDn )
       {
          if( optInNbDevUp == 1.0 )
          {
-            for( i=0; i < (int) outNbElement.value ; i++ )
+            for( i=0; i < (int) outNBElement.value ; i++ )
             {
                tempReal = tempBuffer2[i];
                tempReal2 = outRealMiddleBand[i];
@@ -1847,7 +1847,7 @@ public class Core {
          }
          else
          {
-            for( i=0; i < (int) outNbElement.value ; i++ )
+            for( i=0; i < (int) outNBElement.value ; i++ )
             {
                tempReal = tempBuffer2[i] * optInNbDevUp;
                tempReal2 = outRealMiddleBand[i];
@@ -1858,7 +1858,7 @@ public class Core {
       }
       else if( optInNbDevUp == 1.0 )
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = tempBuffer2[i];
             tempReal2 = outRealMiddleBand[i];
@@ -1868,7 +1868,7 @@ public class Core {
       }
       else if( optInNbDevDn == 1.0 )
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = tempBuffer2[i];
             tempReal2 = outRealMiddleBand[i];
@@ -1878,7 +1878,7 @@ public class Core {
       }
       else
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = tempBuffer2[i];
             tempReal2 = outRealMiddleBand[i];
@@ -1896,7 +1896,7 @@ public class Core {
       double optInNbDevDn,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outRealUpperBand[],
       double outRealMiddleBand[],
       double outRealLowerBand[] )
@@ -1926,26 +1926,26 @@ public class Core {
       tempBuffer2 = outRealLowerBand;
       retCode = movingAverage ( startIdx, endIdx, inReal,
          optInTimePeriod, optInMAType,
-         outBegIdx, outNbElement, tempBuffer1 );
-      if( (retCode != RetCode.Success ) || ((int) outNbElement.value == 0) )
+         outBegIdx, outNBElement, tempBuffer1 );
+      if( (retCode != RetCode.Success ) || ((int) outNBElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       if( optInMAType == MAType.Sma )
       {
          TA_INT_stddev_using_precalc_ma ( inReal, tempBuffer1,
-            (int) outBegIdx.value , (int) outNbElement.value ,
+            (int) outBegIdx.value , (int) outNBElement.value ,
             optInTimePeriod, tempBuffer2 );
       }
       else
       {
          retCode = stdDev ( (int) outBegIdx.value , endIdx, inReal,
             optInTimePeriod, 1.0,
-            outBegIdx, outNbElement, tempBuffer2 );
+            outBegIdx, outNBElement, tempBuffer2 );
          if( retCode != RetCode.Success )
          {
-            outNbElement.value = 0 ;
+            outNBElement.value = 0 ;
             return retCode;
          }
       }
@@ -1953,7 +1953,7 @@ public class Core {
       {
          if( optInNbDevUp == 1.0 )
          {
-            for( i=0; i < (int) outNbElement.value ; i++ )
+            for( i=0; i < (int) outNBElement.value ; i++ )
             {
                tempReal = tempBuffer2[i];
                tempReal2 = outRealMiddleBand[i];
@@ -1963,7 +1963,7 @@ public class Core {
          }
          else
          {
-            for( i=0; i < (int) outNbElement.value ; i++ )
+            for( i=0; i < (int) outNBElement.value ; i++ )
             {
                tempReal = tempBuffer2[i] * optInNbDevUp;
                tempReal2 = outRealMiddleBand[i];
@@ -1974,7 +1974,7 @@ public class Core {
       }
       else if( optInNbDevUp == 1.0 )
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = tempBuffer2[i];
             tempReal2 = outRealMiddleBand[i];
@@ -1984,7 +1984,7 @@ public class Core {
       }
       else if( optInNbDevDn == 1.0 )
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = tempBuffer2[i];
             tempReal2 = outRealMiddleBand[i];
@@ -1994,7 +1994,7 @@ public class Core {
       }
       else
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = tempBuffer2[i];
             tempReal2 = outRealMiddleBand[i];
@@ -2019,7 +2019,7 @@ public class Core {
       double inReal1[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double S_xx = 0.0f;
@@ -2050,7 +2050,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       trailingIdx = startIdx-nbInitialElementNeeded;
@@ -2118,7 +2118,7 @@ public class Core {
          S_x -= x;
          S_y -= y;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2128,7 +2128,7 @@ public class Core {
       float inReal1[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double S_xx = 0.0f;
@@ -2159,7 +2159,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       trailingIdx = startIdx-nbInitialElementNeeded;
@@ -2227,7 +2227,7 @@ public class Core {
          S_x -= x;
          S_y -= y;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2243,7 +2243,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -2261,7 +2261,7 @@ public class Core {
          else
             outReal[outIdx++] = (inClose[i] - inOpen[i])/tempReal;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2272,7 +2272,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -2290,7 +2290,7 @@ public class Core {
          else
             outReal[outIdx++] = (inClose[i] - inOpen[i])/tempReal;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2310,7 +2310,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double tempReal, tempReal2, theAverage, lastValue;
@@ -2330,7 +2330,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       { if( optInTimePeriod <= 0 ) return RetCode.AllocErr ; circBuffer = new double[optInTimePeriod]; maxIdx_circBuffer = (optInTimePeriod-1); } ;
@@ -2366,7 +2366,7 @@ public class Core {
          { circBuffer_Idx ++; if( circBuffer_Idx > maxIdx_circBuffer ) circBuffer_Idx = 0; } ;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2377,7 +2377,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double tempReal, tempReal2, theAverage, lastValue;
@@ -2397,7 +2397,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       { if( optInTimePeriod <= 0 ) return RetCode.AllocErr ; circBuffer = new double[optInTimePeriod]; maxIdx_circBuffer = (optInTimePeriod-1); } ;
@@ -2433,7 +2433,7 @@ public class Core {
          { circBuffer_Idx ++; if( circBuffer_Idx > maxIdx_circBuffer ) circBuffer_Idx = 0; } ;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2449,7 +2449,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal;
@@ -2464,7 +2464,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -2493,7 +2493,7 @@ public class Core {
          i++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2504,7 +2504,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal;
@@ -2519,7 +2519,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -2548,7 +2548,7 @@ public class Core {
          i++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2564,7 +2564,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[3] ;
@@ -2579,7 +2579,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[2] = 0;
@@ -2619,7 +2619,7 @@ public class Core {
          i++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2630,7 +2630,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[3] ;
@@ -2645,7 +2645,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[2] = 0;
@@ -2685,7 +2685,7 @@ public class Core {
          i++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2701,7 +2701,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -2716,7 +2716,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -2755,7 +2755,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2766,7 +2766,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -2781,7 +2781,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -2820,7 +2820,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2836,7 +2836,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []NearPeriodTotal = new double[4] ;
@@ -2851,7 +2851,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       NearPeriodTotal[3] = 0;
@@ -2898,7 +2898,7 @@ public class Core {
          i++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2909,7 +2909,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []NearPeriodTotal = new double[4] ;
@@ -2924,7 +2924,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       NearPeriodTotal[3] = 0;
@@ -2971,7 +2971,7 @@ public class Core {
          i++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -2987,7 +2987,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int i, outIdx, lookbackTotal;
@@ -3001,7 +3001,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       i = startIdx;
@@ -3023,7 +3023,7 @@ public class Core {
             outInteger[outIdx++] = 0;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3034,7 +3034,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int i, outIdx, lookbackTotal;
@@ -3048,7 +3048,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       i = startIdx;
@@ -3070,7 +3070,7 @@ public class Core {
             outInteger[outIdx++] = 0;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3087,7 +3087,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal, BodyShortPeriodTotal, ShadowLongPeriodTotal;
@@ -3104,7 +3104,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -3174,7 +3174,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3185,7 +3185,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal, BodyShortPeriodTotal, ShadowLongPeriodTotal;
@@ -3202,7 +3202,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -3272,7 +3272,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3289,7 +3289,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[3] ;
@@ -3307,7 +3307,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[2] = 0;
@@ -3386,7 +3386,7 @@ public class Core {
          FarTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3397,7 +3397,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[3] ;
@@ -3415,7 +3415,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[2] = 0;
@@ -3494,7 +3494,7 @@ public class Core {
          FarTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3516,7 +3516,7 @@ public class Core {
       double inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
@@ -3535,7 +3535,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -3593,7 +3593,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3605,7 +3605,7 @@ public class Core {
       float inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
@@ -3624,7 +3624,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -3682,7 +3682,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3699,7 +3699,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowShortPeriodTotal = new double[3] ;
@@ -3719,7 +3719,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowShortPeriodTotal[2] = 0;
@@ -3828,7 +3828,7 @@ public class Core {
          FarTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3839,7 +3839,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowShortPeriodTotal = new double[3] ;
@@ -3859,7 +3859,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowShortPeriodTotal[2] = 0;
@@ -3968,7 +3968,7 @@ public class Core {
          FarTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -3984,7 +3984,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -3999,7 +3999,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4040,7 +4040,7 @@ public class Core {
          BodyLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4051,7 +4051,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -4066,7 +4066,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4107,7 +4107,7 @@ public class Core {
          BodyLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4123,7 +4123,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal;
@@ -4138,7 +4138,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4180,7 +4180,7 @@ public class Core {
          i++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4191,7 +4191,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal;
@@ -4206,7 +4206,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4248,7 +4248,7 @@ public class Core {
          i++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4264,7 +4264,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -4279,7 +4279,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4320,7 +4320,7 @@ public class Core {
          BodyLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4331,7 +4331,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -4346,7 +4346,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4387,7 +4387,7 @@ public class Core {
          BodyLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4403,7 +4403,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[4] ;
@@ -4418,7 +4418,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[3] = 0;
@@ -4458,7 +4458,7 @@ public class Core {
          i++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4469,7 +4469,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[4] ;
@@ -4484,7 +4484,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[3] = 0;
@@ -4524,7 +4524,7 @@ public class Core {
          i++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4541,7 +4541,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal;
@@ -4557,7 +4557,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -4597,7 +4597,7 @@ public class Core {
          EqualTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4608,7 +4608,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal;
@@ -4624,7 +4624,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -4664,7 +4664,7 @@ public class Core {
          EqualTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4685,7 +4685,7 @@ public class Core {
       double inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal;
@@ -4704,7 +4704,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4732,7 +4732,7 @@ public class Core {
          i++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4744,7 +4744,7 @@ public class Core {
       float inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal;
@@ -4763,7 +4763,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4791,7 +4791,7 @@ public class Core {
          i++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4807,7 +4807,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal;
@@ -4822,7 +4822,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -4843,7 +4843,7 @@ public class Core {
          i++;
          BodyDojiTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4854,7 +4854,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal;
@@ -4869,7 +4869,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -4890,7 +4890,7 @@ public class Core {
          i++;
          BodyDojiTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4906,7 +4906,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal;
@@ -4921,7 +4921,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -4956,7 +4956,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyDojiTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -4967,7 +4967,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal;
@@ -4982,7 +4982,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -5017,7 +5017,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyDojiTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5033,7 +5033,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -5048,7 +5048,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -5082,7 +5082,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5093,7 +5093,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -5108,7 +5108,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -5142,7 +5142,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5158,7 +5158,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int i, outIdx, lookbackTotal;
@@ -5172,7 +5172,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       i = startIdx;
@@ -5192,7 +5192,7 @@ public class Core {
             outInteger[outIdx++] = 0;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5203,7 +5203,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int i, outIdx, lookbackTotal;
@@ -5217,7 +5217,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       i = startIdx;
@@ -5237,7 +5237,7 @@ public class Core {
             outInteger[outIdx++] = 0;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5259,7 +5259,7 @@ public class Core {
       double inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
@@ -5278,7 +5278,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -5325,7 +5325,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5337,7 +5337,7 @@ public class Core {
       float inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
@@ -5356,7 +5356,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -5403,7 +5403,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5424,7 +5424,7 @@ public class Core {
       double inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal2;
@@ -5443,7 +5443,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -5484,7 +5484,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5496,7 +5496,7 @@ public class Core {
       float inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal2;
@@ -5515,7 +5515,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -5556,7 +5556,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5572,7 +5572,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double NearPeriodTotal, EqualPeriodTotal;
@@ -5587,7 +5587,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       NearPeriodTotal = 0;
@@ -5630,7 +5630,7 @@ public class Core {
          NearTrailingIdx++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5641,7 +5641,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double NearPeriodTotal, EqualPeriodTotal;
@@ -5656,7 +5656,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       NearPeriodTotal = 0;
@@ -5699,7 +5699,7 @@ public class Core {
          NearTrailingIdx++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5715,7 +5715,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -5730,7 +5730,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -5764,7 +5764,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5775,7 +5775,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -5790,7 +5790,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -5824,7 +5824,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5841,7 +5841,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal, NearPeriodTotal;
@@ -5856,7 +5856,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -5913,7 +5913,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -5924,7 +5924,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal, NearPeriodTotal;
@@ -5939,7 +5939,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -5996,7 +5996,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6013,7 +6013,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal, NearPeriodTotal;
@@ -6028,7 +6028,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -6085,7 +6085,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6096,7 +6096,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal, NearPeriodTotal;
@@ -6111,7 +6111,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -6168,7 +6168,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6184,7 +6184,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -6199,7 +6199,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -6234,7 +6234,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6245,7 +6245,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -6260,7 +6260,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -6295,7 +6295,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6311,7 +6311,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal;
@@ -6326,7 +6326,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -6361,7 +6361,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyDojiTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6372,7 +6372,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal;
@@ -6387,7 +6387,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -6422,7 +6422,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyDojiTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6438,7 +6438,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowPeriodTotal;
@@ -6453,7 +6453,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -6485,7 +6485,7 @@ public class Core {
          BodyTrailingIdx++;
          ShadowTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6496,7 +6496,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowPeriodTotal;
@@ -6511,7 +6511,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -6543,7 +6543,7 @@ public class Core {
          BodyTrailingIdx++;
          ShadowTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6559,7 +6559,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int i, outIdx, lookbackTotal, patternIdx, patternResult;
@@ -6573,7 +6573,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       patternIdx = 0;
@@ -6624,7 +6624,7 @@ public class Core {
             outInteger[outIdx++] = 0;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6635,7 +6635,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int i, outIdx, lookbackTotal, patternIdx, patternResult;
@@ -6649,7 +6649,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       patternIdx = 0;
@@ -6700,7 +6700,7 @@ public class Core {
             outInteger[outIdx++] = 0;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6716,7 +6716,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double NearPeriodTotal;
@@ -6731,7 +6731,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       NearPeriodTotal = 0;
@@ -6803,7 +6803,7 @@ public class Core {
          NearTrailingIdx++;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6814,7 +6814,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double NearPeriodTotal;
@@ -6829,7 +6829,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       NearPeriodTotal = 0;
@@ -6901,7 +6901,7 @@ public class Core {
          NearTrailingIdx++;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6917,7 +6917,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -6932,7 +6932,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -6969,7 +6969,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -6980,7 +6980,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -6995,7 +6995,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -7032,7 +7032,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7049,7 +7049,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[3] ;
@@ -7065,7 +7065,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[2] = 0;
@@ -7119,7 +7119,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7130,7 +7130,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[3] ;
@@ -7146,7 +7146,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[2] = 0;
@@ -7200,7 +7200,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7217,7 +7217,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal, BodyLongPeriodTotal;
@@ -7232,7 +7232,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -7270,7 +7270,7 @@ public class Core {
          EqualTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7281,7 +7281,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal, BodyLongPeriodTotal;
@@ -7296,7 +7296,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -7334,7 +7334,7 @@ public class Core {
          EqualTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7351,7 +7351,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -7366,7 +7366,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -7411,7 +7411,7 @@ public class Core {
          ShadowLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7422,7 +7422,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -7437,7 +7437,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -7482,7 +7482,7 @@ public class Core {
          ShadowLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7499,7 +7499,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[2] ;
@@ -7515,7 +7515,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[1] = 0;
@@ -7566,7 +7566,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7577,7 +7577,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[2] ;
@@ -7593,7 +7593,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[1] = 0;
@@ -7644,7 +7644,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7661,7 +7661,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[2] ;
@@ -7677,7 +7677,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[1] = 0;
@@ -7728,7 +7728,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7739,7 +7739,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []ShadowVeryShortPeriodTotal = new double[2] ;
@@ -7755,7 +7755,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal[1] = 0;
@@ -7806,7 +7806,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7822,7 +7822,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double ShadowVeryShortPeriodTotal;
@@ -7837,7 +7837,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal = 0;
@@ -7869,7 +7869,7 @@ public class Core {
          i++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7880,7 +7880,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double ShadowVeryShortPeriodTotal;
@@ -7895,7 +7895,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal = 0;
@@ -7927,7 +7927,7 @@ public class Core {
          i++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -7943,7 +7943,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowLongPeriodTotal;
@@ -7958,7 +7958,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -7993,7 +7993,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          ShadowLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8004,7 +8004,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowLongPeriodTotal;
@@ -8019,7 +8019,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -8054,7 +8054,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          ShadowLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8070,7 +8070,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowPeriodTotal;
@@ -8085,7 +8085,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -8117,7 +8117,7 @@ public class Core {
          BodyTrailingIdx++;
          ShadowTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8128,7 +8128,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowPeriodTotal;
@@ -8143,7 +8143,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -8175,7 +8175,7 @@ public class Core {
          BodyTrailingIdx++;
          ShadowTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8191,7 +8191,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -8206,7 +8206,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -8239,7 +8239,7 @@ public class Core {
          BodyLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8250,7 +8250,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -8265,7 +8265,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -8298,7 +8298,7 @@ public class Core {
          BodyLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8314,7 +8314,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal;
@@ -8329,7 +8329,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -8355,7 +8355,7 @@ public class Core {
          i++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8366,7 +8366,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal;
@@ -8381,7 +8381,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -8407,7 +8407,7 @@ public class Core {
          i++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8428,7 +8428,7 @@ public class Core {
       double inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []BodyPeriodTotal = new double[5] ;
@@ -8447,7 +8447,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal[4] = 0;
@@ -8502,7 +8502,7 @@ public class Core {
          BodyShortTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8514,7 +8514,7 @@ public class Core {
       float inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []BodyPeriodTotal = new double[5] ;
@@ -8533,7 +8533,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal[4] = 0;
@@ -8588,7 +8588,7 @@ public class Core {
          BodyShortTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8610,7 +8610,7 @@ public class Core {
       double inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
@@ -8629,7 +8629,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -8676,7 +8676,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8688,7 +8688,7 @@ public class Core {
       float inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal;
@@ -8707,7 +8707,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -8754,7 +8754,7 @@ public class Core {
          BodyDojiTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8775,7 +8775,7 @@ public class Core {
       double inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal2;
@@ -8794,7 +8794,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -8835,7 +8835,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8847,7 +8847,7 @@ public class Core {
       float inClose[],
       double optInPenetration,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal, BodyShortPeriodTotal2;
@@ -8866,7 +8866,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -8907,7 +8907,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8924,7 +8924,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal, BodyLongPeriodTotal;
@@ -8939,7 +8939,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -8977,7 +8977,7 @@ public class Core {
          EqualTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -8988,7 +8988,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal, BodyLongPeriodTotal;
@@ -9003,7 +9003,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -9041,7 +9041,7 @@ public class Core {
          EqualTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9057,7 +9057,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []BodyLongPeriodTotal = new double[2] ;
@@ -9072,7 +9072,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal[1] = 0;
@@ -9105,7 +9105,7 @@ public class Core {
          i++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9116,7 +9116,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []BodyLongPeriodTotal = new double[2] ;
@@ -9131,7 +9131,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal[1] = 0;
@@ -9164,7 +9164,7 @@ public class Core {
          i++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9180,7 +9180,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowLongPeriodTotal, NearPeriodTotal;
@@ -9195,7 +9195,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -9244,7 +9244,7 @@ public class Core {
          ShadowLongTrailingIdx++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9255,7 +9255,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowLongPeriodTotal, NearPeriodTotal;
@@ -9270,7 +9270,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -9319,7 +9319,7 @@ public class Core {
          ShadowLongTrailingIdx++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9335,7 +9335,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []BodyPeriodTotal = new double[5] ;
@@ -9350,7 +9350,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal[4] = 0;
@@ -9407,7 +9407,7 @@ public class Core {
          BodyShortTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9418,7 +9418,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []BodyPeriodTotal = new double[5] ;
@@ -9433,7 +9433,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal[4] = 0;
@@ -9490,7 +9490,7 @@ public class Core {
          BodyShortTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9507,7 +9507,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double ShadowVeryShortPeriodTotal, BodyLongPeriodTotal, EqualPeriodTotal;
@@ -9522,7 +9522,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal = 0;
@@ -9576,7 +9576,7 @@ public class Core {
          BodyLongTrailingIdx++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9587,7 +9587,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double ShadowVeryShortPeriodTotal, BodyLongPeriodTotal, EqualPeriodTotal;
@@ -9602,7 +9602,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       ShadowVeryShortPeriodTotal = 0;
@@ -9656,7 +9656,7 @@ public class Core {
          BodyLongTrailingIdx++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9673,7 +9673,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -9688,7 +9688,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -9733,7 +9733,7 @@ public class Core {
          ShadowLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9744,7 +9744,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowLongPeriodTotal, ShadowVeryShortPeriodTotal;
@@ -9759,7 +9759,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -9804,7 +9804,7 @@ public class Core {
          ShadowLongTrailingIdx++;
          ShadowVeryShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9820,7 +9820,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowPeriodTotal;
@@ -9835,7 +9835,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -9867,7 +9867,7 @@ public class Core {
          BodyTrailingIdx++;
          ShadowTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9878,7 +9878,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal, ShadowPeriodTotal;
@@ -9893,7 +9893,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -9925,7 +9925,7 @@ public class Core {
          BodyTrailingIdx++;
          ShadowTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9941,7 +9941,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal;
@@ -9956,7 +9956,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -9980,7 +9980,7 @@ public class Core {
          i++;
          BodyTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -9991,7 +9991,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal;
@@ -10006,7 +10006,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -10030,7 +10030,7 @@ public class Core {
          i++;
          BodyTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10047,7 +10047,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []BodyLongPeriodTotal = new double[3] ;
@@ -10065,7 +10065,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal[2] = 0;
@@ -10136,7 +10136,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10147,7 +10147,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double []BodyLongPeriodTotal = new double[3] ;
@@ -10165,7 +10165,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal[2] = 0;
@@ -10236,7 +10236,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10252,7 +10252,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal;
@@ -10267,7 +10267,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -10295,7 +10295,7 @@ public class Core {
          i++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10306,7 +10306,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal;
@@ -10321,7 +10321,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -10349,7 +10349,7 @@ public class Core {
          i++;
          EqualTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10365,7 +10365,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal, ShadowVeryLongPeriodTotal;
@@ -10380,7 +10380,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -10424,7 +10424,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          ShadowVeryLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10435,7 +10435,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyDojiPeriodTotal, ShadowVeryShortPeriodTotal, ShadowVeryLongPeriodTotal;
@@ -10450,7 +10450,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyDojiPeriodTotal = 0;
@@ -10494,7 +10494,7 @@ public class Core {
          ShadowVeryShortTrailingIdx++;
          ShadowVeryLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10510,7 +10510,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double NearPeriodTotal;
@@ -10525,7 +10525,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       NearPeriodTotal = 0;
@@ -10566,7 +10566,7 @@ public class Core {
          i++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10577,7 +10577,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double NearPeriodTotal;
@@ -10592,7 +10592,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       NearPeriodTotal = 0;
@@ -10633,7 +10633,7 @@ public class Core {
          i++;
          NearTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10650,7 +10650,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal, BodyLongPeriodTotal;
@@ -10665,7 +10665,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -10703,7 +10703,7 @@ public class Core {
          EqualTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10714,7 +10714,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double EqualPeriodTotal, BodyLongPeriodTotal;
@@ -10729,7 +10729,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       EqualPeriodTotal = 0;
@@ -10767,7 +10767,7 @@ public class Core {
          EqualTrailingIdx++;
          BodyLongTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10783,7 +10783,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal;
@@ -10798,7 +10798,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -10834,7 +10834,7 @@ public class Core {
          i++;
          BodyTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10845,7 +10845,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyPeriodTotal;
@@ -10860,7 +10860,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyPeriodTotal = 0;
@@ -10896,7 +10896,7 @@ public class Core {
          i++;
          BodyTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10912,7 +10912,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -10927,7 +10927,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -10966,7 +10966,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -10977,7 +10977,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -10992,7 +10992,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -11031,7 +11031,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -11047,7 +11047,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -11062,7 +11062,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -11101,7 +11101,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -11112,7 +11112,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double BodyShortPeriodTotal, BodyLongPeriodTotal;
@@ -11127,7 +11127,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       BodyLongPeriodTotal = 0;
@@ -11166,7 +11166,7 @@ public class Core {
          BodyLongTrailingIdx++;
          BodyShortTrailingIdx++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -11182,7 +11182,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int i, outIdx, lookbackTotal;
@@ -11196,7 +11196,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       i = startIdx;
@@ -11224,7 +11224,7 @@ public class Core {
             outInteger[outIdx++] = 0;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -11235,7 +11235,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int i, outIdx, lookbackTotal;
@@ -11249,7 +11249,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       i = startIdx;
@@ -11277,7 +11277,7 @@ public class Core {
             outInteger[outIdx++] = 0;
          i++;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -11299,7 +11299,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -11315,7 +11315,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = cmoLookback ( optInTimePeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -11326,7 +11326,7 @@ public class Core {
       {
          outBegIdx.value = startIdx;
          i = (endIdx-startIdx)+1;
-         outNbElement.value = i;
+         outNBElement.value = i;
          System.arraycopy(inReal,startIdx,outReal,0,i) ;
          return RetCode.Success ;
       }
@@ -11360,7 +11360,7 @@ public class Core {
          if( today > endIdx )
          {
             outBegIdx.value = startIdx;
-            outNbElement.value = outIdx;
+            outNBElement.value = outIdx;
             return RetCode.Success ;
          }
          today -= optInTimePeriod;
@@ -11427,7 +11427,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode cmo( int startIdx,
@@ -11435,7 +11435,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -11451,7 +11451,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = cmoLookback ( optInTimePeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -11462,7 +11462,7 @@ public class Core {
       {
          outBegIdx.value = startIdx;
          i = (endIdx-startIdx)+1;
-         outNbElement.value = i;
+         outNBElement.value = i;
          System.arraycopy(inReal,startIdx,outReal,0,i) ;
          return RetCode.Success ;
       }
@@ -11496,7 +11496,7 @@ public class Core {
          if( today > endIdx )
          {
             outBegIdx.value = startIdx;
-            outNbElement.value = outIdx;
+            outNBElement.value = outIdx;
             return RetCode.Success ;
          }
          today -= optInTimePeriod;
@@ -11563,7 +11563,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -11581,7 +11581,7 @@ public class Core {
       double inReal1[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double sumXY, sumX, sumY, sumX2, sumY2, x, y, trailingX, trailingY;
@@ -11601,7 +11601,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -11647,7 +11647,7 @@ public class Core {
          else
             outReal[outIdx++] = 0.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode correl( int startIdx,
@@ -11656,7 +11656,7 @@ public class Core {
       float inReal1[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double sumXY, sumX, sumY, sumX2, sumY2, x, y, trailingX, trailingY;
@@ -11676,7 +11676,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -11722,7 +11722,7 @@ public class Core {
          else
             outReal[outIdx++] = 0.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -11739,7 +11739,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []firstEMA ;
@@ -11759,7 +11759,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       outBegIdx.value = 0 ;
       lookbackEMA = emaLookback ( optInTimePeriod );
       lookbackTotal = lookbackEMA * 2;
@@ -11800,7 +11800,7 @@ public class Core {
          outIdx++;
       }
       outBegIdx.value = firstEMABegIdx.value + secondEMABegIdx.value ;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode dema( int startIdx,
@@ -11808,7 +11808,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []firstEMA ;
@@ -11828,7 +11828,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       outBegIdx.value = 0 ;
       lookbackEMA = emaLookback ( optInTimePeriod );
       lookbackTotal = lookbackEMA * 2;
@@ -11864,7 +11864,7 @@ public class Core {
          outIdx++;
       }
       outBegIdx.value = firstEMABegIdx.value + secondEMABegIdx.value ;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -11886,7 +11886,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -11912,7 +11912,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -12019,7 +12019,7 @@ public class Core {
             outReal[outIdx] = outReal[outIdx-1];
          outIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode dx( int startIdx,
@@ -12029,7 +12029,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -12055,7 +12055,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -12162,7 +12162,7 @@ public class Core {
             outReal[outIdx] = outReal[outIdx-1];
          outIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -12179,7 +12179,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       if( startIdx < 0 )
@@ -12193,7 +12193,7 @@ public class Core {
       return TA_INT_EMA ( startIdx, endIdx, inReal,
          optInTimePeriod,
          ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
-         outBegIdx, outNbElement, outReal );
+         outBegIdx, outNBElement, outReal );
    }
    public RetCode TA_INT_EMA( int startIdx,
       int endIdx,
@@ -12201,7 +12201,7 @@ public class Core {
       int optInTimePeriod,
       double optInK_1,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double []outReal )
    {
       double tempReal, prevMA;
@@ -12212,7 +12212,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -12239,7 +12239,7 @@ public class Core {
          prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
          outReal[outIdx++] = prevMA;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode ema( int startIdx,
@@ -12247,7 +12247,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       if( startIdx < 0 )
@@ -12261,7 +12261,7 @@ public class Core {
       return TA_INT_EMA ( startIdx, endIdx, inReal,
          optInTimePeriod,
          ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
-         outBegIdx, outNbElement, outReal );
+         outBegIdx, outNBElement, outReal );
    }
    public RetCode TA_INT_EMA( int startIdx,
       int endIdx,
@@ -12269,7 +12269,7 @@ public class Core {
       int optInTimePeriod,
       double optInK_1,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double []outReal )
    {
       double tempReal, prevMA;
@@ -12280,7 +12280,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -12307,7 +12307,7 @@ public class Core {
          prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
          outReal[outIdx++] = prevMA;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -12319,7 +12319,7 @@ public class Core {
       int endIdx,
       double inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -12353,7 +12353,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -12441,14 +12441,14 @@ public class Core {
          }
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode htDcPeriod( int startIdx,
       int endIdx,
       float inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -12482,7 +12482,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -12570,7 +12570,7 @@ public class Core {
          }
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -12582,7 +12582,7 @@ public class Core {
       int endIdx,
       double inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -12623,7 +12623,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -12748,14 +12748,14 @@ public class Core {
          { smoothPrice_Idx ++; if( smoothPrice_Idx > maxIdx_smoothPrice ) smoothPrice_Idx = 0; } ;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode htDcPhase( int startIdx,
       int endIdx,
       float inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -12796,7 +12796,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -12921,7 +12921,7 @@ public class Core {
          { smoothPrice_Idx ++; if( smoothPrice_Idx > maxIdx_smoothPrice ) smoothPrice_Idx = 0; } ;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -12933,7 +12933,7 @@ public class Core {
       int endIdx,
       double inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outInPhase[],
       double outQuadrature[] )
    {
@@ -12968,7 +12968,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -13060,14 +13060,14 @@ public class Core {
          period = (0.2*period) + (0.8 * tempReal);
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode htPhasor( int startIdx,
       int endIdx,
       float inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outInPhase[],
       double outQuadrature[] )
    {
@@ -13102,7 +13102,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -13194,7 +13194,7 @@ public class Core {
          period = (0.2*period) + (0.8 * tempReal);
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -13206,7 +13206,7 @@ public class Core {
       int endIdx,
       double inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outSine[],
       double outLeadSine[] )
    {
@@ -13249,7 +13249,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -13375,14 +13375,14 @@ public class Core {
          { smoothPrice_Idx ++; if( smoothPrice_Idx > maxIdx_smoothPrice ) smoothPrice_Idx = 0; } ;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode htSine( int startIdx,
       int endIdx,
       float inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outSine[],
       double outLeadSine[] )
    {
@@ -13425,7 +13425,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -13551,7 +13551,7 @@ public class Core {
          { smoothPrice_Idx ++; if( smoothPrice_Idx > maxIdx_smoothPrice ) smoothPrice_Idx = 0; } ;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -13563,7 +13563,7 @@ public class Core {
       int endIdx,
       double inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -13605,7 +13605,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -13709,14 +13709,14 @@ public class Core {
          { smoothPrice_Idx ++; if( smoothPrice_Idx > maxIdx_smoothPrice ) smoothPrice_Idx = 0; } ;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode htTrendline( int startIdx,
       int endIdx,
       float inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -13758,7 +13758,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -13862,7 +13862,7 @@ public class Core {
          { smoothPrice_Idx ++; if( smoothPrice_Idx > maxIdx_smoothPrice ) smoothPrice_Idx = 0; } ;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -13874,7 +13874,7 @@ public class Core {
       int endIdx,
       double inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int outIdx, i;
@@ -13925,7 +13925,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -14086,14 +14086,14 @@ public class Core {
          { smoothPrice_Idx ++; if( smoothPrice_Idx > maxIdx_smoothPrice ) smoothPrice_Idx = 0; } ;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode htTrendMode( int startIdx,
       int endIdx,
       float inReal[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       int outIdx, i;
@@ -14144,7 +14144,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -14305,7 +14305,7 @@ public class Core {
          { smoothPrice_Idx ++; if( smoothPrice_Idx > maxIdx_smoothPrice ) smoothPrice_Idx = 0; } ;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -14322,7 +14322,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       final double constMax = 2.0/(30.0+1.0);
@@ -14341,14 +14341,14 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = optInTimePeriod + (this.unstablePeriod[FuncUnstId.Kama.ordinal()]) ;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       sumROC1 = 0.0;
@@ -14409,7 +14409,7 @@ public class Core {
          prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
          outReal[outIdx++] = prevKAMA;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode kama( int startIdx,
@@ -14417,7 +14417,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       final double constMax = 2.0/(30.0+1.0);
@@ -14436,14 +14436,14 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = optInTimePeriod + (this.unstablePeriod[FuncUnstId.Kama.ordinal()]) ;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       sumROC1 = 0.0;
@@ -14504,7 +14504,7 @@ public class Core {
          prevKAMA = ((inReal[today++]-prevKAMA)*tempReal) + prevKAMA;
          outReal[outIdx++] = prevKAMA;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -14521,7 +14521,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -14544,7 +14544,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -14567,7 +14567,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode linearReg( int startIdx,
@@ -14575,7 +14575,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -14598,7 +14598,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -14621,7 +14621,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -14638,7 +14638,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -14661,7 +14661,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -14683,7 +14683,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode linearRegAngle( int startIdx,
@@ -14691,7 +14691,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -14714,7 +14714,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -14736,7 +14736,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -14753,7 +14753,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -14776,7 +14776,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -14798,7 +14798,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode linearRegIntercept( int startIdx,
@@ -14806,7 +14806,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -14829,7 +14829,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -14851,7 +14851,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -14868,7 +14868,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -14890,7 +14890,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -14911,7 +14911,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode linearRegSlope( int startIdx,
@@ -14919,7 +14919,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -14941,7 +14941,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -14962,7 +14962,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -15016,7 +15016,7 @@ public class Core {
       int optInTimePeriod,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []dummyBuffer ;
@@ -15034,7 +15034,7 @@ public class Core {
       if( optInTimePeriod == 1 )
       {
          nbElement = endIdx-startIdx+1;
-         outNbElement.value = nbElement;
+         outNBElement.value = nbElement;
          for( todayIdx=startIdx, outIdx=0; outIdx < nbElement; outIdx++, todayIdx++ )
             outReal[outIdx] = inReal[todayIdx];
          outBegIdx.value = startIdx;
@@ -15044,43 +15044,43 @@ public class Core {
       {
          case Sma :
             retCode = TA_INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Ema :
             retCode = TA_INT_EMA ( startIdx, endIdx, inReal,
             optInTimePeriod, ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Wma :
             retCode = wma ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Dema :
             retCode = dema ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Tema :
             retCode = tema ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Trima :
             retCode = trima ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Kama :
             retCode = kama ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Mama :
             dummyBuffer = new double[(endIdx-startIdx+1)] ;
          retCode = mama ( startIdx, endIdx, inReal, 0.5, 0.05,
-            outBegIdx, outNbElement,
+            outBegIdx, outNBElement,
             outReal, dummyBuffer );
          break;
          case T3 :
             retCode = t3 ( startIdx, endIdx, inReal,
             optInTimePeriod, 0.7,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          default:
             retCode = RetCode.BadParam ;
@@ -15094,7 +15094,7 @@ public class Core {
       int optInTimePeriod,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []dummyBuffer ;
@@ -15112,7 +15112,7 @@ public class Core {
       if( optInTimePeriod == 1 )
       {
          nbElement = endIdx-startIdx+1;
-         outNbElement.value = nbElement;
+         outNBElement.value = nbElement;
          for( todayIdx=startIdx, outIdx=0; outIdx < nbElement; outIdx++, todayIdx++ )
             outReal[outIdx] = inReal[todayIdx];
          outBegIdx.value = startIdx;
@@ -15122,43 +15122,43 @@ public class Core {
       {
          case Sma :
             retCode = TA_INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Ema :
             retCode = TA_INT_EMA ( startIdx, endIdx, inReal,
             optInTimePeriod, ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Wma :
             retCode = wma ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Dema :
             retCode = dema ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Tema :
             retCode = tema ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Trima :
             retCode = trima ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Kama :
             retCode = kama ( startIdx, endIdx, inReal, optInTimePeriod,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          case Mama :
             dummyBuffer = new double[(endIdx-startIdx+1)] ;
          retCode = mama ( startIdx, endIdx, inReal, 0.5, 0.05,
-            outBegIdx, outNbElement,
+            outBegIdx, outNBElement,
             outReal, dummyBuffer );
          break;
          case T3 :
             retCode = t3 ( startIdx, endIdx, inReal,
             optInTimePeriod, 0.7,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
          break;
          default:
             retCode = RetCode.BadParam ;
@@ -15200,7 +15200,7 @@ public class Core {
       int optInSlowPeriod,
       int optInSignalPeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
       double outMACDHist[] )
@@ -15226,7 +15226,7 @@ public class Core {
          optInSlowPeriod,
          optInSignalPeriod,
          outBegIdx,
-         outNbElement,
+         outNBElement,
          outMACD,
          outMACDSignal,
          outMACDHist );
@@ -15238,7 +15238,7 @@ public class Core {
       int optInSlowPeriod,
       int optInSignalPeriod_2,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
       double outMACDHist[] )
@@ -15282,7 +15282,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       tempInteger = (endIdx-startIdx)+1+lookbackSignal;
@@ -15295,7 +15295,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       retCode = TA_INT_EMA ( tempInteger, endIdx,
@@ -15304,7 +15304,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       if( ( outBegIdx1.value != tempInteger) ||
@@ -15313,7 +15313,7 @@ public class Core {
          ( outNbElement1.value != (endIdx-startIdx)+1+lookbackSignal) )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return (RetCode.InternalError) ;
       }
       for( i=0; i < outNbElement1.value ; i++ )
@@ -15325,13 +15325,13 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       for( i=0; i < outNbElement2.value ; i++ )
          outMACDHist[i] = outMACD[i]-outMACDSignal[i];
       outBegIdx.value = startIdx;
-      outNbElement.value = outNbElement2.value ;
+      outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
    public RetCode macd( int startIdx,
@@ -15341,7 +15341,7 @@ public class Core {
       int optInSlowPeriod,
       int optInSignalPeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
       double outMACDHist[] )
@@ -15367,7 +15367,7 @@ public class Core {
          optInSlowPeriod,
          optInSignalPeriod,
          outBegIdx,
-         outNbElement,
+         outNBElement,
          outMACD,
          outMACDSignal,
          outMACDHist );
@@ -15379,7 +15379,7 @@ public class Core {
       int optInSlowPeriod,
       int optInSignalPeriod_2,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
       double outMACDHist[] )
@@ -15423,7 +15423,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       tempInteger = (endIdx-startIdx)+1+lookbackSignal;
@@ -15436,7 +15436,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       retCode = TA_INT_EMA ( tempInteger, endIdx,
@@ -15445,7 +15445,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       if( ( outBegIdx1.value != tempInteger) ||
@@ -15454,7 +15454,7 @@ public class Core {
          ( outNbElement1.value != (endIdx-startIdx)+1+lookbackSignal) )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return (RetCode.InternalError) ;
       }
       for( i=0; i < outNbElement1.value ; i++ )
@@ -15466,13 +15466,13 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       for( i=0; i < outNbElement2.value ; i++ )
          outMACDHist[i] = outMACD[i]-outMACDSignal[i];
       outBegIdx.value = startIdx;
-      outNbElement.value = outNbElement2.value ;
+      outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
    /* Generated */
@@ -15512,7 +15512,7 @@ public class Core {
       int optInSignalPeriod,
       MAType optInSignalMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
       double outMACDHist[] )
@@ -15564,7 +15564,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       tempInteger = (endIdx-startIdx)+1+lookbackSignal;
@@ -15578,7 +15578,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       retCode = movingAverage ( tempInteger, endIdx,
@@ -15588,7 +15588,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       if( ( outBegIdx1.value != tempInteger) ||
@@ -15597,7 +15597,7 @@ public class Core {
          ( outNbElement1.value != (endIdx-startIdx)+1+lookbackSignal) )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return (RetCode.InternalError) ;
       }
       for( i=0; i < outNbElement1.value ; i++ )
@@ -15609,13 +15609,13 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       for( i=0; i < outNbElement2.value ; i++ )
          outMACDHist[i] = outMACD[i]-outMACDSignal[i];
       outBegIdx.value = startIdx;
-      outNbElement.value = outNbElement2.value ;
+      outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
    public RetCode macdExt( int startIdx,
@@ -15628,7 +15628,7 @@ public class Core {
       int optInSignalPeriod,
       MAType optInSignalMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
       double outMACDHist[] )
@@ -15680,7 +15680,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       tempInteger = (endIdx-startIdx)+1+lookbackSignal;
@@ -15694,7 +15694,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       retCode = movingAverage ( tempInteger, endIdx,
@@ -15704,7 +15704,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       if( ( outBegIdx1.value != tempInteger) ||
@@ -15713,7 +15713,7 @@ public class Core {
          ( outNbElement1.value != (endIdx-startIdx)+1+lookbackSignal) )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return (RetCode.InternalError) ;
       }
       for( i=0; i < outNbElement1.value ; i++ )
@@ -15725,13 +15725,13 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       for( i=0; i < outNbElement2.value ; i++ )
          outMACDHist[i] = outMACD[i]-outMACDSignal[i];
       outBegIdx.value = startIdx;
-      outNbElement.value = outNbElement2.value ;
+      outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
    /* Generated */
@@ -15749,7 +15749,7 @@ public class Core {
       double inReal[],
       int optInSignalPeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
       double outMACDHist[] )
@@ -15767,7 +15767,7 @@ public class Core {
          0,
          optInSignalPeriod,
          outBegIdx,
-         outNbElement,
+         outNBElement,
          outMACD,
          outMACDSignal,
          outMACDHist );
@@ -15777,7 +15777,7 @@ public class Core {
       float inReal[],
       int optInSignalPeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
       double outMACDHist[] )
@@ -15795,7 +15795,7 @@ public class Core {
          0,
          optInSignalPeriod,
          outBegIdx,
-         outNbElement,
+         outNBElement,
          outMACD,
          outMACDSignal,
          outMACDHist );
@@ -15820,7 +15820,7 @@ public class Core {
       double optInFastLimit,
       double optInSlowLimit,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMAMA[],
       double outFAMA[] )
    {
@@ -15863,7 +15863,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -15977,7 +15977,7 @@ public class Core {
          period = (0.2*period) + (0.8 * tempReal);
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode mama( int startIdx,
@@ -15986,7 +15986,7 @@ public class Core {
       double optInFastLimit,
       double optInSlowLimit,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMAMA[],
       double outFAMA[] )
    {
@@ -16029,7 +16029,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -16143,7 +16143,7 @@ public class Core {
          period = (0.2*period) + (0.8 * tempReal);
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -16169,7 +16169,7 @@ public class Core {
       int optInMaxPeriod,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int i, j, lookbackTotal, outputSize, tempInt, curPeriod;
@@ -16196,7 +16196,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       if( lookbackTotal > startIdx )
@@ -16206,7 +16206,7 @@ public class Core {
       if( tempInt > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outputSize = endIdx - tempInt + 1;
@@ -16232,7 +16232,7 @@ public class Core {
             if( retCode != RetCode.Success )
             {
                outBegIdx.value = 0 ;
-               outNbElement.value = 0 ;
+               outNBElement.value = 0 ;
                return retCode;
             }
             outReal[i] = localOutputArray[i];
@@ -16247,7 +16247,7 @@ public class Core {
          }
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outputSize;
+      outNBElement.value = outputSize;
       return RetCode.Success ;
    }
    public RetCode movingAverageVariablePeriod( int startIdx,
@@ -16258,7 +16258,7 @@ public class Core {
       int optInMaxPeriod,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int i, j, lookbackTotal, outputSize, tempInt, curPeriod;
@@ -16285,7 +16285,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       if( lookbackTotal > startIdx )
@@ -16295,7 +16295,7 @@ public class Core {
       if( tempInt > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outputSize = endIdx - tempInt + 1;
@@ -16321,7 +16321,7 @@ public class Core {
             if( retCode != RetCode.Success )
             {
                outBegIdx.value = 0 ;
-               outNbElement.value = 0 ;
+               outNBElement.value = 0 ;
                return retCode;
             }
             outReal[i] = localOutputArray[i];
@@ -16336,7 +16336,7 @@ public class Core {
          }
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outputSize;
+      outNBElement.value = outputSize;
       return RetCode.Success ;
    }
    /* Generated */
@@ -16353,7 +16353,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double highest, tmp;
@@ -16373,7 +16373,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -16409,7 +16409,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode max( int startIdx,
@@ -16417,7 +16417,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double highest, tmp;
@@ -16437,7 +16437,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -16473,7 +16473,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -16490,7 +16490,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double highest, tmp;
@@ -16510,7 +16510,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -16546,7 +16546,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode maxIndex( int startIdx,
@@ -16554,7 +16554,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double highest, tmp;
@@ -16574,7 +16574,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -16610,7 +16610,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -16623,7 +16623,7 @@ public class Core {
       double inHigh[],
       double inLow[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -16636,7 +16636,7 @@ public class Core {
       {
          outReal[outIdx++] = (inHigh[i]+inLow[i])/2.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -16645,7 +16645,7 @@ public class Core {
       float inHigh[],
       float inLow[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -16658,7 +16658,7 @@ public class Core {
       {
          outReal[outIdx++] = (inHigh[i]+inLow[i])/2.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -16679,7 +16679,7 @@ public class Core {
       double inVolume[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double posSumMF, negSumMF, prevValue;
@@ -16696,7 +16696,7 @@ public class Core {
          return RetCode.BadParam ;
       { if( optInTimePeriod <= 0 ) return RetCode.AllocErr ; mflow = new MoneyFlow[optInTimePeriod]; for( int _mflow_index =0; _mflow_index <mflow.length; _mflow_index ++) { mflow[_mflow_index ]=new MoneyFlow(); } maxIdx_mflow = (optInTimePeriod-1); } ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = optInTimePeriod + (this.unstablePeriod[FuncUnstId.Mfi.ordinal()]) ;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -16791,7 +16791,7 @@ public class Core {
          { mflow_Idx ++; if( mflow_Idx > maxIdx_mflow ) mflow_Idx = 0; } ;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode mfi( int startIdx,
@@ -16802,7 +16802,7 @@ public class Core {
       float inVolume[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double posSumMF, negSumMF, prevValue;
@@ -16819,7 +16819,7 @@ public class Core {
          return RetCode.BadParam ;
       { if( optInTimePeriod <= 0 ) return RetCode.AllocErr ; mflow = new MoneyFlow[optInTimePeriod]; for( int _mflow_index =0; _mflow_index <mflow.length; _mflow_index ++) { mflow[_mflow_index ]=new MoneyFlow(); } maxIdx_mflow = (optInTimePeriod-1); } ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = optInTimePeriod + (this.unstablePeriod[FuncUnstId.Mfi.ordinal()]) ;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -16914,7 +16914,7 @@ public class Core {
          { mflow_Idx ++; if( mflow_Idx > maxIdx_mflow ) mflow_Idx = 0; } ;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -16931,7 +16931,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, highest, tmp;
@@ -16951,7 +16951,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -16971,7 +16971,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode midPoint( int startIdx,
@@ -16979,7 +16979,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, highest, tmp;
@@ -16999,7 +16999,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17019,7 +17019,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -17037,7 +17037,7 @@ public class Core {
       double inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, highest, tmp;
@@ -17057,7 +17057,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17079,7 +17079,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode midPrice( int startIdx,
@@ -17088,7 +17088,7 @@ public class Core {
       float inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, highest, tmp;
@@ -17108,7 +17108,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17130,7 +17130,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -17147,7 +17147,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, tmp;
@@ -17167,7 +17167,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17203,7 +17203,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode min( int startIdx,
@@ -17211,7 +17211,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, tmp;
@@ -17231,7 +17231,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17267,7 +17267,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -17284,7 +17284,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double lowest, tmp;
@@ -17304,7 +17304,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17340,7 +17340,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode minIndex( int startIdx,
@@ -17348,7 +17348,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outInteger[] )
    {
       double lowest, tmp;
@@ -17368,7 +17368,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17404,7 +17404,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -17421,7 +17421,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMin[],
       double outMax[] )
    {
@@ -17442,7 +17442,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17502,7 +17502,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode minMax( int startIdx,
@@ -17510,7 +17510,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outMin[],
       double outMax[] )
    {
@@ -17531,7 +17531,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17591,7 +17591,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -17608,7 +17608,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outMinIdx[],
       int outMaxIdx[] )
    {
@@ -17629,7 +17629,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17689,7 +17689,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode minMaxIndex( int startIdx,
@@ -17697,7 +17697,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       int outMinIdx[],
       int outMaxIdx[] )
    {
@@ -17718,7 +17718,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17778,7 +17778,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -17800,7 +17800,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -17825,7 +17825,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -17857,7 +17857,7 @@ public class Core {
                outReal[outIdx++] = (double)0.0;
             prevClose = inClose[today];
          }
-         outNbElement.value = outIdx;
+         outNBElement.value = outIdx;
          return RetCode.Success ;
       }
       outBegIdx.value = today = startIdx;
@@ -17937,7 +17937,7 @@ public class Core {
          else
             outReal[outIdx++] = 0.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode minusDI( int startIdx,
@@ -17947,7 +17947,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -17972,7 +17972,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -18004,7 +18004,7 @@ public class Core {
                outReal[outIdx++] = (double)0.0;
             prevClose = inClose[today];
          }
-         outNbElement.value = outIdx;
+         outNBElement.value = outIdx;
          return RetCode.Success ;
       }
       outBegIdx.value = today = startIdx;
@@ -18084,7 +18084,7 @@ public class Core {
          else
             outReal[outIdx++] = 0.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -18105,7 +18105,7 @@ public class Core {
       double inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -18130,7 +18130,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -18156,7 +18156,7 @@ public class Core {
             else
                outReal[outIdx++] = 0;
          }
-         outNbElement.value = outIdx;
+         outNBElement.value = outIdx;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -18219,7 +18219,7 @@ public class Core {
          }
          outReal[outIdx++] = prevMinusDM;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode minusDM( int startIdx,
@@ -18228,7 +18228,7 @@ public class Core {
       float inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -18253,7 +18253,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -18279,7 +18279,7 @@ public class Core {
             else
                outReal[outIdx++] = 0;
          }
-         outNbElement.value = outIdx;
+         outNBElement.value = outIdx;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -18342,7 +18342,7 @@ public class Core {
          }
          outReal[outIdx++] = prevMinusDM;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -18359,7 +18359,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -18376,7 +18376,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -18384,7 +18384,7 @@ public class Core {
       trailingIdx = startIdx - optInTimePeriod;
       while( inIdx <= endIdx )
          outReal[outIdx++] = inReal[inIdx++] - inReal[trailingIdx++];
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -18393,7 +18393,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -18410,7 +18410,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -18418,7 +18418,7 @@ public class Core {
       trailingIdx = startIdx - optInTimePeriod;
       while( inIdx <= endIdx )
          outReal[outIdx++] = inReal[inIdx++] - inReal[trailingIdx++];
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -18438,7 +18438,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       RetCode retCode;
@@ -18458,7 +18458,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = natrLookback ( optInTimePeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -18468,7 +18468,7 @@ public class Core {
       {
          return trueRange ( startIdx, endIdx,
             inHigh, inLow, inClose,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
       }
       tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
       retCode = trueRange ( (startIdx-lookbackTotal+1), endIdx,
@@ -18518,7 +18518,7 @@ public class Core {
          outIdx++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return retCode;
    }
    public RetCode natr( int startIdx,
@@ -18528,7 +18528,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       RetCode retCode;
@@ -18548,7 +18548,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = natrLookback ( optInTimePeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -18558,7 +18558,7 @@ public class Core {
       {
          return trueRange ( startIdx, endIdx,
             inHigh, inLow, inClose,
-            outBegIdx, outNbElement, outReal );
+            outBegIdx, outNBElement, outReal );
       }
       tempBuffer = new double[lookbackTotal+(endIdx-startIdx)+1] ;
       retCode = trueRange ( (startIdx-lookbackTotal+1), endIdx,
@@ -18608,7 +18608,7 @@ public class Core {
          outIdx++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return retCode;
    }
    /* Generated */
@@ -18621,7 +18621,7 @@ public class Core {
       double inReal[],
       double inVolume[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int i;
@@ -18645,7 +18645,7 @@ public class Core {
          prevReal = tempReal;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode obv( int startIdx,
@@ -18653,7 +18653,7 @@ public class Core {
       float inReal[],
       float inVolume[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int i;
@@ -18677,7 +18677,7 @@ public class Core {
          prevReal = tempReal;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -18699,7 +18699,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -18724,7 +18724,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -18756,7 +18756,7 @@ public class Core {
                outReal[outIdx++] = (double)0.0;
             prevClose = inClose[today];
          }
-         outNbElement.value = outIdx;
+         outNBElement.value = outIdx;
          return RetCode.Success ;
       }
       outBegIdx.value = today = startIdx;
@@ -18836,7 +18836,7 @@ public class Core {
          else
             outReal[outIdx++] = 0.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode plusDI( int startIdx,
@@ -18846,7 +18846,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -18871,7 +18871,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -18903,7 +18903,7 @@ public class Core {
                outReal[outIdx++] = (double)0.0;
             prevClose = inClose[today];
          }
-         outNbElement.value = outIdx;
+         outNBElement.value = outIdx;
          return RetCode.Success ;
       }
       outBegIdx.value = today = startIdx;
@@ -18983,7 +18983,7 @@ public class Core {
          else
             outReal[outIdx++] = 0.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -19004,7 +19004,7 @@ public class Core {
       double inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -19029,7 +19029,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19055,7 +19055,7 @@ public class Core {
             else
                outReal[outIdx++] = 0;
          }
-         outNbElement.value = outIdx;
+         outNBElement.value = outIdx;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -19118,7 +19118,7 @@ public class Core {
          }
          outReal[outIdx++] = prevPlusDM;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode plusDM( int startIdx,
@@ -19127,7 +19127,7 @@ public class Core {
       float inLow[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, lookbackTotal, outIdx;
@@ -19152,7 +19152,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19178,7 +19178,7 @@ public class Core {
             else
                outReal[outIdx++] = 0;
          }
-         outNbElement.value = outIdx;
+         outNBElement.value = outIdx;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -19241,7 +19241,7 @@ public class Core {
          }
          outReal[outIdx++] = prevPlusDM;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -19266,7 +19266,7 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []tempBuffer ;
@@ -19289,7 +19289,7 @@ public class Core {
          optInSlowPeriod,
          optInMAType,
          outBegIdx,
-         outNbElement,
+         outNBElement,
          outReal,
          tempBuffer,
          1 );
@@ -19302,7 +19302,7 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []tempBuffer ;
@@ -19325,7 +19325,7 @@ public class Core {
          optInSlowPeriod,
          optInMAType,
          outBegIdx,
-         outNbElement,
+         outNBElement,
          outReal,
          tempBuffer,
          1 );
@@ -19345,7 +19345,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -19363,7 +19363,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19378,7 +19378,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
          inIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -19387,7 +19387,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -19405,7 +19405,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19420,7 +19420,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
          inIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -19438,7 +19438,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -19456,7 +19456,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19471,7 +19471,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
          inIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -19480,7 +19480,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -19498,7 +19498,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19513,7 +19513,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
          inIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -19531,7 +19531,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -19549,7 +19549,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19564,7 +19564,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
          inIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -19573,7 +19573,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -19591,7 +19591,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19606,7 +19606,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
          inIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -19624,7 +19624,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -19642,7 +19642,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19657,7 +19657,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
          inIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -19666,7 +19666,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, trailingIdx;
@@ -19684,7 +19684,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -19699,7 +19699,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
          inIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -19721,7 +19721,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -19737,7 +19737,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = rsiLookback ( optInTimePeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -19748,7 +19748,7 @@ public class Core {
       {
          outBegIdx.value = startIdx;
          i = (endIdx-startIdx)+1;
-         outNbElement.value = i;
+         outNBElement.value = i;
          System.arraycopy(inReal,startIdx,outReal,0,i) ;
          return RetCode.Success ;
       }
@@ -19781,7 +19781,7 @@ public class Core {
          if( today > endIdx )
          {
             outBegIdx.value = startIdx;
-            outNbElement.value = outIdx;
+            outNBElement.value = outIdx;
             return RetCode.Success ;
          }
          today -= optInTimePeriod;
@@ -19848,7 +19848,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode rsi( int startIdx,
@@ -19856,7 +19856,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -19872,7 +19872,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackTotal = rsiLookback ( optInTimePeriod );
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -19883,7 +19883,7 @@ public class Core {
       {
          outBegIdx.value = startIdx;
          i = (endIdx-startIdx)+1;
-         outNbElement.value = i;
+         outNBElement.value = i;
          System.arraycopy(inReal,startIdx,outReal,0,i) ;
          return RetCode.Success ;
       }
@@ -19916,7 +19916,7 @@ public class Core {
          if( today > endIdx )
          {
             outBegIdx.value = startIdx;
-            outNbElement.value = outIdx;
+            outNBElement.value = outIdx;
             return RetCode.Success ;
          }
          today -= optInTimePeriod;
@@ -19983,7 +19983,7 @@ public class Core {
             outReal[outIdx++] = 0.0;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -20007,7 +20007,7 @@ public class Core {
       double optInAcceleration,
       double optInMaximum,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       RetCode retCode;
@@ -20034,7 +20034,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       af = optInAcceleration;
@@ -20050,7 +20050,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       outBegIdx.value = startIdx;
@@ -20150,7 +20150,7 @@ public class Core {
             }
          }
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode sar( int startIdx,
@@ -20160,7 +20160,7 @@ public class Core {
       double optInAcceleration,
       double optInMaximum,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       RetCode retCode;
@@ -20187,7 +20187,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       af = optInAcceleration;
@@ -20203,7 +20203,7 @@ public class Core {
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       outBegIdx.value = startIdx;
@@ -20303,7 +20303,7 @@ public class Core {
             }
          }
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -20363,7 +20363,7 @@ public class Core {
       double optInAccelerationShort,
       double optInAccelerationMaxShort,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       RetCode retCode;
@@ -20414,7 +20414,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       afLong = optInAccelerationInitLong;
@@ -20439,7 +20439,7 @@ public class Core {
          if( retCode != RetCode.Success )
          {
             outBegIdx.value = 0 ;
-            outNbElement.value = 0 ;
+            outNBElement.value = 0 ;
             return retCode;
          }
       }
@@ -20565,7 +20565,7 @@ public class Core {
             }
          }
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode sarExt( int startIdx,
@@ -20581,7 +20581,7 @@ public class Core {
       double optInAccelerationShort,
       double optInAccelerationMaxShort,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       RetCode retCode;
@@ -20632,7 +20632,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       afLong = optInAccelerationInitLong;
@@ -20657,7 +20657,7 @@ public class Core {
          if( retCode != RetCode.Success )
          {
             outBegIdx.value = 0 ;
-            outNbElement.value = 0 ;
+            outNBElement.value = 0 ;
             return retCode;
          }
       }
@@ -20783,7 +20783,7 @@ public class Core {
             }
          }
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -20800,7 +20800,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       if( startIdx < 0 )
@@ -20813,14 +20813,14 @@ public class Core {
          return RetCode.BadParam ;
       return TA_INT_SMA ( startIdx, endIdx,
          inReal, optInTimePeriod,
-         outBegIdx, outNbElement, outReal );
+         outBegIdx, outNBElement, outReal );
    }
    RetCode TA_INT_SMA( int startIdx,
       int endIdx,
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double periodTotal, tempReal;
@@ -20831,7 +20831,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       periodTotal = 0;
@@ -20850,7 +20850,7 @@ public class Core {
          periodTotal -= inReal[trailingIdx++];
          outReal[outIdx++] = tempReal / optInTimePeriod;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -20859,7 +20859,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       if( startIdx < 0 )
@@ -20872,14 +20872,14 @@ public class Core {
          return RetCode.BadParam ;
       return TA_INT_SMA ( startIdx, endIdx,
          inReal, optInTimePeriod,
-         outBegIdx, outNbElement, outReal );
+         outBegIdx, outNBElement, outReal );
    }
    RetCode TA_INT_SMA( int startIdx,
       int endIdx,
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double periodTotal, tempReal;
@@ -20890,7 +20890,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       periodTotal = 0;
@@ -20909,7 +20909,7 @@ public class Core {
          periodTotal -= inReal[trailingIdx++];
          outReal[outIdx++] = tempReal / optInTimePeriod;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -20933,7 +20933,7 @@ public class Core {
       int optInTimePeriod,
       double optInNbDev,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int i;
@@ -20953,12 +20953,12 @@ public class Core {
          return RetCode.BadParam ;
       retCode = TA_INT_VAR ( startIdx, endIdx,
          inReal, optInTimePeriod,
-         outBegIdx, outNbElement, outReal );
+         outBegIdx, outNBElement, outReal );
       if( retCode != RetCode.Success )
          return retCode;
       if( optInNbDev != 1.0 )
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = outReal[i];
             if( ! (tempReal<0.00000001) )
@@ -20969,7 +20969,7 @@ public class Core {
       }
       else
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = outReal[i];
             if( ! (tempReal<0.00000001) )
@@ -21023,7 +21023,7 @@ public class Core {
       int optInTimePeriod,
       double optInNbDev,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int i;
@@ -21043,12 +21043,12 @@ public class Core {
          return RetCode.BadParam ;
       retCode = TA_INT_VAR ( startIdx, endIdx,
          inReal, optInTimePeriod,
-         outBegIdx, outNbElement, outReal );
+         outBegIdx, outNBElement, outReal );
       if( retCode != RetCode.Success )
          return retCode;
       if( optInNbDev != 1.0 )
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = outReal[i];
             if( ! (tempReal<0.00000001) )
@@ -21059,7 +21059,7 @@ public class Core {
       }
       else
       {
-         for( i=0; i < (int) outNbElement.value ; i++ )
+         for( i=0; i < (int) outNBElement.value ; i++ )
          {
             tempReal = outReal[i];
             if( ! (tempReal<0.00000001) )
@@ -21143,7 +21143,7 @@ public class Core {
       int optInSlowD_Period,
       MAType optInSlowD_MAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outSlowK[],
       double outSlowD[] )
    {
@@ -21178,7 +21178,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -21260,22 +21260,22 @@ public class Core {
       retCode = movingAverage ( 0, outIdx-1,
          tempBuffer, optInSlowK_Period,
          optInSlowK_MAType,
-         outBegIdx, outNbElement, tempBuffer );
-      if( (retCode != RetCode.Success ) || ((int) outNbElement.value == 0) )
+         outBegIdx, outNBElement, tempBuffer );
+      if( (retCode != RetCode.Success ) || ((int) outNBElement.value == 0) )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
-      retCode = movingAverage ( 0, (int) outNbElement.value -1,
+      retCode = movingAverage ( 0, (int) outNBElement.value -1,
          tempBuffer, optInSlowD_Period,
          optInSlowD_MAType,
-         outBegIdx, outNbElement, outSlowD );
-      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNbElement.value) ;
+         outBegIdx, outNBElement, outSlowD );
+      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNBElement.value) ;
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       outBegIdx.value = startIdx;
@@ -21292,7 +21292,7 @@ public class Core {
       int optInSlowD_Period,
       MAType optInSlowD_MAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outSlowK[],
       double outSlowD[] )
    {
@@ -21327,7 +21327,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -21394,22 +21394,22 @@ public class Core {
       retCode = movingAverage ( 0, outIdx-1,
          tempBuffer, optInSlowK_Period,
          optInSlowK_MAType,
-         outBegIdx, outNbElement, tempBuffer );
-      if( (retCode != RetCode.Success ) || ((int) outNbElement.value == 0) )
+         outBegIdx, outNBElement, tempBuffer );
+      if( (retCode != RetCode.Success ) || ((int) outNBElement.value == 0) )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
-      retCode = movingAverage ( 0, (int) outNbElement.value -1,
+      retCode = movingAverage ( 0, (int) outNBElement.value -1,
          tempBuffer, optInSlowD_Period,
          optInSlowD_MAType,
-         outBegIdx, outNbElement, outSlowD );
-      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNbElement.value) ;
+         outBegIdx, outNBElement, outSlowD );
+      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNBElement.value) ;
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       outBegIdx.value = startIdx;
@@ -21442,7 +21442,7 @@ public class Core {
       int optInFastD_Period,
       MAType optInFastD_MAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outFastK[],
       double outFastD[] )
    {
@@ -21472,7 +21472,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -21554,18 +21554,18 @@ public class Core {
       retCode = movingAverage ( 0, outIdx-1,
          tempBuffer, optInFastD_Period,
          optInFastD_MAType,
-         outBegIdx, outNbElement, outFastD );
-      if( (retCode != RetCode.Success ) || ((int) outNbElement.value ) == 0 )
+         outBegIdx, outNBElement, outFastD );
+      if( (retCode != RetCode.Success ) || ((int) outNBElement.value ) == 0 )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
-      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNbElement.value) ;
+      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNBElement.value) ;
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       outBegIdx.value = startIdx;
@@ -21580,7 +21580,7 @@ public class Core {
       int optInFastD_Period,
       MAType optInFastD_MAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outFastK[],
       double outFastD[] )
    {
@@ -21610,7 +21610,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -21677,18 +21677,18 @@ public class Core {
       retCode = movingAverage ( 0, outIdx-1,
          tempBuffer, optInFastD_Period,
          optInFastD_MAType,
-         outBegIdx, outNbElement, outFastD );
-      if( (retCode != RetCode.Success ) || ((int) outNbElement.value ) == 0 )
+         outBegIdx, outNBElement, outFastD );
+      if( (retCode != RetCode.Success ) || ((int) outNBElement.value ) == 0 )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
-      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNbElement.value) ;
+      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNBElement.value) ;
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       outBegIdx.value = startIdx;
@@ -21724,7 +21724,7 @@ public class Core {
       int optInFastD_Period,
       MAType optInFastD_MAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outFastK[],
       double outFastD[] )
    {
@@ -21751,7 +21751,7 @@ public class Core {
       else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackSTOCHF = stochFLookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
       lookbackTotal = rsiLookback ( optInTimePeriod ) + lookbackSTOCHF;
       if( startIdx < lookbackTotal )
@@ -21759,7 +21759,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -21775,7 +21775,7 @@ public class Core {
       if( retCode != RetCode.Success || outNbElement1.value == 0 )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       retCode = stochF (0,
@@ -21787,13 +21787,13 @@ public class Core {
          optInFastD_Period,
          optInFastD_MAType,
          outBegIdx2 ,
-         outNbElement,
+         outNBElement,
          outFastK,
          outFastD);
-      if( retCode != RetCode.Success || ((int) outNbElement.value ) == 0 )
+      if( retCode != RetCode.Success || ((int) outNBElement.value ) == 0 )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       return RetCode.Success ;
@@ -21806,7 +21806,7 @@ public class Core {
       int optInFastD_Period,
       MAType optInFastD_MAType,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outFastK[],
       double outFastD[] )
    {
@@ -21833,7 +21833,7 @@ public class Core {
       else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       lookbackSTOCHF = stochFLookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
       lookbackTotal = rsiLookback ( optInTimePeriod ) + lookbackSTOCHF;
       if( startIdx < lookbackTotal )
@@ -21841,7 +21841,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outBegIdx.value = startIdx;
@@ -21857,7 +21857,7 @@ public class Core {
       if( retCode != RetCode.Success || outNbElement1.value == 0 )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       retCode = stochF (0,
@@ -21869,13 +21869,13 @@ public class Core {
          optInFastD_Period,
          optInFastD_MAType,
          outBegIdx2 ,
-         outNbElement,
+         outNBElement,
          outFastK,
          outFastD);
-      if( retCode != RetCode.Success || ((int) outNbElement.value ) == 0 )
+      if( retCode != RetCode.Success || ((int) outNBElement.value ) == 0 )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return retCode;
       }
       return RetCode.Success ;
@@ -21894,7 +21894,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double periodTotal, tempReal;
@@ -21913,7 +21913,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       periodTotal = 0;
@@ -21932,7 +21932,7 @@ public class Core {
          periodTotal -= inReal[trailingIdx++];
          outReal[outIdx++] = tempReal;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -21941,7 +21941,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double periodTotal, tempReal;
@@ -21960,7 +21960,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       periodTotal = 0;
@@ -21979,7 +21979,7 @@ public class Core {
          periodTotal -= inReal[trailingIdx++];
          outReal[outIdx++] = tempReal;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -22003,7 +22003,7 @@ public class Core {
       int optInTimePeriod,
       double optInVFactor,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, lookbackTotal;
@@ -22029,7 +22029,7 @@ public class Core {
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return RetCode.Success ;
       }
@@ -22112,7 +22112,7 @@ public class Core {
          e6 = (k*e5)+(one_minus_k*e6);
          outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode t3( int startIdx,
@@ -22121,7 +22121,7 @@ public class Core {
       int optInTimePeriod,
       double optInVFactor,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, lookbackTotal;
@@ -22147,7 +22147,7 @@ public class Core {
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return RetCode.Success ;
       }
@@ -22230,7 +22230,7 @@ public class Core {
          e6 = (k*e5)+(one_minus_k*e6);
          outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -22249,7 +22249,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []firstEMA ;
@@ -22272,7 +22272,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       outBegIdx.value = 0 ;
       lookbackEMA = emaLookback ( optInTimePeriod );
       lookbackTotal = lookbackEMA * 3;
@@ -22317,7 +22317,7 @@ public class Core {
          outReal[outIdx] += (3.0*firstEMA[firstEMAIdx++]) - (3.0*secondEMA[secondEMAIdx++]);
          outIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode tema( int startIdx,
@@ -22325,7 +22325,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double []firstEMA ;
@@ -22348,7 +22348,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       outBegIdx.value = 0 ;
       lookbackEMA = emaLookback ( optInTimePeriod );
       lookbackTotal = lookbackEMA * 3;
@@ -22393,7 +22393,7 @@ public class Core {
          outReal[outIdx] += (3.0*firstEMA[firstEMAIdx++]) - (3.0*secondEMA[secondEMAIdx++]);
          outIdx++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -22407,7 +22407,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, outIdx;
@@ -22422,7 +22422,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -22442,7 +22442,7 @@ public class Core {
          outReal[outIdx++] = greatest;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -22452,7 +22452,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int today, outIdx;
@@ -22467,7 +22467,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -22487,7 +22487,7 @@ public class Core {
          outReal[outIdx++] = greatest;
          today++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -22505,7 +22505,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int lookbackTotal;
@@ -22528,7 +22528,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -22618,7 +22618,7 @@ public class Core {
             outReal[outIdx++] = numerator * factor;
          }
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -22627,7 +22627,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int lookbackTotal;
@@ -22650,7 +22650,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -22740,7 +22740,7 @@ public class Core {
             outReal[outIdx++] = numerator * factor;
          }
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -22760,7 +22760,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double k;
@@ -22786,7 +22786,7 @@ public class Core {
          startIdx = totalLookback;
       if( startIdx > endIdx )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return RetCode.Success ;
       }
@@ -22800,7 +22800,7 @@ public class Core {
          tempBuffer );
       if( (retCode != RetCode.Success ) || ( nbElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return retCode;
       }
@@ -22812,7 +22812,7 @@ public class Core {
          tempBuffer );
       if( (retCode != RetCode.Success ) || ( nbElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return retCode;
       }
@@ -22823,18 +22823,18 @@ public class Core {
          tempBuffer );
       if( (retCode != RetCode.Success ) || ( nbElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return retCode;
       }
       nbElementToOutput -= emaLookback;
       retCode = roc ( 0, nbElementToOutput,
          tempBuffer,
-         1, begIdx , outNbElement,
+         1, begIdx , outNBElement,
          outReal );
-      if( (retCode != RetCode.Success ) || ((int) outNbElement.value == 0) )
+      if( (retCode != RetCode.Success ) || ((int) outNBElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return retCode;
       }
@@ -22845,7 +22845,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double k;
@@ -22871,7 +22871,7 @@ public class Core {
          startIdx = totalLookback;
       if( startIdx > endIdx )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return RetCode.Success ;
       }
@@ -22885,7 +22885,7 @@ public class Core {
          tempBuffer );
       if( (retCode != RetCode.Success ) || ( nbElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return retCode;
       }
@@ -22897,7 +22897,7 @@ public class Core {
          tempBuffer );
       if( (retCode != RetCode.Success ) || ( nbElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return retCode;
       }
@@ -22908,18 +22908,18 @@ public class Core {
          tempBuffer );
       if( (retCode != RetCode.Success ) || ( nbElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return retCode;
       }
       nbElementToOutput -= emaLookback;
       retCode = roc ( 0, nbElementToOutput,
          tempBuffer,
-         1, begIdx , outNbElement,
+         1, begIdx , outNBElement,
          outReal );
-      if( (retCode != RetCode.Success ) || ((int) outNbElement.value == 0) )
+      if( (retCode != RetCode.Success ) || ((int) outNBElement.value == 0) )
       {
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          outBegIdx.value = 0 ;
          return retCode;
       }
@@ -22939,7 +22939,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -22962,7 +22962,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -22985,7 +22985,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode tsf( int startIdx,
@@ -22993,7 +22993,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx;
@@ -23016,7 +23016,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       outIdx = 0;
@@ -23039,7 +23039,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -23053,7 +23053,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -23068,7 +23068,7 @@ public class Core {
             inLow [i] +
             inClose[i] ) / 3.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23078,7 +23078,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -23093,7 +23093,7 @@ public class Core {
             inLow [i] +
             inClose[i] ) / 3.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23127,7 +23127,7 @@ public class Core {
       int optInTimePeriod2,
       int optInTimePeriod3,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double a1Total, a2Total, a3Total;
@@ -23158,7 +23158,7 @@ public class Core {
       else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       periods[0] = optInTimePeriod1;
       periods[1] = optInTimePeriod2;
       periods[2] = optInTimePeriod3;
@@ -23223,7 +23223,7 @@ public class Core {
          trailingIdx2++;
          trailingIdx3++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23236,7 +23236,7 @@ public class Core {
       int optInTimePeriod2,
       int optInTimePeriod3,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double a1Total, a2Total, a3Total;
@@ -23267,7 +23267,7 @@ public class Core {
       else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
-      outNbElement.value = 0 ;
+      outNBElement.value = 0 ;
       periods[0] = optInTimePeriod1;
       periods[1] = optInTimePeriod2;
       periods[2] = optInTimePeriod3;
@@ -23332,7 +23332,7 @@ public class Core {
          trailingIdx2++;
          trailingIdx3++;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23356,7 +23356,7 @@ public class Core {
       int optInTimePeriod,
       double optInNbDev,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       if( startIdx < 0 )
@@ -23373,14 +23373,14 @@ public class Core {
          return RetCode.BadParam ;
       return TA_INT_VAR ( startIdx, endIdx, inReal,
          optInTimePeriod,
-         outBegIdx, outNbElement, outReal );
+         outBegIdx, outNBElement, outReal );
    }
    public RetCode TA_INT_VAR( int startIdx,
       int endIdx,
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double tempReal, periodTotal1, periodTotal2, meanValue1, meanValue2;
@@ -23391,7 +23391,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       periodTotal1 = 0;
@@ -23422,7 +23422,7 @@ public class Core {
          periodTotal2 -= tempReal;
          outReal[outIdx++] = meanValue2-meanValue1*meanValue1;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23432,7 +23432,7 @@ public class Core {
       int optInTimePeriod,
       double optInNbDev,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       if( startIdx < 0 )
@@ -23449,14 +23449,14 @@ public class Core {
          return RetCode.BadParam ;
       return TA_INT_VAR ( startIdx, endIdx, inReal,
          optInTimePeriod,
-         outBegIdx, outNbElement, outReal );
+         outBegIdx, outNBElement, outReal );
    }
    public RetCode TA_INT_VAR( int startIdx,
       int endIdx,
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double tempReal, periodTotal1, periodTotal2, meanValue1, meanValue2;
@@ -23467,7 +23467,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       periodTotal1 = 0;
@@ -23498,7 +23498,7 @@ public class Core {
          periodTotal2 -= tempReal;
          outReal[outIdx++] = meanValue2-meanValue1*meanValue1;
       } while( i <= endIdx );
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23513,7 +23513,7 @@ public class Core {
       double inLow[],
       double inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -23528,7 +23528,7 @@ public class Core {
             inLow [i] +
             (inClose[i]*2.0) ) / 4.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23538,7 +23538,7 @@ public class Core {
       float inLow[],
       float inClose[],
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int outIdx, i;
@@ -23553,7 +23553,7 @@ public class Core {
             inLow [i] +
             (inClose[i]*2.0) ) / 4.0;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23573,7 +23573,7 @@ public class Core {
       double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, highest, tmp, diff;
@@ -23594,7 +23594,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       diff = 0.0;
@@ -23659,7 +23659,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode willR( int startIdx,
@@ -23669,7 +23669,7 @@ public class Core {
       float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       double lowest, highest, tmp, diff;
@@ -23690,7 +23690,7 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       diff = 0.0;
@@ -23755,7 +23755,7 @@ public class Core {
          today++;
       }
       outBegIdx.value = startIdx;
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -23772,7 +23772,7 @@ public class Core {
       double inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, i, trailingIdx, divider;
@@ -23792,14 +23792,14 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       if( optInTimePeriod == 1 )
       {
          outBegIdx.value = startIdx;
-         outNbElement.value = endIdx-startIdx+1;
-         System.arraycopy(inReal,startIdx,outReal,0,(int)outNbElement.value) ;
+         outNBElement.value = endIdx-startIdx+1;
+         System.arraycopy(inReal,startIdx,outReal,0,(int)outNBElement.value) ;
          return RetCode.Success ;
       }
       divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
@@ -23826,7 +23826,7 @@ public class Core {
          outReal[outIdx++] = periodSum / divider;
          periodSum -= periodSub;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
@@ -23835,7 +23835,7 @@ public class Core {
       float inReal[],
       int optInTimePeriod,
       MInteger outBegIdx,
-      MInteger outNbElement,
+      MInteger outNBElement,
       double outReal[] )
    {
       int inIdx, outIdx, i, trailingIdx, divider;
@@ -23855,14 +23855,14 @@ public class Core {
       if( startIdx > endIdx )
       {
          outBegIdx.value = 0 ;
-         outNbElement.value = 0 ;
+         outNBElement.value = 0 ;
          return RetCode.Success ;
       }
       if( optInTimePeriod == 1 )
       {
          outBegIdx.value = startIdx;
-         outNbElement.value = endIdx-startIdx+1;
-         System.arraycopy(inReal,startIdx,outReal,0,(int)outNbElement.value) ;
+         outNBElement.value = endIdx-startIdx+1;
+         System.arraycopy(inReal,startIdx,outReal,0,(int)outNBElement.value) ;
          return RetCode.Success ;
       }
       divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
@@ -23889,7 +23889,7 @@ public class Core {
          outReal[outIdx++] = periodSum / divider;
          periodSum -= periodSub;
       }
-      outNbElement.value = outIdx;
+      outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }

@@ -86,7 +86,7 @@ public RetCode ad(
             double inClose [],
             double inVolume [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -102,7 +102,7 @@ public RetCode ad(
         inClose ,
         inVolume ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -169,7 +169,7 @@ public RetCode adOsc(
             )
             int optInSlowPeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -187,7 +187,7 @@ public RetCode adOsc(
         optInFastPeriod,
         optInSlowPeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -234,7 +234,7 @@ public RetCode adx(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -250,7 +250,7 @@ public RetCode adx(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -297,7 +297,7 @@ public RetCode adxr(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -313,7 +313,7 @@ public RetCode adxr(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -393,7 +393,7 @@ public RetCode apo(
             )
             MAType optInMAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -409,7 +409,7 @@ public RetCode apo(
         optInSlowPeriod,
         optInMAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -455,7 +455,7 @@ public RetCode aroon(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outAroonDown",
                 flags     = 4,
@@ -476,7 +476,7 @@ public RetCode aroon(
         inLow ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outAroonDown,
         outAroonUp
 ); }
@@ -523,7 +523,7 @@ public RetCode aroonOsc(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -538,7 +538,7 @@ public RetCode aroonOsc(
         inLow ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -585,7 +585,7 @@ public RetCode atr(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -601,7 +601,7 @@ public RetCode atr(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -632,7 +632,7 @@ public RetCode avgPrice(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -648,7 +648,7 @@ public RetCode avgPrice(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -749,7 +749,7 @@ public RetCode bbands(
             )
             MAType optInMAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outRealUpperBand",
                 flags     = 2048,
@@ -778,7 +778,7 @@ public RetCode bbands(
         optInNbDevDn,
         optInMAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outRealUpperBand,
         outRealMiddleBand,
         outRealLowerBand
@@ -831,7 +831,7 @@ public RetCode beta(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -846,7 +846,7 @@ public RetCode beta(
         inReal1,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -877,7 +877,7 @@ public RetCode bop(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -893,7 +893,7 @@ public RetCode bop(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -940,7 +940,7 @@ public RetCode cci(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -956,7 +956,7 @@ public RetCode cci(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -987,7 +987,7 @@ public RetCode cdl2Crows(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1004,7 +1004,7 @@ public RetCode cdl2Crows(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1035,7 +1035,7 @@ public RetCode cdl3BlackCrows(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1052,7 +1052,7 @@ public RetCode cdl3BlackCrows(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1083,7 +1083,7 @@ public RetCode cdl3Inside(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1100,7 +1100,7 @@ public RetCode cdl3Inside(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1131,7 +1131,7 @@ public RetCode cdl3LineStrike(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1148,7 +1148,7 @@ public RetCode cdl3LineStrike(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1179,7 +1179,7 @@ public RetCode cdl3Outside(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1196,7 +1196,7 @@ public RetCode cdl3Outside(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1227,7 +1227,7 @@ public RetCode cdl3StarsInSouth(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1244,7 +1244,7 @@ public RetCode cdl3StarsInSouth(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1275,7 +1275,7 @@ public RetCode cdl3WhiteSoldiers(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1292,7 +1292,7 @@ public RetCode cdl3WhiteSoldiers(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1341,7 +1341,7 @@ public RetCode cdlAbandonedBaby(
             )
             double optInPenetration,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1359,7 +1359,7 @@ public RetCode cdlAbandonedBaby(
         inClose ,
         optInPenetration,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1390,7 +1390,7 @@ public RetCode cdlAdvanceBlock(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1407,7 +1407,7 @@ public RetCode cdlAdvanceBlock(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1438,7 +1438,7 @@ public RetCode cdlBeltHold(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1455,7 +1455,7 @@ public RetCode cdlBeltHold(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1486,7 +1486,7 @@ public RetCode cdlBreakaway(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1503,7 +1503,7 @@ public RetCode cdlBreakaway(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1534,7 +1534,7 @@ public RetCode cdlClosingMarubozu(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1551,7 +1551,7 @@ public RetCode cdlClosingMarubozu(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1582,7 +1582,7 @@ public RetCode cdlConcealBabysWall(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1599,7 +1599,7 @@ public RetCode cdlConcealBabysWall(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1630,7 +1630,7 @@ public RetCode cdlCounterAttack(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1647,7 +1647,7 @@ public RetCode cdlCounterAttack(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1696,7 +1696,7 @@ public RetCode cdlDarkCloudCover(
             )
             double optInPenetration,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1714,7 +1714,7 @@ public RetCode cdlDarkCloudCover(
         inClose ,
         optInPenetration,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1745,7 +1745,7 @@ public RetCode cdlDoji(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1762,7 +1762,7 @@ public RetCode cdlDoji(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1793,7 +1793,7 @@ public RetCode cdlDojiStar(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1810,7 +1810,7 @@ public RetCode cdlDojiStar(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1841,7 +1841,7 @@ public RetCode cdlDragonflyDoji(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1858,7 +1858,7 @@ public RetCode cdlDragonflyDoji(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1889,7 +1889,7 @@ public RetCode cdlEngulfing(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1906,7 +1906,7 @@ public RetCode cdlEngulfing(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -1955,7 +1955,7 @@ public RetCode cdlEveningDojiStar(
             )
             double optInPenetration,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -1973,7 +1973,7 @@ public RetCode cdlEveningDojiStar(
         inClose ,
         optInPenetration,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2022,7 +2022,7 @@ public RetCode cdlEveningStar(
             )
             double optInPenetration,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2040,7 +2040,7 @@ public RetCode cdlEveningStar(
         inClose ,
         optInPenetration,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2071,7 +2071,7 @@ public RetCode cdlGapSideSideWhite(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2088,7 +2088,7 @@ public RetCode cdlGapSideSideWhite(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2119,7 +2119,7 @@ public RetCode cdlGravestoneDoji(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2136,7 +2136,7 @@ public RetCode cdlGravestoneDoji(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2167,7 +2167,7 @@ public RetCode cdlHammer(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2184,7 +2184,7 @@ public RetCode cdlHammer(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2215,7 +2215,7 @@ public RetCode cdlHangingMan(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2232,7 +2232,7 @@ public RetCode cdlHangingMan(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2263,7 +2263,7 @@ public RetCode cdlHarami(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2280,7 +2280,7 @@ public RetCode cdlHarami(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2311,7 +2311,7 @@ public RetCode cdlHaramiCross(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2328,7 +2328,7 @@ public RetCode cdlHaramiCross(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2359,7 +2359,7 @@ public RetCode cdlHignWave(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2376,7 +2376,7 @@ public RetCode cdlHignWave(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2407,7 +2407,7 @@ public RetCode cdlHikkake(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2424,7 +2424,7 @@ public RetCode cdlHikkake(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2455,7 +2455,7 @@ public RetCode cdlHikkakeMod(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2472,7 +2472,7 @@ public RetCode cdlHikkakeMod(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2503,7 +2503,7 @@ public RetCode cdlHomingPigeon(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2520,7 +2520,7 @@ public RetCode cdlHomingPigeon(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2551,7 +2551,7 @@ public RetCode cdlIdentical3Crows(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2568,7 +2568,7 @@ public RetCode cdlIdentical3Crows(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2599,7 +2599,7 @@ public RetCode cdlInNeck(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2616,7 +2616,7 @@ public RetCode cdlInNeck(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2647,7 +2647,7 @@ public RetCode cdlInvertedHammer(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2664,7 +2664,7 @@ public RetCode cdlInvertedHammer(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2695,7 +2695,7 @@ public RetCode cdlKicking(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2712,7 +2712,7 @@ public RetCode cdlKicking(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2743,7 +2743,7 @@ public RetCode cdlKickingByLength(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2760,7 +2760,7 @@ public RetCode cdlKickingByLength(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2791,7 +2791,7 @@ public RetCode cdlLadderBottom(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2808,7 +2808,7 @@ public RetCode cdlLadderBottom(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2839,7 +2839,7 @@ public RetCode cdlLongLeggedDoji(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2856,7 +2856,7 @@ public RetCode cdlLongLeggedDoji(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2887,7 +2887,7 @@ public RetCode cdlLongLine(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2904,7 +2904,7 @@ public RetCode cdlLongLine(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2935,7 +2935,7 @@ public RetCode cdlMarubozu(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -2952,7 +2952,7 @@ public RetCode cdlMarubozu(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -2983,7 +2983,7 @@ public RetCode cdlMatchingLow(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3000,7 +3000,7 @@ public RetCode cdlMatchingLow(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3049,7 +3049,7 @@ public RetCode cdlMatHold(
             )
             double optInPenetration,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3067,7 +3067,7 @@ public RetCode cdlMatHold(
         inClose ,
         optInPenetration,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3116,7 +3116,7 @@ public RetCode cdlMorningDojiStar(
             )
             double optInPenetration,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3134,7 +3134,7 @@ public RetCode cdlMorningDojiStar(
         inClose ,
         optInPenetration,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3183,7 +3183,7 @@ public RetCode cdlMorningStar(
             )
             double optInPenetration,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3201,7 +3201,7 @@ public RetCode cdlMorningStar(
         inClose ,
         optInPenetration,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3232,7 +3232,7 @@ public RetCode cdlOnNeck(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3249,7 +3249,7 @@ public RetCode cdlOnNeck(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3280,7 +3280,7 @@ public RetCode cdlPiercing(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3297,7 +3297,7 @@ public RetCode cdlPiercing(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3328,7 +3328,7 @@ public RetCode cdlRickshawMan(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3345,7 +3345,7 @@ public RetCode cdlRickshawMan(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3376,7 +3376,7 @@ public RetCode cdlRiseFall3Methods(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3393,7 +3393,7 @@ public RetCode cdlRiseFall3Methods(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3424,7 +3424,7 @@ public RetCode cdlSeperatingLines(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3441,7 +3441,7 @@ public RetCode cdlSeperatingLines(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3472,7 +3472,7 @@ public RetCode cdlShootingStar(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3489,7 +3489,7 @@ public RetCode cdlShootingStar(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3520,7 +3520,7 @@ public RetCode cdlShortLine(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3537,7 +3537,7 @@ public RetCode cdlShortLine(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3568,7 +3568,7 @@ public RetCode cdlSpinningTop(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3585,7 +3585,7 @@ public RetCode cdlSpinningTop(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3616,7 +3616,7 @@ public RetCode cdlStalledPattern(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3633,7 +3633,7 @@ public RetCode cdlStalledPattern(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3664,7 +3664,7 @@ public RetCode cdlStickSandwhich(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3681,7 +3681,7 @@ public RetCode cdlStickSandwhich(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3712,7 +3712,7 @@ public RetCode cdlTakuri(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3729,7 +3729,7 @@ public RetCode cdlTakuri(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3760,7 +3760,7 @@ public RetCode cdlTasukiGap(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3777,7 +3777,7 @@ public RetCode cdlTasukiGap(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3808,7 +3808,7 @@ public RetCode cdlThrusting(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3825,7 +3825,7 @@ public RetCode cdlThrusting(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3856,7 +3856,7 @@ public RetCode cdlTristar(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3873,7 +3873,7 @@ public RetCode cdlTristar(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3904,7 +3904,7 @@ public RetCode cdlUnique3River(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3921,7 +3921,7 @@ public RetCode cdlUnique3River(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -3952,7 +3952,7 @@ public RetCode cdlUpsideGap2Crows(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -3969,7 +3969,7 @@ public RetCode cdlUpsideGap2Crows(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -4000,7 +4000,7 @@ public RetCode cdlXSideGap3Methods(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -4017,7 +4017,7 @@ public RetCode cdlXSideGap3Methods(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -4062,7 +4062,7 @@ public RetCode cmo(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4076,7 +4076,7 @@ public RetCode cmo(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4127,7 +4127,7 @@ public RetCode correl(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4142,7 +4142,7 @@ public RetCode correl(
         inReal1,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4187,7 +4187,7 @@ public RetCode dema(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4201,7 +4201,7 @@ public RetCode dema(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4248,7 +4248,7 @@ public RetCode dx(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4264,7 +4264,7 @@ public RetCode dx(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4309,7 +4309,7 @@ public RetCode ema(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4323,7 +4323,7 @@ public RetCode ema(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4351,7 +4351,7 @@ public RetCode htDcPeriod(
             )
             double inReal[],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4364,7 +4364,7 @@ public RetCode htDcPeriod(
         endIdx,
         inReal,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4392,7 +4392,7 @@ public RetCode htDcPhase(
             )
             double inReal[],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4405,7 +4405,7 @@ public RetCode htDcPhase(
         endIdx,
         inReal,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4433,7 +4433,7 @@ public RetCode htPhasor(
             )
             double inReal[],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInPhase",
                 flags     = 1,
@@ -4452,7 +4452,7 @@ public RetCode htPhasor(
         endIdx,
         inReal,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInPhase,
         outQuadrature
 ); }
@@ -4481,7 +4481,7 @@ public RetCode htSine(
             )
             double inReal[],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outSine",
                 flags     = 1,
@@ -4500,7 +4500,7 @@ public RetCode htSine(
         endIdx,
         inReal,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outSine,
         outLeadSine
 ); }
@@ -4529,7 +4529,7 @@ public RetCode htTrendline(
             )
             double inReal[],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4542,7 +4542,7 @@ public RetCode htTrendline(
         endIdx,
         inReal,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4570,7 +4570,7 @@ public RetCode htTrendMode(
             )
             double inReal[],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -4584,7 +4584,7 @@ public RetCode htTrendMode(
         endIdx,
         inReal,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -4629,7 +4629,7 @@ public RetCode kama(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4643,7 +4643,7 @@ public RetCode kama(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4688,7 +4688,7 @@ public RetCode linearReg(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4702,7 +4702,7 @@ public RetCode linearReg(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4747,7 +4747,7 @@ public RetCode linearRegAngle(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4761,7 +4761,7 @@ public RetCode linearRegAngle(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4806,7 +4806,7 @@ public RetCode linearRegIntercept(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4820,7 +4820,7 @@ public RetCode linearRegIntercept(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4865,7 +4865,7 @@ public RetCode linearRegSlope(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4879,7 +4879,7 @@ public RetCode linearRegSlope(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -4940,7 +4940,7 @@ public RetCode movingAverage(
             )
             MAType optInMAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -4955,7 +4955,7 @@ public RetCode movingAverage(
         optInTimePeriod,
         optInMAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -5038,7 +5038,7 @@ public RetCode macd(
             )
             int optInSignalPeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outMACD",
                 flags     = 1,
@@ -5066,7 +5066,7 @@ public RetCode macd(
         optInSlowPeriod,
         optInSignalPeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outMACD,
         outMACDSignal,
         outMACDHist
@@ -5199,7 +5199,7 @@ public RetCode macdExt(
             )
             MAType optInSignalMAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outMACD",
                 flags     = 1,
@@ -5230,7 +5230,7 @@ public RetCode macdExt(
         optInSignalPeriod,
         optInSignalMAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outMACD,
         outMACDSignal,
         outMACDHist
@@ -5277,7 +5277,7 @@ public RetCode macdFix(
             )
             int optInSignalPeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outMACD",
                 flags     = 1,
@@ -5303,7 +5303,7 @@ public RetCode macdFix(
         inReal,
         optInSignalPeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outMACD,
         outMACDSignal,
         outMACDHist
@@ -5371,7 +5371,7 @@ public RetCode mama(
             )
             double optInSlowLimit,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outMAMA",
                 flags     = 1,
@@ -5392,7 +5392,7 @@ public RetCode mama(
         optInFastLimit,
         optInSlowLimit,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outMAMA,
         outFAMA
 ); }
@@ -5479,7 +5479,7 @@ public RetCode movingAverageVariablePeriod(
             )
             MAType optInMAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -5496,7 +5496,7 @@ public RetCode movingAverageVariablePeriod(
         optInMaxPeriod,
         optInMAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -5541,7 +5541,7 @@ public RetCode max(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -5555,7 +5555,7 @@ public RetCode max(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -5600,7 +5600,7 @@ public RetCode maxIndex(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -5615,7 +5615,7 @@ public RetCode maxIndex(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -5644,7 +5644,7 @@ public RetCode medPrice(
             double inHigh [],
             double inLow [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -5658,7 +5658,7 @@ public RetCode medPrice(
         inHigh ,
         inLow ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -5706,7 +5706,7 @@ public RetCode mfi(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -5723,7 +5723,7 @@ public RetCode mfi(
         inVolume ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -5768,7 +5768,7 @@ public RetCode midPoint(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -5782,7 +5782,7 @@ public RetCode midPoint(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -5828,7 +5828,7 @@ public RetCode midPrice(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -5843,7 +5843,7 @@ public RetCode midPrice(
         inLow ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -5888,7 +5888,7 @@ public RetCode min(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -5902,7 +5902,7 @@ public RetCode min(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -5947,7 +5947,7 @@ public RetCode minIndex(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outInteger",
                 flags     = 1,
@@ -5962,7 +5962,7 @@ public RetCode minIndex(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outInteger
 ); }
 
@@ -6007,7 +6007,7 @@ public RetCode minMax(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outMin",
                 flags     = 1,
@@ -6027,7 +6027,7 @@ public RetCode minMax(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outMin,
         outMax
 ); }
@@ -6073,7 +6073,7 @@ public RetCode minMaxIndex(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outMinIdx",
                 flags     = 1,
@@ -6095,7 +6095,7 @@ public RetCode minMaxIndex(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outMinIdx,
         outMaxIdx
 ); }
@@ -6143,7 +6143,7 @@ public RetCode minusDI(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6159,7 +6159,7 @@ public RetCode minusDI(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6205,7 +6205,7 @@ public RetCode minusDM(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6220,7 +6220,7 @@ public RetCode minusDM(
         inLow ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6265,7 +6265,7 @@ public RetCode mom(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6279,7 +6279,7 @@ public RetCode mom(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6326,7 +6326,7 @@ public RetCode natr(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6342,7 +6342,7 @@ public RetCode natr(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6376,7 +6376,7 @@ public RetCode obv(
             )
             double inVolume [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6390,7 +6390,7 @@ public RetCode obv(
         inReal,
         inVolume ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6437,7 +6437,7 @@ public RetCode plusDI(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6453,7 +6453,7 @@ public RetCode plusDI(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6499,7 +6499,7 @@ public RetCode plusDM(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6514,7 +6514,7 @@ public RetCode plusDM(
         inLow ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6594,7 +6594,7 @@ public RetCode ppo(
             )
             MAType optInMAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6610,7 +6610,7 @@ public RetCode ppo(
         optInSlowPeriod,
         optInMAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6655,7 +6655,7 @@ public RetCode roc(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6669,7 +6669,7 @@ public RetCode roc(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6714,7 +6714,7 @@ public RetCode rocP(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6728,7 +6728,7 @@ public RetCode rocP(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6773,7 +6773,7 @@ public RetCode rocR(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6787,7 +6787,7 @@ public RetCode rocR(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6832,7 +6832,7 @@ public RetCode rocR100(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6846,7 +6846,7 @@ public RetCode rocR100(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6891,7 +6891,7 @@ public RetCode rsi(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6905,7 +6905,7 @@ public RetCode rsi(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -6972,7 +6972,7 @@ public RetCode sar(
             )
             double optInMaximum,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -6988,7 +6988,7 @@ public RetCode sar(
         optInAcceleration,
         optInMaximum,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -7175,7 +7175,7 @@ public RetCode sarExt(
             )
             double optInAccelerationMaxShort,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -7197,7 +7197,7 @@ public RetCode sarExt(
         optInAccelerationShort,
         optInAccelerationMaxShort,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -7242,7 +7242,7 @@ public RetCode sma(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -7256,7 +7256,7 @@ public RetCode sma(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -7321,7 +7321,7 @@ public RetCode stdDev(
             )
             double optInNbDev,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -7336,7 +7336,7 @@ public RetCode stdDev(
         optInTimePeriod,
         optInNbDev,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -7453,7 +7453,7 @@ public RetCode stoch(
             )
             MAType optInSlowD_MAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outSlowK",
                 flags     = 4,
@@ -7479,7 +7479,7 @@ public RetCode stoch(
         optInSlowD_Period,
         optInSlowD_MAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outSlowK,
         outSlowD
 ); }
@@ -7562,7 +7562,7 @@ public RetCode stochF(
             )
             MAType optInFastD_MAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outFastK",
                 flags     = 1,
@@ -7586,7 +7586,7 @@ public RetCode stochF(
         optInFastD_Period,
         optInFastD_MAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outFastK,
         outFastD
 ); }
@@ -7686,7 +7686,7 @@ public RetCode stochRsi(
             )
             MAType optInFastD_MAType,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outFastK",
                 flags     = 1,
@@ -7709,7 +7709,7 @@ public RetCode stochRsi(
         optInFastD_Period,
         optInFastD_MAType,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outFastK,
         outFastD
 ); }
@@ -7755,7 +7755,7 @@ public RetCode sum(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -7769,7 +7769,7 @@ public RetCode sum(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -7834,7 +7834,7 @@ public RetCode t3(
             )
             double optInVFactor,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -7849,7 +7849,7 @@ public RetCode t3(
         optInTimePeriod,
         optInVFactor,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -7894,7 +7894,7 @@ public RetCode tema(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -7908,7 +7908,7 @@ public RetCode tema(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -7938,7 +7938,7 @@ public RetCode trueRange(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -7953,7 +7953,7 @@ public RetCode trueRange(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -7998,7 +7998,7 @@ public RetCode trima(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8012,7 +8012,7 @@ public RetCode trima(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -8057,7 +8057,7 @@ public RetCode trix(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8071,7 +8071,7 @@ public RetCode trix(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -8116,7 +8116,7 @@ public RetCode tsf(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8130,7 +8130,7 @@ public RetCode tsf(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -8160,7 +8160,7 @@ public RetCode typPrice(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8175,7 +8175,7 @@ public RetCode typPrice(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -8260,7 +8260,7 @@ public RetCode ultOsc(
             )
             int optInTimePeriod3,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8278,7 +8278,7 @@ public RetCode ultOsc(
         optInTimePeriod2,
         optInTimePeriod3,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -8343,7 +8343,7 @@ public RetCode variance(
             )
             double optInNbDev,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8358,7 +8358,7 @@ public RetCode variance(
         optInTimePeriod,
         optInNbDev,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -8388,7 +8388,7 @@ public RetCode wclPrice(
             double inLow [],
             double inClose [],
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8403,7 +8403,7 @@ public RetCode wclPrice(
         inLow ,
         inClose ,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -8450,7 +8450,7 @@ public RetCode willR(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8466,7 +8466,7 @@ public RetCode willR(
         inClose ,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
@@ -8511,7 +8511,7 @@ public RetCode wma(
             )
             int optInTimePeriod,
             MInteger     outBegIdx,
-            MInteger     outNbElement,
+            MInteger     outNBElement,
             @OutputParameterInfo(
                 paramName = "outReal",
                 flags     = 1,
@@ -8525,7 +8525,7 @@ public RetCode wma(
         inReal,
         optInTimePeriod,
         outBegIdx,
-        outNbElement,
+        outNBElement,
         outReal
 ); }
 
