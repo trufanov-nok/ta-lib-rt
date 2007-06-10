@@ -173,6 +173,164 @@
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
+		<Configuration
+			Name="Debug SubArray|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="2"
+			ManagedExtensions="3"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\..\c\src\ta_common; ..\..\..\dotnet\src\Core;..\..\..\c\include"
+				PreprocessorDefinitions="WIN32;_DEBUG;CODE_ANALYSIS;USE_SUBARRAY"
+				MinimalRebuild="false"
+				BasicRuntimeChecks="0"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				WarnAsError="true"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+				EnablePREfast="false"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(NoInherit)"
+				LinkIncremental="2"
+				GenerateDebugInformation="true"
+				AssemblyDebug="1"
+				TargetMachine="1"
+				KeyFile="$(ProjectDir)..\key.snk"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+				EnableFxCop="false"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release SubArray|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="2"
+			ManagedExtensions="3"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				AdditionalIncludeDirectories="..\..\..\c\src\ta_common; ..\..\..\dotnet\src\Core;..\..\..\c\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;USE_SUBARRAY"
+				MinimalRebuild="false"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(NoInherit)"
+				LinkIncremental="1"
+				GenerateDebugInformation="true"
+				TargetMachine="0"
+				KeyFile="$(ProjectDir)..\key.snk"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 		<AssemblyReference
@@ -217,6 +375,22 @@
 						UsePrecompiledHeader="1"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug SubArray|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release SubArray|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\TA-Lib-Core.cpp"
@@ -243,3344 +417,4891 @@
 						CompileAs="2"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug SubArray|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAs="2"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release SubArray|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAs="2"
+					/>
+				</FileConfiguration>
 			</File>
 			<Filter
 				Name="ta_func"
 				>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_AD.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_AD.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_ADOSC.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_ADX.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_ADXR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_APO.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_AROON.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_AROONOSC.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_ATR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_AVGPRICE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_BBANDS.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_BETA.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_BOP.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CCI.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDL2CROWS.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDL3BLACKCROWS.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDL3INSIDE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDL3LINESTRIKE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDL3OUTSIDE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDL3STARSINSOUTH.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDL3WHITESOLDIERS.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLABANDONEDBABY.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLADVANCEBLOCK.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLBELTHOLD.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLBREAKAWAY.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLCLOSINGMARUBOZU.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLCONCEALBABYSWALL.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLCOUNTERATTACK.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLDARKCLOUDCOVER.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLDOJI.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLDOJISTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLDRAGONFLYDOJI.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLENGULFING.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLEVENINGDOJISTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLEVENINGSTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLGAPSIDESIDEWHITE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLGRAVESTONEDOJI.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLHAMMER.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLHANGINGMAN.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLHARAMI.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLHARAMICROSS.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLHIGHWAVE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLHIKKAKE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLHIKKAKEMOD.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLHOMINGPIGEON.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLIDENTICAL3CROWS.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLINNECK.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLINVERTEDHAMMER.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLKICKING.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLKICKINGBYLENGTH.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLLADDERBOTTOM.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLLONGLEGGEDDOJI.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLLONGLINE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLMARUBOZU.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLMATCHINGLOW.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLMATHOLD.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLMORNINGDOJISTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLMORNINGSTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLONNECK.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLPIERCING.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLRICKSHAWMAN.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLRISEFALL3METHODS.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLSEPARATINGLINES.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLSHOOTINGSTAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLSHORTLINE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLSPINNINGTOP.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release SubArray|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ADOSC.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLSTALLEDPATTERN.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ADX.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ADXR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLSTICKSANDWICH.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_APO.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_AROON.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLTAKURI.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_AROONOSC.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ATR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLTASUKIGAP.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_AVGPRICE.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_BBANDS.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLTHRUSTING.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_BETA.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_BOP.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLTRISTAR.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CCI.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDL2CROWS.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLUNIQUE3RIVER.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDL3BLACKCROWS.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDL3INSIDE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLUPSIDEGAP2CROWS.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDL3LINESTRIKE.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDL3OUTSIDE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CDLXSIDEGAP3METHODS.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDL3STARSINSOUTH.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDL3WHITESOLDIERS.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CMO.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLABANDONEDBABY.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLADVANCEBLOCK.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_CORREL.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLBELTHOLD.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLBREAKAWAY.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_DEMA.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLCLOSINGMARUBOZU.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLCONCEALBABYSWALL.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_DX.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLCOUNTERATTACK.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLDARKCLOUDCOVER.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_EMA.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLDOJI.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLDOJISTAR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_HT_DCPERIOD.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLDRAGONFLYDOJI.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLENGULFING.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_HT_DCPHASE.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLEVENINGDOJISTAR.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLEVENINGSTAR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_HT_PHASOR.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLGAPSIDESIDEWHITE.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLGRAVESTONEDOJI.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_HT_SINE.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLHAMMER.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLHANGINGMAN.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_HT_TRENDLINE.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLHARAMI.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLHARAMICROSS.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_HT_TRENDMODE.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLHIGHWAVE.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLHIKKAKE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_KAMA.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLHIKKAKEMOD.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLHOMINGPIGEON.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_LINEARREG.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLIDENTICAL3CROWS.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLINNECK.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_LINEARREG_ANGLE.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLINVERTEDHAMMER.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLKICKING.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_LINEARREG_INTERCEPT.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLKICKINGBYLENGTH.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLLADDERBOTTOM.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_LINEARREG_SLOPE.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLLONGLEGGEDDOJI.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLLONGLINE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MA.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLMARUBOZU.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLMATCHINGLOW.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MACD.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLMATHOLD.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLMORNINGDOJISTAR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MACDEXT.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLMORNINGSTAR.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLONNECK.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MACDFIX.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLPIERCING.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLRICKSHAWMAN.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MAMA.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLRISEFALL3METHODS.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLSEPARATINGLINES.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MAVP.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLSHOOTINGSTAR.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLSHORTLINE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MAX.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLSPINNINGTOP.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLSTALLEDPATTERN.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MAXINDEX.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLSTICKSANDWICH.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLTAKURI.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MEDPRICE.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLTASUKIGAP.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLTHRUSTING.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MFI.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLTRISTAR.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLUNIQUE3RIVER.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MIDPOINT.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLUPSIDEGAP2CROWS.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CDLXSIDEGAP3METHODS.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MIDPRICE.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CMO.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_CORREL.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MIN.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_DEMA.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_DX.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MININDEX.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_EMA.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_HT_DCPERIOD.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MINMAX.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_HT_DCPHASE.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_HT_PHASOR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MINMAXINDEX.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_HT_SINE.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_HT_TRENDLINE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MINUS_DI.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_HT_TRENDMODE.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_KAMA.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MINUS_DM.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_LINEARREG.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_LINEARREG_ANGLE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_MOM.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_LINEARREG_INTERCEPT.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_LINEARREG_SLOPE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_NATR.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MA.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MACD.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_OBV.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MACDEXT.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MACDFIX.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_PLUS_DI.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MAMA.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MAVP.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_PLUS_DM.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MAX.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MAXINDEX.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_PPO.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MEDPRICE.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MFI.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_ROC.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MIDPOINT.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MIDPRICE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_ROCP.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MIN.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MININDEX.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_ROCR.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MINMAX.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MINMAXINDEX.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_ROCR100.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MINUS_DI.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MINUS_DM.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_RSI.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_MOM.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_NATR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_SAR.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_OBV.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_PLUS_DI.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_SAREXT.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_PLUS_DM.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_PPO.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_SMA.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ROC.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ROCP.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_STDDEV.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ROCR.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ROCR100.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_STOCH.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_RSI.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_SAR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_STOCHF.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_SAREXT.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_SMA.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_STOCHRSI.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_STDDEV.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_STOCH.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_SUM.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_STOCHF.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_STOCHRSI.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_T3.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_SUM.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_T3.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_TEMA.c">
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_TEMA.c"
-					>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_TRANGE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_TRANGE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_TRIMA.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_TRIMA.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_TRIX.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_TRIX.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_TSF.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_TSF.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_TYPPRICE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_TYPPRICE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_ULTOSC.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_ULTOSC.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_VAR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_VAR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_WCLPRICE.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_WCLPRICE.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_WILLR.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_WILLR.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\..\c\src\ta_func\ta_WMA.c"
-					>
+					RelativePath="..\..\..\c\src\ta_func\ta_WMA.c">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories=""
+							UsePrecompiledHeader="0"
+							CompileAs="2"/>
+					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|Win32"
-						>
+						Name="Debug SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
+						Name="Release SubArray|Win32">
 						<Tool
 							Name="VCCLCompilerTool"
 							AdditionalIncludeDirectories=""
 							UsePrecompiledHeader="0"
-							CompileAs="2"
-						/>
+							CompileAs="2"/>
 					</FileConfiguration>
 				</File>
 			</Filter>

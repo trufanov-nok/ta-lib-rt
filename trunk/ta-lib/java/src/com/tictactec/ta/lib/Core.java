@@ -15043,12 +15043,11 @@ public class Core {
       switch( optInMAType )
       {
          case Sma :
-            retCode = TA_INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            retCode = sma ( startIdx, endIdx, inReal, optInTimePeriod,
             outBegIdx, outNBElement, outReal );
          break;
          case Ema :
-            retCode = TA_INT_EMA ( startIdx, endIdx, inReal,
-            optInTimePeriod, ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
+            retCode = ema ( startIdx, endIdx, inReal, optInTimePeriod,
             outBegIdx, outNBElement, outReal );
          break;
          case Wma :
@@ -15121,12 +15120,11 @@ public class Core {
       switch( optInMAType )
       {
          case Sma :
-            retCode = TA_INT_SMA ( startIdx, endIdx, inReal, optInTimePeriod,
+            retCode = sma ( startIdx, endIdx, inReal, optInTimePeriod,
             outBegIdx, outNBElement, outReal );
          break;
          case Ema :
-            retCode = TA_INT_EMA ( startIdx, endIdx, inReal,
-            optInTimePeriod, ((double)2.0 / ((double)(optInTimePeriod + 1))) ,
+            retCode = ema ( startIdx, endIdx, inReal, optInTimePeriod,
             outBegIdx, outNBElement, outReal );
          break;
          case Wma :
