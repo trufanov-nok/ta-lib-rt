@@ -58,10 +58,40 @@ namespace TicTacTec
 	{
 	   namespace Library
 	   {
+          #if defined( USE_SUBARRAY )
+		   public ref class SubArray sealed
+		   {
+		   public:
+				cli::array<double>^ mDataArray;
+				int mOffset;
+				SubArray( cli::array<double>^ dataArray, int offset )
+				{
+				   mDataArray = dataArray;
+				   mOffset = offset;
+				}
+
+			    property double default[int]
+				{
+				public:
+					double get(int offset)
+					{
+						return mDataArray[mOffset+offset];
+					}    
+
+					/*
+					void set(String^ s, int age)
+					{
+						h->Add(s,age);
+					}*/
+				}				   
+		   };
+          #endif
+
 		  public ref class Core abstract sealed
 		  {
 		  public:
 			 #include "ta_defs.h"
+
 
 		  private:
 			  ref class CandleSetting sealed 
@@ -101,81 +131,183 @@ namespace TicTacTec
 
 			 static GlobalsType^ Globals;
 
+             #if defined( USE_SUBARRAY )
+			 static  enum class RetCode TA_INT_EMA( int           startIdx,
+									int           endIdx,
+									SubArray^ inReal_0,
+									int           optInTimePeriod_0,
+									double        optInK_1,
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0);
+             static  enum class RetCode TA_INT_EMA( int           startIdx,
+					                int           endIdx,
+					                cli::array<double>^ inReal_0,
+					                int           optInTimePeriod_0,
+					                double        optInK_1,
+					                [Out]int% outBegIdx,
+					                [Out]int% outNbElement,
+					                cli::array<double>^ outReal_0)
+             {
+	            return TA_INT_EMA( startIdx, endIdx, gcnew SubArray(inReal_0,0), optInTimePeriod_0, optInK_1, outBegIdx, outNbElement, outReal_0 );
+             }
+             #else
 			 static  enum class RetCode TA_INT_EMA( int           startIdx,
 									int           endIdx,
 									cli::array<double>^ inReal_0,
-									int           optInTimePeriod_0, /* From 1 to 200 */
+									int           optInTimePeriod_0, 
+									double        optInK_1,
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0);
+             #endif
+
+			 static  enum class RetCode TA_INT_EMA( int           startIdx,
+									int           endIdx,
+									cli::array<float>^ inReal_0,
+									int           optInTimePeriod_0, 
 									double        optInK_1,
 									[Out]int% outBegIdx,
 									[Out]int% outNbElement,
 									cli::array<double>^ outReal_0);
 
-			 static  enum class RetCode TA_INT_EMA( int           startIdx,
-									int           endIdx,
-									cli::array<float>^ inReal_0,
-									int           optInTimePeriod_0, /* From 1 to 200 */
-									double        optInK_1,
-									[Out]int% outBegIdx,
-									[Out]int% outNbElement,
-									cli::array<double>^ outReal_0);
+             #if defined( USE_SUBARRAY )
+             static  enum class RetCode TA_INT_SMA( int           startIdx,
+					                int           endIdx,
+					                SubArray^ inReal_0,
+					                int           optInTimePeriod_0,
+					                [Out]int% outBegIdx,
+					                [Out]int% outNbElement,
+					                cli::array<double>^ outReal_0);
 
+             static  enum class RetCode TA_INT_SMA( int           startIdx,
+					                int           endIdx,
+					                cli::array<double>^ inReal_0,
+					                int           optInTimePeriod_0, 
+					                [Out]int% outBegIdx,
+					                [Out]int% outNbElement,
+					                cli::array<double>^ outReal_0)
+             {
+	            return TA_INT_SMA( startIdx, endIdx, gcnew SubArray(inReal_0,0), optInTimePeriod_0, outBegIdx, outNbElement, outReal_0 );
+             }
+             #else
 			 static  enum class RetCode TA_INT_SMA( int     startIdx,
 									int     endIdx,
 									cli::array<double>^ inReal_0,
-									int     optInTimePeriod_0, /* From 1 to 200 */
+									int     optInTimePeriod_0, 
 									[Out]int% outBegIdx,
 									[Out]int% outNbElement,
 									cli::array<double>^ outReal_0);
+             #endif
 
 			 static  enum class RetCode TA_INT_SMA( int     startIdx,
 									int     endIdx,
 									cli::array<float>^ inReal_0,
-									int     optInTimePeriod_0, /* From 1 to 200 */
+									int     optInTimePeriod_0, 
 									[Out]int% outBegIdx,
 									[Out]int% outNbElement,
 									cli::array<double>^ outReal_0 );
 
+             #if defined( USE_SUBARRAY )
+             static  enum class RetCode TA_INT_MACD( int           startIdx,
+					                 int           endIdx,
+					                 SubArray^ inReal_0,
+									 int    optInFastPeriod_0, /* 0 is fix 12 */
+									 int    optInSlowPeriod_1, /* 0 is fix 26 */
+									 int    optInSignalPeriod_2,
+					                 [Out]int% outBegIdx,
+					                 [Out]int% outNbElement,
+									 cli::array<double>^ outMACD_0,
+									 cli::array<double>^ outMACDSignal_1,
+									 cli::array<double>^ outMACDHist_2 );
+
+             static  enum class RetCode TA_INT_MACD( int           startIdx,
+					                 int           endIdx,
+					                 cli::array<double>^ inReal_0,
+									 int    optInFastPeriod_0, /* 0 is fix 12 */
+									 int    optInSlowPeriod_1, /* 0 is fix 26 */
+									 int    optInSignalPeriod_2, 
+					                 [Out]int% outBegIdx,
+					                 [Out]int% outNbElement,
+									 cli::array<double>^ outMACD_0,
+									 cli::array<double>^ outMACDSignal_1,
+									 cli::array<double>^ outMACDHist_2 )
+             {
+	            return TA_INT_MACD( startIdx, endIdx, gcnew SubArray(inReal_0,0), optInFastPeriod_0, optInSlowPeriod_1, optInSignalPeriod_2, outBegIdx, outNbElement, outMACD_0, outMACDSignal_1, outMACDHist_2 );
+             }
+             #else
+
 			 static  enum class RetCode TA_INT_MACD( int    startIdx,
 									 int    endIdx,
 									 cli::array<double>^ inReal_0,
-									 int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
-									 int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
-									 int    optInSignalPeriod_2, /* From 1 to 200 */
+									 int    optInFastPeriod_0, /* 0 is fix 12 */
+									 int    optInSlowPeriod_1, /* 0 is fix 26 */
+									 int    optInSignalPeriod_2, 
 									 [Out]int% outBegIdx,
 									 [Out]int% outNbElement,
 									 cli::array<double>^ outMACD_0,
 									 cli::array<double>^ outMACDSignal_1,
 									 cli::array<double>^ outMACDHist_2 );
+             #endif
 
 			 static  enum class RetCode TA_INT_MACD( int    startIdx,
 									 int    endIdx,
 									 cli::array<float>^ inReal_0,
-									 int    optInFastPeriod_0, /* From 1 to 200, 0 is fix 12 */
-									 int    optInSlowPeriod_1, /* From 1 to 200, 0 is fix 26 */
-									 int    optInSignalPeriod_2, /* From 1 to 200 */
+									 int    optInFastPeriod_0, /* 0 is fix 12 */
+									 int    optInSlowPeriod_1, /* 0 is fix 26 */
+									 int    optInSignalPeriod_2, 
 									 [Out]int% outBegIdx,
 									 [Out]int% outNbElement,
 									 cli::array<double>^ outMACD_0,
 									 cli::array<double>^ outMACDSignal_1,
 									 cli::array<double>^ outMACDHist_2 );
 
+             #if defined( USE_SUBARRAY )
 			 static  enum class RetCode TA_INT_PO( int    startIdx,
 								   int    endIdx,
-								   cli::array<double>^ inReal_0,
-								   int    optInFastPeriod_0, /* From 1 to 200 */
-								   int    optInSlowPeriod_1, /* From 1 to 200 */
+								   SubArray^ inReal_0,
+								   int    optInFastPeriod_0, 
+								   int    optInSlowPeriod_1, 
 								   MAType optInMethod_2,
 								   [Out]int% outBegIdx,
 								   [Out]int% outNbElement,
 								   cli::array<double>^ outReal_0,
 								   cli::array<double>^ tempBuffer,
 								   int  doPercentageOutput );
+
+			 static  enum class RetCode TA_INT_PO( int    startIdx,
+								   int    endIdx,
+								   cli::array<double>^ inReal_0,
+								   int    optInFastPeriod_0, 
+								   int    optInSlowPeriod_1, 
+								   MAType optInMethod_2,
+								   [Out]int% outBegIdx,
+								   [Out]int% outNbElement,
+								   cli::array<double>^ outReal_0,
+								   cli::array<double>^ tempBuffer,
+								   int  doPercentageOutput )
+             {
+	            return TA_INT_PO( startIdx, endIdx, gcnew SubArray(inReal_0,0), optInFastPeriod_0, optInSlowPeriod_1, optInMethod_2, outBegIdx, outNbElement, outReal_0, tempBuffer, doPercentageOutput );
+             }
+             #else
+			 static  enum class RetCode TA_INT_PO( int    startIdx,
+								   int    endIdx,
+								   cli::array<double>^ inReal_0,
+								   int    optInFastPeriod_0, 
+								   int    optInSlowPeriod_1, 
+								   MAType optInMethod_2,
+								   [Out]int% outBegIdx,
+								   [Out]int% outNbElement,
+								   cli::array<double>^ outReal_0,
+								   cli::array<double>^ tempBuffer,
+								   int  doPercentageOutput );
+             #endif
 
 			 static  enum class RetCode TA_INT_PO( int    startIdx,
 								   int    endIdx,
 								   cli::array<float>^ inReal_0,
-								   int    optInFastPeriod_0, /* From 1 to 200 */
-								   int    optInSlowPeriod_1, /* From 1 to 200 */
+								   int    optInFastPeriod_0, 
+								   int    optInSlowPeriod_1, 
 								   MAType optInMethod_2,
 								   [Out]int% outBegIdx,
 								   [Out]int% outNbElement,
@@ -183,6 +315,25 @@ namespace TicTacTec
 								   cli::array<double>^ tempBuffer,
 								   int  doPercentageOutput );
 
+             #if defined( USE_SUBARRAY )
+			 static  enum class RetCode TA_INT_VAR( int    startIdx,
+									int    endIdx,
+									SubArray^ inReal_0,
+									int    optInTimePeriod_0,                       
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0);
+			 static  enum class RetCode TA_INT_VAR( int    startIdx,
+									int    endIdx,
+									cli::array<double>^ inReal_0,
+									int    optInTimePeriod_0,                       
+									[Out]int% outBegIdx,
+									[Out]int% outNbElement,
+									cli::array<double>^ outReal_0)
+			 {
+				 return TA_INT_VAR( startIdx, endIdx, gcnew SubArray(inReal_0,0), optInTimePeriod_0, outBegIdx, outNbElement, outReal_0 );
+			 }
+             #else
 			 static  enum class RetCode TA_INT_VAR( int    startIdx,
 									int    endIdx,
 									cli::array<double>^ inReal_0,
@@ -190,6 +341,7 @@ namespace TicTacTec
 									[Out]int% outBegIdx,
 									[Out]int% outNbElement,
 									cli::array<double>^ outReal_0);
+             #endif
 
 			 static  enum class RetCode TA_INT_VAR( int    startIdx,
 									int    endIdx,
@@ -199,12 +351,31 @@ namespace TicTacTec
 									[Out]int% outNbElement,
 									cli::array<double>^ outReal_0);
 
+
+             #if defined( USE_SUBARRAY )
+			 static void TA_INT_stddev_using_precalc_ma( SubArray^  inReal,
+												  cli::array<double>^ inMovAvg,
+												  int inMovAvgBegIdx,
+												  int inMovAvgNbElement,
+												  int timePeriod,
+												  cli::array<double>^ output );
+			 static void TA_INT_stddev_using_precalc_ma( cli::array<double>^  inReal,
+												  cli::array<double>^ inMovAvg,
+												  int inMovAvgBegIdx,
+												  int inMovAvgNbElement,
+												  int timePeriod,
+												  cli::array<double>^ output )
+			 {
+				 return TA_INT_stddev_using_precalc_ma(gcnew SubArray(inReal,0), inMovAvg, inMovAvgBegIdx, inMovAvgNbElement, timePeriod, output );
+			 }
+             #else
 			 static void TA_INT_stddev_using_precalc_ma( cli::array<double>^  inReal,
 												  cli::array<double>^ inMovAvg,
 												  int inMovAvgBegIdx,
 												  int inMovAvgNbElement,
 												  int timePeriod,
 												  cli::array<double>^ output );
+             #endif
 
 			 static void TA_INT_stddev_using_precalc_ma( cli::array<float>^ inReal,
 												  cli::array<double>^ inMovAvg,
@@ -305,6 +476,36 @@ namespace TicTacTec
 /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
          static int AdLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Ad( int    startIdx,
+                                       int    endIdx,
+                                       SubArray^    inHigh,
+                                       SubArray^    inLow,
+                                       SubArray^    inClose,
+                                       SubArray^    inVolume,
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal );
+
+         static enum class RetCode Ad( int    startIdx,
+                                       int    endIdx,
+                                       cli::array<double>^ inHigh,
+                                       cli::array<double>^ inLow,
+                                       cli::array<double>^ inClose,
+                                       cli::array<double>^ inVolume,
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal )
+         { return Ad( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+             gcnew SubArray(inVolume,0) ,
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Ad( int    startIdx,
                                        int    endIdx,
                                        cli::array<double>^ inHigh,
@@ -314,6 +515,7 @@ namespace TicTacTec
                                        [Out]int%    outBegIdx,
                                        [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Ad( int    startIdx,
                                        int    endIdx,
                                        cli::array<float>^ inHigh,
@@ -330,6 +532,42 @@ namespace TicTacTec
          static int AdOscLookback( int           optInFastPeriod, /* From 2 to 100000 */
                                  int           optInSlowPeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode AdOsc( int    startIdx,
+                                          int    endIdx,
+                                          SubArray^    inHigh,
+                                          SubArray^    inLow,
+                                          SubArray^    inClose,
+                                          SubArray^    inVolume,
+                                          int           optInFastPeriod, /* From 2 to 100000 */
+                                          int           optInSlowPeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+
+         static enum class RetCode AdOsc( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inHigh,
+                                          cli::array<double>^ inLow,
+                                          cli::array<double>^ inClose,
+                                          cli::array<double>^ inVolume,
+                                          int           optInFastPeriod, /* From 2 to 100000 */
+                                          int           optInSlowPeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal )
+         { return AdOsc( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+             gcnew SubArray(inVolume,0) ,
+              optInFastPeriod, /* From 2 to 100000 */
+              optInSlowPeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode AdOsc( int    startIdx,
                                           int    endIdx,
                                           cli::array<double>^ inHigh,
@@ -341,6 +579,7 @@ namespace TicTacTec
                                           [Out]int%    outBegIdx,
                                           [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
+         #endif
          static enum class RetCode AdOsc( int    startIdx,
                                           int    endIdx,
                                           cli::array<float>^ inHigh,
@@ -358,6 +597,36 @@ namespace TicTacTec
 
          static int AdxLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Adx( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inHigh,
+                                        SubArray^    inLow,
+                                        SubArray^    inClose,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Adx( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inHigh,
+                                        cli::array<double>^ inLow,
+                                        cli::array<double>^ inClose,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Adx( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Adx( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inHigh,
@@ -367,6 +636,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Adx( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inHigh,
@@ -382,6 +652,36 @@ namespace TicTacTec
 
          static int AdxrLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Adxr( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inHigh,
+                                         SubArray^    inLow,
+                                         SubArray^    inClose,
+                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Adxr( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inHigh,
+                                         cli::array<double>^ inLow,
+                                         cli::array<double>^ inClose,
+                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Adxr( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Adxr( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inHigh,
@@ -391,6 +691,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Adxr( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inHigh,
@@ -407,6 +708,36 @@ namespace TicTacTec
          static int ApoLookback( int           optInFastPeriod, /* From 2 to 100000 */
                                int           optInSlowPeriod, /* From 2 to 100000 */
                                MAType        optInMAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Apo( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInFastPeriod, /* From 2 to 100000 */
+                                        int           optInSlowPeriod, /* From 2 to 100000 */
+                                        MAType        optInMAType,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Apo( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInFastPeriod, /* From 2 to 100000 */
+                                        int           optInSlowPeriod, /* From 2 to 100000 */
+                                        MAType        optInMAType,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Apo( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInFastPeriod, /* From 2 to 100000 */
+              optInSlowPeriod, /* From 2 to 100000 */
+              optInMAType,
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Apo( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -416,6 +747,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Apo( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -431,6 +763,36 @@ namespace TicTacTec
 
          static int AroonLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Aroon( int    startIdx,
+                                          int    endIdx,
+                                          SubArray^    inHigh,
+                                          SubArray^    inLow,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outAroonDown,
+                                          cli::array<double>^  outAroonUp );
+
+         static enum class RetCode Aroon( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inHigh,
+                                          cli::array<double>^ inLow,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outAroonDown,
+                                          cli::array<double>^  outAroonUp )
+         { return Aroon( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outAroonDown ,
+              outAroonUp  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Aroon( int    startIdx,
                                           int    endIdx,
                                           cli::array<double>^ inHigh,
@@ -440,6 +802,7 @@ namespace TicTacTec
                                           [Out]int%    outNBElement,
                                           cli::array<double>^  outAroonDown,
                                           cli::array<double>^  outAroonUp );
+         #endif
          static enum class RetCode Aroon( int    startIdx,
                                           int    endIdx,
                                           cli::array<float>^ inHigh,
@@ -455,6 +818,33 @@ namespace TicTacTec
 
          static int AroonOscLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode AroonOsc( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inHigh,
+                                             SubArray^    inLow,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal );
+
+         static enum class RetCode AroonOsc( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal )
+         { return AroonOsc( startIdx,    endIdx,
+                gcnew SubArray(inHigh,0) ,
+                gcnew SubArray(inLow,0) ,
+                 optInTimePeriod, /* From 2 to 100000 */
+                outBegIdx,
+                outNBElement,
+                 outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode AroonOsc( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inHigh,
@@ -463,6 +853,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
+         #endif
          static enum class RetCode AroonOsc( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inHigh,
@@ -477,6 +868,36 @@ namespace TicTacTec
 
          static int AtrLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Atr( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inHigh,
+                                        SubArray^    inLow,
+                                        SubArray^    inClose,
+                                        int           optInTimePeriod, /* From 1 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Atr( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inHigh,
+                                        cli::array<double>^ inLow,
+                                        cli::array<double>^ inClose,
+                                        int           optInTimePeriod, /* From 1 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Atr( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+              optInTimePeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Atr( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inHigh,
@@ -486,6 +907,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Atr( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inHigh,
@@ -501,6 +923,36 @@ namespace TicTacTec
 
          static int AvgPriceLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode AvgPrice( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inOpen,
+                                             SubArray^    inHigh,
+                                             SubArray^    inLow,
+                                             SubArray^    inClose,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal );
+
+         static enum class RetCode AvgPrice( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inOpen,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             cli::array<double>^ inClose,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal )
+         { return AvgPrice( startIdx,    endIdx,
+                gcnew SubArray(inOpen,0) ,
+                gcnew SubArray(inHigh,0) ,
+                gcnew SubArray(inLow,0) ,
+                gcnew SubArray(inClose,0) ,
+                outBegIdx,
+                outNBElement,
+                 outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode AvgPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inOpen,
@@ -510,6 +962,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
+         #endif
          static enum class RetCode AvgPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inOpen,
@@ -527,6 +980,45 @@ namespace TicTacTec
                                   double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                                   double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
                                   MAType        optInMAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Bbands( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                           double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                           MAType        optInMAType,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outRealUpperBand,
+                                           cli::array<double>^  outRealMiddleBand,
+                                           cli::array<double>^  outRealLowerBand );
+
+         static enum class RetCode Bbands( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                           double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                           MAType        optInMAType,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outRealUpperBand,
+                                           cli::array<double>^  outRealMiddleBand,
+                                           cli::array<double>^  outRealLowerBand )
+         { return Bbands( startIdx,  endIdx,
+             gcnew SubArray(inReal,0),
+               optInTimePeriod, /* From 2 to 100000 */
+               optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+               optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+               optInMAType,
+              outBegIdx,
+              outNBElement,
+               outRealUpperBand ,
+               outRealMiddleBand ,
+               outRealLowerBand  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Bbands( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inReal,
@@ -539,6 +1031,7 @@ namespace TicTacTec
                                            cli::array<double>^  outRealUpperBand,
                                            cli::array<double>^  outRealMiddleBand,
                                            cli::array<double>^  outRealLowerBand );
+         #endif
          static enum class RetCode Bbands( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
@@ -557,6 +1050,33 @@ namespace TicTacTec
 
          static int BetaLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Beta( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal0,
+                                         SubArray^    inReal1,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Beta( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal0,
+                                         cli::array<double>^ inReal1,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Beta( startIdx, endIdx,
+            gcnew SubArray(inReal0,0),
+            gcnew SubArray(inReal1,0),
+              optInTimePeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Beta( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal0,
@@ -565,6 +1085,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Beta( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal0,
@@ -579,6 +1100,36 @@ namespace TicTacTec
 
          static int BopLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Bop( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inOpen,
+                                        SubArray^    inHigh,
+                                        SubArray^    inLow,
+                                        SubArray^    inClose,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Bop( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inOpen,
+                                        cli::array<double>^ inHigh,
+                                        cli::array<double>^ inLow,
+                                        cli::array<double>^ inClose,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Bop( startIdx, endIdx,
+             gcnew SubArray(inOpen,0) ,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Bop( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inOpen,
@@ -588,6 +1139,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Bop( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inOpen,
@@ -603,6 +1155,36 @@ namespace TicTacTec
 
          static int CciLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cci( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inHigh,
+                                        SubArray^    inLow,
+                                        SubArray^    inClose,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Cci( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inHigh,
+                                        cli::array<double>^ inLow,
+                                        cli::array<double>^ inClose,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Cci( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cci( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inHigh,
@@ -612,6 +1194,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Cci( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inHigh,
@@ -627,6 +1210,36 @@ namespace TicTacTec
 
          static int Cdl2CrowsLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cdl2Crows( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inOpen,
+                                              SubArray^    inHigh,
+                                              SubArray^    inLow,
+                                              SubArray^    inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger );
+
+         static enum class RetCode Cdl2Crows( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inOpen,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger )
+         { return Cdl2Crows( startIdx,     endIdx,
+                 gcnew SubArray(inOpen,0) ,
+                 gcnew SubArray(inHigh,0) ,
+                 gcnew SubArray(inLow,0) ,
+                 gcnew SubArray(inClose,0) ,
+                 outBegIdx,
+                 outNBElement,
+                  outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cdl2Crows( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inOpen,
@@ -636,6 +1249,7 @@ namespace TicTacTec
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode Cdl2Crows( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inOpen,
@@ -651,6 +1265,36 @@ namespace TicTacTec
 
          static int Cdl3BlackCrowsLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cdl3BlackCrows( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inOpen,
+                                                   SubArray^    inHigh,
+                                                   SubArray^    inLow,
+                                                   SubArray^    inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger );
+
+         static enum class RetCode Cdl3BlackCrows( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inOpen,
+                                                   cli::array<double>^ inHigh,
+                                                   cli::array<double>^ inLow,
+                                                   cli::array<double>^ inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger )
+         { return Cdl3BlackCrows( startIdx,          endIdx,
+                      gcnew SubArray(inOpen,0) ,
+                      gcnew SubArray(inHigh,0) ,
+                      gcnew SubArray(inLow,0) ,
+                      gcnew SubArray(inClose,0) ,
+                      outBegIdx,
+                      outNBElement,
+                       outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cdl3BlackCrows( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inOpen,
@@ -660,6 +1304,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode Cdl3BlackCrows( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inOpen,
@@ -675,6 +1320,36 @@ namespace TicTacTec
 
          static int Cdl3InsideLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cdl3Inside( int    startIdx,
+                                               int    endIdx,
+                                               SubArray^    inOpen,
+                                               SubArray^    inHigh,
+                                               SubArray^    inLow,
+                                               SubArray^    inClose,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger );
+
+         static enum class RetCode Cdl3Inside( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inOpen,
+                                               cli::array<double>^ inHigh,
+                                               cli::array<double>^ inLow,
+                                               cli::array<double>^ inClose,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger )
+         { return Cdl3Inside( startIdx,      endIdx,
+                  gcnew SubArray(inOpen,0) ,
+                  gcnew SubArray(inHigh,0) ,
+                  gcnew SubArray(inLow,0) ,
+                  gcnew SubArray(inClose,0) ,
+                  outBegIdx,
+                  outNBElement,
+                   outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cdl3Inside( int    startIdx,
                                                int    endIdx,
                                                cli::array<double>^ inOpen,
@@ -684,6 +1359,7 @@ namespace TicTacTec
                                                [Out]int%    outBegIdx,
                                                [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode Cdl3Inside( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inOpen,
@@ -699,6 +1375,36 @@ namespace TicTacTec
 
          static int Cdl3LineStrikeLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cdl3LineStrike( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inOpen,
+                                                   SubArray^    inHigh,
+                                                   SubArray^    inLow,
+                                                   SubArray^    inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger );
+
+         static enum class RetCode Cdl3LineStrike( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inOpen,
+                                                   cli::array<double>^ inHigh,
+                                                   cli::array<double>^ inLow,
+                                                   cli::array<double>^ inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger )
+         { return Cdl3LineStrike( startIdx,          endIdx,
+                      gcnew SubArray(inOpen,0) ,
+                      gcnew SubArray(inHigh,0) ,
+                      gcnew SubArray(inLow,0) ,
+                      gcnew SubArray(inClose,0) ,
+                      outBegIdx,
+                      outNBElement,
+                       outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cdl3LineStrike( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inOpen,
@@ -708,6 +1414,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode Cdl3LineStrike( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inOpen,
@@ -723,6 +1430,36 @@ namespace TicTacTec
 
          static int Cdl3OutsideLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cdl3Outside( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inOpen,
+                                                SubArray^    inHigh,
+                                                SubArray^    inLow,
+                                                SubArray^    inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger );
+
+         static enum class RetCode Cdl3Outside( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inOpen,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger )
+         { return Cdl3Outside( startIdx,       endIdx,
+                   gcnew SubArray(inOpen,0) ,
+                   gcnew SubArray(inHigh,0) ,
+                   gcnew SubArray(inLow,0) ,
+                   gcnew SubArray(inClose,0) ,
+                   outBegIdx,
+                   outNBElement,
+                    outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cdl3Outside( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inOpen,
@@ -732,6 +1469,7 @@ namespace TicTacTec
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode Cdl3Outside( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inOpen,
@@ -747,6 +1485,36 @@ namespace TicTacTec
 
          static int Cdl3StarsInSouthLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cdl3StarsInSouth( int    startIdx,
+                                                     int    endIdx,
+                                                     SubArray^    inOpen,
+                                                     SubArray^    inHigh,
+                                                     SubArray^    inLow,
+                                                     SubArray^    inClose,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNBElement,
+                                                     cli::array<int>^  outInteger );
+
+         static enum class RetCode Cdl3StarsInSouth( int    startIdx,
+                                                     int    endIdx,
+                                                     cli::array<double>^ inOpen,
+                                                     cli::array<double>^ inHigh,
+                                                     cli::array<double>^ inLow,
+                                                     cli::array<double>^ inClose,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNBElement,
+                                                     cli::array<int>^  outInteger )
+         { return Cdl3StarsInSouth( startIdx,            endIdx,
+                        gcnew SubArray(inOpen,0) ,
+                        gcnew SubArray(inHigh,0) ,
+                        gcnew SubArray(inLow,0) ,
+                        gcnew SubArray(inClose,0) ,
+                        outBegIdx,
+                        outNBElement,
+                         outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cdl3StarsInSouth( int    startIdx,
                                                      int    endIdx,
                                                      cli::array<double>^ inOpen,
@@ -756,6 +1524,7 @@ namespace TicTacTec
                                                      [Out]int%    outBegIdx,
                                                      [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode Cdl3StarsInSouth( int    startIdx,
                                                      int    endIdx,
                                                      cli::array<float>^ inOpen,
@@ -771,6 +1540,36 @@ namespace TicTacTec
 
          static int Cdl3WhiteSoldiersLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cdl3WhiteSoldiers( int    startIdx,
+                                                      int    endIdx,
+                                                      SubArray^    inOpen,
+                                                      SubArray^    inHigh,
+                                                      SubArray^    inLow,
+                                                      SubArray^    inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger );
+
+         static enum class RetCode Cdl3WhiteSoldiers( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<double>^ inOpen,
+                                                      cli::array<double>^ inHigh,
+                                                      cli::array<double>^ inLow,
+                                                      cli::array<double>^ inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger )
+         { return Cdl3WhiteSoldiers( startIdx,             endIdx,
+                         gcnew SubArray(inOpen,0) ,
+                         gcnew SubArray(inHigh,0) ,
+                         gcnew SubArray(inLow,0) ,
+                         gcnew SubArray(inClose,0) ,
+                         outBegIdx,
+                         outNBElement,
+                          outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cdl3WhiteSoldiers( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<double>^ inOpen,
@@ -780,6 +1579,7 @@ namespace TicTacTec
                                                       [Out]int%    outBegIdx,
                                                       [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode Cdl3WhiteSoldiers( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<float>^ inOpen,
@@ -795,6 +1595,39 @@ namespace TicTacTec
 
          static int CdlAbandonedBabyLookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlAbandonedBaby( int    startIdx,
+                                                     int    endIdx,
+                                                     SubArray^    inOpen,
+                                                     SubArray^    inHigh,
+                                                     SubArray^    inLow,
+                                                     SubArray^    inClose,
+                                                     double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNBElement,
+                                                     cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlAbandonedBaby( int    startIdx,
+                                                     int    endIdx,
+                                                     cli::array<double>^ inOpen,
+                                                     cli::array<double>^ inHigh,
+                                                     cli::array<double>^ inLow,
+                                                     cli::array<double>^ inClose,
+                                                     double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNBElement,
+                                                     cli::array<int>^  outInteger )
+         { return CdlAbandonedBaby( startIdx,            endIdx,
+                        gcnew SubArray(inOpen,0) ,
+                        gcnew SubArray(inHigh,0) ,
+                        gcnew SubArray(inLow,0) ,
+                        gcnew SubArray(inClose,0) ,
+                         optInPenetration, /* From 0 to TA_REAL_MAX */
+                        outBegIdx,
+                        outNBElement,
+                         outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlAbandonedBaby( int    startIdx,
                                                      int    endIdx,
                                                      cli::array<double>^ inOpen,
@@ -805,6 +1638,7 @@ namespace TicTacTec
                                                      [Out]int%    outBegIdx,
                                                      [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlAbandonedBaby( int    startIdx,
                                                      int    endIdx,
                                                      cli::array<float>^ inOpen,
@@ -821,6 +1655,36 @@ namespace TicTacTec
 
          static int CdlAdvanceBlockLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlAdvanceBlock( int    startIdx,
+                                                    int    endIdx,
+                                                    SubArray^    inOpen,
+                                                    SubArray^    inHigh,
+                                                    SubArray^    inLow,
+                                                    SubArray^    inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlAdvanceBlock( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<double>^ inOpen,
+                                                    cli::array<double>^ inHigh,
+                                                    cli::array<double>^ inLow,
+                                                    cli::array<double>^ inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger )
+         { return CdlAdvanceBlock( startIdx,           endIdx,
+                       gcnew SubArray(inOpen,0) ,
+                       gcnew SubArray(inHigh,0) ,
+                       gcnew SubArray(inLow,0) ,
+                       gcnew SubArray(inClose,0) ,
+                       outBegIdx,
+                       outNBElement,
+                        outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlAdvanceBlock( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<double>^ inOpen,
@@ -830,6 +1694,7 @@ namespace TicTacTec
                                                     [Out]int%    outBegIdx,
                                                     [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlAdvanceBlock( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<float>^ inOpen,
@@ -845,6 +1710,36 @@ namespace TicTacTec
 
          static int CdlBeltHoldLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlBeltHold( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inOpen,
+                                                SubArray^    inHigh,
+                                                SubArray^    inLow,
+                                                SubArray^    inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlBeltHold( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inOpen,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger )
+         { return CdlBeltHold( startIdx,       endIdx,
+                   gcnew SubArray(inOpen,0) ,
+                   gcnew SubArray(inHigh,0) ,
+                   gcnew SubArray(inLow,0) ,
+                   gcnew SubArray(inClose,0) ,
+                   outBegIdx,
+                   outNBElement,
+                    outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlBeltHold( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inOpen,
@@ -854,6 +1749,7 @@ namespace TicTacTec
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlBeltHold( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inOpen,
@@ -869,6 +1765,36 @@ namespace TicTacTec
 
          static int CdlBreakawayLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlBreakaway( int    startIdx,
+                                                 int    endIdx,
+                                                 SubArray^    inOpen,
+                                                 SubArray^    inHigh,
+                                                 SubArray^    inLow,
+                                                 SubArray^    inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlBreakaway( int    startIdx,
+                                                 int    endIdx,
+                                                 cli::array<double>^ inOpen,
+                                                 cli::array<double>^ inHigh,
+                                                 cli::array<double>^ inLow,
+                                                 cli::array<double>^ inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger )
+         { return CdlBreakaway( startIdx,        endIdx,
+                    gcnew SubArray(inOpen,0) ,
+                    gcnew SubArray(inHigh,0) ,
+                    gcnew SubArray(inLow,0) ,
+                    gcnew SubArray(inClose,0) ,
+                    outBegIdx,
+                    outNBElement,
+                     outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlBreakaway( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<double>^ inOpen,
@@ -878,6 +1804,7 @@ namespace TicTacTec
                                                  [Out]int%    outBegIdx,
                                                  [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlBreakaway( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<float>^ inOpen,
@@ -893,6 +1820,36 @@ namespace TicTacTec
 
          static int CdlClosingMarubozuLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlClosingMarubozu( int    startIdx,
+                                                       int    endIdx,
+                                                       SubArray^    inOpen,
+                                                       SubArray^    inHigh,
+                                                       SubArray^    inLow,
+                                                       SubArray^    inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlClosingMarubozu( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inOpen,
+                                                       cli::array<double>^ inHigh,
+                                                       cli::array<double>^ inLow,
+                                                       cli::array<double>^ inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger )
+         { return CdlClosingMarubozu( startIdx,              endIdx,
+                          gcnew SubArray(inOpen,0) ,
+                          gcnew SubArray(inHigh,0) ,
+                          gcnew SubArray(inLow,0) ,
+                          gcnew SubArray(inClose,0) ,
+                          outBegIdx,
+                          outNBElement,
+                           outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlClosingMarubozu( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<double>^ inOpen,
@@ -902,6 +1859,7 @@ namespace TicTacTec
                                                        [Out]int%    outBegIdx,
                                                        [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlClosingMarubozu( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inOpen,
@@ -917,6 +1875,36 @@ namespace TicTacTec
 
          static int CdlConcealBabysWallLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlConcealBabysWall( int    startIdx,
+                                                        int    endIdx,
+                                                        SubArray^    inOpen,
+                                                        SubArray^    inHigh,
+                                                        SubArray^    inLow,
+                                                        SubArray^    inClose,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNBElement,
+                                                        cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlConcealBabysWall( int    startIdx,
+                                                        int    endIdx,
+                                                        cli::array<double>^ inOpen,
+                                                        cli::array<double>^ inHigh,
+                                                        cli::array<double>^ inLow,
+                                                        cli::array<double>^ inClose,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNBElement,
+                                                        cli::array<int>^  outInteger )
+         { return CdlConcealBabysWall( startIdx,               endIdx,
+                           gcnew SubArray(inOpen,0) ,
+                           gcnew SubArray(inHigh,0) ,
+                           gcnew SubArray(inLow,0) ,
+                           gcnew SubArray(inClose,0) ,
+                           outBegIdx,
+                           outNBElement,
+                            outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlConcealBabysWall( int    startIdx,
                                                         int    endIdx,
                                                         cli::array<double>^ inOpen,
@@ -926,6 +1914,7 @@ namespace TicTacTec
                                                         [Out]int%    outBegIdx,
                                                         [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlConcealBabysWall( int    startIdx,
                                                         int    endIdx,
                                                         cli::array<float>^ inOpen,
@@ -941,6 +1930,36 @@ namespace TicTacTec
 
          static int CdlCounterAttackLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlCounterAttack( int    startIdx,
+                                                     int    endIdx,
+                                                     SubArray^    inOpen,
+                                                     SubArray^    inHigh,
+                                                     SubArray^    inLow,
+                                                     SubArray^    inClose,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNBElement,
+                                                     cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlCounterAttack( int    startIdx,
+                                                     int    endIdx,
+                                                     cli::array<double>^ inOpen,
+                                                     cli::array<double>^ inHigh,
+                                                     cli::array<double>^ inLow,
+                                                     cli::array<double>^ inClose,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNBElement,
+                                                     cli::array<int>^  outInteger )
+         { return CdlCounterAttack( startIdx,            endIdx,
+                        gcnew SubArray(inOpen,0) ,
+                        gcnew SubArray(inHigh,0) ,
+                        gcnew SubArray(inLow,0) ,
+                        gcnew SubArray(inClose,0) ,
+                        outBegIdx,
+                        outNBElement,
+                         outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlCounterAttack( int    startIdx,
                                                      int    endIdx,
                                                      cli::array<double>^ inOpen,
@@ -950,6 +1969,7 @@ namespace TicTacTec
                                                      [Out]int%    outBegIdx,
                                                      [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlCounterAttack( int    startIdx,
                                                      int    endIdx,
                                                      cli::array<float>^ inOpen,
@@ -965,6 +1985,39 @@ namespace TicTacTec
 
          static int CdlDarkCloudCoverLookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlDarkCloudCover( int    startIdx,
+                                                      int    endIdx,
+                                                      SubArray^    inOpen,
+                                                      SubArray^    inHigh,
+                                                      SubArray^    inLow,
+                                                      SubArray^    inClose,
+                                                      double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlDarkCloudCover( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<double>^ inOpen,
+                                                      cli::array<double>^ inHigh,
+                                                      cli::array<double>^ inLow,
+                                                      cli::array<double>^ inClose,
+                                                      double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger )
+         { return CdlDarkCloudCover( startIdx,             endIdx,
+                         gcnew SubArray(inOpen,0) ,
+                         gcnew SubArray(inHigh,0) ,
+                         gcnew SubArray(inLow,0) ,
+                         gcnew SubArray(inClose,0) ,
+                          optInPenetration, /* From 0 to TA_REAL_MAX */
+                         outBegIdx,
+                         outNBElement,
+                          outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlDarkCloudCover( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<double>^ inOpen,
@@ -975,6 +2028,7 @@ namespace TicTacTec
                                                       [Out]int%    outBegIdx,
                                                       [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlDarkCloudCover( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<float>^ inOpen,
@@ -991,6 +2045,36 @@ namespace TicTacTec
 
          static int CdlDojiLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlDoji( int    startIdx,
+                                            int    endIdx,
+                                            SubArray^    inOpen,
+                                            SubArray^    inHigh,
+                                            SubArray^    inLow,
+                                            SubArray^    inClose,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlDoji( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inOpen,
+                                            cli::array<double>^ inHigh,
+                                            cli::array<double>^ inLow,
+                                            cli::array<double>^ inClose,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<int>^  outInteger )
+         { return CdlDoji( startIdx,   endIdx,
+               gcnew SubArray(inOpen,0) ,
+               gcnew SubArray(inHigh,0) ,
+               gcnew SubArray(inLow,0) ,
+               gcnew SubArray(inClose,0) ,
+               outBegIdx,
+               outNBElement,
+                outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlDoji( int    startIdx,
                                             int    endIdx,
                                             cli::array<double>^ inOpen,
@@ -1000,6 +2084,7 @@ namespace TicTacTec
                                             [Out]int%    outBegIdx,
                                             [Out]int%    outNBElement,
                                             cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlDoji( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inOpen,
@@ -1015,6 +2100,36 @@ namespace TicTacTec
 
          static int CdlDojiStarLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlDojiStar( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inOpen,
+                                                SubArray^    inHigh,
+                                                SubArray^    inLow,
+                                                SubArray^    inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlDojiStar( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inOpen,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger )
+         { return CdlDojiStar( startIdx,       endIdx,
+                   gcnew SubArray(inOpen,0) ,
+                   gcnew SubArray(inHigh,0) ,
+                   gcnew SubArray(inLow,0) ,
+                   gcnew SubArray(inClose,0) ,
+                   outBegIdx,
+                   outNBElement,
+                    outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlDojiStar( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inOpen,
@@ -1024,6 +2139,7 @@ namespace TicTacTec
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlDojiStar( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inOpen,
@@ -1039,6 +2155,36 @@ namespace TicTacTec
 
          static int CdlDragonflyDojiLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlDragonflyDoji( int    startIdx,
+                                                     int    endIdx,
+                                                     SubArray^    inOpen,
+                                                     SubArray^    inHigh,
+                                                     SubArray^    inLow,
+                                                     SubArray^    inClose,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNBElement,
+                                                     cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlDragonflyDoji( int    startIdx,
+                                                     int    endIdx,
+                                                     cli::array<double>^ inOpen,
+                                                     cli::array<double>^ inHigh,
+                                                     cli::array<double>^ inLow,
+                                                     cli::array<double>^ inClose,
+                                                     [Out]int%    outBegIdx,
+                                                     [Out]int%    outNBElement,
+                                                     cli::array<int>^  outInteger )
+         { return CdlDragonflyDoji( startIdx,            endIdx,
+                        gcnew SubArray(inOpen,0) ,
+                        gcnew SubArray(inHigh,0) ,
+                        gcnew SubArray(inLow,0) ,
+                        gcnew SubArray(inClose,0) ,
+                        outBegIdx,
+                        outNBElement,
+                         outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlDragonflyDoji( int    startIdx,
                                                      int    endIdx,
                                                      cli::array<double>^ inOpen,
@@ -1048,6 +2194,7 @@ namespace TicTacTec
                                                      [Out]int%    outBegIdx,
                                                      [Out]int%    outNBElement,
                                                      cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlDragonflyDoji( int    startIdx,
                                                      int    endIdx,
                                                      cli::array<float>^ inOpen,
@@ -1063,6 +2210,36 @@ namespace TicTacTec
 
          static int CdlEngulfingLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlEngulfing( int    startIdx,
+                                                 int    endIdx,
+                                                 SubArray^    inOpen,
+                                                 SubArray^    inHigh,
+                                                 SubArray^    inLow,
+                                                 SubArray^    inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlEngulfing( int    startIdx,
+                                                 int    endIdx,
+                                                 cli::array<double>^ inOpen,
+                                                 cli::array<double>^ inHigh,
+                                                 cli::array<double>^ inLow,
+                                                 cli::array<double>^ inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger )
+         { return CdlEngulfing( startIdx,        endIdx,
+                    gcnew SubArray(inOpen,0) ,
+                    gcnew SubArray(inHigh,0) ,
+                    gcnew SubArray(inLow,0) ,
+                    gcnew SubArray(inClose,0) ,
+                    outBegIdx,
+                    outNBElement,
+                     outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlEngulfing( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<double>^ inOpen,
@@ -1072,6 +2249,7 @@ namespace TicTacTec
                                                  [Out]int%    outBegIdx,
                                                  [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlEngulfing( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<float>^ inOpen,
@@ -1087,6 +2265,39 @@ namespace TicTacTec
 
          static int CdlEveningDojiStarLookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlEveningDojiStar( int    startIdx,
+                                                       int    endIdx,
+                                                       SubArray^    inOpen,
+                                                       SubArray^    inHigh,
+                                                       SubArray^    inLow,
+                                                       SubArray^    inClose,
+                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlEveningDojiStar( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inOpen,
+                                                       cli::array<double>^ inHigh,
+                                                       cli::array<double>^ inLow,
+                                                       cli::array<double>^ inClose,
+                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger )
+         { return CdlEveningDojiStar( startIdx,              endIdx,
+                          gcnew SubArray(inOpen,0) ,
+                          gcnew SubArray(inHigh,0) ,
+                          gcnew SubArray(inLow,0) ,
+                          gcnew SubArray(inClose,0) ,
+                           optInPenetration, /* From 0 to TA_REAL_MAX */
+                          outBegIdx,
+                          outNBElement,
+                           outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlEveningDojiStar( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<double>^ inOpen,
@@ -1097,6 +2308,7 @@ namespace TicTacTec
                                                        [Out]int%    outBegIdx,
                                                        [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlEveningDojiStar( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inOpen,
@@ -1113,6 +2325,39 @@ namespace TicTacTec
 
          static int CdlEveningStarLookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlEveningStar( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inOpen,
+                                                   SubArray^    inHigh,
+                                                   SubArray^    inLow,
+                                                   SubArray^    inClose,
+                                                   double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlEveningStar( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inOpen,
+                                                   cli::array<double>^ inHigh,
+                                                   cli::array<double>^ inLow,
+                                                   cli::array<double>^ inClose,
+                                                   double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger )
+         { return CdlEveningStar( startIdx,          endIdx,
+                      gcnew SubArray(inOpen,0) ,
+                      gcnew SubArray(inHigh,0) ,
+                      gcnew SubArray(inLow,0) ,
+                      gcnew SubArray(inClose,0) ,
+                       optInPenetration, /* From 0 to TA_REAL_MAX */
+                      outBegIdx,
+                      outNBElement,
+                       outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlEveningStar( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inOpen,
@@ -1123,6 +2368,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlEveningStar( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inOpen,
@@ -1139,6 +2385,36 @@ namespace TicTacTec
 
          static int CdlGapSideSideWhiteLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlGapSideSideWhite( int    startIdx,
+                                                        int    endIdx,
+                                                        SubArray^    inOpen,
+                                                        SubArray^    inHigh,
+                                                        SubArray^    inLow,
+                                                        SubArray^    inClose,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNBElement,
+                                                        cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlGapSideSideWhite( int    startIdx,
+                                                        int    endIdx,
+                                                        cli::array<double>^ inOpen,
+                                                        cli::array<double>^ inHigh,
+                                                        cli::array<double>^ inLow,
+                                                        cli::array<double>^ inClose,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNBElement,
+                                                        cli::array<int>^  outInteger )
+         { return CdlGapSideSideWhite( startIdx,               endIdx,
+                           gcnew SubArray(inOpen,0) ,
+                           gcnew SubArray(inHigh,0) ,
+                           gcnew SubArray(inLow,0) ,
+                           gcnew SubArray(inClose,0) ,
+                           outBegIdx,
+                           outNBElement,
+                            outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlGapSideSideWhite( int    startIdx,
                                                         int    endIdx,
                                                         cli::array<double>^ inOpen,
@@ -1148,6 +2424,7 @@ namespace TicTacTec
                                                         [Out]int%    outBegIdx,
                                                         [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlGapSideSideWhite( int    startIdx,
                                                         int    endIdx,
                                                         cli::array<float>^ inOpen,
@@ -1163,6 +2440,36 @@ namespace TicTacTec
 
          static int CdlGravestoneDojiLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlGravestoneDoji( int    startIdx,
+                                                      int    endIdx,
+                                                      SubArray^    inOpen,
+                                                      SubArray^    inHigh,
+                                                      SubArray^    inLow,
+                                                      SubArray^    inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlGravestoneDoji( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<double>^ inOpen,
+                                                      cli::array<double>^ inHigh,
+                                                      cli::array<double>^ inLow,
+                                                      cli::array<double>^ inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger )
+         { return CdlGravestoneDoji( startIdx,             endIdx,
+                         gcnew SubArray(inOpen,0) ,
+                         gcnew SubArray(inHigh,0) ,
+                         gcnew SubArray(inLow,0) ,
+                         gcnew SubArray(inClose,0) ,
+                         outBegIdx,
+                         outNBElement,
+                          outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlGravestoneDoji( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<double>^ inOpen,
@@ -1172,6 +2479,7 @@ namespace TicTacTec
                                                       [Out]int%    outBegIdx,
                                                       [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlGravestoneDoji( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<float>^ inOpen,
@@ -1187,6 +2495,36 @@ namespace TicTacTec
 
          static int CdlHammerLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlHammer( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inOpen,
+                                              SubArray^    inHigh,
+                                              SubArray^    inLow,
+                                              SubArray^    inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlHammer( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inOpen,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger )
+         { return CdlHammer( startIdx,     endIdx,
+                 gcnew SubArray(inOpen,0) ,
+                 gcnew SubArray(inHigh,0) ,
+                 gcnew SubArray(inLow,0) ,
+                 gcnew SubArray(inClose,0) ,
+                 outBegIdx,
+                 outNBElement,
+                  outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlHammer( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inOpen,
@@ -1196,6 +2534,7 @@ namespace TicTacTec
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlHammer( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inOpen,
@@ -1211,6 +2550,36 @@ namespace TicTacTec
 
          static int CdlHangingManLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlHangingMan( int    startIdx,
+                                                  int    endIdx,
+                                                  SubArray^    inOpen,
+                                                  SubArray^    inHigh,
+                                                  SubArray^    inLow,
+                                                  SubArray^    inClose,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNBElement,
+                                                  cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlHangingMan( int    startIdx,
+                                                  int    endIdx,
+                                                  cli::array<double>^ inOpen,
+                                                  cli::array<double>^ inHigh,
+                                                  cli::array<double>^ inLow,
+                                                  cli::array<double>^ inClose,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNBElement,
+                                                  cli::array<int>^  outInteger )
+         { return CdlHangingMan( startIdx,         endIdx,
+                     gcnew SubArray(inOpen,0) ,
+                     gcnew SubArray(inHigh,0) ,
+                     gcnew SubArray(inLow,0) ,
+                     gcnew SubArray(inClose,0) ,
+                     outBegIdx,
+                     outNBElement,
+                      outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlHangingMan( int    startIdx,
                                                   int    endIdx,
                                                   cli::array<double>^ inOpen,
@@ -1220,6 +2589,7 @@ namespace TicTacTec
                                                   [Out]int%    outBegIdx,
                                                   [Out]int%    outNBElement,
                                                   cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlHangingMan( int    startIdx,
                                                   int    endIdx,
                                                   cli::array<float>^ inOpen,
@@ -1235,6 +2605,36 @@ namespace TicTacTec
 
          static int CdlHaramiLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlHarami( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inOpen,
+                                              SubArray^    inHigh,
+                                              SubArray^    inLow,
+                                              SubArray^    inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlHarami( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inOpen,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger )
+         { return CdlHarami( startIdx,     endIdx,
+                 gcnew SubArray(inOpen,0) ,
+                 gcnew SubArray(inHigh,0) ,
+                 gcnew SubArray(inLow,0) ,
+                 gcnew SubArray(inClose,0) ,
+                 outBegIdx,
+                 outNBElement,
+                  outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlHarami( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inOpen,
@@ -1244,6 +2644,7 @@ namespace TicTacTec
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlHarami( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inOpen,
@@ -1259,6 +2660,36 @@ namespace TicTacTec
 
          static int CdlHaramiCrossLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlHaramiCross( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inOpen,
+                                                   SubArray^    inHigh,
+                                                   SubArray^    inLow,
+                                                   SubArray^    inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlHaramiCross( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inOpen,
+                                                   cli::array<double>^ inHigh,
+                                                   cli::array<double>^ inLow,
+                                                   cli::array<double>^ inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger )
+         { return CdlHaramiCross( startIdx,          endIdx,
+                      gcnew SubArray(inOpen,0) ,
+                      gcnew SubArray(inHigh,0) ,
+                      gcnew SubArray(inLow,0) ,
+                      gcnew SubArray(inClose,0) ,
+                      outBegIdx,
+                      outNBElement,
+                       outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlHaramiCross( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inOpen,
@@ -1268,6 +2699,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlHaramiCross( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inOpen,
@@ -1283,6 +2715,36 @@ namespace TicTacTec
 
          static int CdlHignWaveLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlHignWave( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inOpen,
+                                                SubArray^    inHigh,
+                                                SubArray^    inLow,
+                                                SubArray^    inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlHignWave( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inOpen,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger )
+         { return CdlHignWave( startIdx,       endIdx,
+                   gcnew SubArray(inOpen,0) ,
+                   gcnew SubArray(inHigh,0) ,
+                   gcnew SubArray(inLow,0) ,
+                   gcnew SubArray(inClose,0) ,
+                   outBegIdx,
+                   outNBElement,
+                    outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlHignWave( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inOpen,
@@ -1292,6 +2754,7 @@ namespace TicTacTec
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlHignWave( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inOpen,
@@ -1307,6 +2770,36 @@ namespace TicTacTec
 
          static int CdlHikkakeLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlHikkake( int    startIdx,
+                                               int    endIdx,
+                                               SubArray^    inOpen,
+                                               SubArray^    inHigh,
+                                               SubArray^    inLow,
+                                               SubArray^    inClose,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlHikkake( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inOpen,
+                                               cli::array<double>^ inHigh,
+                                               cli::array<double>^ inLow,
+                                               cli::array<double>^ inClose,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger )
+         { return CdlHikkake( startIdx,      endIdx,
+                  gcnew SubArray(inOpen,0) ,
+                  gcnew SubArray(inHigh,0) ,
+                  gcnew SubArray(inLow,0) ,
+                  gcnew SubArray(inClose,0) ,
+                  outBegIdx,
+                  outNBElement,
+                   outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlHikkake( int    startIdx,
                                                int    endIdx,
                                                cli::array<double>^ inOpen,
@@ -1316,6 +2809,7 @@ namespace TicTacTec
                                                [Out]int%    outBegIdx,
                                                [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlHikkake( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inOpen,
@@ -1331,6 +2825,36 @@ namespace TicTacTec
 
          static int CdlHikkakeModLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlHikkakeMod( int    startIdx,
+                                                  int    endIdx,
+                                                  SubArray^    inOpen,
+                                                  SubArray^    inHigh,
+                                                  SubArray^    inLow,
+                                                  SubArray^    inClose,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNBElement,
+                                                  cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlHikkakeMod( int    startIdx,
+                                                  int    endIdx,
+                                                  cli::array<double>^ inOpen,
+                                                  cli::array<double>^ inHigh,
+                                                  cli::array<double>^ inLow,
+                                                  cli::array<double>^ inClose,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNBElement,
+                                                  cli::array<int>^  outInteger )
+         { return CdlHikkakeMod( startIdx,         endIdx,
+                     gcnew SubArray(inOpen,0) ,
+                     gcnew SubArray(inHigh,0) ,
+                     gcnew SubArray(inLow,0) ,
+                     gcnew SubArray(inClose,0) ,
+                     outBegIdx,
+                     outNBElement,
+                      outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlHikkakeMod( int    startIdx,
                                                   int    endIdx,
                                                   cli::array<double>^ inOpen,
@@ -1340,6 +2864,7 @@ namespace TicTacTec
                                                   [Out]int%    outBegIdx,
                                                   [Out]int%    outNBElement,
                                                   cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlHikkakeMod( int    startIdx,
                                                   int    endIdx,
                                                   cli::array<float>^ inOpen,
@@ -1355,6 +2880,36 @@ namespace TicTacTec
 
          static int CdlHomingPigeonLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlHomingPigeon( int    startIdx,
+                                                    int    endIdx,
+                                                    SubArray^    inOpen,
+                                                    SubArray^    inHigh,
+                                                    SubArray^    inLow,
+                                                    SubArray^    inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlHomingPigeon( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<double>^ inOpen,
+                                                    cli::array<double>^ inHigh,
+                                                    cli::array<double>^ inLow,
+                                                    cli::array<double>^ inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger )
+         { return CdlHomingPigeon( startIdx,           endIdx,
+                       gcnew SubArray(inOpen,0) ,
+                       gcnew SubArray(inHigh,0) ,
+                       gcnew SubArray(inLow,0) ,
+                       gcnew SubArray(inClose,0) ,
+                       outBegIdx,
+                       outNBElement,
+                        outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlHomingPigeon( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<double>^ inOpen,
@@ -1364,6 +2919,7 @@ namespace TicTacTec
                                                     [Out]int%    outBegIdx,
                                                     [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlHomingPigeon( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<float>^ inOpen,
@@ -1379,6 +2935,36 @@ namespace TicTacTec
 
          static int CdlIdentical3CrowsLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlIdentical3Crows( int    startIdx,
+                                                       int    endIdx,
+                                                       SubArray^    inOpen,
+                                                       SubArray^    inHigh,
+                                                       SubArray^    inLow,
+                                                       SubArray^    inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlIdentical3Crows( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inOpen,
+                                                       cli::array<double>^ inHigh,
+                                                       cli::array<double>^ inLow,
+                                                       cli::array<double>^ inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger )
+         { return CdlIdentical3Crows( startIdx,              endIdx,
+                          gcnew SubArray(inOpen,0) ,
+                          gcnew SubArray(inHigh,0) ,
+                          gcnew SubArray(inLow,0) ,
+                          gcnew SubArray(inClose,0) ,
+                          outBegIdx,
+                          outNBElement,
+                           outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlIdentical3Crows( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<double>^ inOpen,
@@ -1388,6 +2974,7 @@ namespace TicTacTec
                                                        [Out]int%    outBegIdx,
                                                        [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlIdentical3Crows( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inOpen,
@@ -1403,6 +2990,36 @@ namespace TicTacTec
 
          static int CdlInNeckLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlInNeck( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inOpen,
+                                              SubArray^    inHigh,
+                                              SubArray^    inLow,
+                                              SubArray^    inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlInNeck( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inOpen,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger )
+         { return CdlInNeck( startIdx,     endIdx,
+                 gcnew SubArray(inOpen,0) ,
+                 gcnew SubArray(inHigh,0) ,
+                 gcnew SubArray(inLow,0) ,
+                 gcnew SubArray(inClose,0) ,
+                 outBegIdx,
+                 outNBElement,
+                  outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlInNeck( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inOpen,
@@ -1412,6 +3029,7 @@ namespace TicTacTec
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlInNeck( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inOpen,
@@ -1427,6 +3045,36 @@ namespace TicTacTec
 
          static int CdlInvertedHammerLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlInvertedHammer( int    startIdx,
+                                                      int    endIdx,
+                                                      SubArray^    inOpen,
+                                                      SubArray^    inHigh,
+                                                      SubArray^    inLow,
+                                                      SubArray^    inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlInvertedHammer( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<double>^ inOpen,
+                                                      cli::array<double>^ inHigh,
+                                                      cli::array<double>^ inLow,
+                                                      cli::array<double>^ inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger )
+         { return CdlInvertedHammer( startIdx,             endIdx,
+                         gcnew SubArray(inOpen,0) ,
+                         gcnew SubArray(inHigh,0) ,
+                         gcnew SubArray(inLow,0) ,
+                         gcnew SubArray(inClose,0) ,
+                         outBegIdx,
+                         outNBElement,
+                          outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlInvertedHammer( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<double>^ inOpen,
@@ -1436,6 +3084,7 @@ namespace TicTacTec
                                                       [Out]int%    outBegIdx,
                                                       [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlInvertedHammer( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<float>^ inOpen,
@@ -1451,6 +3100,36 @@ namespace TicTacTec
 
          static int CdlKickingLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlKicking( int    startIdx,
+                                               int    endIdx,
+                                               SubArray^    inOpen,
+                                               SubArray^    inHigh,
+                                               SubArray^    inLow,
+                                               SubArray^    inClose,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlKicking( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inOpen,
+                                               cli::array<double>^ inHigh,
+                                               cli::array<double>^ inLow,
+                                               cli::array<double>^ inClose,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger )
+         { return CdlKicking( startIdx,      endIdx,
+                  gcnew SubArray(inOpen,0) ,
+                  gcnew SubArray(inHigh,0) ,
+                  gcnew SubArray(inLow,0) ,
+                  gcnew SubArray(inClose,0) ,
+                  outBegIdx,
+                  outNBElement,
+                   outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlKicking( int    startIdx,
                                                int    endIdx,
                                                cli::array<double>^ inOpen,
@@ -1460,6 +3139,7 @@ namespace TicTacTec
                                                [Out]int%    outBegIdx,
                                                [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlKicking( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inOpen,
@@ -1475,6 +3155,36 @@ namespace TicTacTec
 
          static int CdlKickingByLengthLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlKickingByLength( int    startIdx,
+                                                       int    endIdx,
+                                                       SubArray^    inOpen,
+                                                       SubArray^    inHigh,
+                                                       SubArray^    inLow,
+                                                       SubArray^    inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlKickingByLength( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inOpen,
+                                                       cli::array<double>^ inHigh,
+                                                       cli::array<double>^ inLow,
+                                                       cli::array<double>^ inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger )
+         { return CdlKickingByLength( startIdx,              endIdx,
+                          gcnew SubArray(inOpen,0) ,
+                          gcnew SubArray(inHigh,0) ,
+                          gcnew SubArray(inLow,0) ,
+                          gcnew SubArray(inClose,0) ,
+                          outBegIdx,
+                          outNBElement,
+                           outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlKickingByLength( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<double>^ inOpen,
@@ -1484,6 +3194,7 @@ namespace TicTacTec
                                                        [Out]int%    outBegIdx,
                                                        [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlKickingByLength( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inOpen,
@@ -1499,6 +3210,36 @@ namespace TicTacTec
 
          static int CdlLadderBottomLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlLadderBottom( int    startIdx,
+                                                    int    endIdx,
+                                                    SubArray^    inOpen,
+                                                    SubArray^    inHigh,
+                                                    SubArray^    inLow,
+                                                    SubArray^    inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlLadderBottom( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<double>^ inOpen,
+                                                    cli::array<double>^ inHigh,
+                                                    cli::array<double>^ inLow,
+                                                    cli::array<double>^ inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger )
+         { return CdlLadderBottom( startIdx,           endIdx,
+                       gcnew SubArray(inOpen,0) ,
+                       gcnew SubArray(inHigh,0) ,
+                       gcnew SubArray(inLow,0) ,
+                       gcnew SubArray(inClose,0) ,
+                       outBegIdx,
+                       outNBElement,
+                        outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlLadderBottom( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<double>^ inOpen,
@@ -1508,6 +3249,7 @@ namespace TicTacTec
                                                     [Out]int%    outBegIdx,
                                                     [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlLadderBottom( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<float>^ inOpen,
@@ -1523,6 +3265,36 @@ namespace TicTacTec
 
          static int CdlLongLeggedDojiLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlLongLeggedDoji( int    startIdx,
+                                                      int    endIdx,
+                                                      SubArray^    inOpen,
+                                                      SubArray^    inHigh,
+                                                      SubArray^    inLow,
+                                                      SubArray^    inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlLongLeggedDoji( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<double>^ inOpen,
+                                                      cli::array<double>^ inHigh,
+                                                      cli::array<double>^ inLow,
+                                                      cli::array<double>^ inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger )
+         { return CdlLongLeggedDoji( startIdx,             endIdx,
+                         gcnew SubArray(inOpen,0) ,
+                         gcnew SubArray(inHigh,0) ,
+                         gcnew SubArray(inLow,0) ,
+                         gcnew SubArray(inClose,0) ,
+                         outBegIdx,
+                         outNBElement,
+                          outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlLongLeggedDoji( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<double>^ inOpen,
@@ -1532,6 +3304,7 @@ namespace TicTacTec
                                                       [Out]int%    outBegIdx,
                                                       [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlLongLeggedDoji( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<float>^ inOpen,
@@ -1547,6 +3320,36 @@ namespace TicTacTec
 
          static int CdlLongLineLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlLongLine( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inOpen,
+                                                SubArray^    inHigh,
+                                                SubArray^    inLow,
+                                                SubArray^    inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlLongLine( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inOpen,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger )
+         { return CdlLongLine( startIdx,       endIdx,
+                   gcnew SubArray(inOpen,0) ,
+                   gcnew SubArray(inHigh,0) ,
+                   gcnew SubArray(inLow,0) ,
+                   gcnew SubArray(inClose,0) ,
+                   outBegIdx,
+                   outNBElement,
+                    outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlLongLine( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inOpen,
@@ -1556,6 +3359,7 @@ namespace TicTacTec
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlLongLine( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inOpen,
@@ -1571,6 +3375,36 @@ namespace TicTacTec
 
          static int CdlMarubozuLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlMarubozu( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inOpen,
+                                                SubArray^    inHigh,
+                                                SubArray^    inLow,
+                                                SubArray^    inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlMarubozu( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inOpen,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger )
+         { return CdlMarubozu( startIdx,       endIdx,
+                   gcnew SubArray(inOpen,0) ,
+                   gcnew SubArray(inHigh,0) ,
+                   gcnew SubArray(inLow,0) ,
+                   gcnew SubArray(inClose,0) ,
+                   outBegIdx,
+                   outNBElement,
+                    outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlMarubozu( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inOpen,
@@ -1580,6 +3414,7 @@ namespace TicTacTec
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlMarubozu( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inOpen,
@@ -1595,6 +3430,36 @@ namespace TicTacTec
 
          static int CdlMatchingLowLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlMatchingLow( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inOpen,
+                                                   SubArray^    inHigh,
+                                                   SubArray^    inLow,
+                                                   SubArray^    inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlMatchingLow( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inOpen,
+                                                   cli::array<double>^ inHigh,
+                                                   cli::array<double>^ inLow,
+                                                   cli::array<double>^ inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger )
+         { return CdlMatchingLow( startIdx,          endIdx,
+                      gcnew SubArray(inOpen,0) ,
+                      gcnew SubArray(inHigh,0) ,
+                      gcnew SubArray(inLow,0) ,
+                      gcnew SubArray(inClose,0) ,
+                      outBegIdx,
+                      outNBElement,
+                       outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlMatchingLow( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inOpen,
@@ -1604,6 +3469,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlMatchingLow( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inOpen,
@@ -1619,6 +3485,39 @@ namespace TicTacTec
 
          static int CdlMatHoldLookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlMatHold( int    startIdx,
+                                               int    endIdx,
+                                               SubArray^    inOpen,
+                                               SubArray^    inHigh,
+                                               SubArray^    inLow,
+                                               SubArray^    inClose,
+                                               double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlMatHold( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inOpen,
+                                               cli::array<double>^ inHigh,
+                                               cli::array<double>^ inLow,
+                                               cli::array<double>^ inClose,
+                                               double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger )
+         { return CdlMatHold( startIdx,      endIdx,
+                  gcnew SubArray(inOpen,0) ,
+                  gcnew SubArray(inHigh,0) ,
+                  gcnew SubArray(inLow,0) ,
+                  gcnew SubArray(inClose,0) ,
+                   optInPenetration, /* From 0 to TA_REAL_MAX */
+                  outBegIdx,
+                  outNBElement,
+                   outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlMatHold( int    startIdx,
                                                int    endIdx,
                                                cli::array<double>^ inOpen,
@@ -1629,6 +3528,7 @@ namespace TicTacTec
                                                [Out]int%    outBegIdx,
                                                [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlMatHold( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inOpen,
@@ -1645,6 +3545,39 @@ namespace TicTacTec
 
          static int CdlMorningDojiStarLookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlMorningDojiStar( int    startIdx,
+                                                       int    endIdx,
+                                                       SubArray^    inOpen,
+                                                       SubArray^    inHigh,
+                                                       SubArray^    inLow,
+                                                       SubArray^    inClose,
+                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlMorningDojiStar( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inOpen,
+                                                       cli::array<double>^ inHigh,
+                                                       cli::array<double>^ inLow,
+                                                       cli::array<double>^ inClose,
+                                                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger )
+         { return CdlMorningDojiStar( startIdx,              endIdx,
+                          gcnew SubArray(inOpen,0) ,
+                          gcnew SubArray(inHigh,0) ,
+                          gcnew SubArray(inLow,0) ,
+                          gcnew SubArray(inClose,0) ,
+                           optInPenetration, /* From 0 to TA_REAL_MAX */
+                          outBegIdx,
+                          outNBElement,
+                           outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlMorningDojiStar( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<double>^ inOpen,
@@ -1655,6 +3588,7 @@ namespace TicTacTec
                                                        [Out]int%    outBegIdx,
                                                        [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlMorningDojiStar( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inOpen,
@@ -1671,6 +3605,39 @@ namespace TicTacTec
 
          static int CdlMorningStarLookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlMorningStar( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inOpen,
+                                                   SubArray^    inHigh,
+                                                   SubArray^    inLow,
+                                                   SubArray^    inClose,
+                                                   double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlMorningStar( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inOpen,
+                                                   cli::array<double>^ inHigh,
+                                                   cli::array<double>^ inLow,
+                                                   cli::array<double>^ inClose,
+                                                   double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger )
+         { return CdlMorningStar( startIdx,          endIdx,
+                      gcnew SubArray(inOpen,0) ,
+                      gcnew SubArray(inHigh,0) ,
+                      gcnew SubArray(inLow,0) ,
+                      gcnew SubArray(inClose,0) ,
+                       optInPenetration, /* From 0 to TA_REAL_MAX */
+                      outBegIdx,
+                      outNBElement,
+                       outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlMorningStar( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inOpen,
@@ -1681,6 +3648,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlMorningStar( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inOpen,
@@ -1697,6 +3665,36 @@ namespace TicTacTec
 
          static int CdlOnNeckLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlOnNeck( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inOpen,
+                                              SubArray^    inHigh,
+                                              SubArray^    inLow,
+                                              SubArray^    inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlOnNeck( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inOpen,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger )
+         { return CdlOnNeck( startIdx,     endIdx,
+                 gcnew SubArray(inOpen,0) ,
+                 gcnew SubArray(inHigh,0) ,
+                 gcnew SubArray(inLow,0) ,
+                 gcnew SubArray(inClose,0) ,
+                 outBegIdx,
+                 outNBElement,
+                  outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlOnNeck( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inOpen,
@@ -1706,6 +3704,7 @@ namespace TicTacTec
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlOnNeck( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inOpen,
@@ -1721,6 +3720,36 @@ namespace TicTacTec
 
          static int CdlPiercingLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlPiercing( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inOpen,
+                                                SubArray^    inHigh,
+                                                SubArray^    inLow,
+                                                SubArray^    inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlPiercing( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inOpen,
+                                                cli::array<double>^ inHigh,
+                                                cli::array<double>^ inLow,
+                                                cli::array<double>^ inClose,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger )
+         { return CdlPiercing( startIdx,       endIdx,
+                   gcnew SubArray(inOpen,0) ,
+                   gcnew SubArray(inHigh,0) ,
+                   gcnew SubArray(inLow,0) ,
+                   gcnew SubArray(inClose,0) ,
+                   outBegIdx,
+                   outNBElement,
+                    outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlPiercing( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inOpen,
@@ -1730,6 +3759,7 @@ namespace TicTacTec
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlPiercing( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inOpen,
@@ -1745,6 +3775,36 @@ namespace TicTacTec
 
          static int CdlRickshawManLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlRickshawMan( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inOpen,
+                                                   SubArray^    inHigh,
+                                                   SubArray^    inLow,
+                                                   SubArray^    inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlRickshawMan( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inOpen,
+                                                   cli::array<double>^ inHigh,
+                                                   cli::array<double>^ inLow,
+                                                   cli::array<double>^ inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger )
+         { return CdlRickshawMan( startIdx,          endIdx,
+                      gcnew SubArray(inOpen,0) ,
+                      gcnew SubArray(inHigh,0) ,
+                      gcnew SubArray(inLow,0) ,
+                      gcnew SubArray(inClose,0) ,
+                      outBegIdx,
+                      outNBElement,
+                       outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlRickshawMan( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inOpen,
@@ -1754,6 +3814,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlRickshawMan( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inOpen,
@@ -1769,6 +3830,36 @@ namespace TicTacTec
 
          static int CdlRiseFall3MethodsLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlRiseFall3Methods( int    startIdx,
+                                                        int    endIdx,
+                                                        SubArray^    inOpen,
+                                                        SubArray^    inHigh,
+                                                        SubArray^    inLow,
+                                                        SubArray^    inClose,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNBElement,
+                                                        cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlRiseFall3Methods( int    startIdx,
+                                                        int    endIdx,
+                                                        cli::array<double>^ inOpen,
+                                                        cli::array<double>^ inHigh,
+                                                        cli::array<double>^ inLow,
+                                                        cli::array<double>^ inClose,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNBElement,
+                                                        cli::array<int>^  outInteger )
+         { return CdlRiseFall3Methods( startIdx,               endIdx,
+                           gcnew SubArray(inOpen,0) ,
+                           gcnew SubArray(inHigh,0) ,
+                           gcnew SubArray(inLow,0) ,
+                           gcnew SubArray(inClose,0) ,
+                           outBegIdx,
+                           outNBElement,
+                            outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlRiseFall3Methods( int    startIdx,
                                                         int    endIdx,
                                                         cli::array<double>^ inOpen,
@@ -1778,6 +3869,7 @@ namespace TicTacTec
                                                         [Out]int%    outBegIdx,
                                                         [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlRiseFall3Methods( int    startIdx,
                                                         int    endIdx,
                                                         cli::array<float>^ inOpen,
@@ -1793,6 +3885,36 @@ namespace TicTacTec
 
          static int CdlSeperatingLinesLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlSeperatingLines( int    startIdx,
+                                                       int    endIdx,
+                                                       SubArray^    inOpen,
+                                                       SubArray^    inHigh,
+                                                       SubArray^    inLow,
+                                                       SubArray^    inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlSeperatingLines( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inOpen,
+                                                       cli::array<double>^ inHigh,
+                                                       cli::array<double>^ inLow,
+                                                       cli::array<double>^ inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger )
+         { return CdlSeperatingLines( startIdx,              endIdx,
+                          gcnew SubArray(inOpen,0) ,
+                          gcnew SubArray(inHigh,0) ,
+                          gcnew SubArray(inLow,0) ,
+                          gcnew SubArray(inClose,0) ,
+                          outBegIdx,
+                          outNBElement,
+                           outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlSeperatingLines( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<double>^ inOpen,
@@ -1802,6 +3924,7 @@ namespace TicTacTec
                                                        [Out]int%    outBegIdx,
                                                        [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlSeperatingLines( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inOpen,
@@ -1817,6 +3940,36 @@ namespace TicTacTec
 
          static int CdlShootingStarLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlShootingStar( int    startIdx,
+                                                    int    endIdx,
+                                                    SubArray^    inOpen,
+                                                    SubArray^    inHigh,
+                                                    SubArray^    inLow,
+                                                    SubArray^    inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlShootingStar( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<double>^ inOpen,
+                                                    cli::array<double>^ inHigh,
+                                                    cli::array<double>^ inLow,
+                                                    cli::array<double>^ inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger )
+         { return CdlShootingStar( startIdx,           endIdx,
+                       gcnew SubArray(inOpen,0) ,
+                       gcnew SubArray(inHigh,0) ,
+                       gcnew SubArray(inLow,0) ,
+                       gcnew SubArray(inClose,0) ,
+                       outBegIdx,
+                       outNBElement,
+                        outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlShootingStar( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<double>^ inOpen,
@@ -1826,6 +3979,7 @@ namespace TicTacTec
                                                     [Out]int%    outBegIdx,
                                                     [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlShootingStar( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<float>^ inOpen,
@@ -1841,6 +3995,36 @@ namespace TicTacTec
 
          static int CdlShortLineLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlShortLine( int    startIdx,
+                                                 int    endIdx,
+                                                 SubArray^    inOpen,
+                                                 SubArray^    inHigh,
+                                                 SubArray^    inLow,
+                                                 SubArray^    inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlShortLine( int    startIdx,
+                                                 int    endIdx,
+                                                 cli::array<double>^ inOpen,
+                                                 cli::array<double>^ inHigh,
+                                                 cli::array<double>^ inLow,
+                                                 cli::array<double>^ inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger )
+         { return CdlShortLine( startIdx,        endIdx,
+                    gcnew SubArray(inOpen,0) ,
+                    gcnew SubArray(inHigh,0) ,
+                    gcnew SubArray(inLow,0) ,
+                    gcnew SubArray(inClose,0) ,
+                    outBegIdx,
+                    outNBElement,
+                     outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlShortLine( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<double>^ inOpen,
@@ -1850,6 +4034,7 @@ namespace TicTacTec
                                                  [Out]int%    outBegIdx,
                                                  [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlShortLine( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<float>^ inOpen,
@@ -1865,6 +4050,36 @@ namespace TicTacTec
 
          static int CdlSpinningTopLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlSpinningTop( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inOpen,
+                                                   SubArray^    inHigh,
+                                                   SubArray^    inLow,
+                                                   SubArray^    inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlSpinningTop( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inOpen,
+                                                   cli::array<double>^ inHigh,
+                                                   cli::array<double>^ inLow,
+                                                   cli::array<double>^ inClose,
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<int>^  outInteger )
+         { return CdlSpinningTop( startIdx,          endIdx,
+                      gcnew SubArray(inOpen,0) ,
+                      gcnew SubArray(inHigh,0) ,
+                      gcnew SubArray(inLow,0) ,
+                      gcnew SubArray(inClose,0) ,
+                      outBegIdx,
+                      outNBElement,
+                       outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlSpinningTop( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inOpen,
@@ -1874,6 +4089,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlSpinningTop( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inOpen,
@@ -1889,6 +4105,36 @@ namespace TicTacTec
 
          static int CdlStalledPatternLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlStalledPattern( int    startIdx,
+                                                      int    endIdx,
+                                                      SubArray^    inOpen,
+                                                      SubArray^    inHigh,
+                                                      SubArray^    inLow,
+                                                      SubArray^    inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlStalledPattern( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<double>^ inOpen,
+                                                      cli::array<double>^ inHigh,
+                                                      cli::array<double>^ inLow,
+                                                      cli::array<double>^ inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger )
+         { return CdlStalledPattern( startIdx,             endIdx,
+                         gcnew SubArray(inOpen,0) ,
+                         gcnew SubArray(inHigh,0) ,
+                         gcnew SubArray(inLow,0) ,
+                         gcnew SubArray(inClose,0) ,
+                         outBegIdx,
+                         outNBElement,
+                          outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlStalledPattern( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<double>^ inOpen,
@@ -1898,6 +4144,7 @@ namespace TicTacTec
                                                       [Out]int%    outBegIdx,
                                                       [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlStalledPattern( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<float>^ inOpen,
@@ -1913,6 +4160,36 @@ namespace TicTacTec
 
          static int CdlStickSandwhichLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlStickSandwhich( int    startIdx,
+                                                      int    endIdx,
+                                                      SubArray^    inOpen,
+                                                      SubArray^    inHigh,
+                                                      SubArray^    inLow,
+                                                      SubArray^    inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlStickSandwhich( int    startIdx,
+                                                      int    endIdx,
+                                                      cli::array<double>^ inOpen,
+                                                      cli::array<double>^ inHigh,
+                                                      cli::array<double>^ inLow,
+                                                      cli::array<double>^ inClose,
+                                                      [Out]int%    outBegIdx,
+                                                      [Out]int%    outNBElement,
+                                                      cli::array<int>^  outInteger )
+         { return CdlStickSandwhich( startIdx,             endIdx,
+                         gcnew SubArray(inOpen,0) ,
+                         gcnew SubArray(inHigh,0) ,
+                         gcnew SubArray(inLow,0) ,
+                         gcnew SubArray(inClose,0) ,
+                         outBegIdx,
+                         outNBElement,
+                          outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlStickSandwhich( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<double>^ inOpen,
@@ -1922,6 +4199,7 @@ namespace TicTacTec
                                                       [Out]int%    outBegIdx,
                                                       [Out]int%    outNBElement,
                                                       cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlStickSandwhich( int    startIdx,
                                                       int    endIdx,
                                                       cli::array<float>^ inOpen,
@@ -1937,6 +4215,36 @@ namespace TicTacTec
 
          static int CdlTakuriLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlTakuri( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inOpen,
+                                              SubArray^    inHigh,
+                                              SubArray^    inLow,
+                                              SubArray^    inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlTakuri( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inOpen,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<int>^  outInteger )
+         { return CdlTakuri( startIdx,     endIdx,
+                 gcnew SubArray(inOpen,0) ,
+                 gcnew SubArray(inHigh,0) ,
+                 gcnew SubArray(inLow,0) ,
+                 gcnew SubArray(inClose,0) ,
+                 outBegIdx,
+                 outNBElement,
+                  outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlTakuri( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inOpen,
@@ -1946,6 +4254,7 @@ namespace TicTacTec
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlTakuri( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inOpen,
@@ -1961,6 +4270,36 @@ namespace TicTacTec
 
          static int CdlTasukiGapLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlTasukiGap( int    startIdx,
+                                                 int    endIdx,
+                                                 SubArray^    inOpen,
+                                                 SubArray^    inHigh,
+                                                 SubArray^    inLow,
+                                                 SubArray^    inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlTasukiGap( int    startIdx,
+                                                 int    endIdx,
+                                                 cli::array<double>^ inOpen,
+                                                 cli::array<double>^ inHigh,
+                                                 cli::array<double>^ inLow,
+                                                 cli::array<double>^ inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger )
+         { return CdlTasukiGap( startIdx,        endIdx,
+                    gcnew SubArray(inOpen,0) ,
+                    gcnew SubArray(inHigh,0) ,
+                    gcnew SubArray(inLow,0) ,
+                    gcnew SubArray(inClose,0) ,
+                    outBegIdx,
+                    outNBElement,
+                     outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlTasukiGap( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<double>^ inOpen,
@@ -1970,6 +4309,7 @@ namespace TicTacTec
                                                  [Out]int%    outBegIdx,
                                                  [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlTasukiGap( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<float>^ inOpen,
@@ -1985,6 +4325,36 @@ namespace TicTacTec
 
          static int CdlThrustingLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlThrusting( int    startIdx,
+                                                 int    endIdx,
+                                                 SubArray^    inOpen,
+                                                 SubArray^    inHigh,
+                                                 SubArray^    inLow,
+                                                 SubArray^    inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlThrusting( int    startIdx,
+                                                 int    endIdx,
+                                                 cli::array<double>^ inOpen,
+                                                 cli::array<double>^ inHigh,
+                                                 cli::array<double>^ inLow,
+                                                 cli::array<double>^ inClose,
+                                                 [Out]int%    outBegIdx,
+                                                 [Out]int%    outNBElement,
+                                                 cli::array<int>^  outInteger )
+         { return CdlThrusting( startIdx,        endIdx,
+                    gcnew SubArray(inOpen,0) ,
+                    gcnew SubArray(inHigh,0) ,
+                    gcnew SubArray(inLow,0) ,
+                    gcnew SubArray(inClose,0) ,
+                    outBegIdx,
+                    outNBElement,
+                     outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlThrusting( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<double>^ inOpen,
@@ -1994,6 +4364,7 @@ namespace TicTacTec
                                                  [Out]int%    outBegIdx,
                                                  [Out]int%    outNBElement,
                                                  cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlThrusting( int    startIdx,
                                                  int    endIdx,
                                                  cli::array<float>^ inOpen,
@@ -2009,6 +4380,36 @@ namespace TicTacTec
 
          static int CdlTristarLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlTristar( int    startIdx,
+                                               int    endIdx,
+                                               SubArray^    inOpen,
+                                               SubArray^    inHigh,
+                                               SubArray^    inLow,
+                                               SubArray^    inClose,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlTristar( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inOpen,
+                                               cli::array<double>^ inHigh,
+                                               cli::array<double>^ inLow,
+                                               cli::array<double>^ inClose,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<int>^  outInteger )
+         { return CdlTristar( startIdx,      endIdx,
+                  gcnew SubArray(inOpen,0) ,
+                  gcnew SubArray(inHigh,0) ,
+                  gcnew SubArray(inLow,0) ,
+                  gcnew SubArray(inClose,0) ,
+                  outBegIdx,
+                  outNBElement,
+                   outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlTristar( int    startIdx,
                                                int    endIdx,
                                                cli::array<double>^ inOpen,
@@ -2018,6 +4419,7 @@ namespace TicTacTec
                                                [Out]int%    outBegIdx,
                                                [Out]int%    outNBElement,
                                                cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlTristar( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inOpen,
@@ -2033,6 +4435,36 @@ namespace TicTacTec
 
          static int CdlUnique3RiverLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlUnique3River( int    startIdx,
+                                                    int    endIdx,
+                                                    SubArray^    inOpen,
+                                                    SubArray^    inHigh,
+                                                    SubArray^    inLow,
+                                                    SubArray^    inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlUnique3River( int    startIdx,
+                                                    int    endIdx,
+                                                    cli::array<double>^ inOpen,
+                                                    cli::array<double>^ inHigh,
+                                                    cli::array<double>^ inLow,
+                                                    cli::array<double>^ inClose,
+                                                    [Out]int%    outBegIdx,
+                                                    [Out]int%    outNBElement,
+                                                    cli::array<int>^  outInteger )
+         { return CdlUnique3River( startIdx,           endIdx,
+                       gcnew SubArray(inOpen,0) ,
+                       gcnew SubArray(inHigh,0) ,
+                       gcnew SubArray(inLow,0) ,
+                       gcnew SubArray(inClose,0) ,
+                       outBegIdx,
+                       outNBElement,
+                        outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlUnique3River( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<double>^ inOpen,
@@ -2042,6 +4474,7 @@ namespace TicTacTec
                                                     [Out]int%    outBegIdx,
                                                     [Out]int%    outNBElement,
                                                     cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlUnique3River( int    startIdx,
                                                     int    endIdx,
                                                     cli::array<float>^ inOpen,
@@ -2057,6 +4490,36 @@ namespace TicTacTec
 
          static int CdlUpsideGap2CrowsLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlUpsideGap2Crows( int    startIdx,
+                                                       int    endIdx,
+                                                       SubArray^    inOpen,
+                                                       SubArray^    inHigh,
+                                                       SubArray^    inLow,
+                                                       SubArray^    inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlUpsideGap2Crows( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inOpen,
+                                                       cli::array<double>^ inHigh,
+                                                       cli::array<double>^ inLow,
+                                                       cli::array<double>^ inClose,
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<int>^  outInteger )
+         { return CdlUpsideGap2Crows( startIdx,              endIdx,
+                          gcnew SubArray(inOpen,0) ,
+                          gcnew SubArray(inHigh,0) ,
+                          gcnew SubArray(inLow,0) ,
+                          gcnew SubArray(inClose,0) ,
+                          outBegIdx,
+                          outNBElement,
+                           outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlUpsideGap2Crows( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<double>^ inOpen,
@@ -2066,6 +4529,7 @@ namespace TicTacTec
                                                        [Out]int%    outBegIdx,
                                                        [Out]int%    outNBElement,
                                                        cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlUpsideGap2Crows( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inOpen,
@@ -2081,6 +4545,36 @@ namespace TicTacTec
 
          static int CdlXSideGap3MethodsLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode CdlXSideGap3Methods( int    startIdx,
+                                                        int    endIdx,
+                                                        SubArray^    inOpen,
+                                                        SubArray^    inHigh,
+                                                        SubArray^    inLow,
+                                                        SubArray^    inClose,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNBElement,
+                                                        cli::array<int>^  outInteger );
+
+         static enum class RetCode CdlXSideGap3Methods( int    startIdx,
+                                                        int    endIdx,
+                                                        cli::array<double>^ inOpen,
+                                                        cli::array<double>^ inHigh,
+                                                        cli::array<double>^ inLow,
+                                                        cli::array<double>^ inClose,
+                                                        [Out]int%    outBegIdx,
+                                                        [Out]int%    outNBElement,
+                                                        cli::array<int>^  outInteger )
+         { return CdlXSideGap3Methods( startIdx,               endIdx,
+                           gcnew SubArray(inOpen,0) ,
+                           gcnew SubArray(inHigh,0) ,
+                           gcnew SubArray(inLow,0) ,
+                           gcnew SubArray(inClose,0) ,
+                           outBegIdx,
+                           outNBElement,
+                            outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode CdlXSideGap3Methods( int    startIdx,
                                                         int    endIdx,
                                                         cli::array<double>^ inOpen,
@@ -2090,6 +4584,7 @@ namespace TicTacTec
                                                         [Out]int%    outBegIdx,
                                                         [Out]int%    outNBElement,
                                                         cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode CdlXSideGap3Methods( int    startIdx,
                                                         int    endIdx,
                                                         cli::array<float>^ inOpen,
@@ -2105,6 +4600,30 @@ namespace TicTacTec
 
          static int CmoLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cmo( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Cmo( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Cmo( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Cmo( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -2112,6 +4631,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Cmo( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -2125,6 +4645,33 @@ namespace TicTacTec
 
          static int CorrelLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Correl( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inReal0,
+                                           SubArray^    inReal1,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal );
+
+         static enum class RetCode Correl( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal0,
+                                           cli::array<double>^ inReal1,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal )
+         { return Correl( startIdx,  endIdx,
+             gcnew SubArray(inReal0,0),
+             gcnew SubArray(inReal1,0),
+               optInTimePeriod, /* From 1 to 100000 */
+              outBegIdx,
+              outNBElement,
+               outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Correl( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inReal0,
@@ -2133,6 +4680,7 @@ namespace TicTacTec
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Correl( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal0,
@@ -2147,6 +4695,30 @@ namespace TicTacTec
 
          static int DemaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Dema( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Dema( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Dema( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Dema( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal,
@@ -2154,6 +4726,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Dema( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
@@ -2167,6 +4740,36 @@ namespace TicTacTec
 
          static int DxLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Dx( int    startIdx,
+                                       int    endIdx,
+                                       SubArray^    inHigh,
+                                       SubArray^    inLow,
+                                       SubArray^    inClose,
+                                       int           optInTimePeriod, /* From 2 to 100000 */
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal );
+
+         static enum class RetCode Dx( int    startIdx,
+                                       int    endIdx,
+                                       cli::array<double>^ inHigh,
+                                       cli::array<double>^ inLow,
+                                       cli::array<double>^ inClose,
+                                       int           optInTimePeriod, /* From 2 to 100000 */
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal )
+         { return Dx( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Dx( int    startIdx,
                                        int    endIdx,
                                        cli::array<double>^ inHigh,
@@ -2176,6 +4779,7 @@ namespace TicTacTec
                                        [Out]int%    outBegIdx,
                                        [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Dx( int    startIdx,
                                        int    endIdx,
                                        cli::array<float>^ inHigh,
@@ -2191,6 +4795,30 @@ namespace TicTacTec
 
          static int EmaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Ema( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Ema( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Ema( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Ema( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -2198,6 +4826,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Ema( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -2211,12 +4840,34 @@ namespace TicTacTec
 
          static int HtDcPeriodLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode HtDcPeriod( int    startIdx,
+                                               int    endIdx,
+                                               SubArray^    inReal,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<double>^  outReal );
+
+         static enum class RetCode HtDcPeriod( int    startIdx,
+                                               int    endIdx,
+                                               cli::array<double>^ inReal,
+                                               [Out]int%    outBegIdx,
+                                               [Out]int%    outNBElement,
+                                               cli::array<double>^  outReal )
+         { return HtDcPeriod( startIdx,      endIdx,
+                 gcnew SubArray(inReal,0),
+                  outBegIdx,
+                  outNBElement,
+                   outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode HtDcPeriod( int    startIdx,
                                                int    endIdx,
                                                cli::array<double>^ inReal,
                                                [Out]int%    outBegIdx,
                                                [Out]int%    outNBElement,
                                                cli::array<double>^  outReal );
+         #endif
          static enum class RetCode HtDcPeriod( int    startIdx,
                                                int    endIdx,
                                                cli::array<float>^ inReal,
@@ -2229,12 +4880,34 @@ namespace TicTacTec
 
          static int HtDcPhaseLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode HtDcPhase( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inReal,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<double>^  outReal );
+
+         static enum class RetCode HtDcPhase( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inReal,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<double>^  outReal )
+         { return HtDcPhase( startIdx,     endIdx,
+                gcnew SubArray(inReal,0),
+                 outBegIdx,
+                 outNBElement,
+                  outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode HtDcPhase( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inReal,
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
+         #endif
          static enum class RetCode HtDcPhase( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inReal,
@@ -2247,6 +4920,30 @@ namespace TicTacTec
 
          static int HtPhasorLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode HtPhasor( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inReal,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outInPhase,
+                                             cli::array<double>^  outQuadrature );
+
+         static enum class RetCode HtPhasor( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inReal,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outInPhase,
+                                             cli::array<double>^  outQuadrature )
+         { return HtPhasor( startIdx,    endIdx,
+               gcnew SubArray(inReal,0),
+                outBegIdx,
+                outNBElement,
+                 outInPhase ,
+                 outQuadrature  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode HtPhasor( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inReal,
@@ -2254,6 +4951,7 @@ namespace TicTacTec
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outInPhase,
                                              cli::array<double>^  outQuadrature );
+         #endif
          static enum class RetCode HtPhasor( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
@@ -2267,6 +4965,30 @@ namespace TicTacTec
 
          static int HtSineLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode HtSine( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inReal,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outSine,
+                                           cli::array<double>^  outLeadSine );
+
+         static enum class RetCode HtSine( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outSine,
+                                           cli::array<double>^  outLeadSine )
+         { return HtSine( startIdx,  endIdx,
+             gcnew SubArray(inReal,0),
+              outBegIdx,
+              outNBElement,
+               outSine ,
+               outLeadSine  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode HtSine( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inReal,
@@ -2274,6 +4996,7 @@ namespace TicTacTec
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outSine,
                                            cli::array<double>^  outLeadSine );
+         #endif
          static enum class RetCode HtSine( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
@@ -2287,12 +5010,34 @@ namespace TicTacTec
 
          static int HtTrendlineLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode HtTrendline( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inReal,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<double>^  outReal );
+
+         static enum class RetCode HtTrendline( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inReal,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<double>^  outReal )
+         { return HtTrendline( startIdx,       endIdx,
+                  gcnew SubArray(inReal,0),
+                   outBegIdx,
+                   outNBElement,
+                    outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode HtTrendline( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inReal,
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<double>^  outReal );
+         #endif
          static enum class RetCode HtTrendline( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inReal,
@@ -2305,12 +5050,34 @@ namespace TicTacTec
 
          static int HtTrendModeLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode HtTrendMode( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inReal,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger );
+
+         static enum class RetCode HtTrendMode( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inReal,
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outInteger )
+         { return HtTrendMode( startIdx,       endIdx,
+                  gcnew SubArray(inReal,0),
+                   outBegIdx,
+                   outNBElement,
+                    outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode HtTrendMode( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inReal,
                                                 [Out]int%    outBegIdx,
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode HtTrendMode( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inReal,
@@ -2323,6 +5090,30 @@ namespace TicTacTec
 
          static int KamaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Kama( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Kama( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Kama( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Kama( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal,
@@ -2330,6 +5121,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Kama( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
@@ -2343,6 +5135,30 @@ namespace TicTacTec
 
          static int LinearRegLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode LinearReg( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inReal,
+                                              int           optInTimePeriod, /* From 2 to 100000 */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<double>^  outReal );
+
+         static enum class RetCode LinearReg( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inReal,
+                                              int           optInTimePeriod, /* From 2 to 100000 */
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<double>^  outReal )
+         { return LinearReg( startIdx,     endIdx,
+                gcnew SubArray(inReal,0),
+                  optInTimePeriod, /* From 2 to 100000 */
+                 outBegIdx,
+                 outNBElement,
+                  outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode LinearReg( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inReal,
@@ -2350,6 +5166,7 @@ namespace TicTacTec
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
+         #endif
          static enum class RetCode LinearReg( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inReal,
@@ -2363,6 +5180,30 @@ namespace TicTacTec
 
          static int LinearRegAngleLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode LinearRegAngle( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inReal,
+                                                   int           optInTimePeriod, /* From 2 to 100000 */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<double>^  outReal );
+
+         static enum class RetCode LinearRegAngle( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inReal,
+                                                   int           optInTimePeriod, /* From 2 to 100000 */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<double>^  outReal )
+         { return LinearRegAngle( startIdx,          endIdx,
+                     gcnew SubArray(inReal,0),
+                       optInTimePeriod, /* From 2 to 100000 */
+                      outBegIdx,
+                      outNBElement,
+                       outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode LinearRegAngle( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inReal,
@@ -2370,6 +5211,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<double>^  outReal );
+         #endif
          static enum class RetCode LinearRegAngle( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inReal,
@@ -2383,6 +5225,30 @@ namespace TicTacTec
 
          static int LinearRegInterceptLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode LinearRegIntercept( int    startIdx,
+                                                       int    endIdx,
+                                                       SubArray^    inReal,
+                                                       int           optInTimePeriod, /* From 2 to 100000 */
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<double>^  outReal );
+
+         static enum class RetCode LinearRegIntercept( int    startIdx,
+                                                       int    endIdx,
+                                                       cli::array<double>^ inReal,
+                                                       int           optInTimePeriod, /* From 2 to 100000 */
+                                                       [Out]int%    outBegIdx,
+                                                       [Out]int%    outNBElement,
+                                                       cli::array<double>^  outReal )
+         { return LinearRegIntercept( startIdx,              endIdx,
+                         gcnew SubArray(inReal,0),
+                           optInTimePeriod, /* From 2 to 100000 */
+                          outBegIdx,
+                          outNBElement,
+                           outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode LinearRegIntercept( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<double>^ inReal,
@@ -2390,6 +5256,7 @@ namespace TicTacTec
                                                        [Out]int%    outBegIdx,
                                                        [Out]int%    outNBElement,
                                                        cli::array<double>^  outReal );
+         #endif
          static enum class RetCode LinearRegIntercept( int    startIdx,
                                                        int    endIdx,
                                                        cli::array<float>^ inReal,
@@ -2403,6 +5270,30 @@ namespace TicTacTec
 
          static int LinearRegSlopeLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode LinearRegSlope( int    startIdx,
+                                                   int    endIdx,
+                                                   SubArray^    inReal,
+                                                   int           optInTimePeriod, /* From 2 to 100000 */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<double>^  outReal );
+
+         static enum class RetCode LinearRegSlope( int    startIdx,
+                                                   int    endIdx,
+                                                   cli::array<double>^ inReal,
+                                                   int           optInTimePeriod, /* From 2 to 100000 */
+                                                   [Out]int%    outBegIdx,
+                                                   [Out]int%    outNBElement,
+                                                   cli::array<double>^  outReal )
+         { return LinearRegSlope( startIdx,          endIdx,
+                     gcnew SubArray(inReal,0),
+                       optInTimePeriod, /* From 2 to 100000 */
+                      outBegIdx,
+                      outNBElement,
+                       outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode LinearRegSlope( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<double>^ inReal,
@@ -2410,6 +5301,7 @@ namespace TicTacTec
                                                    [Out]int%    outBegIdx,
                                                    [Out]int%    outNBElement,
                                                    cli::array<double>^  outReal );
+         #endif
          static enum class RetCode LinearRegSlope( int    startIdx,
                                                    int    endIdx,
                                                    cli::array<float>^ inReal,
@@ -2423,6 +5315,33 @@ namespace TicTacTec
 
          static int MovingAverageLookback( int           optInTimePeriod, /* From 1 to 100000 */
                                          MAType        optInMAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MovingAverage( int    startIdx,
+                                                  int    endIdx,
+                                                  SubArray^    inReal,
+                                                  int           optInTimePeriod, /* From 1 to 100000 */
+                                                  MAType        optInMAType,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNBElement,
+                                                  cli::array<double>^  outReal );
+
+         static enum class RetCode MovingAverage( int    startIdx,
+                                                  int    endIdx,
+                                                  cli::array<double>^ inReal,
+                                                  int           optInTimePeriod, /* From 1 to 100000 */
+                                                  MAType        optInMAType,
+                                                  [Out]int%    outBegIdx,
+                                                  [Out]int%    outNBElement,
+                                                  cli::array<double>^  outReal )
+         { return MovingAverage( startIdx,         endIdx,
+                    gcnew SubArray(inReal,0),
+                      optInTimePeriod, /* From 1 to 100000 */
+                      optInMAType,
+                     outBegIdx,
+                     outNBElement,
+                      outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MovingAverage( int    startIdx,
                                                   int    endIdx,
                                                   cli::array<double>^ inReal,
@@ -2431,6 +5350,7 @@ namespace TicTacTec
                                                   [Out]int%    outBegIdx,
                                                   [Out]int%    outNBElement,
                                                   cli::array<double>^  outReal );
+         #endif
          static enum class RetCode MovingAverage( int    startIdx,
                                                   int    endIdx,
                                                   cli::array<float>^ inReal,
@@ -2447,6 +5367,42 @@ namespace TicTacTec
                                 int           optInSlowPeriod, /* From 2 to 100000 */
                                 int           optInSignalPeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Macd( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         int           optInFastPeriod, /* From 2 to 100000 */
+                                         int           optInSlowPeriod, /* From 2 to 100000 */
+                                         int           optInSignalPeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outMACD,
+                                         cli::array<double>^  outMACDSignal,
+                                         cli::array<double>^  outMACDHist );
+
+         static enum class RetCode Macd( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         int           optInFastPeriod, /* From 2 to 100000 */
+                                         int           optInSlowPeriod, /* From 2 to 100000 */
+                                         int           optInSignalPeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outMACD,
+                                         cli::array<double>^  outMACDSignal,
+                                         cli::array<double>^  outMACDHist )
+         { return Macd( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInFastPeriod, /* From 2 to 100000 */
+              optInSlowPeriod, /* From 2 to 100000 */
+              optInSignalPeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outMACD ,
+              outMACDSignal ,
+              outMACDHist  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Macd( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal,
@@ -2458,6 +5414,7 @@ namespace TicTacTec
                                          cli::array<double>^  outMACD,
                                          cli::array<double>^  outMACDSignal,
                                          cli::array<double>^  outMACDHist );
+         #endif
          static enum class RetCode Macd( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
@@ -2479,6 +5436,51 @@ namespace TicTacTec
                                    MAType        optInSlowMAType,
                                    int           optInSignalPeriod, /* From 1 to 100000 */
                                    MAType        optInSignalMAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MacdExt( int    startIdx,
+                                            int    endIdx,
+                                            SubArray^    inReal,
+                                            int           optInFastPeriod, /* From 2 to 100000 */
+                                            MAType        optInFastMAType,
+                                            int           optInSlowPeriod, /* From 2 to 100000 */
+                                            MAType        optInSlowMAType,
+                                            int           optInSignalPeriod, /* From 1 to 100000 */
+                                            MAType        optInSignalMAType,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outMACD,
+                                            cli::array<double>^  outMACDSignal,
+                                            cli::array<double>^  outMACDHist );
+
+         static enum class RetCode MacdExt( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInFastPeriod, /* From 2 to 100000 */
+                                            MAType        optInFastMAType,
+                                            int           optInSlowPeriod, /* From 2 to 100000 */
+                                            MAType        optInSlowMAType,
+                                            int           optInSignalPeriod, /* From 1 to 100000 */
+                                            MAType        optInSignalMAType,
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outMACD,
+                                            cli::array<double>^  outMACDSignal,
+                                            cli::array<double>^  outMACDHist )
+         { return MacdExt( startIdx,   endIdx,
+              gcnew SubArray(inReal,0),
+                optInFastPeriod, /* From 2 to 100000 */
+                optInFastMAType,
+                optInSlowPeriod, /* From 2 to 100000 */
+                optInSlowMAType,
+                optInSignalPeriod, /* From 1 to 100000 */
+                optInSignalMAType,
+               outBegIdx,
+               outNBElement,
+                outMACD ,
+                outMACDSignal ,
+                outMACDHist  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MacdExt( int    startIdx,
                                             int    endIdx,
                                             cli::array<double>^ inReal,
@@ -2493,6 +5495,7 @@ namespace TicTacTec
                                             cli::array<double>^  outMACD,
                                             cli::array<double>^  outMACDSignal,
                                             cli::array<double>^  outMACDHist );
+         #endif
          static enum class RetCode MacdExt( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
@@ -2513,6 +5516,36 @@ namespace TicTacTec
 
          static int MacdFixLookback( int           optInSignalPeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MacdFix( int    startIdx,
+                                            int    endIdx,
+                                            SubArray^    inReal,
+                                            int           optInSignalPeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outMACD,
+                                            cli::array<double>^  outMACDSignal,
+                                            cli::array<double>^  outMACDHist );
+
+         static enum class RetCode MacdFix( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInSignalPeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outMACD,
+                                            cli::array<double>^  outMACDSignal,
+                                            cli::array<double>^  outMACDHist )
+         { return MacdFix( startIdx,   endIdx,
+              gcnew SubArray(inReal,0),
+                optInSignalPeriod, /* From 1 to 100000 */
+               outBegIdx,
+               outNBElement,
+                outMACD ,
+                outMACDSignal ,
+                outMACDHist  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MacdFix( int    startIdx,
                                             int    endIdx,
                                             cli::array<double>^ inReal,
@@ -2522,6 +5555,7 @@ namespace TicTacTec
                                             cli::array<double>^  outMACD,
                                             cli::array<double>^  outMACDSignal,
                                             cli::array<double>^  outMACDHist );
+         #endif
          static enum class RetCode MacdFix( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
@@ -2538,6 +5572,36 @@ namespace TicTacTec
          static int MamaLookback( double        optInFastLimit, /* From 0.01 to 0.99 */
                                 double        optInSlowLimit );  /* From 0.01 to 0.99 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Mama( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         double        optInFastLimit, /* From 0.01 to 0.99 */
+                                         double        optInSlowLimit, /* From 0.01 to 0.99 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outMAMA,
+                                         cli::array<double>^  outFAMA );
+
+         static enum class RetCode Mama( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         double        optInFastLimit, /* From 0.01 to 0.99 */
+                                         double        optInSlowLimit, /* From 0.01 to 0.99 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outMAMA,
+                                         cli::array<double>^  outFAMA )
+         { return Mama( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInFastLimit, /* From 0.01 to 0.99 */
+              optInSlowLimit, /* From 0.01 to 0.99 */
+             outBegIdx,
+             outNBElement,
+              outMAMA ,
+              outFAMA  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Mama( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal,
@@ -2547,6 +5611,7 @@ namespace TicTacTec
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outMAMA,
                                          cli::array<double>^  outFAMA );
+         #endif
          static enum class RetCode Mama( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
@@ -2563,6 +5628,39 @@ namespace TicTacTec
          static int MovingAverageVariablePeriodLookback( int           optInMinPeriod, /* From 2 to 100000 */
                                                        int           optInMaxPeriod, /* From 2 to 100000 */
                                                        MAType        optInMAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
+                                                                int    endIdx,
+                                                                SubArray^    inReal,
+                                                                SubArray^    inPeriods,
+                                                                int           optInMinPeriod, /* From 2 to 100000 */
+                                                                int           optInMaxPeriod, /* From 2 to 100000 */
+                                                                MAType        optInMAType,
+                                                                [Out]int%    outBegIdx,
+                                                                [Out]int%    outNBElement,
+                                                                cli::array<double>^  outReal );
+
+         static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
+                                                                int    endIdx,
+                                                                cli::array<double>^ inReal,
+                                                                cli::array<double>^ inPeriods,
+                                                                int           optInMinPeriod, /* From 2 to 100000 */
+                                                                int           optInMaxPeriod, /* From 2 to 100000 */
+                                                                MAType        optInMAType,
+                                                                [Out]int%    outBegIdx,
+                                                                [Out]int%    outNBElement,
+                                                                cli::array<double>^  outReal )
+         { return MovingAverageVariablePeriod( startIdx,                       endIdx,
+                                  gcnew SubArray(inReal,0),
+                                  gcnew SubArray(inPeriods,0),
+                                    optInMinPeriod, /* From 2 to 100000 */
+                                    optInMaxPeriod, /* From 2 to 100000 */
+                                    optInMAType,
+                                   outBegIdx,
+                                   outNBElement,
+                                    outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
                                                                 int    endIdx,
                                                                 cli::array<double>^ inReal,
@@ -2573,6 +5671,7 @@ namespace TicTacTec
                                                                 [Out]int%    outBegIdx,
                                                                 [Out]int%    outNBElement,
                                                                 cli::array<double>^  outReal );
+         #endif
          static enum class RetCode MovingAverageVariablePeriod( int    startIdx,
                                                                 int    endIdx,
                                                                 cli::array<float>^ inReal,
@@ -2589,6 +5688,30 @@ namespace TicTacTec
 
          static int MaxLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Max( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Max( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Max( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Max( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -2596,6 +5719,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Max( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -2609,6 +5733,30 @@ namespace TicTacTec
 
          static int MaxIndexLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MaxIndex( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<int>^  outInteger );
+
+         static enum class RetCode MaxIndex( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<int>^  outInteger )
+         { return MaxIndex( startIdx,    endIdx,
+               gcnew SubArray(inReal,0),
+                 optInTimePeriod, /* From 2 to 100000 */
+                outBegIdx,
+                outNBElement,
+                 outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MaxIndex( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inReal,
@@ -2616,6 +5764,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode MaxIndex( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
@@ -2629,6 +5778,30 @@ namespace TicTacTec
 
          static int MedPriceLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MedPrice( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inHigh,
+                                             SubArray^    inLow,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal );
+
+         static enum class RetCode MedPrice( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal )
+         { return MedPrice( startIdx,    endIdx,
+                gcnew SubArray(inHigh,0) ,
+                gcnew SubArray(inLow,0) ,
+                outBegIdx,
+                outNBElement,
+                 outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MedPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inHigh,
@@ -2636,6 +5809,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
+         #endif
          static enum class RetCode MedPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inHigh,
@@ -2649,6 +5823,39 @@ namespace TicTacTec
 
          static int MfiLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Mfi( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inHigh,
+                                        SubArray^    inLow,
+                                        SubArray^    inClose,
+                                        SubArray^    inVolume,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Mfi( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inHigh,
+                                        cli::array<double>^ inLow,
+                                        cli::array<double>^ inClose,
+                                        cli::array<double>^ inVolume,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Mfi( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+             gcnew SubArray(inVolume,0) ,
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Mfi( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inHigh,
@@ -2659,6 +5866,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Mfi( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inHigh,
@@ -2675,6 +5883,30 @@ namespace TicTacTec
 
          static int MidPointLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MidPoint( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal );
+
+         static enum class RetCode MidPoint( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal )
+         { return MidPoint( startIdx,    endIdx,
+               gcnew SubArray(inReal,0),
+                 optInTimePeriod, /* From 2 to 100000 */
+                outBegIdx,
+                outNBElement,
+                 outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MidPoint( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inReal,
@@ -2682,6 +5914,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
+         #endif
          static enum class RetCode MidPoint( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
@@ -2695,6 +5928,33 @@ namespace TicTacTec
 
          static int MidPriceLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MidPrice( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inHigh,
+                                             SubArray^    inLow,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal );
+
+         static enum class RetCode MidPrice( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal )
+         { return MidPrice( startIdx,    endIdx,
+                gcnew SubArray(inHigh,0) ,
+                gcnew SubArray(inLow,0) ,
+                 optInTimePeriod, /* From 2 to 100000 */
+                outBegIdx,
+                outNBElement,
+                 outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MidPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inHigh,
@@ -2703,6 +5963,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
+         #endif
          static enum class RetCode MidPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inHigh,
@@ -2717,6 +5978,30 @@ namespace TicTacTec
 
          static int MinLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Min( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Min( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Min( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Min( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -2724,6 +6009,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Min( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -2737,6 +6023,30 @@ namespace TicTacTec
 
          static int MinIndexLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MinIndex( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<int>^  outInteger );
+
+         static enum class RetCode MinIndex( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<int>^  outInteger )
+         { return MinIndex( startIdx,    endIdx,
+               gcnew SubArray(inReal,0),
+                 optInTimePeriod, /* From 2 to 100000 */
+                outBegIdx,
+                outNBElement,
+                 outInteger  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MinIndex( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inReal,
@@ -2744,6 +6054,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<int>^  outInteger );
+         #endif
          static enum class RetCode MinIndex( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
@@ -2757,6 +6068,33 @@ namespace TicTacTec
 
          static int MinMaxLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MinMax( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outMin,
+                                           cli::array<double>^  outMax );
+
+         static enum class RetCode MinMax( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outMin,
+                                           cli::array<double>^  outMax )
+         { return MinMax( startIdx,  endIdx,
+             gcnew SubArray(inReal,0),
+               optInTimePeriod, /* From 2 to 100000 */
+              outBegIdx,
+              outNBElement,
+               outMin ,
+               outMax  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MinMax( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inReal,
@@ -2765,6 +6103,7 @@ namespace TicTacTec
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outMin,
                                            cli::array<double>^  outMax );
+         #endif
          static enum class RetCode MinMax( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
@@ -2779,6 +6118,33 @@ namespace TicTacTec
 
          static int MinMaxIndexLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MinMaxIndex( int    startIdx,
+                                                int    endIdx,
+                                                SubArray^    inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outMinIdx,
+                                                cli::array<int>^  outMaxIdx );
+
+         static enum class RetCode MinMaxIndex( int    startIdx,
+                                                int    endIdx,
+                                                cli::array<double>^ inReal,
+                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                [Out]int%    outBegIdx,
+                                                [Out]int%    outNBElement,
+                                                cli::array<int>^  outMinIdx,
+                                                cli::array<int>^  outMaxIdx )
+         { return MinMaxIndex( startIdx,       endIdx,
+                  gcnew SubArray(inReal,0),
+                    optInTimePeriod, /* From 2 to 100000 */
+                   outBegIdx,
+                   outNBElement,
+                    outMinIdx ,
+                    outMaxIdx  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MinMaxIndex( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<double>^ inReal,
@@ -2787,6 +6153,7 @@ namespace TicTacTec
                                                 [Out]int%    outNBElement,
                                                 cli::array<int>^  outMinIdx,
                                                 cli::array<int>^  outMaxIdx );
+         #endif
          static enum class RetCode MinMaxIndex( int    startIdx,
                                                 int    endIdx,
                                                 cli::array<float>^ inReal,
@@ -2801,6 +6168,36 @@ namespace TicTacTec
 
          static int MinusDILookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MinusDI( int    startIdx,
+                                            int    endIdx,
+                                            SubArray^    inHigh,
+                                            SubArray^    inLow,
+                                            SubArray^    inClose,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outReal );
+
+         static enum class RetCode MinusDI( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inHigh,
+                                            cli::array<double>^ inLow,
+                                            cli::array<double>^ inClose,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outReal )
+         { return MinusDI( startIdx,   endIdx,
+               gcnew SubArray(inHigh,0) ,
+               gcnew SubArray(inLow,0) ,
+               gcnew SubArray(inClose,0) ,
+                optInTimePeriod, /* From 1 to 100000 */
+               outBegIdx,
+               outNBElement,
+                outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MinusDI( int    startIdx,
                                             int    endIdx,
                                             cli::array<double>^ inHigh,
@@ -2810,6 +6207,7 @@ namespace TicTacTec
                                             [Out]int%    outBegIdx,
                                             [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
+         #endif
          static enum class RetCode MinusDI( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inHigh,
@@ -2825,6 +6223,33 @@ namespace TicTacTec
 
          static int MinusDMLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode MinusDM( int    startIdx,
+                                            int    endIdx,
+                                            SubArray^    inHigh,
+                                            SubArray^    inLow,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outReal );
+
+         static enum class RetCode MinusDM( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inHigh,
+                                            cli::array<double>^ inLow,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outReal )
+         { return MinusDM( startIdx,   endIdx,
+               gcnew SubArray(inHigh,0) ,
+               gcnew SubArray(inLow,0) ,
+                optInTimePeriod, /* From 1 to 100000 */
+               outBegIdx,
+               outNBElement,
+                outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode MinusDM( int    startIdx,
                                             int    endIdx,
                                             cli::array<double>^ inHigh,
@@ -2833,6 +6258,7 @@ namespace TicTacTec
                                             [Out]int%    outBegIdx,
                                             [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
+         #endif
          static enum class RetCode MinusDM( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inHigh,
@@ -2847,6 +6273,30 @@ namespace TicTacTec
 
          static int MomLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Mom( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 1 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Mom( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 1 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Mom( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Mom( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -2854,6 +6304,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Mom( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -2867,6 +6318,36 @@ namespace TicTacTec
 
          static int NatrLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Natr( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inHigh,
+                                         SubArray^    inLow,
+                                         SubArray^    inClose,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Natr( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inHigh,
+                                         cli::array<double>^ inLow,
+                                         cli::array<double>^ inClose,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Natr( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+              optInTimePeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Natr( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inHigh,
@@ -2876,6 +6357,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Natr( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inHigh,
@@ -2891,6 +6373,30 @@ namespace TicTacTec
 
          static int ObvLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Obv( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        SubArray^    inVolume,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Obv( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        cli::array<double>^ inVolume,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Obv( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             gcnew SubArray(inVolume,0) ,
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Obv( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -2898,6 +6404,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Obv( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -2911,6 +6418,36 @@ namespace TicTacTec
 
          static int PlusDILookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode PlusDI( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inHigh,
+                                           SubArray^    inLow,
+                                           SubArray^    inClose,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal );
+
+         static enum class RetCode PlusDI( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           cli::array<double>^ inClose,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal )
+         { return PlusDI( startIdx,  endIdx,
+              gcnew SubArray(inHigh,0) ,
+              gcnew SubArray(inLow,0) ,
+              gcnew SubArray(inClose,0) ,
+               optInTimePeriod, /* From 1 to 100000 */
+              outBegIdx,
+              outNBElement,
+               outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode PlusDI( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inHigh,
@@ -2920,6 +6457,7 @@ namespace TicTacTec
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
+         #endif
          static enum class RetCode PlusDI( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inHigh,
@@ -2935,6 +6473,33 @@ namespace TicTacTec
 
          static int PlusDMLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode PlusDM( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inHigh,
+                                           SubArray^    inLow,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal );
+
+         static enum class RetCode PlusDM( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal )
+         { return PlusDM( startIdx,  endIdx,
+              gcnew SubArray(inHigh,0) ,
+              gcnew SubArray(inLow,0) ,
+               optInTimePeriod, /* From 1 to 100000 */
+              outBegIdx,
+              outNBElement,
+               outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode PlusDM( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inHigh,
@@ -2943,6 +6508,7 @@ namespace TicTacTec
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
+         #endif
          static enum class RetCode PlusDM( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inHigh,
@@ -2958,6 +6524,36 @@ namespace TicTacTec
          static int PpoLookback( int           optInFastPeriod, /* From 2 to 100000 */
                                int           optInSlowPeriod, /* From 2 to 100000 */
                                MAType        optInMAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Ppo( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInFastPeriod, /* From 2 to 100000 */
+                                        int           optInSlowPeriod, /* From 2 to 100000 */
+                                        MAType        optInMAType,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Ppo( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInFastPeriod, /* From 2 to 100000 */
+                                        int           optInSlowPeriod, /* From 2 to 100000 */
+                                        MAType        optInMAType,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Ppo( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInFastPeriod, /* From 2 to 100000 */
+              optInSlowPeriod, /* From 2 to 100000 */
+              optInMAType,
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Ppo( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -2967,6 +6563,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Ppo( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -2982,6 +6579,30 @@ namespace TicTacTec
 
          static int RocLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Roc( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 1 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Roc( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 1 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Roc( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Roc( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -2989,6 +6610,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Roc( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -3002,6 +6624,30 @@ namespace TicTacTec
 
          static int RocPLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode RocP( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode RocP( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return RocP( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode RocP( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal,
@@ -3009,6 +6655,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode RocP( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
@@ -3022,6 +6669,30 @@ namespace TicTacTec
 
          static int RocRLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode RocR( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode RocR( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return RocR( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode RocR( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal,
@@ -3029,6 +6700,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode RocR( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
@@ -3042,6 +6714,30 @@ namespace TicTacTec
 
          static int RocR100Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode RocR100( int    startIdx,
+                                            int    endIdx,
+                                            SubArray^    inReal,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outReal );
+
+         static enum class RetCode RocR100( int    startIdx,
+                                            int    endIdx,
+                                            cli::array<double>^ inReal,
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            [Out]int%    outBegIdx,
+                                            [Out]int%    outNBElement,
+                                            cli::array<double>^  outReal )
+         { return RocR100( startIdx,   endIdx,
+              gcnew SubArray(inReal,0),
+                optInTimePeriod, /* From 1 to 100000 */
+               outBegIdx,
+               outNBElement,
+                outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode RocR100( int    startIdx,
                                             int    endIdx,
                                             cli::array<double>^ inReal,
@@ -3049,6 +6745,7 @@ namespace TicTacTec
                                             [Out]int%    outBegIdx,
                                             [Out]int%    outNBElement,
                                             cli::array<double>^  outReal );
+         #endif
          static enum class RetCode RocR100( int    startIdx,
                                             int    endIdx,
                                             cli::array<float>^ inReal,
@@ -3062,6 +6759,30 @@ namespace TicTacTec
 
          static int RsiLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Rsi( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Rsi( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Rsi( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Rsi( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -3069,6 +6790,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Rsi( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -3083,6 +6805,36 @@ namespace TicTacTec
          static int SarLookback( double        optInAcceleration, /* From 0 to TA_REAL_MAX */
                                double        optInMaximum );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Sar( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inHigh,
+                                        SubArray^    inLow,
+                                        double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+                                        double        optInMaximum, /* From 0 to TA_REAL_MAX */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Sar( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inHigh,
+                                        cli::array<double>^ inLow,
+                                        double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+                                        double        optInMaximum, /* From 0 to TA_REAL_MAX */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Sar( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+              optInAcceleration, /* From 0 to TA_REAL_MAX */
+              optInMaximum, /* From 0 to TA_REAL_MAX */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Sar( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inHigh,
@@ -3092,6 +6844,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Sar( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inHigh,
@@ -3114,6 +6867,54 @@ namespace TicTacTec
                                   double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
                                   double        optInAccelerationMaxShort );  /* From 0 to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode SarExt( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inHigh,
+                                           SubArray^    inLow,
+                                           double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                           double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal );
+
+         static enum class RetCode SarExt( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                           double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+                                           double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal )
+         { return SarExt( startIdx,  endIdx,
+              gcnew SubArray(inHigh,0) ,
+              gcnew SubArray(inLow,0) ,
+               optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+               optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+               optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+               optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+               optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+               optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+               optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+               optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+              outBegIdx,
+              outNBElement,
+               outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode SarExt( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inHigh,
@@ -3129,6 +6930,7 @@ namespace TicTacTec
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
+         #endif
          static enum class RetCode SarExt( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inHigh,
@@ -3150,6 +6952,30 @@ namespace TicTacTec
 
          static int SmaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Sma( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Sma( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Sma( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Sma( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -3157,6 +6983,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Sma( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -3171,6 +6998,33 @@ namespace TicTacTec
          static int StdDevLookback( int           optInTimePeriod, /* From 2 to 100000 */
                                   double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode StdDev( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal );
+
+         static enum class RetCode StdDev( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal )
+         { return StdDev( startIdx,  endIdx,
+             gcnew SubArray(inReal,0),
+               optInTimePeriod, /* From 2 to 100000 */
+               optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
+              outBegIdx,
+              outNBElement,
+               outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode StdDev( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inReal,
@@ -3179,6 +7033,7 @@ namespace TicTacTec
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
+         #endif
          static enum class RetCode StdDev( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
@@ -3196,6 +7051,51 @@ namespace TicTacTec
                                  MAType        optInSlowK_MAType,
                                  int           optInSlowD_Period, /* From 1 to 100000 */
                                  MAType        optInSlowD_MAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Stoch( int    startIdx,
+                                          int    endIdx,
+                                          SubArray^    inHigh,
+                                          SubArray^    inLow,
+                                          SubArray^    inClose,
+                                          int           optInFastK_Period, /* From 1 to 100000 */
+                                          int           optInSlowK_Period, /* From 1 to 100000 */
+                                          MAType        optInSlowK_MAType,
+                                          int           optInSlowD_Period, /* From 1 to 100000 */
+                                          MAType        optInSlowD_MAType,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outSlowK,
+                                          cli::array<double>^  outSlowD );
+
+         static enum class RetCode Stoch( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inHigh,
+                                          cli::array<double>^ inLow,
+                                          cli::array<double>^ inClose,
+                                          int           optInFastK_Period, /* From 1 to 100000 */
+                                          int           optInSlowK_Period, /* From 1 to 100000 */
+                                          MAType        optInSlowK_MAType,
+                                          int           optInSlowD_Period, /* From 1 to 100000 */
+                                          MAType        optInSlowD_MAType,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outSlowK,
+                                          cli::array<double>^  outSlowD )
+         { return Stoch( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+              optInFastK_Period, /* From 1 to 100000 */
+              optInSlowK_Period, /* From 1 to 100000 */
+              optInSlowK_MAType,
+              optInSlowD_Period, /* From 1 to 100000 */
+              optInSlowD_MAType,
+             outBegIdx,
+             outNBElement,
+              outSlowK ,
+              outSlowD  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Stoch( int    startIdx,
                                           int    endIdx,
                                           cli::array<double>^ inHigh,
@@ -3210,6 +7110,7 @@ namespace TicTacTec
                                           [Out]int%    outNBElement,
                                           cli::array<double>^  outSlowK,
                                           cli::array<double>^  outSlowD );
+         #endif
          static enum class RetCode Stoch( int    startIdx,
                                           int    endIdx,
                                           cli::array<float>^ inHigh,
@@ -3231,6 +7132,45 @@ namespace TicTacTec
          static int StochFLookback( int           optInFastK_Period, /* From 1 to 100000 */
                                   int           optInFastD_Period, /* From 1 to 100000 */
                                   MAType        optInFastD_MAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode StochF( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inHigh,
+                                           SubArray^    inLow,
+                                           SubArray^    inClose,
+                                           int           optInFastK_Period, /* From 1 to 100000 */
+                                           int           optInFastD_Period, /* From 1 to 100000 */
+                                           MAType        optInFastD_MAType,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outFastK,
+                                           cli::array<double>^  outFastD );
+
+         static enum class RetCode StochF( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           cli::array<double>^ inClose,
+                                           int           optInFastK_Period, /* From 1 to 100000 */
+                                           int           optInFastD_Period, /* From 1 to 100000 */
+                                           MAType        optInFastD_MAType,
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outFastK,
+                                           cli::array<double>^  outFastD )
+         { return StochF( startIdx,  endIdx,
+              gcnew SubArray(inHigh,0) ,
+              gcnew SubArray(inLow,0) ,
+              gcnew SubArray(inClose,0) ,
+               optInFastK_Period, /* From 1 to 100000 */
+               optInFastD_Period, /* From 1 to 100000 */
+               optInFastD_MAType,
+              outBegIdx,
+              outNBElement,
+               outFastK ,
+               outFastD  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode StochF( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inHigh,
@@ -3243,6 +7183,7 @@ namespace TicTacTec
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outFastK,
                                            cli::array<double>^  outFastD );
+         #endif
          static enum class RetCode StochF( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inHigh,
@@ -3263,6 +7204,42 @@ namespace TicTacTec
                                     int           optInFastK_Period, /* From 1 to 100000 */
                                     int           optInFastD_Period, /* From 1 to 100000 */
                                     MAType        optInFastD_MAType ); 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode StochRsi( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             int           optInFastK_Period, /* From 1 to 100000 */
+                                             int           optInFastD_Period, /* From 1 to 100000 */
+                                             MAType        optInFastD_MAType,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outFastK,
+                                             cli::array<double>^  outFastD );
+
+         static enum class RetCode StochRsi( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inReal,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             int           optInFastK_Period, /* From 1 to 100000 */
+                                             int           optInFastD_Period, /* From 1 to 100000 */
+                                             MAType        optInFastD_MAType,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outFastK,
+                                             cli::array<double>^  outFastD )
+         { return StochRsi( startIdx,    endIdx,
+               gcnew SubArray(inReal,0),
+                 optInTimePeriod, /* From 2 to 100000 */
+                 optInFastK_Period, /* From 1 to 100000 */
+                 optInFastD_Period, /* From 1 to 100000 */
+                 optInFastD_MAType,
+                outBegIdx,
+                outNBElement,
+                 outFastK ,
+                 outFastD  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode StochRsi( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inReal,
@@ -3274,6 +7251,7 @@ namespace TicTacTec
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outFastK,
                                              cli::array<double>^  outFastD );
+         #endif
          static enum class RetCode StochRsi( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
@@ -3291,6 +7269,30 @@ namespace TicTacTec
 
          static int SumLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Sum( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Sum( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Sum( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Sum( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -3298,6 +7300,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Sum( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -3312,6 +7315,33 @@ namespace TicTacTec
          static int T3Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                               double        optInVFactor );  /* From 0 to 1 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode T3( int    startIdx,
+                                       int    endIdx,
+                                       SubArray^    inReal,
+                                       int           optInTimePeriod, /* From 2 to 100000 */
+                                       double        optInVFactor, /* From 0 to 1 */
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal );
+
+         static enum class RetCode T3( int    startIdx,
+                                       int    endIdx,
+                                       cli::array<double>^ inReal,
+                                       int           optInTimePeriod, /* From 2 to 100000 */
+                                       double        optInVFactor, /* From 0 to 1 */
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal )
+         { return T3( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+              optInVFactor, /* From 0 to 1 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode T3( int    startIdx,
                                        int    endIdx,
                                        cli::array<double>^ inReal,
@@ -3320,6 +7350,7 @@ namespace TicTacTec
                                        [Out]int%    outBegIdx,
                                        [Out]int%    outNBElement,
                                        cli::array<double>^  outReal );
+         #endif
          static enum class RetCode T3( int    startIdx,
                                        int    endIdx,
                                        cli::array<float>^ inReal,
@@ -3334,6 +7365,30 @@ namespace TicTacTec
 
          static int TemaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Tema( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Tema( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Tema( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Tema( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal,
@@ -3341,6 +7396,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Tema( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
@@ -3354,6 +7410,33 @@ namespace TicTacTec
 
          static int TrueRangeLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode TrueRange( int    startIdx,
+                                              int    endIdx,
+                                              SubArray^    inHigh,
+                                              SubArray^    inLow,
+                                              SubArray^    inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<double>^  outReal );
+
+         static enum class RetCode TrueRange( int    startIdx,
+                                              int    endIdx,
+                                              cli::array<double>^ inHigh,
+                                              cli::array<double>^ inLow,
+                                              cli::array<double>^ inClose,
+                                              [Out]int%    outBegIdx,
+                                              [Out]int%    outNBElement,
+                                              cli::array<double>^  outReal )
+         { return TrueRange( startIdx,     endIdx,
+                 gcnew SubArray(inHigh,0) ,
+                 gcnew SubArray(inLow,0) ,
+                 gcnew SubArray(inClose,0) ,
+                 outBegIdx,
+                 outNBElement,
+                  outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode TrueRange( int    startIdx,
                                               int    endIdx,
                                               cli::array<double>^ inHigh,
@@ -3362,6 +7445,7 @@ namespace TicTacTec
                                               [Out]int%    outBegIdx,
                                               [Out]int%    outNBElement,
                                               cli::array<double>^  outReal );
+         #endif
          static enum class RetCode TrueRange( int    startIdx,
                                               int    endIdx,
                                               cli::array<float>^ inHigh,
@@ -3376,6 +7460,30 @@ namespace TicTacTec
 
          static int TrimaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Trima( int    startIdx,
+                                          int    endIdx,
+                                          SubArray^    inReal,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+
+         static enum class RetCode Trima( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inReal,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal )
+         { return Trima( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Trima( int    startIdx,
                                           int    endIdx,
                                           cli::array<double>^ inReal,
@@ -3383,6 +7491,7 @@ namespace TicTacTec
                                           [Out]int%    outBegIdx,
                                           [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Trima( int    startIdx,
                                           int    endIdx,
                                           cli::array<float>^ inReal,
@@ -3396,6 +7505,30 @@ namespace TicTacTec
 
          static int TrixLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Trix( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Trix( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         int           optInTimePeriod, /* From 1 to 100000 */
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Trix( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 1 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Trix( int    startIdx,
                                          int    endIdx,
                                          cli::array<double>^ inReal,
@@ -3403,6 +7536,7 @@ namespace TicTacTec
                                          [Out]int%    outBegIdx,
                                          [Out]int%    outNBElement,
                                          cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Trix( int    startIdx,
                                          int    endIdx,
                                          cli::array<float>^ inReal,
@@ -3416,6 +7550,30 @@ namespace TicTacTec
 
          static int TsfLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Tsf( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Tsf( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Tsf( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Tsf( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -3423,6 +7581,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Tsf( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
@@ -3436,6 +7595,33 @@ namespace TicTacTec
 
          static int TypPriceLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode TypPrice( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inHigh,
+                                             SubArray^    inLow,
+                                             SubArray^    inClose,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal );
+
+         static enum class RetCode TypPrice( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             cli::array<double>^ inClose,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal )
+         { return TypPrice( startIdx,    endIdx,
+                gcnew SubArray(inHigh,0) ,
+                gcnew SubArray(inLow,0) ,
+                gcnew SubArray(inClose,0) ,
+                outBegIdx,
+                outNBElement,
+                 outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode TypPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inHigh,
@@ -3444,6 +7630,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
+         #endif
          static enum class RetCode TypPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inHigh,
@@ -3460,6 +7647,42 @@ namespace TicTacTec
                                   int           optInTimePeriod2, /* From 1 to 100000 */
                                   int           optInTimePeriod3 );  /* From 1 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode UltOsc( int    startIdx,
+                                           int    endIdx,
+                                           SubArray^    inHigh,
+                                           SubArray^    inLow,
+                                           SubArray^    inClose,
+                                           int           optInTimePeriod1, /* From 1 to 100000 */
+                                           int           optInTimePeriod2, /* From 1 to 100000 */
+                                           int           optInTimePeriod3, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal );
+
+         static enum class RetCode UltOsc( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inHigh,
+                                           cli::array<double>^ inLow,
+                                           cli::array<double>^ inClose,
+                                           int           optInTimePeriod1, /* From 1 to 100000 */
+                                           int           optInTimePeriod2, /* From 1 to 100000 */
+                                           int           optInTimePeriod3, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal )
+         { return UltOsc( startIdx,  endIdx,
+              gcnew SubArray(inHigh,0) ,
+              gcnew SubArray(inLow,0) ,
+              gcnew SubArray(inClose,0) ,
+               optInTimePeriod1, /* From 1 to 100000 */
+               optInTimePeriod2, /* From 1 to 100000 */
+               optInTimePeriod3, /* From 1 to 100000 */
+              outBegIdx,
+              outNBElement,
+               outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode UltOsc( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inHigh,
@@ -3471,6 +7694,7 @@ namespace TicTacTec
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
+         #endif
          static enum class RetCode UltOsc( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inHigh,
@@ -3489,6 +7713,33 @@ namespace TicTacTec
          static int VarianceLookback( int           optInTimePeriod, /* From 1 to 100000 */
                                     double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Variance( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inReal,
+                                             int           optInTimePeriod, /* From 1 to 100000 */
+                                             double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal );
+
+         static enum class RetCode Variance( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inReal,
+                                             int           optInTimePeriod, /* From 1 to 100000 */
+                                             double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal )
+         { return Variance( startIdx,    endIdx,
+               gcnew SubArray(inReal,0),
+                 optInTimePeriod, /* From 1 to 100000 */
+                 optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
+                outBegIdx,
+                outNBElement,
+                 outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Variance( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inReal,
@@ -3497,6 +7748,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Variance( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inReal,
@@ -3511,6 +7763,33 @@ namespace TicTacTec
 
          static int WclPriceLookback( void );
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode WclPrice( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inHigh,
+                                             SubArray^    inLow,
+                                             SubArray^    inClose,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal );
+
+         static enum class RetCode WclPrice( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             cli::array<double>^ inClose,
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outReal )
+         { return WclPrice( startIdx,    endIdx,
+                gcnew SubArray(inHigh,0) ,
+                gcnew SubArray(inLow,0) ,
+                gcnew SubArray(inClose,0) ,
+                outBegIdx,
+                outNBElement,
+                 outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode WclPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<double>^ inHigh,
@@ -3519,6 +7798,7 @@ namespace TicTacTec
                                              [Out]int%    outBegIdx,
                                              [Out]int%    outNBElement,
                                              cli::array<double>^  outReal );
+         #endif
          static enum class RetCode WclPrice( int    startIdx,
                                              int    endIdx,
                                              cli::array<float>^ inHigh,
@@ -3533,6 +7813,36 @@ namespace TicTacTec
 
          static int WillRLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode WillR( int    startIdx,
+                                          int    endIdx,
+                                          SubArray^    inHigh,
+                                          SubArray^    inLow,
+                                          SubArray^    inClose,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+
+         static enum class RetCode WillR( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inHigh,
+                                          cli::array<double>^ inLow,
+                                          cli::array<double>^ inClose,
+                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal )
+         { return WillR( startIdx, endIdx,
+             gcnew SubArray(inHigh,0) ,
+             gcnew SubArray(inLow,0) ,
+             gcnew SubArray(inClose,0) ,
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode WillR( int    startIdx,
                                           int    endIdx,
                                           cli::array<double>^ inHigh,
@@ -3542,6 +7852,7 @@ namespace TicTacTec
                                           [Out]int%    outBegIdx,
                                           [Out]int%    outNBElement,
                                           cli::array<double>^  outReal );
+         #endif
          static enum class RetCode WillR( int    startIdx,
                                           int    endIdx,
                                           cli::array<float>^ inHigh,
@@ -3557,6 +7868,30 @@ namespace TicTacTec
 
          static int WmaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Wma( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Wma( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Wma( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
          static enum class RetCode Wma( int    startIdx,
                                         int    endIdx,
                                         cli::array<double>^ inReal,
@@ -3564,6 +7899,7 @@ namespace TicTacTec
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
+         #endif
          static enum class RetCode Wma( int    startIdx,
                                         int    endIdx,
                                         cli::array<float>^ inReal,
