@@ -16720,10 +16720,15 @@ public class Core {
             negSumMF += tempValue1;
             (mflow[mflow_Idx]). positive = 0.0;
          }
-         else
+         else if( tempValue2 > 0 )
          {
             (mflow[mflow_Idx]). positive = tempValue1;
             posSumMF += tempValue1;
+            (mflow[mflow_Idx]). negative = 0.0;
+         }
+         else
+         {
+            (mflow[mflow_Idx]). positive = 0.0;
             (mflow[mflow_Idx]). negative = 0.0;
          }
          { mflow_Idx ++; if( mflow_Idx > maxIdx_mflow ) mflow_Idx = 0; } ;
@@ -16752,10 +16757,15 @@ public class Core {
                negSumMF += tempValue1;
                (mflow[mflow_Idx]). positive = 0.0;
             }
-            else
+            else if( tempValue2 > 0 )
             {
                (mflow[mflow_Idx]). positive = tempValue1;
                posSumMF += tempValue1;
+               (mflow[mflow_Idx]). negative = 0.0;
+            }
+            else
+            {
+               (mflow[mflow_Idx]). positive = 0.0;
                (mflow[mflow_Idx]). negative = 0.0;
             }
             { mflow_Idx ++; if( mflow_Idx > maxIdx_mflow ) mflow_Idx = 0; } ;
@@ -16775,10 +16785,15 @@ public class Core {
             negSumMF += tempValue1;
             (mflow[mflow_Idx]). positive = 0.0;
          }
-         else
+         else if( tempValue2 > 0 )
          {
             (mflow[mflow_Idx]). positive = tempValue1;
             posSumMF += tempValue1;
+            (mflow[mflow_Idx]). negative = 0.0;
+         }
+         else
+         {
+            (mflow[mflow_Idx]). positive = 0.0;
             (mflow[mflow_Idx]). negative = 0.0;
          }
          tempValue1 = posSumMF+negSumMF;
@@ -16843,10 +16858,15 @@ public class Core {
             negSumMF += tempValue1;
             (mflow[mflow_Idx]). positive = 0.0;
          }
-         else
+         else if( tempValue2 > 0 )
          {
             (mflow[mflow_Idx]). positive = tempValue1;
             posSumMF += tempValue1;
+            (mflow[mflow_Idx]). negative = 0.0;
+         }
+         else
+         {
+            (mflow[mflow_Idx]). positive = 0.0;
             (mflow[mflow_Idx]). negative = 0.0;
          }
          { mflow_Idx ++; if( mflow_Idx > maxIdx_mflow ) mflow_Idx = 0; } ;
@@ -16875,10 +16895,15 @@ public class Core {
                negSumMF += tempValue1;
                (mflow[mflow_Idx]). positive = 0.0;
             }
-            else
+            else if( tempValue2 > 0 )
             {
                (mflow[mflow_Idx]). positive = tempValue1;
                posSumMF += tempValue1;
+               (mflow[mflow_Idx]). negative = 0.0;
+            }
+            else
+            {
+               (mflow[mflow_Idx]). positive = 0.0;
                (mflow[mflow_Idx]). negative = 0.0;
             }
             { mflow_Idx ++; if( mflow_Idx > maxIdx_mflow ) mflow_Idx = 0; } ;
@@ -16898,10 +16923,15 @@ public class Core {
             negSumMF += tempValue1;
             (mflow[mflow_Idx]). positive = 0.0;
          }
-         else
+         else if( tempValue2 > 0 )
          {
             (mflow[mflow_Idx]). positive = tempValue1;
             posSumMF += tempValue1;
+            (mflow[mflow_Idx]). negative = 0.0;
+         }
+         else
+         {
+            (mflow[mflow_Idx]). positive = 0.0;
             (mflow[mflow_Idx]). negative = 0.0;
          }
          tempValue1 = posSumMF+negSumMF;
