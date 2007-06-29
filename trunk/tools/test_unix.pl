@@ -18,6 +18,7 @@ sub Main
       $fastOption = 0;
    }
 
+   print $workdir;
    open(OLD_STDERR,">&STDERR") or die "Failed to save STDERR";
    open(OLD_STDOUT,">&STDOUT") or die "Failed to save STDOUT";   
    open(STDOUT, ">".$workdir."log/stdout_unix.txt" ) or die;
