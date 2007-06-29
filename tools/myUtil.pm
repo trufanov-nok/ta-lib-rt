@@ -1,3 +1,5 @@
+# !! It is very likely that you will need to adjust the path in getUserDir for your setup!!!
+
 package myUtil;
 
 use strict;
@@ -13,7 +15,7 @@ my $releasedir = "";
 my $logdir = "";
 my $tempdir = "";
 
-# User directory.
+# User directory reserved for these perl scripts.
 sub getUserdir
 {
    if( $userdir ne "" ) 
@@ -41,8 +43,8 @@ sub getUserdir
    else
    {
       # Running on win32 machine. 
-      #$userdir = $ENV{'HOME'}."\\";
-      $userdir = "p:\\temp\\";
+      $userdir = $ENV{'USERPROFILE'}."\\Temp\\";
+      #$userdir = "c:\\Users\\Mario\\ta-lib-user\\";
    }
    
    return $userdir;
@@ -536,8 +538,10 @@ sub testPerl
    my $base       = $_[0];
    my $log_path   = $_[1];
 	
-   my $a = $base."swig\\ide\\msvc\\perl";
-   my $b = "nmake /NOLOGO perl.mak >\"".&getWorkdir()."\\log\\win_ta_lib_perl.txt\"";
+   my $a = $base."swig\\ide\\vs2005\\perl";
+   my $b = "msbuild perl.sln /t:clean >\"".&getWorkdir()."\\log\\win_ta_lib_perl.txt\"";
+   execProg( $a, $b );
+   $b = "msbuild perl.sln >\"".&getWorkdir()."\\log\\win_ta_lib_perl.txt\"";
    execProg( $a, $b );
    $a = $base."swig\\src\\tools\\test_perl";
    $b = "perl runtests.pl >\"".&getWorkdir()."\\log\\perl_msvc.txt\"";
@@ -553,18 +557,23 @@ sub testExcel
    removeFile( $base."excel\\ta-lib-reverse.xll" );
    
    # Clean-up and build ta-lib-reverse.xll   
-   execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" Clean" );   
-   execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" Clean" );   
+   #execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" Clean" );   
+   #execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" Clean" );   
    #execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" >\"".&getWorkdir()."\\log\\win_excel.txt\"" );
-   execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib_reverse.mak CFG=\"xlw_for_talib - Win32 Release\" >\"".&getLogdir()."win_excel.txt\"" );
+   #execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib_reverse.mak CFG=\"xlw_for_talib - Win32 Release\" >\"".&getLogdir()."win_excel.txt\"" );
    
-   execProg( $base."excel", "copy ta-lib.xll ta-lib-reverse.xll" );
+   #execProg( $base."excel", "copy ta-lib.xll ta-lib-reverse.xll" );
 
    # Clean-up and build ta-lib.xll
-   removeFile( $base."excel\\ta-lib.xll" );
-   execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" Clean" );   
-   execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" Clean" );
-   execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" >>\"".&getLogdir()."win_excel.txt\"" );      
+   #removeFile( $base."excel\\ta-lib.xll" );
+   #execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" Clean" );   
+   #execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" Clean" );
+   #execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" >>\"".&getLogdir()."win_excel.txt\"" );      
+   execProg(  $base."excel\\src", "msbuild ta-lib.sln /p:Configuration=\"Release\" /t:Clean" );
+   execProg(  $base."excel\\src", "msbuild ta-lib.sln /p:Configuration=\"Release\"  >\"".&getLogdir()."win_excel.txt\"" );
+
+   execProg(  $base."excel\\src", "msbuild ta-lib.sln /p:Configuration=\"Release Reverse\" /t:Clean" );
+   execProg(  $base."excel\\src", "msbuild ta-lib.sln /p:Configuration=\"Release Reverse\" >>\"".&getLogdir()."win_excel.txt\"" );
 }
 
 sub buildBorland
@@ -616,7 +625,7 @@ sub testMSVC
       if( $_[1] eq "cdr" )    
       {
          testPerl($_[0]);
-	 testExcel($_[0]);
+	     testExcel($_[0]);
       }
    }
 }
