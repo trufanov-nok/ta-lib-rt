@@ -19,10 +19,12 @@ sub Main
    }
 
    print $workdir;
-   open(OLD_STDERR,">&STDERR") or die "Failed to save STDERR";
-   open(OLD_STDOUT,">&STDOUT") or die "Failed to save STDOUT";   
-   open(STDOUT, ">".$workdir."log/stdout_unix.txt" ) or die;
-   open(STDERR, ">".$workdir."log/stderr_unix.txt" ) or die;
+   #open(OLD_STDERR,">&STDERR") or die "Failed to save STDERR";
+   #open(OLD_STDOUT,">&STDOUT") or die "Failed to save STDOUT";   
+   #open(STDOUT, ">".$workdir."log/stdout_unix.txt" ) or die;
+   #select(STDOUT);
+   #open(STDERR, ">".$workdir."log/stderr_unix.txt" ) or die;
+   #select(STDERR);
    
    
    # Clean-up working directory
@@ -60,11 +62,11 @@ sub Main
    }
 
    print "\n*** Success - All Unix Tests Completed ***\n";
-   close STDOUT;
-   close STDERR;
-   open(STDOUT,">&OLD_STDOUT") or warn "Failed to restore STDOUT";
-   open(STDERR,">&OLD_STDERR") or warn "Failed to restore STDERR";
-   print "\n*** Success - All Unix Tests Completed ***\n";
+   #close STDOUT;
+   #close STDERR;
+   #open(STDOUT,">&OLD_STDOUT") or warn "Failed to restore STDOUT";
+   #open(STDERR,">&OLD_STDERR") or warn "Failed to restore STDERR";
+   #print "\n*** Success - All Unix Tests Completed ***\n";
 }
 
 &Main;				 
