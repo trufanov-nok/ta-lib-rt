@@ -119,6 +119,7 @@ ROCR100             Rate of change ratio 100 scale: (price/prevPrice)*100
 RSI                 Relative Strength Index
 SAR                 Parabolic SAR
 SAREXT              Parabolic SAR - Extended
+SIN                 Trigonometric Sin
 SMA                 Simple Moving Average
 STDDEV              Standard Deviation
 STOCH               Stochastic

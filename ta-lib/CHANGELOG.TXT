@@ -1,10 +1,11 @@
-Version 0.3.1 (April 2007)
+Version 0.4 (September 2007)
 
 New Features
 ============
 - Java TA-Abstract interface
 - Moving Average with Variable Periods (TA_MAVP)
 - UpperLimit/LowerLimit flags for BBANDS.
+- Vector Arithmetic Functions
 
 Fixes
 =====
@@ -16,6 +17,8 @@ Other Changes
 - Comment clean-up for parameter ranges of internal functions.
 - Mac OS X : xcode and makefiles fixes.
 - Linux: Better Perl library detection
+- Solve warnings for Intel C++ compiler.
+- Automatic benchmarking by ta_regtest (WIN32 only).
 
 Thanks to all contributors.
 
