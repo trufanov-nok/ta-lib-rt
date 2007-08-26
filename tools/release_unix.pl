@@ -81,8 +81,9 @@ chdir "$workdir/ta-lib";
 print "Compiling sources...\n";
 
 # Build and test these sources.
-system( "CFLAGS=\"-O2 -g0 -pipe -march=i686\" ./configure --prefix=/usr" );
-system( "make -j3" );
+system( "./configure" );
+#system( "CFLAGS=\"-O2 -g0 -pipe -march=i686\" ./configure --prefix=/usr" );
+system( "make" );
 
 print "Running tests...\n";
 
@@ -116,3 +117,11 @@ if( defined $deb )
     # Build a package of the installation.
     system( "dpkg --build $workdir/inst/ $workdir/dist/ta-lib-$version.deb" ) == 0 or die "Failed to build debian package.";
 }
+
+# Additional (non-mandatory) copy to my VMWare shared distribution directory.
+if( -e '/mnt/hgfs/ta-lib-user/ta-lib-work/dist' )
+{
+   system( "cp $workdir/dist/* /mnt/hgfs/ta-lib-user/ta-lib-work/dist" ) == 0 or warn "Failed to copy final version in dist.";
+}
+
+print "\n*** Building of unix packages completed ***\n";
