@@ -20815,6 +20815,53 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int sinLookback( )
+   {
+      return 0;
+   }
+   public RetCode Math.sin ( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.sin (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode Math.sin ( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.sin (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int smaLookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )

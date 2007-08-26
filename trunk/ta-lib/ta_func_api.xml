@@ -5357,6 +5357,30 @@
 	</FinancialFunction>
 
 
+	<!-- SIN -->
+	<FinancialFunction>
+		<Abbreviation>SIN</Abbreviation>
+		<CamelCaseName>Sin</CamelCaseName>
+		<ShortDescription>Trigonometric Sin</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- SMA -->
 	<FinancialFunction>
 		<Abbreviation>SMA</Abbreviation>

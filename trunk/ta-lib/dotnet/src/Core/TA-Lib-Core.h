@@ -6950,6 +6950,46 @@ namespace TicTacTec
          #define TA_SAREXT Core::SarExt
          #define TA_SAREXT_Lookback Core::SarExtLookback
 
+         static int SinLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Sin( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Sin( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Sin( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Sin( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Sin( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         #define TA_SIN Core::Sin
+         #define TA_SIN_Lookback Core::SinLookback
+
          static int SmaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )

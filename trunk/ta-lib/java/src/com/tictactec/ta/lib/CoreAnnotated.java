@@ -7202,6 +7202,47 @@ public RetCode sarExt(
 ); }
 
 
+public int sinLookback(
+) {
+    return super.sinLookback(
+); }
+
+@FuncInfo(
+        name  = "SIN",
+        group = "Math Operators",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode sin(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.sin (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int smaLookback(
         int optInTimePeriod) {
     return super.smaLookback(
