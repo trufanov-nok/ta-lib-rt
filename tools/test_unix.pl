@@ -26,7 +26,6 @@ sub Main
    #open(STDERR, ">".$workdir."log/stderr_unix.txt" ) or die;
    #select(STDERR);
    
-   
    # Clean-up working directory
    createWorkdir();
 
@@ -44,7 +43,7 @@ sub Main
      }
      else
      { 
-       system( 'cp -r ../ta-lib '.$tempdir );
+       system( 'rsync -r -v --exclude=*.obj --exclude=*.lib --exclude=*.exe --exclude=.svn --exclude=java --exclude=excel --exclude=dotnet --delete-excluded ../ta-lib '.$tempdir );
      }
     
      # Clean-up possible temp files

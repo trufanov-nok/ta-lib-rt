@@ -370,7 +370,7 @@ sub execProg
 {
    my $dir = &cwd();
 
-   print "cd [".$_[0]."]";
+   # print "cd [".$_[0]."]";
    chdir( $_[0] );
    system( $_[1] );
 
