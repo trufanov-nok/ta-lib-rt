@@ -27,7 +27,7 @@ system( "mkdir -p $workdir/dist" ) == 0 or die "Cannot create directory $workdir
 if( not defined $srcdir )
 {
     # Get the latest code from SVN
-    system( "svn co https://svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib/c/ $workdir/ta-lib" ) == 0 or die "Failed to checkout latest SVN code.";
+    system( "svn co https://ta-lib.svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib/c/ $workdir/ta-lib" ) == 0 or die "Failed to checkout latest SVN code.";
     
     # Enable exec permission here, until we figure out how to do it in SVN instead.
     system( "chmod guo+x $workdir/ta-lib/autogen.sh" ) == 0 or die "Failed to set exec permission for autogen.sh";
