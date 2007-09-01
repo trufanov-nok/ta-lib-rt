@@ -40,20 +40,13 @@
 
 package com.tictactec.ta.lib;
  
-import com.tictactec.ta.lib.MAType;
-import com.tictactec.ta.lib.MInteger;
-import com.tictactec.ta.lib.RetCode;
-import com.tictactec.ta.lib.Core;
-import com.tictactec.ta.lib.meta.annotation.FuncFlags;
 import com.tictactec.ta.lib.meta.annotation.FuncInfo;
-import com.tictactec.ta.lib.meta.annotation.InputFlags;
 import com.tictactec.ta.lib.meta.annotation.InputParameterInfo;
 import com.tictactec.ta.lib.meta.annotation.InputParameterType;
 import com.tictactec.ta.lib.meta.annotation.IntegerList;
 import com.tictactec.ta.lib.meta.annotation.IntegerRange;
 import com.tictactec.ta.lib.meta.annotation.OptInputParameterInfo;
 import com.tictactec.ta.lib.meta.annotation.OptInputParameterType;
-import com.tictactec.ta.lib.meta.annotation.OutputFlags;
 import com.tictactec.ta.lib.meta.annotation.OutputParameterInfo;
 import com.tictactec.ta.lib.meta.annotation.OutputParameterType;
 import com.tictactec.ta.lib.meta.annotation.RealRange;

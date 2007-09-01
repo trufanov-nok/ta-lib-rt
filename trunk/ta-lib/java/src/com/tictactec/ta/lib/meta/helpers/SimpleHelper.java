@@ -89,7 +89,7 @@ public class SimpleHelper {
     /**
      * Constructs a SimpleHelper class providing the TA function name and a list of optional parameters.
      * 
-     * @see SimpleHelper.calculate method
+     * @see SimpleHelper#calculate(int, int, Object[], Object[], MInteger, MInteger)
      * @param func is the TA function name
      * @param args is a list of optional input arguments
      */
@@ -113,7 +113,7 @@ public class SimpleHelper {
         if (this.calc!=null) return this.calc;
         this.calc = CoreMetaData.getInstance(func);
         FuncInfo finfo = calc.getFuncInfo();
-        if (args.length>finfo.nbOptInput()) throw new IllegalArgumentException(); //TODO:message
+        if (args.length>finfo.nbOptInput()) throw new IllegalArgumentException(); //TODO: message
         for (int i=0; i<args.length; i++) {
             OptInputParameterInfo ppinfo = calc.getOptInputParameterInfo(i);
             if (ppinfo.dataSet().isAssignableFrom(IntegerList.class) || ppinfo.dataSet().isAssignableFrom(IntegerRange.class)) {
@@ -134,8 +134,9 @@ public class SimpleHelper {
      * is affected by the optional input arguments passed to this TA function.
      *  
      * @return the lookback number of input points to be consumed before the first output data point is produced.
-     * @throws IllegalArgumentException
+     * 
      * @throws NoSuchMethodException
+     * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
     public int getLookback() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -185,7 +186,7 @@ public class SimpleHelper {
         // parse function name and optional arguments
         FuncInfo finfo = getMetaData().getFuncInfo();
         // set input parameters
-        if (inputs==null  || inputs.length!=finfo.nbInput()) throw new IllegalArgumentException(); //TODO:message
+        if (inputs==null  || inputs.length!=finfo.nbInput()) throw new IllegalArgumentException(); //TODO: message
         for (int i=0; i<inputs.length; i++) {
             InputParameterInfo ipinfo = calc.getInputParameterInfo(i);
             if (ipinfo.type()==InputParameterType.TA_Input_Price) {
@@ -199,7 +200,7 @@ public class SimpleHelper {
             }
         }
         // set output parameters
-        if (outputs==null || outputs.length!=finfo.nbOutput()) throw new IllegalArgumentException(); //TODO:message
+        if (outputs==null || outputs.length!=finfo.nbOutput()) throw new IllegalArgumentException(); //TODO: message
         for (int i=0; i<outputs.length; i++) {
             OutputParameterInfo opinfo = calc.getOutputParameterInfo(i);
             if (opinfo.type()==OutputParameterType.TA_Output_Real) {
