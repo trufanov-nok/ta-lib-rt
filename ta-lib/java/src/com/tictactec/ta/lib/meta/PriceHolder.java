@@ -57,8 +57,6 @@ package com.tictactec.ta.lib.meta;
  * <p>In order to avoid this kind of confusion, PriceHolder cannot be initialized with null arrays.
  * PriceHoder also checks if all arrays passed to constructor have the same length.
  * 
- * @see PriceHolderInputParameter
- * 
  * @author Richard Gomes
  */
 public class PriceHolder {
@@ -74,12 +72,13 @@ public class PriceHolder {
     /**
      * Stores all data point arrays in a PriceHolder instance
      *  
-     * @param open represent the open data points and is expected to be <b>double[]</b> assignment compatible.
-     * @param high represent the high data points and is expected to be <b>double[]</b> assignment compatible.
-     * @param low represent the low data points and is expected to be <b>double[]</b> assignment compatible.
-     * @param close represent the close data points and is expected to be <b>double[]</b> assignment compatible.
-     * @param volume represent the volume data points and is expected to be <b>double[]</b> assignment compatible.
-     * @param openInterest represent the open interest data points and is expected to be <b>double[]</b> assignment compatible.
+     * @param o represent the open data points and is expected to be <b>double[]</b> assignment compatible.
+     * @param h represent the high data points and is expected to be <b>double[]</b> assignment compatible.
+     * @param l represent the low data points and is expected to be <b>double[]</b> assignment compatible.
+     * @param c represent the close data points and is expected to be <b>double[]</b> assignment compatible.
+     * @param v represent the volume data points and is expected to be <b>double[]</b> assignment compatible.
+     * @param i represent the open interest data points and is expected to be <b>double[]</b> assignment compatible.
+     * 
      * @throws NullPointerException if any arrays is null
      * @throws IllegalArgumentException if sizes of arrays dont match
      */

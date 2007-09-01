@@ -2,6 +2,14 @@ package com.tictactec.ta.lib.meta;
 
 import com.tictactec.ta.lib.meta.annotation.InputFlags;
 
+/**
+ * This class is deprecated. Do not use it.
+ * 
+ * @deprecated
+ * 
+ * @author Richard Gomes
+ *
+ */
 public class PriceInputParameter extends PriceHolder {
 
     private int flags;

@@ -50,6 +50,7 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.IncompleteAnnotationException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -89,9 +90,10 @@ import com.tictactec.ta.lib.meta.annotation.RealRange;
 
  * @see com.tictactec.ta.lib.meta.helpers.SimpleHelper is a simple API level helper class based on CoreMetaData
  * @see com.tictactec.ta.lib.meta.CoreMetaDataCompatibility for a "C" style interface, mostly intended for those traslating "C" code to Java.
+ * 
  * @author Richard Gomes
  */
-public class CoreMetaData implements Comparable {
+public class CoreMetaData implements Comparable<CoreMetaData> {
     
     private static transient final String CONTACT_DEVELOPERS = "Contact developers";
     private static transient final String INDEX_OUT_OF_BOUNDS = "Index out of bounds";
@@ -102,7 +104,7 @@ public class CoreMetaData implements Comparable {
     private static transient final String DOUBLE_ARRAY_EXPECTED = "double[] expected";
     private static transient final String PRICE_EXPECTED = "PriceInputParameter object expected";
     
-    private static transient final Class coreClass = CoreAnnotated.class;
+    private static transient final Class<CoreAnnotated> coreClass = CoreAnnotated.class;
     private static transient final String LOOKBACK_SUFFIX = "Lookback";
 
     private static transient CoreAnnotated taCore = null;
@@ -127,8 +129,8 @@ public class CoreMetaData implements Comparable {
         }
     }
 
-    public int compareTo(Object arg0) {
-        return this.name.compareTo(((CoreMetaData)arg0).name);
+    public int compareTo(CoreMetaData arg) {
+        return this.name.compareTo(arg.name);
     }
 
     static private Map<String, CoreMetaData> getAllFuncs() {
@@ -241,7 +243,7 @@ public class CoreMetaData implements Comparable {
         return getFuncInfo(function);
     }
 
-    private Annotation getParameterInfo(final int paramIndex, Class paramAnnotation) {
+    private Annotation getParameterInfo(final int paramIndex, Class<? extends Object> paramAnnotation) {
         if (paramIndex < 0)
             throw new IllegalArgumentException(INDEX_OUT_OF_BOUNDS);
         int i = 0;
@@ -255,7 +257,7 @@ public class CoreMetaData implements Comparable {
         return null;
     }
 
-    private Annotation getParameterInfo(final int paramIndex, Class paramAnnotation, Class paramExtraAnnotation) {
+    private Annotation getParameterInfo(final int paramIndex, Class<? extends Object> paramAnnotation, Class<? extends Object> paramExtraAnnotation) {
         if (paramIndex < 0)
             throw new IllegalArgumentException(INDEX_OUT_OF_BOUNDS);
         int i = 0;
@@ -390,7 +392,7 @@ public class CoreMetaData implements Comparable {
      * which is expected to be assignment compatible to <b>int</b>.
      * 
      * @param paramIndex is the n-th optional input parameter
-     * @param value is the <b>String</b> which must hold an <b>int</b> value
+     * @param string is the <b>String</b> which must hold an <b>int</b> value
      * @throws IllegalArgumentException
      */
     public void setOptInputParamInteger(final int paramIndex, final String string) throws IllegalArgumentException {
@@ -402,7 +404,8 @@ public class CoreMetaData implements Comparable {
             if (param==null) throw new InternalError(CONTACT_DEVELOPERS);
             if (param.type()!=OptInputParameterType.TA_OptInput_IntegerList) throw new InternalError(CONTACT_DEVELOPERS);
 
-            // FIXME: The correct implementation should expose a field in @IntegerList informing
+            // FIXME: The correct implementation should ...
+            // expose a field in @IntegerList informing
             // which Class should be taken for introspection.
             // Currently, all IntegerList instances implicitly depend on MAType class
             // but it may change some day.
@@ -454,7 +457,7 @@ public class CoreMetaData implements Comparable {
      * which is expected to be assignment compatible to <b>double</b>.
      * 
      * @param paramIndex is the n-th optional input parameter
-     * @param value is the <b>String</b> which must hold an <b>double</b> value
+     * @param string is the <b>String</b> which must hold an <b>double</b> value
      * @throws IllegalArgumentException
      */
     public void setOptInputParamReal(final int paramIndex, final String string) throws IllegalArgumentException {
@@ -725,7 +728,7 @@ public class CoreMetaData implements Comparable {
             params[count++] = item;
         }
         
-        Class[] types = (Class[]) function.getGenericParameterTypes();
+        Type[] types = function.getGenericParameterTypes();
         if (types.length != params.length) throw new IllegalArgumentException(ILLEGAL_NUMBER_OF_ARGUMENTS);
         //for (int i=0; i<types.length; i++) {
         //    if (! (params[i].getClass().isAssignableFrom(types[i])) ) {

@@ -59,7 +59,7 @@ public @interface OptInputParameterInfo {
     int                   flags(); // bitwise OR of OptInputFlags
 
     OptInputParameterType type();
-    Class                 dataSet();
-    // String                hint();        // TODO: future
-    // String                helpFile();    // TODO: future
+    Class<? extends Object>  dataSet();
+    // String                hint();        // TODO: reserved for future
+    // String                helpFile();    // TODO: reserved for future
 }
