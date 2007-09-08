@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <FinancialFunctions>
+	<!-- ACOS -->
+	<FinancialFunction>
+		<Abbreviation>ACOS</Abbreviation>
+		<CamelCaseName>Acos</CamelCaseName>
+		<ShortDescription>Vector Trigonometric ACos</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- AD -->
 	<FinancialFunction>
 		<Abbreviation>AD</Abbreviation>
@@ -22,6 +46,34 @@
 			<RequiredInputArgument>
 				<Type>Volume</Type>
 				<Name>Volume</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ADD -->
+	<FinancialFunction>
+		<Abbreviation>ADD</Abbreviation>
+		<CamelCaseName>Add</CamelCaseName>
+		<ShortDescription>Vector Arithmetic Add</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal0</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal1</Name>
 			</RequiredInputArgument>
 		</RequiredInputArguments>
 		<OutputArguments>
@@ -339,6 +391,54 @@
 				<DefaultValue>14</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ASIN -->
+	<FinancialFunction>
+		<Abbreviation>ASIN</Abbreviation>
+		<CamelCaseName>Asin</CamelCaseName>
+		<ShortDescription>Vector Trigonometric ASin</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- ATAN -->
+	<FinancialFunction>
+		<Abbreviation>ATAN</Abbreviation>
+		<CamelCaseName>Atan</CamelCaseName>
+		<ShortDescription>Vector Trigonometric ATan</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
 		<OutputArguments>
 			<OutputArgument>
 				<Type>Double Array</Type>
@@ -3147,6 +3247,30 @@
 	</FinancialFunction>
 
 
+	<!-- CEIL -->
+	<FinancialFunction>
+		<Abbreviation>CEIL</Abbreviation>
+		<CamelCaseName>Ceil</CamelCaseName>
+		<ShortDescription>Vector Ceil</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- CMO -->
 	<FinancialFunction>
 		<Abbreviation>CMO</Abbreviation>
@@ -3232,6 +3356,54 @@
 	</FinancialFunction>
 
 
+	<!-- COS -->
+	<FinancialFunction>
+		<Abbreviation>COS</Abbreviation>
+		<CamelCaseName>Cos</CamelCaseName>
+		<ShortDescription>Vector Trigonometric Cos</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- COSH -->
+	<FinancialFunction>
+		<Abbreviation>COSH</Abbreviation>
+		<CamelCaseName>Cosh</CamelCaseName>
+		<ShortDescription>Vector Trigonometric Cosh</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- DEMA -->
 	<FinancialFunction>
 		<Abbreviation>DEMA</Abbreviation>
@@ -3262,6 +3434,34 @@
 				<DefaultValue>30</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- DIV -->
+	<FinancialFunction>
+		<Abbreviation>DIV</Abbreviation>
+		<CamelCaseName>Div</CamelCaseName>
+		<ShortDescription>Vector Arithmetic Div</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal0</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal1</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
 		<OutputArguments>
 			<OutputArgument>
 				<Type>Double Array</Type>
@@ -3355,6 +3555,54 @@
 				<DefaultValue>30</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- EXP -->
+	<FinancialFunction>
+		<Abbreviation>EXP</Abbreviation>
+		<CamelCaseName>Exp</CamelCaseName>
+		<ShortDescription>Vector Arithmetic Exp</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- FLOOR -->
+	<FinancialFunction>
+		<Abbreviation>FLOOR</Abbreviation>
+		<CamelCaseName>Floor</CamelCaseName>
+		<ShortDescription>Vector Floor</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
 		<OutputArguments>
 			<OutputArgument>
 				<Type>Double Array</Type>
@@ -3737,6 +3985,54 @@
 				<DefaultValue>14</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- LN -->
+	<FinancialFunction>
+		<Abbreviation>LN</Abbreviation>
+		<CamelCaseName>Ln</CamelCaseName>
+		<ShortDescription>Vector Log Natural</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- LOG10 -->
+	<FinancialFunction>
+		<Abbreviation>LOG10</Abbreviation>
+		<CamelCaseName>Log10</CamelCaseName>
+		<ShortDescription>Vector Log10</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
 		<OutputArguments>
 			<OutputArgument>
 				<Type>Double Array</Type>
@@ -4721,6 +5017,34 @@
 	</FinancialFunction>
 
 
+	<!-- MULT -->
+	<FinancialFunction>
+		<Abbreviation>MULT</Abbreviation>
+		<CamelCaseName>Mult</CamelCaseName>
+		<ShortDescription>Vector Arithmetic Mult</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal0</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal1</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- NATR -->
 	<FinancialFunction>
 		<Abbreviation>NATR</Abbreviation>
@@ -5361,8 +5685,32 @@
 	<FinancialFunction>
 		<Abbreviation>SIN</Abbreviation>
 		<CamelCaseName>Sin</CamelCaseName>
-		<ShortDescription>Trigonometric Sin</ShortDescription>
-		<GroupId>Math Operators</GroupId>
+		<ShortDescription>Vector Trigonometric Sin</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- SINH -->
+	<FinancialFunction>
+		<Abbreviation>SINH</Abbreviation>
+		<CamelCaseName>Sinh</CamelCaseName>
+		<ShortDescription>Vector Trigonometric Sinh</ShortDescription>
+		<GroupId>Math Transform</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
 				<Type>Double Array</Type>
@@ -5411,6 +5759,30 @@
 				<DefaultValue>30</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- SQRT -->
+	<FinancialFunction>
+		<Abbreviation>SQRT</Abbreviation>
+		<CamelCaseName>Sqrt</CamelCaseName>
+		<ShortDescription>Vector Square Root</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
 		<OutputArguments>
 			<OutputArgument>
 				<Type>Double Array</Type>
@@ -5722,6 +6094,34 @@
 	</FinancialFunction>
 
 
+	<!-- SUB -->
+	<FinancialFunction>
+		<Abbreviation>SUB</Abbreviation>
+		<CamelCaseName>Sub</CamelCaseName>
+		<ShortDescription>Vector Arithmetic Substraction</ShortDescription>
+		<GroupId>Math Operators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal0</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal1</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- SUM -->
 	<FinancialFunction>
 		<Abbreviation>SUM</Abbreviation>
@@ -5806,6 +6206,54 @@
 				<DefaultValue>7.000000e-1</DefaultValue>
 			</OptionalInputArgument>
 		</OptionalInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- TAN -->
+	<FinancialFunction>
+		<Abbreviation>TAN</Abbreviation>
+		<CamelCaseName>Tan</CamelCaseName>
+		<ShortDescription>Vector Trigonometric Tan</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
+	<!-- TANH -->
+	<FinancialFunction>
+		<Abbreviation>TANH</Abbreviation>
+		<CamelCaseName>Tanh</CamelCaseName>
+		<ShortDescription>Vector Trigonometric Tanh</ShortDescription>
+		<GroupId>Math Transform</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Double Array</Type>
+				<Name>inReal</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
 		<OutputArguments>
 			<OutputArgument>
 				<Type>Double Array</Type>

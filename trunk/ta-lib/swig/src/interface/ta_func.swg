@@ -40,6 +40,23 @@
  
 
 /*
+ * TA_ACOS - Vector Trigonometric ACos
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_ACOS( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_ACOS_Lookback( void );
+
+
+/*
  * TA_AD - Chaikin A/D Line
  * 
  * Input  = High, Low, Close, Volume
@@ -57,6 +74,24 @@ TA_RetCode TA_AD( int           START_IDX,
                   double       *OUT_ARRAY /* outReal */ );
 
 int TA_AD_Lookback( void );
+
+
+/*
+ * TA_ADD - Vector Arithmetic Add
+ * 
+ * Input  = double, double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_ADD( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal0 */,
+                   const double *IN_ARRAY /* inReal1 */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_ADD_Lookback( void );
 
 
 /*
@@ -225,6 +260,40 @@ TA_RetCode TA_AROONOSC( int           START_IDX,
                         double       *OUT_ARRAY /* outReal */ );
 
 int TA_AROONOSC_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_ASIN - Vector Trigonometric ASin
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_ASIN( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_ASIN_Lookback( void );
+
+
+/*
+ * TA_ATAN - Vector Trigonometric ATan
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_ATAN( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_ATAN_Lookback( void );
 
 
 /*
@@ -1654,6 +1723,23 @@ int TA_CDLXSIDEGAP3METHODS_Lookback( void );
 
 
 /*
+ * TA_CEIL - Vector Ceil
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_CEIL( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_CEIL_Lookback( void );
+
+
+/*
  * TA_CMO - Chande Momentum Oscillator
  * 
  * Input  = double
@@ -1703,6 +1789,40 @@ int TA_CORREL_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 /*
+ * TA_COS - Vector Trigonometric Cos
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_COS( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_COS_Lookback( void );
+
+
+/*
+ * TA_COSH - Vector Trigonometric Cosh
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_COSH( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_COSH_Lookback( void );
+
+
+/*
  * TA_DEMA - Double Exponential Moving Average
  * 
  * Input  = double
@@ -1724,6 +1844,24 @@ TA_RetCode TA_DEMA( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_DIV - Vector Arithmetic Div
+ * 
+ * Input  = double, double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_DIV( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal0 */,
+                   const double *IN_ARRAY /* inReal1 */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_DIV_Lookback( void );
 
 
 /*
@@ -1774,6 +1912,40 @@ TA_RetCode TA_EMA( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_EMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_EXP - Vector Arithmetic Exp
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_EXP( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_EXP_Lookback( void );
+
+
+/*
+ * TA_FLOOR - Vector Floor
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_FLOOR( int           START_IDX,
+                     int           END_IDX,
+                     const double *IN_ARRAY /* inReal */,
+                     int          *BEG_IDX,
+                     int          *OUT_SIZE,
+                     double       *OUT_ARRAY /* outReal */ );
+
+int TA_FLOOR_Lookback( void );
 
 
 /*
@@ -1998,6 +2170,40 @@ TA_RetCode TA_LINEARREG_SLOPE( int           START_IDX,
                                double       *OUT_ARRAY /* outReal */ );
 
 int TA_LINEARREG_SLOPE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_LN - Vector Log Natural
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_LN( int           START_IDX,
+                  int           END_IDX,
+                  const double *IN_ARRAY /* inReal */,
+                  int          *BEG_IDX,
+                  int          *OUT_SIZE,
+                  double       *OUT_ARRAY /* outReal */ );
+
+int TA_LN_Lookback( void );
+
+
+/*
+ * TA_LOG10 - Vector Log10
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_LOG10( int           START_IDX,
+                     int           END_IDX,
+                     const double *IN_ARRAY /* inReal */,
+                     int          *BEG_IDX,
+                     int          *OUT_SIZE,
+                     double       *OUT_ARRAY /* outReal */ );
+
+int TA_LOG10_Lookback( void );
 
 
 /*
@@ -2520,6 +2726,24 @@ int TA_MOM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 /*
+ * TA_MULT - Vector Arithmetic Mult
+ * 
+ * Input  = double, double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_MULT( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal0 */,
+                    const double *IN_ARRAY /* inReal1 */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_MULT_Lookback( void );
+
+
+/*
  * TA_NATR - Normalized Average True Range
  * 
  * Input  = High, Low, Close
@@ -2858,7 +3082,7 @@ int TA_SAREXT_Lookback( double        optInStartValue, /* From TA_REAL_MIN to TA
 
 
 /*
- * TA_SIN - Trigonometric Sin
+ * TA_SIN - Vector Trigonometric Sin
  * 
  * Input  = double
  * Output = double
@@ -2872,6 +3096,23 @@ TA_RetCode TA_SIN( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_SIN_Lookback( void );
+
+
+/*
+ * TA_SINH - Vector Trigonometric Sinh
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_SINH( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_SINH_Lookback( void );
 
 
 /*
@@ -2896,6 +3137,23 @@ TA_RetCode TA_SMA( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_SMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+/*
+ * TA_SQRT - Vector Square Root
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_SQRT( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_SQRT_Lookback( void );
 
 
 /*
@@ -3049,6 +3307,24 @@ int TA_STOCHRSI_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                         TA_MAType     optInFastD_MAType ); 
 
 /*
+ * TA_SUB - Vector Arithmetic Substraction
+ * 
+ * Input  = double, double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_SUB( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal0 */,
+                   const double *IN_ARRAY /* inReal1 */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_SUB_Lookback( void );
+
+
+/*
  * TA_SUM - Summation
  * 
  * Input  = double
@@ -3099,6 +3375,40 @@ TA_RetCode TA_T3( int           START_IDX,
 
 int TA_T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                   double        optInVFactor );  /* From 0 to 1 */
+
+
+/*
+ * TA_TAN - Vector Trigonometric Tan
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_TAN( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inReal */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_TAN_Lookback( void );
+
+
+/*
+ * TA_TANH - Vector Trigonometric Tanh
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ */
+TA_RetCode TA_TANH( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_TANH_Lookback( void );
 
 
 /*
