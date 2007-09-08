@@ -474,6 +474,46 @@ namespace TicTacTec
 			 }
 
 /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
+         static int AcosLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Acos( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Acos( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Acos( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Acos( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Acos( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_ACOS Core::Acos
+         #define TA_ACOS_Lookback Core::AcosLookback
+
          static int AdLookback( void );
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
@@ -528,6 +568,51 @@ namespace TicTacTec
 
          #define TA_AD Core::Ad
          #define TA_AD_Lookback Core::AdLookback
+
+         static int AddLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Add( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal0,
+                                        SubArray^    inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Add( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal0,
+                                        cli::array<double>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Add( startIdx, endIdx,
+            gcnew SubArray(inReal0,0),
+            gcnew SubArray(inReal1,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Add( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal0,
+                                        cli::array<double>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Add( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal0,
+                                        cli::array<float>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         #define TA_ADD Core::Add
+         #define TA_ADD_Lookback Core::AddLookback
 
          static int AdOscLookback( int           optInFastPeriod, /* From 2 to 100000 */
                                  int           optInSlowPeriod );  /* From 2 to 100000 */
@@ -865,6 +950,86 @@ namespace TicTacTec
 
          #define TA_AROONOSC Core::AroonOsc
          #define TA_AROONOSC_Lookback Core::AroonOscLookback
+
+         static int AsinLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Asin( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Asin( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Asin( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Asin( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Asin( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_ASIN Core::Asin
+         #define TA_ASIN_Lookback Core::AsinLookback
+
+         static int AtanLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Atan( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Atan( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Atan( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Atan( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Atan( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_ATAN Core::Atan
+         #define TA_ATAN_Lookback Core::AtanLookback
 
          static int AtrLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
@@ -4598,6 +4763,46 @@ namespace TicTacTec
          #define TA_CDLXSIDEGAP3METHODS Core::CdlXSideGap3Methods
          #define TA_CDLXSIDEGAP3METHODS_Lookback Core::CdlXSideGap3MethodsLookback
 
+         static int CeilLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Ceil( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Ceil( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Ceil( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Ceil( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Ceil( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_CEIL Core::Ceil
+         #define TA_CEIL_Lookback Core::CeilLookback
+
          static int CmoLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
@@ -4693,6 +4898,86 @@ namespace TicTacTec
          #define TA_CORREL Core::Correl
          #define TA_CORREL_Lookback Core::CorrelLookback
 
+         static int CosLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cos( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Cos( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Cos( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Cos( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Cos( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         #define TA_COS Core::Cos
+         #define TA_COS_Lookback Core::CosLookback
+
+         static int CoshLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Cosh( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Cosh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Cosh( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Cosh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Cosh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_COSH Core::Cosh
+         #define TA_COSH_Lookback Core::CoshLookback
+
          static int DemaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
@@ -4737,6 +5022,51 @@ namespace TicTacTec
 
          #define TA_DEMA Core::Dema
          #define TA_DEMA_Lookback Core::DemaLookback
+
+         static int DivLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Div( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal0,
+                                        SubArray^    inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Div( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal0,
+                                        cli::array<double>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Div( startIdx, endIdx,
+            gcnew SubArray(inReal0,0),
+            gcnew SubArray(inReal1,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Div( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal0,
+                                        cli::array<double>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Div( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal0,
+                                        cli::array<float>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         #define TA_DIV Core::Div
+         #define TA_DIV_Lookback Core::DivLookback
 
          static int DxLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
@@ -4837,6 +5167,86 @@ namespace TicTacTec
 
          #define TA_EMA Core::Ema
          #define TA_EMA_Lookback Core::EmaLookback
+
+         static int ExpLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Exp( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Exp( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Exp( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Exp( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Exp( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         #define TA_EXP Core::Exp
+         #define TA_EXP_Lookback Core::ExpLookback
+
+         static int FloorLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Floor( int    startIdx,
+                                          int    endIdx,
+                                          SubArray^    inReal,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+
+         static enum class RetCode Floor( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inReal,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal )
+         { return Floor( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Floor( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inReal,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Floor( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<float>^ inReal,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+
+         #define TA_FLOOR Core::Floor
+         #define TA_FLOOR_Lookback Core::FloorLookback
 
          static int HtDcPeriodLookback( void );
 
@@ -5312,6 +5722,86 @@ namespace TicTacTec
 
          #define TA_LINEARREG_SLOPE Core::LinearRegSlope
          #define TA_LINEARREG_SLOPE_Lookback Core::LinearRegSlopeLookback
+
+         static int LnLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Ln( int    startIdx,
+                                       int    endIdx,
+                                       SubArray^    inReal,
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal );
+
+         static enum class RetCode Ln( int    startIdx,
+                                       int    endIdx,
+                                       cli::array<double>^ inReal,
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal )
+         { return Ln( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Ln( int    startIdx,
+                                       int    endIdx,
+                                       cli::array<double>^ inReal,
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Ln( int    startIdx,
+                                       int    endIdx,
+                                       cli::array<float>^ inReal,
+                                       [Out]int%    outBegIdx,
+                                       [Out]int%    outNBElement,
+                                       cli::array<double>^  outReal );
+
+         #define TA_LN Core::Ln
+         #define TA_LN_Lookback Core::LnLookback
+
+         static int Log10Lookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Log10( int    startIdx,
+                                          int    endIdx,
+                                          SubArray^    inReal,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+
+         static enum class RetCode Log10( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inReal,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal )
+         { return Log10( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Log10( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<double>^ inReal,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Log10( int    startIdx,
+                                          int    endIdx,
+                                          cli::array<float>^ inReal,
+                                          [Out]int%    outBegIdx,
+                                          [Out]int%    outNBElement,
+                                          cli::array<double>^  outReal );
+
+         #define TA_LOG10 Core::Log10
+         #define TA_LOG10_Lookback Core::Log10Lookback
 
          static int MovingAverageLookback( int           optInTimePeriod, /* From 1 to 100000 */
                                          MAType        optInMAType ); 
@@ -6316,6 +6806,51 @@ namespace TicTacTec
          #define TA_MOM Core::Mom
          #define TA_MOM_Lookback Core::MomLookback
 
+         static int MultLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Mult( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal0,
+                                         SubArray^    inReal1,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Mult( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal0,
+                                         cli::array<double>^ inReal1,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Mult( startIdx, endIdx,
+            gcnew SubArray(inReal0,0),
+            gcnew SubArray(inReal1,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Mult( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal0,
+                                         cli::array<double>^ inReal1,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Mult( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal0,
+                                         cli::array<float>^ inReal1,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_MULT Core::Mult
+         #define TA_MULT_Lookback Core::MultLookback
+
          static int NatrLookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
@@ -6990,6 +7525,46 @@ namespace TicTacTec
          #define TA_SIN Core::Sin
          #define TA_SIN_Lookback Core::SinLookback
 
+         static int SinhLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Sinh( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Sinh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Sinh( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Sinh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Sinh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_SINH Core::Sinh
+         #define TA_SINH_Lookback Core::SinhLookback
+
          static int SmaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
@@ -7034,6 +7609,46 @@ namespace TicTacTec
 
          #define TA_SMA Core::Sma
          #define TA_SMA_Lookback Core::SmaLookback
+
+         static int SqrtLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Sqrt( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Sqrt( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Sqrt( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Sqrt( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Sqrt( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_SQRT Core::Sqrt
+         #define TA_SQRT_Lookback Core::SqrtLookback
 
          static int StdDevLookback( int           optInTimePeriod, /* From 2 to 100000 */
                                   double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
@@ -7307,6 +7922,51 @@ namespace TicTacTec
          #define TA_STOCHRSI Core::StochRsi
          #define TA_STOCHRSI_Lookback Core::StochRsiLookback
 
+         static int SubLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Sub( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal0,
+                                        SubArray^    inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Sub( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal0,
+                                        cli::array<double>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Sub( startIdx, endIdx,
+            gcnew SubArray(inReal0,0),
+            gcnew SubArray(inReal1,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Sub( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal0,
+                                        cli::array<double>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Sub( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal0,
+                                        cli::array<float>^ inReal1,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         #define TA_SUB Core::Sub
+         #define TA_SUB_Lookback Core::SubLookback
+
          static int SumLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
@@ -7402,6 +8062,86 @@ namespace TicTacTec
 
          #define TA_T3 Core::T3
          #define TA_T3_Lookback Core::T3Lookback
+
+         static int TanLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Tan( int    startIdx,
+                                        int    endIdx,
+                                        SubArray^    inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         static enum class RetCode Tan( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Tan( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Tan( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Tan( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal,
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+
+         #define TA_TAN Core::Tan
+         #define TA_TAN_Lookback Core::TanLookback
+
+         static int TanhLookback( void );
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Tanh( int    startIdx,
+                                         int    endIdx,
+                                         SubArray^    inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         static enum class RetCode Tanh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal )
+         { return Tanh( startIdx, endIdx,
+            gcnew SubArray(inReal,0),
+             outBegIdx,
+             outNBElement,
+              outReal  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Tanh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<double>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+         #endif
+         static enum class RetCode Tanh( int    startIdx,
+                                         int    endIdx,
+                                         cli::array<float>^ inReal,
+                                         [Out]int%    outBegIdx,
+                                         [Out]int%    outNBElement,
+                                         cli::array<double>^  outReal );
+
+         #define TA_TANH Core::Tanh
+         #define TA_TANH_Lookback Core::TanhLookback
 
          static int TemaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 

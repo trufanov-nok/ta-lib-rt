@@ -189,6 +189,53 @@ public class Core {
    }
    
    /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
+   public int acosLookback( )
+   {
+      return 0;
+   }
+   public RetCode acos( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.acos (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode acos( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.acos (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int adLookback( )
    {
       return 0;
@@ -265,6 +312,55 @@ public class Core {
          currentBar++;
          nbBar--;
       }
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int addLookback( )
+   {
+      return 0;
+   }
+   public RetCode add( int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = inReal0[i]+inReal1[i];
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode add( int startIdx,
+      int endIdx,
+      float inReal0[],
+      float inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = inReal0[i]+inReal1[i];
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -1496,6 +1592,100 @@ public class Core {
       }
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int asinLookback( )
+   {
+      return 0;
+   }
+   public RetCode asin( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.asin (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode asin( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.asin (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int atanLookback( )
+   {
+      return 0;
+   }
+   public RetCode atan( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.atan (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode atan( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.atan (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -11282,6 +11472,53 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int ceilLookback( )
+   {
+      return 0;
+   }
+   public RetCode ceil( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.ceil (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode ceil( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.ceil (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int cmoLookback( int optInTimePeriod )
    {
       int retValue;
@@ -11726,6 +11963,100 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int cosLookback( )
+   {
+      return 0;
+   }
+   public RetCode cos( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.cos (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode cos( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.cos (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int coshLookback( )
+   {
+      return 0;
+   }
+   public RetCode cosh( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.cosh (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode cosh( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.cosh (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int demaLookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -11865,6 +12196,55 @@ public class Core {
       }
       outBegIdx.value = firstEMABegIdx.value + secondEMABegIdx.value ;
       outNBElement.value = outIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int divLookback( )
+   {
+      return 0;
+   }
+   public RetCode div( int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = inReal0[i]/inReal1[i];
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode div( int startIdx,
+      int endIdx,
+      float inReal0[],
+      float inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = inReal0[i]/inReal1[i];
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -12308,6 +12688,100 @@ public class Core {
          outReal[outIdx++] = prevMA;
       }
       outNBElement.value = outIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int expLookback( )
+   {
+      return 0;
+   }
+   public RetCode exp( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.exp (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode exp( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.exp (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int floorLookback( )
+   {
+      return 0;
+   }
+   public RetCode floor( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.floor (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode floor( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.floor (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -14963,6 +15437,100 @@ public class Core {
       }
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int lnLookback( )
+   {
+      return 0;
+   }
+   public RetCode ln( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.log (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode ln( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.log (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int log10Lookback( )
+   {
+      return 0;
+   }
+   public RetCode log10( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.log10 (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode log10( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.log10 (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
    /* Generated */
@@ -18451,6 +19019,55 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int multLookback( )
+   {
+      return 0;
+   }
+   public RetCode mult( int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = inReal0[i]*inReal1[i];
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode mult( int startIdx,
+      int endIdx,
+      float inReal0[],
+      float inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = inReal0[i]*inReal1[i];
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int natrLookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -20819,7 +21436,7 @@ public class Core {
    {
       return 0;
    }
-   public RetCode Math.sin ( int startIdx,
+   public RetCode sin( int startIdx,
       int endIdx,
       double inReal[],
       MInteger outBegIdx,
@@ -20840,7 +21457,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public RetCode Math.sin ( int startIdx,
+   public RetCode sin( int startIdx,
       int endIdx,
       float inReal[],
       MInteger outBegIdx,
@@ -20856,6 +21473,53 @@ public class Core {
       for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
       {
          outReal[outIdx] = Math.sin (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int sinhLookback( )
+   {
+      return 0;
+   }
+   public RetCode sinh( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.sinh (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode sinh( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.sinh (inReal[i]);
       }
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
@@ -20984,6 +21648,53 @@ public class Core {
          periodTotal -= inReal[trailingIdx++];
          outReal[outIdx++] = tempReal / optInTimePeriod;
       } while( i <= endIdx );
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int sqrtLookback( )
+   {
+      return 0;
+   }
+   public RetCode sqrt( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.sqrt (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode sqrt( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.sqrt (inReal[i]);
+      }
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
@@ -21956,6 +22667,55 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int subLookback( )
+   {
+      return 0;
+   }
+   public RetCode sub( int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = inReal0[i]-inReal1[i];
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode sub( int startIdx,
+      int endIdx,
+      float inReal0[],
+      float inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = inReal0[i]-inReal1[i];
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int sumLookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -22306,6 +23066,100 @@ public class Core {
          outReal[outIdx++] = c1*e6+c2*e5+c3*e4+c4*e3;
       }
       outNBElement.value = outIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int tanLookback( )
+   {
+      return 0;
+   }
+   public RetCode tan( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.tan (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode tan( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.tan (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
+   public int tanhLookback( )
+   {
+      return 0;
+   }
+   public RetCode tanh( int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.tanh (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
+      return RetCode.Success ;
+   }
+   public RetCode tanh( int startIdx,
+      int endIdx,
+      float inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      int outIdx;
+      int i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      for( i=startIdx, outIdx=0; i <= endIdx; i++, outIdx++ )
+      {
+         outReal[outIdx] = Math.tanh (inReal[i]);
+      }
+      outNBElement.value = outIdx;
+      outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
    /* Generated */

@@ -1,10 +1,14 @@
+ACOS                Vector Trigonometric ACos
 AD                  Chaikin A/D Line
+ADD                 Vector Arithmetic Add
 ADOSC               Chaikin A/D Oscillator
 ADX                 Average Directional Movement Index
 ADXR                Average Directional Movement Index Rating
 APO                 Absolute Price Oscillator
 AROON               Aroon
 AROONOSC            Aroon Oscillator
+ASIN                Vector Trigonometric ASin
+ATAN                Vector Trigonometric ATan
 ATR                 Average True Range
 AVGPRICE            Average Price
 BBANDS              Bollinger Bands
@@ -72,11 +76,17 @@ CDLTRISTAR          Tristar Pattern
 CDLUNIQUE3RIVER     Unique 3 River
 CDLUPSIDEGAP2CROWS  Upside Gap Two Crows
 CDLXSIDEGAP3METHODS Upside/Downside Gap Three Methods
+CEIL                Vector Ceil
 CMO                 Chande Momentum Oscillator
 CORREL              Pearson's Correlation Coefficient (r)
+COS                 Vector Trigonometric Cos
+COSH                Vector Trigonometric Cosh
 DEMA                Double Exponential Moving Average
+DIV                 Vector Arithmetic Div
 DX                  Directional Movement Index
 EMA                 Exponential Moving Average
+EXP                 Vector Arithmetic Exp
+FLOOR               Vector Floor
 HT_DCPERIOD         Hilbert Transform - Dominant Cycle Period
 HT_DCPHASE          Hilbert Transform - Dominant Cycle Phase
 HT_PHASOR           Hilbert Transform - Phasor Components
@@ -88,6 +98,8 @@ LINEARREG           Linear Regression
 LINEARREG_ANGLE     Linear Regression Angle
 LINEARREG_INTERCEPT Linear Regression Intercept
 LINEARREG_SLOPE     Linear Regression Slope
+LN                  Vector Log Natural
+LOG10               Vector Log10
 MA                  Moving average
 MACD                Moving Average Convergence/Divergence
 MACDEXT             MACD with controllable MA type
@@ -107,6 +119,7 @@ MINMAXINDEX         Indexes of lowest and highest values over a specified period
 MINUS_DI            Minus Directional Indicator
 MINUS_DM            Minus Directional Movement
 MOM                 Momentum
+MULT                Vector Arithmetic Mult
 NATR                Normalized Average True Range
 OBV                 On Balance Volume
 PLUS_DI             Plus Directional Indicator
@@ -119,14 +132,19 @@ ROCR100             Rate of change ratio 100 scale: (price/prevPrice)*100
 RSI                 Relative Strength Index
 SAR                 Parabolic SAR
 SAREXT              Parabolic SAR - Extended
-SIN                 Trigonometric Sin
+SIN                 Vector Trigonometric Sin
+SINH                Vector Trigonometric Sinh
 SMA                 Simple Moving Average
+SQRT                Vector Square Root
 STDDEV              Standard Deviation
 STOCH               Stochastic
 STOCHF              Stochastic Fast
 STOCHRSI            Stochastic Relative Strength Index
+SUB                 Vector Arithmetic Substraction
 SUM                 Summation
 T3                  Triple Exponential Moving Average (T3)
+TAN                 Vector Trigonometric Tan
+TANH                Vector Trigonometric Tanh
 TEMA                Triple Exponential Moving Average
 TRANGE              True Range
 TRIMA               Triangular Moving Average
