@@ -1,3 +1,11 @@
+V0.4 (September 2007)
+  - Java TA-Abstract interface.
+  - MAVP, COS, SIN, TAN, COSH, SINH, TANH, ACOS, ASIN, ATAN.
+  - ADD, DIV, SUB, MULT, CEIL, FLOOR, EXP, SQRT, LN, LOG10.
+  - UpperLimit/LowerLimit flags for BBANDS.
+  - Automatic benchmarking by ta_regtest (WIN32 only).
+  - Fix #1656623, #1660327
+
 V0.3 (January 2007)
   - New .NET and Java naming convention.
   - XML interface description (See TA_FunctionDescription).
