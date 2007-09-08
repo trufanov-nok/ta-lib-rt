@@ -53,6 +53,47 @@ import com.tictactec.ta.lib.meta.annotation.RealRange;
 
 public class CoreAnnotated extends Core {
 
+public int acosLookback(
+) {
+    return super.acosLookback(
+); }
+
+@FuncInfo(
+        name  = "ACOS",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode acos(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.acos (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int adLookback(
 ) {
     return super.adLookback(
@@ -94,6 +135,54 @@ public RetCode ad(
         inLow ,
         inClose ,
         inVolume ,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int addLookback(
+) {
+    return super.addLookback(
+); }
+
+@FuncInfo(
+        name  = "ADD",
+        group = "Math Operators",
+        flags = 0,
+        nbInput    = 2,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode add(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal0",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal0[],
+            @InputParameterInfo(
+                paramName = "inReal1",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal1[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.add (
+        startIdx,
+        endIdx,
+        inReal0,
+        inReal1,
         outBegIdx,
         outNBElement,
         outReal
@@ -530,6 +619,88 @@ public RetCode aroonOsc(
         inHigh ,
         inLow ,
         optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int asinLookback(
+) {
+    return super.asinLookback(
+); }
+
+@FuncInfo(
+        name  = "ASIN",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode asin(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.asin (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int atanLookback(
+) {
+    return super.atanLookback(
+); }
+
+@FuncInfo(
+        name  = "ATAN",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode atan(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.atan (
+        startIdx,
+        endIdx,
+        inReal,
         outBegIdx,
         outNBElement,
         outReal
@@ -4015,6 +4186,47 @@ public RetCode cdlXSideGap3Methods(
 ); }
 
 
+public int ceilLookback(
+) {
+    return super.ceilLookback(
+); }
+
+@FuncInfo(
+        name  = "CEIL",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode ceil(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.ceil (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int cmoLookback(
         int optInTimePeriod) {
     return super.cmoLookback(
@@ -4140,6 +4352,88 @@ public RetCode correl(
 ); }
 
 
+public int cosLookback(
+) {
+    return super.cosLookback(
+); }
+
+@FuncInfo(
+        name  = "COS",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode cos(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.cos (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int coshLookback(
+) {
+    return super.coshLookback(
+); }
+
+@FuncInfo(
+        name  = "COSH",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode cosh(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.cosh (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int demaLookback(
         int optInTimePeriod) {
     return super.demaLookback(
@@ -4193,6 +4487,54 @@ public RetCode dema(
         endIdx,
         inReal,
         optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int divLookback(
+) {
+    return super.divLookback(
+); }
+
+@FuncInfo(
+        name  = "DIV",
+        group = "Math Operators",
+        flags = 0,
+        nbInput    = 2,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode div(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal0",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal0[],
+            @InputParameterInfo(
+                paramName = "inReal1",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal1[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.div (
+        startIdx,
+        endIdx,
+        inReal0,
+        inReal1,
         outBegIdx,
         outNBElement,
         outReal
@@ -4315,6 +4657,88 @@ public RetCode ema(
         endIdx,
         inReal,
         optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int expLookback(
+) {
+    return super.expLookback(
+); }
+
+@FuncInfo(
+        name  = "EXP",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode exp(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.exp (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int floorLookback(
+) {
+    return super.floorLookback(
+); }
+
+@FuncInfo(
+        name  = "FLOOR",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode floor(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.floor (
+        startIdx,
+        endIdx,
+        inReal,
         outBegIdx,
         outNBElement,
         outReal
@@ -4871,6 +5295,88 @@ public RetCode linearRegSlope(
         endIdx,
         inReal,
         optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int lnLookback(
+) {
+    return super.lnLookback(
+); }
+
+@FuncInfo(
+        name  = "LN",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode ln(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.ln (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int log10Lookback(
+) {
+    return super.log10Lookback(
+); }
+
+@FuncInfo(
+        name  = "LOG10",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode log10(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.log10 (
+        startIdx,
+        endIdx,
+        inReal,
         outBegIdx,
         outNBElement,
         outReal
@@ -6277,6 +6783,54 @@ public RetCode mom(
 ); }
 
 
+public int multLookback(
+) {
+    return super.multLookback(
+); }
+
+@FuncInfo(
+        name  = "MULT",
+        group = "Math Operators",
+        flags = 0,
+        nbInput    = 2,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode mult(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal0",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal0[],
+            @InputParameterInfo(
+                paramName = "inReal1",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal1[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.mult (
+        startIdx,
+        endIdx,
+        inReal0,
+        inReal1,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int natrLookback(
         int optInTimePeriod) {
     return super.natrLookback(
@@ -7202,7 +7756,7 @@ public int sinLookback(
 
 @FuncInfo(
         name  = "SIN",
-        group = "Math Operators",
+        group = "Math Transform",
         flags = 0,
         nbInput    = 1,
         nbOptInput = 0,
@@ -7227,6 +7781,47 @@ public RetCode sin(
             double outReal[]
 ) {
     return super.sin (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int sinhLookback(
+) {
+    return super.sinhLookback(
+); }
+
+@FuncInfo(
+        name  = "SINH",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode sinh(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.sinh (
         startIdx,
         endIdx,
         inReal,
@@ -7289,6 +7884,47 @@ public RetCode sma(
         endIdx,
         inReal,
         optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int sqrtLookback(
+) {
+    return super.sqrtLookback(
+); }
+
+@FuncInfo(
+        name  = "SQRT",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode sqrt(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.sqrt (
+        startIdx,
+        endIdx,
+        inReal,
         outBegIdx,
         outNBElement,
         outReal
@@ -7749,6 +8385,54 @@ public RetCode stochRsi(
 ); }
 
 
+public int subLookback(
+) {
+    return super.subLookback(
+); }
+
+@FuncInfo(
+        name  = "SUB",
+        group = "Math Operators",
+        flags = 0,
+        nbInput    = 2,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode sub(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal0",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal0[],
+            @InputParameterInfo(
+                paramName = "inReal1",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal1[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.sub (
+        startIdx,
+        endIdx,
+        inReal0,
+        inReal1,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int sumLookback(
         int optInTimePeriod) {
     return super.sumLookback(
@@ -7882,6 +8566,88 @@ public RetCode t3(
         inReal,
         optInTimePeriod,
         optInVFactor,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int tanLookback(
+) {
+    return super.tanLookback(
+); }
+
+@FuncInfo(
+        name  = "TAN",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode tan(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.tan (
+        startIdx,
+        endIdx,
+        inReal,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int tanhLookback(
+) {
+    return super.tanhLookback(
+); }
+
+@FuncInfo(
+        name  = "TANH",
+        group = "Math Transform",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode tanh(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.tanh (
+        startIdx,
+        endIdx,
+        inReal,
         outBegIdx,
         outNBElement,
         outReal
