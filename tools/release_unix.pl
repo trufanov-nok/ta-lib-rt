@@ -28,7 +28,7 @@ if( not defined $srcdir )
 {
     # Get the latest code from SVN
     system( "svn co https://ta-lib.svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib/c/ $workdir/ta-lib" ) == 0 or die "Failed to checkout latest SVN code.";
-    
+
     # Enable exec permission here, until we figure out how to do it in SVN instead.
     system( "chmod guo+x $workdir/ta-lib/autogen.sh" ) == 0 or die "Failed to set exec permission for autogen.sh";
 }else
@@ -36,6 +36,22 @@ if( not defined $srcdir )
     # Copy srcdir into build tree
     print "Acquiring sources...\n";
     system( "cp $srcdir $workdir/ta-lib -R" ) == 0 or die "Failed to copy source directory.";
+}
+
+# Additional (non-mandatory) copy of doc from my VMWare shared distribution directory.
+if( -e '/mnt/hgfs/ta-lib-user/ta-lib-work/dist' )
+{
+   if( not -e '/mnt/hgfs/ta-lib-user/ta-lib-work/dist/CHANGELOG.TXT' )
+   {
+      die "Missing CHANGELOG.TXT in dist"; 
+   }
+
+   if( not -e '/mnt/hgfs/ta-lib-user/ta-lib-work/dist/HISTORY.TXT' )
+   {
+      die "Missing HISTORY.TXT in dist"; 
+   }
+
+   system( "cp /mnt/hgfs/ta-lib-user/ta-lib-work/dist/*.TXT $workdir/ta-lib" ) == 0 or die "Failed to get documentation from dist.";
 }
 
 print "Setting up autoconf...\n";
@@ -84,6 +100,7 @@ print "Compiling sources...\n";
 system( "./configure" );
 #system( "CFLAGS=\"-O2 -g0 -pipe -march=i686\" ./configure --prefix=/usr" );
 system( "make" );
+system( "sudo make install" );
 
 print "Running tests...\n";
 

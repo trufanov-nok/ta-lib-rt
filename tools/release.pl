@@ -1,11 +1,17 @@
 #!/usr/perl/bin
 
+# The following relative directory structure is assumed:
+#   <Your Directory>/tools
+#   <Your Directory>/ta-lib/*
+#   <Your Directory>/ta-lib/c
+#   <Your Directory>/ta-lib/c/src
+#   etc...
+#
+# You must run this script from the ta-lib/tools directory.
+# BTW, this is the same as the SVN repository structure.
+
 # This script get the latest source from SVN and build from scratch all 
 # the files that are part of a release.
-
-# You will need CVS access and modify the following.
-# On windows you can use PuTTY pageant for handling the password.
-$root_cvs = ":ext:fortier\@cvs.sourceforge.net:/cvsroot/ta-lib";
 
 use Cwd;
 use File::DosGlob 'glob';
@@ -34,7 +40,7 @@ sub Main
    }
      
    # Get a SVN copy locally
-   $a = "svn export --force https://svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib .\\ta-lib";
+   $a = "svn export --force ".&getSVNRoot." .\\ta-lib";
    execProg( &getTempdir, $a );
 
    ###########################################################################
@@ -76,7 +82,7 @@ sub Main
 
    $packageName = "ta-lib-".$versionSuffix."-msvc.zip";
    
-   $a = "zip -r -o -q ".&getReleasedir.$packageName." ta-lib\\*.*";
+   $a = "zip a -r ".&getReleasedir.$packageName." ta-lib\\*.*";
    execProg( &getTempdir, $a );
 
    removeAllBinFile(&getTempdir."ta-lib\\", 0 );
@@ -98,7 +104,7 @@ sub Main
 
    $packageName = "ta-lib-".$versionSuffix."-borl.zip";
  
-   $a = "zip -r -o -q ".&getReleasedir.$packageName." ta-lib\\*.*";
+   $a = "zip a -r ".&getReleasedir.$packageName." ta-lib\\*.*";
    execProg( &getTempdir, $a );
 
    execProg( &getTempdir."ta-lib\\", "copy CHANGELOG.TXT ".&getReleasedir );

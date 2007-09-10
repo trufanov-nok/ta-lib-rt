@@ -43,7 +43,7 @@ sub Main
      }
      else
      { 
-       system( 'rsync -r -v --exclude=*.obj --exclude=*.lib --exclude=*.exe --exclude=.svn --exclude=java --exclude=excel --exclude=dotnet --delete-excluded ../ta-lib '.$tempdir );
+       system( 'rsync -r -v --exclude=*.obj --exclude=*.lib --exclude=*.exe --exclude=.svn --exclude=java --exclude=excel --exclude=dotnet --exclude=*~ --exclude=*.ncb --delete-excluded ../ta-lib '.$tempdir );
      }
     
      # Clean-up possible temp files

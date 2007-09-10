@@ -1,68 +1,70 @@
 This file describes the steps to complete a TA-Lib release.
 
-Packaging Procedure
+[<platform>] indicate a manual action done on a given platform.
+***          indicate an automated action done by a script.
+
+packaging procedure
 ===================
-(1) Win32 Testing
-[Windows]test.pl
-  The script performs: - Directory/file clean-up 
-                       - gen_make
-                       - build all libs variant, do gen_code and regression tests.
-                       - build Perl binaries and run regression tests.
-  -fast option: Do not gen_make or clean. Do only a subset of tests.
-  -clean option: Do only gen_make and clean
+(1) win32 testing
+[windows] perl test.pl
+  *** directory/file clean-up 
+  *** runs gen_make to generate all makefiles
+  *** build all libs variant, do gen_code and regression tests.
+  *** build perl binaries and run regression tests.
 
-(2) Linux Testing
-[UNIX]test_unix.pl
-  no option: The script perform all tests by making a complete copy
-             of the ta-lib directory
+(2) linux testing
+[unix] perl test_unix.pl
+  *** rsync source code in the unix user account 
+  *** compile and run ta_regtest
 
-(3) .NET Assemblies
-[Windows] Build the Debug and Release assembly.
 
-(4) Java 
-[Windows] Using Eclipse, run NUnit.
+(3) .net assemblies
+[windows] build the debug and release assembly.
 
-(5) SVN finalization
-[Windows] Make sure the SVN is in synch. Further steps will be done
-          using the SVN repository.
+(4) java 
+[eclipse] start eclipse. run junit 
+[eclipse] right click to "ant build" build.xml (generate ta-lib.jar)
+[windows] manualy copy ta-lib.jar in dist
 
-(6) Build Win32 Packages
-[WINDOWS]release.pl 
-  no option: 
-    - Erase release and all sub-directory
-    - Build a temporary view from the repository in release/build
-    - Build MSVC release and package
-    - Build Borland release and package
-    - Put text file in release
+(5) svn finalization
+[windows] make sure the svn is in synch. 
 
-(7) Build Linux ReleasePackages
-[UNIX]release_unix.pl
-    - Build a package from the repository
-    - Un-tar the package
-    - Run all unix tests in the temp directory
-    - move that tar.gz in "release"
+(6) build win32 packages
+[windows] perl release.pl 
+  *** erase release and all sub-directory
+  *** build a temporary view from the repository in release/build
+  *** build msvc release and package
+  *** build borland release and package
+  *** copy text file in dist
 
-(8) Add SVN tag "release-x-y-z" (Tag Settings -> do not set any options).
+(7) build linux releasepackages
+[unix] perl release_unix.pl -version x.y.x -rpm
+  *** get source code from repository and text file from dist
+  *** build a tar.gz and rpm package
+  *** run ta_regtest
+  *** copy tar.gz in dist
 
-Publish Procedure
+(8) SVN Tagging
+[windows] Usign TortoiseSVN, tag as "release-x-y-z" (tag settings -> do not set any options).
+
+publish procedure
 =================
-(1) [UNIX] Login as root. Execute DevTools/publish.pl
-      
-(2) SourceForge Release
-   - Name the release simply "x.y.z"
-   - Select "preserve my pre-formatted text". Notes is everything except the Change Log. 
-     Add files:
-        ta_yahoo.exe 		i386	Other 
-        WebFetch.exe  		i386	Other 
-        ta-lib-0.0.2-borl.zip 	i386 	Source .zip 
-        ta-lib-0.0.2-msvc.zip 	i386 	Source .zip 
-        ta-lib-0.0.2-src.zip 1	Any 	Source .zip 
-        HISTORY.TXT   		Any 	text 
-        CHANGELOG.TXT 		Any 	text 
+(1) [unix] login as root. execute publish.pl
+  *** ftp dist content on sourceforge
+
+(2) sourceforge release
+[sourceforge] name the release simply "x.y.z"
+[sourceforge] select "preserve my pre-formatted text". notes is everything except the change log. 
+                add files:
+                        ta-lib-0.0.2-borl.zip 	i386 	Source .zip 
+                        ta-lib-0.0.2-msvc.zip 	i386 	Source .zip 
+                        ta-lib-0.0.2-tar.gz		Any 	Sourcetar.gz 
+                        HISTORY.TXT				Any 	text 
+                        CHANGELOG.TXT			Any 	text 
 
 (3) WebSite
-  Update Web site
-  Test download
+[windows] Update Web site
+[windows] Test download
 
 Promotion
 =========
