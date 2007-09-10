@@ -7,13 +7,20 @@ use base 'Exporter';
 use Cwd;
 
 
-our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile createWorkdir removeAllBinFile testExcel testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage getReleasedir getLogdir getTempdir getWorkdir);
+our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile createWorkdir removeAllBinFile testExcel testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage getReleasedir getLogdir getTempdir getWorkdir getSVNRoot );
 
 my $workdir = "";
 my $userdir = "";
 my $releasedir = "";
 my $logdir = "";
 my $tempdir = "";
+
+# Return the SVN URL of TA-Lib
+sub getSVNRoot
+{
+   return "http://ta-lib.svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib";
+}
+
 
 # User directory reserved for these perl scripts.
 sub getUserdir
@@ -228,6 +235,8 @@ sub createWorkdir
 {
    # Create the directories (ignore errors if they do already exist).
    my $workdir = &getWorkdir();
+   my $logdir = &getLogdir();
+
    mkdir( $workdir );
    mkdir( $workdir."log" );
    mkdir( $workdir."dist" );
@@ -250,17 +259,19 @@ sub createWorkdir
    # Do some clean-up from (potential) previous execution.
    if( $^O ne "MSWin32" )
    {         
-      unlink( $workdir."log/stderr_unix.txt" );
-      unlink( $workdir."log/stdout_unix.txt" );	   
-      removeFile( $workdir."log/*_gcc_*.txt" );
+      removeFile( $logdir."execlog_unix.txt" );
+      removeFile( $logdir."stderr_unix.txt" );
+      removeFile( $logdir."stdout_unix.txt" );	   
+      removeFile( $logdir."*_gcc_*.txt" );
       removeFile( $workdir."temp/unix/*" );
+	  removeFile( $workdir."temp/unix/*" );
    }
    else
    {
-      unlink( $workdir."log\\stderr_win32.txt" );
-      unlink( $workdir."log\\stdout_win32.txt" );
-      unlink( $workdir,"log\\perl_msvc.txt" );
-      unlink( $workdir."log\\win_excel.txt" );      
+      removeFile( $workdir."log\\stderr_win32.txt" );
+      removeFile( $workdir."log\\stdout_win32.txt" );
+      removeFile( $workdir,"log\\perl_msvc.txt" );
+      removeFile( $workdir."log\\win_excel.txt" );      
       removeFile( $workdir."log\\win_ta*.txt" );
       removeFile( $workdir."temp\\win32\\*" );
    }  
@@ -377,17 +388,18 @@ sub execProg
    my $exit_value  = $? >> 8;
    my $signal_num  = $? & 127;
    my $dumped_core = $? & 128;
+   my $out = " ";
 
    if( ($exit_value) or
        ($signal_num) or
        ($dumped_core) )
    {
-      print "\n========================================";
-      print "\nProg      = ".$_[0]."  ".$_[1];
-      print "\nExitValue = ".$exit_value;
-      print "\nSignalNum = ".$signal_num;
-      print "\nDumpCore  = ".$dumped_core."\n";
-      print "\n========================================";
+      $out .= "\n========================================";
+      $out .= "\nProg      = ".$_[0]."  ".$_[1];
+      $out .= "\nExitValue = ".$exit_value;
+      $out .= "\nSignalNum = ".$signal_num;
+      $out .= "\nDumpCore  = ".$dumped_core."\n";
+      $out .= "\n========================================";
       if( $^O ne "MSWin32" )     
       {
          chdir( &getWorkdir().'log' );
@@ -396,10 +408,23 @@ sub execProg
       else
       {
          chdir( &getWorkdir().'log' );
-         print( "\n" );
+         $out .= ( "\n" );
          system( 'find /C "arning" *.txt' );
       }
-      print "\n========================================\n";
+      $out .= "\n========================================\n";
+
+	  print $out;
+	  if( $^O eq "MSWin32" ) 
+	  {
+	    open( OUTFILE, ">execlog_win32.txt");
+	  }
+      else
+	  {
+        open( OUTFILE, ">execlog_unix.txt");
+	  }
+
+	  print OUTFILE $out;
+	  close( OUTFILE );
    }
 
    not $exit_value or die "Script Abort";
@@ -437,7 +462,7 @@ sub libversion
    
    chdir( $workdir );
    
-   # Clean-up some files from (potentially) previous run.   
+   # Clean-up some files from (potentially) previous run.  
    unlink( "tmpVer".$filesuffix );
    unlink( "version".$filesuffix.".c" );
    
@@ -471,6 +496,7 @@ sub libversion
       execProg( $workdir, "version_win32.exe >tmpVer".$filesuffix );
       unlink( "version_win32.obj" );
       unlink( "version_win32.exe" );
+
    }
    else
    {
@@ -556,19 +582,6 @@ sub testExcel
    removeFile( $base."excel\\ta-lib.xll" );
    removeFile( $base."excel\\ta-lib-reverse.xll" );
    
-   # Clean-up and build ta-lib-reverse.xll   
-   #execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" Clean" );   
-   #execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" Clean" );   
-   #execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" >\"".&getWorkdir()."\\log\\win_excel.txt\"" );
-   #execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib_reverse.mak CFG=\"xlw_for_talib - Win32 Release\" >\"".&getLogdir()."win_excel.txt\"" );
-   
-   #execProg( $base."excel", "copy ta-lib.xll ta-lib-reverse.xll" );
-
-   # Clean-up and build ta-lib.xll
-   #removeFile( $base."excel\\ta-lib.xll" );
-   #execProg( $base."excel\\src", "nmake /NOLOGO /f ta-lib.mak CFG=\"xlw - Win32 Release\" Clean" );   
-   #execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" Clean" );
-   #execProg( $base."excel\\src\\xlw_for_talib", "nmake /NOLOGO /f xlw_for_talib.mak CFG=\"xlw_for_talib - Win32 Release\" >>\"".&getLogdir()."win_excel.txt\"" );      
    execProg(  $base."excel\\src", "msbuild ta-lib.sln /p:Configuration=\"Release\" /t:Clean" );
    execProg(  $base."excel\\src", "msbuild ta-lib.sln /p:Configuration=\"Release\"  >\"".&getLogdir()."win_excel.txt\"" );
 
