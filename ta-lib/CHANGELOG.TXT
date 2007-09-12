@@ -7,13 +7,14 @@ New Features
 - UpperLimit/LowerLimit flags for BBANDS.
 - Vector Trigonometric Functions: COS, SIN, TAN, 
   COSH, SINH, TANH, ACOS, ASIN, ATAN
-- Vector Arithemtic Functions: ADD, DIV, SUB, MULT
+- Vector Arithmetic Functions: ADD, DIV, SUB, MULT
 - Other Vector Functions: CEIL, FLOOR, EXP, SQRT, LN, LOG10
 
 Fixes
 =====
 #1656623 : TA_FUNC_FLG_OVERLAP on MININDEX, MAXINDEX and MINMAXINDEX
 #1660327 : "A parameter is out of range" problem with Excel 
+#1727704 : MFI logic bug when no price movement
 
 Other Changes
 =============
