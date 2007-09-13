@@ -16,6 +16,7 @@
 use Cwd;
 use File::DosGlob 'glob';
 use myUtil;
+use userSetup;
 
 sub Main
 {   

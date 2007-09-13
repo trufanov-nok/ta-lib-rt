@@ -1,11 +1,11 @@
-# !! It is very likely that you will need to adjust the path in getUserDir for your setup!!!
+# Misceleanous utility function shared by others script.
 
 package myUtil;
 
 use strict;
 use base 'Exporter';
 use Cwd;
-
+use userSetup; # For user specific path/URL
 
 our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile createWorkdir removeAllBinFile testExcel testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage getReleasedir getLogdir getTempdir getWorkdir getSVNRoot );
 
@@ -14,48 +14,6 @@ my $userdir = "";
 my $releasedir = "";
 my $logdir = "";
 my $tempdir = "";
-
-# Return the SVN URL of TA-Lib
-sub getSVNRoot
-{
-   return "http://ta-lib.svn.sourceforge.net/svnroot/ta-lib/trunk/ta-lib";
-}
-
-
-# User directory reserved for these perl scripts.
-sub getUserdir
-{
-   if( $userdir ne "" ) 
-   {
-      return $userdir;
-   }
-
-   if( $^O ne "MSWin32" )
-   {   	
-      # On my setup, both my unix and win32 machines share the
-      # same user directory intended for my projects.
-      # If that shared directory is found, use it instead.
-      # If not, use a local directory in the OS user account.
-      # \Mario
-      my $temp = "/mnt/hgfs/ta-lib-user/";
-      if( -e $temp && -d $temp )
-      {
-         $userdir = $temp;
-      }
-      else
-      {
-         $userdir = $ENV{'HOME'};
-      }
-   }
-   else
-   {
-      # Running on win32 machine. 
-      $userdir = $ENV{'USERPROFILE'}."\\Temp\\";
-      #$userdir = "c:\\Users\\Mario\\ta-lib-user\\";
-   }
-   
-   return $userdir;
-}
 
 # The workdir is where all the processing take place.
 #   - All output logs while running the scripts.

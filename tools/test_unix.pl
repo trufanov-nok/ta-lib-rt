@@ -5,9 +5,6 @@ use myUtil;
 
 sub Main
 {
-   $workdir = &getWorkdir();
-   $tempdir = $workdir.'temp/unix/';
-
    if( $ARGV[0] eq "-fast" )
    {
       print "Fast Option Set: Skipping some tests\n";
@@ -18,7 +15,7 @@ sub Main
       $fastOption = 0;
    }
 
-   print $workdir;
+   #print $workdir;
    #open(OLD_STDERR,">&STDERR") or die "Failed to save STDERR";
    #open(OLD_STDOUT,">&STDOUT") or die "Failed to save STDOUT";   
    #open(STDOUT, ">".$workdir."log/stdout_unix.txt" ) or die;
@@ -29,22 +26,13 @@ sub Main
    # Clean-up working directory
    createWorkdir();
 
+   $workdir = &getWorkdir();
+   $tempdir = &getTempdir();
+
    # Make a copy of ta-lib into the user directory.
    if( $fastOption eq 0 )
-   {     
-     # If the directory "temp/win32/sourcecopy" exists in the workdir, 
-     # use it instead of making a copy from the source tree.
-     # 
-     # This is a speed optimization on my setup when I do test on unix 
-     # following successful tests on win32.
-     if( -e $workdir.'temp/win32/sourcecopy' )
-     {
-        $tempdir = $workdir.'temp/win32/sourcecopy/';
-     }
-     else
-     { 
-       system( 'rsync -r -v --exclude=*.obj --exclude=*.lib --exclude=*.exe --exclude=.svn --exclude=java --exclude=excel --exclude=dotnet --exclude=*~ --exclude=*.ncb --delete-excluded ../ta-lib '.$tempdir );
-     }
+   {
+     system( 'rsync -r -v --exclude=*.obj --exclude=*.lib --exclude=*.exe --exclude=.svn --exclude=java --exclude=excel --exclude=dotnet --exclude=*~ --exclude=*.ncb --delete-excluded ../ta-lib '.$tempdir );
     
      # Clean-up possible temp files
      removeAllTempFile( $tempdir );
