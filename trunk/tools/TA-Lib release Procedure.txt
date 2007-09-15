@@ -5,52 +5,57 @@ This file describes the steps to complete a TA-Lib release.
 
 packaging procedure
 ===================
-(1) win32 testing
+(1) svn synchronization 
+[windows] Using TortoiseSVN (or other SVN client) Update/merge latest
+
+(2) win32 testing
 [windows] perl test.pl
   *** directory/file clean-up 
   *** runs gen_make to generate all makefiles
   *** build all libs variant, do gen_code and regression tests.
   *** build perl binaries and run regression tests.
+  *** build Excel add-ins
 
-(2) linux testing
+(3) linux testing
 [unix] perl test_unix.pl
   *** rsync source code in the unix user account 
   *** compile and run ta_regtest
 
-
-(3) .net assemblies
+(4) .net assemblies
 [windows] build the debug and release assembly.
 
-(4) java 
+(5) java 
 [eclipse] start eclipse. run junit 
 [eclipse] right click to "ant build" build.xml (generate ta-lib.jar)
 [windows] manualy copy ta-lib.jar in dist
 
-(5) svn finalization
-[windows] make sure the svn is in synch. 
+(6) svn finalization
+[windows] Make sure SVN is in synch. 
 
-(6) build win32 packages
+(7) build win32 packages
 [windows] perl release.pl 
   *** erase release and all sub-directory
   *** build a temporary view from the repository in release/build
+  *** build Excel add-ins for the package
   *** build msvc release and package
   *** build borland release and package
   *** copy text file in dist
 
-(7) build linux releasepackages
+(8) build linux releasepackages
 [unix] perl release_unix.pl -version x.y.x -rpm
   *** get source code from repository and text file from dist
   *** build a tar.gz and rpm package
   *** run ta_regtest
   *** copy tar.gz in dist
 
-(8) SVN Tagging
-[windows] Usign TortoiseSVN, tag as "release-x-y-z" (tag settings -> do not set any options).
+(9) SVN Tagging
+[windows] Using TortoiseSVN, tag as "release-x-y-z" (tag settings -> do not set any options).
 
 publish procedure
 =================
-(1) [unix] login as root. execute publish.pl
-  *** ftp dist content on sourceforge
+(1) Publication
+[unix] login as root. execute publish.pl
+  *** FTP dist content on sourceforge
 
 (2) sourceforge release
 [sourceforge] name the release simply "x.y.z"
@@ -65,6 +70,7 @@ publish procedure
 (3) WebSite
 [windows] Update Web site
 [windows] Test download
+[windows] Test Excel
 
 Promotion
 =========
@@ -90,6 +96,8 @@ Promotion
 - Post the news on Yahoo! XLTrader mailing list.
   Post only if new technical analysis function added.
   Use Excel specific Format below.
+
+- Inform Debian and FreeBSD packager.
 
 XLTrader Release Header Post
 ===============================
