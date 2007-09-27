@@ -112,6 +112,7 @@ public class SimpleHelper {
     public CoreMetaData getMetaData() throws NoSuchMethodException, IllegalArgumentException {
         if (this.calc!=null) return this.calc;
         this.calc = CoreMetaData.getInstance(func);
+        if (args==null) return this.calc;
         FuncInfo finfo = calc.getFuncInfo();
         if (args.length>finfo.nbOptInput()) throw new IllegalArgumentException(); //TODO: message
         for (int i=0; i<args.length; i++) {
@@ -186,7 +187,7 @@ public class SimpleHelper {
         // parse function name and optional arguments
         FuncInfo finfo = getMetaData().getFuncInfo();
         // set input parameters
-        if (inputs==null  || inputs.length!=finfo.nbInput()) throw new IllegalArgumentException(); //TODO: message
+        if (inputs==null || inputs.length!=finfo.nbInput()) throw new IllegalArgumentException(); //TODO: message
         for (int i=0; i<inputs.length; i++) {
             InputParameterInfo ipinfo = calc.getInputParameterInfo(i);
             if (ipinfo.type()==InputParameterType.TA_Input_Price) {
