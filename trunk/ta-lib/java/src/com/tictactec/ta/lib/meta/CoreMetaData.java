@@ -541,7 +541,7 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
         InputParameterInfo param = getInputParameterInfo(paramIndex);
         if ((param==null) || (param.type()!=InputParameterType.TA_Input_Price)) throw new InternalError(CONTACT_DEVELOPERS);
         if (callInputParams==null) callInputParams = new Object[getFuncInfo().nbInput()];
-        callInputParams[paramIndex] = new PriceInputParameter(param.flags(), open, high, low, close, volume, openInterest);
+        callInputParams[paramIndex] = new PriceHolder(param.flags(), open, high, low, close, volume, openInterest);
     }
 
     /**
@@ -557,7 +557,7 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
         if (array==null) throw new NullPointerException(ARRAY_IS_NULL);
         InputParameterInfo param = getInputParameterInfo(paramIndex);
         if ((param==null) || (param.type()!=InputParameterType.TA_Input_Price)) throw new InternalError(CONTACT_DEVELOPERS);
-        if (! (array instanceof PriceInputParameter) ) throw new IllegalArgumentException(PRICE_EXPECTED);
+        if (! (array instanceof PriceHolder) ) throw new IllegalArgumentException(PRICE_EXPECTED);
         if (callInputParams==null) callInputParams = new Object[getFuncInfo().nbInput()];
         callInputParams[paramIndex] = array;
     }
@@ -692,13 +692,15 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
 
         int count = 0;
         for (Object item : callInputParams) {
-            if (PriceInputParameter.class.isAssignableFrom(item.getClass())) {
-                count += ((PriceInputParameter)item).getCount();
+            if (PriceHolder.class.isAssignableFrom(item.getClass())) {
+                count += ((PriceHolder)item).getCount();
             } else {
                 count++;
             }
         }
         count += callOutputParams.length;
+        
+        if (callOptInputParams==null) callOptInputParams = new Object[getFuncInfo().nbOptInput()];
         count += callOptInputParams.length;
         
         Object[] params = new Object[count+4];
@@ -707,8 +709,8 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
         params[count++] = endIndex;
 
         for (Object item : callInputParams) {
-            if (PriceInputParameter.class.isAssignableFrom(item.getClass())) {
-                Object objs[] = ((PriceInputParameter)item).toArrays();
+            if (PriceHolder.class.isAssignableFrom(item.getClass())) {
+                Object objs[] = ((PriceHolder)item).toEffectiveArrays();
                 for (int i=0; i<objs.length; i++) {
                     params[count++] = objs[i];
                 }

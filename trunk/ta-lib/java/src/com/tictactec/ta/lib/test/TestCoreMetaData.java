@@ -53,7 +53,6 @@ import java.util.Set;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.meta.CoreMetaData;
 import com.tictactec.ta.lib.meta.PriceHolder;
-import com.tictactec.ta.lib.meta.PriceInputParameter;
 import com.tictactec.ta.lib.meta.TaFuncService;
 import com.tictactec.ta.lib.meta.TaGrpService;
 import com.tictactec.ta.lib.meta.annotation.InputParameterInfo;
@@ -236,7 +235,8 @@ public class TestCoreMetaData {
             System.out.println("lookback="+calc.getLookback());
             System.out.println("outBegIdx    = "+lOutIdx.value+ "    outNbElement = "+lOutSize.value);
             for (int i=0; i<lOutSize.value; i++) {
-                System.out.println("output1["+i+"]="+output1[i]+"     "+"output2["+i+"]="+output2[i]);
+                System.out.printf("output1[%2d]=%8.4f    output2[%2d]=%8.4f\n", i, output1[i], i, output2[i]);
+                //System.out.println("output1["+i+"]="+output1[i]+"     "+"output2["+i+"]="+output2[i]);
             }
 
             /*
@@ -266,7 +266,8 @@ public class TestCoreMetaData {
             System.out.println("lookback="+calc.getLookback());
             System.out.println("outBegIdx    = "+lOutIdx.value+ "    outNbElement = "+lOutSize.value);
             for (int i=0; i<lOutSize.value; i++) {
-                System.out.println("output1["+i+"]="+output1[i]+"     "+"output2["+i+"]="+output2[i]+"     "+"output3["+i+"]="+output3[i]);
+                System.out.printf("output1[%2d]=%8.4f    output2[%2d]=%8.4f        output3[%2d]=%8.4f\n", i, output1[i], i, output2[i], i, output3[i]);
+                //System.out.println("output1["+i+"]="+output1[i]+"     "+"output2["+i+"]="+output2[i]+"     "+"output3["+i+"]="+output3[i]);
             }
             
             /*
@@ -284,13 +285,13 @@ public class TestCoreMetaData {
             System.out.println("===============================================");
             System.out.println(func);
             int flags = calc.getMetaData().getInputParameterInfo(0).flags();
-            PriceHolder price = new PriceInputParameter(flags, open, high, low, close, null, null);
+            PriceHolder price = new PriceHolder(flags, open, high, low, close, null, null);
             calc.calculate(0, 59, new Object[] { price }, new Object[] { output1 }, lOutIdx, lOutSize);
             
             System.out.println("lookback="+calc.getLookback());
             System.out.println("outBegIdx    = "+lOutIdx.value+ "    outNbElement = "+lOutSize.value);
             for (int i=0; i<lOutSize.value; i++) {
-                System.out.println("output1["+i+"]="+output1[i]);
+                System.out.printf("output1[%2d]=%8.4f\n", i, output1[i]);
             }
             
             /*
@@ -312,9 +313,31 @@ public class TestCoreMetaData {
             System.out.println("lookback="+calc.getLookback());
             System.out.println("outBegIdx    = "+lOutIdx.value+ "    outNbElement = "+lOutSize.value);
             for (int i=0; i<lOutSize.value; i++) {
-                System.out.println("output1["+i+"]="+output1[i]);
+                System.out.printf("output1[%2d]=%8.4f\n", i, output1[i]);
+                //System.out.println("output1["+i+"]="+output1[i]);
             }
             
+            /*
+            LN
+              [TA_Input_Real]    [0] inReal
+              [TA_Output_Real]   [1] outReal
+           */
+          func = "ln";
+          params.clear();
+          
+          calc = new SimpleHelper(func, params);
+          
+          System.out.println("===============================================");
+          System.out.println(func);
+          calc.calculate(0, 59, new Object[] { close }, new Object[] { output1 }, lOutIdx, lOutSize);
+          
+          System.out.println("lookback="+calc.getLookback());
+          System.out.println("outBegIdx    = "+lOutIdx.value+ "    outNbElement = "+lOutSize.value);
+          for (int i=0; i<lOutSize.value; i++) {
+              System.out.printf("output1[%2d]=%8.4f\n", i, output1[i]);
+              //System.out.println("output1["+i+"]="+output1[i]);
+          }
+          
         } catch (Exception e) {
             e.printStackTrace();
         }
