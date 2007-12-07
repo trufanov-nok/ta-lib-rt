@@ -474,6 +474,71 @@ namespace TicTacTec
 			 }
 
 /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
+         static int AccbandsLookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Accbands( int    startIdx,
+                                             int    endIdx,
+                                             SubArray^    inHigh,
+                                             SubArray^    inLow,
+                                             SubArray^    inClose,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outRealUpperBand,
+                                             cli::array<double>^  outRealMiddleBand,
+                                             cli::array<double>^  outRealLowerBand );
+
+         static enum class RetCode Accbands( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             cli::array<double>^ inClose,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outRealUpperBand,
+                                             cli::array<double>^  outRealMiddleBand,
+                                             cli::array<double>^  outRealLowerBand )
+         { return Accbands( startIdx,    endIdx,
+                gcnew SubArray(inHigh,0) ,
+                gcnew SubArray(inLow,0) ,
+                gcnew SubArray(inClose,0) ,
+                 optInTimePeriod, /* From 2 to 100000 */
+                outBegIdx,
+                outNBElement,
+                 outRealUpperBand ,
+                 outRealMiddleBand ,
+                 outRealLowerBand  );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Accbands( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<double>^ inHigh,
+                                             cli::array<double>^ inLow,
+                                             cli::array<double>^ inClose,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outRealUpperBand,
+                                             cli::array<double>^  outRealMiddleBand,
+                                             cli::array<double>^  outRealLowerBand );
+         #endif
+         static enum class RetCode Accbands( int    startIdx,
+                                             int    endIdx,
+                                             cli::array<float>^ inHigh,
+                                             cli::array<float>^ inLow,
+                                             cli::array<float>^ inClose,
+                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             [Out]int%    outBegIdx,
+                                             [Out]int%    outNBElement,
+                                             cli::array<double>^  outRealUpperBand,
+                                             cli::array<double>^  outRealMiddleBand,
+                                             cli::array<double>^  outRealLowerBand );
+
+         #define TA_ACCBANDS Core::Accbands
+         #define TA_ACCBANDS_Lookback Core::AccbandsLookback
+
          static int AcosLookback( void );
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )

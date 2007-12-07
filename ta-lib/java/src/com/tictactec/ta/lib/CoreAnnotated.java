@@ -60,6 +60,83 @@ import com.tictactec.ta.lib.meta.annotation.RealRange;
 
 public class CoreAnnotated extends Core {
 
+public int accbandsLookback(
+        int optInTimePeriod) {
+    return super.accbandsLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "ACCBANDS",
+        group = "Overlap Studies",
+        flags = 16777216,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 3
+)
+public RetCode accbands(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLC",
+                flags     = 14,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 20,
+                    min          = 2,
+                    max          = 100000,
+                    suggested_start     = 4,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outRealUpperBand",
+                flags     = 2048,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRealUpperBand[],
+            @OutputParameterInfo(
+                paramName = "outRealMiddleBand",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRealMiddleBand[],
+            @OutputParameterInfo(
+                paramName = "outRealLowerBand",
+                flags     = 4096,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRealLowerBand[]
+) {
+    return super.accbands (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outRealUpperBand,
+        outRealMiddleBand,
+        outRealLowerBand
+); }
+
+
 public int acosLookback(
 ) {
     return super.acosLookback(
