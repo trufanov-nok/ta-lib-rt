@@ -83,7 +83,7 @@ sub Main
 
    $packageName = "ta-lib-".$versionSuffix."-msvc.zip";
    
-   $a = "zip a -r ".&getReleasedir.$packageName." ta-lib\\*.*";
+   $a = "zip a -tzip -r ".&getReleasedir.$packageName." ta-lib\\*";
    execProg( &getTempdir, $a );
 
    removeAllBinFile(&getTempdir."ta-lib\\", 0 );
@@ -105,7 +105,7 @@ sub Main
 
    $packageName = "ta-lib-".$versionSuffix."-borl.zip";
  
-   $a = "zip a -r ".&getReleasedir.$packageName." ta-lib\\*.*";
+   $a = "zip a -tzip -r ".&getReleasedir.$packageName." ta-lib\\*";
    execProg( &getTempdir, $a );
 
    execProg( &getTempdir."ta-lib\\", "copy CHANGELOG.TXT ".&getReleasedir );
