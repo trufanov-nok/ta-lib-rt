@@ -41,7 +41,7 @@ packaging procedure
   *** build borland release and package
   *** copy text file in dist
 
-(8) build linux releasepackages
+(8) build linux release packages
 [unix] perl release_unix.pl -version x.y.x -rpm
   *** get source code from repository and text file from dist
   *** build a tar.gz and rpm package
@@ -49,7 +49,10 @@ packaging procedure
   *** copy tar.gz in dist
 
 (9) SVN Tagging
-[windows] Using TortoiseSVN, tag as "release-x-y-z" (tag settings -> do not set any options).
+[windows] Using TortoiseSVN, select Branch/Tag of the root directory (the one abot "tadoc", "ta-lib" and "tools").
+Do not set any options. Make the copy from Head of the repository to a "tags/release-x-y-z"
+(Example) To URL:
+   https://ta-lib.svn.sourceforge.net/svnroot/ta-lib/tags/release-0.4.0
 
 publish procedure
 =================
