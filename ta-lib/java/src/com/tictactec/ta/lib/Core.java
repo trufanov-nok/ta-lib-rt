@@ -189,6 +189,191 @@ public class Core {
    }
    
    /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
+   public int accbandsLookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 20;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return smaLookback ( optInTimePeriod );
+   }
+   public RetCode accbands( int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outRealUpperBand[],
+      double outRealMiddleBand[],
+      double outRealLowerBand[] )
+   {
+      RetCode retCode;
+      double []tempBuffer1 ;
+      double []tempBuffer2 ;
+      MInteger outBegIdxDummy = new MInteger() ;
+      MInteger outNbElementDummy = new MInteger() ;
+      int i, j, outputSize, bufferSize, lookbackTotal;
+      double tempReal;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 20;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      lookbackTotal = smaLookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outputSize = endIdx-startIdx+1;
+      bufferSize = outputSize+lookbackTotal;
+      tempBuffer1 = new double[bufferSize] ;
+      tempBuffer2 = new double[bufferSize] ;
+      for(j=0, i=startIdx-lookbackTotal; i<=endIdx; i++, j++)
+      {
+         tempReal = inHigh[i]+inLow[i];
+         if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001)) )
+         {
+            tempReal = 4*(inHigh[i]-inLow[i])/tempReal;
+            tempBuffer1[j] = inHigh[i]*(1+tempReal);
+            tempBuffer2[j] = inHigh[i]*(1-tempReal);
+         }
+         else
+         {
+            tempBuffer1[j] = inHigh[i];
+            tempBuffer2[j] = inHigh[i];
+         }
+      }
+      retCode = sma ( startIdx, endIdx, inClose,
+         optInTimePeriod,
+         outBegIdxDummy , outNbElementDummy , outRealMiddleBand );
+      if( (retCode != RetCode.Success ) || ((int) outNbElementDummy.value != outputSize) )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return retCode;
+      }
+      retCode = sma ( 0, bufferSize-1, tempBuffer1,
+         optInTimePeriod,
+         outBegIdxDummy , outNbElementDummy ,
+         outRealUpperBand );
+      if( (retCode != RetCode.Success ) || ((int) outNbElementDummy.value != outputSize) )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return retCode;
+      }
+      retCode = sma ( 0, bufferSize-1, tempBuffer2,
+         optInTimePeriod,
+         outBegIdxDummy , outNbElementDummy ,
+         outRealLowerBand );
+      if( (retCode != RetCode.Success ) || ((int) outNbElementDummy.value != outputSize) )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return retCode;
+      }
+      outBegIdx.value = startIdx;
+      outNBElement.value = outputSize;
+      return RetCode.Success ;
+   }
+   public RetCode accbands( int startIdx,
+      int endIdx,
+      float inHigh[],
+      float inLow[],
+      float inClose[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outRealUpperBand[],
+      double outRealMiddleBand[],
+      double outRealLowerBand[] )
+   {
+      RetCode retCode;
+      double []tempBuffer1 ;
+      double []tempBuffer2 ;
+      MInteger outBegIdxDummy = new MInteger() ;
+      MInteger outNbElementDummy = new MInteger() ;
+      int i, j, outputSize, bufferSize, lookbackTotal;
+      double tempReal;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 20;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      lookbackTotal = smaLookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outputSize = endIdx-startIdx+1;
+      bufferSize = outputSize+lookbackTotal;
+      tempBuffer1 = new double[bufferSize] ;
+      tempBuffer2 = new double[bufferSize] ;
+      for(j=0, i=startIdx-lookbackTotal; i<=endIdx; i++, j++)
+      {
+         tempReal = inHigh[i]+inLow[i];
+         if( ! (((-0.00000001)<tempReal)&&(tempReal<0.00000001)) )
+         {
+            tempReal = 4*(inHigh[i]-inLow[i])/tempReal;
+            tempBuffer1[j] = inHigh[i]*(1+tempReal);
+            tempBuffer2[j] = inHigh[i]*(1-tempReal);
+         }
+         else
+         {
+            tempBuffer1[j] = inHigh[i];
+            tempBuffer2[j] = inHigh[i];
+         }
+      }
+      retCode = sma ( startIdx, endIdx, inClose,
+         optInTimePeriod,
+         outBegIdxDummy , outNbElementDummy , outRealMiddleBand );
+      if( (retCode != RetCode.Success ) || ((int) outNbElementDummy.value != outputSize) )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return retCode;
+      }
+      retCode = sma ( 0, bufferSize-1, tempBuffer1,
+         optInTimePeriod,
+         outBegIdxDummy , outNbElementDummy ,
+         outRealUpperBand );
+      if( (retCode != RetCode.Success ) || ((int) outNbElementDummy.value != outputSize) )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return retCode;
+      }
+      retCode = sma ( 0, bufferSize-1, tempBuffer2,
+         optInTimePeriod,
+         outBegIdxDummy , outNbElementDummy ,
+         outRealLowerBand );
+      if( (retCode != RetCode.Success ) || ((int) outNbElementDummy.value != outputSize) )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return retCode;
+      }
+      outBegIdx.value = startIdx;
+      outNBElement.value = outputSize;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int acosLookback( )
    {
       return 0;
