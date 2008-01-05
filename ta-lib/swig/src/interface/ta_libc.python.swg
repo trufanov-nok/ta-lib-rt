@@ -25,8 +25,23 @@
  */
 
 %define STRING_TABLE(TYPE, SIZE_FIELD)
-/* TODO */
-%ignore TYPE;
+    %typemap(in,numinputs=0) TYPE** (TYPE *temp = 0)
+        "$1 = &temp;"
+    %typemap(argout) TYPE**
+    {
+        /* Copy the strings from **$1 to a Python list */
+        PyObject * list = PyList_New((*$1)->SIZE_FIELD);
+        int elem;
+        for (elem = 0;  elem < (*$1)->SIZE_FIELD;  elem++)
+        {
+            PyObject * name = PyString_FromString((*$1)->string[elem]);
+            PyList_SetItem(list, elem, name);
+        }
+        $result = SWIG_Python_AppendOutput($result, list);
+        $symnameFree(*$1);
+    }
+    /* we don't want just wrapper classes around */
+    %ignore TYPE;
 %enddef /* STRING_TABLE */
 
 
@@ -53,8 +68,15 @@
 
 
 %define CONST_HANDLE(TYPE, NAME)
-/* TODO */
-%nodefault TYPE;
+    %typemap(in, numinputs=0) const TYPE **NAME (TYPE *temp = 0)
+        "$1 = &temp;"
+    %typemap(argout) const TYPE **NAME
+    {
+        PyObject *obj = SWIG_NewPointerObj((void *) *$1, $*1_descriptor, 0);
+        /*SWIG_croak("Type error in argument $argnum of $symname. Expected $*1_mangle");*/
+        $result = SWIG_Python_AppendOutput($result, obj);
+    }
+    %nodefault TYPE;
 %enddef /* CONST_HANDLE */
 
 
@@ -67,14 +89,32 @@
 
 
 %define ARRAY_OBJECT(TYPE, SIZE_FIELD)
-/* TODO */
-%immutable SIZE_FIELD;
+    /* Each array object saves its size in array_size
+     * This will later be needed when acessing the member arrays
+     * This typemap does not perform a conversion, that's why it
+     * cannot be type 'in'.
+     */
+    %typemap(check) TYPE* (unsigned int array_size)
+        "array_size = ($1 != NULL)? ($1->SIZE_FIELD) : 0;"
+
+    /* SIZE_FIELD must not be modified, otherwise segmentation fault may occur */
+    %immutable SIZE_FIELD;
 %enddef /* ARRAY_OBJECT */
 
 
 
 %define MEMBER_ARRAY(TYPE)
-/* TODO */
+	%typemap(out) const TYPE *ARRAY
+	{
+	    int idx;
+	    $result = PyList_New(array_size1);
+	    Py_INCREF($result);
+	    for (idx = 0; idx < array_size1; idx++)
+	    {
+	        PyObject *o = SWIG_NewPointerObj((void *) &$1[idx], $1_descriptor, 1);
+	        PyList_SET_ITEM($result,idx,o);
+	    }
+	}
 %enddef /* MEMBER_ARRAY */
 
 
@@ -167,7 +207,32 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
     goto fail;
 }
 
+%typemap(in) const int *IN_ARRAY
+{
+    int array_size = endIdx2 + 1;
+    int i;
+    int pylen;
+
+    if (!PySequence_Check($input)) {
+        PyErr_SetString(PyExc_TypeError,"Expecting a sequence");
+        return 0;
+    }
+    pylen = PyObject_Length($input);
+
+    $1 = ($1_ltype) calloc(array_size, sizeof($*1_ltype));
+    for (i=0; i<min(pylen, array_size); i++)
+    {
+        PyObject *obj = PySequence_GetItem($input,i);
+        long value = PyInt_AsLong(obj);
+        $1[i] = value;
+        Py_DECREF(obj);
+    }
+}
+
 %typemap(freearg) const double *IN_ARRAY
+    "free($1);";
+
+%typemap(freearg) const int *IN_ARRAY
     "free($1);";
 
 /* After the input arrays, optional parameters come.
@@ -200,11 +265,11 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
 %typemap(in,numinputs=0) int *BEG_IDX(int temp = 0)
     "$1 = &temp;";
 
-%typemap(argout,fragment="t_output_helper") int *BEG_IDX
+%typemap(argout) int *BEG_IDX
 {
     if (result == TA_SUCCESS) {
         PyObject *o = PyInt_FromLong((long) (*$1));
-        $result = t_output_helper($result, o);
+        $result = SWIG_Python_AppendOutput($result, o);
     }
 }
 
@@ -242,7 +307,7 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
 /* On output, the arrays are converted to Python arrays and returned as
  * elements oth a tuple
  */
-%typemap(argout,fragment="t_output_helper") double *OUT_ARRAY
+%typemap(argout) double *OUT_ARRAY
 {
     if ( result == TA_SUCCESS && outNbElement > 0) {
         int idx;
@@ -252,11 +317,11 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
             PyObject *o = PyFloat_FromDouble($1[idx]);
             PyList_SET_ITEM(list,idx,o);
         }
-        $result = t_output_helper($result, list);
+        $result = SWIG_Python_AppendOutput($result, list);
     }
 }
 
-%typemap(argout,fragment="t_output_helper") int *OUT_ARRAY
+%typemap(argout) int *OUT_ARRAY
 {
     if ( result == TA_SUCCESS && outNbElement > 0) {
         int idx;
@@ -266,7 +331,7 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
             PyObject *o = PyInt_FromLong($1[idx]);
             PyList_SET_ITEM(list,idx,o);
         }
-        $result = t_output_helper($result, list);
+        $result = SWIG_Python_AppendOutput($result, list);
     }
 }
 
@@ -301,8 +366,22 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
 
 
 /* typemaps for ta_abstract *************************************************/
-
-/* complex typemap for dataSet */
-/* TODO */
-
-/****************************************************************************/
+%typemap(out) const void *dataSet
+%{
+    if ($1)
+    {
+        swig_type_info *retType = NULL;
+        switch (arg1->type)
+        {
+            case TA_OptInput_RealRange    : retType = SWIGTYPE_p_TA_RealRange;    break;
+            case TA_OptInput_RealList     : retType = SWIGTYPE_p_TA_RealList;     break;
+            case TA_OptInput_IntegerRange : retType = SWIGTYPE_p_TA_IntegerRange; break;
+            case TA_OptInput_IntegerList  : retType = SWIGTYPE_p_TA_IntegerList;  break;
+        }
+        if (retType)
+        {
+            $result = SWIG_NewPointerObj((void *) $1, retType, 1);
+            Py_INCREF($result);
+        }
+    }
+%}
