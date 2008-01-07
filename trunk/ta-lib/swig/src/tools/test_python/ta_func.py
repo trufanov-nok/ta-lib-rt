@@ -18,8 +18,7 @@ class ta_func_test(unittest.TestCase):
 
 
     def test_TA_MAX(self):
-        retCode, begIdx, result = TA_MAX( 0, len(ta_func_test.series)-1, ta_func_test.series, 4 )
-        self.assertEqual( retCode, TA_SUCCESS )
+        begIdx, result = TA_MAX( 0, len(ta_func_test.series)-1, ta_func_test.series, 4 )
         self.assertEqual( begIdx, TA_MAX_Lookback(4) )
         self.assert_( result )
         self.assertEqual( len(ta_func_test.series) - len(result), begIdx )
@@ -30,8 +29,7 @@ class ta_func_test(unittest.TestCase):
         
 
     def test_TA_MIN(self):
-        retCode, begIdx, result = TA_MIN( 0, len(ta_func_test.series)-1, ta_func_test.series, 4 )
-        self.assertEqual( retCode, TA_SUCCESS )
+        begIdx, result = TA_MIN( 0, len(ta_func_test.series)-1, ta_func_test.series, 4 )
         self.assertEqual( begIdx, TA_MIN_Lookback(4) )
         self.assert_( result )
         self.assertEqual( len(ta_func_test.series) - len(result), begIdx )
@@ -42,9 +40,8 @@ class ta_func_test(unittest.TestCase):
         
 
     def test_TA_BBANDS(self):
-        retCode, begIdx, result1, result2, result3 = TA_BBANDS(
+        begIdx, result1, result2, result3 = TA_BBANDS(
                 0, len(ta_func_test.series)-1, ta_func_test.series, 20, 2.0, 2.0, TA_MAType_EMA)
-        self.assertEqual( retCode, TA_SUCCESS )
         self.assertEqual( begIdx, TA_BBANDS_Lookback(20, 2.0, 2.0, TA_MAType_EMA) )
         self.assert_( result1 )
         self.assert_( result2 )
@@ -61,8 +58,7 @@ class ta_func_test(unittest.TestCase):
 
 
     def test_TA_DEMA(self):
-        retCode, begIdx, result = TA_DEMA(0, len(ta_func_test.series)-1, ta_func_test.series ) # default optInTimePeriod
-        self.assertEqual( retCode, TA_SUCCESS )
+        begIdx, result = TA_DEMA(0, len(ta_func_test.series)-1, ta_func_test.series ) # default optInTimePeriod
         self.assertEqual( begIdx, TA_DEMA_Lookback(30) )
         self.assert_( result )
         self.assertEqual( len(ta_func_test.series) - len(result), begIdx )

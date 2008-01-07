@@ -39,10 +39,10 @@ class ta_common_test(unittest.TestCase):
         self.assertEqual( TA_RetCodeInfo(2).infoStr, 'A parameter is out of range' )
 
     def test_TA_Initialize(self):
-        self.assertEqual( TA_Initialize(), TA_SUCCESS )
-        self.assertEqual( TA_Initialize(), TA_SUCCESS )      # implicit call to TA_Shutdown
-        self.assertEqual( TA_Shutdown(), TA_SUCCESS )
-        self.assertEqual( TA_Shutdown(), TA_SUCCESS )            # accepted, no-op
+        self.assertEqual( TA_Initialize(), None )
+        self.assertEqual( TA_Initialize(), None )      # implicit call to TA_Shutdown
+        self.assertEqual( TA_Shutdown(), 0 )
+        self.assertEqual( TA_Shutdown(), 0 )            # accepted, no-op
 
 
 if __name__ == '__main__':
