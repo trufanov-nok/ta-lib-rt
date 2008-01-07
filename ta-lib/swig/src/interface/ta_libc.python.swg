@@ -24,6 +24,26 @@
  * (see below).
  */
 
+ 
+/* In Python we can use exception handling instead TA_RetCode.
+ * If you need the old method, you can comment out this typemap.
+ */
+%typemap(out) TA_RetCode
+{
+	if( $1 != TA_SUCCESS )
+	{
+	 	TA_RetCodeInfo info;
+		char text[200];
+		TA_SetRetCodeInfo( $1, &info );
+		snprintf(text, sizeof(text)-1, "Error %d (%s): %s\n", $1, info.enumStr, info.infoStr );
+		PyErr_SetString(PyExc_Exception, text);
+		SWIG_fail;
+	} 
+	Py_INCREF(Py_None); 
+	$result = Py_None;
+}
+
+
 %define STRING_TABLE(TYPE, SIZE_FIELD)
     %typemap(in,numinputs=0) TYPE** (TYPE *temp = 0)
         "$1 = &temp;"
@@ -309,7 +329,7 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
  */
 %typemap(argout) double *OUT_ARRAY
 {
-    if ( result == TA_SUCCESS && outNbElement > 0) {
+    if ( result == TA_SUCCESS ) {
         int idx;
         PyObject *list = PyList_New(outNbElement);
 
@@ -323,7 +343,7 @@ static int convert_darray(PyObject *input, double *ptr, int size) {
 
 %typemap(argout) int *OUT_ARRAY
 {
-    if ( result == TA_SUCCESS && outNbElement > 0) {
+    if ( result == TA_SUCCESS ) {
         int idx;
         PyObject *list = PyList_New(outNbElement);
 

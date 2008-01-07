@@ -1,7 +1,5 @@
-# MSVC makefile for building a TaLib Python module (.py and .dll)
+# MSVC makefile for building a TaLib Python module (.py and .pyd)
 # CMR (commandline multitheraded release only)
-# Handmade (experimental)
-#
 # Tested with SWIG v1.3.33, Python v2.5.1, MSVS2005
 
 PYTHONDIR  = c:\Python25 # !!! maybe you must change it !!!
@@ -9,9 +7,7 @@ TOPDIR     = ..\..\..\..
 TEMPDIR    = $(TOPDIR)\temp\python\wrap
 TARGETDIR  = $(TOPDIR)\lib\python
 INSTDIR    = $(PYTHONDIR)\Lib\site-packages
-#INTERFACE  = $(TOPDIR)\src\interface\ta_libc.python2.swg # not standard indterface: use exceptions, not return value
 INTERFACE  = $(TOPDIR)\src\interface\ta_libc.swg
-
 
 CC         = cl
 LINK       = link
