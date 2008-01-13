@@ -1469,7 +1469,7 @@ LPXLOPER doTACall( char *funcName, XlfOper *params, int nbParam )
        outIdx += outNbElement;
     }
 
-    while( outIdx < excelArraySize )
+    while( outIdx < outputExcelSize )
        outputExcel[outIdx++] = nanValue;
 
     #if defined( DOWN_UP_CELL_ORDER )
