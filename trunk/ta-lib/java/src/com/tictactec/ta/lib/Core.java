@@ -1,4 +1,4 @@
-/* TA-LIB Copyright (c) 1999-2007, Mario Fortier
+/* TA-LIB Copyright (c) 1999-2008, Mario Fortier
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or
@@ -244,12 +244,12 @@ public class Core {
          {
             tempReal = 4*(inHigh[i]-inLow[i])/tempReal;
             tempBuffer1[j] = inHigh[i]*(1+tempReal);
-            tempBuffer2[j] = inHigh[i]*(1-tempReal);
+            tempBuffer2[j] = inLow[i]*(1-tempReal);
          }
          else
          {
             tempBuffer1[j] = inHigh[i];
-            tempBuffer2[j] = inHigh[i];
+            tempBuffer2[j] = inLow[i];
          }
       }
       retCode = sma ( startIdx, endIdx, inClose,
@@ -332,12 +332,12 @@ public class Core {
          {
             tempReal = 4*(inHigh[i]-inLow[i])/tempReal;
             tempBuffer1[j] = inHigh[i]*(1+tempReal);
-            tempBuffer2[j] = inHigh[i]*(1-tempReal);
+            tempBuffer2[j] = inLow[i]*(1-tempReal);
          }
          else
          {
             tempBuffer1[j] = inHigh[i];
-            tempBuffer2[j] = inHigh[i];
+            tempBuffer2[j] = inLow[i];
          }
       }
       retCode = sma ( startIdx, endIdx, inClose,
