@@ -144,7 +144,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="..\..\..\c\include,..\..\..\c\src\ta_abstract,..\..\..\c\src\ta_common,.."
-				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS;_USRDLL"
+				PreprocessorDefinitions="NDEBUG;WIN32;_WINDOWS;_USRDLL;DOWN_UP_CELL_ORDER"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
