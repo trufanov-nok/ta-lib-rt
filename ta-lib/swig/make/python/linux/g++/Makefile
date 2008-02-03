@@ -24,7 +24,7 @@ endif
 
 CC         = gcc
 LDFLAGS    = -shared -fPIC
-LDLIBS     = -lpthread -lcurl
+LDLIBS     = -lpthread
 
 all: $(TOPDIR)/lib/python/_TaLib.so $(TOPDIR)/lib/python/TaLib.py
 
