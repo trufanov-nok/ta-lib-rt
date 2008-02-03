@@ -1,8 +1,5 @@
 # makefile for building a Python ta_lib.py module
-# CMR (commandline multitheraded release only)
-# Handmade (experimental)
-#
-# Tested with SWIG v1.3.24, Python v2.3.5
+# CMR (commandline multithreaded release only)
 
 TOPDIR=../../../..
 WRAPDIR=$(TOPDIR)/temp/python/wrap
@@ -24,7 +21,7 @@ endif
 
 CC         = gcc
 LDFLAGS    = -shared -fPIC
-LDLIBS     = -lpthread
+LDLIBS     =
 
 all: $(TOPDIR)/lib/python/_TaLib.so $(TOPDIR)/lib/python/TaLib.py
 
