@@ -1,28 +1,16 @@
-Version 0.4 (September 2007)
+Version 0.5 (February 2008)
 
 New Features
 ============
-- Java TA-Abstract interface
-- Moving Average with Variable Periods (MAVP)
-- UpperLimit/LowerLimit flags for BBANDS.
-- Vector Trigonometric Functions: COS, SIN, TAN, 
-  COSH, SINH, TANH, ACOS, ASIN, ATAN
-- Vector Arithmetic Functions: ADD, DIV, SUB, MULT
-- Other Vector Functions: CEIL, FLOOR, EXP, SQRT, LN, LOG10
+- New TA_ACCBANDS
+- VS2005 makefile for SWIG Python interface.
+- MacOS makefile for SWIG Perl interface.
 
 Fixes
 =====
-#1656623 : TA_FUNC_FLG_OVERLAP on MININDEX, MAXINDEX and MINMAXINDEX
-#1660327 : "A parameter is out of range" problem with Excel 
-#1727704 : MFI logic bug when no price movement
-
-Other Changes
-=============
-- Comment clean-up for parameter ranges of internal functions.
-- Mac OS X : xcode and makefiles fixes.
-- Linux: Better Perl library detection
-- Solve warnings for Intel C++ compiler.
-- Automatic benchmarking by ta_regtest (WIN32 only).
+#1870200 : Fix to Excel for #N/A rules.
+Fix Linux RPM to make sure 64-bits lib installed in right dir.
+Removed -lcurl and -lpthread from Python SWIG Makefile
 
 Thanks to all contributors.
 
