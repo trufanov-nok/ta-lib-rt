@@ -18,7 +18,7 @@ cases, those objectives were conflicting; then the Perl way took precedence
 over being literally identical to the TA-LIB C way.
 
 Although SWIG is capable of generating wrappers to many languages, makefiles
-in this directory tree support Perl only.  Taking Perl as example, one can
+in this directory tree support Perl and Python only.  Taking these as examples, one can
 extend it to other laungages, if needed.
 
 First Thing
@@ -30,8 +30,8 @@ jump to the section "Using TA-Lib in Perl".
 Others will need to build their own binaries. Follow the step starting 
 with the "Installation" section.
 
-Installation
-============
+SWIG Installation
+==================
 To build the wrapper, you need to have SWIG installed at your system. Get it
 from http://www.swig.org.  The swig executable must be present on your search
 path. Verify it at command prompt:
@@ -41,6 +41,16 @@ This project is tested with SWIG version 1.3.21. It should work also with
 higher versions within the 1.3.x familly.  If you have a lower SWIG version, 
 better upgrade.
 
+Python Installation
+===================
+The interface was tested with Pyton v2.3.5, v24 adn v2.5
+Will likely work with newer version.
+
+You must have the Python source code installed, else you
+will get compilation error on a missing "Python.h" file.
+
+Perl Installation
+=================
 Obviously, you need also perl installed at your system (Perl5).  The project
 is tested with perl v5.6.1 and v5.8.4.  It should work with newer perl
 releases as well.
