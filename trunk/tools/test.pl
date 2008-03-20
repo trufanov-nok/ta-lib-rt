@@ -1,6 +1,6 @@
 #!/usr/perl/bin
 
-# This script performs an extensive number of tests for TA-Lib.
+# This script performs an extensive clean-up, code generation and tests for TA-Lib.
 # 
 # It builds multiple variant of the library and runs ta_regtest for each.
 # 

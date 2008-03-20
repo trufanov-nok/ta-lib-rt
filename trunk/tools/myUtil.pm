@@ -7,7 +7,7 @@ use base 'Exporter';
 use Cwd;
 use userSetup; # For user specific path/URL
 
-our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile createWorkdir removeAllBinFile testExcel testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage getReleasedir getLogdir getTempdir getWorkdir getSVNRoot );
+our @EXPORT  = qw(removeFile execProg execProgForce libversion removeAllTempFile createWorkdir removeAllBinFile testExcel testBorland testMSVC testGCC testPerl buildMSVC buildBorland removeBinFromPackage getReleasedir getLogdir getTempdir getWorkdir getSVNRoot replaceLine);
 
 my $workdir = "";
 my $userdir = "";
@@ -608,6 +608,13 @@ sub testGCC
    {
       testBin($_[0],$_[2]);
    }
+}
+
+# Usage replaceLine(f,x,y)
+# Open file f, search for the first line containing x and replace it with y
+# 
+sub replaceLine
+{
 }
 
 1;
