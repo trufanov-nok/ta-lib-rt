@@ -57,6 +57,15 @@ sub Main
 
    if( $fastOption eq 0 )
    {
+      # Update version info in some files.
+      replaceLine( $root_dir."ta-lib\\c\\ta-lib.spec.in", "define ta_ver", "%define ta_ver ".$versionSuffix );
+      replaceLine( $root_dir."ta-lib\\swig\\src\\interface\\perl.pm", "VERSION =", "our \$VERSION = v".$versionSuffix.";" );
+      replaceLine( $root_dir."ta-lib\\swig\\src\\tools\\test_perl\\ta_common.t", "use Finance::", "use Finance::TA v".$versionSuffix.";" );   
+      replaceLine( $root_dir."ta-lib\\swig\\src\\tools\\test_perl\\ta_abstract.t", "use Finance::", "use Finance::TA v".$versionSuffix.";" );   
+      replaceLine( $root_dir."ta-lib\\swig\\src\\tools\\test_perl\\ta_defs.t", "use Finance::", "use Finance::TA v".$versionSuffix.";" );   
+      replaceLine( $root_dir."ta-lib\\swig\\src\\tools\\test_perl\\ta_func.t", "use Finance::", "use Finance::TA v".$versionSuffix.";" );
+
+	   
       removeAllTempFile($workdir."ta-lib\\");
       removeAllBinFile($workdir."ta-lib\\", 0);
 
@@ -108,6 +117,7 @@ sub Main
 
    # Check for warnings.
    execProgForce( $workdir."log\\",  'find "arning" *.txt' );
+
 
    # Clean-up everything because usually the test are followed
    # with a sync with the remote SVN repository.

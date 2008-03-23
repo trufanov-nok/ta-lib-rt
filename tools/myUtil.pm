@@ -611,10 +611,66 @@ sub testGCC
 }
 
 # Usage replaceLine(f,x,y)
-# Open file f, search for the first line containing x and replace it with y
+# Open file f, search for the first line containing x and replace 
+# the whole line it with y
 # 
+# Leave the file untouched if nto found.
 sub replaceLine
 {
+  my $f = $_[0];
+  my $x = $_[1];
+  my $y = $_[2];
+  my $line;
+
+  open(FILE, $f) or die("Could not open [".$f."].");
+  my @lines = <FILE>;
+  close(FILE);
+
+  # Check if pattern exists and line different.
+  my $found = 0;
+  my $same = 0;
+
+  foreach $line (@lines) 
+  {
+    chomp($line);
+    if( $line =~ $x )
+    {
+       if( $found eq 0 )
+       {       
+          $found = 1;
+	  if( $line eq $y )
+	  {
+	    $same = 1;
+	  }
+       }
+    }
+  }
+
+  if( ($found eq 1) and ($same eq 0) )
+  {
+    open(FILE, ">".$f) or die ("Could not open for writing [".$f."]");
+    foreach $line (@lines) 
+    {
+      chomp($line);
+      if( $line =~ $x )
+      {
+         print FILE $y."\n";
+      }
+      else
+      {
+         print FILE $line."\n";
+      }
+    }
+    close(FILE);
+  }
+  else
+  {
+     if( $found eq 0 )
+     {
+        die "Could not find [".$x."] in [".$f."]";
+     }
+  }
 }
+
 
 1;
