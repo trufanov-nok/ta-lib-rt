@@ -522,7 +522,7 @@ sub testPerl
    my $base       = $_[0];
    my $log_path   = $_[1];
 	
-   my $a = $base."swig\\ide\\vs2005\\perl";
+   my $a = $base."swig\\ide\\vs2008\\perl";
    my $b = "msbuild perl.sln /t:clean >\"".&getWorkdir()."\\log\\win_ta_lib_perl.txt\"";
    execProg( $a, $b );
    $b = "msbuild perl.sln >\"".&getWorkdir()."\\log\\win_ta_lib_perl.txt\"";
