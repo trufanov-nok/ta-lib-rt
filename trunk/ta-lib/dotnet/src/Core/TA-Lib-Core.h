@@ -59,12 +59,25 @@ namespace TicTacTec
 	   namespace Library
 	   {
           #if defined( USE_SUBARRAY )
-		   public ref class SubArray sealed
+
+		   // Abstration of a single dimension array.
+		   //
+		   // The concrete implementation might be a sub-section of 
+		   // a 1D or 2D array.
+		   public ref class SubArray 
+           {
+		   public:
+			   property double default[int] { 
+		          public:
+					  virtual double get(int) abstract; 
+					  virtual void set(int,double) abstract; 
+			   }
+           };
+
+		   public ref class SubArrayFrom1D : SubArray
 		   {
 		   public:
-				cli::array<double>^ mDataArray;
-				int mOffset;
-				SubArray( cli::array<double>^ dataArray, int offset )
+				SubArrayFrom1D( cli::array<double>^ dataArray, int offset )
 				{
 				   mDataArray = dataArray;
 				   mOffset = offset;
@@ -73,17 +86,53 @@ namespace TicTacTec
 			    property double default[int]
 				{
 				public:
-					double get(int offset)
+					virtual double get(int offset) override 
 					{
 						return mDataArray[mOffset+offset];
 					}    
-
-					/*
-					void set(String^ s, int age)
+					virtual void set(int offset, double value ) override
 					{
-						h->Add(s,age);
-					}*/
-				}				   
+						mDataArray[mOffset+offset] = value;
+					} 					
+				}
+			private:
+				cli::array<double>^ mDataArray;				
+				int mOffset;
+		   };
+
+		   // Allows to access a 2D array as a SubArray.
+		   //
+		   // One of the dimension is made fix at construction time.
+		   //
+		   // The dimension provided in the constructor is 'indice2'
+		   // when accessing the array as [indice1,indice2].           
+		   public ref class SubArrayFrom2D : public SubArray
+		   {
+		   public:								
+				SubArrayFrom2D( cli::array<double,2>^ dataArray, int offset, int dimension )
+				{
+				   mDataArray = dataArray;
+				   mOffset = offset;
+				   mDimension  = dimension;
+				}
+
+			    property double default[int]
+				{
+				public:
+					virtual double get(int offset) override
+					{
+						return mDataArray[mOffset+offset,mDimension];
+					}    
+					virtual void set(int offset, double value ) override
+					{
+						mDataArray[mOffset+offset,mDimension] = value;
+					} 					
+				}
+
+		   private:
+				int mOffset;
+				int mDimension;
+                cli::array<double,2>^ mDataArray;
 		   };
           #endif
 
