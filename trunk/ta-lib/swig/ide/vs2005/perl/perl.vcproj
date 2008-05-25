@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="perl"
 	ProjectGUID="{C0E4CC9C-8719-4FDB-8B7B-40456BD7EEEB}"
+	RootNamespace="perl"
 	>
 	<Platforms>
 		<Platform
@@ -25,7 +26,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="echo In order to function correctly, please ensure the following environment variables are correctly set:&#x0D;&#x0A;echo PERL5_INCLUDE: %PERL5_INCLUDE%&#x0D;&#x0A;echo PERL5_LIB: %PERL5_LIB%&#x0D;&#x0A;echo Make also sure that swig and perl are on search path:&#x0D;&#x0A;echo %PATH%&#x0D;&#x0A;echo on&#x0D;&#x0A;swig -perl -module &quot;Finance::TA&quot; -proxy -Fmicrosoft -o ..\..\..\temp\perl\wrap\$(InputName)_wrap.c -I..\..\..\..\c\include -I$(InputDir) $(InputPath)&#x0D;&#x0A;perl -pe &quot;s/^\x25(OWNER|ITERATORS)/our \x25\1/&quot; ..\..\..\temp\perl\wrap\TA.pm &gt;..\..\..\lib\perl\Finance\TA.pm&#x0D;&#x0A;type ..\..\..\src\interface\perl.pm &gt;&gt;..\..\..\lib\perl\Finance\TA.pm&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
