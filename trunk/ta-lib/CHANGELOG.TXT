@@ -1,10 +1,11 @@
-Version 0.5 (February 2008)
+Version 0.5 (Summer 2008)
 
 New Features
 ============
 - New TA_ACCBANDS
 - VS2005 makefile for SWIG Python interface.
 - MacOS makefile for SWIG Perl interface.
+- Visual Studio 2008 support
 
 Fixes
 =====
