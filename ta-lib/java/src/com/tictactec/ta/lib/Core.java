@@ -11876,6 +11876,7 @@ public class Core {
       int today, lookbackTotal, unstablePeriod, i;
       double prevGain, prevLoss, prevValue, savePrevValue;
       double tempValue1, tempValue2, tempValue3, tempValue4;
+      int mmmixi, mmmixdestIdx, mmmixsrcIdx ;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -11897,7 +11898,7 @@ public class Core {
          outBegIdx.value = startIdx;
          i = (endIdx-startIdx)+1;
          outNBElement.value = i;
-         System.arraycopy(inReal,startIdx,outReal,0,i) ;
+         { for( mmmixi=0, mmmixdestIdx=0, mmmixsrcIdx=startIdx; mmmixi < i; mmmixi++, mmmixdestIdx++, mmmixsrcIdx++ ) { outReal[mmmixdestIdx] = inReal[mmmixsrcIdx]; } } ;
          return RetCode.Success ;
       }
       today = startIdx-lookbackTotal;
@@ -20705,6 +20706,7 @@ public class Core {
       int today, lookbackTotal, unstablePeriod, i;
       double prevGain, prevLoss, prevValue, savePrevValue;
       double tempValue1, tempValue2;
+      int mmmixi, mmmixdestIdx, mmmixsrcIdx ;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -20726,7 +20728,7 @@ public class Core {
          outBegIdx.value = startIdx;
          i = (endIdx-startIdx)+1;
          outNBElement.value = i;
-         System.arraycopy(inReal,startIdx,outReal,0,i) ;
+         { for( mmmixi=0, mmmixdestIdx=0, mmmixsrcIdx=startIdx; mmmixi < i; mmmixi++, mmmixdestIdx++, mmmixsrcIdx++ ) { outReal[mmmixdestIdx] = inReal[mmmixsrcIdx]; } } ;
          return RetCode.Success ;
       }
       today = startIdx-lookbackTotal;
@@ -24967,6 +24969,7 @@ public class Core {
       int inIdx, outIdx, i, trailingIdx, divider;
       double periodSum, periodSub, tempReal, trailingValue;
       int lookbackTotal;
+      int mmmixi, mmmixdestIdx, mmmixsrcIdx ;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -24988,7 +24991,7 @@ public class Core {
       {
          outBegIdx.value = startIdx;
          outNBElement.value = endIdx-startIdx+1;
-         System.arraycopy(inReal,startIdx,outReal,0,(int)outNBElement.value) ;
+         { for( mmmixi=0, mmmixdestIdx=0, mmmixsrcIdx=startIdx; mmmixi < (int) outNBElement.value ; mmmixi++, mmmixdestIdx++, mmmixsrcIdx++ ) { outReal[mmmixdestIdx] = inReal[mmmixsrcIdx]; } } ;
          return RetCode.Success ;
       }
       divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
