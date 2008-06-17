@@ -60,7 +60,7 @@ namespace TicTacTec
 	   {
           #if defined( USE_SUBARRAY )
 
-		   // Abstration of a single dimension array of double.
+		   // Abstration of a single dimension array.
 		   //		   
 		   // The concrete implementation might be a sub-section of 
 		   // a 1D or 2D array and can even be of a different
@@ -68,6 +68,8 @@ namespace TicTacTec
 		   generic<typename T> public ref class SubArray abstract
            {
 		   public:
+
+			   // Array like interface.
 			   property T default[int] { 
 		          public:
 					  virtual T get(int) abstract; 
@@ -81,9 +83,6 @@ namespace TicTacTec
 					   dest[destIndex] = source[sourceIndex];
 				   }
 			   }
-
-               //SubArray<T>() {}
-			   //SubArray<T>(const SubArray<T>^) {}
            };
 
 		   generic<typename T> public ref class SubArrayFrom1D : public SubArray<T>
@@ -116,6 +115,171 @@ namespace TicTacTec
 			    cli::array<T>^ mDataArray;
 		   };
 
+		   // Allows to access a 2D array as a SubArray.
+		   //
+		   // One of the dimension is made fix at construction time.
+		   //
+		   // The dimension provided in the constructor is 'indice2'
+		   // when accessing the array as [indice1,indice2].           
+		   generic<typename T> public ref class SubArrayFrom2D : public SubArray<T>
+		   {
+		   public:								
+				SubArrayFrom2D<T>( cli::array<T,2>^ dataArray, int offset, int dimension )
+				{
+				   mDataArray = dataArray;
+				   mOffset = offset;
+				   mDimension  = dimension;
+				}
+
+			   SubArrayFrom2D<T>() {}
+			   SubArrayFrom2D<T>(const SubArrayFrom2D<T>^) {}
+
+			    property T default[int]
+				{
+				public:
+					virtual T get(int offset) override
+					{
+						return mDataArray[mOffset+offset,mDimension];
+					}    
+					virtual void set(int offset, T value ) override
+					{
+						mDataArray[mOffset+offset,mDimension] = value;
+					} 					
+				}
+
+		   private:
+				int mOffset;
+				int mDimension;
+                cli::array<T,2>^ mDataArray;
+		   };
+
+           // Allows to transform any 2D array of objects into a SubArray<T>.		   
+/*
+		   generic<typename T> where T:SubArray<System::Object^>
+		   public ref class SubArrayToDouble : public SubArray<double>
+		   {
+           public:
+			    SubArrayToDouble<T>( T subArray )
+				{
+					mSubArray = subArray;
+				}
+
+			    SubArrayToDouble<T>() {}
+			    SubArrayToDouble<T>(const SubArrayToDouble<T>^) {}
+
+			    property double default[int]
+				{
+				public:
+					virtual double get(int offset) override 
+					{
+						return mSubArray[offset];
+					}    
+					virtual void set(int offset, double value ) override
+					{
+						mSubArray[offset] = safe_cast<System::Object>(value);
+					} 					
+				}
+
+			private:
+				T mSubArray;				
+		   };*/
+
+//where T:SubArray<System::Object^>
+		   generic<typename T>  public ref class SubArrayFrom2DObject : public SubArray<T>		   
+		   {
+	       public:
+			    SubArrayFrom2DObject<T>( cli::array<System::Object^,2>^ dataArray, int offset, int dimension )
+				{
+				   mDataArray = dataArray;
+				   mOffset = offset;
+				   mDimension  = dimension;
+				}
+
+			   SubArrayFrom2DObject<T>() {}
+			   SubArrayFrom2DObject<T>(const SubArrayFrom2DObject<T>^) {}
+
+			    property T default[int]
+				{
+				public:
+					virtual T get(int offset) override
+					{
+						return safe_cast<T>(mDataArray[mOffset+offset,mDimension]);
+					}    
+					virtual void set(int offset, T value ) override
+					{
+						mDataArray[mOffset+offset,mDimension] = (T)value;
+					} 					
+				}
+
+		   private:
+				int mOffset;
+				int mDimension;                
+				cli::array<System::Object^,2>^ mDataArray;
+		   };
+
+
+		   generic<typename T>  public ref class SubArrayFrom1DObject : public SubArray<T>		   
+		   {
+	       public:
+			    SubArrayFrom1DObject<T>( cli::array<System::Object^>^ dataArray, int offset )
+				{
+				   mDataArray = dataArray;
+				   mOffset = offset;				   
+				}
+
+			   SubArrayFrom1DObject<T>() {}
+			   SubArrayFrom1DObject<T>(const SubArrayFrom1DObject<T>^) {}
+
+			    property T default[int]
+				{
+				public:
+					virtual T get(int offset) override
+					{
+						return safe_cast<T>(mDataArray[mOffset+offset]);
+					}    
+					virtual void set(int offset, T value ) override
+					{
+						mDataArray[mOffset+offset] = (T)value;
+					} 					
+				}
+
+		   private:
+				int mOffset;				
+				cli::array<System::Object^>^ mDataArray;
+		   };
+
+
+		   // Allows to transform a SubArrayFrom2D<Object^> into a SubArray<double> 
+		   // without copy (cast on the fly).
+/*
+		   public ref class SubArrayFrom2DObjectToDouble : public SubArray<double>
+		   {
+		   public:
+			   SubArrayFrom2DObjectToDouble( SubArrayFrom2D<System::Object^>^ subArray )
+				{
+					mSubArray = subArray;
+				}
+
+			    SubArrayFrom2DObjectToDouble() {}
+			    SubArrayFrom2DObjectToDouble(const SubArrayFrom2DObjectToDouble^) {}
+
+			    property double default[int]
+				{
+				public:
+					virtual double get(int offset) override 
+					{
+						return (double)mSubArray[offset];
+					}    
+					virtual void set(int offset, double value ) override
+					{
+						mSubArray[offset] = (double)value;
+					} 					
+				}
+
+			private:
+				SubArrayFrom2D<System::Object^>^ mSubArray;				
+		   };*/
+
 		   // Allows to transform a SubArray<float> into a SubArray<double> without copy
 		   // (cast on the fly).
 		   public ref class SubArrayFloatToDouble : public SubArray<double>
@@ -146,43 +310,6 @@ namespace TicTacTec
 				SubArray<float>^ mSubArray;				
 		   };
 
-		   // Allows to access a 2D array as a SubArray.
-		   //
-		   // One of the dimension is made fix at construction time.
-		   //
-		   // The dimension provided in the constructor is 'indice2'
-		   // when accessing the array as [indice1,indice2].           
-		   generic<typename T> ref class SubArrayFrom2D : public SubArray<T>
-		   {
-		   public:								
-				SubArrayFrom2D<T>( cli::array<T,2>^ dataArray, int offset, int dimension )
-				{
-				   mDataArray = dataArray;
-				   mOffset = offset;
-				   mDimension  = dimension;
-				}
-
-			   SubArrayFrom2D<T>() {}
-			   SubArrayFrom2D<T>(const SubArrayFrom1D<T>^) {}
-
-			    property T default[int]
-				{
-				public:
-					virtual T get(int offset) override
-					{
-						return mDataArray[mOffset+offset,mDimension];
-					}    
-					virtual void set(int offset, T value ) override
-					{
-						mDataArray[mOffset+offset,mDimension] = value;
-					} 					
-				}
-
-		   private:
-				int mOffset;
-				int mDimension;
-                cli::array<T,2>^ mDataArray;
-		   };
           #endif
 
 		  public ref class Core abstract sealed
