@@ -93,7 +93,7 @@ import com.tictactec.ta.lib.meta.annotation.RealRange;
  * 
  * @author Richard Gomes
  */
-public class CoreMetaData implements Comparable<CoreMetaData> {
+public class CoreMetaData implements Comparable<CoreMetaData>, Cloneable {
     
     private static transient final String CONTACT_DEVELOPERS = "Contact developers";
     private static transient final String INDEX_OUT_OF_BOUNDS = "Index out of bounds";
@@ -119,6 +119,9 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
     private transient Object callInputParams[] = null;
     private transient Object callOutputParams[] = null;
     private transient Object callOptInputParams[] = null;
+    
+    private transient FuncInfo funcInfo;
+    private transient Annotation[][] parameterAnnotations;
     
     
     protected CoreMetaData() {
@@ -230,7 +233,23 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
      * @throws NoSuchMethodException
      */
     static public CoreMetaData getInstance(final String name) throws NoSuchMethodException {
-        return getFuncHandle(name);
+        return getFuncHandle(name).clone();
+    }
+    
+    @Override
+    protected CoreMetaData clone() {
+        try {
+			getFuncInfo();
+			getParameterAnnotations();
+            CoreMetaData clone = (CoreMetaData) super.clone();
+            callInputParams = null;
+            callOutputParams = null;
+            callOptInputParams = null;
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            //we implement Cloneable interface, this exception cannot happen
+            return null;
+        }
     }
 
     /**
@@ -240,14 +259,17 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
      * @throws IncompleteAnnotationException
      */
     public FuncInfo getFuncInfo() throws IncompleteAnnotationException {
-        return getFuncInfo(function);
+        if (funcInfo == null) {
+            funcInfo = getFuncInfo(function);
+        }
+        return funcInfo;
     }
 
     private Annotation getParameterInfo(final int paramIndex, Class<? extends Object> paramAnnotation) {
         if (paramIndex < 0)
             throw new IllegalArgumentException(INDEX_OUT_OF_BOUNDS);
         int i = 0;
-        for (Annotation[] annArray : function.getParameterAnnotations()) {
+        for (Annotation[] annArray : getParameterAnnotations()) {
             for (Annotation ann : annArray) {
                 if ((ann.annotationType() == paramAnnotation) && (paramIndex == i++)) {
                     return ann;
@@ -256,12 +278,19 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
         }
         return null;
     }
+    
+    private Annotation[][] getParameterAnnotations() {
+        if (parameterAnnotations == null) {
+            parameterAnnotations = function.getParameterAnnotations();
+        }
+        return parameterAnnotations;
+    }
 
     private Annotation getParameterInfo(final int paramIndex, Class<? extends Object> paramAnnotation, Class<? extends Object> paramExtraAnnotation) {
         if (paramIndex < 0)
             throw new IllegalArgumentException(INDEX_OUT_OF_BOUNDS);
         int i = 0;
-        for (Annotation[] annArray : function.getParameterAnnotations()) {
+        for (Annotation[] annArray : getParameterAnnotations()) {
             for (Annotation ann : annArray) {
                 if ((ann.annotationType() == paramAnnotation) && (paramIndex == i++)) {
                     for (Annotation annExt : annArray) {
@@ -369,11 +398,25 @@ public class CoreMetaData implements Comparable<CoreMetaData> {
         if (param==null) throw new InternalError(CONTACT_DEVELOPERS);
         if (param.type()==OptInputParameterType.TA_OptInput_IntegerList) {
             IntegerList list = getOptInputIntegerList(paramIndex);
-            for (int entry : list.value()) {
-                if (value==entry) {
-                    if (callOptInputParams==null) callOptInputParams = new Object[getFuncInfo().nbOptInput()];
-                    callOptInputParams[paramIndex] = value;
-                    return;
+            int[] values = list.value();
+            for (int i = 0; i < values.length; i++) {
+                if (value==values[i]) {
+                    String strValue = list.string()[i];
+                    
+                    // FIXME: The correct implementation should ...
+                    // expose a field in @IntegerList informing
+                    // which Class should be taken for introspection.
+                    // Currently, all IntegerList instances implicitly depend on MAType class
+                    // but it may change some day.
+                    
+                    MAType[] fields = MAType.values();
+                    for (MAType maType : fields) {
+                        if (maType.name().toUpperCase().equals(strValue.toUpperCase())) {
+                            if (callOptInputParams==null) callOptInputParams = new Object[getFuncInfo().nbOptInput()];
+                            callOptInputParams[paramIndex] = maType;
+                            return;
+                        }
+                    }
                 }
             }
         } else if (param.type()==OptInputParameterType.TA_OptInput_IntegerRange) {
