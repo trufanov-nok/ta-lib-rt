@@ -5567,14 +5567,21 @@ public class Core {
       do
       {
          if( ( ( inClose[i] >= inOpen[i] ? 1 : -1 ) == 1 && ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) == -1 &&
-            inClose[i] > inOpen[i-1] && inOpen[i] < inClose[i-1]
+            ( ( inClose[i] >= inOpen[i-1] && inOpen[i] < inClose[i-1] ) ||
+            ( inClose[i] > inOpen[i-1] && inOpen[i] <= inClose[i-1] )
+            )
             )
             ||
             ( ( inClose[i] >= inOpen[i] ? 1 : -1 ) == -1 && ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) == 1 &&
-            inOpen[i] > inClose[i-1] && inClose[i] < inOpen[i-1]
+            ( ( inOpen[i] >= inClose[i-1] && inClose[i] < inOpen[i-1] ) ||
+            ( inOpen[i] > inClose[i-1] && inClose[i] <= inOpen[i-1] )
             )
             )
+            )
+            if( inOpen[i] != inClose[i-1] && inClose[i] != inOpen[i-1] )
             outInteger[outIdx++] = ( inClose[i] >= inOpen[i] ? 1 : -1 ) * 100;
+         else
+            outInteger[outIdx++] = ( inClose[i] >= inOpen[i] ? 1 : -1 ) * 80;
          else
             outInteger[outIdx++] = 0;
          i++;
@@ -5612,14 +5619,21 @@ public class Core {
       do
       {
          if( ( ( inClose[i] >= inOpen[i] ? 1 : -1 ) == 1 && ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) == -1 &&
-            inClose[i] > inOpen[i-1] && inOpen[i] < inClose[i-1]
+            ( ( inClose[i] >= inOpen[i-1] && inOpen[i] < inClose[i-1] ) ||
+            ( inClose[i] > inOpen[i-1] && inOpen[i] <= inClose[i-1] )
+            )
             )
             ||
             ( ( inClose[i] >= inOpen[i] ? 1 : -1 ) == -1 && ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) == 1 &&
-            inOpen[i] > inClose[i-1] && inClose[i] < inOpen[i-1]
+            ( ( inOpen[i] >= inClose[i-1] && inClose[i] < inOpen[i-1] ) ||
+            ( inOpen[i] > inClose[i-1] && inClose[i] <= inOpen[i-1] )
             )
             )
+            )
+            if( inOpen[i] != inClose[i-1] && inClose[i] != inOpen[i-1] )
             outInteger[outIdx++] = ( inClose[i] >= inOpen[i] ? 1 : -1 ) * 100;
+         else
+            outInteger[outIdx++] = ( inClose[i] >= inOpen[i] ? 1 : -1 ) * 80;
          else
             outInteger[outIdx++] = 0;
          i++;
@@ -6608,11 +6622,19 @@ public class Core {
       do
       {
          if( ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? BodyLongPeriodTotal / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i-1] - inLow[i-1] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) ) + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            ( Math.abs ( inClose[i] - inOpen[i] ) ) <= ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? BodyShortPeriodTotal / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i] - inLow[i] ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) ) + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) < (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
+            ( Math.abs ( inClose[i] - inOpen[i] ) ) <= ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? BodyShortPeriodTotal / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i] - inLow[i] ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) ) + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
+            )
+            if ( (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) < (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
             (((inClose[i]) < (inOpen[i])) ? (inClose[i]) : (inOpen[i])) > (((inClose[i-1]) < (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))
             )
             outInteger[outIdx++] = - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) * 100;
+         else
+            if ( (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) <= (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
+            (((inClose[i]) < (inOpen[i])) ? (inClose[i]) : (inOpen[i])) >= (((inClose[i-1]) < (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))
+            )
+            outInteger[outIdx++] = - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) * 80;
+         else
+            outInteger[outIdx++] = 0;
          else
             outInteger[outIdx++] = 0;
          BodyLongPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i-1] - inLow[i-1] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) ) + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] ) : 0 ) ) ) - ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[BodyLongTrailingIdx] - inOpen[BodyLongTrailingIdx] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[BodyLongTrailingIdx] - inLow[BodyLongTrailingIdx] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[BodyLongTrailingIdx] - ( inClose[BodyLongTrailingIdx] >= inOpen[BodyLongTrailingIdx] ? inClose[BodyLongTrailingIdx] : inOpen[BodyLongTrailingIdx] ) ) + ( ( inClose[BodyLongTrailingIdx] >= inOpen[BodyLongTrailingIdx] ? inOpen[BodyLongTrailingIdx] : inClose[BodyLongTrailingIdx] ) - inLow[BodyLongTrailingIdx] ) : 0 ) ) ) ;
@@ -6669,11 +6691,19 @@ public class Core {
       do
       {
          if( ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? BodyLongPeriodTotal / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i-1] - inLow[i-1] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) ) + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            ( Math.abs ( inClose[i] - inOpen[i] ) ) <= ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? BodyShortPeriodTotal / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i] - inLow[i] ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) ) + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) < (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
+            ( Math.abs ( inClose[i] - inOpen[i] ) ) <= ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? BodyShortPeriodTotal / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i] - inLow[i] ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) ) + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
+            )
+            if ( (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) < (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
             (((inClose[i]) < (inOpen[i])) ? (inClose[i]) : (inOpen[i])) > (((inClose[i-1]) < (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))
             )
             outInteger[outIdx++] = - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) * 100;
+         else
+            if ( (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) <= (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
+            (((inClose[i]) < (inOpen[i])) ? (inClose[i]) : (inOpen[i])) >= (((inClose[i-1]) < (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))
+            )
+            outInteger[outIdx++] = - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) * 80;
+         else
+            outInteger[outIdx++] = 0;
          else
             outInteger[outIdx++] = 0;
          BodyLongPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i-1] - inLow[i-1] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) ) + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] ) : 0 ) ) ) - ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[BodyLongTrailingIdx] - inOpen[BodyLongTrailingIdx] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[BodyLongTrailingIdx] - inLow[BodyLongTrailingIdx] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[BodyLongTrailingIdx] - ( inClose[BodyLongTrailingIdx] >= inOpen[BodyLongTrailingIdx] ? inClose[BodyLongTrailingIdx] : inOpen[BodyLongTrailingIdx] ) ) + ( ( inClose[BodyLongTrailingIdx] >= inOpen[BodyLongTrailingIdx] ? inOpen[BodyLongTrailingIdx] : inClose[BodyLongTrailingIdx] ) - inLow[BodyLongTrailingIdx] ) : 0 ) ) ) ;
@@ -6735,11 +6765,18 @@ public class Core {
       do
       {
          if( ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? BodyLongPeriodTotal / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i-1] - inLow[i-1] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) ) + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            ( Math.abs ( inClose[i] - inOpen[i] ) ) <= ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) != 0.0? BodyDojiPeriodTotal / (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i] - inLow[i] ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) ) + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) < (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
+            ( Math.abs ( inClose[i] - inOpen[i] ) ) <= ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) != 0.0? BodyDojiPeriodTotal / (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i] - inLow[i] ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) ) + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) )
+            if ( (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) < (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
             (((inClose[i]) < (inOpen[i])) ? (inClose[i]) : (inOpen[i])) > (((inClose[i-1]) < (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))
             )
             outInteger[outIdx++] = - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) * 100;
+         else
+            if ( (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) <= (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
+            (((inClose[i]) < (inOpen[i])) ? (inClose[i]) : (inOpen[i])) >= (((inClose[i-1]) < (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))
+            )
+            outInteger[outIdx++] = - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) * 80;
+         else
+            outInteger[outIdx++] = 0;
          else
             outInteger[outIdx++] = 0;
          BodyLongPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i-1] - inLow[i-1] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) ) + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] ) : 0 ) ) ) - ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[BodyLongTrailingIdx] - inOpen[BodyLongTrailingIdx] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[BodyLongTrailingIdx] - inLow[BodyLongTrailingIdx] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[BodyLongTrailingIdx] - ( inClose[BodyLongTrailingIdx] >= inOpen[BodyLongTrailingIdx] ? inClose[BodyLongTrailingIdx] : inOpen[BodyLongTrailingIdx] ) ) + ( ( inClose[BodyLongTrailingIdx] >= inOpen[BodyLongTrailingIdx] ? inOpen[BodyLongTrailingIdx] : inClose[BodyLongTrailingIdx] ) - inLow[BodyLongTrailingIdx] ) : 0 ) ) ) ;
@@ -6796,11 +6833,18 @@ public class Core {
       do
       {
          if( ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? BodyLongPeriodTotal / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i-1] - inLow[i-1] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) ) + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            ( Math.abs ( inClose[i] - inOpen[i] ) ) <= ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) != 0.0? BodyDojiPeriodTotal / (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i] - inLow[i] ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) ) + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) < (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
+            ( Math.abs ( inClose[i] - inOpen[i] ) ) <= ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) != 0.0? BodyDojiPeriodTotal / (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i] - inOpen[i] ) ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i] - inLow[i] ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i] - ( inClose[i] >= inOpen[i] ? inClose[i] : inOpen[i] ) ) + ( ( inClose[i] >= inOpen[i] ? inOpen[i] : inClose[i] ) - inLow[i] ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) )
+            if ( (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) < (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
             (((inClose[i]) < (inOpen[i])) ? (inClose[i]) : (inOpen[i])) > (((inClose[i-1]) < (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))
             )
             outInteger[outIdx++] = - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) * 100;
+         else
+            if ( (((inClose[i]) > (inOpen[i])) ? (inClose[i]) : (inOpen[i])) <= (((inClose[i-1]) > (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1])) &&
+            (((inClose[i]) < (inOpen[i])) ? (inClose[i]) : (inOpen[i])) >= (((inClose[i-1]) < (inOpen[i-1])) ? (inClose[i-1]) : (inOpen[i-1]))
+            )
+            outInteger[outIdx++] = - ( inClose[i-1] >= inOpen[i-1] ? 1 : -1 ) * 80;
+         else
+            outInteger[outIdx++] = 0;
          else
             outInteger[outIdx++] = 0;
          BodyLongPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[i-1] - inOpen[i-1] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[i-1] - inLow[i-1] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[i-1] - ( inClose[i-1] >= inOpen[i-1] ? inClose[i-1] : inOpen[i-1] ) ) + ( ( inClose[i-1] >= inOpen[i-1] ? inOpen[i-1] : inClose[i-1] ) - inLow[i-1] ) : 0 ) ) ) - ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose[BodyLongTrailingIdx] - inOpen[BodyLongTrailingIdx] ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh[BodyLongTrailingIdx] - inLow[BodyLongTrailingIdx] ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh[BodyLongTrailingIdx] - ( inClose[BodyLongTrailingIdx] >= inOpen[BodyLongTrailingIdx] ? inClose[BodyLongTrailingIdx] : inOpen[BodyLongTrailingIdx] ) ) + ( ( inClose[BodyLongTrailingIdx] >= inOpen[BodyLongTrailingIdx] ? inOpen[BodyLongTrailingIdx] : inClose[BodyLongTrailingIdx] ) - inLow[BodyLongTrailingIdx] ) : 0 ) ) ) ;
