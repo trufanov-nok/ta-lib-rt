@@ -6,6 +6,8 @@ New Features
 - VS2005 makefile for SWIG Python interface.
 - MacOS makefile for SWIG Perl interface.
 - Visual Studio 2008 support
+- General fix to floating point processing for support 
+  of calculation with very small values (<0.00000001).
 
 Fixes
 =====
