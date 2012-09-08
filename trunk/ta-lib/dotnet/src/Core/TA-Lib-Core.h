@@ -1849,6 +1849,73 @@ namespace TicTacTec
          #define TA_AVGPRICE Core::AvgPrice
          #define TA_AVGPRICE_Lookback Core::AvgPriceLookback
 
+         static int AvgDevLookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode AvgDev( int    startIdx,
+                                           int    endIdx,
+                                           SubArray<double>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           SubArray<double>^  outReal );
+
+         static enum class RetCode AvgDev( int    startIdx,
+                                           int    endIdx,
+                                           SubArray<float>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           SubArray<double>^  outReal );
+
+         static enum class RetCode AvgDev( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal )
+         { return AvgDev( startIdx,  endIdx,
+                           gcnew SubArrayFrom1D<double>(inReal,0),
+               optInTimePeriod, /* From 1 to 100000 */
+              outBegIdx,
+              outNBElement,
+                 gcnew SubArrayFrom1D<double>(outReal,0) );
+         }
+         static enum class RetCode AvgDev( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal )
+         { return AvgDev( startIdx,  endIdx,
+                           gcnew SubArrayFrom1D<float>(inReal,0),
+               optInTimePeriod, /* From 1 to 100000 */
+              outBegIdx,
+              outNBElement,
+                 gcnew SubArrayFrom1D<double>(outReal,0) );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode AvgDev( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<double>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal );
+         static enum class RetCode AvgDev( int    startIdx,
+                                           int    endIdx,
+                                           cli::array<float>^ inReal,
+                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           [Out]int%    outBegIdx,
+                                           [Out]int%    outNBElement,
+                                           cli::array<double>^  outReal );
+         #endif
+
+         #define TA_AVGDEV Core::AvgDev
+         #define TA_AVGDEV_Lookback Core::AvgDevLookback
+
          static int BbandsLookback( int           optInTimePeriod, /* From 2 to 100000 */
                                   double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                                   double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
