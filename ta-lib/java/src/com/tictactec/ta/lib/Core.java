@@ -2104,6 +2104,55 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int avgDevLookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return 0;
+   }
+   public RetCode avgDev( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      outBegIdx.value = 0 ;
+      outNBElement.value = 0 ;
+      return RetCode.Success ;
+   }
+   public RetCode avgDev( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      outBegIdx.value = 0 ;
+      outNBElement.value = 0 ;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int bbandsLookback( int optInTimePeriod,
       double optInNbDevUp,
       double optInNbDevDn,

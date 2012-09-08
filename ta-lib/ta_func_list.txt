@@ -12,6 +12,7 @@ ASIN                Vector Trigonometric ASin
 ATAN                Vector Trigonometric ATan
 ATR                 Average True Range
 AVGPRICE            Average Price
+AVGDEV              Average Deviation
 BBANDS              Bollinger Bands
 BETA                Beta
 BOP                 Balance Of Power

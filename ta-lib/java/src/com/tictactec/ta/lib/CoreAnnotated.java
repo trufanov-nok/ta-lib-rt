@@ -901,6 +901,65 @@ public RetCode avgPrice(
 ); }
 
 
+public int avgDevLookback(
+        int optInTimePeriod) {
+    return super.avgDevLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "AVGDEV",
+        group = "Price Transform",
+        flags = 16777216,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 1
+)
+public RetCode avgDev(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 14,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.avgDev (
+        startIdx,
+        endIdx,
+        inReal,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int bbandsLookback(
         int optInTimePeriod,
         double optInNbDevUp,
