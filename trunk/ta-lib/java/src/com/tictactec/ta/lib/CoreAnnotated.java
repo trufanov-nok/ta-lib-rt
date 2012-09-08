@@ -933,9 +933,9 @@ public RetCode avgDev(
             @IntegerRange(
                     paramName    = "optInTimePeriod",
                     defaultValue = 14,
-                    min          = 1,
+                    min          = 2,
                     max          = 100000,
-                    suggested_start     = 1,
+                    suggested_start     = 4,
                     suggested_end       = 200,
                     suggested_increment = 1
             )

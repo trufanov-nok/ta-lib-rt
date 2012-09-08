@@ -378,7 +378,7 @@ int TA_AVGPRICE_Lookback( void );
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 1 to 100000)
+ * optInTimePeriod:(From 2 to 100000)
  *    Number of period
  * 
  * 
@@ -386,12 +386,12 @@ int TA_AVGPRICE_Lookback( void );
 TA_RetCode TA_AVGDEV( int           START_IDX,
                       int           END_IDX,
                       const double *IN_ARRAY /* inReal */,
-                      int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                      int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
                       int          *BEG_IDX,
                       int          *OUT_SIZE,
                       double       *OUT_ARRAY /* outReal */ );
 
-int TA_AVGDEV_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+int TA_AVGDEV_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 /*
