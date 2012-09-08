@@ -1849,13 +1849,13 @@ namespace TicTacTec
          #define TA_AVGPRICE Core::AvgPrice
          #define TA_AVGPRICE_Lookback Core::AvgPriceLookback
 
-         static int AvgDevLookback( int           optInTimePeriod );  /* From 1 to 100000 */
+         static int AvgDevLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
          static enum class RetCode AvgDev( int    startIdx,
                                            int    endIdx,
                                            SubArray<double>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            SubArray<double>^  outReal );
@@ -1863,7 +1863,7 @@ namespace TicTacTec
          static enum class RetCode AvgDev( int    startIdx,
                                            int    endIdx,
                                            SubArray<float>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            SubArray<double>^  outReal );
@@ -1871,13 +1871,13 @@ namespace TicTacTec
          static enum class RetCode AvgDev( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal )
          { return AvgDev( startIdx,  endIdx,
                            gcnew SubArrayFrom1D<double>(inReal,0),
-               optInTimePeriod, /* From 1 to 100000 */
+               optInTimePeriod, /* From 2 to 100000 */
               outBegIdx,
               outNBElement,
                  gcnew SubArrayFrom1D<double>(outReal,0) );
@@ -1885,13 +1885,13 @@ namespace TicTacTec
          static enum class RetCode AvgDev( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal )
          { return AvgDev( startIdx,  endIdx,
                            gcnew SubArrayFrom1D<float>(inReal,0),
-               optInTimePeriod, /* From 1 to 100000 */
+               optInTimePeriod, /* From 2 to 100000 */
               outBegIdx,
               outNBElement,
                  gcnew SubArrayFrom1D<double>(outReal,0) );
@@ -1900,14 +1900,14 @@ namespace TicTacTec
          static enum class RetCode AvgDev( int    startIdx,
                                            int    endIdx,
                                            cli::array<double>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );
          static enum class RetCode AvgDev( int    startIdx,
                                            int    endIdx,
                                            cli::array<float>^ inReal,
-                                           int           optInTimePeriod, /* From 1 to 100000 */
+                                           int           optInTimePeriod, /* From 2 to 100000 */
                                            [Out]int%    outBegIdx,
                                            [Out]int%    outNBElement,
                                            cli::array<double>^  outReal );

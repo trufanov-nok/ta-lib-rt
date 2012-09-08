@@ -2108,7 +2108,7 @@ public class Core {
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return -1;
       return 0;
    }
@@ -2126,7 +2126,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
       outNBElement.value = 0 ;
