@@ -5149,6 +5149,72 @@ public RetCode htTrendMode(
 ); }
 
 
+public int imiLookback(
+        int optInTimePeriod) {
+    return super.imiLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "IMI",
+        group = "Momentum Indicators",
+        flags = 134217728,
+        nbInput    = 2,
+        nbOptInput = 1,
+        nbOutput   = 1
+)
+public RetCode imi(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 14,
+                    min          = 2,
+                    max          = 100000,
+                    suggested_start     = 4,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.imi (
+        startIdx,
+        endIdx,
+        inReal,
+        inReal,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int kamaLookback(
         int optInTimePeriod) {
     return super.kamaLookback(
