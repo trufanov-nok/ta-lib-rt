@@ -3909,12 +3909,12 @@
 		</Flags>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
-				<Type>Double Array</Type>
-				<Name>inReal</Name>
+				<Type>Open</Type>
+				<Name>Open</Name>
 			</RequiredInputArgument>
 			<RequiredInputArgument>
-				<Type>Double Array</Type>
-				<Name>inReal</Name>
+				<Type>Close</Type>
+				<Name>Close</Name>
 			</RequiredInputArgument>
 		</RequiredInputArguments>
 		<OptionalInputArguments>

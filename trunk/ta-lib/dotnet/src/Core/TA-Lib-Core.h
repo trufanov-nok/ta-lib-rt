@@ -8481,8 +8481,8 @@ namespace TicTacTec
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
          static enum class RetCode Imi( int    startIdx,
                                         int    endIdx,
-                                        SubArray<double>^ inReal,
-                                        SubArray<double>^ inReal,
+                                        SubArray<double>^ inOpen,
+                                        SubArray<double>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
@@ -8490,8 +8490,8 @@ namespace TicTacTec
 
          static enum class RetCode Imi( int    startIdx,
                                         int    endIdx,
-                                        SubArray<float>^ inReal,
-                                        SubArray<float>^ inReal,
+                                        SubArray<float>^ inOpen,
+                                        SubArray<float>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
@@ -8499,15 +8499,15 @@ namespace TicTacTec
 
          static enum class RetCode Imi( int    startIdx,
                                         int    endIdx,
-                                        cli::array<double>^ inReal,
-                                        cli::array<double>^ inReal,
+                                        cli::array<double>^ inOpen,
+                                        cli::array<double>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal )
          { return Imi( startIdx, endIdx,
-                          gcnew SubArrayFrom1D<double>(inReal,0),
-                          gcnew SubArrayFrom1D<double>(inReal,0),
+              gcnew SubArrayFrom1D<double>(inOpen,0),
+              gcnew SubArrayFrom1D<double>(inClose,0),
               optInTimePeriod, /* From 2 to 100000 */
              outBegIdx,
              outNBElement,
@@ -8515,15 +8515,15 @@ namespace TicTacTec
          }
          static enum class RetCode Imi( int    startIdx,
                                         int    endIdx,
-                                        cli::array<float>^ inReal,
-                                        cli::array<float>^ inReal,
+                                        cli::array<float>^ inOpen,
+                                        cli::array<float>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal )
          { return Imi( startIdx, endIdx,
-                          gcnew SubArrayFrom1D<float>(inReal,0),
-                          gcnew SubArrayFrom1D<float>(inReal,0),
+              gcnew SubArrayFrom1D<float>(inOpen,0),
+              gcnew SubArrayFrom1D<float>(inClose,0),
               optInTimePeriod, /* From 2 to 100000 */
              outBegIdx,
              outNBElement,
@@ -8532,16 +8532,16 @@ namespace TicTacTec
          #elif defined( _MANAGED )
          static enum class RetCode Imi( int    startIdx,
                                         int    endIdx,
-                                        cli::array<double>^ inReal,
-                                        cli::array<double>^ inReal,
+                                        cli::array<double>^ inOpen,
+                                        cli::array<double>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,
                                         cli::array<double>^  outReal );
          static enum class RetCode Imi( int    startIdx,
                                         int    endIdx,
-                                        cli::array<float>^ inReal,
-                                        cli::array<float>^ inReal,
+                                        cli::array<float>^ inOpen,
+                                        cli::array<float>^ inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
                                         [Out]int%    outBegIdx,
                                         [Out]int%    outNBElement,

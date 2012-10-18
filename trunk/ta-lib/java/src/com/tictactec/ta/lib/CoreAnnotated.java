@@ -5158,7 +5158,7 @@ public int imiLookback(
         name  = "IMI",
         group = "Momentum Indicators",
         flags = 134217728,
-        nbInput    = 2,
+        nbInput    = 1,
         nbOptInput = 1,
         nbOutput   = 1
 )
@@ -5166,17 +5166,12 @@ public RetCode imi(
             int startIdx,
             int endIdx,
             @InputParameterInfo(
-                paramName = "inReal",
-                flags     = 0,
-                type = InputParameterType.TA_Input_Real
+                paramName = "inPriceOC",
+                flags     = 9,
+                type = InputParameterType.TA_Input_Price
             )
-            double inReal[],
-            @InputParameterInfo(
-                paramName = "inReal",
-                flags     = 0,
-                type = InputParameterType.TA_Input_Real
-            )
-            double inReal[],
+            double inOpen [],
+            double inClose [],
             @OptInputParameterInfo(
                 paramName    = "optInTimePeriod",
                 displayName  = "Time Period",
@@ -5206,8 +5201,8 @@ public RetCode imi(
     return super.imi (
         startIdx,
         endIdx,
-        inReal,
-        inReal,
+        inOpen ,
+        inClose ,
         optInTimePeriod,
         outBegIdx,
         outNBElement,
