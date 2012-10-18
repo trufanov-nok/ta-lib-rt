@@ -8476,6 +8476,81 @@ namespace TicTacTec
          #define TA_HT_TRENDMODE Core::HtTrendMode
          #define TA_HT_TRENDMODE_Lookback Core::HtTrendModeLookback
 
+         static int ImiLookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+         #if defined( _MANAGED ) && defined( USE_SUBARRAY )
+         static enum class RetCode Imi( int    startIdx,
+                                        int    endIdx,
+                                        SubArray<double>^ inReal,
+                                        SubArray<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        SubArray<double>^  outReal );
+
+         static enum class RetCode Imi( int    startIdx,
+                                        int    endIdx,
+                                        SubArray<float>^ inReal,
+                                        SubArray<float>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        SubArray<double>^  outReal );
+
+         static enum class RetCode Imi( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Imi( startIdx, endIdx,
+                          gcnew SubArrayFrom1D<double>(inReal,0),
+                          gcnew SubArrayFrom1D<double>(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+                gcnew SubArrayFrom1D<double>(outReal,0) );
+         }
+         static enum class RetCode Imi( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal,
+                                        cli::array<float>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal )
+         { return Imi( startIdx, endIdx,
+                          gcnew SubArrayFrom1D<float>(inReal,0),
+                          gcnew SubArrayFrom1D<float>(inReal,0),
+              optInTimePeriod, /* From 2 to 100000 */
+             outBegIdx,
+             outNBElement,
+                gcnew SubArrayFrom1D<double>(outReal,0) );
+         }
+         #elif defined( _MANAGED )
+         static enum class RetCode Imi( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<double>^ inReal,
+                                        cli::array<double>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         static enum class RetCode Imi( int    startIdx,
+                                        int    endIdx,
+                                        cli::array<float>^ inReal,
+                                        cli::array<float>^ inReal,
+                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        [Out]int%    outBegIdx,
+                                        [Out]int%    outNBElement,
+                                        cli::array<double>^  outReal );
+         #endif
+
+         #define TA_IMI Core::Imi
+         #define TA_IMI_Lookback Core::ImiLookback
+
          static int KamaLookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
          #if defined( _MANAGED ) && defined( USE_SUBARRAY )
