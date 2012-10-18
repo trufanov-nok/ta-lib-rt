@@ -15138,8 +15138,8 @@ public class Core {
    }
    public RetCode imi( int startIdx,
       int endIdx,
-      double inReal[],
-      double inReal[],
+      double inOpen[],
+      double inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
       MInteger outNBElement,
@@ -15159,8 +15159,8 @@ public class Core {
    }
    public RetCode imi( int startIdx,
       int endIdx,
-      float inReal[],
-      float inReal[],
+      float inOpen[],
+      float inClose[],
       int optInTimePeriod,
       MInteger outBegIdx,
       MInteger outNBElement,
