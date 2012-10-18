@@ -2110,7 +2110,7 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return -1;
-      return 0;
+      return optInTimePeriod-1;
    }
    public RetCode avgDev( int startIdx,
       int endIdx,
@@ -2120,6 +2120,7 @@ public class Core {
       MInteger outNBElement,
       double outReal[] )
    {
+      int today, outIdx, lookback;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -2128,8 +2129,34 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      outBegIdx.value = 0 ;
-      outNBElement.value = 0 ;
+      lookback = optInTimePeriod - 1;
+      if (startIdx < lookback) {
+         startIdx = lookback;
+      }
+      today = startIdx;
+      if( today > endIdx ) {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outBegIdx.value = today;
+      outIdx = 0;
+      while (today <= endIdx) {
+         double todaySum, todayDev;
+         int i;
+         todaySum = 0.0;
+         for (i = 0; i < optInTimePeriod; i++) {
+            todaySum += inReal[today-i];
+         }
+         todayDev = 0.0;
+         for (i = 0; i < optInTimePeriod; i++) {
+            todayDev += Math.abs (inReal[today-i] - todaySum/optInTimePeriod);
+         }
+         outReal[outIdx] = todayDev/optInTimePeriod;
+         outIdx++;
+         today++;
+      }
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode avgDev( int startIdx,
@@ -2140,16 +2167,43 @@ public class Core {
       MInteger outNBElement,
       double outReal[] )
    {
+      int today, outIdx, lookback;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      outBegIdx.value = 0 ;
-      outNBElement.value = 0 ;
+      lookback = optInTimePeriod - 1;
+      if (startIdx < lookback) {
+         startIdx = lookback;
+      }
+      today = startIdx;
+      if( today > endIdx ) {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outBegIdx.value = today;
+      outIdx = 0;
+      while (today <= endIdx) {
+         double todaySum, todayDev;
+         int i;
+         todaySum = 0.0;
+         for (i = 0; i < optInTimePeriod; i++) {
+            todaySum += inReal[today-i];
+         }
+         todayDev = 0.0;
+         for (i = 0; i < optInTimePeriod; i++) {
+            todayDev += Math.abs (inReal[today-i] - todaySum/optInTimePeriod);
+         }
+         outReal[outIdx] = todayDev/optInTimePeriod;
+         outIdx++;
+         today++;
+      }
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
