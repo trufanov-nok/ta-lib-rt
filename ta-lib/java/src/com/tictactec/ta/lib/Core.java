@@ -15134,7 +15134,7 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return -1;
-      return 0;
+      return optInTimePeriod + (this.unstablePeriod[FuncUnstId.Imi.ordinal()]) - 1;
    }
    public RetCode imi( int startIdx,
       int endIdx,
@@ -15145,6 +15145,7 @@ public class Core {
       MInteger outNBElement,
       double outReal[] )
    {
+      int lookback, outIdx = 0;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -15153,8 +15154,32 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      outBegIdx.value = 0 ;
-      outNBElement.value = 0 ;
+      lookback = imiLookback ( optInTimePeriod );
+      if(startIdx < lookback)
+         startIdx = lookback;
+      if( startIdx > endIdx ) {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outBegIdx.value = startIdx;
+      while (startIdx <= endIdx) {
+         double upsum = .0, downsum = .0;
+         int i;
+         for (i = startIdx - lookback; i <= startIdx; i++) {
+            double close = inClose[i];
+            double open = inOpen[i];
+            if (close > open) {
+               upsum += (close - open);
+            } else {
+               downsum += (open - close);
+            }
+            outReal[outIdx] = 100.0*(upsum/(upsum + downsum));
+         }
+         startIdx++;
+         outIdx++;
+      }
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    public RetCode imi( int startIdx,
@@ -15166,6 +15191,7 @@ public class Core {
       MInteger outNBElement,
       double outReal[] )
    {
+      int lookback, outIdx = 0;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
@@ -15174,8 +15200,32 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      outBegIdx.value = 0 ;
-      outNBElement.value = 0 ;
+      lookback = imiLookback ( optInTimePeriod );
+      if(startIdx < lookback)
+         startIdx = lookback;
+      if( startIdx > endIdx ) {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outBegIdx.value = startIdx;
+      while (startIdx <= endIdx) {
+         double upsum = .0, downsum = .0;
+         int i;
+         for (i = startIdx - lookback; i <= startIdx; i++) {
+            double close = inClose[i];
+            double open = inOpen[i];
+            if (close > open) {
+               upsum += (close - open);
+            } else {
+               downsum += (open - close);
+            }
+            outReal[outIdx] = 100.0*(upsum/(upsum + downsum));
+         }
+         startIdx++;
+         outIdx++;
+      }
+      outNBElement.value = outIdx;
       return RetCode.Success ;
    }
    /* Generated */
