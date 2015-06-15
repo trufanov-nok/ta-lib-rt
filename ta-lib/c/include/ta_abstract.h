@@ -118,10 +118,6 @@ TA_RetCode TA_GroupTableFree ( TA_StringTable *table );
  * On success, it becomes the responsibility of the caller to
  * call TA_FuncTableFree once the 'table' is no longuer needed.
  *
- * Passing NULL as the group string will return ALL the TA functions.
- * (Note: All TA_Functions have a unique string identifier even when in
- *        seperate group).
- *
  * Example:
  * This code snippet will print out the name of all the supported
  * function in the "market strength" category:
