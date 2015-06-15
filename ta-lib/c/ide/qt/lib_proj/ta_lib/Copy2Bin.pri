@@ -1,0 +1,3 @@
+isEmpty(DESTDIR) {
+ DESTDIR=./../../../../../bin
+} 
