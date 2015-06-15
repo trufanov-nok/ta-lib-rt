@@ -1301,7 +1301,7 @@ static void ReplaceReservedXmlCharacters(const char *input, char *output )
 static void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
 								 void *opaqueData)
 {
-//	TA_RetCode retCode;
+    TA_RetCode retCode;
 	const TA_InputParameterInfo *inputInfo;
 	const TA_OptInputParameterInfo *optInputInfo;
 	const TA_OutputParameterInfo *outputInfo;
@@ -1349,6 +1349,13 @@ static void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
 	for(i=0; i<funcInfo->nbInput; i++)
 	{
 		retCode = TA_GetInputParameterInfo( funcInfo->handle, i, &inputInfo);
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetInputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
 		if(inputInfo->type == TA_Input_Price)
 		{
 			if(inputInfo->flags & TA_IN_PRICE_OPEN)
@@ -1430,6 +1437,12 @@ static void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
 		for(i=0; i<funcInfo->nbOptInput; i++)
 		{
 			retCode = TA_GetOptInputParameterInfo( funcInfo->handle, i, &optInputInfo );
+
+            if( retCode != TA_SUCCESS )
+            {
+               printf( "Error in TA_GetOptInputParameterInfo (%d)\n", retCode );
+               return;
+            }
 
 			fprintf(gOutFunc_XML->file, "			<OptionalInputArgument>\n");
 			fprintf(gOutFunc_XML->file, "				<Name>%s</Name>\n", optInputInfo->displayName);
@@ -1517,6 +1530,13 @@ static void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
 	for(i=0; i<funcInfo->nbOutput; i++)
 	{
 		retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, &outputInfo );
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetOutputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
 		fprintf(gOutFunc_XML->file, "			<OutputArgument>\n");
 		if(outputInfo->type == TA_Output_Integer)
 		{
@@ -4473,7 +4493,7 @@ static void convertFileToCArray( FILE *in, FILE *out )
 
 static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 {
-//	TA_RetCode retCode;
+    TA_RetCode retCode;
 	TA_InputParameterInfo *inputInfo;
 	TA_OptInputParameterInfo *optInputInfo;
 	TA_OutputParameterInfo *outputInfo;
@@ -4511,6 +4531,13 @@ static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 	for(i=0; i<funcInfo->nbOptInput; i++)
 	{
 		retCode = TA_GetOptInputParameterInfo( funcInfo->handle, i, (void*)&optInputInfo );
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetOptInputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
 		if(optInputInfo->type == TA_OptInput_RealRange)
 		{
 			fprintf(gOutFunc_Annotation->file, "        double %s", optInputInfo->paramName);
@@ -4534,6 +4561,13 @@ static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 	for(i=0; i<funcInfo->nbOptInput; i++)
 	{
 		retCode = TA_GetOptInputParameterInfo( funcInfo->handle, i, (void*)&optInputInfo );
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetOptInputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
 		fprintf(gOutFunc_Annotation->file, "        %s", optInputInfo->paramName);
 		if (i<funcInfo->nbOptInput-1) fprintf(gOutFunc_Annotation->file, ",\n");
 	}    
@@ -4567,6 +4601,13 @@ static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 		/*if (funcInfo->nbInput>1) idx='0'+i;*/ /* TODO: compile Java code and see if it is necessary to distinguish parameters*/
 
 		retCode = TA_GetInputParameterInfo( funcInfo->handle, i, (void*)&inputInfo);
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetInputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
 		if(inputInfo->type == TA_Input_Price)
 		{
 			fprintf(gOutFunc_Annotation->file, "            @InputParameterInfo(\n");
@@ -4641,6 +4682,13 @@ static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 	for(i=0; i<funcInfo->nbOptInput; i++)
 	{
 		retCode = TA_GetOptInputParameterInfo( funcInfo->handle, i, (void*)&optInputInfo );
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetOptInputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
 		fprintf(gOutFunc_Annotation->file, "            @OptInputParameterInfo(\n");
         fprintf(gOutFunc_Annotation->file, "                paramName    = \"%s\",\n", optInputInfo->paramName);
 		fprintf(gOutFunc_Annotation->file, "                displayName  = \"%s\",\n", optInputInfo->displayName);
@@ -4729,6 +4777,13 @@ static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 	for(i=0; i<funcInfo->nbOutput; i++)
 	{
 		retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, (void*)&outputInfo );
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetOutputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
 		if(outputInfo->type == TA_Output_Integer)
 		{
 			fprintf(gOutFunc_Annotation->file, "            @OutputParameterInfo(\n");
@@ -4770,6 +4825,13 @@ static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 	for(i=0; i<funcInfo->nbInput; i++)
 	{
 		retCode = TA_GetInputParameterInfo(funcInfo->handle, i, (void*)&inputInfo);
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetInputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
 		if(inputInfo->type == TA_Input_Price)
 		{
 			char idx = ' ';
@@ -4811,6 +4873,13 @@ static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 	for(i=0; i<funcInfo->nbOptInput; i++)
 	{
 		retCode = TA_GetOptInputParameterInfo(funcInfo->handle, i, (void*)&optInputInfo);
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetOptInputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
         fprintf(gOutFunc_Annotation->file, "        %s,\n", optInputInfo->paramName);
 	}
 
@@ -4820,9 +4889,24 @@ static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 	for(i=0; i<funcInfo->nbOutput-1; i++)
 	{
 		retCode = TA_GetOutputParameterInfo(funcInfo->handle, i, (void*)&outputInfo);
+
+        if( retCode != TA_SUCCESS )
+        {
+           printf( "Error in TA_GetOutputParameterInfo (%d)\n", retCode );
+           return;
+        }
+
         fprintf(gOutFunc_Annotation->file, "        %s,\n", outputInfo->paramName);
 	}
+
 	retCode = TA_GetOutputParameterInfo(funcInfo->handle, funcInfo->nbOutput-1, (void*)&outputInfo);
+
+    if( retCode != TA_SUCCESS )
+    {
+       printf( "Error in TA_GetOutputParameterInfo (%d)\n", retCode );
+       return;
+    }
+
     fprintf(gOutFunc_Annotation->file, "        %s\n", outputInfo->paramName);
 
     fprintf(gOutFunc_Annotation->file, "); }\n\n\n");
