@@ -1301,7 +1301,7 @@ static void ReplaceReservedXmlCharacters(const char *input, char *output )
 static void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
 								 void *opaqueData)
 {
-	TA_RetCode retCode;
+//	TA_RetCode retCode;
 	const TA_InputParameterInfo *inputInfo;
 	const TA_OptInputParameterInfo *optInputInfo;
 	const TA_OutputParameterInfo *outputInfo;
@@ -4473,7 +4473,7 @@ static void convertFileToCArray( FILE *in, FILE *out )
 
 static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 {
-	TA_RetCode retCode;
+//	TA_RetCode retCode;
 	TA_InputParameterInfo *inputInfo;
 	TA_OptInputParameterInfo *optInputInfo;
 	TA_OutputParameterInfo *outputInfo;
