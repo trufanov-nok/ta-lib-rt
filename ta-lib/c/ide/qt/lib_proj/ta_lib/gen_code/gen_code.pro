@@ -5,7 +5,7 @@ CONFIG -= qt
 
 TARGET = gen_code
 
-LIBS += -L./../../../../../lib -lta_common -lta_abstract -lta_func -lpthread #why i can't build without ta_func and lta_abstract?
+LIBS += -L./../../../../../lib -lta_common
 unix:LIBS += -ldl
 
 DEFINES *= TA_GEN_CODE
