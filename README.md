@@ -6,6 +6,6 @@ Master branch contains original sourcecode. ALl changes is done in Dev branch.
 Should be fixed:
 * [#93 Link error: Missing test files: imi and avgdev](https://sourceforge.net/p/ta-lib/bugs/93/)
 
-Additions
+Additions:
 
-* QtCreator project files tree is added to c\ide\qt So not sources could be built from QtCreator.
+* QtCreator project files tree is added to `\c\ide\qt` So now sources could be built from QtCreator.
