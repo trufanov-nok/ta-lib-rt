@@ -164,7 +164,7 @@ TA_RetCode TA_GetFuncHandle( const char *name,
  *   Print the number of inputs used by the MA (moving average) function.
  *
  *   TA_RetCode retCode;
- *   TA_FuncHandle *handle;
+ *   const TA_FuncHandle *handle;
  *   const TA_FuncInfo *theInfo;
  *
  *   retCode = TA_GetFuncHandle( "MA", &handle );
