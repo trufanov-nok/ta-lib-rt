@@ -2083,12 +2083,12 @@ static void printFunc( FILE *out,
          else
          {
             if( inputIsSinglePrecision )
-               sprintf( gTempBuf, "%sTA_RetCode TA_S_%s( int    %s,\n",
+               sprintf( gTempBuf, "%sTA_RetCode TA_S_%s( size_t    %s,\n",
                         prefix? prefix:"",
                         funcName,
                         startIdxString );
             else  
-               sprintf( gTempBuf, "%sTA_RetCode TA_%s( int    %s,\n",
+               sprintf( gTempBuf, "%sTA_RetCode TA_%s( size_t    %s,\n",
                         prefix? prefix:"",                        
                         funcName,
                         startIdxString );
@@ -2098,16 +2098,22 @@ static void printFunc( FILE *out,
          
          if( outputForSWIG ) 
             indent -= 25;
-         else
+         else      
+         if (managedCPPCode || outputForJava || arrayToSubArrayCnvt)
             indent -= 17;
+         else
+             indent -= 20;
 
 		 if( indent < 0 ) indent = 0;		 
 
          printIndent( out, indent );
 		 if( arrayToSubArrayCnvt )
             fprintf( out, "%s,\n", endIdxString );
-		 else
+		 else 
+                     if (managedCPPCode || outputForJava || outputForSWIG)
 			fprintf( out, "int    %s,\n", endIdxString );
+                     else
+                         fprintf( out, "size_t    %s,\n", endIdxString );
       }
    }
    else if( frame )
@@ -2650,7 +2656,7 @@ static void printFunc( FILE *out,
             else
                fprintf( out, "%-*s %s%s",
                       prototype? 12 : 0,
-                      prototype? outputIntParam : "",
+                      prototype? (!managedCPPCode&&!outputForJava?"size_t":outputIntParam) : "",
                       prototype&&!managedCPPCode&&!outputForJava? "*" : "",
                       outBegIdxString );
 
@@ -2798,9 +2804,9 @@ static void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned i
    else
    {
       print( out, "TA_RetCode TA_%s_FramePP( const TA_ParamHolderPriv *params,\n", funcInfo->name );
-      print( out, "                          int            startIdx,\n" );
-      print( out, "                          int            endIdx,\n" );
-      print( out, "                          int           *outBegIdx,\n" );
+      print( out, "                          size_t            startIdx,\n" );
+      print( out, "                          size_t            endIdx,\n" );
+      print( out, "                          size_t            *outBegIdx,\n" );
       print( out, "                          int           *outNBElement )\n" );
    }
 }
