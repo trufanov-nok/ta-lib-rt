@@ -8,4 +8,4 @@ Should be fixed:
 
 Additions
 
-* QtCreator project files tree is added to c\ide\qt So not sources could be build from QtCreator.
+* QtCreator project files tree is added to c\ide\qt So not sources could be built from QtCreator.
