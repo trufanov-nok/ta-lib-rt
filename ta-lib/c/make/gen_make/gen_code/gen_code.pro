@@ -51,6 +51,7 @@ SOURCES = ../../../../../src/tools/gen_code/gen_code.c \
           ../../../../../src/ta_abstract/tables/table_y.c \
           ../../../../../src/ta_abstract/tables/table_z.c
 
+HEADERS = ../../../../../src/tools/gen_code/gen_code.h
 
 # Additional libraries
 win32:TA_COMMON_CMD = ta_common_cmd.lib

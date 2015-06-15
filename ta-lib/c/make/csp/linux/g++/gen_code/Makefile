@@ -33,7 +33,7 @@ CXXFLAGS += $(CUSERFLAGS)
 
 ####### Files
 
-HEADERS =	
+HEADERS =	../../../../../src/tools/gen_code/gen_code.h
 SOURCES =	../../../../../src/tools/gen_code/gen_code.c \
 		../../../../../src/ta_abstract/ta_abstract.c \
 		../../../../../src/ta_abstract/ta_def_ui.c \
