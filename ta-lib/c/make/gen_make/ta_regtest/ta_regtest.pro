@@ -42,6 +42,8 @@ SOURCES	= ../../../../../src/tools/ta_regtest/ta_regtest.c \
           ../../../../../src/tools/ta_regtest/ta_test_func/test_stddev.c \
           ../../../../../src/tools/ta_regtest/ta_test_func/test_stoch.c \
           ../../../../../src/tools/ta_regtest/ta_test_func/test_trange.c \
+          ../../../../../src/tools/ta_regtest/ta_test_func/test_imi.c \
+          ../../../../../src/tools/ta_regtest/ta_test_func/test_avgdev.c \
           ../../../../../src/tools/ta_regtest/test_util.c \
           ../../../../../src/tools/ta_regtest/test_data.c \
           ../../../../../src/tools/ta_regtest/test_abstract.c
