@@ -82,6 +82,7 @@ SOURCES =	../../../../../src/ta_common/ta_global.c \
 		../../../../../src/ta_func/ta_ATAN.c \
 		../../../../../src/ta_func/ta_ATR.c \
 		../../../../../src/ta_func/ta_AVGPRICE.c \
+		../../../../../src/ta_func/ta_AVGDEV.c \
 		../../../../../src/ta_func/ta_BBANDS.c \
 		../../../../../src/ta_func/ta_BETA.c \
 		../../../../../src/ta_func/ta_BOP.c \
@@ -164,6 +165,7 @@ SOURCES =	../../../../../src/ta_common/ta_global.c \
 		../../../../../src/ta_func/ta_HT_SINE.c \
 		../../../../../src/ta_func/ta_HT_TRENDLINE.c \
 		../../../../../src/ta_func/ta_HT_TRENDMODE.c \
+		../../../../../src/ta_func/ta_IMI.c \
 		../../../../../src/ta_func/ta_KAMA.c \
 		../../../../../src/ta_func/ta_LINEARREG.c \
 		../../../../../src/ta_func/ta_LINEARREG_ANGLE.c \
@@ -276,6 +278,7 @@ OBJECTS =	../../../../../temp/cmr/ta_global.o \
 		../../../../../temp/cmr/ta_ATAN.o \
 		../../../../../temp/cmr/ta_ATR.o \
 		../../../../../temp/cmr/ta_AVGPRICE.o \
+		../../../../../temp/cmr/ta_AVGDEV.o \
 		../../../../../temp/cmr/ta_BBANDS.o \
 		../../../../../temp/cmr/ta_BETA.o \
 		../../../../../temp/cmr/ta_BOP.o \
@@ -358,6 +361,7 @@ OBJECTS =	../../../../../temp/cmr/ta_global.o \
 		../../../../../temp/cmr/ta_HT_SINE.o \
 		../../../../../temp/cmr/ta_HT_TRENDLINE.o \
 		../../../../../temp/cmr/ta_HT_TRENDMODE.o \
+		../../../../../temp/cmr/ta_IMI.o \
 		../../../../../temp/cmr/ta_KAMA.o \
 		../../../../../temp/cmr/ta_LINEARREG.o \
 		../../../../../temp/cmr/ta_LINEARREG_ANGLE.o \
@@ -621,6 +625,9 @@ clean:
 ../../../../../temp/cmr/ta_AVGPRICE.o: ../../../../../src/ta_func/ta_AVGPRICE.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_AVGPRICE.o ../../../../../src/ta_func/ta_AVGPRICE.c
 
+../../../../../temp/cmr/ta_AVGDEV.o: ../../../../../src/ta_func/ta_AVGDEV.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_AVGDEV.o ../../../../../src/ta_func/ta_AVGDEV.c
+
 ../../../../../temp/cmr/ta_BBANDS.o: ../../../../../src/ta_func/ta_BBANDS.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_BBANDS.o ../../../../../src/ta_func/ta_BBANDS.c
 
@@ -866,6 +873,9 @@ clean:
 
 ../../../../../temp/cmr/ta_HT_TRENDMODE.o: ../../../../../src/ta_func/ta_HT_TRENDMODE.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_HT_TRENDMODE.o ../../../../../src/ta_func/ta_HT_TRENDMODE.c
+
+../../../../../temp/cmr/ta_IMI.o: ../../../../../src/ta_func/ta_IMI.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_IMI.o ../../../../../src/ta_func/ta_IMI.c
 
 ../../../../../temp/cmr/ta_KAMA.o: ../../../../../src/ta_func/ta_KAMA.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_KAMA.o ../../../../../src/ta_func/ta_KAMA.c

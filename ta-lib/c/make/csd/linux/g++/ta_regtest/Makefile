@@ -56,6 +56,8 @@ SOURCES =	../../../../../src/tools/ta_regtest/ta_regtest.c \
 		../../../../../src/tools/ta_regtest/ta_test_func/test_stddev.c \
 		../../../../../src/tools/ta_regtest/ta_test_func/test_stoch.c \
 		../../../../../src/tools/ta_regtest/ta_test_func/test_trange.c \
+		../../../../../src/tools/ta_regtest/ta_test_func/test_imi.c \
+		../../../../../src/tools/ta_regtest/ta_test_func/test_avgdev.c \
 		../../../../../src/tools/ta_regtest/test_util.c \
 		../../../../../src/tools/ta_regtest/test_data.c \
 		../../../../../src/tools/ta_regtest/test_abstract.c
@@ -81,6 +83,8 @@ OBJECTS =	../../../../../temp/csd/ta_regtest.o \
 		../../../../../temp/csd/test_stddev.o \
 		../../../../../temp/csd/test_stoch.o \
 		../../../../../temp/csd/test_trange.o \
+		../../../../../temp/csd/test_imi.o \
+		../../../../../temp/csd/test_avgdev.o \
 		../../../../../temp/csd/test_util.o \
 		../../../../../temp/csd/test_data.o \
 		../../../../../temp/csd/test_abstract.o
@@ -199,6 +203,12 @@ clean:
 
 ../../../../../temp/csd/test_trange.o: ../../../../../src/tools/ta_regtest/ta_test_func/test_trange.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/csd/test_trange.o ../../../../../src/tools/ta_regtest/ta_test_func/test_trange.c
+
+../../../../../temp/csd/test_imi.o: ../../../../../src/tools/ta_regtest/ta_test_func/test_imi.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/csd/test_imi.o ../../../../../src/tools/ta_regtest/ta_test_func/test_imi.c
+
+../../../../../temp/csd/test_avgdev.o: ../../../../../src/tools/ta_regtest/ta_test_func/test_avgdev.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/csd/test_avgdev.o ../../../../../src/tools/ta_regtest/ta_test_func/test_avgdev.c
 
 ../../../../../temp/csd/test_util.o: ../../../../../src/tools/ta_regtest/test_util.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/csd/test_util.o ../../../../../src/tools/ta_regtest/test_util.c
