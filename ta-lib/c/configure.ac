@@ -6,6 +6,7 @@ AC_COPYRIGHT([(c) TicTacTec 2005, 2006])
 AC_INIT([ta-lib], [SVN], [http://sourceforge.net/tracker/?group_id=8903&atid=108903])
 AC_CONFIG_SRCDIR([src/ta_func/ta_AD.c])
 AC_CONFIG_HEADER([include/ta_config.h])
+AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([subdir-objects])
 
 # Checks for programs.
