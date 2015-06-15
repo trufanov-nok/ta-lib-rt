@@ -1,11 +1,21 @@
 TEMPLATE = lib
-CONFIG += console
-CONFIG -= app_bundle
 CONFIG -= qt
+CONFIG += staticlib
 
 TARGET = ta_abstract
 
-#LIBS += -L./../../../../../lib -lta_func -lta_common
+# debug/release dependent options.
+debug:DEFINES   *= TA_DEBUG
+debug:DEFINES   *= _DEBUG
+DEFINES        += TA_SINGLE_THREAD
+thread:DEFINES -= TA_SINGLE_THREAD
+
+# Platform dependent options.
+win32:DEFINES         *= WIN32
+win32-msvc:DEFINES    *= _MBCS _LIB
+freebsd-g++:LIBS      -= -ldl
+freebsd-g++:INCLUDEPATH += /usr/local/include
+
 
 INCLUDEPATH += ./../../../../../include \
                ./../../../../../src/ta_common \
