@@ -6,7 +6,11 @@ CONFIG -= qt
 TARGET = ta_regtest
 
 
-LIBS += -L./../../../../../lib -lta_libc
+#link static libs
+win32:LIBS = ./../../../../../lib/libta_libc.lib
+unix:LIBS =  ./../../../../../lib/libta_libc.a
+
+
 unix:LIBS += -ldl
 
 

@@ -5,7 +5,10 @@ CONFIG -= qt
 
 TARGET = gen_code
 
-LIBS += -L./../../../../../lib -lta_common
+#link static libs
+win32:LIBS = ./../../../../../lib/libta_common.lib
+unix:LIBS =  ./../../../../../lib/libta_common.a
+
 unix:LIBS += -ldl
 
 DEFINES *= TA_GEN_CODE
