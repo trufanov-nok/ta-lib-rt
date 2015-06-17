@@ -2309,7 +2309,7 @@ public class Core {
       }
       if( tempBuffer1 != outRealMiddleBand )
       {
-         System.arraycopy(tempBuffer1,0,outRealMiddleBand,0,outNBElement.value) ;
+         System.arraycopy(tempBuffer1,0,outRealMiddleBand,0,outNBElement.value ) ;
       }
       if( optInNbDevUp == optInNbDevDn )
       {
@@ -12459,7 +12459,7 @@ public class Core {
       {
          return retCode;
       }
-      secondEMA = new double[firstEMANbElement.value] ;
+      secondEMA = new double[firstEMANbElement.value ] ;
       retCode = TA_INT_EMA ( 0, firstEMANbElement.value -1, firstEMA,
          optInTimePeriod, k,
          secondEMABegIdx , secondEMANbElement ,
@@ -12523,7 +12523,7 @@ public class Core {
       {
          return retCode;
       }
-      secondEMA = new double[firstEMANbElement.value] ;
+      secondEMA = new double[firstEMANbElement.value ] ;
       retCode = TA_INT_EMA ( 0, firstEMANbElement.value -1, firstEMA,
          optInTimePeriod, k,
          secondEMABegIdx , secondEMANbElement ,
@@ -22504,7 +22504,7 @@ public class Core {
          tempBuffer, optInSlowD_Period,
          optInSlowD_MAType,
          outBegIdx, outNBElement, outSlowD );
-      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNBElement.value) ;
+      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int) outNBElement.value ) ;
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
@@ -22638,7 +22638,7 @@ public class Core {
          tempBuffer, optInSlowD_Period,
          optInSlowD_MAType,
          outBegIdx, outNBElement, outSlowD );
-      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int)outNBElement.value) ;
+      System.arraycopy(tempBuffer,lookbackDSlow,outSlowK,0,(int) outNBElement.value ) ;
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
@@ -22794,7 +22794,7 @@ public class Core {
          outNBElement.value = 0 ;
          return retCode;
       }
-      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNBElement.value) ;
+      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int) outNBElement.value ) ;
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
@@ -22917,7 +22917,7 @@ public class Core {
          outNBElement.value = 0 ;
          return retCode;
       }
-      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int)outNBElement.value) ;
+      System.arraycopy(tempBuffer,lookbackFastD,outFastK,0,(int) outNBElement.value ) ;
       if( retCode != RetCode.Success )
       {
          outBegIdx.value = 0 ;
@@ -23667,7 +23667,7 @@ public class Core {
       {
          return retCode;
       }
-      secondEMA = new double[firstEMANbElement.value] ;
+      secondEMA = new double[firstEMANbElement.value ] ;
       retCode = TA_INT_EMA ( 0, firstEMANbElement.value -1, firstEMA,
          optInTimePeriod, k,
          secondEMABegIdx , secondEMANbElement ,
@@ -23743,7 +23743,7 @@ public class Core {
       {
          return retCode;
       }
-      secondEMA = new double[firstEMANbElement.value] ;
+      secondEMA = new double[firstEMANbElement.value ] ;
       retCode = TA_INT_EMA ( 0, firstEMANbElement.value -1, firstEMA,
          optInTimePeriod, k,
          secondEMABegIdx , secondEMANbElement ,
@@ -25175,7 +25175,7 @@ public class Core {
       {
          outBegIdx.value = startIdx;
          outNBElement.value = endIdx-startIdx+1;
-         System.arraycopy(inReal,startIdx,outReal,0,(int)outNBElement.value) ;
+         System.arraycopy(inReal,startIdx,outReal,0,(int) outNBElement.value ) ;
          return RetCode.Success ;
       }
       divider = (optInTimePeriod*(optInTimePeriod+1))>>1;
