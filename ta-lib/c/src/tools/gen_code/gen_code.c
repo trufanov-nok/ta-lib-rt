@@ -78,6 +78,8 @@
 
 #include "gen_code.h"
 
+
+
 static char *ta_fs_path(int count, ...) {
     char *path = (char *)malloc(16000); /* XXX quick and dirty */
     char *p; 
@@ -1392,19 +1394,19 @@ static void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
    printDefines( gOutFunc_SWG->file, funcInfo );
 
    /* Generate the function prototype. */
-   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded );
    fprintf( gOutFunc_H->file, "\n" );
 
-   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 );
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_inputIsSinglePrecision);
    fprintf( gOutFunc_H->file, "\n" );
 
    /* Generate the SWIG interface. */
-   printFunc( gOutFunc_SWG->file, NULL, funcInfo, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_outputForSWIG);
    fprintf( gOutFunc_SWG->file, "\n" );
 
    /* Generate the corresponding lookback function prototype. */
-   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 );
-   printFunc( gOutFunc_SWG->file, NULL, funcInfo, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_lookbackSignature );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_lookbackSignature );
 
    /* Create the frame definition (ta_frame.c) and declaration (ta_frame.h) */
    genPrefix = 1;
@@ -1484,33 +1486,33 @@ static void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
 
    #ifdef _MSC_VER
       /* Generate the functions declaration for the .NET interface. */
-      printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0 );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_lookbackSignature | pfs_managedCPPCode | pfs_managedCPPDeclaration );
 
 	  fprintf( gOutDotNet_H->file, "         #if defined( _MANAGED ) && defined( USE_SUBARRAY )\n" );   
 
 	  // SubArray<double> declaration
-	  printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0 );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_managedCPPCode | pfs_managedCPPDeclaration | pfs_useSubArrayObject);
 	  fprintf( gOutDotNet_H->file, "\n" );
 
 	  // SubArray<float> declaration
-	  printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0 );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_managedCPPCode | pfs_managedCPPDeclaration | pfs_inputIsSinglePrecision | pfs_useSubArrayObject );
 	  fprintf( gOutDotNet_H->file, "\n" );
 
 	  // cli_array<double> to SubArray<double> conversion 
-	  printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_managedCPPCode | pfs_managedCPPDeclaration );
 	  fprintf( gOutDotNet_H->file, "         { return " );
-	  printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1 );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_managedCPPDeclaration | pfs_useSubArrayObject | pfs_arrayToSubArrayCnvt );
 	  fprintf( gOutDotNet_H->file, "         }\n" );
 
 	  // cli_array<float> to SubArray<float> conversion 
-	  printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_managedCPPCode | pfs_managedCPPDeclaration | pfs_inputIsSinglePrecision );
 	  fprintf( gOutDotNet_H->file, "         { return " );
-	  printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1 );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_managedCPPCode | pfs_inputIsSinglePrecision | pfs_useSubArrayObject | pfs_arrayToSubArrayCnvt );
 	  fprintf( gOutDotNet_H->file, "         }\n" );
 
 	  fprintf( gOutDotNet_H->file, "         #elif defined( _MANAGED )\n" );
-	  printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 );
-	  printFunc( gOutDotNet_H->file, NULL, funcInfo, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_managedCPPCode | pfs_managedCPPDeclaration );
+      printFunc( gOutDotNet_H->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_managedCPPCode | pfs_managedCPPDeclaration | pfs_inputIsSinglePrecision );
 	  fprintf( gOutDotNet_H->file, "         #endif\n" );
 
 	  fprintf( gOutDotNet_H->file, "\n" );
@@ -1642,19 +1644,7 @@ static void printDefines( FILE *out, const TA_FuncInfo *funcInfo )
 static void printFunc( FILE *out,
                        const char *prefix, /* Can be NULL */
                        const TA_FuncInfo *funcInfo,
-                       unsigned int prototype, /* Boolean */
-                       unsigned int frame,     /* Boolean */
-                       unsigned int semiColonNeeded, /* Boolean */
-                       unsigned int validationCode, /* Boolean */
-                       unsigned int lookbackSignature, /* Boolean */
-                       unsigned int managedCPPCode, /* Boolean */
-                       unsigned int managedCPPDeclaration, /* Boolean */
-                       unsigned int inputIsSinglePrecision, /* Boolean */
-                       unsigned int outputForSWIG, /* Boolean */
-                       unsigned int outputForJava, /* Boolean */
-                       unsigned int lookbackValidationCode, /* Boolean */
-					   unsigned int useSubArrayObject,      /* Boolean */
-					   unsigned int arrayToSubArrayCnvt     /* Boolean */
+                       unsigned int settings // set of printFuncSettings
                       )
 {
    TA_RetCode retCode;
@@ -1684,6 +1674,24 @@ static void printFunc( FILE *out,
 
    char funcNameBuffer[1024]; /* Not safe, but 1024 is realistic, */
 
+   // read settings
+
+   unsigned int prototype = settings & pfs_prototype;
+   unsigned int frame = settings & pfs_frame;
+   unsigned int semiColonNeeded = settings & pfs_semiColonNeeded;
+   unsigned int validationCode = settings & pfs_validationCode;
+   unsigned int lookbackSignature = settings & pfs_lookbackSignature;
+   unsigned int managedCPPCode = settings & pfs_managedCPPCode;
+   unsigned int managedCPPDeclaration = settings & pfs_managedCPPDeclaration;
+   unsigned int inputIsSinglePrecision = settings & pfs_inputIsSinglePrecision;
+   unsigned int outputForSWIG = settings & pfs_outputForSWIG;
+   unsigned int outputForJava = settings & pfs_outputForJava;
+   unsigned int lookbackValidationCode = settings & pfs_lookbackValidationCode;
+   unsigned int useSubArrayObject = settings & pfs_useSubArrayObject;
+   unsigned int arrayToSubArrayCnvt = settings & pfs_arrayToSubArrayCnvt;
+
+   // init text constants begin
+
    if( arrayToSubArrayCnvt )
    {
       inputIntArrayType     = "int";
@@ -1707,16 +1715,16 @@ static void printFunc( FILE *out,
    }
    else if( managedCPPCode )
    {
-	  if( inputIsSinglePrecision )
+      if( inputIsSinglePrecision )
 	  {
           inputDoubleArrayType  = useSubArrayObject? "SubArray<float>^":"cli::array<float>^";
 	  }
 	  else
 	  {
-		  inputDoubleArrayType  = useSubArrayObject? "SubArray<double>^":"cli::array<double>^";         
+          inputDoubleArrayType  = useSubArrayObject? "SubArray<double>^":"cli::array<double>^";
 	  }
 
-	  inputIntArrayType     = useSubArrayObject? "SubArray<int>^"   : "cli::array<int>^";
+      inputIntArrayType     = useSubArrayObject? "SubArray<int>^"   : "cli::array<int>^";
       outputDoubleArrayType = useSubArrayObject? "SubArray<double>^": "cli::array<double>^";
       outputIntArrayType    = useSubArrayObject? "SubArray<int>^"   : "cli::array<int>^";
       outputIntParam        = "[Out]int%";
@@ -1852,7 +1860,7 @@ static void printFunc( FILE *out,
          print( out, gTempBuf );
          indent = (unsigned int)strlen(gTempBuf);
          
-         if( outputForSWIG ) 
+         if( outputForSWIG )
             indent -= 25;
          else
             indent -= 17;
@@ -1860,7 +1868,7 @@ static void printFunc( FILE *out,
 		 if( indent < 0 ) indent = 0;		 
 
          printIndent( out, indent );
-		 if( arrayToSubArrayCnvt )
+         if( arrayToSubArrayCnvt )
             fprintf( out, "%s,\n", endIdxString );
 		 else
 			fprintf( out, "int    %s,\n", endIdxString );
@@ -2014,7 +2022,7 @@ static void printFunc( FILE *out,
                   printIndent( out, indent );
                   if( frame )
                      fprintf( out, "params->in[%d].data.inPrice.open, /*", paramNb );
-				  if( arrayToSubArrayCnvt )
+                  if( arrayToSubArrayCnvt )
 				  {
                      fprintf( out, "              gcnew SubArrayFrom1D<%s>(inOpen,0)", inputDoubleArrayType );
 				  }
@@ -2024,7 +2032,7 @@ static void printFunc( FILE *out,
                          prototype? 12 : 0,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
-                         outputForSWIG? "IN_ARRAY /* inOpen */": "inOpen",						 
+                         outputForSWIG? "IN_ARRAY /* inOpen */": "inOpen",
                          prototype? arrayBracket : "" );
 				  }
                   fprintf( out, "%s\n", frame? " */":"," );
@@ -2035,7 +2043,7 @@ static void printFunc( FILE *out,
                   printIndent( out, indent );
                   if( frame )
                      fprintf( out, "params->in[%d].data.inPrice.high, /*", paramNb );
-				  if( arrayToSubArrayCnvt )
+                  if( arrayToSubArrayCnvt )
 				  {
                      fprintf( out, "              gcnew SubArrayFrom1D<%s>(inHigh,0)", inputDoubleArrayType );
 				  }
@@ -2043,7 +2051,7 @@ static void printFunc( FILE *out,
 				  {
                      fprintf( out, "%-*s%s%s%s",
                          prototype? 12 : 0,
-                         prototype? inputDoubleArrayType : "",                           
+                         prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inHigh */":"inHigh",
                          prototype? arrayBracket : "" );
@@ -2086,7 +2094,7 @@ static void printFunc( FILE *out,
 				  {
 					  fprintf( out, "%-*s%s%s%s",
                          prototype? 12 : 0,
-                         prototype? inputDoubleArrayType : "",                           
+                         prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inClose */": "inClose",
                          prototype? arrayBracket : "" );
@@ -2531,14 +2539,14 @@ static void printCallFrame( FILE *out, const TA_FuncInfo *funcInfo )
 
    printFrameHeader( out, funcInfo, 0 );
    print( out, "{\n" );
-   printFunc( out, "   return ", funcInfo, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded );
    print( out, "}\n" );
 
    printFrameHeader( out, funcInfo, 1 );
    print( out, "{\n" );
    if( funcInfo->nbOptInput == 0 )
       print( out, "   (void)params;\n" );
-   printFunc( out, "   return ", funcInfo, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_lookbackSignature);
    print( out, "}\n" );
    
    genPrefix = 0;
@@ -2748,13 +2756,13 @@ static void doFuncFile( const TA_FuncInfo *funcInfo )
    print( gOutFunc_C->file, "#define  INPUT_TYPE float\n" );
 
    print( gOutFunc_C->file, "#if defined( _MANAGED ) && defined( USE_SUBARRAY )\n" );   
-   printFunc( gOutFunc_C->file, NULL, funcInfo, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0 );  
+   printFunc( gOutFunc_C->file, NULL, funcInfo, pfs_prototype | pfs_managedCPPCode | pfs_inputIsSinglePrecision | pfs_useSubArrayObject);
    print( gOutFunc_C->file, "#elif defined( _MANAGED )\n" );
-   printFunc( gOutFunc_C->file, NULL, funcInfo, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 );   
+   printFunc( gOutFunc_C->file, NULL, funcInfo, pfs_prototype | pfs_managedCPPCode | pfs_inputIsSinglePrecision );
    print( gOutFunc_C->file, "#elif defined( _JAVA )\n" );
-   printFunc( gOutFunc_C->file, NULL, funcInfo, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0 );
+   printFunc( gOutFunc_C->file, NULL, funcInfo, pfs_prototype | pfs_inputIsSinglePrecision | pfs_outputForJava );
    print( gOutFunc_C->file, "#else\n" );
-   printFunc( gOutFunc_C->file, NULL, funcInfo, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 );
+   printFunc( gOutFunc_C->file, NULL, funcInfo,  pfs_prototype | pfs_inputIsSinglePrecision );
    print( gOutFunc_C->file, "#endif\n" );
 
    /* Insert the internal logic of the function */
@@ -3164,11 +3172,11 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    print( out, "#define INPUT_TYPE   double\n" );
    print( out, "\n" );
    print( out, "#if defined( _MANAGED )\n" );
-   printFunc( out, NULL, funcInfo, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( out, NULL, funcInfo,  pfs_prototype | pfs_lookbackSignature | pfs_managedCPPCode);
    print( out, "#elif defined( _JAVA )\n" );
-   printFunc( out, NULL, funcInfo, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0 );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_lookbackSignature | pfs_outputForJava);
    print( out, "#else\n" );
-   printFunc( out, "TA_LIB_API ", funcInfo, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_lookbackSignature );
    print( out, "#endif\n" );
 
    genPrefix = 0;
@@ -3177,7 +3185,7 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    genPrefix = 1;
    if( funcInfo->nbOptInput != 0 )
       print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
-   printFunc( out, NULL, funcInfo, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0 );
+   printFunc( out, NULL, funcInfo, pfs_validationCode | pfs_lookbackValidationCode );
    if( funcInfo->nbOptInput != 0 )     
      print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
    else   
@@ -3192,9 +3200,9 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    fprintf( out, " */\n" );
    print( out, "\n" );
    print( out, "#if defined( _MANAGED ) && defined( USE_SUBARRAY )\n" );   
-   printFunc( out, NULL, funcInfo, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0 );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_managedCPPCode | pfs_useSubArrayObject );
    print( out, "#elif defined( _MANAGED )\n" );
-   printFunc( out, NULL, funcInfo, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_managedCPPCode );
    print( out, "#elif defined( _JAVA )\n" );
 
    /* Handle special case to avoid duplicate definition of min,max */
@@ -3204,9 +3212,9 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
       print( out, "#undef max\n" );
    }
 
-   printFunc( out, NULL, funcInfo, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_outputForJava );
    print( out, "#else\n" );
-   printFunc( out, "TA_LIB_API ", funcInfo, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype );
    print( out, "#endif\n" );
 
    genPrefix = 0;
@@ -3226,7 +3234,7 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
     * Also generates the code for setting up the
     * default values.
     */
-   printFunc( out, NULL, funcInfo, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 );
+   printFunc( out, NULL, funcInfo, pfs_validationCode );
 
    print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
    print( out, "\n" );

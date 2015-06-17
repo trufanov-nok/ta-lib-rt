@@ -227,23 +227,28 @@ static int gen_retcode( void );
 
 static void printIndent( FILE *out, unsigned int indent );
 
-static void printFunc( FILE *out,
+enum printFuncSettings
+{
+    pfs_prototype =              1 << 0,
+    pfs_frame =                  1 << 1,
+    pfs_semiColonNeeded =        1 << 2,
+    pfs_validationCode =         1 << 3,
+    pfs_lookbackSignature =      1 << 4,
+    pfs_managedCPPCode =         1 << 5,
+    pfs_managedCPPDeclaration =  1 << 6,
+    pfs_inputIsSinglePrecision = 1 << 7,
+    pfs_outputForSWIG =          1 << 8,
+    pfs_outputForJava =          1 << 9,
+    pfs_lookbackValidationCode = 1 << 10,
+    pfs_useSubArrayObject =      1 << 11,
+    pfs_arrayToSubArrayCnvt =    1 << 12
+};
+
+
+static void printFunc(FILE *out,
                        const char *prefix,       /* Can be NULL */
                        const TA_FuncInfo *funcInfo,
-                       unsigned int prototype,              /* Boolean */
-                       unsigned int frame,                  /* Boolean */
-                       unsigned int semiColonNeeded,        /* Boolean */
-                       unsigned int validationCode,         /* Boolean */
-                       unsigned int lookbackSignature,      /* Boolean */
-                       unsigned int managedCPPCode,         /* Boolean */
-                       unsigned int managedCPPDeclaration,  /* Boolean */
-                       unsigned int inputIsSinglePrecision, /* Boolean */
-                       unsigned int outputForSWIG,          /* Boolean */
-                       unsigned int outputForJava,          /* Boolean */
-                       unsigned int lookbackValidationCode, /* Boolean */
-                       unsigned int useSubArrayObject,      /* Boolean */
-                       unsigned int arrayToSubArrayCnvt     /* Boolean */
-                     );
+                       unsigned int settings);
 
 static void printCallFrame  ( FILE *out, const TA_FuncInfo *funcInfo );
 static void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int lookbackSignature );
