@@ -249,6 +249,7 @@ ENUM_BEGIN( RetCode )
     /*     14 */  ENUM_DEFINE( TA_INVALID_LIST_TYPE, InvalidListType ),
     /*     15 */  ENUM_DEFINE( TA_BAD_OBJECT, BadObject ),
     /*     16 */  ENUM_DEFINE( TA_NOT_SUPPORTED, NotSupported ),
+    /*     17 */  ENUM_DEFINE( TA_NEED_MORE_DATA, NeedMoreData ),
     /*   5000 */  ENUM_DEFINE( TA_INTERNAL_ERROR, InternalError ) = 5000,
     /* 0xFFFF */  ENUM_DEFINE( TA_UNKNOWN_ERR, UnknownErr ) = 0xFFFF
 ENUM_END( RetCode )
