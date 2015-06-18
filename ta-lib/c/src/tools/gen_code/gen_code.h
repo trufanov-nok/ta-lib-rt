@@ -241,7 +241,11 @@ enum printFuncSettings
     pfs_outputForJava =          1 << 9,
     pfs_lookbackValidationCode = 1 << 10,
     pfs_useSubArrayObject =      1 << 11,
-    pfs_arrayToSubArrayCnvt =    1 << 12
+    pfs_arrayToSubArrayCnvt =    1 << 12,
+    pfs_stateStruct =            1 << 13,
+    pfs_stateInitSignature =     1 << 14,
+    pfs_stateFuncSignature =     1 << 15,
+    pfs_stateFreeSignature =     1 << 16
 };
 
 

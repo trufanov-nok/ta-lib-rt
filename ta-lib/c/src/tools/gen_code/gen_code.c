@@ -1406,7 +1406,31 @@ static void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
 
    /* Generate the corresponding lookback function prototype. */
    printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_lookbackSignature );
+   fprintf( gOutFunc_H->file, "\n" );
    printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_lookbackSignature );
+   fprintf( gOutFunc_SWG->file, "\n" );
+
+   /* Generate the corresponding state struct declaration. */
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateStruct );
+   fprintf( gOutFunc_H->file, "\n" );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_stateStruct );
+   fprintf( gOutFunc_SWG->file, "\n" );
+
+   /* Generate the corresponding state init function prototype. */
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateInitSignature );
+   fprintf( gOutFunc_H->file, "\n" );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateInitSignature );
+   fprintf( gOutFunc_SWG->file, "\n" );
+
+   /* Generate the corresponding state function prototype. */
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFuncSignature );
+   fprintf( gOutFunc_H->file, "\n" );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFuncSignature );
+   fprintf( gOutFunc_SWG->file, "\n" );
+
+   /* Generate the corresponding state free function prototype. */
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFreeSignature );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFreeSignature );
 
    /* Create the frame definition (ta_frame.c) and declaration (ta_frame.h) */
    genPrefix = 1;
@@ -1671,24 +1695,30 @@ static void printFunc( FILE *out,
    const char *endIdxString;
    const char *outNbElementString;
    const char *outBegIdxString;
-
    char funcNameBuffer[1024]; /* Not safe, but 1024 is realistic, */
 
    // read settings
+   #define SETTING_DECL(setting_name) unsigned int setting_name = settings & pfs_##setting_name;
+   SETTING_DECL(prototype);
+   SETTING_DECL(frame);
+   SETTING_DECL(semiColonNeeded);
+   SETTING_DECL(validationCode);
+   SETTING_DECL(lookbackSignature);
+   SETTING_DECL(managedCPPCode);
+   SETTING_DECL(managedCPPDeclaration);
+   SETTING_DECL(inputIsSinglePrecision);
+   SETTING_DECL(outputForSWIG);
+   SETTING_DECL(outputForJava);
+   SETTING_DECL(lookbackValidationCode);
+   SETTING_DECL(useSubArrayObject);
+   SETTING_DECL(arrayToSubArrayCnvt);
+   SETTING_DECL(stateStruct);
+   SETTING_DECL(stateInitSignature);
+   SETTING_DECL(stateFuncSignature);
+   SETTING_DECL(stateFreeSignature);
 
-   unsigned int prototype = settings & pfs_prototype;
-   unsigned int frame = settings & pfs_frame;
-   unsigned int semiColonNeeded = settings & pfs_semiColonNeeded;
-   unsigned int validationCode = settings & pfs_validationCode;
-   unsigned int lookbackSignature = settings & pfs_lookbackSignature;
-   unsigned int managedCPPCode = settings & pfs_managedCPPCode;
-   unsigned int managedCPPDeclaration = settings & pfs_managedCPPDeclaration;
-   unsigned int inputIsSinglePrecision = settings & pfs_inputIsSinglePrecision;
-   unsigned int outputForSWIG = settings & pfs_outputForSWIG;
-   unsigned int outputForJava = settings & pfs_outputForJava;
-   unsigned int lookbackValidationCode = settings & pfs_lookbackValidationCode;
-   unsigned int useSubArrayObject = settings & pfs_useSubArrayObject;
-   unsigned int arrayToSubArrayCnvt = settings & pfs_arrayToSubArrayCnvt;
+   #define ANY_SIGNATURE_PARAM (lookbackSignature || stateInitSignature || stateFuncSignature || stateFreeSignature)
+
 
    // init text constants begin
 
@@ -1794,33 +1824,72 @@ static void printFunc( FILE *out,
    typeString = "";
    defaultParamName = "";
 
+   // print the beginning of function declaration with given suffix
+
+   if (stateStruct)
+   {
+       if( managedCPPCode )
+       {
+          sprintf( gTempBuf, "%spublic struct TA_%s_State { int memory_size;\nint current_idx;",
+                   prefix? prefix:"",
+                   funcName );
+       }
+       else if( outputForJava )
+       {
+          sprintf( gTempBuf, "%sclass TA_%s_State { int memory_size;\nint current_idx;",
+                   prefix? prefix:"",
+                   funcName );
+       }
+       else
+       {
+          sprintf( gTempBuf, "%sstruct TA_%s_State { int memory_size;\nint current_idx;",
+                   prefix? prefix:"",
+                   funcName );
+       }
+       print( out, gTempBuf );
+       indent = (unsigned int)strlen(gTempBuf) - 2;
+   } else
    if( prototype )
    {
-      if( lookbackSignature )
-      {  
-         if( managedCPPCode )
-         {       
-            sprintf( gTempBuf, "%s%sint %s%sLookback( ",
-                     prefix? prefix:"",
-                     managedCPPDeclaration? "         static ":"",
-                     managedCPPDeclaration? "":"Core::",
-                     funcName );
-         }
-         else if( outputForJava )
-         {         
-            sprintf( gTempBuf, "%spublic int %sLookback( ",
-                     prefix? prefix:"",
-                     funcName );
-         }
-         else
-         {
-            sprintf( gTempBuf, "%sint TA_%s_Lookback( ",
-                     prefix? prefix:"",
-                     funcName );
-         }
-         print( out, gTempBuf );
-         indent = (unsigned int)strlen(gTempBuf) - 2;
-      }
+
+       #define PRINT_SIGNATURE(funcSuffix) \
+       { \
+           if( managedCPPCode ) \
+           {        \
+              sprintf( gTempBuf, "%s%sint %s%s%s( ", \
+                       prefix? prefix:"", \
+                       managedCPPDeclaration? "         static ":"", \
+                       managedCPPDeclaration? "":"Core::", \
+                       funcName, funcSuffix ); \
+           } \
+           else if( outputForJava ) \
+           {          \
+              sprintf( gTempBuf, "%spublic int %s%s( ", \
+                       prefix? prefix:"", \
+                       funcName, funcSuffix ); \
+           } \
+           else \
+           { \
+              sprintf( gTempBuf, "%sint TA_%s_%s( ", \
+                       prefix? prefix:"", \
+                       funcName, funcSuffix ); \
+           } \
+           print( out, gTempBuf ); \
+           indent = (unsigned int)strlen(gTempBuf) - 2; \
+       }
+
+
+      if( lookbackSignature )      
+        { PRINT_SIGNATURE("Lookback"); }
+      else
+      if( stateInitSignature )
+        { PRINT_SIGNATURE("StateInit"); }
+      else
+      if( stateFuncSignature )
+        { PRINT_SIGNATURE("State"); }
+      else
+      if( stateFreeSignature )
+        { PRINT_SIGNATURE("StateFree"); }
       else
       {
          if( arrayToSubArrayCnvt )
@@ -1881,11 +1950,25 @@ static void printFunc( FILE *out,
       {
          print( out, "%sTA_%s_Lookback(", prefix == NULL? "" : prefix, funcName );
          indent += 12;
-
+      } else
+      if( stateInitSignature )
+      {
+         print( out, "%sTA_%s_StateInit(", prefix == NULL? "" : prefix, funcName );
+         indent += 12;
+      } else
+      if( stateFuncSignature )
+      {
+         print( out, "%sTA_%s_State(", prefix == NULL? "" : prefix, funcName );
+         indent += 12;
+      } else
+      if( stateFreeSignature )
+      {
+         print( out, "%sTA_%s_StateFree(", prefix == NULL? "" : prefix, funcName );
+         indent += 12;
       }
       else
       {  
-         print( out, "%sTA_%s(\n", prefix == NULL? "" : prefix, funcName );
+         print( out, "%sTA_%s(", prefix == NULL? "" : prefix, funcName );
          indent += 4;
       }
    }
@@ -1904,7 +1987,7 @@ static void printFunc( FILE *out,
    if( frame )
       indent -= 5;
 
-   if( frame && !lookbackSignature )
+   if( frame && !ANY_SIGNATURE_PARAM && !stateStruct )
    {
       printIndent( out, indent );
       fprintf( out, "%s,\n", startIdxString );
@@ -1912,8 +1995,15 @@ static void printFunc( FILE *out,
       fprintf( out, "%s,\n", endIdxString );
    }
 
+   if (stateInitSignature || stateFuncSignature || stateFreeSignature)
+   {
+       fprintf( out, "TA_%s_State*& _state", funcName );
+       if (!stateFreeSignature && (stateFuncSignature || funcInfo->nbOptInput > 0))
+           fprintf( out, ",\n"); // hope that will be more params later
+   }
+
    /* Go through all the input. */
-   if( !lookbackSignature && !lookbackValidationCode )
+   if( !lookbackSignature && !stateInitSignature && !stateFreeSignature )
    {
       if( validationCode )
       {
@@ -2033,9 +2123,9 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inOpen */": "inOpen",
-                         prototype? arrayBracket : "" );
+                         (prototype && !stateFuncSignature)? arrayBracket : "" );
 				  }
-                  fprintf( out, "%s\n", frame? " */":"," );
+                  fprintf( out, "%s\n",  stateStruct? ";": (frame? " */":",") );
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_HIGH )
@@ -2054,9 +2144,9 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inHigh */":"inHigh",
-                         prototype? arrayBracket : "" );
+                         (prototype && !stateFuncSignature)? arrayBracket : "" );
 				  }
-                  fprintf( out, "%s\n", frame? " */":"," );
+                  fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_LOW )
@@ -2075,10 +2165,10 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inLow */": "inLow",
-                         prototype? arrayBracket : "" );
+                         (prototype && !stateFuncSignature)? arrayBracket : "" );
 				  }
 
-                  fprintf( out, "%s\n", frame? " */":"," );
+                  fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_CLOSE )
@@ -2097,10 +2187,10 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inClose */": "inClose",
-                         prototype? arrayBracket : "" );
+                         (prototype && !stateFuncSignature)? arrayBracket : "" );
 				  }
 
-                  fprintf( out, "%s\n", frame? " */":"," );
+                  fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_VOLUME )
@@ -2119,10 +2209,10 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inVolume */": "inVolume",
-                         prototype? arrayBracket : "" );
+                         (prototype && !stateFuncSignature)? arrayBracket : "" );
 				  }
 
-                  fprintf( out, "%s\n", frame? " */":"," );
+                  fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_OPENINTEREST )
@@ -2141,15 +2231,15 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inOpenInterest */": "inOpenInterest",
-                         prototype? arrayBracket : "" );
+                         (prototype && !stateFuncSignature)? arrayBracket : "" );
 				  }
 
-                  fprintf( out, "%s\n", frame? " */":"," );
+                  fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
                }
             }
             break;
          case TA_Input_Real:
-            typeString = inputDoubleArrayType;                         
+            typeString = inputDoubleArrayType;
             defaultParamName = outputForSWIG? "IN_ARRAY":"inReal";
             break;
          case TA_Input_Integer:
@@ -2180,7 +2270,7 @@ static void printFunc( FILE *out,
                            prototype? 12 : 0,
                            prototype? typeString : "",
                            defaultParamName,
-                           prototype? arrayBracket : "",
+                           (prototype && !stateFuncSignature)? arrayBracket : "",
                            inputParamInfo->paramName );
                else
 			   {
@@ -2197,10 +2287,10 @@ static void printFunc( FILE *out,
                            prototype? 12 : 0,
                            prototype? typeString : "",
                            inputParamInfo->paramName,
-                           prototype? arrayBracket : "" );
+                           (prototype && !stateFuncSignature)? arrayBracket : "" );
 				   }
 			   }
-               fprintf( out, "%s\n", frame? " */":"," );
+               fprintf( out, "%s\n", stateStruct?";":(frame? " */":",") );
             }
          }
          paramNb++;
@@ -2216,11 +2306,13 @@ static void printFunc( FILE *out,
    /* Go through all the optional input */
    paramNb = 0;
    lastParam = 0;
+
+   if (!stateFreeSignature)
    for( i=0; i < funcInfo->nbOptInput; i++ )
    {
       excludeFromManaged = 0;
 
-      if( (i == (funcInfo->nbOptInput-1)) && lookbackSignature )
+      if( (i == (funcInfo->nbOptInput-1)) && (lookbackSignature || stateInitSignature) )
          lastParam = 1;
 
       retCode = TA_GetOptInputParameterInfo( funcInfo->handle,
@@ -2306,7 +2398,7 @@ static void printFunc( FILE *out,
             fprintf( out, "%sparams->optIn[%d].data.%s%s /*",
 				     isMAType?"(TA_MAType)":"",
                      paramNb, defaultParamName,
-                     lookbackSignature&&lastParam?"":"," );
+                     (lookbackSignature || stateInitSignature)&&lastParam?"":"," );
          }
          if( outputForSWIG )
             fprintf( out, "%-*s %s /* %s */",
@@ -2321,7 +2413,7 @@ static void printFunc( FILE *out,
                 
          if( frame )
          {
-            if( lookbackSignature && lastParam )
+            if( (lookbackSignature || stateInitSignature) && lastParam )
                fprintf( out, "*/ )%s\n", semiColonNeeded? ";":"" );
             else
                fprintf( out, "*/\n" );
@@ -2331,10 +2423,10 @@ static void printFunc( FILE *out,
             switch( optInputParamInfo->type )
             {
             case TA_OptInput_RealRange:
-               if( lookbackSignature && lastParam )
+               if( (lookbackSignature || stateInitSignature) && lastParam )
                   fprintf( out, " )%s ", semiColonNeeded? ";":"" );
                else
-                  fprintf( out, "," );
+                  fprintf( out, stateStruct?";":"," );
 
                if( ((TA_RealRange *)(optInputParamInfo->dataSet))->min == TA_REAL_MIN )
                   fprintf( out, " /* From TA_REAL_MIN" );
@@ -2354,10 +2446,10 @@ static void printFunc( FILE *out,
                }
                break;
             case TA_OptInput_IntegerRange:
-               if( lookbackSignature && lastParam )
+               if( (lookbackSignature || stateInitSignature) && lastParam )
                   fprintf( out, " )%s ", semiColonNeeded? ";":"" );
                else
-                  fprintf( out, "," );
+                  fprintf( out, stateStruct?";":"," );
 
                if( ((TA_IntegerRange *)(optInputParamInfo->dataSet))->min == TA_INTEGER_MIN )
                   fprintf( out, " /* From TA_INTEGER_MIN" );
@@ -2376,10 +2468,10 @@ static void printFunc( FILE *out,
                }
                break;
             default:
-               if( lookbackSignature && lastParam )
+               if( (lookbackSignature || stateInitSignature) && lastParam )
                   fprintf( out, " )%s ", semiColonNeeded? ";":"" );
                else
-                  fprintf( out, ",\n" );
+                  fprintf( out, stateStruct?";":"," );
             }
          }
       }
@@ -2387,16 +2479,19 @@ static void printFunc( FILE *out,
       paramNb++;
    }
 
-   if( lookbackSignature && (funcInfo->nbOptInput == 0) )
+   if( ((lookbackSignature || stateInitSignature) && (funcInfo->nbOptInput == 0)) || stateFreeSignature )
    {
-      if( frame || outputForJava )
+      if( frame || outputForJava || stateInitSignature || stateFreeSignature)
          fprintf( out, " )%s\n", semiColonNeeded? ";":"" );
       else      
          fprintf( out, "void )%s\n", semiColonNeeded? ";":"" );
    }
 
+   if (stateStruct)
+       fprintf( out, "}\n");
+
    /* Go through all the output */
-   if( lookbackSignature )
+   if( lookbackSignature || stateInitSignature || stateFreeSignature || stateStruct )
    {
       if( !frame )
          print( out, "\n" );
@@ -2406,7 +2501,7 @@ static void printFunc( FILE *out,
       paramNb = 0;
       lastParam = 0;
 
-      if( !validationCode )
+      if( !validationCode && !stateFuncSignature)
       {
             printIndent( out, indent );
             if( frame )
@@ -2491,11 +2586,12 @@ static void printFunc( FILE *out,
                       lastParam? "":"," );
 
             if( outputForSWIG )
-               fprintf( out, "%-*s *%s%s /* %s */",
+               fprintf( out, "%-*s %s*%s%s /* %s */",
                         prototype? 12 : 0,
                         prototype? typeString : "",                     
+                        stateFuncSignature?"&":"",
                         defaultParamName,
-                        prototype? arrayBracket : "",
+                        (prototype && !stateFuncSignature)? arrayBracket : "",
                         paramName );
             else if( arrayToSubArrayCnvt )            
 			{
@@ -2503,11 +2599,12 @@ static void printFunc( FILE *out,
 			}
 			else
 			{
-               fprintf( out, "%-*s  %s%s",
+               fprintf( out, "%-*s  %s%s%s",
                         prototype? 12 : 0,
-                        prototype? typeString : "",                     
+                        prototype? typeString : "",
+                        stateFuncSignature?"&":"",
                         paramName,
-                        prototype? arrayBracket : "" );
+                        (prototype && !stateFuncSignature)? arrayBracket : "" );
 			}
 
             if( !lastParam )
@@ -4102,7 +4199,10 @@ static void appendToFunc( FILE *out )
 void genJavaCodePhase1( const TA_FuncInfo *funcInfo )
 {
    fprintf( gOutJavaDefs_H->file, "#define TA_%s_Lookback %c%sLookback\n", funcInfo->name, tolower(funcInfo->camelCaseName[0]), &funcInfo->camelCaseName[1] );
-   fprintf( gOutJavaDefs_H->file, "#define TA_%s %c%s\n", funcInfo->name, tolower(funcInfo->camelCaseName[0]), &funcInfo->camelCaseName[1] );
+   fprintf( gOutJavaDefs_H->file, "#define TA_%s %c%s\n", funcInfo->name, tolower(funcInfo->camelCaseName[0]), &funcInfo->camelCaseName[1] );   
+   fprintf( gOutJavaDefs_H->file, "#define TA_%s_StateInit %c%s\n", funcInfo->name, tolower(funcInfo->camelCaseName[0]), &funcInfo->camelCaseName[1] );
+   fprintf( gOutJavaDefs_H->file, "#define TA_%s_State %c%s\n", funcInfo->name, tolower(funcInfo->camelCaseName[0]), &funcInfo->camelCaseName[1] );
+   fprintf( gOutJavaDefs_H->file, "#define TA_%s_StateFree %c%s\n", funcInfo->name, tolower(funcInfo->camelCaseName[0]), &funcInfo->camelCaseName[1] );
 }
 
 void genJavaCodePhase2( const TA_FuncInfo *funcInfo )
