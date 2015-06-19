@@ -254,6 +254,8 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    *_state = malloc(sizeof(struct TA_MACDFIX_State));
+/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    (*_state)->optInSignalPeriod = optInSignalPeriod;
 /* Generated */    (*_state)->mem_size = TA_MACDFIX_Lookback(optInSignalPeriod );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MACDFIX_Data)*(*_state)->mem_size);
@@ -266,7 +268,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -274,24 +276,21 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ int Core::MacdFixState( struct TA_MacdFix_State* _state,
 /* Generated */                       cli::array<double>^ inReal,
-/* Generated */                       int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                       cli::array<double>^  **outMACD,
-/* Generated */                       cli::array<double>^  **outMACDSignal,
-/* Generated */                       cli::array<double>^  **outMACDHist )
+/* Generated */                       cli::array<double>^  *outMACD,
+/* Generated */                       cli::array<double>^  *outMACDSignal,
+/* Generated */                       cli::array<double>^  *outMACDHist )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int macdFixState( struct TA_macdFix_State* _state,
 /* Generated */                        double       inReal,
-/* Generated */                        int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                        double        **outMACD,
-/* Generated */                        double        **outMACDSignal,
-/* Generated */                        double        **outMACDHist )
+/* Generated */                        double        *outMACD,
+/* Generated */                        double        *outMACDSignal,
+/* Generated */                        double        *outMACDHist )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_MACDFIX_State( struct TA_MACDFIX_State* _state,
 /* Generated */                                           const double inReal,
-/* Generated */                                           int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                                           double        **outMACD,
-/* Generated */                                           double        **outMACDSignal,
-/* Generated */                                           double        **outMACDHist )
+/* Generated */                                           double        *outMACD,
+/* Generated */                                           double        *outMACDSignal,
+/* Generated */                                           double        *outMACDHist )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -306,12 +305,6 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    /* min/max are checked for optInSignalPeriod. */
-/* Generated */    if( (int)optInSignalPeriod == TA_INTEGER_DEFAULT )
-/* Generated */       optInSignalPeriod = 9;
-/* Generated */    else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outMACD )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -329,7 +322,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -363,7 +356,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

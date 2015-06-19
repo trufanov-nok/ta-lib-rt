@@ -1774,9 +1774,9 @@ static void printFunc( FILE *out,
    else if( outputForSWIG )
    {
       if( inputIsSinglePrecision )
-         inputDoubleArrayType  = "const float  *";
+         inputDoubleArrayType  = (stateStruct)? "float *" : "const float  *";
       else
-         inputDoubleArrayType  = "const double *";
+         inputDoubleArrayType  = (stateStruct)? "double *" : "const double *";
       inputIntArrayType     = "const int    *";
       outputIntArrayType    = "int";
       outputDoubleArrayType = "double";
@@ -1812,9 +1812,9 @@ static void printFunc( FILE *out,
    else
    {
       if( inputIsSinglePrecision )
-         inputDoubleArrayType  = "const float";
+         inputDoubleArrayType  = (stateStruct)? "float" : "const float";
       else
-         inputDoubleArrayType  = "const double";
+         inputDoubleArrayType  = (stateStruct)? "double" : "const double";
       inputIntArrayType     = "const int";
       outputDoubleArrayType = "double";
       outputIntArrayType    = "int";
@@ -2365,7 +2365,7 @@ static void printFunc( FILE *out,
    nbOptInputArgsBuffer[0] = '\0';
    int nbOptInputArgsBufferLen = 0;
 
-   if (!stateFreeSignature)
+   if (!stateFreeSignature && !stateFuncSignature)
    for( i=0; i < funcInfo->nbOptInput; i++ )
    {
       excludeFromManaged = 0;
@@ -2542,6 +2542,31 @@ static void printFunc( FILE *out,
        printIndent( out, indent);
        fprintf( out, "*_state = malloc(sizeof(struct TA_%s_State));\n", funcName);
        printIndent( out, indent);
+       fprintf( out, "(*_state)->mem_index = 0;\n");
+
+       int word_idx = 0;
+       char word[500];
+       nbOptInputArgsBufferLen = 0;
+       while (1)
+       {
+           char c = nbOptInputArgsBuffer[nbOptInputArgsBufferLen++];
+
+           if ((c == ',') || ( c == '\0'))
+           {
+               word[word_idx] = '\0';
+               if (word_idx > 0)
+               {
+                printIndent( out, indent );
+                fprintf( out, "(*_state)->%s = %s;\n", word, word);
+               }
+               word_idx = 0;
+               if (c == '\0') break;
+           } else
+               if (c != ' ')
+               word[word_idx++] = c;
+       }
+
+       printIndent( out, indent );
        fprintf( out, "(*_state)->mem_size = TA_%s_Lookback(%s);\n", funcName, nbOptInputArgsBuffer);
        printIndent( out, indent);
        fprintf( out, "if ((*_state)->mem_size > 0)\n");
@@ -2660,7 +2685,7 @@ static void printFunc( FILE *out,
          {
             printIndent( out, indent );
             if( frame )
-               fprintf( out, "%sparams->out[%d].data.%s%s /*", stateFuncSignature?"&":"",
+               fprintf( out, "%sparams->out[%d].data.%s%s /*", stateFuncSignature?"":"",
                       paramNb, defaultParamName,
                       lastParam? "":"," );
 
@@ -2668,7 +2693,7 @@ static void printFunc( FILE *out,
                fprintf( out, "%-*s %s*%s%s /* %s */",
                         prototype? 12 : 0,
                         prototype? typeString : "",                     
-                        stateFuncSignature?"**":"",
+                        stateFuncSignature?"*":"",
                         defaultParamName,
                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "",
                         paramName );
@@ -2681,7 +2706,7 @@ static void printFunc( FILE *out,
                fprintf( out, "%-*s  %s%s%s",
                         prototype? 12 : 0,
                         prototype? typeString : "",
-                        stateFuncSignature?"**":"",
+                        stateFuncSignature?"*":"",
                         paramName,
                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 			}

@@ -95,7 +95,7 @@
 
    /* insert lookback code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
@@ -208,6 +208,7 @@
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    *_state = malloc(sizeof(struct TA_EXP_State));
+/* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->mem_size = TA_EXP_Lookback();
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_EXP_Data)*(*_state)->mem_size);
@@ -220,7 +221,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -228,15 +229,15 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ int Core::ExpState( struct TA_Exp_State* _state,
 /* Generated */                   cli::array<double>^ inReal,
-/* Generated */                   cli::array<double>^  **outReal )
+/* Generated */                   cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int expState( struct TA_exp_State* _state,
 /* Generated */                    double       inReal,
-/* Generated */                    double        **outReal )
+/* Generated */                    double        *outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_EXP_State( struct TA_EXP_State* _state,
 /* Generated */                                       const double inReal,
-/* Generated */                                       double        **outReal )
+/* Generated */                                       double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -262,7 +263,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -296,7 +297,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

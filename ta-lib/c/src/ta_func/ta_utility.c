@@ -101,7 +101,7 @@ unsigned int TA_GetUnstablePeriod( TA_FuncUnstId id )
 #endif
 {
    if( id >= ENUM_VALUE(FuncUnstId,TA_FUNC_UNST_ALL,FuncUnstAll) )
-	   return 0;
+	   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 
    #if defined( _MANAGED )
       return Globals->unstablePeriod[(int)id];

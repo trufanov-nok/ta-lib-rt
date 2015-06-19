@@ -484,6 +484,11 @@
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
 /* Generated */    *_state = malloc(sizeof(struct TA_BBANDS_State));
+/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
+/* Generated */    (*_state)->optInNbDevUp = optInNbDevUp;
+/* Generated */    (*_state)->optInNbDevDn = optInNbDevDn;
+/* Generated */    (*_state)->optInMAType = optInMAType;
 /* Generated */    (*_state)->mem_size = TA_BBANDS_Lookback(optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_BBANDS_Data)*(*_state)->mem_size);
@@ -496,7 +501,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -504,30 +509,21 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ int Core::BbandsState( struct TA_Bbands_State* _state,
 /* Generated */                      cli::array<double>^ inReal,
-/* Generated */                      int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                      double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                      double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                      MAType        optInMAType,/* Generated */                      cli::array<double>^  **outRealUpperBand,
-/* Generated */                      cli::array<double>^  **outRealMiddleBand,
-/* Generated */                      cli::array<double>^  **outRealLowerBand )
+/* Generated */                      cli::array<double>^  *outRealUpperBand,
+/* Generated */                      cli::array<double>^  *outRealMiddleBand,
+/* Generated */                      cli::array<double>^  *outRealLowerBand )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int bbandsState( struct TA_bbands_State* _state,
 /* Generated */                       double       inReal,
-/* Generated */                       int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                       double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                       double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                       MAType        optInMAType,/* Generated */                       double        **outRealUpperBand,
-/* Generated */                       double        **outRealMiddleBand,
-/* Generated */                       double        **outRealLowerBand )
+/* Generated */                       double        *outRealUpperBand,
+/* Generated */                       double        *outRealMiddleBand,
+/* Generated */                       double        *outRealLowerBand )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_BBANDS_State( struct TA_BBANDS_State* _state,
 /* Generated */                                          const double inReal,
-/* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                                          double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                                          double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                                          TA_MAType     optInMAType,/* Generated */                                          double        **outRealUpperBand,
-/* Generated */                                          double        **outRealMiddleBand,
-/* Generated */                                          double        **outRealLowerBand )
+/* Generated */                                          double        *outRealUpperBand,
+/* Generated */                                          double        *outRealMiddleBand,
+/* Generated */                                          double        *outRealLowerBand )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -542,29 +538,6 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    /* min/max are checked for optInTimePeriod. */
-/* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
-/* Generated */       optInTimePeriod = 5;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInNbDevUp == TA_REAL_DEFAULT )
-/* Generated */       optInNbDevUp = 2.000000e+0;
-/* Generated */    else if( (optInNbDevUp < -3.000000e+37) ||/* Generated */  (optInNbDevUp > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInNbDevDn == TA_REAL_DEFAULT )
-/* Generated */       optInNbDevDn = 2.000000e+0;
-/* Generated */    else if( (optInNbDevDn < -3.000000e+37) ||/* Generated */  (optInNbDevDn > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
-/* Generated */    if( (int)optInMAType == TA_INTEGER_DEFAULT )
-/* Generated */       optInMAType = (TA_MAType)0;
-/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 8) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outRealUpperBand )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -582,7 +555,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -616,7 +589,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

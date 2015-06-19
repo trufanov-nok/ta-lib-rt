@@ -389,6 +389,9 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    *_state = malloc(sizeof(struct TA_ADOSC_State));
+/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    (*_state)->optInFastPeriod = optInFastPeriod;
+/* Generated */    (*_state)->optInSlowPeriod = optInSlowPeriod;
 /* Generated */    (*_state)->mem_size = TA_ADOSC_Lookback(optInFastPeriod, optInSlowPeriod );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_ADOSC_Data)*(*_state)->mem_size);
@@ -401,7 +404,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -412,27 +415,21 @@
 /* Generated */                     cli::array<double>^ inLow,
 /* Generated */                     cli::array<double>^ inClose,
 /* Generated */                     cli::array<double>^ inVolume,
-/* Generated */                     int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                     int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                     cli::array<double>^  **outReal )
+/* Generated */                     cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int adOscState( struct TA_adOsc_State* _state,
 /* Generated */                      double       inHigh,
 /* Generated */                      double       inLow,
 /* Generated */                      double       inClose,
 /* Generated */                      double       inVolume,
-/* Generated */                      int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                      int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                      double        **outReal )
+/* Generated */                      double        *outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_ADOSC_State( struct TA_ADOSC_State* _state,
 /* Generated */                                         const double inHigh,
 /* Generated */                                         const double inLow,
 /* Generated */                                         const double inClose,
 /* Generated */                                         const double inVolume,
-/* Generated */                                         int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                                         int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                                         double        **outReal )
+/* Generated */                                         double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -450,18 +447,6 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    /* min/max are checked for optInFastPeriod. */
-/* Generated */    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
-/* Generated */       optInFastPeriod = 3;
-/* Generated */    else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    /* min/max are checked for optInSlowPeriod. */
-/* Generated */    if( (int)optInSlowPeriod == TA_INTEGER_DEFAULT )
-/* Generated */       optInSlowPeriod = 10;
-/* Generated */    else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outReal )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -473,7 +458,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -507,7 +492,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

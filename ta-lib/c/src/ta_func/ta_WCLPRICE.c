@@ -100,7 +100,7 @@
    /* insert lookback code here. */
 
    /* This function have no lookback needed. */
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
@@ -222,6 +222,7 @@
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    *_state = malloc(sizeof(struct TA_WCLPRICE_State));
+/* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->mem_size = TA_WCLPRICE_Lookback();
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_WCLPRICE_Data)*(*_state)->mem_size);
@@ -234,7 +235,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -244,19 +245,19 @@
 /* Generated */                        cli::array<double>^ inHigh,
 /* Generated */                        cli::array<double>^ inLow,
 /* Generated */                        cli::array<double>^ inClose,
-/* Generated */                        cli::array<double>^  **outReal )
+/* Generated */                        cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int wclPriceState( struct TA_wclPrice_State* _state,
 /* Generated */                         double       inHigh,
 /* Generated */                         double       inLow,
 /* Generated */                         double       inClose,
-/* Generated */                         double        **outReal )
+/* Generated */                         double        *outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_WCLPRICE_State( struct TA_WCLPRICE_State* _state,
 /* Generated */                                            const double inHigh,
 /* Generated */                                            const double inLow,
 /* Generated */                                            const double inClose,
-/* Generated */                                            double        **outReal )
+/* Generated */                                            double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -285,7 +286,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -319,7 +320,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

@@ -417,6 +417,11 @@
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
 /* Generated */    *_state = malloc(sizeof(struct TA_STOCHRSI_State));
+/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
+/* Generated */    (*_state)->optInFastK_Period = optInFastK_Period;
+/* Generated */    (*_state)->optInFastD_Period = optInFastD_Period;
+/* Generated */    (*_state)->optInFastD_MAType = optInFastD_MAType;
 /* Generated */    (*_state)->mem_size = TA_STOCHRSI_Lookback(optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_STOCHRSI_Data)*(*_state)->mem_size);
@@ -429,7 +434,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -437,27 +442,18 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ int Core::StochRsiState( struct TA_StochRsi_State* _state,
 /* Generated */                        cli::array<double>^ inReal,
-/* Generated */                        int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                        int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                        int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                        MAType        optInFastD_MAType,/* Generated */                        cli::array<double>^  **outFastK,
-/* Generated */                        cli::array<double>^  **outFastD )
+/* Generated */                        cli::array<double>^  *outFastK,
+/* Generated */                        cli::array<double>^  *outFastD )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int stochRsiState( struct TA_stochRsi_State* _state,
 /* Generated */                         double       inReal,
-/* Generated */                         int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                         int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                         int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                         MAType        optInFastD_MAType,/* Generated */                         double        **outFastK,
-/* Generated */                         double        **outFastD )
+/* Generated */                         double        *outFastK,
+/* Generated */                         double        *outFastD )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_STOCHRSI_State( struct TA_STOCHRSI_State* _state,
 /* Generated */                                            const double inReal,
-/* Generated */                                            int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                                            int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                                            int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                                            TA_MAType     optInFastD_MAType,/* Generated */                                            double        **outFastK,
-/* Generated */                                            double        **outFastD )
+/* Generated */                                            double        *outFastK,
+/* Generated */                                            double        *outFastD )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -472,31 +468,6 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    /* min/max are checked for optInTimePeriod. */
-/* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
-/* Generated */       optInTimePeriod = 14;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    /* min/max are checked for optInFastK_Period. */
-/* Generated */    if( (int)optInFastK_Period == TA_INTEGER_DEFAULT )
-/* Generated */       optInFastK_Period = 5;
-/* Generated */    else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    /* min/max are checked for optInFastD_Period. */
-/* Generated */    if( (int)optInFastD_Period == TA_INTEGER_DEFAULT )
-/* Generated */       optInFastD_Period = 3;
-/* Generated */    else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
-/* Generated */    if( (int)optInFastD_MAType == TA_INTEGER_DEFAULT )
-/* Generated */       optInFastD_MAType = (TA_MAType)0;
-/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 8) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outFastK )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -511,7 +482,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -545,7 +516,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

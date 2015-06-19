@@ -440,6 +440,10 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    *_state = malloc(sizeof(struct TA_ULTOSC_State));
+/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    (*_state)->optInTimePeriod1 = optInTimePeriod1;
+/* Generated */    (*_state)->optInTimePeriod2 = optInTimePeriod2;
+/* Generated */    (*_state)->optInTimePeriod3 = optInTimePeriod3;
 /* Generated */    (*_state)->mem_size = TA_ULTOSC_Lookback(optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_ULTOSC_Data)*(*_state)->mem_size);
@@ -452,7 +456,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -462,28 +466,19 @@
 /* Generated */                      cli::array<double>^ inHigh,
 /* Generated */                      cli::array<double>^ inLow,
 /* Generated */                      cli::array<double>^ inClose,
-/* Generated */                      int           optInTimePeriod1, /* From 1 to 100000 */
-/* Generated */                      int           optInTimePeriod2, /* From 1 to 100000 */
-/* Generated */                      int           optInTimePeriod3, /* From 1 to 100000 */
-/* Generated */                      cli::array<double>^  **outReal )
+/* Generated */                      cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int ultOscState( struct TA_ultOsc_State* _state,
 /* Generated */                       double       inHigh,
 /* Generated */                       double       inLow,
 /* Generated */                       double       inClose,
-/* Generated */                       int           optInTimePeriod1, /* From 1 to 100000 */
-/* Generated */                       int           optInTimePeriod2, /* From 1 to 100000 */
-/* Generated */                       int           optInTimePeriod3, /* From 1 to 100000 */
-/* Generated */                       double        **outReal )
+/* Generated */                       double        *outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_ULTOSC_State( struct TA_ULTOSC_State* _state,
 /* Generated */                                          const double inHigh,
 /* Generated */                                          const double inLow,
 /* Generated */                                          const double inClose,
-/* Generated */                                          int           optInTimePeriod1, /* From 1 to 100000 */
-/* Generated */                                          int           optInTimePeriod2, /* From 1 to 100000 */
-/* Generated */                                          int           optInTimePeriod3, /* From 1 to 100000 */
-/* Generated */                                          double        **outReal )
+/* Generated */                                          double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -501,24 +496,6 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    /* min/max are checked for optInTimePeriod1. */
-/* Generated */    if( (int)optInTimePeriod1 == TA_INTEGER_DEFAULT )
-/* Generated */       optInTimePeriod1 = 7;
-/* Generated */    else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    /* min/max are checked for optInTimePeriod2. */
-/* Generated */    if( (int)optInTimePeriod2 == TA_INTEGER_DEFAULT )
-/* Generated */       optInTimePeriod2 = 14;
-/* Generated */    else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    /* min/max are checked for optInTimePeriod3. */
-/* Generated */    if( (int)optInTimePeriod3 == TA_INTEGER_DEFAULT )
-/* Generated */       optInTimePeriod3 = 28;
-/* Generated */    else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outReal )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -530,7 +507,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -564,7 +541,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

@@ -320,6 +320,8 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    *_state = malloc(sizeof(struct TA_SMA_State));
+/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
 /* Generated */    (*_state)->mem_size = TA_SMA_Lookback(optInTimePeriod );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_SMA_Data)*(*_state)->mem_size);
@@ -332,7 +334,7 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -340,18 +342,15 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ int Core::SmaState( struct TA_Sma_State* _state,
 /* Generated */                   cli::array<double>^ inReal,
-/* Generated */                   int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                   cli::array<double>^  **outReal )
+/* Generated */                   cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int smaState( struct TA_sma_State* _state,
 /* Generated */                    double       inReal,
-/* Generated */                    int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                    double        **outReal )
+/* Generated */                    double        *outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_SMA_State( struct TA_SMA_State* _state,
 /* Generated */                                       const double inReal,
-/* Generated */                                       int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                                       double        **outReal )
+/* Generated */                                       double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -366,12 +365,6 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    /* min/max are checked for optInTimePeriod. */
-/* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
-/* Generated */       optInTimePeriod = 30;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outReal )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -383,7 +376,7 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -417,7 +410,7 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

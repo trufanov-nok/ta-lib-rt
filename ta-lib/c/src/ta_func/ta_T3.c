@@ -401,6 +401,9 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    *_state = malloc(sizeof(struct TA_T3_State));
+/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
+/* Generated */    (*_state)->optInVFactor = optInVFactor;
 /* Generated */    (*_state)->mem_size = TA_T3_Lookback(optInTimePeriod, optInVFactor );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_T3_Data)*(*_state)->mem_size);
@@ -413,7 +416,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -421,21 +424,15 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ int Core::T3State( struct TA_T3_State* _state,
 /* Generated */                  cli::array<double>^ inReal,
-/* Generated */                  int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                  double        optInVFactor, /* From 0 to 1 */
-/* Generated */                  cli::array<double>^  **outReal )
+/* Generated */                  cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int t3State( struct TA_t3_State* _state,
 /* Generated */                   double       inReal,
-/* Generated */                   int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                   double        optInVFactor, /* From 0 to 1 */
-/* Generated */                   double        **outReal )
+/* Generated */                   double        *outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_T3_State( struct TA_T3_State* _state,
 /* Generated */                                      const double inReal,
-/* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                                      double        optInVFactor, /* From 0 to 1 */
-/* Generated */                                      double        **outReal )
+/* Generated */                                      double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -450,17 +447,6 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    /* min/max are checked for optInTimePeriod. */
-/* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
-/* Generated */       optInTimePeriod = 5;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInVFactor == TA_REAL_DEFAULT )
-/* Generated */       optInVFactor = 7.000000e-1;
-/* Generated */    else if( (optInVFactor < 0.000000e+0) ||/* Generated */  (optInVFactor > 1.000000e+0) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outReal )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -472,7 +458,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -506,7 +492,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

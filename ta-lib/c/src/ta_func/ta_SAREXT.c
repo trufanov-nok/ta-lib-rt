@@ -785,6 +785,15 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    *_state = malloc(sizeof(struct TA_SAREXT_State));
+/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    (*_state)->optInStartValue = optInStartValue;
+/* Generated */    (*_state)->optInOffsetOnReverse = optInOffsetOnReverse;
+/* Generated */    (*_state)->optInAccelerationInitLong = optInAccelerationInitLong;
+/* Generated */    (*_state)->optInAccelerationLong = optInAccelerationLong;
+/* Generated */    (*_state)->optInAccelerationMaxLong = optInAccelerationMaxLong;
+/* Generated */    (*_state)->optInAccelerationInitShort = optInAccelerationInitShort;
+/* Generated */    (*_state)->optInAccelerationShort = optInAccelerationShort;
+/* Generated */    (*_state)->optInAccelerationMaxShort = optInAccelerationMaxShort;
 /* Generated */    (*_state)->mem_size = TA_SAREXT_Lookback(optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_SAREXT_Data)*(*_state)->mem_size);
@@ -797,7 +806,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -806,41 +815,17 @@
 /* Generated */ int Core::SarExtState( struct TA_SarExt_State* _state,
 /* Generated */                      cli::array<double>^ inHigh,
 /* Generated */                      cli::array<double>^ inLow,
-/* Generated */                      double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                      double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-/* Generated */                      double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                      double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                      double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                      double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                      double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                      double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                      cli::array<double>^  **outReal )
+/* Generated */                      cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int sarExtState( struct TA_sarExt_State* _state,
 /* Generated */                       double       inHigh,
 /* Generated */                       double       inLow,
-/* Generated */                       double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                       double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        **outReal )
+/* Generated */                       double        *outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_SAREXT_State( struct TA_SAREXT_State* _state,
 /* Generated */                                          const double inHigh,
 /* Generated */                                          const double inLow,
-/* Generated */                                          double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                                          double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-/* Generated */                                          double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                                          double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                                          double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                                          double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                                          double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                                          double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                                          double        **outReal )
+/* Generated */                                          double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -858,46 +843,6 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    if( optInStartValue == TA_REAL_DEFAULT )
-/* Generated */       optInStartValue = 0.000000e+0;
-/* Generated */    else if( (optInStartValue < -3.000000e+37) ||/* Generated */  (optInStartValue > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInOffsetOnReverse == TA_REAL_DEFAULT )
-/* Generated */       optInOffsetOnReverse = 0.000000e+0;
-/* Generated */    else if( (optInOffsetOnReverse < 0.000000e+0) ||/* Generated */  (optInOffsetOnReverse > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInAccelerationInitLong == TA_REAL_DEFAULT )
-/* Generated */       optInAccelerationInitLong = 2.000000e-2;
-/* Generated */    else if( (optInAccelerationInitLong < 0.000000e+0) ||/* Generated */  (optInAccelerationInitLong > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInAccelerationLong == TA_REAL_DEFAULT )
-/* Generated */       optInAccelerationLong = 2.000000e-2;
-/* Generated */    else if( (optInAccelerationLong < 0.000000e+0) ||/* Generated */  (optInAccelerationLong > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInAccelerationMaxLong == TA_REAL_DEFAULT )
-/* Generated */       optInAccelerationMaxLong = 2.000000e-1;
-/* Generated */    else if( (optInAccelerationMaxLong < 0.000000e+0) ||/* Generated */  (optInAccelerationMaxLong > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInAccelerationInitShort == TA_REAL_DEFAULT )
-/* Generated */       optInAccelerationInitShort = 2.000000e-2;
-/* Generated */    else if( (optInAccelerationInitShort < 0.000000e+0) ||/* Generated */  (optInAccelerationInitShort > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInAccelerationShort == TA_REAL_DEFAULT )
-/* Generated */       optInAccelerationShort = 2.000000e-2;
-/* Generated */    else if( (optInAccelerationShort < 0.000000e+0) ||/* Generated */  (optInAccelerationShort > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    if( optInAccelerationMaxShort == TA_REAL_DEFAULT )
-/* Generated */       optInAccelerationMaxShort = 2.000000e-1;
-/* Generated */    else if( (optInAccelerationMaxShort < 0.000000e+0) ||/* Generated */  (optInAccelerationMaxShort > 3.000000e+37) )
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outReal )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -909,7 +854,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -943,7 +888,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

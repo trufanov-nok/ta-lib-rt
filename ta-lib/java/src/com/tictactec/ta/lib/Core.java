@@ -295,29 +295,26 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct accbands ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = accbandsLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ACCBANDS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int accbandsState( struct TA_accbands_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outRealUpperBand,
-      double **outRealMiddleBand,
-      double **outRealLowerBand )
+      double *outRealUpperBand,
+      double *outRealMiddleBand,
+      double *outRealLowerBand )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 20;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int accbandsStateFree( struct TA_accbands_State** _state )
    {
@@ -326,7 +323,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode accbands( int startIdx,
       int endIdx,
@@ -419,7 +416,7 @@ public class Core {
    /* Generated */
    public int acosLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode acos( int startIdx,
       int endIdx,
@@ -447,20 +444,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct acos ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = acosLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ACOS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int acosState( struct TA_acos_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int acosStateFree( struct TA_acos_State** _state )
    {
@@ -469,7 +467,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode acos( int startIdx,
       int endIdx,
@@ -495,7 +493,7 @@ public class Core {
    /* Generated */
    public int adLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ad( int startIdx,
       int endIdx,
@@ -539,23 +537,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct ad ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = adLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_AD_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int adState( struct TA_ad_State* _state,
       double inHigh,
       double inLow,
       double inClose,
       double inVolume,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int adStateFree( struct TA_ad_State** _state )
    {
@@ -564,7 +563,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ad( int startIdx,
       int endIdx,
@@ -606,7 +605,7 @@ public class Core {
    /* Generated */
    public int addLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode add( int startIdx,
       int endIdx,
@@ -635,21 +634,22 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct add ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = addLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ADD_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int addState( struct TA_add_State* _state,
       double inReal0,
       double inReal1,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int addStateFree( struct TA_add_State** _state )
    {
@@ -658,7 +658,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode add( int startIdx,
       int endIdx,
@@ -786,33 +786,26 @@ public class Core {
       else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct adOsc ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInFastPeriod = optInFastPeriod;
+      (*_state)->optInSlowPeriod = optInSlowPeriod;
       (*_state)->mem_size = adOscLookback (optInFastPeriod, optInSlowPeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ADOSC_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int adOscState( struct TA_adOsc_State* _state,
       double inHigh,
       double inLow,
       double inClose,
       double inVolume,
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
-         optInFastPeriod = 3;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
-         optInSlowPeriod = 10;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int adOscStateFree( struct TA_adOsc_State** _state )
    {
@@ -821,7 +814,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode adOsc( int startIdx,
       int endIdx,
@@ -1085,27 +1078,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct adx ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = adxLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ADX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int adxState( struct TA_adx_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int adxStateFree( struct TA_adx_State** _state )
    {
@@ -1114,7 +1104,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode adx( int startIdx,
       int endIdx,
@@ -1359,27 +1349,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct adxr ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = adxrLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ADXR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int adxrState( struct TA_adxr_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int adxrStateFree( struct TA_adxr_State** _state )
    {
@@ -1388,7 +1375,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode adxr( int startIdx,
       int endIdx,
@@ -1575,30 +1562,24 @@ public class Core {
       else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct apo ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInFastPeriod = optInFastPeriod;
+      (*_state)->optInSlowPeriod = optInSlowPeriod;
+      (*_state)->optInMAType = optInMAType;
       (*_state)->mem_size = apoLookback (optInFastPeriod, optInSlowPeriod, optInMAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_APO_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int apoState( struct TA_apo_State* _state,
       double inReal,
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      MAType optInMAType, double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int apoStateFree( struct TA_apo_State** _state )
    {
@@ -1607,7 +1588,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode apo( int startIdx,
       int endIdx,
@@ -1825,27 +1806,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct aroon ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = aroonLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_AROON_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int aroonState( struct TA_aroon_State* _state,
       double inHigh,
       double inLow,
-      int optInTimePeriod,
-      double **outAroonDown,
-      double **outAroonUp )
+      double *outAroonDown,
+      double *outAroonUp )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int aroonStateFree( struct TA_aroon_State** _state )
    {
@@ -1854,7 +1832,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode aroon( int startIdx,
       int endIdx,
@@ -2056,26 +2034,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct aroonOsc ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = aroonOscLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_AROONOSC_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int aroonOscState( struct TA_aroonOsc_State* _state,
       double inHigh,
       double inLow,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int aroonOscStateFree( struct TA_aroonOsc_State** _state )
    {
@@ -2084,7 +2059,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode aroonOsc( int startIdx,
       int endIdx,
@@ -2179,7 +2154,7 @@ public class Core {
    /* Generated */
    public int asinLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode asin( int startIdx,
       int endIdx,
@@ -2207,20 +2182,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct asin ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = asinLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ASIN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int asinState( struct TA_asin_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int asinStateFree( struct TA_asin_State** _state )
    {
@@ -2229,7 +2205,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode asin( int startIdx,
       int endIdx,
@@ -2255,7 +2231,7 @@ public class Core {
    /* Generated */
    public int atanLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode atan( int startIdx,
       int endIdx,
@@ -2283,20 +2259,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct atan ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = atanLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ATAN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int atanState( struct TA_atan_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int atanStateFree( struct TA_atan_State** _state )
    {
@@ -2305,7 +2282,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode atan( int startIdx,
       int endIdx,
@@ -2428,27 +2405,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct atr ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = atrLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ATR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int atrState( struct TA_atr_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int atrStateFree( struct TA_atr_State** _state )
    {
@@ -2457,7 +2431,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode atr( int startIdx,
       int endIdx,
@@ -2543,7 +2517,7 @@ public class Core {
    /* Generated */
    public int avgPriceLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode avgPrice( int startIdx,
       int endIdx,
@@ -2577,23 +2551,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct avgPrice ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = avgPriceLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_AVGPRICE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int avgPriceState( struct TA_avgPrice_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int avgPriceStateFree( struct TA_avgPrice_State** _state )
    {
@@ -2602,7 +2577,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode avgPrice( int startIdx,
       int endIdx,
@@ -2697,25 +2672,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct avgDev ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = avgDevLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_AVGDEV_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int avgDevState( struct TA_avgDev_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int avgDevStateFree( struct TA_avgDev_State** _state )
    {
@@ -2724,7 +2696,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode avgDev( int startIdx,
       int endIdx,
@@ -2953,37 +2925,27 @@ public class Core {
       else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct bbands ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
+      (*_state)->optInNbDevUp = optInNbDevUp;
+      (*_state)->optInNbDevDn = optInNbDevDn;
+      (*_state)->optInMAType = optInMAType;
       (*_state)->mem_size = bbandsLookback (optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_BBANDS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int bbandsState( struct TA_bbands_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double optInNbDevUp,
-      double optInNbDevDn,
-      MAType optInMAType, double **outRealUpperBand,
-      double **outRealMiddleBand,
-      double **outRealLowerBand )
+      double *outRealUpperBand,
+      double *outRealMiddleBand,
+      double *outRealLowerBand )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      if( optInNbDevUp == (-4e+37) )
-         optInNbDevUp = 2.000000e+0;
-      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInNbDevDn == (-4e+37) )
-         optInNbDevDn = 2.000000e+0;
-      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int bbandsStateFree( struct TA_bbands_State** _state )
    {
@@ -2992,7 +2954,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode bbands( int startIdx,
       int endIdx,
@@ -3237,26 +3199,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct beta ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = betaLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_BETA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int betaState( struct TA_beta_State* _state,
       double inReal0,
       double inReal1,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int betaStateFree( struct TA_beta_State** _state )
    {
@@ -3265,7 +3224,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode beta( int startIdx,
       int endIdx,
@@ -3379,7 +3338,7 @@ public class Core {
    /* Generated */
    public int bopLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode bop( int startIdx,
       int endIdx,
@@ -3415,23 +3374,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct bop ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = bopLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_BOP_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int bopState( struct TA_bop_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int bopStateFree( struct TA_bop_State** _state )
    {
@@ -3440,7 +3400,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode bop( int startIdx,
       int endIdx,
@@ -3557,27 +3517,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cci ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = cciLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CCI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cciState( struct TA_cci_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cciStateFree( struct TA_cci_State** _state )
    {
@@ -3586,7 +3543,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cci( int startIdx,
       int endIdx,
@@ -3720,23 +3677,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdl2Crows ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdl2CrowsLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDL2CROWS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl2CrowsState( struct TA_cdl2Crows_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl2CrowsStateFree( struct TA_cdl2Crows_State** _state )
    {
@@ -3745,7 +3703,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdl2Crows( int startIdx,
       int endIdx,
@@ -3878,23 +3836,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdl3BlackCrows ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdl3BlackCrowsLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDL3BLACKCROWS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3BlackCrowsState( struct TA_cdl3BlackCrows_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3BlackCrowsStateFree( struct TA_cdl3BlackCrows_State** _state )
    {
@@ -3903,7 +3862,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdl3BlackCrows( int startIdx,
       int endIdx,
@@ -4046,23 +4005,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdl3Inside ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdl3InsideLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDL3INSIDE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3InsideState( struct TA_cdl3Inside_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3InsideStateFree( struct TA_cdl3Inside_State** _state )
    {
@@ -4071,7 +4031,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdl3Inside( int startIdx,
       int endIdx,
@@ -4221,23 +4181,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdl3LineStrike ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdl3LineStrikeLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDL3LINESTRIKE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3LineStrikeState( struct TA_cdl3LineStrike_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3LineStrikeStateFree( struct TA_cdl3LineStrike_State** _state )
    {
@@ -4246,7 +4207,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdl3LineStrike( int startIdx,
       int endIdx,
@@ -4380,23 +4341,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdl3Outside ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdl3OutsideLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDL3OUTSIDE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3OutsideState( struct TA_cdl3Outside_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3OutsideStateFree( struct TA_cdl3Outside_State** _state )
    {
@@ -4405,7 +4367,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdl3Outside( int startIdx,
       int endIdx,
@@ -4565,23 +4527,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdl3StarsInSouth ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdl3StarsInSouthLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDL3STARSINSOUTH_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3StarsInSouthState( struct TA_cdl3StarsInSouth_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3StarsInSouthStateFree( struct TA_cdl3StarsInSouth_State** _state )
    {
@@ -4590,7 +4553,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdl3StarsInSouth( int startIdx,
       int endIdx,
@@ -4809,23 +4772,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdl3WhiteSoldiers ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdl3WhiteSoldiersLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDL3WHITESOLDIERS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3WhiteSoldiersState( struct TA_cdl3WhiteSoldiers_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdl3WhiteSoldiersStateFree( struct TA_cdl3WhiteSoldiers_State** _state )
    {
@@ -4834,7 +4798,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdl3WhiteSoldiers( int startIdx,
       int endIdx,
@@ -5057,28 +5021,25 @@ public class Core {
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlAbandonedBaby ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInPenetration = optInPenetration;
       (*_state)->mem_size = cdlAbandonedBabyLookback (optInPenetration );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLABANDONEDBABY_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlAbandonedBabyState( struct TA_cdlAbandonedBaby_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double optInPenetration,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
-         optInPenetration = 3.000000e-1;
-      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlAbandonedBabyStateFree( struct TA_cdlAbandonedBaby_State** _state )
    {
@@ -5087,7 +5048,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlAbandonedBaby( int startIdx,
       int endIdx,
@@ -5333,23 +5294,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlAdvanceBlock ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlAdvanceBlockLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLADVANCEBLOCK_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlAdvanceBlockState( struct TA_cdlAdvanceBlock_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlAdvanceBlockStateFree( struct TA_cdlAdvanceBlock_State** _state )
    {
@@ -5358,7 +5320,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlAdvanceBlock( int startIdx,
       int endIdx,
@@ -5577,23 +5539,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlBeltHold ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlBeltHoldLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLBELTHOLD_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlBeltHoldState( struct TA_cdlBeltHold_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlBeltHoldStateFree( struct TA_cdlBeltHold_State** _state )
    {
@@ -5602,7 +5565,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlBeltHold( int startIdx,
       int endIdx,
@@ -5749,23 +5712,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlBreakaway ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlBreakawayLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLBREAKAWAY_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlBreakawayState( struct TA_cdlBreakaway_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlBreakawayStateFree( struct TA_cdlBreakaway_State** _state )
    {
@@ -5774,7 +5738,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlBreakaway( int startIdx,
       int endIdx,
@@ -5921,23 +5885,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlClosingMarubozu ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlClosingMarubozuLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLCLOSINGMARUBOZU_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlClosingMarubozuState( struct TA_cdlClosingMarubozu_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlClosingMarubozuStateFree( struct TA_cdlClosingMarubozu_State** _state )
    {
@@ -5946,7 +5911,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlClosingMarubozu( int startIdx,
       int endIdx,
@@ -6091,23 +6056,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlConcealBabysWall ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlConcealBabysWallLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLCONCEALBABYSWALL_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlConcealBabysWallState( struct TA_cdlConcealBabysWall_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State** _state )
    {
@@ -6116,7 +6082,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlConcealBabysWall( int startIdx,
       int endIdx,
@@ -6262,23 +6228,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlCounterAttack ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlCounterAttackLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLCOUNTERATTACK_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlCounterAttackState( struct TA_cdlCounterAttack_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State** _state )
    {
@@ -6287,7 +6254,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlCounterAttack( int startIdx,
       int endIdx,
@@ -6434,28 +6401,25 @@ public class Core {
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlDarkCloudCover ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInPenetration = optInPenetration;
       (*_state)->mem_size = cdlDarkCloudCoverLookback (optInPenetration );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLDARKCLOUDCOVER_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlDarkCloudCoverState( struct TA_cdlDarkCloudCover_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double optInPenetration,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
-         optInPenetration = 5.000000e-1;
-      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State** _state )
    {
@@ -6464,7 +6428,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlDarkCloudCover( int startIdx,
       int endIdx,
@@ -6582,23 +6546,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlDoji ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlDojiLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLDOJI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlDojiState( struct TA_cdlDoji_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlDojiStateFree( struct TA_cdlDoji_State** _state )
    {
@@ -6607,7 +6572,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlDoji( int startIdx,
       int endIdx,
@@ -6727,23 +6692,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlDojiStar ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlDojiStarLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLDOJISTAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlDojiStarState( struct TA_cdlDojiStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlDojiStarStateFree( struct TA_cdlDojiStar_State** _state )
    {
@@ -6752,7 +6718,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlDojiStar( int startIdx,
       int endIdx,
@@ -6885,23 +6851,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlDragonflyDoji ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlDragonflyDojiLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLDRAGONFLYDOJI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlDragonflyDojiState( struct TA_cdlDragonflyDoji_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlDragonflyDojiStateFree( struct TA_cdlDragonflyDoji_State** _state )
    {
@@ -6910,7 +6877,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlDragonflyDoji( int startIdx,
       int endIdx,
@@ -7034,23 +7001,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlEngulfing ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlEngulfingLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLENGULFING_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlEngulfingState( struct TA_cdlEngulfing_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlEngulfingStateFree( struct TA_cdlEngulfing_State** _state )
    {
@@ -7059,7 +7027,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlEngulfing( int startIdx,
       int endIdx,
@@ -7211,28 +7179,25 @@ public class Core {
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlEveningDojiStar ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInPenetration = optInPenetration;
       (*_state)->mem_size = cdlEveningDojiStarLookback (optInPenetration );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLEVENINGDOJISTAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlEveningDojiStarState( struct TA_cdlEveningDojiStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double optInPenetration,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
-         optInPenetration = 3.000000e-1;
-      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlEveningDojiStarStateFree( struct TA_cdlEveningDojiStar_State** _state )
    {
@@ -7241,7 +7206,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlEveningDojiStar( int startIdx,
       int endIdx,
@@ -7412,28 +7377,25 @@ public class Core {
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlEveningStar ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInPenetration = optInPenetration;
       (*_state)->mem_size = cdlEveningStarLookback (optInPenetration );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLEVENINGSTAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlEveningStarState( struct TA_cdlEveningStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double optInPenetration,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
-         optInPenetration = 3.000000e-1;
-      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlEveningStarStateFree( struct TA_cdlEveningStar_State** _state )
    {
@@ -7442,7 +7404,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlEveningStar( int startIdx,
       int endIdx,
@@ -7595,23 +7557,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlGapSideSideWhite ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlGapSideSideWhiteLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLGAPSIDESIDEWHITE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlGapSideSideWhiteState( struct TA_cdlGapSideSideWhite_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlGapSideSideWhiteStateFree( struct TA_cdlGapSideSideWhite_State** _state )
    {
@@ -7620,7 +7583,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlGapSideSideWhite( int startIdx,
       int endIdx,
@@ -7761,23 +7724,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlGravestoneDoji ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlGravestoneDojiLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLGRAVESTONEDOJI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlGravestoneDojiState( struct TA_cdlGravestoneDoji_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlGravestoneDojiStateFree( struct TA_cdlGravestoneDoji_State** _state )
    {
@@ -7786,7 +7750,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlGravestoneDoji( int startIdx,
       int endIdx,
@@ -7942,23 +7906,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlHammer ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlHammerLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLHAMMER_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHammerState( struct TA_cdlHammer_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHammerStateFree( struct TA_cdlHammer_State** _state )
    {
@@ -7967,7 +7932,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlHammer( int startIdx,
       int endIdx,
@@ -8146,23 +8111,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlHangingMan ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlHangingManLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLHANGINGMAN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHangingManState( struct TA_cdlHangingMan_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHangingManStateFree( struct TA_cdlHangingMan_State** _state )
    {
@@ -8171,7 +8137,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlHangingMan( int startIdx,
       int endIdx,
@@ -8335,23 +8301,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlHarami ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlHaramiLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLHARAMI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHaramiState( struct TA_cdlHarami_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHaramiStateFree( struct TA_cdlHarami_State** _state )
    {
@@ -8360,7 +8327,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlHarami( int startIdx,
       int endIdx,
@@ -8509,23 +8476,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlHaramiCross ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlHaramiCrossLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLHARAMICROSS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHaramiCrossState( struct TA_cdlHaramiCross_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State** _state )
    {
@@ -8534,7 +8502,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlHaramiCross( int startIdx,
       int endIdx,
@@ -8672,23 +8640,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlHignWave ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlHignWaveLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLHIGHWAVE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHignWaveState( struct TA_cdlHignWave_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHignWaveStateFree( struct TA_cdlHignWave_State** _state )
    {
@@ -8697,7 +8666,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlHignWave( int startIdx,
       int endIdx,
@@ -8843,23 +8812,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlHikkake ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlHikkakeLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLHIKKAKE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHikkakeState( struct TA_cdlHikkake_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHikkakeStateFree( struct TA_cdlHikkake_State** _state )
    {
@@ -8868,7 +8838,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlHikkake( int startIdx,
       int endIdx,
@@ -9054,23 +9024,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlHikkakeMod ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlHikkakeModLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLHIKKAKEMOD_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHikkakeModState( struct TA_cdlHikkakeMod_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHikkakeModStateFree( struct TA_cdlHikkakeMod_State** _state )
    {
@@ -9079,7 +9050,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlHikkakeMod( int startIdx,
       int endIdx,
@@ -9252,23 +9223,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlHomingPigeon ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlHomingPigeonLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLHOMINGPIGEON_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHomingPigeonState( struct TA_cdlHomingPigeon_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State** _state )
    {
@@ -9277,7 +9249,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlHomingPigeon( int startIdx,
       int endIdx,
@@ -9434,23 +9406,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlIdentical3Crows ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlIdentical3CrowsLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLIDENTICAL3CROWS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlIdentical3CrowsState( struct TA_cdlIdentical3Crows_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State** _state )
    {
@@ -9459,7 +9432,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlIdentical3Crows( int startIdx,
       int endIdx,
@@ -9617,23 +9590,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlInNeck ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlInNeckLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLINNECK_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlInNeckState( struct TA_cdlInNeck_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlInNeckStateFree( struct TA_cdlInNeck_State** _state )
    {
@@ -9642,7 +9616,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlInNeck( int startIdx,
       int endIdx,
@@ -9790,23 +9764,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlInvertedHammer ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlInvertedHammerLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLINVERTEDHAMMER_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlInvertedHammerState( struct TA_cdlInvertedHammer_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
    {
@@ -9815,7 +9790,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlInvertedHammer( int startIdx,
       int endIdx,
@@ -9977,23 +9952,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlKicking ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlKickingLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLKICKING_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlKickingState( struct TA_cdlKicking_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlKickingStateFree( struct TA_cdlKicking_State** _state )
    {
@@ -10002,7 +9978,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlKicking( int startIdx,
       int endIdx,
@@ -10171,23 +10147,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlKickingByLength ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlKickingByLengthLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLKICKINGBYLENGTH_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlKickingByLengthState( struct TA_cdlKickingByLength_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlKickingByLengthStateFree( struct TA_cdlKickingByLength_State** _state )
    {
@@ -10196,7 +10173,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlKickingByLength( int startIdx,
       int endIdx,
@@ -10344,23 +10321,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlLadderBottom ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlLadderBottomLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLLADDERBOTTOM_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlLadderBottomState( struct TA_cdlLadderBottom_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
    {
@@ -10369,7 +10347,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlLadderBottom( int startIdx,
       int endIdx,
@@ -10500,23 +10478,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlLongLeggedDoji ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlLongLeggedDojiLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLLONGLEGGEDDOJI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlLongLeggedDojiState( struct TA_cdlLongLeggedDoji_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlLongLeggedDojiStateFree( struct TA_cdlLongLeggedDoji_State** _state )
    {
@@ -10525,7 +10504,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlLongLeggedDoji( int startIdx,
       int endIdx,
@@ -10656,23 +10635,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlLongLine ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlLongLineLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLLONGLINE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlLongLineState( struct TA_cdlLongLine_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
    {
@@ -10681,7 +10661,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlLongLine( int startIdx,
       int endIdx,
@@ -10810,23 +10790,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlMarubozu ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlMarubozuLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLMARUBOZU_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMarubozuState( struct TA_cdlMarubozu_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMarubozuStateFree( struct TA_cdlMarubozu_State** _state )
    {
@@ -10835,7 +10816,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlMarubozu( int startIdx,
       int endIdx,
@@ -10958,23 +10939,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlMatchingLow ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlMatchingLowLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLMATCHINGLOW_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMatchingLowState( struct TA_cdlMatchingLow_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
    {
@@ -10983,7 +10965,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlMatchingLow( int startIdx,
       int endIdx,
@@ -11142,28 +11124,25 @@ public class Core {
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlMatHold ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInPenetration = optInPenetration;
       (*_state)->mem_size = cdlMatHoldLookback (optInPenetration );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLMATHOLD_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMatHoldState( struct TA_cdlMatHold_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double optInPenetration,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
-         optInPenetration = 5.000000e-1;
-      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMatHoldStateFree( struct TA_cdlMatHold_State** _state )
    {
@@ -11172,7 +11151,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlMatHold( int startIdx,
       int endIdx,
@@ -11358,28 +11337,25 @@ public class Core {
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlMorningDojiStar ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInPenetration = optInPenetration;
       (*_state)->mem_size = cdlMorningDojiStarLookback (optInPenetration );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLMORNINGDOJISTAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMorningDojiStarState( struct TA_cdlMorningDojiStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double optInPenetration,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
-         optInPenetration = 3.000000e-1;
-      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMorningDojiStarStateFree( struct TA_cdlMorningDojiStar_State** _state )
    {
@@ -11388,7 +11364,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlMorningDojiStar( int startIdx,
       int endIdx,
@@ -11559,28 +11535,25 @@ public class Core {
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlMorningStar ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInPenetration = optInPenetration;
       (*_state)->mem_size = cdlMorningStarLookback (optInPenetration );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLMORNINGSTAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMorningStarState( struct TA_cdlMorningStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      double optInPenetration,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
-         optInPenetration = 3.000000e-1;
-      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlMorningStarStateFree( struct TA_cdlMorningStar_State** _state )
    {
@@ -11589,7 +11562,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlMorningStar( int startIdx,
       int endIdx,
@@ -11738,23 +11711,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlOnNeck ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlOnNeckLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLONNECK_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlOnNeckState( struct TA_cdlOnNeck_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlOnNeckStateFree( struct TA_cdlOnNeck_State** _state )
    {
@@ -11763,7 +11737,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlOnNeck( int startIdx,
       int endIdx,
@@ -11898,23 +11872,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlPiercing ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlPiercingLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLPIERCING_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlPiercingState( struct TA_cdlPiercing_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlPiercingStateFree( struct TA_cdlPiercing_State** _state )
    {
@@ -11923,7 +11898,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlPiercing( int startIdx,
       int endIdx,
@@ -12069,23 +12044,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlRickshawMan ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlRickshawManLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLRICKSHAWMAN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlRickshawManState( struct TA_cdlRickshawMan_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlRickshawManStateFree( struct TA_cdlRickshawMan_State** _state )
    {
@@ -12094,7 +12070,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlRickshawMan( int startIdx,
       int endIdx,
@@ -12264,23 +12240,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlRiseFall3Methods ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlRiseFall3MethodsLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLRISEFALL3METHODS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlRiseFall3MethodsState( struct TA_cdlRiseFall3Methods_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlRiseFall3MethodsStateFree( struct TA_cdlRiseFall3Methods_State** _state )
    {
@@ -12289,7 +12266,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlRiseFall3Methods( int startIdx,
       int endIdx,
@@ -12465,23 +12442,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlSeperatingLines ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlSeperatingLinesLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLSEPARATINGLINES_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlSeperatingLinesState( struct TA_cdlSeperatingLines_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
    {
@@ -12490,7 +12468,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlSeperatingLines( int startIdx,
       int endIdx,
@@ -12654,23 +12632,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlShootingStar ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlShootingStarLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLSHOOTINGSTAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlShootingStarState( struct TA_cdlShootingStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlShootingStarStateFree( struct TA_cdlShootingStar_State** _state )
    {
@@ -12679,7 +12658,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlShootingStar( int startIdx,
       int endIdx,
@@ -12820,23 +12799,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlShortLine ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlShortLineLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLSHORTLINE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlShortLineState( struct TA_cdlShortLine_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlShortLineStateFree( struct TA_cdlShortLine_State** _state )
    {
@@ -12845,7 +12825,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlShortLine( int startIdx,
       int endIdx,
@@ -12965,23 +12945,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlSpinningTop ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlSpinningTopLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLSPINNINGTOP_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlSpinningTopState( struct TA_cdlSpinningTop_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State** _state )
    {
@@ -12990,7 +12971,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlSpinningTop( int startIdx,
       int endIdx,
@@ -13153,23 +13134,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlStalledPattern ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlStalledPatternLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLSTALLEDPATTERN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlStalledPatternState( struct TA_cdlStalledPattern_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State** _state )
    {
@@ -13178,7 +13160,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlStalledPattern( int startIdx,
       int endIdx,
@@ -13344,23 +13326,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlStickSandwhich ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlStickSandwhichLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLSTICKSANDWICH_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlStickSandwhichState( struct TA_cdlStickSandwhich_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlStickSandwhichStateFree( struct TA_cdlStickSandwhich_State** _state )
    {
@@ -13369,7 +13352,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlStickSandwhich( int startIdx,
       int endIdx,
@@ -13505,23 +13488,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlTakuri ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlTakuriLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLTAKURI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlTakuriState( struct TA_cdlTakuri_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlTakuriStateFree( struct TA_cdlTakuri_State** _state )
    {
@@ -13530,7 +13514,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlTakuri( int startIdx,
       int endIdx,
@@ -13679,23 +13663,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlTasukiGap ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlTasukiGapLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLTASUKIGAP_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlTasukiGapState( struct TA_cdlTasukiGap_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlTasukiGapStateFree( struct TA_cdlTasukiGap_State** _state )
    {
@@ -13704,7 +13689,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlTasukiGap( int startIdx,
       int endIdx,
@@ -13848,23 +13833,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlThrusting ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlThrustingLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLTHRUSTING_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlThrustingState( struct TA_cdlThrusting_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlThrustingStateFree( struct TA_cdlThrusting_State** _state )
    {
@@ -13873,7 +13859,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlThrusting( int startIdx,
       int endIdx,
@@ -14011,23 +13997,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlTristar ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlTristarLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLTRISTAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlTristarState( struct TA_cdlTristar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlTristarStateFree( struct TA_cdlTristar_State** _state )
    {
@@ -14036,7 +14023,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlTristar( int startIdx,
       int endIdx,
@@ -14175,23 +14162,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlUnique3River ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlUnique3RiverLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLUNIQUE3RIVER_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlUnique3RiverState( struct TA_cdlUnique3River_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlUnique3RiverStateFree( struct TA_cdlUnique3River_State** _state )
    {
@@ -14200,7 +14188,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlUnique3River( int startIdx,
       int endIdx,
@@ -14342,23 +14330,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlUpsideGap2Crows ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlUpsideGap2CrowsLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLUPSIDEGAP2CROWS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlUpsideGap2CrowsState( struct TA_cdlUpsideGap2Crows_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State** _state )
    {
@@ -14367,7 +14356,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlUpsideGap2Crows( int startIdx,
       int endIdx,
@@ -14497,23 +14486,24 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cdlXSideGap3Methods ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cdlXSideGap3MethodsLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CDLXSIDEGAP3METHODS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlXSideGap3MethodsState( struct TA_cdlXSideGap3Methods_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
       double inClose,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State** _state )
    {
@@ -14522,7 +14512,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cdlXSideGap3Methods( int startIdx,
       int endIdx,
@@ -14580,7 +14570,7 @@ public class Core {
    /* Generated */
    public int ceilLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ceil( int startIdx,
       int endIdx,
@@ -14608,20 +14598,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct ceil ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = ceilLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CEIL_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int ceilState( struct TA_ceil_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int ceilStateFree( struct TA_ceil_State** _state )
    {
@@ -14630,7 +14621,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ceil( int startIdx,
       int endIdx,
@@ -14812,25 +14803,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cmo ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = cmoLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CMO_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cmoState( struct TA_cmo_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cmoStateFree( struct TA_cmo_State** _state )
    {
@@ -14839,7 +14827,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cmo( int startIdx,
       int endIdx,
@@ -15072,26 +15060,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct correl ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = correlLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_CORREL_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int correlState( struct TA_correl_State* _state,
       double inReal0,
       double inReal1,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int correlStateFree( struct TA_correl_State** _state )
    {
@@ -15100,7 +15085,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode correl( int startIdx,
       int endIdx,
@@ -15180,7 +15165,7 @@ public class Core {
    /* Generated */
    public int cosLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cos( int startIdx,
       int endIdx,
@@ -15208,20 +15193,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cos ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = cosLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_COS_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int cosState( struct TA_cos_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int cosStateFree( struct TA_cos_State** _state )
    {
@@ -15230,7 +15216,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cos( int startIdx,
       int endIdx,
@@ -15256,7 +15242,7 @@ public class Core {
    /* Generated */
    public int coshLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cosh( int startIdx,
       int endIdx,
@@ -15284,20 +15270,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct cosh ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = coshLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_COSH_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int coshState( struct TA_cosh_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int coshStateFree( struct TA_cosh_State** _state )
    {
@@ -15306,7 +15293,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode cosh( int startIdx,
       int endIdx,
@@ -15417,25 +15404,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct dema ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = demaLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_DEMA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int demaState( struct TA_dema_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int demaStateFree( struct TA_dema_State** _state )
    {
@@ -15444,7 +15428,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode dema( int startIdx,
       int endIdx,
@@ -15513,7 +15497,7 @@ public class Core {
    /* Generated */
    public int divLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode div( int startIdx,
       int endIdx,
@@ -15542,21 +15526,22 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct div ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = divLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_DIV_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int divState( struct TA_div_State* _state,
       double inReal0,
       double inReal1,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int divStateFree( struct TA_div_State** _state )
    {
@@ -15565,7 +15550,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode div( int startIdx,
       int endIdx,
@@ -15754,27 +15739,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct dx ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = dxLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_DX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int dxState( struct TA_dx_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int dxStateFree( struct TA_dx_State** _state )
    {
@@ -15783,7 +15765,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode dx( int startIdx,
       int endIdx,
@@ -16015,25 +15997,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct ema ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = emaLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_EMA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int emaState( struct TA_ema_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int emaStateFree( struct TA_ema_State** _state )
    {
@@ -16042,7 +16021,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ema( int startIdx,
       int endIdx,
@@ -16115,7 +16094,7 @@ public class Core {
    /* Generated */
    public int expLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode exp( int startIdx,
       int endIdx,
@@ -16143,20 +16122,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct exp ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = expLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_EXP_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int expState( struct TA_exp_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int expStateFree( struct TA_exp_State** _state )
    {
@@ -16165,7 +16145,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode exp( int startIdx,
       int endIdx,
@@ -16191,7 +16171,7 @@ public class Core {
    /* Generated */
    public int floorLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode floor( int startIdx,
       int endIdx,
@@ -16219,20 +16199,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct floor ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = floorLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_FLOOR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int floorState( struct TA_floor_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int floorStateFree( struct TA_floor_State** _state )
    {
@@ -16241,7 +16222,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode floor( int startIdx,
       int endIdx,
@@ -16403,20 +16384,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct htDcPeriod ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = htDcPeriodLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_HT_DCPERIOD_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int htDcPeriodState( struct TA_htDcPeriod_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int htDcPeriodStateFree( struct TA_htDcPeriod_State** _state )
    {
@@ -16425,7 +16407,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode htDcPeriod( int startIdx,
       int endIdx,
@@ -16739,20 +16721,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct htDcPhase ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = htDcPhaseLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_HT_DCPHASE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int htDcPhaseState( struct TA_htDcPhase_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
    {
@@ -16761,7 +16744,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode htDcPhase( int startIdx,
       int endIdx,
@@ -17080,21 +17063,22 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct htPhasor ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = htPhasorLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_HT_PHASOR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int htPhasorState( struct TA_htPhasor_State* _state,
       double inReal,
-      double **outInPhase,
-      double **outQuadrature )
+      double *outInPhase,
+      double *outQuadrature )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int htPhasorStateFree( struct TA_htPhasor_State** _state )
    {
@@ -17103,7 +17087,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode htPhasor( int startIdx,
       int endIdx,
@@ -17425,21 +17409,22 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct htSine ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = htSineLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_HT_SINE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int htSineState( struct TA_htSine_State* _state,
       double inReal,
-      double **outSine,
-      double **outLeadSine )
+      double *outSine,
+      double *outLeadSine )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int htSineStateFree( struct TA_htSine_State** _state )
    {
@@ -17448,7 +17433,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode htSine( int startIdx,
       int endIdx,
@@ -17789,20 +17774,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct htTrendline ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = htTrendlineLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_HT_TRENDLINE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int htTrendlineState( struct TA_htTrendline_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int htTrendlineStateFree( struct TA_htTrendline_State** _state )
    {
@@ -17811,7 +17797,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode htTrendline( int startIdx,
       int endIdx,
@@ -18195,20 +18181,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct htTrendMode ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = htTrendModeLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_HT_TRENDMODE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int htTrendModeState( struct TA_htTrendMode_State* _state,
       double inReal,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int htTrendModeStateFree( struct TA_htTrendMode_State** _state )
    {
@@ -18217,7 +18204,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode htTrendMode( int startIdx,
       int endIdx,
@@ -18503,26 +18490,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct imi ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = imiLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_IMI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int imiState( struct TA_imi_State* _state,
       double inOpen,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int imiStateFree( struct TA_imi_State** _state )
    {
@@ -18531,7 +18515,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode imi( int startIdx,
       int endIdx,
@@ -18693,25 +18677,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct kama ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = kamaLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_KAMA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int kamaState( struct TA_kama_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int kamaStateFree( struct TA_kama_State** _state )
    {
@@ -18720,7 +18701,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode kama( int startIdx,
       int endIdx,
@@ -18890,25 +18871,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct linearReg ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = linearRegLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_LINEARREG_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int linearRegState( struct TA_linearReg_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int linearRegStateFree( struct TA_linearReg_State** _state )
    {
@@ -18917,7 +18895,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode linearReg( int startIdx,
       int endIdx,
@@ -19045,25 +19023,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct linearRegAngle ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = linearRegAngleLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_LINEARREG_ANGLE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int linearRegAngleState( struct TA_linearRegAngle_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
    {
@@ -19072,7 +19047,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode linearRegAngle( int startIdx,
       int endIdx,
@@ -19199,25 +19174,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct linearRegIntercept ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = linearRegInterceptLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_LINEARREG_INTERCEPT_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int linearRegInterceptState( struct TA_linearRegIntercept_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
    {
@@ -19226,7 +19198,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode linearRegIntercept( int startIdx,
       int endIdx,
@@ -19351,25 +19323,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct linearRegSlope ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = linearRegSlopeLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_LINEARREG_SLOPE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int linearRegSlopeState( struct TA_linearRegSlope_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int linearRegSlopeStateFree( struct TA_linearRegSlope_State** _state )
    {
@@ -19378,7 +19347,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode linearRegSlope( int startIdx,
       int endIdx,
@@ -19434,7 +19403,7 @@ public class Core {
    /* Generated */
    public int lnLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ln( int startIdx,
       int endIdx,
@@ -19462,20 +19431,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct ln ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = lnLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_LN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int lnState( struct TA_ln_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int lnStateFree( struct TA_ln_State** _state )
    {
@@ -19484,7 +19454,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ln( int startIdx,
       int endIdx,
@@ -19510,7 +19480,7 @@ public class Core {
    /* Generated */
    public int log10Lookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode log10( int startIdx,
       int endIdx,
@@ -19538,20 +19508,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct log10 ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = log10Lookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_LOG10_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int log10State( struct TA_log10_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int log10StateFree( struct TA_log10_State** _state )
    {
@@ -19560,7 +19531,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode log10( int startIdx,
       int endIdx,
@@ -19593,7 +19564,7 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       if( optInTimePeriod <= 1 )
-         return 0;
+         return RetCode.Success ;
       switch( optInMAType )
       {
          case Sma :
@@ -19715,25 +19686,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct movingAverage ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
+      (*_state)->optInMAType = optInMAType;
       (*_state)->mem_size = movingAverageLookback (optInTimePeriod, optInMAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int movingAverageState( struct TA_movingAverage_State* _state,
       double inReal,
-      int optInTimePeriod,
-      MAType optInMAType, double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int movingAverageStateFree( struct TA_movingAverage_State** _state )
    {
@@ -19742,7 +19711,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode movingAverage( int startIdx,
       int endIdx,
@@ -20008,37 +19977,26 @@ public class Core {
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct macd ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInFastPeriod = optInFastPeriod;
+      (*_state)->optInSlowPeriod = optInSlowPeriod;
+      (*_state)->optInSignalPeriod = optInSignalPeriod;
       (*_state)->mem_size = macdLookback (optInFastPeriod, optInSlowPeriod, optInSignalPeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MACD_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int macdState( struct TA_macd_State* _state,
       double inReal,
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      int optInSignalPeriod,
-      double **outMACD,
-      double **outMACDSignal,
-      double **outMACDHist )
+      double *outMACD,
+      double *outMACDSignal,
+      double *outMACDHist )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int macdStateFree( struct TA_macd_State** _state )
    {
@@ -20047,7 +20005,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode macd( int startIdx,
       int endIdx,
@@ -20349,37 +20307,29 @@ public class Core {
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct macdExt ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInFastPeriod = optInFastPeriod;
+      (*_state)->optInFastMAType = optInFastMAType;
+      (*_state)->optInSlowPeriod = optInSlowPeriod;
+      (*_state)->optInSlowMAType = optInSlowMAType;
+      (*_state)->optInSignalPeriod = optInSignalPeriod;
+      (*_state)->optInSignalMAType = optInSignalMAType;
       (*_state)->mem_size = macdExtLookback (optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MACDEXT_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int macdExtState( struct TA_macdExt_State* _state,
       double inReal,
-      int optInFastPeriod,
-      MAType optInFastMAType, int optInSlowPeriod,
-      MAType optInSlowMAType, int optInSignalPeriod,
-      MAType optInSignalMAType, double **outMACD,
-      double **outMACDSignal,
-      double **outMACDHist )
+      double *outMACD,
+      double *outMACDSignal,
+      double *outMACDHist )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int macdExtStateFree( struct TA_macdExt_State** _state )
    {
@@ -20388,7 +20338,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode macdExt( int startIdx,
       int endIdx,
@@ -20551,27 +20501,24 @@ public class Core {
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct macdFix ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInSignalPeriod = optInSignalPeriod;
       (*_state)->mem_size = macdFixLookback (optInSignalPeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MACDFIX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int macdFixState( struct TA_macdFix_State* _state,
       double inReal,
-      int optInSignalPeriod,
-      double **outMACD,
-      double **outMACDSignal,
-      double **outMACDHist )
+      double *outMACD,
+      double *outMACDSignal,
+      double *outMACDHist )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
-         optInSignalPeriod = 9;
-      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int macdFixStateFree( struct TA_macdFix_State** _state )
    {
@@ -20580,7 +20527,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode macdFix( int startIdx,
       int endIdx,
@@ -20805,31 +20752,24 @@ public class Core {
       else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct mama ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInFastLimit = optInFastLimit;
+      (*_state)->optInSlowLimit = optInSlowLimit;
       (*_state)->mem_size = mamaLookback (optInFastLimit, optInSlowLimit );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MAMA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int mamaState( struct TA_mama_State* _state,
       double inReal,
-      double optInFastLimit,
-      double optInSlowLimit,
-      double **outMAMA,
-      double **outFAMA )
+      double *outMAMA,
+      double *outFAMA )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInFastLimit == (-4e+37) )
-         optInFastLimit = 5.000000e-1;
-      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
-         return RetCode.BadParam ;
-      if( optInSlowLimit == (-4e+37) )
-         optInSlowLimit = 5.000000e-2;
-      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int mamaStateFree( struct TA_mama_State** _state )
    {
@@ -20838,7 +20778,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode mama( int startIdx,
       int endIdx,
@@ -21125,31 +21065,25 @@ public class Core {
       else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct movingAverageVariablePeriod ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInMinPeriod = optInMinPeriod;
+      (*_state)->optInMaxPeriod = optInMaxPeriod;
+      (*_state)->optInMAType = optInMAType;
       (*_state)->mem_size = movingAverageVariablePeriodLookback (optInMinPeriod, optInMaxPeriod, optInMAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MAVP_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int movingAverageVariablePeriodState( struct TA_movingAverageVariablePeriod_State* _state,
       double inReal,
       double inPeriods,
-      int optInMinPeriod,
-      int optInMaxPeriod,
-      MAType optInMAType, double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
-         optInMinPeriod = 2;
-      else if( ((int)optInMinPeriod < 2) || ((int)optInMinPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInMaxPeriod == ( Integer.MIN_VALUE ) )
-         optInMaxPeriod = 30;
-      else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int movingAverageVariablePeriodStateFree( struct TA_movingAverageVariablePeriod_State** _state )
    {
@@ -21158,7 +21092,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode movingAverageVariablePeriod( int startIdx,
       int endIdx,
@@ -21331,25 +21265,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct max ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = maxLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MAX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int maxState( struct TA_max_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int maxStateFree( struct TA_max_State** _state )
    {
@@ -21358,7 +21289,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode max( int startIdx,
       int endIdx,
@@ -21507,25 +21438,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct maxIndex ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = maxIndexLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MAXINDEX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int maxIndexState( struct TA_maxIndex_State* _state,
       double inReal,
-      int optInTimePeriod,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int maxIndexStateFree( struct TA_maxIndex_State** _state )
    {
@@ -21534,7 +21462,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode maxIndex( int startIdx,
       int endIdx,
@@ -21603,7 +21531,7 @@ public class Core {
    /* Generated */
    public int medPriceLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode medPrice( int startIdx,
       int endIdx,
@@ -21632,21 +21560,22 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct medPrice ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = medPriceLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MEDPRICE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int medPriceState( struct TA_medPrice_State* _state,
       double inHigh,
       double inLow,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int medPriceStateFree( struct TA_medPrice_State** _state )
    {
@@ -21655,7 +21584,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode medPrice( int startIdx,
       int endIdx,
@@ -21836,28 +21765,25 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct mfi ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = mfiLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MFI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int mfiState( struct TA_mfi_State* _state,
       double inHigh,
       double inLow,
       double inClose,
       double inVolume,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int mfiStateFree( struct TA_mfi_State** _state )
    {
@@ -21866,7 +21792,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode mfi( int startIdx,
       int endIdx,
@@ -22073,25 +21999,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct midPoint ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = midPointLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MIDPOINT_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int midPointState( struct TA_midPoint_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int midPointStateFree( struct TA_midPoint_State** _state )
    {
@@ -22100,7 +22023,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode midPoint( int startIdx,
       int endIdx,
@@ -22220,26 +22143,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct midPrice ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = midPriceLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MIDPRICE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int midPriceState( struct TA_midPrice_State* _state,
       double inHigh,
       double inLow,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int midPriceStateFree( struct TA_midPrice_State** _state )
    {
@@ -22248,7 +22168,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode midPrice( int startIdx,
       int endIdx,
@@ -22384,25 +22304,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct min ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = minLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MIN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int minState( struct TA_min_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int minStateFree( struct TA_min_State** _state )
    {
@@ -22411,7 +22328,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode min( int startIdx,
       int endIdx,
@@ -22560,25 +22477,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct minIndex ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = minIndexLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MININDEX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int minIndexState( struct TA_minIndex_State* _state,
       double inReal,
-      int optInTimePeriod,
-      int **outInteger )
+      int *outInteger )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int minIndexStateFree( struct TA_minIndex_State** _state )
    {
@@ -22587,7 +22501,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode minIndex( int startIdx,
       int endIdx,
@@ -22761,26 +22675,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct minMax ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = minMaxLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MINMAX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int minMaxState( struct TA_minMax_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outMin,
-      double **outMax )
+      double *outMin,
+      double *outMax )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int minMaxStateFree( struct TA_minMax_State** _state )
    {
@@ -22789,7 +22700,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode minMax( int startIdx,
       int endIdx,
@@ -22988,26 +22899,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct minMaxIndex ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = minMaxIndexLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MINMAXINDEX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int minMaxIndexState( struct TA_minMaxIndex_State* _state,
       double inReal,
-      int optInTimePeriod,
-      int **outMinIdx,
-      int **outMaxIdx )
+      int *outMinIdx,
+      int *outMaxIdx )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )
    {
@@ -23016,7 +22924,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode minMaxIndex( int startIdx,
       int endIdx,
@@ -23276,27 +23184,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct minusDI ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = minusDILookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MINUS_DI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int minusDIState( struct TA_minusDI_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int minusDIStateFree( struct TA_minusDI_State** _state )
    {
@@ -23305,7 +23210,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode minusDI( int startIdx,
       int endIdx,
@@ -23599,26 +23504,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct minusDM ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = minusDMLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MINUS_DM_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int minusDMState( struct TA_minusDM_State* _state,
       double inHigh,
       double inLow,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int minusDMStateFree( struct TA_minusDM_State** _state )
    {
@@ -23627,7 +23529,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode minusDM( int startIdx,
       int endIdx,
@@ -23805,25 +23707,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct mom ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = momLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MOM_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int momState( struct TA_mom_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int momStateFree( struct TA_mom_State** _state )
    {
@@ -23832,7 +23731,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode mom( int startIdx,
       int endIdx,
@@ -23871,7 +23770,7 @@ public class Core {
    /* Generated */
    public int multLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode mult( int startIdx,
       int endIdx,
@@ -23900,21 +23799,22 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct mult ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = multLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_MULT_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int multState( struct TA_mult_State* _state,
       double inReal0,
       double inReal1,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int multStateFree( struct TA_mult_State** _state )
    {
@@ -23923,7 +23823,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode mult( int startIdx,
       int endIdx,
@@ -24056,27 +23956,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct natr ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = natrLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_NATR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int natrState( struct TA_natr_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int natrStateFree( struct TA_natr_State** _state )
    {
@@ -24085,7 +23982,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode natr( int startIdx,
       int endIdx,
@@ -24180,7 +24077,7 @@ public class Core {
    /* Generated */
    public int obvLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode obv( int startIdx,
       int endIdx,
@@ -24219,21 +24116,22 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct obv ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = obvLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_OBV_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int obvState( struct TA_obv_State* _state,
       double inReal,
       double inVolume,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int obvStateFree( struct TA_obv_State** _state )
    {
@@ -24242,7 +24140,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode obv( int startIdx,
       int endIdx,
@@ -24445,27 +24343,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct plusDI ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = plusDILookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_PLUS_DI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int plusDIState( struct TA_plusDI_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int plusDIStateFree( struct TA_plusDI_State** _state )
    {
@@ -24474,7 +24369,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode plusDI( int startIdx,
       int endIdx,
@@ -24768,26 +24663,23 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct plusDM ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = plusDMLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_PLUS_DM_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int plusDMState( struct TA_plusDM_State* _state,
       double inHigh,
       double inLow,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int plusDMStateFree( struct TA_plusDM_State** _state )
    {
@@ -24796,7 +24688,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode plusDM( int startIdx,
       int endIdx,
@@ -24987,30 +24879,24 @@ public class Core {
       else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct ppo ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInFastPeriod = optInFastPeriod;
+      (*_state)->optInSlowPeriod = optInSlowPeriod;
+      (*_state)->optInMAType = optInMAType;
       (*_state)->mem_size = ppoLookback (optInFastPeriod, optInSlowPeriod, optInMAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_PPO_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int ppoState( struct TA_ppo_State* _state,
       double inReal,
-      int optInFastPeriod,
-      int optInSlowPeriod,
-      MAType optInMAType, double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int ppoStateFree( struct TA_ppo_State** _state )
    {
@@ -25019,7 +24905,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ppo( int startIdx,
       int endIdx,
@@ -25117,25 +25003,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct roc ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = rocLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ROC_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int rocState( struct TA_roc_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int rocStateFree( struct TA_roc_State** _state )
    {
@@ -25144,7 +25027,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode roc( int startIdx,
       int endIdx,
@@ -25249,25 +25132,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct rocP ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = rocPLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ROCP_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int rocPState( struct TA_rocP_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int rocPStateFree( struct TA_rocP_State** _state )
    {
@@ -25276,7 +25156,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode rocP( int startIdx,
       int endIdx,
@@ -25381,25 +25261,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct rocR ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = rocRLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ROCR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int rocRState( struct TA_rocR_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int rocRStateFree( struct TA_rocR_State** _state )
    {
@@ -25408,7 +25285,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode rocR( int startIdx,
       int endIdx,
@@ -25513,25 +25390,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct rocR100 ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = rocR100Lookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ROCR100_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int rocR100State( struct TA_rocR100_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 10;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int rocR100StateFree( struct TA_rocR100_State** _state )
    {
@@ -25540,7 +25414,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode rocR100( int startIdx,
       int endIdx,
@@ -25742,25 +25616,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct rsi ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = rsiLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_RSI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int rsiState( struct TA_rsi_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int rsiStateFree( struct TA_rsi_State** _state )
    {
@@ -25769,7 +25640,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode rsi( int startIdx,
       int endIdx,
@@ -26089,31 +25960,24 @@ public class Core {
       else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct sar ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInAcceleration = optInAcceleration;
+      (*_state)->optInMaximum = optInMaximum;
       (*_state)->mem_size = sarLookback (optInAcceleration, optInMaximum );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_SAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int sarState( struct TA_sar_State* _state,
       double inHigh,
       double inLow,
-      double optInAcceleration,
-      double optInMaximum,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInAcceleration == (-4e+37) )
-         optInAcceleration = 2.000000e-2;
-      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInMaximum == (-4e+37) )
-         optInMaximum = 2.000000e-1;
-      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int sarStateFree( struct TA_sar_State** _state )
    {
@@ -26122,7 +25986,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sar( int startIdx,
       int endIdx,
@@ -26584,61 +26448,30 @@ public class Core {
       else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct sarExt ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInStartValue = optInStartValue;
+      (*_state)->optInOffsetOnReverse = optInOffsetOnReverse;
+      (*_state)->optInAccelerationInitLong = optInAccelerationInitLong;
+      (*_state)->optInAccelerationLong = optInAccelerationLong;
+      (*_state)->optInAccelerationMaxLong = optInAccelerationMaxLong;
+      (*_state)->optInAccelerationInitShort = optInAccelerationInitShort;
+      (*_state)->optInAccelerationShort = optInAccelerationShort;
+      (*_state)->optInAccelerationMaxShort = optInAccelerationMaxShort;
       (*_state)->mem_size = sarExtLookback (optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_SAREXT_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int sarExtState( struct TA_sarExt_State* _state,
       double inHigh,
       double inLow,
-      double optInStartValue,
-      double optInOffsetOnReverse,
-      double optInAccelerationInitLong,
-      double optInAccelerationLong,
-      double optInAccelerationMaxLong,
-      double optInAccelerationInitShort,
-      double optInAccelerationShort,
-      double optInAccelerationMaxShort,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInStartValue == (-4e+37) )
-         optInStartValue = 0.000000e+0;
-      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInOffsetOnReverse == (-4e+37) )
-         optInOffsetOnReverse = 0.000000e+0;
-      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInAccelerationInitLong == (-4e+37) )
-         optInAccelerationInitLong = 2.000000e-2;
-      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInAccelerationLong == (-4e+37) )
-         optInAccelerationLong = 2.000000e-2;
-      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInAccelerationMaxLong == (-4e+37) )
-         optInAccelerationMaxLong = 2.000000e-1;
-      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInAccelerationInitShort == (-4e+37) )
-         optInAccelerationInitShort = 2.000000e-2;
-      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInAccelerationShort == (-4e+37) )
-         optInAccelerationShort = 2.000000e-2;
-      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
-         return RetCode.BadParam ;
-      if( optInAccelerationMaxShort == (-4e+37) )
-         optInAccelerationMaxShort = 2.000000e-1;
-      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int sarExtStateFree( struct TA_sarExt_State** _state )
    {
@@ -26647,7 +26480,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sarExt( int startIdx,
       int endIdx,
@@ -26870,7 +26703,7 @@ public class Core {
    /* Generated */
    public int sinLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sin( int startIdx,
       int endIdx,
@@ -26898,20 +26731,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct sin ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = sinLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_SIN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int sinState( struct TA_sin_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int sinStateFree( struct TA_sin_State** _state )
    {
@@ -26920,7 +26754,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sin( int startIdx,
       int endIdx,
@@ -26946,7 +26780,7 @@ public class Core {
    /* Generated */
    public int sinhLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sinh( int startIdx,
       int endIdx,
@@ -26974,20 +26808,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct sinh ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = sinhLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_SINH_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int sinhState( struct TA_sinh_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int sinhStateFree( struct TA_sinh_State** _state )
    {
@@ -26996,7 +26831,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sinh( int startIdx,
       int endIdx,
@@ -27097,25 +26932,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct sma ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = smaLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_SMA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int smaState( struct TA_sma_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int smaStateFree( struct TA_sma_State** _state )
    {
@@ -27124,7 +26956,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sma( int startIdx,
       int endIdx,
@@ -27188,7 +27020,7 @@ public class Core {
    /* Generated */
    public int sqrtLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sqrt( int startIdx,
       int endIdx,
@@ -27216,20 +27048,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct sqrt ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = sqrtLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_SQRT_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int sqrtState( struct TA_sqrt_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int sqrtStateFree( struct TA_sqrt_State** _state )
    {
@@ -27238,7 +27071,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sqrt( int startIdx,
       int endIdx,
@@ -27380,30 +27213,23 @@ public class Core {
       else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct stdDev ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
+      (*_state)->optInNbDev = optInNbDev;
       (*_state)->mem_size = stdDevLookback (optInTimePeriod, optInNbDev );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_STDDEV_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int stdDevState( struct TA_stdDev_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double optInNbDev,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      if( optInNbDev == (-4e+37) )
-         optInNbDev = 1.000000e+0;
-      else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int stdDevStateFree( struct TA_stdDev_State** _state )
    {
@@ -27412,7 +27238,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode stdDev( int startIdx,
       int endIdx,
@@ -27696,38 +27522,29 @@ public class Core {
       else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct stoch ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInFastK_Period = optInFastK_Period;
+      (*_state)->optInSlowK_Period = optInSlowK_Period;
+      (*_state)->optInSlowK_MAType = optInSlowK_MAType;
+      (*_state)->optInSlowD_Period = optInSlowD_Period;
+      (*_state)->optInSlowD_MAType = optInSlowD_MAType;
       (*_state)->mem_size = stochLookback (optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_STOCH_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int stochState( struct TA_stoch_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInFastK_Period,
-      int optInSlowK_Period,
-      MAType optInSlowK_MAType, int optInSlowD_Period,
-      MAType optInSlowD_MAType, double **outSlowK,
-      double **outSlowD )
+      double *outSlowK,
+      double *outSlowD )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSlowK_Period == ( Integer.MIN_VALUE ) )
-         optInSlowK_Period = 3;
-      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSlowD_Period == ( Integer.MIN_VALUE ) )
-         optInSlowD_Period = 3;
-      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int stochStateFree( struct TA_stoch_State** _state )
    {
@@ -27736,7 +27553,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode stoch( int startIdx,
       int endIdx,
@@ -28041,33 +27858,27 @@ public class Core {
       else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct stochF ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInFastK_Period = optInFastK_Period;
+      (*_state)->optInFastD_Period = optInFastD_Period;
+      (*_state)->optInFastD_MAType = optInFastD_MAType;
       (*_state)->mem_size = stochFLookback (optInFastK_Period, optInFastD_Period, optInFastD_MAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_STOCHF_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int stochFState( struct TA_stochF_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInFastK_Period,
-      int optInFastD_Period,
-      MAType optInFastD_MAType, double **outFastK,
-      double **outFastD )
+      double *outFastK,
+      double *outFastD )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInFastD_Period == ( Integer.MIN_VALUE ) )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int stochFStateFree( struct TA_stochF_State** _state )
    {
@@ -28076,7 +27887,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode stochF( int startIdx,
       int endIdx,
@@ -28324,36 +28135,26 @@ public class Core {
       else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct stochRsi ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
+      (*_state)->optInFastK_Period = optInFastK_Period;
+      (*_state)->optInFastD_Period = optInFastD_Period;
+      (*_state)->optInFastD_MAType = optInFastD_MAType;
       (*_state)->mem_size = stochRsiLookback (optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_STOCHRSI_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int stochRsiState( struct TA_stochRsi_State* _state,
       double inReal,
-      int optInTimePeriod,
-      int optInFastK_Period,
-      int optInFastD_Period,
-      MAType optInFastD_MAType, double **outFastK,
-      double **outFastD )
+      double *outFastK,
+      double *outFastD )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInFastD_Period == ( Integer.MIN_VALUE ) )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int stochRsiStateFree( struct TA_stochRsi_State** _state )
    {
@@ -28362,7 +28163,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode stochRsi( int startIdx,
       int endIdx,
@@ -28448,7 +28249,7 @@ public class Core {
    /* Generated */
    public int subLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sub( int startIdx,
       int endIdx,
@@ -28477,21 +28278,22 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct sub ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = subLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_SUB_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int subState( struct TA_sub_State* _state,
       double inReal0,
       double inReal1,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int subStateFree( struct TA_sub_State** _state )
    {
@@ -28500,7 +28302,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sub( int startIdx,
       int endIdx,
@@ -28590,25 +28392,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct sum ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = sumLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_SUM_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int sumState( struct TA_sum_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int sumStateFree( struct TA_sum_State** _state )
    {
@@ -28617,7 +28416,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode sum( int startIdx,
       int endIdx,
@@ -28813,30 +28612,23 @@ public class Core {
       else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct t3 ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
+      (*_state)->optInVFactor = optInVFactor;
       (*_state)->mem_size = t3Lookback (optInTimePeriod, optInVFactor );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_T3_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int t3State( struct TA_t3_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double optInVFactor,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      if( optInVFactor == (-4e+37) )
-         optInVFactor = 7.000000e-1;
-      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int t3StateFree( struct TA_t3_State** _state )
    {
@@ -28845,7 +28637,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode t3( int startIdx,
       int endIdx,
@@ -28968,7 +28760,7 @@ public class Core {
    /* Generated */
    public int tanLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode tan( int startIdx,
       int endIdx,
@@ -28996,20 +28788,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct tan ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = tanLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_TAN_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int tanState( struct TA_tan_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int tanStateFree( struct TA_tan_State** _state )
    {
@@ -29018,7 +28811,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode tan( int startIdx,
       int endIdx,
@@ -29044,7 +28837,7 @@ public class Core {
    /* Generated */
    public int tanhLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode tanh( int startIdx,
       int endIdx,
@@ -29072,20 +28865,21 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct tanh ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = tanhLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_TANH_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int tanhState( struct TA_tanh_State* _state,
       double inReal,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int tanhStateFree( struct TA_tanh_State** _state )
    {
@@ -29094,7 +28888,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode tanh( int startIdx,
       int endIdx,
@@ -29214,25 +29008,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct tema ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = temaLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_TEMA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int temaState( struct TA_tema_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int temaStateFree( struct TA_tema_State** _state )
    {
@@ -29241,7 +29032,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode tema( int startIdx,
       int endIdx,
@@ -29374,22 +29165,23 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct trueRange ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = trueRangeLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_TRANGE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int trueRangeState( struct TA_trueRange_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int trueRangeStateFree( struct TA_trueRange_State** _state )
    {
@@ -29398,7 +29190,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode trueRange( int startIdx,
       int endIdx,
@@ -29586,25 +29378,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct trima ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = trimaLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_TRIMA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int trimaState( struct TA_trima_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int trimaStateFree( struct TA_trima_State** _state )
    {
@@ -29613,7 +29402,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode trima( int startIdx,
       int endIdx,
@@ -29843,25 +29632,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct trix ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = trixLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_TRIX_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int trixState( struct TA_trix_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int trixStateFree( struct TA_trix_State** _state )
    {
@@ -29870,7 +29656,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode trix( int startIdx,
       int endIdx,
@@ -30030,25 +29816,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct tsf ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = tsfLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_TSF_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int tsfState( struct TA_tsf_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int tsfStateFree( struct TA_tsf_State** _state )
    {
@@ -30057,7 +29840,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode tsf( int startIdx,
       int endIdx,
@@ -30116,7 +29899,7 @@ public class Core {
    /* Generated */
    public int typPriceLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode typPrice( int startIdx,
       int endIdx,
@@ -30148,22 +29931,23 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct typPrice ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = typPriceLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_TYPPRICE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int typPriceState( struct TA_typPrice_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int typPriceStateFree( struct TA_typPrice_State** _state )
    {
@@ -30172,7 +29956,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode typPrice( int startIdx,
       int endIdx,
@@ -30349,37 +30133,26 @@ public class Core {
       else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct ultOsc ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod1 = optInTimePeriod1;
+      (*_state)->optInTimePeriod2 = optInTimePeriod2;
+      (*_state)->optInTimePeriod3 = optInTimePeriod3;
       (*_state)->mem_size = ultOscLookback (optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_ULTOSC_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int ultOscState( struct TA_ultOsc_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod1,
-      int optInTimePeriod2,
-      int optInTimePeriod3,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod1 == ( Integer.MIN_VALUE ) )
-         optInTimePeriod1 = 7;
-      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInTimePeriod2 == ( Integer.MIN_VALUE ) )
-         optInTimePeriod2 = 14;
-      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInTimePeriod3 == ( Integer.MIN_VALUE ) )
-         optInTimePeriod3 = 28;
-      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int ultOscStateFree( struct TA_ultOsc_State** _state )
    {
@@ -30388,7 +30161,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode ultOsc( int startIdx,
       int endIdx,
@@ -30604,30 +30377,23 @@ public class Core {
       else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct variance ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
+      (*_state)->optInNbDev = optInNbDev;
       (*_state)->mem_size = varianceLookback (optInTimePeriod, optInNbDev );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_VAR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int varianceState( struct TA_variance_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double optInNbDev,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      if( optInNbDev == (-4e+37) )
-         optInNbDev = 1.000000e+0;
-      else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int varianceStateFree( struct TA_variance_State** _state )
    {
@@ -30636,7 +30402,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode variance( int startIdx,
       int endIdx,
@@ -30717,7 +30483,7 @@ public class Core {
    /* Generated */
    public int wclPriceLookback( )
    {
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode wclPrice( int startIdx,
       int endIdx,
@@ -30749,22 +30515,23 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct wclPrice ));
+      (*_state)->mem_index = 0;
       (*_state)->mem_size = wclPriceLookback ();
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_WCLPRICE_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int wclPriceState( struct TA_wclPrice_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int wclPriceStateFree( struct TA_wclPrice_State** _state )
    {
@@ -30773,7 +30540,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode wclPrice( int startIdx,
       int endIdx,
@@ -30915,27 +30682,24 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct willR ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = willRLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_WILLR_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int willRState( struct TA_willR_State* _state,
       double inHigh,
       double inLow,
       double inClose,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 14;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int willRStateFree( struct TA_willR_State** _state )
    {
@@ -30944,7 +30708,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode willR( int startIdx,
       int endIdx,
@@ -31124,25 +30888,22 @@ public class Core {
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       *_state = malloc(sizeof(struct wma ));
+      (*_state)->mem_index = 0;
+      (*_state)->optInTimePeriod = optInTimePeriod;
       (*_state)->mem_size = wmaLookback (optInTimePeriod );
       if ((*_state)->mem_size > 0)
          (*_state)->memory = malloc(sizeof(struct TA_WMA_Data)*(*_state)->mem_size);
       else
          (*_state)->memory = NULL;
-      return 0;
+      return RetCode.Success ;
    }
    public int wmaState( struct TA_wma_State* _state,
       double inReal,
-      int optInTimePeriod,
-      double **outReal )
+      double *outReal )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
-         optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
-         return RetCode.BadParam ;
-      return 0;
+      return RetCode.Success ;
    }
    public int wmaStateFree( struct TA_wma_State** _state )
    {
@@ -31151,7 +30912,7 @@ public class Core {
       if (*_state != NULL) {
          if ((*_state)->memory != NULL) free((*_state)->memory);
          free(*_state); *_state = NULL;}
-      return 0;
+      return RetCode.Success ;
    }
    public RetCode wma( int startIdx,
       int endIdx,

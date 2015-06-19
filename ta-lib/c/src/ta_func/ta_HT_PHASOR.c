@@ -417,6 +417,7 @@
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    *_state = malloc(sizeof(struct TA_HT_PHASOR_State));
+/* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->mem_size = TA_HT_PHASOR_Lookback();
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_HT_PHASOR_Data)*(*_state)->mem_size);
@@ -429,7 +430,7 @@
    /* insert state init code here. */
 
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -437,18 +438,18 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ int Core::HtPhasorState( struct TA_HtPhasor_State* _state,
 /* Generated */                        cli::array<double>^ inReal,
-/* Generated */                        cli::array<double>^  **outInPhase,
-/* Generated */                        cli::array<double>^  **outQuadrature )
+/* Generated */                        cli::array<double>^  *outInPhase,
+/* Generated */                        cli::array<double>^  *outQuadrature )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int htPhasorState( struct TA_htPhasor_State* _state,
 /* Generated */                         double       inReal,
-/* Generated */                         double        **outInPhase,
-/* Generated */                         double        **outQuadrature )
+/* Generated */                         double        *outInPhase,
+/* Generated */                         double        *outQuadrature )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_HT_PHASOR_State( struct TA_HT_PHASOR_State* _state,
 /* Generated */                                             const double inReal,
-/* Generated */                                             double        **outInPhase,
-/* Generated */                                             double        **outQuadrature )
+/* Generated */                                             double        *outInPhase,
+/* Generated */                                             double        *outQuadrature )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -477,7 +478,7 @@
 
    /* insert state based TA dunc code here. */
 
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -511,7 +512,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return 0;
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
