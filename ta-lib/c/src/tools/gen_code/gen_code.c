@@ -2005,29 +2005,53 @@ static void printFunc( FILE *out,
       fprintf( out, "%s,\n", endIdxString );
    }
 
+
    if (stateInitSignature || stateFuncSignature || stateFreeSignature)
    {
+       unsigned int last_arg = stateFreeSignature || (!stateFuncSignature && funcInfo->nbOptInput == 0);
+
+       if (frame)
+           fprintf( out, " %s(struct TA_%s_State**) params->_state%s\n", stateFuncSignature?"*":"", funcName, last_arg?"":"," );
+       else
        if (!validationCode) {
-       fprintf( out, "struct TA_%s_State* _state", funcName );
-       if (!stateFreeSignature && (stateFuncSignature || funcInfo->nbOptInput > 0))
+       fprintf( out, "struct TA_%s_State*", funcName );
+       if (!stateFuncSignature) fprintf( out, "*");
+       fprintf( out, " _state");
+       if (!last_arg)
            fprintf( out, ",\n"); // hope that will be more params later
-       } else
-       if (stateInitSignature) {
-           printIndent( out, indent );
-           fprintf( out, "if (_state != NULL)\n");
-           printIndent( out, indent+6 );
-           fprintf( out, "return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n");
-       } else
-       if (stateFuncSignature || stateFreeSignature) {
+       } else {
+
            printIndent( out, indent );
            fprintf( out, "if (_state == NULL)\n");
            printIndent( out, indent+6 );
            fprintf( out, "return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n");
+
+       if (stateInitSignature) {
+           printIndent( out, indent);
+           fprintf( out, "*_state = malloc(sizeof(struct TA_%s_State));\n", funcName);
+           printIndent( out, indent);
+           fprintf( out, "(*_state)->mem_size = 100;\nif ((*_state)->mem_size > 0)\n");
+           printIndent( out, indent+6 );
+           fprintf( out, "(*_state)->memory = malloc(sizeof(struct TA_%s_Data)*(*_state)->mem_size);\n", funcName);
+           printIndent( out, indent );
+           fprintf( out, "else\n");
+           printIndent( out, indent+6 );
+           fprintf( out, "(*_state)->memory = NULL;");
+       } else
+       if (stateFreeSignature) {
+           printIndent( out, indent );
+           fprintf( out, "if (*_state != NULL) {\n");
+           printIndent( out, indent+6 );
+           fprintf( out, "if ((*_state)->memory != NULL) free((*_state)->memory);\n");
+           printIndent( out, indent+6 );
+           fprintf( out, "free(*_state); *_state = NULL;}\n");
+       }
+
        }
    }
 
    /* Go through all the input. */
-   if( !lookbackSignature && !stateInitSignature && !stateFreeSignature )
+   if( !lookbackSignature && !lookbackValidationCode && !stateInitSignature && !stateFreeSignature )
    {
       if( validationCode )
       {
@@ -2135,7 +2159,7 @@ static void printFunc( FILE *out,
                {
                   printIndent( out, indent );
                   if( frame )
-                     fprintf( out, "params->in[%d].data.inPrice.open, /*", paramNb );
+                     fprintf( out, "%sparams->in[%d].data.inPrice.open, /*", stateFuncSignature?"*":"", paramNb );
                   if( arrayToSubArrayCnvt )
 				  {
                      fprintf( out, "              gcnew SubArrayFrom1D<%s>(inOpen,0)", inputDoubleArrayType );
@@ -2156,7 +2180,7 @@ static void printFunc( FILE *out,
                {
                   printIndent( out, indent );
                   if( frame )
-                     fprintf( out, "params->in[%d].data.inPrice.high, /*", paramNb );
+                     fprintf( out, "%sparams->in[%d].data.inPrice.high, /*", stateFuncSignature?"*":"", paramNb );
                   if( arrayToSubArrayCnvt )
 				  {
                      fprintf( out, "              gcnew SubArrayFrom1D<%s>(inHigh,0)", inputDoubleArrayType );
@@ -2177,7 +2201,7 @@ static void printFunc( FILE *out,
                {
                   printIndent( out, indent );
                   if( frame )
-                     fprintf( out, "params->in[%d].data.inPrice.low, /*", paramNb );
+                     fprintf( out, "%sparams->in[%d].data.inPrice.low, /*", stateFuncSignature?"*":"", paramNb );
                   if( arrayToSubArrayCnvt )
 				  {
 					  fprintf( out, "              gcnew SubArrayFrom1D<%s>(inLow,0)", inputDoubleArrayType );
@@ -2199,7 +2223,7 @@ static void printFunc( FILE *out,
                {
                   printIndent( out, indent );
                   if( frame )
-                     fprintf( out, "params->in[%d].data.inPrice.close, /*", paramNb );
+                     fprintf( out, "%sparams->in[%d].data.inPrice.close, /*", stateFuncSignature?"*":"", paramNb );
                   if( arrayToSubArrayCnvt )
 				  {
 					  fprintf( out, "              gcnew SubArrayFrom1D<%s>(inClose,0)", inputDoubleArrayType );
@@ -2221,7 +2245,7 @@ static void printFunc( FILE *out,
                {
                   printIndent( out, indent );
                   if( frame )
-                     fprintf( out, "params->in[%d].data.inPrice.volume, /*", paramNb );
+                     fprintf( out, "%sparams->in[%d].data.inPrice.volume, /*", stateFuncSignature?"*":"", paramNb );
                   if( arrayToSubArrayCnvt )
 				  {
 					  fprintf( out, "              gcnew SubArrayFrom1D<%s>(inVolume,0)", inputDoubleArrayType );
@@ -2243,7 +2267,7 @@ static void printFunc( FILE *out,
                {
                   printIndent( out, indent );
                   if( frame )
-                     fprintf( out, "params->in[%d].data.inPrice.openInterest, /*", paramNb );
+                     fprintf( out, "%sparams->in[%d].data.inPrice.openInterest, /*", stateFuncSignature?"*":"", paramNb );
                   if( arrayToSubArrayCnvt )
 				  {
 					  fprintf( out, "              gcnew SubArrayFrom1D<%s>(inOpenInterest,0)", inputDoubleArrayType );
@@ -2288,7 +2312,7 @@ static void printFunc( FILE *out,
             {
 				
                if( frame )
-                  fprintf( out, "params->in[%d].data.%s, /*", paramNb, defaultParamName );
+                  fprintf( out, "%sparams->in[%d].data.%s, /*", stateFuncSignature?"*":"", paramNb, defaultParamName );
                if( outputForSWIG )
                   fprintf( out, "%-*s%s%s /* %s */",
                            prototype? 12 : 0,
@@ -2332,7 +2356,7 @@ static void printFunc( FILE *out,
        printIndent( out, indent );
        print( out, "};\n"); //close Data struct
        //start main struct
-       PRINT_STRUCT_NAME(prefix, funcName, "Struct {\n");
+       PRINT_STRUCT_NAME(prefix, funcName, "State {\n");
        printIndent( out, indent );
        print( out, "int mem_size;\n");
        printIndent( out, indent );
@@ -2531,6 +2555,7 @@ static void printFunc( FILE *out,
    {
        printIndent( out, indent );
        fprintf( out, "};\n");
+//       PRINT_STRUCT_NAME(prefix, funcName, "Struct; // trigger declaration\n");
    }
 
    /* Go through all the output */
@@ -2624,7 +2649,7 @@ static void printFunc( FILE *out,
          {
             printIndent( out, indent );
             if( frame )
-               fprintf( out, "params->out[%d].data.%s%s /*",
+               fprintf( out, "%sparams->out[%d].data.%s%s /*", stateFuncSignature?"&":"",
                       paramNb, defaultParamName,
                       lastParam? "":"," );
 
@@ -2632,7 +2657,7 @@ static void printFunc( FILE *out,
                fprintf( out, "%-*s %s*%s%s /* %s */",
                         prototype? 12 : 0,
                         prototype? typeString : "",                     
-                        stateFuncSignature?"&":"",
+                        stateFuncSignature?"**":"",
                         defaultParamName,
                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "",
                         paramName );
@@ -2645,7 +2670,7 @@ static void printFunc( FILE *out,
                fprintf( out, "%-*s  %s%s%s",
                         prototype? 12 : 0,
                         prototype? typeString : "",
-                        stateFuncSignature?"&":"",
+                        stateFuncSignature?"**":"",
                         paramName,
                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 			}
@@ -3452,12 +3477,6 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    print( out, "\n" );
    print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
    print( out, "\n" );
-   print( out, "   /* Validate the requested output range. */\n" );
-   print( out, "   if( startIdx < 0 )\n" );
-   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);\n" );
-   print( out, "   if( (endIdx < 0) || (endIdx < startIdx))\n" );
-   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);\n" );
-   print( out, "\n" );
    /* Generate the code for checking the parameters.
     * Also generates the code for setting up the
     * default values.
@@ -3496,12 +3515,6 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    print( out, "\n" );
    print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
    print( out, "\n" );
-   print( out, "   /* Validate the requested output range. */\n" );
-   print( out, "   if( startIdx < 0 )\n" );
-   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);\n" );
-   print( out, "   if( (endIdx < 0) || (endIdx < startIdx))\n" );
-   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);\n" );
-   print( out, "\n" );
    /* Generate the code for checking the parameters.
     * Also generates the code for setting up the
     * default values.
@@ -3539,12 +3552,6 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    genPrefix = 1;
    print( out, "\n" );
    print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
-   print( out, "\n" );
-   print( out, "   /* Validate the requested output range. */\n" );
-   print( out, "   if( startIdx < 0 )\n" );
-   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);\n" );
-   print( out, "   if( (endIdx < 0) || (endIdx < startIdx))\n" );
-   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);\n" );
    print( out, "\n" );
    /* Generate the code for checking the parameters.
     * Also generates the code for setting up the

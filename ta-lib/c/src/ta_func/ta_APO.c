@@ -98,9 +98,6 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */    #if !defined(_JAVA)
-/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    /* min/max are checked for optInFastPeriod. */
 /* Generated */    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastPeriod = 12;
@@ -400,17 +397,17 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::ApoStateInit( struct TA_Apo_State* _state,
+/* Generated */ int Core::ApoStateInit( struct TA_Apo_State** _state,
 /* Generated */                       int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                       int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                       MAType        optInMAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int apoStateInit( struct TA_apo_State* _state,
+/* Generated */ public int apoStateInit( struct TA_apo_State** _state,
 /* Generated */                        int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                        int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                        MAType        optInMAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_APO_StateInit( struct TA_APO_State* _state,
+/* Generated */ TA_LIB_API int TA_APO_StateInit( struct TA_APO_State** _state,
 /* Generated */                                           int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                           int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                                           TA_MAType     optInMAType ) /* Generated */ 
@@ -424,15 +421,14 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
-/* Generated */    if (_state != NULL)
+/* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    /* min/max are checked for optInFastPeriod. */
+/* Generated */    *_state = malloc(sizeof(struct TA_APO_State));
+/* Generated */    (*_state)->mem_size = 100;
+if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_APO_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */    /* min/max are checked for optInFastPeriod. */
 /* Generated */    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastPeriod = 12;
 /* Generated */    else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
@@ -469,19 +465,19 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /* Generated */                   cli::array<double>^ inReal,
 /* Generated */                   int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                   int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                   MAType        optInMAType,/* Generated */                   cli::array<double>^  &outReal )
+/* Generated */                   MAType        optInMAType,/* Generated */                   cli::array<double>^  **outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int apoState( struct TA_apo_State* _state,
 /* Generated */                    double       inReal,
 /* Generated */                    int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                    int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                    MAType        optInMAType,/* Generated */                    double        &outReal )
+/* Generated */                    MAType        optInMAType,/* Generated */                    double        **outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_APO_State( struct TA_APO_State* _state,
 /* Generated */                                       const double inReal,
 /* Generated */                                       int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                       int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                                       TA_MAType     optInMAType,/* Generated */                                       double        &outReal )
+/* Generated */                                       TA_MAType     optInMAType,/* Generated */                                       double        **outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -490,12 +486,6 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -538,13 +528,13 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::ApoStateFree( struct TA_Apo_State* _state )
+/* Generated */ int Core::ApoStateFree( struct TA_Apo_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int apoStateFree( struct TA_apo_State* _state )
+/* Generated */ public int apoStateFree( struct TA_apo_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_APO_StateFree( struct TA_APO_State* _state )
+/* Generated */ TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -555,14 +545,11 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if (*_state != NULL) {
+/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
+/* Generated */          free(*_state); *_state = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

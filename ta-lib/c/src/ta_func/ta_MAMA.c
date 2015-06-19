@@ -98,9 +98,6 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */    #if !defined(_JAVA)
-/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    if( optInFastLimit == TA_REAL_DEFAULT )
 /* Generated */       optInFastLimit = 5.000000e-1;
 /* Generated */    else if( (optInFastLimit < 1.000000e-2) ||/* Generated */  (optInFastLimit > 9.900000e-1) )
@@ -496,17 +493,17 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MamaStateInit( struct TA_Mama_State* _state,
+/* Generated */ int Core::MamaStateInit( struct TA_Mama_State** _state,
 /* Generated */                        double        optInFastLimit, /* From 0.01 to 0.99 */
 /* Generated */                        double        optInSlowLimit )  /* From 0.01 to 0.99 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mamaStateInit( struct TA_mama_State* _state,
+/* Generated */ public int mamaStateInit( struct TA_mama_State** _state,
 /* Generated */                         double        optInFastLimit, /* From 0.01 to 0.99 */
 /* Generated */                         double        optInSlowLimit )  /* From 0.01 to 0.99 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAMA_StateInit( struct TA_MAMA_State* _state,
+/* Generated */ TA_LIB_API int TA_MAMA_StateInit( struct TA_MAMA_State** _state,
 /* Generated */                                            double        optInFastLimit, /* From 0.01 to 0.99 */
 /* Generated */                                            double        optInSlowLimit )  /* From 0.01 to 0.99 */
 /* Generated */ 
@@ -520,15 +517,14 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
-/* Generated */    if (_state != NULL)
+/* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    if( optInFastLimit == TA_REAL_DEFAULT )
+/* Generated */    *_state = malloc(sizeof(struct TA_MAMA_State));
+/* Generated */    (*_state)->mem_size = 100;
+if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MAMA_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */    if( optInFastLimit == TA_REAL_DEFAULT )
 /* Generated */       optInFastLimit = 5.000000e-1;
 /* Generated */    else if( (optInFastLimit < 1.000000e-2) ||/* Generated */  (optInFastLimit > 9.900000e-1) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -556,22 +552,22 @@
 /* Generated */                    cli::array<double>^ inReal,
 /* Generated */                    double        optInFastLimit, /* From 0.01 to 0.99 */
 /* Generated */                    double        optInSlowLimit, /* From 0.01 to 0.99 */
-/* Generated */                    cli::array<double>^  &outMAMA,
-/* Generated */                    cli::array<double>^  &outFAMA )
+/* Generated */                    cli::array<double>^  **outMAMA,
+/* Generated */                    cli::array<double>^  **outFAMA )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int mamaState( struct TA_mama_State* _state,
 /* Generated */                     double       inReal,
 /* Generated */                     double        optInFastLimit, /* From 0.01 to 0.99 */
 /* Generated */                     double        optInSlowLimit, /* From 0.01 to 0.99 */
-/* Generated */                     double        &outMAMA,
-/* Generated */                     double        &outFAMA )
+/* Generated */                     double        **outMAMA,
+/* Generated */                     double        **outFAMA )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_MAMA_State( struct TA_MAMA_State* _state,
 /* Generated */                                        const double inReal,
 /* Generated */                                        double        optInFastLimit, /* From 0.01 to 0.99 */
 /* Generated */                                        double        optInSlowLimit, /* From 0.01 to 0.99 */
-/* Generated */                                        double        &outMAMA,
-/* Generated */                                        double        &outFAMA )
+/* Generated */                                        double        **outMAMA,
+/* Generated */                                        double        **outFAMA )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -580,12 +576,6 @@
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -622,13 +612,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MamaStateFree( struct TA_Mama_State* _state )
+/* Generated */ int Core::MamaStateFree( struct TA_Mama_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mamaStateFree( struct TA_mama_State* _state )
+/* Generated */ public int mamaStateFree( struct TA_mama_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State* _state )
+/* Generated */ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -639,14 +629,11 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if (*_state != NULL) {
+/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
+/* Generated */          free(*_state); *_state = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

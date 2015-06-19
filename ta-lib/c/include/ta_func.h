@@ -98,15 +98,15 @@ TA_LIB_API struct TA_ACCBANDS_Data {
                                               const double inLow;
                                               const double inClose;
                                               };
-TA_LIB_API struct TA_ACCBANDS_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_ACCBANDS_Data* memory;
-                                     int           optInTimePeriod; /* From 2 to 100000 */
-                                     };
+TA_LIB_API struct TA_ACCBANDS_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_ACCBANDS_Data* memory;
+                                    int           optInTimePeriod; /* From 2 to 100000 */
+                                    };
 
 
-TA_LIB_API int TA_ACCBANDS_StateInit( struct TA_ACCBANDS_State* _state,
+TA_LIB_API int TA_ACCBANDS_StateInit( struct TA_ACCBANDS_State** _state,
                                                int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -115,11 +115,11 @@ TA_LIB_API int TA_ACCBANDS_State( struct TA_ACCBANDS_State* _state,
                                            const double inLow,
                                            const double inClose,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           double        &outRealUpperBand,
-                                           double        &outRealMiddleBand,
-                                           double        &outRealLowerBand );
+                                           double        **outRealUpperBand,
+                                           double        **outRealMiddleBand,
+                                           double        **outRealLowerBand );
 
-TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State* _state );
+TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 
 
 /*
@@ -149,21 +149,21 @@ TA_LIB_API int TA_ACOS_Lookback( void );
 TA_LIB_API struct TA_ACOS_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_ACOS_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_ACOS_Data* memory;
-                                 };
+TA_LIB_API struct TA_ACOS_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_ACOS_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_ACOS_StateInit( struct TA_ACOS_State* _state );
+TA_LIB_API int TA_ACOS_StateInit( struct TA_ACOS_State** _state );
 
 
 TA_LIB_API int TA_ACOS_State( struct TA_ACOS_State* _state,
                                        const double inReal,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State* _state );
+TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State** _state );
 
 
 /*
@@ -202,14 +202,14 @@ TA_LIB_API struct TA_AD_Data {
                                         const double inClose;
                                         const double inVolume;
                                         };
-TA_LIB_API struct TA_AD_Struct {
-                               int mem_size;
-                               int mem_index;
-                               struct TA_AD_Data* memory;
-                               };
+TA_LIB_API struct TA_AD_State {
+                              int mem_size;
+                              int mem_index;
+                              struct TA_AD_Data* memory;
+                              };
 
 
-TA_LIB_API int TA_AD_StateInit( struct TA_AD_State* _state );
+TA_LIB_API int TA_AD_StateInit( struct TA_AD_State** _state );
 
 
 TA_LIB_API int TA_AD_State( struct TA_AD_State* _state,
@@ -217,9 +217,9 @@ TA_LIB_API int TA_AD_State( struct TA_AD_State* _state,
                                      const double inLow,
                                      const double inClose,
                                      const double inVolume,
-                                     double        &outReal );
+                                     double        **outReal );
 
-TA_LIB_API int TA_AD_StateFree( struct TA_AD_State* _state );
+TA_LIB_API int TA_AD_StateFree( struct TA_AD_State** _state );
 
 
 /*
@@ -252,22 +252,22 @@ TA_LIB_API struct TA_ADD_Data {
                                          const double inReal0;
                                          const double inReal1;
                                          };
-TA_LIB_API struct TA_ADD_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_ADD_Data* memory;
-                                };
+TA_LIB_API struct TA_ADD_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_ADD_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_ADD_StateInit( struct TA_ADD_State* _state );
+TA_LIB_API int TA_ADD_StateInit( struct TA_ADD_State** _state );
 
 
 TA_LIB_API int TA_ADD_State( struct TA_ADD_State* _state,
                                       const double inReal0,
                                       const double inReal1,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State* _state );
+TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State** _state );
 
 
 /*
@@ -320,16 +320,16 @@ TA_LIB_API struct TA_ADOSC_Data {
                                            const double inClose;
                                            const double inVolume;
                                            };
-TA_LIB_API struct TA_ADOSC_Struct {
-                                  int mem_size;
-                                  int mem_index;
-                                  struct TA_ADOSC_Data* memory;
-                                  int           optInFastPeriod; /* From 2 to 100000 */
-                                  int           optInSlowPeriod; /* From 2 to 100000 */
-                                  };
+TA_LIB_API struct TA_ADOSC_State {
+                                 int mem_size;
+                                 int mem_index;
+                                 struct TA_ADOSC_Data* memory;
+                                 int           optInFastPeriod; /* From 2 to 100000 */
+                                 int           optInSlowPeriod; /* From 2 to 100000 */
+                                 };
 
 
-TA_LIB_API int TA_ADOSC_StateInit( struct TA_ADOSC_State* _state,
+TA_LIB_API int TA_ADOSC_StateInit( struct TA_ADOSC_State** _state,
                                             int           optInFastPeriod, /* From 2 to 100000 */
                                             int           optInSlowPeriod );  /* From 2 to 100000 */
 
@@ -341,9 +341,9 @@ TA_LIB_API int TA_ADOSC_State( struct TA_ADOSC_State* _state,
                                         const double inVolume,
                                         int           optInFastPeriod, /* From 2 to 100000 */
                                         int           optInSlowPeriod, /* From 2 to 100000 */
-                                        double        &outReal );
+                                        double        **outReal );
 
-TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State* _state );
+TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 
 
 /*
@@ -387,15 +387,15 @@ TA_LIB_API struct TA_ADX_Data {
                                          const double inLow;
                                          const double inClose;
                                          };
-TA_LIB_API struct TA_ADX_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_ADX_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_ADX_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_ADX_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_ADX_StateInit( struct TA_ADX_State* _state,
+TA_LIB_API int TA_ADX_StateInit( struct TA_ADX_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -404,9 +404,9 @@ TA_LIB_API int TA_ADX_State( struct TA_ADX_State* _state,
                                       const double inLow,
                                       const double inClose,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State* _state );
+TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State** _state );
 
 
 /*
@@ -450,15 +450,15 @@ TA_LIB_API struct TA_ADXR_Data {
                                           const double inLow;
                                           const double inClose;
                                           };
-TA_LIB_API struct TA_ADXR_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_ADXR_Data* memory;
-                                 int           optInTimePeriod; /* From 2 to 100000 */
-                                 };
+TA_LIB_API struct TA_ADXR_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_ADXR_Data* memory;
+                                int           optInTimePeriod; /* From 2 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_ADXR_StateInit( struct TA_ADXR_State* _state,
+TA_LIB_API int TA_ADXR_StateInit( struct TA_ADXR_State** _state,
                                            int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -467,9 +467,9 @@ TA_LIB_API int TA_ADXR_State( struct TA_ADXR_State* _state,
                                        const double inLow,
                                        const double inClose,
                                        int           optInTimePeriod, /* From 2 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State* _state );
+TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
 
 
 /*
@@ -516,16 +516,16 @@ TA_LIB_API int TA_APO_Lookback( int           optInFastPeriod, /* From 2 to 1000
 TA_LIB_API struct TA_APO_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_APO_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_APO_Data* memory;
-                                int           optInFastPeriod; /* From 2 to 100000 */
-                                int           optInSlowPeriod; /* From 2 to 100000 */
-                                TA_MAType     optInMAType;                                };
+TA_LIB_API struct TA_APO_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_APO_Data* memory;
+                               int           optInFastPeriod; /* From 2 to 100000 */
+                               int           optInSlowPeriod; /* From 2 to 100000 */
+                               TA_MAType     optInMAType;                               };
 
 
-TA_LIB_API int TA_APO_StateInit( struct TA_APO_State* _state,
+TA_LIB_API int TA_APO_StateInit( struct TA_APO_State** _state,
                                           int           optInFastPeriod, /* From 2 to 100000 */
                                           int           optInSlowPeriod, /* From 2 to 100000 */
                                           TA_MAType     optInMAType ); 
@@ -534,9 +534,9 @@ TA_LIB_API int TA_APO_State( struct TA_APO_State* _state,
                                       const double inReal,
                                       int           optInFastPeriod, /* From 2 to 100000 */
                                       int           optInSlowPeriod, /* From 2 to 100000 */
-                                      TA_MAType     optInMAType,                                      double        &outReal );
+                                      TA_MAType     optInMAType,                                      double        **outReal );
 
-TA_LIB_API int TA_APO_StateFree( struct TA_APO_State* _state );
+TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state );
 
 
 /*
@@ -579,15 +579,15 @@ TA_LIB_API struct TA_AROON_Data {
                                            const double inHigh;
                                            const double inLow;
                                            };
-TA_LIB_API struct TA_AROON_Struct {
-                                  int mem_size;
-                                  int mem_index;
-                                  struct TA_AROON_Data* memory;
-                                  int           optInTimePeriod; /* From 2 to 100000 */
-                                  };
+TA_LIB_API struct TA_AROON_State {
+                                 int mem_size;
+                                 int mem_index;
+                                 struct TA_AROON_Data* memory;
+                                 int           optInTimePeriod; /* From 2 to 100000 */
+                                 };
 
 
-TA_LIB_API int TA_AROON_StateInit( struct TA_AROON_State* _state,
+TA_LIB_API int TA_AROON_StateInit( struct TA_AROON_State** _state,
                                             int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -595,10 +595,10 @@ TA_LIB_API int TA_AROON_State( struct TA_AROON_State* _state,
                                         const double inHigh,
                                         const double inLow,
                                         int           optInTimePeriod, /* From 2 to 100000 */
-                                        double        &outAroonDown,
-                                        double        &outAroonUp );
+                                        double        **outAroonDown,
+                                        double        **outAroonUp );
 
-TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State* _state );
+TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state );
 
 
 /*
@@ -639,15 +639,15 @@ TA_LIB_API struct TA_AROONOSC_Data {
                                               const double inHigh;
                                               const double inLow;
                                               };
-TA_LIB_API struct TA_AROONOSC_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_AROONOSC_Data* memory;
-                                     int           optInTimePeriod; /* From 2 to 100000 */
-                                     };
+TA_LIB_API struct TA_AROONOSC_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_AROONOSC_Data* memory;
+                                    int           optInTimePeriod; /* From 2 to 100000 */
+                                    };
 
 
-TA_LIB_API int TA_AROONOSC_StateInit( struct TA_AROONOSC_State* _state,
+TA_LIB_API int TA_AROONOSC_StateInit( struct TA_AROONOSC_State** _state,
                                                int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -655,9 +655,9 @@ TA_LIB_API int TA_AROONOSC_State( struct TA_AROONOSC_State* _state,
                                            const double inHigh,
                                            const double inLow,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State* _state );
+TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 
 
 /*
@@ -687,21 +687,21 @@ TA_LIB_API int TA_ASIN_Lookback( void );
 TA_LIB_API struct TA_ASIN_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_ASIN_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_ASIN_Data* memory;
-                                 };
+TA_LIB_API struct TA_ASIN_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_ASIN_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_ASIN_StateInit( struct TA_ASIN_State* _state );
+TA_LIB_API int TA_ASIN_StateInit( struct TA_ASIN_State** _state );
 
 
 TA_LIB_API int TA_ASIN_State( struct TA_ASIN_State* _state,
                                        const double inReal,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_ASIN_StateFree( struct TA_ASIN_State* _state );
+TA_LIB_API int TA_ASIN_StateFree( struct TA_ASIN_State** _state );
 
 
 /*
@@ -731,21 +731,21 @@ TA_LIB_API int TA_ATAN_Lookback( void );
 TA_LIB_API struct TA_ATAN_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_ATAN_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_ATAN_Data* memory;
-                                 };
+TA_LIB_API struct TA_ATAN_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_ATAN_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_ATAN_StateInit( struct TA_ATAN_State* _state );
+TA_LIB_API int TA_ATAN_StateInit( struct TA_ATAN_State** _state );
 
 
 TA_LIB_API int TA_ATAN_State( struct TA_ATAN_State* _state,
                                        const double inReal,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State* _state );
+TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State** _state );
 
 
 /*
@@ -789,15 +789,15 @@ TA_LIB_API struct TA_ATR_Data {
                                          const double inLow;
                                          const double inClose;
                                          };
-TA_LIB_API struct TA_ATR_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_ATR_Data* memory;
-                                int           optInTimePeriod; /* From 1 to 100000 */
-                                };
+TA_LIB_API struct TA_ATR_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_ATR_Data* memory;
+                               int           optInTimePeriod; /* From 1 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_ATR_StateInit( struct TA_ATR_State* _state,
+TA_LIB_API int TA_ATR_StateInit( struct TA_ATR_State** _state,
                                           int           optInTimePeriod );  /* From 1 to 100000 */
 
 
@@ -806,9 +806,9 @@ TA_LIB_API int TA_ATR_State( struct TA_ATR_State* _state,
                                       const double inLow,
                                       const double inClose,
                                       int           optInTimePeriod, /* From 1 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State* _state );
+TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State** _state );
 
 
 /*
@@ -847,14 +847,14 @@ TA_LIB_API struct TA_AVGPRICE_Data {
                                               const double inLow;
                                               const double inClose;
                                               };
-TA_LIB_API struct TA_AVGPRICE_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_AVGPRICE_Data* memory;
-                                     };
+TA_LIB_API struct TA_AVGPRICE_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_AVGPRICE_Data* memory;
+                                    };
 
 
-TA_LIB_API int TA_AVGPRICE_StateInit( struct TA_AVGPRICE_State* _state );
+TA_LIB_API int TA_AVGPRICE_StateInit( struct TA_AVGPRICE_State** _state );
 
 
 TA_LIB_API int TA_AVGPRICE_State( struct TA_AVGPRICE_State* _state,
@@ -862,9 +862,9 @@ TA_LIB_API int TA_AVGPRICE_State( struct TA_AVGPRICE_State* _state,
                                            const double inHigh,
                                            const double inLow,
                                            const double inClose,
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State* _state );
+TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
 
 
 /*
@@ -902,24 +902,24 @@ TA_LIB_API int TA_AVGDEV_Lookback( int           optInTimePeriod );  /* From 2 t
 TA_LIB_API struct TA_AVGDEV_Data {
                                             const double inReal;
                                             };
-TA_LIB_API struct TA_AVGDEV_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_AVGDEV_Data* memory;
-                                   int           optInTimePeriod; /* From 2 to 100000 */
-                                   };
+TA_LIB_API struct TA_AVGDEV_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_AVGDEV_Data* memory;
+                                  int           optInTimePeriod; /* From 2 to 100000 */
+                                  };
 
 
-TA_LIB_API int TA_AVGDEV_StateInit( struct TA_AVGDEV_State* _state,
+TA_LIB_API int TA_AVGDEV_StateInit( struct TA_AVGDEV_State** _state,
                                              int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_AVGDEV_State( struct TA_AVGDEV_State* _state,
                                          const double inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
-                                         double        &outReal );
+                                         double        **outReal );
 
-TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State* _state );
+TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
 
 
 /*
@@ -976,17 +976,17 @@ TA_LIB_API int TA_BBANDS_Lookback( int           optInTimePeriod, /* From 2 to 1
 TA_LIB_API struct TA_BBANDS_Data {
                                             const double inReal;
                                             };
-TA_LIB_API struct TA_BBANDS_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_BBANDS_Data* memory;
-                                   int           optInTimePeriod; /* From 2 to 100000 */
-                                   double        optInNbDevUp; /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInNbDevDn; /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   TA_MAType     optInMAType;                                   };
+TA_LIB_API struct TA_BBANDS_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_BBANDS_Data* memory;
+                                  int           optInTimePeriod; /* From 2 to 100000 */
+                                  double        optInNbDevUp; /* From TA_REAL_MIN to TA_REAL_MAX */
+                                  double        optInNbDevDn; /* From TA_REAL_MIN to TA_REAL_MAX */
+                                  TA_MAType     optInMAType;                                  };
 
 
-TA_LIB_API int TA_BBANDS_StateInit( struct TA_BBANDS_State* _state,
+TA_LIB_API int TA_BBANDS_StateInit( struct TA_BBANDS_State** _state,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                                              double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
@@ -997,11 +997,11 @@ TA_LIB_API int TA_BBANDS_State( struct TA_BBANDS_State* _state,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                                          double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                         TA_MAType     optInMAType,                                         double        &outRealUpperBand,
-                                         double        &outRealMiddleBand,
-                                         double        &outRealLowerBand );
+                                         TA_MAType     optInMAType,                                         double        **outRealUpperBand,
+                                         double        **outRealMiddleBand,
+                                         double        **outRealLowerBand );
 
-TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State* _state );
+TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 
 
 /*
@@ -1042,15 +1042,15 @@ TA_LIB_API struct TA_BETA_Data {
                                           const double inReal0;
                                           const double inReal1;
                                           };
-TA_LIB_API struct TA_BETA_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_BETA_Data* memory;
-                                 int           optInTimePeriod; /* From 1 to 100000 */
-                                 };
+TA_LIB_API struct TA_BETA_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_BETA_Data* memory;
+                                int           optInTimePeriod; /* From 1 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_BETA_StateInit( struct TA_BETA_State* _state,
+TA_LIB_API int TA_BETA_StateInit( struct TA_BETA_State** _state,
                                            int           optInTimePeriod );  /* From 1 to 100000 */
 
 
@@ -1058,9 +1058,9 @@ TA_LIB_API int TA_BETA_State( struct TA_BETA_State* _state,
                                        const double inReal0,
                                        const double inReal1,
                                        int           optInTimePeriod, /* From 1 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State* _state );
+TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state );
 
 
 /*
@@ -1099,14 +1099,14 @@ TA_LIB_API struct TA_BOP_Data {
                                          const double inLow;
                                          const double inClose;
                                          };
-TA_LIB_API struct TA_BOP_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_BOP_Data* memory;
-                                };
+TA_LIB_API struct TA_BOP_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_BOP_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_BOP_StateInit( struct TA_BOP_State* _state );
+TA_LIB_API int TA_BOP_StateInit( struct TA_BOP_State** _state );
 
 
 TA_LIB_API int TA_BOP_State( struct TA_BOP_State* _state,
@@ -1114,9 +1114,9 @@ TA_LIB_API int TA_BOP_State( struct TA_BOP_State* _state,
                                       const double inHigh,
                                       const double inLow,
                                       const double inClose,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State* _state );
+TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State** _state );
 
 
 /*
@@ -1160,15 +1160,15 @@ TA_LIB_API struct TA_CCI_Data {
                                          const double inLow;
                                          const double inClose;
                                          };
-TA_LIB_API struct TA_CCI_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_CCI_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_CCI_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_CCI_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_CCI_StateInit( struct TA_CCI_State* _state,
+TA_LIB_API int TA_CCI_StateInit( struct TA_CCI_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -1177,9 +1177,9 @@ TA_LIB_API int TA_CCI_State( struct TA_CCI_State* _state,
                                       const double inLow,
                                       const double inClose,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State* _state );
+TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state );
 
 
 /*
@@ -1218,14 +1218,14 @@ TA_LIB_API struct TA_CDL2CROWS_Data {
                                                const double inLow;
                                                const double inClose;
                                                };
-TA_LIB_API struct TA_CDL2CROWS_Struct {
-                                      int mem_size;
-                                      int mem_index;
-                                      struct TA_CDL2CROWS_Data* memory;
-                                      };
+TA_LIB_API struct TA_CDL2CROWS_State {
+                                     int mem_size;
+                                     int mem_index;
+                                     struct TA_CDL2CROWS_Data* memory;
+                                     };
 
 
-TA_LIB_API int TA_CDL2CROWS_StateInit( struct TA_CDL2CROWS_State* _state );
+TA_LIB_API int TA_CDL2CROWS_StateInit( struct TA_CDL2CROWS_State** _state );
 
 
 TA_LIB_API int TA_CDL2CROWS_State( struct TA_CDL2CROWS_State* _state,
@@ -1233,9 +1233,9 @@ TA_LIB_API int TA_CDL2CROWS_State( struct TA_CDL2CROWS_State* _state,
                                             const double inHigh,
                                             const double inLow,
                                             const double inClose,
-                                            int           &outInteger );
+                                            int           **outInteger );
 
-TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State* _state );
+TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
 
 
 /*
@@ -1274,14 +1274,14 @@ TA_LIB_API struct TA_CDL3BLACKCROWS_Data {
                                                     const double inLow;
                                                     const double inClose;
                                                     };
-TA_LIB_API struct TA_CDL3BLACKCROWS_Struct {
-                                           int mem_size;
-                                           int mem_index;
-                                           struct TA_CDL3BLACKCROWS_Data* memory;
-                                           };
+TA_LIB_API struct TA_CDL3BLACKCROWS_State {
+                                          int mem_size;
+                                          int mem_index;
+                                          struct TA_CDL3BLACKCROWS_Data* memory;
+                                          };
 
 
-TA_LIB_API int TA_CDL3BLACKCROWS_StateInit( struct TA_CDL3BLACKCROWS_State* _state );
+TA_LIB_API int TA_CDL3BLACKCROWS_StateInit( struct TA_CDL3BLACKCROWS_State** _state );
 
 
 TA_LIB_API int TA_CDL3BLACKCROWS_State( struct TA_CDL3BLACKCROWS_State* _state,
@@ -1289,9 +1289,9 @@ TA_LIB_API int TA_CDL3BLACKCROWS_State( struct TA_CDL3BLACKCROWS_State* _state,
                                                  const double inHigh,
                                                  const double inLow,
                                                  const double inClose,
-                                                 int           &outInteger );
+                                                 int           **outInteger );
 
-TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State* _state );
+TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _state );
 
 
 /*
@@ -1330,14 +1330,14 @@ TA_LIB_API struct TA_CDL3INSIDE_Data {
                                                 const double inLow;
                                                 const double inClose;
                                                 };
-TA_LIB_API struct TA_CDL3INSIDE_Struct {
-                                       int mem_size;
-                                       int mem_index;
-                                       struct TA_CDL3INSIDE_Data* memory;
-                                       };
+TA_LIB_API struct TA_CDL3INSIDE_State {
+                                      int mem_size;
+                                      int mem_index;
+                                      struct TA_CDL3INSIDE_Data* memory;
+                                      };
 
 
-TA_LIB_API int TA_CDL3INSIDE_StateInit( struct TA_CDL3INSIDE_State* _state );
+TA_LIB_API int TA_CDL3INSIDE_StateInit( struct TA_CDL3INSIDE_State** _state );
 
 
 TA_LIB_API int TA_CDL3INSIDE_State( struct TA_CDL3INSIDE_State* _state,
@@ -1345,9 +1345,9 @@ TA_LIB_API int TA_CDL3INSIDE_State( struct TA_CDL3INSIDE_State* _state,
                                              const double inHigh,
                                              const double inLow,
                                              const double inClose,
-                                             int           &outInteger );
+                                             int           **outInteger );
 
-TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State* _state );
+TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 
 
 /*
@@ -1386,14 +1386,14 @@ TA_LIB_API struct TA_CDL3LINESTRIKE_Data {
                                                     const double inLow;
                                                     const double inClose;
                                                     };
-TA_LIB_API struct TA_CDL3LINESTRIKE_Struct {
-                                           int mem_size;
-                                           int mem_index;
-                                           struct TA_CDL3LINESTRIKE_Data* memory;
-                                           };
+TA_LIB_API struct TA_CDL3LINESTRIKE_State {
+                                          int mem_size;
+                                          int mem_index;
+                                          struct TA_CDL3LINESTRIKE_Data* memory;
+                                          };
 
 
-TA_LIB_API int TA_CDL3LINESTRIKE_StateInit( struct TA_CDL3LINESTRIKE_State* _state );
+TA_LIB_API int TA_CDL3LINESTRIKE_StateInit( struct TA_CDL3LINESTRIKE_State** _state );
 
 
 TA_LIB_API int TA_CDL3LINESTRIKE_State( struct TA_CDL3LINESTRIKE_State* _state,
@@ -1401,9 +1401,9 @@ TA_LIB_API int TA_CDL3LINESTRIKE_State( struct TA_CDL3LINESTRIKE_State* _state,
                                                  const double inHigh,
                                                  const double inLow,
                                                  const double inClose,
-                                                 int           &outInteger );
+                                                 int           **outInteger );
 
-TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State* _state );
+TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _state );
 
 
 /*
@@ -1442,14 +1442,14 @@ TA_LIB_API struct TA_CDL3OUTSIDE_Data {
                                                  const double inLow;
                                                  const double inClose;
                                                  };
-TA_LIB_API struct TA_CDL3OUTSIDE_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_CDL3OUTSIDE_Data* memory;
-                                        };
+TA_LIB_API struct TA_CDL3OUTSIDE_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_CDL3OUTSIDE_Data* memory;
+                                       };
 
 
-TA_LIB_API int TA_CDL3OUTSIDE_StateInit( struct TA_CDL3OUTSIDE_State* _state );
+TA_LIB_API int TA_CDL3OUTSIDE_StateInit( struct TA_CDL3OUTSIDE_State** _state );
 
 
 TA_LIB_API int TA_CDL3OUTSIDE_State( struct TA_CDL3OUTSIDE_State* _state,
@@ -1457,9 +1457,9 @@ TA_LIB_API int TA_CDL3OUTSIDE_State( struct TA_CDL3OUTSIDE_State* _state,
                                               const double inHigh,
                                               const double inLow,
                                               const double inClose,
-                                              int           &outInteger );
+                                              int           **outInteger );
 
-TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State* _state );
+TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
 
 
 /*
@@ -1498,14 +1498,14 @@ TA_LIB_API struct TA_CDL3STARSINSOUTH_Data {
                                                       const double inLow;
                                                       const double inClose;
                                                       };
-TA_LIB_API struct TA_CDL3STARSINSOUTH_Struct {
-                                             int mem_size;
-                                             int mem_index;
-                                             struct TA_CDL3STARSINSOUTH_Data* memory;
-                                             };
+TA_LIB_API struct TA_CDL3STARSINSOUTH_State {
+                                            int mem_size;
+                                            int mem_index;
+                                            struct TA_CDL3STARSINSOUTH_Data* memory;
+                                            };
 
 
-TA_LIB_API int TA_CDL3STARSINSOUTH_StateInit( struct TA_CDL3STARSINSOUTH_State* _state );
+TA_LIB_API int TA_CDL3STARSINSOUTH_StateInit( struct TA_CDL3STARSINSOUTH_State** _state );
 
 
 TA_LIB_API int TA_CDL3STARSINSOUTH_State( struct TA_CDL3STARSINSOUTH_State* _state,
@@ -1513,9 +1513,9 @@ TA_LIB_API int TA_CDL3STARSINSOUTH_State( struct TA_CDL3STARSINSOUTH_State* _sta
                                                    const double inHigh,
                                                    const double inLow,
                                                    const double inClose,
-                                                   int           &outInteger );
+                                                   int           **outInteger );
 
-TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State* _state );
+TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State** _state );
 
 
 /*
@@ -1554,14 +1554,14 @@ TA_LIB_API struct TA_CDL3WHITESOLDIERS_Data {
                                                        const double inLow;
                                                        const double inClose;
                                                        };
-TA_LIB_API struct TA_CDL3WHITESOLDIERS_Struct {
-                                              int mem_size;
-                                              int mem_index;
-                                              struct TA_CDL3WHITESOLDIERS_Data* memory;
-                                              };
+TA_LIB_API struct TA_CDL3WHITESOLDIERS_State {
+                                             int mem_size;
+                                             int mem_index;
+                                             struct TA_CDL3WHITESOLDIERS_Data* memory;
+                                             };
 
 
-TA_LIB_API int TA_CDL3WHITESOLDIERS_StateInit( struct TA_CDL3WHITESOLDIERS_State* _state );
+TA_LIB_API int TA_CDL3WHITESOLDIERS_StateInit( struct TA_CDL3WHITESOLDIERS_State** _state );
 
 
 TA_LIB_API int TA_CDL3WHITESOLDIERS_State( struct TA_CDL3WHITESOLDIERS_State* _state,
@@ -1569,9 +1569,9 @@ TA_LIB_API int TA_CDL3WHITESOLDIERS_State( struct TA_CDL3WHITESOLDIERS_State* _s
                                                     const double inHigh,
                                                     const double inLow,
                                                     const double inClose,
-                                                    int           &outInteger );
+                                                    int           **outInteger );
 
-TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State* _state );
+TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State** _state );
 
 
 /*
@@ -1618,15 +1618,15 @@ TA_LIB_API struct TA_CDLABANDONEDBABY_Data {
                                                       const double inLow;
                                                       const double inClose;
                                                       };
-TA_LIB_API struct TA_CDLABANDONEDBABY_Struct {
-                                             int mem_size;
-                                             int mem_index;
-                                             struct TA_CDLABANDONEDBABY_Data* memory;
-                                             double        optInPenetration; /* From 0 to TA_REAL_MAX */
-                                             };
+TA_LIB_API struct TA_CDLABANDONEDBABY_State {
+                                            int mem_size;
+                                            int mem_index;
+                                            struct TA_CDLABANDONEDBABY_Data* memory;
+                                            double        optInPenetration; /* From 0 to TA_REAL_MAX */
+                                            };
 
 
-TA_LIB_API int TA_CDLABANDONEDBABY_StateInit( struct TA_CDLABANDONEDBABY_State* _state,
+TA_LIB_API int TA_CDLABANDONEDBABY_StateInit( struct TA_CDLABANDONEDBABY_State** _state,
                                                        double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
@@ -1636,9 +1636,9 @@ TA_LIB_API int TA_CDLABANDONEDBABY_State( struct TA_CDLABANDONEDBABY_State* _sta
                                                    const double inLow,
                                                    const double inClose,
                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                   int           &outInteger );
+                                                   int           **outInteger );
 
-TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State* _state );
+TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State** _state );
 
 
 /*
@@ -1677,14 +1677,14 @@ TA_LIB_API struct TA_CDLADVANCEBLOCK_Data {
                                                      const double inLow;
                                                      const double inClose;
                                                      };
-TA_LIB_API struct TA_CDLADVANCEBLOCK_Struct {
-                                            int mem_size;
-                                            int mem_index;
-                                            struct TA_CDLADVANCEBLOCK_Data* memory;
-                                            };
+TA_LIB_API struct TA_CDLADVANCEBLOCK_State {
+                                           int mem_size;
+                                           int mem_index;
+                                           struct TA_CDLADVANCEBLOCK_Data* memory;
+                                           };
 
 
-TA_LIB_API int TA_CDLADVANCEBLOCK_StateInit( struct TA_CDLADVANCEBLOCK_State* _state );
+TA_LIB_API int TA_CDLADVANCEBLOCK_StateInit( struct TA_CDLADVANCEBLOCK_State** _state );
 
 
 TA_LIB_API int TA_CDLADVANCEBLOCK_State( struct TA_CDLADVANCEBLOCK_State* _state,
@@ -1692,9 +1692,9 @@ TA_LIB_API int TA_CDLADVANCEBLOCK_State( struct TA_CDLADVANCEBLOCK_State* _state
                                                   const double inHigh,
                                                   const double inLow,
                                                   const double inClose,
-                                                  int           &outInteger );
+                                                  int           **outInteger );
 
-TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State* _state );
+TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _state );
 
 
 /*
@@ -1733,14 +1733,14 @@ TA_LIB_API struct TA_CDLBELTHOLD_Data {
                                                  const double inLow;
                                                  const double inClose;
                                                  };
-TA_LIB_API struct TA_CDLBELTHOLD_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_CDLBELTHOLD_Data* memory;
-                                        };
+TA_LIB_API struct TA_CDLBELTHOLD_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_CDLBELTHOLD_Data* memory;
+                                       };
 
 
-TA_LIB_API int TA_CDLBELTHOLD_StateInit( struct TA_CDLBELTHOLD_State* _state );
+TA_LIB_API int TA_CDLBELTHOLD_StateInit( struct TA_CDLBELTHOLD_State** _state );
 
 
 TA_LIB_API int TA_CDLBELTHOLD_State( struct TA_CDLBELTHOLD_State* _state,
@@ -1748,9 +1748,9 @@ TA_LIB_API int TA_CDLBELTHOLD_State( struct TA_CDLBELTHOLD_State* _state,
                                               const double inHigh,
                                               const double inLow,
                                               const double inClose,
-                                              int           &outInteger );
+                                              int           **outInteger );
 
-TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State* _state );
+TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 
 
 /*
@@ -1789,14 +1789,14 @@ TA_LIB_API struct TA_CDLBREAKAWAY_Data {
                                                   const double inLow;
                                                   const double inClose;
                                                   };
-TA_LIB_API struct TA_CDLBREAKAWAY_Struct {
-                                         int mem_size;
-                                         int mem_index;
-                                         struct TA_CDLBREAKAWAY_Data* memory;
-                                         };
+TA_LIB_API struct TA_CDLBREAKAWAY_State {
+                                        int mem_size;
+                                        int mem_index;
+                                        struct TA_CDLBREAKAWAY_Data* memory;
+                                        };
 
 
-TA_LIB_API int TA_CDLBREAKAWAY_StateInit( struct TA_CDLBREAKAWAY_State* _state );
+TA_LIB_API int TA_CDLBREAKAWAY_StateInit( struct TA_CDLBREAKAWAY_State** _state );
 
 
 TA_LIB_API int TA_CDLBREAKAWAY_State( struct TA_CDLBREAKAWAY_State* _state,
@@ -1804,9 +1804,9 @@ TA_LIB_API int TA_CDLBREAKAWAY_State( struct TA_CDLBREAKAWAY_State* _state,
                                                const double inHigh,
                                                const double inLow,
                                                const double inClose,
-                                               int           &outInteger );
+                                               int           **outInteger );
 
-TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State* _state );
+TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state );
 
 
 /*
@@ -1845,14 +1845,14 @@ TA_LIB_API struct TA_CDLCLOSINGMARUBOZU_Data {
                                                         const double inLow;
                                                         const double inClose;
                                                         };
-TA_LIB_API struct TA_CDLCLOSINGMARUBOZU_Struct {
-                                               int mem_size;
-                                               int mem_index;
-                                               struct TA_CDLCLOSINGMARUBOZU_Data* memory;
-                                               };
+TA_LIB_API struct TA_CDLCLOSINGMARUBOZU_State {
+                                              int mem_size;
+                                              int mem_index;
+                                              struct TA_CDLCLOSINGMARUBOZU_Data* memory;
+                                              };
 
 
-TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateInit( struct TA_CDLCLOSINGMARUBOZU_State* _state );
+TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateInit( struct TA_CDLCLOSINGMARUBOZU_State** _state );
 
 
 TA_LIB_API int TA_CDLCLOSINGMARUBOZU_State( struct TA_CDLCLOSINGMARUBOZU_State* _state,
@@ -1860,9 +1860,9 @@ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_State( struct TA_CDLCLOSINGMARUBOZU_State* 
                                                      const double inHigh,
                                                      const double inLow,
                                                      const double inClose,
-                                                     int           &outInteger );
+                                                     int           **outInteger );
 
-TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_State* _state );
+TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_State** _state );
 
 
 /*
@@ -1901,14 +1901,14 @@ TA_LIB_API struct TA_CDLCONCEALBABYSWALL_Data {
                                                          const double inLow;
                                                          const double inClose;
                                                          };
-TA_LIB_API struct TA_CDLCONCEALBABYSWALL_Struct {
-                                                int mem_size;
-                                                int mem_index;
-                                                struct TA_CDLCONCEALBABYSWALL_Data* memory;
-                                                };
+TA_LIB_API struct TA_CDLCONCEALBABYSWALL_State {
+                                               int mem_size;
+                                               int mem_index;
+                                               struct TA_CDLCONCEALBABYSWALL_Data* memory;
+                                               };
 
 
-TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateInit( struct TA_CDLCONCEALBABYSWALL_State* _state );
+TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateInit( struct TA_CDLCONCEALBABYSWALL_State** _state );
 
 
 TA_LIB_API int TA_CDLCONCEALBABYSWALL_State( struct TA_CDLCONCEALBABYSWALL_State* _state,
@@ -1916,9 +1916,9 @@ TA_LIB_API int TA_CDLCONCEALBABYSWALL_State( struct TA_CDLCONCEALBABYSWALL_State
                                                       const double inHigh,
                                                       const double inLow,
                                                       const double inClose,
-                                                      int           &outInteger );
+                                                      int           **outInteger );
 
-TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_State* _state );
+TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_State** _state );
 
 
 /*
@@ -1957,14 +1957,14 @@ TA_LIB_API struct TA_CDLCOUNTERATTACK_Data {
                                                       const double inLow;
                                                       const double inClose;
                                                       };
-TA_LIB_API struct TA_CDLCOUNTERATTACK_Struct {
-                                             int mem_size;
-                                             int mem_index;
-                                             struct TA_CDLCOUNTERATTACK_Data* memory;
-                                             };
+TA_LIB_API struct TA_CDLCOUNTERATTACK_State {
+                                            int mem_size;
+                                            int mem_index;
+                                            struct TA_CDLCOUNTERATTACK_Data* memory;
+                                            };
 
 
-TA_LIB_API int TA_CDLCOUNTERATTACK_StateInit( struct TA_CDLCOUNTERATTACK_State* _state );
+TA_LIB_API int TA_CDLCOUNTERATTACK_StateInit( struct TA_CDLCOUNTERATTACK_State** _state );
 
 
 TA_LIB_API int TA_CDLCOUNTERATTACK_State( struct TA_CDLCOUNTERATTACK_State* _state,
@@ -1972,9 +1972,9 @@ TA_LIB_API int TA_CDLCOUNTERATTACK_State( struct TA_CDLCOUNTERATTACK_State* _sta
                                                    const double inHigh,
                                                    const double inLow,
                                                    const double inClose,
-                                                   int           &outInteger );
+                                                   int           **outInteger );
 
-TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State* _state );
+TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State** _state );
 
 
 /*
@@ -2021,15 +2021,15 @@ TA_LIB_API struct TA_CDLDARKCLOUDCOVER_Data {
                                                        const double inLow;
                                                        const double inClose;
                                                        };
-TA_LIB_API struct TA_CDLDARKCLOUDCOVER_Struct {
-                                              int mem_size;
-                                              int mem_index;
-                                              struct TA_CDLDARKCLOUDCOVER_Data* memory;
-                                              double        optInPenetration; /* From 0 to TA_REAL_MAX */
-                                              };
+TA_LIB_API struct TA_CDLDARKCLOUDCOVER_State {
+                                             int mem_size;
+                                             int mem_index;
+                                             struct TA_CDLDARKCLOUDCOVER_Data* memory;
+                                             double        optInPenetration; /* From 0 to TA_REAL_MAX */
+                                             };
 
 
-TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateInit( struct TA_CDLDARKCLOUDCOVER_State* _state,
+TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateInit( struct TA_CDLDARKCLOUDCOVER_State** _state,
                                                         double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
@@ -2039,9 +2039,9 @@ TA_LIB_API int TA_CDLDARKCLOUDCOVER_State( struct TA_CDLDARKCLOUDCOVER_State* _s
                                                     const double inLow,
                                                     const double inClose,
                                                     double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                    int           &outInteger );
+                                                    int           **outInteger );
 
-TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State* _state );
+TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State** _state );
 
 
 /*
@@ -2080,14 +2080,14 @@ TA_LIB_API struct TA_CDLDOJI_Data {
                                              const double inLow;
                                              const double inClose;
                                              };
-TA_LIB_API struct TA_CDLDOJI_Struct {
-                                    int mem_size;
-                                    int mem_index;
-                                    struct TA_CDLDOJI_Data* memory;
-                                    };
+TA_LIB_API struct TA_CDLDOJI_State {
+                                   int mem_size;
+                                   int mem_index;
+                                   struct TA_CDLDOJI_Data* memory;
+                                   };
 
 
-TA_LIB_API int TA_CDLDOJI_StateInit( struct TA_CDLDOJI_State* _state );
+TA_LIB_API int TA_CDLDOJI_StateInit( struct TA_CDLDOJI_State** _state );
 
 
 TA_LIB_API int TA_CDLDOJI_State( struct TA_CDLDOJI_State* _state,
@@ -2095,9 +2095,9 @@ TA_LIB_API int TA_CDLDOJI_State( struct TA_CDLDOJI_State* _state,
                                           const double inHigh,
                                           const double inLow,
                                           const double inClose,
-                                          int           &outInteger );
+                                          int           **outInteger );
 
-TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State* _state );
+TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
 
 
 /*
@@ -2136,14 +2136,14 @@ TA_LIB_API struct TA_CDLDOJISTAR_Data {
                                                  const double inLow;
                                                  const double inClose;
                                                  };
-TA_LIB_API struct TA_CDLDOJISTAR_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_CDLDOJISTAR_Data* memory;
-                                        };
+TA_LIB_API struct TA_CDLDOJISTAR_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_CDLDOJISTAR_Data* memory;
+                                       };
 
 
-TA_LIB_API int TA_CDLDOJISTAR_StateInit( struct TA_CDLDOJISTAR_State* _state );
+TA_LIB_API int TA_CDLDOJISTAR_StateInit( struct TA_CDLDOJISTAR_State** _state );
 
 
 TA_LIB_API int TA_CDLDOJISTAR_State( struct TA_CDLDOJISTAR_State* _state,
@@ -2151,9 +2151,9 @@ TA_LIB_API int TA_CDLDOJISTAR_State( struct TA_CDLDOJISTAR_State* _state,
                                               const double inHigh,
                                               const double inLow,
                                               const double inClose,
-                                              int           &outInteger );
+                                              int           **outInteger );
 
-TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State* _state );
+TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 
 
 /*
@@ -2192,14 +2192,14 @@ TA_LIB_API struct TA_CDLDRAGONFLYDOJI_Data {
                                                       const double inLow;
                                                       const double inClose;
                                                       };
-TA_LIB_API struct TA_CDLDRAGONFLYDOJI_Struct {
-                                             int mem_size;
-                                             int mem_index;
-                                             struct TA_CDLDRAGONFLYDOJI_Data* memory;
-                                             };
+TA_LIB_API struct TA_CDLDRAGONFLYDOJI_State {
+                                            int mem_size;
+                                            int mem_index;
+                                            struct TA_CDLDRAGONFLYDOJI_Data* memory;
+                                            };
 
 
-TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateInit( struct TA_CDLDRAGONFLYDOJI_State* _state );
+TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateInit( struct TA_CDLDRAGONFLYDOJI_State** _state );
 
 
 TA_LIB_API int TA_CDLDRAGONFLYDOJI_State( struct TA_CDLDRAGONFLYDOJI_State* _state,
@@ -2207,9 +2207,9 @@ TA_LIB_API int TA_CDLDRAGONFLYDOJI_State( struct TA_CDLDRAGONFLYDOJI_State* _sta
                                                    const double inHigh,
                                                    const double inLow,
                                                    const double inClose,
-                                                   int           &outInteger );
+                                                   int           **outInteger );
 
-TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State* _state );
+TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State** _state );
 
 
 /*
@@ -2248,14 +2248,14 @@ TA_LIB_API struct TA_CDLENGULFING_Data {
                                                   const double inLow;
                                                   const double inClose;
                                                   };
-TA_LIB_API struct TA_CDLENGULFING_Struct {
-                                         int mem_size;
-                                         int mem_index;
-                                         struct TA_CDLENGULFING_Data* memory;
-                                         };
+TA_LIB_API struct TA_CDLENGULFING_State {
+                                        int mem_size;
+                                        int mem_index;
+                                        struct TA_CDLENGULFING_Data* memory;
+                                        };
 
 
-TA_LIB_API int TA_CDLENGULFING_StateInit( struct TA_CDLENGULFING_State* _state );
+TA_LIB_API int TA_CDLENGULFING_StateInit( struct TA_CDLENGULFING_State** _state );
 
 
 TA_LIB_API int TA_CDLENGULFING_State( struct TA_CDLENGULFING_State* _state,
@@ -2263,9 +2263,9 @@ TA_LIB_API int TA_CDLENGULFING_State( struct TA_CDLENGULFING_State* _state,
                                                const double inHigh,
                                                const double inLow,
                                                const double inClose,
-                                               int           &outInteger );
+                                               int           **outInteger );
 
-TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State* _state );
+TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state );
 
 
 /*
@@ -2312,15 +2312,15 @@ TA_LIB_API struct TA_CDLEVENINGDOJISTAR_Data {
                                                         const double inLow;
                                                         const double inClose;
                                                         };
-TA_LIB_API struct TA_CDLEVENINGDOJISTAR_Struct {
-                                               int mem_size;
-                                               int mem_index;
-                                               struct TA_CDLEVENINGDOJISTAR_Data* memory;
-                                               double        optInPenetration; /* From 0 to TA_REAL_MAX */
-                                               };
+TA_LIB_API struct TA_CDLEVENINGDOJISTAR_State {
+                                              int mem_size;
+                                              int mem_index;
+                                              struct TA_CDLEVENINGDOJISTAR_Data* memory;
+                                              double        optInPenetration; /* From 0 to TA_REAL_MAX */
+                                              };
 
 
-TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateInit( struct TA_CDLEVENINGDOJISTAR_State* _state,
+TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateInit( struct TA_CDLEVENINGDOJISTAR_State** _state,
                                                          double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
@@ -2330,9 +2330,9 @@ TA_LIB_API int TA_CDLEVENINGDOJISTAR_State( struct TA_CDLEVENINGDOJISTAR_State* 
                                                      const double inLow,
                                                      const double inClose,
                                                      double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                     int           &outInteger );
+                                                     int           **outInteger );
 
-TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_State* _state );
+TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_State** _state );
 
 
 /*
@@ -2379,15 +2379,15 @@ TA_LIB_API struct TA_CDLEVENINGSTAR_Data {
                                                     const double inLow;
                                                     const double inClose;
                                                     };
-TA_LIB_API struct TA_CDLEVENINGSTAR_Struct {
-                                           int mem_size;
-                                           int mem_index;
-                                           struct TA_CDLEVENINGSTAR_Data* memory;
-                                           double        optInPenetration; /* From 0 to TA_REAL_MAX */
-                                           };
+TA_LIB_API struct TA_CDLEVENINGSTAR_State {
+                                          int mem_size;
+                                          int mem_index;
+                                          struct TA_CDLEVENINGSTAR_Data* memory;
+                                          double        optInPenetration; /* From 0 to TA_REAL_MAX */
+                                          };
 
 
-TA_LIB_API int TA_CDLEVENINGSTAR_StateInit( struct TA_CDLEVENINGSTAR_State* _state,
+TA_LIB_API int TA_CDLEVENINGSTAR_StateInit( struct TA_CDLEVENINGSTAR_State** _state,
                                                      double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
@@ -2397,9 +2397,9 @@ TA_LIB_API int TA_CDLEVENINGSTAR_State( struct TA_CDLEVENINGSTAR_State* _state,
                                                  const double inLow,
                                                  const double inClose,
                                                  double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                 int           &outInteger );
+                                                 int           **outInteger );
 
-TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State* _state );
+TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _state );
 
 
 /*
@@ -2438,14 +2438,14 @@ TA_LIB_API struct TA_CDLGAPSIDESIDEWHITE_Data {
                                                          const double inLow;
                                                          const double inClose;
                                                          };
-TA_LIB_API struct TA_CDLGAPSIDESIDEWHITE_Struct {
-                                                int mem_size;
-                                                int mem_index;
-                                                struct TA_CDLGAPSIDESIDEWHITE_Data* memory;
-                                                };
+TA_LIB_API struct TA_CDLGAPSIDESIDEWHITE_State {
+                                               int mem_size;
+                                               int mem_index;
+                                               struct TA_CDLGAPSIDESIDEWHITE_Data* memory;
+                                               };
 
 
-TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateInit( struct TA_CDLGAPSIDESIDEWHITE_State* _state );
+TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateInit( struct TA_CDLGAPSIDESIDEWHITE_State** _state );
 
 
 TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_State( struct TA_CDLGAPSIDESIDEWHITE_State* _state,
@@ -2453,9 +2453,9 @@ TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_State( struct TA_CDLGAPSIDESIDEWHITE_State
                                                       const double inHigh,
                                                       const double inLow,
                                                       const double inClose,
-                                                      int           &outInteger );
+                                                      int           **outInteger );
 
-TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_State* _state );
+TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_State** _state );
 
 
 /*
@@ -2494,14 +2494,14 @@ TA_LIB_API struct TA_CDLGRAVESTONEDOJI_Data {
                                                        const double inLow;
                                                        const double inClose;
                                                        };
-TA_LIB_API struct TA_CDLGRAVESTONEDOJI_Struct {
-                                              int mem_size;
-                                              int mem_index;
-                                              struct TA_CDLGRAVESTONEDOJI_Data* memory;
-                                              };
+TA_LIB_API struct TA_CDLGRAVESTONEDOJI_State {
+                                             int mem_size;
+                                             int mem_index;
+                                             struct TA_CDLGRAVESTONEDOJI_Data* memory;
+                                             };
 
 
-TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateInit( struct TA_CDLGRAVESTONEDOJI_State* _state );
+TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateInit( struct TA_CDLGRAVESTONEDOJI_State** _state );
 
 
 TA_LIB_API int TA_CDLGRAVESTONEDOJI_State( struct TA_CDLGRAVESTONEDOJI_State* _state,
@@ -2509,9 +2509,9 @@ TA_LIB_API int TA_CDLGRAVESTONEDOJI_State( struct TA_CDLGRAVESTONEDOJI_State* _s
                                                     const double inHigh,
                                                     const double inLow,
                                                     const double inClose,
-                                                    int           &outInteger );
+                                                    int           **outInteger );
 
-TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State* _state );
+TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State** _state );
 
 
 /*
@@ -2550,14 +2550,14 @@ TA_LIB_API struct TA_CDLHAMMER_Data {
                                                const double inLow;
                                                const double inClose;
                                                };
-TA_LIB_API struct TA_CDLHAMMER_Struct {
-                                      int mem_size;
-                                      int mem_index;
-                                      struct TA_CDLHAMMER_Data* memory;
-                                      };
+TA_LIB_API struct TA_CDLHAMMER_State {
+                                     int mem_size;
+                                     int mem_index;
+                                     struct TA_CDLHAMMER_Data* memory;
+                                     };
 
 
-TA_LIB_API int TA_CDLHAMMER_StateInit( struct TA_CDLHAMMER_State* _state );
+TA_LIB_API int TA_CDLHAMMER_StateInit( struct TA_CDLHAMMER_State** _state );
 
 
 TA_LIB_API int TA_CDLHAMMER_State( struct TA_CDLHAMMER_State* _state,
@@ -2565,9 +2565,9 @@ TA_LIB_API int TA_CDLHAMMER_State( struct TA_CDLHAMMER_State* _state,
                                             const double inHigh,
                                             const double inLow,
                                             const double inClose,
-                                            int           &outInteger );
+                                            int           **outInteger );
 
-TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State* _state );
+TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 
 
 /*
@@ -2606,14 +2606,14 @@ TA_LIB_API struct TA_CDLHANGINGMAN_Data {
                                                    const double inLow;
                                                    const double inClose;
                                                    };
-TA_LIB_API struct TA_CDLHANGINGMAN_Struct {
-                                          int mem_size;
-                                          int mem_index;
-                                          struct TA_CDLHANGINGMAN_Data* memory;
-                                          };
+TA_LIB_API struct TA_CDLHANGINGMAN_State {
+                                         int mem_size;
+                                         int mem_index;
+                                         struct TA_CDLHANGINGMAN_Data* memory;
+                                         };
 
 
-TA_LIB_API int TA_CDLHANGINGMAN_StateInit( struct TA_CDLHANGINGMAN_State* _state );
+TA_LIB_API int TA_CDLHANGINGMAN_StateInit( struct TA_CDLHANGINGMAN_State** _state );
 
 
 TA_LIB_API int TA_CDLHANGINGMAN_State( struct TA_CDLHANGINGMAN_State* _state,
@@ -2621,9 +2621,9 @@ TA_LIB_API int TA_CDLHANGINGMAN_State( struct TA_CDLHANGINGMAN_State* _state,
                                                 const double inHigh,
                                                 const double inLow,
                                                 const double inClose,
-                                                int           &outInteger );
+                                                int           **outInteger );
 
-TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State* _state );
+TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _state );
 
 
 /*
@@ -2662,14 +2662,14 @@ TA_LIB_API struct TA_CDLHARAMI_Data {
                                                const double inLow;
                                                const double inClose;
                                                };
-TA_LIB_API struct TA_CDLHARAMI_Struct {
-                                      int mem_size;
-                                      int mem_index;
-                                      struct TA_CDLHARAMI_Data* memory;
-                                      };
+TA_LIB_API struct TA_CDLHARAMI_State {
+                                     int mem_size;
+                                     int mem_index;
+                                     struct TA_CDLHARAMI_Data* memory;
+                                     };
 
 
-TA_LIB_API int TA_CDLHARAMI_StateInit( struct TA_CDLHARAMI_State* _state );
+TA_LIB_API int TA_CDLHARAMI_StateInit( struct TA_CDLHARAMI_State** _state );
 
 
 TA_LIB_API int TA_CDLHARAMI_State( struct TA_CDLHARAMI_State* _state,
@@ -2677,9 +2677,9 @@ TA_LIB_API int TA_CDLHARAMI_State( struct TA_CDLHARAMI_State* _state,
                                             const double inHigh,
                                             const double inLow,
                                             const double inClose,
-                                            int           &outInteger );
+                                            int           **outInteger );
 
-TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State* _state );
+TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
 
 
 /*
@@ -2718,14 +2718,14 @@ TA_LIB_API struct TA_CDLHARAMICROSS_Data {
                                                     const double inLow;
                                                     const double inClose;
                                                     };
-TA_LIB_API struct TA_CDLHARAMICROSS_Struct {
-                                           int mem_size;
-                                           int mem_index;
-                                           struct TA_CDLHARAMICROSS_Data* memory;
-                                           };
+TA_LIB_API struct TA_CDLHARAMICROSS_State {
+                                          int mem_size;
+                                          int mem_index;
+                                          struct TA_CDLHARAMICROSS_Data* memory;
+                                          };
 
 
-TA_LIB_API int TA_CDLHARAMICROSS_StateInit( struct TA_CDLHARAMICROSS_State* _state );
+TA_LIB_API int TA_CDLHARAMICROSS_StateInit( struct TA_CDLHARAMICROSS_State** _state );
 
 
 TA_LIB_API int TA_CDLHARAMICROSS_State( struct TA_CDLHARAMICROSS_State* _state,
@@ -2733,9 +2733,9 @@ TA_LIB_API int TA_CDLHARAMICROSS_State( struct TA_CDLHARAMICROSS_State* _state,
                                                  const double inHigh,
                                                  const double inLow,
                                                  const double inClose,
-                                                 int           &outInteger );
+                                                 int           **outInteger );
 
-TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State* _state );
+TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _state );
 
 
 /*
@@ -2774,14 +2774,14 @@ TA_LIB_API struct TA_CDLHIGHWAVE_Data {
                                                  const double inLow;
                                                  const double inClose;
                                                  };
-TA_LIB_API struct TA_CDLHIGHWAVE_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_CDLHIGHWAVE_Data* memory;
-                                        };
+TA_LIB_API struct TA_CDLHIGHWAVE_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_CDLHIGHWAVE_Data* memory;
+                                       };
 
 
-TA_LIB_API int TA_CDLHIGHWAVE_StateInit( struct TA_CDLHIGHWAVE_State* _state );
+TA_LIB_API int TA_CDLHIGHWAVE_StateInit( struct TA_CDLHIGHWAVE_State** _state );
 
 
 TA_LIB_API int TA_CDLHIGHWAVE_State( struct TA_CDLHIGHWAVE_State* _state,
@@ -2789,9 +2789,9 @@ TA_LIB_API int TA_CDLHIGHWAVE_State( struct TA_CDLHIGHWAVE_State* _state,
                                               const double inHigh,
                                               const double inLow,
                                               const double inClose,
-                                              int           &outInteger );
+                                              int           **outInteger );
 
-TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State* _state );
+TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 
 
 /*
@@ -2830,14 +2830,14 @@ TA_LIB_API struct TA_CDLHIKKAKE_Data {
                                                 const double inLow;
                                                 const double inClose;
                                                 };
-TA_LIB_API struct TA_CDLHIKKAKE_Struct {
-                                       int mem_size;
-                                       int mem_index;
-                                       struct TA_CDLHIKKAKE_Data* memory;
-                                       };
+TA_LIB_API struct TA_CDLHIKKAKE_State {
+                                      int mem_size;
+                                      int mem_index;
+                                      struct TA_CDLHIKKAKE_Data* memory;
+                                      };
 
 
-TA_LIB_API int TA_CDLHIKKAKE_StateInit( struct TA_CDLHIKKAKE_State* _state );
+TA_LIB_API int TA_CDLHIKKAKE_StateInit( struct TA_CDLHIKKAKE_State** _state );
 
 
 TA_LIB_API int TA_CDLHIKKAKE_State( struct TA_CDLHIKKAKE_State* _state,
@@ -2845,9 +2845,9 @@ TA_LIB_API int TA_CDLHIKKAKE_State( struct TA_CDLHIKKAKE_State* _state,
                                              const double inHigh,
                                              const double inLow,
                                              const double inClose,
-                                             int           &outInteger );
+                                             int           **outInteger );
 
-TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State* _state );
+TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
 
 
 /*
@@ -2886,14 +2886,14 @@ TA_LIB_API struct TA_CDLHIKKAKEMOD_Data {
                                                    const double inLow;
                                                    const double inClose;
                                                    };
-TA_LIB_API struct TA_CDLHIKKAKEMOD_Struct {
-                                          int mem_size;
-                                          int mem_index;
-                                          struct TA_CDLHIKKAKEMOD_Data* memory;
-                                          };
+TA_LIB_API struct TA_CDLHIKKAKEMOD_State {
+                                         int mem_size;
+                                         int mem_index;
+                                         struct TA_CDLHIKKAKEMOD_Data* memory;
+                                         };
 
 
-TA_LIB_API int TA_CDLHIKKAKEMOD_StateInit( struct TA_CDLHIKKAKEMOD_State* _state );
+TA_LIB_API int TA_CDLHIKKAKEMOD_StateInit( struct TA_CDLHIKKAKEMOD_State** _state );
 
 
 TA_LIB_API int TA_CDLHIKKAKEMOD_State( struct TA_CDLHIKKAKEMOD_State* _state,
@@ -2901,9 +2901,9 @@ TA_LIB_API int TA_CDLHIKKAKEMOD_State( struct TA_CDLHIKKAKEMOD_State* _state,
                                                 const double inHigh,
                                                 const double inLow,
                                                 const double inClose,
-                                                int           &outInteger );
+                                                int           **outInteger );
 
-TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State* _state );
+TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _state );
 
 
 /*
@@ -2942,14 +2942,14 @@ TA_LIB_API struct TA_CDLHOMINGPIGEON_Data {
                                                      const double inLow;
                                                      const double inClose;
                                                      };
-TA_LIB_API struct TA_CDLHOMINGPIGEON_Struct {
-                                            int mem_size;
-                                            int mem_index;
-                                            struct TA_CDLHOMINGPIGEON_Data* memory;
-                                            };
+TA_LIB_API struct TA_CDLHOMINGPIGEON_State {
+                                           int mem_size;
+                                           int mem_index;
+                                           struct TA_CDLHOMINGPIGEON_Data* memory;
+                                           };
 
 
-TA_LIB_API int TA_CDLHOMINGPIGEON_StateInit( struct TA_CDLHOMINGPIGEON_State* _state );
+TA_LIB_API int TA_CDLHOMINGPIGEON_StateInit( struct TA_CDLHOMINGPIGEON_State** _state );
 
 
 TA_LIB_API int TA_CDLHOMINGPIGEON_State( struct TA_CDLHOMINGPIGEON_State* _state,
@@ -2957,9 +2957,9 @@ TA_LIB_API int TA_CDLHOMINGPIGEON_State( struct TA_CDLHOMINGPIGEON_State* _state
                                                   const double inHigh,
                                                   const double inLow,
                                                   const double inClose,
-                                                  int           &outInteger );
+                                                  int           **outInteger );
 
-TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State* _state );
+TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _state );
 
 
 /*
@@ -2998,14 +2998,14 @@ TA_LIB_API struct TA_CDLIDENTICAL3CROWS_Data {
                                                         const double inLow;
                                                         const double inClose;
                                                         };
-TA_LIB_API struct TA_CDLIDENTICAL3CROWS_Struct {
-                                               int mem_size;
-                                               int mem_index;
-                                               struct TA_CDLIDENTICAL3CROWS_Data* memory;
-                                               };
+TA_LIB_API struct TA_CDLIDENTICAL3CROWS_State {
+                                              int mem_size;
+                                              int mem_index;
+                                              struct TA_CDLIDENTICAL3CROWS_Data* memory;
+                                              };
 
 
-TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateInit( struct TA_CDLIDENTICAL3CROWS_State* _state );
+TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateInit( struct TA_CDLIDENTICAL3CROWS_State** _state );
 
 
 TA_LIB_API int TA_CDLIDENTICAL3CROWS_State( struct TA_CDLIDENTICAL3CROWS_State* _state,
@@ -3013,9 +3013,9 @@ TA_LIB_API int TA_CDLIDENTICAL3CROWS_State( struct TA_CDLIDENTICAL3CROWS_State* 
                                                      const double inHigh,
                                                      const double inLow,
                                                      const double inClose,
-                                                     int           &outInteger );
+                                                     int           **outInteger );
 
-TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_State* _state );
+TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_State** _state );
 
 
 /*
@@ -3054,14 +3054,14 @@ TA_LIB_API struct TA_CDLINNECK_Data {
                                                const double inLow;
                                                const double inClose;
                                                };
-TA_LIB_API struct TA_CDLINNECK_Struct {
-                                      int mem_size;
-                                      int mem_index;
-                                      struct TA_CDLINNECK_Data* memory;
-                                      };
+TA_LIB_API struct TA_CDLINNECK_State {
+                                     int mem_size;
+                                     int mem_index;
+                                     struct TA_CDLINNECK_Data* memory;
+                                     };
 
 
-TA_LIB_API int TA_CDLINNECK_StateInit( struct TA_CDLINNECK_State* _state );
+TA_LIB_API int TA_CDLINNECK_StateInit( struct TA_CDLINNECK_State** _state );
 
 
 TA_LIB_API int TA_CDLINNECK_State( struct TA_CDLINNECK_State* _state,
@@ -3069,9 +3069,9 @@ TA_LIB_API int TA_CDLINNECK_State( struct TA_CDLINNECK_State* _state,
                                             const double inHigh,
                                             const double inLow,
                                             const double inClose,
-                                            int           &outInteger );
+                                            int           **outInteger );
 
-TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State* _state );
+TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 
 
 /*
@@ -3110,14 +3110,14 @@ TA_LIB_API struct TA_CDLINVERTEDHAMMER_Data {
                                                        const double inLow;
                                                        const double inClose;
                                                        };
-TA_LIB_API struct TA_CDLINVERTEDHAMMER_Struct {
-                                              int mem_size;
-                                              int mem_index;
-                                              struct TA_CDLINVERTEDHAMMER_Data* memory;
-                                              };
+TA_LIB_API struct TA_CDLINVERTEDHAMMER_State {
+                                             int mem_size;
+                                             int mem_index;
+                                             struct TA_CDLINVERTEDHAMMER_Data* memory;
+                                             };
 
 
-TA_LIB_API int TA_CDLINVERTEDHAMMER_StateInit( struct TA_CDLINVERTEDHAMMER_State* _state );
+TA_LIB_API int TA_CDLINVERTEDHAMMER_StateInit( struct TA_CDLINVERTEDHAMMER_State** _state );
 
 
 TA_LIB_API int TA_CDLINVERTEDHAMMER_State( struct TA_CDLINVERTEDHAMMER_State* _state,
@@ -3125,9 +3125,9 @@ TA_LIB_API int TA_CDLINVERTEDHAMMER_State( struct TA_CDLINVERTEDHAMMER_State* _s
                                                     const double inHigh,
                                                     const double inLow,
                                                     const double inClose,
-                                                    int           &outInteger );
+                                                    int           **outInteger );
 
-TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State* _state );
+TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State** _state );
 
 
 /*
@@ -3166,14 +3166,14 @@ TA_LIB_API struct TA_CDLKICKING_Data {
                                                 const double inLow;
                                                 const double inClose;
                                                 };
-TA_LIB_API struct TA_CDLKICKING_Struct {
-                                       int mem_size;
-                                       int mem_index;
-                                       struct TA_CDLKICKING_Data* memory;
-                                       };
+TA_LIB_API struct TA_CDLKICKING_State {
+                                      int mem_size;
+                                      int mem_index;
+                                      struct TA_CDLKICKING_Data* memory;
+                                      };
 
 
-TA_LIB_API int TA_CDLKICKING_StateInit( struct TA_CDLKICKING_State* _state );
+TA_LIB_API int TA_CDLKICKING_StateInit( struct TA_CDLKICKING_State** _state );
 
 
 TA_LIB_API int TA_CDLKICKING_State( struct TA_CDLKICKING_State* _state,
@@ -3181,9 +3181,9 @@ TA_LIB_API int TA_CDLKICKING_State( struct TA_CDLKICKING_State* _state,
                                              const double inHigh,
                                              const double inLow,
                                              const double inClose,
-                                             int           &outInteger );
+                                             int           **outInteger );
 
-TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State* _state );
+TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 
 
 /*
@@ -3222,14 +3222,14 @@ TA_LIB_API struct TA_CDLKICKINGBYLENGTH_Data {
                                                         const double inLow;
                                                         const double inClose;
                                                         };
-TA_LIB_API struct TA_CDLKICKINGBYLENGTH_Struct {
-                                               int mem_size;
-                                               int mem_index;
-                                               struct TA_CDLKICKINGBYLENGTH_Data* memory;
-                                               };
+TA_LIB_API struct TA_CDLKICKINGBYLENGTH_State {
+                                              int mem_size;
+                                              int mem_index;
+                                              struct TA_CDLKICKINGBYLENGTH_Data* memory;
+                                              };
 
 
-TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateInit( struct TA_CDLKICKINGBYLENGTH_State* _state );
+TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateInit( struct TA_CDLKICKINGBYLENGTH_State** _state );
 
 
 TA_LIB_API int TA_CDLKICKINGBYLENGTH_State( struct TA_CDLKICKINGBYLENGTH_State* _state,
@@ -3237,9 +3237,9 @@ TA_LIB_API int TA_CDLKICKINGBYLENGTH_State( struct TA_CDLKICKINGBYLENGTH_State* 
                                                      const double inHigh,
                                                      const double inLow,
                                                      const double inClose,
-                                                     int           &outInteger );
+                                                     int           **outInteger );
 
-TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_State* _state );
+TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_State** _state );
 
 
 /*
@@ -3278,14 +3278,14 @@ TA_LIB_API struct TA_CDLLADDERBOTTOM_Data {
                                                      const double inLow;
                                                      const double inClose;
                                                      };
-TA_LIB_API struct TA_CDLLADDERBOTTOM_Struct {
-                                            int mem_size;
-                                            int mem_index;
-                                            struct TA_CDLLADDERBOTTOM_Data* memory;
-                                            };
+TA_LIB_API struct TA_CDLLADDERBOTTOM_State {
+                                           int mem_size;
+                                           int mem_index;
+                                           struct TA_CDLLADDERBOTTOM_Data* memory;
+                                           };
 
 
-TA_LIB_API int TA_CDLLADDERBOTTOM_StateInit( struct TA_CDLLADDERBOTTOM_State* _state );
+TA_LIB_API int TA_CDLLADDERBOTTOM_StateInit( struct TA_CDLLADDERBOTTOM_State** _state );
 
 
 TA_LIB_API int TA_CDLLADDERBOTTOM_State( struct TA_CDLLADDERBOTTOM_State* _state,
@@ -3293,9 +3293,9 @@ TA_LIB_API int TA_CDLLADDERBOTTOM_State( struct TA_CDLLADDERBOTTOM_State* _state
                                                   const double inHigh,
                                                   const double inLow,
                                                   const double inClose,
-                                                  int           &outInteger );
+                                                  int           **outInteger );
 
-TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State* _state );
+TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _state );
 
 
 /*
@@ -3334,14 +3334,14 @@ TA_LIB_API struct TA_CDLLONGLEGGEDDOJI_Data {
                                                        const double inLow;
                                                        const double inClose;
                                                        };
-TA_LIB_API struct TA_CDLLONGLEGGEDDOJI_Struct {
-                                              int mem_size;
-                                              int mem_index;
-                                              struct TA_CDLLONGLEGGEDDOJI_Data* memory;
-                                              };
+TA_LIB_API struct TA_CDLLONGLEGGEDDOJI_State {
+                                             int mem_size;
+                                             int mem_index;
+                                             struct TA_CDLLONGLEGGEDDOJI_Data* memory;
+                                             };
 
 
-TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateInit( struct TA_CDLLONGLEGGEDDOJI_State* _state );
+TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateInit( struct TA_CDLLONGLEGGEDDOJI_State** _state );
 
 
 TA_LIB_API int TA_CDLLONGLEGGEDDOJI_State( struct TA_CDLLONGLEGGEDDOJI_State* _state,
@@ -3349,9 +3349,9 @@ TA_LIB_API int TA_CDLLONGLEGGEDDOJI_State( struct TA_CDLLONGLEGGEDDOJI_State* _s
                                                     const double inHigh,
                                                     const double inLow,
                                                     const double inClose,
-                                                    int           &outInteger );
+                                                    int           **outInteger );
 
-TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State* _state );
+TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State** _state );
 
 
 /*
@@ -3390,14 +3390,14 @@ TA_LIB_API struct TA_CDLLONGLINE_Data {
                                                  const double inLow;
                                                  const double inClose;
                                                  };
-TA_LIB_API struct TA_CDLLONGLINE_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_CDLLONGLINE_Data* memory;
-                                        };
+TA_LIB_API struct TA_CDLLONGLINE_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_CDLLONGLINE_Data* memory;
+                                       };
 
 
-TA_LIB_API int TA_CDLLONGLINE_StateInit( struct TA_CDLLONGLINE_State* _state );
+TA_LIB_API int TA_CDLLONGLINE_StateInit( struct TA_CDLLONGLINE_State** _state );
 
 
 TA_LIB_API int TA_CDLLONGLINE_State( struct TA_CDLLONGLINE_State* _state,
@@ -3405,9 +3405,9 @@ TA_LIB_API int TA_CDLLONGLINE_State( struct TA_CDLLONGLINE_State* _state,
                                               const double inHigh,
                                               const double inLow,
                                               const double inClose,
-                                              int           &outInteger );
+                                              int           **outInteger );
 
-TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State* _state );
+TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
 
 
 /*
@@ -3446,14 +3446,14 @@ TA_LIB_API struct TA_CDLMARUBOZU_Data {
                                                  const double inLow;
                                                  const double inClose;
                                                  };
-TA_LIB_API struct TA_CDLMARUBOZU_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_CDLMARUBOZU_Data* memory;
-                                        };
+TA_LIB_API struct TA_CDLMARUBOZU_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_CDLMARUBOZU_Data* memory;
+                                       };
 
 
-TA_LIB_API int TA_CDLMARUBOZU_StateInit( struct TA_CDLMARUBOZU_State* _state );
+TA_LIB_API int TA_CDLMARUBOZU_StateInit( struct TA_CDLMARUBOZU_State** _state );
 
 
 TA_LIB_API int TA_CDLMARUBOZU_State( struct TA_CDLMARUBOZU_State* _state,
@@ -3461,9 +3461,9 @@ TA_LIB_API int TA_CDLMARUBOZU_State( struct TA_CDLMARUBOZU_State* _state,
                                               const double inHigh,
                                               const double inLow,
                                               const double inClose,
-                                              int           &outInteger );
+                                              int           **outInteger );
 
-TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State* _state );
+TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 
 
 /*
@@ -3502,14 +3502,14 @@ TA_LIB_API struct TA_CDLMATCHINGLOW_Data {
                                                     const double inLow;
                                                     const double inClose;
                                                     };
-TA_LIB_API struct TA_CDLMATCHINGLOW_Struct {
-                                           int mem_size;
-                                           int mem_index;
-                                           struct TA_CDLMATCHINGLOW_Data* memory;
-                                           };
+TA_LIB_API struct TA_CDLMATCHINGLOW_State {
+                                          int mem_size;
+                                          int mem_index;
+                                          struct TA_CDLMATCHINGLOW_Data* memory;
+                                          };
 
 
-TA_LIB_API int TA_CDLMATCHINGLOW_StateInit( struct TA_CDLMATCHINGLOW_State* _state );
+TA_LIB_API int TA_CDLMATCHINGLOW_StateInit( struct TA_CDLMATCHINGLOW_State** _state );
 
 
 TA_LIB_API int TA_CDLMATCHINGLOW_State( struct TA_CDLMATCHINGLOW_State* _state,
@@ -3517,9 +3517,9 @@ TA_LIB_API int TA_CDLMATCHINGLOW_State( struct TA_CDLMATCHINGLOW_State* _state,
                                                  const double inHigh,
                                                  const double inLow,
                                                  const double inClose,
-                                                 int           &outInteger );
+                                                 int           **outInteger );
 
-TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State* _state );
+TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _state );
 
 
 /*
@@ -3566,15 +3566,15 @@ TA_LIB_API struct TA_CDLMATHOLD_Data {
                                                 const double inLow;
                                                 const double inClose;
                                                 };
-TA_LIB_API struct TA_CDLMATHOLD_Struct {
-                                       int mem_size;
-                                       int mem_index;
-                                       struct TA_CDLMATHOLD_Data* memory;
-                                       double        optInPenetration; /* From 0 to TA_REAL_MAX */
-                                       };
+TA_LIB_API struct TA_CDLMATHOLD_State {
+                                      int mem_size;
+                                      int mem_index;
+                                      struct TA_CDLMATHOLD_Data* memory;
+                                      double        optInPenetration; /* From 0 to TA_REAL_MAX */
+                                      };
 
 
-TA_LIB_API int TA_CDLMATHOLD_StateInit( struct TA_CDLMATHOLD_State* _state,
+TA_LIB_API int TA_CDLMATHOLD_StateInit( struct TA_CDLMATHOLD_State** _state,
                                                  double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
@@ -3584,9 +3584,9 @@ TA_LIB_API int TA_CDLMATHOLD_State( struct TA_CDLMATHOLD_State* _state,
                                              const double inLow,
                                              const double inClose,
                                              double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                             int           &outInteger );
+                                             int           **outInteger );
 
-TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State* _state );
+TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
 
 
 /*
@@ -3633,15 +3633,15 @@ TA_LIB_API struct TA_CDLMORNINGDOJISTAR_Data {
                                                         const double inLow;
                                                         const double inClose;
                                                         };
-TA_LIB_API struct TA_CDLMORNINGDOJISTAR_Struct {
-                                               int mem_size;
-                                               int mem_index;
-                                               struct TA_CDLMORNINGDOJISTAR_Data* memory;
-                                               double        optInPenetration; /* From 0 to TA_REAL_MAX */
-                                               };
+TA_LIB_API struct TA_CDLMORNINGDOJISTAR_State {
+                                              int mem_size;
+                                              int mem_index;
+                                              struct TA_CDLMORNINGDOJISTAR_Data* memory;
+                                              double        optInPenetration; /* From 0 to TA_REAL_MAX */
+                                              };
 
 
-TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateInit( struct TA_CDLMORNINGDOJISTAR_State* _state,
+TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateInit( struct TA_CDLMORNINGDOJISTAR_State** _state,
                                                          double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
@@ -3651,9 +3651,9 @@ TA_LIB_API int TA_CDLMORNINGDOJISTAR_State( struct TA_CDLMORNINGDOJISTAR_State* 
                                                      const double inLow,
                                                      const double inClose,
                                                      double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                     int           &outInteger );
+                                                     int           **outInteger );
 
-TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_State* _state );
+TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_State** _state );
 
 
 /*
@@ -3700,15 +3700,15 @@ TA_LIB_API struct TA_CDLMORNINGSTAR_Data {
                                                     const double inLow;
                                                     const double inClose;
                                                     };
-TA_LIB_API struct TA_CDLMORNINGSTAR_Struct {
-                                           int mem_size;
-                                           int mem_index;
-                                           struct TA_CDLMORNINGSTAR_Data* memory;
-                                           double        optInPenetration; /* From 0 to TA_REAL_MAX */
-                                           };
+TA_LIB_API struct TA_CDLMORNINGSTAR_State {
+                                          int mem_size;
+                                          int mem_index;
+                                          struct TA_CDLMORNINGSTAR_Data* memory;
+                                          double        optInPenetration; /* From 0 to TA_REAL_MAX */
+                                          };
 
 
-TA_LIB_API int TA_CDLMORNINGSTAR_StateInit( struct TA_CDLMORNINGSTAR_State* _state,
+TA_LIB_API int TA_CDLMORNINGSTAR_StateInit( struct TA_CDLMORNINGSTAR_State** _state,
                                                      double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
@@ -3718,9 +3718,9 @@ TA_LIB_API int TA_CDLMORNINGSTAR_State( struct TA_CDLMORNINGSTAR_State* _state,
                                                  const double inLow,
                                                  const double inClose,
                                                  double        optInPenetration, /* From 0 to TA_REAL_MAX */
-                                                 int           &outInteger );
+                                                 int           **outInteger );
 
-TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State* _state );
+TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _state );
 
 
 /*
@@ -3759,14 +3759,14 @@ TA_LIB_API struct TA_CDLONNECK_Data {
                                                const double inLow;
                                                const double inClose;
                                                };
-TA_LIB_API struct TA_CDLONNECK_Struct {
-                                      int mem_size;
-                                      int mem_index;
-                                      struct TA_CDLONNECK_Data* memory;
-                                      };
+TA_LIB_API struct TA_CDLONNECK_State {
+                                     int mem_size;
+                                     int mem_index;
+                                     struct TA_CDLONNECK_Data* memory;
+                                     };
 
 
-TA_LIB_API int TA_CDLONNECK_StateInit( struct TA_CDLONNECK_State* _state );
+TA_LIB_API int TA_CDLONNECK_StateInit( struct TA_CDLONNECK_State** _state );
 
 
 TA_LIB_API int TA_CDLONNECK_State( struct TA_CDLONNECK_State* _state,
@@ -3774,9 +3774,9 @@ TA_LIB_API int TA_CDLONNECK_State( struct TA_CDLONNECK_State* _state,
                                             const double inHigh,
                                             const double inLow,
                                             const double inClose,
-                                            int           &outInteger );
+                                            int           **outInteger );
 
-TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State* _state );
+TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
 
 
 /*
@@ -3815,14 +3815,14 @@ TA_LIB_API struct TA_CDLPIERCING_Data {
                                                  const double inLow;
                                                  const double inClose;
                                                  };
-TA_LIB_API struct TA_CDLPIERCING_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_CDLPIERCING_Data* memory;
-                                        };
+TA_LIB_API struct TA_CDLPIERCING_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_CDLPIERCING_Data* memory;
+                                       };
 
 
-TA_LIB_API int TA_CDLPIERCING_StateInit( struct TA_CDLPIERCING_State* _state );
+TA_LIB_API int TA_CDLPIERCING_StateInit( struct TA_CDLPIERCING_State** _state );
 
 
 TA_LIB_API int TA_CDLPIERCING_State( struct TA_CDLPIERCING_State* _state,
@@ -3830,9 +3830,9 @@ TA_LIB_API int TA_CDLPIERCING_State( struct TA_CDLPIERCING_State* _state,
                                               const double inHigh,
                                               const double inLow,
                                               const double inClose,
-                                              int           &outInteger );
+                                              int           **outInteger );
 
-TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State* _state );
+TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 
 
 /*
@@ -3871,14 +3871,14 @@ TA_LIB_API struct TA_CDLRICKSHAWMAN_Data {
                                                     const double inLow;
                                                     const double inClose;
                                                     };
-TA_LIB_API struct TA_CDLRICKSHAWMAN_Struct {
-                                           int mem_size;
-                                           int mem_index;
-                                           struct TA_CDLRICKSHAWMAN_Data* memory;
-                                           };
+TA_LIB_API struct TA_CDLRICKSHAWMAN_State {
+                                          int mem_size;
+                                          int mem_index;
+                                          struct TA_CDLRICKSHAWMAN_Data* memory;
+                                          };
 
 
-TA_LIB_API int TA_CDLRICKSHAWMAN_StateInit( struct TA_CDLRICKSHAWMAN_State* _state );
+TA_LIB_API int TA_CDLRICKSHAWMAN_StateInit( struct TA_CDLRICKSHAWMAN_State** _state );
 
 
 TA_LIB_API int TA_CDLRICKSHAWMAN_State( struct TA_CDLRICKSHAWMAN_State* _state,
@@ -3886,9 +3886,9 @@ TA_LIB_API int TA_CDLRICKSHAWMAN_State( struct TA_CDLRICKSHAWMAN_State* _state,
                                                  const double inHigh,
                                                  const double inLow,
                                                  const double inClose,
-                                                 int           &outInteger );
+                                                 int           **outInteger );
 
-TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State* _state );
+TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _state );
 
 
 /*
@@ -3927,14 +3927,14 @@ TA_LIB_API struct TA_CDLRISEFALL3METHODS_Data {
                                                          const double inLow;
                                                          const double inClose;
                                                          };
-TA_LIB_API struct TA_CDLRISEFALL3METHODS_Struct {
-                                                int mem_size;
-                                                int mem_index;
-                                                struct TA_CDLRISEFALL3METHODS_Data* memory;
-                                                };
+TA_LIB_API struct TA_CDLRISEFALL3METHODS_State {
+                                               int mem_size;
+                                               int mem_index;
+                                               struct TA_CDLRISEFALL3METHODS_Data* memory;
+                                               };
 
 
-TA_LIB_API int TA_CDLRISEFALL3METHODS_StateInit( struct TA_CDLRISEFALL3METHODS_State* _state );
+TA_LIB_API int TA_CDLRISEFALL3METHODS_StateInit( struct TA_CDLRISEFALL3METHODS_State** _state );
 
 
 TA_LIB_API int TA_CDLRISEFALL3METHODS_State( struct TA_CDLRISEFALL3METHODS_State* _state,
@@ -3942,9 +3942,9 @@ TA_LIB_API int TA_CDLRISEFALL3METHODS_State( struct TA_CDLRISEFALL3METHODS_State
                                                       const double inHigh,
                                                       const double inLow,
                                                       const double inClose,
-                                                      int           &outInteger );
+                                                      int           **outInteger );
 
-TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_State* _state );
+TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_State** _state );
 
 
 /*
@@ -3983,14 +3983,14 @@ TA_LIB_API struct TA_CDLSEPARATINGLINES_Data {
                                                         const double inLow;
                                                         const double inClose;
                                                         };
-TA_LIB_API struct TA_CDLSEPARATINGLINES_Struct {
-                                               int mem_size;
-                                               int mem_index;
-                                               struct TA_CDLSEPARATINGLINES_Data* memory;
-                                               };
+TA_LIB_API struct TA_CDLSEPARATINGLINES_State {
+                                              int mem_size;
+                                              int mem_index;
+                                              struct TA_CDLSEPARATINGLINES_Data* memory;
+                                              };
 
 
-TA_LIB_API int TA_CDLSEPARATINGLINES_StateInit( struct TA_CDLSEPARATINGLINES_State* _state );
+TA_LIB_API int TA_CDLSEPARATINGLINES_StateInit( struct TA_CDLSEPARATINGLINES_State** _state );
 
 
 TA_LIB_API int TA_CDLSEPARATINGLINES_State( struct TA_CDLSEPARATINGLINES_State* _state,
@@ -3998,9 +3998,9 @@ TA_LIB_API int TA_CDLSEPARATINGLINES_State( struct TA_CDLSEPARATINGLINES_State* 
                                                      const double inHigh,
                                                      const double inLow,
                                                      const double inClose,
-                                                     int           &outInteger );
+                                                     int           **outInteger );
 
-TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_State* _state );
+TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_State** _state );
 
 
 /*
@@ -4039,14 +4039,14 @@ TA_LIB_API struct TA_CDLSHOOTINGSTAR_Data {
                                                      const double inLow;
                                                      const double inClose;
                                                      };
-TA_LIB_API struct TA_CDLSHOOTINGSTAR_Struct {
-                                            int mem_size;
-                                            int mem_index;
-                                            struct TA_CDLSHOOTINGSTAR_Data* memory;
-                                            };
+TA_LIB_API struct TA_CDLSHOOTINGSTAR_State {
+                                           int mem_size;
+                                           int mem_index;
+                                           struct TA_CDLSHOOTINGSTAR_Data* memory;
+                                           };
 
 
-TA_LIB_API int TA_CDLSHOOTINGSTAR_StateInit( struct TA_CDLSHOOTINGSTAR_State* _state );
+TA_LIB_API int TA_CDLSHOOTINGSTAR_StateInit( struct TA_CDLSHOOTINGSTAR_State** _state );
 
 
 TA_LIB_API int TA_CDLSHOOTINGSTAR_State( struct TA_CDLSHOOTINGSTAR_State* _state,
@@ -4054,9 +4054,9 @@ TA_LIB_API int TA_CDLSHOOTINGSTAR_State( struct TA_CDLSHOOTINGSTAR_State* _state
                                                   const double inHigh,
                                                   const double inLow,
                                                   const double inClose,
-                                                  int           &outInteger );
+                                                  int           **outInteger );
 
-TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State* _state );
+TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _state );
 
 
 /*
@@ -4095,14 +4095,14 @@ TA_LIB_API struct TA_CDLSHORTLINE_Data {
                                                   const double inLow;
                                                   const double inClose;
                                                   };
-TA_LIB_API struct TA_CDLSHORTLINE_Struct {
-                                         int mem_size;
-                                         int mem_index;
-                                         struct TA_CDLSHORTLINE_Data* memory;
-                                         };
+TA_LIB_API struct TA_CDLSHORTLINE_State {
+                                        int mem_size;
+                                        int mem_index;
+                                        struct TA_CDLSHORTLINE_Data* memory;
+                                        };
 
 
-TA_LIB_API int TA_CDLSHORTLINE_StateInit( struct TA_CDLSHORTLINE_State* _state );
+TA_LIB_API int TA_CDLSHORTLINE_StateInit( struct TA_CDLSHORTLINE_State** _state );
 
 
 TA_LIB_API int TA_CDLSHORTLINE_State( struct TA_CDLSHORTLINE_State* _state,
@@ -4110,9 +4110,9 @@ TA_LIB_API int TA_CDLSHORTLINE_State( struct TA_CDLSHORTLINE_State* _state,
                                                const double inHigh,
                                                const double inLow,
                                                const double inClose,
-                                               int           &outInteger );
+                                               int           **outInteger );
 
-TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State* _state );
+TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state );
 
 
 /*
@@ -4151,14 +4151,14 @@ TA_LIB_API struct TA_CDLSPINNINGTOP_Data {
                                                     const double inLow;
                                                     const double inClose;
                                                     };
-TA_LIB_API struct TA_CDLSPINNINGTOP_Struct {
-                                           int mem_size;
-                                           int mem_index;
-                                           struct TA_CDLSPINNINGTOP_Data* memory;
-                                           };
+TA_LIB_API struct TA_CDLSPINNINGTOP_State {
+                                          int mem_size;
+                                          int mem_index;
+                                          struct TA_CDLSPINNINGTOP_Data* memory;
+                                          };
 
 
-TA_LIB_API int TA_CDLSPINNINGTOP_StateInit( struct TA_CDLSPINNINGTOP_State* _state );
+TA_LIB_API int TA_CDLSPINNINGTOP_StateInit( struct TA_CDLSPINNINGTOP_State** _state );
 
 
 TA_LIB_API int TA_CDLSPINNINGTOP_State( struct TA_CDLSPINNINGTOP_State* _state,
@@ -4166,9 +4166,9 @@ TA_LIB_API int TA_CDLSPINNINGTOP_State( struct TA_CDLSPINNINGTOP_State* _state,
                                                  const double inHigh,
                                                  const double inLow,
                                                  const double inClose,
-                                                 int           &outInteger );
+                                                 int           **outInteger );
 
-TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State* _state );
+TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _state );
 
 
 /*
@@ -4207,14 +4207,14 @@ TA_LIB_API struct TA_CDLSTALLEDPATTERN_Data {
                                                        const double inLow;
                                                        const double inClose;
                                                        };
-TA_LIB_API struct TA_CDLSTALLEDPATTERN_Struct {
-                                              int mem_size;
-                                              int mem_index;
-                                              struct TA_CDLSTALLEDPATTERN_Data* memory;
-                                              };
+TA_LIB_API struct TA_CDLSTALLEDPATTERN_State {
+                                             int mem_size;
+                                             int mem_index;
+                                             struct TA_CDLSTALLEDPATTERN_Data* memory;
+                                             };
 
 
-TA_LIB_API int TA_CDLSTALLEDPATTERN_StateInit( struct TA_CDLSTALLEDPATTERN_State* _state );
+TA_LIB_API int TA_CDLSTALLEDPATTERN_StateInit( struct TA_CDLSTALLEDPATTERN_State** _state );
 
 
 TA_LIB_API int TA_CDLSTALLEDPATTERN_State( struct TA_CDLSTALLEDPATTERN_State* _state,
@@ -4222,9 +4222,9 @@ TA_LIB_API int TA_CDLSTALLEDPATTERN_State( struct TA_CDLSTALLEDPATTERN_State* _s
                                                     const double inHigh,
                                                     const double inLow,
                                                     const double inClose,
-                                                    int           &outInteger );
+                                                    int           **outInteger );
 
-TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State* _state );
+TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State** _state );
 
 
 /*
@@ -4263,14 +4263,14 @@ TA_LIB_API struct TA_CDLSTICKSANDWICH_Data {
                                                       const double inLow;
                                                       const double inClose;
                                                       };
-TA_LIB_API struct TA_CDLSTICKSANDWICH_Struct {
-                                             int mem_size;
-                                             int mem_index;
-                                             struct TA_CDLSTICKSANDWICH_Data* memory;
-                                             };
+TA_LIB_API struct TA_CDLSTICKSANDWICH_State {
+                                            int mem_size;
+                                            int mem_index;
+                                            struct TA_CDLSTICKSANDWICH_Data* memory;
+                                            };
 
 
-TA_LIB_API int TA_CDLSTICKSANDWICH_StateInit( struct TA_CDLSTICKSANDWICH_State* _state );
+TA_LIB_API int TA_CDLSTICKSANDWICH_StateInit( struct TA_CDLSTICKSANDWICH_State** _state );
 
 
 TA_LIB_API int TA_CDLSTICKSANDWICH_State( struct TA_CDLSTICKSANDWICH_State* _state,
@@ -4278,9 +4278,9 @@ TA_LIB_API int TA_CDLSTICKSANDWICH_State( struct TA_CDLSTICKSANDWICH_State* _sta
                                                    const double inHigh,
                                                    const double inLow,
                                                    const double inClose,
-                                                   int           &outInteger );
+                                                   int           **outInteger );
 
-TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State* _state );
+TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State** _state );
 
 
 /*
@@ -4319,14 +4319,14 @@ TA_LIB_API struct TA_CDLTAKURI_Data {
                                                const double inLow;
                                                const double inClose;
                                                };
-TA_LIB_API struct TA_CDLTAKURI_Struct {
-                                      int mem_size;
-                                      int mem_index;
-                                      struct TA_CDLTAKURI_Data* memory;
-                                      };
+TA_LIB_API struct TA_CDLTAKURI_State {
+                                     int mem_size;
+                                     int mem_index;
+                                     struct TA_CDLTAKURI_Data* memory;
+                                     };
 
 
-TA_LIB_API int TA_CDLTAKURI_StateInit( struct TA_CDLTAKURI_State* _state );
+TA_LIB_API int TA_CDLTAKURI_StateInit( struct TA_CDLTAKURI_State** _state );
 
 
 TA_LIB_API int TA_CDLTAKURI_State( struct TA_CDLTAKURI_State* _state,
@@ -4334,9 +4334,9 @@ TA_LIB_API int TA_CDLTAKURI_State( struct TA_CDLTAKURI_State* _state,
                                             const double inHigh,
                                             const double inLow,
                                             const double inClose,
-                                            int           &outInteger );
+                                            int           **outInteger );
 
-TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State* _state );
+TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
 
 
 /*
@@ -4375,14 +4375,14 @@ TA_LIB_API struct TA_CDLTASUKIGAP_Data {
                                                   const double inLow;
                                                   const double inClose;
                                                   };
-TA_LIB_API struct TA_CDLTASUKIGAP_Struct {
-                                         int mem_size;
-                                         int mem_index;
-                                         struct TA_CDLTASUKIGAP_Data* memory;
-                                         };
+TA_LIB_API struct TA_CDLTASUKIGAP_State {
+                                        int mem_size;
+                                        int mem_index;
+                                        struct TA_CDLTASUKIGAP_Data* memory;
+                                        };
 
 
-TA_LIB_API int TA_CDLTASUKIGAP_StateInit( struct TA_CDLTASUKIGAP_State* _state );
+TA_LIB_API int TA_CDLTASUKIGAP_StateInit( struct TA_CDLTASUKIGAP_State** _state );
 
 
 TA_LIB_API int TA_CDLTASUKIGAP_State( struct TA_CDLTASUKIGAP_State* _state,
@@ -4390,9 +4390,9 @@ TA_LIB_API int TA_CDLTASUKIGAP_State( struct TA_CDLTASUKIGAP_State* _state,
                                                const double inHigh,
                                                const double inLow,
                                                const double inClose,
-                                               int           &outInteger );
+                                               int           **outInteger );
 
-TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State* _state );
+TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state );
 
 
 /*
@@ -4431,14 +4431,14 @@ TA_LIB_API struct TA_CDLTHRUSTING_Data {
                                                   const double inLow;
                                                   const double inClose;
                                                   };
-TA_LIB_API struct TA_CDLTHRUSTING_Struct {
-                                         int mem_size;
-                                         int mem_index;
-                                         struct TA_CDLTHRUSTING_Data* memory;
-                                         };
+TA_LIB_API struct TA_CDLTHRUSTING_State {
+                                        int mem_size;
+                                        int mem_index;
+                                        struct TA_CDLTHRUSTING_Data* memory;
+                                        };
 
 
-TA_LIB_API int TA_CDLTHRUSTING_StateInit( struct TA_CDLTHRUSTING_State* _state );
+TA_LIB_API int TA_CDLTHRUSTING_StateInit( struct TA_CDLTHRUSTING_State** _state );
 
 
 TA_LIB_API int TA_CDLTHRUSTING_State( struct TA_CDLTHRUSTING_State* _state,
@@ -4446,9 +4446,9 @@ TA_LIB_API int TA_CDLTHRUSTING_State( struct TA_CDLTHRUSTING_State* _state,
                                                const double inHigh,
                                                const double inLow,
                                                const double inClose,
-                                               int           &outInteger );
+                                               int           **outInteger );
 
-TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State* _state );
+TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state );
 
 
 /*
@@ -4487,14 +4487,14 @@ TA_LIB_API struct TA_CDLTRISTAR_Data {
                                                 const double inLow;
                                                 const double inClose;
                                                 };
-TA_LIB_API struct TA_CDLTRISTAR_Struct {
-                                       int mem_size;
-                                       int mem_index;
-                                       struct TA_CDLTRISTAR_Data* memory;
-                                       };
+TA_LIB_API struct TA_CDLTRISTAR_State {
+                                      int mem_size;
+                                      int mem_index;
+                                      struct TA_CDLTRISTAR_Data* memory;
+                                      };
 
 
-TA_LIB_API int TA_CDLTRISTAR_StateInit( struct TA_CDLTRISTAR_State* _state );
+TA_LIB_API int TA_CDLTRISTAR_StateInit( struct TA_CDLTRISTAR_State** _state );
 
 
 TA_LIB_API int TA_CDLTRISTAR_State( struct TA_CDLTRISTAR_State* _state,
@@ -4502,9 +4502,9 @@ TA_LIB_API int TA_CDLTRISTAR_State( struct TA_CDLTRISTAR_State* _state,
                                              const double inHigh,
                                              const double inLow,
                                              const double inClose,
-                                             int           &outInteger );
+                                             int           **outInteger );
 
-TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State* _state );
+TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 
 
 /*
@@ -4543,14 +4543,14 @@ TA_LIB_API struct TA_CDLUNIQUE3RIVER_Data {
                                                      const double inLow;
                                                      const double inClose;
                                                      };
-TA_LIB_API struct TA_CDLUNIQUE3RIVER_Struct {
-                                            int mem_size;
-                                            int mem_index;
-                                            struct TA_CDLUNIQUE3RIVER_Data* memory;
-                                            };
+TA_LIB_API struct TA_CDLUNIQUE3RIVER_State {
+                                           int mem_size;
+                                           int mem_index;
+                                           struct TA_CDLUNIQUE3RIVER_Data* memory;
+                                           };
 
 
-TA_LIB_API int TA_CDLUNIQUE3RIVER_StateInit( struct TA_CDLUNIQUE3RIVER_State* _state );
+TA_LIB_API int TA_CDLUNIQUE3RIVER_StateInit( struct TA_CDLUNIQUE3RIVER_State** _state );
 
 
 TA_LIB_API int TA_CDLUNIQUE3RIVER_State( struct TA_CDLUNIQUE3RIVER_State* _state,
@@ -4558,9 +4558,9 @@ TA_LIB_API int TA_CDLUNIQUE3RIVER_State( struct TA_CDLUNIQUE3RIVER_State* _state
                                                   const double inHigh,
                                                   const double inLow,
                                                   const double inClose,
-                                                  int           &outInteger );
+                                                  int           **outInteger );
 
-TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State* _state );
+TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _state );
 
 
 /*
@@ -4599,14 +4599,14 @@ TA_LIB_API struct TA_CDLUPSIDEGAP2CROWS_Data {
                                                         const double inLow;
                                                         const double inClose;
                                                         };
-TA_LIB_API struct TA_CDLUPSIDEGAP2CROWS_Struct {
-                                               int mem_size;
-                                               int mem_index;
-                                               struct TA_CDLUPSIDEGAP2CROWS_Data* memory;
-                                               };
+TA_LIB_API struct TA_CDLUPSIDEGAP2CROWS_State {
+                                              int mem_size;
+                                              int mem_index;
+                                              struct TA_CDLUPSIDEGAP2CROWS_Data* memory;
+                                              };
 
 
-TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateInit( struct TA_CDLUPSIDEGAP2CROWS_State* _state );
+TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateInit( struct TA_CDLUPSIDEGAP2CROWS_State** _state );
 
 
 TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_State( struct TA_CDLUPSIDEGAP2CROWS_State* _state,
@@ -4614,9 +4614,9 @@ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_State( struct TA_CDLUPSIDEGAP2CROWS_State* 
                                                      const double inHigh,
                                                      const double inLow,
                                                      const double inClose,
-                                                     int           &outInteger );
+                                                     int           **outInteger );
 
-TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_State* _state );
+TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_State** _state );
 
 
 /*
@@ -4655,14 +4655,14 @@ TA_LIB_API struct TA_CDLXSIDEGAP3METHODS_Data {
                                                          const double inLow;
                                                          const double inClose;
                                                          };
-TA_LIB_API struct TA_CDLXSIDEGAP3METHODS_Struct {
-                                                int mem_size;
-                                                int mem_index;
-                                                struct TA_CDLXSIDEGAP3METHODS_Data* memory;
-                                                };
+TA_LIB_API struct TA_CDLXSIDEGAP3METHODS_State {
+                                               int mem_size;
+                                               int mem_index;
+                                               struct TA_CDLXSIDEGAP3METHODS_Data* memory;
+                                               };
 
 
-TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateInit( struct TA_CDLXSIDEGAP3METHODS_State* _state );
+TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateInit( struct TA_CDLXSIDEGAP3METHODS_State** _state );
 
 
 TA_LIB_API int TA_CDLXSIDEGAP3METHODS_State( struct TA_CDLXSIDEGAP3METHODS_State* _state,
@@ -4670,9 +4670,9 @@ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_State( struct TA_CDLXSIDEGAP3METHODS_State
                                                       const double inHigh,
                                                       const double inLow,
                                                       const double inClose,
-                                                      int           &outInteger );
+                                                      int           **outInteger );
 
-TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_State* _state );
+TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_State** _state );
 
 
 /*
@@ -4702,21 +4702,21 @@ TA_LIB_API int TA_CEIL_Lookback( void );
 TA_LIB_API struct TA_CEIL_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_CEIL_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_CEIL_Data* memory;
-                                 };
+TA_LIB_API struct TA_CEIL_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_CEIL_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_CEIL_StateInit( struct TA_CEIL_State* _state );
+TA_LIB_API int TA_CEIL_StateInit( struct TA_CEIL_State** _state );
 
 
 TA_LIB_API int TA_CEIL_State( struct TA_CEIL_State* _state,
                                        const double inReal,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State* _state );
+TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State** _state );
 
 
 /*
@@ -4754,24 +4754,24 @@ TA_LIB_API int TA_CMO_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_CMO_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_CMO_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_CMO_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_CMO_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_CMO_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_CMO_StateInit( struct TA_CMO_State* _state,
+TA_LIB_API int TA_CMO_StateInit( struct TA_CMO_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_CMO_State( struct TA_CMO_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State* _state );
+TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State** _state );
 
 
 /*
@@ -4812,15 +4812,15 @@ TA_LIB_API struct TA_CORREL_Data {
                                             const double inReal0;
                                             const double inReal1;
                                             };
-TA_LIB_API struct TA_CORREL_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_CORREL_Data* memory;
-                                   int           optInTimePeriod; /* From 1 to 100000 */
-                                   };
+TA_LIB_API struct TA_CORREL_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_CORREL_Data* memory;
+                                  int           optInTimePeriod; /* From 1 to 100000 */
+                                  };
 
 
-TA_LIB_API int TA_CORREL_StateInit( struct TA_CORREL_State* _state,
+TA_LIB_API int TA_CORREL_StateInit( struct TA_CORREL_State** _state,
                                              int           optInTimePeriod );  /* From 1 to 100000 */
 
 
@@ -4828,9 +4828,9 @@ TA_LIB_API int TA_CORREL_State( struct TA_CORREL_State* _state,
                                          const double inReal0,
                                          const double inReal1,
                                          int           optInTimePeriod, /* From 1 to 100000 */
-                                         double        &outReal );
+                                         double        **outReal );
 
-TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State* _state );
+TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 
 
 /*
@@ -4860,21 +4860,21 @@ TA_LIB_API int TA_COS_Lookback( void );
 TA_LIB_API struct TA_COS_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_COS_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_COS_Data* memory;
-                                };
+TA_LIB_API struct TA_COS_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_COS_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_COS_StateInit( struct TA_COS_State* _state );
+TA_LIB_API int TA_COS_StateInit( struct TA_COS_State** _state );
 
 
 TA_LIB_API int TA_COS_State( struct TA_COS_State* _state,
                                       const double inReal,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_COS_StateFree( struct TA_COS_State* _state );
+TA_LIB_API int TA_COS_StateFree( struct TA_COS_State** _state );
 
 
 /*
@@ -4904,21 +4904,21 @@ TA_LIB_API int TA_COSH_Lookback( void );
 TA_LIB_API struct TA_COSH_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_COSH_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_COSH_Data* memory;
-                                 };
+TA_LIB_API struct TA_COSH_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_COSH_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_COSH_StateInit( struct TA_COSH_State* _state );
+TA_LIB_API int TA_COSH_StateInit( struct TA_COSH_State** _state );
 
 
 TA_LIB_API int TA_COSH_State( struct TA_COSH_State* _state,
                                        const double inReal,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_COSH_StateFree( struct TA_COSH_State* _state );
+TA_LIB_API int TA_COSH_StateFree( struct TA_COSH_State** _state );
 
 
 /*
@@ -4956,24 +4956,24 @@ TA_LIB_API int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 
 TA_LIB_API struct TA_DEMA_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_DEMA_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_DEMA_Data* memory;
-                                 int           optInTimePeriod; /* From 2 to 100000 */
-                                 };
+TA_LIB_API struct TA_DEMA_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_DEMA_Data* memory;
+                                int           optInTimePeriod; /* From 2 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_DEMA_StateInit( struct TA_DEMA_State* _state,
+TA_LIB_API int TA_DEMA_StateInit( struct TA_DEMA_State** _state,
                                            int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_DEMA_State( struct TA_DEMA_State* _state,
                                        const double inReal,
                                        int           optInTimePeriod, /* From 2 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State* _state );
+TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 
 
 /*
@@ -5006,22 +5006,22 @@ TA_LIB_API struct TA_DIV_Data {
                                          const double inReal0;
                                          const double inReal1;
                                          };
-TA_LIB_API struct TA_DIV_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_DIV_Data* memory;
-                                };
+TA_LIB_API struct TA_DIV_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_DIV_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_DIV_StateInit( struct TA_DIV_State* _state );
+TA_LIB_API int TA_DIV_StateInit( struct TA_DIV_State** _state );
 
 
 TA_LIB_API int TA_DIV_State( struct TA_DIV_State* _state,
                                       const double inReal0,
                                       const double inReal1,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State* _state );
+TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state );
 
 
 /*
@@ -5065,15 +5065,15 @@ TA_LIB_API struct TA_DX_Data {
                                         const double inLow;
                                         const double inClose;
                                         };
-TA_LIB_API struct TA_DX_Struct {
-                               int mem_size;
-                               int mem_index;
-                               struct TA_DX_Data* memory;
-                               int           optInTimePeriod; /* From 2 to 100000 */
-                               };
+TA_LIB_API struct TA_DX_State {
+                              int mem_size;
+                              int mem_index;
+                              struct TA_DX_Data* memory;
+                              int           optInTimePeriod; /* From 2 to 100000 */
+                              };
 
 
-TA_LIB_API int TA_DX_StateInit( struct TA_DX_State* _state,
+TA_LIB_API int TA_DX_StateInit( struct TA_DX_State** _state,
                                          int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -5082,9 +5082,9 @@ TA_LIB_API int TA_DX_State( struct TA_DX_State* _state,
                                      const double inLow,
                                      const double inClose,
                                      int           optInTimePeriod, /* From 2 to 100000 */
-                                     double        &outReal );
+                                     double        **outReal );
 
-TA_LIB_API int TA_DX_StateFree( struct TA_DX_State* _state );
+TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state );
 
 
 /*
@@ -5122,24 +5122,24 @@ TA_LIB_API int TA_EMA_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_EMA_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_EMA_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_EMA_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_EMA_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_EMA_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_EMA_StateInit( struct TA_EMA_State* _state,
+TA_LIB_API int TA_EMA_StateInit( struct TA_EMA_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_EMA_State( struct TA_EMA_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State* _state );
+TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State** _state );
 
 
 /*
@@ -5169,21 +5169,21 @@ TA_LIB_API int TA_EXP_Lookback( void );
 TA_LIB_API struct TA_EXP_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_EXP_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_EXP_Data* memory;
-                                };
+TA_LIB_API struct TA_EXP_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_EXP_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_EXP_StateInit( struct TA_EXP_State* _state );
+TA_LIB_API int TA_EXP_StateInit( struct TA_EXP_State** _state );
 
 
 TA_LIB_API int TA_EXP_State( struct TA_EXP_State* _state,
                                       const double inReal,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_EXP_StateFree( struct TA_EXP_State* _state );
+TA_LIB_API int TA_EXP_StateFree( struct TA_EXP_State** _state );
 
 
 /*
@@ -5213,21 +5213,21 @@ TA_LIB_API int TA_FLOOR_Lookback( void );
 TA_LIB_API struct TA_FLOOR_Data {
                                            const double inReal;
                                            };
-TA_LIB_API struct TA_FLOOR_Struct {
-                                  int mem_size;
-                                  int mem_index;
-                                  struct TA_FLOOR_Data* memory;
-                                  };
+TA_LIB_API struct TA_FLOOR_State {
+                                 int mem_size;
+                                 int mem_index;
+                                 struct TA_FLOOR_Data* memory;
+                                 };
 
 
-TA_LIB_API int TA_FLOOR_StateInit( struct TA_FLOOR_State* _state );
+TA_LIB_API int TA_FLOOR_StateInit( struct TA_FLOOR_State** _state );
 
 
 TA_LIB_API int TA_FLOOR_State( struct TA_FLOOR_State* _state,
                                         const double inReal,
-                                        double        &outReal );
+                                        double        **outReal );
 
-TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State* _state );
+TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state );
 
 
 /*
@@ -5257,21 +5257,21 @@ TA_LIB_API int TA_HT_DCPERIOD_Lookback( void );
 TA_LIB_API struct TA_HT_DCPERIOD_Data {
                                                  const double inReal;
                                                  };
-TA_LIB_API struct TA_HT_DCPERIOD_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_HT_DCPERIOD_Data* memory;
-                                        };
+TA_LIB_API struct TA_HT_DCPERIOD_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_HT_DCPERIOD_Data* memory;
+                                       };
 
 
-TA_LIB_API int TA_HT_DCPERIOD_StateInit( struct TA_HT_DCPERIOD_State* _state );
+TA_LIB_API int TA_HT_DCPERIOD_StateInit( struct TA_HT_DCPERIOD_State** _state );
 
 
 TA_LIB_API int TA_HT_DCPERIOD_State( struct TA_HT_DCPERIOD_State* _state,
                                               const double inReal,
-                                              double        &outReal );
+                                              double        **outReal );
 
-TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State* _state );
+TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state );
 
 
 /*
@@ -5301,21 +5301,21 @@ TA_LIB_API int TA_HT_DCPHASE_Lookback( void );
 TA_LIB_API struct TA_HT_DCPHASE_Data {
                                                 const double inReal;
                                                 };
-TA_LIB_API struct TA_HT_DCPHASE_Struct {
-                                       int mem_size;
-                                       int mem_index;
-                                       struct TA_HT_DCPHASE_Data* memory;
-                                       };
+TA_LIB_API struct TA_HT_DCPHASE_State {
+                                      int mem_size;
+                                      int mem_index;
+                                      struct TA_HT_DCPHASE_Data* memory;
+                                      };
 
 
-TA_LIB_API int TA_HT_DCPHASE_StateInit( struct TA_HT_DCPHASE_State* _state );
+TA_LIB_API int TA_HT_DCPHASE_StateInit( struct TA_HT_DCPHASE_State** _state );
 
 
 TA_LIB_API int TA_HT_DCPHASE_State( struct TA_HT_DCPHASE_State* _state,
                                              const double inReal,
-                                             double        &outReal );
+                                             double        **outReal );
 
-TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State* _state );
+TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state );
 
 
 /*
@@ -5347,22 +5347,22 @@ TA_LIB_API int TA_HT_PHASOR_Lookback( void );
 TA_LIB_API struct TA_HT_PHASOR_Data {
                                                const double inReal;
                                                };
-TA_LIB_API struct TA_HT_PHASOR_Struct {
-                                      int mem_size;
-                                      int mem_index;
-                                      struct TA_HT_PHASOR_Data* memory;
-                                      };
+TA_LIB_API struct TA_HT_PHASOR_State {
+                                     int mem_size;
+                                     int mem_index;
+                                     struct TA_HT_PHASOR_Data* memory;
+                                     };
 
 
-TA_LIB_API int TA_HT_PHASOR_StateInit( struct TA_HT_PHASOR_State* _state );
+TA_LIB_API int TA_HT_PHASOR_StateInit( struct TA_HT_PHASOR_State** _state );
 
 
 TA_LIB_API int TA_HT_PHASOR_State( struct TA_HT_PHASOR_State* _state,
                                             const double inReal,
-                                            double        &outInPhase,
-                                            double        &outQuadrature );
+                                            double        **outInPhase,
+                                            double        **outQuadrature );
 
-TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State* _state );
+TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
 
 
 /*
@@ -5394,22 +5394,22 @@ TA_LIB_API int TA_HT_SINE_Lookback( void );
 TA_LIB_API struct TA_HT_SINE_Data {
                                              const double inReal;
                                              };
-TA_LIB_API struct TA_HT_SINE_Struct {
-                                    int mem_size;
-                                    int mem_index;
-                                    struct TA_HT_SINE_Data* memory;
-                                    };
+TA_LIB_API struct TA_HT_SINE_State {
+                                   int mem_size;
+                                   int mem_index;
+                                   struct TA_HT_SINE_Data* memory;
+                                   };
 
 
-TA_LIB_API int TA_HT_SINE_StateInit( struct TA_HT_SINE_State* _state );
+TA_LIB_API int TA_HT_SINE_StateInit( struct TA_HT_SINE_State** _state );
 
 
 TA_LIB_API int TA_HT_SINE_State( struct TA_HT_SINE_State* _state,
                                           const double inReal,
-                                          double        &outSine,
-                                          double        &outLeadSine );
+                                          double        **outSine,
+                                          double        **outLeadSine );
 
-TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State* _state );
+TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 
 
 /*
@@ -5439,21 +5439,21 @@ TA_LIB_API int TA_HT_TRENDLINE_Lookback( void );
 TA_LIB_API struct TA_HT_TRENDLINE_Data {
                                                   const double inReal;
                                                   };
-TA_LIB_API struct TA_HT_TRENDLINE_Struct {
-                                         int mem_size;
-                                         int mem_index;
-                                         struct TA_HT_TRENDLINE_Data* memory;
-                                         };
+TA_LIB_API struct TA_HT_TRENDLINE_State {
+                                        int mem_size;
+                                        int mem_index;
+                                        struct TA_HT_TRENDLINE_Data* memory;
+                                        };
 
 
-TA_LIB_API int TA_HT_TRENDLINE_StateInit( struct TA_HT_TRENDLINE_State* _state );
+TA_LIB_API int TA_HT_TRENDLINE_StateInit( struct TA_HT_TRENDLINE_State** _state );
 
 
 TA_LIB_API int TA_HT_TRENDLINE_State( struct TA_HT_TRENDLINE_State* _state,
                                                const double inReal,
-                                               double        &outReal );
+                                               double        **outReal );
 
-TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State* _state );
+TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state );
 
 
 /*
@@ -5483,21 +5483,21 @@ TA_LIB_API int TA_HT_TRENDMODE_Lookback( void );
 TA_LIB_API struct TA_HT_TRENDMODE_Data {
                                                   const double inReal;
                                                   };
-TA_LIB_API struct TA_HT_TRENDMODE_Struct {
-                                         int mem_size;
-                                         int mem_index;
-                                         struct TA_HT_TRENDMODE_Data* memory;
-                                         };
+TA_LIB_API struct TA_HT_TRENDMODE_State {
+                                        int mem_size;
+                                        int mem_index;
+                                        struct TA_HT_TRENDMODE_Data* memory;
+                                        };
 
 
-TA_LIB_API int TA_HT_TRENDMODE_StateInit( struct TA_HT_TRENDMODE_State* _state );
+TA_LIB_API int TA_HT_TRENDMODE_StateInit( struct TA_HT_TRENDMODE_State** _state );
 
 
 TA_LIB_API int TA_HT_TRENDMODE_State( struct TA_HT_TRENDMODE_State* _state,
                                                const double inReal,
-                                               int           &outInteger );
+                                               int           **outInteger );
 
-TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State* _state );
+TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state );
 
 
 /*
@@ -5538,15 +5538,15 @@ TA_LIB_API struct TA_IMI_Data {
                                          const double inOpen;
                                          const double inClose;
                                          };
-TA_LIB_API struct TA_IMI_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_IMI_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_IMI_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_IMI_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_IMI_StateInit( struct TA_IMI_State* _state,
+TA_LIB_API int TA_IMI_StateInit( struct TA_IMI_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -5554,9 +5554,9 @@ TA_LIB_API int TA_IMI_State( struct TA_IMI_State* _state,
                                       const double inOpen,
                                       const double inClose,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State* _state );
+TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state );
 
 
 /*
@@ -5594,24 +5594,24 @@ TA_LIB_API int TA_KAMA_Lookback( int           optInTimePeriod );  /* From 2 to 
 TA_LIB_API struct TA_KAMA_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_KAMA_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_KAMA_Data* memory;
-                                 int           optInTimePeriod; /* From 2 to 100000 */
-                                 };
+TA_LIB_API struct TA_KAMA_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_KAMA_Data* memory;
+                                int           optInTimePeriod; /* From 2 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_KAMA_StateInit( struct TA_KAMA_State* _state,
+TA_LIB_API int TA_KAMA_StateInit( struct TA_KAMA_State** _state,
                                            int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_KAMA_State( struct TA_KAMA_State* _state,
                                        const double inReal,
                                        int           optInTimePeriod, /* From 2 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State* _state );
+TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
 
 
 /*
@@ -5649,24 +5649,24 @@ TA_LIB_API int TA_LINEARREG_Lookback( int           optInTimePeriod );  /* From 
 TA_LIB_API struct TA_LINEARREG_Data {
                                                const double inReal;
                                                };
-TA_LIB_API struct TA_LINEARREG_Struct {
-                                      int mem_size;
-                                      int mem_index;
-                                      struct TA_LINEARREG_Data* memory;
-                                      int           optInTimePeriod; /* From 2 to 100000 */
-                                      };
+TA_LIB_API struct TA_LINEARREG_State {
+                                     int mem_size;
+                                     int mem_index;
+                                     struct TA_LINEARREG_Data* memory;
+                                     int           optInTimePeriod; /* From 2 to 100000 */
+                                     };
 
 
-TA_LIB_API int TA_LINEARREG_StateInit( struct TA_LINEARREG_State* _state,
+TA_LIB_API int TA_LINEARREG_StateInit( struct TA_LINEARREG_State** _state,
                                                 int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_LINEARREG_State( struct TA_LINEARREG_State* _state,
                                             const double inReal,
                                             int           optInTimePeriod, /* From 2 to 100000 */
-                                            double        &outReal );
+                                            double        **outReal );
 
-TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State* _state );
+TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 
 
 /*
@@ -5704,24 +5704,24 @@ TA_LIB_API int TA_LINEARREG_ANGLE_Lookback( int           optInTimePeriod );  /*
 TA_LIB_API struct TA_LINEARREG_ANGLE_Data {
                                                      const double inReal;
                                                      };
-TA_LIB_API struct TA_LINEARREG_ANGLE_Struct {
-                                            int mem_size;
-                                            int mem_index;
-                                            struct TA_LINEARREG_ANGLE_Data* memory;
-                                            int           optInTimePeriod; /* From 2 to 100000 */
-                                            };
+TA_LIB_API struct TA_LINEARREG_ANGLE_State {
+                                           int mem_size;
+                                           int mem_index;
+                                           struct TA_LINEARREG_ANGLE_Data* memory;
+                                           int           optInTimePeriod; /* From 2 to 100000 */
+                                           };
 
 
-TA_LIB_API int TA_LINEARREG_ANGLE_StateInit( struct TA_LINEARREG_ANGLE_State* _state,
+TA_LIB_API int TA_LINEARREG_ANGLE_StateInit( struct TA_LINEARREG_ANGLE_State** _state,
                                                       int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_LINEARREG_ANGLE_State( struct TA_LINEARREG_ANGLE_State* _state,
                                                   const double inReal,
                                                   int           optInTimePeriod, /* From 2 to 100000 */
-                                                  double        &outReal );
+                                                  double        **outReal );
 
-TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State* _state );
+TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _state );
 
 
 /*
@@ -5759,24 +5759,24 @@ TA_LIB_API int TA_LINEARREG_INTERCEPT_Lookback( int           optInTimePeriod );
 TA_LIB_API struct TA_LINEARREG_INTERCEPT_Data {
                                                          const double inReal;
                                                          };
-TA_LIB_API struct TA_LINEARREG_INTERCEPT_Struct {
-                                                int mem_size;
-                                                int mem_index;
-                                                struct TA_LINEARREG_INTERCEPT_Data* memory;
-                                                int           optInTimePeriod; /* From 2 to 100000 */
-                                                };
+TA_LIB_API struct TA_LINEARREG_INTERCEPT_State {
+                                               int mem_size;
+                                               int mem_index;
+                                               struct TA_LINEARREG_INTERCEPT_Data* memory;
+                                               int           optInTimePeriod; /* From 2 to 100000 */
+                                               };
 
 
-TA_LIB_API int TA_LINEARREG_INTERCEPT_StateInit( struct TA_LINEARREG_INTERCEPT_State* _state,
+TA_LIB_API int TA_LINEARREG_INTERCEPT_StateInit( struct TA_LINEARREG_INTERCEPT_State** _state,
                                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_LINEARREG_INTERCEPT_State( struct TA_LINEARREG_INTERCEPT_State* _state,
                                                       const double inReal,
                                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                                      double        &outReal );
+                                                      double        **outReal );
 
-TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_State* _state );
+TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_State** _state );
 
 
 /*
@@ -5814,24 +5814,24 @@ TA_LIB_API int TA_LINEARREG_SLOPE_Lookback( int           optInTimePeriod );  /*
 TA_LIB_API struct TA_LINEARREG_SLOPE_Data {
                                                      const double inReal;
                                                      };
-TA_LIB_API struct TA_LINEARREG_SLOPE_Struct {
-                                            int mem_size;
-                                            int mem_index;
-                                            struct TA_LINEARREG_SLOPE_Data* memory;
-                                            int           optInTimePeriod; /* From 2 to 100000 */
-                                            };
+TA_LIB_API struct TA_LINEARREG_SLOPE_State {
+                                           int mem_size;
+                                           int mem_index;
+                                           struct TA_LINEARREG_SLOPE_Data* memory;
+                                           int           optInTimePeriod; /* From 2 to 100000 */
+                                           };
 
 
-TA_LIB_API int TA_LINEARREG_SLOPE_StateInit( struct TA_LINEARREG_SLOPE_State* _state,
+TA_LIB_API int TA_LINEARREG_SLOPE_StateInit( struct TA_LINEARREG_SLOPE_State** _state,
                                                       int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_LINEARREG_SLOPE_State( struct TA_LINEARREG_SLOPE_State* _state,
                                                   const double inReal,
                                                   int           optInTimePeriod, /* From 2 to 100000 */
-                                                  double        &outReal );
+                                                  double        **outReal );
 
-TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State* _state );
+TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _state );
 
 
 /*
@@ -5861,21 +5861,21 @@ TA_LIB_API int TA_LN_Lookback( void );
 TA_LIB_API struct TA_LN_Data {
                                         const double inReal;
                                         };
-TA_LIB_API struct TA_LN_Struct {
-                               int mem_size;
-                               int mem_index;
-                               struct TA_LN_Data* memory;
-                               };
+TA_LIB_API struct TA_LN_State {
+                              int mem_size;
+                              int mem_index;
+                              struct TA_LN_Data* memory;
+                              };
 
 
-TA_LIB_API int TA_LN_StateInit( struct TA_LN_State* _state );
+TA_LIB_API int TA_LN_StateInit( struct TA_LN_State** _state );
 
 
 TA_LIB_API int TA_LN_State( struct TA_LN_State* _state,
                                      const double inReal,
-                                     double        &outReal );
+                                     double        **outReal );
 
-TA_LIB_API int TA_LN_StateFree( struct TA_LN_State* _state );
+TA_LIB_API int TA_LN_StateFree( struct TA_LN_State** _state );
 
 
 /*
@@ -5905,21 +5905,21 @@ TA_LIB_API int TA_LOG10_Lookback( void );
 TA_LIB_API struct TA_LOG10_Data {
                                            const double inReal;
                                            };
-TA_LIB_API struct TA_LOG10_Struct {
-                                  int mem_size;
-                                  int mem_index;
-                                  struct TA_LOG10_Data* memory;
-                                  };
+TA_LIB_API struct TA_LOG10_State {
+                                 int mem_size;
+                                 int mem_index;
+                                 struct TA_LOG10_Data* memory;
+                                 };
 
 
-TA_LIB_API int TA_LOG10_StateInit( struct TA_LOG10_State* _state );
+TA_LIB_API int TA_LOG10_StateInit( struct TA_LOG10_State** _state );
 
 
 TA_LIB_API int TA_LOG10_State( struct TA_LOG10_State* _state,
                                         const double inReal,
-                                        double        &outReal );
+                                        double        **outReal );
 
-TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State* _state );
+TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State** _state );
 
 
 /*
@@ -5960,24 +5960,24 @@ TA_LIB_API int TA_MA_Lookback( int           optInTimePeriod, /* From 1 to 10000
 TA_LIB_API struct TA_MA_Data {
                                         const double inReal;
                                         };
-TA_LIB_API struct TA_MA_Struct {
-                               int mem_size;
-                               int mem_index;
-                               struct TA_MA_Data* memory;
-                               int           optInTimePeriod; /* From 1 to 100000 */
-                               TA_MAType     optInMAType;                               };
+TA_LIB_API struct TA_MA_State {
+                              int mem_size;
+                              int mem_index;
+                              struct TA_MA_Data* memory;
+                              int           optInTimePeriod; /* From 1 to 100000 */
+                              TA_MAType     optInMAType;                              };
 
 
-TA_LIB_API int TA_MA_StateInit( struct TA_MA_State* _state,
+TA_LIB_API int TA_MA_StateInit( struct TA_MA_State** _state,
                                          int           optInTimePeriod, /* From 1 to 100000 */
                                          TA_MAType     optInMAType ); 
 
 TA_LIB_API int TA_MA_State( struct TA_MA_State* _state,
                                      const double inReal,
                                      int           optInTimePeriod, /* From 1 to 100000 */
-                                     TA_MAType     optInMAType,                                     double        &outReal );
+                                     TA_MAType     optInMAType,                                     double        **outReal );
 
-TA_LIB_API int TA_MA_StateFree( struct TA_MA_State* _state );
+TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state );
 
 
 /*
@@ -6031,17 +6031,17 @@ TA_LIB_API int TA_MACD_Lookback( int           optInFastPeriod, /* From 2 to 100
 TA_LIB_API struct TA_MACD_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_MACD_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_MACD_Data* memory;
-                                 int           optInFastPeriod; /* From 2 to 100000 */
-                                 int           optInSlowPeriod; /* From 2 to 100000 */
-                                 int           optInSignalPeriod; /* From 1 to 100000 */
-                                 };
+TA_LIB_API struct TA_MACD_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_MACD_Data* memory;
+                                int           optInFastPeriod; /* From 2 to 100000 */
+                                int           optInSlowPeriod; /* From 2 to 100000 */
+                                int           optInSignalPeriod; /* From 1 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_MACD_StateInit( struct TA_MACD_State* _state,
+TA_LIB_API int TA_MACD_StateInit( struct TA_MACD_State** _state,
                                            int           optInFastPeriod, /* From 2 to 100000 */
                                            int           optInSlowPeriod, /* From 2 to 100000 */
                                            int           optInSignalPeriod );  /* From 1 to 100000 */
@@ -6052,11 +6052,11 @@ TA_LIB_API int TA_MACD_State( struct TA_MACD_State* _state,
                                        int           optInFastPeriod, /* From 2 to 100000 */
                                        int           optInSlowPeriod, /* From 2 to 100000 */
                                        int           optInSignalPeriod, /* From 1 to 100000 */
-                                       double        &outMACD,
-                                       double        &outMACDSignal,
-                                       double        &outMACDHist );
+                                       double        **outMACD,
+                                       double        **outMACDSignal,
+                                       double        **outMACDHist );
 
-TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State* _state );
+TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 
 
 /*
@@ -6119,17 +6119,17 @@ TA_LIB_API int TA_MACDEXT_Lookback( int           optInFastPeriod, /* From 2 to 
 TA_LIB_API struct TA_MACDEXT_Data {
                                              const double inReal;
                                              };
-TA_LIB_API struct TA_MACDEXT_Struct {
-                                    int mem_size;
-                                    int mem_index;
-                                    struct TA_MACDEXT_Data* memory;
-                                    int           optInFastPeriod; /* From 2 to 100000 */
-                                    TA_MAType     optInFastMAType;                                    int           optInSlowPeriod; /* From 2 to 100000 */
-                                    TA_MAType     optInSlowMAType;                                    int           optInSignalPeriod; /* From 1 to 100000 */
-                                    TA_MAType     optInSignalMAType;                                    };
+TA_LIB_API struct TA_MACDEXT_State {
+                                   int mem_size;
+                                   int mem_index;
+                                   struct TA_MACDEXT_Data* memory;
+                                   int           optInFastPeriod; /* From 2 to 100000 */
+                                   TA_MAType     optInFastMAType;                                   int           optInSlowPeriod; /* From 2 to 100000 */
+                                   TA_MAType     optInSlowMAType;                                   int           optInSignalPeriod; /* From 1 to 100000 */
+                                   TA_MAType     optInSignalMAType;                                   };
 
 
-TA_LIB_API int TA_MACDEXT_StateInit( struct TA_MACDEXT_State* _state,
+TA_LIB_API int TA_MACDEXT_StateInit( struct TA_MACDEXT_State** _state,
                                               int           optInFastPeriod, /* From 2 to 100000 */
                                               TA_MAType     optInFastMAType,                                              int           optInSlowPeriod, /* From 2 to 100000 */
                                               TA_MAType     optInSlowMAType,                                              int           optInSignalPeriod, /* From 1 to 100000 */
@@ -6140,11 +6140,11 @@ TA_LIB_API int TA_MACDEXT_State( struct TA_MACDEXT_State* _state,
                                           int           optInFastPeriod, /* From 2 to 100000 */
                                           TA_MAType     optInFastMAType,                                          int           optInSlowPeriod, /* From 2 to 100000 */
                                           TA_MAType     optInSlowMAType,                                          int           optInSignalPeriod, /* From 1 to 100000 */
-                                          TA_MAType     optInSignalMAType,                                          double        &outMACD,
-                                          double        &outMACDSignal,
-                                          double        &outMACDHist );
+                                          TA_MAType     optInSignalMAType,                                          double        **outMACD,
+                                          double        **outMACDSignal,
+                                          double        **outMACDHist );
 
-TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State* _state );
+TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 
 
 /*
@@ -6186,26 +6186,26 @@ TA_LIB_API int TA_MACDFIX_Lookback( int           optInSignalPeriod );  /* From 
 TA_LIB_API struct TA_MACDFIX_Data {
                                              const double inReal;
                                              };
-TA_LIB_API struct TA_MACDFIX_Struct {
-                                    int mem_size;
-                                    int mem_index;
-                                    struct TA_MACDFIX_Data* memory;
-                                    int           optInSignalPeriod; /* From 1 to 100000 */
-                                    };
+TA_LIB_API struct TA_MACDFIX_State {
+                                   int mem_size;
+                                   int mem_index;
+                                   struct TA_MACDFIX_Data* memory;
+                                   int           optInSignalPeriod; /* From 1 to 100000 */
+                                   };
 
 
-TA_LIB_API int TA_MACDFIX_StateInit( struct TA_MACDFIX_State* _state,
+TA_LIB_API int TA_MACDFIX_StateInit( struct TA_MACDFIX_State** _state,
                                               int           optInSignalPeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API int TA_MACDFIX_State( struct TA_MACDFIX_State* _state,
                                           const double inReal,
                                           int           optInSignalPeriod, /* From 1 to 100000 */
-                                          double        &outMACD,
-                                          double        &outMACDSignal,
-                                          double        &outMACDHist );
+                                          double        **outMACD,
+                                          double        **outMACDSignal,
+                                          double        **outMACDHist );
 
-TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State* _state );
+TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 
 
 /*
@@ -6251,16 +6251,16 @@ TA_LIB_API int TA_MAMA_Lookback( double        optInFastLimit, /* From 0.01 to 0
 TA_LIB_API struct TA_MAMA_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_MAMA_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_MAMA_Data* memory;
-                                 double        optInFastLimit; /* From 0.01 to 0.99 */
-                                 double        optInSlowLimit; /* From 0.01 to 0.99 */
-                                 };
+TA_LIB_API struct TA_MAMA_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_MAMA_Data* memory;
+                                double        optInFastLimit; /* From 0.01 to 0.99 */
+                                double        optInSlowLimit; /* From 0.01 to 0.99 */
+                                };
 
 
-TA_LIB_API int TA_MAMA_StateInit( struct TA_MAMA_State* _state,
+TA_LIB_API int TA_MAMA_StateInit( struct TA_MAMA_State** _state,
                                            double        optInFastLimit, /* From 0.01 to 0.99 */
                                            double        optInSlowLimit );  /* From 0.01 to 0.99 */
 
@@ -6269,10 +6269,10 @@ TA_LIB_API int TA_MAMA_State( struct TA_MAMA_State* _state,
                                        const double inReal,
                                        double        optInFastLimit, /* From 0.01 to 0.99 */
                                        double        optInSlowLimit, /* From 0.01 to 0.99 */
-                                       double        &outMAMA,
-                                       double        &outFAMA );
+                                       double        **outMAMA,
+                                       double        **outFAMA );
 
-TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State* _state );
+TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 
 
 /*
@@ -6322,16 +6322,16 @@ TA_LIB_API struct TA_MAVP_Data {
                                           const double inReal;
                                           const double inPeriods;
                                           };
-TA_LIB_API struct TA_MAVP_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_MAVP_Data* memory;
-                                 int           optInMinPeriod; /* From 2 to 100000 */
-                                 int           optInMaxPeriod; /* From 2 to 100000 */
-                                 TA_MAType     optInMAType;                                 };
+TA_LIB_API struct TA_MAVP_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_MAVP_Data* memory;
+                                int           optInMinPeriod; /* From 2 to 100000 */
+                                int           optInMaxPeriod; /* From 2 to 100000 */
+                                TA_MAType     optInMAType;                                };
 
 
-TA_LIB_API int TA_MAVP_StateInit( struct TA_MAVP_State* _state,
+TA_LIB_API int TA_MAVP_StateInit( struct TA_MAVP_State** _state,
                                            int           optInMinPeriod, /* From 2 to 100000 */
                                            int           optInMaxPeriod, /* From 2 to 100000 */
                                            TA_MAType     optInMAType ); 
@@ -6341,9 +6341,9 @@ TA_LIB_API int TA_MAVP_State( struct TA_MAVP_State* _state,
                                        const double inPeriods,
                                        int           optInMinPeriod, /* From 2 to 100000 */
                                        int           optInMaxPeriod, /* From 2 to 100000 */
-                                       TA_MAType     optInMAType,                                       double        &outReal );
+                                       TA_MAType     optInMAType,                                       double        **outReal );
 
-TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State* _state );
+TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 
 
 /*
@@ -6381,24 +6381,24 @@ TA_LIB_API int TA_MAX_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_MAX_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_MAX_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_MAX_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_MAX_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_MAX_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_MAX_StateInit( struct TA_MAX_State* _state,
+TA_LIB_API int TA_MAX_StateInit( struct TA_MAX_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_MAX_State( struct TA_MAX_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State* _state );
+TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state );
 
 
 /*
@@ -6436,24 +6436,24 @@ TA_LIB_API int TA_MAXINDEX_Lookback( int           optInTimePeriod );  /* From 2
 TA_LIB_API struct TA_MAXINDEX_Data {
                                               const double inReal;
                                               };
-TA_LIB_API struct TA_MAXINDEX_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_MAXINDEX_Data* memory;
-                                     int           optInTimePeriod; /* From 2 to 100000 */
-                                     };
+TA_LIB_API struct TA_MAXINDEX_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_MAXINDEX_Data* memory;
+                                    int           optInTimePeriod; /* From 2 to 100000 */
+                                    };
 
 
-TA_LIB_API int TA_MAXINDEX_StateInit( struct TA_MAXINDEX_State* _state,
+TA_LIB_API int TA_MAXINDEX_StateInit( struct TA_MAXINDEX_State** _state,
                                                int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_MAXINDEX_State( struct TA_MAXINDEX_State* _state,
                                            const double inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           int           &outInteger );
+                                           int           **outInteger );
 
-TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State* _state );
+TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 
 
 /*
@@ -6486,22 +6486,22 @@ TA_LIB_API struct TA_MEDPRICE_Data {
                                               const double inHigh;
                                               const double inLow;
                                               };
-TA_LIB_API struct TA_MEDPRICE_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_MEDPRICE_Data* memory;
-                                     };
+TA_LIB_API struct TA_MEDPRICE_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_MEDPRICE_Data* memory;
+                                    };
 
 
-TA_LIB_API int TA_MEDPRICE_StateInit( struct TA_MEDPRICE_State* _state );
+TA_LIB_API int TA_MEDPRICE_StateInit( struct TA_MEDPRICE_State** _state );
 
 
 TA_LIB_API int TA_MEDPRICE_State( struct TA_MEDPRICE_State* _state,
                                            const double inHigh,
                                            const double inLow,
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State* _state );
+TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
 
 
 /*
@@ -6548,15 +6548,15 @@ TA_LIB_API struct TA_MFI_Data {
                                          const double inClose;
                                          const double inVolume;
                                          };
-TA_LIB_API struct TA_MFI_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_MFI_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_MFI_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_MFI_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_MFI_StateInit( struct TA_MFI_State* _state,
+TA_LIB_API int TA_MFI_StateInit( struct TA_MFI_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -6566,9 +6566,9 @@ TA_LIB_API int TA_MFI_State( struct TA_MFI_State* _state,
                                       const double inClose,
                                       const double inVolume,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State* _state );
+TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state );
 
 
 /*
@@ -6606,24 +6606,24 @@ TA_LIB_API int TA_MIDPOINT_Lookback( int           optInTimePeriod );  /* From 2
 TA_LIB_API struct TA_MIDPOINT_Data {
                                               const double inReal;
                                               };
-TA_LIB_API struct TA_MIDPOINT_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_MIDPOINT_Data* memory;
-                                     int           optInTimePeriod; /* From 2 to 100000 */
-                                     };
+TA_LIB_API struct TA_MIDPOINT_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_MIDPOINT_Data* memory;
+                                    int           optInTimePeriod; /* From 2 to 100000 */
+                                    };
 
 
-TA_LIB_API int TA_MIDPOINT_StateInit( struct TA_MIDPOINT_State* _state,
+TA_LIB_API int TA_MIDPOINT_StateInit( struct TA_MIDPOINT_State** _state,
                                                int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_MIDPOINT_State( struct TA_MIDPOINT_State* _state,
                                            const double inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State* _state );
+TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
 
 
 /*
@@ -6664,15 +6664,15 @@ TA_LIB_API struct TA_MIDPRICE_Data {
                                               const double inHigh;
                                               const double inLow;
                                               };
-TA_LIB_API struct TA_MIDPRICE_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_MIDPRICE_Data* memory;
-                                     int           optInTimePeriod; /* From 2 to 100000 */
-                                     };
+TA_LIB_API struct TA_MIDPRICE_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_MIDPRICE_Data* memory;
+                                    int           optInTimePeriod; /* From 2 to 100000 */
+                                    };
 
 
-TA_LIB_API int TA_MIDPRICE_StateInit( struct TA_MIDPRICE_State* _state,
+TA_LIB_API int TA_MIDPRICE_StateInit( struct TA_MIDPRICE_State** _state,
                                                int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -6680,9 +6680,9 @@ TA_LIB_API int TA_MIDPRICE_State( struct TA_MIDPRICE_State* _state,
                                            const double inHigh,
                                            const double inLow,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State* _state );
+TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 
 
 /*
@@ -6720,24 +6720,24 @@ TA_LIB_API int TA_MIN_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_MIN_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_MIN_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_MIN_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_MIN_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_MIN_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_MIN_StateInit( struct TA_MIN_State* _state,
+TA_LIB_API int TA_MIN_StateInit( struct TA_MIN_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_MIN_State( struct TA_MIN_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State* _state );
+TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state );
 
 
 /*
@@ -6775,24 +6775,24 @@ TA_LIB_API int TA_MININDEX_Lookback( int           optInTimePeriod );  /* From 2
 TA_LIB_API struct TA_MININDEX_Data {
                                               const double inReal;
                                               };
-TA_LIB_API struct TA_MININDEX_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_MININDEX_Data* memory;
-                                     int           optInTimePeriod; /* From 2 to 100000 */
-                                     };
+TA_LIB_API struct TA_MININDEX_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_MININDEX_Data* memory;
+                                    int           optInTimePeriod; /* From 2 to 100000 */
+                                    };
 
 
-TA_LIB_API int TA_MININDEX_StateInit( struct TA_MININDEX_State* _state,
+TA_LIB_API int TA_MININDEX_StateInit( struct TA_MININDEX_State** _state,
                                                int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_MININDEX_State( struct TA_MININDEX_State* _state,
                                            const double inReal,
                                            int           optInTimePeriod, /* From 2 to 100000 */
-                                           int           &outInteger );
+                                           int           **outInteger );
 
-TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State* _state );
+TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 
 
 /*
@@ -6832,25 +6832,25 @@ TA_LIB_API int TA_MINMAX_Lookback( int           optInTimePeriod );  /* From 2 t
 TA_LIB_API struct TA_MINMAX_Data {
                                             const double inReal;
                                             };
-TA_LIB_API struct TA_MINMAX_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_MINMAX_Data* memory;
-                                   int           optInTimePeriod; /* From 2 to 100000 */
-                                   };
+TA_LIB_API struct TA_MINMAX_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_MINMAX_Data* memory;
+                                  int           optInTimePeriod; /* From 2 to 100000 */
+                                  };
 
 
-TA_LIB_API int TA_MINMAX_StateInit( struct TA_MINMAX_State* _state,
+TA_LIB_API int TA_MINMAX_StateInit( struct TA_MINMAX_State** _state,
                                              int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_MINMAX_State( struct TA_MINMAX_State* _state,
                                          const double inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
-                                         double        &outMin,
-                                         double        &outMax );
+                                         double        **outMin,
+                                         double        **outMax );
 
-TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State* _state );
+TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
 
 
 /*
@@ -6890,25 +6890,25 @@ TA_LIB_API int TA_MINMAXINDEX_Lookback( int           optInTimePeriod );  /* Fro
 TA_LIB_API struct TA_MINMAXINDEX_Data {
                                                  const double inReal;
                                                  };
-TA_LIB_API struct TA_MINMAXINDEX_Struct {
-                                        int mem_size;
-                                        int mem_index;
-                                        struct TA_MINMAXINDEX_Data* memory;
-                                        int           optInTimePeriod; /* From 2 to 100000 */
-                                        };
+TA_LIB_API struct TA_MINMAXINDEX_State {
+                                       int mem_size;
+                                       int mem_index;
+                                       struct TA_MINMAXINDEX_Data* memory;
+                                       int           optInTimePeriod; /* From 2 to 100000 */
+                                       };
 
 
-TA_LIB_API int TA_MINMAXINDEX_StateInit( struct TA_MINMAXINDEX_State* _state,
+TA_LIB_API int TA_MINMAXINDEX_StateInit( struct TA_MINMAXINDEX_State** _state,
                                                   int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_MINMAXINDEX_State( struct TA_MINMAXINDEX_State* _state,
                                               const double inReal,
                                               int           optInTimePeriod, /* From 2 to 100000 */
-                                              int           &outMinIdx,
-                                              int           &outMaxIdx );
+                                              int           **outMinIdx,
+                                              int           **outMaxIdx );
 
-TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State* _state );
+TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
 
 
 /*
@@ -6952,15 +6952,15 @@ TA_LIB_API struct TA_MINUS_DI_Data {
                                               const double inLow;
                                               const double inClose;
                                               };
-TA_LIB_API struct TA_MINUS_DI_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_MINUS_DI_Data* memory;
-                                     int           optInTimePeriod; /* From 1 to 100000 */
-                                     };
+TA_LIB_API struct TA_MINUS_DI_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_MINUS_DI_Data* memory;
+                                    int           optInTimePeriod; /* From 1 to 100000 */
+                                    };
 
 
-TA_LIB_API int TA_MINUS_DI_StateInit( struct TA_MINUS_DI_State* _state,
+TA_LIB_API int TA_MINUS_DI_StateInit( struct TA_MINUS_DI_State** _state,
                                                int           optInTimePeriod );  /* From 1 to 100000 */
 
 
@@ -6969,9 +6969,9 @@ TA_LIB_API int TA_MINUS_DI_State( struct TA_MINUS_DI_State* _state,
                                            const double inLow,
                                            const double inClose,
                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State* _state );
+TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 
 
 /*
@@ -7012,15 +7012,15 @@ TA_LIB_API struct TA_MINUS_DM_Data {
                                               const double inHigh;
                                               const double inLow;
                                               };
-TA_LIB_API struct TA_MINUS_DM_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_MINUS_DM_Data* memory;
-                                     int           optInTimePeriod; /* From 1 to 100000 */
-                                     };
+TA_LIB_API struct TA_MINUS_DM_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_MINUS_DM_Data* memory;
+                                    int           optInTimePeriod; /* From 1 to 100000 */
+                                    };
 
 
-TA_LIB_API int TA_MINUS_DM_StateInit( struct TA_MINUS_DM_State* _state,
+TA_LIB_API int TA_MINUS_DM_StateInit( struct TA_MINUS_DM_State** _state,
                                                int           optInTimePeriod );  /* From 1 to 100000 */
 
 
@@ -7028,9 +7028,9 @@ TA_LIB_API int TA_MINUS_DM_State( struct TA_MINUS_DM_State* _state,
                                            const double inHigh,
                                            const double inLow,
                                            int           optInTimePeriod, /* From 1 to 100000 */
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State* _state );
+TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 
 
 /*
@@ -7068,24 +7068,24 @@ TA_LIB_API int TA_MOM_Lookback( int           optInTimePeriod );  /* From 1 to 1
 TA_LIB_API struct TA_MOM_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_MOM_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_MOM_Data* memory;
-                                int           optInTimePeriod; /* From 1 to 100000 */
-                                };
+TA_LIB_API struct TA_MOM_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_MOM_Data* memory;
+                               int           optInTimePeriod; /* From 1 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_MOM_StateInit( struct TA_MOM_State* _state,
+TA_LIB_API int TA_MOM_StateInit( struct TA_MOM_State** _state,
                                           int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API int TA_MOM_State( struct TA_MOM_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 1 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State* _state );
+TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State** _state );
 
 
 /*
@@ -7118,22 +7118,22 @@ TA_LIB_API struct TA_MULT_Data {
                                           const double inReal0;
                                           const double inReal1;
                                           };
-TA_LIB_API struct TA_MULT_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_MULT_Data* memory;
-                                 };
+TA_LIB_API struct TA_MULT_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_MULT_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_MULT_StateInit( struct TA_MULT_State* _state );
+TA_LIB_API int TA_MULT_StateInit( struct TA_MULT_State** _state );
 
 
 TA_LIB_API int TA_MULT_State( struct TA_MULT_State* _state,
                                        const double inReal0,
                                        const double inReal1,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State* _state );
+TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state );
 
 
 /*
@@ -7177,15 +7177,15 @@ TA_LIB_API struct TA_NATR_Data {
                                           const double inLow;
                                           const double inClose;
                                           };
-TA_LIB_API struct TA_NATR_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_NATR_Data* memory;
-                                 int           optInTimePeriod; /* From 1 to 100000 */
-                                 };
+TA_LIB_API struct TA_NATR_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_NATR_Data* memory;
+                                int           optInTimePeriod; /* From 1 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_NATR_StateInit( struct TA_NATR_State* _state,
+TA_LIB_API int TA_NATR_StateInit( struct TA_NATR_State** _state,
                                            int           optInTimePeriod );  /* From 1 to 100000 */
 
 
@@ -7194,9 +7194,9 @@ TA_LIB_API int TA_NATR_State( struct TA_NATR_State* _state,
                                        const double inLow,
                                        const double inClose,
                                        int           optInTimePeriod, /* From 1 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State* _state );
+TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 
 
 /*
@@ -7229,22 +7229,22 @@ TA_LIB_API struct TA_OBV_Data {
                                          const double inReal;
                                          const double inVolume;
                                          };
-TA_LIB_API struct TA_OBV_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_OBV_Data* memory;
-                                };
+TA_LIB_API struct TA_OBV_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_OBV_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_OBV_StateInit( struct TA_OBV_State* _state );
+TA_LIB_API int TA_OBV_StateInit( struct TA_OBV_State** _state );
 
 
 TA_LIB_API int TA_OBV_State( struct TA_OBV_State* _state,
                                       const double inReal,
                                       const double inVolume,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State* _state );
+TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 
 
 /*
@@ -7288,15 +7288,15 @@ TA_LIB_API struct TA_PLUS_DI_Data {
                                              const double inLow;
                                              const double inClose;
                                              };
-TA_LIB_API struct TA_PLUS_DI_Struct {
-                                    int mem_size;
-                                    int mem_index;
-                                    struct TA_PLUS_DI_Data* memory;
-                                    int           optInTimePeriod; /* From 1 to 100000 */
-                                    };
+TA_LIB_API struct TA_PLUS_DI_State {
+                                   int mem_size;
+                                   int mem_index;
+                                   struct TA_PLUS_DI_Data* memory;
+                                   int           optInTimePeriod; /* From 1 to 100000 */
+                                   };
 
 
-TA_LIB_API int TA_PLUS_DI_StateInit( struct TA_PLUS_DI_State* _state,
+TA_LIB_API int TA_PLUS_DI_StateInit( struct TA_PLUS_DI_State** _state,
                                               int           optInTimePeriod );  /* From 1 to 100000 */
 
 
@@ -7305,9 +7305,9 @@ TA_LIB_API int TA_PLUS_DI_State( struct TA_PLUS_DI_State* _state,
                                           const double inLow,
                                           const double inClose,
                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                          double        &outReal );
+                                          double        **outReal );
 
-TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State* _state );
+TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 
 
 /*
@@ -7348,15 +7348,15 @@ TA_LIB_API struct TA_PLUS_DM_Data {
                                              const double inHigh;
                                              const double inLow;
                                              };
-TA_LIB_API struct TA_PLUS_DM_Struct {
-                                    int mem_size;
-                                    int mem_index;
-                                    struct TA_PLUS_DM_Data* memory;
-                                    int           optInTimePeriod; /* From 1 to 100000 */
-                                    };
+TA_LIB_API struct TA_PLUS_DM_State {
+                                   int mem_size;
+                                   int mem_index;
+                                   struct TA_PLUS_DM_Data* memory;
+                                   int           optInTimePeriod; /* From 1 to 100000 */
+                                   };
 
 
-TA_LIB_API int TA_PLUS_DM_StateInit( struct TA_PLUS_DM_State* _state,
+TA_LIB_API int TA_PLUS_DM_StateInit( struct TA_PLUS_DM_State** _state,
                                               int           optInTimePeriod );  /* From 1 to 100000 */
 
 
@@ -7364,9 +7364,9 @@ TA_LIB_API int TA_PLUS_DM_State( struct TA_PLUS_DM_State* _state,
                                           const double inHigh,
                                           const double inLow,
                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                          double        &outReal );
+                                          double        **outReal );
 
-TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State* _state );
+TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
 
 
 /*
@@ -7413,16 +7413,16 @@ TA_LIB_API int TA_PPO_Lookback( int           optInFastPeriod, /* From 2 to 1000
 TA_LIB_API struct TA_PPO_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_PPO_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_PPO_Data* memory;
-                                int           optInFastPeriod; /* From 2 to 100000 */
-                                int           optInSlowPeriod; /* From 2 to 100000 */
-                                TA_MAType     optInMAType;                                };
+TA_LIB_API struct TA_PPO_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_PPO_Data* memory;
+                               int           optInFastPeriod; /* From 2 to 100000 */
+                               int           optInSlowPeriod; /* From 2 to 100000 */
+                               TA_MAType     optInMAType;                               };
 
 
-TA_LIB_API int TA_PPO_StateInit( struct TA_PPO_State* _state,
+TA_LIB_API int TA_PPO_StateInit( struct TA_PPO_State** _state,
                                           int           optInFastPeriod, /* From 2 to 100000 */
                                           int           optInSlowPeriod, /* From 2 to 100000 */
                                           TA_MAType     optInMAType ); 
@@ -7431,9 +7431,9 @@ TA_LIB_API int TA_PPO_State( struct TA_PPO_State* _state,
                                       const double inReal,
                                       int           optInFastPeriod, /* From 2 to 100000 */
                                       int           optInSlowPeriod, /* From 2 to 100000 */
-                                      TA_MAType     optInMAType,                                      double        &outReal );
+                                      TA_MAType     optInMAType,                                      double        **outReal );
 
-TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State* _state );
+TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state );
 
 
 /*
@@ -7471,24 +7471,24 @@ TA_LIB_API int TA_ROC_Lookback( int           optInTimePeriod );  /* From 1 to 1
 TA_LIB_API struct TA_ROC_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_ROC_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_ROC_Data* memory;
-                                int           optInTimePeriod; /* From 1 to 100000 */
-                                };
+TA_LIB_API struct TA_ROC_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_ROC_Data* memory;
+                               int           optInTimePeriod; /* From 1 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_ROC_StateInit( struct TA_ROC_State* _state,
+TA_LIB_API int TA_ROC_StateInit( struct TA_ROC_State** _state,
                                           int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API int TA_ROC_State( struct TA_ROC_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 1 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State* _state );
+TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State** _state );
 
 
 /*
@@ -7526,24 +7526,24 @@ TA_LIB_API int TA_ROCP_Lookback( int           optInTimePeriod );  /* From 1 to 
 TA_LIB_API struct TA_ROCP_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_ROCP_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_ROCP_Data* memory;
-                                 int           optInTimePeriod; /* From 1 to 100000 */
-                                 };
+TA_LIB_API struct TA_ROCP_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_ROCP_Data* memory;
+                                int           optInTimePeriod; /* From 1 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_ROCP_StateInit( struct TA_ROCP_State* _state,
+TA_LIB_API int TA_ROCP_StateInit( struct TA_ROCP_State** _state,
                                            int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API int TA_ROCP_State( struct TA_ROCP_State* _state,
                                        const double inReal,
                                        int           optInTimePeriod, /* From 1 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State* _state );
+TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 
 
 /*
@@ -7581,24 +7581,24 @@ TA_LIB_API int TA_ROCR_Lookback( int           optInTimePeriod );  /* From 1 to 
 TA_LIB_API struct TA_ROCR_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_ROCR_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_ROCR_Data* memory;
-                                 int           optInTimePeriod; /* From 1 to 100000 */
-                                 };
+TA_LIB_API struct TA_ROCR_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_ROCR_Data* memory;
+                                int           optInTimePeriod; /* From 1 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_ROCR_StateInit( struct TA_ROCR_State* _state,
+TA_LIB_API int TA_ROCR_StateInit( struct TA_ROCR_State** _state,
                                            int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API int TA_ROCR_State( struct TA_ROCR_State* _state,
                                        const double inReal,
                                        int           optInTimePeriod, /* From 1 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State* _state );
+TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 
 
 /*
@@ -7636,24 +7636,24 @@ TA_LIB_API int TA_ROCR100_Lookback( int           optInTimePeriod );  /* From 1 
 TA_LIB_API struct TA_ROCR100_Data {
                                              const double inReal;
                                              };
-TA_LIB_API struct TA_ROCR100_Struct {
-                                    int mem_size;
-                                    int mem_index;
-                                    struct TA_ROCR100_Data* memory;
-                                    int           optInTimePeriod; /* From 1 to 100000 */
-                                    };
+TA_LIB_API struct TA_ROCR100_State {
+                                   int mem_size;
+                                   int mem_index;
+                                   struct TA_ROCR100_Data* memory;
+                                   int           optInTimePeriod; /* From 1 to 100000 */
+                                   };
 
 
-TA_LIB_API int TA_ROCR100_StateInit( struct TA_ROCR100_State* _state,
+TA_LIB_API int TA_ROCR100_StateInit( struct TA_ROCR100_State** _state,
                                               int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API int TA_ROCR100_State( struct TA_ROCR100_State* _state,
                                           const double inReal,
                                           int           optInTimePeriod, /* From 1 to 100000 */
-                                          double        &outReal );
+                                          double        **outReal );
 
-TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State* _state );
+TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
 
 
 /*
@@ -7691,24 +7691,24 @@ TA_LIB_API int TA_RSI_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_RSI_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_RSI_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_RSI_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_RSI_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_RSI_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_RSI_StateInit( struct TA_RSI_State* _state,
+TA_LIB_API int TA_RSI_StateInit( struct TA_RSI_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_RSI_State( struct TA_RSI_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State* _state );
+TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state );
 
 
 /*
@@ -7755,16 +7755,16 @@ TA_LIB_API struct TA_SAR_Data {
                                          const double inHigh;
                                          const double inLow;
                                          };
-TA_LIB_API struct TA_SAR_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_SAR_Data* memory;
-                                double        optInAcceleration; /* From 0 to TA_REAL_MAX */
-                                double        optInMaximum; /* From 0 to TA_REAL_MAX */
-                                };
+TA_LIB_API struct TA_SAR_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_SAR_Data* memory;
+                               double        optInAcceleration; /* From 0 to TA_REAL_MAX */
+                               double        optInMaximum; /* From 0 to TA_REAL_MAX */
+                               };
 
 
-TA_LIB_API int TA_SAR_StateInit( struct TA_SAR_State* _state,
+TA_LIB_API int TA_SAR_StateInit( struct TA_SAR_State** _state,
                                           double        optInAcceleration, /* From 0 to TA_REAL_MAX */
                                           double        optInMaximum );  /* From 0 to TA_REAL_MAX */
 
@@ -7774,9 +7774,9 @@ TA_LIB_API int TA_SAR_State( struct TA_SAR_State* _state,
                                       const double inLow,
                                       double        optInAcceleration, /* From 0 to TA_REAL_MAX */
                                       double        optInMaximum, /* From 0 to TA_REAL_MAX */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State* _state );
+TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state );
 
 
 /*
@@ -7859,22 +7859,22 @@ TA_LIB_API struct TA_SAREXT_Data {
                                             const double inHigh;
                                             const double inLow;
                                             };
-TA_LIB_API struct TA_SAREXT_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_SAREXT_Data* memory;
-                                   double        optInStartValue; /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   double        optInOffsetOnReverse; /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationInitLong; /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationLong; /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationMaxLong; /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationInitShort; /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationShort; /* From 0 to TA_REAL_MAX */
-                                   double        optInAccelerationMaxShort; /* From 0 to TA_REAL_MAX */
-                                   };
+TA_LIB_API struct TA_SAREXT_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_SAREXT_Data* memory;
+                                  double        optInStartValue; /* From TA_REAL_MIN to TA_REAL_MAX */
+                                  double        optInOffsetOnReverse; /* From 0 to TA_REAL_MAX */
+                                  double        optInAccelerationInitLong; /* From 0 to TA_REAL_MAX */
+                                  double        optInAccelerationLong; /* From 0 to TA_REAL_MAX */
+                                  double        optInAccelerationMaxLong; /* From 0 to TA_REAL_MAX */
+                                  double        optInAccelerationInitShort; /* From 0 to TA_REAL_MAX */
+                                  double        optInAccelerationShort; /* From 0 to TA_REAL_MAX */
+                                  double        optInAccelerationMaxShort; /* From 0 to TA_REAL_MAX */
+                                  };
 
 
-TA_LIB_API int TA_SAREXT_StateInit( struct TA_SAREXT_State* _state,
+TA_LIB_API int TA_SAREXT_StateInit( struct TA_SAREXT_State** _state,
                                              double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
                                              double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
                                              double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
@@ -7896,9 +7896,9 @@ TA_LIB_API int TA_SAREXT_State( struct TA_SAREXT_State* _state,
                                          double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
                                          double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
                                          double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-                                         double        &outReal );
+                                         double        **outReal );
 
-TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State* _state );
+TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 
 
 /*
@@ -7928,21 +7928,21 @@ TA_LIB_API int TA_SIN_Lookback( void );
 TA_LIB_API struct TA_SIN_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_SIN_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_SIN_Data* memory;
-                                };
+TA_LIB_API struct TA_SIN_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_SIN_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_SIN_StateInit( struct TA_SIN_State* _state );
+TA_LIB_API int TA_SIN_StateInit( struct TA_SIN_State** _state );
 
 
 TA_LIB_API int TA_SIN_State( struct TA_SIN_State* _state,
                                       const double inReal,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_SIN_StateFree( struct TA_SIN_State* _state );
+TA_LIB_API int TA_SIN_StateFree( struct TA_SIN_State** _state );
 
 
 /*
@@ -7972,21 +7972,21 @@ TA_LIB_API int TA_SINH_Lookback( void );
 TA_LIB_API struct TA_SINH_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_SINH_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_SINH_Data* memory;
-                                 };
+TA_LIB_API struct TA_SINH_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_SINH_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_SINH_StateInit( struct TA_SINH_State* _state );
+TA_LIB_API int TA_SINH_StateInit( struct TA_SINH_State** _state );
 
 
 TA_LIB_API int TA_SINH_State( struct TA_SINH_State* _state,
                                        const double inReal,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State* _state );
+TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State** _state );
 
 
 /*
@@ -8024,24 +8024,24 @@ TA_LIB_API int TA_SMA_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_SMA_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_SMA_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_SMA_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_SMA_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_SMA_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_SMA_StateInit( struct TA_SMA_State* _state,
+TA_LIB_API int TA_SMA_StateInit( struct TA_SMA_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_SMA_State( struct TA_SMA_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State* _state );
+TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state );
 
 
 /*
@@ -8071,21 +8071,21 @@ TA_LIB_API int TA_SQRT_Lookback( void );
 TA_LIB_API struct TA_SQRT_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_SQRT_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_SQRT_Data* memory;
-                                 };
+TA_LIB_API struct TA_SQRT_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_SQRT_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_SQRT_StateInit( struct TA_SQRT_State* _state );
+TA_LIB_API int TA_SQRT_StateInit( struct TA_SQRT_State** _state );
 
 
 TA_LIB_API int TA_SQRT_State( struct TA_SQRT_State* _state,
                                        const double inReal,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_SQRT_StateFree( struct TA_SQRT_State* _state );
+TA_LIB_API int TA_SQRT_StateFree( struct TA_SQRT_State** _state );
 
 
 /*
@@ -8129,16 +8129,16 @@ TA_LIB_API int TA_STDDEV_Lookback( int           optInTimePeriod, /* From 2 to 1
 TA_LIB_API struct TA_STDDEV_Data {
                                             const double inReal;
                                             };
-TA_LIB_API struct TA_STDDEV_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_STDDEV_Data* memory;
-                                   int           optInTimePeriod; /* From 2 to 100000 */
-                                   double        optInNbDev; /* From TA_REAL_MIN to TA_REAL_MAX */
-                                   };
+TA_LIB_API struct TA_STDDEV_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_STDDEV_Data* memory;
+                                  int           optInTimePeriod; /* From 2 to 100000 */
+                                  double        optInNbDev; /* From TA_REAL_MIN to TA_REAL_MAX */
+                                  };
 
 
-TA_LIB_API int TA_STDDEV_StateInit( struct TA_STDDEV_State* _state,
+TA_LIB_API int TA_STDDEV_StateInit( struct TA_STDDEV_State** _state,
                                              int           optInTimePeriod, /* From 2 to 100000 */
                                              double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
 
@@ -8147,9 +8147,9 @@ TA_LIB_API int TA_STDDEV_State( struct TA_STDDEV_State* _state,
                                          const double inReal,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                         double        &outReal );
+                                         double        **outReal );
 
-TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State* _state );
+TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
 
 
 /*
@@ -8213,17 +8213,17 @@ TA_LIB_API struct TA_STOCH_Data {
                                            const double inLow;
                                            const double inClose;
                                            };
-TA_LIB_API struct TA_STOCH_Struct {
-                                  int mem_size;
-                                  int mem_index;
-                                  struct TA_STOCH_Data* memory;
-                                  int           optInFastK_Period; /* From 1 to 100000 */
-                                  int           optInSlowK_Period; /* From 1 to 100000 */
-                                  TA_MAType     optInSlowK_MAType;                                  int           optInSlowD_Period; /* From 1 to 100000 */
-                                  TA_MAType     optInSlowD_MAType;                                  };
+TA_LIB_API struct TA_STOCH_State {
+                                 int mem_size;
+                                 int mem_index;
+                                 struct TA_STOCH_Data* memory;
+                                 int           optInFastK_Period; /* From 1 to 100000 */
+                                 int           optInSlowK_Period; /* From 1 to 100000 */
+                                 TA_MAType     optInSlowK_MAType;                                 int           optInSlowD_Period; /* From 1 to 100000 */
+                                 TA_MAType     optInSlowD_MAType;                                 };
 
 
-TA_LIB_API int TA_STOCH_StateInit( struct TA_STOCH_State* _state,
+TA_LIB_API int TA_STOCH_StateInit( struct TA_STOCH_State** _state,
                                             int           optInFastK_Period, /* From 1 to 100000 */
                                             int           optInSlowK_Period, /* From 1 to 100000 */
                                             TA_MAType     optInSlowK_MAType,                                            int           optInSlowD_Period, /* From 1 to 100000 */
@@ -8236,10 +8236,10 @@ TA_LIB_API int TA_STOCH_State( struct TA_STOCH_State* _state,
                                         int           optInFastK_Period, /* From 1 to 100000 */
                                         int           optInSlowK_Period, /* From 1 to 100000 */
                                         TA_MAType     optInSlowK_MAType,                                        int           optInSlowD_Period, /* From 1 to 100000 */
-                                        TA_MAType     optInSlowD_MAType,                                        double        &outSlowK,
-                                        double        &outSlowD );
+                                        TA_MAType     optInSlowD_MAType,                                        double        **outSlowK,
+                                        double        **outSlowD );
 
-TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State* _state );
+TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 
 
 /*
@@ -8294,16 +8294,16 @@ TA_LIB_API struct TA_STOCHF_Data {
                                             const double inLow;
                                             const double inClose;
                                             };
-TA_LIB_API struct TA_STOCHF_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_STOCHF_Data* memory;
-                                   int           optInFastK_Period; /* From 1 to 100000 */
-                                   int           optInFastD_Period; /* From 1 to 100000 */
-                                   TA_MAType     optInFastD_MAType;                                   };
+TA_LIB_API struct TA_STOCHF_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_STOCHF_Data* memory;
+                                  int           optInFastK_Period; /* From 1 to 100000 */
+                                  int           optInFastD_Period; /* From 1 to 100000 */
+                                  TA_MAType     optInFastD_MAType;                                  };
 
 
-TA_LIB_API int TA_STOCHF_StateInit( struct TA_STOCHF_State* _state,
+TA_LIB_API int TA_STOCHF_StateInit( struct TA_STOCHF_State** _state,
                                              int           optInFastK_Period, /* From 1 to 100000 */
                                              int           optInFastD_Period, /* From 1 to 100000 */
                                              TA_MAType     optInFastD_MAType ); 
@@ -8314,10 +8314,10 @@ TA_LIB_API int TA_STOCHF_State( struct TA_STOCHF_State* _state,
                                          const double inClose,
                                          int           optInFastK_Period, /* From 1 to 100000 */
                                          int           optInFastD_Period, /* From 1 to 100000 */
-                                         TA_MAType     optInFastD_MAType,                                         double        &outFastK,
-                                         double        &outFastD );
+                                         TA_MAType     optInFastD_MAType,                                         double        **outFastK,
+                                         double        **outFastD );
 
-TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State* _state );
+TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 
 
 /*
@@ -8372,17 +8372,17 @@ TA_LIB_API int TA_STOCHRSI_Lookback( int           optInTimePeriod, /* From 2 to
 TA_LIB_API struct TA_STOCHRSI_Data {
                                               const double inReal;
                                               };
-TA_LIB_API struct TA_STOCHRSI_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_STOCHRSI_Data* memory;
-                                     int           optInTimePeriod; /* From 2 to 100000 */
-                                     int           optInFastK_Period; /* From 1 to 100000 */
-                                     int           optInFastD_Period; /* From 1 to 100000 */
-                                     TA_MAType     optInFastD_MAType;                                     };
+TA_LIB_API struct TA_STOCHRSI_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_STOCHRSI_Data* memory;
+                                    int           optInTimePeriod; /* From 2 to 100000 */
+                                    int           optInFastK_Period; /* From 1 to 100000 */
+                                    int           optInFastD_Period; /* From 1 to 100000 */
+                                    TA_MAType     optInFastD_MAType;                                    };
 
 
-TA_LIB_API int TA_STOCHRSI_StateInit( struct TA_STOCHRSI_State* _state,
+TA_LIB_API int TA_STOCHRSI_StateInit( struct TA_STOCHRSI_State** _state,
                                                int           optInTimePeriod, /* From 2 to 100000 */
                                                int           optInFastK_Period, /* From 1 to 100000 */
                                                int           optInFastD_Period, /* From 1 to 100000 */
@@ -8393,10 +8393,10 @@ TA_LIB_API int TA_STOCHRSI_State( struct TA_STOCHRSI_State* _state,
                                            int           optInTimePeriod, /* From 2 to 100000 */
                                            int           optInFastK_Period, /* From 1 to 100000 */
                                            int           optInFastD_Period, /* From 1 to 100000 */
-                                           TA_MAType     optInFastD_MAType,                                           double        &outFastK,
-                                           double        &outFastD );
+                                           TA_MAType     optInFastD_MAType,                                           double        **outFastK,
+                                           double        **outFastD );
 
-TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State* _state );
+TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 
 
 /*
@@ -8429,22 +8429,22 @@ TA_LIB_API struct TA_SUB_Data {
                                          const double inReal0;
                                          const double inReal1;
                                          };
-TA_LIB_API struct TA_SUB_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_SUB_Data* memory;
-                                };
+TA_LIB_API struct TA_SUB_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_SUB_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_SUB_StateInit( struct TA_SUB_State* _state );
+TA_LIB_API int TA_SUB_StateInit( struct TA_SUB_State** _state );
 
 
 TA_LIB_API int TA_SUB_State( struct TA_SUB_State* _state,
                                       const double inReal0,
                                       const double inReal1,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State* _state );
+TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state );
 
 
 /*
@@ -8482,24 +8482,24 @@ TA_LIB_API int TA_SUM_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_SUM_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_SUM_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_SUM_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_SUM_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_SUM_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_SUM_StateInit( struct TA_SUM_State* _state,
+TA_LIB_API int TA_SUM_StateInit( struct TA_SUM_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_SUM_State( struct TA_SUM_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State* _state );
+TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State** _state );
 
 
 /*
@@ -8543,16 +8543,16 @@ TA_LIB_API int TA_T3_Lookback( int           optInTimePeriod, /* From 2 to 10000
 TA_LIB_API struct TA_T3_Data {
                                         const double inReal;
                                         };
-TA_LIB_API struct TA_T3_Struct {
-                               int mem_size;
-                               int mem_index;
-                               struct TA_T3_Data* memory;
-                               int           optInTimePeriod; /* From 2 to 100000 */
-                               double        optInVFactor; /* From 0 to 1 */
-                               };
+TA_LIB_API struct TA_T3_State {
+                              int mem_size;
+                              int mem_index;
+                              struct TA_T3_Data* memory;
+                              int           optInTimePeriod; /* From 2 to 100000 */
+                              double        optInVFactor; /* From 0 to 1 */
+                              };
 
 
-TA_LIB_API int TA_T3_StateInit( struct TA_T3_State* _state,
+TA_LIB_API int TA_T3_StateInit( struct TA_T3_State** _state,
                                          int           optInTimePeriod, /* From 2 to 100000 */
                                          double        optInVFactor );  /* From 0 to 1 */
 
@@ -8561,9 +8561,9 @@ TA_LIB_API int TA_T3_State( struct TA_T3_State* _state,
                                      const double inReal,
                                      int           optInTimePeriod, /* From 2 to 100000 */
                                      double        optInVFactor, /* From 0 to 1 */
-                                     double        &outReal );
+                                     double        **outReal );
 
-TA_LIB_API int TA_T3_StateFree( struct TA_T3_State* _state );
+TA_LIB_API int TA_T3_StateFree( struct TA_T3_State** _state );
 
 
 /*
@@ -8593,21 +8593,21 @@ TA_LIB_API int TA_TAN_Lookback( void );
 TA_LIB_API struct TA_TAN_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_TAN_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_TAN_Data* memory;
-                                };
+TA_LIB_API struct TA_TAN_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_TAN_Data* memory;
+                               };
 
 
-TA_LIB_API int TA_TAN_StateInit( struct TA_TAN_State* _state );
+TA_LIB_API int TA_TAN_StateInit( struct TA_TAN_State** _state );
 
 
 TA_LIB_API int TA_TAN_State( struct TA_TAN_State* _state,
                                       const double inReal,
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State* _state );
+TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State** _state );
 
 
 /*
@@ -8637,21 +8637,21 @@ TA_LIB_API int TA_TANH_Lookback( void );
 TA_LIB_API struct TA_TANH_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_TANH_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_TANH_Data* memory;
-                                 };
+TA_LIB_API struct TA_TANH_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_TANH_Data* memory;
+                                };
 
 
-TA_LIB_API int TA_TANH_StateInit( struct TA_TANH_State* _state );
+TA_LIB_API int TA_TANH_StateInit( struct TA_TANH_State** _state );
 
 
 TA_LIB_API int TA_TANH_State( struct TA_TANH_State* _state,
                                        const double inReal,
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State* _state );
+TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State** _state );
 
 
 /*
@@ -8689,24 +8689,24 @@ TA_LIB_API int TA_TEMA_Lookback( int           optInTimePeriod );  /* From 2 to 
 TA_LIB_API struct TA_TEMA_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_TEMA_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_TEMA_Data* memory;
-                                 int           optInTimePeriod; /* From 2 to 100000 */
-                                 };
+TA_LIB_API struct TA_TEMA_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_TEMA_Data* memory;
+                                int           optInTimePeriod; /* From 2 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_TEMA_StateInit( struct TA_TEMA_State* _state,
+TA_LIB_API int TA_TEMA_StateInit( struct TA_TEMA_State** _state,
                                            int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_TEMA_State( struct TA_TEMA_State* _state,
                                        const double inReal,
                                        int           optInTimePeriod, /* From 2 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State* _state );
+TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 
 
 /*
@@ -8742,23 +8742,23 @@ TA_LIB_API struct TA_TRANGE_Data {
                                             const double inLow;
                                             const double inClose;
                                             };
-TA_LIB_API struct TA_TRANGE_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_TRANGE_Data* memory;
-                                   };
+TA_LIB_API struct TA_TRANGE_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_TRANGE_Data* memory;
+                                  };
 
 
-TA_LIB_API int TA_TRANGE_StateInit( struct TA_TRANGE_State* _state );
+TA_LIB_API int TA_TRANGE_StateInit( struct TA_TRANGE_State** _state );
 
 
 TA_LIB_API int TA_TRANGE_State( struct TA_TRANGE_State* _state,
                                          const double inHigh,
                                          const double inLow,
                                          const double inClose,
-                                         double        &outReal );
+                                         double        **outReal );
 
-TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State* _state );
+TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
 
 
 /*
@@ -8796,24 +8796,24 @@ TA_LIB_API int TA_TRIMA_Lookback( int           optInTimePeriod );  /* From 2 to
 TA_LIB_API struct TA_TRIMA_Data {
                                            const double inReal;
                                            };
-TA_LIB_API struct TA_TRIMA_Struct {
-                                  int mem_size;
-                                  int mem_index;
-                                  struct TA_TRIMA_Data* memory;
-                                  int           optInTimePeriod; /* From 2 to 100000 */
-                                  };
+TA_LIB_API struct TA_TRIMA_State {
+                                 int mem_size;
+                                 int mem_index;
+                                 struct TA_TRIMA_Data* memory;
+                                 int           optInTimePeriod; /* From 2 to 100000 */
+                                 };
 
 
-TA_LIB_API int TA_TRIMA_StateInit( struct TA_TRIMA_State* _state,
+TA_LIB_API int TA_TRIMA_StateInit( struct TA_TRIMA_State** _state,
                                             int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_TRIMA_State( struct TA_TRIMA_State* _state,
                                         const double inReal,
                                         int           optInTimePeriod, /* From 2 to 100000 */
-                                        double        &outReal );
+                                        double        **outReal );
 
-TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State* _state );
+TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 
 
 /*
@@ -8851,24 +8851,24 @@ TA_LIB_API int TA_TRIX_Lookback( int           optInTimePeriod );  /* From 1 to 
 TA_LIB_API struct TA_TRIX_Data {
                                           const double inReal;
                                           };
-TA_LIB_API struct TA_TRIX_Struct {
-                                 int mem_size;
-                                 int mem_index;
-                                 struct TA_TRIX_Data* memory;
-                                 int           optInTimePeriod; /* From 1 to 100000 */
-                                 };
+TA_LIB_API struct TA_TRIX_State {
+                                int mem_size;
+                                int mem_index;
+                                struct TA_TRIX_Data* memory;
+                                int           optInTimePeriod; /* From 1 to 100000 */
+                                };
 
 
-TA_LIB_API int TA_TRIX_StateInit( struct TA_TRIX_State* _state,
+TA_LIB_API int TA_TRIX_StateInit( struct TA_TRIX_State** _state,
                                            int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API int TA_TRIX_State( struct TA_TRIX_State* _state,
                                        const double inReal,
                                        int           optInTimePeriod, /* From 1 to 100000 */
-                                       double        &outReal );
+                                       double        **outReal );
 
-TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State* _state );
+TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
 
 
 /*
@@ -8906,24 +8906,24 @@ TA_LIB_API int TA_TSF_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_TSF_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_TSF_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_TSF_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_TSF_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_TSF_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_TSF_StateInit( struct TA_TSF_State* _state,
+TA_LIB_API int TA_TSF_StateInit( struct TA_TSF_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_TSF_State( struct TA_TSF_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State* _state );
+TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State** _state );
 
 
 /*
@@ -8959,23 +8959,23 @@ TA_LIB_API struct TA_TYPPRICE_Data {
                                               const double inLow;
                                               const double inClose;
                                               };
-TA_LIB_API struct TA_TYPPRICE_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_TYPPRICE_Data* memory;
-                                     };
+TA_LIB_API struct TA_TYPPRICE_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_TYPPRICE_Data* memory;
+                                    };
 
 
-TA_LIB_API int TA_TYPPRICE_StateInit( struct TA_TYPPRICE_State* _state );
+TA_LIB_API int TA_TYPPRICE_StateInit( struct TA_TYPPRICE_State** _state );
 
 
 TA_LIB_API int TA_TYPPRICE_State( struct TA_TYPPRICE_State* _state,
                                            const double inHigh,
                                            const double inLow,
                                            const double inClose,
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State* _state );
+TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
 
 
 /*
@@ -9031,17 +9031,17 @@ TA_LIB_API struct TA_ULTOSC_Data {
                                             const double inLow;
                                             const double inClose;
                                             };
-TA_LIB_API struct TA_ULTOSC_Struct {
-                                   int mem_size;
-                                   int mem_index;
-                                   struct TA_ULTOSC_Data* memory;
-                                   int           optInTimePeriod1; /* From 1 to 100000 */
-                                   int           optInTimePeriod2; /* From 1 to 100000 */
-                                   int           optInTimePeriod3; /* From 1 to 100000 */
-                                   };
+TA_LIB_API struct TA_ULTOSC_State {
+                                  int mem_size;
+                                  int mem_index;
+                                  struct TA_ULTOSC_Data* memory;
+                                  int           optInTimePeriod1; /* From 1 to 100000 */
+                                  int           optInTimePeriod2; /* From 1 to 100000 */
+                                  int           optInTimePeriod3; /* From 1 to 100000 */
+                                  };
 
 
-TA_LIB_API int TA_ULTOSC_StateInit( struct TA_ULTOSC_State* _state,
+TA_LIB_API int TA_ULTOSC_StateInit( struct TA_ULTOSC_State** _state,
                                              int           optInTimePeriod1, /* From 1 to 100000 */
                                              int           optInTimePeriod2, /* From 1 to 100000 */
                                              int           optInTimePeriod3 );  /* From 1 to 100000 */
@@ -9054,9 +9054,9 @@ TA_LIB_API int TA_ULTOSC_State( struct TA_ULTOSC_State* _state,
                                          int           optInTimePeriod1, /* From 1 to 100000 */
                                          int           optInTimePeriod2, /* From 1 to 100000 */
                                          int           optInTimePeriod3, /* From 1 to 100000 */
-                                         double        &outReal );
+                                         double        **outReal );
 
-TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State* _state );
+TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 
 
 /*
@@ -9100,16 +9100,16 @@ TA_LIB_API int TA_VAR_Lookback( int           optInTimePeriod, /* From 1 to 1000
 TA_LIB_API struct TA_VAR_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_VAR_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_VAR_Data* memory;
-                                int           optInTimePeriod; /* From 1 to 100000 */
-                                double        optInNbDev; /* From TA_REAL_MIN to TA_REAL_MAX */
-                                };
+TA_LIB_API struct TA_VAR_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_VAR_Data* memory;
+                               int           optInTimePeriod; /* From 1 to 100000 */
+                               double        optInNbDev; /* From TA_REAL_MIN to TA_REAL_MAX */
+                               };
 
 
-TA_LIB_API int TA_VAR_StateInit( struct TA_VAR_State* _state,
+TA_LIB_API int TA_VAR_StateInit( struct TA_VAR_State** _state,
                                           int           optInTimePeriod, /* From 1 to 100000 */
                                           double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
 
@@ -9118,9 +9118,9 @@ TA_LIB_API int TA_VAR_State( struct TA_VAR_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 1 to 100000 */
                                       double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State* _state );
+TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state );
 
 
 /*
@@ -9156,23 +9156,23 @@ TA_LIB_API struct TA_WCLPRICE_Data {
                                               const double inLow;
                                               const double inClose;
                                               };
-TA_LIB_API struct TA_WCLPRICE_Struct {
-                                     int mem_size;
-                                     int mem_index;
-                                     struct TA_WCLPRICE_Data* memory;
-                                     };
+TA_LIB_API struct TA_WCLPRICE_State {
+                                    int mem_size;
+                                    int mem_index;
+                                    struct TA_WCLPRICE_Data* memory;
+                                    };
 
 
-TA_LIB_API int TA_WCLPRICE_StateInit( struct TA_WCLPRICE_State* _state );
+TA_LIB_API int TA_WCLPRICE_StateInit( struct TA_WCLPRICE_State** _state );
 
 
 TA_LIB_API int TA_WCLPRICE_State( struct TA_WCLPRICE_State* _state,
                                            const double inHigh,
                                            const double inLow,
                                            const double inClose,
-                                           double        &outReal );
+                                           double        **outReal );
 
-TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State* _state );
+TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
 
 
 /*
@@ -9216,15 +9216,15 @@ TA_LIB_API struct TA_WILLR_Data {
                                            const double inLow;
                                            const double inClose;
                                            };
-TA_LIB_API struct TA_WILLR_Struct {
-                                  int mem_size;
-                                  int mem_index;
-                                  struct TA_WILLR_Data* memory;
-                                  int           optInTimePeriod; /* From 2 to 100000 */
-                                  };
+TA_LIB_API struct TA_WILLR_State {
+                                 int mem_size;
+                                 int mem_index;
+                                 struct TA_WILLR_Data* memory;
+                                 int           optInTimePeriod; /* From 2 to 100000 */
+                                 };
 
 
-TA_LIB_API int TA_WILLR_StateInit( struct TA_WILLR_State* _state,
+TA_LIB_API int TA_WILLR_StateInit( struct TA_WILLR_State** _state,
                                             int           optInTimePeriod );  /* From 2 to 100000 */
 
 
@@ -9233,9 +9233,9 @@ TA_LIB_API int TA_WILLR_State( struct TA_WILLR_State* _state,
                                         const double inLow,
                                         const double inClose,
                                         int           optInTimePeriod, /* From 2 to 100000 */
-                                        double        &outReal );
+                                        double        **outReal );
 
-TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State* _state );
+TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 
 
 /*
@@ -9273,24 +9273,24 @@ TA_LIB_API int TA_WMA_Lookback( int           optInTimePeriod );  /* From 2 to 1
 TA_LIB_API struct TA_WMA_Data {
                                          const double inReal;
                                          };
-TA_LIB_API struct TA_WMA_Struct {
-                                int mem_size;
-                                int mem_index;
-                                struct TA_WMA_Data* memory;
-                                int           optInTimePeriod; /* From 2 to 100000 */
-                                };
+TA_LIB_API struct TA_WMA_State {
+                               int mem_size;
+                               int mem_index;
+                               struct TA_WMA_Data* memory;
+                               int           optInTimePeriod; /* From 2 to 100000 */
+                               };
 
 
-TA_LIB_API int TA_WMA_StateInit( struct TA_WMA_State* _state,
+TA_LIB_API int TA_WMA_StateInit( struct TA_WMA_State** _state,
                                           int           optInTimePeriod );  /* From 2 to 100000 */
 
 
 TA_LIB_API int TA_WMA_State( struct TA_WMA_State* _state,
                                       const double inReal,
                                       int           optInTimePeriod, /* From 2 to 100000 */
-                                      double        &outReal );
+                                      double        **outReal );
 
-TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State* _state );
+TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State** _state );
 
 
 /* Some TA functions takes a certain amount of input data

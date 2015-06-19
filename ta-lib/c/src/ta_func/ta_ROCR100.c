@@ -94,9 +94,6 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */    #if !defined(_JAVA)
-/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 10;
@@ -267,15 +264,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocR100StateInit( struct TA_RocR100_State* _state,
+/* Generated */ int Core::RocR100StateInit( struct TA_RocR100_State** _state,
 /* Generated */                           int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocR100StateInit( struct TA_rocR100_State* _state,
+/* Generated */ public int rocR100StateInit( struct TA_rocR100_State** _state,
 /* Generated */                            int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROCR100_StateInit( struct TA_ROCR100_State* _state,
+/* Generated */ TA_LIB_API int TA_ROCR100_StateInit( struct TA_ROCR100_State** _state,
 /* Generated */                                               int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -288,15 +285,14 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
-/* Generated */    if (_state != NULL)
+/* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    /* min/max are checked for optInTimePeriod. */
+/* Generated */    *_state = malloc(sizeof(struct TA_ROCR100_State));
+/* Generated */    (*_state)->mem_size = 100;
+if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_ROCR100_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 10;
 /* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -319,17 +315,17 @@
 /* Generated */ int Core::RocR100State( struct TA_RocR100_State* _state,
 /* Generated */                       cli::array<double>^ inReal,
 /* Generated */                       int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                       cli::array<double>^  &outReal )
+/* Generated */                       cli::array<double>^  **outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int rocR100State( struct TA_rocR100_State* _state,
 /* Generated */                        double       inReal,
 /* Generated */                        int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                        double        &outReal )
+/* Generated */                        double        **outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_ROCR100_State( struct TA_ROCR100_State* _state,
 /* Generated */                                           const double inReal,
 /* Generated */                                           int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                           double        &outReal )
+/* Generated */                                           double        **outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -338,12 +334,6 @@
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -373,13 +363,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocR100StateFree( struct TA_RocR100_State* _state )
+/* Generated */ int Core::RocR100StateFree( struct TA_RocR100_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocR100StateFree( struct TA_rocR100_State* _state )
+/* Generated */ public int rocR100StateFree( struct TA_rocR100_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State* _state )
+/* Generated */ TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -390,14 +380,11 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if (*_state != NULL) {
+/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
+/* Generated */          free(*_state); *_state = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

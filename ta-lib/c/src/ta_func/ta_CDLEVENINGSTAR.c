@@ -93,12 +93,6 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */    #if !defined(_JAVA)
-/* Generated */    /* Verify required price component. */
-/* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    if( optInPenetration == TA_REAL_DEFAULT )
 /* Generated */       optInPenetration = 3.000000e-1;
 /* Generated */    else if( (optInPenetration < 0.000000e+0) ||/* Generated */  (optInPenetration > 3.000000e+37) )
@@ -307,15 +301,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlEveningStarStateInit( struct TA_CdlEveningStar_State* _state,
+/* Generated */ int Core::CdlEveningStarStateInit( struct TA_CdlEveningStar_State** _state,
 /* Generated */                                  double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlEveningStarStateInit( struct TA_cdlEveningStar_State* _state,
+/* Generated */ public int cdlEveningStarStateInit( struct TA_cdlEveningStar_State** _state,
 /* Generated */                                   double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLEVENINGSTAR_StateInit( struct TA_CDLEVENINGSTAR_State* _state,
+/* Generated */ TA_LIB_API int TA_CDLEVENINGSTAR_StateInit( struct TA_CDLEVENINGSTAR_State** _state,
 /* Generated */                                                      double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
@@ -328,15 +322,14 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
-/* Generated */    if (_state != NULL)
+/* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    if( optInPenetration == TA_REAL_DEFAULT )
+/* Generated */    *_state = malloc(sizeof(struct TA_CDLEVENINGSTAR_State));
+/* Generated */    (*_state)->mem_size = 100;
+if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_CDLEVENINGSTAR_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */    if( optInPenetration == TA_REAL_DEFAULT )
 /* Generated */       optInPenetration = 3.000000e-1;
 /* Generated */    else if( (optInPenetration < 0.000000e+0) ||/* Generated */  (optInPenetration > 3.000000e+37) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -361,7 +354,7 @@
 /* Generated */                              cli::array<double>^ inLow,
 /* Generated */                              cli::array<double>^ inClose,
 /* Generated */                              double        optInPenetration, /* From 0 to TA_REAL_MAX */
-/* Generated */                              cli::array<int>^  &outInteger )
+/* Generated */                              cli::array<int>^  **outInteger )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int cdlEveningStarState( struct TA_cdlEveningStar_State* _state,
 /* Generated */                               double       inOpen,
@@ -369,7 +362,7 @@
 /* Generated */                               double       inLow,
 /* Generated */                               double       inClose,
 /* Generated */                               double        optInPenetration, /* From 0 to TA_REAL_MAX */
-/* Generated */                               int           &outInteger )
+/* Generated */                               int           **outInteger )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_CDLEVENINGSTAR_State( struct TA_CDLEVENINGSTAR_State* _state,
 /* Generated */                                                  const double inOpen,
@@ -377,7 +370,7 @@
 /* Generated */                                                  const double inLow,
 /* Generated */                                                  const double inClose,
 /* Generated */                                                  double        optInPenetration, /* From 0 to TA_REAL_MAX */
-/* Generated */                                                  int           &outInteger )
+/* Generated */                                                  int           **outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -386,12 +379,6 @@
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -423,13 +410,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlEveningStarStateFree( struct TA_CdlEveningStar_State* _state )
+/* Generated */ int Core::CdlEveningStarStateFree( struct TA_CdlEveningStar_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlEveningStarStateFree( struct TA_cdlEveningStar_State* _state )
+/* Generated */ public int cdlEveningStarStateFree( struct TA_cdlEveningStar_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State* _state )
+/* Generated */ TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -440,14 +427,11 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if (*_state != NULL) {
+/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
+/* Generated */          free(*_state); *_state = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

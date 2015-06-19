@@ -92,12 +92,6 @@
    /* insert local variable here */
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
-/* Generated */    #if !defined(_JAVA)
-/* Generated */    /* Verify required price component. */
-/* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */ /* No parameters to validate. */
 /**** END GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 
@@ -301,13 +295,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlIdentical3CrowsStateInit( struct TA_CdlIdentical3Crows_State* _state )
+/* Generated */ int Core::CdlIdentical3CrowsStateInit( struct TA_CdlIdentical3Crows_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlIdentical3CrowsStateInit( struct TA_cdlIdentical3Crows_State* _state )
+/* Generated */ public int cdlIdentical3CrowsStateInit( struct TA_cdlIdentical3Crows_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateInit( struct TA_CDLIDENTICAL3CROWS_State* _state )
+/* Generated */ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateInit( struct TA_CDLIDENTICAL3CROWS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -319,15 +313,14 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
-/* Generated */    if (_state != NULL)
+/* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
+/* Generated */    *_state = malloc(sizeof(struct TA_CDLIDENTICAL3CROWS_State));
+/* Generated */    (*_state)->mem_size = 100;
+if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_CDLIDENTICAL3CROWS_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -346,21 +339,21 @@
 /* Generated */                                  cli::array<double>^ inHigh,
 /* Generated */                                  cli::array<double>^ inLow,
 /* Generated */                                  cli::array<double>^ inClose,
-/* Generated */                                  cli::array<int>^  &outInteger )
+/* Generated */                                  cli::array<int>^  **outInteger )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int cdlIdentical3CrowsState( struct TA_cdlIdentical3Crows_State* _state,
 /* Generated */                                   double       inOpen,
 /* Generated */                                   double       inHigh,
 /* Generated */                                   double       inLow,
 /* Generated */                                   double       inClose,
-/* Generated */                                   int           &outInteger )
+/* Generated */                                   int           **outInteger )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_CDLIDENTICAL3CROWS_State( struct TA_CDLIDENTICAL3CROWS_State* _state,
 /* Generated */                                                      const double inOpen,
 /* Generated */                                                      const double inHigh,
 /* Generated */                                                      const double inLow,
 /* Generated */                                                      const double inClose,
-/* Generated */                                                      int           &outInteger )
+/* Generated */                                                      int           **outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -369,12 +362,6 @@
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -401,13 +388,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlIdentical3CrowsStateFree( struct TA_CdlIdentical3Crows_State* _state )
+/* Generated */ int Core::CdlIdentical3CrowsStateFree( struct TA_CdlIdentical3Crows_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State* _state )
+/* Generated */ public int cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_State* _state )
+/* Generated */ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -418,14 +405,11 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if (*_state != NULL) {
+/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
+/* Generated */          free(*_state); *_state = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

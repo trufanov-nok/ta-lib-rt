@@ -127,12 +127,6 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */    #if !defined(_JAVA)
-/* Generated */    /* Verify required price component. */
-/* Generated */    if(!inHigh||!inLow)
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
-/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    if( optInStartValue == TA_REAL_DEFAULT )
 /* Generated */       optInStartValue = 0.000000e+0;
 /* Generated */    else if( (optInStartValue < -3.000000e+37) ||/* Generated */  (optInStartValue > 3.000000e+37) )
@@ -705,7 +699,7 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarExtStateInit( struct TA_SarExt_State* _state,
+/* Generated */ int Core::SarExtStateInit( struct TA_SarExt_State** _state,
 /* Generated */                          double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */                          double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
 /* Generated */                          double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
@@ -716,7 +710,7 @@
 /* Generated */                          double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarExtStateInit( struct TA_sarExt_State* _state,
+/* Generated */ public int sarExtStateInit( struct TA_sarExt_State** _state,
 /* Generated */                           double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */                           double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
 /* Generated */                           double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
@@ -727,7 +721,7 @@
 /* Generated */                           double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAREXT_StateInit( struct TA_SAREXT_State* _state,
+/* Generated */ TA_LIB_API int TA_SAREXT_StateInit( struct TA_SAREXT_State** _state,
 /* Generated */                                              double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */                                              double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
 /* Generated */                                              double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
@@ -748,15 +742,14 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
-/* Generated */    if (_state != NULL)
+/* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    if( optInStartValue == TA_REAL_DEFAULT )
+/* Generated */    *_state = malloc(sizeof(struct TA_SAREXT_State));
+/* Generated */    (*_state)->mem_size = 100;
+if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_SAREXT_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */    if( optInStartValue == TA_REAL_DEFAULT )
 /* Generated */       optInStartValue = 0.000000e+0;
 /* Generated */    else if( (optInStartValue < -3.000000e+37) ||/* Generated */  (optInStartValue > 3.000000e+37) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -821,7 +814,7 @@
 /* Generated */                      double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
 /* Generated */                      double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
 /* Generated */                      double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                      cli::array<double>^  &outReal )
+/* Generated */                      cli::array<double>^  **outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int sarExtState( struct TA_sarExt_State* _state,
 /* Generated */                       double       inHigh,
@@ -834,7 +827,7 @@
 /* Generated */                       double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
 /* Generated */                       double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
 /* Generated */                       double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        &outReal )
+/* Generated */                       double        **outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_SAREXT_State( struct TA_SAREXT_State* _state,
 /* Generated */                                          const double inHigh,
@@ -847,7 +840,7 @@
 /* Generated */                                          double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
 /* Generated */                                          double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
 /* Generated */                                          double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                                          double        &outReal )
+/* Generated */                                          double        **outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -856,12 +849,6 @@
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -928,13 +915,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarExtStateFree( struct TA_SarExt_State* _state )
+/* Generated */ int Core::SarExtStateFree( struct TA_SarExt_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarExtStateFree( struct TA_sarExt_State* _state )
+/* Generated */ public int sarExtStateFree( struct TA_sarExt_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State* _state )
+/* Generated */ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -945,14 +932,11 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if (*_state != NULL) {
+/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
+/* Generated */          free(*_state); *_state = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

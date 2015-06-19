@@ -114,6 +114,7 @@ typedef struct
    unsigned int inBitmap;
    unsigned int outBitmap;
 
+   void* _state;
    const TA_FuncInfo *funcInfo;
 } TA_ParamHolderPriv;
 

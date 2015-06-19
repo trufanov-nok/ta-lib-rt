@@ -285,15 +285,17 @@ public class Core {
       outNBElement.value = outputSize;
       return RetCode.Success ;
    }
-   public int accbandsStateInit( struct TA_accbands_State* _state,
+   public int accbandsStateInit( struct TA_accbands_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct accbands ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ACCBANDS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 20;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -306,14 +308,10 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outRealUpperBand,
-      double &outRealMiddleBand,
-      double &outRealLowerBand )
+      double **outRealUpperBand,
+      double **outRealMiddleBand,
+      double **outRealLowerBand )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -322,14 +320,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int accbandsStateFree( struct TA_accbands_State* _state )
+   public int accbandsStateFree( struct TA_accbands_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode accbands( int startIdx,
@@ -446,37 +443,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int acosStateInit( struct TA_acos_State* _state )
+   public int acosStateInit( struct TA_acos_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct acos ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ACOS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int acosState( struct TA_acos_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int acosStateFree( struct TA_acos_State* _state )
+   public int acosStateFree( struct TA_acos_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode acos( int startIdx,
@@ -542,14 +536,16 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int adStateInit( struct TA_ad_State* _state )
+   public int adStateInit( struct TA_ad_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct ad ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_AD_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -558,24 +554,19 @@ public class Core {
       double inLow,
       double inClose,
       double inVolume,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int adStateFree( struct TA_ad_State* _state )
+   public int adStateFree( struct TA_ad_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode ad( int startIdx,
@@ -642,38 +633,35 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int addStateInit( struct TA_add_State* _state )
+   public int addStateInit( struct TA_add_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct add ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ADD_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int addState( struct TA_add_State* _state,
       double inReal0,
       double inReal1,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int addStateFree( struct TA_add_State* _state )
+   public int addStateFree( struct TA_add_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode add( int startIdx,
@@ -787,16 +775,18 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int adOscStateInit( struct TA_adOsc_State* _state,
+   public int adOscStateInit( struct TA_adOsc_State** _state,
       int optInFastPeriod,
       int optInSlowPeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct adOsc ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ADOSC_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
          optInFastPeriod = 3;
       else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
@@ -815,12 +805,8 @@ public class Core {
       double inVolume,
       int optInFastPeriod,
       int optInSlowPeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
@@ -833,14 +819,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int adOscStateFree( struct TA_adOsc_State* _state )
+   public int adOscStateFree( struct TA_adOsc_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode adOsc( int startIdx,
@@ -1095,15 +1080,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int adxStateInit( struct TA_adx_State* _state,
+   public int adxStateInit( struct TA_adx_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct adx ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ADX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -1116,12 +1103,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -1130,14 +1113,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int adxStateFree( struct TA_adx_State* _state )
+   public int adxStateFree( struct TA_adx_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode adx( int startIdx,
@@ -1373,15 +1355,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int adxrStateInit( struct TA_adxr_State* _state,
+   public int adxrStateInit( struct TA_adxr_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct adxr ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ADXR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -1394,12 +1378,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -1408,14 +1388,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int adxrStateFree( struct TA_adxr_State* _state )
+   public int adxrStateFree( struct TA_adxr_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode adxr( int startIdx,
@@ -1587,17 +1566,19 @@ public class Core {
       }
       return retCode;
    }
-   public int apoStateInit( struct TA_apo_State* _state,
+   public int apoStateInit( struct TA_apo_State** _state,
       int optInFastPeriod,
       int optInSlowPeriod,
       MAType optInMAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct apo ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_APO_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
          optInFastPeriod = 12;
       else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
@@ -1613,12 +1594,8 @@ public class Core {
       double inReal,
       int optInFastPeriod,
       int optInSlowPeriod,
-      MAType optInMAType, double &outReal )
+      MAType optInMAType, double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
@@ -1631,14 +1608,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int apoStateFree( struct TA_apo_State* _state )
+   public int apoStateFree( struct TA_apo_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode apo( int startIdx,
@@ -1847,15 +1823,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int aroonStateInit( struct TA_aroon_State* _state,
+   public int aroonStateInit( struct TA_aroon_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct aroon ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_AROON_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -1867,13 +1845,9 @@ public class Core {
       double inHigh,
       double inLow,
       int optInTimePeriod,
-      double &outAroonDown,
-      double &outAroonUp )
+      double **outAroonDown,
+      double **outAroonUp )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -1882,14 +1856,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int aroonStateFree( struct TA_aroon_State* _state )
+   public int aroonStateFree( struct TA_aroon_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode aroon( int startIdx,
@@ -2082,15 +2055,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int aroonOscStateInit( struct TA_aroonOsc_State* _state,
+   public int aroonOscStateInit( struct TA_aroonOsc_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct aroonOsc ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_AROONOSC_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -2102,12 +2077,8 @@ public class Core {
       double inHigh,
       double inLow,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -2116,14 +2087,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int aroonOscStateFree( struct TA_aroonOsc_State* _state )
+   public int aroonOscStateFree( struct TA_aroonOsc_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode aroonOsc( int startIdx,
@@ -2242,37 +2212,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int asinStateInit( struct TA_asin_State* _state )
+   public int asinStateInit( struct TA_asin_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct asin ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ASIN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int asinState( struct TA_asin_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int asinStateFree( struct TA_asin_State* _state )
+   public int asinStateFree( struct TA_asin_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode asin( int startIdx,
@@ -2322,37 +2289,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int atanStateInit( struct TA_atan_State* _state )
+   public int atanStateInit( struct TA_atan_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct atan ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ATAN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int atanState( struct TA_atan_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int atanStateFree( struct TA_atan_State* _state )
+   public int atanStateFree( struct TA_atan_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode atan( int startIdx,
@@ -2466,15 +2430,17 @@ public class Core {
       outNBElement.value = outIdx;
       return retCode;
    }
-   public int atrStateInit( struct TA_atr_State* _state,
+   public int atrStateInit( struct TA_atr_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct atr ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ATR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -2487,12 +2453,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -2501,14 +2463,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int atrStateFree( struct TA_atr_State* _state )
+   public int atrStateFree( struct TA_atr_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode atr( int startIdx,
@@ -2624,14 +2585,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int avgPriceStateInit( struct TA_avgPrice_State* _state )
+   public int avgPriceStateInit( struct TA_avgPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct avgPrice ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_AVGPRICE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -2640,24 +2603,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int avgPriceStateFree( struct TA_avgPrice_State* _state )
+   public int avgPriceStateFree( struct TA_avgPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode avgPrice( int startIdx,
@@ -2743,15 +2701,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int avgDevStateInit( struct TA_avgDev_State* _state,
+   public int avgDevStateInit( struct TA_avgDev_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct avgDev ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_AVGDEV_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -2762,12 +2722,8 @@ public class Core {
    public int avgDevState( struct TA_avgDev_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -2776,14 +2732,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int avgDevStateFree( struct TA_avgDev_State* _state )
+   public int avgDevStateFree( struct TA_avgDev_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode avgDev( int startIdx,
@@ -2992,18 +2947,20 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int bbandsStateInit( struct TA_bbands_State* _state,
+   public int bbandsStateInit( struct TA_bbands_State** _state,
       int optInTimePeriod,
       double optInNbDevUp,
       double optInNbDevDn,
       MAType optInMAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct bbands ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_BBANDS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -3024,14 +2981,10 @@ public class Core {
       int optInTimePeriod,
       double optInNbDevUp,
       double optInNbDevDn,
-      MAType optInMAType, double &outRealUpperBand,
-      double &outRealMiddleBand,
-      double &outRealLowerBand )
+      MAType optInMAType, double **outRealUpperBand,
+      double **outRealMiddleBand,
+      double **outRealLowerBand )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -3048,14 +3001,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int bbandsStateFree( struct TA_bbands_State* _state )
+   public int bbandsStateFree( struct TA_bbands_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode bbands( int startIdx,
@@ -3291,15 +3243,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int betaStateInit( struct TA_beta_State* _state,
+   public int betaStateInit( struct TA_beta_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct beta ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_BETA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -3311,12 +3265,8 @@ public class Core {
       double inReal0,
       double inReal1,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -3325,14 +3275,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int betaStateFree( struct TA_beta_State* _state )
+   public int betaStateFree( struct TA_beta_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode beta( int startIdx,
@@ -3478,14 +3427,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int bopStateInit( struct TA_bop_State* _state )
+   public int bopStateInit( struct TA_bop_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct bop ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_BOP_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -3494,24 +3445,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int bopStateFree( struct TA_bop_State* _state )
+   public int bopStateFree( struct TA_bop_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode bop( int startIdx,
@@ -3619,15 +3565,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cciStateInit( struct TA_cci_State* _state,
+   public int cciStateInit( struct TA_cci_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cci ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CCI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -3640,12 +3588,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -3654,14 +3598,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cciStateFree( struct TA_cci_State* _state )
+   public int cciStateFree( struct TA_cci_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cci( int startIdx,
@@ -3791,14 +3734,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl2CrowsStateInit( struct TA_cdl2Crows_State* _state )
+   public int cdl2CrowsStateInit( struct TA_cdl2Crows_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdl2Crows ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDL2CROWS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -3807,24 +3752,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdl2CrowsStateFree( struct TA_cdl2Crows_State* _state )
+   public int cdl2CrowsStateFree( struct TA_cdl2Crows_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdl2Crows( int startIdx,
@@ -3953,14 +3893,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3BlackCrowsStateInit( struct TA_cdl3BlackCrows_State* _state )
+   public int cdl3BlackCrowsStateInit( struct TA_cdl3BlackCrows_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdl3BlackCrows ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDL3BLACKCROWS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -3969,24 +3911,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdl3BlackCrowsStateFree( struct TA_cdl3BlackCrows_State* _state )
+   public int cdl3BlackCrowsStateFree( struct TA_cdl3BlackCrows_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdl3BlackCrows( int startIdx,
@@ -4125,14 +4062,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3InsideStateInit( struct TA_cdl3Inside_State* _state )
+   public int cdl3InsideStateInit( struct TA_cdl3Inside_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdl3Inside ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDL3INSIDE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -4141,24 +4080,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdl3InsideStateFree( struct TA_cdl3Inside_State* _state )
+   public int cdl3InsideStateFree( struct TA_cdl3Inside_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdl3Inside( int startIdx,
@@ -4304,14 +4238,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3LineStrikeStateInit( struct TA_cdl3LineStrike_State* _state )
+   public int cdl3LineStrikeStateInit( struct TA_cdl3LineStrike_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdl3LineStrike ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDL3LINESTRIKE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -4320,24 +4256,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdl3LineStrikeStateFree( struct TA_cdl3LineStrike_State* _state )
+   public int cdl3LineStrikeStateFree( struct TA_cdl3LineStrike_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdl3LineStrike( int startIdx,
@@ -4467,14 +4398,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3OutsideStateInit( struct TA_cdl3Outside_State* _state )
+   public int cdl3OutsideStateInit( struct TA_cdl3Outside_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdl3Outside ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDL3OUTSIDE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -4483,24 +4416,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdl3OutsideStateFree( struct TA_cdl3Outside_State* _state )
+   public int cdl3OutsideStateFree( struct TA_cdl3Outside_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdl3Outside( int startIdx,
@@ -4656,14 +4584,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3StarsInSouthStateInit( struct TA_cdl3StarsInSouth_State* _state )
+   public int cdl3StarsInSouthStateInit( struct TA_cdl3StarsInSouth_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdl3StarsInSouth ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDL3STARSINSOUTH_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -4672,24 +4602,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdl3StarsInSouthStateFree( struct TA_cdl3StarsInSouth_State* _state )
+   public int cdl3StarsInSouthStateFree( struct TA_cdl3StarsInSouth_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdl3StarsInSouth( int startIdx,
@@ -4904,14 +4829,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3WhiteSoldiersStateInit( struct TA_cdl3WhiteSoldiers_State* _state )
+   public int cdl3WhiteSoldiersStateInit( struct TA_cdl3WhiteSoldiers_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdl3WhiteSoldiers ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDL3WHITESOLDIERS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -4920,24 +4847,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdl3WhiteSoldiersStateFree( struct TA_cdl3WhiteSoldiers_State* _state )
+   public int cdl3WhiteSoldiersStateFree( struct TA_cdl3WhiteSoldiers_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdl3WhiteSoldiers( int startIdx,
@@ -5151,16 +5073,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlAbandonedBabyStateInit( struct TA_cdlAbandonedBaby_State* _state,
+   public int cdlAbandonedBabyStateInit( struct TA_cdlAbandonedBaby_State** _state,
       double optInPenetration )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
+      *_state = malloc(sizeof(struct cdlAbandonedBaby ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLABANDONEDBABY_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInPenetration == (-4e+37) )
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -5173,12 +5096,8 @@ public class Core {
       double inLow,
       double inClose,
       double optInPenetration,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInPenetration == (-4e+37) )
@@ -5187,14 +5106,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlAbandonedBabyStateFree( struct TA_cdlAbandonedBaby_State* _state )
+   public int cdlAbandonedBabyStateFree( struct TA_cdlAbandonedBaby_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlAbandonedBaby( int startIdx,
@@ -5436,14 +5354,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlAdvanceBlockStateInit( struct TA_cdlAdvanceBlock_State* _state )
+   public int cdlAdvanceBlockStateInit( struct TA_cdlAdvanceBlock_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlAdvanceBlock ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLADVANCEBLOCK_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -5452,24 +5372,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlAdvanceBlockStateFree( struct TA_cdlAdvanceBlock_State* _state )
+   public int cdlAdvanceBlockStateFree( struct TA_cdlAdvanceBlock_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlAdvanceBlock( int startIdx,
@@ -5684,14 +5599,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlBeltHoldStateInit( struct TA_cdlBeltHold_State* _state )
+   public int cdlBeltHoldStateInit( struct TA_cdlBeltHold_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlBeltHold ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLBELTHOLD_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -5700,24 +5617,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlBeltHoldStateFree( struct TA_cdlBeltHold_State* _state )
+   public int cdlBeltHoldStateFree( struct TA_cdlBeltHold_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlBeltHold( int startIdx,
@@ -5860,14 +5772,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlBreakawayStateInit( struct TA_cdlBreakaway_State* _state )
+   public int cdlBreakawayStateInit( struct TA_cdlBreakaway_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlBreakaway ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLBREAKAWAY_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -5876,24 +5790,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlBreakawayStateFree( struct TA_cdlBreakaway_State* _state )
+   public int cdlBreakawayStateFree( struct TA_cdlBreakaway_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlBreakaway( int startIdx,
@@ -6036,14 +5945,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlClosingMarubozuStateInit( struct TA_cdlClosingMarubozu_State* _state )
+   public int cdlClosingMarubozuStateInit( struct TA_cdlClosingMarubozu_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlClosingMarubozu ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLCLOSINGMARUBOZU_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -6052,24 +5963,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlClosingMarubozuStateFree( struct TA_cdlClosingMarubozu_State* _state )
+   public int cdlClosingMarubozuStateFree( struct TA_cdlClosingMarubozu_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlClosingMarubozu( int startIdx,
@@ -6210,14 +6116,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlConcealBabysWallStateInit( struct TA_cdlConcealBabysWall_State* _state )
+   public int cdlConcealBabysWallStateInit( struct TA_cdlConcealBabysWall_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlConcealBabysWall ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLCONCEALBABYSWALL_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -6226,24 +6134,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State* _state )
+   public int cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlConcealBabysWall( int startIdx,
@@ -6385,14 +6288,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlCounterAttackStateInit( struct TA_cdlCounterAttack_State* _state )
+   public int cdlCounterAttackStateInit( struct TA_cdlCounterAttack_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlCounterAttack ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLCOUNTERATTACK_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -6401,24 +6306,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State* _state )
+   public int cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlCounterAttack( int startIdx,
@@ -6556,16 +6456,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlDarkCloudCoverStateInit( struct TA_cdlDarkCloudCover_State* _state,
+   public int cdlDarkCloudCoverStateInit( struct TA_cdlDarkCloudCover_State** _state,
       double optInPenetration )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
+      *_state = malloc(sizeof(struct cdlDarkCloudCover ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLDARKCLOUDCOVER_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInPenetration == (-4e+37) )
          optInPenetration = 5.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -6578,12 +6479,8 @@ public class Core {
       double inLow,
       double inClose,
       double optInPenetration,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInPenetration == (-4e+37) )
@@ -6592,14 +6489,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State* _state )
+   public int cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlDarkCloudCover( int startIdx,
@@ -6713,14 +6609,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlDojiStateInit( struct TA_cdlDoji_State* _state )
+   public int cdlDojiStateInit( struct TA_cdlDoji_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlDoji ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLDOJI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -6729,24 +6627,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlDojiStateFree( struct TA_cdlDoji_State* _state )
+   public int cdlDojiStateFree( struct TA_cdlDoji_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlDoji( int startIdx,
@@ -6862,14 +6755,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlDojiStarStateInit( struct TA_cdlDojiStar_State* _state )
+   public int cdlDojiStarStateInit( struct TA_cdlDojiStar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlDojiStar ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLDOJISTAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -6878,24 +6773,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlDojiStarStateFree( struct TA_cdlDojiStar_State* _state )
+   public int cdlDojiStarStateFree( struct TA_cdlDojiStar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlDojiStar( int startIdx,
@@ -7024,14 +6914,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlDragonflyDojiStateInit( struct TA_cdlDragonflyDoji_State* _state )
+   public int cdlDragonflyDojiStateInit( struct TA_cdlDragonflyDoji_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlDragonflyDoji ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLDRAGONFLYDOJI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -7040,24 +6932,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlDragonflyDojiStateFree( struct TA_cdlDragonflyDoji_State* _state )
+   public int cdlDragonflyDojiStateFree( struct TA_cdlDragonflyDoji_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlDragonflyDoji( int startIdx,
@@ -7177,14 +7064,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlEngulfingStateInit( struct TA_cdlEngulfing_State* _state )
+   public int cdlEngulfingStateInit( struct TA_cdlEngulfing_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlEngulfing ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLENGULFING_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -7193,24 +7082,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlEngulfingStateFree( struct TA_cdlEngulfing_State* _state )
+   public int cdlEngulfingStateFree( struct TA_cdlEngulfing_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlEngulfing( int startIdx,
@@ -7353,16 +7237,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlEveningDojiStarStateInit( struct TA_cdlEveningDojiStar_State* _state,
+   public int cdlEveningDojiStarStateInit( struct TA_cdlEveningDojiStar_State** _state,
       double optInPenetration )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
+      *_state = malloc(sizeof(struct cdlEveningDojiStar ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLEVENINGDOJISTAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInPenetration == (-4e+37) )
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -7375,12 +7260,8 @@ public class Core {
       double inLow,
       double inClose,
       double optInPenetration,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInPenetration == (-4e+37) )
@@ -7389,14 +7270,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlEveningDojiStarStateFree( struct TA_cdlEveningDojiStar_State* _state )
+   public int cdlEveningDojiStarStateFree( struct TA_cdlEveningDojiStar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlEveningDojiStar( int startIdx,
@@ -7558,16 +7438,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlEveningStarStateInit( struct TA_cdlEveningStar_State* _state,
+   public int cdlEveningStarStateInit( struct TA_cdlEveningStar_State** _state,
       double optInPenetration )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
+      *_state = malloc(sizeof(struct cdlEveningStar ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLEVENINGSTAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInPenetration == (-4e+37) )
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -7580,12 +7461,8 @@ public class Core {
       double inLow,
       double inClose,
       double optInPenetration,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInPenetration == (-4e+37) )
@@ -7594,14 +7471,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlEveningStarStateFree( struct TA_cdlEveningStar_State* _state )
+   public int cdlEveningStarStateFree( struct TA_cdlEveningStar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlEveningStar( int startIdx,
@@ -7750,14 +7626,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlGapSideSideWhiteStateInit( struct TA_cdlGapSideSideWhite_State* _state )
+   public int cdlGapSideSideWhiteStateInit( struct TA_cdlGapSideSideWhite_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlGapSideSideWhite ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLGAPSIDESIDEWHITE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -7766,24 +7644,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlGapSideSideWhiteStateFree( struct TA_cdlGapSideSideWhite_State* _state )
+   public int cdlGapSideSideWhiteStateFree( struct TA_cdlGapSideSideWhite_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlGapSideSideWhite( int startIdx,
@@ -7920,14 +7793,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlGravestoneDojiStateInit( struct TA_cdlGravestoneDoji_State* _state )
+   public int cdlGravestoneDojiStateInit( struct TA_cdlGravestoneDoji_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlGravestoneDoji ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLGRAVESTONEDOJI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -7936,24 +7811,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlGravestoneDojiStateFree( struct TA_cdlGravestoneDoji_State* _state )
+   public int cdlGravestoneDojiStateFree( struct TA_cdlGravestoneDoji_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlGravestoneDoji( int startIdx,
@@ -8105,14 +7975,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHammerStateInit( struct TA_cdlHammer_State* _state )
+   public int cdlHammerStateInit( struct TA_cdlHammer_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlHammer ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLHAMMER_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -8121,24 +7993,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlHammerStateFree( struct TA_cdlHammer_State* _state )
+   public int cdlHammerStateFree( struct TA_cdlHammer_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlHammer( int startIdx,
@@ -8313,14 +8180,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHangingManStateInit( struct TA_cdlHangingMan_State* _state )
+   public int cdlHangingManStateInit( struct TA_cdlHangingMan_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlHangingMan ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLHANGINGMAN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -8329,24 +8198,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlHangingManStateFree( struct TA_cdlHangingMan_State* _state )
+   public int cdlHangingManStateFree( struct TA_cdlHangingMan_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlHangingMan( int startIdx,
@@ -8506,14 +8370,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHaramiStateInit( struct TA_cdlHarami_State* _state )
+   public int cdlHaramiStateInit( struct TA_cdlHarami_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlHarami ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLHARAMI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -8522,24 +8388,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlHaramiStateFree( struct TA_cdlHarami_State* _state )
+   public int cdlHaramiStateFree( struct TA_cdlHarami_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlHarami( int startIdx,
@@ -8684,14 +8545,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHaramiCrossStateInit( struct TA_cdlHaramiCross_State* _state )
+   public int cdlHaramiCrossStateInit( struct TA_cdlHaramiCross_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlHaramiCross ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLHARAMICROSS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -8700,24 +8563,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State* _state )
+   public int cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlHaramiCross( int startIdx,
@@ -8851,14 +8709,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHignWaveStateInit( struct TA_cdlHignWave_State* _state )
+   public int cdlHignWaveStateInit( struct TA_cdlHignWave_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlHignWave ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLHIGHWAVE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -8867,24 +8727,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlHignWaveStateFree( struct TA_cdlHignWave_State* _state )
+   public int cdlHignWaveStateFree( struct TA_cdlHignWave_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlHignWave( int startIdx,
@@ -9026,14 +8881,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHikkakeStateInit( struct TA_cdlHikkake_State* _state )
+   public int cdlHikkakeStateInit( struct TA_cdlHikkake_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlHikkake ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLHIKKAKE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -9042,24 +8899,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlHikkakeStateFree( struct TA_cdlHikkake_State* _state )
+   public int cdlHikkakeStateFree( struct TA_cdlHikkake_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlHikkake( int startIdx,
@@ -9241,14 +9093,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHikkakeModStateInit( struct TA_cdlHikkakeMod_State* _state )
+   public int cdlHikkakeModStateInit( struct TA_cdlHikkakeMod_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlHikkakeMod ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLHIKKAKEMOD_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -9257,24 +9111,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlHikkakeModStateFree( struct TA_cdlHikkakeMod_State* _state )
+   public int cdlHikkakeModStateFree( struct TA_cdlHikkakeMod_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlHikkakeMod( int startIdx,
@@ -9443,14 +9292,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHomingPigeonStateInit( struct TA_cdlHomingPigeon_State* _state )
+   public int cdlHomingPigeonStateInit( struct TA_cdlHomingPigeon_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlHomingPigeon ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLHOMINGPIGEON_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -9459,24 +9310,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State* _state )
+   public int cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlHomingPigeon( int startIdx,
@@ -9629,14 +9475,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlIdentical3CrowsStateInit( struct TA_cdlIdentical3Crows_State* _state )
+   public int cdlIdentical3CrowsStateInit( struct TA_cdlIdentical3Crows_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlIdentical3Crows ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLIDENTICAL3CROWS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -9645,24 +9493,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State* _state )
+   public int cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlIdentical3Crows( int startIdx,
@@ -9816,14 +9659,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlInNeckStateInit( struct TA_cdlInNeck_State* _state )
+   public int cdlInNeckStateInit( struct TA_cdlInNeck_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlInNeck ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLINNECK_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -9832,24 +9677,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlInNeckStateFree( struct TA_cdlInNeck_State* _state )
+   public int cdlInNeckStateFree( struct TA_cdlInNeck_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlInNeck( int startIdx,
@@ -9993,14 +9833,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlInvertedHammerStateInit( struct TA_cdlInvertedHammer_State* _state )
+   public int cdlInvertedHammerStateInit( struct TA_cdlInvertedHammer_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlInvertedHammer ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLINVERTEDHAMMER_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -10009,24 +9851,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State* _state )
+   public int cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlInvertedHammer( int startIdx,
@@ -10184,14 +10021,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlKickingStateInit( struct TA_cdlKicking_State* _state )
+   public int cdlKickingStateInit( struct TA_cdlKicking_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlKicking ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLKICKING_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -10200,24 +10039,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlKickingStateFree( struct TA_cdlKicking_State* _state )
+   public int cdlKickingStateFree( struct TA_cdlKicking_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlKicking( int startIdx,
@@ -10382,14 +10216,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlKickingByLengthStateInit( struct TA_cdlKickingByLength_State* _state )
+   public int cdlKickingByLengthStateInit( struct TA_cdlKickingByLength_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlKickingByLength ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLKICKINGBYLENGTH_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -10398,24 +10234,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlKickingByLengthStateFree( struct TA_cdlKickingByLength_State* _state )
+   public int cdlKickingByLengthStateFree( struct TA_cdlKickingByLength_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlKickingByLength( int startIdx,
@@ -10559,14 +10390,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlLadderBottomStateInit( struct TA_cdlLadderBottom_State* _state )
+   public int cdlLadderBottomStateInit( struct TA_cdlLadderBottom_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlLadderBottom ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLLADDERBOTTOM_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -10575,24 +10408,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State* _state )
+   public int cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlLadderBottom( int startIdx,
@@ -10719,14 +10547,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlLongLeggedDojiStateInit( struct TA_cdlLongLeggedDoji_State* _state )
+   public int cdlLongLeggedDojiStateInit( struct TA_cdlLongLeggedDoji_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlLongLeggedDoji ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLLONGLEGGEDDOJI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -10735,24 +10565,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlLongLeggedDojiStateFree( struct TA_cdlLongLeggedDoji_State* _state )
+   public int cdlLongLeggedDojiStateFree( struct TA_cdlLongLeggedDoji_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlLongLeggedDoji( int startIdx,
@@ -10879,14 +10704,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlLongLineStateInit( struct TA_cdlLongLine_State* _state )
+   public int cdlLongLineStateInit( struct TA_cdlLongLine_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlLongLine ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLLONGLINE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -10895,24 +10722,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlLongLineStateFree( struct TA_cdlLongLine_State* _state )
+   public int cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlLongLine( int startIdx,
@@ -11037,14 +10859,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMarubozuStateInit( struct TA_cdlMarubozu_State* _state )
+   public int cdlMarubozuStateInit( struct TA_cdlMarubozu_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlMarubozu ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLMARUBOZU_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -11053,24 +10877,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlMarubozuStateFree( struct TA_cdlMarubozu_State* _state )
+   public int cdlMarubozuStateFree( struct TA_cdlMarubozu_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlMarubozu( int startIdx,
@@ -11189,14 +11008,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMatchingLowStateInit( struct TA_cdlMatchingLow_State* _state )
+   public int cdlMatchingLowStateInit( struct TA_cdlMatchingLow_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlMatchingLow ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLMATCHINGLOW_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -11205,24 +11026,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State* _state )
+   public int cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlMatchingLow( int startIdx,
@@ -11372,16 +11188,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMatHoldStateInit( struct TA_cdlMatHold_State* _state,
+   public int cdlMatHoldStateInit( struct TA_cdlMatHold_State** _state,
       double optInPenetration )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
+      *_state = malloc(sizeof(struct cdlMatHold ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLMATHOLD_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInPenetration == (-4e+37) )
          optInPenetration = 5.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -11394,12 +11211,8 @@ public class Core {
       double inLow,
       double inClose,
       double optInPenetration,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInPenetration == (-4e+37) )
@@ -11408,14 +11221,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlMatHoldStateFree( struct TA_cdlMatHold_State* _state )
+   public int cdlMatHoldStateFree( struct TA_cdlMatHold_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlMatHold( int startIdx,
@@ -11592,16 +11404,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMorningDojiStarStateInit( struct TA_cdlMorningDojiStar_State* _state,
+   public int cdlMorningDojiStarStateInit( struct TA_cdlMorningDojiStar_State** _state,
       double optInPenetration )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
+      *_state = malloc(sizeof(struct cdlMorningDojiStar ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLMORNINGDOJISTAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInPenetration == (-4e+37) )
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -11614,12 +11427,8 @@ public class Core {
       double inLow,
       double inClose,
       double optInPenetration,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInPenetration == (-4e+37) )
@@ -11628,14 +11437,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlMorningDojiStarStateFree( struct TA_cdlMorningDojiStar_State* _state )
+   public int cdlMorningDojiStarStateFree( struct TA_cdlMorningDojiStar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlMorningDojiStar( int startIdx,
@@ -11797,16 +11605,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMorningStarStateInit( struct TA_cdlMorningStar_State* _state,
+   public int cdlMorningStarStateInit( struct TA_cdlMorningStar_State** _state,
       double optInPenetration )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInPenetration == (-4e+37) )
+      *_state = malloc(sizeof(struct cdlMorningStar ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLMORNINGSTAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInPenetration == (-4e+37) )
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -11819,12 +11628,8 @@ public class Core {
       double inLow,
       double inClose,
       double optInPenetration,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInPenetration == (-4e+37) )
@@ -11833,14 +11638,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlMorningStarStateFree( struct TA_cdlMorningStar_State* _state )
+   public int cdlMorningStarStateFree( struct TA_cdlMorningStar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlMorningStar( int startIdx,
@@ -11985,14 +11789,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlOnNeckStateInit( struct TA_cdlOnNeck_State* _state )
+   public int cdlOnNeckStateInit( struct TA_cdlOnNeck_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlOnNeck ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLONNECK_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -12001,24 +11807,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlOnNeckStateFree( struct TA_cdlOnNeck_State* _state )
+   public int cdlOnNeckStateFree( struct TA_cdlOnNeck_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlOnNeck( int startIdx,
@@ -12149,14 +11950,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlPiercingStateInit( struct TA_cdlPiercing_State* _state )
+   public int cdlPiercingStateInit( struct TA_cdlPiercing_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlPiercing ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLPIERCING_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -12165,24 +11968,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlPiercingStateFree( struct TA_cdlPiercing_State* _state )
+   public int cdlPiercingStateFree( struct TA_cdlPiercing_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlPiercing( int startIdx,
@@ -12324,14 +12122,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlRickshawManStateInit( struct TA_cdlRickshawMan_State* _state )
+   public int cdlRickshawManStateInit( struct TA_cdlRickshawMan_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlRickshawMan ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLRICKSHAWMAN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -12340,24 +12140,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlRickshawManStateFree( struct TA_cdlRickshawMan_State* _state )
+   public int cdlRickshawManStateFree( struct TA_cdlRickshawMan_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlRickshawMan( int startIdx,
@@ -12523,14 +12318,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlRiseFall3MethodsStateInit( struct TA_cdlRiseFall3Methods_State* _state )
+   public int cdlRiseFall3MethodsStateInit( struct TA_cdlRiseFall3Methods_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlRiseFall3Methods ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLRISEFALL3METHODS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -12539,24 +12336,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlRiseFall3MethodsStateFree( struct TA_cdlRiseFall3Methods_State* _state )
+   public int cdlRiseFall3MethodsStateFree( struct TA_cdlRiseFall3Methods_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlRiseFall3Methods( int startIdx,
@@ -12728,14 +12520,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlSeperatingLinesStateInit( struct TA_cdlSeperatingLines_State* _state )
+   public int cdlSeperatingLinesStateInit( struct TA_cdlSeperatingLines_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlSeperatingLines ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLSEPARATINGLINES_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -12744,24 +12538,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State* _state )
+   public int cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlSeperatingLines( int startIdx,
@@ -12921,14 +12710,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlShootingStarStateInit( struct TA_cdlShootingStar_State* _state )
+   public int cdlShootingStarStateInit( struct TA_cdlShootingStar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlShootingStar ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLSHOOTINGSTAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -12937,24 +12728,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlShootingStarStateFree( struct TA_cdlShootingStar_State* _state )
+   public int cdlShootingStarStateFree( struct TA_cdlShootingStar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlShootingStar( int startIdx,
@@ -13091,14 +12877,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlShortLineStateInit( struct TA_cdlShortLine_State* _state )
+   public int cdlShortLineStateInit( struct TA_cdlShortLine_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlShortLine ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLSHORTLINE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -13107,24 +12895,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlShortLineStateFree( struct TA_cdlShortLine_State* _state )
+   public int cdlShortLineStateFree( struct TA_cdlShortLine_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlShortLine( int startIdx,
@@ -13240,14 +13023,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlSpinningTopStateInit( struct TA_cdlSpinningTop_State* _state )
+   public int cdlSpinningTopStateInit( struct TA_cdlSpinningTop_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlSpinningTop ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLSPINNINGTOP_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -13256,24 +13041,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State* _state )
+   public int cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlSpinningTop( int startIdx,
@@ -13432,14 +13212,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlStalledPatternStateInit( struct TA_cdlStalledPattern_State* _state )
+   public int cdlStalledPatternStateInit( struct TA_cdlStalledPattern_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlStalledPattern ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLSTALLEDPATTERN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -13448,24 +13230,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State* _state )
+   public int cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlStalledPattern( int startIdx,
@@ -13627,14 +13404,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlStickSandwhichStateInit( struct TA_cdlStickSandwhich_State* _state )
+   public int cdlStickSandwhichStateInit( struct TA_cdlStickSandwhich_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlStickSandwhich ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLSTICKSANDWICH_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -13643,24 +13422,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlStickSandwhichStateFree( struct TA_cdlStickSandwhich_State* _state )
+   public int cdlStickSandwhichStateFree( struct TA_cdlStickSandwhich_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlStickSandwhich( int startIdx,
@@ -13792,14 +13566,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlTakuriStateInit( struct TA_cdlTakuri_State* _state )
+   public int cdlTakuriStateInit( struct TA_cdlTakuri_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlTakuri ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLTAKURI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -13808,24 +13584,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlTakuriStateFree( struct TA_cdlTakuri_State* _state )
+   public int cdlTakuriStateFree( struct TA_cdlTakuri_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlTakuri( int startIdx,
@@ -13970,14 +13741,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlTasukiGapStateInit( struct TA_cdlTasukiGap_State* _state )
+   public int cdlTasukiGapStateInit( struct TA_cdlTasukiGap_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlTasukiGap ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLTASUKIGAP_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -13986,24 +13759,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlTasukiGapStateFree( struct TA_cdlTasukiGap_State* _state )
+   public int cdlTasukiGapStateFree( struct TA_cdlTasukiGap_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlTasukiGap( int startIdx,
@@ -14143,14 +13911,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlThrustingStateInit( struct TA_cdlThrusting_State* _state )
+   public int cdlThrustingStateInit( struct TA_cdlThrusting_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlThrusting ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLTHRUSTING_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -14159,24 +13929,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlThrustingStateFree( struct TA_cdlThrusting_State* _state )
+   public int cdlThrustingStateFree( struct TA_cdlThrusting_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlThrusting( int startIdx,
@@ -14310,14 +14075,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlTristarStateInit( struct TA_cdlTristar_State* _state )
+   public int cdlTristarStateInit( struct TA_cdlTristar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlTristar ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLTRISTAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -14326,24 +14093,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlTristarStateFree( struct TA_cdlTristar_State* _state )
+   public int cdlTristarStateFree( struct TA_cdlTristar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlTristar( int startIdx,
@@ -14478,14 +14240,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlUnique3RiverStateInit( struct TA_cdlUnique3River_State* _state )
+   public int cdlUnique3RiverStateInit( struct TA_cdlUnique3River_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlUnique3River ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLUNIQUE3RIVER_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -14494,24 +14258,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlUnique3RiverStateFree( struct TA_cdlUnique3River_State* _state )
+   public int cdlUnique3RiverStateFree( struct TA_cdlUnique3River_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlUnique3River( int startIdx,
@@ -14649,14 +14408,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlUpsideGap2CrowsStateInit( struct TA_cdlUpsideGap2Crows_State* _state )
+   public int cdlUpsideGap2CrowsStateInit( struct TA_cdlUpsideGap2Crows_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlUpsideGap2Crows ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLUPSIDEGAP2CROWS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -14665,24 +14426,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State* _state )
+   public int cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlUpsideGap2Crows( int startIdx,
@@ -14808,14 +14564,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlXSideGap3MethodsStateInit( struct TA_cdlXSideGap3Methods_State* _state )
+   public int cdlXSideGap3MethodsStateInit( struct TA_cdlXSideGap3Methods_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cdlXSideGap3Methods ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CDLXSIDEGAP3METHODS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -14824,24 +14582,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State* _state )
+   public int cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cdlXSideGap3Methods( int startIdx,
@@ -14923,37 +14676,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int ceilStateInit( struct TA_ceil_State* _state )
+   public int ceilStateInit( struct TA_ceil_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct ceil ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CEIL_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int ceilState( struct TA_ceil_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int ceilStateFree( struct TA_ceil_State* _state )
+   public int ceilStateFree( struct TA_ceil_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode ceil( int startIdx,
@@ -15126,15 +14876,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int cmoStateInit( struct TA_cmo_State* _state,
+   public int cmoStateInit( struct TA_cmo_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cmo ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CMO_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -15145,12 +14897,8 @@ public class Core {
    public int cmoState( struct TA_cmo_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -15159,14 +14907,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int cmoStateFree( struct TA_cmo_State* _state )
+   public int cmoStateFree( struct TA_cmo_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cmo( int startIdx,
@@ -15390,15 +15137,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int correlStateInit( struct TA_correl_State* _state,
+   public int correlStateInit( struct TA_correl_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct correl ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_CORREL_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -15410,12 +15159,8 @@ public class Core {
       double inReal0,
       double inReal1,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -15424,14 +15169,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int correlStateFree( struct TA_correl_State* _state )
+   public int correlStateFree( struct TA_correl_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode correl( int startIdx,
@@ -15535,37 +15279,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cosStateInit( struct TA_cos_State* _state )
+   public int cosStateInit( struct TA_cos_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cos ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_COS_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int cosState( struct TA_cos_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int cosStateFree( struct TA_cos_State* _state )
+   public int cosStateFree( struct TA_cos_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cos( int startIdx,
@@ -15615,37 +15356,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int coshStateInit( struct TA_cosh_State* _state )
+   public int coshStateInit( struct TA_cosh_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct cosh ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_COSH_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int coshState( struct TA_cosh_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int coshStateFree( struct TA_cosh_State* _state )
+   public int coshStateFree( struct TA_cosh_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode cosh( int startIdx,
@@ -15747,15 +15485,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int demaStateInit( struct TA_dema_State* _state,
+   public int demaStateInit( struct TA_dema_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct dema ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_DEMA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -15766,12 +15506,8 @@ public class Core {
    public int demaState( struct TA_dema_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -15780,14 +15516,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int demaStateFree( struct TA_dema_State* _state )
+   public int demaStateFree( struct TA_dema_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode dema( int startIdx,
@@ -15881,38 +15616,35 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int divStateInit( struct TA_div_State* _state )
+   public int divStateInit( struct TA_div_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct div ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_DIV_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int divState( struct TA_div_State* _state,
       double inReal0,
       double inReal1,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int divStateFree( struct TA_div_State* _state )
+   public int divStateFree( struct TA_div_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode div( int startIdx,
@@ -16092,15 +15824,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int dxStateInit( struct TA_dx_State* _state,
+   public int dxStateInit( struct TA_dx_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct dx ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_DX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -16113,12 +15847,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -16127,14 +15857,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int dxStateFree( struct TA_dx_State* _state )
+   public int dxStateFree( struct TA_dx_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode dx( int startIdx,
@@ -16357,15 +16086,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int emaStateInit( struct TA_ema_State* _state,
+   public int emaStateInit( struct TA_ema_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct ema ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_EMA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -16376,12 +16107,8 @@ public class Core {
    public int emaState( struct TA_ema_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -16390,14 +16117,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int emaStateFree( struct TA_ema_State* _state )
+   public int emaStateFree( struct TA_ema_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode ema( int startIdx,
@@ -16494,37 +16220,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int expStateInit( struct TA_exp_State* _state )
+   public int expStateInit( struct TA_exp_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct exp ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_EXP_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int expState( struct TA_exp_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int expStateFree( struct TA_exp_State* _state )
+   public int expStateFree( struct TA_exp_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode exp( int startIdx,
@@ -16574,37 +16297,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int floorStateInit( struct TA_floor_State* _state )
+   public int floorStateInit( struct TA_floor_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct floor ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_FLOOR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int floorState( struct TA_floor_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int floorStateFree( struct TA_floor_State* _state )
+   public int floorStateFree( struct TA_floor_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode floor( int startIdx,
@@ -16762,37 +16482,34 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int htDcPeriodStateInit( struct TA_htDcPeriod_State* _state )
+   public int htDcPeriodStateInit( struct TA_htDcPeriod_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct htDcPeriod ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_HT_DCPERIOD_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int htDcPeriodState( struct TA_htDcPeriod_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int htDcPeriodStateFree( struct TA_htDcPeriod_State* _state )
+   public int htDcPeriodStateFree( struct TA_htDcPeriod_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode htDcPeriod( int startIdx,
@@ -17102,37 +16819,34 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int htDcPhaseStateInit( struct TA_htDcPhase_State* _state )
+   public int htDcPhaseStateInit( struct TA_htDcPhase_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct htDcPhase ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_HT_DCPHASE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int htDcPhaseState( struct TA_htDcPhase_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int htDcPhaseStateFree( struct TA_htDcPhase_State* _state )
+   public int htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode htDcPhase( int startIdx,
@@ -17447,38 +17161,35 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int htPhasorStateInit( struct TA_htPhasor_State* _state )
+   public int htPhasorStateInit( struct TA_htPhasor_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct htPhasor ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_HT_PHASOR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int htPhasorState( struct TA_htPhasor_State* _state,
       double inReal,
-      double &outInPhase,
-      double &outQuadrature )
+      double **outInPhase,
+      double **outQuadrature )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int htPhasorStateFree( struct TA_htPhasor_State* _state )
+   public int htPhasorStateFree( struct TA_htPhasor_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode htPhasor( int startIdx,
@@ -17796,38 +17507,35 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int htSineStateInit( struct TA_htSine_State* _state )
+   public int htSineStateInit( struct TA_htSine_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct htSine ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_HT_SINE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int htSineState( struct TA_htSine_State* _state,
       double inReal,
-      double &outSine,
-      double &outLeadSine )
+      double **outSine,
+      double **outLeadSine )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int htSineStateFree( struct TA_htSine_State* _state )
+   public int htSineStateFree( struct TA_htSine_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode htSine( int startIdx,
@@ -18164,37 +17872,34 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int htTrendlineStateInit( struct TA_htTrendline_State* _state )
+   public int htTrendlineStateInit( struct TA_htTrendline_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct htTrendline ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_HT_TRENDLINE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int htTrendlineState( struct TA_htTrendline_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int htTrendlineStateFree( struct TA_htTrendline_State* _state )
+   public int htTrendlineStateFree( struct TA_htTrendline_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode htTrendline( int startIdx,
@@ -18574,37 +18279,34 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int htTrendModeStateInit( struct TA_htTrendMode_State* _state )
+   public int htTrendModeStateInit( struct TA_htTrendMode_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct htTrendMode ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_HT_TRENDMODE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int htTrendModeState( struct TA_htTrendMode_State* _state,
       double inReal,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int htTrendModeStateFree( struct TA_htTrendMode_State* _state )
+   public int htTrendModeStateFree( struct TA_htTrendMode_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode htTrendMode( int startIdx,
@@ -18881,15 +18583,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int imiStateInit( struct TA_imi_State* _state,
+   public int imiStateInit( struct TA_imi_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct imi ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_IMI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -18901,12 +18605,8 @@ public class Core {
       double inOpen,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -18915,14 +18615,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int imiStateFree( struct TA_imi_State* _state )
+   public int imiStateFree( struct TA_imi_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode imi( int startIdx,
@@ -19075,15 +18774,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int kamaStateInit( struct TA_kama_State* _state,
+   public int kamaStateInit( struct TA_kama_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct kama ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_KAMA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -19094,12 +18795,8 @@ public class Core {
    public int kamaState( struct TA_kama_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -19108,14 +18805,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int kamaStateFree( struct TA_kama_State* _state )
+   public int kamaStateFree( struct TA_kama_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode kama( int startIdx,
@@ -19276,15 +18972,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int linearRegStateInit( struct TA_linearReg_State* _state,
+   public int linearRegStateInit( struct TA_linearReg_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct linearReg ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_LINEARREG_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -19295,12 +18993,8 @@ public class Core {
    public int linearRegState( struct TA_linearReg_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -19309,14 +19003,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int linearRegStateFree( struct TA_linearReg_State* _state )
+   public int linearRegStateFree( struct TA_linearReg_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode linearReg( int startIdx,
@@ -19435,15 +19128,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int linearRegAngleStateInit( struct TA_linearRegAngle_State* _state,
+   public int linearRegAngleStateInit( struct TA_linearRegAngle_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct linearRegAngle ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_LINEARREG_ANGLE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -19454,12 +19149,8 @@ public class Core {
    public int linearRegAngleState( struct TA_linearRegAngle_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -19468,14 +19159,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int linearRegAngleStateFree( struct TA_linearRegAngle_State* _state )
+   public int linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode linearRegAngle( int startIdx,
@@ -19593,15 +19283,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int linearRegInterceptStateInit( struct TA_linearRegIntercept_State* _state,
+   public int linearRegInterceptStateInit( struct TA_linearRegIntercept_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct linearRegIntercept ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_LINEARREG_INTERCEPT_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -19612,12 +19304,8 @@ public class Core {
    public int linearRegInterceptState( struct TA_linearRegIntercept_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -19626,14 +19314,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int linearRegInterceptStateFree( struct TA_linearRegIntercept_State* _state )
+   public int linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode linearRegIntercept( int startIdx,
@@ -19749,15 +19436,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int linearRegSlopeStateInit( struct TA_linearRegSlope_State* _state,
+   public int linearRegSlopeStateInit( struct TA_linearRegSlope_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct linearRegSlope ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_LINEARREG_SLOPE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -19768,12 +19457,8 @@ public class Core {
    public int linearRegSlopeState( struct TA_linearRegSlope_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -19782,14 +19467,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int linearRegSlopeStateFree( struct TA_linearRegSlope_State* _state )
+   public int linearRegSlopeStateFree( struct TA_linearRegSlope_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode linearRegSlope( int startIdx,
@@ -19869,37 +19553,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int lnStateInit( struct TA_ln_State* _state )
+   public int lnStateInit( struct TA_ln_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct ln ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_LN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int lnState( struct TA_ln_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int lnStateFree( struct TA_ln_State* _state )
+   public int lnStateFree( struct TA_ln_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode ln( int startIdx,
@@ -19949,37 +19630,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int log10StateInit( struct TA_log10_State* _state )
+   public int log10StateInit( struct TA_log10_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct log10 ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_LOG10_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int log10State( struct TA_log10_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int log10StateFree( struct TA_log10_State* _state )
+   public int log10StateFree( struct TA_log10_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode log10( int startIdx,
@@ -20124,16 +19802,18 @@ public class Core {
       }
       return retCode;
    }
-   public int movingAverageStateInit( struct TA_movingAverage_State* _state,
+   public int movingAverageStateInit( struct TA_movingAverage_State** _state,
       int optInTimePeriod,
       MAType optInMAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct movingAverage ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -20144,12 +19824,8 @@ public class Core {
    public int movingAverageState( struct TA_movingAverage_State* _state,
       double inReal,
       int optInTimePeriod,
-      MAType optInMAType, double &outReal )
+      MAType optInMAType, double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -20158,14 +19834,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int movingAverageStateFree( struct TA_movingAverage_State* _state )
+   public int movingAverageStateFree( struct TA_movingAverage_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode movingAverage( int startIdx,
@@ -20412,17 +20087,19 @@ public class Core {
       outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
-   public int macdStateInit( struct TA_macd_State* _state,
+   public int macdStateInit( struct TA_macd_State** _state,
       int optInFastPeriod,
       int optInSlowPeriod,
       int optInSignalPeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct macd ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MACD_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
          optInFastPeriod = 12;
       else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
@@ -20443,14 +20120,10 @@ public class Core {
       int optInFastPeriod,
       int optInSlowPeriod,
       int optInSignalPeriod,
-      double &outMACD,
-      double &outMACDSignal,
-      double &outMACDHist )
+      double **outMACD,
+      double **outMACDSignal,
+      double **outMACDHist )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
@@ -20467,14 +20140,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int macdStateFree( struct TA_macd_State* _state )
+   public int macdStateFree( struct TA_macd_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode macd( int startIdx,
@@ -20756,18 +20428,20 @@ public class Core {
       outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
-   public int macdExtStateInit( struct TA_macdExt_State* _state,
+   public int macdExtStateInit( struct TA_macdExt_State** _state,
       int optInFastPeriod,
       MAType optInFastMAType, int optInSlowPeriod,
       MAType optInSlowMAType, int optInSignalPeriod,
       MAType optInSignalMAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct macdExt ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MACDEXT_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
          optInFastPeriod = 12;
       else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
@@ -20788,14 +20462,10 @@ public class Core {
       int optInFastPeriod,
       MAType optInFastMAType, int optInSlowPeriod,
       MAType optInSlowMAType, int optInSignalPeriod,
-      MAType optInSignalMAType, double &outMACD,
-      double &outMACDSignal,
-      double &outMACDHist )
+      MAType optInSignalMAType, double **outMACD,
+      double **outMACDSignal,
+      double **outMACDHist )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
@@ -20812,14 +20482,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int macdExtStateFree( struct TA_macdExt_State* _state )
+   public int macdExtStateFree( struct TA_macdExt_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode macdExt( int startIdx,
@@ -20973,15 +20642,17 @@ public class Core {
          outMACDSignal,
          outMACDHist );
    }
-   public int macdFixStateInit( struct TA_macdFix_State* _state,
+   public int macdFixStateInit( struct TA_macdFix_State** _state,
       int optInSignalPeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct macdFix ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MACDFIX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
          optInSignalPeriod = 9;
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
@@ -20992,14 +20663,10 @@ public class Core {
    public int macdFixState( struct TA_macdFix_State* _state,
       double inReal,
       int optInSignalPeriod,
-      double &outMACD,
-      double &outMACDSignal,
-      double &outMACDHist )
+      double **outMACD,
+      double **outMACDSignal,
+      double **outMACDHist )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
@@ -21008,14 +20675,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int macdFixStateFree( struct TA_macdFix_State* _state )
+   public int macdFixStateFree( struct TA_macdFix_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode macdFix( int startIdx,
@@ -21226,17 +20892,18 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int mamaStateInit( struct TA_mama_State* _state,
+   public int mamaStateInit( struct TA_mama_State** _state,
       double optInFastLimit,
       double optInSlowLimit )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInFastLimit == (-4e+37) )
+      *_state = malloc(sizeof(struct mama ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MAMA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInFastLimit == (-4e+37) )
          optInFastLimit = 5.000000e-1;
       else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
          return RetCode.BadParam ;
@@ -21251,13 +20918,9 @@ public class Core {
       double inReal,
       double optInFastLimit,
       double optInSlowLimit,
-      double &outMAMA,
-      double &outFAMA )
+      double **outMAMA,
+      double **outFAMA )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInFastLimit == (-4e+37) )
@@ -21270,14 +20933,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int mamaStateFree( struct TA_mama_State* _state )
+   public int mamaStateFree( struct TA_mama_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode mama( int startIdx,
@@ -21549,17 +21211,19 @@ public class Core {
       outNBElement.value = outputSize;
       return RetCode.Success ;
    }
-   public int movingAverageVariablePeriodStateInit( struct TA_movingAverageVariablePeriod_State* _state,
+   public int movingAverageVariablePeriodStateInit( struct TA_movingAverageVariablePeriod_State** _state,
       int optInMinPeriod,
       int optInMaxPeriod,
       MAType optInMAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct movingAverageVariablePeriod ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MAVP_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
          optInMinPeriod = 2;
       else if( ((int)optInMinPeriod < 2) || ((int)optInMinPeriod > 100000) )
@@ -21576,12 +21240,8 @@ public class Core {
       double inPeriods,
       int optInMinPeriod,
       int optInMaxPeriod,
-      MAType optInMAType, double &outReal )
+      MAType optInMAType, double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
@@ -21594,14 +21254,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int movingAverageVariablePeriodStateFree( struct TA_movingAverageVariablePeriod_State* _state )
+   public int movingAverageVariablePeriodStateFree( struct TA_movingAverageVariablePeriod_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode movingAverageVariablePeriod( int startIdx,
@@ -21765,15 +21424,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int maxStateInit( struct TA_max_State* _state,
+   public int maxStateInit( struct TA_max_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct max ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MAX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -21784,12 +21445,8 @@ public class Core {
    public int maxState( struct TA_max_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -21798,14 +21455,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int maxStateFree( struct TA_max_State* _state )
+   public int maxStateFree( struct TA_max_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode max( int startIdx,
@@ -21945,15 +21601,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int maxIndexStateInit( struct TA_maxIndex_State* _state,
+   public int maxIndexStateInit( struct TA_maxIndex_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct maxIndex ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MAXINDEX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -21964,12 +21622,8 @@ public class Core {
    public int maxIndexState( struct TA_maxIndex_State* _state,
       double inReal,
       int optInTimePeriod,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -21978,14 +21632,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int maxIndexStateFree( struct TA_maxIndex_State* _state )
+   public int maxIndexStateFree( struct TA_maxIndex_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode maxIndex( int startIdx,
@@ -22079,38 +21732,35 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int medPriceStateInit( struct TA_medPrice_State* _state )
+   public int medPriceStateInit( struct TA_medPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct medPrice ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MEDPRICE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int medPriceState( struct TA_medPrice_State* _state,
       double inHigh,
       double inLow,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int medPriceStateFree( struct TA_medPrice_State* _state )
+   public int medPriceStateFree( struct TA_medPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode medPrice( int startIdx,
@@ -22282,15 +21932,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int mfiStateInit( struct TA_mfi_State* _state,
+   public int mfiStateInit( struct TA_mfi_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct mfi ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MFI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -22304,12 +21956,8 @@ public class Core {
       double inClose,
       double inVolume,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -22318,14 +21966,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int mfiStateFree( struct TA_mfi_State* _state )
+   public int mfiStateFree( struct TA_mfi_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode mfi( int startIdx,
@@ -22523,15 +22170,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int midPointStateInit( struct TA_midPoint_State* _state,
+   public int midPointStateInit( struct TA_midPoint_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct midPoint ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MIDPOINT_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -22542,12 +22191,8 @@ public class Core {
    public int midPointState( struct TA_midPoint_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -22556,14 +22201,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int midPointStateFree( struct TA_midPoint_State* _state )
+   public int midPointStateFree( struct TA_midPoint_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode midPoint( int startIdx,
@@ -22674,15 +22318,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int midPriceStateInit( struct TA_midPrice_State* _state,
+   public int midPriceStateInit( struct TA_midPrice_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct midPrice ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MIDPRICE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -22694,12 +22340,8 @@ public class Core {
       double inHigh,
       double inLow,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -22708,14 +22350,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int midPriceStateFree( struct TA_midPrice_State* _state )
+   public int midPriceStateFree( struct TA_midPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode midPrice( int startIdx,
@@ -22842,15 +22483,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minStateInit( struct TA_min_State* _state,
+   public int minStateInit( struct TA_min_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct min ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MIN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -22861,12 +22504,8 @@ public class Core {
    public int minState( struct TA_min_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -22875,14 +22514,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int minStateFree( struct TA_min_State* _state )
+   public int minStateFree( struct TA_min_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode min( int startIdx,
@@ -23022,15 +22660,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minIndexStateInit( struct TA_minIndex_State* _state,
+   public int minIndexStateInit( struct TA_minIndex_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct minIndex ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MININDEX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -23041,12 +22681,8 @@ public class Core {
    public int minIndexState( struct TA_minIndex_State* _state,
       double inReal,
       int optInTimePeriod,
-      int &outInteger )
+      int **outInteger )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -23055,14 +22691,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int minIndexStateFree( struct TA_minIndex_State* _state )
+   public int minIndexStateFree( struct TA_minIndex_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode minIndex( int startIdx,
@@ -23227,15 +22862,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minMaxStateInit( struct TA_minMax_State* _state,
+   public int minMaxStateInit( struct TA_minMax_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct minMax ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MINMAX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -23246,13 +22883,9 @@ public class Core {
    public int minMaxState( struct TA_minMax_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outMin,
-      double &outMax )
+      double **outMin,
+      double **outMax )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -23261,14 +22894,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int minMaxStateFree( struct TA_minMax_State* _state )
+   public int minMaxStateFree( struct TA_minMax_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode minMax( int startIdx,
@@ -23458,15 +23090,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minMaxIndexStateInit( struct TA_minMaxIndex_State* _state,
+   public int minMaxIndexStateInit( struct TA_minMaxIndex_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct minMaxIndex ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MINMAXINDEX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -23477,13 +23111,9 @@ public class Core {
    public int minMaxIndexState( struct TA_minMaxIndex_State* _state,
       double inReal,
       int optInTimePeriod,
-      int &outMinIdx,
-      int &outMaxIdx )
+      int **outMinIdx,
+      int **outMaxIdx )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -23492,14 +23122,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int minMaxIndexStateFree( struct TA_minMaxIndex_State* _state )
+   public int minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode minMaxIndex( int startIdx,
@@ -23750,15 +23379,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minusDIStateInit( struct TA_minusDI_State* _state,
+   public int minusDIStateInit( struct TA_minusDI_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct minusDI ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MINUS_DI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -23771,12 +23402,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -23785,14 +23412,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int minusDIStateFree( struct TA_minusDI_State* _state )
+   public int minusDIStateFree( struct TA_minusDI_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode minusDI( int startIdx,
@@ -24077,15 +23703,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minusDMStateInit( struct TA_minusDM_State* _state,
+   public int minusDMStateInit( struct TA_minusDM_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct minusDM ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MINUS_DM_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -24097,12 +23725,8 @@ public class Core {
       double inHigh,
       double inLow,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -24111,14 +23735,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int minusDMStateFree( struct TA_minusDM_State* _state )
+   public int minusDMStateFree( struct TA_minusDM_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode minusDM( int startIdx,
@@ -24287,15 +23910,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int momStateInit( struct TA_mom_State* _state,
+   public int momStateInit( struct TA_mom_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct mom ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MOM_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -24306,12 +23931,8 @@ public class Core {
    public int momState( struct TA_mom_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -24320,14 +23941,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int momStateFree( struct TA_mom_State* _state )
+   public int momStateFree( struct TA_mom_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode mom( int startIdx,
@@ -24391,38 +24011,35 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int multStateInit( struct TA_mult_State* _state )
+   public int multStateInit( struct TA_mult_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct mult ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_MULT_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int multState( struct TA_mult_State* _state,
       double inReal0,
       double inReal1,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int multStateFree( struct TA_mult_State* _state )
+   public int multStateFree( struct TA_mult_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode mult( int startIdx,
@@ -24546,15 +24163,17 @@ public class Core {
       outNBElement.value = outIdx;
       return retCode;
    }
-   public int natrStateInit( struct TA_natr_State* _state,
+   public int natrStateInit( struct TA_natr_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct natr ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_NATR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -24567,12 +24186,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -24581,14 +24196,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int natrStateFree( struct TA_natr_State* _state )
+   public int natrStateFree( struct TA_natr_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode natr( int startIdx,
@@ -24718,38 +24332,35 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int obvStateInit( struct TA_obv_State* _state )
+   public int obvStateInit( struct TA_obv_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct obv ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_OBV_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int obvState( struct TA_obv_State* _state,
       double inReal,
       double inVolume,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int obvStateFree( struct TA_obv_State* _state )
+   public int obvStateFree( struct TA_obv_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode obv( int startIdx,
@@ -24943,15 +24554,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int plusDIStateInit( struct TA_plusDI_State* _state,
+   public int plusDIStateInit( struct TA_plusDI_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct plusDI ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_PLUS_DI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -24964,12 +24577,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -24978,14 +24587,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int plusDIStateFree( struct TA_plusDI_State* _state )
+   public int plusDIStateFree( struct TA_plusDI_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode plusDI( int startIdx,
@@ -25270,15 +24878,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int plusDMStateInit( struct TA_plusDM_State* _state,
+   public int plusDMStateInit( struct TA_plusDM_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct plusDM ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_PLUS_DM_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -25290,12 +24900,8 @@ public class Core {
       double inHigh,
       double inLow,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -25304,14 +24910,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int plusDMStateFree( struct TA_plusDM_State* _state )
+   public int plusDMStateFree( struct TA_plusDM_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode plusDM( int startIdx,
@@ -25487,17 +25092,19 @@ public class Core {
          1 );
       return retCode;
    }
-   public int ppoStateInit( struct TA_ppo_State* _state,
+   public int ppoStateInit( struct TA_ppo_State** _state,
       int optInFastPeriod,
       int optInSlowPeriod,
       MAType optInMAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct ppo ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_PPO_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
          optInFastPeriod = 12;
       else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
@@ -25513,12 +25120,8 @@ public class Core {
       double inReal,
       int optInFastPeriod,
       int optInSlowPeriod,
-      MAType optInMAType, double &outReal )
+      MAType optInMAType, double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
@@ -25531,14 +25134,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int ppoStateFree( struct TA_ppo_State* _state )
+   public int ppoStateFree( struct TA_ppo_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode ppo( int startIdx,
@@ -25627,15 +25229,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int rocStateInit( struct TA_roc_State* _state,
+   public int rocStateInit( struct TA_roc_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct roc ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ROC_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -25646,12 +25250,8 @@ public class Core {
    public int rocState( struct TA_roc_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -25660,14 +25260,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int rocStateFree( struct TA_roc_State* _state )
+   public int rocStateFree( struct TA_roc_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode roc( int startIdx,
@@ -25763,15 +25362,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int rocPStateInit( struct TA_rocP_State* _state,
+   public int rocPStateInit( struct TA_rocP_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct rocP ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ROCP_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -25782,12 +25383,8 @@ public class Core {
    public int rocPState( struct TA_rocP_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -25796,14 +25393,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int rocPStateFree( struct TA_rocP_State* _state )
+   public int rocPStateFree( struct TA_rocP_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode rocP( int startIdx,
@@ -25899,15 +25495,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int rocRStateInit( struct TA_rocR_State* _state,
+   public int rocRStateInit( struct TA_rocR_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct rocR ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ROCR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -25918,12 +25516,8 @@ public class Core {
    public int rocRState( struct TA_rocR_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -25932,14 +25526,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int rocRStateFree( struct TA_rocR_State* _state )
+   public int rocRStateFree( struct TA_rocR_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode rocR( int startIdx,
@@ -26035,15 +25628,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int rocR100StateInit( struct TA_rocR100_State* _state,
+   public int rocR100StateInit( struct TA_rocR100_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct rocR100 ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ROCR100_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -26054,12 +25649,8 @@ public class Core {
    public int rocR100State( struct TA_rocR100_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -26068,14 +25659,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int rocR100StateFree( struct TA_rocR100_State* _state )
+   public int rocR100StateFree( struct TA_rocR100_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode rocR100( int startIdx,
@@ -26268,15 +25858,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int rsiStateInit( struct TA_rsi_State* _state,
+   public int rsiStateInit( struct TA_rsi_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct rsi ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_RSI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -26287,12 +25879,8 @@ public class Core {
    public int rsiState( struct TA_rsi_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -26301,14 +25889,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int rsiStateFree( struct TA_rsi_State* _state )
+   public int rsiStateFree( struct TA_rsi_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode rsi( int startIdx,
@@ -26614,17 +26201,18 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int sarStateInit( struct TA_sar_State* _state,
+   public int sarStateInit( struct TA_sar_State** _state,
       double optInAcceleration,
       double optInMaximum )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInAcceleration == (-4e+37) )
+      *_state = malloc(sizeof(struct sar ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_SAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInAcceleration == (-4e+37) )
          optInAcceleration = 2.000000e-2;
       else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -26640,12 +26228,8 @@ public class Core {
       double inLow,
       double optInAcceleration,
       double optInMaximum,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInAcceleration == (-4e+37) )
@@ -26658,14 +26242,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int sarStateFree( struct TA_sar_State* _state )
+   public int sarStateFree( struct TA_sar_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode sar( int startIdx,
@@ -27083,7 +26666,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int sarExtStateInit( struct TA_sarExt_State* _state,
+   public int sarExtStateInit( struct TA_sarExt_State** _state,
       double optInStartValue,
       double optInOffsetOnReverse,
       double optInAccelerationInitLong,
@@ -27093,13 +26676,14 @@ public class Core {
       double optInAccelerationShort,
       double optInAccelerationMaxShort )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
-      if( optInStartValue == (-4e+37) )
+      *_state = malloc(sizeof(struct sarExt ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_SAREXT_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL; if( optInStartValue == (-4e+37) )
          optInStartValue = 0.000000e+0;
       else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
          return RetCode.BadParam ;
@@ -27145,12 +26729,8 @@ public class Core {
       double optInAccelerationInitShort,
       double optInAccelerationShort,
       double optInAccelerationMaxShort,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInStartValue == (-4e+37) )
@@ -27187,14 +26767,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int sarExtStateFree( struct TA_sarExt_State* _state )
+   public int sarExtStateFree( struct TA_sarExt_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode sarExt( int startIdx,
@@ -27441,37 +27020,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int sinStateInit( struct TA_sin_State* _state )
+   public int sinStateInit( struct TA_sin_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct sin ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_SIN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int sinState( struct TA_sin_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int sinStateFree( struct TA_sin_State* _state )
+   public int sinStateFree( struct TA_sin_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode sin( int startIdx,
@@ -27521,37 +27097,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int sinhStateInit( struct TA_sinh_State* _state )
+   public int sinhStateInit( struct TA_sinh_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct sinh ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_SINH_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int sinhState( struct TA_sinh_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int sinhStateFree( struct TA_sinh_State* _state )
+   public int sinhStateFree( struct TA_sinh_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode sinh( int startIdx,
@@ -27643,15 +27216,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int smaStateInit( struct TA_sma_State* _state,
+   public int smaStateInit( struct TA_sma_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct sma ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_SMA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -27662,12 +27237,8 @@ public class Core {
    public int smaState( struct TA_sma_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -27676,14 +27247,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int smaStateFree( struct TA_sma_State* _state )
+   public int smaStateFree( struct TA_sma_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode sma( int startIdx,
@@ -27771,37 +27341,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int sqrtStateInit( struct TA_sqrt_State* _state )
+   public int sqrtStateInit( struct TA_sqrt_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct sqrt ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_SQRT_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int sqrtState( struct TA_sqrt_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int sqrtStateFree( struct TA_sqrt_State* _state )
+   public int sqrtStateFree( struct TA_sqrt_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode sqrt( int startIdx,
@@ -27929,16 +27496,18 @@ public class Core {
             output[outIdx] = (double)0.0;
       }
    }
-   public int stdDevStateInit( struct TA_stdDev_State* _state,
+   public int stdDevStateInit( struct TA_stdDev_State** _state,
       int optInTimePeriod,
       double optInNbDev )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct stdDev ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_STDDEV_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -27954,12 +27523,8 @@ public class Core {
       double inReal,
       int optInTimePeriod,
       double optInNbDev,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -27972,14 +27537,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int stdDevStateFree( struct TA_stdDev_State* _state )
+   public int stdDevStateFree( struct TA_stdDev_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode stdDev( int startIdx,
@@ -28243,18 +27807,20 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int stochStateInit( struct TA_stoch_State* _state,
+   public int stochStateInit( struct TA_stoch_State** _state,
       int optInFastK_Period,
       int optInSlowK_Period,
       MAType optInSlowK_MAType, int optInSlowD_Period,
       MAType optInSlowD_MAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct stoch ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_STOCH_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
          optInFastK_Period = 5;
       else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
@@ -28277,13 +27843,9 @@ public class Core {
       int optInFastK_Period,
       int optInSlowK_Period,
       MAType optInSlowK_MAType, int optInSlowD_Period,
-      MAType optInSlowD_MAType, double &outSlowK,
-      double &outSlowD )
+      MAType optInSlowD_MAType, double **outSlowK,
+      double **outSlowD )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
@@ -28300,14 +27862,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int stochStateFree( struct TA_stoch_State* _state )
+   public int stochStateFree( struct TA_stoch_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode stoch( int startIdx,
@@ -28597,17 +28158,19 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int stochFStateInit( struct TA_stochF_State* _state,
+   public int stochFStateInit( struct TA_stochF_State** _state,
       int optInFastK_Period,
       int optInFastD_Period,
       MAType optInFastD_MAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct stochF ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_STOCHF_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
          optInFastK_Period = 5;
       else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
@@ -28625,13 +28188,9 @@ public class Core {
       double inClose,
       int optInFastK_Period,
       int optInFastD_Period,
-      MAType optInFastD_MAType, double &outFastK,
-      double &outFastD )
+      MAType optInFastD_MAType, double **outFastK,
+      double **outFastD )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
@@ -28644,14 +28203,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int stochFStateFree( struct TA_stochF_State* _state )
+   public int stochFStateFree( struct TA_stochF_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode stochF( int startIdx,
@@ -28879,18 +28437,20 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int stochRsiStateInit( struct TA_stochRsi_State* _state,
+   public int stochRsiStateInit( struct TA_stochRsi_State** _state,
       int optInTimePeriod,
       int optInFastK_Period,
       int optInFastD_Period,
       MAType optInFastD_MAType )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct stochRsi ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_STOCHRSI_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -28911,13 +28471,9 @@ public class Core {
       int optInTimePeriod,
       int optInFastK_Period,
       int optInFastD_Period,
-      MAType optInFastD_MAType, double &outFastK,
-      double &outFastD )
+      MAType optInFastD_MAType, double **outFastK,
+      double **outFastD )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -28934,14 +28490,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int stochRsiStateFree( struct TA_stochRsi_State* _state )
+   public int stochRsiStateFree( struct TA_stochRsi_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode stochRsi( int startIdx,
@@ -29052,38 +28607,35 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int subStateInit( struct TA_sub_State* _state )
+   public int subStateInit( struct TA_sub_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct sub ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_SUB_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int subState( struct TA_sub_State* _state,
       double inReal0,
       double inReal1,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int subStateFree( struct TA_sub_State* _state )
+   public int subStateFree( struct TA_sub_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode sub( int startIdx,
@@ -29164,15 +28716,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int sumStateInit( struct TA_sum_State* _state,
+   public int sumStateInit( struct TA_sum_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct sum ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_SUM_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -29183,12 +28737,8 @@ public class Core {
    public int sumState( struct TA_sum_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -29197,14 +28747,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int sumStateFree( struct TA_sum_State* _state )
+   public int sumStateFree( struct TA_sum_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode sum( int startIdx,
@@ -29386,16 +28935,18 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int t3StateInit( struct TA_t3_State* _state,
+   public int t3StateInit( struct TA_t3_State** _state,
       int optInTimePeriod,
       double optInVFactor )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct t3 ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_T3_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -29411,12 +28962,8 @@ public class Core {
       double inReal,
       int optInTimePeriod,
       double optInVFactor,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -29429,14 +28976,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int t3StateFree( struct TA_t3_State* _state )
+   public int t3StateFree( struct TA_t3_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode t3( int startIdx,
@@ -29583,37 +29129,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int tanStateInit( struct TA_tan_State* _state )
+   public int tanStateInit( struct TA_tan_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct tan ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_TAN_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int tanState( struct TA_tan_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int tanStateFree( struct TA_tan_State* _state )
+   public int tanStateFree( struct TA_tan_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode tan( int startIdx,
@@ -29663,37 +29206,34 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int tanhStateInit( struct TA_tanh_State* _state )
+   public int tanhStateInit( struct TA_tanh_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct tanh ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_TANH_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
    public int tanhState( struct TA_tanh_State* _state,
       double inReal,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int tanhStateFree( struct TA_tanh_State* _state )
+   public int tanhStateFree( struct TA_tanh_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode tanh( int startIdx,
@@ -29804,15 +29344,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int temaStateInit( struct TA_tema_State* _state,
+   public int temaStateInit( struct TA_tema_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct tema ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_TEMA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -29823,12 +29365,8 @@ public class Core {
    public int temaState( struct TA_tema_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -29837,14 +29375,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int temaStateFree( struct TA_tema_State* _state )
+   public int temaStateFree( struct TA_tema_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode tema( int startIdx,
@@ -29973,14 +29510,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int trueRangeStateInit( struct TA_trueRange_State* _state )
+   public int trueRangeStateInit( struct TA_trueRange_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct trueRange ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_TRANGE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -29988,24 +29527,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int trueRangeStateFree( struct TA_trueRange_State* _state )
+   public int trueRangeStateFree( struct TA_trueRange_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode trueRange( int startIdx,
@@ -30184,15 +29718,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int trimaStateInit( struct TA_trima_State* _state,
+   public int trimaStateInit( struct TA_trima_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct trima ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_TRIMA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -30203,12 +29739,8 @@ public class Core {
    public int trimaState( struct TA_trima_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -30217,14 +29749,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int trimaStateFree( struct TA_trima_State* _state )
+   public int trimaStateFree( struct TA_trima_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode trima( int startIdx,
@@ -30445,15 +29976,17 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int trixStateInit( struct TA_trix_State* _state,
+   public int trixStateInit( struct TA_trix_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct trix ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_TRIX_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -30464,12 +29997,8 @@ public class Core {
    public int trixState( struct TA_trix_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -30478,14 +30007,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int trixStateFree( struct TA_trix_State* _state )
+   public int trixStateFree( struct TA_trix_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode trix( int startIdx,
@@ -30636,15 +30164,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int tsfStateInit( struct TA_tsf_State* _state,
+   public int tsfStateInit( struct TA_tsf_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct tsf ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_TSF_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -30655,12 +30185,8 @@ public class Core {
    public int tsfState( struct TA_tsf_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -30669,14 +30195,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int tsfStateFree( struct TA_tsf_State* _state )
+   public int tsfStateFree( struct TA_tsf_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode tsf( int startIdx,
@@ -30763,14 +30288,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int typPriceStateInit( struct TA_typPrice_State* _state )
+   public int typPriceStateInit( struct TA_typPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct typPrice ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_TYPPRICE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -30778,24 +30305,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int typPriceStateFree( struct TA_typPrice_State* _state )
+   public int typPriceStateFree( struct TA_typPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode typPrice( int startIdx,
@@ -30953,17 +30475,19 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int ultOscStateInit( struct TA_ultOsc_State* _state,
+   public int ultOscStateInit( struct TA_ultOsc_State** _state,
       int optInTimePeriod1,
       int optInTimePeriod2,
       int optInTimePeriod3 )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct ultOsc ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_ULTOSC_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod1 == ( Integer.MIN_VALUE ) )
          optInTimePeriod1 = 7;
       else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
@@ -30986,12 +30510,8 @@ public class Core {
       int optInTimePeriod1,
       int optInTimePeriod2,
       int optInTimePeriod3,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod1 == ( Integer.MIN_VALUE ) )
@@ -31008,14 +30528,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int ultOscStateFree( struct TA_ultOsc_State* _state )
+   public int ultOscStateFree( struct TA_ultOsc_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode ultOsc( int startIdx,
@@ -31217,16 +30736,18 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int varianceStateInit( struct TA_variance_State* _state,
+   public int varianceStateInit( struct TA_variance_State** _state,
       int optInTimePeriod,
       double optInNbDev )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct variance ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_VAR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
@@ -31242,12 +30763,8 @@ public class Core {
       double inReal,
       int optInTimePeriod,
       double optInNbDev,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -31260,14 +30777,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int varianceStateFree( struct TA_variance_State* _state )
+   public int varianceStateFree( struct TA_variance_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode variance( int startIdx,
@@ -31376,14 +30892,16 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int wclPriceStateInit( struct TA_wclPrice_State* _state )
+   public int wclPriceStateInit( struct TA_wclPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct wclPrice ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_WCLPRICE_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       _state = NULL;
       return 0;
    }
@@ -31391,24 +30909,19 @@ public class Core {
       double inHigh,
       double inLow,
       double inClose,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       return 0;
    }
-   public int wclPriceStateFree( struct TA_wclPrice_State* _state )
+   public int wclPriceStateFree( struct TA_wclPrice_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode wclPrice( int startIdx,
@@ -31541,15 +31054,17 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int willRStateInit( struct TA_willR_State* _state,
+   public int willRStateInit( struct TA_willR_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct willR ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_WILLR_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -31562,12 +31077,8 @@ public class Core {
       double inLow,
       double inClose,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -31576,14 +31087,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int willRStateFree( struct TA_willR_State* _state )
+   public int willRStateFree( struct TA_willR_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode willR( int startIdx,
@@ -31754,15 +31264,17 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int wmaStateInit( struct TA_wma_State* _state,
+   public int wmaStateInit( struct TA_wma_State** _state,
       int optInTimePeriod )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if (_state != NULL)
+      if (_state == NULL)
          return RetCode.BadParam ;
+      *_state = malloc(sizeof(struct wma ));
+      (*_state)->mem_size = 100;
+      if ((*_state)->mem_size > 0)
+         (*_state)->memory = malloc(sizeof(struct TA_WMA_Data)*(*_state)->mem_size);
+      else
+         (*_state)->memory = NULL;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -31773,12 +31285,8 @@ public class Core {
    public int wmaState( struct TA_wma_State* _state,
       double inReal,
       int optInTimePeriod,
-      double &outReal )
+      double **outReal )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -31787,14 +31295,13 @@ public class Core {
          return RetCode.BadParam ;
       return 0;
    }
-   public int wmaStateFree( struct TA_wma_State* _state )
+   public int wmaStateFree( struct TA_wma_State** _state )
    {
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
       if (_state == NULL)
          return RetCode.BadParam ;
+      if (*_state != NULL) {
+         if ((*_state)->memory != NULL) free((*_state)->memory);
+         free(*_state); *_state = NULL;}
       return 0;
    }
    public RetCode wma( int startIdx,

@@ -90,10 +90,6 @@
    /* insert local variable here */
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
-/* Generated */    #if !defined(_JAVA)
-/* Generated */    if( !inReal0 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    if( !inReal1 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */ /* No parameters to validate. */
 /**** END GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 
@@ -197,13 +193,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SubStateInit( struct TA_Sub_State* _state )
+/* Generated */ int Core::SubStateInit( struct TA_Sub_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int subStateInit( struct TA_sub_State* _state )
+/* Generated */ public int subStateInit( struct TA_sub_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SUB_StateInit( struct TA_SUB_State* _state )
+/* Generated */ TA_LIB_API int TA_SUB_StateInit( struct TA_SUB_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -215,15 +211,14 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
-/* Generated */    if (_state != NULL)
+/* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
+/* Generated */    *_state = malloc(sizeof(struct TA_SUB_State));
+/* Generated */    (*_state)->mem_size = 100;
+if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_SUB_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -240,17 +235,17 @@
 /* Generated */ int Core::SubState( struct TA_Sub_State* _state,
 /* Generated */                   cli::array<double>^ inReal0,
 /* Generated */                   cli::array<double>^ inReal1,
-/* Generated */                   cli::array<double>^  &outReal )
+/* Generated */                   cli::array<double>^  **outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int subState( struct TA_sub_State* _state,
 /* Generated */                    double       inReal0,
 /* Generated */                    double       inReal1,
-/* Generated */                    double        &outReal )
+/* Generated */                    double        **outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_SUB_State( struct TA_SUB_State* _state,
 /* Generated */                                       const double inReal0,
 /* Generated */                                       const double inReal1,
-/* Generated */                                       double        &outReal )
+/* Generated */                                       double        **outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -259,12 +254,6 @@
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -289,13 +278,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SubStateFree( struct TA_Sub_State* _state )
+/* Generated */ int Core::SubStateFree( struct TA_Sub_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int subStateFree( struct TA_sub_State* _state )
+/* Generated */ public int subStateFree( struct TA_sub_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State* _state )
+/* Generated */ TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -306,14 +295,11 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if (*_state != NULL) {
+/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
+/* Generated */          free(*_state); *_state = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

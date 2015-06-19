@@ -94,9 +94,6 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */    #if !defined(_JAVA)
-/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    /* min/max are checked for optInSignalPeriod. */
 /* Generated */    if( (int)optInSignalPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInSignalPeriod = 9;
@@ -227,15 +224,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdFixStateInit( struct TA_MacdFix_State* _state,
+/* Generated */ int Core::MacdFixStateInit( struct TA_MacdFix_State** _state,
 /* Generated */                           int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdFixStateInit( struct TA_macdFix_State* _state,
+/* Generated */ public int macdFixStateInit( struct TA_macdFix_State** _state,
 /* Generated */                            int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDFIX_StateInit( struct TA_MACDFIX_State* _state,
+/* Generated */ TA_LIB_API int TA_MACDFIX_StateInit( struct TA_MACDFIX_State** _state,
 /* Generated */                                               int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -248,15 +245,14 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
-/* Generated */    if (_state != NULL)
+/* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    /* min/max are checked for optInSignalPeriod. */
+/* Generated */    *_state = malloc(sizeof(struct TA_MACDFIX_State));
+/* Generated */    (*_state)->mem_size = 100;
+if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MACDFIX_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */    /* min/max are checked for optInSignalPeriod. */
 /* Generated */    if( (int)optInSignalPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInSignalPeriod = 9;
 /* Generated */    else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
@@ -279,23 +275,23 @@
 /* Generated */ int Core::MacdFixState( struct TA_MacdFix_State* _state,
 /* Generated */                       cli::array<double>^ inReal,
 /* Generated */                       int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                       cli::array<double>^  &outMACD,
-/* Generated */                       cli::array<double>^  &outMACDSignal,
-/* Generated */                       cli::array<double>^  &outMACDHist )
+/* Generated */                       cli::array<double>^  **outMACD,
+/* Generated */                       cli::array<double>^  **outMACDSignal,
+/* Generated */                       cli::array<double>^  **outMACDHist )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int macdFixState( struct TA_macdFix_State* _state,
 /* Generated */                        double       inReal,
 /* Generated */                        int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                        double        &outMACD,
-/* Generated */                        double        &outMACDSignal,
-/* Generated */                        double        &outMACDHist )
+/* Generated */                        double        **outMACD,
+/* Generated */                        double        **outMACDSignal,
+/* Generated */                        double        **outMACDHist )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_MACDFIX_State( struct TA_MACDFIX_State* _state,
 /* Generated */                                           const double inReal,
 /* Generated */                                           int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                                           double        &outMACD,
-/* Generated */                                           double        &outMACDSignal,
-/* Generated */                                           double        &outMACDHist )
+/* Generated */                                           double        **outMACD,
+/* Generated */                                           double        **outMACDSignal,
+/* Generated */                                           double        **outMACDHist )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -304,12 +300,6 @@
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
-/* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -345,13 +335,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdFixStateFree( struct TA_MacdFix_State* _state )
+/* Generated */ int Core::MacdFixStateFree( struct TA_MacdFix_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdFixStateFree( struct TA_macdFix_State* _state )
+/* Generated */ public int macdFixStateFree( struct TA_macdFix_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State* _state )
+/* Generated */ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -362,14 +352,11 @@
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */ 
-/* Generated */    /* Validate the requested output range. */
-/* Generated */    if( startIdx < 0 )
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
-/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
-/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
-/* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if (*_state != NULL) {
+/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
+/* Generated */          free(*_state); *_state = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
