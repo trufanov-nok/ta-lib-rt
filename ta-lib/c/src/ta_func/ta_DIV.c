@@ -90,6 +90,10 @@
    /* insert local variable here */
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !inReal0 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if( !inReal1 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */ /* No parameters to validate. */
 /**** END GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 
@@ -191,6 +195,132 @@
 
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::DivStateInit( TA_Div_State*& _state )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int divStateInit( TA_div_State*& _state )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_DIV_StateInit( TA_DIV_State*& _state )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_DIV_State*& _state )
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state init code here. */
+
+   _state = NULL;
+   return 0;
+}
+
+/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::DivState( TA_Div_State*& _state,
+/* Generated */                   cli::array<double>^ inReal0,
+/* Generated */                   cli::array<double>^ inReal1,
+/* Generated */                   cli::array<double>^  &outReal )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int divState( TA_div_State*& _state,
+/* Generated */                    double       inReal0,
+/* Generated */                    double       inReal1,
+/* Generated */                    double        &outReal )
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_DIV_State( TA_DIV_State*& _state,
+/* Generated */                                       const double inReal0,
+/* Generated */                                       const double inReal1,
+/* Generated */                                       double        &outReal )
+/* Generated */ #endif
+/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_DIV_State*& _state,
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !inReal0 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    if( !inReal1 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outReal )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state based TA dunc code here. */
+
+   return 0;
+}
+
+/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::DivStateFree( TA_Div_State*& _state )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int divStateFree( TA_div_State*& _state )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_DIV_StateFree( TA_DIV_State*& _state )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_DIV_State*& _state )
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state free code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -266,51 +396,5 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
-
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state init code here. */
-
-   _state = NULL;
-   return 0;
-}
-
-/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state based TA dunc code here. */
-
-   return 0;
-}
-
-/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state free code here. */   
-   return 0;
-}
-
-/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 

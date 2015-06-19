@@ -92,6 +92,12 @@
    /* insert local variable here */
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */ /* No parameters to validate. */
 /**** END GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 
@@ -279,6 +285,140 @@
 
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::CdlSeperatingLinesStateInit( TA_CdlSeperatingLines_State*& _state )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int cdlSeperatingLinesStateInit( TA_cdlSeperatingLines_State*& _state )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateInit( TA_CDLSEPARATINGLINES_State*& _state )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_CDLSEPARATINGLINES_State*& _state )
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state init code here. */
+
+   _state = NULL;
+   return 0;
+}
+
+/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::CdlSeperatingLinesState( TA_CdlSeperatingLines_State*& _state,
+/* Generated */                                  cli::array<double>^ inOpen,
+/* Generated */                                  cli::array<double>^ inHigh,
+/* Generated */                                  cli::array<double>^ inLow,
+/* Generated */                                  cli::array<double>^ inClose,
+/* Generated */                                  cli::array<int>^  &outInteger )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int cdlSeperatingLinesState( TA_cdlSeperatingLines_State*& _state,
+/* Generated */                                   double       inOpen,
+/* Generated */                                   double       inHigh,
+/* Generated */                                   double       inLow,
+/* Generated */                                   double       inClose,
+/* Generated */                                   int           &outInteger )
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_State( TA_CDLSEPARATINGLINES_State*& _state,
+/* Generated */                                                      const double inOpen,
+/* Generated */                                                      const double inHigh,
+/* Generated */                                                      const double inLow,
+/* Generated */                                                      const double inClose,
+/* Generated */                                                      int           &outInteger )
+/* Generated */ #endif
+/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_CDLSEPARATINGLINES_State*& _state,
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outInteger )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state based TA dunc code here. */
+
+   return 0;
+}
+
+/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::CdlSeperatingLinesStateFree( TA_CdlSeperatingLines_State*& _state )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int cdlSeperatingLinesStateFree( TA_cdlSeperatingLines_State*& _state )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( TA_CDLSEPARATINGLINES_State*& _state )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_CDLSEPARATINGLINES_State*& _state )
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state free code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -413,51 +553,5 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
-
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state init code here. */
-
-   _state = NULL;
-   return 0;
-}
-
-/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state based TA dunc code here. */
-
-   return 0;
-}
-
-/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state free code here. */   
-   return 0;
-}
-
-/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 

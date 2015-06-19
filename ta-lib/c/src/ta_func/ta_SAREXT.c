@@ -127,6 +127,12 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inHigh||!inLow)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    if( optInStartValue == TA_REAL_DEFAULT )
 /* Generated */       optInStartValue = 0.000000e+0;
 /* Generated */    else if( (optInStartValue < -3.000000e+37) ||/* Generated */  (optInStartValue > 3.000000e+37) )
@@ -698,6 +704,263 @@
 
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::SarExtStateInit( TA_SarExt_State*& _state,
+/* Generated */                          double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                          double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                          double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                          double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                          double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                          double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                          double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                          double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int sarExtStateInit( TA_sarExt_State*& _state,
+/* Generated */                           double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                           double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                           double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                           double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                           double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                           double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                           double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                           double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_SAREXT_StateInit( TA_SAREXT_State*& _state,
+/* Generated */                                              double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                                              double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                                              double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                              double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                              double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                              double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                              double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                              double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
+
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_SAREXT_State*& _state,
+/* Generated */    if( optInStartValue == TA_REAL_DEFAULT )
+/* Generated */       optInStartValue = 0.000000e+0;
+/* Generated */    else if( (optInStartValue < -3.000000e+37) ||/* Generated */  (optInStartValue > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInOffsetOnReverse == TA_REAL_DEFAULT )
+/* Generated */       optInOffsetOnReverse = 0.000000e+0;
+/* Generated */    else if( (optInOffsetOnReverse < 0.000000e+0) ||/* Generated */  (optInOffsetOnReverse > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationInitLong == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationInitLong = 2.000000e-2;
+/* Generated */    else if( (optInAccelerationInitLong < 0.000000e+0) ||/* Generated */  (optInAccelerationInitLong > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationLong == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationLong = 2.000000e-2;
+/* Generated */    else if( (optInAccelerationLong < 0.000000e+0) ||/* Generated */  (optInAccelerationLong > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationMaxLong == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationMaxLong = 2.000000e-1;
+/* Generated */    else if( (optInAccelerationMaxLong < 0.000000e+0) ||/* Generated */  (optInAccelerationMaxLong > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationInitShort == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationInitShort = 2.000000e-2;
+/* Generated */    else if( (optInAccelerationInitShort < 0.000000e+0) ||/* Generated */  (optInAccelerationInitShort > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationShort == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationShort = 2.000000e-2;
+/* Generated */    else if( (optInAccelerationShort < 0.000000e+0) ||/* Generated */  (optInAccelerationShort > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationMaxShort == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationMaxShort = 2.000000e-1;
+/* Generated */    else if( (optInAccelerationMaxShort < 0.000000e+0) ||/* Generated */  (optInAccelerationMaxShort > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state init code here. */
+
+   _state = NULL;
+   return 0;
+}
+
+/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::SarExtState( TA_SarExt_State*& _state,
+/* Generated */                      cli::array<double>^ inHigh,
+/* Generated */                      cli::array<double>^ inLow,
+/* Generated */                      double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                      double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                      double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                      double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                      double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                      double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                      double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                      double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                      cli::array<double>^  &outReal )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int sarExtState( TA_sarExt_State*& _state,
+/* Generated */                       double       inHigh,
+/* Generated */                       double       inLow,
+/* Generated */                       double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                       double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                       double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                       double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                       double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                       double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                       double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                       double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                       double        &outReal )
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_SAREXT_State( TA_SAREXT_State*& _state,
+/* Generated */                                          const double inHigh,
+/* Generated */                                          const double inLow,
+/* Generated */                                          double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                                          double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                                          double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                          double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                          double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                          double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                          double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                          double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                          double        &outReal )
+/* Generated */ #endif
+/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_SAREXT_State*& _state,
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inHigh||!inLow)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    if( optInStartValue == TA_REAL_DEFAULT )
+/* Generated */       optInStartValue = 0.000000e+0;
+/* Generated */    else if( (optInStartValue < -3.000000e+37) ||/* Generated */  (optInStartValue > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInOffsetOnReverse == TA_REAL_DEFAULT )
+/* Generated */       optInOffsetOnReverse = 0.000000e+0;
+/* Generated */    else if( (optInOffsetOnReverse < 0.000000e+0) ||/* Generated */  (optInOffsetOnReverse > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationInitLong == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationInitLong = 2.000000e-2;
+/* Generated */    else if( (optInAccelerationInitLong < 0.000000e+0) ||/* Generated */  (optInAccelerationInitLong > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationLong == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationLong = 2.000000e-2;
+/* Generated */    else if( (optInAccelerationLong < 0.000000e+0) ||/* Generated */  (optInAccelerationLong > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationMaxLong == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationMaxLong = 2.000000e-1;
+/* Generated */    else if( (optInAccelerationMaxLong < 0.000000e+0) ||/* Generated */  (optInAccelerationMaxLong > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationInitShort == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationInitShort = 2.000000e-2;
+/* Generated */    else if( (optInAccelerationInitShort < 0.000000e+0) ||/* Generated */  (optInAccelerationInitShort > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationShort == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationShort = 2.000000e-2;
+/* Generated */    else if( (optInAccelerationShort < 0.000000e+0) ||/* Generated */  (optInAccelerationShort > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( optInAccelerationMaxShort == TA_REAL_DEFAULT )
+/* Generated */       optInAccelerationMaxShort = 2.000000e-1;
+/* Generated */    else if( (optInAccelerationMaxShort < 0.000000e+0) ||/* Generated */  (optInAccelerationMaxShort > 3.000000e+37) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outReal )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state based TA dunc code here. */
+
+   return 0;
+}
+
+/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::SarExtStateFree( TA_SarExt_State*& _state )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int sarExtStateFree( TA_sarExt_State*& _state )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_SAREXT_StateFree( TA_SAREXT_State*& _state )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_SAREXT_State*& _state )
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state free code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -997,52 +1260,5 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
-
-
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state init code here. */
-
-   _state = NULL;
-   return 0;
-}
-
-/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state based TA dunc code here. */
-
-   return 0;
-}
-
-/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state free code here. */   
-   return 0;
-}
-
-/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 

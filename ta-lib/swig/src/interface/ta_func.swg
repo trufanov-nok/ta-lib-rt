@@ -67,6 +67,30 @@ TA_RetCode TA_ACCBANDS( int           START_IDX,
 int TA_ACCBANDS_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_ACCBANDS_State { int memory_size;
+int current_idx;                                                          const double inHigh[];
+                                                          const double inLow[];
+                                                          const double inClose[];
+                                                          int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_ACCBANDS_StateInit( TA_ACCBANDS_State*& _state,
+                         int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_ACCBANDS_State( TA_ACCBANDS_State*& _state,
+                     const double inHigh,
+                     const double inLow,
+                     const double inClose,
+                     int           optInTimePeriod, /* From 2 to 100000 */
+                     double        &outRealUpperBand,
+                     double        &outRealMiddleBand,
+                     double        &outRealLowerBand );
+
+int TA_ACCBANDS_StateFree( TA_ACCBANDS_State*& _state );
+
+
 /*
  * TA_ACOS - Vector Trigonometric ACos
  * 
@@ -82,6 +106,21 @@ TA_RetCode TA_ACOS( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_ACOS_Lookback( void );
+
+
+struct TA_ACOS_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+}
+
+
+int TA_ACOS_StateInit( TA_ACOS_State*& _state );
+
+
+int TA_ACOS_State( TA_ACOS_State*& _state,
+                 const double inReal,
+                 double        &outReal );
+
+int TA_ACOS_StateFree( TA_ACOS_State*& _state );
 
 
 /*
@@ -104,6 +143,27 @@ TA_RetCode TA_AD( int           START_IDX,
 int TA_AD_Lookback( void );
 
 
+struct TA_AD_State { int memory_size;
+int current_idx;                                                    const double inHigh[];
+                                                    const double inLow[];
+                                                    const double inClose[];
+                                                    const double inVolume[];
+}
+
+
+int TA_AD_StateInit( TA_AD_State*& _state );
+
+
+int TA_AD_State( TA_AD_State*& _state,
+               const double inHigh,
+               const double inLow,
+               const double inClose,
+               const double inVolume,
+               double        &outReal );
+
+int TA_AD_StateFree( TA_AD_State*& _state );
+
+
 /*
  * TA_ADD - Vector Arithmetic Add
  * 
@@ -120,6 +180,23 @@ TA_RetCode TA_ADD( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_ADD_Lookback( void );
+
+
+struct TA_ADD_State { int memory_size;
+int current_idx;                                                     const double inReal0[];
+                                                     const double inReal1[];
+}
+
+
+int TA_ADD_StateInit( TA_ADD_State*& _state );
+
+
+int TA_ADD_State( TA_ADD_State*& _state,
+                const double inReal0,
+                const double inReal1,
+                double        &outReal );
+
+int TA_ADD_StateFree( TA_ADD_State*& _state );
 
 
 /*
@@ -154,6 +231,33 @@ int TA_ADOSC_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
                      int           optInSlowPeriod );  /* From 2 to 100000 */
 
 
+struct TA_ADOSC_State { int memory_size;
+int current_idx;                                                       const double inHigh[];
+                                                       const double inLow[];
+                                                       const double inClose[];
+                                                       const double inVolume[];
+                                                       int           optInFastPeriod; /* From 2 to 100000 */
+                                                       int           optInSlowPeriod; /* From 2 to 100000 */
+}
+
+
+int TA_ADOSC_StateInit( TA_ADOSC_State*& _state,
+                      int           optInFastPeriod, /* From 2 to 100000 */
+                      int           optInSlowPeriod );  /* From 2 to 100000 */
+
+
+int TA_ADOSC_State( TA_ADOSC_State*& _state,
+                  const double inHigh,
+                  const double inLow,
+                  const double inClose,
+                  const double inVolume,
+                  int           optInFastPeriod, /* From 2 to 100000 */
+                  int           optInSlowPeriod, /* From 2 to 100000 */
+                  double        &outReal );
+
+int TA_ADOSC_StateFree( TA_ADOSC_State*& _state );
+
+
 /*
  * TA_ADX - Average Directional Movement Index
  * 
@@ -178,6 +282,28 @@ TA_RetCode TA_ADX( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_ADX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_ADX_State { int memory_size;
+int current_idx;                                                     const double inHigh[];
+                                                     const double inLow[];
+                                                     const double inClose[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_ADX_StateInit( TA_ADX_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_ADX_State( TA_ADX_State*& _state,
+                const double inHigh,
+                const double inLow,
+                const double inClose,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_ADX_StateFree( TA_ADX_State*& _state );
 
 
 /*
@@ -206,6 +332,28 @@ TA_RetCode TA_ADXR( int           START_IDX,
 int TA_ADXR_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_ADXR_State { int memory_size;
+int current_idx;                                                      const double inHigh[];
+                                                      const double inLow[];
+                                                      const double inClose[];
+                                                      int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_ADXR_StateInit( TA_ADXR_State*& _state,
+                     int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_ADXR_State( TA_ADXR_State*& _state,
+                 const double inHigh,
+                 const double inLow,
+                 const double inClose,
+                 int           optInTimePeriod, /* From 2 to 100000 */
+                 double        &outReal );
+
+int TA_ADXR_StateFree( TA_ADXR_State*& _state );
+
+
 /*
  * TA_APO - Absolute Price Oscillator
  * 
@@ -230,14 +378,34 @@ TA_RetCode TA_APO( int           START_IDX,
                    const double *IN_ARRAY /* inReal */,
                    int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
                    int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
-                   TA_MAType     OPT_MATYPE /* optInMAType */,
-                   int          *BEG_IDX,
+                   TA_MAType     OPT_MATYPE /* optInMAType */,                   int          *BEG_IDX,
                    int          *OUT_SIZE,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_APO_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
                    int           optInSlowPeriod, /* From 2 to 100000 */
                    TA_MAType     optInMAType ); 
+
+struct TA_APO_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInFastPeriod; /* From 2 to 100000 */
+                                                     int           optInSlowPeriod; /* From 2 to 100000 */
+                                                     TA_MAType     optInMAType;}
+
+
+int TA_APO_StateInit( TA_APO_State*& _state,
+                    int           optInFastPeriod, /* From 2 to 100000 */
+                    int           optInSlowPeriod, /* From 2 to 100000 */
+                    TA_MAType     optInMAType ); 
+
+int TA_APO_State( TA_APO_State*& _state,
+                const double inReal,
+                int           optInFastPeriod, /* From 2 to 100000 */
+                int           optInSlowPeriod, /* From 2 to 100000 */
+                TA_MAType     optInMAType,                double        &outReal );
+
+int TA_APO_StateFree( TA_APO_State*& _state );
+
 
 /*
  * TA_AROON - Aroon
@@ -265,6 +433,27 @@ TA_RetCode TA_AROON( int           START_IDX,
 int TA_AROON_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_AROON_State { int memory_size;
+int current_idx;                                                       const double inHigh[];
+                                                       const double inLow[];
+                                                       int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_AROON_StateInit( TA_AROON_State*& _state,
+                      int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_AROON_State( TA_AROON_State*& _state,
+                  const double inHigh,
+                  const double inLow,
+                  int           optInTimePeriod, /* From 2 to 100000 */
+                  double        &outAroonDown,
+                  double        &outAroonUp );
+
+int TA_AROON_StateFree( TA_AROON_State*& _state );
+
+
 /*
  * TA_AROONOSC - Aroon Oscillator
  * 
@@ -290,6 +479,26 @@ TA_RetCode TA_AROONOSC( int           START_IDX,
 int TA_AROONOSC_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_AROONOSC_State { int memory_size;
+int current_idx;                                                          const double inHigh[];
+                                                          const double inLow[];
+                                                          int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_AROONOSC_StateInit( TA_AROONOSC_State*& _state,
+                         int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_AROONOSC_State( TA_AROONOSC_State*& _state,
+                     const double inHigh,
+                     const double inLow,
+                     int           optInTimePeriod, /* From 2 to 100000 */
+                     double        &outReal );
+
+int TA_AROONOSC_StateFree( TA_AROONOSC_State*& _state );
+
+
 /*
  * TA_ASIN - Vector Trigonometric ASin
  * 
@@ -307,6 +516,21 @@ TA_RetCode TA_ASIN( int           START_IDX,
 int TA_ASIN_Lookback( void );
 
 
+struct TA_ASIN_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+}
+
+
+int TA_ASIN_StateInit( TA_ASIN_State*& _state );
+
+
+int TA_ASIN_State( TA_ASIN_State*& _state,
+                 const double inReal,
+                 double        &outReal );
+
+int TA_ASIN_StateFree( TA_ASIN_State*& _state );
+
+
 /*
  * TA_ATAN - Vector Trigonometric ATan
  * 
@@ -322,6 +546,21 @@ TA_RetCode TA_ATAN( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_ATAN_Lookback( void );
+
+
+struct TA_ATAN_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+}
+
+
+int TA_ATAN_StateInit( TA_ATAN_State*& _state );
+
+
+int TA_ATAN_State( TA_ATAN_State*& _state,
+                 const double inReal,
+                 double        &outReal );
+
+int TA_ATAN_StateFree( TA_ATAN_State*& _state );
 
 
 /*
@@ -350,6 +589,28 @@ TA_RetCode TA_ATR( int           START_IDX,
 int TA_ATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_ATR_State { int memory_size;
+int current_idx;                                                     const double inHigh[];
+                                                     const double inLow[];
+                                                     const double inClose[];
+                                                     int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_ATR_StateInit( TA_ATR_State*& _state,
+                    int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_ATR_State( TA_ATR_State*& _state,
+                const double inHigh,
+                const double inLow,
+                const double inClose,
+                int           optInTimePeriod, /* From 1 to 100000 */
+                double        &outReal );
+
+int TA_ATR_StateFree( TA_ATR_State*& _state );
+
+
 /*
  * TA_AVGPRICE - Average Price
  * 
@@ -368,6 +629,27 @@ TA_RetCode TA_AVGPRICE( int           START_IDX,
                         double       *OUT_ARRAY /* outReal */ );
 
 int TA_AVGPRICE_Lookback( void );
+
+
+struct TA_AVGPRICE_State { int memory_size;
+int current_idx;                                                          const double inOpen[];
+                                                          const double inHigh[];
+                                                          const double inLow[];
+                                                          const double inClose[];
+}
+
+
+int TA_AVGPRICE_StateInit( TA_AVGPRICE_State*& _state );
+
+
+int TA_AVGPRICE_State( TA_AVGPRICE_State*& _state,
+                     const double inOpen,
+                     const double inHigh,
+                     const double inLow,
+                     const double inClose,
+                     double        &outReal );
+
+int TA_AVGPRICE_StateFree( TA_AVGPRICE_State*& _state );
 
 
 /*
@@ -392,6 +674,24 @@ TA_RetCode TA_AVGDEV( int           START_IDX,
                       double       *OUT_ARRAY /* outReal */ );
 
 int TA_AVGDEV_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_AVGDEV_State { int memory_size;
+int current_idx;                                                        const double inReal[];
+                                                        int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_AVGDEV_StateInit( TA_AVGDEV_State*& _state,
+                       int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_AVGDEV_State( TA_AVGDEV_State*& _state,
+                   const double inReal,
+                   int           optInTimePeriod, /* From 2 to 100000 */
+                   double        &outReal );
+
+int TA_AVGDEV_StateFree( TA_AVGDEV_State*& _state );
 
 
 /*
@@ -422,8 +722,7 @@ TA_RetCode TA_BBANDS( int           START_IDX,
                       int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
                       double        OPT_REAL /* optInNbDevUp */, /* From TA_REAL_MIN to TA_REAL_MAX */
                       double        OPT_REAL /* optInNbDevDn */, /* From TA_REAL_MIN to TA_REAL_MAX */
-                      TA_MAType     OPT_MATYPE /* optInMAType */,
-                      int          *BEG_IDX,
+                      TA_MAType     OPT_MATYPE /* optInMAType */,                      int          *BEG_IDX,
                       int          *OUT_SIZE,
                       double       *OUT_ARRAY /* outRealUpperBand */,
                       double       *OUT_ARRAY /* outRealMiddleBand */,
@@ -433,6 +732,32 @@ int TA_BBANDS_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                       double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
                       double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
                       TA_MAType     optInMAType ); 
+
+struct TA_BBANDS_State { int memory_size;
+int current_idx;                                                        const double inReal[];
+                                                        int           optInTimePeriod; /* From 2 to 100000 */
+                                                        double        optInNbDevUp; /* From TA_REAL_MIN to TA_REAL_MAX */
+                                                        double        optInNbDevDn; /* From TA_REAL_MIN to TA_REAL_MAX */
+                                                        TA_MAType     optInMAType;}
+
+
+int TA_BBANDS_StateInit( TA_BBANDS_State*& _state,
+                       int           optInTimePeriod, /* From 2 to 100000 */
+                       double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+                       double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+                       TA_MAType     optInMAType ); 
+
+int TA_BBANDS_State( TA_BBANDS_State*& _state,
+                   const double inReal,
+                   int           optInTimePeriod, /* From 2 to 100000 */
+                   double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+                   double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+                   TA_MAType     optInMAType,                   double        &outRealUpperBand,
+                   double        &outRealMiddleBand,
+                   double        &outRealLowerBand );
+
+int TA_BBANDS_StateFree( TA_BBANDS_State*& _state );
+
 
 /*
  * TA_BETA - Beta
@@ -459,6 +784,26 @@ TA_RetCode TA_BETA( int           START_IDX,
 int TA_BETA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_BETA_State { int memory_size;
+int current_idx;                                                      const double inReal0[];
+                                                      const double inReal1[];
+                                                      int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_BETA_StateInit( TA_BETA_State*& _state,
+                     int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_BETA_State( TA_BETA_State*& _state,
+                 const double inReal0,
+                 const double inReal1,
+                 int           optInTimePeriod, /* From 1 to 100000 */
+                 double        &outReal );
+
+int TA_BETA_StateFree( TA_BETA_State*& _state );
+
+
 /*
  * TA_BOP - Balance Of Power
  * 
@@ -477,6 +822,27 @@ TA_RetCode TA_BOP( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_BOP_Lookback( void );
+
+
+struct TA_BOP_State { int memory_size;
+int current_idx;                                                     const double inOpen[];
+                                                     const double inHigh[];
+                                                     const double inLow[];
+                                                     const double inClose[];
+}
+
+
+int TA_BOP_StateInit( TA_BOP_State*& _state );
+
+
+int TA_BOP_State( TA_BOP_State*& _state,
+                const double inOpen,
+                const double inHigh,
+                const double inLow,
+                const double inClose,
+                double        &outReal );
+
+int TA_BOP_StateFree( TA_BOP_State*& _state );
 
 
 /*
@@ -505,6 +871,28 @@ TA_RetCode TA_CCI( int           START_IDX,
 int TA_CCI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_CCI_State { int memory_size;
+int current_idx;                                                     const double inHigh[];
+                                                     const double inLow[];
+                                                     const double inClose[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_CCI_StateInit( TA_CCI_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_CCI_State( TA_CCI_State*& _state,
+                const double inHigh,
+                const double inLow,
+                const double inClose,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_CCI_StateFree( TA_CCI_State*& _state );
+
+
 /*
  * TA_CDL2CROWS - Two Crows
  * 
@@ -523,6 +911,27 @@ TA_RetCode TA_CDL2CROWS( int           START_IDX,
                          int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDL2CROWS_Lookback( void );
+
+
+struct TA_CDL2CROWS_State { int memory_size;
+int current_idx;                                                           const double inOpen[];
+                                                           const double inHigh[];
+                                                           const double inLow[];
+                                                           const double inClose[];
+}
+
+
+int TA_CDL2CROWS_StateInit( TA_CDL2CROWS_State*& _state );
+
+
+int TA_CDL2CROWS_State( TA_CDL2CROWS_State*& _state,
+                      const double inOpen,
+                      const double inHigh,
+                      const double inLow,
+                      const double inClose,
+                      int           &outInteger );
+
+int TA_CDL2CROWS_StateFree( TA_CDL2CROWS_State*& _state );
 
 
 /*
@@ -545,6 +954,27 @@ TA_RetCode TA_CDL3BLACKCROWS( int           START_IDX,
 int TA_CDL3BLACKCROWS_Lookback( void );
 
 
+struct TA_CDL3BLACKCROWS_State { int memory_size;
+int current_idx;                                                                const double inOpen[];
+                                                                const double inHigh[];
+                                                                const double inLow[];
+                                                                const double inClose[];
+}
+
+
+int TA_CDL3BLACKCROWS_StateInit( TA_CDL3BLACKCROWS_State*& _state );
+
+
+int TA_CDL3BLACKCROWS_State( TA_CDL3BLACKCROWS_State*& _state,
+                           const double inOpen,
+                           const double inHigh,
+                           const double inLow,
+                           const double inClose,
+                           int           &outInteger );
+
+int TA_CDL3BLACKCROWS_StateFree( TA_CDL3BLACKCROWS_State*& _state );
+
+
 /*
  * TA_CDL3INSIDE - Three Inside Up/Down
  * 
@@ -563,6 +993,27 @@ TA_RetCode TA_CDL3INSIDE( int           START_IDX,
                           int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDL3INSIDE_Lookback( void );
+
+
+struct TA_CDL3INSIDE_State { int memory_size;
+int current_idx;                                                            const double inOpen[];
+                                                            const double inHigh[];
+                                                            const double inLow[];
+                                                            const double inClose[];
+}
+
+
+int TA_CDL3INSIDE_StateInit( TA_CDL3INSIDE_State*& _state );
+
+
+int TA_CDL3INSIDE_State( TA_CDL3INSIDE_State*& _state,
+                       const double inOpen,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       int           &outInteger );
+
+int TA_CDL3INSIDE_StateFree( TA_CDL3INSIDE_State*& _state );
 
 
 /*
@@ -585,6 +1036,27 @@ TA_RetCode TA_CDL3LINESTRIKE( int           START_IDX,
 int TA_CDL3LINESTRIKE_Lookback( void );
 
 
+struct TA_CDL3LINESTRIKE_State { int memory_size;
+int current_idx;                                                                const double inOpen[];
+                                                                const double inHigh[];
+                                                                const double inLow[];
+                                                                const double inClose[];
+}
+
+
+int TA_CDL3LINESTRIKE_StateInit( TA_CDL3LINESTRIKE_State*& _state );
+
+
+int TA_CDL3LINESTRIKE_State( TA_CDL3LINESTRIKE_State*& _state,
+                           const double inOpen,
+                           const double inHigh,
+                           const double inLow,
+                           const double inClose,
+                           int           &outInteger );
+
+int TA_CDL3LINESTRIKE_StateFree( TA_CDL3LINESTRIKE_State*& _state );
+
+
 /*
  * TA_CDL3OUTSIDE - Three Outside Up/Down
  * 
@@ -603,6 +1075,27 @@ TA_RetCode TA_CDL3OUTSIDE( int           START_IDX,
                            int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDL3OUTSIDE_Lookback( void );
+
+
+struct TA_CDL3OUTSIDE_State { int memory_size;
+int current_idx;                                                             const double inOpen[];
+                                                             const double inHigh[];
+                                                             const double inLow[];
+                                                             const double inClose[];
+}
+
+
+int TA_CDL3OUTSIDE_StateInit( TA_CDL3OUTSIDE_State*& _state );
+
+
+int TA_CDL3OUTSIDE_State( TA_CDL3OUTSIDE_State*& _state,
+                        const double inOpen,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        int           &outInteger );
+
+int TA_CDL3OUTSIDE_StateFree( TA_CDL3OUTSIDE_State*& _state );
 
 
 /*
@@ -625,6 +1118,27 @@ TA_RetCode TA_CDL3STARSINSOUTH( int           START_IDX,
 int TA_CDL3STARSINSOUTH_Lookback( void );
 
 
+struct TA_CDL3STARSINSOUTH_State { int memory_size;
+int current_idx;                                                                  const double inOpen[];
+                                                                  const double inHigh[];
+                                                                  const double inLow[];
+                                                                  const double inClose[];
+}
+
+
+int TA_CDL3STARSINSOUTH_StateInit( TA_CDL3STARSINSOUTH_State*& _state );
+
+
+int TA_CDL3STARSINSOUTH_State( TA_CDL3STARSINSOUTH_State*& _state,
+                             const double inOpen,
+                             const double inHigh,
+                             const double inLow,
+                             const double inClose,
+                             int           &outInteger );
+
+int TA_CDL3STARSINSOUTH_StateFree( TA_CDL3STARSINSOUTH_State*& _state );
+
+
 /*
  * TA_CDL3WHITESOLDIERS - Three Advancing White Soldiers
  * 
@@ -643,6 +1157,27 @@ TA_RetCode TA_CDL3WHITESOLDIERS( int           START_IDX,
                                  int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDL3WHITESOLDIERS_Lookback( void );
+
+
+struct TA_CDL3WHITESOLDIERS_State { int memory_size;
+int current_idx;                                                                   const double inOpen[];
+                                                                   const double inHigh[];
+                                                                   const double inLow[];
+                                                                   const double inClose[];
+}
+
+
+int TA_CDL3WHITESOLDIERS_StateInit( TA_CDL3WHITESOLDIERS_State*& _state );
+
+
+int TA_CDL3WHITESOLDIERS_State( TA_CDL3WHITESOLDIERS_State*& _state,
+                              const double inOpen,
+                              const double inHigh,
+                              const double inLow,
+                              const double inClose,
+                              int           &outInteger );
+
+int TA_CDL3WHITESOLDIERS_StateFree( TA_CDL3WHITESOLDIERS_State*& _state );
 
 
 /*
@@ -672,6 +1207,30 @@ TA_RetCode TA_CDLABANDONEDBABY( int           START_IDX,
 int TA_CDLABANDONEDBABY_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
+struct TA_CDLABANDONEDBABY_State { int memory_size;
+int current_idx;                                                                  const double inOpen[];
+                                                                  const double inHigh[];
+                                                                  const double inLow[];
+                                                                  const double inClose[];
+                                                                  double        optInPenetration; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_CDLABANDONEDBABY_StateInit( TA_CDLABANDONEDBABY_State*& _state,
+                                 double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_CDLABANDONEDBABY_State( TA_CDLABANDONEDBABY_State*& _state,
+                             const double inOpen,
+                             const double inHigh,
+                             const double inLow,
+                             const double inClose,
+                             double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                             int           &outInteger );
+
+int TA_CDLABANDONEDBABY_StateFree( TA_CDLABANDONEDBABY_State*& _state );
+
+
 /*
  * TA_CDLADVANCEBLOCK - Advance Block
  * 
@@ -690,6 +1249,27 @@ TA_RetCode TA_CDLADVANCEBLOCK( int           START_IDX,
                                int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLADVANCEBLOCK_Lookback( void );
+
+
+struct TA_CDLADVANCEBLOCK_State { int memory_size;
+int current_idx;                                                                 const double inOpen[];
+                                                                 const double inHigh[];
+                                                                 const double inLow[];
+                                                                 const double inClose[];
+}
+
+
+int TA_CDLADVANCEBLOCK_StateInit( TA_CDLADVANCEBLOCK_State*& _state );
+
+
+int TA_CDLADVANCEBLOCK_State( TA_CDLADVANCEBLOCK_State*& _state,
+                            const double inOpen,
+                            const double inHigh,
+                            const double inLow,
+                            const double inClose,
+                            int           &outInteger );
+
+int TA_CDLADVANCEBLOCK_StateFree( TA_CDLADVANCEBLOCK_State*& _state );
 
 
 /*
@@ -712,6 +1292,27 @@ TA_RetCode TA_CDLBELTHOLD( int           START_IDX,
 int TA_CDLBELTHOLD_Lookback( void );
 
 
+struct TA_CDLBELTHOLD_State { int memory_size;
+int current_idx;                                                             const double inOpen[];
+                                                             const double inHigh[];
+                                                             const double inLow[];
+                                                             const double inClose[];
+}
+
+
+int TA_CDLBELTHOLD_StateInit( TA_CDLBELTHOLD_State*& _state );
+
+
+int TA_CDLBELTHOLD_State( TA_CDLBELTHOLD_State*& _state,
+                        const double inOpen,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        int           &outInteger );
+
+int TA_CDLBELTHOLD_StateFree( TA_CDLBELTHOLD_State*& _state );
+
+
 /*
  * TA_CDLBREAKAWAY - Breakaway
  * 
@@ -730,6 +1331,27 @@ TA_RetCode TA_CDLBREAKAWAY( int           START_IDX,
                             int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLBREAKAWAY_Lookback( void );
+
+
+struct TA_CDLBREAKAWAY_State { int memory_size;
+int current_idx;                                                              const double inOpen[];
+                                                              const double inHigh[];
+                                                              const double inLow[];
+                                                              const double inClose[];
+}
+
+
+int TA_CDLBREAKAWAY_StateInit( TA_CDLBREAKAWAY_State*& _state );
+
+
+int TA_CDLBREAKAWAY_State( TA_CDLBREAKAWAY_State*& _state,
+                         const double inOpen,
+                         const double inHigh,
+                         const double inLow,
+                         const double inClose,
+                         int           &outInteger );
+
+int TA_CDLBREAKAWAY_StateFree( TA_CDLBREAKAWAY_State*& _state );
 
 
 /*
@@ -752,6 +1374,27 @@ TA_RetCode TA_CDLCLOSINGMARUBOZU( int           START_IDX,
 int TA_CDLCLOSINGMARUBOZU_Lookback( void );
 
 
+struct TA_CDLCLOSINGMARUBOZU_State { int memory_size;
+int current_idx;                                                                    const double inOpen[];
+                                                                    const double inHigh[];
+                                                                    const double inLow[];
+                                                                    const double inClose[];
+}
+
+
+int TA_CDLCLOSINGMARUBOZU_StateInit( TA_CDLCLOSINGMARUBOZU_State*& _state );
+
+
+int TA_CDLCLOSINGMARUBOZU_State( TA_CDLCLOSINGMARUBOZU_State*& _state,
+                               const double inOpen,
+                               const double inHigh,
+                               const double inLow,
+                               const double inClose,
+                               int           &outInteger );
+
+int TA_CDLCLOSINGMARUBOZU_StateFree( TA_CDLCLOSINGMARUBOZU_State*& _state );
+
+
 /*
  * TA_CDLCONCEALBABYSWALL - Concealing Baby Swallow
  * 
@@ -772,6 +1415,27 @@ TA_RetCode TA_CDLCONCEALBABYSWALL( int           START_IDX,
 int TA_CDLCONCEALBABYSWALL_Lookback( void );
 
 
+struct TA_CDLCONCEALBABYSWALL_State { int memory_size;
+int current_idx;                                                                     const double inOpen[];
+                                                                     const double inHigh[];
+                                                                     const double inLow[];
+                                                                     const double inClose[];
+}
+
+
+int TA_CDLCONCEALBABYSWALL_StateInit( TA_CDLCONCEALBABYSWALL_State*& _state );
+
+
+int TA_CDLCONCEALBABYSWALL_State( TA_CDLCONCEALBABYSWALL_State*& _state,
+                                const double inOpen,
+                                const double inHigh,
+                                const double inLow,
+                                const double inClose,
+                                int           &outInteger );
+
+int TA_CDLCONCEALBABYSWALL_StateFree( TA_CDLCONCEALBABYSWALL_State*& _state );
+
+
 /*
  * TA_CDLCOUNTERATTACK - Counterattack
  * 
@@ -790,6 +1454,27 @@ TA_RetCode TA_CDLCOUNTERATTACK( int           START_IDX,
                                 int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLCOUNTERATTACK_Lookback( void );
+
+
+struct TA_CDLCOUNTERATTACK_State { int memory_size;
+int current_idx;                                                                  const double inOpen[];
+                                                                  const double inHigh[];
+                                                                  const double inLow[];
+                                                                  const double inClose[];
+}
+
+
+int TA_CDLCOUNTERATTACK_StateInit( TA_CDLCOUNTERATTACK_State*& _state );
+
+
+int TA_CDLCOUNTERATTACK_State( TA_CDLCOUNTERATTACK_State*& _state,
+                             const double inOpen,
+                             const double inHigh,
+                             const double inLow,
+                             const double inClose,
+                             int           &outInteger );
+
+int TA_CDLCOUNTERATTACK_StateFree( TA_CDLCOUNTERATTACK_State*& _state );
 
 
 /*
@@ -819,6 +1504,30 @@ TA_RetCode TA_CDLDARKCLOUDCOVER( int           START_IDX,
 int TA_CDLDARKCLOUDCOVER_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
+struct TA_CDLDARKCLOUDCOVER_State { int memory_size;
+int current_idx;                                                                   const double inOpen[];
+                                                                   const double inHigh[];
+                                                                   const double inLow[];
+                                                                   const double inClose[];
+                                                                   double        optInPenetration; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_CDLDARKCLOUDCOVER_StateInit( TA_CDLDARKCLOUDCOVER_State*& _state,
+                                  double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_CDLDARKCLOUDCOVER_State( TA_CDLDARKCLOUDCOVER_State*& _state,
+                              const double inOpen,
+                              const double inHigh,
+                              const double inLow,
+                              const double inClose,
+                              double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                              int           &outInteger );
+
+int TA_CDLDARKCLOUDCOVER_StateFree( TA_CDLDARKCLOUDCOVER_State*& _state );
+
+
 /*
  * TA_CDLDOJI - Doji
  * 
@@ -837,6 +1546,27 @@ TA_RetCode TA_CDLDOJI( int           START_IDX,
                        int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLDOJI_Lookback( void );
+
+
+struct TA_CDLDOJI_State { int memory_size;
+int current_idx;                                                         const double inOpen[];
+                                                         const double inHigh[];
+                                                         const double inLow[];
+                                                         const double inClose[];
+}
+
+
+int TA_CDLDOJI_StateInit( TA_CDLDOJI_State*& _state );
+
+
+int TA_CDLDOJI_State( TA_CDLDOJI_State*& _state,
+                    const double inOpen,
+                    const double inHigh,
+                    const double inLow,
+                    const double inClose,
+                    int           &outInteger );
+
+int TA_CDLDOJI_StateFree( TA_CDLDOJI_State*& _state );
 
 
 /*
@@ -859,6 +1589,27 @@ TA_RetCode TA_CDLDOJISTAR( int           START_IDX,
 int TA_CDLDOJISTAR_Lookback( void );
 
 
+struct TA_CDLDOJISTAR_State { int memory_size;
+int current_idx;                                                             const double inOpen[];
+                                                             const double inHigh[];
+                                                             const double inLow[];
+                                                             const double inClose[];
+}
+
+
+int TA_CDLDOJISTAR_StateInit( TA_CDLDOJISTAR_State*& _state );
+
+
+int TA_CDLDOJISTAR_State( TA_CDLDOJISTAR_State*& _state,
+                        const double inOpen,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        int           &outInteger );
+
+int TA_CDLDOJISTAR_StateFree( TA_CDLDOJISTAR_State*& _state );
+
+
 /*
  * TA_CDLDRAGONFLYDOJI - Dragonfly Doji
  * 
@@ -879,6 +1630,27 @@ TA_RetCode TA_CDLDRAGONFLYDOJI( int           START_IDX,
 int TA_CDLDRAGONFLYDOJI_Lookback( void );
 
 
+struct TA_CDLDRAGONFLYDOJI_State { int memory_size;
+int current_idx;                                                                  const double inOpen[];
+                                                                  const double inHigh[];
+                                                                  const double inLow[];
+                                                                  const double inClose[];
+}
+
+
+int TA_CDLDRAGONFLYDOJI_StateInit( TA_CDLDRAGONFLYDOJI_State*& _state );
+
+
+int TA_CDLDRAGONFLYDOJI_State( TA_CDLDRAGONFLYDOJI_State*& _state,
+                             const double inOpen,
+                             const double inHigh,
+                             const double inLow,
+                             const double inClose,
+                             int           &outInteger );
+
+int TA_CDLDRAGONFLYDOJI_StateFree( TA_CDLDRAGONFLYDOJI_State*& _state );
+
+
 /*
  * TA_CDLENGULFING - Engulfing Pattern
  * 
@@ -897,6 +1669,27 @@ TA_RetCode TA_CDLENGULFING( int           START_IDX,
                             int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLENGULFING_Lookback( void );
+
+
+struct TA_CDLENGULFING_State { int memory_size;
+int current_idx;                                                              const double inOpen[];
+                                                              const double inHigh[];
+                                                              const double inLow[];
+                                                              const double inClose[];
+}
+
+
+int TA_CDLENGULFING_StateInit( TA_CDLENGULFING_State*& _state );
+
+
+int TA_CDLENGULFING_State( TA_CDLENGULFING_State*& _state,
+                         const double inOpen,
+                         const double inHigh,
+                         const double inLow,
+                         const double inClose,
+                         int           &outInteger );
+
+int TA_CDLENGULFING_StateFree( TA_CDLENGULFING_State*& _state );
 
 
 /*
@@ -926,6 +1719,30 @@ TA_RetCode TA_CDLEVENINGDOJISTAR( int           START_IDX,
 int TA_CDLEVENINGDOJISTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
+struct TA_CDLEVENINGDOJISTAR_State { int memory_size;
+int current_idx;                                                                    const double inOpen[];
+                                                                    const double inHigh[];
+                                                                    const double inLow[];
+                                                                    const double inClose[];
+                                                                    double        optInPenetration; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_CDLEVENINGDOJISTAR_StateInit( TA_CDLEVENINGDOJISTAR_State*& _state,
+                                   double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_CDLEVENINGDOJISTAR_State( TA_CDLEVENINGDOJISTAR_State*& _state,
+                               const double inOpen,
+                               const double inHigh,
+                               const double inLow,
+                               const double inClose,
+                               double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                               int           &outInteger );
+
+int TA_CDLEVENINGDOJISTAR_StateFree( TA_CDLEVENINGDOJISTAR_State*& _state );
+
+
 /*
  * TA_CDLEVENINGSTAR - Evening Star
  * 
@@ -953,6 +1770,30 @@ TA_RetCode TA_CDLEVENINGSTAR( int           START_IDX,
 int TA_CDLEVENINGSTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
+struct TA_CDLEVENINGSTAR_State { int memory_size;
+int current_idx;                                                                const double inOpen[];
+                                                                const double inHigh[];
+                                                                const double inLow[];
+                                                                const double inClose[];
+                                                                double        optInPenetration; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_CDLEVENINGSTAR_StateInit( TA_CDLEVENINGSTAR_State*& _state,
+                               double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_CDLEVENINGSTAR_State( TA_CDLEVENINGSTAR_State*& _state,
+                           const double inOpen,
+                           const double inHigh,
+                           const double inLow,
+                           const double inClose,
+                           double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                           int           &outInteger );
+
+int TA_CDLEVENINGSTAR_StateFree( TA_CDLEVENINGSTAR_State*& _state );
+
+
 /*
  * TA_CDLGAPSIDESIDEWHITE - Up/Down-gap side-by-side white lines
  * 
@@ -971,6 +1812,27 @@ TA_RetCode TA_CDLGAPSIDESIDEWHITE( int           START_IDX,
                                    int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLGAPSIDESIDEWHITE_Lookback( void );
+
+
+struct TA_CDLGAPSIDESIDEWHITE_State { int memory_size;
+int current_idx;                                                                     const double inOpen[];
+                                                                     const double inHigh[];
+                                                                     const double inLow[];
+                                                                     const double inClose[];
+}
+
+
+int TA_CDLGAPSIDESIDEWHITE_StateInit( TA_CDLGAPSIDESIDEWHITE_State*& _state );
+
+
+int TA_CDLGAPSIDESIDEWHITE_State( TA_CDLGAPSIDESIDEWHITE_State*& _state,
+                                const double inOpen,
+                                const double inHigh,
+                                const double inLow,
+                                const double inClose,
+                                int           &outInteger );
+
+int TA_CDLGAPSIDESIDEWHITE_StateFree( TA_CDLGAPSIDESIDEWHITE_State*& _state );
 
 
 /*
@@ -993,6 +1855,27 @@ TA_RetCode TA_CDLGRAVESTONEDOJI( int           START_IDX,
 int TA_CDLGRAVESTONEDOJI_Lookback( void );
 
 
+struct TA_CDLGRAVESTONEDOJI_State { int memory_size;
+int current_idx;                                                                   const double inOpen[];
+                                                                   const double inHigh[];
+                                                                   const double inLow[];
+                                                                   const double inClose[];
+}
+
+
+int TA_CDLGRAVESTONEDOJI_StateInit( TA_CDLGRAVESTONEDOJI_State*& _state );
+
+
+int TA_CDLGRAVESTONEDOJI_State( TA_CDLGRAVESTONEDOJI_State*& _state,
+                              const double inOpen,
+                              const double inHigh,
+                              const double inLow,
+                              const double inClose,
+                              int           &outInteger );
+
+int TA_CDLGRAVESTONEDOJI_StateFree( TA_CDLGRAVESTONEDOJI_State*& _state );
+
+
 /*
  * TA_CDLHAMMER - Hammer
  * 
@@ -1011,6 +1894,27 @@ TA_RetCode TA_CDLHAMMER( int           START_IDX,
                          int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLHAMMER_Lookback( void );
+
+
+struct TA_CDLHAMMER_State { int memory_size;
+int current_idx;                                                           const double inOpen[];
+                                                           const double inHigh[];
+                                                           const double inLow[];
+                                                           const double inClose[];
+}
+
+
+int TA_CDLHAMMER_StateInit( TA_CDLHAMMER_State*& _state );
+
+
+int TA_CDLHAMMER_State( TA_CDLHAMMER_State*& _state,
+                      const double inOpen,
+                      const double inHigh,
+                      const double inLow,
+                      const double inClose,
+                      int           &outInteger );
+
+int TA_CDLHAMMER_StateFree( TA_CDLHAMMER_State*& _state );
 
 
 /*
@@ -1033,6 +1937,27 @@ TA_RetCode TA_CDLHANGINGMAN( int           START_IDX,
 int TA_CDLHANGINGMAN_Lookback( void );
 
 
+struct TA_CDLHANGINGMAN_State { int memory_size;
+int current_idx;                                                               const double inOpen[];
+                                                               const double inHigh[];
+                                                               const double inLow[];
+                                                               const double inClose[];
+}
+
+
+int TA_CDLHANGINGMAN_StateInit( TA_CDLHANGINGMAN_State*& _state );
+
+
+int TA_CDLHANGINGMAN_State( TA_CDLHANGINGMAN_State*& _state,
+                          const double inOpen,
+                          const double inHigh,
+                          const double inLow,
+                          const double inClose,
+                          int           &outInteger );
+
+int TA_CDLHANGINGMAN_StateFree( TA_CDLHANGINGMAN_State*& _state );
+
+
 /*
  * TA_CDLHARAMI - Harami Pattern
  * 
@@ -1051,6 +1976,27 @@ TA_RetCode TA_CDLHARAMI( int           START_IDX,
                          int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLHARAMI_Lookback( void );
+
+
+struct TA_CDLHARAMI_State { int memory_size;
+int current_idx;                                                           const double inOpen[];
+                                                           const double inHigh[];
+                                                           const double inLow[];
+                                                           const double inClose[];
+}
+
+
+int TA_CDLHARAMI_StateInit( TA_CDLHARAMI_State*& _state );
+
+
+int TA_CDLHARAMI_State( TA_CDLHARAMI_State*& _state,
+                      const double inOpen,
+                      const double inHigh,
+                      const double inLow,
+                      const double inClose,
+                      int           &outInteger );
+
+int TA_CDLHARAMI_StateFree( TA_CDLHARAMI_State*& _state );
 
 
 /*
@@ -1073,6 +2019,27 @@ TA_RetCode TA_CDLHARAMICROSS( int           START_IDX,
 int TA_CDLHARAMICROSS_Lookback( void );
 
 
+struct TA_CDLHARAMICROSS_State { int memory_size;
+int current_idx;                                                                const double inOpen[];
+                                                                const double inHigh[];
+                                                                const double inLow[];
+                                                                const double inClose[];
+}
+
+
+int TA_CDLHARAMICROSS_StateInit( TA_CDLHARAMICROSS_State*& _state );
+
+
+int TA_CDLHARAMICROSS_State( TA_CDLHARAMICROSS_State*& _state,
+                           const double inOpen,
+                           const double inHigh,
+                           const double inLow,
+                           const double inClose,
+                           int           &outInteger );
+
+int TA_CDLHARAMICROSS_StateFree( TA_CDLHARAMICROSS_State*& _state );
+
+
 /*
  * TA_CDLHIGHWAVE - High-Wave Candle
  * 
@@ -1091,6 +2058,27 @@ TA_RetCode TA_CDLHIGHWAVE( int           START_IDX,
                            int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLHIGHWAVE_Lookback( void );
+
+
+struct TA_CDLHIGHWAVE_State { int memory_size;
+int current_idx;                                                             const double inOpen[];
+                                                             const double inHigh[];
+                                                             const double inLow[];
+                                                             const double inClose[];
+}
+
+
+int TA_CDLHIGHWAVE_StateInit( TA_CDLHIGHWAVE_State*& _state );
+
+
+int TA_CDLHIGHWAVE_State( TA_CDLHIGHWAVE_State*& _state,
+                        const double inOpen,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        int           &outInteger );
+
+int TA_CDLHIGHWAVE_StateFree( TA_CDLHIGHWAVE_State*& _state );
 
 
 /*
@@ -1113,6 +2101,27 @@ TA_RetCode TA_CDLHIKKAKE( int           START_IDX,
 int TA_CDLHIKKAKE_Lookback( void );
 
 
+struct TA_CDLHIKKAKE_State { int memory_size;
+int current_idx;                                                            const double inOpen[];
+                                                            const double inHigh[];
+                                                            const double inLow[];
+                                                            const double inClose[];
+}
+
+
+int TA_CDLHIKKAKE_StateInit( TA_CDLHIKKAKE_State*& _state );
+
+
+int TA_CDLHIKKAKE_State( TA_CDLHIKKAKE_State*& _state,
+                       const double inOpen,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       int           &outInteger );
+
+int TA_CDLHIKKAKE_StateFree( TA_CDLHIKKAKE_State*& _state );
+
+
 /*
  * TA_CDLHIKKAKEMOD - Modified Hikkake Pattern
  * 
@@ -1131,6 +2140,27 @@ TA_RetCode TA_CDLHIKKAKEMOD( int           START_IDX,
                              int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLHIKKAKEMOD_Lookback( void );
+
+
+struct TA_CDLHIKKAKEMOD_State { int memory_size;
+int current_idx;                                                               const double inOpen[];
+                                                               const double inHigh[];
+                                                               const double inLow[];
+                                                               const double inClose[];
+}
+
+
+int TA_CDLHIKKAKEMOD_StateInit( TA_CDLHIKKAKEMOD_State*& _state );
+
+
+int TA_CDLHIKKAKEMOD_State( TA_CDLHIKKAKEMOD_State*& _state,
+                          const double inOpen,
+                          const double inHigh,
+                          const double inLow,
+                          const double inClose,
+                          int           &outInteger );
+
+int TA_CDLHIKKAKEMOD_StateFree( TA_CDLHIKKAKEMOD_State*& _state );
 
 
 /*
@@ -1153,6 +2183,27 @@ TA_RetCode TA_CDLHOMINGPIGEON( int           START_IDX,
 int TA_CDLHOMINGPIGEON_Lookback( void );
 
 
+struct TA_CDLHOMINGPIGEON_State { int memory_size;
+int current_idx;                                                                 const double inOpen[];
+                                                                 const double inHigh[];
+                                                                 const double inLow[];
+                                                                 const double inClose[];
+}
+
+
+int TA_CDLHOMINGPIGEON_StateInit( TA_CDLHOMINGPIGEON_State*& _state );
+
+
+int TA_CDLHOMINGPIGEON_State( TA_CDLHOMINGPIGEON_State*& _state,
+                            const double inOpen,
+                            const double inHigh,
+                            const double inLow,
+                            const double inClose,
+                            int           &outInteger );
+
+int TA_CDLHOMINGPIGEON_StateFree( TA_CDLHOMINGPIGEON_State*& _state );
+
+
 /*
  * TA_CDLIDENTICAL3CROWS - Identical Three Crows
  * 
@@ -1171,6 +2222,27 @@ TA_RetCode TA_CDLIDENTICAL3CROWS( int           START_IDX,
                                   int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLIDENTICAL3CROWS_Lookback( void );
+
+
+struct TA_CDLIDENTICAL3CROWS_State { int memory_size;
+int current_idx;                                                                    const double inOpen[];
+                                                                    const double inHigh[];
+                                                                    const double inLow[];
+                                                                    const double inClose[];
+}
+
+
+int TA_CDLIDENTICAL3CROWS_StateInit( TA_CDLIDENTICAL3CROWS_State*& _state );
+
+
+int TA_CDLIDENTICAL3CROWS_State( TA_CDLIDENTICAL3CROWS_State*& _state,
+                               const double inOpen,
+                               const double inHigh,
+                               const double inLow,
+                               const double inClose,
+                               int           &outInteger );
+
+int TA_CDLIDENTICAL3CROWS_StateFree( TA_CDLIDENTICAL3CROWS_State*& _state );
 
 
 /*
@@ -1193,6 +2265,27 @@ TA_RetCode TA_CDLINNECK( int           START_IDX,
 int TA_CDLINNECK_Lookback( void );
 
 
+struct TA_CDLINNECK_State { int memory_size;
+int current_idx;                                                           const double inOpen[];
+                                                           const double inHigh[];
+                                                           const double inLow[];
+                                                           const double inClose[];
+}
+
+
+int TA_CDLINNECK_StateInit( TA_CDLINNECK_State*& _state );
+
+
+int TA_CDLINNECK_State( TA_CDLINNECK_State*& _state,
+                      const double inOpen,
+                      const double inHigh,
+                      const double inLow,
+                      const double inClose,
+                      int           &outInteger );
+
+int TA_CDLINNECK_StateFree( TA_CDLINNECK_State*& _state );
+
+
 /*
  * TA_CDLINVERTEDHAMMER - Inverted Hammer
  * 
@@ -1211,6 +2304,27 @@ TA_RetCode TA_CDLINVERTEDHAMMER( int           START_IDX,
                                  int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLINVERTEDHAMMER_Lookback( void );
+
+
+struct TA_CDLINVERTEDHAMMER_State { int memory_size;
+int current_idx;                                                                   const double inOpen[];
+                                                                   const double inHigh[];
+                                                                   const double inLow[];
+                                                                   const double inClose[];
+}
+
+
+int TA_CDLINVERTEDHAMMER_StateInit( TA_CDLINVERTEDHAMMER_State*& _state );
+
+
+int TA_CDLINVERTEDHAMMER_State( TA_CDLINVERTEDHAMMER_State*& _state,
+                              const double inOpen,
+                              const double inHigh,
+                              const double inLow,
+                              const double inClose,
+                              int           &outInteger );
+
+int TA_CDLINVERTEDHAMMER_StateFree( TA_CDLINVERTEDHAMMER_State*& _state );
 
 
 /*
@@ -1233,6 +2347,27 @@ TA_RetCode TA_CDLKICKING( int           START_IDX,
 int TA_CDLKICKING_Lookback( void );
 
 
+struct TA_CDLKICKING_State { int memory_size;
+int current_idx;                                                            const double inOpen[];
+                                                            const double inHigh[];
+                                                            const double inLow[];
+                                                            const double inClose[];
+}
+
+
+int TA_CDLKICKING_StateInit( TA_CDLKICKING_State*& _state );
+
+
+int TA_CDLKICKING_State( TA_CDLKICKING_State*& _state,
+                       const double inOpen,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       int           &outInteger );
+
+int TA_CDLKICKING_StateFree( TA_CDLKICKING_State*& _state );
+
+
 /*
  * TA_CDLKICKINGBYLENGTH - Kicking - bull/bear determined by the longer marubozu
  * 
@@ -1251,6 +2386,27 @@ TA_RetCode TA_CDLKICKINGBYLENGTH( int           START_IDX,
                                   int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLKICKINGBYLENGTH_Lookback( void );
+
+
+struct TA_CDLKICKINGBYLENGTH_State { int memory_size;
+int current_idx;                                                                    const double inOpen[];
+                                                                    const double inHigh[];
+                                                                    const double inLow[];
+                                                                    const double inClose[];
+}
+
+
+int TA_CDLKICKINGBYLENGTH_StateInit( TA_CDLKICKINGBYLENGTH_State*& _state );
+
+
+int TA_CDLKICKINGBYLENGTH_State( TA_CDLKICKINGBYLENGTH_State*& _state,
+                               const double inOpen,
+                               const double inHigh,
+                               const double inLow,
+                               const double inClose,
+                               int           &outInteger );
+
+int TA_CDLKICKINGBYLENGTH_StateFree( TA_CDLKICKINGBYLENGTH_State*& _state );
 
 
 /*
@@ -1273,6 +2429,27 @@ TA_RetCode TA_CDLLADDERBOTTOM( int           START_IDX,
 int TA_CDLLADDERBOTTOM_Lookback( void );
 
 
+struct TA_CDLLADDERBOTTOM_State { int memory_size;
+int current_idx;                                                                 const double inOpen[];
+                                                                 const double inHigh[];
+                                                                 const double inLow[];
+                                                                 const double inClose[];
+}
+
+
+int TA_CDLLADDERBOTTOM_StateInit( TA_CDLLADDERBOTTOM_State*& _state );
+
+
+int TA_CDLLADDERBOTTOM_State( TA_CDLLADDERBOTTOM_State*& _state,
+                            const double inOpen,
+                            const double inHigh,
+                            const double inLow,
+                            const double inClose,
+                            int           &outInteger );
+
+int TA_CDLLADDERBOTTOM_StateFree( TA_CDLLADDERBOTTOM_State*& _state );
+
+
 /*
  * TA_CDLLONGLEGGEDDOJI - Long Legged Doji
  * 
@@ -1291,6 +2468,27 @@ TA_RetCode TA_CDLLONGLEGGEDDOJI( int           START_IDX,
                                  int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLLONGLEGGEDDOJI_Lookback( void );
+
+
+struct TA_CDLLONGLEGGEDDOJI_State { int memory_size;
+int current_idx;                                                                   const double inOpen[];
+                                                                   const double inHigh[];
+                                                                   const double inLow[];
+                                                                   const double inClose[];
+}
+
+
+int TA_CDLLONGLEGGEDDOJI_StateInit( TA_CDLLONGLEGGEDDOJI_State*& _state );
+
+
+int TA_CDLLONGLEGGEDDOJI_State( TA_CDLLONGLEGGEDDOJI_State*& _state,
+                              const double inOpen,
+                              const double inHigh,
+                              const double inLow,
+                              const double inClose,
+                              int           &outInteger );
+
+int TA_CDLLONGLEGGEDDOJI_StateFree( TA_CDLLONGLEGGEDDOJI_State*& _state );
 
 
 /*
@@ -1313,6 +2511,27 @@ TA_RetCode TA_CDLLONGLINE( int           START_IDX,
 int TA_CDLLONGLINE_Lookback( void );
 
 
+struct TA_CDLLONGLINE_State { int memory_size;
+int current_idx;                                                             const double inOpen[];
+                                                             const double inHigh[];
+                                                             const double inLow[];
+                                                             const double inClose[];
+}
+
+
+int TA_CDLLONGLINE_StateInit( TA_CDLLONGLINE_State*& _state );
+
+
+int TA_CDLLONGLINE_State( TA_CDLLONGLINE_State*& _state,
+                        const double inOpen,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        int           &outInteger );
+
+int TA_CDLLONGLINE_StateFree( TA_CDLLONGLINE_State*& _state );
+
+
 /*
  * TA_CDLMARUBOZU - Marubozu
  * 
@@ -1333,6 +2552,27 @@ TA_RetCode TA_CDLMARUBOZU( int           START_IDX,
 int TA_CDLMARUBOZU_Lookback( void );
 
 
+struct TA_CDLMARUBOZU_State { int memory_size;
+int current_idx;                                                             const double inOpen[];
+                                                             const double inHigh[];
+                                                             const double inLow[];
+                                                             const double inClose[];
+}
+
+
+int TA_CDLMARUBOZU_StateInit( TA_CDLMARUBOZU_State*& _state );
+
+
+int TA_CDLMARUBOZU_State( TA_CDLMARUBOZU_State*& _state,
+                        const double inOpen,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        int           &outInteger );
+
+int TA_CDLMARUBOZU_StateFree( TA_CDLMARUBOZU_State*& _state );
+
+
 /*
  * TA_CDLMATCHINGLOW - Matching Low
  * 
@@ -1351,6 +2591,27 @@ TA_RetCode TA_CDLMATCHINGLOW( int           START_IDX,
                               int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLMATCHINGLOW_Lookback( void );
+
+
+struct TA_CDLMATCHINGLOW_State { int memory_size;
+int current_idx;                                                                const double inOpen[];
+                                                                const double inHigh[];
+                                                                const double inLow[];
+                                                                const double inClose[];
+}
+
+
+int TA_CDLMATCHINGLOW_StateInit( TA_CDLMATCHINGLOW_State*& _state );
+
+
+int TA_CDLMATCHINGLOW_State( TA_CDLMATCHINGLOW_State*& _state,
+                           const double inOpen,
+                           const double inHigh,
+                           const double inLow,
+                           const double inClose,
+                           int           &outInteger );
+
+int TA_CDLMATCHINGLOW_StateFree( TA_CDLMATCHINGLOW_State*& _state );
 
 
 /*
@@ -1380,6 +2641,30 @@ TA_RetCode TA_CDLMATHOLD( int           START_IDX,
 int TA_CDLMATHOLD_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
+struct TA_CDLMATHOLD_State { int memory_size;
+int current_idx;                                                            const double inOpen[];
+                                                            const double inHigh[];
+                                                            const double inLow[];
+                                                            const double inClose[];
+                                                            double        optInPenetration; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_CDLMATHOLD_StateInit( TA_CDLMATHOLD_State*& _state,
+                           double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_CDLMATHOLD_State( TA_CDLMATHOLD_State*& _state,
+                       const double inOpen,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                       int           &outInteger );
+
+int TA_CDLMATHOLD_StateFree( TA_CDLMATHOLD_State*& _state );
+
+
 /*
  * TA_CDLMORNINGDOJISTAR - Morning Doji Star
  * 
@@ -1405,6 +2690,30 @@ TA_RetCode TA_CDLMORNINGDOJISTAR( int           START_IDX,
                                   int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLMORNINGDOJISTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+struct TA_CDLMORNINGDOJISTAR_State { int memory_size;
+int current_idx;                                                                    const double inOpen[];
+                                                                    const double inHigh[];
+                                                                    const double inLow[];
+                                                                    const double inClose[];
+                                                                    double        optInPenetration; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_CDLMORNINGDOJISTAR_StateInit( TA_CDLMORNINGDOJISTAR_State*& _state,
+                                   double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_CDLMORNINGDOJISTAR_State( TA_CDLMORNINGDOJISTAR_State*& _state,
+                               const double inOpen,
+                               const double inHigh,
+                               const double inLow,
+                               const double inClose,
+                               double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                               int           &outInteger );
+
+int TA_CDLMORNINGDOJISTAR_StateFree( TA_CDLMORNINGDOJISTAR_State*& _state );
 
 
 /*
@@ -1434,6 +2743,30 @@ TA_RetCode TA_CDLMORNINGSTAR( int           START_IDX,
 int TA_CDLMORNINGSTAR_Lookback( double        optInPenetration );  /* From 0 to TA_REAL_MAX */
 
 
+struct TA_CDLMORNINGSTAR_State { int memory_size;
+int current_idx;                                                                const double inOpen[];
+                                                                const double inHigh[];
+                                                                const double inLow[];
+                                                                const double inClose[];
+                                                                double        optInPenetration; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_CDLMORNINGSTAR_StateInit( TA_CDLMORNINGSTAR_State*& _state,
+                               double        optInPenetration );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_CDLMORNINGSTAR_State( TA_CDLMORNINGSTAR_State*& _state,
+                           const double inOpen,
+                           const double inHigh,
+                           const double inLow,
+                           const double inClose,
+                           double        optInPenetration, /* From 0 to TA_REAL_MAX */
+                           int           &outInteger );
+
+int TA_CDLMORNINGSTAR_StateFree( TA_CDLMORNINGSTAR_State*& _state );
+
+
 /*
  * TA_CDLONNECK - On-Neck Pattern
  * 
@@ -1452,6 +2785,27 @@ TA_RetCode TA_CDLONNECK( int           START_IDX,
                          int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLONNECK_Lookback( void );
+
+
+struct TA_CDLONNECK_State { int memory_size;
+int current_idx;                                                           const double inOpen[];
+                                                           const double inHigh[];
+                                                           const double inLow[];
+                                                           const double inClose[];
+}
+
+
+int TA_CDLONNECK_StateInit( TA_CDLONNECK_State*& _state );
+
+
+int TA_CDLONNECK_State( TA_CDLONNECK_State*& _state,
+                      const double inOpen,
+                      const double inHigh,
+                      const double inLow,
+                      const double inClose,
+                      int           &outInteger );
+
+int TA_CDLONNECK_StateFree( TA_CDLONNECK_State*& _state );
 
 
 /*
@@ -1474,6 +2828,27 @@ TA_RetCode TA_CDLPIERCING( int           START_IDX,
 int TA_CDLPIERCING_Lookback( void );
 
 
+struct TA_CDLPIERCING_State { int memory_size;
+int current_idx;                                                             const double inOpen[];
+                                                             const double inHigh[];
+                                                             const double inLow[];
+                                                             const double inClose[];
+}
+
+
+int TA_CDLPIERCING_StateInit( TA_CDLPIERCING_State*& _state );
+
+
+int TA_CDLPIERCING_State( TA_CDLPIERCING_State*& _state,
+                        const double inOpen,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        int           &outInteger );
+
+int TA_CDLPIERCING_StateFree( TA_CDLPIERCING_State*& _state );
+
+
 /*
  * TA_CDLRICKSHAWMAN - Rickshaw Man
  * 
@@ -1492,6 +2867,27 @@ TA_RetCode TA_CDLRICKSHAWMAN( int           START_IDX,
                               int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLRICKSHAWMAN_Lookback( void );
+
+
+struct TA_CDLRICKSHAWMAN_State { int memory_size;
+int current_idx;                                                                const double inOpen[];
+                                                                const double inHigh[];
+                                                                const double inLow[];
+                                                                const double inClose[];
+}
+
+
+int TA_CDLRICKSHAWMAN_StateInit( TA_CDLRICKSHAWMAN_State*& _state );
+
+
+int TA_CDLRICKSHAWMAN_State( TA_CDLRICKSHAWMAN_State*& _state,
+                           const double inOpen,
+                           const double inHigh,
+                           const double inLow,
+                           const double inClose,
+                           int           &outInteger );
+
+int TA_CDLRICKSHAWMAN_StateFree( TA_CDLRICKSHAWMAN_State*& _state );
 
 
 /*
@@ -1514,6 +2910,27 @@ TA_RetCode TA_CDLRISEFALL3METHODS( int           START_IDX,
 int TA_CDLRISEFALL3METHODS_Lookback( void );
 
 
+struct TA_CDLRISEFALL3METHODS_State { int memory_size;
+int current_idx;                                                                     const double inOpen[];
+                                                                     const double inHigh[];
+                                                                     const double inLow[];
+                                                                     const double inClose[];
+}
+
+
+int TA_CDLRISEFALL3METHODS_StateInit( TA_CDLRISEFALL3METHODS_State*& _state );
+
+
+int TA_CDLRISEFALL3METHODS_State( TA_CDLRISEFALL3METHODS_State*& _state,
+                                const double inOpen,
+                                const double inHigh,
+                                const double inLow,
+                                const double inClose,
+                                int           &outInteger );
+
+int TA_CDLRISEFALL3METHODS_StateFree( TA_CDLRISEFALL3METHODS_State*& _state );
+
+
 /*
  * TA_CDLSEPARATINGLINES - Separating Lines
  * 
@@ -1532,6 +2949,27 @@ TA_RetCode TA_CDLSEPARATINGLINES( int           START_IDX,
                                   int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLSEPARATINGLINES_Lookback( void );
+
+
+struct TA_CDLSEPARATINGLINES_State { int memory_size;
+int current_idx;                                                                    const double inOpen[];
+                                                                    const double inHigh[];
+                                                                    const double inLow[];
+                                                                    const double inClose[];
+}
+
+
+int TA_CDLSEPARATINGLINES_StateInit( TA_CDLSEPARATINGLINES_State*& _state );
+
+
+int TA_CDLSEPARATINGLINES_State( TA_CDLSEPARATINGLINES_State*& _state,
+                               const double inOpen,
+                               const double inHigh,
+                               const double inLow,
+                               const double inClose,
+                               int           &outInteger );
+
+int TA_CDLSEPARATINGLINES_StateFree( TA_CDLSEPARATINGLINES_State*& _state );
 
 
 /*
@@ -1554,6 +2992,27 @@ TA_RetCode TA_CDLSHOOTINGSTAR( int           START_IDX,
 int TA_CDLSHOOTINGSTAR_Lookback( void );
 
 
+struct TA_CDLSHOOTINGSTAR_State { int memory_size;
+int current_idx;                                                                 const double inOpen[];
+                                                                 const double inHigh[];
+                                                                 const double inLow[];
+                                                                 const double inClose[];
+}
+
+
+int TA_CDLSHOOTINGSTAR_StateInit( TA_CDLSHOOTINGSTAR_State*& _state );
+
+
+int TA_CDLSHOOTINGSTAR_State( TA_CDLSHOOTINGSTAR_State*& _state,
+                            const double inOpen,
+                            const double inHigh,
+                            const double inLow,
+                            const double inClose,
+                            int           &outInteger );
+
+int TA_CDLSHOOTINGSTAR_StateFree( TA_CDLSHOOTINGSTAR_State*& _state );
+
+
 /*
  * TA_CDLSHORTLINE - Short Line Candle
  * 
@@ -1572,6 +3031,27 @@ TA_RetCode TA_CDLSHORTLINE( int           START_IDX,
                             int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLSHORTLINE_Lookback( void );
+
+
+struct TA_CDLSHORTLINE_State { int memory_size;
+int current_idx;                                                              const double inOpen[];
+                                                              const double inHigh[];
+                                                              const double inLow[];
+                                                              const double inClose[];
+}
+
+
+int TA_CDLSHORTLINE_StateInit( TA_CDLSHORTLINE_State*& _state );
+
+
+int TA_CDLSHORTLINE_State( TA_CDLSHORTLINE_State*& _state,
+                         const double inOpen,
+                         const double inHigh,
+                         const double inLow,
+                         const double inClose,
+                         int           &outInteger );
+
+int TA_CDLSHORTLINE_StateFree( TA_CDLSHORTLINE_State*& _state );
 
 
 /*
@@ -1594,6 +3074,27 @@ TA_RetCode TA_CDLSPINNINGTOP( int           START_IDX,
 int TA_CDLSPINNINGTOP_Lookback( void );
 
 
+struct TA_CDLSPINNINGTOP_State { int memory_size;
+int current_idx;                                                                const double inOpen[];
+                                                                const double inHigh[];
+                                                                const double inLow[];
+                                                                const double inClose[];
+}
+
+
+int TA_CDLSPINNINGTOP_StateInit( TA_CDLSPINNINGTOP_State*& _state );
+
+
+int TA_CDLSPINNINGTOP_State( TA_CDLSPINNINGTOP_State*& _state,
+                           const double inOpen,
+                           const double inHigh,
+                           const double inLow,
+                           const double inClose,
+                           int           &outInteger );
+
+int TA_CDLSPINNINGTOP_StateFree( TA_CDLSPINNINGTOP_State*& _state );
+
+
 /*
  * TA_CDLSTALLEDPATTERN - Stalled Pattern
  * 
@@ -1612,6 +3113,27 @@ TA_RetCode TA_CDLSTALLEDPATTERN( int           START_IDX,
                                  int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLSTALLEDPATTERN_Lookback( void );
+
+
+struct TA_CDLSTALLEDPATTERN_State { int memory_size;
+int current_idx;                                                                   const double inOpen[];
+                                                                   const double inHigh[];
+                                                                   const double inLow[];
+                                                                   const double inClose[];
+}
+
+
+int TA_CDLSTALLEDPATTERN_StateInit( TA_CDLSTALLEDPATTERN_State*& _state );
+
+
+int TA_CDLSTALLEDPATTERN_State( TA_CDLSTALLEDPATTERN_State*& _state,
+                              const double inOpen,
+                              const double inHigh,
+                              const double inLow,
+                              const double inClose,
+                              int           &outInteger );
+
+int TA_CDLSTALLEDPATTERN_StateFree( TA_CDLSTALLEDPATTERN_State*& _state );
 
 
 /*
@@ -1634,6 +3156,27 @@ TA_RetCode TA_CDLSTICKSANDWICH( int           START_IDX,
 int TA_CDLSTICKSANDWICH_Lookback( void );
 
 
+struct TA_CDLSTICKSANDWICH_State { int memory_size;
+int current_idx;                                                                  const double inOpen[];
+                                                                  const double inHigh[];
+                                                                  const double inLow[];
+                                                                  const double inClose[];
+}
+
+
+int TA_CDLSTICKSANDWICH_StateInit( TA_CDLSTICKSANDWICH_State*& _state );
+
+
+int TA_CDLSTICKSANDWICH_State( TA_CDLSTICKSANDWICH_State*& _state,
+                             const double inOpen,
+                             const double inHigh,
+                             const double inLow,
+                             const double inClose,
+                             int           &outInteger );
+
+int TA_CDLSTICKSANDWICH_StateFree( TA_CDLSTICKSANDWICH_State*& _state );
+
+
 /*
  * TA_CDLTAKURI - Takuri (Dragonfly Doji with very long lower shadow)
  * 
@@ -1652,6 +3195,27 @@ TA_RetCode TA_CDLTAKURI( int           START_IDX,
                          int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLTAKURI_Lookback( void );
+
+
+struct TA_CDLTAKURI_State { int memory_size;
+int current_idx;                                                           const double inOpen[];
+                                                           const double inHigh[];
+                                                           const double inLow[];
+                                                           const double inClose[];
+}
+
+
+int TA_CDLTAKURI_StateInit( TA_CDLTAKURI_State*& _state );
+
+
+int TA_CDLTAKURI_State( TA_CDLTAKURI_State*& _state,
+                      const double inOpen,
+                      const double inHigh,
+                      const double inLow,
+                      const double inClose,
+                      int           &outInteger );
+
+int TA_CDLTAKURI_StateFree( TA_CDLTAKURI_State*& _state );
 
 
 /*
@@ -1674,6 +3238,27 @@ TA_RetCode TA_CDLTASUKIGAP( int           START_IDX,
 int TA_CDLTASUKIGAP_Lookback( void );
 
 
+struct TA_CDLTASUKIGAP_State { int memory_size;
+int current_idx;                                                              const double inOpen[];
+                                                              const double inHigh[];
+                                                              const double inLow[];
+                                                              const double inClose[];
+}
+
+
+int TA_CDLTASUKIGAP_StateInit( TA_CDLTASUKIGAP_State*& _state );
+
+
+int TA_CDLTASUKIGAP_State( TA_CDLTASUKIGAP_State*& _state,
+                         const double inOpen,
+                         const double inHigh,
+                         const double inLow,
+                         const double inClose,
+                         int           &outInteger );
+
+int TA_CDLTASUKIGAP_StateFree( TA_CDLTASUKIGAP_State*& _state );
+
+
 /*
  * TA_CDLTHRUSTING - Thrusting Pattern
  * 
@@ -1692,6 +3277,27 @@ TA_RetCode TA_CDLTHRUSTING( int           START_IDX,
                             int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLTHRUSTING_Lookback( void );
+
+
+struct TA_CDLTHRUSTING_State { int memory_size;
+int current_idx;                                                              const double inOpen[];
+                                                              const double inHigh[];
+                                                              const double inLow[];
+                                                              const double inClose[];
+}
+
+
+int TA_CDLTHRUSTING_StateInit( TA_CDLTHRUSTING_State*& _state );
+
+
+int TA_CDLTHRUSTING_State( TA_CDLTHRUSTING_State*& _state,
+                         const double inOpen,
+                         const double inHigh,
+                         const double inLow,
+                         const double inClose,
+                         int           &outInteger );
+
+int TA_CDLTHRUSTING_StateFree( TA_CDLTHRUSTING_State*& _state );
 
 
 /*
@@ -1714,6 +3320,27 @@ TA_RetCode TA_CDLTRISTAR( int           START_IDX,
 int TA_CDLTRISTAR_Lookback( void );
 
 
+struct TA_CDLTRISTAR_State { int memory_size;
+int current_idx;                                                            const double inOpen[];
+                                                            const double inHigh[];
+                                                            const double inLow[];
+                                                            const double inClose[];
+}
+
+
+int TA_CDLTRISTAR_StateInit( TA_CDLTRISTAR_State*& _state );
+
+
+int TA_CDLTRISTAR_State( TA_CDLTRISTAR_State*& _state,
+                       const double inOpen,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       int           &outInteger );
+
+int TA_CDLTRISTAR_StateFree( TA_CDLTRISTAR_State*& _state );
+
+
 /*
  * TA_CDLUNIQUE3RIVER - Unique 3 River
  * 
@@ -1732,6 +3359,27 @@ TA_RetCode TA_CDLUNIQUE3RIVER( int           START_IDX,
                                int          *OUT_ARRAY /* outInteger */ );
 
 int TA_CDLUNIQUE3RIVER_Lookback( void );
+
+
+struct TA_CDLUNIQUE3RIVER_State { int memory_size;
+int current_idx;                                                                 const double inOpen[];
+                                                                 const double inHigh[];
+                                                                 const double inLow[];
+                                                                 const double inClose[];
+}
+
+
+int TA_CDLUNIQUE3RIVER_StateInit( TA_CDLUNIQUE3RIVER_State*& _state );
+
+
+int TA_CDLUNIQUE3RIVER_State( TA_CDLUNIQUE3RIVER_State*& _state,
+                            const double inOpen,
+                            const double inHigh,
+                            const double inLow,
+                            const double inClose,
+                            int           &outInteger );
+
+int TA_CDLUNIQUE3RIVER_StateFree( TA_CDLUNIQUE3RIVER_State*& _state );
 
 
 /*
@@ -1754,6 +3402,27 @@ TA_RetCode TA_CDLUPSIDEGAP2CROWS( int           START_IDX,
 int TA_CDLUPSIDEGAP2CROWS_Lookback( void );
 
 
+struct TA_CDLUPSIDEGAP2CROWS_State { int memory_size;
+int current_idx;                                                                    const double inOpen[];
+                                                                    const double inHigh[];
+                                                                    const double inLow[];
+                                                                    const double inClose[];
+}
+
+
+int TA_CDLUPSIDEGAP2CROWS_StateInit( TA_CDLUPSIDEGAP2CROWS_State*& _state );
+
+
+int TA_CDLUPSIDEGAP2CROWS_State( TA_CDLUPSIDEGAP2CROWS_State*& _state,
+                               const double inOpen,
+                               const double inHigh,
+                               const double inLow,
+                               const double inClose,
+                               int           &outInteger );
+
+int TA_CDLUPSIDEGAP2CROWS_StateFree( TA_CDLUPSIDEGAP2CROWS_State*& _state );
+
+
 /*
  * TA_CDLXSIDEGAP3METHODS - Upside/Downside Gap Three Methods
  * 
@@ -1774,6 +3443,27 @@ TA_RetCode TA_CDLXSIDEGAP3METHODS( int           START_IDX,
 int TA_CDLXSIDEGAP3METHODS_Lookback( void );
 
 
+struct TA_CDLXSIDEGAP3METHODS_State { int memory_size;
+int current_idx;                                                                     const double inOpen[];
+                                                                     const double inHigh[];
+                                                                     const double inLow[];
+                                                                     const double inClose[];
+}
+
+
+int TA_CDLXSIDEGAP3METHODS_StateInit( TA_CDLXSIDEGAP3METHODS_State*& _state );
+
+
+int TA_CDLXSIDEGAP3METHODS_State( TA_CDLXSIDEGAP3METHODS_State*& _state,
+                                const double inOpen,
+                                const double inHigh,
+                                const double inLow,
+                                const double inClose,
+                                int           &outInteger );
+
+int TA_CDLXSIDEGAP3METHODS_StateFree( TA_CDLXSIDEGAP3METHODS_State*& _state );
+
+
 /*
  * TA_CEIL - Vector Ceil
  * 
@@ -1789,6 +3479,21 @@ TA_RetCode TA_CEIL( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_CEIL_Lookback( void );
+
+
+struct TA_CEIL_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+}
+
+
+int TA_CEIL_StateInit( TA_CEIL_State*& _state );
+
+
+int TA_CEIL_State( TA_CEIL_State*& _state,
+                 const double inReal,
+                 double        &outReal );
+
+int TA_CEIL_StateFree( TA_CEIL_State*& _state );
 
 
 /*
@@ -1813,6 +3518,24 @@ TA_RetCode TA_CMO( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_CMO_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_CMO_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_CMO_StateInit( TA_CMO_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_CMO_State( TA_CMO_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_CMO_StateFree( TA_CMO_State*& _state );
 
 
 /*
@@ -1840,6 +3563,26 @@ TA_RetCode TA_CORREL( int           START_IDX,
 int TA_CORREL_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_CORREL_State { int memory_size;
+int current_idx;                                                        const double inReal0[];
+                                                        const double inReal1[];
+                                                        int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_CORREL_StateInit( TA_CORREL_State*& _state,
+                       int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_CORREL_State( TA_CORREL_State*& _state,
+                   const double inReal0,
+                   const double inReal1,
+                   int           optInTimePeriod, /* From 1 to 100000 */
+                   double        &outReal );
+
+int TA_CORREL_StateFree( TA_CORREL_State*& _state );
+
+
 /*
  * TA_COS - Vector Trigonometric Cos
  * 
@@ -1857,6 +3600,21 @@ TA_RetCode TA_COS( int           START_IDX,
 int TA_COS_Lookback( void );
 
 
+struct TA_COS_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+}
+
+
+int TA_COS_StateInit( TA_COS_State*& _state );
+
+
+int TA_COS_State( TA_COS_State*& _state,
+                const double inReal,
+                double        &outReal );
+
+int TA_COS_StateFree( TA_COS_State*& _state );
+
+
 /*
  * TA_COSH - Vector Trigonometric Cosh
  * 
@@ -1872,6 +3630,21 @@ TA_RetCode TA_COSH( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_COSH_Lookback( void );
+
+
+struct TA_COSH_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+}
+
+
+int TA_COSH_StateInit( TA_COSH_State*& _state );
+
+
+int TA_COSH_State( TA_COSH_State*& _state,
+                 const double inReal,
+                 double        &outReal );
+
+int TA_COSH_StateFree( TA_COSH_State*& _state );
 
 
 /*
@@ -1898,6 +3671,24 @@ TA_RetCode TA_DEMA( int           START_IDX,
 int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_DEMA_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_DEMA_StateInit( TA_DEMA_State*& _state,
+                     int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_DEMA_State( TA_DEMA_State*& _state,
+                 const double inReal,
+                 int           optInTimePeriod, /* From 2 to 100000 */
+                 double        &outReal );
+
+int TA_DEMA_StateFree( TA_DEMA_State*& _state );
+
+
 /*
  * TA_DIV - Vector Arithmetic Div
  * 
@@ -1914,6 +3705,23 @@ TA_RetCode TA_DIV( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_DIV_Lookback( void );
+
+
+struct TA_DIV_State { int memory_size;
+int current_idx;                                                     const double inReal0[];
+                                                     const double inReal1[];
+}
+
+
+int TA_DIV_StateInit( TA_DIV_State*& _state );
+
+
+int TA_DIV_State( TA_DIV_State*& _state,
+                const double inReal0,
+                const double inReal1,
+                double        &outReal );
+
+int TA_DIV_StateFree( TA_DIV_State*& _state );
 
 
 /*
@@ -1942,6 +3750,28 @@ TA_RetCode TA_DX( int           START_IDX,
 int TA_DX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_DX_State { int memory_size;
+int current_idx;                                                    const double inHigh[];
+                                                    const double inLow[];
+                                                    const double inClose[];
+                                                    int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_DX_StateInit( TA_DX_State*& _state,
+                   int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_DX_State( TA_DX_State*& _state,
+               const double inHigh,
+               const double inLow,
+               const double inClose,
+               int           optInTimePeriod, /* From 2 to 100000 */
+               double        &outReal );
+
+int TA_DX_StateFree( TA_DX_State*& _state );
+
+
 /*
  * TA_EMA - Exponential Moving Average
  * 
@@ -1966,6 +3796,24 @@ TA_RetCode TA_EMA( int           START_IDX,
 int TA_EMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_EMA_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_EMA_StateInit( TA_EMA_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_EMA_State( TA_EMA_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_EMA_StateFree( TA_EMA_State*& _state );
+
+
 /*
  * TA_EXP - Vector Arithmetic Exp
  * 
@@ -1981,6 +3829,21 @@ TA_RetCode TA_EXP( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_EXP_Lookback( void );
+
+
+struct TA_EXP_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+}
+
+
+int TA_EXP_StateInit( TA_EXP_State*& _state );
+
+
+int TA_EXP_State( TA_EXP_State*& _state,
+                const double inReal,
+                double        &outReal );
+
+int TA_EXP_StateFree( TA_EXP_State*& _state );
 
 
 /*
@@ -2000,6 +3863,21 @@ TA_RetCode TA_FLOOR( int           START_IDX,
 int TA_FLOOR_Lookback( void );
 
 
+struct TA_FLOOR_State { int memory_size;
+int current_idx;                                                       const double inReal[];
+}
+
+
+int TA_FLOOR_StateInit( TA_FLOOR_State*& _state );
+
+
+int TA_FLOOR_State( TA_FLOOR_State*& _state,
+                  const double inReal,
+                  double        &outReal );
+
+int TA_FLOOR_StateFree( TA_FLOOR_State*& _state );
+
+
 /*
  * TA_HT_DCPERIOD - Hilbert Transform - Dominant Cycle Period
  * 
@@ -2017,6 +3895,21 @@ TA_RetCode TA_HT_DCPERIOD( int           START_IDX,
 int TA_HT_DCPERIOD_Lookback( void );
 
 
+struct TA_HT_DCPERIOD_State { int memory_size;
+int current_idx;                                                             const double inReal[];
+}
+
+
+int TA_HT_DCPERIOD_StateInit( TA_HT_DCPERIOD_State*& _state );
+
+
+int TA_HT_DCPERIOD_State( TA_HT_DCPERIOD_State*& _state,
+                        const double inReal,
+                        double        &outReal );
+
+int TA_HT_DCPERIOD_StateFree( TA_HT_DCPERIOD_State*& _state );
+
+
 /*
  * TA_HT_DCPHASE - Hilbert Transform - Dominant Cycle Phase
  * 
@@ -2032,6 +3925,21 @@ TA_RetCode TA_HT_DCPHASE( int           START_IDX,
                           double       *OUT_ARRAY /* outReal */ );
 
 int TA_HT_DCPHASE_Lookback( void );
+
+
+struct TA_HT_DCPHASE_State { int memory_size;
+int current_idx;                                                            const double inReal[];
+}
+
+
+int TA_HT_DCPHASE_StateInit( TA_HT_DCPHASE_State*& _state );
+
+
+int TA_HT_DCPHASE_State( TA_HT_DCPHASE_State*& _state,
+                       const double inReal,
+                       double        &outReal );
+
+int TA_HT_DCPHASE_StateFree( TA_HT_DCPHASE_State*& _state );
 
 
 /*
@@ -2052,6 +3960,22 @@ TA_RetCode TA_HT_PHASOR( int           START_IDX,
 int TA_HT_PHASOR_Lookback( void );
 
 
+struct TA_HT_PHASOR_State { int memory_size;
+int current_idx;                                                           const double inReal[];
+}
+
+
+int TA_HT_PHASOR_StateInit( TA_HT_PHASOR_State*& _state );
+
+
+int TA_HT_PHASOR_State( TA_HT_PHASOR_State*& _state,
+                      const double inReal,
+                      double        &outInPhase,
+                      double        &outQuadrature );
+
+int TA_HT_PHASOR_StateFree( TA_HT_PHASOR_State*& _state );
+
+
 /*
  * TA_HT_SINE - Hilbert Transform - SineWave
  * 
@@ -2068,6 +3992,22 @@ TA_RetCode TA_HT_SINE( int           START_IDX,
                        double       *OUT_ARRAY /* outLeadSine */ );
 
 int TA_HT_SINE_Lookback( void );
+
+
+struct TA_HT_SINE_State { int memory_size;
+int current_idx;                                                         const double inReal[];
+}
+
+
+int TA_HT_SINE_StateInit( TA_HT_SINE_State*& _state );
+
+
+int TA_HT_SINE_State( TA_HT_SINE_State*& _state,
+                    const double inReal,
+                    double        &outSine,
+                    double        &outLeadSine );
+
+int TA_HT_SINE_StateFree( TA_HT_SINE_State*& _state );
 
 
 /*
@@ -2087,6 +4027,21 @@ TA_RetCode TA_HT_TRENDLINE( int           START_IDX,
 int TA_HT_TRENDLINE_Lookback( void );
 
 
+struct TA_HT_TRENDLINE_State { int memory_size;
+int current_idx;                                                              const double inReal[];
+}
+
+
+int TA_HT_TRENDLINE_StateInit( TA_HT_TRENDLINE_State*& _state );
+
+
+int TA_HT_TRENDLINE_State( TA_HT_TRENDLINE_State*& _state,
+                         const double inReal,
+                         double        &outReal );
+
+int TA_HT_TRENDLINE_StateFree( TA_HT_TRENDLINE_State*& _state );
+
+
 /*
  * TA_HT_TRENDMODE - Hilbert Transform - Trend vs Cycle Mode
  * 
@@ -2102,6 +4057,21 @@ TA_RetCode TA_HT_TRENDMODE( int           START_IDX,
                             int          *OUT_ARRAY /* outInteger */ );
 
 int TA_HT_TRENDMODE_Lookback( void );
+
+
+struct TA_HT_TRENDMODE_State { int memory_size;
+int current_idx;                                                              const double inReal[];
+}
+
+
+int TA_HT_TRENDMODE_StateInit( TA_HT_TRENDMODE_State*& _state );
+
+
+int TA_HT_TRENDMODE_State( TA_HT_TRENDMODE_State*& _state,
+                         const double inReal,
+                         int           &outInteger );
+
+int TA_HT_TRENDMODE_StateFree( TA_HT_TRENDMODE_State*& _state );
 
 
 /*
@@ -2129,6 +4099,26 @@ TA_RetCode TA_IMI( int           START_IDX,
 int TA_IMI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_IMI_State { int memory_size;
+int current_idx;                                                     const double inOpen[];
+                                                     const double inClose[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_IMI_StateInit( TA_IMI_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_IMI_State( TA_IMI_State*& _state,
+                const double inOpen,
+                const double inClose,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_IMI_StateFree( TA_IMI_State*& _state );
+
+
 /*
  * TA_KAMA - Kaufman Adaptive Moving Average
  * 
@@ -2151,6 +4141,24 @@ TA_RetCode TA_KAMA( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_KAMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_KAMA_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_KAMA_StateInit( TA_KAMA_State*& _state,
+                     int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_KAMA_State( TA_KAMA_State*& _state,
+                 const double inReal,
+                 int           optInTimePeriod, /* From 2 to 100000 */
+                 double        &outReal );
+
+int TA_KAMA_StateFree( TA_KAMA_State*& _state );
 
 
 /*
@@ -2177,6 +4185,24 @@ TA_RetCode TA_LINEARREG( int           START_IDX,
 int TA_LINEARREG_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_LINEARREG_State { int memory_size;
+int current_idx;                                                           const double inReal[];
+                                                           int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_LINEARREG_StateInit( TA_LINEARREG_State*& _state,
+                          int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_LINEARREG_State( TA_LINEARREG_State*& _state,
+                      const double inReal,
+                      int           optInTimePeriod, /* From 2 to 100000 */
+                      double        &outReal );
+
+int TA_LINEARREG_StateFree( TA_LINEARREG_State*& _state );
+
+
 /*
  * TA_LINEARREG_ANGLE - Linear Regression Angle
  * 
@@ -2199,6 +4225,24 @@ TA_RetCode TA_LINEARREG_ANGLE( int           START_IDX,
                                double       *OUT_ARRAY /* outReal */ );
 
 int TA_LINEARREG_ANGLE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_LINEARREG_ANGLE_State { int memory_size;
+int current_idx;                                                                 const double inReal[];
+                                                                 int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_LINEARREG_ANGLE_StateInit( TA_LINEARREG_ANGLE_State*& _state,
+                                int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_LINEARREG_ANGLE_State( TA_LINEARREG_ANGLE_State*& _state,
+                            const double inReal,
+                            int           optInTimePeriod, /* From 2 to 100000 */
+                            double        &outReal );
+
+int TA_LINEARREG_ANGLE_StateFree( TA_LINEARREG_ANGLE_State*& _state );
 
 
 /*
@@ -2225,6 +4269,24 @@ TA_RetCode TA_LINEARREG_INTERCEPT( int           START_IDX,
 int TA_LINEARREG_INTERCEPT_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_LINEARREG_INTERCEPT_State { int memory_size;
+int current_idx;                                                                     const double inReal[];
+                                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_LINEARREG_INTERCEPT_StateInit( TA_LINEARREG_INTERCEPT_State*& _state,
+                                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_LINEARREG_INTERCEPT_State( TA_LINEARREG_INTERCEPT_State*& _state,
+                                const double inReal,
+                                int           optInTimePeriod, /* From 2 to 100000 */
+                                double        &outReal );
+
+int TA_LINEARREG_INTERCEPT_StateFree( TA_LINEARREG_INTERCEPT_State*& _state );
+
+
 /*
  * TA_LINEARREG_SLOPE - Linear Regression Slope
  * 
@@ -2249,6 +4311,24 @@ TA_RetCode TA_LINEARREG_SLOPE( int           START_IDX,
 int TA_LINEARREG_SLOPE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_LINEARREG_SLOPE_State { int memory_size;
+int current_idx;                                                                 const double inReal[];
+                                                                 int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_LINEARREG_SLOPE_StateInit( TA_LINEARREG_SLOPE_State*& _state,
+                                int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_LINEARREG_SLOPE_State( TA_LINEARREG_SLOPE_State*& _state,
+                            const double inReal,
+                            int           optInTimePeriod, /* From 2 to 100000 */
+                            double        &outReal );
+
+int TA_LINEARREG_SLOPE_StateFree( TA_LINEARREG_SLOPE_State*& _state );
+
+
 /*
  * TA_LN - Vector Log Natural
  * 
@@ -2266,6 +4346,21 @@ TA_RetCode TA_LN( int           START_IDX,
 int TA_LN_Lookback( void );
 
 
+struct TA_LN_State { int memory_size;
+int current_idx;                                                    const double inReal[];
+}
+
+
+int TA_LN_StateInit( TA_LN_State*& _state );
+
+
+int TA_LN_State( TA_LN_State*& _state,
+               const double inReal,
+               double        &outReal );
+
+int TA_LN_StateFree( TA_LN_State*& _state );
+
+
 /*
  * TA_LOG10 - Vector Log10
  * 
@@ -2281,6 +4376,21 @@ TA_RetCode TA_LOG10( int           START_IDX,
                      double       *OUT_ARRAY /* outReal */ );
 
 int TA_LOG10_Lookback( void );
+
+
+struct TA_LOG10_State { int memory_size;
+int current_idx;                                                       const double inReal[];
+}
+
+
+int TA_LOG10_StateInit( TA_LOG10_State*& _state );
+
+
+int TA_LOG10_State( TA_LOG10_State*& _state,
+                  const double inReal,
+                  double        &outReal );
+
+int TA_LOG10_StateFree( TA_LOG10_State*& _state );
 
 
 /*
@@ -2303,13 +4413,30 @@ TA_RetCode TA_MA( int           START_IDX,
                   int           END_IDX,
                   const double *IN_ARRAY /* inReal */,
                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
-                  TA_MAType     OPT_MATYPE /* optInMAType */,
-                  int          *BEG_IDX,
+                  TA_MAType     OPT_MATYPE /* optInMAType */,                  int          *BEG_IDX,
                   int          *OUT_SIZE,
                   double       *OUT_ARRAY /* outReal */ );
 
 int TA_MA_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
                   TA_MAType     optInMAType ); 
+
+struct TA_MA_State { int memory_size;
+int current_idx;                                                    const double inReal[];
+                                                    int           optInTimePeriod; /* From 1 to 100000 */
+                                                    TA_MAType     optInMAType;}
+
+
+int TA_MA_StateInit( TA_MA_State*& _state,
+                   int           optInTimePeriod, /* From 1 to 100000 */
+                   TA_MAType     optInMAType ); 
+
+int TA_MA_State( TA_MA_State*& _state,
+               const double inReal,
+               int           optInTimePeriod, /* From 1 to 100000 */
+               TA_MAType     optInMAType,               double        &outReal );
+
+int TA_MA_StateFree( TA_MA_State*& _state );
+
 
 /*
  * TA_MACD - Moving Average Convergence/Divergence
@@ -2347,6 +4474,32 @@ int TA_MACD_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
                     int           optInSignalPeriod );  /* From 1 to 100000 */
 
 
+struct TA_MACD_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      int           optInFastPeriod; /* From 2 to 100000 */
+                                                      int           optInSlowPeriod; /* From 2 to 100000 */
+                                                      int           optInSignalPeriod; /* From 1 to 100000 */
+}
+
+
+int TA_MACD_StateInit( TA_MACD_State*& _state,
+                     int           optInFastPeriod, /* From 2 to 100000 */
+                     int           optInSlowPeriod, /* From 2 to 100000 */
+                     int           optInSignalPeriod );  /* From 1 to 100000 */
+
+
+int TA_MACD_State( TA_MACD_State*& _state,
+                 const double inReal,
+                 int           optInFastPeriod, /* From 2 to 100000 */
+                 int           optInSlowPeriod, /* From 2 to 100000 */
+                 int           optInSignalPeriod, /* From 1 to 100000 */
+                 double        &outMACD,
+                 double        &outMACDSignal,
+                 double        &outMACDHist );
+
+int TA_MACD_StateFree( TA_MACD_State*& _state );
+
+
 /*
  * TA_MACDEXT - MACD with controllable MA type
  * 
@@ -2379,23 +4532,44 @@ TA_RetCode TA_MACDEXT( int           START_IDX,
                        int           END_IDX,
                        const double *IN_ARRAY /* inReal */,
                        int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
-                       TA_MAType     OPT_MATYPE /* optInFastMAType */,
-                       int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
-                       TA_MAType     OPT_MATYPE /* optInSlowMAType */,
-                       int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
-                       TA_MAType     OPT_MATYPE /* optInSignalMAType */,
-                       int          *BEG_IDX,
+                       TA_MAType     OPT_MATYPE /* optInFastMAType */,                       int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
+                       TA_MAType     OPT_MATYPE /* optInSlowMAType */,                       int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
+                       TA_MAType     OPT_MATYPE /* optInSignalMAType */,                       int          *BEG_IDX,
                        int          *OUT_SIZE,
                        double       *OUT_ARRAY /* outMACD */,
                        double       *OUT_ARRAY /* outMACDSignal */,
                        double       *OUT_ARRAY /* outMACDHist */ );
 
 int TA_MACDEXT_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
-                       TA_MAType     optInFastMAType,
-                       int           optInSlowPeriod, /* From 2 to 100000 */
-                       TA_MAType     optInSlowMAType,
-                       int           optInSignalPeriod, /* From 1 to 100000 */
+                       TA_MAType     optInFastMAType,                       int           optInSlowPeriod, /* From 2 to 100000 */
+                       TA_MAType     optInSlowMAType,                       int           optInSignalPeriod, /* From 1 to 100000 */
                        TA_MAType     optInSignalMAType ); 
+
+struct TA_MACDEXT_State { int memory_size;
+int current_idx;                                                         const double inReal[];
+                                                         int           optInFastPeriod; /* From 2 to 100000 */
+                                                         TA_MAType     optInFastMAType;                                                         int           optInSlowPeriod; /* From 2 to 100000 */
+                                                         TA_MAType     optInSlowMAType;                                                         int           optInSignalPeriod; /* From 1 to 100000 */
+                                                         TA_MAType     optInSignalMAType;}
+
+
+int TA_MACDEXT_StateInit( TA_MACDEXT_State*& _state,
+                        int           optInFastPeriod, /* From 2 to 100000 */
+                        TA_MAType     optInFastMAType,                        int           optInSlowPeriod, /* From 2 to 100000 */
+                        TA_MAType     optInSlowMAType,                        int           optInSignalPeriod, /* From 1 to 100000 */
+                        TA_MAType     optInSignalMAType ); 
+
+int TA_MACDEXT_State( TA_MACDEXT_State*& _state,
+                    const double inReal,
+                    int           optInFastPeriod, /* From 2 to 100000 */
+                    TA_MAType     optInFastMAType,                    int           optInSlowPeriod, /* From 2 to 100000 */
+                    TA_MAType     optInSlowMAType,                    int           optInSignalPeriod, /* From 1 to 100000 */
+                    TA_MAType     optInSignalMAType,                    double        &outMACD,
+                    double        &outMACDSignal,
+                    double        &outMACDHist );
+
+int TA_MACDEXT_StateFree( TA_MACDEXT_State*& _state );
+
 
 /*
  * TA_MACDFIX - Moving Average Convergence/Divergence Fix 12/26
@@ -2421,6 +4595,26 @@ TA_RetCode TA_MACDFIX( int           START_IDX,
                        double       *OUT_ARRAY /* outMACDHist */ );
 
 int TA_MACDFIX_Lookback( int           optInSignalPeriod );  /* From 1 to 100000 */
+
+
+struct TA_MACDFIX_State { int memory_size;
+int current_idx;                                                         const double inReal[];
+                                                         int           optInSignalPeriod; /* From 1 to 100000 */
+}
+
+
+int TA_MACDFIX_StateInit( TA_MACDFIX_State*& _state,
+                        int           optInSignalPeriod );  /* From 1 to 100000 */
+
+
+int TA_MACDFIX_State( TA_MACDFIX_State*& _state,
+                    const double inReal,
+                    int           optInSignalPeriod, /* From 1 to 100000 */
+                    double        &outMACD,
+                    double        &outMACDSignal,
+                    double        &outMACDHist );
+
+int TA_MACDFIX_StateFree( TA_MACDFIX_State*& _state );
 
 
 /*
@@ -2453,6 +4647,28 @@ int TA_MAMA_Lookback( double        optInFastLimit, /* From 0.01 to 0.99 */
                     double        optInSlowLimit );  /* From 0.01 to 0.99 */
 
 
+struct TA_MAMA_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      double        optInFastLimit; /* From 0.01 to 0.99 */
+                                                      double        optInSlowLimit; /* From 0.01 to 0.99 */
+}
+
+
+int TA_MAMA_StateInit( TA_MAMA_State*& _state,
+                     double        optInFastLimit, /* From 0.01 to 0.99 */
+                     double        optInSlowLimit );  /* From 0.01 to 0.99 */
+
+
+int TA_MAMA_State( TA_MAMA_State*& _state,
+                 const double inReal,
+                 double        optInFastLimit, /* From 0.01 to 0.99 */
+                 double        optInSlowLimit, /* From 0.01 to 0.99 */
+                 double        &outMAMA,
+                 double        &outFAMA );
+
+int TA_MAMA_StateFree( TA_MAMA_State*& _state );
+
+
 /*
  * TA_MAVP - Moving average with variable period
  * 
@@ -2478,14 +4694,36 @@ TA_RetCode TA_MAVP( int           START_IDX,
                     const double *IN_ARRAY /* inPeriods */,
                     int           OPT_INT /* optInMinPeriod */, /* From 2 to 100000 */
                     int           OPT_INT /* optInMaxPeriod */, /* From 2 to 100000 */
-                    TA_MAType     OPT_MATYPE /* optInMAType */,
-                    int          *BEG_IDX,
+                    TA_MAType     OPT_MATYPE /* optInMAType */,                    int          *BEG_IDX,
                     int          *OUT_SIZE,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_MAVP_Lookback( int           optInMinPeriod, /* From 2 to 100000 */
                     int           optInMaxPeriod, /* From 2 to 100000 */
                     TA_MAType     optInMAType ); 
+
+struct TA_MAVP_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      const double inPeriods[];
+                                                      int           optInMinPeriod; /* From 2 to 100000 */
+                                                      int           optInMaxPeriod; /* From 2 to 100000 */
+                                                      TA_MAType     optInMAType;}
+
+
+int TA_MAVP_StateInit( TA_MAVP_State*& _state,
+                     int           optInMinPeriod, /* From 2 to 100000 */
+                     int           optInMaxPeriod, /* From 2 to 100000 */
+                     TA_MAType     optInMAType ); 
+
+int TA_MAVP_State( TA_MAVP_State*& _state,
+                 const double inReal,
+                 const double inPeriods,
+                 int           optInMinPeriod, /* From 2 to 100000 */
+                 int           optInMaxPeriod, /* From 2 to 100000 */
+                 TA_MAType     optInMAType,                 double        &outReal );
+
+int TA_MAVP_StateFree( TA_MAVP_State*& _state );
+
 
 /*
  * TA_MAX - Highest value over a specified period
@@ -2509,6 +4747,24 @@ TA_RetCode TA_MAX( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_MAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_MAX_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MAX_StateInit( TA_MAX_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MAX_State( TA_MAX_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_MAX_StateFree( TA_MAX_State*& _state );
 
 
 /*
@@ -2535,6 +4791,24 @@ TA_RetCode TA_MAXINDEX( int           START_IDX,
 int TA_MAXINDEX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_MAXINDEX_State { int memory_size;
+int current_idx;                                                          const double inReal[];
+                                                          int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MAXINDEX_StateInit( TA_MAXINDEX_State*& _state,
+                         int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MAXINDEX_State( TA_MAXINDEX_State*& _state,
+                     const double inReal,
+                     int           optInTimePeriod, /* From 2 to 100000 */
+                     int           &outInteger );
+
+int TA_MAXINDEX_StateFree( TA_MAXINDEX_State*& _state );
+
+
 /*
  * TA_MEDPRICE - Median Price
  * 
@@ -2551,6 +4825,23 @@ TA_RetCode TA_MEDPRICE( int           START_IDX,
                         double       *OUT_ARRAY /* outReal */ );
 
 int TA_MEDPRICE_Lookback( void );
+
+
+struct TA_MEDPRICE_State { int memory_size;
+int current_idx;                                                          const double inHigh[];
+                                                          const double inLow[];
+}
+
+
+int TA_MEDPRICE_StateInit( TA_MEDPRICE_State*& _state );
+
+
+int TA_MEDPRICE_State( TA_MEDPRICE_State*& _state,
+                     const double inHigh,
+                     const double inLow,
+                     double        &outReal );
+
+int TA_MEDPRICE_StateFree( TA_MEDPRICE_State*& _state );
 
 
 /*
@@ -2580,6 +4871,30 @@ TA_RetCode TA_MFI( int           START_IDX,
 int TA_MFI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_MFI_State { int memory_size;
+int current_idx;                                                     const double inHigh[];
+                                                     const double inLow[];
+                                                     const double inClose[];
+                                                     const double inVolume[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MFI_StateInit( TA_MFI_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MFI_State( TA_MFI_State*& _state,
+                const double inHigh,
+                const double inLow,
+                const double inClose,
+                const double inVolume,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_MFI_StateFree( TA_MFI_State*& _state );
+
+
 /*
  * TA_MIDPOINT - MidPoint over period
  * 
@@ -2602,6 +4917,24 @@ TA_RetCode TA_MIDPOINT( int           START_IDX,
                         double       *OUT_ARRAY /* outReal */ );
 
 int TA_MIDPOINT_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_MIDPOINT_State { int memory_size;
+int current_idx;                                                          const double inReal[];
+                                                          int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MIDPOINT_StateInit( TA_MIDPOINT_State*& _state,
+                         int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MIDPOINT_State( TA_MIDPOINT_State*& _state,
+                     const double inReal,
+                     int           optInTimePeriod, /* From 2 to 100000 */
+                     double        &outReal );
+
+int TA_MIDPOINT_StateFree( TA_MIDPOINT_State*& _state );
 
 
 /*
@@ -2629,6 +4962,26 @@ TA_RetCode TA_MIDPRICE( int           START_IDX,
 int TA_MIDPRICE_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_MIDPRICE_State { int memory_size;
+int current_idx;                                                          const double inHigh[];
+                                                          const double inLow[];
+                                                          int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MIDPRICE_StateInit( TA_MIDPRICE_State*& _state,
+                         int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MIDPRICE_State( TA_MIDPRICE_State*& _state,
+                     const double inHigh,
+                     const double inLow,
+                     int           optInTimePeriod, /* From 2 to 100000 */
+                     double        &outReal );
+
+int TA_MIDPRICE_StateFree( TA_MIDPRICE_State*& _state );
+
+
 /*
  * TA_MIN - Lowest value over a specified period
  * 
@@ -2653,6 +5006,24 @@ TA_RetCode TA_MIN( int           START_IDX,
 int TA_MIN_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_MIN_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MIN_StateInit( TA_MIN_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MIN_State( TA_MIN_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_MIN_StateFree( TA_MIN_State*& _state );
+
+
 /*
  * TA_MININDEX - Index of lowest value over a specified period
  * 
@@ -2675,6 +5046,24 @@ TA_RetCode TA_MININDEX( int           START_IDX,
                         int          *OUT_ARRAY /* outInteger */ );
 
 int TA_MININDEX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_MININDEX_State { int memory_size;
+int current_idx;                                                          const double inReal[];
+                                                          int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MININDEX_StateInit( TA_MININDEX_State*& _state,
+                         int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MININDEX_State( TA_MININDEX_State*& _state,
+                     const double inReal,
+                     int           optInTimePeriod, /* From 2 to 100000 */
+                     int           &outInteger );
+
+int TA_MININDEX_StateFree( TA_MININDEX_State*& _state );
 
 
 /*
@@ -2702,6 +5091,25 @@ TA_RetCode TA_MINMAX( int           START_IDX,
 int TA_MINMAX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_MINMAX_State { int memory_size;
+int current_idx;                                                        const double inReal[];
+                                                        int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MINMAX_StateInit( TA_MINMAX_State*& _state,
+                       int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MINMAX_State( TA_MINMAX_State*& _state,
+                   const double inReal,
+                   int           optInTimePeriod, /* From 2 to 100000 */
+                   double        &outMin,
+                   double        &outMax );
+
+int TA_MINMAX_StateFree( TA_MINMAX_State*& _state );
+
+
 /*
  * TA_MINMAXINDEX - Indexes of lowest and highest values over a specified period
  * 
@@ -2725,6 +5133,25 @@ TA_RetCode TA_MINMAXINDEX( int           START_IDX,
                            int          *OUT_ARRAY /* outMaxIdx */ );
 
 int TA_MINMAXINDEX_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_MINMAXINDEX_State { int memory_size;
+int current_idx;                                                             const double inReal[];
+                                                             int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_MINMAXINDEX_StateInit( TA_MINMAXINDEX_State*& _state,
+                            int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_MINMAXINDEX_State( TA_MINMAXINDEX_State*& _state,
+                        const double inReal,
+                        int           optInTimePeriod, /* From 2 to 100000 */
+                        int           &outMinIdx,
+                        int           &outMaxIdx );
+
+int TA_MINMAXINDEX_StateFree( TA_MINMAXINDEX_State*& _state );
 
 
 /*
@@ -2753,6 +5180,28 @@ TA_RetCode TA_MINUS_DI( int           START_IDX,
 int TA_MINUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_MINUS_DI_State { int memory_size;
+int current_idx;                                                          const double inHigh[];
+                                                          const double inLow[];
+                                                          const double inClose[];
+                                                          int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_MINUS_DI_StateInit( TA_MINUS_DI_State*& _state,
+                         int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_MINUS_DI_State( TA_MINUS_DI_State*& _state,
+                     const double inHigh,
+                     const double inLow,
+                     const double inClose,
+                     int           optInTimePeriod, /* From 1 to 100000 */
+                     double        &outReal );
+
+int TA_MINUS_DI_StateFree( TA_MINUS_DI_State*& _state );
+
+
 /*
  * TA_MINUS_DM - Minus Directional Movement
  * 
@@ -2776,6 +5225,26 @@ TA_RetCode TA_MINUS_DM( int           START_IDX,
                         double       *OUT_ARRAY /* outReal */ );
 
 int TA_MINUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_MINUS_DM_State { int memory_size;
+int current_idx;                                                          const double inHigh[];
+                                                          const double inLow[];
+                                                          int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_MINUS_DM_StateInit( TA_MINUS_DM_State*& _state,
+                         int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_MINUS_DM_State( TA_MINUS_DM_State*& _state,
+                     const double inHigh,
+                     const double inLow,
+                     int           optInTimePeriod, /* From 1 to 100000 */
+                     double        &outReal );
+
+int TA_MINUS_DM_StateFree( TA_MINUS_DM_State*& _state );
 
 
 /*
@@ -2802,6 +5271,24 @@ TA_RetCode TA_MOM( int           START_IDX,
 int TA_MOM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_MOM_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_MOM_StateInit( TA_MOM_State*& _state,
+                    int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_MOM_State( TA_MOM_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 1 to 100000 */
+                double        &outReal );
+
+int TA_MOM_StateFree( TA_MOM_State*& _state );
+
+
 /*
  * TA_MULT - Vector Arithmetic Mult
  * 
@@ -2818,6 +5305,23 @@ TA_RetCode TA_MULT( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_MULT_Lookback( void );
+
+
+struct TA_MULT_State { int memory_size;
+int current_idx;                                                      const double inReal0[];
+                                                      const double inReal1[];
+}
+
+
+int TA_MULT_StateInit( TA_MULT_State*& _state );
+
+
+int TA_MULT_State( TA_MULT_State*& _state,
+                 const double inReal0,
+                 const double inReal1,
+                 double        &outReal );
+
+int TA_MULT_StateFree( TA_MULT_State*& _state );
 
 
 /*
@@ -2846,6 +5350,28 @@ TA_RetCode TA_NATR( int           START_IDX,
 int TA_NATR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_NATR_State { int memory_size;
+int current_idx;                                                      const double inHigh[];
+                                                      const double inLow[];
+                                                      const double inClose[];
+                                                      int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_NATR_StateInit( TA_NATR_State*& _state,
+                     int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_NATR_State( TA_NATR_State*& _state,
+                 const double inHigh,
+                 const double inLow,
+                 const double inClose,
+                 int           optInTimePeriod, /* From 1 to 100000 */
+                 double        &outReal );
+
+int TA_NATR_StateFree( TA_NATR_State*& _state );
+
+
 /*
  * TA_OBV - On Balance Volume
  * 
@@ -2862,6 +5388,23 @@ TA_RetCode TA_OBV( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_OBV_Lookback( void );
+
+
+struct TA_OBV_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     const double inVolume[];
+}
+
+
+int TA_OBV_StateInit( TA_OBV_State*& _state );
+
+
+int TA_OBV_State( TA_OBV_State*& _state,
+                const double inReal,
+                const double inVolume,
+                double        &outReal );
+
+int TA_OBV_StateFree( TA_OBV_State*& _state );
 
 
 /*
@@ -2890,6 +5433,28 @@ TA_RetCode TA_PLUS_DI( int           START_IDX,
 int TA_PLUS_DI_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_PLUS_DI_State { int memory_size;
+int current_idx;                                                         const double inHigh[];
+                                                         const double inLow[];
+                                                         const double inClose[];
+                                                         int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_PLUS_DI_StateInit( TA_PLUS_DI_State*& _state,
+                        int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_PLUS_DI_State( TA_PLUS_DI_State*& _state,
+                    const double inHigh,
+                    const double inLow,
+                    const double inClose,
+                    int           optInTimePeriod, /* From 1 to 100000 */
+                    double        &outReal );
+
+int TA_PLUS_DI_StateFree( TA_PLUS_DI_State*& _state );
+
+
 /*
  * TA_PLUS_DM - Plus Directional Movement
  * 
@@ -2913,6 +5478,26 @@ TA_RetCode TA_PLUS_DM( int           START_IDX,
                        double       *OUT_ARRAY /* outReal */ );
 
 int TA_PLUS_DM_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_PLUS_DM_State { int memory_size;
+int current_idx;                                                         const double inHigh[];
+                                                         const double inLow[];
+                                                         int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_PLUS_DM_StateInit( TA_PLUS_DM_State*& _state,
+                        int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_PLUS_DM_State( TA_PLUS_DM_State*& _state,
+                    const double inHigh,
+                    const double inLow,
+                    int           optInTimePeriod, /* From 1 to 100000 */
+                    double        &outReal );
+
+int TA_PLUS_DM_StateFree( TA_PLUS_DM_State*& _state );
 
 
 /*
@@ -2939,14 +5524,34 @@ TA_RetCode TA_PPO( int           START_IDX,
                    const double *IN_ARRAY /* inReal */,
                    int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
                    int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
-                   TA_MAType     OPT_MATYPE /* optInMAType */,
-                   int          *BEG_IDX,
+                   TA_MAType     OPT_MATYPE /* optInMAType */,                   int          *BEG_IDX,
                    int          *OUT_SIZE,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_PPO_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
                    int           optInSlowPeriod, /* From 2 to 100000 */
                    TA_MAType     optInMAType ); 
+
+struct TA_PPO_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInFastPeriod; /* From 2 to 100000 */
+                                                     int           optInSlowPeriod; /* From 2 to 100000 */
+                                                     TA_MAType     optInMAType;}
+
+
+int TA_PPO_StateInit( TA_PPO_State*& _state,
+                    int           optInFastPeriod, /* From 2 to 100000 */
+                    int           optInSlowPeriod, /* From 2 to 100000 */
+                    TA_MAType     optInMAType ); 
+
+int TA_PPO_State( TA_PPO_State*& _state,
+                const double inReal,
+                int           optInFastPeriod, /* From 2 to 100000 */
+                int           optInSlowPeriod, /* From 2 to 100000 */
+                TA_MAType     optInMAType,                double        &outReal );
+
+int TA_PPO_StateFree( TA_PPO_State*& _state );
+
 
 /*
  * TA_ROC - Rate of change : ((price/prevPrice)-1)*100
@@ -2970,6 +5575,24 @@ TA_RetCode TA_ROC( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_ROC_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_ROC_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_ROC_StateInit( TA_ROC_State*& _state,
+                    int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_ROC_State( TA_ROC_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 1 to 100000 */
+                double        &outReal );
+
+int TA_ROC_StateFree( TA_ROC_State*& _state );
 
 
 /*
@@ -2996,6 +5619,24 @@ TA_RetCode TA_ROCP( int           START_IDX,
 int TA_ROCP_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_ROCP_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_ROCP_StateInit( TA_ROCP_State*& _state,
+                     int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_ROCP_State( TA_ROCP_State*& _state,
+                 const double inReal,
+                 int           optInTimePeriod, /* From 1 to 100000 */
+                 double        &outReal );
+
+int TA_ROCP_StateFree( TA_ROCP_State*& _state );
+
+
 /*
  * TA_ROCR - Rate of change ratio: (price/prevPrice)
  * 
@@ -3018,6 +5659,24 @@ TA_RetCode TA_ROCR( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_ROCR_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_ROCR_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_ROCR_StateInit( TA_ROCR_State*& _state,
+                     int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_ROCR_State( TA_ROCR_State*& _state,
+                 const double inReal,
+                 int           optInTimePeriod, /* From 1 to 100000 */
+                 double        &outReal );
+
+int TA_ROCR_StateFree( TA_ROCR_State*& _state );
 
 
 /*
@@ -3044,6 +5703,24 @@ TA_RetCode TA_ROCR100( int           START_IDX,
 int TA_ROCR100_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
+struct TA_ROCR100_State { int memory_size;
+int current_idx;                                                         const double inReal[];
+                                                         int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_ROCR100_StateInit( TA_ROCR100_State*& _state,
+                        int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_ROCR100_State( TA_ROCR100_State*& _state,
+                    const double inReal,
+                    int           optInTimePeriod, /* From 1 to 100000 */
+                    double        &outReal );
+
+int TA_ROCR100_StateFree( TA_ROCR100_State*& _state );
+
+
 /*
  * TA_RSI - Relative Strength Index
  * 
@@ -3066,6 +5743,24 @@ TA_RetCode TA_RSI( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_RSI_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_RSI_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_RSI_StateInit( TA_RSI_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_RSI_State( TA_RSI_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_RSI_StateFree( TA_RSI_State*& _state );
 
 
 /*
@@ -3096,6 +5791,29 @@ TA_RetCode TA_SAR( int           START_IDX,
 
 int TA_SAR_Lookback( double        optInAcceleration, /* From 0 to TA_REAL_MAX */
                    double        optInMaximum );  /* From 0 to TA_REAL_MAX */
+
+
+struct TA_SAR_State { int memory_size;
+int current_idx;                                                     const double inHigh[];
+                                                     const double inLow[];
+                                                     double        optInAcceleration; /* From 0 to TA_REAL_MAX */
+                                                     double        optInMaximum; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_SAR_StateInit( TA_SAR_State*& _state,
+                    double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+                    double        optInMaximum );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_SAR_State( TA_SAR_State*& _state,
+                const double inHigh,
+                const double inLow,
+                double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+                double        optInMaximum, /* From 0 to TA_REAL_MAX */
+                double        &outReal );
+
+int TA_SAR_StateFree( TA_SAR_State*& _state );
 
 
 /*
@@ -3158,6 +5876,47 @@ int TA_SAREXT_Lookback( double        optInStartValue, /* From TA_REAL_MIN to TA
                       double        optInAccelerationMaxShort );  /* From 0 to TA_REAL_MAX */
 
 
+struct TA_SAREXT_State { int memory_size;
+int current_idx;                                                        const double inHigh[];
+                                                        const double inLow[];
+                                                        double        optInStartValue; /* From TA_REAL_MIN to TA_REAL_MAX */
+                                                        double        optInOffsetOnReverse; /* From 0 to TA_REAL_MAX */
+                                                        double        optInAccelerationInitLong; /* From 0 to TA_REAL_MAX */
+                                                        double        optInAccelerationLong; /* From 0 to TA_REAL_MAX */
+                                                        double        optInAccelerationMaxLong; /* From 0 to TA_REAL_MAX */
+                                                        double        optInAccelerationInitShort; /* From 0 to TA_REAL_MAX */
+                                                        double        optInAccelerationShort; /* From 0 to TA_REAL_MAX */
+                                                        double        optInAccelerationMaxShort; /* From 0 to TA_REAL_MAX */
+}
+
+
+int TA_SAREXT_StateInit( TA_SAREXT_State*& _state,
+                       double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+                       double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+                       double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+                       double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+                       double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+                       double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+                       double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+                       double        optInAccelerationMaxShort );  /* From 0 to TA_REAL_MAX */
+
+
+int TA_SAREXT_State( TA_SAREXT_State*& _state,
+                   const double inHigh,
+                   const double inLow,
+                   double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+                   double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+                   double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+                   double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+                   double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+                   double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+                   double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+                   double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
+                   double        &outReal );
+
+int TA_SAREXT_StateFree( TA_SAREXT_State*& _state );
+
+
 /*
  * TA_SIN - Vector Trigonometric Sin
  * 
@@ -3175,6 +5934,21 @@ TA_RetCode TA_SIN( int           START_IDX,
 int TA_SIN_Lookback( void );
 
 
+struct TA_SIN_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+}
+
+
+int TA_SIN_StateInit( TA_SIN_State*& _state );
+
+
+int TA_SIN_State( TA_SIN_State*& _state,
+                const double inReal,
+                double        &outReal );
+
+int TA_SIN_StateFree( TA_SIN_State*& _state );
+
+
 /*
  * TA_SINH - Vector Trigonometric Sinh
  * 
@@ -3190,6 +5964,21 @@ TA_RetCode TA_SINH( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_SINH_Lookback( void );
+
+
+struct TA_SINH_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+}
+
+
+int TA_SINH_StateInit( TA_SINH_State*& _state );
+
+
+int TA_SINH_State( TA_SINH_State*& _state,
+                 const double inReal,
+                 double        &outReal );
+
+int TA_SINH_StateFree( TA_SINH_State*& _state );
 
 
 /*
@@ -3216,6 +6005,24 @@ TA_RetCode TA_SMA( int           START_IDX,
 int TA_SMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_SMA_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_SMA_StateInit( TA_SMA_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_SMA_State( TA_SMA_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_SMA_StateFree( TA_SMA_State*& _state );
+
+
 /*
  * TA_SQRT - Vector Square Root
  * 
@@ -3231,6 +6038,21 @@ TA_RetCode TA_SQRT( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_SQRT_Lookback( void );
+
+
+struct TA_SQRT_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+}
+
+
+int TA_SQRT_StateInit( TA_SQRT_State*& _state );
+
+
+int TA_SQRT_State( TA_SQRT_State*& _state,
+                 const double inReal,
+                 double        &outReal );
+
+int TA_SQRT_StateFree( TA_SQRT_State*& _state );
 
 
 /*
@@ -3260,6 +6082,27 @@ TA_RetCode TA_STDDEV( int           START_IDX,
 
 int TA_STDDEV_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                       double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
+
+
+struct TA_STDDEV_State { int memory_size;
+int current_idx;                                                        const double inReal[];
+                                                        int           optInTimePeriod; /* From 2 to 100000 */
+                                                        double        optInNbDev; /* From TA_REAL_MIN to TA_REAL_MAX */
+}
+
+
+int TA_STDDEV_StateInit( TA_STDDEV_State*& _state,
+                       int           optInTimePeriod, /* From 2 to 100000 */
+                       double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
+
+
+int TA_STDDEV_State( TA_STDDEV_State*& _state,
+                   const double inReal,
+                   int           optInTimePeriod, /* From 2 to 100000 */
+                   double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
+                   double        &outReal );
+
+int TA_STDDEV_StateFree( TA_STDDEV_State*& _state );
 
 
 /*
@@ -3294,19 +6137,45 @@ TA_RetCode TA_STOCH( int           START_IDX,
                      const double *IN_ARRAY /* inClose */,
                      int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
                      int           OPT_INT /* optInSlowK_Period */, /* From 1 to 100000 */
-                     TA_MAType     OPT_MATYPE /* optInSlowK_MAType */,
-                     int           OPT_INT /* optInSlowD_Period */, /* From 1 to 100000 */
-                     TA_MAType     OPT_MATYPE /* optInSlowD_MAType */,
-                     int          *BEG_IDX,
+                     TA_MAType     OPT_MATYPE /* optInSlowK_MAType */,                     int           OPT_INT /* optInSlowD_Period */, /* From 1 to 100000 */
+                     TA_MAType     OPT_MATYPE /* optInSlowD_MAType */,                     int          *BEG_IDX,
                      int          *OUT_SIZE,
                      double       *OUT_ARRAY /* outSlowK */,
                      double       *OUT_ARRAY /* outSlowD */ );
 
 int TA_STOCH_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
                      int           optInSlowK_Period, /* From 1 to 100000 */
-                     TA_MAType     optInSlowK_MAType,
-                     int           optInSlowD_Period, /* From 1 to 100000 */
+                     TA_MAType     optInSlowK_MAType,                     int           optInSlowD_Period, /* From 1 to 100000 */
                      TA_MAType     optInSlowD_MAType ); 
+
+struct TA_STOCH_State { int memory_size;
+int current_idx;                                                       const double inHigh[];
+                                                       const double inLow[];
+                                                       const double inClose[];
+                                                       int           optInFastK_Period; /* From 1 to 100000 */
+                                                       int           optInSlowK_Period; /* From 1 to 100000 */
+                                                       TA_MAType     optInSlowK_MAType;                                                       int           optInSlowD_Period; /* From 1 to 100000 */
+                                                       TA_MAType     optInSlowD_MAType;}
+
+
+int TA_STOCH_StateInit( TA_STOCH_State*& _state,
+                      int           optInFastK_Period, /* From 1 to 100000 */
+                      int           optInSlowK_Period, /* From 1 to 100000 */
+                      TA_MAType     optInSlowK_MAType,                      int           optInSlowD_Period, /* From 1 to 100000 */
+                      TA_MAType     optInSlowD_MAType ); 
+
+int TA_STOCH_State( TA_STOCH_State*& _state,
+                  const double inHigh,
+                  const double inLow,
+                  const double inClose,
+                  int           optInFastK_Period, /* From 1 to 100000 */
+                  int           optInSlowK_Period, /* From 1 to 100000 */
+                  TA_MAType     optInSlowK_MAType,                  int           optInSlowD_Period, /* From 1 to 100000 */
+                  TA_MAType     optInSlowD_MAType,                  double        &outSlowK,
+                  double        &outSlowD );
+
+int TA_STOCH_StateFree( TA_STOCH_State*& _state );
+
 
 /*
  * TA_STOCHF - Stochastic Fast
@@ -3334,8 +6203,7 @@ TA_RetCode TA_STOCHF( int           START_IDX,
                       const double *IN_ARRAY /* inClose */,
                       int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
                       int           OPT_INT /* optInFastD_Period */, /* From 1 to 100000 */
-                      TA_MAType     OPT_MATYPE /* optInFastD_MAType */,
-                      int          *BEG_IDX,
+                      TA_MAType     OPT_MATYPE /* optInFastD_MAType */,                      int          *BEG_IDX,
                       int          *OUT_SIZE,
                       double       *OUT_ARRAY /* outFastK */,
                       double       *OUT_ARRAY /* outFastD */ );
@@ -3343,6 +6211,32 @@ TA_RetCode TA_STOCHF( int           START_IDX,
 int TA_STOCHF_Lookback( int           optInFastK_Period, /* From 1 to 100000 */
                       int           optInFastD_Period, /* From 1 to 100000 */
                       TA_MAType     optInFastD_MAType ); 
+
+struct TA_STOCHF_State { int memory_size;
+int current_idx;                                                        const double inHigh[];
+                                                        const double inLow[];
+                                                        const double inClose[];
+                                                        int           optInFastK_Period; /* From 1 to 100000 */
+                                                        int           optInFastD_Period; /* From 1 to 100000 */
+                                                        TA_MAType     optInFastD_MAType;}
+
+
+int TA_STOCHF_StateInit( TA_STOCHF_State*& _state,
+                       int           optInFastK_Period, /* From 1 to 100000 */
+                       int           optInFastD_Period, /* From 1 to 100000 */
+                       TA_MAType     optInFastD_MAType ); 
+
+int TA_STOCHF_State( TA_STOCHF_State*& _state,
+                   const double inHigh,
+                   const double inLow,
+                   const double inClose,
+                   int           optInFastK_Period, /* From 1 to 100000 */
+                   int           optInFastD_Period, /* From 1 to 100000 */
+                   TA_MAType     optInFastD_MAType,                   double        &outFastK,
+                   double        &outFastD );
+
+int TA_STOCHF_StateFree( TA_STOCHF_State*& _state );
+
 
 /*
  * TA_STOCHRSI - Stochastic Relative Strength Index
@@ -3372,8 +6266,7 @@ TA_RetCode TA_STOCHRSI( int           START_IDX,
                         int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
                         int           OPT_INT /* optInFastK_Period */, /* From 1 to 100000 */
                         int           OPT_INT /* optInFastD_Period */, /* From 1 to 100000 */
-                        TA_MAType     OPT_MATYPE /* optInFastD_MAType */,
-                        int          *BEG_IDX,
+                        TA_MAType     OPT_MATYPE /* optInFastD_MAType */,                        int          *BEG_IDX,
                         int          *OUT_SIZE,
                         double       *OUT_ARRAY /* outFastK */,
                         double       *OUT_ARRAY /* outFastD */ );
@@ -3382,6 +6275,31 @@ int TA_STOCHRSI_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                         int           optInFastK_Period, /* From 1 to 100000 */
                         int           optInFastD_Period, /* From 1 to 100000 */
                         TA_MAType     optInFastD_MAType ); 
+
+struct TA_STOCHRSI_State { int memory_size;
+int current_idx;                                                          const double inReal[];
+                                                          int           optInTimePeriod; /* From 2 to 100000 */
+                                                          int           optInFastK_Period; /* From 1 to 100000 */
+                                                          int           optInFastD_Period; /* From 1 to 100000 */
+                                                          TA_MAType     optInFastD_MAType;}
+
+
+int TA_STOCHRSI_StateInit( TA_STOCHRSI_State*& _state,
+                         int           optInTimePeriod, /* From 2 to 100000 */
+                         int           optInFastK_Period, /* From 1 to 100000 */
+                         int           optInFastD_Period, /* From 1 to 100000 */
+                         TA_MAType     optInFastD_MAType ); 
+
+int TA_STOCHRSI_State( TA_STOCHRSI_State*& _state,
+                     const double inReal,
+                     int           optInTimePeriod, /* From 2 to 100000 */
+                     int           optInFastK_Period, /* From 1 to 100000 */
+                     int           optInFastD_Period, /* From 1 to 100000 */
+                     TA_MAType     optInFastD_MAType,                     double        &outFastK,
+                     double        &outFastD );
+
+int TA_STOCHRSI_StateFree( TA_STOCHRSI_State*& _state );
+
 
 /*
  * TA_SUB - Vector Arithmetic Substraction
@@ -3399,6 +6317,23 @@ TA_RetCode TA_SUB( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_SUB_Lookback( void );
+
+
+struct TA_SUB_State { int memory_size;
+int current_idx;                                                     const double inReal0[];
+                                                     const double inReal1[];
+}
+
+
+int TA_SUB_StateInit( TA_SUB_State*& _state );
+
+
+int TA_SUB_State( TA_SUB_State*& _state,
+                const double inReal0,
+                const double inReal1,
+                double        &outReal );
+
+int TA_SUB_StateFree( TA_SUB_State*& _state );
 
 
 /*
@@ -3423,6 +6358,24 @@ TA_RetCode TA_SUM( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_SUM_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_SUM_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_SUM_StateInit( TA_SUM_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_SUM_State( TA_SUM_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_SUM_StateFree( TA_SUM_State*& _state );
 
 
 /*
@@ -3454,6 +6407,27 @@ int TA_T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
                   double        optInVFactor );  /* From 0 to 1 */
 
 
+struct TA_T3_State { int memory_size;
+int current_idx;                                                    const double inReal[];
+                                                    int           optInTimePeriod; /* From 2 to 100000 */
+                                                    double        optInVFactor; /* From 0 to 1 */
+}
+
+
+int TA_T3_StateInit( TA_T3_State*& _state,
+                   int           optInTimePeriod, /* From 2 to 100000 */
+                   double        optInVFactor );  /* From 0 to 1 */
+
+
+int TA_T3_State( TA_T3_State*& _state,
+               const double inReal,
+               int           optInTimePeriod, /* From 2 to 100000 */
+               double        optInVFactor, /* From 0 to 1 */
+               double        &outReal );
+
+int TA_T3_StateFree( TA_T3_State*& _state );
+
+
 /*
  * TA_TAN - Vector Trigonometric Tan
  * 
@@ -3471,6 +6445,21 @@ TA_RetCode TA_TAN( int           START_IDX,
 int TA_TAN_Lookback( void );
 
 
+struct TA_TAN_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+}
+
+
+int TA_TAN_StateInit( TA_TAN_State*& _state );
+
+
+int TA_TAN_State( TA_TAN_State*& _state,
+                const double inReal,
+                double        &outReal );
+
+int TA_TAN_StateFree( TA_TAN_State*& _state );
+
+
 /*
  * TA_TANH - Vector Trigonometric Tanh
  * 
@@ -3486,6 +6475,21 @@ TA_RetCode TA_TANH( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_TANH_Lookback( void );
+
+
+struct TA_TANH_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+}
+
+
+int TA_TANH_StateInit( TA_TANH_State*& _state );
+
+
+int TA_TANH_State( TA_TANH_State*& _state,
+                 const double inReal,
+                 double        &outReal );
+
+int TA_TANH_StateFree( TA_TANH_State*& _state );
 
 
 /*
@@ -3512,6 +6516,24 @@ TA_RetCode TA_TEMA( int           START_IDX,
 int TA_TEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_TEMA_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_TEMA_StateInit( TA_TEMA_State*& _state,
+                     int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_TEMA_State( TA_TEMA_State*& _state,
+                 const double inReal,
+                 int           optInTimePeriod, /* From 2 to 100000 */
+                 double        &outReal );
+
+int TA_TEMA_StateFree( TA_TEMA_State*& _state );
+
+
 /*
  * TA_TRANGE - True Range
  * 
@@ -3529,6 +6551,25 @@ TA_RetCode TA_TRANGE( int           START_IDX,
                       double       *OUT_ARRAY /* outReal */ );
 
 int TA_TRANGE_Lookback( void );
+
+
+struct TA_TRANGE_State { int memory_size;
+int current_idx;                                                        const double inHigh[];
+                                                        const double inLow[];
+                                                        const double inClose[];
+}
+
+
+int TA_TRANGE_StateInit( TA_TRANGE_State*& _state );
+
+
+int TA_TRANGE_State( TA_TRANGE_State*& _state,
+                   const double inHigh,
+                   const double inLow,
+                   const double inClose,
+                   double        &outReal );
+
+int TA_TRANGE_StateFree( TA_TRANGE_State*& _state );
 
 
 /*
@@ -3555,6 +6596,24 @@ TA_RetCode TA_TRIMA( int           START_IDX,
 int TA_TRIMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_TRIMA_State { int memory_size;
+int current_idx;                                                       const double inReal[];
+                                                       int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_TRIMA_StateInit( TA_TRIMA_State*& _state,
+                      int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_TRIMA_State( TA_TRIMA_State*& _state,
+                  const double inReal,
+                  int           optInTimePeriod, /* From 2 to 100000 */
+                  double        &outReal );
+
+int TA_TRIMA_StateFree( TA_TRIMA_State*& _state );
+
+
 /*
  * TA_TRIX - 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
  * 
@@ -3577,6 +6636,24 @@ TA_RetCode TA_TRIX( int           START_IDX,
                     double       *OUT_ARRAY /* outReal */ );
 
 int TA_TRIX_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_TRIX_State { int memory_size;
+int current_idx;                                                      const double inReal[];
+                                                      int           optInTimePeriod; /* From 1 to 100000 */
+}
+
+
+int TA_TRIX_StateInit( TA_TRIX_State*& _state,
+                     int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+int TA_TRIX_State( TA_TRIX_State*& _state,
+                 const double inReal,
+                 int           optInTimePeriod, /* From 1 to 100000 */
+                 double        &outReal );
+
+int TA_TRIX_StateFree( TA_TRIX_State*& _state );
 
 
 /*
@@ -3603,6 +6680,24 @@ TA_RetCode TA_TSF( int           START_IDX,
 int TA_TSF_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_TSF_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_TSF_StateInit( TA_TSF_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_TSF_State( TA_TSF_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_TSF_StateFree( TA_TSF_State*& _state );
+
+
 /*
  * TA_TYPPRICE - Typical Price
  * 
@@ -3620,6 +6715,25 @@ TA_RetCode TA_TYPPRICE( int           START_IDX,
                         double       *OUT_ARRAY /* outReal */ );
 
 int TA_TYPPRICE_Lookback( void );
+
+
+struct TA_TYPPRICE_State { int memory_size;
+int current_idx;                                                          const double inHigh[];
+                                                          const double inLow[];
+                                                          const double inClose[];
+}
+
+
+int TA_TYPPRICE_StateInit( TA_TYPPRICE_State*& _state );
+
+
+int TA_TYPPRICE_State( TA_TYPPRICE_State*& _state,
+                     const double inHigh,
+                     const double inLow,
+                     const double inClose,
+                     double        &outReal );
+
+int TA_TYPPRICE_StateFree( TA_TYPPRICE_State*& _state );
 
 
 /*
@@ -3658,6 +6772,34 @@ int TA_ULTOSC_Lookback( int           optInTimePeriod1, /* From 1 to 100000 */
                       int           optInTimePeriod3 );  /* From 1 to 100000 */
 
 
+struct TA_ULTOSC_State { int memory_size;
+int current_idx;                                                        const double inHigh[];
+                                                        const double inLow[];
+                                                        const double inClose[];
+                                                        int           optInTimePeriod1; /* From 1 to 100000 */
+                                                        int           optInTimePeriod2; /* From 1 to 100000 */
+                                                        int           optInTimePeriod3; /* From 1 to 100000 */
+}
+
+
+int TA_ULTOSC_StateInit( TA_ULTOSC_State*& _state,
+                       int           optInTimePeriod1, /* From 1 to 100000 */
+                       int           optInTimePeriod2, /* From 1 to 100000 */
+                       int           optInTimePeriod3 );  /* From 1 to 100000 */
+
+
+int TA_ULTOSC_State( TA_ULTOSC_State*& _state,
+                   const double inHigh,
+                   const double inLow,
+                   const double inClose,
+                   int           optInTimePeriod1, /* From 1 to 100000 */
+                   int           optInTimePeriod2, /* From 1 to 100000 */
+                   int           optInTimePeriod3, /* From 1 to 100000 */
+                   double        &outReal );
+
+int TA_ULTOSC_StateFree( TA_ULTOSC_State*& _state );
+
+
 /*
  * TA_VAR - Variance
  * 
@@ -3687,6 +6829,27 @@ int TA_VAR_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
                    double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
 
 
+struct TA_VAR_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 1 to 100000 */
+                                                     double        optInNbDev; /* From TA_REAL_MIN to TA_REAL_MAX */
+}
+
+
+int TA_VAR_StateInit( TA_VAR_State*& _state,
+                    int           optInTimePeriod, /* From 1 to 100000 */
+                    double        optInNbDev );  /* From TA_REAL_MIN to TA_REAL_MAX */
+
+
+int TA_VAR_State( TA_VAR_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 1 to 100000 */
+                double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
+                double        &outReal );
+
+int TA_VAR_StateFree( TA_VAR_State*& _state );
+
+
 /*
  * TA_WCLPRICE - Weighted Close Price
  * 
@@ -3704,6 +6867,25 @@ TA_RetCode TA_WCLPRICE( int           START_IDX,
                         double       *OUT_ARRAY /* outReal */ );
 
 int TA_WCLPRICE_Lookback( void );
+
+
+struct TA_WCLPRICE_State { int memory_size;
+int current_idx;                                                          const double inHigh[];
+                                                          const double inLow[];
+                                                          const double inClose[];
+}
+
+
+int TA_WCLPRICE_StateInit( TA_WCLPRICE_State*& _state );
+
+
+int TA_WCLPRICE_State( TA_WCLPRICE_State*& _state,
+                     const double inHigh,
+                     const double inLow,
+                     const double inClose,
+                     double        &outReal );
+
+int TA_WCLPRICE_StateFree( TA_WCLPRICE_State*& _state );
 
 
 /*
@@ -3732,6 +6914,28 @@ TA_RetCode TA_WILLR( int           START_IDX,
 int TA_WILLR_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
 
 
+struct TA_WILLR_State { int memory_size;
+int current_idx;                                                       const double inHigh[];
+                                                       const double inLow[];
+                                                       const double inClose[];
+                                                       int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_WILLR_StateInit( TA_WILLR_State*& _state,
+                      int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_WILLR_State( TA_WILLR_State*& _state,
+                  const double inHigh,
+                  const double inLow,
+                  const double inClose,
+                  int           optInTimePeriod, /* From 2 to 100000 */
+                  double        &outReal );
+
+int TA_WILLR_StateFree( TA_WILLR_State*& _state );
+
+
 /*
  * TA_WMA - Weighted Moving Average
  * 
@@ -3754,6 +6958,24 @@ TA_RetCode TA_WMA( int           START_IDX,
                    double       *OUT_ARRAY /* outReal */ );
 
 int TA_WMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+struct TA_WMA_State { int memory_size;
+int current_idx;                                                     const double inReal[];
+                                                     int           optInTimePeriod; /* From 2 to 100000 */
+}
+
+
+int TA_WMA_StateInit( TA_WMA_State*& _state,
+                    int           optInTimePeriod );  /* From 2 to 100000 */
+
+
+int TA_WMA_State( TA_WMA_State*& _state,
+                const double inReal,
+                int           optInTimePeriod, /* From 2 to 100000 */
+                double        &outReal );
+
+int TA_WMA_StateFree( TA_WMA_State*& _state );
 
 
 /* Some TA functions takes a certain amount of input data

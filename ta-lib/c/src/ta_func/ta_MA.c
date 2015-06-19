@@ -98,6 +98,9 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
@@ -187,8 +190,7 @@
 /* Generated */                                               int    endIdx,
 /* Generated */                                               SubArray<double>^ inReal,
 /* Generated */                                               int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                               MAType        optInMAType,
-/* Generated */                                               [Out]int%    outBegIdx,
+/* Generated */                                               MAType        optInMAType,/* Generated */                                               [Out]int%    outBegIdx,
 /* Generated */                                               [Out]int%    outNBElement,
 /* Generated */                                               SubArray<double>^  outReal )
 /* Generated */ #elif defined( _MANAGED )
@@ -196,8 +198,7 @@
 /* Generated */                                               int    endIdx,
 /* Generated */                                               cli::array<double>^ inReal,
 /* Generated */                                               int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                               MAType        optInMAType,
-/* Generated */                                               [Out]int%    outBegIdx,
+/* Generated */                                               MAType        optInMAType,/* Generated */                                               [Out]int%    outBegIdx,
 /* Generated */                                               [Out]int%    outNBElement,
 /* Generated */                                               cli::array<double>^  outReal )
 /* Generated */ #elif defined( _JAVA )
@@ -205,8 +206,7 @@
 /* Generated */                               int    endIdx,
 /* Generated */                               double       inReal[],
 /* Generated */                               int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                               MAType        optInMAType,
-/* Generated */                               MInteger     outBegIdx,
+/* Generated */                               MAType        optInMAType,/* Generated */                               MInteger     outBegIdx,
 /* Generated */                               MInteger     outNBElement,
 /* Generated */                               double        outReal[] )
 /* Generated */ #else
@@ -214,8 +214,7 @@
 /* Generated */                              int    endIdx,
 /* Generated */                                         const double inReal[],
 /* Generated */                                         int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                         TA_MAType     optInMAType,
-/* Generated */                                         int          *outBegIdx,
+/* Generated */                                         TA_MAType     optInMAType,/* Generated */                                         int          *outBegIdx,
 /* Generated */                                         int          *outNBElement,
 /* Generated */                                         double        outReal[] )
 /* Generated */ #endif
@@ -344,6 +343,160 @@
 
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::MovingAverageStateInit( TA_MovingAverage_State*& _state,
+/* Generated */                                 int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                 MAType        optInMAType ) /* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int movingAverageStateInit( TA_movingAverage_State*& _state,
+/* Generated */                                  int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                  MAType        optInMAType ) /* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_MA_StateInit( TA_MA_State*& _state,
+/* Generated */                                          int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                          TA_MAType     optInMAType ) /* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_MA_State*& _state,
+/* Generated */    /* min/max are checked for optInTimePeriod. */
+/* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
+/* Generated */       optInTimePeriod = 30;
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
+/* Generated */    if( (int)optInMAType == TA_INTEGER_DEFAULT )
+/* Generated */       optInMAType = (TA_MAType)0;
+/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 8) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state init code here. */
+
+   _state = NULL;
+   return 0;
+}
+
+/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::MovingAverageState( TA_MovingAverage_State*& _state,
+/* Generated */                             cli::array<double>^ inReal,
+/* Generated */                             int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                             MAType        optInMAType,/* Generated */                             cli::array<double>^  &outReal )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int movingAverageState( TA_movingAverage_State*& _state,
+/* Generated */                              double       inReal,
+/* Generated */                              int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                              MAType        optInMAType,/* Generated */                              double        &outReal )
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_MA_State( TA_MA_State*& _state,
+/* Generated */                                      const double inReal,
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                      TA_MAType     optInMAType,/* Generated */                                      double        &outReal )
+/* Generated */ #endif
+/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_MA_State*& _state,
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    /* min/max are checked for optInTimePeriod. */
+/* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
+/* Generated */       optInTimePeriod = 30;
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
+/* Generated */    if( (int)optInMAType == TA_INTEGER_DEFAULT )
+/* Generated */       optInMAType = (TA_MAType)0;
+/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 8) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outReal )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state based TA dunc code here. */
+
+   return 0;
+}
+
+/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::MovingAverageStateFree( TA_MovingAverage_State*& _state )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int movingAverageStateFree( TA_movingAverage_State*& _state )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_MA_StateFree( TA_MA_State*& _state )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_MA_State*& _state )
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state free code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -357,8 +510,7 @@
 /* Generated */                                               int    endIdx,
 /* Generated */                                               SubArray<float>^ inReal,
 /* Generated */                                               int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                               MAType        optInMAType,
-/* Generated */                                               [Out]int%    outBegIdx,
+/* Generated */                                               MAType        optInMAType,/* Generated */                                               [Out]int%    outBegIdx,
 /* Generated */                                               [Out]int%    outNBElement,
 /* Generated */                                               SubArray<double>^  outReal )
 /* Generated */ #elif defined( _MANAGED )
@@ -366,8 +518,7 @@
 /* Generated */                                               int    endIdx,
 /* Generated */                                               cli::array<float>^ inReal,
 /* Generated */                                               int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                               MAType        optInMAType,
-/* Generated */                                               [Out]int%    outBegIdx,
+/* Generated */                                               MAType        optInMAType,/* Generated */                                               [Out]int%    outBegIdx,
 /* Generated */                                               [Out]int%    outNBElement,
 /* Generated */                                               cli::array<double>^  outReal )
 /* Generated */ #elif defined( _JAVA )
@@ -375,8 +526,7 @@
 /* Generated */                               int    endIdx,
 /* Generated */                               float        inReal[],
 /* Generated */                               int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                               MAType        optInMAType,
-/* Generated */                               MInteger     outBegIdx,
+/* Generated */                               MAType        optInMAType,/* Generated */                               MInteger     outBegIdx,
 /* Generated */                               MInteger     outNBElement,
 /* Generated */                               double        outReal[] )
 /* Generated */ #else
@@ -384,8 +534,7 @@
 /* Generated */                     int    endIdx,
 /* Generated */                     const float  inReal[],
 /* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                     TA_MAType     optInMAType,
-/* Generated */                     int          *outBegIdx,
+/* Generated */                     TA_MAType     optInMAType,/* Generated */                     int          *outBegIdx,
 /* Generated */                     int          *outNBElement,
 /* Generated */                     double        outReal[] )
 /* Generated */ #endif
@@ -482,51 +631,5 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
-
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state init code here. */
-
-   _state = NULL;
-   return 0;
-}
-
-/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state based TA dunc code here. */
-
-   return 0;
-}
-
-/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state free code here. */   
-   return 0;
-}
-
-/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 

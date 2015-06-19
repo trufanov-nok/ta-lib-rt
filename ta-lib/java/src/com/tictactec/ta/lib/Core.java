@@ -285,6 +285,50 @@ public class Core {
       outNBElement.value = outputSize;
       return RetCode.Success ;
    }
+   public int accbandsStateInit( TA_accbands_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ACCBANDS_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 20;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int accbandsState( TA_accbands_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outRealUpperBand,
+      double &outRealMiddleBand,
+      double &outRealLowerBand )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ACCBANDS_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 20;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int accbandsStateFree( TA_accbands_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ACCBANDS_State*& _state )
+         return 0;
+   }
    public RetCode accbands( int startIdx,
       int endIdx,
       float inHigh[],
@@ -399,6 +443,36 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int acosStateInit( TA_acos_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ACOS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int acosState( TA_acos_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ACOS_State*& _state,
+         return 0;
+   }
+   public int acosStateFree( TA_acos_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ACOS_State*& _state )
+         return 0;
+   }
    public RetCode acos( int startIdx,
       int endIdx,
       float inReal[],
@@ -461,6 +535,39 @@ public class Core {
          nbBar--;
       }
       return RetCode.Success ;
+   }
+   public int adStateInit( TA_ad_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AD_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int adState( TA_ad_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double inVolume,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AD_State*& _state,
+         return 0;
+   }
+   public int adStateFree( TA_ad_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AD_State*& _state )
+         return 0;
    }
    public RetCode ad( int startIdx,
       int endIdx,
@@ -525,6 +632,37 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int addStateInit( TA_add_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADD_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int addState( TA_add_State*& _state,
+      double inReal0,
+      double inReal1,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADD_State*& _state,
+         return 0;
+   }
+   public int addStateFree( TA_add_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADD_State*& _state )
+         return 0;
    }
    public RetCode add( int startIdx,
       int endIdx,
@@ -636,6 +774,59 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int adOscStateInit( TA_adOsc_State*& _state,
+      int optInFastPeriod,
+      int optInSlowPeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADOSC_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 3;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 10;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int adOscState( TA_adOsc_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double inVolume,
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADOSC_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 3;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 10;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int adOscStateFree( TA_adOsc_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADOSC_State*& _state )
+         return 0;
    }
    public RetCode adOsc( int startIdx,
       int endIdx,
@@ -889,6 +1080,48 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int adxStateInit( TA_adx_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int adxState( TA_adx_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int adxStateFree( TA_adx_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADX_State*& _state )
+         return 0;
+   }
    public RetCode adx( int startIdx,
       int endIdx,
       float inHigh[],
@@ -1122,6 +1355,48 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int adxrStateInit( TA_adxr_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADXR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int adxrState( TA_adxr_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADXR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int adxrStateFree( TA_adxr_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ADXR_State*& _state )
+         return 0;
+   }
    public RetCode adxr( int startIdx,
       int endIdx,
       float inHigh[],
@@ -1190,8 +1465,7 @@ public class Core {
       double inReal[],
       int optInFastPeriod,
       int optInSlowPeriod,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outReal[] )
    {
@@ -1292,13 +1566,63 @@ public class Core {
       }
       return retCode;
    }
+   public int apoStateInit( TA_apo_State*& _state,
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      MAType optInMAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_APO_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int apoState( TA_apo_State*& _state,
+      double inReal,
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      MAType optInMAType, double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_APO_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int apoStateFree( TA_apo_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_APO_State*& _state )
+         return 0;
+   }
    public RetCode apo( int startIdx,
       int endIdx,
       float inReal[],
       int optInFastPeriod,
       int optInSlowPeriod,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outReal[] )
    {
@@ -1499,6 +1823,48 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int aroonStateInit( TA_aroon_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AROON_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int aroonState( TA_aroon_State*& _state,
+      double inHigh,
+      double inLow,
+      int optInTimePeriod,
+      double &outAroonDown,
+      double &outAroonUp )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AROON_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int aroonStateFree( TA_aroon_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AROON_State*& _state )
+         return 0;
+   }
    public RetCode aroon( int startIdx,
       int endIdx,
       float inHigh[],
@@ -1689,6 +2055,47 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int aroonOscStateInit( TA_aroonOsc_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AROONOSC_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int aroonOscState( TA_aroonOsc_State*& _state,
+      double inHigh,
+      double inLow,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AROONOSC_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int aroonOscStateFree( TA_aroonOsc_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AROONOSC_State*& _state )
+         return 0;
+   }
    public RetCode aroonOsc( int startIdx,
       int endIdx,
       float inHigh[],
@@ -1805,6 +2212,36 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int asinStateInit( TA_asin_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ASIN_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int asinState( TA_asin_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ASIN_State*& _state,
+         return 0;
+   }
+   public int asinStateFree( TA_asin_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ASIN_State*& _state )
+         return 0;
+   }
    public RetCode asin( int startIdx,
       int endIdx,
       float inReal[],
@@ -1851,6 +2288,36 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int atanStateInit( TA_atan_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ATAN_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int atanState( TA_atan_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ATAN_State*& _state,
+         return 0;
+   }
+   public int atanStateFree( TA_atan_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ATAN_State*& _state )
+         return 0;
    }
    public RetCode atan( int startIdx,
       int endIdx,
@@ -1962,6 +2429,48 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return retCode;
+   }
+   public int atrStateInit( TA_atr_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ATR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int atrState( TA_atr_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ATR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int atrStateFree( TA_atr_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ATR_State*& _state )
+         return 0;
    }
    public RetCode atr( int startIdx,
       int endIdx,
@@ -2076,6 +2585,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int avgPriceStateInit( TA_avgPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AVGPRICE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int avgPriceState( TA_avgPrice_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AVGPRICE_State*& _state,
+         return 0;
+   }
+   public int avgPriceStateFree( TA_avgPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AVGPRICE_State*& _state )
+         return 0;
+   }
    public RetCode avgPrice( int startIdx,
       int endIdx,
       float inOpen[],
@@ -2159,6 +2701,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int avgDevStateInit( TA_avgDev_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AVGDEV_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int avgDevState( TA_avgDev_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AVGDEV_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int avgDevStateFree( TA_avgDev_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_AVGDEV_State*& _state )
+         return 0;
+   }
    public RetCode avgDev( int startIdx,
       int endIdx,
       float inReal[],
@@ -2232,8 +2814,7 @@ public class Core {
       int optInTimePeriod,
       double optInNbDevUp,
       double optInNbDevDn,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outRealUpperBand[],
       double outRealMiddleBand[],
@@ -2366,14 +2947,76 @@ public class Core {
       }
       return RetCode.Success ;
    }
+   public int bbandsStateInit( TA_bbands_State*& _state,
+      int optInTimePeriod,
+      double optInNbDevUp,
+      double optInNbDevDn,
+      MAType optInMAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BBANDS_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( optInNbDevUp == (-4e+37) )
+         optInNbDevUp = 2.000000e+0;
+      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInNbDevDn == (-4e+37) )
+         optInNbDevDn = 2.000000e+0;
+      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int bbandsState( TA_bbands_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double optInNbDevUp,
+      double optInNbDevDn,
+      MAType optInMAType, double &outRealUpperBand,
+      double &outRealMiddleBand,
+      double &outRealLowerBand )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BBANDS_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( optInNbDevUp == (-4e+37) )
+         optInNbDevUp = 2.000000e+0;
+      else if( (optInNbDevUp < -3.000000e+37) || (optInNbDevUp > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInNbDevDn == (-4e+37) )
+         optInNbDevDn = 2.000000e+0;
+      else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int bbandsStateFree( TA_bbands_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BBANDS_State*& _state )
+         return 0;
+   }
    public RetCode bbands( int startIdx,
       int endIdx,
       float inReal[],
       int optInTimePeriod,
       double optInNbDevUp,
       double optInNbDevDn,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outRealUpperBand[],
       double outRealMiddleBand[],
@@ -2600,6 +3243,47 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int betaStateInit( TA_beta_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BETA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int betaState( TA_beta_State*& _state,
+      double inReal0,
+      double inReal1,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BETA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int betaStateFree( TA_beta_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BETA_State*& _state )
+         return 0;
+   }
    public RetCode beta( int startIdx,
       int endIdx,
       float inReal0[],
@@ -2743,6 +3427,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int bopStateInit( TA_bop_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BOP_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int bopState( TA_bop_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BOP_State*& _state,
+         return 0;
+   }
+   public int bopStateFree( TA_bop_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_BOP_State*& _state )
+         return 0;
+   }
    public RetCode bop( int startIdx,
       int endIdx,
       float inOpen[],
@@ -2847,6 +3564,48 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cciStateInit( TA_cci_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CCI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cciState( TA_cci_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CCI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cciStateFree( TA_cci_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CCI_State*& _state )
+         return 0;
    }
    public RetCode cci( int startIdx,
       int endIdx,
@@ -2975,6 +3734,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdl2CrowsStateInit( TA_cdl2Crows_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL2CROWS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdl2CrowsState( TA_cdl2Crows_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL2CROWS_State*& _state,
+         return 0;
+   }
+   public int cdl2CrowsStateFree( TA_cdl2Crows_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL2CROWS_State*& _state )
+         return 0;
+   }
    public RetCode cdl2Crows( int startIdx,
       int endIdx,
       float inOpen[],
@@ -3100,6 +3892,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdl3BlackCrowsStateInit( TA_cdl3BlackCrows_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3BLACKCROWS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdl3BlackCrowsState( TA_cdl3BlackCrows_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3BLACKCROWS_State*& _state,
+         return 0;
+   }
+   public int cdl3BlackCrowsStateFree( TA_cdl3BlackCrows_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3BLACKCROWS_State*& _state )
+         return 0;
    }
    public RetCode cdl3BlackCrows( int startIdx,
       int endIdx,
@@ -3236,6 +4061,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdl3InsideStateInit( TA_cdl3Inside_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3INSIDE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdl3InsideState( TA_cdl3Inside_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3INSIDE_State*& _state,
+         return 0;
+   }
+   public int cdl3InsideStateFree( TA_cdl3Inside_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3INSIDE_State*& _state )
+         return 0;
    }
    public RetCode cdl3Inside( int startIdx,
       int endIdx,
@@ -3380,6 +4238,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdl3LineStrikeStateInit( TA_cdl3LineStrike_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3LINESTRIKE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdl3LineStrikeState( TA_cdl3LineStrike_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3LINESTRIKE_State*& _state,
+         return 0;
+   }
+   public int cdl3LineStrikeStateFree( TA_cdl3LineStrike_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3LINESTRIKE_State*& _state )
+         return 0;
+   }
    public RetCode cdl3LineStrike( int startIdx,
       int endIdx,
       float inOpen[],
@@ -3506,6 +4397,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdl3OutsideStateInit( TA_cdl3Outside_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3OUTSIDE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdl3OutsideState( TA_cdl3Outside_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3OUTSIDE_State*& _state,
+         return 0;
+   }
+   public int cdl3OutsideStateFree( TA_cdl3Outside_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3OUTSIDE_State*& _state )
+         return 0;
    }
    public RetCode cdl3Outside( int startIdx,
       int endIdx,
@@ -3659,6 +4583,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdl3StarsInSouthStateInit( TA_cdl3StarsInSouth_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3STARSINSOUTH_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdl3StarsInSouthState( TA_cdl3StarsInSouth_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3STARSINSOUTH_State*& _state,
+         return 0;
+   }
+   public int cdl3StarsInSouthStateFree( TA_cdl3StarsInSouth_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3STARSINSOUTH_State*& _state )
+         return 0;
    }
    public RetCode cdl3StarsInSouth( int startIdx,
       int endIdx,
@@ -3872,6 +4829,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdl3WhiteSoldiersStateInit( TA_cdl3WhiteSoldiers_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3WHITESOLDIERS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdl3WhiteSoldiersState( TA_cdl3WhiteSoldiers_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3WHITESOLDIERS_State*& _state,
+         return 0;
+   }
+   public int cdl3WhiteSoldiersStateFree( TA_cdl3WhiteSoldiers_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDL3WHITESOLDIERS_State*& _state )
+         return 0;
+   }
    public RetCode cdl3WhiteSoldiers( int startIdx,
       int endIdx,
       float inOpen[],
@@ -4082,6 +5072,49 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlAbandonedBabyStateInit( TA_cdlAbandonedBaby_State*& _state,
+      double optInPenetration )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLABANDONEDBABY_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cdlAbandonedBabyState( TA_cdlAbandonedBaby_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double optInPenetration,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLABANDONEDBABY_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cdlAbandonedBabyStateFree( TA_cdlAbandonedBaby_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLABANDONEDBABY_State*& _state )
+         return 0;
    }
    public RetCode cdlAbandonedBaby( int startIdx,
       int endIdx,
@@ -4322,6 +5355,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlAdvanceBlockStateInit( TA_cdlAdvanceBlock_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLADVANCEBLOCK_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlAdvanceBlockState( TA_cdlAdvanceBlock_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLADVANCEBLOCK_State*& _state,
+         return 0;
+   }
+   public int cdlAdvanceBlockStateFree( TA_cdlAdvanceBlock_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLADVANCEBLOCK_State*& _state )
+         return 0;
+   }
    public RetCode cdlAdvanceBlock( int startIdx,
       int endIdx,
       float inOpen[],
@@ -4534,6 +5600,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlBeltHoldStateInit( TA_cdlBeltHold_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLBELTHOLD_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlBeltHoldState( TA_cdlBeltHold_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLBELTHOLD_State*& _state,
+         return 0;
+   }
+   public int cdlBeltHoldStateFree( TA_cdlBeltHold_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLBELTHOLD_State*& _state )
+         return 0;
+   }
    public RetCode cdlBeltHold( int startIdx,
       int endIdx,
       float inOpen[],
@@ -4673,6 +5772,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlBreakawayStateInit( TA_cdlBreakaway_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLBREAKAWAY_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlBreakawayState( TA_cdlBreakaway_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLBREAKAWAY_State*& _state,
+         return 0;
+   }
+   public int cdlBreakawayStateFree( TA_cdlBreakaway_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLBREAKAWAY_State*& _state )
+         return 0;
    }
    public RetCode cdlBreakaway( int startIdx,
       int endIdx,
@@ -4814,6 +5946,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlClosingMarubozuStateInit( TA_cdlClosingMarubozu_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCLOSINGMARUBOZU_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlClosingMarubozuState( TA_cdlClosingMarubozu_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCLOSINGMARUBOZU_State*& _state,
+         return 0;
+   }
+   public int cdlClosingMarubozuStateFree( TA_cdlClosingMarubozu_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCLOSINGMARUBOZU_State*& _state )
+         return 0;
+   }
    public RetCode cdlClosingMarubozu( int startIdx,
       int endIdx,
       float inOpen[],
@@ -4951,6 +6116,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlConcealBabysWallStateInit( TA_cdlConcealBabysWall_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCONCEALBABYSWALL_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlConcealBabysWallState( TA_cdlConcealBabysWall_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCONCEALBABYSWALL_State*& _state,
+         return 0;
+   }
+   public int cdlConcealBabysWallStateFree( TA_cdlConcealBabysWall_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCONCEALBABYSWALL_State*& _state )
+         return 0;
    }
    public RetCode cdlConcealBabysWall( int startIdx,
       int endIdx,
@@ -5091,6 +6289,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlCounterAttackStateInit( TA_cdlCounterAttack_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCOUNTERATTACK_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlCounterAttackState( TA_cdlCounterAttack_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCOUNTERATTACK_State*& _state,
+         return 0;
+   }
+   public int cdlCounterAttackStateFree( TA_cdlCounterAttack_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLCOUNTERATTACK_State*& _state )
+         return 0;
+   }
    public RetCode cdlCounterAttack( int startIdx,
       int endIdx,
       float inOpen[],
@@ -5226,6 +6457,49 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlDarkCloudCoverStateInit( TA_cdlDarkCloudCover_State*& _state,
+      double optInPenetration )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDARKCLOUDCOVER_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 5.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cdlDarkCloudCoverState( TA_cdlDarkCloudCover_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double optInPenetration,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDARKCLOUDCOVER_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 5.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cdlDarkCloudCoverStateFree( TA_cdlDarkCloudCover_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDARKCLOUDCOVER_State*& _state )
+         return 0;
+   }
    public RetCode cdlDarkCloudCover( int startIdx,
       int endIdx,
       float inOpen[],
@@ -5336,6 +6610,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlDojiStateInit( TA_cdlDoji_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDOJI_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlDojiState( TA_cdlDoji_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDOJI_State*& _state,
+         return 0;
+   }
+   public int cdlDojiStateFree( TA_cdlDoji_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDOJI_State*& _state )
+         return 0;
    }
    public RetCode cdlDoji( int startIdx,
       int endIdx,
@@ -5449,6 +6756,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlDojiStarStateInit( TA_cdlDojiStar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDOJISTAR_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlDojiStarState( TA_cdlDojiStar_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDOJISTAR_State*& _state,
+         return 0;
+   }
+   public int cdlDojiStarStateFree( TA_cdlDojiStar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDOJISTAR_State*& _state )
+         return 0;
    }
    public RetCode cdlDojiStar( int startIdx,
       int endIdx,
@@ -5576,6 +6916,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlDragonflyDojiStateInit( TA_cdlDragonflyDoji_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDRAGONFLYDOJI_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlDragonflyDojiState( TA_cdlDragonflyDoji_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDRAGONFLYDOJI_State*& _state,
+         return 0;
+   }
+   public int cdlDragonflyDojiStateFree( TA_cdlDragonflyDoji_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLDRAGONFLYDOJI_State*& _state )
+         return 0;
+   }
    public RetCode cdlDragonflyDoji( int startIdx,
       int endIdx,
       float inOpen[],
@@ -5692,6 +7065,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlEngulfingStateInit( TA_cdlEngulfing_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLENGULFING_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlEngulfingState( TA_cdlEngulfing_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLENGULFING_State*& _state,
+         return 0;
+   }
+   public int cdlEngulfingStateFree( TA_cdlEngulfing_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLENGULFING_State*& _state )
+         return 0;
    }
    public RetCode cdlEngulfing( int startIdx,
       int endIdx,
@@ -5832,6 +7238,49 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlEveningDojiStarStateInit( TA_cdlEveningDojiStar_State*& _state,
+      double optInPenetration )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLEVENINGDOJISTAR_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cdlEveningDojiStarState( TA_cdlEveningDojiStar_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double optInPenetration,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLEVENINGDOJISTAR_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cdlEveningDojiStarStateFree( TA_cdlEveningDojiStar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLEVENINGDOJISTAR_State*& _state )
+         return 0;
    }
    public RetCode cdlEveningDojiStar( int startIdx,
       int endIdx,
@@ -5992,6 +7441,49 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlEveningStarStateInit( TA_cdlEveningStar_State*& _state,
+      double optInPenetration )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLEVENINGSTAR_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cdlEveningStarState( TA_cdlEveningStar_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double optInPenetration,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLEVENINGSTAR_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cdlEveningStarStateFree( TA_cdlEveningStar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLEVENINGSTAR_State*& _state )
+         return 0;
+   }
    public RetCode cdlEveningStar( int startIdx,
       int endIdx,
       float inOpen[],
@@ -6138,6 +7630,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlGapSideSideWhiteStateInit( TA_cdlGapSideSideWhite_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLGAPSIDESIDEWHITE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlGapSideSideWhiteState( TA_cdlGapSideSideWhite_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLGAPSIDESIDEWHITE_State*& _state,
+         return 0;
+   }
+   public int cdlGapSideSideWhiteStateFree( TA_cdlGapSideSideWhite_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLGAPSIDESIDEWHITE_State*& _state )
+         return 0;
+   }
    public RetCode cdlGapSideSideWhite( int startIdx,
       int endIdx,
       float inOpen[],
@@ -6271,6 +7796,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlGravestoneDojiStateInit( TA_cdlGravestoneDoji_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLGRAVESTONEDOJI_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlGravestoneDojiState( TA_cdlGravestoneDoji_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLGRAVESTONEDOJI_State*& _state,
+         return 0;
+   }
+   public int cdlGravestoneDojiStateFree( TA_cdlGravestoneDoji_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLGRAVESTONEDOJI_State*& _state )
+         return 0;
    }
    public RetCode cdlGravestoneDoji( int startIdx,
       int endIdx,
@@ -6420,6 +7978,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlHammerStateInit( TA_cdlHammer_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHAMMER_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlHammerState( TA_cdlHammer_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHAMMER_State*& _state,
+         return 0;
+   }
+   public int cdlHammerStateFree( TA_cdlHammer_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHAMMER_State*& _state )
+         return 0;
    }
    public RetCode cdlHammer( int startIdx,
       int endIdx,
@@ -6593,6 +8184,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlHangingManStateInit( TA_cdlHangingMan_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHANGINGMAN_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlHangingManState( TA_cdlHangingMan_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHANGINGMAN_State*& _state,
+         return 0;
+   }
+   public int cdlHangingManStateFree( TA_cdlHangingMan_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHANGINGMAN_State*& _state )
+         return 0;
+   }
    public RetCode cdlHangingMan( int startIdx,
       int endIdx,
       float inOpen[],
@@ -6750,6 +8374,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlHaramiStateInit( TA_cdlHarami_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHARAMI_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlHaramiState( TA_cdlHarami_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHARAMI_State*& _state,
+         return 0;
+   }
+   public int cdlHaramiStateFree( TA_cdlHarami_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHARAMI_State*& _state )
+         return 0;
+   }
    public RetCode cdlHarami( int startIdx,
       int endIdx,
       float inOpen[],
@@ -6892,6 +8549,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlHaramiCrossStateInit( TA_cdlHaramiCross_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHARAMICROSS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlHaramiCrossState( TA_cdlHaramiCross_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHARAMICROSS_State*& _state,
+         return 0;
+   }
+   public int cdlHaramiCrossStateFree( TA_cdlHaramiCross_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHARAMICROSS_State*& _state )
+         return 0;
+   }
    public RetCode cdlHaramiCross( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7022,6 +8712,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlHignWaveStateInit( TA_cdlHignWave_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIGHWAVE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlHignWaveState( TA_cdlHignWave_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIGHWAVE_State*& _state,
+         return 0;
+   }
+   public int cdlHignWaveStateFree( TA_cdlHignWave_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIGHWAVE_State*& _state )
+         return 0;
    }
    public RetCode cdlHignWave( int startIdx,
       int endIdx,
@@ -7161,6 +8884,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlHikkakeStateInit( TA_cdlHikkake_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIKKAKE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlHikkakeState( TA_cdlHikkake_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIKKAKE_State*& _state,
+         return 0;
+   }
+   public int cdlHikkakeStateFree( TA_cdlHikkake_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIKKAKE_State*& _state )
+         return 0;
    }
    public RetCode cdlHikkake( int startIdx,
       int endIdx,
@@ -7341,6 +9097,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlHikkakeModStateInit( TA_cdlHikkakeMod_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIKKAKEMOD_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlHikkakeModState( TA_cdlHikkakeMod_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIKKAKEMOD_State*& _state,
+         return 0;
+   }
+   public int cdlHikkakeModStateFree( TA_cdlHikkakeMod_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHIKKAKEMOD_State*& _state )
+         return 0;
+   }
    public RetCode cdlHikkakeMod( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7507,6 +9296,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlHomingPigeonStateInit( TA_cdlHomingPigeon_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHOMINGPIGEON_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlHomingPigeonState( TA_cdlHomingPigeon_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHOMINGPIGEON_State*& _state,
+         return 0;
+   }
+   public int cdlHomingPigeonStateFree( TA_cdlHomingPigeon_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLHOMINGPIGEON_State*& _state )
+         return 0;
+   }
    public RetCode cdlHomingPigeon( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7656,6 +9478,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlIdentical3CrowsStateInit( TA_cdlIdentical3Crows_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLIDENTICAL3CROWS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlIdentical3CrowsState( TA_cdlIdentical3Crows_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLIDENTICAL3CROWS_State*& _state,
+         return 0;
+   }
+   public int cdlIdentical3CrowsStateFree( TA_cdlIdentical3Crows_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLIDENTICAL3CROWS_State*& _state )
+         return 0;
    }
    public RetCode cdlIdentical3Crows( int startIdx,
       int endIdx,
@@ -7808,6 +9663,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlInNeckStateInit( TA_cdlInNeck_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLINNECK_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlInNeckState( TA_cdlInNeck_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLINNECK_State*& _state,
+         return 0;
+   }
+   public int cdlInNeckStateFree( TA_cdlInNeck_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLINNECK_State*& _state )
+         return 0;
+   }
    public RetCode cdlInNeck( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7948,6 +9836,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlInvertedHammerStateInit( TA_cdlInvertedHammer_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLINVERTEDHAMMER_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlInvertedHammerState( TA_cdlInvertedHammer_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLINVERTEDHAMMER_State*& _state,
+         return 0;
+   }
+   public int cdlInvertedHammerStateFree( TA_cdlInvertedHammer_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLINVERTEDHAMMER_State*& _state )
+         return 0;
    }
    public RetCode cdlInvertedHammer( int startIdx,
       int endIdx,
@@ -8103,6 +10024,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlKickingStateInit( TA_cdlKicking_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLKICKING_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlKickingState( TA_cdlKicking_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLKICKING_State*& _state,
+         return 0;
+   }
+   public int cdlKickingStateFree( TA_cdlKicking_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLKICKING_State*& _state )
+         return 0;
    }
    public RetCode cdlKicking( int startIdx,
       int endIdx,
@@ -8266,6 +10220,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlKickingByLengthStateInit( TA_cdlKickingByLength_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLKICKINGBYLENGTH_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlKickingByLengthState( TA_cdlKickingByLength_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLKICKINGBYLENGTH_State*& _state,
+         return 0;
+   }
+   public int cdlKickingByLengthStateFree( TA_cdlKickingByLength_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLKICKINGBYLENGTH_State*& _state )
+         return 0;
+   }
    public RetCode cdlKickingByLength( int startIdx,
       int endIdx,
       float inOpen[],
@@ -8407,6 +10394,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlLadderBottomStateInit( TA_cdlLadderBottom_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLADDERBOTTOM_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlLadderBottomState( TA_cdlLadderBottom_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLADDERBOTTOM_State*& _state,
+         return 0;
+   }
+   public int cdlLadderBottomStateFree( TA_cdlLadderBottom_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLADDERBOTTOM_State*& _state )
+         return 0;
+   }
    public RetCode cdlLadderBottom( int startIdx,
       int endIdx,
       float inOpen[],
@@ -8530,6 +10550,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlLongLeggedDojiStateInit( TA_cdlLongLeggedDoji_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLONGLEGGEDDOJI_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlLongLeggedDojiState( TA_cdlLongLeggedDoji_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLONGLEGGEDDOJI_State*& _state,
+         return 0;
+   }
+   public int cdlLongLeggedDojiStateFree( TA_cdlLongLeggedDoji_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLONGLEGGEDDOJI_State*& _state )
+         return 0;
    }
    public RetCode cdlLongLeggedDoji( int startIdx,
       int endIdx,
@@ -8655,6 +10708,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlLongLineStateInit( TA_cdlLongLine_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLONGLINE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlLongLineState( TA_cdlLongLine_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLONGLINE_State*& _state,
+         return 0;
+   }
+   public int cdlLongLineStateFree( TA_cdlLongLine_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLLONGLINE_State*& _state )
+         return 0;
+   }
    public RetCode cdlLongLine( int startIdx,
       int endIdx,
       float inOpen[],
@@ -8777,6 +10863,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlMarubozuStateInit( TA_cdlMarubozu_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMARUBOZU_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlMarubozuState( TA_cdlMarubozu_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMARUBOZU_State*& _state,
+         return 0;
+   }
+   public int cdlMarubozuStateFree( TA_cdlMarubozu_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMARUBOZU_State*& _state )
+         return 0;
+   }
    public RetCode cdlMarubozu( int startIdx,
       int endIdx,
       float inOpen[],
@@ -8892,6 +11011,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlMatchingLowStateInit( TA_cdlMatchingLow_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMATCHINGLOW_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlMatchingLowState( TA_cdlMatchingLow_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMATCHINGLOW_State*& _state,
+         return 0;
+   }
+   public int cdlMatchingLowStateFree( TA_cdlMatchingLow_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMATCHINGLOW_State*& _state )
+         return 0;
    }
    public RetCode cdlMatchingLow( int startIdx,
       int endIdx,
@@ -9039,6 +11191,49 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlMatHoldStateInit( TA_cdlMatHold_State*& _state,
+      double optInPenetration )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMATHOLD_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 5.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cdlMatHoldState( TA_cdlMatHold_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double optInPenetration,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMATHOLD_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 5.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cdlMatHoldStateFree( TA_cdlMatHold_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMATHOLD_State*& _state )
+         return 0;
    }
    public RetCode cdlMatHold( int startIdx,
       int endIdx,
@@ -9214,6 +11409,49 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlMorningDojiStarStateInit( TA_cdlMorningDojiStar_State*& _state,
+      double optInPenetration )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMORNINGDOJISTAR_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cdlMorningDojiStarState( TA_cdlMorningDojiStar_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double optInPenetration,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMORNINGDOJISTAR_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cdlMorningDojiStarStateFree( TA_cdlMorningDojiStar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMORNINGDOJISTAR_State*& _state )
+         return 0;
+   }
    public RetCode cdlMorningDojiStar( int startIdx,
       int endIdx,
       float inOpen[],
@@ -9373,6 +11611,49 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlMorningStarStateInit( TA_cdlMorningStar_State*& _state,
+      double optInPenetration )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMORNINGSTAR_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cdlMorningStarState( TA_cdlMorningStar_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double optInPenetration,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMORNINGSTAR_State*& _state,
+         if( optInPenetration == (-4e+37) )
+         optInPenetration = 3.000000e-1;
+      else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cdlMorningStarStateFree( TA_cdlMorningStar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLMORNINGSTAR_State*& _state )
+         return 0;
+   }
    public RetCode cdlMorningStar( int startIdx,
       int endIdx,
       float inOpen[],
@@ -9515,6 +11796,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlOnNeckStateInit( TA_cdlOnNeck_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLONNECK_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlOnNeckState( TA_cdlOnNeck_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLONNECK_State*& _state,
+         return 0;
+   }
+   public int cdlOnNeckStateFree( TA_cdlOnNeck_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLONNECK_State*& _state )
+         return 0;
+   }
    public RetCode cdlOnNeck( int startIdx,
       int endIdx,
       float inOpen[],
@@ -9642,6 +11956,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlPiercingStateInit( TA_cdlPiercing_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLPIERCING_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlPiercingState( TA_cdlPiercing_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLPIERCING_State*& _state,
+         return 0;
+   }
+   public int cdlPiercingStateFree( TA_cdlPiercing_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLPIERCING_State*& _state )
+         return 0;
    }
    public RetCode cdlPiercing( int startIdx,
       int endIdx,
@@ -9781,6 +12128,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlRickshawManStateInit( TA_cdlRickshawMan_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLRICKSHAWMAN_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlRickshawManState( TA_cdlRickshawMan_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLRICKSHAWMAN_State*& _state,
+         return 0;
+   }
+   public int cdlRickshawManStateFree( TA_cdlRickshawMan_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLRICKSHAWMAN_State*& _state )
+         return 0;
    }
    public RetCode cdlRickshawMan( int startIdx,
       int endIdx,
@@ -9944,6 +12324,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlRiseFall3MethodsStateInit( TA_cdlRiseFall3Methods_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLRISEFALL3METHODS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlRiseFall3MethodsState( TA_cdlRiseFall3Methods_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLRISEFALL3METHODS_State*& _state,
+         return 0;
+   }
+   public int cdlRiseFall3MethodsStateFree( TA_cdlRiseFall3Methods_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLRISEFALL3METHODS_State*& _state )
+         return 0;
    }
    public RetCode cdlRiseFall3Methods( int startIdx,
       int endIdx,
@@ -10114,6 +12527,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlSeperatingLinesStateInit( TA_cdlSeperatingLines_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSEPARATINGLINES_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlSeperatingLinesState( TA_cdlSeperatingLines_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSEPARATINGLINES_State*& _state,
+         return 0;
+   }
+   public int cdlSeperatingLinesStateFree( TA_cdlSeperatingLines_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSEPARATINGLINES_State*& _state )
+         return 0;
+   }
    public RetCode cdlSeperatingLines( int startIdx,
       int endIdx,
       float inOpen[],
@@ -10271,6 +12717,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlShootingStarStateInit( TA_cdlShootingStar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSHOOTINGSTAR_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlShootingStarState( TA_cdlShootingStar_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSHOOTINGSTAR_State*& _state,
+         return 0;
+   }
+   public int cdlShootingStarStateFree( TA_cdlShootingStar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSHOOTINGSTAR_State*& _state )
+         return 0;
+   }
    public RetCode cdlShootingStar( int startIdx,
       int endIdx,
       float inOpen[],
@@ -10405,6 +12884,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlShortLineStateInit( TA_cdlShortLine_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSHORTLINE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlShortLineState( TA_cdlShortLine_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSHORTLINE_State*& _state,
+         return 0;
+   }
+   public int cdlShortLineStateFree( TA_cdlShortLine_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSHORTLINE_State*& _state )
+         return 0;
+   }
    public RetCode cdlShortLine( int startIdx,
       int endIdx,
       float inOpen[],
@@ -10517,6 +13029,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlSpinningTopStateInit( TA_cdlSpinningTop_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSPINNINGTOP_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlSpinningTopState( TA_cdlSpinningTop_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSPINNINGTOP_State*& _state,
+         return 0;
+   }
+   public int cdlSpinningTopStateFree( TA_cdlSpinningTop_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSPINNINGTOP_State*& _state )
+         return 0;
    }
    public RetCode cdlSpinningTop( int startIdx,
       int endIdx,
@@ -10673,6 +13218,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlStalledPatternStateInit( TA_cdlStalledPattern_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSTALLEDPATTERN_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlStalledPatternState( TA_cdlStalledPattern_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSTALLEDPATTERN_State*& _state,
+         return 0;
+   }
+   public int cdlStalledPatternStateFree( TA_cdlStalledPattern_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSTALLEDPATTERN_State*& _state )
+         return 0;
    }
    public RetCode cdlStalledPattern( int startIdx,
       int endIdx,
@@ -10833,6 +13411,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlStickSandwhichStateInit( TA_cdlStickSandwhich_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSTICKSANDWICH_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlStickSandwhichState( TA_cdlStickSandwhich_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSTICKSANDWICH_State*& _state,
+         return 0;
+   }
+   public int cdlStickSandwhichStateFree( TA_cdlStickSandwhich_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLSTICKSANDWICH_State*& _state )
+         return 0;
+   }
    public RetCode cdlStickSandwhich( int startIdx,
       int endIdx,
       float inOpen[],
@@ -10961,6 +13572,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlTakuriStateInit( TA_cdlTakuri_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTAKURI_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlTakuriState( TA_cdlTakuri_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTAKURI_State*& _state,
+         return 0;
+   }
+   public int cdlTakuriStateFree( TA_cdlTakuri_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTAKURI_State*& _state )
+         return 0;
    }
    public RetCode cdlTakuri( int startIdx,
       int endIdx,
@@ -11104,6 +13748,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlTasukiGapStateInit( TA_cdlTasukiGap_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTASUKIGAP_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlTasukiGapState( TA_cdlTasukiGap_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTASUKIGAP_State*& _state,
+         return 0;
+   }
+   public int cdlTasukiGapStateFree( TA_cdlTasukiGap_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTASUKIGAP_State*& _state )
+         return 0;
+   }
    public RetCode cdlTasukiGap( int startIdx,
       int endIdx,
       float inOpen[],
@@ -11241,6 +13918,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlThrustingStateInit( TA_cdlThrusting_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTHRUSTING_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlThrustingState( TA_cdlThrusting_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTHRUSTING_State*& _state,
+         return 0;
+   }
+   public int cdlThrustingStateFree( TA_cdlThrusting_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTHRUSTING_State*& _state )
+         return 0;
+   }
    public RetCode cdlThrusting( int startIdx,
       int endIdx,
       float inOpen[],
@@ -11371,6 +14081,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlTristarStateInit( TA_cdlTristar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTRISTAR_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlTristarState( TA_cdlTristar_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTRISTAR_State*& _state,
+         return 0;
+   }
+   public int cdlTristarStateFree( TA_cdlTristar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLTRISTAR_State*& _state )
+         return 0;
    }
    public RetCode cdlTristar( int startIdx,
       int endIdx,
@@ -11503,6 +14246,39 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int cdlUnique3RiverStateInit( TA_cdlUnique3River_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLUNIQUE3RIVER_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlUnique3RiverState( TA_cdlUnique3River_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLUNIQUE3RIVER_State*& _state,
+         return 0;
+   }
+   public int cdlUnique3RiverStateFree( TA_cdlUnique3River_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLUNIQUE3RIVER_State*& _state )
+         return 0;
    }
    public RetCode cdlUnique3River( int startIdx,
       int endIdx,
@@ -11639,6 +14415,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlUpsideGap2CrowsStateInit( TA_cdlUpsideGap2Crows_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLUPSIDEGAP2CROWS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlUpsideGap2CrowsState( TA_cdlUpsideGap2Crows_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLUPSIDEGAP2CROWS_State*& _state,
+         return 0;
+   }
+   public int cdlUpsideGap2CrowsStateFree( TA_cdlUpsideGap2Crows_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLUPSIDEGAP2CROWS_State*& _state )
+         return 0;
+   }
    public RetCode cdlUpsideGap2Crows( int startIdx,
       int endIdx,
       float inOpen[],
@@ -11762,6 +14571,39 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cdlXSideGap3MethodsStateInit( TA_cdlXSideGap3Methods_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLXSIDEGAP3METHODS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cdlXSideGap3MethodsState( TA_cdlXSideGap3Methods_State*& _state,
+      double inOpen,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLXSIDEGAP3METHODS_State*& _state,
+         return 0;
+   }
+   public int cdlXSideGap3MethodsStateFree( TA_cdlXSideGap3Methods_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CDLXSIDEGAP3METHODS_State*& _state )
+         return 0;
+   }
    public RetCode cdlXSideGap3Methods( int startIdx,
       int endIdx,
       float inOpen[],
@@ -11840,6 +14682,36 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int ceilStateInit( TA_ceil_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CEIL_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int ceilState( TA_ceil_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CEIL_State*& _state,
+         return 0;
+   }
+   public int ceilStateFree( TA_ceil_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CEIL_State*& _state )
+         return 0;
    }
    public RetCode ceil( int startIdx,
       int endIdx,
@@ -12010,6 +14882,46 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int cmoStateInit( TA_cmo_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CMO_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int cmoState( TA_cmo_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CMO_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int cmoStateFree( TA_cmo_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CMO_State*& _state )
+         return 0;
    }
    public RetCode cmo( int startIdx,
       int endIdx,
@@ -12232,6 +15144,47 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int correlStateInit( TA_correl_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CORREL_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int correlState( TA_correl_State*& _state,
+      double inReal0,
+      double inReal1,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CORREL_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int correlStateFree( TA_correl_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_CORREL_State*& _state )
+         return 0;
+   }
    public RetCode correl( int startIdx,
       int endIdx,
       float inReal0[],
@@ -12333,6 +15286,36 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int cosStateInit( TA_cos_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_COS_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int cosState( TA_cos_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_COS_State*& _state,
+         return 0;
+   }
+   public int cosStateFree( TA_cos_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_COS_State*& _state )
+         return 0;
+   }
    public RetCode cos( int startIdx,
       int endIdx,
       float inReal[],
@@ -12379,6 +15362,36 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int coshStateInit( TA_cosh_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_COSH_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int coshState( TA_cosh_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_COSH_State*& _state,
+         return 0;
+   }
+   public int coshStateFree( TA_cosh_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_COSH_State*& _state )
+         return 0;
    }
    public RetCode cosh( int startIdx,
       int endIdx,
@@ -12479,6 +15492,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int demaStateInit( TA_dema_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DEMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int demaState( TA_dema_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DEMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int demaStateFree( TA_dema_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DEMA_State*& _state )
+         return 0;
+   }
    public RetCode dema( int startIdx,
       int endIdx,
       float inReal[],
@@ -12569,6 +15622,37 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int divStateInit( TA_div_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DIV_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int divState( TA_div_State*& _state,
+      double inReal0,
+      double inReal1,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DIV_State*& _state,
+         return 0;
+   }
+   public int divStateFree( TA_div_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DIV_State*& _state )
+         return 0;
    }
    public RetCode div( int startIdx,
       int endIdx,
@@ -12746,6 +15830,48 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int dxStateInit( TA_dx_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int dxState( TA_dx_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int dxStateFree( TA_dx_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_DX_State*& _state )
+         return 0;
    }
    public RetCode dx( int startIdx,
       int endIdx,
@@ -12967,6 +16093,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int emaStateInit( TA_ema_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_EMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int emaState( TA_ema_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_EMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int emaStateFree( TA_ema_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_EMA_State*& _state )
+         return 0;
+   }
    public RetCode ema( int startIdx,
       int endIdx,
       float inReal[],
@@ -13061,6 +16227,36 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int expStateInit( TA_exp_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_EXP_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int expState( TA_exp_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_EXP_State*& _state,
+         return 0;
+   }
+   public int expStateFree( TA_exp_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_EXP_State*& _state )
+         return 0;
+   }
    public RetCode exp( int startIdx,
       int endIdx,
       float inReal[],
@@ -13107,6 +16303,36 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int floorStateInit( TA_floor_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_FLOOR_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int floorState( TA_floor_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_FLOOR_State*& _state,
+         return 0;
+   }
+   public int floorStateFree( TA_floor_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_FLOOR_State*& _state )
+         return 0;
    }
    public RetCode floor( int startIdx,
       int endIdx,
@@ -13262,6 +16488,36 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int htDcPeriodStateInit( TA_htDcPeriod_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_DCPERIOD_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int htDcPeriodState( TA_htDcPeriod_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_DCPERIOD_State*& _state,
+         return 0;
+   }
+   public int htDcPeriodStateFree( TA_htDcPeriod_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_DCPERIOD_State*& _state )
+         return 0;
    }
    public RetCode htDcPeriod( int startIdx,
       int endIdx,
@@ -13569,6 +16825,36 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int htDcPhaseStateInit( TA_htDcPhase_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_DCPHASE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int htDcPhaseState( TA_htDcPhase_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_DCPHASE_State*& _state,
+         return 0;
+   }
+   public int htDcPhaseStateFree( TA_htDcPhase_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_DCPHASE_State*& _state )
+         return 0;
    }
    public RetCode htDcPhase( int startIdx,
       int endIdx,
@@ -13881,6 +17167,37 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int htPhasorStateInit( TA_htPhasor_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_PHASOR_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int htPhasorState( TA_htPhasor_State*& _state,
+      double inReal,
+      double &outInPhase,
+      double &outQuadrature )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_PHASOR_State*& _state,
+         return 0;
+   }
+   public int htPhasorStateFree( TA_htPhasor_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_PHASOR_State*& _state )
+         return 0;
    }
    public RetCode htPhasor( int startIdx,
       int endIdx,
@@ -14196,6 +17513,37 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int htSineStateInit( TA_htSine_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_SINE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int htSineState( TA_htSine_State*& _state,
+      double inReal,
+      double &outSine,
+      double &outLeadSine )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_SINE_State*& _state,
+         return 0;
+   }
+   public int htSineStateFree( TA_htSine_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_SINE_State*& _state )
+         return 0;
    }
    public RetCode htSine( int startIdx,
       int endIdx,
@@ -14530,6 +17878,36 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int htTrendlineStateInit( TA_htTrendline_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_TRENDLINE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int htTrendlineState( TA_htTrendline_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_TRENDLINE_State*& _state,
+         return 0;
+   }
+   public int htTrendlineStateFree( TA_htTrendline_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_TRENDLINE_State*& _state )
+         return 0;
    }
    public RetCode htTrendline( int startIdx,
       int endIdx,
@@ -14908,6 +18286,36 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int htTrendModeStateInit( TA_htTrendMode_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_TRENDMODE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int htTrendModeState( TA_htTrendMode_State*& _state,
+      double inReal,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_TRENDMODE_State*& _state,
+         return 0;
+   }
+   public int htTrendModeStateFree( TA_htTrendMode_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_HT_TRENDMODE_State*& _state )
+         return 0;
+   }
    public RetCode htTrendMode( int startIdx,
       int endIdx,
       float inReal[],
@@ -15182,6 +18590,47 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int imiStateInit( TA_imi_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_IMI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int imiState( TA_imi_State*& _state,
+      double inOpen,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_IMI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int imiStateFree( TA_imi_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_IMI_State*& _state )
+         return 0;
+   }
    public RetCode imi( int startIdx,
       int endIdx,
       float inOpen[],
@@ -15331,6 +18780,46 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int kamaStateInit( TA_kama_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_KAMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int kamaState( TA_kama_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_KAMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int kamaStateFree( TA_kama_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_KAMA_State*& _state )
+         return 0;
    }
    public RetCode kama( int startIdx,
       int endIdx,
@@ -15490,6 +18979,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int linearRegStateInit( TA_linearReg_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int linearRegState( TA_linearReg_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int linearRegStateFree( TA_linearReg_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_State*& _state )
+         return 0;
+   }
    public RetCode linearReg( int startIdx,
       int endIdx,
       float inReal[],
@@ -15606,6 +19135,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int linearRegAngleStateInit( TA_linearRegAngle_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_ANGLE_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int linearRegAngleState( TA_linearRegAngle_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_ANGLE_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int linearRegAngleStateFree( TA_linearRegAngle_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_ANGLE_State*& _state )
+         return 0;
+   }
    public RetCode linearRegAngle( int startIdx,
       int endIdx,
       float inReal[],
@@ -15721,6 +19290,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int linearRegInterceptStateInit( TA_linearRegIntercept_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_INTERCEPT_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int linearRegInterceptState( TA_linearRegIntercept_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_INTERCEPT_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int linearRegInterceptStateFree( TA_linearRegIntercept_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_INTERCEPT_State*& _state )
+         return 0;
+   }
    public RetCode linearRegIntercept( int startIdx,
       int endIdx,
       float inReal[],
@@ -15834,6 +19443,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int linearRegSlopeStateInit( TA_linearRegSlope_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_SLOPE_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int linearRegSlopeState( TA_linearRegSlope_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_SLOPE_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int linearRegSlopeStateFree( TA_linearRegSlope_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LINEARREG_SLOPE_State*& _state )
+         return 0;
+   }
    public RetCode linearRegSlope( int startIdx,
       int endIdx,
       float inReal[],
@@ -15911,6 +19560,36 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int lnStateInit( TA_ln_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LN_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int lnState( TA_ln_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LN_State*& _state,
+         return 0;
+   }
+   public int lnStateFree( TA_ln_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LN_State*& _state )
+         return 0;
+   }
    public RetCode ln( int startIdx,
       int endIdx,
       float inReal[],
@@ -15957,6 +19636,36 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int log10StateInit( TA_log10_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LOG10_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int log10State( TA_log10_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LOG10_State*& _state,
+         return 0;
+   }
+   public int log10StateFree( TA_log10_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_LOG10_State*& _state )
+         return 0;
    }
    public RetCode log10( int startIdx,
       int endIdx,
@@ -16028,8 +19737,7 @@ public class Core {
       int endIdx,
       double inReal[],
       int optInTimePeriod,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outReal[] )
    {
@@ -16101,12 +19809,52 @@ public class Core {
       }
       return retCode;
    }
+   public int movingAverageStateInit( TA_movingAverage_State*& _state,
+      int optInTimePeriod,
+      MAType optInMAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int movingAverageState( TA_movingAverage_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      MAType optInMAType, double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int movingAverageStateFree( TA_movingAverage_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MA_State*& _state )
+         return 0;
+   }
    public RetCode movingAverage( int startIdx,
       int endIdx,
       float inReal[],
       int optInTimePeriod,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outReal[] )
    {
@@ -16346,6 +20094,68 @@ public class Core {
       outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
+   public int macdStateInit( TA_macd_State*& _state,
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      int optInSignalPeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACD_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int macdState( TA_macd_State*& _state,
+      double inReal,
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      int optInSignalPeriod,
+      double &outMACD,
+      double &outMACDSignal,
+      double &outMACDHist )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACD_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int macdStateFree( TA_macd_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACD_State*& _state )
+         return 0;
+   }
    public RetCode macd( int startIdx,
       int endIdx,
       float inReal[],
@@ -16489,10 +20299,8 @@ public class Core {
    }
    /* Generated */
    public int macdExtLookback( int optInFastPeriod,
-      MAType optInFastMAType,
-      int optInSlowPeriod,
-      MAType optInSlowMAType,
-      int optInSignalPeriod,
+      MAType optInFastMAType, int optInSlowPeriod,
+      MAType optInSlowMAType, int optInSignalPeriod,
       MAType optInSignalMAType )
    {
       int tempInteger, lookbackLargest;
@@ -16518,12 +20326,9 @@ public class Core {
       int endIdx,
       double inReal[],
       int optInFastPeriod,
-      MAType optInFastMAType,
-      int optInSlowPeriod,
-      MAType optInSlowMAType,
-      int optInSignalPeriod,
-      MAType optInSignalMAType,
-      MInteger outBegIdx,
+      MAType optInFastMAType, int optInSlowPeriod,
+      MAType optInSlowMAType, int optInSignalPeriod,
+      MAType optInSignalMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
@@ -16630,16 +20435,76 @@ public class Core {
       outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
+   public int macdExtStateInit( TA_macdExt_State*& _state,
+      int optInFastPeriod,
+      MAType optInFastMAType, int optInSlowPeriod,
+      MAType optInSlowMAType, int optInSignalPeriod,
+      MAType optInSignalMAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACDEXT_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int macdExtState( TA_macdExt_State*& _state,
+      double inReal,
+      int optInFastPeriod,
+      MAType optInFastMAType, int optInSlowPeriod,
+      MAType optInSlowMAType, int optInSignalPeriod,
+      MAType optInSignalMAType, double &outMACD,
+      double &outMACDSignal,
+      double &outMACDHist )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACDEXT_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int macdExtStateFree( TA_macdExt_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACDEXT_State*& _state )
+         return 0;
+   }
    public RetCode macdExt( int startIdx,
       int endIdx,
       float inReal[],
       int optInFastPeriod,
-      MAType optInFastMAType,
-      int optInSlowPeriod,
-      MAType optInSlowMAType,
-      int optInSignalPeriod,
-      MAType optInSignalMAType,
-      MInteger outBegIdx,
+      MAType optInFastMAType, int optInSlowPeriod,
+      MAType optInSlowMAType, int optInSignalPeriod,
+      MAType optInSignalMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outMACD[],
       double outMACDSignal[],
@@ -16783,6 +20648,48 @@ public class Core {
          outMACD,
          outMACDSignal,
          outMACDHist );
+   }
+   public int macdFixStateInit( TA_macdFix_State*& _state,
+      int optInSignalPeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACDFIX_State*& _state,
+         if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int macdFixState( TA_macdFix_State*& _state,
+      double inReal,
+      int optInSignalPeriod,
+      double &outMACD,
+      double &outMACDSignal,
+      double &outMACDHist )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACDFIX_State*& _state,
+         if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
+         optInSignalPeriod = 9;
+      else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int macdFixStateFree( TA_macdFix_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MACDFIX_State*& _state )
+         return 0;
    }
    public RetCode macdFix( int startIdx,
       int endIdx,
@@ -16992,6 +20899,57 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int mamaStateInit( TA_mama_State*& _state,
+      double optInFastLimit,
+      double optInSlowLimit )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAMA_State*& _state,
+         if( optInFastLimit == (-4e+37) )
+         optInFastLimit = 5.000000e-1;
+      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
+         return RetCode.BadParam ;
+      if( optInSlowLimit == (-4e+37) )
+         optInSlowLimit = 5.000000e-2;
+      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int mamaState( TA_mama_State*& _state,
+      double inReal,
+      double optInFastLimit,
+      double optInSlowLimit,
+      double &outMAMA,
+      double &outFAMA )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAMA_State*& _state,
+         if( optInFastLimit == (-4e+37) )
+         optInFastLimit = 5.000000e-1;
+      else if( (optInFastLimit < 1.000000e-2) || (optInFastLimit > 9.900000e-1) )
+         return RetCode.BadParam ;
+      if( optInSlowLimit == (-4e+37) )
+         optInSlowLimit = 5.000000e-2;
+      else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int mamaStateFree( TA_mama_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAMA_State*& _state )
+         return 0;
+   }
    public RetCode mama( int startIdx,
       int endIdx,
       float inReal[],
@@ -17179,8 +21137,7 @@ public class Core {
       double inPeriods[],
       int optInMinPeriod,
       int optInMaxPeriod,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outReal[] )
    {
@@ -17262,14 +21219,65 @@ public class Core {
       outNBElement.value = outputSize;
       return RetCode.Success ;
    }
+   public int movingAverageVariablePeriodStateInit( TA_movingAverageVariablePeriod_State*& _state,
+      int optInMinPeriod,
+      int optInMaxPeriod,
+      MAType optInMAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAVP_State*& _state,
+         if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
+         optInMinPeriod = 2;
+      else if( ((int)optInMinPeriod < 2) || ((int)optInMinPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInMaxPeriod == ( Integer.MIN_VALUE ) )
+         optInMaxPeriod = 30;
+      else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int movingAverageVariablePeriodState( TA_movingAverageVariablePeriod_State*& _state,
+      double inReal,
+      double inPeriods,
+      int optInMinPeriod,
+      int optInMaxPeriod,
+      MAType optInMAType, double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAVP_State*& _state,
+         if( (int)optInMinPeriod == ( Integer.MIN_VALUE ) )
+         optInMinPeriod = 2;
+      else if( ((int)optInMinPeriod < 2) || ((int)optInMinPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInMaxPeriod == ( Integer.MIN_VALUE ) )
+         optInMaxPeriod = 30;
+      else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int movingAverageVariablePeriodStateFree( TA_movingAverageVariablePeriod_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAVP_State*& _state )
+         return 0;
+   }
    public RetCode movingAverageVariablePeriod( int startIdx,
       int endIdx,
       float inReal[],
       float inPeriods[],
       int optInMinPeriod,
       int optInMaxPeriod,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outReal[] )
    {
@@ -17424,6 +21432,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int maxStateInit( TA_max_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int maxState( TA_max_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int maxStateFree( TA_max_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAX_State*& _state )
+         return 0;
+   }
    public RetCode max( int startIdx,
       int endIdx,
       float inReal[],
@@ -17561,6 +21609,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int maxIndexStateInit( TA_maxIndex_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAXINDEX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int maxIndexState( TA_maxIndex_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAXINDEX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int maxIndexStateFree( TA_maxIndex_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MAXINDEX_State*& _state )
+         return 0;
+   }
    public RetCode maxIndex( int startIdx,
       int endIdx,
       float inReal[],
@@ -17651,6 +21739,37 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int medPriceStateInit( TA_medPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MEDPRICE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int medPriceState( TA_medPrice_State*& _state,
+      double inHigh,
+      double inLow,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MEDPRICE_State*& _state,
+         return 0;
+   }
+   public int medPriceStateFree( TA_medPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MEDPRICE_State*& _state )
+         return 0;
    }
    public RetCode medPrice( int startIdx,
       int endIdx,
@@ -17820,6 +21939,49 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int mfiStateInit( TA_mfi_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MFI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int mfiState( TA_mfi_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double inVolume,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MFI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int mfiStateFree( TA_mfi_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MFI_State*& _state )
+         return 0;
    }
    public RetCode mfi( int startIdx,
       int endIdx,
@@ -18016,6 +22178,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int midPointStateInit( TA_midPoint_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIDPOINT_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int midPointState( TA_midPoint_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIDPOINT_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int midPointStateFree( TA_midPoint_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIDPOINT_State*& _state )
+         return 0;
+   }
    public RetCode midPoint( int startIdx,
       int endIdx,
       float inReal[],
@@ -18123,6 +22325,47 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int midPriceStateInit( TA_midPrice_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIDPRICE_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int midPriceState( TA_midPrice_State*& _state,
+      double inHigh,
+      double inLow,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIDPRICE_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int midPriceStateFree( TA_midPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIDPRICE_State*& _state )
+         return 0;
    }
    public RetCode midPrice( int startIdx,
       int endIdx,
@@ -18247,6 +22490,46 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int minStateInit( TA_min_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIN_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int minState( TA_min_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIN_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int minStateFree( TA_min_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MIN_State*& _state )
+         return 0;
    }
    public RetCode min( int startIdx,
       int endIdx,
@@ -18384,6 +22667,46 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int minIndexStateInit( TA_minIndex_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MININDEX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int minIndexState( TA_minIndex_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      int &outInteger )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MININDEX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int minIndexStateFree( TA_minIndex_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MININDEX_State*& _state )
+         return 0;
    }
    public RetCode minIndex( int startIdx,
       int endIdx,
@@ -18546,6 +22869,47 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int minMaxStateInit( TA_minMax_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINMAX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int minMaxState( TA_minMax_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outMin,
+      double &outMax )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINMAX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int minMaxStateFree( TA_minMax_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINMAX_State*& _state )
+         return 0;
    }
    public RetCode minMax( int startIdx,
       int endIdx,
@@ -18733,6 +23097,47 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int minMaxIndexStateInit( TA_minMaxIndex_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINMAXINDEX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int minMaxIndexState( TA_minMaxIndex_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      int &outMinIdx,
+      int &outMaxIdx )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINMAXINDEX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int minMaxIndexStateFree( TA_minMaxIndex_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINMAXINDEX_State*& _state )
+         return 0;
    }
    public RetCode minMaxIndex( int startIdx,
       int endIdx,
@@ -18981,6 +23386,48 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int minusDIStateInit( TA_minusDI_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINUS_DI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int minusDIState( TA_minusDI_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINUS_DI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int minusDIStateFree( TA_minusDI_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINUS_DI_State*& _state )
+         return 0;
    }
    public RetCode minusDI( int startIdx,
       int endIdx,
@@ -19264,6 +23711,47 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int minusDMStateInit( TA_minusDM_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINUS_DM_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int minusDMState( TA_minusDM_State*& _state,
+      double inHigh,
+      double inLow,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINUS_DM_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int minusDMStateFree( TA_minusDM_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MINUS_DM_State*& _state )
+         return 0;
+   }
    public RetCode minusDM( int startIdx,
       int endIdx,
       float inHigh[],
@@ -19430,6 +23918,46 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int momStateInit( TA_mom_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MOM_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int momState( TA_mom_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MOM_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int momStateFree( TA_mom_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MOM_State*& _state )
+         return 0;
+   }
    public RetCode mom( int startIdx,
       int endIdx,
       float inReal[],
@@ -19490,6 +24018,37 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int multStateInit( TA_mult_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MULT_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int multState( TA_mult_State*& _state,
+      double inReal0,
+      double inReal1,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MULT_State*& _state,
+         return 0;
+   }
+   public int multStateFree( TA_mult_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_MULT_State*& _state )
+         return 0;
    }
    public RetCode mult( int startIdx,
       int endIdx,
@@ -19611,6 +24170,48 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return retCode;
+   }
+   public int natrStateInit( TA_natr_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_NATR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int natrState( TA_natr_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_NATR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int natrStateFree( TA_natr_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_NATR_State*& _state )
+         return 0;
    }
    public RetCode natr( int startIdx,
       int endIdx,
@@ -19738,6 +24339,37 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int obvStateInit( TA_obv_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_OBV_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int obvState( TA_obv_State*& _state,
+      double inReal,
+      double inVolume,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_OBV_State*& _state,
+         return 0;
+   }
+   public int obvStateFree( TA_obv_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_OBV_State*& _state )
+         return 0;
    }
    public RetCode obv( int startIdx,
       int endIdx,
@@ -19929,6 +24561,48 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int plusDIStateInit( TA_plusDI_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PLUS_DI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int plusDIState( TA_plusDI_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PLUS_DI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int plusDIStateFree( TA_plusDI_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PLUS_DI_State*& _state )
+         return 0;
    }
    public RetCode plusDI( int startIdx,
       int endIdx,
@@ -20212,6 +24886,47 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int plusDMStateInit( TA_plusDM_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PLUS_DM_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int plusDMState( TA_plusDM_State*& _state,
+      double inHigh,
+      double inLow,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PLUS_DM_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int plusDMStateFree( TA_plusDM_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PLUS_DM_State*& _state )
+         return 0;
+   }
    public RetCode plusDM( int startIdx,
       int endIdx,
       float inHigh[],
@@ -20355,8 +25070,7 @@ public class Core {
       double inReal[],
       int optInFastPeriod,
       int optInSlowPeriod,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outReal[] )
    {
@@ -20386,13 +25100,63 @@ public class Core {
          1 );
       return retCode;
    }
+   public int ppoStateInit( TA_ppo_State*& _state,
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      MAType optInMAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PPO_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int ppoState( TA_ppo_State*& _state,
+      double inReal,
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      MAType optInMAType, double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PPO_State*& _state,
+         if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
+         optInFastPeriod = 12;
+      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
+         optInSlowPeriod = 26;
+      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int ppoStateFree( TA_ppo_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_PPO_State*& _state )
+         return 0;
+   }
    public RetCode ppo( int startIdx,
       int endIdx,
       float inReal[],
       int optInFastPeriod,
       int optInSlowPeriod,
-      MAType optInMAType,
-      MInteger outBegIdx,
+      MAType optInMAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outReal[] )
    {
@@ -20472,6 +25236,46 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int rocStateInit( TA_roc_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROC_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int rocState( TA_roc_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROC_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int rocStateFree( TA_roc_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROC_State*& _state )
+         return 0;
    }
    public RetCode roc( int startIdx,
       int endIdx,
@@ -20566,6 +25370,46 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int rocPStateInit( TA_rocP_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCP_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int rocPState( TA_rocP_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCP_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int rocPStateFree( TA_rocP_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCP_State*& _state )
+         return 0;
+   }
    public RetCode rocP( int startIdx,
       int endIdx,
       float inReal[],
@@ -20659,6 +25503,46 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int rocRStateInit( TA_rocR_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int rocRState( TA_rocR_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int rocRStateFree( TA_rocR_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCR_State*& _state )
+         return 0;
+   }
    public RetCode rocR( int startIdx,
       int endIdx,
       float inReal[],
@@ -20751,6 +25635,46 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int rocR100StateInit( TA_rocR100_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCR100_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int rocR100State( TA_rocR100_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCR100_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 10;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int rocR100StateFree( TA_rocR100_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ROCR100_State*& _state )
+         return 0;
    }
    public RetCode rocR100( int startIdx,
       int endIdx,
@@ -20941,6 +25865,46 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int rsiStateInit( TA_rsi_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_RSI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int rsiState( TA_rsi_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_RSI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int rsiStateFree( TA_rsi_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_RSI_State*& _state )
+         return 0;
    }
    public RetCode rsi( int startIdx,
       int endIdx,
@@ -21244,6 +26208,57 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int sarStateInit( TA_sar_State*& _state,
+      double optInAcceleration,
+      double optInMaximum )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SAR_State*& _state,
+         if( optInAcceleration == (-4e+37) )
+         optInAcceleration = 2.000000e-2;
+      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInMaximum == (-4e+37) )
+         optInMaximum = 2.000000e-1;
+      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int sarState( TA_sar_State*& _state,
+      double inHigh,
+      double inLow,
+      double optInAcceleration,
+      double optInMaximum,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SAR_State*& _state,
+         if( optInAcceleration == (-4e+37) )
+         optInAcceleration = 2.000000e-2;
+      else if( (optInAcceleration < 0.000000e+0) || (optInAcceleration > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInMaximum == (-4e+37) )
+         optInMaximum = 2.000000e-1;
+      else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int sarStateFree( TA_sar_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SAR_State*& _state )
+         return 0;
    }
    public RetCode sar( int startIdx,
       int endIdx,
@@ -21660,6 +26675,117 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int sarExtStateInit( TA_sarExt_State*& _state,
+      double optInStartValue,
+      double optInOffsetOnReverse,
+      double optInAccelerationInitLong,
+      double optInAccelerationLong,
+      double optInAccelerationMaxLong,
+      double optInAccelerationInitShort,
+      double optInAccelerationShort,
+      double optInAccelerationMaxShort )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SAREXT_State*& _state,
+         if( optInStartValue == (-4e+37) )
+         optInStartValue = 0.000000e+0;
+      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInOffsetOnReverse == (-4e+37) )
+         optInOffsetOnReverse = 0.000000e+0;
+      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationInitLong == (-4e+37) )
+         optInAccelerationInitLong = 2.000000e-2;
+      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationLong == (-4e+37) )
+         optInAccelerationLong = 2.000000e-2;
+      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationMaxLong == (-4e+37) )
+         optInAccelerationMaxLong = 2.000000e-1;
+      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationInitShort == (-4e+37) )
+         optInAccelerationInitShort = 2.000000e-2;
+      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationShort == (-4e+37) )
+         optInAccelerationShort = 2.000000e-2;
+      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationMaxShort == (-4e+37) )
+         optInAccelerationMaxShort = 2.000000e-1;
+      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int sarExtState( TA_sarExt_State*& _state,
+      double inHigh,
+      double inLow,
+      double optInStartValue,
+      double optInOffsetOnReverse,
+      double optInAccelerationInitLong,
+      double optInAccelerationLong,
+      double optInAccelerationMaxLong,
+      double optInAccelerationInitShort,
+      double optInAccelerationShort,
+      double optInAccelerationMaxShort,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SAREXT_State*& _state,
+         if( optInStartValue == (-4e+37) )
+         optInStartValue = 0.000000e+0;
+      else if( (optInStartValue < -3.000000e+37) || (optInStartValue > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInOffsetOnReverse == (-4e+37) )
+         optInOffsetOnReverse = 0.000000e+0;
+      else if( (optInOffsetOnReverse < 0.000000e+0) || (optInOffsetOnReverse > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationInitLong == (-4e+37) )
+         optInAccelerationInitLong = 2.000000e-2;
+      else if( (optInAccelerationInitLong < 0.000000e+0) || (optInAccelerationInitLong > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationLong == (-4e+37) )
+         optInAccelerationLong = 2.000000e-2;
+      else if( (optInAccelerationLong < 0.000000e+0) || (optInAccelerationLong > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationMaxLong == (-4e+37) )
+         optInAccelerationMaxLong = 2.000000e-1;
+      else if( (optInAccelerationMaxLong < 0.000000e+0) || (optInAccelerationMaxLong > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationInitShort == (-4e+37) )
+         optInAccelerationInitShort = 2.000000e-2;
+      else if( (optInAccelerationInitShort < 0.000000e+0) || (optInAccelerationInitShort > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationShort == (-4e+37) )
+         optInAccelerationShort = 2.000000e-2;
+      else if( (optInAccelerationShort < 0.000000e+0) || (optInAccelerationShort > 3.000000e+37) )
+         return RetCode.BadParam ;
+      if( optInAccelerationMaxShort == (-4e+37) )
+         optInAccelerationMaxShort = 2.000000e-1;
+      else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int sarExtStateFree( TA_sarExt_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SAREXT_State*& _state )
+         return 0;
+   }
    public RetCode sarExt( int startIdx,
       int endIdx,
       float inHigh[],
@@ -21904,6 +27030,36 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int sinStateInit( TA_sin_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SIN_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int sinState( TA_sin_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SIN_State*& _state,
+         return 0;
+   }
+   public int sinStateFree( TA_sin_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SIN_State*& _state )
+         return 0;
+   }
    public RetCode sin( int startIdx,
       int endIdx,
       float inReal[],
@@ -21950,6 +27106,36 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int sinhStateInit( TA_sinh_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SINH_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int sinhState( TA_sinh_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SINH_State*& _state,
+         return 0;
+   }
+   public int sinhStateFree( TA_sinh_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SINH_State*& _state )
+         return 0;
    }
    public RetCode sinh( int startIdx,
       int endIdx,
@@ -22040,6 +27226,46 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int smaStateInit( TA_sma_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int smaState( TA_sma_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int smaStateFree( TA_sma_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SMA_State*& _state )
+         return 0;
+   }
    public RetCode sma( int startIdx,
       int endIdx,
       float inReal[],
@@ -22124,6 +27350,36 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int sqrtStateInit( TA_sqrt_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SQRT_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int sqrtState( TA_sqrt_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SQRT_State*& _state,
+         return 0;
+   }
+   public int sqrtStateFree( TA_sqrt_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SQRT_State*& _state )
+         return 0;
    }
    public RetCode sqrt( int startIdx,
       int endIdx,
@@ -22250,6 +27506,56 @@ public class Core {
             output[outIdx] = (double)0.0;
       }
    }
+   public int stdDevStateInit( TA_stdDev_State*& _state,
+      int optInTimePeriod,
+      double optInNbDev )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STDDEV_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( optInNbDev == (-4e+37) )
+         optInNbDev = 1.000000e+0;
+      else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int stdDevState( TA_stdDev_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double optInNbDev,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STDDEV_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( optInNbDev == (-4e+37) )
+         optInNbDev = 1.000000e+0;
+      else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int stdDevStateFree( TA_stdDev_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STDDEV_State*& _state )
+         return 0;
+   }
    public RetCode stdDev( int startIdx,
       int endIdx,
       float inReal[],
@@ -22343,8 +27649,7 @@ public class Core {
    /* Generated */
    public int stochLookback( int optInFastK_Period,
       int optInSlowK_Period,
-      MAType optInSlowK_MAType,
-      int optInSlowD_Period,
+      MAType optInSlowK_MAType, int optInSlowD_Period,
       MAType optInSlowD_MAType )
    {
       int retValue;
@@ -22372,10 +27677,8 @@ public class Core {
       double inClose[],
       int optInFastK_Period,
       int optInSlowK_Period,
-      MAType optInSlowK_MAType,
-      int optInSlowD_Period,
-      MAType optInSlowD_MAType,
-      MInteger outBegIdx,
+      MAType optInSlowK_MAType, int optInSlowD_Period,
+      MAType optInSlowD_MAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outSlowK[],
       double outSlowD[] )
@@ -22514,6 +27817,70 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int stochStateInit( TA_stoch_State*& _state,
+      int optInFastK_Period,
+      int optInSlowK_Period,
+      MAType optInSlowK_MAType, int optInSlowD_Period,
+      MAType optInSlowD_MAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCH_State*& _state,
+         if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowK_Period == ( Integer.MIN_VALUE ) )
+         optInSlowK_Period = 3;
+      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowD_Period == ( Integer.MIN_VALUE ) )
+         optInSlowD_Period = 3;
+      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int stochState( TA_stoch_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInFastK_Period,
+      int optInSlowK_Period,
+      MAType optInSlowK_MAType, int optInSlowD_Period,
+      MAType optInSlowD_MAType, double &outSlowK,
+      double &outSlowD )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCH_State*& _state,
+         if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowK_Period == ( Integer.MIN_VALUE ) )
+         optInSlowK_Period = 3;
+      else if( ((int)optInSlowK_Period < 1) || ((int)optInSlowK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInSlowD_Period == ( Integer.MIN_VALUE ) )
+         optInSlowD_Period = 3;
+      else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int stochStateFree( TA_stoch_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCH_State*& _state )
+         return 0;
+   }
    public RetCode stoch( int startIdx,
       int endIdx,
       float inHigh[],
@@ -22521,10 +27888,8 @@ public class Core {
       float inClose[],
       int optInFastK_Period,
       int optInSlowK_Period,
-      MAType optInSlowK_MAType,
-      int optInSlowD_Period,
-      MAType optInSlowD_MAType,
-      MInteger outBegIdx,
+      MAType optInSlowK_MAType, int optInSlowD_Period,
+      MAType optInSlowD_MAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outSlowK[],
       double outSlowD[] )
@@ -22673,8 +28038,7 @@ public class Core {
       double inClose[],
       int optInFastK_Period,
       int optInFastD_Period,
-      MAType optInFastD_MAType,
-      MInteger outBegIdx,
+      MAType optInFastD_MAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outFastK[],
       double outFastD[] )
@@ -22804,6 +28168,60 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int stochFStateInit( TA_stochF_State*& _state,
+      int optInFastK_Period,
+      int optInFastD_Period,
+      MAType optInFastD_MAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCHF_State*& _state,
+         if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInFastD_Period == ( Integer.MIN_VALUE ) )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int stochFState( TA_stochF_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInFastK_Period,
+      int optInFastD_Period,
+      MAType optInFastD_MAType, double &outFastK,
+      double &outFastD )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCHF_State*& _state,
+         if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInFastD_Period == ( Integer.MIN_VALUE ) )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int stochFStateFree( TA_stochF_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCHF_State*& _state )
+         return 0;
+   }
    public RetCode stochF( int startIdx,
       int endIdx,
       float inHigh[],
@@ -22811,8 +28229,7 @@ public class Core {
       float inClose[],
       int optInFastK_Period,
       int optInFastD_Period,
-      MAType optInFastD_MAType,
-      MInteger outBegIdx,
+      MAType optInFastD_MAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outFastK[],
       double outFastD[] )
@@ -22955,8 +28372,7 @@ public class Core {
       int optInTimePeriod,
       int optInFastK_Period,
       int optInFastD_Period,
-      MAType optInFastD_MAType,
-      MInteger outBegIdx,
+      MAType optInFastD_MAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outFastK[],
       double outFastD[] )
@@ -23031,14 +28447,75 @@ public class Core {
       }
       return RetCode.Success ;
    }
+   public int stochRsiStateInit( TA_stochRsi_State*& _state,
+      int optInTimePeriod,
+      int optInFastK_Period,
+      int optInFastD_Period,
+      MAType optInFastD_MAType )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCHRSI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInFastD_Period == ( Integer.MIN_VALUE ) )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int stochRsiState( TA_stochRsi_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      int optInFastK_Period,
+      int optInFastD_Period,
+      MAType optInFastD_MAType, double &outFastK,
+      double &outFastD )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCHRSI_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInFastD_Period == ( Integer.MIN_VALUE ) )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int stochRsiStateFree( TA_stochRsi_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_STOCHRSI_State*& _state )
+         return 0;
+   }
    public RetCode stochRsi( int startIdx,
       int endIdx,
       float inReal[],
       int optInTimePeriod,
       int optInFastK_Period,
       int optInFastD_Period,
-      MAType optInFastD_MAType,
-      MInteger outBegIdx,
+      MAType optInFastD_MAType, MInteger outBegIdx,
       MInteger outNBElement,
       double outFastK[],
       double outFastD[] )
@@ -23140,6 +28617,37 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int subStateInit( TA_sub_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SUB_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int subState( TA_sub_State*& _state,
+      double inReal0,
+      double inReal1,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SUB_State*& _state,
+         return 0;
+   }
+   public int subStateFree( TA_sub_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SUB_State*& _state )
+         return 0;
+   }
    public RetCode sub( int startIdx,
       int endIdx,
       float inReal0[],
@@ -23217,6 +28725,46 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int sumStateInit( TA_sum_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SUM_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int sumState( TA_sum_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SUM_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int sumStateFree( TA_sum_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_SUM_State*& _state )
+         return 0;
    }
    public RetCode sum( int startIdx,
       int endIdx,
@@ -23397,6 +28945,56 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int t3StateInit( TA_t3_State*& _state,
+      int optInTimePeriod,
+      double optInVFactor )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_T3_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( optInVFactor == (-4e+37) )
+         optInVFactor = 7.000000e-1;
+      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int t3State( TA_t3_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double optInVFactor,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_T3_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( optInVFactor == (-4e+37) )
+         optInVFactor = 7.000000e-1;
+      else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int t3StateFree( TA_t3_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_T3_State*& _state )
+         return 0;
+   }
    public RetCode t3( int startIdx,
       int endIdx,
       float inReal[],
@@ -23541,6 +29139,36 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int tanStateInit( TA_tan_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TAN_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int tanState( TA_tan_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TAN_State*& _state,
+         return 0;
+   }
+   public int tanStateFree( TA_tan_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TAN_State*& _state )
+         return 0;
+   }
    public RetCode tan( int startIdx,
       int endIdx,
       float inReal[],
@@ -23587,6 +29215,36 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int tanhStateInit( TA_tanh_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TANH_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int tanhState( TA_tanh_State*& _state,
+      double inReal,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TANH_State*& _state,
+         return 0;
+   }
+   public int tanhStateFree( TA_tanh_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TANH_State*& _state )
+         return 0;
    }
    public RetCode tanh( int startIdx,
       int endIdx,
@@ -23695,6 +29353,46 @@ public class Core {
       }
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int temaStateInit( TA_tema_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TEMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int temaState( TA_tema_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TEMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int temaStateFree( TA_tema_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TEMA_State*& _state )
+         return 0;
    }
    public RetCode tema( int startIdx,
       int endIdx,
@@ -23821,6 +29519,38 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int trueRangeStateInit( TA_trueRange_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRANGE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int trueRangeState( TA_trueRange_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRANGE_State*& _state,
+         return 0;
+   }
+   public int trueRangeStateFree( TA_trueRange_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRANGE_State*& _state )
+         return 0;
    }
    public RetCode trueRange( int startIdx,
       int endIdx,
@@ -23997,6 +29727,46 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int trimaStateInit( TA_trima_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRIMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int trimaState( TA_trima_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRIMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int trimaStateFree( TA_trima_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRIMA_State*& _state )
+         return 0;
    }
    public RetCode trima( int startIdx,
       int endIdx,
@@ -24216,6 +29986,46 @@ public class Core {
       }
       return RetCode.Success ;
    }
+   public int trixStateInit( TA_trix_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRIX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int trixState( TA_trix_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRIX_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int trixStateFree( TA_trix_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TRIX_State*& _state )
+         return 0;
+   }
    public RetCode trix( int startIdx,
       int endIdx,
       float inReal[],
@@ -24364,6 +30174,46 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   public int tsfStateInit( TA_tsf_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TSF_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int tsfState( TA_tsf_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TSF_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int tsfStateFree( TA_tsf_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TSF_State*& _state )
+         return 0;
+   }
    public RetCode tsf( int startIdx,
       int endIdx,
       float inReal[],
@@ -24447,6 +30297,38 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int typPriceStateInit( TA_typPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TYPPRICE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int typPriceState( TA_typPrice_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TYPPRICE_State*& _state,
+         return 0;
+   }
+   public int typPriceStateFree( TA_typPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_TYPPRICE_State*& _state )
+         return 0;
    }
    public RetCode typPrice( int startIdx,
       int endIdx,
@@ -24602,6 +30484,68 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int ultOscStateInit( TA_ultOsc_State*& _state,
+      int optInTimePeriod1,
+      int optInTimePeriod2,
+      int optInTimePeriod3 )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ULTOSC_State*& _state,
+         if( (int)optInTimePeriod1 == ( Integer.MIN_VALUE ) )
+         optInTimePeriod1 = 7;
+      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInTimePeriod2 == ( Integer.MIN_VALUE ) )
+         optInTimePeriod2 = 14;
+      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInTimePeriod3 == ( Integer.MIN_VALUE ) )
+         optInTimePeriod3 = 28;
+      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int ultOscState( TA_ultOsc_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod1,
+      int optInTimePeriod2,
+      int optInTimePeriod3,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ULTOSC_State*& _state,
+         if( (int)optInTimePeriod1 == ( Integer.MIN_VALUE ) )
+         optInTimePeriod1 = 7;
+      else if( ((int)optInTimePeriod1 < 1) || ((int)optInTimePeriod1 > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInTimePeriod2 == ( Integer.MIN_VALUE ) )
+         optInTimePeriod2 = 14;
+      else if( ((int)optInTimePeriod2 < 1) || ((int)optInTimePeriod2 > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInTimePeriod3 == ( Integer.MIN_VALUE ) )
+         optInTimePeriod3 = 28;
+      else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int ultOscStateFree( TA_ultOsc_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_ULTOSC_State*& _state )
+         return 0;
    }
    public RetCode ultOsc( int startIdx,
       int endIdx,
@@ -24802,6 +30746,56 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   public int varianceStateInit( TA_variance_State*& _state,
+      int optInTimePeriod,
+      double optInNbDev )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_VAR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( optInNbDev == (-4e+37) )
+         optInNbDev = 1.000000e+0;
+      else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int varianceState( TA_variance_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double optInNbDev,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_VAR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 5;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      if( optInNbDev == (-4e+37) )
+         optInNbDev = 1.000000e+0;
+      else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int varianceStateFree( TA_variance_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_VAR_State*& _state )
+         return 0;
+   }
    public RetCode variance( int startIdx,
       int endIdx,
       float inReal[],
@@ -24907,6 +30901,38 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int wclPriceStateInit( TA_wclPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WCLPRICE_State*& _state )
+         _state = NULL;
+      return 0;
+   }
+   public int wclPriceState( TA_wclPrice_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WCLPRICE_State*& _state,
+         return 0;
+   }
+   public int wclPriceStateFree( TA_wclPrice_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WCLPRICE_State*& _state )
+         return 0;
    }
    public RetCode wclPrice( int startIdx,
       int endIdx,
@@ -25037,6 +31063,48 @@ public class Core {
       outBegIdx.value = startIdx;
       outNBElement.value = outIdx;
       return RetCode.Success ;
+   }
+   public int willRStateInit( TA_willR_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WILLR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int willRState( TA_willR_State*& _state,
+      double inHigh,
+      double inLow,
+      double inClose,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WILLR_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 14;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int willRStateFree( TA_willR_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WILLR_State*& _state )
+         return 0;
    }
    public RetCode willR( int startIdx,
       int endIdx,
@@ -25205,6 +31273,46 @@ public class Core {
       outNBElement.value = outIdx;
       outBegIdx.value = startIdx;
       return RetCode.Success ;
+   }
+   public int wmaStateInit( TA_wma_State*& _state,
+      int optInTimePeriod )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state = NULL;
+      return 0;
+   }
+   public int wmaState( TA_wma_State*& _state,
+      double inReal,
+      int optInTimePeriod,
+      double &outReal )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WMA_State*& _state,
+         if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return 0;
+   }
+   public int wmaStateFree( TA_wma_State*& _state )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      TA_WMA_State*& _state )
+         return 0;
    }
    public RetCode wma( int startIdx,
       int endIdx,

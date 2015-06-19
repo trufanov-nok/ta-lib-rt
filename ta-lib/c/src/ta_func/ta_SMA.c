@@ -94,6 +94,9 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
@@ -289,6 +292,146 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::SmaStateInit( TA_Sma_State*& _state,
+/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int smaStateInit( TA_sma_State*& _state,
+/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_SMA_StateInit( TA_SMA_State*& _state,
+/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_SMA_State*& _state,
+/* Generated */    /* min/max are checked for optInTimePeriod. */
+/* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
+/* Generated */       optInTimePeriod = 30;
+/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state init code here. */
+
+   _state = NULL;
+   return 0;
+}
+
+/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::SmaState( TA_Sma_State*& _state,
+/* Generated */                   cli::array<double>^ inReal,
+/* Generated */                   int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                   cli::array<double>^  &outReal )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int smaState( TA_sma_State*& _state,
+/* Generated */                    double       inReal,
+/* Generated */                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                    double        &outReal )
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_SMA_State( TA_SMA_State*& _state,
+/* Generated */                                       const double inReal,
+/* Generated */                                       int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                       double        &outReal )
+/* Generated */ #endif
+/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_SMA_State*& _state,
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    /* min/max are checked for optInTimePeriod. */
+/* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
+/* Generated */       optInTimePeriod = 30;
+/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outReal )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state based TA dunc code here. */
+
+   return 0;
+}
+
+/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::SmaStateFree( TA_Sma_State*& _state )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int smaStateFree( TA_sma_State*& _state )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_SMA_StateFree( TA_SMA_State*& _state )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_SMA_State*& _state )
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state free code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -425,51 +568,5 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
-
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state init code here. */
-
-   _state = NULL;
-   return 0;
-}
-
-/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state based TA dunc code here. */
-
-   return 0;
-}
-
-/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state free code here. */   
-   return 0;
-}
-
-/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 

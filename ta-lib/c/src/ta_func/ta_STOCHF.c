@@ -99,6 +99,12 @@
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inHigh||!inLow||!inClose)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    /* min/max are checked for optInFastK_Period. */
 /* Generated */    if( (int)optInFastK_Period == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastK_Period = 5;
@@ -161,8 +167,7 @@
 /* Generated */                                        SubArray<double>^ inClose,
 /* Generated */                                        int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                                        int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                                        MAType        optInFastD_MAType,
-/* Generated */                                        [Out]int%    outBegIdx,
+/* Generated */                                        MAType        optInFastD_MAType,/* Generated */                                        [Out]int%    outBegIdx,
 /* Generated */                                        [Out]int%    outNBElement,
 /* Generated */                                        SubArray<double>^  outFastK,
 /* Generated */                                        SubArray<double>^  outFastD )
@@ -174,8 +179,7 @@
 /* Generated */                                        cli::array<double>^ inClose,
 /* Generated */                                        int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                                        int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                                        MAType        optInFastD_MAType,
-/* Generated */                                        [Out]int%    outBegIdx,
+/* Generated */                                        MAType        optInFastD_MAType,/* Generated */                                        [Out]int%    outBegIdx,
 /* Generated */                                        [Out]int%    outNBElement,
 /* Generated */                                        cli::array<double>^  outFastK,
 /* Generated */                                        cli::array<double>^  outFastD )
@@ -187,8 +191,7 @@
 /* Generated */                        double       inClose[],
 /* Generated */                        int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                        int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                        MAType        optInFastD_MAType,
-/* Generated */                        MInteger     outBegIdx,
+/* Generated */                        MAType        optInFastD_MAType,/* Generated */                        MInteger     outBegIdx,
 /* Generated */                        MInteger     outNBElement,
 /* Generated */                        double        outFastK[],
 /* Generated */                        double        outFastD[] )
@@ -200,8 +203,7 @@
 /* Generated */                                             const double inClose[],
 /* Generated */                                             int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                                             int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                                             TA_MAType     optInFastD_MAType,
-/* Generated */                                             int          *outBegIdx,
+/* Generated */                                             TA_MAType     optInFastD_MAType,/* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
 /* Generated */                                             double        outFastK[],
 /* Generated */                                             double        outFastD[] )
@@ -500,6 +502,193 @@
 
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::StochFStateInit( TA_StochF_State*& _state,
+/* Generated */                          int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                          int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                          MAType        optInFastD_MAType ) /* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int stochFStateInit( TA_stochF_State*& _state,
+/* Generated */                           int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                           int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                           MAType        optInFastD_MAType ) /* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_STOCHF_StateInit( TA_STOCHF_State*& _state,
+/* Generated */                                              int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                                              int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                                              TA_MAType     optInFastD_MAType ) /* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_STOCHF_State*& _state,
+/* Generated */    /* min/max are checked for optInFastK_Period. */
+/* Generated */    if( (int)optInFastK_Period == TA_INTEGER_DEFAULT )
+/* Generated */       optInFastK_Period = 5;
+/* Generated */    else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    /* min/max are checked for optInFastD_Period. */
+/* Generated */    if( (int)optInFastD_Period == TA_INTEGER_DEFAULT )
+/* Generated */       optInFastD_Period = 3;
+/* Generated */    else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
+/* Generated */    if( (int)optInFastD_MAType == TA_INTEGER_DEFAULT )
+/* Generated */       optInFastD_MAType = (TA_MAType)0;
+/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 8) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state init code here. */
+
+   _state = NULL;
+   return 0;
+}
+
+/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::StochFState( TA_StochF_State*& _state,
+/* Generated */                      cli::array<double>^ inHigh,
+/* Generated */                      cli::array<double>^ inLow,
+/* Generated */                      cli::array<double>^ inClose,
+/* Generated */                      int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                      int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                      MAType        optInFastD_MAType,/* Generated */                      cli::array<double>^  &outFastK,
+/* Generated */                      cli::array<double>^  &outFastD )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int stochFState( TA_stochF_State*& _state,
+/* Generated */                       double       inHigh,
+/* Generated */                       double       inLow,
+/* Generated */                       double       inClose,
+/* Generated */                       int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                       int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                       MAType        optInFastD_MAType,/* Generated */                       double        &outFastK,
+/* Generated */                       double        &outFastD )
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_STOCHF_State( TA_STOCHF_State*& _state,
+/* Generated */                                          const double inHigh,
+/* Generated */                                          const double inLow,
+/* Generated */                                          const double inClose,
+/* Generated */                                          int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                                          int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                                          TA_MAType     optInFastD_MAType,/* Generated */                                          double        &outFastK,
+/* Generated */                                          double        &outFastD )
+/* Generated */ #endif
+/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_STOCHF_State*& _state,
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inHigh||!inLow||!inClose)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    /* min/max are checked for optInFastK_Period. */
+/* Generated */    if( (int)optInFastK_Period == TA_INTEGER_DEFAULT )
+/* Generated */       optInFastK_Period = 5;
+/* Generated */    else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    /* min/max are checked for optInFastD_Period. */
+/* Generated */    if( (int)optInFastD_Period == TA_INTEGER_DEFAULT )
+/* Generated */       optInFastD_Period = 3;
+/* Generated */    else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
+/* Generated */    if( (int)optInFastD_MAType == TA_INTEGER_DEFAULT )
+/* Generated */       optInFastD_MAType = (TA_MAType)0;
+/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 8) )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outFastK )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( !outFastD )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state based TA dunc code here. */
+
+   return 0;
+}
+
+/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::StochFStateFree( TA_StochF_State*& _state )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int stochFStateFree( TA_stochF_State*& _state )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_STOCHF_StateFree( TA_STOCHF_State*& _state )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    /* Validate the requested output range. */
+/* Generated */    if( startIdx < 0 )
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
+/* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
+/* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
+/* Generated */ 
+TA_STOCHF_State*& _state )
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state free code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -516,8 +705,7 @@
 /* Generated */                                        SubArray<float>^ inClose,
 /* Generated */                                        int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                                        int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                                        MAType        optInFastD_MAType,
-/* Generated */                                        [Out]int%    outBegIdx,
+/* Generated */                                        MAType        optInFastD_MAType,/* Generated */                                        [Out]int%    outBegIdx,
 /* Generated */                                        [Out]int%    outNBElement,
 /* Generated */                                        SubArray<double>^  outFastK,
 /* Generated */                                        SubArray<double>^  outFastD )
@@ -529,8 +717,7 @@
 /* Generated */                                        cli::array<float>^ inClose,
 /* Generated */                                        int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                                        int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                                        MAType        optInFastD_MAType,
-/* Generated */                                        [Out]int%    outBegIdx,
+/* Generated */                                        MAType        optInFastD_MAType,/* Generated */                                        [Out]int%    outBegIdx,
 /* Generated */                                        [Out]int%    outNBElement,
 /* Generated */                                        cli::array<double>^  outFastK,
 /* Generated */                                        cli::array<double>^  outFastD )
@@ -542,8 +729,7 @@
 /* Generated */                        float        inClose[],
 /* Generated */                        int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                        int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                        MAType        optInFastD_MAType,
-/* Generated */                        MInteger     outBegIdx,
+/* Generated */                        MAType        optInFastD_MAType,/* Generated */                        MInteger     outBegIdx,
 /* Generated */                        MInteger     outNBElement,
 /* Generated */                        double        outFastK[],
 /* Generated */                        double        outFastD[] )
@@ -555,8 +741,7 @@
 /* Generated */                         const float  inClose[],
 /* Generated */                         int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                         int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                         TA_MAType     optInFastD_MAType,
-/* Generated */                         int          *outBegIdx,
+/* Generated */                         TA_MAType     optInFastD_MAType,/* Generated */                         int          *outBegIdx,
 /* Generated */                         int          *outNBElement,
 /* Generated */                         double        outFastK[],
 /* Generated */                         double        outFastD[] )
@@ -732,51 +917,5 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
-
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state init code here. */
-
-   _state = NULL;
-   return 0;
-}
-
-/**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state based TA dunc code here. */
-
-   return 0;
-}
-
-/**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
-{
-   /* insert local variable here */
-
-/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
-/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
-
-   /* insert state free code here. */   
-   return 0;
-}
-
-/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
-%%%GENCODE%%%
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 
