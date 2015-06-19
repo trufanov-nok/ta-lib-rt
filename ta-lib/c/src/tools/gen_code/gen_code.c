@@ -3520,7 +3520,7 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
 
    // section 11?
    /* Put a marker who is going to be used in the second pass */
-   fprintf( out, "%%%%%%GENCODE%%%%%%\n" );
+//   fprintf( out, "%%%%%%GENCODE%%%%%%\n" );
 }
 
 static void printOptInputValidation( FILE *out,
