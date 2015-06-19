@@ -308,15 +308,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CciStateInit( TA_Cci_State*& _state,
+/* Generated */ int Core::CciStateInit( struct TA_Cci_State* _state,
 /* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cciStateInit( TA_cci_State*& _state,
+/* Generated */ public int cciStateInit( struct TA_cci_State* _state,
 /* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CCI_StateInit( TA_CCI_State*& _state,
+/* Generated */ TA_LIB_API int TA_CCI_StateInit( struct TA_CCI_State* _state,
 /* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -335,7 +335,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CCI_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 14;
@@ -356,21 +357,21 @@ TA_CCI_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CciState( TA_Cci_State*& _state,
+/* Generated */ int Core::CciState( struct TA_Cci_State* _state,
 /* Generated */                   cli::array<double>^ inHigh,
 /* Generated */                   cli::array<double>^ inLow,
 /* Generated */                   cli::array<double>^ inClose,
 /* Generated */                   int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                   cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cciState( TA_cci_State*& _state,
+/* Generated */ public int cciState( struct TA_cci_State* _state,
 /* Generated */                    double       inHigh,
 /* Generated */                    double       inLow,
 /* Generated */                    double       inClose,
 /* Generated */                    int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                    double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CCI_State( TA_CCI_State*& _state,
+/* Generated */ TA_LIB_API int TA_CCI_State( struct TA_CCI_State* _state,
 /* Generated */                                       const double inHigh,
 /* Generated */                                       const double inLow,
 /* Generated */                                       const double inClose,
@@ -391,7 +392,8 @@ TA_CCI_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CCI_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow||!inClose)
@@ -421,13 +423,13 @@ TA_CCI_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CciStateFree( TA_Cci_State*& _state )
+/* Generated */ int Core::CciStateFree( struct TA_Cci_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cciStateFree( TA_cci_State*& _state )
+/* Generated */ public int cciStateFree( struct TA_cci_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CCI_StateFree( TA_CCI_State*& _state )
+/* Generated */ TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -444,7 +446,8 @@ TA_CCI_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CCI_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

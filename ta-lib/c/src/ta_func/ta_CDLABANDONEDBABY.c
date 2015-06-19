@@ -327,15 +327,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlAbandonedBabyStateInit( TA_CdlAbandonedBaby_State*& _state,
+/* Generated */ int Core::CdlAbandonedBabyStateInit( struct TA_CdlAbandonedBaby_State* _state,
 /* Generated */                                    double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlAbandonedBabyStateInit( TA_cdlAbandonedBaby_State*& _state,
+/* Generated */ public int cdlAbandonedBabyStateInit( struct TA_cdlAbandonedBaby_State* _state,
 /* Generated */                                     double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLABANDONEDBABY_StateInit( TA_CDLABANDONEDBABY_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLABANDONEDBABY_StateInit( struct TA_CDLABANDONEDBABY_State* _state,
 /* Generated */                                                        double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
@@ -354,7 +354,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLABANDONEDBABY_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if( optInPenetration == TA_REAL_DEFAULT )
 /* Generated */       optInPenetration = 3.000000e-1;
 /* Generated */    else if( (optInPenetration < 0.000000e+0) ||/* Generated */  (optInPenetration > 3.000000e+37) )
@@ -374,7 +375,7 @@ TA_CDLABANDONEDBABY_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlAbandonedBabyState( TA_CdlAbandonedBaby_State*& _state,
+/* Generated */ int Core::CdlAbandonedBabyState( struct TA_CdlAbandonedBaby_State* _state,
 /* Generated */                                cli::array<double>^ inOpen,
 /* Generated */                                cli::array<double>^ inHigh,
 /* Generated */                                cli::array<double>^ inLow,
@@ -382,7 +383,7 @@ TA_CDLABANDONEDBABY_State*& _state,
 /* Generated */                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlAbandonedBabyState( TA_cdlAbandonedBaby_State*& _state,
+/* Generated */ public int cdlAbandonedBabyState( struct TA_cdlAbandonedBaby_State* _state,
 /* Generated */                                 double       inOpen,
 /* Generated */                                 double       inHigh,
 /* Generated */                                 double       inLow,
@@ -390,7 +391,7 @@ TA_CDLABANDONEDBABY_State*& _state,
 /* Generated */                                 double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                 int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLABANDONEDBABY_State( TA_CDLABANDONEDBABY_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLABANDONEDBABY_State( struct TA_CDLABANDONEDBABY_State* _state,
 /* Generated */                                                    const double inOpen,
 /* Generated */                                                    const double inHigh,
 /* Generated */                                                    const double inLow,
@@ -412,7 +413,8 @@ TA_CDLABANDONEDBABY_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLABANDONEDBABY_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -441,13 +443,13 @@ TA_CDLABANDONEDBABY_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlAbandonedBabyStateFree( TA_CdlAbandonedBaby_State*& _state )
+/* Generated */ int Core::CdlAbandonedBabyStateFree( struct TA_CdlAbandonedBaby_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlAbandonedBabyStateFree( TA_cdlAbandonedBaby_State*& _state )
+/* Generated */ public int cdlAbandonedBabyStateFree( struct TA_cdlAbandonedBaby_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( TA_CDLABANDONEDBABY_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -464,7 +466,8 @@ TA_CDLABANDONEDBABY_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLABANDONEDBABY_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

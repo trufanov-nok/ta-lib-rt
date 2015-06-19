@@ -309,15 +309,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMorningDojiStarStateInit( TA_CdlMorningDojiStar_State*& _state,
+/* Generated */ int Core::CdlMorningDojiStarStateInit( struct TA_CdlMorningDojiStar_State* _state,
 /* Generated */                                      double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMorningDojiStarStateInit( TA_cdlMorningDojiStar_State*& _state,
+/* Generated */ public int cdlMorningDojiStarStateInit( struct TA_cdlMorningDojiStar_State* _state,
 /* Generated */                                       double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateInit( TA_CDLMORNINGDOJISTAR_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateInit( struct TA_CDLMORNINGDOJISTAR_State* _state,
 /* Generated */                                                          double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
@@ -336,7 +336,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLMORNINGDOJISTAR_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if( optInPenetration == TA_REAL_DEFAULT )
 /* Generated */       optInPenetration = 3.000000e-1;
 /* Generated */    else if( (optInPenetration < 0.000000e+0) ||/* Generated */  (optInPenetration > 3.000000e+37) )
@@ -356,7 +357,7 @@ TA_CDLMORNINGDOJISTAR_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMorningDojiStarState( TA_CdlMorningDojiStar_State*& _state,
+/* Generated */ int Core::CdlMorningDojiStarState( struct TA_CdlMorningDojiStar_State* _state,
 /* Generated */                                  cli::array<double>^ inOpen,
 /* Generated */                                  cli::array<double>^ inHigh,
 /* Generated */                                  cli::array<double>^ inLow,
@@ -364,7 +365,7 @@ TA_CDLMORNINGDOJISTAR_State*& _state,
 /* Generated */                                  double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                  cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMorningDojiStarState( TA_cdlMorningDojiStar_State*& _state,
+/* Generated */ public int cdlMorningDojiStarState( struct TA_cdlMorningDojiStar_State* _state,
 /* Generated */                                   double       inOpen,
 /* Generated */                                   double       inHigh,
 /* Generated */                                   double       inLow,
@@ -372,7 +373,7 @@ TA_CDLMORNINGDOJISTAR_State*& _state,
 /* Generated */                                   double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                   int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMORNINGDOJISTAR_State( TA_CDLMORNINGDOJISTAR_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLMORNINGDOJISTAR_State( struct TA_CDLMORNINGDOJISTAR_State* _state,
 /* Generated */                                                      const double inOpen,
 /* Generated */                                                      const double inHigh,
 /* Generated */                                                      const double inLow,
@@ -394,7 +395,8 @@ TA_CDLMORNINGDOJISTAR_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLMORNINGDOJISTAR_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -423,13 +425,13 @@ TA_CDLMORNINGDOJISTAR_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMorningDojiStarStateFree( TA_CdlMorningDojiStar_State*& _state )
+/* Generated */ int Core::CdlMorningDojiStarStateFree( struct TA_CdlMorningDojiStar_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMorningDojiStarStateFree( TA_cdlMorningDojiStar_State*& _state )
+/* Generated */ public int cdlMorningDojiStarStateFree( struct TA_cdlMorningDojiStar_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( TA_CDLMORNINGDOJISTAR_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -446,7 +448,8 @@ TA_CDLMORNINGDOJISTAR_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLMORNINGDOJISTAR_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

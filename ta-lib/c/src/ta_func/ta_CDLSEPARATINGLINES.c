@@ -286,13 +286,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSeperatingLinesStateInit( TA_CdlSeperatingLines_State*& _state )
+/* Generated */ int Core::CdlSeperatingLinesStateInit( struct TA_CdlSeperatingLines_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSeperatingLinesStateInit( TA_cdlSeperatingLines_State*& _state )
+/* Generated */ public int cdlSeperatingLinesStateInit( struct TA_cdlSeperatingLines_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateInit( TA_CDLSEPARATINGLINES_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateInit( struct TA_CDLSEPARATINGLINES_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -310,7 +310,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLSEPARATINGLINES_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -325,21 +326,21 @@ TA_CDLSEPARATINGLINES_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSeperatingLinesState( TA_CdlSeperatingLines_State*& _state,
+/* Generated */ int Core::CdlSeperatingLinesState( struct TA_CdlSeperatingLines_State* _state,
 /* Generated */                                  cli::array<double>^ inOpen,
 /* Generated */                                  cli::array<double>^ inHigh,
 /* Generated */                                  cli::array<double>^ inLow,
 /* Generated */                                  cli::array<double>^ inClose,
 /* Generated */                                  cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSeperatingLinesState( TA_cdlSeperatingLines_State*& _state,
+/* Generated */ public int cdlSeperatingLinesState( struct TA_cdlSeperatingLines_State* _state,
 /* Generated */                                   double       inOpen,
 /* Generated */                                   double       inHigh,
 /* Generated */                                   double       inLow,
 /* Generated */                                   double       inClose,
 /* Generated */                                   int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_State( TA_CDLSEPARATINGLINES_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_State( struct TA_CDLSEPARATINGLINES_State* _state,
 /* Generated */                                                      const double inOpen,
 /* Generated */                                                      const double inHigh,
 /* Generated */                                                      const double inLow,
@@ -360,7 +361,8 @@ TA_CDLSEPARATINGLINES_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLSEPARATINGLINES_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -384,13 +386,13 @@ TA_CDLSEPARATINGLINES_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSeperatingLinesStateFree( TA_CdlSeperatingLines_State*& _state )
+/* Generated */ int Core::CdlSeperatingLinesStateFree( struct TA_CdlSeperatingLines_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSeperatingLinesStateFree( TA_cdlSeperatingLines_State*& _state )
+/* Generated */ public int cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( TA_CDLSEPARATINGLINES_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -407,7 +409,8 @@ TA_CDLSEPARATINGLINES_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLSEPARATINGLINES_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -287,15 +287,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDarkCloudCoverStateInit( TA_CdlDarkCloudCover_State*& _state,
+/* Generated */ int Core::CdlDarkCloudCoverStateInit( struct TA_CdlDarkCloudCover_State* _state,
 /* Generated */                                     double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDarkCloudCoverStateInit( TA_cdlDarkCloudCover_State*& _state,
+/* Generated */ public int cdlDarkCloudCoverStateInit( struct TA_cdlDarkCloudCover_State* _state,
 /* Generated */                                      double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateInit( TA_CDLDARKCLOUDCOVER_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateInit( struct TA_CDLDARKCLOUDCOVER_State* _state,
 /* Generated */                                                         double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
@@ -314,7 +314,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLDARKCLOUDCOVER_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if( optInPenetration == TA_REAL_DEFAULT )
 /* Generated */       optInPenetration = 5.000000e-1;
 /* Generated */    else if( (optInPenetration < 0.000000e+0) ||/* Generated */  (optInPenetration > 3.000000e+37) )
@@ -334,7 +335,7 @@ TA_CDLDARKCLOUDCOVER_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDarkCloudCoverState( TA_CdlDarkCloudCover_State*& _state,
+/* Generated */ int Core::CdlDarkCloudCoverState( struct TA_CdlDarkCloudCover_State* _state,
 /* Generated */                                 cli::array<double>^ inOpen,
 /* Generated */                                 cli::array<double>^ inHigh,
 /* Generated */                                 cli::array<double>^ inLow,
@@ -342,7 +343,7 @@ TA_CDLDARKCLOUDCOVER_State*& _state,
 /* Generated */                                 double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                 cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDarkCloudCoverState( TA_cdlDarkCloudCover_State*& _state,
+/* Generated */ public int cdlDarkCloudCoverState( struct TA_cdlDarkCloudCover_State* _state,
 /* Generated */                                  double       inOpen,
 /* Generated */                                  double       inHigh,
 /* Generated */                                  double       inLow,
@@ -350,7 +351,7 @@ TA_CDLDARKCLOUDCOVER_State*& _state,
 /* Generated */                                  double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                  int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_State( TA_CDLDARKCLOUDCOVER_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_State( struct TA_CDLDARKCLOUDCOVER_State* _state,
 /* Generated */                                                     const double inOpen,
 /* Generated */                                                     const double inHigh,
 /* Generated */                                                     const double inLow,
@@ -372,7 +373,8 @@ TA_CDLDARKCLOUDCOVER_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLDARKCLOUDCOVER_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -401,13 +403,13 @@ TA_CDLDARKCLOUDCOVER_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDarkCloudCoverStateFree( TA_CdlDarkCloudCover_State*& _state )
+/* Generated */ int Core::CdlDarkCloudCoverStateFree( struct TA_CdlDarkCloudCover_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDarkCloudCoverStateFree( TA_cdlDarkCloudCover_State*& _state )
+/* Generated */ public int cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( TA_CDLDARKCLOUDCOVER_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -424,7 +426,8 @@ TA_CDLDARKCLOUDCOVER_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLDARKCLOUDCOVER_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

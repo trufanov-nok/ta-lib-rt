@@ -421,15 +421,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CmoStateInit( TA_Cmo_State*& _state,
+/* Generated */ int Core::CmoStateInit( struct TA_Cmo_State* _state,
 /* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cmoStateInit( TA_cmo_State*& _state,
+/* Generated */ public int cmoStateInit( struct TA_cmo_State* _state,
 /* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CMO_StateInit( TA_CMO_State*& _state,
+/* Generated */ TA_LIB_API int TA_CMO_StateInit( struct TA_CMO_State* _state,
 /* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -448,7 +448,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CMO_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 14;
@@ -469,17 +470,17 @@ TA_CMO_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CmoState( TA_Cmo_State*& _state,
+/* Generated */ int Core::CmoState( struct TA_Cmo_State* _state,
 /* Generated */                   cli::array<double>^ inReal,
 /* Generated */                   int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                   cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cmoState( TA_cmo_State*& _state,
+/* Generated */ public int cmoState( struct TA_cmo_State* _state,
 /* Generated */                    double       inReal,
 /* Generated */                    int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                    double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CMO_State( TA_CMO_State*& _state,
+/* Generated */ TA_LIB_API int TA_CMO_State( struct TA_CMO_State* _state,
 /* Generated */                                       const double inReal,
 /* Generated */                                       int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                       double        &outReal )
@@ -498,7 +499,8 @@ TA_CMO_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CMO_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -525,13 +527,13 @@ TA_CMO_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CmoStateFree( TA_Cmo_State*& _state )
+/* Generated */ int Core::CmoStateFree( struct TA_Cmo_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cmoStateFree( TA_cmo_State*& _state )
+/* Generated */ public int cmoStateFree( struct TA_cmo_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CMO_StateFree( TA_CMO_State*& _state )
+/* Generated */ TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -548,7 +550,8 @@ TA_CMO_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CMO_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

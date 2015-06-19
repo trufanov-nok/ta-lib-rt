@@ -298,15 +298,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxIndexStateInit( TA_MinMaxIndex_State*& _state,
+/* Generated */ int Core::MinMaxIndexStateInit( struct TA_MinMaxIndex_State* _state,
 /* Generated */                               int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxIndexStateInit( TA_minMaxIndex_State*& _state,
+/* Generated */ public int minMaxIndexStateInit( struct TA_minMaxIndex_State* _state,
 /* Generated */                                int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAXINDEX_StateInit( TA_MINMAXINDEX_State*& _state,
+/* Generated */ TA_LIB_API int TA_MINMAXINDEX_StateInit( struct TA_MINMAXINDEX_State* _state,
 /* Generated */                                                   int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -325,7 +325,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MINMAXINDEX_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
@@ -346,19 +347,19 @@ TA_MINMAXINDEX_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxIndexState( TA_MinMaxIndex_State*& _state,
+/* Generated */ int Core::MinMaxIndexState( struct TA_MinMaxIndex_State* _state,
 /* Generated */                           cli::array<double>^ inReal,
 /* Generated */                           int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                           cli::array<int>^  &outMinIdx,
 /* Generated */                           cli::array<int>^  &outMaxIdx )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxIndexState( TA_minMaxIndex_State*& _state,
+/* Generated */ public int minMaxIndexState( struct TA_minMaxIndex_State* _state,
 /* Generated */                            double       inReal,
 /* Generated */                            int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                            int           &outMinIdx,
 /* Generated */                            int           &outMaxIdx )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAXINDEX_State( TA_MINMAXINDEX_State*& _state,
+/* Generated */ TA_LIB_API int TA_MINMAXINDEX_State( struct TA_MINMAXINDEX_State* _state,
 /* Generated */                                               const double inReal,
 /* Generated */                                               int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                               int           &outMinIdx,
@@ -378,7 +379,8 @@ TA_MINMAXINDEX_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MINMAXINDEX_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -408,13 +410,13 @@ TA_MINMAXINDEX_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxIndexStateFree( TA_MinMaxIndex_State*& _state )
+/* Generated */ int Core::MinMaxIndexStateFree( struct TA_MinMaxIndex_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxIndexStateFree( TA_minMaxIndex_State*& _state )
+/* Generated */ public int minMaxIndexStateFree( struct TA_minMaxIndex_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAXINDEX_StateFree( TA_MINMAXINDEX_State*& _state )
+/* Generated */ TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -431,7 +433,8 @@ TA_MINMAXINDEX_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MINMAXINDEX_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

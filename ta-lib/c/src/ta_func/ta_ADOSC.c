@@ -356,17 +356,17 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdOscStateInit( TA_AdOsc_State*& _state,
+/* Generated */ int Core::AdOscStateInit( struct TA_AdOsc_State* _state,
 /* Generated */                         int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                         int           optInSlowPeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adOscStateInit( TA_adOsc_State*& _state,
+/* Generated */ public int adOscStateInit( struct TA_adOsc_State* _state,
 /* Generated */                          int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                          int           optInSlowPeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADOSC_StateInit( TA_ADOSC_State*& _state,
+/* Generated */ TA_LIB_API int TA_ADOSC_StateInit( struct TA_ADOSC_State* _state,
 /* Generated */                                             int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                             int           optInSlowPeriod )  /* From 2 to 100000 */
 /* Generated */ 
@@ -386,7 +386,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ADOSC_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInFastPeriod. */
 /* Generated */    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastPeriod = 3;
@@ -413,7 +414,7 @@ TA_ADOSC_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdOscState( TA_AdOsc_State*& _state,
+/* Generated */ int Core::AdOscState( struct TA_AdOsc_State* _state,
 /* Generated */                     cli::array<double>^ inHigh,
 /* Generated */                     cli::array<double>^ inLow,
 /* Generated */                     cli::array<double>^ inClose,
@@ -422,7 +423,7 @@ TA_ADOSC_State*& _state,
 /* Generated */                     int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                     cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adOscState( TA_adOsc_State*& _state,
+/* Generated */ public int adOscState( struct TA_adOsc_State* _state,
 /* Generated */                      double       inHigh,
 /* Generated */                      double       inLow,
 /* Generated */                      double       inClose,
@@ -431,7 +432,7 @@ TA_ADOSC_State*& _state,
 /* Generated */                      int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                      double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADOSC_State( TA_ADOSC_State*& _state,
+/* Generated */ TA_LIB_API int TA_ADOSC_State( struct TA_ADOSC_State* _state,
 /* Generated */                                         const double inHigh,
 /* Generated */                                         const double inLow,
 /* Generated */                                         const double inClose,
@@ -454,7 +455,8 @@ TA_ADOSC_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ADOSC_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow||!inClose||!inVolume)
@@ -490,13 +492,13 @@ TA_ADOSC_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdOscStateFree( TA_AdOsc_State*& _state )
+/* Generated */ int Core::AdOscStateFree( struct TA_AdOsc_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adOscStateFree( TA_adOsc_State*& _state )
+/* Generated */ public int adOscStateFree( struct TA_adOsc_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADOSC_StateFree( TA_ADOSC_State*& _state )
+/* Generated */ TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -513,7 +515,8 @@ TA_ADOSC_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ADOSC_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

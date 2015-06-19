@@ -190,13 +190,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::Log10StateInit( TA_Log10_State*& _state )
+/* Generated */ int Core::Log10StateInit( struct TA_Log10_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int log10StateInit( TA_log10_State*& _state )
+/* Generated */ public int log10StateInit( struct TA_log10_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LOG10_StateInit( TA_LOG10_State*& _state )
+/* Generated */ TA_LIB_API int TA_LOG10_StateInit( struct TA_LOG10_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -214,7 +214,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_LOG10_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -229,15 +230,15 @@ TA_LOG10_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::Log10State( TA_Log10_State*& _state,
+/* Generated */ int Core::Log10State( struct TA_Log10_State* _state,
 /* Generated */                     cli::array<double>^ inReal,
 /* Generated */                     cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int log10State( TA_log10_State*& _state,
+/* Generated */ public int log10State( struct TA_log10_State* _state,
 /* Generated */                      double       inReal,
 /* Generated */                      double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LOG10_State( TA_LOG10_State*& _state,
+/* Generated */ TA_LIB_API int TA_LOG10_State( struct TA_LOG10_State* _state,
 /* Generated */                                         const double inReal,
 /* Generated */                                         double        &outReal )
 /* Generated */ #endif
@@ -255,7 +256,8 @@ TA_LOG10_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_LOG10_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -276,13 +278,13 @@ TA_LOG10_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::Log10StateFree( TA_Log10_State*& _state )
+/* Generated */ int Core::Log10StateFree( struct TA_Log10_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int log10StateFree( TA_log10_State*& _state )
+/* Generated */ public int log10StateFree( struct TA_log10_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LOG10_StateFree( TA_LOG10_State*& _state )
+/* Generated */ TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -299,7 +301,8 @@ TA_LOG10_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_LOG10_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

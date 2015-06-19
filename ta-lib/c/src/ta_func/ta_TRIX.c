@@ -315,15 +315,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrixStateInit( TA_Trix_State*& _state,
+/* Generated */ int Core::TrixStateInit( struct TA_Trix_State* _state,
 /* Generated */                        int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trixStateInit( TA_trix_State*& _state,
+/* Generated */ public int trixStateInit( struct TA_trix_State* _state,
 /* Generated */                         int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIX_StateInit( TA_TRIX_State*& _state,
+/* Generated */ TA_LIB_API int TA_TRIX_StateInit( struct TA_TRIX_State* _state,
 /* Generated */                                            int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -342,7 +342,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TRIX_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
@@ -363,17 +364,17 @@ TA_TRIX_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrixState( TA_Trix_State*& _state,
+/* Generated */ int Core::TrixState( struct TA_Trix_State* _state,
 /* Generated */                    cli::array<double>^ inReal,
 /* Generated */                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                    cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trixState( TA_trix_State*& _state,
+/* Generated */ public int trixState( struct TA_trix_State* _state,
 /* Generated */                     double       inReal,
 /* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                     double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIX_State( TA_TRIX_State*& _state,
+/* Generated */ TA_LIB_API int TA_TRIX_State( struct TA_TRIX_State* _state,
 /* Generated */                                        const double inReal,
 /* Generated */                                        int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                        double        &outReal )
@@ -392,7 +393,8 @@ TA_TRIX_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TRIX_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -419,13 +421,13 @@ TA_TRIX_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrixStateFree( TA_Trix_State*& _state )
+/* Generated */ int Core::TrixStateFree( struct TA_Trix_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trixStateFree( TA_trix_State*& _state )
+/* Generated */ public int trixStateFree( struct TA_trix_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIX_StateFree( TA_TRIX_State*& _state )
+/* Generated */ TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -442,7 +444,8 @@ TA_TRIX_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TRIX_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

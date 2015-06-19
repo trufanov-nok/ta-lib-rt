@@ -390,15 +390,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MfiStateInit( TA_Mfi_State*& _state,
+/* Generated */ int Core::MfiStateInit( struct TA_Mfi_State* _state,
 /* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mfiStateInit( TA_mfi_State*& _state,
+/* Generated */ public int mfiStateInit( struct TA_mfi_State* _state,
 /* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MFI_StateInit( TA_MFI_State*& _state,
+/* Generated */ TA_LIB_API int TA_MFI_StateInit( struct TA_MFI_State* _state,
 /* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -417,7 +417,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MFI_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 14;
@@ -438,7 +439,7 @@ TA_MFI_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MfiState( TA_Mfi_State*& _state,
+/* Generated */ int Core::MfiState( struct TA_Mfi_State* _state,
 /* Generated */                   cli::array<double>^ inHigh,
 /* Generated */                   cli::array<double>^ inLow,
 /* Generated */                   cli::array<double>^ inClose,
@@ -446,7 +447,7 @@ TA_MFI_State*& _state,
 /* Generated */                   int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                   cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mfiState( TA_mfi_State*& _state,
+/* Generated */ public int mfiState( struct TA_mfi_State* _state,
 /* Generated */                    double       inHigh,
 /* Generated */                    double       inLow,
 /* Generated */                    double       inClose,
@@ -454,7 +455,7 @@ TA_MFI_State*& _state,
 /* Generated */                    int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                    double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MFI_State( TA_MFI_State*& _state,
+/* Generated */ TA_LIB_API int TA_MFI_State( struct TA_MFI_State* _state,
 /* Generated */                                       const double inHigh,
 /* Generated */                                       const double inLow,
 /* Generated */                                       const double inClose,
@@ -476,7 +477,8 @@ TA_MFI_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MFI_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow||!inClose||!inVolume)
@@ -506,13 +508,13 @@ TA_MFI_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MfiStateFree( TA_Mfi_State*& _state )
+/* Generated */ int Core::MfiStateFree( struct TA_Mfi_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mfiStateFree( TA_mfi_State*& _state )
+/* Generated */ public int mfiStateFree( struct TA_mfi_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MFI_StateFree( TA_MFI_State*& _state )
+/* Generated */ TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -529,7 +531,8 @@ TA_MFI_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MFI_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

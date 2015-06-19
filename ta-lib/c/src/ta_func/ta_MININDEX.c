@@ -266,15 +266,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinIndexStateInit( TA_MinIndex_State*& _state,
+/* Generated */ int Core::MinIndexStateInit( struct TA_MinIndex_State* _state,
 /* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minIndexStateInit( TA_minIndex_State*& _state,
+/* Generated */ public int minIndexStateInit( struct TA_minIndex_State* _state,
 /* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MININDEX_StateInit( TA_MININDEX_State*& _state,
+/* Generated */ TA_LIB_API int TA_MININDEX_StateInit( struct TA_MININDEX_State* _state,
 /* Generated */                                                int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -293,7 +293,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MININDEX_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
@@ -314,17 +315,17 @@ TA_MININDEX_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinIndexState( TA_MinIndex_State*& _state,
+/* Generated */ int Core::MinIndexState( struct TA_MinIndex_State* _state,
 /* Generated */                        cli::array<double>^ inReal,
 /* Generated */                        int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                        cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minIndexState( TA_minIndex_State*& _state,
+/* Generated */ public int minIndexState( struct TA_minIndex_State* _state,
 /* Generated */                         double       inReal,
 /* Generated */                         int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                         int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MININDEX_State( TA_MININDEX_State*& _state,
+/* Generated */ TA_LIB_API int TA_MININDEX_State( struct TA_MININDEX_State* _state,
 /* Generated */                                            const double inReal,
 /* Generated */                                            int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                            int           &outInteger )
@@ -343,7 +344,8 @@ TA_MININDEX_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MININDEX_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -370,13 +372,13 @@ TA_MININDEX_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinIndexStateFree( TA_MinIndex_State*& _state )
+/* Generated */ int Core::MinIndexStateFree( struct TA_MinIndex_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minIndexStateFree( TA_minIndex_State*& _state )
+/* Generated */ public int minIndexStateFree( struct TA_minIndex_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MININDEX_StateFree( TA_MININDEX_State*& _state )
+/* Generated */ TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -393,7 +395,8 @@ TA_MININDEX_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MININDEX_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

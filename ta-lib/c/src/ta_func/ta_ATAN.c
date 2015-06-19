@@ -184,13 +184,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AtanStateInit( TA_Atan_State*& _state )
+/* Generated */ int Core::AtanStateInit( struct TA_Atan_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int atanStateInit( TA_atan_State*& _state )
+/* Generated */ public int atanStateInit( struct TA_atan_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ATAN_StateInit( TA_ATAN_State*& _state )
+/* Generated */ TA_LIB_API int TA_ATAN_StateInit( struct TA_ATAN_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -208,7 +208,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ATAN_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -223,15 +224,15 @@ TA_ATAN_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AtanState( TA_Atan_State*& _state,
+/* Generated */ int Core::AtanState( struct TA_Atan_State* _state,
 /* Generated */                    cli::array<double>^ inReal,
 /* Generated */                    cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int atanState( TA_atan_State*& _state,
+/* Generated */ public int atanState( struct TA_atan_State* _state,
 /* Generated */                     double       inReal,
 /* Generated */                     double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ATAN_State( TA_ATAN_State*& _state,
+/* Generated */ TA_LIB_API int TA_ATAN_State( struct TA_ATAN_State* _state,
 /* Generated */                                        const double inReal,
 /* Generated */                                        double        &outReal )
 /* Generated */ #endif
@@ -249,7 +250,8 @@ TA_ATAN_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ATAN_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -270,13 +272,13 @@ TA_ATAN_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AtanStateFree( TA_Atan_State*& _state )
+/* Generated */ int Core::AtanStateFree( struct TA_Atan_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int atanStateFree( TA_atan_State*& _state )
+/* Generated */ public int atanStateFree( struct TA_atan_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ATAN_StateFree( TA_ATAN_State*& _state )
+/* Generated */ TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -293,7 +295,8 @@ TA_ATAN_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ATAN_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

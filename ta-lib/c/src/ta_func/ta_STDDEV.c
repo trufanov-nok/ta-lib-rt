@@ -350,17 +350,17 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StdDevStateInit( TA_StdDev_State*& _state,
+/* Generated */ int Core::StdDevStateInit( struct TA_StdDev_State* _state,
 /* Generated */                          int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                          double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stdDevStateInit( TA_stdDev_State*& _state,
+/* Generated */ public int stdDevStateInit( struct TA_stdDev_State* _state,
 /* Generated */                           int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                           double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STDDEV_StateInit( TA_STDDEV_State*& _state,
+/* Generated */ TA_LIB_API int TA_STDDEV_StateInit( struct TA_STDDEV_State* _state,
 /* Generated */                                              int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                              double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
@@ -380,7 +380,8 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_STDDEV_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 5;
@@ -406,19 +407,19 @@ TA_STDDEV_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StdDevState( TA_StdDev_State*& _state,
+/* Generated */ int Core::StdDevState( struct TA_StdDev_State* _state,
 /* Generated */                      cli::array<double>^ inReal,
 /* Generated */                      int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                      double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */                      cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stdDevState( TA_stdDev_State*& _state,
+/* Generated */ public int stdDevState( struct TA_stdDev_State* _state,
 /* Generated */                       double       inReal,
 /* Generated */                       int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                       double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */                       double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STDDEV_State( TA_STDDEV_State*& _state,
+/* Generated */ TA_LIB_API int TA_STDDEV_State( struct TA_STDDEV_State* _state,
 /* Generated */                                          const double inReal,
 /* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                          double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
@@ -438,7 +439,8 @@ TA_STDDEV_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_STDDEV_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -470,13 +472,13 @@ TA_STDDEV_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StdDevStateFree( TA_StdDev_State*& _state )
+/* Generated */ int Core::StdDevStateFree( struct TA_StdDev_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stdDevStateFree( TA_stdDev_State*& _state )
+/* Generated */ public int stdDevStateFree( struct TA_stdDev_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STDDEV_StateFree( TA_STDDEV_State*& _state )
+/* Generated */ TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -493,7 +495,8 @@ TA_STDDEV_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_STDDEV_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -211,13 +211,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgPriceStateInit( TA_AvgPrice_State*& _state )
+/* Generated */ int Core::AvgPriceStateInit( struct TA_AvgPrice_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgPriceStateInit( TA_avgPrice_State*& _state )
+/* Generated */ public int avgPriceStateInit( struct TA_avgPrice_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGPRICE_StateInit( TA_AVGPRICE_State*& _state )
+/* Generated */ TA_LIB_API int TA_AVGPRICE_StateInit( struct TA_AVGPRICE_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -235,7 +235,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AVGPRICE_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -250,21 +251,21 @@ TA_AVGPRICE_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgPriceState( TA_AvgPrice_State*& _state,
+/* Generated */ int Core::AvgPriceState( struct TA_AvgPrice_State* _state,
 /* Generated */                        cli::array<double>^ inOpen,
 /* Generated */                        cli::array<double>^ inHigh,
 /* Generated */                        cli::array<double>^ inLow,
 /* Generated */                        cli::array<double>^ inClose,
 /* Generated */                        cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgPriceState( TA_avgPrice_State*& _state,
+/* Generated */ public int avgPriceState( struct TA_avgPrice_State* _state,
 /* Generated */                         double       inOpen,
 /* Generated */                         double       inHigh,
 /* Generated */                         double       inLow,
 /* Generated */                         double       inClose,
 /* Generated */                         double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGPRICE_State( TA_AVGPRICE_State*& _state,
+/* Generated */ TA_LIB_API int TA_AVGPRICE_State( struct TA_AVGPRICE_State* _state,
 /* Generated */                                            const double inOpen,
 /* Generated */                                            const double inHigh,
 /* Generated */                                            const double inLow,
@@ -285,7 +286,8 @@ TA_AVGPRICE_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AVGPRICE_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -309,13 +311,13 @@ TA_AVGPRICE_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgPriceStateFree( TA_AvgPrice_State*& _state )
+/* Generated */ int Core::AvgPriceStateFree( struct TA_AvgPrice_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgPriceStateFree( TA_avgPrice_State*& _state )
+/* Generated */ public int avgPriceStateFree( struct TA_avgPrice_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGPRICE_StateFree( TA_AVGPRICE_State*& _state )
+/* Generated */ TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -332,7 +334,8 @@ TA_AVGPRICE_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AVGPRICE_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

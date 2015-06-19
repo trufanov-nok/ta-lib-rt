@@ -399,13 +399,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtPhasorStateInit( TA_HtPhasor_State*& _state )
+/* Generated */ int Core::HtPhasorStateInit( struct TA_HtPhasor_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htPhasorStateInit( TA_htPhasor_State*& _state )
+/* Generated */ public int htPhasorStateInit( struct TA_htPhasor_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_PHASOR_StateInit( TA_HT_PHASOR_State*& _state )
+/* Generated */ TA_LIB_API int TA_HT_PHASOR_StateInit( struct TA_HT_PHASOR_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -423,7 +423,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_PHASOR_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -438,17 +439,17 @@ TA_HT_PHASOR_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtPhasorState( TA_HtPhasor_State*& _state,
+/* Generated */ int Core::HtPhasorState( struct TA_HtPhasor_State* _state,
 /* Generated */                        cli::array<double>^ inReal,
 /* Generated */                        cli::array<double>^  &outInPhase,
 /* Generated */                        cli::array<double>^  &outQuadrature )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htPhasorState( TA_htPhasor_State*& _state,
+/* Generated */ public int htPhasorState( struct TA_htPhasor_State* _state,
 /* Generated */                         double       inReal,
 /* Generated */                         double        &outInPhase,
 /* Generated */                         double        &outQuadrature )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_PHASOR_State( TA_HT_PHASOR_State*& _state,
+/* Generated */ TA_LIB_API int TA_HT_PHASOR_State( struct TA_HT_PHASOR_State* _state,
 /* Generated */                                             const double inReal,
 /* Generated */                                             double        &outInPhase,
 /* Generated */                                             double        &outQuadrature )
@@ -467,7 +468,8 @@ TA_HT_PHASOR_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_PHASOR_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -491,13 +493,13 @@ TA_HT_PHASOR_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtPhasorStateFree( TA_HtPhasor_State*& _state )
+/* Generated */ int Core::HtPhasorStateFree( struct TA_HtPhasor_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htPhasorStateFree( TA_htPhasor_State*& _state )
+/* Generated */ public int htPhasorStateFree( struct TA_htPhasor_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_PHASOR_StateFree( TA_HT_PHASOR_State*& _state )
+/* Generated */ TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -514,7 +516,8 @@ TA_HT_PHASOR_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_PHASOR_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

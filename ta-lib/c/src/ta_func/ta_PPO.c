@@ -261,17 +261,17 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PpoStateInit( TA_Ppo_State*& _state,
+/* Generated */ int Core::PpoStateInit( struct TA_Ppo_State* _state,
 /* Generated */                       int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                       int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                       MAType        optInMAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ppoStateInit( TA_ppo_State*& _state,
+/* Generated */ public int ppoStateInit( struct TA_ppo_State* _state,
 /* Generated */                        int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                        int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                        MAType        optInMAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PPO_StateInit( TA_PPO_State*& _state,
+/* Generated */ TA_LIB_API int TA_PPO_StateInit( struct TA_PPO_State* _state,
 /* Generated */                                           int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                           int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                                           TA_MAType     optInMAType ) /* Generated */ 
@@ -291,7 +291,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_PPO_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInFastPeriod. */
 /* Generated */    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastPeriod = 12;
@@ -325,19 +326,19 @@ TA_PPO_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PpoState( TA_Ppo_State*& _state,
+/* Generated */ int Core::PpoState( struct TA_Ppo_State* _state,
 /* Generated */                   cli::array<double>^ inReal,
 /* Generated */                   int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                   int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                   MAType        optInMAType,/* Generated */                   cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ppoState( TA_ppo_State*& _state,
+/* Generated */ public int ppoState( struct TA_ppo_State* _state,
 /* Generated */                    double       inReal,
 /* Generated */                    int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                    int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                    MAType        optInMAType,/* Generated */                    double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PPO_State( TA_PPO_State*& _state,
+/* Generated */ TA_LIB_API int TA_PPO_State( struct TA_PPO_State* _state,
 /* Generated */                                       const double inReal,
 /* Generated */                                       int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                       int           optInSlowPeriod, /* From 2 to 100000 */
@@ -357,7 +358,8 @@ TA_PPO_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_PPO_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -397,13 +399,13 @@ TA_PPO_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PpoStateFree( TA_Ppo_State*& _state )
+/* Generated */ int Core::PpoStateFree( struct TA_Ppo_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ppoStateFree( TA_ppo_State*& _state )
+/* Generated */ public int ppoStateFree( struct TA_ppo_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PPO_StateFree( TA_PPO_State*& _state )
+/* Generated */ TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -420,7 +422,8 @@ TA_PPO_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_PPO_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

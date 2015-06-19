@@ -1832,28 +1832,32 @@ static void printFunc( FILE *out,
 
    // print the beginning of function declaration with given suffix
 
-   if (stateStruct)
+#define PRINT_STRUCT_NAME(prefic, funcName, suffix) { \
+    if( managedCPPCode ) \
+    { \
+       sprintf( gTempBuf, "%spublic struct TA_%s_%s ", \
+                prefix? prefix:"", \
+                funcName, suffix ); \
+    } \
+    else if( outputForJava ) \
+    { \
+       sprintf( gTempBuf, "%sclass TA_%s_%s", \
+                prefix? prefix:"", \
+                funcName, suffix ); \
+    } \
+    else \
+    { \
+       sprintf( gTempBuf, "%sstruct TA_%s_%s", \
+                prefix? prefix:"", \
+                funcName, suffix ); \
+    } \
+    print( out, gTempBuf ); \
+    indent = (unsigned int)strlen(gTempBuf) - 2; \
+}
+
+   if (stateStruct && !validationCode)
    {
-       if( managedCPPCode )
-       {
-          sprintf( gTempBuf, "%spublic struct TA_%s_State { int memory_size;\nint current_idx;",
-                   prefix? prefix:"",
-                   funcName );
-       }
-       else if( outputForJava )
-       {
-          sprintf( gTempBuf, "%sclass TA_%s_State { int memory_size;\nint current_idx;",
-                   prefix? prefix:"",
-                   funcName );
-       }
-       else
-       {
-          sprintf( gTempBuf, "%sstruct TA_%s_State { int memory_size;\nint current_idx;",
-                   prefix? prefix:"",
-                   funcName );
-       }
-       print( out, gTempBuf );
-       indent = (unsigned int)strlen(gTempBuf) - 2;
+       PRINT_STRUCT_NAME(prefix, funcName, "Data {\n"); //forward declaration of memory struct
    } else
    if( prototype )
    {
@@ -2003,9 +2007,23 @@ static void printFunc( FILE *out,
 
    if (stateInitSignature || stateFuncSignature || stateFreeSignature)
    {
-       fprintf( out, "TA_%s_State*& _state", funcName );
+       if (!validationCode) {
+       fprintf( out, "struct TA_%s_State* _state", funcName );
        if (!stateFreeSignature && (stateFuncSignature || funcInfo->nbOptInput > 0))
            fprintf( out, ",\n"); // hope that will be more params later
+       } else
+       if (stateInitSignature) {
+           printIndent( out, indent );
+           fprintf( out, "if (_state != NULL)\n");
+           printIndent( out, indent+6 );
+           fprintf( out, "return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n");
+       } else
+       if (stateFuncSignature || stateFreeSignature) {
+           printIndent( out, indent );
+           fprintf( out, "if (_state == NULL)\n");
+           printIndent( out, indent+6 );
+           fprintf( out, "return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n");
+       }
    }
 
    /* Go through all the input. */
@@ -2129,7 +2147,7 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inOpen */": "inOpen",
-                         (prototype && !stateFuncSignature)? arrayBracket : "" );
+                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 				  }
                   fprintf( out, "%s\n",  stateStruct? ";": (frame? " */":",") );
                }
@@ -2150,7 +2168,7 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inHigh */":"inHigh",
-                         (prototype && !stateFuncSignature)? arrayBracket : "" );
+                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 				  }
                   fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
                }
@@ -2171,7 +2189,7 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inLow */": "inLow",
-                         (prototype && !stateFuncSignature)? arrayBracket : "" );
+                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 				  }
 
                   fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
@@ -2193,7 +2211,7 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inClose */": "inClose",
-                         (prototype && !stateFuncSignature)? arrayBracket : "" );
+                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 				  }
 
                   fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
@@ -2215,7 +2233,7 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inVolume */": "inVolume",
-                         (prototype && !stateFuncSignature)? arrayBracket : "" );
+                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 				  }
 
                   fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
@@ -2237,7 +2255,7 @@ static void printFunc( FILE *out,
                          prototype? inputDoubleArrayType : "",
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inOpenInterest */": "inOpenInterest",
-                         (prototype && !stateFuncSignature)? arrayBracket : "" );
+                         (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 				  }
 
                   fprintf( out, "%s\n", stateStruct? ";": (frame? " */":",") );
@@ -2276,7 +2294,7 @@ static void printFunc( FILE *out,
                            prototype? 12 : 0,
                            prototype? typeString : "",
                            defaultParamName,
-                           (prototype && !stateFuncSignature)? arrayBracket : "",
+                           (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "",
                            inputParamInfo->paramName );
                else
 			   {
@@ -2293,7 +2311,7 @@ static void printFunc( FILE *out,
                            prototype? 12 : 0,
                            prototype? typeString : "",
                            inputParamInfo->paramName,
-                           (prototype && !stateFuncSignature)? arrayBracket : "" );
+                           (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 				   }
 			   }
                fprintf( out, "%s\n", stateStruct?";":(frame? " */":",") );
@@ -2308,6 +2326,21 @@ static void printFunc( FILE *out,
          fprintf( out, "#endif /* !defined(_JAVA)*/\n" );
       }
    }
+
+   if (stateStruct)
+   {
+       printIndent( out, indent );
+       print( out, "};\n"); //close Data struct
+       //start main struct
+       PRINT_STRUCT_NAME(prefix, funcName, "Struct {\n");
+       printIndent( out, indent );
+       print( out, "int mem_size;\n");
+       printIndent( out, indent );
+       print( out, "int mem_index;\n");
+       printIndent( out, indent );
+       print( out, "struct TA_%s_Data* memory;\n", funcName);
+   }
+
 
    /* Go through all the optional input */
    paramNb = 0;
@@ -2485,7 +2518,8 @@ static void printFunc( FILE *out,
       paramNb++;
    }
 
-   if( ((lookbackSignature || stateInitSignature) && (funcInfo->nbOptInput == 0)) || stateFreeSignature )
+   if (!validationCode)
+   if( ((lookbackSignature || stateInitSignature) && (funcInfo->nbOptInput == 0)) || stateFreeSignature)
    {
       if( frame || outputForJava || stateInitSignature || stateFreeSignature)
          fprintf( out, " )%s\n", semiColonNeeded? ";":"" );
@@ -2494,7 +2528,10 @@ static void printFunc( FILE *out,
    }
 
    if (stateStruct)
-       fprintf( out, "}\n");
+   {
+       printIndent( out, indent );
+       fprintf( out, "};\n");
+   }
 
    /* Go through all the output */
    if( lookbackSignature || stateInitSignature || stateFreeSignature || stateStruct )
@@ -2597,7 +2634,7 @@ static void printFunc( FILE *out,
                         prototype? typeString : "",                     
                         stateFuncSignature?"&":"",
                         defaultParamName,
-                        (prototype && !stateFuncSignature)? arrayBracket : "",
+                        (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "",
                         paramName );
             else if( arrayToSubArrayCnvt )            
 			{
@@ -2610,7 +2647,7 @@ static void printFunc( FILE *out,
                         prototype? typeString : "",
                         stateFuncSignature?"&":"",
                         paramName,
-                        (prototype && !stateFuncSignature)? arrayBracket : "" );
+                        (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
 			}
 
             if( !lastParam )

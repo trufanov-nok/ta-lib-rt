@@ -503,17 +503,17 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochFStateInit( TA_StochF_State*& _state,
+/* Generated */ int Core::StochFStateInit( struct TA_StochF_State* _state,
 /* Generated */                          int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                          int           optInFastD_Period, /* From 1 to 100000 */
 /* Generated */                          MAType        optInFastD_MAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochFStateInit( TA_stochF_State*& _state,
+/* Generated */ public int stochFStateInit( struct TA_stochF_State* _state,
 /* Generated */                           int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                           int           optInFastD_Period, /* From 1 to 100000 */
 /* Generated */                           MAType        optInFastD_MAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHF_StateInit( TA_STOCHF_State*& _state,
+/* Generated */ TA_LIB_API int TA_STOCHF_StateInit( struct TA_STOCHF_State* _state,
 /* Generated */                                              int           optInFastK_Period, /* From 1 to 100000 */
 /* Generated */                                              int           optInFastD_Period, /* From 1 to 100000 */
 /* Generated */                                              TA_MAType     optInFastD_MAType ) /* Generated */ 
@@ -533,7 +533,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_STOCHF_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInFastK_Period. */
 /* Generated */    if( (int)optInFastK_Period == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastK_Period = 5;
@@ -567,7 +568,7 @@ TA_STOCHF_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochFState( TA_StochF_State*& _state,
+/* Generated */ int Core::StochFState( struct TA_StochF_State* _state,
 /* Generated */                      cli::array<double>^ inHigh,
 /* Generated */                      cli::array<double>^ inLow,
 /* Generated */                      cli::array<double>^ inClose,
@@ -576,7 +577,7 @@ TA_STOCHF_State*& _state,
 /* Generated */                      MAType        optInFastD_MAType,/* Generated */                      cli::array<double>^  &outFastK,
 /* Generated */                      cli::array<double>^  &outFastD )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochFState( TA_stochF_State*& _state,
+/* Generated */ public int stochFState( struct TA_stochF_State* _state,
 /* Generated */                       double       inHigh,
 /* Generated */                       double       inLow,
 /* Generated */                       double       inClose,
@@ -585,7 +586,7 @@ TA_STOCHF_State*& _state,
 /* Generated */                       MAType        optInFastD_MAType,/* Generated */                       double        &outFastK,
 /* Generated */                       double        &outFastD )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHF_State( TA_STOCHF_State*& _state,
+/* Generated */ TA_LIB_API int TA_STOCHF_State( struct TA_STOCHF_State* _state,
 /* Generated */                                          const double inHigh,
 /* Generated */                                          const double inLow,
 /* Generated */                                          const double inClose,
@@ -608,7 +609,8 @@ TA_STOCHF_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_STOCHF_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow||!inClose)
@@ -654,13 +656,13 @@ TA_STOCHF_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochFStateFree( TA_StochF_State*& _state )
+/* Generated */ int Core::StochFStateFree( struct TA_StochF_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochFStateFree( TA_stochF_State*& _state )
+/* Generated */ public int stochFStateFree( struct TA_stochF_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHF_StateFree( TA_STOCHF_State*& _state )
+/* Generated */ TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -677,7 +679,8 @@ TA_STOCHF_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_STOCHF_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

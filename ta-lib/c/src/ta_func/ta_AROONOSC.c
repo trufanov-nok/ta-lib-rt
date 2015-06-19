@@ -328,15 +328,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AroonOscStateInit( TA_AroonOsc_State*& _state,
+/* Generated */ int Core::AroonOscStateInit( struct TA_AroonOsc_State* _state,
 /* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int aroonOscStateInit( TA_aroonOsc_State*& _state,
+/* Generated */ public int aroonOscStateInit( struct TA_aroonOsc_State* _state,
 /* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AROONOSC_StateInit( TA_AROONOSC_State*& _state,
+/* Generated */ TA_LIB_API int TA_AROONOSC_StateInit( struct TA_AROONOSC_State* _state,
 /* Generated */                                                int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -355,7 +355,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AROONOSC_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 14;
@@ -376,19 +377,19 @@ TA_AROONOSC_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AroonOscState( TA_AroonOsc_State*& _state,
+/* Generated */ int Core::AroonOscState( struct TA_AroonOsc_State* _state,
 /* Generated */                        cli::array<double>^ inHigh,
 /* Generated */                        cli::array<double>^ inLow,
 /* Generated */                        int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                        cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int aroonOscState( TA_aroonOsc_State*& _state,
+/* Generated */ public int aroonOscState( struct TA_aroonOsc_State* _state,
 /* Generated */                         double       inHigh,
 /* Generated */                         double       inLow,
 /* Generated */                         int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                         double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AROONOSC_State( TA_AROONOSC_State*& _state,
+/* Generated */ TA_LIB_API int TA_AROONOSC_State( struct TA_AROONOSC_State* _state,
 /* Generated */                                            const double inHigh,
 /* Generated */                                            const double inLow,
 /* Generated */                                            int           optInTimePeriod, /* From 2 to 100000 */
@@ -408,7 +409,8 @@ TA_AROONOSC_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AROONOSC_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow)
@@ -438,13 +440,13 @@ TA_AROONOSC_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AroonOscStateFree( TA_AroonOsc_State*& _state )
+/* Generated */ int Core::AroonOscStateFree( struct TA_AroonOsc_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int aroonOscStateFree( TA_aroonOsc_State*& _state )
+/* Generated */ public int aroonOscStateFree( struct TA_aroonOsc_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AROONOSC_StateFree( TA_AROONOSC_State*& _state )
+/* Generated */ TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -461,7 +463,8 @@ TA_AROONOSC_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AROONOSC_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -238,13 +238,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdStateInit( TA_Ad_State*& _state )
+/* Generated */ int Core::AdStateInit( struct TA_Ad_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adStateInit( TA_ad_State*& _state )
+/* Generated */ public int adStateInit( struct TA_ad_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AD_StateInit( TA_AD_State*& _state )
+/* Generated */ TA_LIB_API int TA_AD_StateInit( struct TA_AD_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -261,7 +261,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AD_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -276,21 +277,21 @@ TA_AD_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdState( TA_Ad_State*& _state,
+/* Generated */ int Core::AdState( struct TA_Ad_State* _state,
 /* Generated */                  cli::array<double>^ inHigh,
 /* Generated */                  cli::array<double>^ inLow,
 /* Generated */                  cli::array<double>^ inClose,
 /* Generated */                  cli::array<double>^ inVolume,
 /* Generated */                  cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adState( TA_ad_State*& _state,
+/* Generated */ public int adState( struct TA_ad_State* _state,
 /* Generated */                   double       inHigh,
 /* Generated */                   double       inLow,
 /* Generated */                   double       inClose,
 /* Generated */                   double       inVolume,
 /* Generated */                   double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AD_State( TA_AD_State*& _state,
+/* Generated */ TA_LIB_API int TA_AD_State( struct TA_AD_State* _state,
 /* Generated */                                      const double inHigh,
 /* Generated */                                      const double inLow,
 /* Generated */                                      const double inClose,
@@ -311,7 +312,8 @@ TA_AD_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AD_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow||!inClose||!inVolume)
@@ -335,13 +337,13 @@ TA_AD_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdStateFree( TA_Ad_State*& _state )
+/* Generated */ int Core::AdStateFree( struct TA_Ad_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adStateFree( TA_ad_State*& _state )
+/* Generated */ public int adStateFree( struct TA_ad_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AD_StateFree( TA_AD_State*& _state )
+/* Generated */ TA_LIB_API int TA_AD_StateFree( struct TA_AD_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -358,7 +360,8 @@ TA_AD_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_AD_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

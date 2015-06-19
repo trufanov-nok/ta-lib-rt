@@ -190,13 +190,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TanhStateInit( TA_Tanh_State*& _state )
+/* Generated */ int Core::TanhStateInit( struct TA_Tanh_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int tanhStateInit( TA_tanh_State*& _state )
+/* Generated */ public int tanhStateInit( struct TA_tanh_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TANH_StateInit( TA_TANH_State*& _state )
+/* Generated */ TA_LIB_API int TA_TANH_StateInit( struct TA_TANH_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -214,7 +214,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TANH_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -229,15 +230,15 @@ TA_TANH_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TanhState( TA_Tanh_State*& _state,
+/* Generated */ int Core::TanhState( struct TA_Tanh_State* _state,
 /* Generated */                    cli::array<double>^ inReal,
 /* Generated */                    cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int tanhState( TA_tanh_State*& _state,
+/* Generated */ public int tanhState( struct TA_tanh_State* _state,
 /* Generated */                     double       inReal,
 /* Generated */                     double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TANH_State( TA_TANH_State*& _state,
+/* Generated */ TA_LIB_API int TA_TANH_State( struct TA_TANH_State* _state,
 /* Generated */                                        const double inReal,
 /* Generated */                                        double        &outReal )
 /* Generated */ #endif
@@ -255,7 +256,8 @@ TA_TANH_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TANH_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -276,13 +278,13 @@ TA_TANH_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TanhStateFree( TA_Tanh_State*& _state )
+/* Generated */ int Core::TanhStateFree( struct TA_Tanh_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int tanhStateFree( TA_tanh_State*& _state )
+/* Generated */ public int tanhStateFree( struct TA_tanh_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TANH_StateFree( TA_TANH_State*& _state )
+/* Generated */ TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -299,7 +301,8 @@ TA_TANH_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TANH_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

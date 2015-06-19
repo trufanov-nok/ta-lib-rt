@@ -266,15 +266,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocStateInit( TA_Roc_State*& _state,
+/* Generated */ int Core::RocStateInit( struct TA_Roc_State* _state,
 /* Generated */                       int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocStateInit( TA_roc_State*& _state,
+/* Generated */ public int rocStateInit( struct TA_roc_State* _state,
 /* Generated */                        int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROC_StateInit( TA_ROC_State*& _state,
+/* Generated */ TA_LIB_API int TA_ROC_StateInit( struct TA_ROC_State* _state,
 /* Generated */                                           int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -293,7 +293,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ROC_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 10;
@@ -314,17 +315,17 @@ TA_ROC_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocState( TA_Roc_State*& _state,
+/* Generated */ int Core::RocState( struct TA_Roc_State* _state,
 /* Generated */                   cli::array<double>^ inReal,
 /* Generated */                   int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                   cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocState( TA_roc_State*& _state,
+/* Generated */ public int rocState( struct TA_roc_State* _state,
 /* Generated */                    double       inReal,
 /* Generated */                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                    double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROC_State( TA_ROC_State*& _state,
+/* Generated */ TA_LIB_API int TA_ROC_State( struct TA_ROC_State* _state,
 /* Generated */                                       const double inReal,
 /* Generated */                                       int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                       double        &outReal )
@@ -343,7 +344,8 @@ TA_ROC_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ROC_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -370,13 +372,13 @@ TA_ROC_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocStateFree( TA_Roc_State*& _state )
+/* Generated */ int Core::RocStateFree( struct TA_Roc_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocStateFree( TA_roc_State*& _state )
+/* Generated */ public int rocStateFree( struct TA_roc_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROC_StateFree( TA_ROC_State*& _state )
+/* Generated */ TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -393,7 +395,8 @@ TA_ROC_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ROC_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

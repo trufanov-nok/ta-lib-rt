@@ -283,13 +283,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlClosingMarubozuStateInit( TA_CdlClosingMarubozu_State*& _state )
+/* Generated */ int Core::CdlClosingMarubozuStateInit( struct TA_CdlClosingMarubozu_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlClosingMarubozuStateInit( TA_cdlClosingMarubozu_State*& _state )
+/* Generated */ public int cdlClosingMarubozuStateInit( struct TA_cdlClosingMarubozu_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateInit( TA_CDLCLOSINGMARUBOZU_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateInit( struct TA_CDLCLOSINGMARUBOZU_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -307,7 +307,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLCLOSINGMARUBOZU_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -322,21 +323,21 @@ TA_CDLCLOSINGMARUBOZU_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlClosingMarubozuState( TA_CdlClosingMarubozu_State*& _state,
+/* Generated */ int Core::CdlClosingMarubozuState( struct TA_CdlClosingMarubozu_State* _state,
 /* Generated */                                  cli::array<double>^ inOpen,
 /* Generated */                                  cli::array<double>^ inHigh,
 /* Generated */                                  cli::array<double>^ inLow,
 /* Generated */                                  cli::array<double>^ inClose,
 /* Generated */                                  cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlClosingMarubozuState( TA_cdlClosingMarubozu_State*& _state,
+/* Generated */ public int cdlClosingMarubozuState( struct TA_cdlClosingMarubozu_State* _state,
 /* Generated */                                   double       inOpen,
 /* Generated */                                   double       inHigh,
 /* Generated */                                   double       inLow,
 /* Generated */                                   double       inClose,
 /* Generated */                                   int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_State( TA_CDLCLOSINGMARUBOZU_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_State( struct TA_CDLCLOSINGMARUBOZU_State* _state,
 /* Generated */                                                      const double inOpen,
 /* Generated */                                                      const double inHigh,
 /* Generated */                                                      const double inLow,
@@ -357,7 +358,8 @@ TA_CDLCLOSINGMARUBOZU_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLCLOSINGMARUBOZU_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -381,13 +383,13 @@ TA_CDLCLOSINGMARUBOZU_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlClosingMarubozuStateFree( TA_CdlClosingMarubozu_State*& _state )
+/* Generated */ int Core::CdlClosingMarubozuStateFree( struct TA_CdlClosingMarubozu_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlClosingMarubozuStateFree( TA_cdlClosingMarubozu_State*& _state )
+/* Generated */ public int cdlClosingMarubozuStateFree( struct TA_cdlClosingMarubozu_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( TA_CDLCLOSINGMARUBOZU_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -404,7 +406,8 @@ TA_CDLCLOSINGMARUBOZU_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLCLOSINGMARUBOZU_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -505,15 +505,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PlusDIStateInit( TA_PlusDI_State*& _state,
+/* Generated */ int Core::PlusDIStateInit( struct TA_PlusDI_State* _state,
 /* Generated */                          int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int plusDIStateInit( TA_plusDI_State*& _state,
+/* Generated */ public int plusDIStateInit( struct TA_plusDI_State* _state,
 /* Generated */                           int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PLUS_DI_StateInit( TA_PLUS_DI_State*& _state,
+/* Generated */ TA_LIB_API int TA_PLUS_DI_StateInit( struct TA_PLUS_DI_State* _state,
 /* Generated */                                               int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -532,7 +532,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_PLUS_DI_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 14;
@@ -553,21 +554,21 @@ TA_PLUS_DI_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PlusDIState( TA_PlusDI_State*& _state,
+/* Generated */ int Core::PlusDIState( struct TA_PlusDI_State* _state,
 /* Generated */                      cli::array<double>^ inHigh,
 /* Generated */                      cli::array<double>^ inLow,
 /* Generated */                      cli::array<double>^ inClose,
 /* Generated */                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                      cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int plusDIState( TA_plusDI_State*& _state,
+/* Generated */ public int plusDIState( struct TA_plusDI_State* _state,
 /* Generated */                       double       inHigh,
 /* Generated */                       double       inLow,
 /* Generated */                       double       inClose,
 /* Generated */                       int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                       double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PLUS_DI_State( TA_PLUS_DI_State*& _state,
+/* Generated */ TA_LIB_API int TA_PLUS_DI_State( struct TA_PLUS_DI_State* _state,
 /* Generated */                                           const double inHigh,
 /* Generated */                                           const double inLow,
 /* Generated */                                           const double inClose,
@@ -588,7 +589,8 @@ TA_PLUS_DI_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_PLUS_DI_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow||!inClose)
@@ -618,13 +620,13 @@ TA_PLUS_DI_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PlusDIStateFree( TA_PlusDI_State*& _state )
+/* Generated */ int Core::PlusDIStateFree( struct TA_PlusDI_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int plusDIStateFree( TA_plusDI_State*& _state )
+/* Generated */ public int plusDIStateFree( struct TA_plusDI_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PLUS_DI_StateFree( TA_PLUS_DI_State*& _state )
+/* Generated */ TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -641,7 +643,8 @@ TA_PLUS_DI_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_PLUS_DI_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

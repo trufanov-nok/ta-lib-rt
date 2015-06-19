@@ -196,13 +196,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DivStateInit( TA_Div_State*& _state )
+/* Generated */ int Core::DivStateInit( struct TA_Div_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int divStateInit( TA_div_State*& _state )
+/* Generated */ public int divStateInit( struct TA_div_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DIV_StateInit( TA_DIV_State*& _state )
+/* Generated */ TA_LIB_API int TA_DIV_StateInit( struct TA_DIV_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -220,7 +220,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_DIV_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -235,17 +236,17 @@ TA_DIV_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DivState( TA_Div_State*& _state,
+/* Generated */ int Core::DivState( struct TA_Div_State* _state,
 /* Generated */                   cli::array<double>^ inReal0,
 /* Generated */                   cli::array<double>^ inReal1,
 /* Generated */                   cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int divState( TA_div_State*& _state,
+/* Generated */ public int divState( struct TA_div_State* _state,
 /* Generated */                    double       inReal0,
 /* Generated */                    double       inReal1,
 /* Generated */                    double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DIV_State( TA_DIV_State*& _state,
+/* Generated */ TA_LIB_API int TA_DIV_State( struct TA_DIV_State* _state,
 /* Generated */                                       const double inReal0,
 /* Generated */                                       const double inReal1,
 /* Generated */                                       double        &outReal )
@@ -264,7 +265,8 @@ TA_DIV_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_DIV_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal0 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if( !inReal1 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -286,13 +288,13 @@ TA_DIV_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DivStateFree( TA_Div_State*& _state )
+/* Generated */ int Core::DivStateFree( struct TA_Div_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int divStateFree( TA_div_State*& _state )
+/* Generated */ public int divStateFree( struct TA_div_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DIV_StateFree( TA_DIV_State*& _state )
+/* Generated */ TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -309,7 +311,8 @@ TA_DIV_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_DIV_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

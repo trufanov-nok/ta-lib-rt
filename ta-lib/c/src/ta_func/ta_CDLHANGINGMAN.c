@@ -291,13 +291,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHangingManStateInit( TA_CdlHangingMan_State*& _state )
+/* Generated */ int Core::CdlHangingManStateInit( struct TA_CdlHangingMan_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHangingManStateInit( TA_cdlHangingMan_State*& _state )
+/* Generated */ public int cdlHangingManStateInit( struct TA_cdlHangingMan_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHANGINGMAN_StateInit( TA_CDLHANGINGMAN_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLHANGINGMAN_StateInit( struct TA_CDLHANGINGMAN_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -315,7 +315,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLHANGINGMAN_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -330,21 +331,21 @@ TA_CDLHANGINGMAN_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHangingManState( TA_CdlHangingMan_State*& _state,
+/* Generated */ int Core::CdlHangingManState( struct TA_CdlHangingMan_State* _state,
 /* Generated */                             cli::array<double>^ inOpen,
 /* Generated */                             cli::array<double>^ inHigh,
 /* Generated */                             cli::array<double>^ inLow,
 /* Generated */                             cli::array<double>^ inClose,
 /* Generated */                             cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHangingManState( TA_cdlHangingMan_State*& _state,
+/* Generated */ public int cdlHangingManState( struct TA_cdlHangingMan_State* _state,
 /* Generated */                              double       inOpen,
 /* Generated */                              double       inHigh,
 /* Generated */                              double       inLow,
 /* Generated */                              double       inClose,
 /* Generated */                              int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHANGINGMAN_State( TA_CDLHANGINGMAN_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLHANGINGMAN_State( struct TA_CDLHANGINGMAN_State* _state,
 /* Generated */                                                 const double inOpen,
 /* Generated */                                                 const double inHigh,
 /* Generated */                                                 const double inLow,
@@ -365,7 +366,8 @@ TA_CDLHANGINGMAN_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLHANGINGMAN_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -389,13 +391,13 @@ TA_CDLHANGINGMAN_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHangingManStateFree( TA_CdlHangingMan_State*& _state )
+/* Generated */ int Core::CdlHangingManStateFree( struct TA_CdlHangingMan_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHangingManStateFree( TA_cdlHangingMan_State*& _state )
+/* Generated */ public int cdlHangingManStateFree( struct TA_cdlHangingMan_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHANGINGMAN_StateFree( TA_CDLHANGINGMAN_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -412,7 +414,8 @@ TA_CDLHANGINGMAN_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLHANGINGMAN_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

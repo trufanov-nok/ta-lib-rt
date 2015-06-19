@@ -258,13 +258,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMatchingLowStateInit( TA_CdlMatchingLow_State*& _state )
+/* Generated */ int Core::CdlMatchingLowStateInit( struct TA_CdlMatchingLow_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMatchingLowStateInit( TA_cdlMatchingLow_State*& _state )
+/* Generated */ public int cdlMatchingLowStateInit( struct TA_cdlMatchingLow_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_StateInit( TA_CDLMATCHINGLOW_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_StateInit( struct TA_CDLMATCHINGLOW_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -282,7 +282,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLMATCHINGLOW_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -297,21 +298,21 @@ TA_CDLMATCHINGLOW_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMatchingLowState( TA_CdlMatchingLow_State*& _state,
+/* Generated */ int Core::CdlMatchingLowState( struct TA_CdlMatchingLow_State* _state,
 /* Generated */                              cli::array<double>^ inOpen,
 /* Generated */                              cli::array<double>^ inHigh,
 /* Generated */                              cli::array<double>^ inLow,
 /* Generated */                              cli::array<double>^ inClose,
 /* Generated */                              cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMatchingLowState( TA_cdlMatchingLow_State*& _state,
+/* Generated */ public int cdlMatchingLowState( struct TA_cdlMatchingLow_State* _state,
 /* Generated */                               double       inOpen,
 /* Generated */                               double       inHigh,
 /* Generated */                               double       inLow,
 /* Generated */                               double       inClose,
 /* Generated */                               int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_State( TA_CDLMATCHINGLOW_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_State( struct TA_CDLMATCHINGLOW_State* _state,
 /* Generated */                                                  const double inOpen,
 /* Generated */                                                  const double inHigh,
 /* Generated */                                                  const double inLow,
@@ -332,7 +333,8 @@ TA_CDLMATCHINGLOW_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLMATCHINGLOW_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -356,13 +358,13 @@ TA_CDLMATCHINGLOW_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMatchingLowStateFree( TA_CdlMatchingLow_State*& _state )
+/* Generated */ int Core::CdlMatchingLowStateFree( struct TA_CdlMatchingLow_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMatchingLowStateFree( TA_cdlMatchingLow_State*& _state )
+/* Generated */ public int cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( TA_CDLMATCHINGLOW_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -379,7 +381,8 @@ TA_CDLMATCHINGLOW_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLMATCHINGLOW_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -533,19 +533,19 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdStateInit( TA_Macd_State*& _state,
+/* Generated */ int Core::MacdStateInit( struct TA_Macd_State* _state,
 /* Generated */                        int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                        int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                        int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdStateInit( TA_macd_State*& _state,
+/* Generated */ public int macdStateInit( struct TA_macd_State* _state,
 /* Generated */                         int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                         int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                         int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACD_StateInit( TA_MACD_State*& _state,
+/* Generated */ TA_LIB_API int TA_MACD_StateInit( struct TA_MACD_State* _state,
 /* Generated */                                            int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                            int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                                            int           optInSignalPeriod )  /* From 1 to 100000 */
@@ -566,7 +566,8 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MACD_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInFastPeriod. */
 /* Generated */    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastPeriod = 12;
@@ -599,7 +600,7 @@ TA_MACD_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdState( TA_Macd_State*& _state,
+/* Generated */ int Core::MacdState( struct TA_Macd_State* _state,
 /* Generated */                    cli::array<double>^ inReal,
 /* Generated */                    int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                    int           optInSlowPeriod, /* From 2 to 100000 */
@@ -608,7 +609,7 @@ TA_MACD_State*& _state,
 /* Generated */                    cli::array<double>^  &outMACDSignal,
 /* Generated */                    cli::array<double>^  &outMACDHist )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdState( TA_macd_State*& _state,
+/* Generated */ public int macdState( struct TA_macd_State* _state,
 /* Generated */                     double       inReal,
 /* Generated */                     int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                     int           optInSlowPeriod, /* From 2 to 100000 */
@@ -617,7 +618,7 @@ TA_MACD_State*& _state,
 /* Generated */                     double        &outMACDSignal,
 /* Generated */                     double        &outMACDHist )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACD_State( TA_MACD_State*& _state,
+/* Generated */ TA_LIB_API int TA_MACD_State( struct TA_MACD_State* _state,
 /* Generated */                                        const double inReal,
 /* Generated */                                        int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                        int           optInSlowPeriod, /* From 2 to 100000 */
@@ -640,7 +641,8 @@ TA_MACD_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MACD_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -685,13 +687,13 @@ TA_MACD_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdStateFree( TA_Macd_State*& _state )
+/* Generated */ int Core::MacdStateFree( struct TA_Macd_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdStateFree( TA_macd_State*& _state )
+/* Generated */ public int macdStateFree( struct TA_macd_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACD_StateFree( TA_MACD_State*& _state )
+/* Generated */ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -708,7 +710,8 @@ TA_MACD_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MACD_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

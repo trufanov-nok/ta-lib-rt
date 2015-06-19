@@ -388,13 +388,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPeriodStateInit( TA_HtDcPeriod_State*& _state )
+/* Generated */ int Core::HtDcPeriodStateInit( struct TA_HtDcPeriod_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPeriodStateInit( TA_htDcPeriod_State*& _state )
+/* Generated */ public int htDcPeriodStateInit( struct TA_htDcPeriod_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_StateInit( TA_HT_DCPERIOD_State*& _state )
+/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_StateInit( struct TA_HT_DCPERIOD_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -412,7 +412,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_DCPERIOD_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -427,15 +428,15 @@ TA_HT_DCPERIOD_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPeriodState( TA_HtDcPeriod_State*& _state,
+/* Generated */ int Core::HtDcPeriodState( struct TA_HtDcPeriod_State* _state,
 /* Generated */                          cli::array<double>^ inReal,
 /* Generated */                          cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPeriodState( TA_htDcPeriod_State*& _state,
+/* Generated */ public int htDcPeriodState( struct TA_htDcPeriod_State* _state,
 /* Generated */                           double       inReal,
 /* Generated */                           double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_State( TA_HT_DCPERIOD_State*& _state,
+/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_State( struct TA_HT_DCPERIOD_State* _state,
 /* Generated */                                               const double inReal,
 /* Generated */                                               double        &outReal )
 /* Generated */ #endif
@@ -453,7 +454,8 @@ TA_HT_DCPERIOD_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_DCPERIOD_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -474,13 +476,13 @@ TA_HT_DCPERIOD_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPeriodStateFree( TA_HtDcPeriod_State*& _state )
+/* Generated */ int Core::HtDcPeriodStateFree( struct TA_HtDcPeriod_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPeriodStateFree( TA_htDcPeriod_State*& _state )
+/* Generated */ public int htDcPeriodStateFree( struct TA_htDcPeriod_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_StateFree( TA_HT_DCPERIOD_State*& _state )
+/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -497,7 +499,8 @@ TA_HT_DCPERIOD_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_DCPERIOD_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

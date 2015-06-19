@@ -288,13 +288,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlConcealBabysWallStateInit( TA_CdlConcealBabysWall_State*& _state )
+/* Generated */ int Core::CdlConcealBabysWallStateInit( struct TA_CdlConcealBabysWall_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlConcealBabysWallStateInit( TA_cdlConcealBabysWall_State*& _state )
+/* Generated */ public int cdlConcealBabysWallStateInit( struct TA_cdlConcealBabysWall_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateInit( TA_CDLCONCEALBABYSWALL_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateInit( struct TA_CDLCONCEALBABYSWALL_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -312,7 +312,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLCONCEALBABYSWALL_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -327,21 +328,21 @@ TA_CDLCONCEALBABYSWALL_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlConcealBabysWallState( TA_CdlConcealBabysWall_State*& _state,
+/* Generated */ int Core::CdlConcealBabysWallState( struct TA_CdlConcealBabysWall_State* _state,
 /* Generated */                                   cli::array<double>^ inOpen,
 /* Generated */                                   cli::array<double>^ inHigh,
 /* Generated */                                   cli::array<double>^ inLow,
 /* Generated */                                   cli::array<double>^ inClose,
 /* Generated */                                   cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlConcealBabysWallState( TA_cdlConcealBabysWall_State*& _state,
+/* Generated */ public int cdlConcealBabysWallState( struct TA_cdlConcealBabysWall_State* _state,
 /* Generated */                                    double       inOpen,
 /* Generated */                                    double       inHigh,
 /* Generated */                                    double       inLow,
 /* Generated */                                    double       inClose,
 /* Generated */                                    int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_State( TA_CDLCONCEALBABYSWALL_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_State( struct TA_CDLCONCEALBABYSWALL_State* _state,
 /* Generated */                                                       const double inOpen,
 /* Generated */                                                       const double inHigh,
 /* Generated */                                                       const double inLow,
@@ -362,7 +363,8 @@ TA_CDLCONCEALBABYSWALL_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLCONCEALBABYSWALL_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -386,13 +388,13 @@ TA_CDLCONCEALBABYSWALL_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlConcealBabysWallStateFree( TA_CdlConcealBabysWall_State*& _state )
+/* Generated */ int Core::CdlConcealBabysWallStateFree( struct TA_CdlConcealBabysWall_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlConcealBabysWallStateFree( TA_cdlConcealBabysWall_State*& _state )
+/* Generated */ public int cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( TA_CDLCONCEALBABYSWALL_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -409,7 +411,8 @@ TA_CDLCONCEALBABYSWALL_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLCONCEALBABYSWALL_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

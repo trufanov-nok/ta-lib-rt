@@ -398,19 +398,19 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::UltOscStateInit( TA_UltOsc_State*& _state,
+/* Generated */ int Core::UltOscStateInit( struct TA_UltOsc_State* _state,
 /* Generated */                          int           optInTimePeriod1, /* From 1 to 100000 */
 /* Generated */                          int           optInTimePeriod2, /* From 1 to 100000 */
 /* Generated */                          int           optInTimePeriod3 )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ultOscStateInit( TA_ultOsc_State*& _state,
+/* Generated */ public int ultOscStateInit( struct TA_ultOsc_State* _state,
 /* Generated */                           int           optInTimePeriod1, /* From 1 to 100000 */
 /* Generated */                           int           optInTimePeriod2, /* From 1 to 100000 */
 /* Generated */                           int           optInTimePeriod3 )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ULTOSC_StateInit( TA_ULTOSC_State*& _state,
+/* Generated */ TA_LIB_API int TA_ULTOSC_StateInit( struct TA_ULTOSC_State* _state,
 /* Generated */                                              int           optInTimePeriod1, /* From 1 to 100000 */
 /* Generated */                                              int           optInTimePeriod2, /* From 1 to 100000 */
 /* Generated */                                              int           optInTimePeriod3 )  /* From 1 to 100000 */
@@ -431,7 +431,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ULTOSC_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod1. */
 /* Generated */    if( (int)optInTimePeriod1 == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod1 = 7;
@@ -464,7 +465,7 @@ TA_ULTOSC_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::UltOscState( TA_UltOsc_State*& _state,
+/* Generated */ int Core::UltOscState( struct TA_UltOsc_State* _state,
 /* Generated */                      cli::array<double>^ inHigh,
 /* Generated */                      cli::array<double>^ inLow,
 /* Generated */                      cli::array<double>^ inClose,
@@ -473,7 +474,7 @@ TA_ULTOSC_State*& _state,
 /* Generated */                      int           optInTimePeriod3, /* From 1 to 100000 */
 /* Generated */                      cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ultOscState( TA_ultOsc_State*& _state,
+/* Generated */ public int ultOscState( struct TA_ultOsc_State* _state,
 /* Generated */                       double       inHigh,
 /* Generated */                       double       inLow,
 /* Generated */                       double       inClose,
@@ -482,7 +483,7 @@ TA_ULTOSC_State*& _state,
 /* Generated */                       int           optInTimePeriod3, /* From 1 to 100000 */
 /* Generated */                       double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ULTOSC_State( TA_ULTOSC_State*& _state,
+/* Generated */ TA_LIB_API int TA_ULTOSC_State( struct TA_ULTOSC_State* _state,
 /* Generated */                                          const double inHigh,
 /* Generated */                                          const double inLow,
 /* Generated */                                          const double inClose,
@@ -505,7 +506,8 @@ TA_ULTOSC_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ULTOSC_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow||!inClose)
@@ -547,13 +549,13 @@ TA_ULTOSC_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::UltOscStateFree( TA_UltOsc_State*& _state )
+/* Generated */ int Core::UltOscStateFree( struct TA_UltOsc_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ultOscStateFree( TA_ultOsc_State*& _state )
+/* Generated */ public int ultOscStateFree( struct TA_ultOsc_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ULTOSC_StateFree( TA_ULTOSC_State*& _state )
+/* Generated */ TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -570,7 +572,8 @@ TA_ULTOSC_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_ULTOSC_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -261,13 +261,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDojiStateInit( TA_CdlDoji_State*& _state )
+/* Generated */ int Core::CdlDojiStateInit( struct TA_CdlDoji_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDojiStateInit( TA_cdlDoji_State*& _state )
+/* Generated */ public int cdlDojiStateInit( struct TA_cdlDoji_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDOJI_StateInit( TA_CDLDOJI_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLDOJI_StateInit( struct TA_CDLDOJI_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -285,7 +285,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLDOJI_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -300,21 +301,21 @@ TA_CDLDOJI_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDojiState( TA_CdlDoji_State*& _state,
+/* Generated */ int Core::CdlDojiState( struct TA_CdlDoji_State* _state,
 /* Generated */                       cli::array<double>^ inOpen,
 /* Generated */                       cli::array<double>^ inHigh,
 /* Generated */                       cli::array<double>^ inLow,
 /* Generated */                       cli::array<double>^ inClose,
 /* Generated */                       cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDojiState( TA_cdlDoji_State*& _state,
+/* Generated */ public int cdlDojiState( struct TA_cdlDoji_State* _state,
 /* Generated */                        double       inOpen,
 /* Generated */                        double       inHigh,
 /* Generated */                        double       inLow,
 /* Generated */                        double       inClose,
 /* Generated */                        int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDOJI_State( TA_CDLDOJI_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLDOJI_State( struct TA_CDLDOJI_State* _state,
 /* Generated */                                           const double inOpen,
 /* Generated */                                           const double inHigh,
 /* Generated */                                           const double inLow,
@@ -335,7 +336,8 @@ TA_CDLDOJI_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLDOJI_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -359,13 +361,13 @@ TA_CDLDOJI_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDojiStateFree( TA_CdlDoji_State*& _state )
+/* Generated */ int Core::CdlDojiStateFree( struct TA_CdlDoji_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDojiStateFree( TA_cdlDoji_State*& _state )
+/* Generated */ public int cdlDojiStateFree( struct TA_cdlDoji_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDOJI_StateFree( TA_CDLDOJI_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -382,7 +384,8 @@ TA_CDLDOJI_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLDOJI_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

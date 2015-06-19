@@ -470,19 +470,19 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdExtStateInit( TA_MacdExt_State*& _state,
+/* Generated */ int Core::MacdExtStateInit( struct TA_MacdExt_State* _state,
 /* Generated */                           int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                           MAType        optInFastMAType,/* Generated */                           int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                           MAType        optInSlowMAType,/* Generated */                           int           optInSignalPeriod, /* From 1 to 100000 */
 /* Generated */                           MAType        optInSignalMAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdExtStateInit( TA_macdExt_State*& _state,
+/* Generated */ public int macdExtStateInit( struct TA_macdExt_State* _state,
 /* Generated */                            int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                            MAType        optInFastMAType,/* Generated */                            int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                            MAType        optInSlowMAType,/* Generated */                            int           optInSignalPeriod, /* From 1 to 100000 */
 /* Generated */                            MAType        optInSignalMAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDEXT_StateInit( TA_MACDEXT_State*& _state,
+/* Generated */ TA_LIB_API int TA_MACDEXT_StateInit( struct TA_MACDEXT_State* _state,
 /* Generated */                                               int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                               TA_MAType     optInFastMAType,/* Generated */                                               int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                                               TA_MAType     optInSlowMAType,/* Generated */                                               int           optInSignalPeriod, /* From 1 to 100000 */
@@ -503,7 +503,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MACDEXT_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInFastPeriod. */
 /* Generated */    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastPeriod = 12;
@@ -557,7 +558,7 @@ TA_MACDEXT_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdExtState( TA_MacdExt_State*& _state,
+/* Generated */ int Core::MacdExtState( struct TA_MacdExt_State* _state,
 /* Generated */                       cli::array<double>^ inReal,
 /* Generated */                       int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                       MAType        optInFastMAType,/* Generated */                       int           optInSlowPeriod, /* From 2 to 100000 */
@@ -566,7 +567,7 @@ TA_MACDEXT_State*& _state,
 /* Generated */                       cli::array<double>^  &outMACDSignal,
 /* Generated */                       cli::array<double>^  &outMACDHist )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdExtState( TA_macdExt_State*& _state,
+/* Generated */ public int macdExtState( struct TA_macdExt_State* _state,
 /* Generated */                        double       inReal,
 /* Generated */                        int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                        MAType        optInFastMAType,/* Generated */                        int           optInSlowPeriod, /* From 2 to 100000 */
@@ -575,7 +576,7 @@ TA_MACDEXT_State*& _state,
 /* Generated */                        double        &outMACDSignal,
 /* Generated */                        double        &outMACDHist )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDEXT_State( TA_MACDEXT_State*& _state,
+/* Generated */ TA_LIB_API int TA_MACDEXT_State( struct TA_MACDEXT_State* _state,
 /* Generated */                                           const double inReal,
 /* Generated */                                           int           optInFastPeriod, /* From 2 to 100000 */
 /* Generated */                                           TA_MAType     optInFastMAType,/* Generated */                                           int           optInSlowPeriod, /* From 2 to 100000 */
@@ -598,7 +599,8 @@ TA_MACDEXT_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MACDEXT_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -664,13 +666,13 @@ TA_MACDEXT_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdExtStateFree( TA_MacdExt_State*& _state )
+/* Generated */ int Core::MacdExtStateFree( struct TA_MacdExt_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdExtStateFree( TA_macdExt_State*& _state )
+/* Generated */ public int macdExtStateFree( struct TA_macdExt_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDEXT_StateFree( TA_MACDEXT_State*& _state )
+/* Generated */ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -687,7 +689,8 @@ TA_MACDEXT_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_MACDEXT_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

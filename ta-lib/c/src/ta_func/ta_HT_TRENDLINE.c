@@ -443,13 +443,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendlineStateInit( TA_HtTrendline_State*& _state )
+/* Generated */ int Core::HtTrendlineStateInit( struct TA_HtTrendline_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendlineStateInit( TA_htTrendline_State*& _state )
+/* Generated */ public int htTrendlineStateInit( struct TA_htTrendline_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_StateInit( TA_HT_TRENDLINE_State*& _state )
+/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_StateInit( struct TA_HT_TRENDLINE_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -467,7 +467,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_TRENDLINE_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -482,15 +483,15 @@ TA_HT_TRENDLINE_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendlineState( TA_HtTrendline_State*& _state,
+/* Generated */ int Core::HtTrendlineState( struct TA_HtTrendline_State* _state,
 /* Generated */                           cli::array<double>^ inReal,
 /* Generated */                           cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendlineState( TA_htTrendline_State*& _state,
+/* Generated */ public int htTrendlineState( struct TA_htTrendline_State* _state,
 /* Generated */                            double       inReal,
 /* Generated */                            double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_State( TA_HT_TRENDLINE_State*& _state,
+/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_State( struct TA_HT_TRENDLINE_State* _state,
 /* Generated */                                                const double inReal,
 /* Generated */                                                double        &outReal )
 /* Generated */ #endif
@@ -508,7 +509,8 @@ TA_HT_TRENDLINE_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_TRENDLINE_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -529,13 +531,13 @@ TA_HT_TRENDLINE_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendlineStateFree( TA_HtTrendline_State*& _state )
+/* Generated */ int Core::HtTrendlineStateFree( struct TA_HtTrendline_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendlineStateFree( TA_htTrendline_State*& _state )
+/* Generated */ public int htTrendlineStateFree( struct TA_htTrendline_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_StateFree( TA_HT_TRENDLINE_State*& _state )
+/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -552,7 +554,8 @@ TA_HT_TRENDLINE_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_TRENDLINE_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

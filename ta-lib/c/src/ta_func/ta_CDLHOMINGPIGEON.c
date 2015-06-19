@@ -276,13 +276,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHomingPigeonStateInit( TA_CdlHomingPigeon_State*& _state )
+/* Generated */ int Core::CdlHomingPigeonStateInit( struct TA_CdlHomingPigeon_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHomingPigeonStateInit( TA_cdlHomingPigeon_State*& _state )
+/* Generated */ public int cdlHomingPigeonStateInit( struct TA_cdlHomingPigeon_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_StateInit( TA_CDLHOMINGPIGEON_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_StateInit( struct TA_CDLHOMINGPIGEON_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -300,7 +300,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLHOMINGPIGEON_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -315,21 +316,21 @@ TA_CDLHOMINGPIGEON_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHomingPigeonState( TA_CdlHomingPigeon_State*& _state,
+/* Generated */ int Core::CdlHomingPigeonState( struct TA_CdlHomingPigeon_State* _state,
 /* Generated */                               cli::array<double>^ inOpen,
 /* Generated */                               cli::array<double>^ inHigh,
 /* Generated */                               cli::array<double>^ inLow,
 /* Generated */                               cli::array<double>^ inClose,
 /* Generated */                               cli::array<int>^  &outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHomingPigeonState( TA_cdlHomingPigeon_State*& _state,
+/* Generated */ public int cdlHomingPigeonState( struct TA_cdlHomingPigeon_State* _state,
 /* Generated */                                double       inOpen,
 /* Generated */                                double       inHigh,
 /* Generated */                                double       inLow,
 /* Generated */                                double       inClose,
 /* Generated */                                int           &outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_State( TA_CDLHOMINGPIGEON_State*& _state,
+/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_State( struct TA_CDLHOMINGPIGEON_State* _state,
 /* Generated */                                                   const double inOpen,
 /* Generated */                                                   const double inHigh,
 /* Generated */                                                   const double inLow,
@@ -350,7 +351,8 @@ TA_CDLHOMINGPIGEON_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLHOMINGPIGEON_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
@@ -374,13 +376,13 @@ TA_CDLHOMINGPIGEON_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHomingPigeonStateFree( TA_CdlHomingPigeon_State*& _state )
+/* Generated */ int Core::CdlHomingPigeonStateFree( struct TA_CdlHomingPigeon_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHomingPigeonStateFree( TA_cdlHomingPigeon_State*& _state )
+/* Generated */ public int cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( TA_CDLHOMINGPIGEON_State*& _state )
+/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -397,7 +399,8 @@ TA_CDLHOMINGPIGEON_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_CDLHOMINGPIGEON_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

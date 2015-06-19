@@ -461,13 +461,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPhaseStateInit( TA_HtDcPhase_State*& _state )
+/* Generated */ int Core::HtDcPhaseStateInit( struct TA_HtDcPhase_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPhaseStateInit( TA_htDcPhase_State*& _state )
+/* Generated */ public int htDcPhaseStateInit( struct TA_htDcPhase_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPHASE_StateInit( TA_HT_DCPHASE_State*& _state )
+/* Generated */ TA_LIB_API int TA_HT_DCPHASE_StateInit( struct TA_HT_DCPHASE_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -485,7 +485,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_DCPHASE_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -500,15 +501,15 @@ TA_HT_DCPHASE_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPhaseState( TA_HtDcPhase_State*& _state,
+/* Generated */ int Core::HtDcPhaseState( struct TA_HtDcPhase_State* _state,
 /* Generated */                         cli::array<double>^ inReal,
 /* Generated */                         cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPhaseState( TA_htDcPhase_State*& _state,
+/* Generated */ public int htDcPhaseState( struct TA_htDcPhase_State* _state,
 /* Generated */                          double       inReal,
 /* Generated */                          double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPHASE_State( TA_HT_DCPHASE_State*& _state,
+/* Generated */ TA_LIB_API int TA_HT_DCPHASE_State( struct TA_HT_DCPHASE_State* _state,
 /* Generated */                                              const double inReal,
 /* Generated */                                              double        &outReal )
 /* Generated */ #endif
@@ -526,7 +527,8 @@ TA_HT_DCPHASE_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_DCPHASE_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -547,13 +549,13 @@ TA_HT_DCPHASE_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPhaseStateFree( TA_HtDcPhase_State*& _state )
+/* Generated */ int Core::HtDcPhaseStateFree( struct TA_HtDcPhase_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPhaseStateFree( TA_htDcPhase_State*& _state )
+/* Generated */ public int htDcPhaseStateFree( struct TA_htDcPhase_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPHASE_StateFree( TA_HT_DCPHASE_State*& _state )
+/* Generated */ TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -570,7 +572,8 @@ TA_HT_DCPHASE_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_HT_DCPHASE_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

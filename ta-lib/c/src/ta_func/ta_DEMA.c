@@ -347,15 +347,15 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DemaStateInit( TA_Dema_State*& _state,
+/* Generated */ int Core::DemaStateInit( struct TA_Dema_State* _state,
 /* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int demaStateInit( TA_dema_State*& _state,
+/* Generated */ public int demaStateInit( struct TA_dema_State* _state,
 /* Generated */                         int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DEMA_StateInit( TA_DEMA_State*& _state,
+/* Generated */ TA_LIB_API int TA_DEMA_StateInit( struct TA_DEMA_State* _state,
 /* Generated */                                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
@@ -374,7 +374,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_DEMA_State*& _state,
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
@@ -395,17 +396,17 @@ TA_DEMA_State*& _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DemaState( TA_Dema_State*& _state,
+/* Generated */ int Core::DemaState( struct TA_Dema_State* _state,
 /* Generated */                    cli::array<double>^ inReal,
 /* Generated */                    int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                    cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int demaState( TA_dema_State*& _state,
+/* Generated */ public int demaState( struct TA_dema_State* _state,
 /* Generated */                     double       inReal,
 /* Generated */                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                     double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DEMA_State( TA_DEMA_State*& _state,
+/* Generated */ TA_LIB_API int TA_DEMA_State( struct TA_DEMA_State* _state,
 /* Generated */                                        const double inReal,
 /* Generated */                                        int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                        double        &outReal )
@@ -424,7 +425,8 @@ TA_DEMA_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_DEMA_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -451,13 +453,13 @@ TA_DEMA_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DemaStateFree( TA_Dema_State*& _state )
+/* Generated */ int Core::DemaStateFree( struct TA_Dema_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int demaStateFree( TA_dema_State*& _state )
+/* Generated */ public int demaStateFree( struct TA_dema_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DEMA_StateFree( TA_DEMA_State*& _state )
+/* Generated */ TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -474,7 +476,8 @@ TA_DEMA_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_DEMA_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

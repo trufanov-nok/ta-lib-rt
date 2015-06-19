@@ -245,13 +245,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrueRangeStateInit( TA_TrueRange_State*& _state )
+/* Generated */ int Core::TrueRangeStateInit( struct TA_TrueRange_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trueRangeStateInit( TA_trueRange_State*& _state )
+/* Generated */ public int trueRangeStateInit( struct TA_trueRange_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRANGE_StateInit( TA_TRANGE_State*& _state )
+/* Generated */ TA_LIB_API int TA_TRANGE_StateInit( struct TA_TRANGE_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -269,7 +269,8 @@
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TRANGE_State*& _state )
+/* Generated */    if (_state != NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -284,19 +285,19 @@ TA_TRANGE_State*& _state )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrueRangeState( TA_TrueRange_State*& _state,
+/* Generated */ int Core::TrueRangeState( struct TA_TrueRange_State* _state,
 /* Generated */                         cli::array<double>^ inHigh,
 /* Generated */                         cli::array<double>^ inLow,
 /* Generated */                         cli::array<double>^ inClose,
 /* Generated */                         cli::array<double>^  &outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trueRangeState( TA_trueRange_State*& _state,
+/* Generated */ public int trueRangeState( struct TA_trueRange_State* _state,
 /* Generated */                          double       inHigh,
 /* Generated */                          double       inLow,
 /* Generated */                          double       inClose,
 /* Generated */                          double        &outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRANGE_State( TA_TRANGE_State*& _state,
+/* Generated */ TA_LIB_API int TA_TRANGE_State( struct TA_TRANGE_State* _state,
 /* Generated */                                          const double inHigh,
 /* Generated */                                          const double inLow,
 /* Generated */                                          const double inClose,
@@ -316,7 +317,8 @@ TA_TRANGE_State*& _state )
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TRANGE_State*& _state,
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    /* Verify required price component. */
 /* Generated */    if(!inHigh||!inLow||!inClose)
@@ -340,13 +342,13 @@ TA_TRANGE_State*& _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrueRangeStateFree( TA_TrueRange_State*& _state )
+/* Generated */ int Core::TrueRangeStateFree( struct TA_TrueRange_State* _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trueRangeStateFree( TA_trueRange_State*& _state )
+/* Generated */ public int trueRangeStateFree( struct TA_trueRange_State* _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRANGE_StateFree( TA_TRANGE_State*& _state )
+/* Generated */ TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State* _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -363,7 +365,8 @@ TA_TRANGE_State*& _state,
 /* Generated */    if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
-TA_TRANGE_State*& _state )
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
