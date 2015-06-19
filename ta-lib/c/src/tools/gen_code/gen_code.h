@@ -255,7 +255,7 @@ static void printFunc(FILE *out,
                        unsigned int settings);
 
 static void printCallFrame  ( FILE *out, const TA_FuncInfo *funcInfo );
-static void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int lookbackSignature );
+static void printFrameHeader(FILE *out, const TA_FuncInfo *funcInfo, unsigned int settings );
 
 static void printExternReferenceForEachFunction( const TA_FuncInfo *info,
                                                  void *opaqueData );

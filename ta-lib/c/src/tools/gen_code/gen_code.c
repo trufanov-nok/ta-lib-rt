@@ -1436,7 +1436,13 @@ static void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
    genPrefix = 1;
    printFrameHeader( gOutFrame_H->file, funcInfo, 0 );
    fprintf( gOutFrame_H->file, ";\n" );
-   printFrameHeader( gOutFrame_H->file, funcInfo, 1 );
+   printFrameHeader( gOutFrame_H->file, funcInfo, pfs_lookbackSignature );
+   fprintf( gOutFrame_H->file, ";\n" );
+   printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateInitSignature );
+   fprintf( gOutFrame_H->file, ";\n" );
+   printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateFuncSignature );
+   fprintf( gOutFrame_H->file, ";\n" );
+   printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateFreeSignature );
    fprintf( gOutFrame_H->file, ";\n\n" );
    printCallFrame( gOutFrame_C->file, funcInfo );
 
@@ -2639,22 +2645,58 @@ static void printCallFrame( FILE *out, const TA_FuncInfo *funcInfo )
    printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded );
    print( out, "}\n" );
 
-   printFrameHeader( out, funcInfo, 1 );
+   printFrameHeader( out, funcInfo, pfs_lookbackSignature );
    print( out, "{\n" );
    if( funcInfo->nbOptInput == 0 )
       print( out, "   (void)params;\n" );
    printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_lookbackSignature);
+   print( out, "}\n" );
+
+   printFrameHeader( out, funcInfo, pfs_stateInitSignature );
+   print( out, "{\n" );
+   if( funcInfo->nbOptInput == 0 )
+      print( out, "   (void)params;\n" );
+   printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_stateInitSignature);
+   print( out, "}\n" );
+
+   printFrameHeader( out, funcInfo, pfs_stateFuncSignature );
+   print( out, "{\n" );
+   if( funcInfo->nbOptInput == 0 )
+      print( out, "   (void)params;\n" );
+   printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_stateFuncSignature);
+   print( out, "}\n" );
+
+   printFrameHeader( out, funcInfo, pfs_stateFreeSignature );
+   print( out, "{\n" );
+   if( funcInfo->nbOptInput == 0 )
+      print( out, "   (void)params;\n" );
+   printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_stateFreeSignature);
    print( out, "}\n" );
    
    genPrefix = 0;
 }
 
 
-static void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int lookbackSignature )
+static void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int settings )
 {
-   if( lookbackSignature )
+   if( settings & pfs_lookbackSignature )
    {
       print( out, "unsigned int TA_%s_FramePPLB( const TA_ParamHolderPriv *params )\n", funcInfo->name );
+   }
+   else
+   if( settings & pfs_stateInitSignature )
+   {
+      print( out, "unsigned int TA_%s_FramePPSI( const TA_ParamHolderPriv *params )\n", funcInfo->name );
+   }
+   else
+   if( settings & pfs_stateFuncSignature )
+   {
+      print( out, "unsigned int TA_%s_FramePPS( const TA_ParamHolderPriv *params )\n", funcInfo->name );
+   }
+   else
+   if( settings & pfs_stateFreeSignature )
+   {
+      print( out, "unsigned int TA_%s_FramePPFS( const TA_ParamHolderPriv *params )\n", funcInfo->name );
    }
    else
    {
@@ -3241,6 +3283,7 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    fprintf( out, " * next time gen_code is run.\n" );
    fprintf( out, " */\n" );
 
+   // section 1 begin
    genPrefix = 1;
    print( out, "\n" );
    print( out, "#if defined( _MANAGED )\n" );
@@ -3275,10 +3318,12 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    print( out, "#else\n" );
    printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_lookbackSignature );
    print( out, "#endif\n" );
+   //section 1 end
 
    genPrefix = 0;
    skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
 
+   //section 2 begin
    genPrefix = 1;
    if( funcInfo->nbOptInput != 0 )
       print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
@@ -3287,10 +3332,12 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
      print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
    else   
      print( out, "/* No parameters to validate. */\n" );
+   //section 2 end
 
    genPrefix = 0;
    skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
 
+   // section 3 begin
    genPrefix = 1;
    fprintf( out, "/*\n" );
    printFuncHeaderDoc( out, funcInfo, " * " );
@@ -3313,10 +3360,12 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    print( out, "#else\n" );
    printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype );
    print( out, "#endif\n" );
+   //section 3 end
 
    genPrefix = 0;
    skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
 
+   //section 4 begin
    genPrefix = 1;
    print( out, "\n" );
    print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
@@ -3335,9 +3384,141 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
 
    print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
    print( out, "\n" );
+   //section 4 end
 
+   genPrefix = 0;
    skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
 
+   // section 5 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#if defined( _MANAGED )\n" );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateInitSignature | pfs_managedCPPCode );
+   print( out, "#elif defined( _JAVA )\n" );
+   /* Handle special case to avoid duplicate definition of min,max */
+   if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
+      print( out, "#undef min\n" );
+   } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
+      print( out, "#undef max\n" );
+   }
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateInitSignature | pfs_outputForJava );
+   print( out, "#else\n" );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateInitSignature );
+   print( out, "#endif\n" );
+   //section 5 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   //section 6 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
+   print( out, "\n" );
+   print( out, "   /* Validate the requested output range. */\n" );
+   print( out, "   if( startIdx < 0 )\n" );
+   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);\n" );
+   print( out, "   if( (endIdx < 0) || (endIdx < startIdx))\n" );
+   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);\n" );
+   print( out, "\n" );
+   /* Generate the code for checking the parameters.
+    * Also generates the code for setting up the
+    * default values.
+    */
+   printFunc( out, NULL, funcInfo, pfs_stateInitSignature | pfs_validationCode );
+   print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
+   print( out, "\n" );
+   //section 6 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   // section 7 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#if defined( _MANAGED )\n" );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateFuncSignature | pfs_managedCPPCode );
+   print( out, "#elif defined( _JAVA )\n" );
+   /* Handle special case to avoid duplicate definition of min,max */
+   if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
+      print( out, "#undef min\n" );
+   } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
+      print( out, "#undef max\n" );
+   }
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateFuncSignature | pfs_outputForJava );
+   print( out, "#else\n" );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateFuncSignature );
+   print( out, "#endif\n" );
+   //section 7 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   //section 8 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
+   print( out, "\n" );
+   print( out, "   /* Validate the requested output range. */\n" );
+   print( out, "   if( startIdx < 0 )\n" );
+   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);\n" );
+   print( out, "   if( (endIdx < 0) || (endIdx < startIdx))\n" );
+   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);\n" );
+   print( out, "\n" );
+   /* Generate the code for checking the parameters.
+    * Also generates the code for setting up the
+    * default values.
+    */
+   printFunc( out, NULL, funcInfo, pfs_stateFuncSignature | pfs_validationCode );
+   print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
+   print( out, "\n" );
+   //section 8 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   // section 9 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#if defined( _MANAGED )\n" );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateFreeSignature | pfs_managedCPPCode );
+   print( out, "#elif defined( _JAVA )\n" );
+   /* Handle special case to avoid duplicate definition of min,max */
+   if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
+      print( out, "#undef min\n" );
+   } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
+      print( out, "#undef max\n" );
+   }
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateFreeSignature | pfs_outputForJava );
+   print( out, "#else\n" );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateFreeSignature );
+   print( out, "#endif\n" );
+   //section 9 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   //section 10 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
+   print( out, "\n" );
+   print( out, "   /* Validate the requested output range. */\n" );
+   print( out, "   if( startIdx < 0 )\n" );
+   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);\n" );
+   print( out, "   if( (endIdx < 0) || (endIdx < startIdx))\n" );
+   print( out, "      return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);\n" );
+   print( out, "\n" );
+   /* Generate the code for checking the parameters.
+    * Also generates the code for setting up the
+    * default values.
+    */
+   printFunc( out, NULL, funcInfo, pfs_stateFreeSignature | pfs_validationCode );
+   print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
+   print( out, "\n" );
+   //section 10 end
+
+   // section 11?
    /* Put a marker who is going to be used in the second pass */
    fprintf( out, "%%%%%%GENCODE%%%%%%\n" );
 }
