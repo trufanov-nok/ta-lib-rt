@@ -44,7 +44,7 @@
  *  -------------------------------------------------------------------
  *  120802 MF     Template creation.
  *  052603 MF     Adapt code to compile with .NET Managed C++
- *  111705 MF,JD  Fix#1359452 for handling properly start/end range.
+ *  111705 MF,JD  Fix#1359452 for handling propta_utility.cerly start/end range.
  */
 
 /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
@@ -296,6 +296,8 @@
 {
    /* insert local variable here */
 
+   double tmp;
+
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -318,6 +320,15 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+   tmp = inHigh - inLow;
+
+
+   if( tmp > 0.0 )
+       VALUE_HANDLE_DEREF(outReal) = (((inClose-inLow)-(inHigh-inClose))/tmp)*((double)inVolume);
+   else
+       VALUE_HANDLE_DEREF(outReal) = 0.0;
+
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

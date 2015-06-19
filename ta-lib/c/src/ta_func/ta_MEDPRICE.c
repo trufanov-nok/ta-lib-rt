@@ -233,7 +233,6 @@
 
    /* insert state init code here. */
 
-
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -281,7 +280,7 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
-
+   VALUE_HANDLE_DEREF(outReal) = (inHigh+inLow)/2.0;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 

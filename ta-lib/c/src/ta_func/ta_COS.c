@@ -262,7 +262,7 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
-
+   VALUE_HANDLE_DEREF(outReal) = std_cos(inReal);
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
