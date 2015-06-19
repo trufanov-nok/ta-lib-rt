@@ -460,12 +460,7 @@
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    *_state = malloc(sizeof(struct TA_BBANDS_State));
-/* Generated */    (*_state)->mem_size = 100;
-if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_BBANDS_Data)*(*_state)->mem_size);
-/* Generated */    else
-/* Generated */          (*_state)->memory = NULL;/* Generated */    /* min/max are checked for optInTimePeriod. */
+/* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 5;
 /* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -488,14 +483,19 @@ if ((*_state)->mem_size > 0)
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
-/* Generated */ 
+/* Generated */    *_state = malloc(sizeof(struct TA_BBANDS_State));
+/* Generated */    (*_state)->mem_size = TA_BBANDS_Lookback(optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType );
+/* Generated */    if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_BBANDS_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
 
-   _state = NULL;
+
    return 0;
 }
 

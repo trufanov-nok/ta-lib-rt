@@ -529,12 +529,7 @@
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    *_state = malloc(sizeof(struct TA_SAR_State));
-/* Generated */    (*_state)->mem_size = 100;
-if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_SAR_Data)*(*_state)->mem_size);
-/* Generated */    else
-/* Generated */          (*_state)->memory = NULL;/* Generated */    if( optInAcceleration == TA_REAL_DEFAULT )
+/* Generated */    if( optInAcceleration == TA_REAL_DEFAULT )
 /* Generated */       optInAcceleration = 2.000000e-2;
 /* Generated */    else if( (optInAcceleration < 0.000000e+0) ||/* Generated */  (optInAcceleration > 3.000000e+37) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -544,14 +539,19 @@ if ((*_state)->mem_size > 0)
 /* Generated */    else if( (optInMaximum < 0.000000e+0) ||/* Generated */  (optInMaximum > 3.000000e+37) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */ 
+/* Generated */    *_state = malloc(sizeof(struct TA_SAR_State));
+/* Generated */    (*_state)->mem_size = TA_SAR_Lookback(optInAcceleration, optInMaximum );
+/* Generated */    if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_SAR_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
 
-   _state = NULL;
+
    return 0;
 }
 

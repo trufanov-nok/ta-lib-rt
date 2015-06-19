@@ -247,25 +247,25 @@
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    *_state = malloc(sizeof(struct TA_MACDFIX_State));
-/* Generated */    (*_state)->mem_size = 100;
-if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MACDFIX_Data)*(*_state)->mem_size);
-/* Generated */    else
-/* Generated */          (*_state)->memory = NULL;/* Generated */    /* min/max are checked for optInSignalPeriod. */
+/* Generated */    /* min/max are checked for optInSignalPeriod. */
 /* Generated */    if( (int)optInSignalPeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInSignalPeriod = 9;
 /* Generated */    else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */ 
+/* Generated */    *_state = malloc(sizeof(struct TA_MACDFIX_State));
+/* Generated */    (*_state)->mem_size = TA_MACDFIX_Lookback(optInSignalPeriod );
+/* Generated */    if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MACDFIX_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
 
-   _state = NULL;
+
    return 0;
 }
 

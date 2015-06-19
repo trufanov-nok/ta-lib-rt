@@ -282,8 +282,8 @@
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    *_state = malloc(sizeof(struct TA_CDLLADDERBOTTOM_State));
-/* Generated */    (*_state)->mem_size = 100;
-if ((*_state)->mem_size > 0)
+/* Generated */    (*_state)->mem_size = TA_CDLLADDERBOTTOM_Lookback();
+/* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_CDLLADDERBOTTOM_Data)*(*_state)->mem_size);
 /* Generated */    else
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
@@ -293,7 +293,7 @@ if ((*_state)->mem_size > 0)
 
    /* insert state init code here. */
 
-   _state = NULL;
+
    return 0;
 }
 

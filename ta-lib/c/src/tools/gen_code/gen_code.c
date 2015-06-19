@@ -2026,18 +2026,8 @@ static void printFunc( FILE *out,
            printIndent( out, indent+6 );
            fprintf( out, "return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n");
 
-       if (stateInitSignature) {
-           printIndent( out, indent);
-           fprintf( out, "*_state = malloc(sizeof(struct TA_%s_State));\n", funcName);
-           printIndent( out, indent);
-           fprintf( out, "(*_state)->mem_size = 100;\nif ((*_state)->mem_size > 0)\n");
-           printIndent( out, indent+6 );
-           fprintf( out, "(*_state)->memory = malloc(sizeof(struct TA_%s_Data)*(*_state)->mem_size);\n", funcName);
-           printIndent( out, indent );
-           fprintf( out, "else\n");
-           printIndent( out, indent+6 );
-           fprintf( out, "(*_state)->memory = NULL;");
-       } else
+//           if (stateInitSignature)
+//           is moved close to optIn
        if (stateFreeSignature) {
            printIndent( out, indent );
            fprintf( out, "if (*_state != NULL) {\n");
@@ -2370,6 +2360,11 @@ static void printFunc( FILE *out,
    paramNb = 0;
    lastParam = 0;
 
+
+   char nbOptInputArgsBuffer[1024]; /* Not safe, but 1024 is realistic, */
+   nbOptInputArgsBuffer[0] = '\0';
+   int nbOptInputArgsBufferLen = 0;
+
    if (!stateFreeSignature)
    for( i=0; i < funcInfo->nbOptInput; i++ )
    {
@@ -2409,7 +2404,6 @@ static void printFunc( FILE *out,
       case TA_OptInput_IntegerList:
          if( isMAType && !frame )
          {
-
             typeString = managedCPPCode||outputForJava? "MAType":"TA_MAType";
             defaultParamName = outputForSWIG? "OPT_MATYPE":"optInMAType";
             excludeFromManaged = 1;
@@ -2425,7 +2419,7 @@ static void printFunc( FILE *out,
             paramName = "optInParam";
          printf( "[%s,%s,%d] invalid 'optional input' type(%d)\n",
                  funcName, paramName, paramNb,
-                 optInputParamInfo->type );
+                 optInputParamInfo->type );         
          return;
       }
 
@@ -2444,6 +2438,8 @@ static void printFunc( FILE *out,
          }
 
          printOptInputValidation( out, paramName, optInputParamInfo, lookbackValidationCode );
+         if (stateInitSignature)
+             nbOptInputArgsBufferLen = sprintf(((char *)nbOptInputArgsBuffer)+nbOptInputArgsBufferLen, "%s%s ", paramName, lastParam?"":",") + nbOptInputArgsBufferLen;
 
          if( excludeFromManaged )
          {
@@ -2540,6 +2536,21 @@ static void printFunc( FILE *out,
       }
 
       paramNb++;
+   }
+
+   if (validationCode && stateInitSignature) {
+       printIndent( out, indent);
+       fprintf( out, "*_state = malloc(sizeof(struct TA_%s_State));\n", funcName);
+       printIndent( out, indent);
+       fprintf( out, "(*_state)->mem_size = TA_%s_Lookback(%s);\n", funcName, nbOptInputArgsBuffer);
+       printIndent( out, indent);
+       fprintf( out, "if ((*_state)->mem_size > 0)\n");
+       printIndent( out, indent+6 );
+       fprintf( out, "(*_state)->memory = malloc(sizeof(struct TA_%s_Data)*(*_state)->mem_size);\n", funcName);
+       printIndent( out, indent );
+       fprintf( out, "else\n");
+       printIndent( out, indent+6 );
+       fprintf( out, "(*_state)->memory = NULL;");
    }
 
    if (!validationCode)

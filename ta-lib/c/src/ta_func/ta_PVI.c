@@ -204,7 +204,7 @@
 
    /* insert state init code here. */
 
-   _state = NULL;
+
    return 0;
 }
 

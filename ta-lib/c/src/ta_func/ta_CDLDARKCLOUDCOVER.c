@@ -304,24 +304,24 @@
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    *_state = malloc(sizeof(struct TA_CDLDARKCLOUDCOVER_State));
-/* Generated */    (*_state)->mem_size = 100;
-if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_CDLDARKCLOUDCOVER_Data)*(*_state)->mem_size);
-/* Generated */    else
-/* Generated */          (*_state)->memory = NULL;/* Generated */    if( optInPenetration == TA_REAL_DEFAULT )
+/* Generated */    if( optInPenetration == TA_REAL_DEFAULT )
 /* Generated */       optInPenetration = 5.000000e-1;
 /* Generated */    else if( (optInPenetration < 0.000000e+0) ||/* Generated */  (optInPenetration > 3.000000e+37) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */ 
+/* Generated */    *_state = malloc(sizeof(struct TA_CDLDARKCLOUDCOVER_State));
+/* Generated */    (*_state)->mem_size = TA_CDLDARKCLOUDCOVER_Lookback(optInPenetration );
+/* Generated */    if ((*_state)->mem_size > 0)
+/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_CDLDARKCLOUDCOVER_Data)*(*_state)->mem_size);
+/* Generated */    else
+/* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
 
-   _state = NULL;
+
    return 0;
 }
 
