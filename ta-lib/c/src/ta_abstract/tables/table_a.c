@@ -416,7 +416,13 @@ static const TA_OptInputParameterInfo *TA_AVGDEV_OptInputs[] =
 	NULL
 };
 
-static const TA_InputParameterInfo *TA_AVGDEV_StructParams[] = { NULL };
+
+const TA_InputParameterInfo TA_AVGDEV_DEF_UI_STRUCT_PARAM =
+                                  { TA_Input_Real, "sum", 0 };
+
+static const TA_InputParameterInfo *TA_AVGDEV_StructParams[] = {
+    &TA_AVGDEV_DEF_UI_STRUCT_PARAM,
+    NULL };
 
 DEF_FUNCTION( AVGDEV,                         /* name */
 				TA_GroupId_PriceTransform, /* groupId*/

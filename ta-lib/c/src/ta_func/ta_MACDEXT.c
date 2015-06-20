@@ -535,21 +535,21 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
-/* Generated */    *_state = malloc(sizeof(struct TA_MACDEXT_State));
-/* Generated */    (*_state)->mem_index = 0;
-/* Generated */    (*_state)->optInFastPeriod = optInFastPeriod;
-/* Generated */    (*_state)->optInFastMAType = optInFastMAType;
-/* Generated */    (*_state)->optInSlowPeriod = optInSlowPeriod;
-/* Generated */    (*_state)->optInSlowMAType = optInSlowMAType;
-/* Generated */    (*_state)->optInSignalPeriod = optInSignalPeriod;
-/* Generated */    (*_state)->optInSignalMAType = optInSignalMAType;
+/* Generated */    STATE = calloc(1, sizeof(struct TA_MACDEXT_State));
+/* Generated */    STATE_P.mem_index = 0;
+/* Generated */    STATE_P.optInFastPeriod = optInFastPeriod;
+/* Generated */    STATE_P.optInFastMAType = optInFastMAType;
+/* Generated */    STATE_P.optInSlowPeriod = optInSlowPeriod;
+/* Generated */    STATE_P.optInSlowMAType = optInSlowMAType;
+/* Generated */    STATE_P.optInSignalPeriod = optInSignalPeriod;
+/* Generated */    STATE_P.optInSignalMAType = optInSignalMAType;
 /* Generated */    #ifndef TA_MACDEXT_SUPPRESS_MEMORY_ALLOCATION
-/* Generated */    (*_state)->mem_size = TA_MACDEXT_Lookback(optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType );
-/* Generated */    if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MACDEXT_Data)*(*_state)->mem_size);
+/* Generated */    MEM_SIZE_P = TA_MACDEXT_Lookback(optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType );
+/* Generated */    if (MEM_SIZE_P > 0)
+/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MACDEXT_Data));
 /* Generated */    else
 /* Generated */    #endif
-/* Generated */          (*_state)->memory = NULL;/* Generated */ 
+/* Generated */          MEM_P = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -594,10 +594,7 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
-/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
-/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
-/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
 /* Generated */    #ifndef TA_MACDEXT_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -615,8 +612,6 @@
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
-/* Generated */ 
-/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 

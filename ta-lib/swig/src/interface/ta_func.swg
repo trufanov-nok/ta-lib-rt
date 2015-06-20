@@ -743,6 +743,7 @@ struct TA_AVGDEV_State {
                        int mem_size;
                        int mem_index;
                        struct TA_AVGDEV_Data* memory;
+                       double       sum;
                        int           optInTimePeriod; /* From 2 to 100000 */
                        };
 
@@ -5456,6 +5457,8 @@ struct TA_MIDPOINT_State {
                          int mem_size;
                          int mem_index;
                          struct TA_MIDPOINT_Data* memory;
+                         double       highest;
+                         double       lowest;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
 
@@ -5504,6 +5507,8 @@ struct TA_MIDPRICE_State {
                          int mem_size;
                          int mem_index;
                          struct TA_MIDPRICE_Data* memory;
+                         double       highest;
+                         double       lowest;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
 

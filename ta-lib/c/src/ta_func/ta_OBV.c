@@ -225,15 +225,15 @@
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    *_state = malloc(sizeof(struct TA_OBV_State));
-/* Generated */    (*_state)->mem_index = 0;
+/* Generated */    STATE = calloc(1, sizeof(struct TA_OBV_State));
+/* Generated */    STATE_P.mem_index = 0;
 /* Generated */    #ifndef TA_OBV_SUPPRESS_MEMORY_ALLOCATION
-/* Generated */    (*_state)->mem_size = TA_OBV_Lookback();
-/* Generated */    if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_OBV_Data)*(*_state)->mem_size);
+/* Generated */    MEM_SIZE_P = TA_OBV_Lookback();
+/* Generated */    if (MEM_SIZE_P > 0)
+/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_OBV_Data));
 /* Generated */    else
 /* Generated */    #endif
-/* Generated */          (*_state)->memory = NULL;/* Generated */ 
+/* Generated */          MEM_P = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -279,10 +279,7 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
-/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
-/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
-/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
 /* Generated */    #ifndef TA_OBV_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -296,25 +293,23 @@
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
-/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
-/* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
 
  if (FIRST_LAUNCH)
  { // first launch
-   _state->prevOBV = inVolume;
-   _state->prevReal = inReal;
+      STATE.prevOBV = inVolume;
+      STATE.prevReal = inReal;
  } else {
-    if( inReal > _state->prevReal )
-       _state->prevOBV += inVolume;
-    else if( inReal < _state->prevReal )
-         _state->prevOBV -= inVolume;
+    if( inReal >    STATE.prevReal )
+          STATE.prevOBV += inVolume;
+    else if( inReal <    STATE.prevReal )
+            STATE.prevOBV -= inVolume;
  }
 
- VALUE_HANDLE_DEREF(outReal) = _state->prevOBV;
- _state->prevReal = inReal;
+ VALUE_HANDLE_DEREF(outReal) =    STATE.prevOBV;
+    STATE.prevReal = inReal;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

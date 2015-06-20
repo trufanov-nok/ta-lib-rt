@@ -279,7 +279,7 @@
 
 {
    /* insert local variable here */
-
+   #define TA_MAXINDEX_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -292,16 +292,16 @@
 /* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */    *_state = malloc(sizeof(struct TA_MAXINDEX_State));
-/* Generated */    (*_state)->mem_index = 0;
-/* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
+/* Generated */    STATE = calloc(1, sizeof(struct TA_MAXINDEX_State));
+/* Generated */    STATE_P.mem_index = 0;
+/* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
 /* Generated */    #ifndef TA_MAXINDEX_SUPPRESS_MEMORY_ALLOCATION
-/* Generated */    (*_state)->mem_size = TA_MAXINDEX_Lookback(optInTimePeriod );
-/* Generated */    if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MAXINDEX_Data)*(*_state)->mem_size);
+/* Generated */    MEM_SIZE_P = TA_MAXINDEX_Lookback(optInTimePeriod );
+/* Generated */    if (MEM_SIZE_P > 0)
+/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MAXINDEX_Data));
 /* Generated */    else
 /* Generated */    #endif
-/* Generated */          (*_state)->memory = NULL;/* Generated */ 
+/* Generated */          MEM_P = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -330,7 +330,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+   #define TA_MAXINDEX_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -340,10 +340,7 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
-/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
-/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
-/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
 /* Generated */    #ifndef TA_MAXINDEX_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -356,28 +353,28 @@
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
-/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
-/* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
  if (FIRST_LAUNCH)
   {
-   _state->max = inReal;
-   _state->maxIdx = 0;
-   _state->currentIdx = 0;
+   STATE.max = inReal;
+   STATE.maxIdx = 0;
+   STATE.currentIdx = 0;
   } else
-        ++ _state->currentIdx;
+        ++ STATE.currentIdx;
 
- if( _state->max < inReal )
+ if( STATE.max < inReal )
  {
-     _state->max = inReal;
-     _state->maxIdx = _state->currentIdx;
+     STATE.max = inReal;
+     STATE.maxIdx = STATE.currentIdx;
  } else
-     if( _state->max == inReal )
-         _state->maxIdx = _state->currentIdx;
+     if( STATE.max == inReal )
+         STATE.maxIdx = STATE.currentIdx;
 
- VALUE_HANDLE_DEREF(outInteger) = _state->max;
+ if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+ VALUE_HANDLE_DEREF(outInteger) = STATE.max;
 
  return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

@@ -542,18 +542,18 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
-/* Generated */    *_state = malloc(sizeof(struct TA_STOCHF_State));
-/* Generated */    (*_state)->mem_index = 0;
-/* Generated */    (*_state)->optInFastK_Period = optInFastK_Period;
-/* Generated */    (*_state)->optInFastD_Period = optInFastD_Period;
-/* Generated */    (*_state)->optInFastD_MAType = optInFastD_MAType;
+/* Generated */    STATE = calloc(1, sizeof(struct TA_STOCHF_State));
+/* Generated */    STATE_P.mem_index = 0;
+/* Generated */    STATE_P.optInFastK_Period = optInFastK_Period;
+/* Generated */    STATE_P.optInFastD_Period = optInFastD_Period;
+/* Generated */    STATE_P.optInFastD_MAType = optInFastD_MAType;
 /* Generated */    #ifndef TA_STOCHF_SUPPRESS_MEMORY_ALLOCATION
-/* Generated */    (*_state)->mem_size = TA_STOCHF_Lookback(optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-/* Generated */    if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_STOCHF_Data)*(*_state)->mem_size);
+/* Generated */    MEM_SIZE_P = TA_STOCHF_Lookback(optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+/* Generated */    if (MEM_SIZE_P > 0)
+/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_STOCHF_Data));
 /* Generated */    else
 /* Generated */    #endif
-/* Generated */          (*_state)->memory = NULL;/* Generated */ 
+/* Generated */          MEM_P = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -604,10 +604,7 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
-/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
-/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
-/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
 /* Generated */    #ifndef TA_STOCHF_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inHigh,inHigh);
@@ -624,8 +621,6 @@
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
-/* Generated */ 
-/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 

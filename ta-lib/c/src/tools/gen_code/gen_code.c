@@ -2368,13 +2368,7 @@ static void printFunc( FILE *out,
 
    if (stateFuncSignature && validationCode) {
        printIndent( out, indent );
-       fprintf( out, "int _cur_idx = ++_state->mem_index %% _state->mem_size;\n");
-       printIndent( out, indent );
-       fprintf( out, "#define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y\n");
-       printIndent( out, indent );
-       fprintf( out, "#define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x\n");
-       printIndent( out, indent );
-       fprintf( out, "#define NEED_MORE_DATA (_state->mem_index < _state->mem_size)\n");
+       fprintf( out, "int _cur_idx = ++STATE.mem_index %% MEM_SIZE;\n");
        printIndent( out, indent );
        fprintf( out, "#ifndef TA_%s_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA\n", funcName );
        printIndent( out, indent );
@@ -2647,9 +2641,9 @@ static void printFunc( FILE *out,
 
    if (validationCode && stateInitSignature) {
        printIndent( out, indent);
-       fprintf( out, "*_state = malloc(sizeof(struct TA_%s_State));\n", funcName);
+       fprintf( out, "STATE = calloc(1, sizeof(struct TA_%s_State));\n", funcName);
        printIndent( out, indent);
-       fprintf( out, "(*_state)->mem_index = 0;\n");
+       fprintf( out, "STATE_P.mem_index = 0;\n");
 
        int word_idx = 0;
        char word[500];
@@ -2664,7 +2658,7 @@ static void printFunc( FILE *out,
                if (word_idx > 0)
                {
                 printIndent( out, indent );
-                fprintf( out, "(*_state)->%s = %s;\n", word, word);
+                fprintf( out, "STATE_P.%s = %s;\n", word, word);
                }
                word_idx = 0;
                if (c == '\0') break;
@@ -2676,17 +2670,17 @@ static void printFunc( FILE *out,
        printIndent( out, indent );
        fprintf( out, "#ifndef TA_%s_SUPPRESS_MEMORY_ALLOCATION\n", funcName);
        printIndent( out, indent );
-       fprintf( out, "(*_state)->mem_size = TA_%s_Lookback(%s);\n", funcName, nbOptInputArgsBuffer);
+       fprintf( out, "MEM_SIZE_P = TA_%s_Lookback(%s);\n", funcName, nbOptInputArgsBuffer);
        printIndent( out, indent);
-       fprintf( out, "if ((*_state)->mem_size > 0)\n");
+       fprintf( out, "if (MEM_SIZE_P > 0)\n");
        printIndent( out, indent+6 );
-       fprintf( out, "(*_state)->memory = malloc(sizeof(struct TA_%s_Data)*(*_state)->mem_size);\n", funcName);
+       fprintf( out, "MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_%s_Data));\n", funcName);
        printIndent( out, indent );
        fprintf( out, "else\n");
        printIndent( out, indent );
        fprintf( out, "#endif\n");
        printIndent( out, indent+6 );
-       fprintf( out, "(*_state)->memory = NULL;");
+       fprintf( out, "MEM_P = NULL;");
    }
 
    if (!validationCode)
@@ -3668,8 +3662,6 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
     */
    printFunc( out, NULL, funcInfo, pfs_stateFuncSignature | pfs_validationCode );
    print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
-   print( out, "\n");
-   print( out, "#define FIRST_LAUNCH (_state->mem_index <= 1)\n" );
    print( out, "\n");
    //section 8 end
 

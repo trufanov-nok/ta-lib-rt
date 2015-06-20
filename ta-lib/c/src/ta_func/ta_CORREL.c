@@ -314,16 +314,16 @@
 /* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */    *_state = malloc(sizeof(struct TA_CORREL_State));
-/* Generated */    (*_state)->mem_index = 0;
-/* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
+/* Generated */    STATE = calloc(1, sizeof(struct TA_CORREL_State));
+/* Generated */    STATE_P.mem_index = 0;
+/* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
 /* Generated */    #ifndef TA_CORREL_SUPPRESS_MEMORY_ALLOCATION
-/* Generated */    (*_state)->mem_size = TA_CORREL_Lookback(optInTimePeriod );
-/* Generated */    if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_CORREL_Data)*(*_state)->mem_size);
+/* Generated */    MEM_SIZE_P = TA_CORREL_Lookback(optInTimePeriod );
+/* Generated */    if (MEM_SIZE_P > 0)
+/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_CORREL_Data));
 /* Generated */    else
 /* Generated */    #endif
-/* Generated */          (*_state)->memory = NULL;/* Generated */ 
+/* Generated */          MEM_P = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -366,10 +366,7 @@
 /* Generated */    if( !inReal0 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if( !inReal1 ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
-/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
-/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
-/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
 /* Generated */    #ifndef TA_CORREL_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal0,inReal0);
@@ -382,8 +379,6 @@
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
-/* Generated */ 
-/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 

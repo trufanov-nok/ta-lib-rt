@@ -201,6 +201,23 @@
   #endif
 #endif
 
+// Some templates for state functions
+
+#define STATE VALUE_HANDLE_DEREF(_state)
+#define STATE_P VALUE_HANDLE_DEREF(STATE)
+#define MEM STATE.memory
+#define MEM_P STATE_P.memory
+#define MEM_SIZE STATE.mem_size
+#define MEM_SIZE_P STATE_P.mem_size
+#define MEM_IDX(idx) VALUE_HANDLE_DEREF( (STATE.memory+idx) )
+#define MEM_IDX_NS(idx,ns) (MEM_IDX(idx)).ns
+#define FOR_ALL_MEM(i) for (i = 0; i < MEM_SIZE; ++i)
+#define PUSH_TO_MEM(x,y) MEM_IDX_NS(_cur_idx, x) = y
+#define POP_FROM_MEM(x) MEM_IDX_NS(_cur_idx, x)
+#define NEED_MORE_DATA (STATE.mem_index < STATE.mem_size)
+#define FIRST_LAUNCH (STATE.mem_index <= 1)
+
+
 /* Abstraction of function calls within the library.
  * Needed because Java/.NET allows overloading, while for C the
  * TA_PREFIX allows to select variant of the same function.

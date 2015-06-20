@@ -784,23 +784,23 @@
 /* Generated */    else if( (optInAccelerationMaxShort < 0.000000e+0) ||/* Generated */  (optInAccelerationMaxShort > 3.000000e+37) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */    *_state = malloc(sizeof(struct TA_SAREXT_State));
-/* Generated */    (*_state)->mem_index = 0;
-/* Generated */    (*_state)->optInStartValue = optInStartValue;
-/* Generated */    (*_state)->optInOffsetOnReverse = optInOffsetOnReverse;
-/* Generated */    (*_state)->optInAccelerationInitLong = optInAccelerationInitLong;
-/* Generated */    (*_state)->optInAccelerationLong = optInAccelerationLong;
-/* Generated */    (*_state)->optInAccelerationMaxLong = optInAccelerationMaxLong;
-/* Generated */    (*_state)->optInAccelerationInitShort = optInAccelerationInitShort;
-/* Generated */    (*_state)->optInAccelerationShort = optInAccelerationShort;
-/* Generated */    (*_state)->optInAccelerationMaxShort = optInAccelerationMaxShort;
+/* Generated */    STATE = calloc(1, sizeof(struct TA_SAREXT_State));
+/* Generated */    STATE_P.mem_index = 0;
+/* Generated */    STATE_P.optInStartValue = optInStartValue;
+/* Generated */    STATE_P.optInOffsetOnReverse = optInOffsetOnReverse;
+/* Generated */    STATE_P.optInAccelerationInitLong = optInAccelerationInitLong;
+/* Generated */    STATE_P.optInAccelerationLong = optInAccelerationLong;
+/* Generated */    STATE_P.optInAccelerationMaxLong = optInAccelerationMaxLong;
+/* Generated */    STATE_P.optInAccelerationInitShort = optInAccelerationInitShort;
+/* Generated */    STATE_P.optInAccelerationShort = optInAccelerationShort;
+/* Generated */    STATE_P.optInAccelerationMaxShort = optInAccelerationMaxShort;
 /* Generated */    #ifndef TA_SAREXT_SUPPRESS_MEMORY_ALLOCATION
-/* Generated */    (*_state)->mem_size = TA_SAREXT_Lookback(optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort );
-/* Generated */    if ((*_state)->mem_size > 0)
-/* Generated */          (*_state)->memory = malloc(sizeof(struct TA_SAREXT_Data)*(*_state)->mem_size);
+/* Generated */    MEM_SIZE_P = TA_SAREXT_Lookback(optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort );
+/* Generated */    if (MEM_SIZE_P > 0)
+/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_SAREXT_Data));
 /* Generated */    else
 /* Generated */    #endif
-/* Generated */          (*_state)->memory = NULL;/* Generated */ 
+/* Generated */          MEM_P = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -845,10 +845,7 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
-/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
-/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
-/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
 /* Generated */    #ifndef TA_SAREXT_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inHigh,inHigh);
@@ -861,8 +858,6 @@
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
-/* Generated */ 
-/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
