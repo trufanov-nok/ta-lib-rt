@@ -296,7 +296,8 @@ typedef enum
 {
    TA_Input_Price,
    TA_Input_Real,
-   TA_Input_Integer
+   TA_Input_Integer,
+   TA_Input_Pointer
 } TA_InputParameterType;
 
 typedef enum
@@ -382,7 +383,6 @@ typedef struct TA_InputParameterInfo
    TA_InputParameterType type;
    const char           *paramName;
    TA_InputFlags         flags;
-
 } TA_InputParameterInfo;
 
 typedef struct TA_OptInputParameterInfo

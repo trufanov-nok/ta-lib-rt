@@ -401,7 +401,12 @@ static const TA_OptInputParameterInfo *TA_STDDEV_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_STDDEV_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_STDDEV_DEF_UI_STRUCT_PARAM =
+                                  { TA_Input_Pointer, "var_state", 0 };
+
+static const TA_InputParameterInfo *TA_STDDEV_StructParams[] = {
+    &TA_STDDEV_DEF_UI_STRUCT_PARAM,
+    NULL };
 
 DEF_FUNCTION( STDDEV,                     /* name */
               TA_GroupId_Statistic,     /* groupId */

@@ -67,7 +67,15 @@ static const TA_OptInputParameterInfo *TA_VAR_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_VAR_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_VAR_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "periodTotal1", 0 };
+const TA_InputParameterInfo TA_VAR_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "periodTotal2", 0 };
+
+static const TA_InputParameterInfo *TA_VAR_StructParams[] = {
+    &TA_VAR_DEF_UI_STRUCT_PARAM_1,
+    &TA_VAR_DEF_UI_STRUCT_PARAM_2,
+    NULL };
 
 DEF_FUNCTION( VAR,                         /* name */
               TA_GroupId_Statistic,     /* groupId */

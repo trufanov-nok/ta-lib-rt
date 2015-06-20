@@ -15644,13 +15644,35 @@ public class Core {
       double inReal1,
       double *outReal )
    {
+      double x,y, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
+      if ( ( _state.value .mem_index <= 1) )
+      {
+         _state.value .sumXY = 0.0;
+         _state.value .sumX = 0.0;
+         _state.value .sumY = 0.0;
+         _state.value .sumX2 = 0.0;
+         _state.value .sumY2 = 0.0;
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         { _state.value .sumX += 1*inReal0; _state.value .sumX2 += 1*inReal0*inReal0; _state.value .sumXY += 1*inReal0*inReal1; _state.value .sumY += 1*inReal1; _state.value .sumY2 += 1*inReal1*inReal1; }
          ( ( _state.value .memory+_cur_idx).value ).inReal0 = inReal0 ;
          ( ( _state.value .memory+_cur_idx).value ).inReal1 = inReal1 ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      }
+      tempReal = ( _state.value .sumX2-(( _state.value .sumX* _state.value .sumX)/ _state.value .optInTimePeriod)) * ( _state.value .sumY2-(( _state.value .sumY* _state.value .sumY)/ _state.value .optInTimePeriod));
+      if( ! (tempReal< (0.00000000000001) ) )
+         outReal.value = ( _state.value .sumXY-(( _state.value .sumX* _state.value .sumY)/ _state.value .optInTimePeriod)) / Math.sqrt (tempReal);
+      else
+         outReal.value = 0.0;
+      x= ( ( _state.value .memory+_cur_idx).value ).inReal0 ;
+      y= ( ( _state.value .memory+_cur_idx).value ).inReal1 ;
+      { _state.value .sumX += -1*x; _state.value .sumX2 += -1*x*x; _state.value .sumXY += -1*x*y; _state.value .sumY += -1*y; _state.value .sumY2 += -1*y*y; }
+      ( ( _state.value .memory+_cur_idx).value ).inReal0 = inReal0 ;
+      ( ( _state.value .memory+_cur_idx).value ).inReal1 = inReal1 ;
       return RetCode.Success ;
    }
    public int correlStateFree( struct TA_correl_State** _state )
@@ -16135,7 +16157,7 @@ public class Core {
          ( ( _state.value .memory+_cur_idx).value ).inReal0 = inReal0 ;
          ( ( _state.value .memory+_cur_idx).value ).inReal1 = inReal1 ;
          return RetCode.NeedMoreData ; }
-      outReal.value = Math.cos (inReal0/inReal1);
+      outReal.value = inReal0 / inReal1;
       return RetCode.Success ;
    }
    public int divStateFree( struct TA_div_State** _state )
@@ -28125,27 +28147,42 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInNbDev = optInNbDev;
-      _state.value .value .mem_size = stdDevLookback (optInTimePeriod, optInNbDev );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_STDDEV_Data));
-      else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+      _state.value .value .memory = NULL;
+      return variance (& _state.value .var_state);
    }
    public int stdDevState( struct TA_stdDev_State* _state,
       double inReal,
       double *outReal )
    {
+      RetCode retCode;
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
-         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      retCode = TA_INT_VAR _State ( ( variance *) _state, inReal, outReal );
+      if( retCode != RetCode.Success )
+         return retCode;
+      if( optInNbDev != 1.0 )
+      {
+         tempReal = outReal.value ;
+         if( ! (tempReal< (0.00000000000001) ) )
+            outReal.value = Math.sqrt (tempReal) * _state.value .optInNbDev;
+         else
+            outReal.value = (double)0.0;
+      }
+      else
+      {
+         tempReal = outReal.value ;
+         if( ! (tempReal< (0.00000000000001) ) )
+            outReal.value = Math.sqrt (tempReal);
+         else
+            outReal.value = (double)0.0;
+      }
       return RetCode.Success ;
    }
    public int stdDevStateFree( struct TA_stdDev_State** _state )
    {
+      variance (& _state.value .var_state);
       if (_state == NULL)
          return RetCode.BadParam ;
       if (*_state != NULL) {
@@ -31400,12 +31437,31 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double tempReal, meanValue1, meanValue2;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
+      if ( ( _state.value .mem_index <= 1) )
+      {
+         _state.value .periodTotal1 = 0.;
+         _state.value .periodTotal2 = 0.;
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         _state.value .periodTotal1 += inReal;
+         _state.value .periodTotal2 += inReal*inReal;
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      }
+      meanValue1 = _state.value .periodTotal1 / _state.value .optInTimePeriod;
+      meanValue2 = _state.value .periodTotal2 / _state.value .optInTimePeriod;
+      outReal.value = meanValue2 - meanValue1 * meanValue1;
+      tempReal = ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      _state.value .periodTotal1 -= tempReal;
+      _state.value .periodTotal2 -= tempReal*tempReal;
+      _state.value .periodTotal1 += inReal;
+      _state.value .periodTotal2 += inReal*inReal;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int varianceStateFree( struct TA_variance_State** _state )

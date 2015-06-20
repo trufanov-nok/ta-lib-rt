@@ -1906,7 +1906,25 @@ static const TA_OptInputParameterInfo *TA_CORREL_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CORREL_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CORREL_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "sumXY", 0 };
+const TA_InputParameterInfo TA_CORREL_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "sumX", 0 };
+const TA_InputParameterInfo TA_CORREL_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "sumY", 0 };
+const TA_InputParameterInfo TA_CORREL_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "sumX2", 0 };
+const TA_InputParameterInfo TA_CORREL_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "sumY2", 0 };
+
+static const TA_InputParameterInfo *TA_CORREL_StructParams[] = {
+    &TA_CORREL_DEF_UI_STRUCT_PARAM_1,
+    &TA_CORREL_DEF_UI_STRUCT_PARAM_2,
+    &TA_CORREL_DEF_UI_STRUCT_PARAM_3,
+    &TA_CORREL_DEF_UI_STRUCT_PARAM_4,
+    &TA_CORREL_DEF_UI_STRUCT_PARAM_5,
+    NULL
+};
 
 DEF_FUNCTION( CORREL,                         /* name */
               TA_GroupId_Statistic,     /* groupId */

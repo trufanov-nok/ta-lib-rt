@@ -225,6 +225,10 @@
 #define FUNCTION_CALL(x)        TA_PREFIX(x)
 #define FUNCTION_CALL_DOUBLE(x) TA_##x
 #define LOOKBACK_CALL(x)        TA_##x##_Lookback
+#define FUNCTION_CALL_STATE(x)        TA_##x##_State
+#define FUNCTION_CALL_DOUBLE_STATE(x) TA_##x##_State
+#define FUNCTION_CALL_STATE_INIT(x)        TA_##x##_StateInit
+#define FUNCTION_CALL_STATE_FREE(x)        TA_##x##_StateFree
 
 /* min/max value for a TA_Integer */
 #define TA_INTEGER_MIN (INT_MIN+1)

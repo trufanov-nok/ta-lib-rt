@@ -413,7 +413,8 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+   #define TA_VAR_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+   double tempReal, meanValue1, meanValue2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -440,6 +441,32 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+    {
+        STATE.periodTotal1 = 0.;
+        STATE.periodTotal2 = 0.;
+    }
+
+    if (NEED_MORE_DATA)
+    {
+      STATE.periodTotal1 += inReal;
+      STATE.periodTotal2 += inReal*inReal;
+      PUSH_TO_MEM(inReal,inReal);
+      return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+    }
+
+    meanValue1 = STATE.periodTotal1 / STATE.optInTimePeriod;
+    meanValue2 = STATE.periodTotal2 / STATE.optInTimePeriod;
+
+    VALUE_HANDLE_DEREF(outReal) = meanValue2 - meanValue1 * meanValue1;
+
+    tempReal = POP_FROM_MEM(inReal);
+    STATE.periodTotal1 -= tempReal;
+    STATE.periodTotal2 -= tempReal*tempReal;
+
+    STATE.periodTotal1 += inReal;
+    STATE.periodTotal2 += inReal*inReal;
+    PUSH_TO_MEM(inReal,inReal);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

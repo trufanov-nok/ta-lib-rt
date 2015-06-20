@@ -3958,6 +3958,11 @@ struct TA_CORREL_State {
                        int mem_size;
                        int mem_index;
                        struct TA_CORREL_Data* memory;
+                       double       sumXY;
+                       double       sumX;
+                       double       sumY;
+                       double       sumX2;
+                       double       sumY2;
                        int           optInTimePeriod; /* From 1 to 100000 */
                        };
 
@@ -6739,6 +6744,7 @@ struct TA_STDDEV_State {
                        int mem_size;
                        int mem_index;
                        struct TA_STDDEV_Data* memory;
+                       void*        var_state;
                        int           optInTimePeriod; /* From 2 to 100000 */
                        double        optInNbDev; /* From TA_REAL_MIN to TA_REAL_MAX */
                        };
@@ -7545,6 +7551,8 @@ struct TA_VAR_State {
                     int mem_size;
                     int mem_index;
                     struct TA_VAR_Data* memory;
+                    double       periodTotal1;
+                    double       periodTotal2;
                     int           optInTimePeriod; /* From 1 to 100000 */
                     double        optInNbDev; /* From TA_REAL_MIN to TA_REAL_MAX */
                     };

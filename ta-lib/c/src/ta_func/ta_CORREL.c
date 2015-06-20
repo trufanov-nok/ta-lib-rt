@@ -355,6 +355,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+   #define TA_CORREL_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+   double x,y, tempReal;
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -384,6 +386,48 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+        {
+            STATE.sumXY = 0.0;
+            STATE.sumX = 0.0;
+            STATE.sumY = 0.0;
+            STATE.sumX2 = 0.0;
+            STATE.sumY2 = 0.0;
+        }
+
+
+   #define ADDDATA(inX, inY, sign) \
+   { \
+       STATE.sumX  += sign*inX; \
+       STATE.sumX2 += sign*inX*inX; \
+     \
+       STATE.sumXY += sign*inX*inY; \
+       STATE.sumY  += sign*inY; \
+       STATE.sumY2 += sign*inY*inY; \
+   }
+
+
+   if (NEED_MORE_DATA)
+   {
+      ADDDATA(inReal0, inReal1, 1)
+
+             PUSH_TO_MEM(inReal0,inReal0);
+             PUSH_TO_MEM(inReal1,inReal1);
+      return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+   }
+
+   tempReal = (STATE.sumX2-((STATE.sumX*STATE.sumX)/STATE.optInTimePeriod)) * (STATE.sumY2-((STATE.sumY*STATE.sumY)/STATE.optInTimePeriod));
+
+   if( !TA_IS_ZERO_OR_NEG(tempReal) )
+      VALUE_HANDLE_DEREF(outReal) = (STATE.sumXY-((STATE.sumX*STATE.sumY)/STATE.optInTimePeriod)) / std_sqrt(tempReal);
+   else
+      VALUE_HANDLE_DEREF(outReal) = 0.0;
+
+   x=POP_FROM_MEM(inReal0);
+   y=POP_FROM_MEM(inReal1);
+   ADDDATA(x, y, -1)
+   PUSH_TO_MEM(inReal0, inReal0);
+   PUSH_TO_MEM(inReal1, inReal1);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

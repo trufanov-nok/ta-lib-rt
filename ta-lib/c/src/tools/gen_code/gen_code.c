@@ -2309,6 +2309,7 @@ static void printFunc( FILE *out,
             if (stateFuncSignature && validationCode)
                 nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", inputParamInfo->paramName) + nbInputArgsBufferLen;
             break;
+         case TA_Input_Pointer: ;
          default:
             if( !paramName )
                paramName = "inParam";
@@ -2443,6 +2444,9 @@ static void printFunc( FILE *out,
             break;
          case TA_Input_Integer:
             typeString = "int";
+            break;
+         case TA_Input_Pointer:
+            typeString = "void*";
             break;
          default:
             typeString = inputDoubleArrayType;

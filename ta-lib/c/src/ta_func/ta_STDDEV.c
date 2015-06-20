@@ -366,6 +366,8 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 
 {
    /* insert local variable here */
+ #define TA_STDDEV_SUPPRESS_MEMORY_ALLOCATION //mem will be allocated in STDDEV
+
 
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -401,8 +403,8 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 
    /* insert state init code here. */
 
-
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   // pass on STATE.var_state to TA_VAR_StateInit()
+   return FUNCTION_CALL_STATE_INIT(VAR)((struct TA_VAR_State**)&STATE_P.var_state, optInTimePeriod, optInNbDev);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -423,6 +425,10 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+   #define TA_STDDEV_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+
+   int retCode;
+   double tempReal;
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -450,6 +456,33 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+            retCode = FUNCTION_CALL_STATE(VAR)( STATE.var_state, inReal, outReal );
+
+            if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) )
+               return retCode;
+
+            /* Calculate the square root of variance, this
+             * is the standard deviation.
+             *
+             * Multiply also by the ratio specified.
+             */
+
+            if( STATE.optInNbDev != 1.0 )
+            {
+               tempReal = VALUE_HANDLE_DEREF(outReal);
+               if( !TA_IS_ZERO_OR_NEG(tempReal) )
+                  VALUE_HANDLE_DEREF(outReal) = std_sqrt(tempReal) * STATE.optInNbDev;
+               else
+                  VALUE_HANDLE_DEREF(outReal) = (double)0.0;
+            }
+            else
+            {
+               tempReal = VALUE_HANDLE_DEREF(outReal);
+                  if( !TA_IS_ZERO_OR_NEG(tempReal) )
+                     VALUE_HANDLE_DEREF(outReal) = std_sqrt(tempReal);
+                  else
+                     VALUE_HANDLE_DEREF(outReal) = (double)0.0;
+            }
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -469,7 +502,7 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+   FUNCTION_CALL_STATE_FREE(VAR)((struct TA_VAR_State**)&STATE_P.var_state);
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
