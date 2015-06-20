@@ -456,6 +456,10 @@ TA_RetCode TA_GetOutputParameterInfo( const TA_FuncHandle *handle,
                                       unsigned int paramIndex,
                                       const TA_OutputParameterInfo **info );
 
+TA_RetCode TA_GetStructParameterInfo( const TA_FuncHandle *handle,
+                                     unsigned int paramIndex,
+                                     const TA_InputParameterInfo **info );
+
 /* Alloc a structure allowing to build the list of parameters
  * for doing a call.
  *

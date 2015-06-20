@@ -597,6 +597,51 @@ TA_RetCode TA_GetOutputParameterInfo( const TA_FuncHandle *handle,
    return TA_SUCCESS;
 }
 
+TA_RetCode TA_GetStructParameterInfo( const TA_FuncHandle *handle,
+                                     unsigned int paramIndex,
+                                     const TA_InputParameterInfo **info )
+{
+   const TA_FuncDef  *funcDef;
+   const TA_FuncInfo *funcInfo;
+   const TA_InputParameterInfo **inputTable;
+
+   if( (handle == NULL) || (info == NULL) )
+   {
+      return TA_BAD_PARAM;
+   }
+
+   *info = NULL;
+
+   /* Validate that this is a valid funcHandle. */
+   funcDef = (const TA_FuncDef *)handle;
+   if( funcDef->magicNumber != TA_FUNC_DEF_MAGIC_NB )
+   {
+      return TA_INVALID_HANDLE;
+   }
+   funcInfo = funcDef->funcInfo;
+
+   if( !funcInfo ) return TA_INVALID_HANDLE;
+
+   if( paramIndex >= funcInfo->nbStructParams )
+   {
+      return TA_BAD_PARAM;
+   }
+
+   inputTable = (const TA_InputParameterInfo **)funcDef->structParams;
+
+   if( !inputTable )
+      return TA_INTERNAL_ERROR(2);
+
+   *info = inputTable[paramIndex];
+
+   if( !(*info) )
+      return TA_INTERNAL_ERROR(3);
+
+   return TA_SUCCESS;
+}
+
+
+
 TA_RetCode TA_ParamHolderAlloc( const TA_FuncHandle *handle,
                                 TA_ParamHolder **allocatedParams )
 {

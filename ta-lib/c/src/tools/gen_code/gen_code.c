@@ -2355,6 +2355,42 @@ static void printFunc( FILE *out,
        print( out, "struct TA_%s_Data* memory;\n", funcName);
    }
 
+   /* Go through all the additional State arams. */
+   if( stateStruct )
+   {
+      for( i=0; i < funcInfo->nbStructParams; i++ )
+      {
+         retCode = TA_GetStructParameterInfo( funcInfo->handle,
+                                             i, &inputParamInfo );
+
+         if( retCode != TA_SUCCESS )
+         {
+            printf( "[%s] invalid 'input' information (%d,%d)\n", funcName, i, paramNb );
+            return;
+         }
+
+         switch( inputParamInfo->type )
+         {
+         case TA_Input_Real:
+            typeString = inputDoubleArrayType;
+            break;
+         case TA_Input_Integer:
+            typeString = inputIntArrayType;
+            break;
+         default:
+            typeString = inputDoubleArrayType;
+         }
+         paramName = inputParamInfo->paramName;
+         printIndent( out, indent );
+         fprintf( out, "%-*s %s;\n",
+              prototype? 12 : 0,
+              prototype? typeString:"",
+              inputParamInfo->paramName);
+      }
+   }
+
+
+
 
    /* Go through all the optional input */
    paramNb = 0;
