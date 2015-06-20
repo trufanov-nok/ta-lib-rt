@@ -351,12 +351,26 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
+/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
+/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
+/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    #ifndef TA_CDLDRAGONFLYDOJI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+/* Generated */    if (NEED_MORE_DATA) {
+/* Generated */          PUSH_TO_MEM(inOpen,inOpen);
+/* Generated */          PUSH_TO_MEM(inHigh,inHigh);
+/* Generated */          PUSH_TO_MEM(inLow,inLow);
+/* Generated */          PUSH_TO_MEM(inClose,inClose);
+/* Generated */    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData); }
+/* Generated */    #endif
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outInteger )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 

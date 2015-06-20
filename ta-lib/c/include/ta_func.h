@@ -6339,6 +6339,7 @@ TA_LIB_API struct TA_MAX_State {
                                int mem_size;
                                int mem_index;
                                struct TA_MAX_Data* memory;
+                               double       max;
                                int           optInTimePeriod; /* From 2 to 100000 */
                                };
 
@@ -6393,6 +6394,9 @@ TA_LIB_API struct TA_MAXINDEX_State {
                                     int mem_size;
                                     int mem_index;
                                     struct TA_MAXINDEX_Data* memory;
+                                    double       max;
+                                    int          maxIdx;
+                                    int          currentIdx;
                                     int           optInTimePeriod; /* From 2 to 100000 */
                                     };
 
@@ -6673,6 +6677,7 @@ TA_LIB_API struct TA_MIN_State {
                                int mem_size;
                                int mem_index;
                                struct TA_MIN_Data* memory;
+                               double       min;
                                int           optInTimePeriod; /* From 2 to 100000 */
                                };
 
@@ -6727,6 +6732,9 @@ TA_LIB_API struct TA_MININDEX_State {
                                     int mem_size;
                                     int mem_index;
                                     struct TA_MININDEX_Data* memory;
+                                    double       min;
+                                    int          minIdx;
+                                    int          currentIdx;
                                     int           optInTimePeriod; /* From 2 to 100000 */
                                     };
 
@@ -6783,6 +6791,8 @@ TA_LIB_API struct TA_MINMAX_State {
                                   int mem_size;
                                   int mem_index;
                                   struct TA_MINMAX_Data* memory;
+                                  double       min;
+                                  double       max;
                                   int           optInTimePeriod; /* From 2 to 100000 */
                                   };
 
@@ -6840,6 +6850,11 @@ TA_LIB_API struct TA_MINMAXINDEX_State {
                                        int mem_size;
                                        int mem_index;
                                        struct TA_MINMAXINDEX_Data* memory;
+                                       double       min;
+                                       double       max;
+                                       int          minIdx;
+                                       int          maxIdx;
+                                       int          currentIdx;
                                        int           optInTimePeriod; /* From 2 to 100000 */
                                        };
 
@@ -7174,6 +7189,8 @@ TA_LIB_API struct TA_OBV_State {
                                int mem_size;
                                int mem_index;
                                struct TA_OBV_Data* memory;
+                               double       prevOBV;
+                               double       prevReal;
                                };
 
 

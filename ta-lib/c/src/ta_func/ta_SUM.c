@@ -316,6 +316,8 @@
 {
    /* insert local variable here */
 
+   #define TA_SUM_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -325,6 +327,15 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
+/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
+/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
+/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    #ifndef TA_SUM_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+/* Generated */    if (NEED_MORE_DATA) {
+/* Generated */          PUSH_TO_MEM(inReal,inReal);
+/* Generated */    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData); }
+/* Generated */    #endif
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outReal )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -332,11 +343,31 @@
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
+/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
+/* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   if (FIRST_LAUNCH)
+    _state->tempSum = 0;
+
+   if (NEED_MORE_DATA)
+   {
+      _state->tempSum += inReal;
+
+      PUSH_TO_MEM(inReal,inReal);
+      VALUE_HANDLE_DEREF(outReal) =  0;
+      return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+   } else {             
+       _state->tempSum -= POP_FROM_MEM(inReal);
+       _state->tempSum += inReal;
+       PUSH_TO_MEM(inReal,inReal);
+       VALUE_HANDLE_DEREF(outReal) = inReal;
+       return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   }
+
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/

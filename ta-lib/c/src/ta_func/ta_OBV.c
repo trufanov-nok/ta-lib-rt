@@ -279,6 +279,16 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
+/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
+/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
+/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    #ifndef TA_OBV_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+/* Generated */    if (NEED_MORE_DATA) {
+/* Generated */          PUSH_TO_MEM(inReal,inReal);
+/* Generated */          PUSH_TO_MEM(inVolume,inVolume);
+/* Generated */    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData); }
+/* Generated */    #endif
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outReal )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -286,9 +296,25 @@
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
+/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
+/* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+ if (FIRST_LAUNCH)
+ { // first launch
+   _state->prevOBV = inVolume;
+   _state->prevReal = inReal;
+ } else {
+    if( inReal > _state->prevReal )
+       _state->prevOBV += inVolume;
+    else if( inReal < _state->prevReal )
+         _state->prevOBV -= inVolume;
+ }
+
+ VALUE_HANDLE_DEREF(outReal) = _state->prevOBV;
+ _state->prevReal = inReal;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

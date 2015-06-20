@@ -2041,6 +2041,11 @@ static void printFunc( FILE *out,
    }
 
    /* Go through all the input. */
+
+   int nbInputArgsBufferLen = 0;
+   char nbInputArgsBuffer[500];
+
+
    if( !lookbackSignature && !lookbackValidationCode && !stateInitSignature && !stateFreeSignature )
    {
       if( validationCode )
@@ -2054,6 +2059,7 @@ static void printFunc( FILE *out,
       {
          retCode = TA_GetInputParameterInfo( funcInfo->handle,
                                              i, &inputParamInfo );
+
 
          if( retCode != TA_SUCCESS )
          {
@@ -2100,42 +2106,56 @@ static void printFunc( FILE *out,
                {
                   k++;
                   fprintf( out, "!inTimestamp%s", k != j? "||":")");
+                  if (stateFuncSignature)
+                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s", (nbInputArgsBufferLen)?",":"", "inTimestamp") + nbInputArgsBufferLen;
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_OPEN )
                {
                   k++;
                   fprintf( out, "!inOpen%s", k != j? "||":")");
+                  if (stateFuncSignature)
+                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inOpen") + nbInputArgsBufferLen;
                }
                
                if( inputParamInfo->flags & TA_IN_PRICE_HIGH )
                {
                   k++;
                   fprintf( out, "!inHigh%s", k != j? "||":")");
+                  if (stateFuncSignature)
+                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inHigh") + nbInputArgsBufferLen;
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_LOW )
                {
                   k++;
                   fprintf( out, "!inLow%s", k != j? "||":")");
+                  if (stateFuncSignature)
+                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inLow") + nbInputArgsBufferLen;
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_CLOSE )
                {
                   k++;
                   fprintf( out, "!inClose%s", k != j? "||":")");
+                  if (stateFuncSignature)
+                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inClose") + nbInputArgsBufferLen;
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_VOLUME )
                {
                   k++;
                   fprintf( out, "!inVolume%s", k != j? "||":")");
+                  if (stateFuncSignature)
+                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inVolume") + nbInputArgsBufferLen;
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_OPENINTEREST )
                {
                   k++;
                   fprintf( out, "!inOpenInterest%s", k != j? "||":")");
+                  if (stateFuncSignature)
+                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inOpenInterest") + nbInputArgsBufferLen;
                }
 
                fprintf( out, "\n" );
@@ -2162,6 +2182,7 @@ static void printFunc( FILE *out,
                          outputForSWIG?"":" ",
                          outputForSWIG? "IN_ARRAY /* inOpen */": "inOpen",
                          (prototype && !stateFuncSignature && !stateStruct)? arrayBracket : "" );
+
 				  }
                   fprintf( out, "%s\n",  stateStruct? ";": (frame? " */":",") );
                }
@@ -2279,10 +2300,14 @@ static void printFunc( FILE *out,
          case TA_Input_Real:
             typeString = inputDoubleArrayType;
             defaultParamName = outputForSWIG? "IN_ARRAY":"inReal";
+            if (stateFuncSignature && validationCode)
+                nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", inputParamInfo->paramName) + nbInputArgsBufferLen;
             break;
          case TA_Input_Integer:
             typeString = inputIntArrayType;
             defaultParamName = outputForSWIG? "IN_ARRAY":"inInteger";
+            if (stateFuncSignature && validationCode)
+                nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", inputParamInfo->paramName) + nbInputArgsBufferLen;
             break;
          default:
             if( !paramName )
@@ -2341,6 +2366,52 @@ static void printFunc( FILE *out,
       }
    }
 
+   if (stateFuncSignature && validationCode) {
+       printIndent( out, indent );
+       fprintf( out, "int _cur_idx = ++_state->mem_index %% _state->mem_size;\n");
+       printIndent( out, indent );
+       fprintf( out, "#define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y\n");
+       printIndent( out, indent );
+       fprintf( out, "#define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x\n");
+       printIndent( out, indent );
+       fprintf( out, "#define NEED_MORE_DATA (_state->mem_index < _state->mem_size)\n");
+       printIndent( out, indent );
+       fprintf( out, "#ifndef TA_%s_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA\n", funcName );
+       printIndent( out, indent );
+       fprintf( out, "if (NEED_MORE_DATA) {\n");
+
+       int word_idx = 0;
+       char word[500];
+       nbInputArgsBufferLen = 0;
+       while (1)
+       {
+           char c = nbInputArgsBuffer[nbInputArgsBufferLen++];
+
+           if ((c == ',') || ( c == '\0'))
+           {
+               word[word_idx] = '\0';
+               if (word_idx > 0)
+               {
+                printIndent( out, indent+6 );
+                fprintf( out, "PUSH_TO_MEM(%s,%s);\n", word, word);
+               }
+               word_idx = 0;
+               if (c == '\0') break;
+           } else
+               if (c != ' ')
+               word[word_idx++] = c;
+       }
+
+ //            PUSH_TO_MEM(x,x);
+ //            PUSH_TO_MEM(y,y);
+ //            PUSH_TO_MEM(z,z);
+       printIndent( out, indent );
+       fprintf( out, "return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData); }\n");
+       printIndent( out, indent );
+       fprintf( out, "#endif\n");
+
+   }
+
    if (stateStruct)
    {
        printIndent( out, indent );
@@ -2375,7 +2446,7 @@ static void printFunc( FILE *out,
             typeString = inputDoubleArrayType;
             break;
          case TA_Input_Integer:
-            typeString = inputIntArrayType;
+            typeString = "int";
             break;
          default:
             typeString = inputDoubleArrayType;
@@ -3469,7 +3540,7 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
    if( funcInfo->nbOptInput != 0 )     
      print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
    else   
-     print( out, "/* No parameters to validate. */\n" );
+     print( out, "/* No parameters to validate. */\n" ); 
    //section 2 end
 
    genPrefix = 0;
@@ -3597,7 +3668,9 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
     */
    printFunc( out, NULL, funcInfo, pfs_stateFuncSignature | pfs_validationCode );
    print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
-   print( out, "\n" );
+   print( out, "\n");
+   print( out, "#define FIRST_LAUNCH (_state->mem_index <= 1)\n" );
+   print( out, "\n");
    //section 8 end
 
    genPrefix = 0;

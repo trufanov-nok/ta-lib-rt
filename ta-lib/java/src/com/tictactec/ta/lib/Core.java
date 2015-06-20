@@ -314,6 +314,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int accbandsStateFree( struct TA_accbands_State** _state )
@@ -458,6 +464,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.acos (inReal);
       return RetCode.Success ;
    }
@@ -556,6 +566,13 @@ public class Core {
       double tmp;
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         (_state->memory+_cur_idx)->inVolume = inVolume ;
+         return RetCode.NeedMoreData ; }
       tmp = inHigh - inLow;
       if( tmp > 0.0 )
          outReal.value = (((inClose-inLow)-(inHigh-inClose))/tmp)*((double)inVolume);
@@ -656,6 +673,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal0 = inReal0 ;
+         (_state->memory+_cur_idx)->inReal1 = inReal1 ;
+         return RetCode.NeedMoreData ; }
       outReal.value = inReal0 + inReal1;
       return RetCode.Success ;
    }
@@ -813,6 +835,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         (_state->memory+_cur_idx)->inVolume = inVolume ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int adOscStateFree( struct TA_adOsc_State** _state )
@@ -1103,6 +1132,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int adxStateFree( struct TA_adx_State** _state )
@@ -1374,6 +1409,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int adxrStateFree( struct TA_adxr_State** _state )
@@ -1587,6 +1628,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int apoStateFree( struct TA_apo_State** _state )
@@ -1831,6 +1876,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int aroonStateFree( struct TA_aroon_State** _state )
@@ -2058,6 +2108,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int aroonOscStateFree( struct TA_aroonOsc_State** _state )
@@ -2204,6 +2259,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.asin (inReal);
       return RetCode.Success ;
    }
@@ -2282,6 +2341,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.atan (inReal);
       return RetCode.Success ;
    }
@@ -2432,6 +2495,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int atrStateFree( struct TA_atr_State** _state )
@@ -2578,6 +2647,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       outReal.value = ( inHigh + inLow + inClose + inOpen) / 4;
       return RetCode.Success ;
    }
@@ -2698,6 +2774,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int avgDevStateFree( struct TA_avgDev_State** _state )
@@ -2956,6 +3036,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int bbandsStateFree( struct TA_bbands_State** _state )
@@ -3226,6 +3310,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal0 = inReal0 ;
+         (_state->memory+_cur_idx)->inReal1 = inReal1 ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int betaStateFree( struct TA_beta_State** _state )
@@ -3403,6 +3492,13 @@ public class Core {
       double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       tempReal = inHigh-inLow;
       if( (tempReal< (0.00000000000001) ) )
          outReal.value = 0.0;
@@ -3551,6 +3647,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cciStateFree( struct TA_cci_State** _state )
@@ -3711,6 +3813,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdl2CrowsStateFree( struct TA_cdl2Crows_State** _state )
@@ -3870,6 +3979,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdl3BlackCrowsStateFree( struct TA_cdl3BlackCrows_State** _state )
@@ -4039,6 +4155,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdl3InsideStateFree( struct TA_cdl3Inside_State** _state )
@@ -4215,6 +4338,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdl3LineStrikeStateFree( struct TA_cdl3LineStrike_State** _state )
@@ -4375,6 +4505,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdl3OutsideStateFree( struct TA_cdl3Outside_State** _state )
@@ -4561,6 +4698,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdl3StarsInSouthStateFree( struct TA_cdl3StarsInSouth_State** _state )
@@ -4806,6 +4950,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdl3WhiteSoldiersStateFree( struct TA_cdl3WhiteSoldiers_State** _state )
@@ -5056,6 +5207,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlAbandonedBabyStateFree( struct TA_cdlAbandonedBaby_State** _state )
@@ -5328,6 +5486,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlAdvanceBlockStateFree( struct TA_cdlAdvanceBlock_State** _state )
@@ -5573,6 +5738,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlBeltHoldStateFree( struct TA_cdlBeltHold_State** _state )
@@ -5746,6 +5918,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlBreakawayStateFree( struct TA_cdlBreakaway_State** _state )
@@ -5919,6 +6098,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlClosingMarubozuStateFree( struct TA_cdlClosingMarubozu_State** _state )
@@ -6090,6 +6276,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State** _state )
@@ -6262,6 +6455,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State** _state )
@@ -6436,6 +6636,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State** _state )
@@ -6580,6 +6787,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlDojiStateFree( struct TA_cdlDoji_State** _state )
@@ -6726,6 +6940,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlDojiStarStateFree( struct TA_cdlDojiStar_State** _state )
@@ -6885,6 +7106,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlDragonflyDojiStateFree( struct TA_cdlDragonflyDoji_State** _state )
@@ -7035,6 +7263,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlEngulfingStateFree( struct TA_cdlEngulfing_State** _state )
@@ -7214,6 +7449,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlEveningDojiStarStateFree( struct TA_cdlEveningDojiStar_State** _state )
@@ -7412,6 +7654,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlEveningStarStateFree( struct TA_cdlEveningStar_State** _state )
@@ -7591,6 +7840,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlGapSideSideWhiteStateFree( struct TA_cdlGapSideSideWhite_State** _state )
@@ -7758,6 +8014,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlGravestoneDojiStateFree( struct TA_cdlGravestoneDoji_State** _state )
@@ -7940,6 +8203,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlHammerStateFree( struct TA_cdlHammer_State** _state )
@@ -8145,6 +8415,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlHangingManStateFree( struct TA_cdlHangingMan_State** _state )
@@ -8335,6 +8612,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlHaramiStateFree( struct TA_cdlHarami_State** _state )
@@ -8510,6 +8794,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State** _state )
@@ -8674,6 +8965,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlHignWaveStateFree( struct TA_cdlHignWave_State** _state )
@@ -8846,6 +9144,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlHikkakeStateFree( struct TA_cdlHikkake_State** _state )
@@ -9058,6 +9363,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlHikkakeModStateFree( struct TA_cdlHikkakeMod_State** _state )
@@ -9257,6 +9569,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State** _state )
@@ -9440,6 +9759,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State** _state )
@@ -9624,6 +9950,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlInNeckStateFree( struct TA_cdlInNeck_State** _state )
@@ -9798,6 +10131,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
@@ -9986,6 +10326,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlKickingStateFree( struct TA_cdlKicking_State** _state )
@@ -10181,6 +10528,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlKickingByLengthStateFree( struct TA_cdlKickingByLength_State** _state )
@@ -10355,6 +10709,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
@@ -10512,6 +10873,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlLongLeggedDojiStateFree( struct TA_cdlLongLeggedDoji_State** _state )
@@ -10669,6 +11037,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
@@ -10824,6 +11199,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlMarubozuStateFree( struct TA_cdlMarubozu_State** _state )
@@ -10973,6 +11355,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
@@ -11159,6 +11548,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlMatHoldStateFree( struct TA_cdlMatHold_State** _state )
@@ -11372,6 +11768,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlMorningDojiStarStateFree( struct TA_cdlMorningDojiStar_State** _state )
@@ -11570,6 +11973,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlMorningStarStateFree( struct TA_cdlMorningStar_State** _state )
@@ -11745,6 +12155,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlOnNeckStateFree( struct TA_cdlOnNeck_State** _state )
@@ -11906,6 +12323,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlPiercingStateFree( struct TA_cdlPiercing_State** _state )
@@ -12078,6 +12502,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlRickshawManStateFree( struct TA_cdlRickshawMan_State** _state )
@@ -12274,6 +12705,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlRiseFall3MethodsStateFree( struct TA_cdlRiseFall3Methods_State** _state )
@@ -12476,6 +12914,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
@@ -12666,6 +13111,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlShootingStarStateFree( struct TA_cdlShootingStar_State** _state )
@@ -12833,6 +13285,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlShortLineStateFree( struct TA_cdlShortLine_State** _state )
@@ -12979,6 +13438,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State** _state )
@@ -13168,6 +13634,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State** _state )
@@ -13360,6 +13833,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlStickSandwhichStateFree( struct TA_cdlStickSandwhich_State** _state )
@@ -13522,6 +14002,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlTakuriStateFree( struct TA_cdlTakuri_State** _state )
@@ -13697,6 +14184,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlTasukiGapStateFree( struct TA_cdlTasukiGap_State** _state )
@@ -13867,6 +14361,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlThrustingStateFree( struct TA_cdlThrusting_State** _state )
@@ -14031,6 +14532,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlTristarStateFree( struct TA_cdlTristar_State** _state )
@@ -14196,6 +14704,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlUnique3RiverStateFree( struct TA_cdlUnique3River_State** _state )
@@ -14364,6 +14879,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State** _state )
@@ -14520,6 +15042,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State** _state )
@@ -14629,6 +15158,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.ceil (inReal);
       return RetCode.Success ;
    }
@@ -14836,6 +15369,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int cmoStateFree( struct TA_cmo_State** _state )
@@ -15094,6 +15631,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal0 = inReal0 ;
+         (_state->memory+_cur_idx)->inReal1 = inReal1 ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int correlStateFree( struct TA_correl_State** _state )
@@ -15225,6 +15767,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.cos (inReal);
       return RetCode.Success ;
    }
@@ -15303,6 +15849,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.cosh (inReal);
       return RetCode.Success ;
    }
@@ -15439,6 +15989,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int demaStateFree( struct TA_dema_State** _state )
@@ -15561,6 +16115,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal0 = inReal0 ;
+         (_state->memory+_cur_idx)->inReal1 = inReal1 ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.cos (inReal0/inReal1);
       return RetCode.Success ;
    }
@@ -15777,6 +16336,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int dxStateFree( struct TA_dx_State** _state )
@@ -16033,6 +16598,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int emaStateFree( struct TA_ema_State** _state )
@@ -16157,6 +16726,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.exp (inReal);
       return RetCode.Success ;
    }
@@ -16235,6 +16808,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.floor (inReal);
       return RetCode.Success ;
    }
@@ -16421,6 +16998,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int htDcPeriodStateFree( struct TA_htDcPeriod_State** _state )
@@ -16758,6 +17339,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
@@ -17101,6 +17686,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int htPhasorStateFree( struct TA_htPhasor_State** _state )
@@ -17447,6 +18036,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int htSineStateFree( struct TA_htSine_State** _state )
@@ -17811,6 +18404,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int htTrendlineStateFree( struct TA_htTrendline_State** _state )
@@ -18218,6 +18815,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int htTrendModeStateFree( struct TA_htTrendMode_State** _state )
@@ -18529,6 +19130,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inOpen = inOpen ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int imiStateFree( struct TA_imi_State** _state )
@@ -18715,6 +19321,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int kamaStateFree( struct TA_kama_State** _state )
@@ -18909,6 +19519,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int linearRegStateFree( struct TA_linearReg_State** _state )
@@ -19061,6 +19675,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
@@ -19212,6 +19830,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
@@ -19361,6 +19983,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int linearRegSlopeStateFree( struct TA_linearRegSlope_State** _state )
@@ -19468,6 +20094,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.log (inReal);
       return RetCode.Success ;
    }
@@ -19546,6 +20176,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.log10 (inReal);
       return RetCode.Success ;
    }
@@ -19727,6 +20361,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int movingAverageStateFree( struct TA_movingAverage_State** _state )
@@ -20021,6 +20659,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int macdStateFree( struct TA_macd_State** _state )
@@ -20354,6 +20996,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int macdExtStateFree( struct TA_macdExt_State** _state )
@@ -20543,6 +21189,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int macdFixStateFree( struct TA_macdFix_State** _state )
@@ -20794,6 +21444,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int mamaStateFree( struct TA_mama_State** _state )
@@ -21108,6 +21762,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         (_state->memory+_cur_idx)->inPeriods = inPeriods ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int movingAverageVariablePeriodStateFree( struct TA_movingAverageVariablePeriod_State** _state )
@@ -21305,6 +21964,16 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
+      if ( (_state->mem_index <= 1) )
+         _state->max = inReal;
+      else
+         if( _state->max < inReal )
+         _state->max = inReal;
+      outReal.value = _state->max;
       return RetCode.Success ;
    }
    public int maxStateFree( struct TA_max_State** _state )
@@ -21478,6 +22147,23 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
+      if ( (_state->mem_index <= 1) )
+      {
+         _state->max = inReal;
+         _state->maxIdx = 0;
+         _state->currentIdx = 0;
+      } else
+         ++ _state->currentIdx;
+      if( _state->max > inReal )
+      {
+         _state->max = inReal;
+         _state->maxIdx = _state->currentIdx;
+      }
+      outInteger.value = _state->max;
       return RetCode.Success ;
    }
    public int maxIndexStateFree( struct TA_maxIndex_State** _state )
@@ -21600,6 +22286,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         return RetCode.NeedMoreData ; }
       outReal.value = (inHigh+inLow)/2.0;
       return RetCode.Success ;
    }
@@ -21809,6 +22500,13 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         (_state->memory+_cur_idx)->inVolume = inVolume ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int mfiStateFree( struct TA_mfi_State** _state )
@@ -22040,6 +22738,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int midPointStateFree( struct TA_midPoint_State** _state )
@@ -22185,6 +22887,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int midPriceStateFree( struct TA_midPrice_State** _state )
@@ -22345,6 +23052,16 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
+      if ( (_state->mem_index <= 1) )
+         _state->min = inReal;
+      else
+         if( _state->min > inReal )
+         _state->min = inReal;
+      outReal.value = _state->min;
       return RetCode.Success ;
    }
    public int minStateFree( struct TA_min_State** _state )
@@ -22518,6 +23235,23 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
+      if ( (_state->mem_index <= 1) )
+      {
+         _state->min = inReal;
+         _state->minIdx = 0;
+         _state->currentIdx = 0;
+      } else
+         ++ _state->currentIdx;
+      if( _state->min > inReal )
+      {
+         _state->min = inReal;
+         _state->minIdx = _state->currentIdx;
+      }
+      outInteger.value = _state->min;
       return RetCode.Success ;
    }
    public int minIndexStateFree( struct TA_minIndex_State** _state )
@@ -22717,6 +23451,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int minMaxStateFree( struct TA_minMax_State** _state )
@@ -22941,6 +23679,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )
@@ -23227,6 +23969,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int minusDIStateFree( struct TA_minusDI_State** _state )
@@ -23546,6 +24294,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int minusDMStateFree( struct TA_minusDM_State** _state )
@@ -23748,6 +24501,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int momStateFree( struct TA_mom_State** _state )
@@ -23840,6 +24597,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal0 = inReal0 ;
+         (_state->memory+_cur_idx)->inReal1 = inReal1 ;
+         return RetCode.NeedMoreData ; }
       outReal.value = inReal0*inReal1;
       return RetCode.Success ;
    }
@@ -24000,6 +24762,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int natrStateFree( struct TA_natr_State** _state )
@@ -24158,6 +24926,23 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         (_state->memory+_cur_idx)->inVolume = inVolume ;
+         return RetCode.NeedMoreData ; }
+      if ( (_state->mem_index <= 1) )
+      {
+         _state->prevOBV = inVolume;
+         _state->prevReal = inReal;
+      } else {
+         if( inReal > _state->prevReal )
+            _state->prevOBV += inVolume;
+         else if( inReal < _state->prevReal )
+            _state->prevOBV -= inVolume;
+      }
+      outReal.value = _state->prevOBV;
+      _state->prevReal = inReal;
       return RetCode.Success ;
    }
    public int obvStateFree( struct TA_obv_State** _state )
@@ -24387,6 +25172,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int plusDIStateFree( struct TA_plusDI_State** _state )
@@ -24706,6 +25497,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int plusDMStateFree( struct TA_plusDM_State** _state )
@@ -24923,6 +25719,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int ppoStateFree( struct TA_ppo_State** _state )
@@ -25045,6 +25845,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int rocStateFree( struct TA_roc_State** _state )
@@ -25174,6 +25978,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int rocPStateFree( struct TA_rocP_State** _state )
@@ -25303,6 +26111,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int rocRStateFree( struct TA_rocR_State** _state )
@@ -25432,6 +26244,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int rocR100StateFree( struct TA_rocR100_State** _state )
@@ -25658,6 +26474,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int rsiStateFree( struct TA_rsi_State** _state )
@@ -26004,6 +26824,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int sarStateFree( struct TA_sar_State** _state )
@@ -26498,6 +27323,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int sarExtStateFree( struct TA_sarExt_State** _state )
@@ -26772,6 +27602,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.sin (inReal);
       return RetCode.Success ;
    }
@@ -26850,6 +27684,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.sinh (inReal);
       return RetCode.Success ;
    }
@@ -26976,6 +27814,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int smaStateFree( struct TA_sma_State** _state )
@@ -27091,6 +27933,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.sqrt (inReal);
       return RetCode.Success ;
    }
@@ -27259,6 +28105,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int stdDevStateFree( struct TA_stdDev_State** _state )
@@ -27574,6 +28424,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int stochStateFree( struct TA_stoch_State** _state )
@@ -27908,6 +28764,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int stochFStateFree( struct TA_stochF_State** _state )
@@ -28184,6 +29046,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int stochRsiStateFree( struct TA_stochRsi_State** _state )
@@ -28323,6 +29189,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal0 = inReal0 ;
+         (_state->memory+_cur_idx)->inReal1 = inReal1 ;
+         return RetCode.NeedMoreData ; }
       outReal.value = inReal0-inReal1;
       return RetCode.Success ;
    }
@@ -28438,7 +29309,22 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      return RetCode.Success ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index <= 1) )
+         _state->tempSum = 0;
+      if ( (_state->mem_index < _state->mem_size) )
+      {
+         _state->tempSum += inReal;
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         outReal.value = 0;
+         return RetCode.NeedMoreData ;
+      } else {
+         _state->tempSum -= (_state->memory+_cur_idx)->inReal ;
+         _state->tempSum += inReal;
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         outReal.value = inReal;
+         return RetCode.Success ;
+      }
    }
    public int sumStateFree( struct TA_sum_State** _state )
    {
@@ -28659,6 +29545,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int t3StateFree( struct TA_t3_State** _state )
@@ -28833,6 +29723,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.tan (inReal);
       return RetCode.Success ;
    }
@@ -28911,6 +29805,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       outReal.value = Math.tanh (inReal);
       return RetCode.Success ;
    }
@@ -29056,6 +29954,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int temaStateFree( struct TA_tema_State** _state )
@@ -29214,6 +30116,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int trueRangeStateFree( struct TA_trueRange_State** _state )
@@ -29426,6 +30334,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int trimaStateFree( struct TA_trima_State** _state )
@@ -29680,6 +30592,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int trixStateFree( struct TA_trix_State** _state )
@@ -29864,6 +30780,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int tsfStateFree( struct TA_tsf_State** _state )
@@ -29980,6 +30900,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       outReal.value = ( inHigh + inLow + inClose ) / 3.0;
       return RetCode.Success ;
    }
@@ -30186,6 +31112,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int ultOscStateFree( struct TA_ultOsc_State** _state )
@@ -30427,6 +31359,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int varianceStateFree( struct TA_variance_State** _state )
@@ -30565,6 +31501,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       outReal.value = ( inHigh + inLow + (inClose*2.0) ) / 4.0;
       return RetCode.Success ;
    }
@@ -30734,6 +31676,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inHigh = inHigh ;
+         (_state->memory+_cur_idx)->inLow = inLow ;
+         (_state->memory+_cur_idx)->inClose = inClose ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int willRStateFree( struct TA_willR_State** _state )
@@ -30938,6 +31886,10 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      int _cur_idx = ++_state->mem_index % _state->mem_size;
+      if ( (_state->mem_index < _state->mem_size) ) {
+         (_state->memory+_cur_idx)->inReal = inReal ;
+         return RetCode.NeedMoreData ; }
       return RetCode.Success ;
    }
    public int wmaStateFree( struct TA_wma_State** _state )

@@ -375,6 +375,15 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    int _cur_idx = ++_state->mem_index % _state->mem_size;
+/* Generated */    #define PUSH_TO_MEM(x,y) (_state->memory+_cur_idx)->x = y
+/* Generated */    #define POP_FROM_MEM(x) (_state->memory+_cur_idx)->x
+/* Generated */    #define NEED_MORE_DATA (_state->mem_index < _state->mem_size)
+/* Generated */    #ifndef TA_MINMAXINDEX_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+/* Generated */    if (NEED_MORE_DATA) {
+/* Generated */          PUSH_TO_MEM(inReal,inReal);
+/* Generated */    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData); }
+/* Generated */    #endif
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !outMinIdx )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
@@ -385,10 +394,40 @@
 /* Generated */    #endif /* !defined(_JAVA) */
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
+/* Generated */ #define FIRST_LAUNCH (_state->mem_index <= 1)
+/* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+if (FIRST_LAUNCH)
+        {
+            _state->max = inReal;
+            _state->min = inReal;
+            _state->maxIdx = 0;
+            _state->minIdx = 0;
+            _state->currentIdx = 0;
+        } else
+        ++ _state->currentIdx;
 
+        if( _state->max < inReal )
+        {
+            _state->max = inReal;
+            _state->maxIdx = _state->currentIdx;
+        } else
+            if( _state->max == inReal )
+                _state->maxIdx = _state->currentIdx;
+
+        if( _state->min > inReal )
+        {
+            _state->min = inReal;
+            _state->minIdx = _state->currentIdx;
+        } else
+            if( _state->min == inReal )
+                _state->minIdx = _state->currentIdx;
+
+
+        VALUE_HANDLE_DEREF(outMaxIdx) = _state->max;
+        VALUE_HANDLE_DEREF(outMinIdx) = _state->min;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 

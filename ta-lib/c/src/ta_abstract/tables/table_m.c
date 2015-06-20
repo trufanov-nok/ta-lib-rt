@@ -369,7 +369,14 @@ static const TA_OptInputParameterInfo *TA_MAX_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MAX_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MAX_DEF_UI_STRUCT_PARAM =
+                                  { TA_Input_Real, "max", 0 };
+
+static const TA_InputParameterInfo *TA_MAX_StructParams[] =
+{
+  &TA_MAX_DEF_UI_STRUCT_PARAM,
+  NULL
+};
 
 DEF_FUNCTION( MAX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
@@ -397,7 +404,20 @@ static const TA_OptInputParameterInfo *TA_MAXINDEX_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MAXINDEX_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MAXINDEX_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "max", 0 };
+const TA_InputParameterInfo TA_MAXINDEX_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Integer, "maxIdx", 0 };
+const TA_InputParameterInfo TA_MAXINDEX_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "currentIdx", 0 };
+
+static const TA_InputParameterInfo *TA_MAXINDEX_StructParams[] =
+{
+  &TA_MAXINDEX_DEF_UI_STRUCT_PARAM_1,
+  &TA_MAXINDEX_DEF_UI_STRUCT_PARAM_2,
+  &TA_MAXINDEX_DEF_UI_STRUCT_PARAM_3,
+  NULL
+};
 
 DEF_FUNCTION( MAXINDEX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
@@ -537,7 +557,15 @@ static const TA_OptInputParameterInfo *TA_MIN_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MIN_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MIN_DEF_UI_STRUCT_PARAM =
+                                  { TA_Input_Real, "min", 0 };
+
+static const TA_InputParameterInfo *TA_MIN_StructParams[] =
+{
+  &TA_MIN_DEF_UI_STRUCT_PARAM,
+  NULL
+};
+
 
 DEF_FUNCTION( MIN,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
@@ -565,7 +593,20 @@ static const TA_OptInputParameterInfo *TA_MININDEX_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MININDEX_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MININDEX_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "min", 0 };
+const TA_InputParameterInfo TA_MININDEX_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Integer, "minIdx", 0 };
+const TA_InputParameterInfo TA_MININDEX_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "currentIdx", 0 };
+
+static const TA_InputParameterInfo *TA_MININDEX_StructParams[] =
+{
+  &TA_MININDEX_DEF_UI_STRUCT_PARAM_1,
+  &TA_MININDEX_DEF_UI_STRUCT_PARAM_2,
+  &TA_MININDEX_DEF_UI_STRUCT_PARAM_3,
+  NULL
+};
 
 DEF_FUNCTION( MININDEX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
@@ -600,7 +641,15 @@ static const TA_OptInputParameterInfo *TA_MINMAX_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MINMAX_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MINMAX_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "min", 0 };
+const TA_InputParameterInfo TA_MINMAX_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "max", 0 };
+static const TA_InputParameterInfo *TA_MINMAX_StructParams[] = {
+    &TA_MINMAX_DEF_UI_STRUCT_PARAM_1,
+    &TA_MINMAX_DEF_UI_STRUCT_PARAM_2,
+    NULL
+};
 
 DEF_FUNCTION( MINMAX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
@@ -635,7 +684,25 @@ static const TA_OptInputParameterInfo *TA_MINMAXINDEX_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MINMAXINDEX_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "min", 0 };
+const TA_InputParameterInfo TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "max", 0 };
+const TA_InputParameterInfo TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "minIdx", 0 };
+const TA_InputParameterInfo TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "maxIdx", 0 };
+const TA_InputParameterInfo TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "currentIdx", 0 };
+
+static const TA_InputParameterInfo *TA_MINMAXINDEX_StructParams[] = {
+    &TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_1,
+    &TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_2,
+    &TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_3,
+    &TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_4,
+    &TA_MINMAXINDEX_DEF_UI_STRUCT_PARAM_5,
+    NULL
+};
 
 DEF_FUNCTION( MINMAXINDEX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */

@@ -65,7 +65,17 @@ static const TA_OutputParameterInfo   *TA_OBV_Outputs[]   =
 static const TA_OptInputParameterInfo *TA_OBV_OptInputs[] =
 { NULL };
 
-static const TA_InputParameterInfo *TA_OBV_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_OBV_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevOBV", 0 };
+const TA_InputParameterInfo TA_OBV_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevReal", 0 };
+
+static const TA_InputParameterInfo *TA_OBV_StructParams[] =
+{
+  &TA_OBV_DEF_UI_STRUCT_PARAM_1,
+  &TA_OBV_DEF_UI_STRUCT_PARAM_2,
+  NULL
+};
 
 DEF_FUNCTION( OBV,                          /* name */
               TA_GroupId_VolumeIndicators,  /* groupId */
