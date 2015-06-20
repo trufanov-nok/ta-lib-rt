@@ -2370,6 +2370,8 @@ static void printFunc( FILE *out,
        printIndent( out, indent );
        fprintf( out, "int _cur_idx = ++STATE.mem_index %% MEM_SIZE;\n");
        printIndent( out, indent );
+       fprintf( out, "UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP ethods won't be used\n");
+       printIndent( out, indent );
        fprintf( out, "#ifndef TA_%s_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA\n", funcName );
        printIndent( out, indent );
        fprintf( out, "if (NEED_MORE_DATA) {\n");
