@@ -66,7 +66,9 @@ static const TA_OptInputParameterInfo *TA_HT_DCPERIOD_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( HT_DCPERIOD,                   /* name */
+static const TA_InputParameterInfo *TA_HT_DCPERIOD_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( HT_DCPERIOD,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */
               "Hilbert Transform - Dominant Cycle Period",  /* hint */
               "HtDcPeriod",                       /* CamelCase name */
@@ -92,7 +94,9 @@ static const TA_OptInputParameterInfo *TA_HT_DCPHASE_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( HT_DCPHASE,                   /* name */
+static const TA_InputParameterInfo *TA_HT_DCPHASE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( HT_DCPHASE,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */
               "Hilbert Transform - Dominant Cycle Phase",  /* hint */
               "HtDcPhase",   /* CamelCase name */
@@ -125,7 +129,9 @@ static const TA_OptInputParameterInfo *TA_HT_PHASOR_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( HT_PHASOR,                   /* name */
+static const TA_InputParameterInfo *TA_HT_PHASOR_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( HT_PHASOR,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */
               "Hilbert Transform - Phasor Components",  /* hint */
               "HtPhasor",                       /* CamelCase name */
@@ -158,7 +164,9 @@ static const TA_OptInputParameterInfo *TA_HT_SINE_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( HT_SINE,                   /* name */
+static const TA_InputParameterInfo *TA_HT_SINE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( HT_SINE,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */
               "Hilbert Transform - SineWave",  /* hint */
               "HtSine",                       /* CamelCase name */
@@ -184,7 +192,9 @@ static const TA_OptInputParameterInfo *TA_HT_TRENDLINE_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( HT_TRENDLINE,                   /* name */
+static const TA_InputParameterInfo *TA_HT_TRENDLINE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( HT_TRENDLINE,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Hilbert Transform - Instantaneous Trendline",  /* hint */
               "HtTrendline", /* CamelCase name */
@@ -210,7 +220,9 @@ static const TA_OptInputParameterInfo *TA_HT_TRENDMODE_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( HT_TRENDMODE,                   /* name */
+static const TA_InputParameterInfo *TA_HT_TRENDMODE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( HT_TRENDMODE,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */
               "Hilbert Transform - Trend vs Cycle Mode",  /* hint */
               "HtTrendMode",                       /* CamelCase name */

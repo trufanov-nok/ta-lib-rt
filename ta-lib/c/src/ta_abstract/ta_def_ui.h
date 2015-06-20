@@ -165,6 +165,7 @@ typedef struct
    const TA_InputParameterInfo    * const input;
    const TA_OptInputParameterInfo * const optInput;
    const TA_OutputParameterInfo   * const output;
+   const TA_InputParameterInfo    * const structParams;
 
    /* Entry point of the TA function and its lookback function. */
    const TA_FrameFunction function;
@@ -192,6 +193,7 @@ typedef struct
       (const TA_InputParameterInfo    * const)&TA_##name##_Inputs[0],    \
       (const TA_OptInputParameterInfo * const)&TA_##name##_OptInputs[0], \
       (const TA_OutputParameterInfo   * const)&TA_##name##_Outputs[0],   \
+      (const TA_InputParameterInfo    * const)&TA_##name##_StructParams[0],   \
       TA_##name##_FramePP, \
       TA_##name##_FramePPLB \
    }; \
@@ -205,6 +207,7 @@ typedef struct
       (sizeof(TA_##name##_Inputs)   / sizeof(TA_InputParameterInfo *))   - 1, \
       (sizeof(TA_##name##_OptInputs)/ sizeof(TA_OptInputParameterInfo *))- 1, \
       (sizeof(TA_##name##_Outputs)  / sizeof(TA_OutputParameterInfo *))  - 1, \
+      (sizeof(TA_##name##_StructParams)  / sizeof(TA_InputParameterInfo *))  - 1, \
       (const TA_FuncHandle * const)&TA_DEF_##name \
    };
 #else
@@ -228,6 +231,7 @@ typedef struct
       (const TA_InputParameterInfo    * const)&TA_##name##_Inputs[0],    \
       (const TA_OptInputParameterInfo * const)&TA_##name##_OptInputs[0], \
       (const TA_OutputParameterInfo   * const)&TA_##name##_Outputs[0],   \
+      (const TA_InputParameterInfo    * const)&TA_##name##_StructParams[0],   \
       NULL, \
       NULL \
    }; \
@@ -241,6 +245,7 @@ typedef struct
       (sizeof(TA_##name##_Inputs)   / sizeof(TA_InputParameterInfo *))   - 1, \
       (sizeof(TA_##name##_OptInputs)/ sizeof(TA_OptInputParameterInfo *))- 1, \
       (sizeof(TA_##name##_Outputs)  / sizeof(TA_OutputParameterInfo *))  - 1, \
+      (sizeof(TA_##name##_StructParams)  / sizeof(TA_InputParameterInfo *))  - 1, \
       (const TA_FuncHandle * const)&TA_DEF_##name \
    };
 #endif
@@ -261,7 +266,8 @@ static const TA_OutputParameterInfo   *TA_##NAME##_Outputs[]   = \
   &TA_DEF_UI_Output_Real, \
   NULL \
 }; \
-	static const TA_OptInputParameterInfo *TA_##NAME##_OptInputs[] = { NULL }; \
+static const TA_OptInputParameterInfo *TA_##NAME##_OptInputs[] = { NULL }; \
+static const TA_InputParameterInfo   *TA_##NAME##_StructParams[]   = { NULL }; \
 DEF_FUNCTION( NAME, /* name */ \
               TA_GroupId_MathTransform, /* groupId */ \
               HINT, /* hint */ \
@@ -281,7 +287,8 @@ static const TA_OutputParameterInfo   *TA_##NAME##_Outputs[]   = \
   &TA_DEF_UI_Output_Real, \
   NULL \
 }; \
-	static const TA_OptInputParameterInfo *TA_##NAME##_OptInputs[] = { NULL }; \
+static const TA_OptInputParameterInfo *TA_##NAME##_OptInputs[] = { NULL }; \
+static const TA_InputParameterInfo   *TA_##NAME##_StructParams[]   = { NULL }; \
 DEF_FUNCTION( NAME, /* name */ \
               TA_GroupId_MathOperators, /* groupId */ \
               HINT, /* hint */ \

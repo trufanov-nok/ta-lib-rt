@@ -80,7 +80,9 @@ static const TA_OptInputParameterInfo *TA_T3_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( T3,                       /* name */
+static const TA_InputParameterInfo *TA_T3_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( T3,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Triple Exponential Moving Average (T3)", /* hint */
               "T3",                       /* CamelCase name */
@@ -114,7 +116,9 @@ static const TA_OptInputParameterInfo *TA_TEMA_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( TEMA,                       /* name */
+static const TA_InputParameterInfo *TA_TEMA_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( TEMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Triple Exponential Moving Average", /* hint */
               "Tema",                     /* CamelCase name */
@@ -137,7 +141,9 @@ static const TA_OutputParameterInfo   *TA_TRANGE_Outputs[]   =
 
 static const TA_OptInputParameterInfo *TA_TRANGE_OptInputs[] = { NULL };
 
-DEF_FUNCTION( TRANGE,                     /* name */
+static const TA_InputParameterInfo *TA_TRANGE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( TRANGE,                         /* name */
               TA_GroupId_VolatilityIndicators,  /* groupId */
               "True Range",               /* hint */
               "TrueRange",                /* CamelCase name */
@@ -163,7 +169,9 @@ static const TA_OptInputParameterInfo *TA_TRIMA_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( TRIMA,                       /* name */
+static const TA_InputParameterInfo *TA_TRIMA_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( TRIMA,                         /* name */
               TA_GroupId_OverlapStudies,   /* groupId */
               "Triangular Moving Average", /* hint */
               "Trima",                     /* CamelCase name */
@@ -189,7 +197,9 @@ static const TA_OptInputParameterInfo *TA_TRIX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( TRIX,                       /* name */
+static const TA_InputParameterInfo *TA_TRIX_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( TRIX,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "1-day Rate-Of-Change (ROC) of a Triple Smooth EMA", /* hint */
               "Trix",                     /* CamelCase name */
@@ -215,7 +225,9 @@ static const TA_OptInputParameterInfo *TA_TSF_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( TSF,                   /* name */
+static const TA_InputParameterInfo *TA_TSF_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( TSF,                         /* name */
               TA_GroupId_Statistic,  /* groupId */
               "Time Series Forecast",/* hint */
               "Tsf",                 /* CamelCase name */
@@ -238,7 +250,9 @@ static const TA_OutputParameterInfo   *TA_TYPPRICE_Outputs[]   =
 
 static const TA_OptInputParameterInfo *TA_TYPPRICE_OptInputs[] = { NULL };
 
-DEF_FUNCTION( TYPPRICE,                   /* name */
+static const TA_InputParameterInfo *TA_TYPPRICE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( TYPPRICE,                         /* name */
               TA_GroupId_PriceTransform,  /* groupId */
               "Typical Price",            /* hint */
               "TypPrice",                 /* CamelCase name */

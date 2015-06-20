@@ -111,7 +111,9 @@ static const TA_OptInputParameterInfo *TA_BBANDS_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( BBANDS,                    /* name */
+static const TA_InputParameterInfo *TA_BBANDS_StructParams[] = { NULL };
+
+DEF_FUNCTION( BBANDS,                         /* name */
               TA_GroupId_OverlapStudies, /* groupId */
               "Bollinger Bands",         /* hint */
               "Bbands",                  /* CamelCase name */
@@ -135,7 +137,9 @@ static const TA_OutputParameterInfo   *TA_BOP_Outputs[]   =
 
 static const TA_OptInputParameterInfo *TA_BOP_OptInputs[] = { NULL };
 
-DEF_FUNCTION( BOP,                   /* name */
+static const TA_InputParameterInfo *TA_BOP_StructParams[] = { NULL };
+
+DEF_FUNCTION( BOP,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Balance Of Power",         /* hint */
               "Bop",                      /* CamelCase name */
@@ -163,7 +167,9 @@ static const TA_OptInputParameterInfo *TA_BETA_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( BETA,                      /* name */
+static const TA_InputParameterInfo *TA_BETA_StructParams[] = { NULL };
+
+DEF_FUNCTION( BETA,                         /* name */
               TA_GroupId_Statistic,     /* groupId */
               "Beta", /* hint */
               "Beta",                /* CamelCase name */

@@ -66,7 +66,9 @@ static const TA_OptInputParameterInfo *TA_DEMA_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( DEMA,                       /* name */
+static const TA_InputParameterInfo *TA_DEMA_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( DEMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Double Exponential Moving Average", /* hint */
               "Dema",                     /* CamelCase name */
@@ -96,7 +98,9 @@ static const TA_OptInputParameterInfo *TA_DX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( DX,                           /* name */
+static const TA_InputParameterInfo *TA_DX_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( DX,                         /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */
               "Directional Movement Index", /* hint */
               "Dx",                         /* CamelCase name */

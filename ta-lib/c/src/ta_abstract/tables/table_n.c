@@ -66,7 +66,9 @@ static const TA_OptInputParameterInfo *TA_NATR_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( NATR,                        /* name */
+static const TA_InputParameterInfo *TA_NATR_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( NATR,                         /* name */
               TA_GroupId_VolatilityIndicators, /* groupId */
               "Normalized Average True Range", /* hint */
               "Natr",                     /* CamelCase name */
@@ -94,7 +96,9 @@ static const TA_OptInputParameterInfo *TA_NVI_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( NVI,                     /* name */
+static const TA_InputParameterInfo *TA_NVI_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( NVI,                         /* name */
               TA_GroupId_VolumeIndicators,   /* groupId */
               "Negative Volume Index", /* hint */
               "Nvi",      /* CamelCase name */

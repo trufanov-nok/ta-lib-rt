@@ -66,7 +66,9 @@ static const TA_OptInputParameterInfo *TA_EMA_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( EMA,                        /* name */
+static const TA_InputParameterInfo *TA_EMA_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( EMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Exponential Moving Average", /* hint */
               "Ema",                       /* CamelCase name */

@@ -67,7 +67,9 @@ static const TA_OptInputParameterInfo *TA_IMI_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( IMI,                        /* name */
+static const TA_InputParameterInfo *TA_IMI_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( IMI,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Intraday Momentum Index",  /* hint */
               "Imi",                      /* CamelCase name */

@@ -63,7 +63,9 @@ static const TA_OutputParameterInfo   *TA_WCLPRICE_Outputs[]   =
 
 static const TA_OptInputParameterInfo *TA_WCLPRICE_OptInputs[] = { NULL };
 
-DEF_FUNCTION( WCLPRICE,                   /* name */
+static const TA_InputParameterInfo *TA_WCLPRICE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( WCLPRICE,                         /* name */
               TA_GroupId_PriceTransform,  /* groupId */
               "Weighted Close Price",     /* hint */
               "WclPrice",                 /* CamelCase name */
@@ -89,7 +91,9 @@ static const TA_OptInputParameterInfo *TA_WILLR_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( WILLR,          /* name */
+static const TA_InputParameterInfo *TA_WILLR_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( WILLR,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Williams' %R", /* hint */
               "WillR",        /* CamelCase name */
@@ -115,7 +119,9 @@ static const TA_OptInputParameterInfo *TA_WMA_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( WMA,                        /* name */
+static const TA_InputParameterInfo *TA_WMA_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( WMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Weighted Moving Average",  /* hint */
               "Wma",                      /* CamelCase name */

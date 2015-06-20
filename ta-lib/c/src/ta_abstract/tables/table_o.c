@@ -65,6 +65,8 @@ static const TA_OutputParameterInfo   *TA_OBV_Outputs[]   =
 static const TA_OptInputParameterInfo *TA_OBV_OptInputs[] =
 { NULL };
 
+static const TA_InputParameterInfo *TA_OBV_StructParams[] = { NULL };
+
 DEF_FUNCTION( OBV,                          /* name */
               TA_GroupId_VolumeIndicators,  /* groupId */
               "On Balance Volume",          /* hint */

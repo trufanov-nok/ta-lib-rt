@@ -111,6 +111,8 @@ static const TA_OptInputParameterInfo *TA_ULTOSC_OptInputs[] =
   NULL
 };
 
+static const TA_InputParameterInfo *TA_ULTOSC_StructParams[] = { NULL }; 
+
 DEF_FUNCTION( ULTOSC,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Ultimate Oscillator",          /* hint */

@@ -199,6 +199,7 @@ typedef struct TA_FuncInfo
    unsigned int nbInput;
    unsigned int nbOptInput;
    unsigned int nbOutput;
+   unsigned int nbStructParams;
 
    const TA_FuncHandle *handle;
 } TA_FuncInfo;
@@ -405,6 +406,16 @@ typedef struct TA_OutputParameterInfo
    TA_OutputFlags         flags;
 
 } TA_OutputParameterInfo;
+
+typedef struct TA_StructParameterInfo
+{
+   TA_InputParameterType type;
+   const char           *paramName;
+   TA_InputFlags         flags;
+
+} TA_StructParameterInfo;
+
+
 
 /* Functions to get a const ptr on the "TA_XXXXXXParameterInfo".
  * Max value for the 'paramIndex' can be found in the TA_FuncInfo structure.

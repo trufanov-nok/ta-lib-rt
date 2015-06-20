@@ -66,7 +66,9 @@ static const TA_OptInputParameterInfo *TA_PLUS_DI_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( PLUS_DI,                     /* name */
+static const TA_InputParameterInfo *TA_PLUS_DI_StructParams[] = { NULL };
+
+DEF_FUNCTION ( PLUS_DI,                     /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */
               "Plus Directional Indicator", /* hint */
               "PlusDI",                     /* CamelCase name */
@@ -93,7 +95,9 @@ static const TA_OptInputParameterInfo *TA_PLUS_DM_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( PLUS_DM,                       /* name */
+static const TA_InputParameterInfo *TA_PLUS_DM_StructParams[] = { NULL };
+
+DEF_FUNCTION( PLUS_DM,                     /* name */
               TA_GroupId_MomentumIndicators, /* groupId */
               "Plus Directional Movement",   /* hint */
               "PlusDM",                      /* CamelCase name */
@@ -122,7 +126,9 @@ static const TA_OptInputParameterInfo *TA_PPO_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( PPO,                           /* name */
+static const TA_InputParameterInfo *TA_PPO_StructParams[] = { NULL };
+
+DEF_FUNCTION( PPO,                     /* name */
               TA_GroupId_MomentumIndicators, /* groupId */
               "Percentage Price Oscillator", /* hint */
               "Ppo",                         /* CamelCase name */
@@ -150,7 +156,9 @@ static const TA_OptInputParameterInfo *TA_PVI_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( PVI,                         /* name */
+static const TA_InputParameterInfo *TA_PVI_StructParams[] = { NULL };
+
+DEF_FUNCTION( PVI,                     /* name */
               TA_GroupId_VolumeIndicators, /* groupId */
               "Positive Volume Index",     /* hint */
               "Pvi",                       /* CamelCase name */

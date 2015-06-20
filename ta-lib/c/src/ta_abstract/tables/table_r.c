@@ -66,7 +66,9 @@ static const TA_OptInputParameterInfo *TA_ROC_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( ROC,                     /* name */
+static const TA_InputParameterInfo *TA_ROC_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( ROC,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Rate of change : ((price/prevPrice)-1)*100", /* hint */
               "Roc",            /* CamelCase name */
@@ -92,7 +94,9 @@ static const TA_OptInputParameterInfo *TA_ROCP_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( ROCP,                    /* name */
+static const TA_InputParameterInfo *TA_ROCP_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( ROCP,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Rate of change Percentage: (price-prevPrice)/prevPrice", /* hint */
               "RocP",           /* CamelCase name */
@@ -118,7 +122,9 @@ static const TA_OptInputParameterInfo *TA_ROCR_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( ROCR,                    /* name */
+static const TA_InputParameterInfo *TA_ROCR_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( ROCR,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Rate of change ratio: (price/prevPrice)", /* hint */
               "RocR",           /* CamelCase name */
@@ -144,7 +150,9 @@ static const TA_OptInputParameterInfo *TA_ROCR100_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( ROCR100,                    /* name */
+static const TA_InputParameterInfo *TA_ROCR100_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( ROCR100,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Rate of change ratio 100 scale: (price/prevPrice)*100", /* hint */
               "RocR100",       /* CamelCase name */
@@ -171,7 +179,9 @@ static const TA_OptInputParameterInfo *TA_RSI_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( RSI,                        /* name */
+static const TA_InputParameterInfo *TA_RSI_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( RSI,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Relative Strength Index",  /* hint */
               "Rsi",                      /* CamelCase name */

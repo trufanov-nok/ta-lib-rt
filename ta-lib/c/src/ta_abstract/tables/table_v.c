@@ -67,7 +67,9 @@ static const TA_OptInputParameterInfo *TA_VAR_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( VAR,                      /* name */
+static const TA_InputParameterInfo *TA_VAR_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( VAR,                         /* name */
               TA_GroupId_Statistic,     /* groupId */
               "Variance",               /* hint */
               "Variance",               /* CamelCase name */

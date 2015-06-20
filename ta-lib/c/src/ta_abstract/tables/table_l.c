@@ -66,7 +66,9 @@ static const TA_OptInputParameterInfo *TA_LINEARREG_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( LINEARREG,           /* name */
+static const TA_InputParameterInfo *TA_LINEARREG_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( LINEARREG,                         /* name */
               TA_GroupId_Statistic,/* groupId */
               "Linear Regression", /* hint */
               "LinearReg",         /* CamelCase name */
@@ -92,7 +94,9 @@ static const TA_OptInputParameterInfo *TA_LINEARREG_SLOPE_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( LINEARREG_SLOPE,     /* name */
+static const TA_InputParameterInfo *TA_LINEARREG_SLOPE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( LINEARREG_SLOPE,                         /* name */
               TA_GroupId_Statistic,/* groupId */
               "Linear Regression Slope", /* hint */
               "LinearRegSlope",    /* CamelCase name */
@@ -118,7 +122,9 @@ static const TA_OptInputParameterInfo *TA_LINEARREG_ANGLE_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( LINEARREG_ANGLE,           /* name */
+static const TA_InputParameterInfo *TA_LINEARREG_ANGLE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( LINEARREG_ANGLE,                         /* name */
               TA_GroupId_Statistic,/* groupId */
               "Linear Regression Angle", /* hint */
               "LinearRegAngle",    /* CamelCase name */
@@ -144,7 +150,9 @@ static const TA_OptInputParameterInfo *TA_LINEARREG_INTERCEPT_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( LINEARREG_INTERCEPT,           /* name */
+static const TA_InputParameterInfo *TA_LINEARREG_INTERCEPT_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( LINEARREG_INTERCEPT,                         /* name */
               TA_GroupId_Statistic,/* groupId */
               "Linear Regression Intercept", /* hint */
               "LinearRegIntercept",  /* CamelCase name */

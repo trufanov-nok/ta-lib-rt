@@ -66,7 +66,9 @@ static const TA_OptInputParameterInfo *TA_KAMA_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( KAMA,                       /* name */
+static const TA_InputParameterInfo *TA_KAMA_StructParams[] = { NULL };
+
+DEF_FUNCTION( KAMA,                     /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Kaufman Adaptive Moving Average", /* hint */
               "Kama",                       /* CamelCase name */

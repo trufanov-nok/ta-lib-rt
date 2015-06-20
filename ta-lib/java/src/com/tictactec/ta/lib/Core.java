@@ -458,6 +458,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.acos (inReal);
       return RetCode.Success ;
    }
    public int acosStateFree( struct TA_acos_State** _state )
@@ -552,8 +553,14 @@ public class Core {
       double inVolume,
       double *outReal )
    {
+      double tmp;
       if (_state == NULL)
          return RetCode.BadParam ;
+      tmp = inHigh - inLow;
+      if( tmp > 0.0 )
+         outReal.value = (((inClose-inLow)-(inHigh-inClose))/tmp)*((double)inVolume);
+      else
+         outReal.value = 0.0;
       return RetCode.Success ;
    }
    public int adStateFree( struct TA_ad_State** _state )
@@ -649,6 +656,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = inReal0 + inReal1;
       return RetCode.Success ;
    }
    public int addStateFree( struct TA_add_State** _state )
@@ -2196,6 +2204,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.asin (inReal);
       return RetCode.Success ;
    }
    public int asinStateFree( struct TA_asin_State** _state )
@@ -2273,6 +2282,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.atan (inReal);
       return RetCode.Success ;
    }
    public int atanStateFree( struct TA_atan_State** _state )
@@ -2568,6 +2578,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = ( inHigh + inLow + inClose + inOpen) / 4;
       return RetCode.Success ;
    }
    public int avgPriceStateFree( struct TA_avgPrice_State** _state )
@@ -3389,8 +3400,14 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
+      tempReal = inHigh-inLow;
+      if( (tempReal< (0.00000000000001) ) )
+         outReal.value = 0.0;
+      else
+         outReal.value = (inClose - inOpen)/tempReal;
       return RetCode.Success ;
    }
    public int bopStateFree( struct TA_bop_State** _state )
@@ -14612,6 +14629,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.ceil (inReal);
       return RetCode.Success ;
    }
    public int ceilStateFree( struct TA_ceil_State** _state )
@@ -15207,6 +15225,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.cos (inReal);
       return RetCode.Success ;
    }
    public int cosStateFree( struct TA_cos_State** _state )
@@ -15284,6 +15303,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.cosh (inReal);
       return RetCode.Success ;
    }
    public int coshStateFree( struct TA_cosh_State** _state )
@@ -15541,6 +15561,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.cos (inReal0/inReal1);
       return RetCode.Success ;
    }
    public int divStateFree( struct TA_div_State** _state )
@@ -16136,6 +16157,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.exp (inReal);
       return RetCode.Success ;
    }
    public int expStateFree( struct TA_exp_State** _state )
@@ -16213,6 +16235,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.floor (inReal);
       return RetCode.Success ;
    }
    public int floorStateFree( struct TA_floor_State** _state )
@@ -19445,6 +19468,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.log (inReal);
       return RetCode.Success ;
    }
    public int lnStateFree( struct TA_ln_State** _state )
@@ -19522,6 +19546,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.log10 (inReal);
       return RetCode.Success ;
    }
    public int log10StateFree( struct TA_log10_State** _state )
@@ -21575,6 +21600,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = (inHigh+inLow)/2.0;
       return RetCode.Success ;
    }
    public int medPriceStateFree( struct TA_medPrice_State** _state )
@@ -23814,6 +23840,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = inReal0*inReal1;
       return RetCode.Success ;
    }
    public int multStateFree( struct TA_mult_State** _state )
@@ -26745,6 +26772,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.sin (inReal);
       return RetCode.Success ;
    }
    public int sinStateFree( struct TA_sin_State** _state )
@@ -26822,6 +26850,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.sinh (inReal);
       return RetCode.Success ;
    }
    public int sinhStateFree( struct TA_sinh_State** _state )
@@ -27062,6 +27091,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.sqrt (inReal);
       return RetCode.Success ;
    }
    public int sqrtStateFree( struct TA_sqrt_State** _state )
@@ -28293,6 +28323,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = inReal0-inReal1;
       return RetCode.Success ;
    }
    public int subStateFree( struct TA_sub_State** _state )
@@ -28802,6 +28833,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.tan (inReal);
       return RetCode.Success ;
    }
    public int tanStateFree( struct TA_tan_State** _state )
@@ -28879,6 +28911,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = Math.tanh (inReal);
       return RetCode.Success ;
    }
    public int tanhStateFree( struct TA_tanh_State** _state )
@@ -29947,6 +29980,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = ( inHigh + inLow + inClose ) / 3.0;
       return RetCode.Success ;
    }
    public int typPriceStateFree( struct TA_typPrice_State** _state )
@@ -30531,6 +30565,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
+      outReal.value = ( inHigh + inLow + (inClose*2.0) ) / 4.0;
       return RetCode.Success ;
    }
    public int wclPriceStateFree( struct TA_wclPrice_State** _state )

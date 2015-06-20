@@ -78,7 +78,9 @@ static const TA_OptInputParameterInfo *TA_ACCBANDS_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( ACCBANDS,                    /* name */
+static const TA_InputParameterInfo *TA_ACCBANDS_StructParams[] = { NULL };
+
+DEF_FUNCTION( ACCBANDS,                         /* name */
               TA_GroupId_OverlapStudies,   /* groupId */
               "Acceleration Bands",        /* hint */
               "Accbands",                  /* CamelCase name */
@@ -108,6 +110,8 @@ static const TA_OptInputParameterInfo *TA_AD_OptInputs[] =
 {
   NULL
 };
+
+static const TA_InputParameterInfo *TA_AD_StructParams[] = { NULL };
 
 DEF_FUNCTION( AD,                         /* name */
               TA_GroupId_VolumeIndicators,   /* groupId */
@@ -169,6 +173,8 @@ static const TA_OptInputParameterInfo *TA_ADOSC_OptInputs[] =
   NULL
 };
 
+static const TA_InputParameterInfo *TA_ADOSC_StructParams[] = { NULL };
+
 DEF_FUNCTION( ADOSC,                         /* name */
               TA_GroupId_VolumeIndicators,   /* groupId */
               "Chaikin A/D Oscillator", /* hint */
@@ -195,7 +201,9 @@ static const TA_OptInputParameterInfo *TA_ADX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( ADX,                          /* name */
+static const TA_InputParameterInfo *TA_ADX_StructParams[] = { NULL };
+
+DEF_FUNCTION( ADX,                         /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */
               "Average Directional Movement Index", /* hint */
               "Adx",                         /* CamelCase name */
@@ -220,6 +228,8 @@ static const TA_OptInputParameterInfo *TA_ADXR_OptInputs[] =
 { &TA_DEF_UI_TimePeriod_14_MINIMUM2,
   NULL
 };
+
+static const TA_InputParameterInfo *TA_ADXR_StructParams[] = { NULL };
 
 DEF_FUNCTION( ADXR,                         /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */
@@ -248,6 +258,8 @@ static const TA_OptInputParameterInfo *TA_APO_OptInputs[] =
   &TA_DEF_UI_MA_Method,
   NULL
 };
+
+static const TA_InputParameterInfo *TA_APO_StructParams[] = { NULL };
 
 DEF_FUNCTION( APO,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
@@ -283,7 +295,9 @@ static const TA_OptInputParameterInfo *TA_AROON_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( AROON,                          /* name */
+static const TA_InputParameterInfo *TA_AROON_StructParams[] = { NULL };
+
+DEF_FUNCTION( AROON,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Aroon",                        /* hint */
               "Aroon",                        /* CamelCase name */
@@ -311,7 +325,9 @@ static const TA_OptInputParameterInfo *TA_AROONOSC_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( AROONOSC,                       /* name */
+static const TA_InputParameterInfo *TA_AROONOSC_StructParams[] = { NULL };
+
+DEF_FUNCTION( AROONOSC,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Aroon Oscillator",             /* hint */
 			  "AroonOsc",                     /* CamelCase name */
@@ -346,7 +362,9 @@ static const TA_OptInputParameterInfo *TA_ATR_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( ATR,                        /* name */
+static const TA_InputParameterInfo *TA_ATR_StructParams[] = { NULL };
+
+DEF_FUNCTION( ATR,                         /* name */
               TA_GroupId_VolatilityIndicators, /* groupId */
               "Average True Range",       /* hint */
               "Atr",                      /* CamelCase name */
@@ -369,7 +387,9 @@ static const TA_OutputParameterInfo   *TA_AVGPRICE_Outputs[]   =
 
 static const TA_OptInputParameterInfo *TA_AVGPRICE_OptInputs[] = { NULL };
 
-DEF_FUNCTION( AVGPRICE,                   /* name */
+static const TA_InputParameterInfo *TA_AVGPRICE_StructParams[] = { NULL };
+
+DEF_FUNCTION( AVGPRICE,                         /* name */
               TA_GroupId_PriceTransform,  /* groupId */
               "Average Price",            /* hint */
               "AvgPrice",                 /* CamelCase name */
@@ -396,7 +416,9 @@ static const TA_OptInputParameterInfo *TA_AVGDEV_OptInputs[] =
 	NULL
 };
 
-DEF_FUNCTION( AVGDEV,                      /* name */
+static const TA_InputParameterInfo *TA_AVGDEV_StructParams[] = { NULL };
+
+DEF_FUNCTION( AVGDEV,                         /* name */
 				TA_GroupId_PriceTransform, /* groupId*/
 				"Average Deviation",       /* hint */
 				"AvgDev",                  /* CamelCase name*/

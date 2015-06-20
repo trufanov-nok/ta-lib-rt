@@ -122,6 +122,8 @@ static const TA_OptInputParameterInfo *TA_MA_OptInputs[] =
   NULL
 };
 
+static const TA_InputParameterInfo *TA_MA_StructParams[] = { NULL }; 
+
 DEF_FUNCTION( MA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Moving average",       /* hint */
@@ -161,7 +163,9 @@ static const TA_OptInputParameterInfo *TA_MACD_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MACD,                       /* name */
+static const TA_InputParameterInfo *TA_MACD_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MACD,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Moving Average Convergence/Divergence", /* hint */
               "Macd",                     /* CamelCase name */
@@ -194,7 +198,9 @@ static const TA_OptInputParameterInfo *TA_MACDEXT_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MACDEXT,                     /* name */
+static const TA_InputParameterInfo *TA_MACDEXT_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MACDEXT,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "MACD with controllable MA type", /* hint */
               "MacdExt",                  /* CamelCase name */
@@ -222,7 +228,9 @@ static const TA_OptInputParameterInfo *TA_MACDFIX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MACDFIX,                    /* name */
+static const TA_InputParameterInfo *TA_MACDFIX_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MACDFIX,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Moving Average Convergence/Divergence Fix 12/26", /* hint */
               "MacdFix",                  /* CamelCase name */
@@ -301,6 +309,8 @@ static const TA_OptInputParameterInfo *TA_MAMA_OptInputs[] =
   NULL
 };
 
+static const TA_InputParameterInfo *TA_MAMA_StructParams[] = { NULL }; 
+
 DEF_FUNCTION( MAMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "MESA Adaptive Moving Average",       /* hint */
@@ -331,6 +341,8 @@ static const TA_OptInputParameterInfo *TA_MAVP_OptInputs[] =
   NULL
 };
 
+static const TA_InputParameterInfo *TA_MAVP_StructParams[] = { NULL }; 
+
 DEF_FUNCTION( MAVP,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Moving average with variable period",  /* hint */
@@ -357,7 +369,9 @@ static const TA_OptInputParameterInfo *TA_MAX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MAX,                       /* name */
+static const TA_InputParameterInfo *TA_MAX_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MAX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
               "Highest value over a specified period", /* hint */
               "Max",                     /* CamelCase name */
@@ -383,7 +397,9 @@ static const TA_OptInputParameterInfo *TA_MAXINDEX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MAXINDEX,                  /* name */
+static const TA_InputParameterInfo *TA_MAXINDEX_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MAXINDEX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
               "Index of highest value over a specified period", /* hint */
               "MaxIndex",                /* CamelCase name */
@@ -406,7 +422,9 @@ static const TA_OutputParameterInfo   *TA_MEDPRICE_Outputs[]   =
 
 static const TA_OptInputParameterInfo *TA_MEDPRICE_OptInputs[] = { NULL };
 
-DEF_FUNCTION( MEDPRICE,                   /* name */
+static const TA_InputParameterInfo *TA_MEDPRICE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MEDPRICE,                         /* name */
               TA_GroupId_PriceTransform,  /* groupId */
               "Median Price",             /* hint */
               "MedPrice",                 /* CamelCase name */
@@ -434,7 +452,9 @@ static const TA_OptInputParameterInfo *TA_MFI_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MFI,                   /* name */
+static const TA_InputParameterInfo *TA_MFI_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MFI,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Money Flow Index",         /* hint */
               "Mfi",                      /* CamelCase name */
@@ -460,7 +480,9 @@ static const TA_OptInputParameterInfo *TA_MIDPRICE_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MIDPRICE,                    /* name */
+static const TA_InputParameterInfo *TA_MIDPRICE_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MIDPRICE,                         /* name */
               TA_GroupId_OverlapStudies,   /* groupId */
               "Midpoint Price over period",/* hint */
               "MidPrice",                  /* CamelCase name */
@@ -487,7 +509,9 @@ static const TA_OptInputParameterInfo *TA_MIDPOINT_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MIDPOINT,                   /* name */
+static const TA_InputParameterInfo *TA_MIDPOINT_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MIDPOINT,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "MidPoint over period",     /* hint */
               "MidPoint",                 /* CamelCase name */
@@ -513,7 +537,9 @@ static const TA_OptInputParameterInfo *TA_MIN_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MIN,                       /* name */
+static const TA_InputParameterInfo *TA_MIN_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MIN,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
               "Lowest value over a specified period", /* hint */
               "Min",                     /* CamelCase name */
@@ -539,7 +565,9 @@ static const TA_OptInputParameterInfo *TA_MININDEX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MININDEX,                  /* name */
+static const TA_InputParameterInfo *TA_MININDEX_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MININDEX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
               "Index of lowest value over a specified period", /* hint */
               "MinIndex",                /* CamelCase name */
@@ -572,7 +600,9 @@ static const TA_OptInputParameterInfo *TA_MINMAX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MINMAX,                    /* name */
+static const TA_InputParameterInfo *TA_MINMAX_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MINMAX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
               "Lowest and highest values over a specified period", /* hint */
               "MinMax",                  /* CamelCase name */
@@ -605,7 +635,9 @@ static const TA_OptInputParameterInfo *TA_MINMAXINDEX_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MINMAXINDEX,               /* name */
+static const TA_InputParameterInfo *TA_MINMAXINDEX_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MINMAXINDEX,                         /* name */
               TA_GroupId_MathOperators,  /* groupId */
               "Indexes of lowest and highest values over a specified period", /* hint */
               "MinMaxIndex",             /* CamelCase name */
@@ -631,7 +663,9 @@ static const TA_OptInputParameterInfo *TA_MINUS_DI_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MINUS_DI,                      /* name */
+static const TA_InputParameterInfo *TA_MINUS_DI_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MINUS_DI,                         /* name */
               TA_GroupId_MomentumIndicators,    /* groupId */
               "Minus Directional Indicator", /* hint */
               "MinusDI",                     /* CamelCase name */
@@ -658,7 +692,9 @@ static const TA_OptInputParameterInfo *TA_MINUS_DM_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MINUS_DM,                     /* name */
+static const TA_InputParameterInfo *TA_MINUS_DM_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MINUS_DM,                         /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */
               "Minus Directional Movement", /* hint */
               "MinusDM",                    /* CamelCase name */
@@ -685,7 +721,9 @@ static const TA_OptInputParameterInfo *TA_MOM_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( MOM,                     /* name */
+static const TA_InputParameterInfo *TA_MOM_StructParams[] = { NULL }; 
+
+DEF_FUNCTION( MOM,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Momentum",        /* hint */
               "Mom",             /* CamelCase name */

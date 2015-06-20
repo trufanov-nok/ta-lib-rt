@@ -114,7 +114,9 @@ static const TA_OptInputParameterInfo *TA_SAR_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( SAR,                        /* name */
+static const TA_InputParameterInfo *TA_SAR_StructParams[] = { NULL };
+
+DEF_FUNCTION( SAR,                     /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Parabolic SAR",            /* hint */
               "Sar",                      /* CamelCase name */
@@ -288,6 +290,8 @@ static const TA_OptInputParameterInfo *TA_SAREXT_OptInputs[] =
   NULL
 };
 
+static const TA_InputParameterInfo *TA_SAREXT_StructParams[] = { NULL };
+
 DEF_FUNCTION( SAREXT,                     /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Parabolic SAR - Extended", /* hint */
@@ -324,7 +328,9 @@ static const TA_OptInputParameterInfo *TA_SMA_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( SMA,                        /* name */
+static const TA_InputParameterInfo *TA_SMA_StructParams[] = { NULL };
+
+DEF_FUNCTION( SMA,                     /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
               "Simple Moving Average",    /* hint */
               "Sma",                      /* CamelCase name */
@@ -359,7 +365,9 @@ static const TA_OptInputParameterInfo *TA_SUM_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( SUM, /* name */
+static const TA_InputParameterInfo *TA_SUM_StructParams[] = { NULL };
+
+DEF_FUNCTION( SUM,                     /* name */
               TA_GroupId_MathOperators, /* groupId */
               "Summation", /* hint */
               "Sum",   /* CamelCase name */
@@ -386,7 +394,9 @@ static const TA_OptInputParameterInfo *TA_STDDEV_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( STDDEV,                   /* name */
+static const TA_InputParameterInfo *TA_STDDEV_StructParams[] = { NULL };
+
+DEF_FUNCTION( STDDEV,                     /* name */
               TA_GroupId_Statistic,     /* groupId */
               "Standard Deviation",     /* hint */
               "StdDev",                 /* CamelCase name */
@@ -493,7 +503,9 @@ static const TA_OptInputParameterInfo *TA_STOCH_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( STOCH,                   /* name */
+static const TA_InputParameterInfo *TA_STOCH_StructParams[] = { NULL };
+
+DEF_FUNCTION( STOCH,                     /* name */
               TA_GroupId_MomentumIndicators, /* groupId */
               "Stochastic",             /* hint */
               "Stoch",                  /* CamelCase name */
@@ -556,7 +568,9 @@ static const TA_OptInputParameterInfo *TA_STOCHF_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( STOCHF,                   /* name */
+static const TA_InputParameterInfo *TA_STOCHF_StructParams[] = { NULL };
+
+DEF_FUNCTION( STOCHF,                     /* name */
               TA_GroupId_MomentumIndicators, /* groupId */
               "Stochastic Fast",        /* hint */
               "StochF",                 /* CamelCase name */
@@ -587,7 +601,9 @@ static const TA_OptInputParameterInfo *TA_STOCHRSI_OptInputs[] =
   NULL
 };
 
-DEF_FUNCTION( STOCHRSI,                        /* name */
+static const TA_InputParameterInfo *TA_STOCHRSI_StructParams[] = { NULL };
+
+DEF_FUNCTION( STOCHRSI,                     /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
               "Stochastic Relative Strength Index",  /* hint */
               "StochRsi",                 /* CamelCase name */
