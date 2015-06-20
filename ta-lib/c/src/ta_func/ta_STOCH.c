@@ -617,10 +617,12 @@
 /* Generated */    (*_state)->optInSlowK_MAType = optInSlowK_MAType;
 /* Generated */    (*_state)->optInSlowD_Period = optInSlowD_Period;
 /* Generated */    (*_state)->optInSlowD_MAType = optInSlowD_MAType;
+/* Generated */    #ifndef TA_STOCH_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_STOCH_Lookback(optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_STOCH_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

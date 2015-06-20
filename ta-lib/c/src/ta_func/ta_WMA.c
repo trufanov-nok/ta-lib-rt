@@ -346,10 +346,12 @@
 /* Generated */    *_state = malloc(sizeof(struct TA_WMA_State));
 /* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
+/* Generated */    #ifndef TA_WMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_WMA_Lookback(optInTimePeriod );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_WMA_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

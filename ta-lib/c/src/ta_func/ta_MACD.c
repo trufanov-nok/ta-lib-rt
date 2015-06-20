@@ -582,10 +582,12 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 /* Generated */    (*_state)->optInFastPeriod = optInFastPeriod;
 /* Generated */    (*_state)->optInSlowPeriod = optInSlowPeriod;
 /* Generated */    (*_state)->optInSignalPeriod = optInSignalPeriod;
+/* Generated */    #ifndef TA_MACD_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_MACD_Lookback(optInFastPeriod, optInSlowPeriod, optInSignalPeriod );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MACD_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

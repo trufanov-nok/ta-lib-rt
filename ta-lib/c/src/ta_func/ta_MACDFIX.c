@@ -256,10 +256,12 @@
 /* Generated */    *_state = malloc(sizeof(struct TA_MACDFIX_State));
 /* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->optInSignalPeriod = optInSignalPeriod;
+/* Generated */    #ifndef TA_MACDFIX_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_MACDFIX_Lookback(optInSignalPeriod );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MACDFIX_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

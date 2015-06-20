@@ -8397,6 +8397,7 @@ TA_LIB_API struct TA_SUM_State {
                                int mem_size;
                                int mem_index;
                                struct TA_SUM_Data* memory;
+                               double       tempSum;
                                int           optInTimePeriod; /* From 2 to 100000 */
                                };
 

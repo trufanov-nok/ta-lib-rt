@@ -308,10 +308,12 @@
 /* Generated */    (*_state)->optInFastPeriod = optInFastPeriod;
 /* Generated */    (*_state)->optInSlowPeriod = optInSlowPeriod;
 /* Generated */    (*_state)->optInMAType = optInMAType;
+/* Generated */    #ifndef TA_PPO_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_PPO_Lookback(optInFastPeriod, optInSlowPeriod, optInMAType );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_PPO_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

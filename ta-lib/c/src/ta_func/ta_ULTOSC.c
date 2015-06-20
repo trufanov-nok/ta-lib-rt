@@ -444,10 +444,12 @@
 /* Generated */    (*_state)->optInTimePeriod1 = optInTimePeriod1;
 /* Generated */    (*_state)->optInTimePeriod2 = optInTimePeriod2;
 /* Generated */    (*_state)->optInTimePeriod3 = optInTimePeriod3;
+/* Generated */    #ifndef TA_ULTOSC_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_ULTOSC_Lookback(optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_ULTOSC_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

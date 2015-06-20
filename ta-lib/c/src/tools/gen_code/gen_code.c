@@ -2603,6 +2603,8 @@ static void printFunc( FILE *out,
        }
 
        printIndent( out, indent );
+       fprintf( out, "#ifndef TA_%s_SUPPRESS_MEMORY_ALLOCATION\n", funcName);
+       printIndent( out, indent );
        fprintf( out, "(*_state)->mem_size = TA_%s_Lookback(%s);\n", funcName, nbOptInputArgsBuffer);
        printIndent( out, indent);
        fprintf( out, "if ((*_state)->mem_size > 0)\n");
@@ -2610,6 +2612,8 @@ static void printFunc( FILE *out,
        fprintf( out, "(*_state)->memory = malloc(sizeof(struct TA_%s_Data)*(*_state)->mem_size);\n", funcName);
        printIndent( out, indent );
        fprintf( out, "else\n");
+       printIndent( out, indent );
+       fprintf( out, "#endif\n");
        printIndent( out, indent+6 );
        fprintf( out, "(*_state)->memory = NULL;");
    }

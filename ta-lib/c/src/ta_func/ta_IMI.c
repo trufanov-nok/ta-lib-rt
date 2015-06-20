@@ -270,10 +270,12 @@
 /* Generated */    *_state = malloc(sizeof(struct TA_IMI_State));
 /* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
+/* Generated */    #ifndef TA_IMI_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_IMI_Lookback(optInTimePeriod );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_IMI_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

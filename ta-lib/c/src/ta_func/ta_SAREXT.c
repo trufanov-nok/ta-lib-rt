@@ -794,10 +794,12 @@
 /* Generated */    (*_state)->optInAccelerationInitShort = optInAccelerationInitShort;
 /* Generated */    (*_state)->optInAccelerationShort = optInAccelerationShort;
 /* Generated */    (*_state)->optInAccelerationMaxShort = optInAccelerationMaxShort;
+/* Generated */    #ifndef TA_SAREXT_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_SAREXT_Lookback(optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_SAREXT_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

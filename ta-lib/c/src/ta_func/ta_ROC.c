@@ -295,10 +295,12 @@
 /* Generated */    *_state = malloc(sizeof(struct TA_ROC_State));
 /* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
+/* Generated */    #ifndef TA_ROC_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_ROC_Lookback(optInTimePeriod );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_ROC_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -543,10 +543,12 @@
 /* Generated */    (*_state)->optInSlowMAType = optInSlowMAType;
 /* Generated */    (*_state)->optInSignalPeriod = optInSignalPeriod;
 /* Generated */    (*_state)->optInSignalMAType = optInSignalMAType;
+/* Generated */    #ifndef TA_MACDEXT_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_MACDEXT_Lookback(optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_MACDEXT_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

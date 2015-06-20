@@ -378,10 +378,12 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->optInTimePeriod = optInTimePeriod;
 /* Generated */    (*_state)->optInNbDev = optInNbDev;
+/* Generated */    #ifndef TA_VAR_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_VAR_Lookback(optInTimePeriod, optInNbDev );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_VAR_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

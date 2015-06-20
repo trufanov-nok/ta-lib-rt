@@ -365,7 +365,14 @@ static const TA_OptInputParameterInfo *TA_SUM_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_SUM_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_DEF_UI_STRUCT_PARAM_SUM =
+                                  { TA_Input_Real, "tempSum", 0 };
+
+static const TA_InputParameterInfo *TA_SUM_StructParams[] =
+{
+  &TA_DEF_UI_STRUCT_PARAM_SUM,
+  NULL
+};
 
 DEF_FUNCTION( SUM,                     /* name */
               TA_GroupId_MathOperators, /* groupId */

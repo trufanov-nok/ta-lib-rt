@@ -334,10 +334,12 @@
 /* Generated */    *_state = malloc(sizeof(struct TA_CDLMORNINGDOJISTAR_State));
 /* Generated */    (*_state)->mem_index = 0;
 /* Generated */    (*_state)->optInPenetration = optInPenetration;
+/* Generated */    #ifndef TA_CDLMORNINGDOJISTAR_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    (*_state)->mem_size = TA_CDLMORNINGDOJISTAR_Lookback(optInPenetration );
 /* Generated */    if ((*_state)->mem_size > 0)
 /* Generated */          (*_state)->memory = malloc(sizeof(struct TA_CDLMORNINGDOJISTAR_Data)*(*_state)->mem_size);
 /* Generated */    else
+/* Generated */    #endif
 /* Generated */          (*_state)->memory = NULL;/* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
