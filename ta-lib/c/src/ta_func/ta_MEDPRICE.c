@@ -273,6 +273,7 @@
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
 /* Generated */    #ifndef TA_MEDPRICE_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inHigh,inHigh);
