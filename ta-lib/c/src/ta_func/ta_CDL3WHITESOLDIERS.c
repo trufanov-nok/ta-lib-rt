@@ -446,9 +446,9 @@
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    if (*_state != NULL) {
-/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
-/* Generated */          free(*_state); *_state = NULL;}
+/* Generated */    if (STATE != NULL) {
+/* Generated */          if (MEM_P != NULL) free(MEM_P);
+/* Generated */          free(STATE); STATE = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

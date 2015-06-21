@@ -91,7 +91,15 @@ static const TA_OptInputParameterInfo *TA_WILLR_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_WILLR_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_WILLR_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "highest", 0 };
+const TA_InputParameterInfo TA_WILLR_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "lowest", 0 };
+
+static const TA_InputParameterInfo *TA_WILLR_StructParams[] = {
+    &TA_WILLR_DEF_UI_STRUCT_PARAM_1,
+    &TA_WILLR_DEF_UI_STRUCT_PARAM_2,
+    NULL };
 
 DEF_FUNCTION( WILLR,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */

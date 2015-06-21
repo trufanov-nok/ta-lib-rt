@@ -67,7 +67,17 @@ static const TA_OptInputParameterInfo *TA_IMI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_IMI_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_IMI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "upsum", 0 };
+const TA_InputParameterInfo TA_IMI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "downsum", 0 };
+
+static const TA_InputParameterInfo *TA_IMI_StructParams[] = {
+    &TA_IMI_DEF_UI_STRUCT_PARAM_1,
+    &TA_IMI_DEF_UI_STRUCT_PARAM_2,
+    NULL };
+
 
 DEF_FUNCTION( IMI,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */

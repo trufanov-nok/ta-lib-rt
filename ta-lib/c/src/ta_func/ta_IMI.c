@@ -308,7 +308,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_IMI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+double tempClose, tempOpen;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -339,9 +340,45 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                if (NEED_MORE_DATA)
+        {
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
-}
+
+            if (inClose > inOpen) {
+                STATE.upsum += (inClose - inOpen);
+            } else {
+                STATE.downsum += (inOpen - inClose);
+            }
+
+            PUSH_TO_MEM(inOpen,inOpen);
+            PUSH_TO_MEM(inClose,inClose);
+            return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+        }
+
+
+        if (inClose > inOpen) {
+            STATE.upsum += (inClose - inOpen);
+        } else {
+            STATE.downsum += (inOpen - inClose);
+        }
+
+
+         VALUE_HANDLE_DEREF(outReal) = 100.0*(STATE.upsum/(STATE.upsum + STATE.downsum));
+
+         tempClose = POP_FROM_MEM(inClose);
+         tempOpen = POP_FROM_MEM(inOpen);
+
+         if (tempClose > tempOpen) {
+             STATE.upsum -= (tempClose - tempOpen);
+         } else {
+             STATE.downsum -= (tempOpen - tempClose);
+         }
+
+         PUSH_TO_MEM(inOpen,inOpen);
+         PUSH_TO_MEM(inClose,inClose);
+
+        return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+    }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -365,9 +402,9 @@
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    if (*_state != NULL) {
-/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
-/* Generated */          free(*_state); *_state = NULL;}
+/* Generated */    if (STATE != NULL) {
+/* Generated */          if (MEM_P != NULL) free(MEM_P);
+/* Generated */          free(STATE); STATE = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

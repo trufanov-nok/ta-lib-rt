@@ -2030,11 +2030,11 @@ static void printFunc( FILE *out,
 //           is moved close to optIn
        if (stateFreeSignature) {
            printIndent( out, indent );
-           fprintf( out, "if (*_state != NULL) {\n");
+           fprintf( out, "if (STATE != NULL) {\n");
            printIndent( out, indent+6 );
-           fprintf( out, "if ((*_state)->memory != NULL) free((*_state)->memory);\n");
+           fprintf( out, "if (MEM_P != NULL) free(MEM_P);\n");
            printIndent( out, indent+6 );
-           fprintf( out, "free(*_state); *_state = NULL;}\n");
+           fprintf( out, "free(STATE); STATE = NULL;}\n");
        }
 
        }

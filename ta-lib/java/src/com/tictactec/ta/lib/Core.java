@@ -326,9 +326,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode accbands( int startIdx,
@@ -475,9 +475,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode acos( int startIdx,
@@ -584,9 +584,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ad( int startIdx,
@@ -685,9 +685,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode add( int startIdx,
@@ -848,9 +848,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode adOsc( int startIdx,
@@ -1144,9 +1144,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode adx( int startIdx,
@@ -1421,9 +1421,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode adxr( int startIdx,
@@ -1638,9 +1638,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode apo( int startIdx,
@@ -1887,9 +1887,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode aroon( int startIdx,
@@ -2119,9 +2119,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode aroonOsc( int startIdx,
@@ -2270,9 +2270,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode asin( int startIdx,
@@ -2352,9 +2352,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode atan( int startIdx,
@@ -2507,9 +2507,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode atr( int startIdx,
@@ -2661,9 +2661,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode avgPrice( int startIdx,
@@ -2799,9 +2799,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode avgDev( int startIdx,
@@ -3061,9 +3061,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode bbands( int startIdx,
@@ -3336,9 +3336,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode beta( int startIdx,
@@ -3525,9 +3525,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode bop( int startIdx,
@@ -3674,9 +3674,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cci( int startIdx,
@@ -3841,9 +3841,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl2Crows( int startIdx,
@@ -4007,9 +4007,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3BlackCrows( int startIdx,
@@ -4183,9 +4183,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3Inside( int startIdx,
@@ -4366,9 +4366,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3LineStrike( int startIdx,
@@ -4533,9 +4533,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3Outside( int startIdx,
@@ -4726,9 +4726,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3StarsInSouth( int startIdx,
@@ -4978,9 +4978,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3WhiteSoldiers( int startIdx,
@@ -5235,9 +5235,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlAbandonedBaby( int startIdx,
@@ -5514,9 +5514,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlAdvanceBlock( int startIdx,
@@ -5766,9 +5766,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlBeltHold( int startIdx,
@@ -5946,9 +5946,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlBreakaway( int startIdx,
@@ -6126,9 +6126,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlClosingMarubozu( int startIdx,
@@ -6304,9 +6304,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlConcealBabysWall( int startIdx,
@@ -6483,9 +6483,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlCounterAttack( int startIdx,
@@ -6664,9 +6664,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlDarkCloudCover( int startIdx,
@@ -6815,9 +6815,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlDoji( int startIdx,
@@ -6968,9 +6968,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlDojiStar( int startIdx,
@@ -7134,9 +7134,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlDragonflyDoji( int startIdx,
@@ -7291,9 +7291,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlEngulfing( int startIdx,
@@ -7477,9 +7477,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlEveningDojiStar( int startIdx,
@@ -7682,9 +7682,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlEveningStar( int startIdx,
@@ -7868,9 +7868,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlGapSideSideWhite( int startIdx,
@@ -8042,9 +8042,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlGravestoneDoji( int startIdx,
@@ -8231,9 +8231,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHammer( int startIdx,
@@ -8443,9 +8443,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHangingMan( int startIdx,
@@ -8640,9 +8640,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHarami( int startIdx,
@@ -8822,9 +8822,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHaramiCross( int startIdx,
@@ -8993,9 +8993,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHignWave( int startIdx,
@@ -9172,9 +9172,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHikkake( int startIdx,
@@ -9391,9 +9391,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHikkakeMod( int startIdx,
@@ -9597,9 +9597,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHomingPigeon( int startIdx,
@@ -9787,9 +9787,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlIdentical3Crows( int startIdx,
@@ -9978,9 +9978,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlInNeck( int startIdx,
@@ -10159,9 +10159,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlInvertedHammer( int startIdx,
@@ -10354,9 +10354,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlKicking( int startIdx,
@@ -10556,9 +10556,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlKickingByLength( int startIdx,
@@ -10737,9 +10737,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlLadderBottom( int startIdx,
@@ -10901,9 +10901,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlLongLeggedDoji( int startIdx,
@@ -11065,9 +11065,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlLongLine( int startIdx,
@@ -11227,9 +11227,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMarubozu( int startIdx,
@@ -11383,9 +11383,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMatchingLow( int startIdx,
@@ -11576,9 +11576,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMatHold( int startIdx,
@@ -11796,9 +11796,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMorningDojiStar( int startIdx,
@@ -12001,9 +12001,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMorningStar( int startIdx,
@@ -12183,9 +12183,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlOnNeck( int startIdx,
@@ -12351,9 +12351,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlPiercing( int startIdx,
@@ -12530,9 +12530,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlRickshawMan( int startIdx,
@@ -12733,9 +12733,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlRiseFall3Methods( int startIdx,
@@ -12942,9 +12942,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlSeperatingLines( int startIdx,
@@ -13139,9 +13139,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlShootingStar( int startIdx,
@@ -13313,9 +13313,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlShortLine( int startIdx,
@@ -13466,9 +13466,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlSpinningTop( int startIdx,
@@ -13662,9 +13662,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlStalledPattern( int startIdx,
@@ -13861,9 +13861,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlStickSandwhich( int startIdx,
@@ -14030,9 +14030,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlTakuri( int startIdx,
@@ -14212,9 +14212,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlTasukiGap( int startIdx,
@@ -14389,9 +14389,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlThrusting( int startIdx,
@@ -14560,9 +14560,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlTristar( int startIdx,
@@ -14732,9 +14732,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlUnique3River( int startIdx,
@@ -14907,9 +14907,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlUpsideGap2Crows( int startIdx,
@@ -15070,9 +15070,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlXSideGap3Methods( int startIdx,
@@ -15184,9 +15184,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ceil( int startIdx,
@@ -15394,9 +15394,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cmo( int startIdx,
@@ -15679,9 +15679,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode correl( int startIdx,
@@ -15815,9 +15815,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cos( int startIdx,
@@ -15897,9 +15897,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cosh( int startIdx,
@@ -16036,9 +16036,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode dema( int startIdx,
@@ -16164,9 +16164,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode div( int startIdx,
@@ -16385,9 +16385,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode dx( int startIdx,
@@ -16645,9 +16645,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ema( int startIdx,
@@ -16774,9 +16774,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode exp( int startIdx,
@@ -16856,9 +16856,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode floor( int startIdx,
@@ -17045,9 +17045,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htDcPeriod( int startIdx,
@@ -17386,9 +17386,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htDcPhase( int startIdx,
@@ -17733,9 +17733,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htPhasor( int startIdx,
@@ -18083,9 +18083,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htSine( int startIdx,
@@ -18451,9 +18451,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htTrendline( int startIdx,
@@ -18862,9 +18862,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htTrendMode( int startIdx,
@@ -19165,22 +19165,45 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      double tempClose, tempOpen;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         if (inClose > inOpen) {
+            _state.value .upsum += (inClose - inOpen);
+         } else {
+            _state.value .downsum += (inOpen - inClose);
+         }
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      }
+      if (inClose > inOpen) {
+         _state.value .upsum += (inClose - inOpen);
+      } else {
+         _state.value .downsum += (inOpen - inClose);
+      }
+      outReal.value = 100.0*( _state.value .upsum/( _state.value .upsum + _state.value .downsum));
+      tempClose = ( ( _state.value .memory+_cur_idx).value ).inClose ;
+      tempOpen = ( ( _state.value .memory+_cur_idx).value ).inOpen ;
+      if (tempClose > tempOpen) {
+         _state.value .upsum -= (tempClose - tempOpen);
+      } else {
+         _state.value .downsum -= (tempOpen - tempClose);
+      }
+      ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
+      ( ( _state.value .memory+_cur_idx).value ).inClose = inClose ;
       return RetCode.Success ;
    }
    public int imiStateFree( struct TA_imi_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode imi( int startIdx,
@@ -19368,9 +19391,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode kama( int startIdx,
@@ -19566,9 +19589,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode linearReg( int startIdx,
@@ -19722,9 +19745,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode linearRegAngle( int startIdx,
@@ -19877,9 +19900,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode linearRegIntercept( int startIdx,
@@ -20030,9 +20053,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode linearRegSlope( int startIdx,
@@ -20142,9 +20165,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ln( int startIdx,
@@ -20224,9 +20247,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode log10( int startIdx,
@@ -20408,9 +20431,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode movingAverage( int startIdx,
@@ -20706,9 +20729,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode macd( int startIdx,
@@ -21043,9 +21066,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode macdExt( int startIdx,
@@ -21236,9 +21259,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode macdFix( int startIdx,
@@ -21491,9 +21514,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode mama( int startIdx,
@@ -21810,9 +21833,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode movingAverageVariablePeriod( int startIdx,
@@ -22011,9 +22034,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode max( int startIdx,
@@ -22197,9 +22220,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode maxIndex( int startIdx,
@@ -22325,9 +22348,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode medPrice( int startIdx,
@@ -22540,9 +22563,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode mfi( int startIdx,
@@ -22780,9 +22803,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode midPoint( int startIdx,
@@ -22934,9 +22957,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode midPrice( int startIdx,
@@ -23098,9 +23121,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode min( int startIdx,
@@ -23284,9 +23307,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minIndex( int startIdx,
@@ -23493,9 +23516,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minMax( int startIdx,
@@ -23740,9 +23763,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minMaxIndex( int startIdx,
@@ -24032,9 +24055,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minusDI( int startIdx,
@@ -24356,9 +24379,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minusDM( int startIdx,
@@ -24566,9 +24589,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode mom( int startIdx,
@@ -24664,9 +24687,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode mult( int startIdx,
@@ -24829,9 +24852,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode natr( int startIdx,
@@ -25004,9 +25027,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode obv( int startIdx,
@@ -25239,9 +25262,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode plusDI( int startIdx,
@@ -25563,9 +25586,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode plusDM( int startIdx,
@@ -25784,9 +25807,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ppo( int startIdx,
@@ -25910,9 +25933,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode roc( int startIdx,
@@ -26043,9 +26066,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode rocP( int startIdx,
@@ -26176,9 +26199,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode rocR( int startIdx,
@@ -26309,9 +26332,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode rocR100( int startIdx,
@@ -26539,9 +26562,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode rsi( int startIdx,
@@ -26890,9 +26913,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sar( int startIdx,
@@ -27389,9 +27412,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sarExt( int startIdx,
@@ -27668,9 +27691,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sin( int startIdx,
@@ -27750,9 +27773,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sinh( int startIdx,
@@ -27879,9 +27902,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sma( int startIdx,
@@ -27999,9 +28022,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sqrt( int startIdx,
@@ -28148,21 +28171,21 @@ public class Core {
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInNbDev = optInNbDev;
       _state.value .value .memory = NULL;
-      return variance (& _state.value .var_state);
+      return variance ((struct variance **)& _state.value .value .var_state, optInTimePeriod, optInNbDev);
    }
    public int stdDevState( struct TA_stdDev_State* _state,
       double inReal,
       double *outReal )
    {
-      RetCode retCode;
+      int retCode;
       double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      retCode = TA_INT_VAR _State ( ( variance *) _state, inReal, outReal );
+      retCode = variance ( _state.value .var_state, inReal, outReal );
       if( retCode != RetCode.Success )
          return retCode;
-      if( optInNbDev != 1.0 )
+      if( _state.value .optInNbDev != 1.0 )
       {
          tempReal = outReal.value ;
          if( ! (tempReal< (0.00000000000001) ) )
@@ -28182,12 +28205,12 @@ public class Core {
    }
    public int stdDevStateFree( struct TA_stdDev_State** _state )
    {
-      variance (& _state.value .var_state);
+      variance ((struct variance **)& _state.value .value .var_state);
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stdDev( int startIdx,
@@ -28506,9 +28529,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stoch( int startIdx,
@@ -28846,9 +28869,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stochF( int startIdx,
@@ -29126,9 +29149,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stochRsi( int startIdx,
@@ -29271,9 +29294,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sub( int startIdx,
@@ -29400,9 +29423,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sum( int startIdx,
@@ -29625,9 +29648,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode t3( int startIdx,
@@ -29804,9 +29827,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode tan( int startIdx,
@@ -29886,9 +29909,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode tanh( int startIdx,
@@ -30034,9 +30057,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode tema( int startIdx,
@@ -30208,9 +30231,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode trueRange( int startIdx,
@@ -30424,9 +30447,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode trima( int startIdx,
@@ -30682,9 +30705,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode trix( int startIdx,
@@ -30870,9 +30893,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode tsf( int startIdx,
@@ -30993,9 +31016,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode typPrice( int startIdx,
@@ -31204,9 +31227,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ultOsc( int startIdx,
@@ -31468,9 +31491,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode variance( int startIdx,
@@ -31613,9 +31636,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode wclPrice( int startIdx,
@@ -31787,9 +31810,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode willR( int startIdx,
@@ -31995,9 +32018,9 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      if (*_state != NULL) {
-         if ((*_state)->memory != NULL) free((*_state)->memory);
-         free(*_state); *_state = NULL;}
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
+         free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode wma( int startIdx,

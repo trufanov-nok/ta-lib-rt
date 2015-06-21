@@ -327,7 +327,7 @@
 
 {
    /* insert local variable here */
-
+   #define TA_WILLR_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -384,7 +384,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_WILLR_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+        double diff;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -416,6 +417,28 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+        {
+            STATE.lowest = 0.;
+            STATE.highest = 0.;
+        }
+
+   if (inLow < STATE.lowest)
+       STATE.lowest = inLow;
+
+   if (inHigh > STATE.highest)
+       STATE.highest = inHigh;
+
+
+   if (NEED_MORE_DATA)
+       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+   diff = (STATE.highest - STATE.lowest)/(-100.0);
+
+   if( diff != 0.0 )
+      VALUE_HANDLE_DEREF(outReal) = (STATE.highest-inClose)/diff;
+   else
+      VALUE_HANDLE_DEREF(outReal) = 0.0;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -442,9 +465,9 @@
 /* Generated */ 
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    if (*_state != NULL) {
-/* Generated */          if ((*_state)->memory != NULL) free((*_state)->memory);
-/* Generated */          free(*_state); *_state = NULL;}
+/* Generated */    if (STATE != NULL) {
+/* Generated */          if (MEM_P != NULL) free(MEM_P);
+/* Generated */          free(STATE); STATE = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

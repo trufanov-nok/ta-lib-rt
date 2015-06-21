@@ -5520,6 +5520,8 @@ TA_LIB_API struct TA_IMI_State {
                                int mem_size;
                                int mem_index;
                                struct TA_IMI_Data* memory;
+                               double       upsum;
+                               double       downsum;
                                int           optInTimePeriod; /* From 2 to 100000 */
                                };
 
@@ -9150,6 +9152,8 @@ TA_LIB_API struct TA_WILLR_State {
                                  int mem_size;
                                  int mem_index;
                                  struct TA_WILLR_Data* memory;
+                                 double       highest;
+                                 double       lowest;
                                  int           optInTimePeriod; /* From 2 to 100000 */
                                  };
 
