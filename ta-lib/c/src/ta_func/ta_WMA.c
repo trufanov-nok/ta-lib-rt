@@ -381,7 +381,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_WMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+//double tempReal;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -391,8 +392,8 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
-/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
+/* Generated */    size_t _cur_idx = STATE.mem_index++ % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_WMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -408,6 +409,35 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+ if (FIRST_LAUNCH)
+    {
+            STATE.periodSum = 0.;
+            STATE.periodSub = 0.;
+            STATE.divider =  (STATE.optInTimePeriod*(STATE.optInTimePeriod+1))>>1; //const
+    }
+
+ if (NEED_MORE_DATA)
+ {
+     STATE.periodSum += inReal*STATE.optInTimePeriod;
+
+     STATE.periodSub += inReal;
+     STATE.periodSum -= STATE.periodSub;
+
+     PUSH_TO_MEM(inReal,inReal);
+     return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+ }
+
+    STATE.periodSum += inReal*STATE.optInTimePeriod;
+
+    VALUE_HANDLE_DEREF(outReal) = STATE.periodSum / STATE.divider;
+
+    STATE.periodSum -= STATE.periodSub;
+    STATE.periodSub += inReal;
+
+    STATE.periodSub -= POP_FROM_MEM(inReal);
+    PUSH_TO_MEM(inReal,inReal);
+
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

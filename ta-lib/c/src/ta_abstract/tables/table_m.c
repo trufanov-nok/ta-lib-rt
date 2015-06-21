@@ -122,7 +122,12 @@ static const TA_OptInputParameterInfo *TA_MA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MA_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "ta_state", 0 };
+
+static const TA_InputParameterInfo *TA_MA_StructParams[] = {
+    &TA_MA_DEF_UI_STRUCT_PARAM_1,
+    NULL };
 
 DEF_FUNCTION( MA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
@@ -309,7 +314,70 @@ static const TA_OptInputParameterInfo *TA_MAMA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MAMA_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "detrender", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "Q1", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "jI", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "jQ", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "hilbertIdx", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "periodWMASub", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "periodWMASum", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "period", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "I1ForOddPrev2", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "I1ForEvenPrev2", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "I1ForOddPrev3", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "I1ForEvenPrev3", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Real, "prevI2", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Real, "prevQ2", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_15 =
+                                  { TA_Input_Real, "prevPhase", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_16 =
+                                  { TA_Input_Real, "mama", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_17 =
+                                  { TA_Input_Real, "fama", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_18 =
+                                  { TA_Input_Real, "Im", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_19 =
+                                  { TA_Input_Real, "Re", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_20 =
+                                  { TA_Input_Real, "trailingWMAValue", 0 };
+
+static const TA_InputParameterInfo *TA_MAMA_StructParams[] = {
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_1,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_2,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_3,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_4,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_5,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_6,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_7,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_8,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_9,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_10,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_11,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_12,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_13,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_14,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_15,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_16,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_17,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_18,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_19,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_20,
+    NULL };
 
 DEF_FUNCTION( MAMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */

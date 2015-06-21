@@ -215,7 +215,7 @@
 #define PUSH_TO_MEM(x,y) MEM_IDX_NS(_cur_idx, x) = y
 #define POP_FROM_MEM(x) MEM_IDX_NS(_cur_idx, x)
 #define NEED_MORE_DATA (STATE.mem_index < STATE.mem_size)
-#define FIRST_LAUNCH (STATE.mem_index <= 1)
+#define FIRST_LAUNCH (_cur_idx == 0)
 
 
 /* Abstraction of function calls within the library.

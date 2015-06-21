@@ -73,8 +73,8 @@ struct TA_ACCBANDS_Data {
                         double       inClose;
                         };
 struct TA_ACCBANDS_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_ACCBANDS_Data* memory;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
@@ -116,8 +116,8 @@ struct TA_ACOS_Data {
                     double       inReal;
                     };
 struct TA_ACOS_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_ACOS_Data* memory;
                      };
 
@@ -159,8 +159,8 @@ struct TA_AD_Data {
                   double       inVolume;
                   };
 struct TA_AD_State {
-                   int mem_size;
-                   int mem_index;
+                   size_t mem_size;
+                   size_t mem_index;
                    struct TA_AD_Data* memory;
                    };
 
@@ -201,8 +201,8 @@ struct TA_ADD_Data {
                    double       inReal1;
                    };
 struct TA_ADD_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_ADD_Data* memory;
                     };
 
@@ -257,8 +257,8 @@ struct TA_ADOSC_Data {
                      double       inVolume;
                      };
 struct TA_ADOSC_State {
-                      int mem_size;
-                      int mem_index;
+                      size_t mem_size;
+                      size_t mem_index;
                       struct TA_ADOSC_Data* memory;
                       int           optInFastPeriod; /* From 2 to 100000 */
                       int           optInSlowPeriod; /* From 2 to 100000 */
@@ -312,8 +312,8 @@ struct TA_ADX_Data {
                    double       inClose;
                    };
 struct TA_ADX_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_ADX_Data* memory;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
@@ -364,8 +364,8 @@ struct TA_ADXR_Data {
                     double       inClose;
                     };
 struct TA_ADXR_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_ADXR_Data* memory;
                      int           optInTimePeriod; /* From 2 to 100000 */
                      };
@@ -420,8 +420,8 @@ struct TA_APO_Data {
                    double       inReal;
                    };
 struct TA_APO_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_APO_Data* memory;
                     int           optInFastPeriod; /* From 2 to 100000 */
                     int           optInSlowPeriod; /* From 2 to 100000 */
@@ -471,8 +471,8 @@ struct TA_AROON_Data {
                      double       inLow;
                      };
 struct TA_AROON_State {
-                      int mem_size;
-                      int mem_index;
+                      size_t mem_size;
+                      size_t mem_index;
                       struct TA_AROON_Data* memory;
                       int           optInTimePeriod; /* From 2 to 100000 */
                       };
@@ -521,8 +521,8 @@ struct TA_AROONOSC_Data {
                         double       inLow;
                         };
 struct TA_AROONOSC_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_AROONOSC_Data* memory;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
@@ -561,8 +561,8 @@ struct TA_ASIN_Data {
                     double       inReal;
                     };
 struct TA_ASIN_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_ASIN_Data* memory;
                      };
 
@@ -598,8 +598,8 @@ struct TA_ATAN_Data {
                     double       inReal;
                     };
 struct TA_ATAN_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_ATAN_Data* memory;
                      };
 
@@ -646,8 +646,8 @@ struct TA_ATR_Data {
                    double       inClose;
                    };
 struct TA_ATR_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_ATR_Data* memory;
                     int           optInTimePeriod; /* From 1 to 100000 */
                     };
@@ -693,8 +693,8 @@ struct TA_AVGPRICE_Data {
                         double       inClose;
                         };
 struct TA_AVGPRICE_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_AVGPRICE_Data* memory;
                          };
 
@@ -740,8 +740,8 @@ struct TA_AVGDEV_Data {
                       double       inReal;
                       };
 struct TA_AVGDEV_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_AVGDEV_Data* memory;
                        double       sum;
                        int           optInTimePeriod; /* From 2 to 100000 */
@@ -802,8 +802,8 @@ struct TA_BBANDS_Data {
                       double       inReal;
                       };
 struct TA_BBANDS_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_BBANDS_Data* memory;
                        int           optInTimePeriod; /* From 2 to 100000 */
                        double        optInNbDevUp; /* From TA_REAL_MIN to TA_REAL_MAX */
@@ -856,8 +856,8 @@ struct TA_BETA_Data {
                     double       inReal1;
                     };
 struct TA_BETA_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_BETA_Data* memory;
                      int           optInTimePeriod; /* From 1 to 100000 */
                      };
@@ -902,8 +902,8 @@ struct TA_BOP_Data {
                    double       inClose;
                    };
 struct TA_BOP_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_BOP_Data* memory;
                     };
 
@@ -953,8 +953,8 @@ struct TA_CCI_Data {
                    double       inClose;
                    };
 struct TA_CCI_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_CCI_Data* memory;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
@@ -1000,8 +1000,8 @@ struct TA_CDL2CROWS_Data {
                          double       inClose;
                          };
 struct TA_CDL2CROWS_State {
-                          int mem_size;
-                          int mem_index;
+                          size_t mem_size;
+                          size_t mem_index;
                           struct TA_CDL2CROWS_Data* memory;
                           };
 
@@ -1046,8 +1046,8 @@ struct TA_CDL3BLACKCROWS_Data {
                               double       inClose;
                               };
 struct TA_CDL3BLACKCROWS_State {
-                               int mem_size;
-                               int mem_index;
+                               size_t mem_size;
+                               size_t mem_index;
                                struct TA_CDL3BLACKCROWS_Data* memory;
                                };
 
@@ -1092,8 +1092,8 @@ struct TA_CDL3INSIDE_Data {
                           double       inClose;
                           };
 struct TA_CDL3INSIDE_State {
-                           int mem_size;
-                           int mem_index;
+                           size_t mem_size;
+                           size_t mem_index;
                            struct TA_CDL3INSIDE_Data* memory;
                            };
 
@@ -1138,8 +1138,8 @@ struct TA_CDL3LINESTRIKE_Data {
                               double       inClose;
                               };
 struct TA_CDL3LINESTRIKE_State {
-                               int mem_size;
-                               int mem_index;
+                               size_t mem_size;
+                               size_t mem_index;
                                struct TA_CDL3LINESTRIKE_Data* memory;
                                };
 
@@ -1184,8 +1184,8 @@ struct TA_CDL3OUTSIDE_Data {
                            double       inClose;
                            };
 struct TA_CDL3OUTSIDE_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_CDL3OUTSIDE_Data* memory;
                             };
 
@@ -1230,8 +1230,8 @@ struct TA_CDL3STARSINSOUTH_Data {
                                 double       inClose;
                                 };
 struct TA_CDL3STARSINSOUTH_State {
-                                 int mem_size;
-                                 int mem_index;
+                                 size_t mem_size;
+                                 size_t mem_index;
                                  struct TA_CDL3STARSINSOUTH_Data* memory;
                                  };
 
@@ -1276,8 +1276,8 @@ struct TA_CDL3WHITESOLDIERS_Data {
                                  double       inClose;
                                  };
 struct TA_CDL3WHITESOLDIERS_State {
-                                  int mem_size;
-                                  int mem_index;
+                                  size_t mem_size;
+                                  size_t mem_index;
                                   struct TA_CDL3WHITESOLDIERS_Data* memory;
                                   };
 
@@ -1329,8 +1329,8 @@ struct TA_CDLABANDONEDBABY_Data {
                                 double       inClose;
                                 };
 struct TA_CDLABANDONEDBABY_State {
-                                 int mem_size;
-                                 int mem_index;
+                                 size_t mem_size;
+                                 size_t mem_index;
                                  struct TA_CDLABANDONEDBABY_Data* memory;
                                  double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                  };
@@ -1377,8 +1377,8 @@ struct TA_CDLADVANCEBLOCK_Data {
                                double       inClose;
                                };
 struct TA_CDLADVANCEBLOCK_State {
-                                int mem_size;
-                                int mem_index;
+                                size_t mem_size;
+                                size_t mem_index;
                                 struct TA_CDLADVANCEBLOCK_Data* memory;
                                 };
 
@@ -1423,8 +1423,8 @@ struct TA_CDLBELTHOLD_Data {
                            double       inClose;
                            };
 struct TA_CDLBELTHOLD_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_CDLBELTHOLD_Data* memory;
                             };
 
@@ -1469,8 +1469,8 @@ struct TA_CDLBREAKAWAY_Data {
                             double       inClose;
                             };
 struct TA_CDLBREAKAWAY_State {
-                             int mem_size;
-                             int mem_index;
+                             size_t mem_size;
+                             size_t mem_index;
                              struct TA_CDLBREAKAWAY_Data* memory;
                              };
 
@@ -1515,8 +1515,8 @@ struct TA_CDLCLOSINGMARUBOZU_Data {
                                   double       inClose;
                                   };
 struct TA_CDLCLOSINGMARUBOZU_State {
-                                   int mem_size;
-                                   int mem_index;
+                                   size_t mem_size;
+                                   size_t mem_index;
                                    struct TA_CDLCLOSINGMARUBOZU_Data* memory;
                                    };
 
@@ -1561,8 +1561,8 @@ struct TA_CDLCONCEALBABYSWALL_Data {
                                    double       inClose;
                                    };
 struct TA_CDLCONCEALBABYSWALL_State {
-                                    int mem_size;
-                                    int mem_index;
+                                    size_t mem_size;
+                                    size_t mem_index;
                                     struct TA_CDLCONCEALBABYSWALL_Data* memory;
                                     };
 
@@ -1607,8 +1607,8 @@ struct TA_CDLCOUNTERATTACK_Data {
                                 double       inClose;
                                 };
 struct TA_CDLCOUNTERATTACK_State {
-                                 int mem_size;
-                                 int mem_index;
+                                 size_t mem_size;
+                                 size_t mem_index;
                                  struct TA_CDLCOUNTERATTACK_Data* memory;
                                  };
 
@@ -1660,8 +1660,8 @@ struct TA_CDLDARKCLOUDCOVER_Data {
                                  double       inClose;
                                  };
 struct TA_CDLDARKCLOUDCOVER_State {
-                                  int mem_size;
-                                  int mem_index;
+                                  size_t mem_size;
+                                  size_t mem_index;
                                   struct TA_CDLDARKCLOUDCOVER_Data* memory;
                                   double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                   };
@@ -1708,8 +1708,8 @@ struct TA_CDLDOJI_Data {
                        double       inClose;
                        };
 struct TA_CDLDOJI_State {
-                        int mem_size;
-                        int mem_index;
+                        size_t mem_size;
+                        size_t mem_index;
                         struct TA_CDLDOJI_Data* memory;
                         };
 
@@ -1754,8 +1754,8 @@ struct TA_CDLDOJISTAR_Data {
                            double       inClose;
                            };
 struct TA_CDLDOJISTAR_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_CDLDOJISTAR_Data* memory;
                             };
 
@@ -1800,8 +1800,8 @@ struct TA_CDLDRAGONFLYDOJI_Data {
                                 double       inClose;
                                 };
 struct TA_CDLDRAGONFLYDOJI_State {
-                                 int mem_size;
-                                 int mem_index;
+                                 size_t mem_size;
+                                 size_t mem_index;
                                  struct TA_CDLDRAGONFLYDOJI_Data* memory;
                                  };
 
@@ -1846,8 +1846,8 @@ struct TA_CDLENGULFING_Data {
                             double       inClose;
                             };
 struct TA_CDLENGULFING_State {
-                             int mem_size;
-                             int mem_index;
+                             size_t mem_size;
+                             size_t mem_index;
                              struct TA_CDLENGULFING_Data* memory;
                              };
 
@@ -1899,8 +1899,8 @@ struct TA_CDLEVENINGDOJISTAR_Data {
                                   double       inClose;
                                   };
 struct TA_CDLEVENINGDOJISTAR_State {
-                                   int mem_size;
-                                   int mem_index;
+                                   size_t mem_size;
+                                   size_t mem_index;
                                    struct TA_CDLEVENINGDOJISTAR_Data* memory;
                                    double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                    };
@@ -1954,8 +1954,8 @@ struct TA_CDLEVENINGSTAR_Data {
                               double       inClose;
                               };
 struct TA_CDLEVENINGSTAR_State {
-                               int mem_size;
-                               int mem_index;
+                               size_t mem_size;
+                               size_t mem_index;
                                struct TA_CDLEVENINGSTAR_Data* memory;
                                double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                };
@@ -2002,8 +2002,8 @@ struct TA_CDLGAPSIDESIDEWHITE_Data {
                                    double       inClose;
                                    };
 struct TA_CDLGAPSIDESIDEWHITE_State {
-                                    int mem_size;
-                                    int mem_index;
+                                    size_t mem_size;
+                                    size_t mem_index;
                                     struct TA_CDLGAPSIDESIDEWHITE_Data* memory;
                                     };
 
@@ -2048,8 +2048,8 @@ struct TA_CDLGRAVESTONEDOJI_Data {
                                  double       inClose;
                                  };
 struct TA_CDLGRAVESTONEDOJI_State {
-                                  int mem_size;
-                                  int mem_index;
+                                  size_t mem_size;
+                                  size_t mem_index;
                                   struct TA_CDLGRAVESTONEDOJI_Data* memory;
                                   };
 
@@ -2094,8 +2094,8 @@ struct TA_CDLHAMMER_Data {
                          double       inClose;
                          };
 struct TA_CDLHAMMER_State {
-                          int mem_size;
-                          int mem_index;
+                          size_t mem_size;
+                          size_t mem_index;
                           struct TA_CDLHAMMER_Data* memory;
                           };
 
@@ -2140,8 +2140,8 @@ struct TA_CDLHANGINGMAN_Data {
                              double       inClose;
                              };
 struct TA_CDLHANGINGMAN_State {
-                              int mem_size;
-                              int mem_index;
+                              size_t mem_size;
+                              size_t mem_index;
                               struct TA_CDLHANGINGMAN_Data* memory;
                               };
 
@@ -2186,8 +2186,8 @@ struct TA_CDLHARAMI_Data {
                          double       inClose;
                          };
 struct TA_CDLHARAMI_State {
-                          int mem_size;
-                          int mem_index;
+                          size_t mem_size;
+                          size_t mem_index;
                           struct TA_CDLHARAMI_Data* memory;
                           };
 
@@ -2232,8 +2232,8 @@ struct TA_CDLHARAMICROSS_Data {
                               double       inClose;
                               };
 struct TA_CDLHARAMICROSS_State {
-                               int mem_size;
-                               int mem_index;
+                               size_t mem_size;
+                               size_t mem_index;
                                struct TA_CDLHARAMICROSS_Data* memory;
                                };
 
@@ -2278,8 +2278,8 @@ struct TA_CDLHIGHWAVE_Data {
                            double       inClose;
                            };
 struct TA_CDLHIGHWAVE_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_CDLHIGHWAVE_Data* memory;
                             };
 
@@ -2324,8 +2324,8 @@ struct TA_CDLHIKKAKE_Data {
                           double       inClose;
                           };
 struct TA_CDLHIKKAKE_State {
-                           int mem_size;
-                           int mem_index;
+                           size_t mem_size;
+                           size_t mem_index;
                            struct TA_CDLHIKKAKE_Data* memory;
                            };
 
@@ -2370,8 +2370,8 @@ struct TA_CDLHIKKAKEMOD_Data {
                              double       inClose;
                              };
 struct TA_CDLHIKKAKEMOD_State {
-                              int mem_size;
-                              int mem_index;
+                              size_t mem_size;
+                              size_t mem_index;
                               struct TA_CDLHIKKAKEMOD_Data* memory;
                               };
 
@@ -2416,8 +2416,8 @@ struct TA_CDLHOMINGPIGEON_Data {
                                double       inClose;
                                };
 struct TA_CDLHOMINGPIGEON_State {
-                                int mem_size;
-                                int mem_index;
+                                size_t mem_size;
+                                size_t mem_index;
                                 struct TA_CDLHOMINGPIGEON_Data* memory;
                                 };
 
@@ -2462,8 +2462,8 @@ struct TA_CDLIDENTICAL3CROWS_Data {
                                   double       inClose;
                                   };
 struct TA_CDLIDENTICAL3CROWS_State {
-                                   int mem_size;
-                                   int mem_index;
+                                   size_t mem_size;
+                                   size_t mem_index;
                                    struct TA_CDLIDENTICAL3CROWS_Data* memory;
                                    };
 
@@ -2508,8 +2508,8 @@ struct TA_CDLINNECK_Data {
                          double       inClose;
                          };
 struct TA_CDLINNECK_State {
-                          int mem_size;
-                          int mem_index;
+                          size_t mem_size;
+                          size_t mem_index;
                           struct TA_CDLINNECK_Data* memory;
                           };
 
@@ -2554,8 +2554,8 @@ struct TA_CDLINVERTEDHAMMER_Data {
                                  double       inClose;
                                  };
 struct TA_CDLINVERTEDHAMMER_State {
-                                  int mem_size;
-                                  int mem_index;
+                                  size_t mem_size;
+                                  size_t mem_index;
                                   struct TA_CDLINVERTEDHAMMER_Data* memory;
                                   };
 
@@ -2600,8 +2600,8 @@ struct TA_CDLKICKING_Data {
                           double       inClose;
                           };
 struct TA_CDLKICKING_State {
-                           int mem_size;
-                           int mem_index;
+                           size_t mem_size;
+                           size_t mem_index;
                            struct TA_CDLKICKING_Data* memory;
                            };
 
@@ -2646,8 +2646,8 @@ struct TA_CDLKICKINGBYLENGTH_Data {
                                   double       inClose;
                                   };
 struct TA_CDLKICKINGBYLENGTH_State {
-                                   int mem_size;
-                                   int mem_index;
+                                   size_t mem_size;
+                                   size_t mem_index;
                                    struct TA_CDLKICKINGBYLENGTH_Data* memory;
                                    };
 
@@ -2692,8 +2692,8 @@ struct TA_CDLLADDERBOTTOM_Data {
                                double       inClose;
                                };
 struct TA_CDLLADDERBOTTOM_State {
-                                int mem_size;
-                                int mem_index;
+                                size_t mem_size;
+                                size_t mem_index;
                                 struct TA_CDLLADDERBOTTOM_Data* memory;
                                 };
 
@@ -2738,8 +2738,8 @@ struct TA_CDLLONGLEGGEDDOJI_Data {
                                  double       inClose;
                                  };
 struct TA_CDLLONGLEGGEDDOJI_State {
-                                  int mem_size;
-                                  int mem_index;
+                                  size_t mem_size;
+                                  size_t mem_index;
                                   struct TA_CDLLONGLEGGEDDOJI_Data* memory;
                                   };
 
@@ -2784,8 +2784,8 @@ struct TA_CDLLONGLINE_Data {
                            double       inClose;
                            };
 struct TA_CDLLONGLINE_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_CDLLONGLINE_Data* memory;
                             };
 
@@ -2830,8 +2830,8 @@ struct TA_CDLMARUBOZU_Data {
                            double       inClose;
                            };
 struct TA_CDLMARUBOZU_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_CDLMARUBOZU_Data* memory;
                             };
 
@@ -2876,8 +2876,8 @@ struct TA_CDLMATCHINGLOW_Data {
                               double       inClose;
                               };
 struct TA_CDLMATCHINGLOW_State {
-                               int mem_size;
-                               int mem_index;
+                               size_t mem_size;
+                               size_t mem_index;
                                struct TA_CDLMATCHINGLOW_Data* memory;
                                };
 
@@ -2929,8 +2929,8 @@ struct TA_CDLMATHOLD_Data {
                           double       inClose;
                           };
 struct TA_CDLMATHOLD_State {
-                           int mem_size;
-                           int mem_index;
+                           size_t mem_size;
+                           size_t mem_index;
                            struct TA_CDLMATHOLD_Data* memory;
                            double        optInPenetration; /* From 0 to TA_REAL_MAX */
                            };
@@ -2984,8 +2984,8 @@ struct TA_CDLMORNINGDOJISTAR_Data {
                                   double       inClose;
                                   };
 struct TA_CDLMORNINGDOJISTAR_State {
-                                   int mem_size;
-                                   int mem_index;
+                                   size_t mem_size;
+                                   size_t mem_index;
                                    struct TA_CDLMORNINGDOJISTAR_Data* memory;
                                    double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                    };
@@ -3039,8 +3039,8 @@ struct TA_CDLMORNINGSTAR_Data {
                               double       inClose;
                               };
 struct TA_CDLMORNINGSTAR_State {
-                               int mem_size;
-                               int mem_index;
+                               size_t mem_size;
+                               size_t mem_index;
                                struct TA_CDLMORNINGSTAR_Data* memory;
                                double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                };
@@ -3087,8 +3087,8 @@ struct TA_CDLONNECK_Data {
                          double       inClose;
                          };
 struct TA_CDLONNECK_State {
-                          int mem_size;
-                          int mem_index;
+                          size_t mem_size;
+                          size_t mem_index;
                           struct TA_CDLONNECK_Data* memory;
                           };
 
@@ -3133,8 +3133,8 @@ struct TA_CDLPIERCING_Data {
                            double       inClose;
                            };
 struct TA_CDLPIERCING_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_CDLPIERCING_Data* memory;
                             };
 
@@ -3179,8 +3179,8 @@ struct TA_CDLRICKSHAWMAN_Data {
                               double       inClose;
                               };
 struct TA_CDLRICKSHAWMAN_State {
-                               int mem_size;
-                               int mem_index;
+                               size_t mem_size;
+                               size_t mem_index;
                                struct TA_CDLRICKSHAWMAN_Data* memory;
                                };
 
@@ -3225,8 +3225,8 @@ struct TA_CDLRISEFALL3METHODS_Data {
                                    double       inClose;
                                    };
 struct TA_CDLRISEFALL3METHODS_State {
-                                    int mem_size;
-                                    int mem_index;
+                                    size_t mem_size;
+                                    size_t mem_index;
                                     struct TA_CDLRISEFALL3METHODS_Data* memory;
                                     };
 
@@ -3271,8 +3271,8 @@ struct TA_CDLSEPARATINGLINES_Data {
                                   double       inClose;
                                   };
 struct TA_CDLSEPARATINGLINES_State {
-                                   int mem_size;
-                                   int mem_index;
+                                   size_t mem_size;
+                                   size_t mem_index;
                                    struct TA_CDLSEPARATINGLINES_Data* memory;
                                    };
 
@@ -3317,8 +3317,8 @@ struct TA_CDLSHOOTINGSTAR_Data {
                                double       inClose;
                                };
 struct TA_CDLSHOOTINGSTAR_State {
-                                int mem_size;
-                                int mem_index;
+                                size_t mem_size;
+                                size_t mem_index;
                                 struct TA_CDLSHOOTINGSTAR_Data* memory;
                                 };
 
@@ -3363,8 +3363,8 @@ struct TA_CDLSHORTLINE_Data {
                             double       inClose;
                             };
 struct TA_CDLSHORTLINE_State {
-                             int mem_size;
-                             int mem_index;
+                             size_t mem_size;
+                             size_t mem_index;
                              struct TA_CDLSHORTLINE_Data* memory;
                              };
 
@@ -3409,8 +3409,8 @@ struct TA_CDLSPINNINGTOP_Data {
                               double       inClose;
                               };
 struct TA_CDLSPINNINGTOP_State {
-                               int mem_size;
-                               int mem_index;
+                               size_t mem_size;
+                               size_t mem_index;
                                struct TA_CDLSPINNINGTOP_Data* memory;
                                };
 
@@ -3455,8 +3455,8 @@ struct TA_CDLSTALLEDPATTERN_Data {
                                  double       inClose;
                                  };
 struct TA_CDLSTALLEDPATTERN_State {
-                                  int mem_size;
-                                  int mem_index;
+                                  size_t mem_size;
+                                  size_t mem_index;
                                   struct TA_CDLSTALLEDPATTERN_Data* memory;
                                   };
 
@@ -3501,8 +3501,8 @@ struct TA_CDLSTICKSANDWICH_Data {
                                 double       inClose;
                                 };
 struct TA_CDLSTICKSANDWICH_State {
-                                 int mem_size;
-                                 int mem_index;
+                                 size_t mem_size;
+                                 size_t mem_index;
                                  struct TA_CDLSTICKSANDWICH_Data* memory;
                                  };
 
@@ -3547,8 +3547,8 @@ struct TA_CDLTAKURI_Data {
                          double       inClose;
                          };
 struct TA_CDLTAKURI_State {
-                          int mem_size;
-                          int mem_index;
+                          size_t mem_size;
+                          size_t mem_index;
                           struct TA_CDLTAKURI_Data* memory;
                           };
 
@@ -3593,8 +3593,8 @@ struct TA_CDLTASUKIGAP_Data {
                             double       inClose;
                             };
 struct TA_CDLTASUKIGAP_State {
-                             int mem_size;
-                             int mem_index;
+                             size_t mem_size;
+                             size_t mem_index;
                              struct TA_CDLTASUKIGAP_Data* memory;
                              };
 
@@ -3639,8 +3639,8 @@ struct TA_CDLTHRUSTING_Data {
                             double       inClose;
                             };
 struct TA_CDLTHRUSTING_State {
-                             int mem_size;
-                             int mem_index;
+                             size_t mem_size;
+                             size_t mem_index;
                              struct TA_CDLTHRUSTING_Data* memory;
                              };
 
@@ -3685,8 +3685,8 @@ struct TA_CDLTRISTAR_Data {
                           double       inClose;
                           };
 struct TA_CDLTRISTAR_State {
-                           int mem_size;
-                           int mem_index;
+                           size_t mem_size;
+                           size_t mem_index;
                            struct TA_CDLTRISTAR_Data* memory;
                            };
 
@@ -3731,8 +3731,8 @@ struct TA_CDLUNIQUE3RIVER_Data {
                                double       inClose;
                                };
 struct TA_CDLUNIQUE3RIVER_State {
-                                int mem_size;
-                                int mem_index;
+                                size_t mem_size;
+                                size_t mem_index;
                                 struct TA_CDLUNIQUE3RIVER_Data* memory;
                                 };
 
@@ -3777,8 +3777,8 @@ struct TA_CDLUPSIDEGAP2CROWS_Data {
                                   double       inClose;
                                   };
 struct TA_CDLUPSIDEGAP2CROWS_State {
-                                   int mem_size;
-                                   int mem_index;
+                                   size_t mem_size;
+                                   size_t mem_index;
                                    struct TA_CDLUPSIDEGAP2CROWS_Data* memory;
                                    };
 
@@ -3823,8 +3823,8 @@ struct TA_CDLXSIDEGAP3METHODS_Data {
                                    double       inClose;
                                    };
 struct TA_CDLXSIDEGAP3METHODS_State {
-                                    int mem_size;
-                                    int mem_index;
+                                    size_t mem_size;
+                                    size_t mem_index;
                                     struct TA_CDLXSIDEGAP3METHODS_Data* memory;
                                     };
 
@@ -3863,8 +3863,8 @@ struct TA_CEIL_Data {
                     double       inReal;
                     };
 struct TA_CEIL_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_CEIL_Data* memory;
                      };
 
@@ -3907,8 +3907,8 @@ struct TA_CMO_Data {
                    double       inReal;
                    };
 struct TA_CMO_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_CMO_Data* memory;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
@@ -3955,8 +3955,8 @@ struct TA_CORREL_Data {
                       double       inReal1;
                       };
 struct TA_CORREL_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_CORREL_Data* memory;
                        double       sumXY;
                        double       sumX;
@@ -4000,8 +4000,8 @@ struct TA_COS_Data {
                    double       inReal;
                    };
 struct TA_COS_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_COS_Data* memory;
                     };
 
@@ -4037,8 +4037,8 @@ struct TA_COSH_Data {
                     double       inReal;
                     };
 struct TA_COSH_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_COSH_Data* memory;
                      };
 
@@ -4081,9 +4081,11 @@ struct TA_DEMA_Data {
                     double       inReal;
                     };
 struct TA_DEMA_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_DEMA_Data* memory;
+                     void*        state_EMA;
+                     void*        state_EMA2;
                      int           optInTimePeriod; /* From 2 to 100000 */
                      };
 
@@ -4122,8 +4124,8 @@ struct TA_DIV_Data {
                    double       inReal1;
                    };
 struct TA_DIV_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_DIV_Data* memory;
                     };
 
@@ -4171,8 +4173,8 @@ struct TA_DX_Data {
                   double       inClose;
                   };
 struct TA_DX_State {
-                   int mem_size;
-                   int mem_index;
+                   size_t mem_size;
+                   size_t mem_index;
                    struct TA_DX_Data* memory;
                    int           optInTimePeriod; /* From 2 to 100000 */
                    };
@@ -4219,9 +4221,12 @@ struct TA_EMA_Data {
                    double       inReal;
                    };
 struct TA_EMA_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_EMA_Data* memory;
+                    double       prevMA;
+                    double       tempSum;
+                    int          currentIdx;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 
@@ -4258,8 +4263,8 @@ struct TA_EXP_Data {
                    double       inReal;
                    };
 struct TA_EXP_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_EXP_Data* memory;
                     };
 
@@ -4295,8 +4300,8 @@ struct TA_FLOOR_Data {
                      double       inReal;
                      };
 struct TA_FLOOR_State {
-                      int mem_size;
-                      int mem_index;
+                      size_t mem_size;
+                      size_t mem_index;
                       struct TA_FLOOR_Data* memory;
                       };
 
@@ -4332,8 +4337,8 @@ struct TA_HT_DCPERIOD_Data {
                            double       inReal;
                            };
 struct TA_HT_DCPERIOD_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_HT_DCPERIOD_Data* memory;
                             };
 
@@ -4369,8 +4374,8 @@ struct TA_HT_DCPHASE_Data {
                           double       inReal;
                           };
 struct TA_HT_DCPHASE_State {
-                           int mem_size;
-                           int mem_index;
+                           size_t mem_size;
+                           size_t mem_index;
                            struct TA_HT_DCPHASE_Data* memory;
                            };
 
@@ -4407,8 +4412,8 @@ struct TA_HT_PHASOR_Data {
                          double       inReal;
                          };
 struct TA_HT_PHASOR_State {
-                          int mem_size;
-                          int mem_index;
+                          size_t mem_size;
+                          size_t mem_index;
                           struct TA_HT_PHASOR_Data* memory;
                           };
 
@@ -4446,8 +4451,8 @@ struct TA_HT_SINE_Data {
                        double       inReal;
                        };
 struct TA_HT_SINE_State {
-                        int mem_size;
-                        int mem_index;
+                        size_t mem_size;
+                        size_t mem_index;
                         struct TA_HT_SINE_Data* memory;
                         };
 
@@ -4484,8 +4489,8 @@ struct TA_HT_TRENDLINE_Data {
                             double       inReal;
                             };
 struct TA_HT_TRENDLINE_State {
-                             int mem_size;
-                             int mem_index;
+                             size_t mem_size;
+                             size_t mem_index;
                              struct TA_HT_TRENDLINE_Data* memory;
                              };
 
@@ -4521,8 +4526,8 @@ struct TA_HT_TRENDMODE_Data {
                             double       inReal;
                             };
 struct TA_HT_TRENDMODE_State {
-                             int mem_size;
-                             int mem_index;
+                             size_t mem_size;
+                             size_t mem_index;
                              struct TA_HT_TRENDMODE_Data* memory;
                              };
 
@@ -4567,8 +4572,8 @@ struct TA_IMI_Data {
                    double       inClose;
                    };
 struct TA_IMI_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_IMI_Data* memory;
                     double       upsum;
                     double       downsum;
@@ -4616,9 +4621,12 @@ struct TA_KAMA_Data {
                     double       inReal;
                     };
 struct TA_KAMA_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_KAMA_Data* memory;
+                     double       sumROC1;
+                     double       yestReal;
+                     double       prevKAMA;
                      int           optInTimePeriod; /* From 2 to 100000 */
                      };
 
@@ -4662,8 +4670,8 @@ struct TA_LINEARREG_Data {
                          double       inReal;
                          };
 struct TA_LINEARREG_State {
-                          int mem_size;
-                          int mem_index;
+                          size_t mem_size;
+                          size_t mem_index;
                           struct TA_LINEARREG_Data* memory;
                           double       SumX;
                           double       SumXY;
@@ -4713,8 +4721,8 @@ struct TA_LINEARREG_ANGLE_Data {
                                double       inReal;
                                };
 struct TA_LINEARREG_ANGLE_State {
-                                int mem_size;
-                                int mem_index;
+                                size_t mem_size;
+                                size_t mem_index;
                                 struct TA_LINEARREG_ANGLE_Data* memory;
                                 double       SumX;
                                 double       SumXY;
@@ -4764,8 +4772,8 @@ struct TA_LINEARREG_INTERCEPT_Data {
                                    double       inReal;
                                    };
 struct TA_LINEARREG_INTERCEPT_State {
-                                    int mem_size;
-                                    int mem_index;
+                                    size_t mem_size;
+                                    size_t mem_index;
                                     struct TA_LINEARREG_INTERCEPT_Data* memory;
                                     double       SumX;
                                     double       SumXY;
@@ -4815,8 +4823,8 @@ struct TA_LINEARREG_SLOPE_Data {
                                double       inReal;
                                };
 struct TA_LINEARREG_SLOPE_State {
-                                int mem_size;
-                                int mem_index;
+                                size_t mem_size;
+                                size_t mem_index;
                                 struct TA_LINEARREG_SLOPE_Data* memory;
                                 double       SumX;
                                 double       SumXY;
@@ -4859,8 +4867,8 @@ struct TA_LN_Data {
                   double       inReal;
                   };
 struct TA_LN_State {
-                   int mem_size;
-                   int mem_index;
+                   size_t mem_size;
+                   size_t mem_index;
                    struct TA_LN_Data* memory;
                    };
 
@@ -4896,8 +4904,8 @@ struct TA_LOG10_Data {
                      double       inReal;
                      };
 struct TA_LOG10_State {
-                      int mem_size;
-                      int mem_index;
+                      size_t mem_size;
+                      size_t mem_index;
                       struct TA_LOG10_Data* memory;
                       };
 
@@ -4943,9 +4951,10 @@ struct TA_MA_Data {
                   double       inReal;
                   };
 struct TA_MA_State {
-                   int mem_size;
-                   int mem_index;
+                   size_t mem_size;
+                   size_t mem_index;
                    struct TA_MA_Data* memory;
+                   void*        ta_state;
                    int           optInTimePeriod; /* From 1 to 100000 */
                    TA_MAType     optInMAType;                   };
 
@@ -5001,8 +5010,8 @@ struct TA_MACD_Data {
                     double       inReal;
                     };
 struct TA_MACD_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_MACD_Data* memory;
                      int           optInFastPeriod; /* From 2 to 100000 */
                      int           optInSlowPeriod; /* From 2 to 100000 */
@@ -5074,8 +5083,8 @@ struct TA_MACDEXT_Data {
                        double       inReal;
                        };
 struct TA_MACDEXT_State {
-                        int mem_size;
-                        int mem_index;
+                        size_t mem_size;
+                        size_t mem_index;
                         struct TA_MACDEXT_Data* memory;
                         int           optInFastPeriod; /* From 2 to 100000 */
                         TA_MAType     optInFastMAType;                        int           optInSlowPeriod; /* From 2 to 100000 */
@@ -5128,8 +5137,8 @@ struct TA_MACDFIX_Data {
                        double       inReal;
                        };
 struct TA_MACDFIX_State {
-                        int mem_size;
-                        int mem_index;
+                        size_t mem_size;
+                        size_t mem_index;
                         struct TA_MACDFIX_Data* memory;
                         int           optInSignalPeriod; /* From 1 to 100000 */
                         };
@@ -5182,9 +5191,29 @@ struct TA_MAMA_Data {
                     double       inReal;
                     };
 struct TA_MAMA_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_MAMA_Data* memory;
+                     void*        detrender;
+                     void*        Q1;
+                     void*        jI;
+                     void*        jQ;
+                     int          hilbertIdx;
+                     double       periodWMASub;
+                     double       periodWMASum;
+                     double       period;
+                     double       I1ForOddPrev2;
+                     double       I1ForEvenPrev2;
+                     double       I1ForOddPrev3;
+                     double       I1ForEvenPrev3;
+                     double       prevI2;
+                     double       prevQ2;
+                     double       prevPhase;
+                     double       mama;
+                     double       fama;
+                     double       Im;
+                     double       Re;
+                     double       trailingWMAValue;
                      double        optInFastLimit; /* From 0.01 to 0.99 */
                      double        optInSlowLimit; /* From 0.01 to 0.99 */
                      };
@@ -5241,8 +5270,8 @@ struct TA_MAVP_Data {
                     double       inPeriods;
                     };
 struct TA_MAVP_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_MAVP_Data* memory;
                      int           optInMinPeriod; /* From 2 to 100000 */
                      int           optInMaxPeriod; /* From 2 to 100000 */
@@ -5290,8 +5319,8 @@ struct TA_MAX_Data {
                    double       inReal;
                    };
 struct TA_MAX_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_MAX_Data* memory;
                     double       max;
                     int           optInTimePeriod; /* From 2 to 100000 */
@@ -5337,8 +5366,8 @@ struct TA_MAXINDEX_Data {
                         double       inReal;
                         };
 struct TA_MAXINDEX_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_MAXINDEX_Data* memory;
                          double       max;
                          int          maxIdx;
@@ -5381,8 +5410,8 @@ struct TA_MEDPRICE_Data {
                         double       inLow;
                         };
 struct TA_MEDPRICE_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_MEDPRICE_Data* memory;
                          };
 
@@ -5432,8 +5461,8 @@ struct TA_MFI_Data {
                    double       inVolume;
                    };
 struct TA_MFI_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_MFI_Data* memory;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
@@ -5481,8 +5510,8 @@ struct TA_MIDPOINT_Data {
                         double       inReal;
                         };
 struct TA_MIDPOINT_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_MIDPOINT_Data* memory;
                          double       highest;
                          double       lowest;
@@ -5531,8 +5560,8 @@ struct TA_MIDPRICE_Data {
                         double       inLow;
                         };
 struct TA_MIDPRICE_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_MIDPRICE_Data* memory;
                          double       highest;
                          double       lowest;
@@ -5580,8 +5609,8 @@ struct TA_MIN_Data {
                    double       inReal;
                    };
 struct TA_MIN_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_MIN_Data* memory;
                     double       min;
                     int           optInTimePeriod; /* From 2 to 100000 */
@@ -5627,8 +5656,8 @@ struct TA_MININDEX_Data {
                         double       inReal;
                         };
 struct TA_MININDEX_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_MININDEX_Data* memory;
                          double       min;
                          int          minIdx;
@@ -5677,8 +5706,8 @@ struct TA_MINMAX_Data {
                       double       inReal;
                       };
 struct TA_MINMAX_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_MINMAX_Data* memory;
                        double       min;
                        double       max;
@@ -5727,8 +5756,8 @@ struct TA_MINMAXINDEX_Data {
                            double       inReal;
                            };
 struct TA_MINMAXINDEX_State {
-                            int mem_size;
-                            int mem_index;
+                            size_t mem_size;
+                            size_t mem_index;
                             struct TA_MINMAXINDEX_Data* memory;
                             double       min;
                             double       max;
@@ -5783,8 +5812,8 @@ struct TA_MINUS_DI_Data {
                         double       inClose;
                         };
 struct TA_MINUS_DI_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_MINUS_DI_Data* memory;
                          int           optInTimePeriod; /* From 1 to 100000 */
                          };
@@ -5833,8 +5862,8 @@ struct TA_MINUS_DM_Data {
                         double       inLow;
                         };
 struct TA_MINUS_DM_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_MINUS_DM_Data* memory;
                          int           optInTimePeriod; /* From 1 to 100000 */
                          };
@@ -5880,8 +5909,8 @@ struct TA_MOM_Data {
                    double       inReal;
                    };
 struct TA_MOM_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_MOM_Data* memory;
                     int           optInTimePeriod; /* From 1 to 100000 */
                     };
@@ -5921,8 +5950,8 @@ struct TA_MULT_Data {
                     double       inReal1;
                     };
 struct TA_MULT_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_MULT_Data* memory;
                      };
 
@@ -5970,8 +5999,8 @@ struct TA_NATR_Data {
                     double       inClose;
                     };
 struct TA_NATR_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_NATR_Data* memory;
                      int           optInTimePeriod; /* From 1 to 100000 */
                      };
@@ -6013,8 +6042,8 @@ struct TA_OBV_Data {
                    double       inVolume;
                    };
 struct TA_OBV_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_OBV_Data* memory;
                     double       prevOBV;
                     double       prevReal;
@@ -6064,8 +6093,8 @@ struct TA_PLUS_DI_Data {
                        double       inClose;
                        };
 struct TA_PLUS_DI_State {
-                        int mem_size;
-                        int mem_index;
+                        size_t mem_size;
+                        size_t mem_index;
                         struct TA_PLUS_DI_Data* memory;
                         int           optInTimePeriod; /* From 1 to 100000 */
                         };
@@ -6114,8 +6143,8 @@ struct TA_PLUS_DM_Data {
                        double       inLow;
                        };
 struct TA_PLUS_DM_State {
-                        int mem_size;
-                        int mem_index;
+                        size_t mem_size;
+                        size_t mem_index;
                         struct TA_PLUS_DM_Data* memory;
                         int           optInTimePeriod; /* From 1 to 100000 */
                         };
@@ -6169,8 +6198,8 @@ struct TA_PPO_Data {
                    double       inReal;
                    };
 struct TA_PPO_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_PPO_Data* memory;
                     int           optInFastPeriod; /* From 2 to 100000 */
                     int           optInSlowPeriod; /* From 2 to 100000 */
@@ -6217,8 +6246,8 @@ struct TA_ROC_Data {
                    double       inReal;
                    };
 struct TA_ROC_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_ROC_Data* memory;
                     int           optInTimePeriod; /* From 1 to 100000 */
                     };
@@ -6263,8 +6292,8 @@ struct TA_ROCP_Data {
                     double       inReal;
                     };
 struct TA_ROCP_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_ROCP_Data* memory;
                      int           optInTimePeriod; /* From 1 to 100000 */
                      };
@@ -6309,8 +6338,8 @@ struct TA_ROCR_Data {
                     double       inReal;
                     };
 struct TA_ROCR_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_ROCR_Data* memory;
                      int           optInTimePeriod; /* From 1 to 100000 */
                      };
@@ -6355,8 +6384,8 @@ struct TA_ROCR100_Data {
                        double       inReal;
                        };
 struct TA_ROCR100_State {
-                        int mem_size;
-                        int mem_index;
+                        size_t mem_size;
+                        size_t mem_index;
                         struct TA_ROCR100_Data* memory;
                         int           optInTimePeriod; /* From 1 to 100000 */
                         };
@@ -6401,8 +6430,8 @@ struct TA_RSI_Data {
                    double       inReal;
                    };
 struct TA_RSI_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_RSI_Data* memory;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
@@ -6454,8 +6483,8 @@ struct TA_SAR_Data {
                    double       inLow;
                    };
 struct TA_SAR_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_SAR_Data* memory;
                     double        optInAcceleration; /* From 0 to TA_REAL_MAX */
                     double        optInMaximum; /* From 0 to TA_REAL_MAX */
@@ -6540,8 +6569,8 @@ struct TA_SAREXT_Data {
                       double       inLow;
                       };
 struct TA_SAREXT_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_SAREXT_Data* memory;
                        double        optInStartValue; /* From TA_REAL_MIN to TA_REAL_MAX */
                        double        optInOffsetOnReverse; /* From 0 to TA_REAL_MAX */
@@ -6594,8 +6623,8 @@ struct TA_SIN_Data {
                    double       inReal;
                    };
 struct TA_SIN_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_SIN_Data* memory;
                     };
 
@@ -6631,8 +6660,8 @@ struct TA_SINH_Data {
                     double       inReal;
                     };
 struct TA_SINH_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_SINH_Data* memory;
                      };
 
@@ -6675,9 +6704,10 @@ struct TA_SMA_Data {
                    double       inReal;
                    };
 struct TA_SMA_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_SMA_Data* memory;
+                    double       periodTotal;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 
@@ -6714,8 +6744,8 @@ struct TA_SQRT_Data {
                     double       inReal;
                     };
 struct TA_SQRT_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_SQRT_Data* memory;
                      };
 
@@ -6763,8 +6793,8 @@ struct TA_STDDEV_Data {
                       double       inReal;
                       };
 struct TA_STDDEV_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_STDDEV_Data* memory;
                        void*        var_state;
                        int           optInTimePeriod; /* From 2 to 100000 */
@@ -6833,8 +6863,8 @@ struct TA_STOCH_Data {
                      double       inClose;
                      };
 struct TA_STOCH_State {
-                      int mem_size;
-                      int mem_index;
+                      size_t mem_size;
+                      size_t mem_index;
                       struct TA_STOCH_Data* memory;
                       int           optInFastK_Period; /* From 1 to 100000 */
                       int           optInSlowK_Period; /* From 1 to 100000 */
@@ -6899,8 +6929,8 @@ struct TA_STOCHF_Data {
                       double       inClose;
                       };
 struct TA_STOCHF_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_STOCHF_Data* memory;
                        int           optInFastK_Period; /* From 1 to 100000 */
                        int           optInFastD_Period; /* From 1 to 100000 */
@@ -6964,8 +6994,8 @@ struct TA_STOCHRSI_Data {
                         double       inReal;
                         };
 struct TA_STOCHRSI_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_STOCHRSI_Data* memory;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          int           optInFastK_Period; /* From 1 to 100000 */
@@ -7010,8 +7040,8 @@ struct TA_SUB_Data {
                    double       inReal1;
                    };
 struct TA_SUB_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_SUB_Data* memory;
                     };
 
@@ -7055,8 +7085,8 @@ struct TA_SUM_Data {
                    double       inReal;
                    };
 struct TA_SUM_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_SUM_Data* memory;
                     double       tempSum;
                     int           optInTimePeriod; /* From 2 to 100000 */
@@ -7107,9 +7137,22 @@ struct TA_T3_Data {
                   double       inReal;
                   };
 struct TA_T3_State {
-                   int mem_size;
-                   int mem_index;
+                   size_t mem_size;
+                   size_t mem_index;
                    struct TA_T3_Data* memory;
+                   double       k;
+                   double       one_minus_k;
+                   double       e1;
+                   double       e2;
+                   double       e3;
+                   double       e4;
+                   double       e5;
+                   double       e6;
+                   double       c1;
+                   double       c2;
+                   double       c3;
+                   double       c4;
+                   double       tempReal;
                    int           optInTimePeriod; /* From 2 to 100000 */
                    double        optInVFactor; /* From 0 to 1 */
                    };
@@ -7148,8 +7191,8 @@ struct TA_TAN_Data {
                    double       inReal;
                    };
 struct TA_TAN_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_TAN_Data* memory;
                     };
 
@@ -7185,8 +7228,8 @@ struct TA_TANH_Data {
                     double       inReal;
                     };
 struct TA_TANH_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_TANH_Data* memory;
                      };
 
@@ -7229,9 +7272,12 @@ struct TA_TEMA_Data {
                     double       inReal;
                     };
 struct TA_TEMA_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_TEMA_Data* memory;
+                     void*        state_EMA;
+                     void*        state_EMA2;
+                     void*        state_EMA3;
                      int           optInTimePeriod; /* From 2 to 100000 */
                      };
 
@@ -7272,8 +7318,8 @@ struct TA_TRANGE_Data {
                       double       inClose;
                       };
 struct TA_TRANGE_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_TRANGE_Data* memory;
                        };
 
@@ -7318,9 +7364,14 @@ struct TA_TRIMA_Data {
                      double       inReal;
                      };
 struct TA_TRIMA_State {
-                      int mem_size;
-                      int mem_index;
+                      size_t mem_size;
+                      size_t mem_index;
                       struct TA_TRIMA_Data* memory;
+                      double       numerator;
+                      double       numeratorSub;
+                      double       numeratorAdd;
+                      double       factor;
+                      int          middleIdx;
                       int           optInTimePeriod; /* From 2 to 100000 */
                       };
 
@@ -7364,8 +7415,8 @@ struct TA_TRIX_Data {
                     double       inReal;
                     };
 struct TA_TRIX_State {
-                     int mem_size;
-                     int mem_index;
+                     size_t mem_size;
+                     size_t mem_index;
                      struct TA_TRIX_Data* memory;
                      int           optInTimePeriod; /* From 1 to 100000 */
                      };
@@ -7410,8 +7461,8 @@ struct TA_TSF_Data {
                    double       inReal;
                    };
 struct TA_TSF_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_TSF_Data* memory;
                     double       SumX;
                     double       SumXY;
@@ -7458,8 +7509,8 @@ struct TA_TYPPRICE_Data {
                         double       inClose;
                         };
 struct TA_TYPPRICE_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_TYPPRICE_Data* memory;
                          };
 
@@ -7518,8 +7569,8 @@ struct TA_ULTOSC_Data {
                       double       inClose;
                       };
 struct TA_ULTOSC_State {
-                       int mem_size;
-                       int mem_index;
+                       size_t mem_size;
+                       size_t mem_index;
                        struct TA_ULTOSC_Data* memory;
                        int           optInTimePeriod1; /* From 1 to 100000 */
                        int           optInTimePeriod2; /* From 1 to 100000 */
@@ -7575,8 +7626,8 @@ struct TA_VAR_Data {
                    double       inReal;
                    };
 struct TA_VAR_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_VAR_Data* memory;
                     double       periodTotal1;
                     double       periodTotal2;
@@ -7622,8 +7673,8 @@ struct TA_WCLPRICE_Data {
                         double       inClose;
                         };
 struct TA_WCLPRICE_State {
-                         int mem_size;
-                         int mem_index;
+                         size_t mem_size;
+                         size_t mem_index;
                          struct TA_WCLPRICE_Data* memory;
                          };
 
@@ -7672,8 +7723,8 @@ struct TA_WILLR_Data {
                      double       inClose;
                      };
 struct TA_WILLR_State {
-                      int mem_size;
-                      int mem_index;
+                      size_t mem_size;
+                      size_t mem_index;
                       struct TA_WILLR_Data* memory;
                       double       highest;
                       double       lowest;
@@ -7722,9 +7773,12 @@ struct TA_WMA_Data {
                    double       inReal;
                    };
 struct TA_WMA_State {
-                    int mem_size;
-                    int mem_index;
+                    size_t mem_size;
+                    size_t mem_index;
                     struct TA_WMA_Data* memory;
+                    double       periodSum;
+                    double       periodSub;
+                    double       divider;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 

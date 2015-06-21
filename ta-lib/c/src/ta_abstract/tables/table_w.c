@@ -127,7 +127,19 @@ static const TA_OptInputParameterInfo *TA_WMA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_WMA_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_WMA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "periodSum", 0 };
+const TA_InputParameterInfo TA_WMA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "periodSub", 0 };
+const TA_InputParameterInfo TA_WMA_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "divider", 0 };
+
+static const TA_InputParameterInfo *TA_WMA_StructParams[] = {
+    &TA_WMA_DEF_UI_STRUCT_PARAM_1,
+    &TA_WMA_DEF_UI_STRUCT_PARAM_2,
+    &TA_WMA_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( WMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */

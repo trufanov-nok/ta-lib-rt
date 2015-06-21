@@ -357,6 +357,7 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+  #define TA_SMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -367,8 +368,8 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
-/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
+/* Generated */    size_t _cur_idx = STATE.mem_index++ % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_SMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -384,6 +385,23 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+  {
+      STATE.periodTotal = 0;
+  }
+
+  if (NEED_MORE_DATA) {
+    STATE.periodTotal += inReal;
+    PUSH_TO_MEM(inReal,inReal);
+  return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData); }
+
+
+  STATE.periodTotal += inReal;
+
+  VALUE_HANDLE_DEREF(outReal) = STATE.periodTotal / STATE.optInTimePeriod;
+
+  STATE.periodTotal -= POP_FROM_MEM(inReal);
+  PUSH_TO_MEM(inReal,inReal);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

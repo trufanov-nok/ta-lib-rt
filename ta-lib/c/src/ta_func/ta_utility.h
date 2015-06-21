@@ -272,6 +272,27 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
    double prev_##varName##_input_Odd; \
    double prev_##varName##_input_Even
 
+#define DEFINE_HILBERT_VARIABLES_STRUCT(taFunc) \
+ struct TA_##taFunc##_HILBERT_STRUCT { \
+   ARRAY_LOCAL(_Odd,3); \
+   ARRAY_LOCAL(_Even, 3); \
+   double var; \
+   double prev_Odd; \
+   double prev_Even; \
+   double prev_input_Odd; \
+   double prev_input_Even; };
+
+#define CREATE_HILBERT_VARIABLES_STRUCT(taFunc,var) {\
+    STATE_P.var = calloc(1, sizeof(struct TA_##taFunc##_HILBERT_STRUCT)); \
+    if (STATE_P.var == NULL) return ENUM_VALUE(RetCode, TA_ALLOC_ERR, AllocErr ); }
+
+#define FREE_HILBERT_VARIABLES_STRUCT(var) { \
+    if (STATE_P.var != NULL) { \
+        free (STATE_P.var);    \
+        STATE_P.var = NULL; }  }
+
+
+
 #define INIT_HILBERT_VARIABLES(varName) { \
       varName##_Odd [0] = 0.0; \
       varName##_Odd [1] = 0.0; \
@@ -286,6 +307,22 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
       prev_##varName##_input_Even = 0.0; \
       }
 
+#define INIT_HILBERT_VARIABLES_STRUCT(taFunc, structName) { \
+      struct TA_##taFunc##_HILBERT_STRUCT* ref; \
+      ref = (struct TA_##taFunc##_HILBERT_STRUCT*)STATE.structName; \
+      VALUE_HANDLE_DEREF(ref)._Odd [0] = 0.0; \
+      VALUE_HANDLE_DEREF(ref)._Odd [1] = 0.0; \
+      VALUE_HANDLE_DEREF(ref)._Odd [2] = 0.0; \
+      VALUE_HANDLE_DEREF(ref)._Even[0] = 0.0; \
+      VALUE_HANDLE_DEREF(ref)._Even[1] = 0.0; \
+      VALUE_HANDLE_DEREF(ref)._Even[2] = 0.0; \
+      VALUE_HANDLE_DEREF(ref).var = 0.0; \
+      VALUE_HANDLE_DEREF(ref).prev_Odd        = 0.0; \
+      VALUE_HANDLE_DEREF(ref).prev_Even       = 0.0; \
+      VALUE_HANDLE_DEREF(ref).prev_input_Odd  = 0.0; \
+      VALUE_HANDLE_DEREF(ref).prev_input_Even = 0.0; \
+      }
+
 #define DO_HILBERT_TRANSFORM(varName,input,OddOrEvenId) {\
          hilbertTempReal = a * input; \
          varName = -varName##_##OddOrEvenId[hilbertIdx]; \
@@ -298,8 +335,26 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
          varName *= adjustedPrevPeriod; \
          }
 
+#define DO_HILBERT_TRANSFORM_IN_STRUCT(taFunc,structName,input,OddOrEvenId) {\
+         struct TA_##taFunc##_HILBERT_STRUCT* ref; \
+         ref = (struct TA_##taFunc##_HILBERT_STRUCT*)STATE.structName; \
+         hilbertTempReal = a * input; \
+         VALUE_HANDLE_DEREF(ref).var = -VALUE_HANDLE_DEREF(ref)._##OddOrEvenId[STATE.hilbertIdx]; \
+         VALUE_HANDLE_DEREF(ref)._##OddOrEvenId[STATE.hilbertIdx] = hilbertTempReal; \
+         VALUE_HANDLE_DEREF(ref).var += hilbertTempReal; \
+         VALUE_HANDLE_DEREF(ref).var -= VALUE_HANDLE_DEREF(ref).prev_##OddOrEvenId; \
+         VALUE_HANDLE_DEREF(ref).prev_##OddOrEvenId = b * VALUE_HANDLE_DEREF(ref).prev_input_##OddOrEvenId; \
+         VALUE_HANDLE_DEREF(ref).var += VALUE_HANDLE_DEREF(ref).prev_##OddOrEvenId; \
+         VALUE_HANDLE_DEREF(ref).prev_input_##OddOrEvenId = input; \
+         VALUE_HANDLE_DEREF(ref).var *= adjustedPrevPeriod; \
+         }
+
 #define DO_HILBERT_ODD(varName,input)  DO_HILBERT_TRANSFORM(varName,input,Odd)
 #define DO_HILBERT_EVEN(varName,input) DO_HILBERT_TRANSFORM(varName,input,Even)
+#define DO_HILBERT_STRUCT_ODD(taFunc,varName,input)  DO_HILBERT_TRANSFORM_IN_STRUCT(taFunc,varName,input,Odd)
+#define DO_HILBERT_STRUCT_EVEN(taFunc,varName,input) DO_HILBERT_TRANSFORM_IN_STRUCT(taFunc,varName,input,Even)
+#define GET_HILBERT_STRUCT_VAR(taFunc,structName,varName) \
+    VALUE_HANDLE_DEREF( (struct TA_##taFunc##_HILBERT_STRUCT*)STATE.structName).varName
 
 /* Convert a period into the equivalent k:
  *

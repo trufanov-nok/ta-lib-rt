@@ -328,7 +328,14 @@ static const TA_OptInputParameterInfo *TA_SMA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_SMA_StructParams[] = { NULL };
+
+
+const TA_InputParameterInfo TA_SMA_DEF_UI_STRUCT_PARAM =
+                                  { TA_Input_Real, "periodTotal", 0 };
+
+static const TA_InputParameterInfo *TA_SMA_StructParams[] = {
+    &TA_SMA_DEF_UI_STRUCT_PARAM,
+    NULL };
 
 DEF_FUNCTION( SMA,                     /* name */
               TA_GroupId_OverlapStudies,  /* groupId */

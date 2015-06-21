@@ -300,7 +300,7 @@
 {
    /* insert local variable here */
    #define TA_AVGDEV_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
-   int i;
+   size_t i;
    double temp;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -311,8 +311,8 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
-/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
+/* Generated */    size_t _cur_idx = STATE.mem_index++ % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_AVGDEV_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);

@@ -66,7 +66,16 @@ static const TA_OptInputParameterInfo *TA_DEMA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_DEMA_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_DEMA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "state_EMA", 0 };
+const TA_InputParameterInfo TA_DEMA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "state_EMA2", 0 };
+
+static const TA_InputParameterInfo *TA_DEMA_StructParams[] = {
+    &TA_DEMA_DEF_UI_STRUCT_PARAM_1,
+    &TA_DEMA_DEF_UI_STRUCT_PARAM_2,
+    NULL };
 
 DEF_FUNCTION( DEMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */

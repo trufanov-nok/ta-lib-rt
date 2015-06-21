@@ -314,7 +314,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -464,7 +464,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -566,7 +566,7 @@ public class Core {
       double tmp;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -673,7 +673,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal0 = inReal0 ;
          ( ( _state.value .memory+_cur_idx).value ).inReal1 = inReal1 ;
@@ -835,7 +835,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -1132,7 +1132,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -1409,7 +1409,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -1628,7 +1628,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -1876,7 +1876,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -2108,7 +2108,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -2259,7 +2259,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -2341,7 +2341,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -2495,7 +2495,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -2647,7 +2647,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -2772,12 +2772,12 @@ public class Core {
       double inReal,
       double *outReal )
    {
-      int i;
+      size_t i;
       double temp;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
          _state.value .sum = 0;
       if ( ( _state.value .mem_index < _state.value .mem_size) )
       {
@@ -3051,7 +3051,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -3325,7 +3325,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal0 = inReal0 ;
          ( ( _state.value .memory+_cur_idx).value ).inReal1 = inReal1 ;
@@ -3507,7 +3507,7 @@ public class Core {
       double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -3662,7 +3662,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -3828,7 +3828,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -3994,7 +3994,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -4170,7 +4170,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -4353,7 +4353,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -4520,7 +4520,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -4713,7 +4713,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -4965,7 +4965,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -5222,7 +5222,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -5501,7 +5501,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -5753,7 +5753,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -5933,7 +5933,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -6113,7 +6113,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -6291,7 +6291,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -6470,7 +6470,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -6651,7 +6651,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -6802,7 +6802,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -6955,7 +6955,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -7121,7 +7121,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -7278,7 +7278,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -7464,7 +7464,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -7669,7 +7669,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -7855,7 +7855,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -8029,7 +8029,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -8218,7 +8218,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -8430,7 +8430,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -8627,7 +8627,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -8809,7 +8809,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -8980,7 +8980,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -9159,7 +9159,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -9378,7 +9378,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -9584,7 +9584,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -9774,7 +9774,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -9965,7 +9965,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -10146,7 +10146,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -10341,7 +10341,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -10543,7 +10543,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -10724,7 +10724,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -10888,7 +10888,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -11052,7 +11052,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -11214,7 +11214,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -11370,7 +11370,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -11563,7 +11563,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -11783,7 +11783,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -11988,7 +11988,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -12170,7 +12170,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -12338,7 +12338,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -12517,7 +12517,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -12720,7 +12720,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -12929,7 +12929,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -13126,7 +13126,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -13300,7 +13300,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -13453,7 +13453,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -13649,7 +13649,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -13848,7 +13848,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -14017,7 +14017,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -14199,7 +14199,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -14376,7 +14376,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -14547,7 +14547,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -14719,7 +14719,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -14894,7 +14894,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -15057,7 +15057,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inOpen = inOpen ;
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
@@ -15173,7 +15173,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -15384,7 +15384,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -15647,8 +15647,8 @@ public class Core {
       double x,y, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .sumXY = 0.0;
          _state.value .sumX = 0.0;
@@ -15804,7 +15804,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -15886,7 +15886,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -16004,6 +16004,7 @@ public class Core {
    public int demaStateInit( struct TA_dema_State** _state,
       int optInTimePeriod )
    {
+      int res;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -16013,33 +16014,45 @@ public class Core {
       _state.value = calloc(1, sizeof(struct dema ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
-      _state.value .value .mem_size = demaLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_DEMA_Data));
-      else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+      _state.value .value .memory = NULL;
+      res = ema ((struct ema **)& _state.value .value .state_EMA, optInTimePeriod);
+      if (res == RetCode.Success )
+      {
+         res = ema ((struct ema **)& _state.value .value .state_EMA2, optInTimePeriod);
+      }
+      return res;
    }
    public int demaState( struct TA_dema_State* _state,
       double inReal,
       double *outReal )
    {
+      double ema, ema2;
+      int retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
-         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      retCode = ema ( _state.value .state_EMA, inReal, &ema );
+      if( retCode != RetCode.Success )
+         return retCode;
+      retCode = ema ( _state.value .state_EMA2, ema, &ema2 );
+      if( retCode != RetCode.Success )
+         return retCode;
+      outReal.value = (2.0*ema) - ema2;
       return RetCode.Success ;
    }
    public int demaStateFree( struct TA_dema_State** _state )
    {
+      int res = ema ((struct ema **)& _state.value .value .state_EMA);
+      if (res == RetCode.Success )
+      {
+         res = ema ((struct ema **)& _state.value .value .state_EMA2);
+      }
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
          if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
          free( _state.value ); _state.value = NULL;}
-      return RetCode.Success ;
+      return res;
    }
    public RetCode dema( int startIdx,
       int endIdx,
@@ -16152,7 +16165,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal0 = inReal0 ;
          ( ( _state.value .memory+_cur_idx).value ).inReal1 = inReal1 ;
@@ -16373,7 +16386,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -16622,11 +16635,7 @@ public class Core {
       _state.value = calloc(1, sizeof(struct ema ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
-      _state.value .value .mem_size = emaLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_EMA_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
    public int emaState( struct TA_ema_State* _state,
@@ -16635,10 +16644,28 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
-         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
+      {
+         _state.value .currentIdx = 0;
+         _state.value .prevMA = 0.;
+         _state.value .tempSum = 0.;
+      } else
+         ++ _state.value .currentIdx;
+      if( (this.compatibility) == Compatibility.Default )
+      {
+         if ( _state.value .currentIdx < _state.value .optInTimePeriod)
+            _state.value .tempSum += inReal;
+         _state.value .prevMA = _state.value .tempSum / _state.value .optInTimePeriod;
+      }
+      else
+      {
+         _state.value .prevMA = inReal;
+      }
+      _state.value .prevMA = ((inReal- _state.value .prevMA) * ((double)2.0 / ((double)( _state.value .optInTimePeriod + 1))) ) + _state.value .prevMA;
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+         return RetCode.NeedMoreData ;
+      outReal.value = _state.value .prevMA;
       return RetCode.Success ;
    }
    public int emaStateFree( struct TA_ema_State** _state )
@@ -16763,7 +16790,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -16845,7 +16872,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -17035,7 +17062,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -17376,7 +17403,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -17723,7 +17750,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -18073,7 +18100,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -18441,7 +18468,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -18852,7 +18879,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -19168,7 +19195,7 @@ public class Core {
       double tempClose, tempOpen;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) )
       {
          if (inClose > inOpen) {
@@ -19379,12 +19406,40 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      final double constMax = 2.0/(30.0+1.0);
+      final double constDiff = 2.0/(2.0+1.0) - constMax;
+      double tempReal;
+      double periodROC;
+      double trailingValue;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
+      {
+         _state.value .sumROC1 = 0.0;
+         _state.value .yestReal = inReal;
+      } else
+         if ((int)_cur_idx < _state.value .optInTimePeriod-1)
+      {
+         _state.value .sumROC1 += Math.abs ( _state.value .yestReal - inReal);
+         _state.value .yestReal = inReal;
+         _state.value .prevKAMA = inReal;
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      }
+      trailingValue = ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      periodROC = inReal - trailingValue;
+      if( ( _state.value .sumROC1 <= periodROC) || (((- (0.00000000000001) )< _state.value .sumROC1)&&( _state.value .sumROC1< (0.00000000000001) )) )
+         tempReal = 1.0;
+      else
+         tempReal = Math.abs (periodROC/ _state.value .sumROC1);
+      tempReal = (tempReal*constDiff)+constMax;
+      tempReal *= tempReal;
+      _state.value .prevKAMA = ((inReal- _state.value .prevKAMA)*tempReal) + _state.value .prevKAMA;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+         return RetCode.NeedMoreData ;
+      outReal.value = _state.value .prevKAMA;
       return RetCode.Success ;
    }
    public int kamaStateFree( struct TA_kama_State** _state )
@@ -19580,8 +19635,8 @@ public class Core {
       double m, b, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
          _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
@@ -19758,11 +19813,11 @@ public class Core {
       double m, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
-      if ( ( _state.value .mem_index <= 1) )
+      if ( (_cur_idx == 0) )
       {
          _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
          _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
@@ -19937,11 +19992,11 @@ public class Core {
       double m, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
-      if ( ( _state.value .mem_index <= 1) )
+      if ( (_cur_idx == 0) )
       {
          _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
          _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
@@ -20114,11 +20169,11 @@ public class Core {
       double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
-      if ( ( _state.value .mem_index <= 1) )
+      if ( (_cur_idx == 0) )
       {
          _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
          _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
@@ -20247,7 +20302,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -20329,7 +20384,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -20491,6 +20546,7 @@ public class Core {
       int optInTimePeriod,
       MAType optInMAType )
    {
+      RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -20506,6 +20562,41 @@ public class Core {
          _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MA_Data));
       else
          _state.value .value .memory = NULL;
+      if( optInTimePeriod <= 1 )
+         return RetCode.Success ;
+      switch( optInMAType )
+      {
+         case Sma :
+            retValue = smaLookback ( optInTimePeriod );
+         break;
+         case Ema :
+            retValue = emaLookback ( optInTimePeriod );
+         break;
+         case Wma :
+            retValue = wmaLookback ( optInTimePeriod );
+         break;
+         case Dema :
+            retValue = demaLookback ( optInTimePeriod );
+         break;
+         case Tema :
+            retValue = temaLookback ( optInTimePeriod );
+         break;
+         case Trima :
+            retValue = trimaLookback ( optInTimePeriod );
+         break;
+         case Kama :
+            retValue = kamaLookback ( optInTimePeriod );
+         break;
+         case Mama :
+            retValue = mamaLookback ( 0.5, 0.05 );
+         break;
+         case T3 :
+            retValue = t3Lookback ( optInTimePeriod, 0.7 );
+         break;
+         default:
+            retValue = 0;
+      }
+      return retValue;
       return RetCode.Success ;
    }
    public int movingAverageState( struct TA_movingAverage_State* _state,
@@ -20514,7 +20605,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -20812,7 +20903,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -21149,7 +21240,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -21342,7 +21433,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -21565,6 +21656,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   struct TA_MAMA_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
    public int mamaStateInit( struct TA_mama_State** _state,
       double optInFastLimit,
       double optInSlowLimit )
@@ -21588,6 +21680,10 @@ public class Core {
          _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MAMA_Data));
       else
          _state.value .value .memory = NULL;
+      { _state.value .value .detrender = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .Q1 = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .jI = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .jQ = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
    public int mamaState( struct TA_mama_State* _state,
@@ -21595,16 +21691,130 @@ public class Core {
       double *outMAMA,
       double *outFAMA )
    {
+      final double a = 0.0962;
+      final double b = 0.5769;
+      double hilbertTempReal, smoothedValue;
+      double rad2Deg;
+      double adjustedPrevPeriod;
+      double Q2, I2;
+      double tempReal, tempReal2;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
-         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      rad2Deg = 180.0 / (4.0 * Math.atan (1));
+      if ( (_cur_idx == 0) )
+      {
+         _state.value .periodWMASub = 0.;
+         _state.value .periodWMASum = 0.;
+         _state.value .hilbertIdx = 0;
+         _state.value .period = 0;
+         _state.value .prevI2 = 0.;
+         _state.value .prevQ2 = 0.;
+         _state.value .I1ForOddPrev2 = 0;
+         _state.value .I1ForEvenPrev2 = 0;
+         _state.value .I1ForOddPrev3 = 0;
+         _state.value .I1ForEvenPrev3 = 0;
+         _state.value .prevPhase = 0.;
+         _state.value .mama = 0.;
+         _state.value .fama = 0.;
+         _state.value .Im = 0.;
+         _state.value .Re = 0.;
+         _state.value .trailingWMAValue = 0.;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jI; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jQ; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+      }
+      if ( _state.value .mem_index <= 4)
+      {
+         _state.value .periodWMASub += inReal;
+         _state.value .periodWMASum += _state.value .mem_index*inReal;
+         return RetCode.NeedMoreData ;
+      } else
+         if ( _state.value .mem_index <= 12)
+      {
+         { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( ( _state.value .memory+_state.value .mem_index-1-4 % _state.value .mem_size ).value ).inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
+         return RetCode.NeedMoreData ;
+      }
+      adjustedPrevPeriod = (0.075* _state.value .period)+0.54;
+      { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( ( _state.value .memory+_state.value .mem_index-1-4 % _state.value .mem_size ).value ).inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
+      if( ( _state.value .mem_index%2) == 0 )
+      {
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = a * smoothedValue; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1; hilbertTempReal = a * (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = a * _state.value .I1ForEvenPrev3; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = _state.value .I1ForEvenPrev3; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = a * (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         if( ++ _state.value .hilbertIdx == 3 )
+            _state.value .hilbertIdx = 0;
+         Q2 = (0.2*( (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1.value .var + (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jI.value .var )) + (0.8* _state.value .prevQ2);
+         I2 = (0.2*( _state.value .I1ForEvenPrev3 - (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jQ.value .var )) + (0.8* _state.value .prevI2);
+         _state.value .I1ForOddPrev3 = _state.value .I1ForOddPrev2;
+         _state.value .I1ForOddPrev2 = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender.value .var ;
+         if( _state.value .I1ForEvenPrev3 != 0.0 )
+            tempReal2 = ( Math.atan ( (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1.value .var / _state.value .I1ForEvenPrev3)*rad2Deg);
+         else
+            tempReal2 = 0.0;
+      } else {
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = a * smoothedValue; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1; hilbertTempReal = a * (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = a * _state.value .I1ForOddPrev3; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = _state.value .I1ForOddPrev3; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_MAMA_HILBERT_STRUCT * ref; ref = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = a * (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         Q2 = (0.2*( (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1.value .var + (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jI.value .var )) + (0.8* _state.value .prevQ2);
+         I2 = (0.2*( _state.value .I1ForOddPrev3 - (struct TA_MAMA_HILBERT_STRUCT *) _state.value .jQ.value .var )) + (0.8* _state.value .prevI2);
+         _state.value .I1ForEvenPrev3 = _state.value .I1ForEvenPrev2;
+         _state.value .I1ForEvenPrev2 = (struct TA_MAMA_HILBERT_STRUCT *) _state.value .detrender.value .var ;
+         if( _state.value .I1ForOddPrev3 != 0.0 )
+            tempReal2 = ( Math.atan ( (struct TA_MAMA_HILBERT_STRUCT *) _state.value .Q1.value .var / _state.value .I1ForOddPrev3)*rad2Deg);
+         else
+            tempReal2 = 0.0;
+      }
+      tempReal = _state.value .prevPhase - tempReal2;
+      _state.value .prevPhase = tempReal2;
+      if( tempReal < 1.0 )
+         tempReal = 1.0;
+      if( tempReal > 1.0 )
+      {
+         tempReal = _state.value .optInFastLimit/tempReal;
+         if( tempReal < _state.value .optInSlowLimit )
+            tempReal = _state.value .optInSlowLimit;
+      }
+      else
+      {
+         tempReal = _state.value .optInFastLimit;
+      }
+      _state.value .mama = (tempReal*inReal)+((1-tempReal)* _state.value .mama);
+      tempReal *= 0.5;
+      _state.value .fama = (tempReal* _state.value .mama)+((1-tempReal)* _state.value .fama);
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+         return RetCode.NeedMoreData ;
+      outMAMA.value = _state.value .mama;
+      outFAMA.value = _state.value .fama;
+      _state.value .Re = (0.2*((I2* _state.value .prevI2)+(Q2* _state.value .prevQ2)))+(0.8* _state.value .Re);
+      _state.value .Im = (0.2*((I2* _state.value .prevQ2)-(Q2* _state.value .prevI2)))+(0.8* _state.value .Im);
+      _state.value .prevQ2 = Q2;
+      _state.value .prevI2 = I2;
+      tempReal = _state.value .period;
+      if( ( _state.value .Im != 0.0) && ( _state.value .Re != 0.0) )
+         _state.value .period = 360.0 / ( Math.atan ( _state.value .Im/ _state.value .Re)*rad2Deg);
+      tempReal2 = 1.5*tempReal;
+      if( _state.value .period > tempReal2)
+         _state.value .period = tempReal2;
+      tempReal2 = 0.67*tempReal;
+      if( _state.value .period < tempReal2 )
+         _state.value .period = tempReal2;
+      if( _state.value .period < 6 )
+         _state.value .period = 6;
+      else if( _state.value .period > 50 )
+         _state.value .period = 50;
+      _state.value .period = (0.2* _state.value .period) + (0.8 * tempReal);
       return RetCode.Success ;
    }
    public int mamaStateFree( struct TA_mama_State** _state )
    {
+      { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
+      { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
+      { if ( _state.value .value .jI != NULL) { free ( _state.value .value .jI); _state.value .value .jI = NULL; } } ;
+      { if ( _state.value .value .jQ != NULL) { free ( _state.value .value .jQ); _state.value .value .jQ = NULL; } } ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -21915,7 +22125,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          ( ( _state.value .memory+_cur_idx).value ).inPeriods = inPeriods ;
@@ -22113,8 +22323,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
          _state.value .max = inReal;
       else
          if( _state.value .max < inReal )
@@ -22290,8 +22500,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .max = inReal;
          _state.value .maxIdx = 0;
@@ -22429,7 +22639,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -22643,7 +22853,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -22877,8 +23087,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .highest = inReal;
          _state.value .lowest = inReal;
@@ -23031,8 +23241,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .highest = inHigh;
          _state.value .lowest = inLow;
@@ -23200,8 +23410,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
          _state.value .min = inReal;
       else
          if( _state.value .min > inReal )
@@ -23377,8 +23587,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .min = inReal;
          _state.value .minIdx = 0;
@@ -23589,8 +23799,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .min = inReal;
          _state.value .max = inReal;
@@ -23823,8 +24033,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .max = inReal;
          _state.value .min = inReal;
@@ -24136,7 +24346,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -24461,7 +24671,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -24669,7 +24879,7 @@ public class Core {
       double temp;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -24768,7 +24978,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal0 = inReal0 ;
          ( ( _state.value .memory+_cur_idx).value ).inReal1 = inReal1 ;
@@ -24933,7 +25143,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -25097,12 +25307,12 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          ( ( _state.value .memory+_cur_idx).value ).inVolume = inVolume ;
          return RetCode.NeedMoreData ; }
-      if ( ( _state.value .mem_index <= 1) )
+      if ( (_cur_idx == 0) )
       {
          _state.value .prevOBV = inVolume;
          _state.value .prevReal = inReal;
@@ -25343,7 +25553,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -25668,7 +25878,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -25890,7 +26100,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -26016,7 +26226,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -26149,7 +26359,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -26282,7 +26492,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -26415,7 +26625,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -26645,7 +26855,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -26995,7 +27205,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -27494,7 +27704,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -27773,7 +27983,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -27855,7 +28065,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -27985,10 +28195,19 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
+      {
+         _state.value .periodTotal = 0;
+      }
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
+         _state.value .periodTotal += inReal;
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
+      _state.value .periodTotal += inReal;
+      outReal.value = _state.value .periodTotal / _state.value .optInTimePeriod;
+      _state.value .periodTotal -= ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int smaStateFree( struct TA_sma_State** _state )
@@ -28104,7 +28323,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -28274,7 +28493,7 @@ public class Core {
       double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       retCode = variance ( _state.value .var_state, inReal, outReal );
       if( retCode != RetCode.Success )
          return retCode;
@@ -28610,7 +28829,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -28950,7 +29169,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -29232,7 +29451,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -29375,7 +29594,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal0 = inReal0 ;
          ( ( _state.value .memory+_cur_idx).value ).inReal1 = inReal1 ;
@@ -29495,8 +29714,8 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
          _state->tempSum = 0;
       if ( ( _state.value .mem_index < _state.value .mem_size) )
       {
@@ -29718,11 +29937,7 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInVFactor = optInVFactor;
-      _state.value .value .mem_size = t3Lookback (optInTimePeriod, optInVFactor );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_T3_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
    public int t3State( struct TA_t3_State* _state,
@@ -29731,10 +29946,102 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
-         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
+      {
+         _state.value .k = 2.0/( _state.value .optInTimePeriod+1.0);
+         _state.value .one_minus_k = 1.0 - _state.value .k;
+         _state.value .tempReal = 0.;
+         double t = _state.value .optInVFactor * _state.value .optInVFactor;
+         _state.value .c1 = -(t * _state.value .optInVFactor);
+         _state.value .c2 = 3.0 * (t - _state.value .c1);
+         _state.value .c3 = -6.0 * t - 3.0 * ( _state.value .optInVFactor- _state.value .c1);
+         _state.value .c4 = 1.0 + 3.0 * _state.value .optInVFactor - _state.value .c1 + 3.0 * t;
+      }
+      if ((int)_cur_idx < _state.value .optInTimePeriod)
+      {
+         _state.value .tempReal += inReal;
+         if ((int)_cur_idx == _state.value .optInTimePeriod-1)
+         {
+            _state.value .e1 = _state.value .tempReal / _state.value .optInTimePeriod;
+            _state.value .tempReal = _state.value .e1;
+         }
+         return RetCode.NeedMoreData ;
+      } else
+         if ((int)_cur_idx < 2* _state.value .optInTimePeriod-1)
+      {
+         _state.value .e1 = ( _state.value .k*inReal)+( _state.value .one_minus_k* _state.value .e1);
+         _state.value .tempReal += _state.value .e1;
+         if ((int)_cur_idx == 2* _state.value .optInTimePeriod-2)
+         {
+            _state.value .e2 = _state.value .tempReal / _state.value .optInTimePeriod;
+            _state.value .tempReal = _state.value .e2;
+         }
+         return RetCode.NeedMoreData ;
+      } else
+         if ((int)_cur_idx < 3* _state.value .optInTimePeriod-2)
+      {
+         _state.value .e1 = ( _state.value .k*inReal)+( _state.value .one_minus_k* _state.value .e1);
+         _state.value .e2 = ( _state.value .k* _state.value .e1)+( _state.value .one_minus_k* _state.value .e2);
+         _state.value .tempReal += _state.value .e2;
+         if ((int)_cur_idx == 3* _state.value .optInTimePeriod-3)
+         {
+            _state.value .e3 = _state.value .tempReal / _state.value .optInTimePeriod;
+            _state.value .tempReal = _state.value .e3;
+         }
+         return RetCode.NeedMoreData ;
+      } else
+         if ((int)_cur_idx < 4* _state.value .optInTimePeriod-3)
+      {
+         _state.value .e1 = ( _state.value .k*inReal)+( _state.value .one_minus_k* _state.value .e1);
+         _state.value .e2 = ( _state.value .k* _state.value .e1)+( _state.value .one_minus_k* _state.value .e2);
+         _state.value .e3 = ( _state.value .k* _state.value .e2)+( _state.value .one_minus_k* _state.value .e3);
+         _state.value .tempReal += _state.value .e3;
+         if ((int)_cur_idx == 4* _state.value .optInTimePeriod-4)
+         {
+            _state.value .e4 = _state.value .tempReal / _state.value .optInTimePeriod;
+            _state.value .tempReal = _state.value .e4;
+         }
+         return RetCode.NeedMoreData ;
+      } else
+         if ((int)_cur_idx < 5* _state.value .optInTimePeriod-4)
+      {
+         _state.value .e1 = ( _state.value .k*inReal)+( _state.value .one_minus_k* _state.value .e1);
+         _state.value .e2 = ( _state.value .k* _state.value .e1)+( _state.value .one_minus_k* _state.value .e2);
+         _state.value .e3 = ( _state.value .k* _state.value .e2)+( _state.value .one_minus_k* _state.value .e3);
+         _state.value .e4 = ( _state.value .k* _state.value .e3)+( _state.value .one_minus_k* _state.value .e4);
+         _state.value .tempReal += _state.value .e4;
+         if ((int)_cur_idx == 5* _state.value .optInTimePeriod-5)
+         {
+            _state.value .e5 = _state.value .tempReal / _state.value .optInTimePeriod;
+            _state.value .tempReal = _state.value .e5;
+         }
+         return RetCode.NeedMoreData ;
+      } else
+         if ((int)_cur_idx < 6* _state.value .optInTimePeriod-5)
+      {
+         _state.value .e1 = ( _state.value .k*inReal)+( _state.value .one_minus_k* _state.value .e1);
+         _state.value .e2 = ( _state.value .k* _state.value .e1)+( _state.value .one_minus_k* _state.value .e2);
+         _state.value .e3 = ( _state.value .k* _state.value .e2)+( _state.value .one_minus_k* _state.value .e3);
+         _state.value .e4 = ( _state.value .k* _state.value .e3)+( _state.value .one_minus_k* _state.value .e4);
+         _state.value .e5 = ( _state.value .k* _state.value .e4)+( _state.value .one_minus_k* _state.value .e5);
+         _state.value .tempReal += _state.value .e5;
+         if ((int)_cur_idx == 6* _state.value .optInTimePeriod-6)
+         {
+            _state.value .e6 = _state.value .tempReal / _state.value .optInTimePeriod;
+            _state.value .tempReal = _state.value .e6;
+         }
+         return RetCode.NeedMoreData ;
+      }
+      _state.value .e1 = ( _state.value .k*inReal)+( _state.value .one_minus_k* _state.value .e1);
+      _state.value .e2 = ( _state.value .k* _state.value .e1)+( _state.value .one_minus_k* _state.value .e2);
+      _state.value .e3 = ( _state.value .k* _state.value .e2)+( _state.value .one_minus_k* _state.value .e3);
+      _state.value .e4 = ( _state.value .k* _state.value .e3)+( _state.value .one_minus_k* _state.value .e4);
+      _state.value .e5 = ( _state.value .k* _state.value .e4)+( _state.value .one_minus_k* _state.value .e5);
+      _state.value .e6 = ( _state.value .k* _state.value .e5)+( _state.value .one_minus_k* _state.value .e6);
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+         return RetCode.NeedMoreData ;
+      outReal.value = _state.value .c1* _state.value .e6+ _state.value .c2* _state.value .e5+ _state.value .c3* _state.value .e4+ _state.value .c4* _state.value .e3;
       return RetCode.Success ;
    }
    public int t3StateFree( struct TA_t3_State** _state )
@@ -29909,7 +30216,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -29991,7 +30298,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -30118,6 +30425,7 @@ public class Core {
    public int temaStateInit( struct TA_tema_State** _state,
       int optInTimePeriod )
    {
+      int res;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -30127,33 +30435,56 @@ public class Core {
       _state.value = calloc(1, sizeof(struct tema ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
-      _state.value .value .mem_size = temaLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_TEMA_Data));
-      else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+      _state.value .value .memory = NULL;
+      res = ema ((struct ema **)& _state.value .value .state_EMA, optInTimePeriod);
+      if (res == RetCode.Success )
+      {
+         res = ema ((struct ema **)& _state.value .value .state_EMA2, optInTimePeriod);
+      }
+      if (res == RetCode.Success )
+      {
+         res = ema ((struct ema **)& _state.value .value .state_EMA3, optInTimePeriod);
+      }
+      return res;
    }
    public int temaState( struct TA_tema_State* _state,
       double inReal,
       double *outReal )
    {
+      double ema, ema2, ema3;
+      int retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
-         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      retCode = ema ( _state.value .state_EMA, inReal, &ema );
+      if( retCode != RetCode.Success )
+         return retCode;
+      retCode = ema ( _state.value .state_EMA2, ema, &ema2 );
+      if( retCode != RetCode.Success )
+         return retCode;
+      retCode = ema ( _state.value .state_EMA3, ema2, &ema3 );
+      if( retCode != RetCode.Success )
+         return retCode;
+      outReal.value = (3.0*ema) - (3.0*ema2) + ema3;
       return RetCode.Success ;
    }
    public int temaStateFree( struct TA_tema_State** _state )
    {
+      int res = ema ((struct ema **)& _state.value .value .state_EMA);
+      if (res == RetCode.Success )
+      {
+         res = ema ((struct ema **)& _state.value .value .state_EMA2);
+      }
+      if (res == RetCode.Success )
+      {
+         res = ema ((struct ema **)& _state.value .value .state_EMA3);
+      }
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
          if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
          free( _state.value ); _state.value = NULL;}
-      return RetCode.Success ;
+      return res;
    }
    public RetCode tema( int startIdx,
       int endIdx,
@@ -30303,7 +30634,7 @@ public class Core {
       double val2, val3, greatest, tempCY;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -30439,6 +30770,12 @@ public class Core {
             numeratorAdd += tempReal;
             numerator += numeratorAdd;
          }
+         for( i=middleIdx; i <= todayIdx; i++ )
+         {
+            tempReal = inReal[i];
+            numeratorAdd += tempReal;
+            numerator += numeratorAdd;
+         }
          outIdx = 0;
          tempReal = inReal[trailingIdx++];
          outReal[outIdx++] = numerator * factor;
@@ -30528,12 +30865,57 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      int i, middle;
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
-         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
+      {
+         _state.value .numerator = 0;
+         _state.value .numeratorSub = 0;
+         _state.value .numeratorAdd = 0;
+         if( ( _state.value .optInTimePeriod % 2) == 1 )
+         {
+            i = ( _state.value .optInTimePeriod>>1);
+            _state.value .factor = (i+1)*(i+1);
+            _state.value .factor = 1.0/ _state.value .factor;
+            _state.value .middleIdx = i;
+         } else {
+            i = ( _state.value .optInTimePeriod>>1);
+            _state.value .factor = i*(i+1);
+            _state.value .factor = 1.0/ _state.value .factor;
+            _state.value .middleIdx = i - 1;
+         }
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         if ((int)_cur_idx <= _state.value .middleIdx)
+         {
+            _state.value .numerator -= _state.value .numeratorSub;
+            _state.value .numeratorSub += inReal;
+            _state.value .numerator += _state.value .middleIdx * inReal;
+         }
+         if ((int)_cur_idx > _state.value .middleIdx)
+         {
+            _state.value .numeratorAdd += inReal;
+            _state.value .numerator += _state.value .numeratorAdd;
+         }
+      }
+      _state.value .numeratorAdd += inReal;
+      _state.value .numerator += _state.value .numeratorAdd;
+      outReal.value = _state.value .numerator * _state.value .factor;
+      _state.value .numerator -= _state.value .numeratorSub;
+      _state.value .numeratorSub -= ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      middle = _state.value .middleIdx++ % _state.value .mem_size;
+      tempReal = ( ( _state.value .memory+middle).value ).inReal ;
+      _state.value .numeratorAdd -= tempReal;
+      _state.value .numeratorSub += tempReal;
+      if( ( _state.value .optInTimePeriod % 2) == 1 )
+      {
+         _state.value .numerator += tempReal;
+      }
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int trimaStateFree( struct TA_trima_State** _state )
@@ -30595,6 +30977,12 @@ public class Core {
          }
          numeratorAdd = 0.0;
          middleIdx++;
+         for( i=middleIdx; i <= todayIdx; i++ )
+         {
+            tempReal = inReal[i];
+            numeratorAdd += tempReal;
+            numerator += numeratorAdd;
+         }
          for( i=middleIdx; i <= todayIdx; i++ )
          {
             tempReal = inReal[i];
@@ -30788,7 +31176,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
@@ -30974,12 +31362,37 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double m, b, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
+      if ( (_cur_idx == 0) )
+      {
+         _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
+         _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
+         _state.value .Divisor = _state.value .SumX * _state.value .SumX - _state.value .optInTimePeriod * _state.value .SumXSqr;
+         _state.value .SumXY = 0;
+         _state.value .SumY = 0;
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         _state.value .SumY += inReal;
+         _state.value .SumXY += _state.value .SumY;
+         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
+         return RetCode.NeedMoreData ;
+      }
+      _state.value .SumY += inReal;
+      _state.value .SumXY += _state.value .SumY;
+      m = ( _state.value .optInTimePeriod * _state.value .SumXY - _state.value .SumX * _state.value .SumY) / _state.value .Divisor;
+      b = ( _state.value .SumY - m * _state.value .SumX ) / (double) _state.value .optInTimePeriod;
+      outReal.value = b + m * (double) _state.value .optInTimePeriod;
+      tempReal = ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      _state.value .SumY -= tempReal;
+      _state.value .SumXY -= tempReal* _state.value .optInTimePeriod;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int tsfStateFree( struct TA_tsf_State** _state )
@@ -31096,7 +31509,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -31308,7 +31721,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -31556,8 +31969,8 @@ public class Core {
       double tempReal, meanValue1, meanValue2;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .periodTotal1 = 0.;
          _state.value .periodTotal2 = 0.;
@@ -31716,7 +32129,7 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
          ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
@@ -31888,8 +32301,8 @@ public class Core {
       double diff;
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index <= 1) )
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
       {
          _state.value .lowest = 0.;
          _state.value .highest = 0.;
@@ -32109,10 +32522,27 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
+      size_t _cur_idx = _state.value .mem_index++ % _state.value .mem_size ;
+      if ( (_cur_idx == 0) )
+      {
+         _state.value .periodSum = 0.;
+         _state.value .periodSub = 0.;
+         _state.value .divider = ( _state.value .optInTimePeriod*( _state.value .optInTimePeriod+1))>>1;
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         _state.value .periodSum += inReal* _state.value .optInTimePeriod;
+         _state.value .periodSub += inReal;
+         _state.value .periodSum -= _state.value .periodSub;
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      }
+      _state.value .periodSum += inReal* _state.value .optInTimePeriod;
+      outReal.value = _state.value .periodSum / _state.value .divider;
+      _state.value .periodSum -= _state.value .periodSub;
+      _state.value .periodSub += inReal;
+      _state.value .periodSub -= ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int wmaStateFree( struct TA_wma_State** _state )

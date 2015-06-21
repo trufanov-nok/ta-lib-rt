@@ -358,6 +358,13 @@
       }
       numeratorAdd = 0.0;
       middleIdx++;
+
+      for( i=middleIdx; i <= todayIdx; i++ )
+      {
+         tempReal      = inReal[i];
+         numeratorAdd += tempReal;
+         numerator    += numeratorAdd;
+      }
       for( i=middleIdx; i <= todayIdx; i++ )
       {
          tempReal      = inReal[i];
@@ -552,7 +559,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_TRIMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i, middle;
+double tempReal;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -562,8 +571,8 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
-/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
+/* Generated */    size_t _cur_idx = STATE.mem_index++ % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_TRIMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -579,6 +588,65 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+    {
+    STATE.numerator = 0;
+    STATE.numeratorSub = 0;
+    STATE.numeratorAdd = 0;
+
+
+            if( (STATE.optInTimePeriod % 2) == 1 )
+            {
+                i = (STATE.optInTimePeriod>>1);
+                STATE.factor = (i+1)*(i+1);
+                STATE.factor = 1.0/STATE.factor;
+                STATE.middleIdx   = i;
+            } else {
+                i = (STATE.optInTimePeriod>>1);
+                STATE.factor = i*(i+1);
+                STATE.factor = 1.0/STATE.factor;
+
+                STATE.middleIdx   = i - 1;
+            }
+    }
+
+
+   if (NEED_MORE_DATA)
+   { // _cur_idx always < STATE.optInTimePeriod
+       if ((int)_cur_idx <= STATE.middleIdx)
+       {
+           STATE.numerator    -= STATE.numeratorSub;
+           STATE.numeratorSub += inReal;
+           STATE.numerator    += STATE.middleIdx * inReal;
+       }
+
+       if ((int)_cur_idx > STATE.middleIdx)
+       {
+           STATE.numeratorAdd += inReal;
+           STATE.numerator    += STATE.numeratorAdd;
+       }
+   }
+
+   STATE.numeratorAdd += inReal;
+
+
+   STATE.numerator    += STATE.numeratorAdd;
+   VALUE_HANDLE_DEREF(outReal) = STATE.numerator * STATE.factor;
+
+   STATE.numerator    -= STATE.numeratorSub;
+   STATE.numeratorSub -= POP_FROM_MEM(inReal);
+
+   middle = STATE.middleIdx++ % STATE.mem_size;
+   tempReal = MEM_IDX_NS(middle, inReal);
+   STATE.numeratorAdd -= tempReal;
+   STATE.numeratorSub += tempReal;
+
+   if( (STATE.optInTimePeriod % 2) == 1 )
+   {
+     STATE.numerator += tempReal;
+   }
+
+   PUSH_TO_MEM(inReal, inReal);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -712,6 +780,12 @@
 /* Generated */       }
 /* Generated */       numeratorAdd = 0.0;
 /* Generated */       middleIdx++;
+/* Generated */       for( i=middleIdx; i <= todayIdx; i++ )
+/* Generated */       {
+/* Generated */          tempReal      = inReal[i];
+/* Generated */          numeratorAdd += tempReal;
+/* Generated */          numerator    += numeratorAdd;
+/* Generated */       }
 /* Generated */       for( i=middleIdx; i <= todayIdx; i++ )
 /* Generated */       {
 /* Generated */          tempReal      = inReal[i];

@@ -2369,9 +2369,9 @@ static void printFunc( FILE *out,
 
    if (stateFuncSignature && validationCode) {
        printIndent( out, indent );
-       fprintf( out, "int _cur_idx = ++STATE.mem_index %% MEM_SIZE;\n");
+       fprintf( out, "size_t _cur_idx = STATE.mem_index++ %% MEM_SIZE;\n");
        printIndent( out, indent );
-       fprintf( out, "UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP ethods won't be used\n");
+       fprintf( out, "UNUSED_VARIABLE(_cur_idx); // in case PUSH\\POP methods won't be used\n");
        printIndent( out, indent );
        fprintf( out, "#ifndef TA_%s_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA\n", funcName );
        printIndent( out, indent );
@@ -2416,9 +2416,9 @@ static void printFunc( FILE *out,
        //start main struct
        PRINT_STRUCT_NAME(prefix, funcName, "State {\n");
        printIndent( out, indent );
-       print( out, "int mem_size;\n");
+       print( out, "size_t mem_size;\n");
        printIndent( out, indent );
-       print( out, "int mem_index;\n");
+       print( out, "size_t mem_index;\n");
        printIndent( out, indent );
        print( out, "struct TA_%s_Data* memory;\n", funcName);
    }
@@ -3861,6 +3861,7 @@ static void printFuncHeaderDoc( FILE *out,
 
       switch( inputParamInfo->type )
       {
+      case TA_Input_Pointer: break; // only for stateStruct declaration
       case TA_Input_Price:
          first = 1;
          #define PRICE_PARAM(upperParam,lowerParam) \

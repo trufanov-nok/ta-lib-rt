@@ -66,7 +66,20 @@ static const TA_OptInputParameterInfo *TA_EMA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_EMA_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_EMA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevMA", 0 };
+
+const TA_InputParameterInfo TA_EMA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "tempSum", 0 };
+
+const TA_InputParameterInfo TA_EMA_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "currentIdx", 0 };
+
+static const TA_InputParameterInfo *TA_EMA_StructParams[] = {
+    &TA_EMA_DEF_UI_STRUCT_PARAM_1,
+    &TA_EMA_DEF_UI_STRUCT_PARAM_2,
+    &TA_EMA_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( EMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */

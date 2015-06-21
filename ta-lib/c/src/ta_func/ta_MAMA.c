@@ -490,6 +490,11 @@
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
+#ifndef HILBERT_VARIABLES_STRUCT_MAMA_DEFINED
+DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
+#define HILBERT_VARIABLES_STRUCT_MAMA_DEFINED
+#endif
+
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
@@ -545,8 +550,10 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
-
-
+   CREATE_HILBERT_VARIABLES_STRUCT(MAMA, detrender);
+   CREATE_HILBERT_VARIABLES_STRUCT(MAMA, Q1);
+   CREATE_HILBERT_VARIABLES_STRUCT(MAMA, jI);
+   CREATE_HILBERT_VARIABLES_STRUCT(MAMA, jQ);
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -571,6 +578,14 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+   #define TA_MAMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+    CONSTANT_DOUBLE(a) = 0.0962;
+    CONSTANT_DOUBLE(b) = 0.5769;
+    double hilbertTempReal, smoothedValue;
+    double rad2Deg;
+    double adjustedPrevPeriod;
+    double Q2, I2;
+    double tempReal, tempReal2;
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -581,8 +596,8 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
-/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
+/* Generated */    size_t _cur_idx = STATE.mem_index++ % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_MAMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -602,6 +617,150 @@
 
    /* insert state based TA dunc code here. */
 
+   rad2Deg = 180.0 / (4.0 * std_atan(1));
+   if (FIRST_LAUNCH)
+   {
+       STATE.periodWMASub = 0.;
+       STATE.periodWMASum = 0.;
+       STATE.hilbertIdx = 0;
+       STATE.period = 0;
+       STATE.prevI2 = 0.;
+       STATE.prevQ2 = 0.;
+       STATE.I1ForOddPrev2 = 0;
+       STATE.I1ForEvenPrev2 = 0;
+       STATE.I1ForOddPrev3 = 0;
+       STATE.I1ForEvenPrev3 = 0;
+       STATE.prevPhase = 0.;
+       STATE.mama = 0.;
+       STATE.fama = 0.;
+       STATE.Im = 0.;
+       STATE.Re = 0.;
+       STATE.trailingWMAValue = 0.;
+
+       INIT_HILBERT_VARIABLES_STRUCT(MAMA, detrender);
+       INIT_HILBERT_VARIABLES_STRUCT(MAMA, Q1);
+       INIT_HILBERT_VARIABLES_STRUCT(MAMA, jI);
+       INIT_HILBERT_VARIABLES_STRUCT(MAMA, jQ);
+   }
+
+#define DO_PRICE_WMA_STATE(varNewPrice,varToStoreSmoothedValue) { \
+   STATE.periodWMASub     += varNewPrice; \
+   STATE.periodWMASub     -= STATE.trailingWMAValue; \
+   STATE.periodWMASum     += varNewPrice*4.0; \
+   STATE.trailingWMAValue  = MEM_IDX_NS(STATE.mem_index-1-4 % MEM_SIZE, inReal); \
+   varToStoreSmoothedValue = STATE.periodWMASum*0.1; \
+   STATE.periodWMASum -= STATE.periodWMASub; \
+}
+
+   if (STATE.mem_index <= 4)
+   {
+      STATE.periodWMASub += inReal;
+      STATE.periodWMASum += STATE.mem_index*inReal;
+      return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+   } else
+       if (STATE.mem_index <= 12)
+       {
+           DO_PRICE_WMA_STATE(inReal, smoothedValue);
+           return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+       }
+
+
+
+
+
+   adjustedPrevPeriod = (0.075*STATE.period)+0.54;
+   DO_PRICE_WMA_STATE(inReal, smoothedValue);
+
+   if( (STATE.mem_index%2) == 0 )
+   {
+       /* Do the Hilbert Transforms for even price bar */
+       DO_HILBERT_STRUCT_EVEN(MAMA, detrender, smoothedValue);
+       DO_HILBERT_STRUCT_EVEN(MAMA, Q1, GET_HILBERT_STRUCT_VAR(MAMA,detrender,var));
+       DO_HILBERT_STRUCT_EVEN(MAMA, jI, STATE.I1ForEvenPrev3);
+       DO_HILBERT_STRUCT_EVEN(MAMA, jQ, GET_HILBERT_STRUCT_VAR(MAMA,Q1,var));
+       if( ++STATE.hilbertIdx == 3 )
+          STATE.hilbertIdx = 0;
+
+       Q2 = (0.2*(GET_HILBERT_STRUCT_VAR(MAMA,Q1,var) + GET_HILBERT_STRUCT_VAR(MAMA,jI,var))) + (0.8*STATE.prevQ2);
+       I2 = (0.2*(STATE.I1ForEvenPrev3 - GET_HILBERT_STRUCT_VAR(MAMA,jQ,var))) + (0.8*STATE.prevI2);
+
+       STATE.I1ForOddPrev3 = STATE.I1ForOddPrev2;
+       STATE.I1ForOddPrev2 = GET_HILBERT_STRUCT_VAR(MAMA,detrender,var);
+
+       if( STATE.I1ForEvenPrev3 != 0.0 )
+          tempReal2 = (std_atan(GET_HILBERT_STRUCT_VAR(MAMA,Q1,var)/STATE.I1ForEvenPrev3)*rad2Deg);
+       else
+          tempReal2 = 0.0;
+   } else {
+
+       DO_HILBERT_STRUCT_ODD(MAMA, detrender, smoothedValue);
+       DO_HILBERT_STRUCT_ODD(MAMA, Q1, GET_HILBERT_STRUCT_VAR(MAMA,detrender,var));
+       DO_HILBERT_STRUCT_ODD(MAMA, jI, STATE.I1ForOddPrev3);
+       DO_HILBERT_STRUCT_ODD(MAMA, jQ, GET_HILBERT_STRUCT_VAR(MAMA,Q1,var));
+
+       Q2 = (0.2*(GET_HILBERT_STRUCT_VAR(MAMA,Q1,var) + GET_HILBERT_STRUCT_VAR(MAMA,jI,var))) + (0.8*STATE.prevQ2);
+       I2 = (0.2*(STATE.I1ForOddPrev3 - GET_HILBERT_STRUCT_VAR(MAMA,jQ,var))) + (0.8*STATE.prevI2);
+
+       STATE.I1ForEvenPrev3 = STATE.I1ForEvenPrev2;
+       STATE.I1ForEvenPrev2 = GET_HILBERT_STRUCT_VAR(MAMA,detrender,var);
+
+       if( STATE.I1ForOddPrev3 != 0.0 )
+          tempReal2 = (std_atan(GET_HILBERT_STRUCT_VAR(MAMA,Q1,var)/STATE.I1ForOddPrev3)*rad2Deg);
+       else
+          tempReal2 = 0.0;
+   }
+
+
+   tempReal  = STATE.prevPhase - tempReal2;
+   STATE.prevPhase = tempReal2;
+   if( tempReal < 1.0 )
+      tempReal = 1.0;
+
+
+   if( tempReal > 1.0 )
+   {
+      tempReal = STATE.optInFastLimit/tempReal;
+      if( tempReal < STATE.optInSlowLimit )
+         tempReal = STATE.optInSlowLimit;
+   }
+   else
+   {
+      tempReal = STATE.optInFastLimit;
+   }
+
+
+   STATE.mama = (tempReal*inReal)+((1-tempReal)*STATE.mama);
+   tempReal *= 0.5;
+   STATE.fama = (tempReal*STATE.mama)+((1-tempReal)*STATE.fama);
+
+   if (NEED_MORE_DATA)
+   return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+   VALUE_HANDLE_DEREF(outMAMA) = STATE.mama;
+   VALUE_HANDLE_DEREF(outFAMA) = STATE.fama;
+
+
+   STATE.Re = (0.2*((I2*STATE.prevI2)+(Q2*STATE.prevQ2)))+(0.8*STATE.Re);
+   STATE.Im = (0.2*((I2*STATE.prevQ2)-(Q2*STATE.prevI2)))+(0.8*STATE.Im);
+   STATE.prevQ2 = Q2;
+   STATE.prevI2 = I2;
+   tempReal = STATE.period;
+   if( (STATE.Im != 0.0) && (STATE.Re != 0.0) )
+      STATE.period = 360.0 / (std_atan(STATE.Im/STATE.Re)*rad2Deg);
+   tempReal2 = 1.5*tempReal;
+   if( STATE.period > tempReal2)
+      STATE.period = tempReal2;
+   tempReal2 = 0.67*tempReal;
+   if( STATE.period < tempReal2 )
+      STATE.period = tempReal2;
+   if( STATE.period < 6 )
+      STATE.period = 6;
+   else if( STATE.period > 50 )
+      STATE.period = 50;
+   STATE.period = (0.2*STATE.period) + (0.8 * tempReal);
+
+
+
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -619,7 +778,10 @@
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
-   /* insert local variable here */
+    FREE_HILBERT_VARIABLES_STRUCT(detrender);
+    FREE_HILBERT_VARIABLES_STRUCT(Q1);
+    FREE_HILBERT_VARIABLES_STRUCT(jI);
+    FREE_HILBERT_VARIABLES_STRUCT(jQ);
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -866,6 +1028,10 @@
 /* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
 /* Generated */    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */ }
+/* Generated */ #ifndef HILBERT_VARIABLES_STRUCT_MAMA_DEFINED
+/* Generated */ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
+/* Generated */ #define HILBERT_VARIABLES_STRUCT_MAMA_DEFINED
+/* Generated */ #endif
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib

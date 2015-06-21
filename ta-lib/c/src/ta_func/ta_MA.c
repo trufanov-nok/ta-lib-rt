@@ -357,7 +357,8 @@
 
 {
    /* insert local variable here */
-
+ENUM_DECLARATION(RetCode) retValue;
+#define TA_MA_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -394,8 +395,49 @@
 
    /* insert state init code here. */
 
+                switch( optInMAType )
+                {
+                case ENUM_CASE(MAType, TA_MAType_SMA, Sma ):
+                   retValue = FUNCTION_CALL_STATE_INIT(SMA)( (struct TA_SMA_State**) &STATE_P.ta_state, optInTimePeriod );
+                   break;
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+                case ENUM_CASE(MAType, TA_MAType_EMA, Ema):
+                   retValue = FUNCTION_CALL_STATE_INIT(EMA)( (struct TA_EMA_State**)  &STATE_P.ta_state, optInTimePeriod );
+                   break;
+
+                case ENUM_CASE(MAType, TA_MAType_WMA, Wma):
+                   retValue = FUNCTION_CALL_STATE_INIT(WMA)( (struct TA_WMA_State**) &STATE_P.ta_state, optInTimePeriod );
+                   break;
+
+                case ENUM_CASE(MAType, TA_MAType_DEMA, Dema):
+                   retValue = FUNCTION_CALL_STATE_INIT(DEMA)( (struct TA_DEMA_State**) &STATE_P.ta_state, optInTimePeriod );
+                   break;
+
+                case ENUM_CASE(MAType, TA_MAType_TEMA, Tema ):
+                   retValue = FUNCTION_CALL_STATE_INIT(TEMA)( (struct TA_TEMA_State**) &STATE_P.ta_state, optInTimePeriod );
+                   break;
+
+                case ENUM_CASE(MAType, TA_MAType_TRIMA, Trima ):
+                   retValue = FUNCTION_CALL_STATE_INIT(TRIMA)( (struct TA_TRIMA_State**) &STATE_P.ta_state, optInTimePeriod );
+                   break;
+
+                case ENUM_CASE(MAType, TA_MAType_KAMA, Kama ):
+                   retValue = FUNCTION_CALL_STATE_INIT(KAMA)( (struct TA_KAMA_State**) &STATE_P.ta_state, optInTimePeriod );
+                   break;
+
+                case ENUM_CASE(MAType, TA_MAType_MAMA, Mama ):
+                   retValue = FUNCTION_CALL_STATE_INIT(MAMA)( (struct TA_MAMA_State**) &STATE_P.ta_state, 0.5, 0.05 );
+                   break;
+
+                case ENUM_CASE(MAType, TA_MAType_T3, T3):
+                   retValue = FUNCTION_CALL_STATE_INIT(T3)( (struct TA_T3_State**) &STATE_P.ta_state, optInTimePeriod, 0.7 );
+                   break;
+
+                default:
+                   retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
+                }
+
+                return retValue;
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -416,7 +458,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+ENUM_DECLARATION(RetCode) retValue;
+#define TA_MA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -426,8 +469,8 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
-/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
+/* Generated */    size_t _cur_idx = STATE.mem_index++ % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_MA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -443,8 +486,59 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if( STATE.optInTimePeriod == 1 )
+        {
+          VALUE_HANDLE_DEREF(outReal) = inReal;
+          return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+        }
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+switch( STATE.optInMAType )
+{
+case ENUM_CASE(MAType, TA_MAType_SMA, Sma ):
+   retValue = FUNCTION_CALL_STATE(SMA)( (struct TA_SMA_State*) STATE.ta_state, inReal, outReal );
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_EMA, Ema):
+   retValue = FUNCTION_CALL_STATE(EMA)( (struct TA_EMA_State*)  &STATE.ta_state, inReal, outReal );
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_WMA, Wma):
+   retValue = FUNCTION_CALL_STATE(WMA)( (struct TA_WMA_State*) STATE.ta_state, inReal, outReal );
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_DEMA, Dema):
+   retValue = FUNCTION_CALL_STATE(DEMA)( (struct TA_DEMA_State*) STATE.ta_state, inReal, outReal );
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_TEMA, Tema ):
+   retValue = FUNCTION_CALL_STATE(TEMA)( (struct TA_TEMA_State*) STATE.ta_state, inReal, outReal );
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_TRIMA, Trima ):
+   retValue = FUNCTION_CALL_STATE(TRIMA)( (struct TA_TRIMA_State*) STATE.ta_state, inReal, outReal );
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_KAMA, Kama ):
+   retValue = FUNCTION_CALL_STATE(KAMA)( (struct TA_KAMA_State*) STATE.ta_state, inReal, outReal );
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_MAMA, Mama ):
+{
+   double dummy;
+   retValue = FUNCTION_CALL_STATE(MAMA)( (struct TA_MAMA_State*) STATE.ta_state, inReal, outReal, &dummy );
+}
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_T3, T3):
+   retValue = FUNCTION_CALL_STATE(T3)( (struct TA_T3_State*) STATE.ta_state, inReal, outReal );
+   break;
+
+default:
+   retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
+}
+
+return retValue;
+
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -462,6 +556,53 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+ENUM_DECLARATION(RetCode) retValue;
+
+
+switch( STATE_P.optInMAType )
+{
+case ENUM_CASE(MAType, TA_MAType_SMA, Sma ):
+   retValue = FUNCTION_CALL_STATE_FREE(SMA)( (struct TA_SMA_State**) &STATE_P.ta_state);
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_EMA, Ema):
+   retValue = FUNCTION_CALL_STATE_FREE(EMA)( (struct TA_EMA_State**)  &STATE_P.ta_state);
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_WMA, Wma):
+   retValue = FUNCTION_CALL_STATE_FREE(WMA)( (struct TA_WMA_State**) &STATE_P.ta_state);
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_DEMA, Dema):
+   retValue = FUNCTION_CALL_STATE_FREE(DEMA)( (struct TA_DEMA_State**) &STATE_P.ta_state);
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_TEMA, Tema ):
+   retValue = FUNCTION_CALL_STATE_FREE(TEMA)( (struct TA_TEMA_State**) &STATE_P.ta_state);
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_TRIMA, Trima ):
+   retValue = FUNCTION_CALL_STATE_FREE(TRIMA)( (struct TA_TRIMA_State**) &STATE_P.ta_state);
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_KAMA, Kama ):
+   retValue = FUNCTION_CALL_STATE_FREE(KAMA)( (struct TA_KAMA_State**) &STATE_P.ta_state);
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_MAMA, Mama ):
+   retValue = FUNCTION_CALL_STATE_FREE(MAMA)( (struct TA_MAMA_State**) &STATE_P.ta_state);
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_T3, T3):
+   retValue = FUNCTION_CALL_STATE_FREE(T3)( (struct TA_T3_State**) &STATE_P.ta_state);
+   break;
+
+default:
+   retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
+}
+
+if (retValue != ENUM_VALUE(RetCode,TA_SUCCESS,Success))
+    return retValue;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -478,6 +619,8 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
+
+
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 

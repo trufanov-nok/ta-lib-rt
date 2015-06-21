@@ -80,7 +80,48 @@ static const TA_OptInputParameterInfo *TA_T3_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_T3_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "k", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "one_minus_k", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "e1", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "e2", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "e3", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "e4", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "e5", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "e6", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "c1", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "c2", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "c3", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "c4", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Real, "tempReal", 0 };
+
+static const TA_InputParameterInfo *TA_T3_StructParams[] = {
+    &TA_T3_DEF_UI_STRUCT_PARAM_1,
+    &TA_T3_DEF_UI_STRUCT_PARAM_2,
+    &TA_T3_DEF_UI_STRUCT_PARAM_3,
+    &TA_T3_DEF_UI_STRUCT_PARAM_4,
+    &TA_T3_DEF_UI_STRUCT_PARAM_5,
+    &TA_T3_DEF_UI_STRUCT_PARAM_6,
+    &TA_T3_DEF_UI_STRUCT_PARAM_7,
+    &TA_T3_DEF_UI_STRUCT_PARAM_8,
+    &TA_T3_DEF_UI_STRUCT_PARAM_9,
+    &TA_T3_DEF_UI_STRUCT_PARAM_10,
+    &TA_T3_DEF_UI_STRUCT_PARAM_11,
+    &TA_T3_DEF_UI_STRUCT_PARAM_12,
+    &TA_T3_DEF_UI_STRUCT_PARAM_13,
+    NULL };
 
 DEF_FUNCTION( T3,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
@@ -116,7 +157,18 @@ static const TA_OptInputParameterInfo *TA_TEMA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_TEMA_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_TEMA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "state_EMA", 0 };
+const TA_InputParameterInfo TA_TEMA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "state_EMA2", 0 };
+const TA_InputParameterInfo TA_TEMA_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "state_EMA3", 0 };
+
+static const TA_InputParameterInfo *TA_TEMA_StructParams[] = {
+    &TA_TEMA_DEF_UI_STRUCT_PARAM_1,
+    &TA_TEMA_DEF_UI_STRUCT_PARAM_2,
+    &TA_TEMA_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( TEMA,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
@@ -169,7 +221,26 @@ static const TA_OptInputParameterInfo *TA_TRIMA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_TRIMA_StructParams[] = { NULL }; 
+
+
+const TA_InputParameterInfo TA_TRIMA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "numerator", 0 };
+const TA_InputParameterInfo TA_TRIMA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "numeratorSub", 0 };
+const TA_InputParameterInfo TA_TRIMA_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "numeratorAdd", 0 };
+const TA_InputParameterInfo TA_TRIMA_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "factor", 0 };
+const TA_InputParameterInfo TA_TRIMA_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "middleIdx", 0 };
+
+static const TA_InputParameterInfo *TA_TRIMA_StructParams[] = {
+    &TA_TRIMA_DEF_UI_STRUCT_PARAM_1,
+    &TA_TRIMA_DEF_UI_STRUCT_PARAM_2,
+    &TA_TRIMA_DEF_UI_STRUCT_PARAM_3,
+    &TA_TRIMA_DEF_UI_STRUCT_PARAM_4,
+    &TA_TRIMA_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( TRIMA,                         /* name */
               TA_GroupId_OverlapStudies,   /* groupId */

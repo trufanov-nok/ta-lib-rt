@@ -360,7 +360,8 @@
 
 {
    /* insert local variable here */
-
+ #define TA_DEMA_SUPPRESS_MEMORY_ALLOCATION
+ int res;
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -390,7 +391,13 @@
    /* insert state init code here. */
 
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   res = FUNCTION_CALL_STATE_INIT(EMA)((struct TA_EMA_State**)&STATE_P.state_EMA, optInTimePeriod);
+   if (res == ENUM_VALUE(RetCode,TA_SUCCESS,Success))
+   {
+       res = FUNCTION_CALL_STATE_INIT(EMA)((struct TA_EMA_State**)&STATE_P.state_EMA2, optInTimePeriod);
+   }
+
+   return res;
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -411,7 +418,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+  #define TA_DEMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+  double ema, ema2;
+  int retCode;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -421,8 +430,8 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
-/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
+/* Generated */    size_t _cur_idx = STATE.mem_index++ % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_DEMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -438,6 +447,17 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+   retCode = FUNCTION_CALL_STATE(EMA)( STATE.state_EMA, inReal, &ema );
+   if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) )
+       return retCode;
+
+   retCode = FUNCTION_CALL_STATE(EMA)( STATE.state_EMA2, ema, &ema2 );
+   if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) )
+       return retCode;
+
+   VALUE_HANDLE_DEREF(outReal) = (2.0*ema) - ema2;
+
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -458,6 +478,13 @@
 {
    /* insert local variable here */
 
+
+        int res = FUNCTION_CALL_STATE_FREE(EMA)((struct TA_EMA_State**)&STATE_P.state_EMA);
+        if (res == ENUM_VALUE(RetCode,TA_SUCCESS,Success))
+           {
+            res = FUNCTION_CALL_STATE_FREE(EMA)((struct TA_EMA_State**)&STATE_P.state_EMA2);
+           }
+
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -473,7 +500,7 @@
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
    /* insert state free code here. */   
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   return res;
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

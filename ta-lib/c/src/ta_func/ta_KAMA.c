@@ -428,7 +428,13 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+#define TA_KAMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+        CONSTANT_DOUBLE(constMax) = 2.0/(30.0+1.0);
+        CONSTANT_DOUBLE(constDiff) = 2.0/(2.0+1.0) - constMax;
 
+        double tempReal;
+        double periodROC;
+        double trailingValue;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -438,8 +444,8 @@
 /* Generated */    #if !defined(_JAVA)
 /* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #endif /* !defined(_JAVA)*/
-/* Generated */    int _cur_idx = ++STATE.mem_index % MEM_SIZE;
-/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSHPOP ethods won't be used
+/* Generated */    size_t _cur_idx = STATE.mem_index++ % MEM_SIZE;
+/* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_KAMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
@@ -455,6 +461,44 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+   if (FIRST_LAUNCH)
+   {
+            STATE.sumROC1 = 0.0;
+            STATE.yestReal = inReal;
+   } else
+        if ((int)_cur_idx < STATE.optInTimePeriod-1) // less than mem_size
+        {
+          STATE.sumROC1  += std_fabs(STATE.yestReal - inReal);
+          STATE.yestReal = inReal;
+          STATE.prevKAMA = inReal;
+          PUSH_TO_MEM(inReal,inReal);
+          return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+        }
+
+    trailingValue = POP_FROM_MEM(inReal);
+    periodROC = inReal - trailingValue;
+
+    if( (STATE.sumROC1 <= periodROC) || TA_IS_ZERO(STATE.sumROC1))
+       tempReal = 1.0;
+    else
+       tempReal = std_fabs(periodROC/STATE.sumROC1);
+
+
+    tempReal  = (tempReal*constDiff)+constMax;
+    tempReal *= tempReal;
+
+
+    STATE.prevKAMA = ((inReal-STATE.prevKAMA)*tempReal) + STATE.prevKAMA;
+
+
+    PUSH_TO_MEM(inReal,inReal);
+
+    if (NEED_MORE_DATA)
+        return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+
+   VALUE_HANDLE_DEREF(outReal) = STATE.prevKAMA;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

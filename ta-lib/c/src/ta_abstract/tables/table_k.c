@@ -66,7 +66,18 @@ static const TA_OptInputParameterInfo *TA_KAMA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_KAMA_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_KAMA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "sumROC1", 0 };
+const TA_InputParameterInfo TA_KAMA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "yestReal", 0 };
+const TA_InputParameterInfo TA_KAMA_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevKAMA", 0 };
+
+static const TA_InputParameterInfo *TA_KAMA_StructParams[] = {
+    &TA_KAMA_DEF_UI_STRUCT_PARAM_1,
+    &TA_KAMA_DEF_UI_STRUCT_PARAM_2,
+    &TA_KAMA_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( KAMA,                     /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
