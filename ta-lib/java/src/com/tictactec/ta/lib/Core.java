@@ -19577,12 +19577,34 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double m, b, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
+      if ( ( _state.value .mem_index <= 1) )
+      {
+         _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
+         _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
+         _state.value .Divisor = _state.value .SumX * _state.value .SumX - _state.value .optInTimePeriod * _state.value .SumXSqr;
+         _state.value .SumXY = 0;
+         _state.value .SumY = 0;
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         _state.value .SumY += inReal;
+         _state.value .SumXY += _state.value .SumY;
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      }
+      _state.value .SumY += inReal;
+      _state.value .SumXY += _state.value .SumY;
+      m = ( _state.value .optInTimePeriod * _state.value .SumXY - _state.value .SumX * _state.value .SumY) / _state.value .Divisor;
+      b = ( _state.value .SumY - m * _state.value .SumX ) / (double) _state.value .optInTimePeriod;
+      outReal.value = b + m * (double)( _state.value .optInTimePeriod-1);
+      tempReal = ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      _state.value .SumY -= tempReal;
+      _state.value .SumXY -= tempReal* _state.value .optInTimePeriod;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int linearRegStateFree( struct TA_linearReg_State** _state )
@@ -19733,12 +19755,36 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double m, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index <= 1) )
+      {
+         _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
+         _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
+         _state.value .Divisor = _state.value .SumX * _state.value .SumX - _state.value .optInTimePeriod * _state.value .SumXSqr;
+         _state.value .SumXY = 0;
+         _state.value .SumY = 0;
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         _state.value .SumY += inReal;
+         _state.value .SumXY += _state.value .SumY;
+         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
+         return RetCode.NeedMoreData ;
+      }
+      _state.value .SumY += inReal;
+      _state.value .SumXY += _state.value .SumY;
+      m = ( _state.value .optInTimePeriod * _state.value .SumXY - _state.value .SumX * _state.value .SumY) / _state.value .Divisor;
+      outReal.value = Math.atan (m) * ( 180.0 / 3.14159265358979323846 );
+      tempReal = ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      _state.value .SumY -= tempReal;
+      _state.value .SumXY -= tempReal* _state.value .optInTimePeriod;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
@@ -19888,12 +19934,36 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double m, tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index <= 1) )
+      {
+         _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
+         _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
+         _state.value .Divisor = _state.value .SumX * _state.value .SumX - _state.value .optInTimePeriod * _state.value .SumXSqr;
+         _state.value .SumXY = 0;
+         _state.value .SumY = 0;
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         _state.value .SumY += inReal;
+         _state.value .SumXY += _state.value .SumY;
+         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
+         return RetCode.NeedMoreData ;
+      }
+      _state.value .SumY += inReal;
+      _state.value .SumXY += _state.value .SumY;
+      m = ( _state.value .optInTimePeriod * _state.value .SumXY - _state.value .SumX * _state.value .SumY) / _state.value .Divisor;
+      outReal.value = ( _state.value .SumY - m * _state.value .SumX ) / (double) _state.value .optInTimePeriod;
+      tempReal = ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      _state.value .SumY -= tempReal;
+      _state.value .SumXY -= tempReal* _state.value .optInTimePeriod;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
@@ -20041,12 +20111,35 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
       if ( ( _state.value .mem_index < _state.value .mem_size) ) {
          ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
          return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index <= 1) )
+      {
+         _state.value .SumX = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * 0.5;
+         _state.value .SumXSqr = _state.value .optInTimePeriod * ( _state.value .optInTimePeriod - 1 ) * ( 2 * _state.value .optInTimePeriod - 1 ) / 6;
+         _state.value .Divisor = _state.value .SumX * _state.value .SumX - _state.value .optInTimePeriod * _state.value .SumXSqr;
+         _state.value .SumXY = 0;
+         _state.value .SumY = 0;
+      }
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+      {
+         _state.value .SumY += inReal;
+         _state.value .SumXY += _state.value .SumY;
+         ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
+         return RetCode.NeedMoreData ;
+      }
+      _state.value .SumY += inReal;
+      _state.value .SumXY += _state.value .SumY;
+      outReal.value = ( _state.value .optInTimePeriod * _state.value .SumXY - _state.value .SumX * _state.value .SumY) / _state.value .Divisor;
+      tempReal = ( ( _state.value .memory+_cur_idx).value ).inReal ;
+      _state.value .SumY -= tempReal;
+      _state.value .SumXY -= tempReal* _state.value .optInTimePeriod;
+      ( ( _state.value .memory+_cur_idx).value ).inReal = inReal ;
       return RetCode.Success ;
    }
    public int linearRegSlopeStateFree( struct TA_linearRegSlope_State** _state )
@@ -31783,11 +31876,7 @@ public class Core {
       _state.value = calloc(1, sizeof(struct willR ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
-      _state.value .value .mem_size = willRLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_WILLR_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
    public int willRState( struct TA_willR_State* _state,
@@ -31796,14 +31885,26 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      double diff;
       if (_state == NULL)
          return RetCode.BadParam ;
       int _cur_idx = ++ _state.value .mem_index % _state.value .mem_size ;
-      if ( ( _state.value .mem_index < _state.value .mem_size) ) {
-         ( ( _state.value .memory+_cur_idx).value ).inHigh = inHigh ;
-         ( ( _state.value .memory+_cur_idx).value ).inLow = inLow ;
-         ( ( _state.value .memory+_cur_idx).value ).inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index <= 1) )
+      {
+         _state.value .lowest = 0.;
+         _state.value .highest = 0.;
+      }
+      if (inLow < _state.value .lowest)
+         _state.value .lowest = inLow;
+      if (inHigh > _state.value .highest)
+         _state.value .highest = inHigh;
+      if ( ( _state.value .mem_index < _state.value .mem_size) )
+         return RetCode.NeedMoreData ;
+      diff = ( _state.value .highest - _state.value .lowest)/(-100.0);
+      if( diff != 0.0 )
+         outReal.value = ( _state.value .highest-inClose)/diff;
+      else
+         outReal.value = 0.0;
       return RetCode.Success ;
    }
    public int willRStateFree( struct TA_willR_State** _state )

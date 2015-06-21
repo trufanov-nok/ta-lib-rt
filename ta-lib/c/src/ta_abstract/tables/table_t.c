@@ -225,7 +225,24 @@ static const TA_OptInputParameterInfo *TA_TSF_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_TSF_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_TSF_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "SumX", 0 };
+const TA_InputParameterInfo TA_TSF_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "SumXY", 0 };
+const TA_InputParameterInfo TA_TSF_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "SumY", 0 };
+const TA_InputParameterInfo TA_TSF_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "SumXSqr", 0 };
+const TA_InputParameterInfo TA_TSF_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "Divisor", 0 };
+
+static const TA_InputParameterInfo *TA_TSF_StructParams[] = {
+    &TA_TSF_DEF_UI_STRUCT_PARAM_1,
+    &TA_TSF_DEF_UI_STRUCT_PARAM_2,
+    &TA_TSF_DEF_UI_STRUCT_PARAM_3,
+    &TA_TSF_DEF_UI_STRUCT_PARAM_4,
+    &TA_TSF_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( TSF,                         /* name */
               TA_GroupId_Statistic,  /* groupId */

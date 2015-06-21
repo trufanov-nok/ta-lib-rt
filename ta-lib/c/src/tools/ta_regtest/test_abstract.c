@@ -412,6 +412,7 @@ static ErrorNumber callWithDefaults( const char *funcName, const double *input, 
       TA_GetInputParameterInfo( handle, i, &inputInfo );
 	  switch(inputInfo->type)
 	  {
+      case TA_Input_Pointer: break; // for struct only
 	  case TA_Input_Price:
          TA_SetInputParamPricePtr( paramHolder, i,
 			 inputInfo->flags&TA_IN_PRICE_OPEN?input:NULL,
@@ -711,6 +712,7 @@ static ErrorNumber callAndProfile( const char *funcName, ProfilingType type )
 			  TA_GetInputParameterInfo( handle, k, &inputInfo );
 			  switch(inputInfo->type)
 			  {
+              case TA_Input_Pointer: break; // for struct only
 			  case TA_Input_Price:
 				 TA_SetInputParamPricePtr( paramHolder, k,
 					 inputInfo->flags&TA_IN_PRICE_OPEN?&gDataOpen[j*stepSize]:NULL,

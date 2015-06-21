@@ -327,7 +327,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_LINEARREG_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+double m, tempReal;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -354,6 +355,36 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+        if (FIRST_LAUNCH)
+             { // init const values
+                 STATE.SumX = STATE.optInTimePeriod * ( STATE.optInTimePeriod - 1 ) * 0.5;
+                 STATE.SumXSqr = STATE.optInTimePeriod * ( STATE.optInTimePeriod - 1 ) * ( 2 * STATE.optInTimePeriod - 1 ) / 6;
+                 STATE.Divisor = STATE.SumX * STATE.SumX - STATE.optInTimePeriod * STATE.SumXSqr;
+               // init sums
+                 STATE.SumXY = 0;
+                 STATE.SumY = 0;
+             }
+
+
+        if (NEED_MORE_DATA)
+        {
+            STATE.SumY += inReal;
+            STATE.SumXY += STATE.SumY; // at the end shall be (i*a+(i-1)*b+(i-2)*c ... +z)
+           PUSH_TO_MEM(inReal,inReal);
+           return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+        }
+
+        STATE.SumY += inReal;
+        STATE.SumXY += STATE.SumY; // at the end shall be (i*a+(i-1)*b+(i-2)*c ... +z)
+
+        m = ( STATE.optInTimePeriod * STATE.SumXY - STATE.SumX * STATE.SumY) / STATE.Divisor;
+        VALUE_HANDLE_DEREF(outReal) = std_atan(m) * ( 180.0 / PI );
+
+        tempReal = POP_FROM_MEM(inReal);
+        STATE.SumY -= tempReal;
+        STATE.SumXY  -= tempReal*STATE.optInTimePeriod;
+        PUSH_TO_MEM(inReal,inReal);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

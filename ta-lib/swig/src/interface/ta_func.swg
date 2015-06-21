@@ -4665,6 +4665,11 @@ struct TA_LINEARREG_State {
                           int mem_size;
                           int mem_index;
                           struct TA_LINEARREG_Data* memory;
+                          double       SumX;
+                          double       SumXY;
+                          double       SumY;
+                          double       SumXSqr;
+                          double       Divisor;
                           int           optInTimePeriod; /* From 2 to 100000 */
                           };
 
@@ -4711,6 +4716,11 @@ struct TA_LINEARREG_ANGLE_State {
                                 int mem_size;
                                 int mem_index;
                                 struct TA_LINEARREG_ANGLE_Data* memory;
+                                double       SumX;
+                                double       SumXY;
+                                double       SumY;
+                                double       SumXSqr;
+                                double       Divisor;
                                 int           optInTimePeriod; /* From 2 to 100000 */
                                 };
 
@@ -4757,6 +4767,11 @@ struct TA_LINEARREG_INTERCEPT_State {
                                     int mem_size;
                                     int mem_index;
                                     struct TA_LINEARREG_INTERCEPT_Data* memory;
+                                    double       SumX;
+                                    double       SumXY;
+                                    double       SumY;
+                                    double       SumXSqr;
+                                    double       Divisor;
                                     int           optInTimePeriod; /* From 2 to 100000 */
                                     };
 
@@ -4803,6 +4818,11 @@ struct TA_LINEARREG_SLOPE_State {
                                 int mem_size;
                                 int mem_index;
                                 struct TA_LINEARREG_SLOPE_Data* memory;
+                                double       SumX;
+                                double       SumXY;
+                                double       SumY;
+                                double       SumXSqr;
+                                double       Divisor;
                                 int           optInTimePeriod; /* From 2 to 100000 */
                                 };
 
@@ -7393,6 +7413,11 @@ struct TA_TSF_State {
                     int mem_size;
                     int mem_index;
                     struct TA_TSF_Data* memory;
+                    double       SumX;
+                    double       SumXY;
+                    double       SumY;
+                    double       SumXSqr;
+                    double       Divisor;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 

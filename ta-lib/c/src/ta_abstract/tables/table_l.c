@@ -66,7 +66,24 @@ static const TA_OptInputParameterInfo *TA_LINEARREG_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_LINEARREG_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_LINEARREG_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "SumX", 0 };
+const TA_InputParameterInfo TA_LINEARREG_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "SumXY", 0 };
+const TA_InputParameterInfo TA_LINEARREG_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "SumY", 0 };
+const TA_InputParameterInfo TA_LINEARREG_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "SumXSqr", 0 };
+const TA_InputParameterInfo TA_LINEARREG_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "Divisor", 0 };
+
+static const TA_InputParameterInfo *TA_LINEARREG_StructParams[] = {
+    &TA_LINEARREG_DEF_UI_STRUCT_PARAM_1,
+    &TA_LINEARREG_DEF_UI_STRUCT_PARAM_2,
+    &TA_LINEARREG_DEF_UI_STRUCT_PARAM_3,
+    &TA_LINEARREG_DEF_UI_STRUCT_PARAM_4,
+    &TA_LINEARREG_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( LINEARREG,                         /* name */
               TA_GroupId_Statistic,/* groupId */
@@ -94,7 +111,25 @@ static const TA_OptInputParameterInfo *TA_LINEARREG_SLOPE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_LINEARREG_SLOPE_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "SumX", 0 };
+const TA_InputParameterInfo TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "SumXY", 0 };
+const TA_InputParameterInfo TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "SumY", 0 };
+const TA_InputParameterInfo TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "SumXSqr", 0 };
+const TA_InputParameterInfo TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "Divisor", 0 };
+
+static const TA_InputParameterInfo *TA_LINEARREG_SLOPE_StructParams[] = {
+    &TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_1,
+    &TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_2,
+    &TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_3,
+    &TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_4,
+    &TA_LINEARREG_SLOPE_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( LINEARREG_SLOPE,                         /* name */
               TA_GroupId_Statistic,/* groupId */
@@ -122,7 +157,24 @@ static const TA_OptInputParameterInfo *TA_LINEARREG_ANGLE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_LINEARREG_ANGLE_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "SumX", 0 };
+const TA_InputParameterInfo TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "SumXY", 0 };
+const TA_InputParameterInfo TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "SumY", 0 };
+const TA_InputParameterInfo TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "SumXSqr", 0 };
+const TA_InputParameterInfo TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "Divisor", 0 };
+
+static const TA_InputParameterInfo *TA_LINEARREG_ANGLE_StructParams[] = {
+    &TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_1,
+    &TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_2,
+    &TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_3,
+    &TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_4,
+    &TA_LINEARREG_ANGLE_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( LINEARREG_ANGLE,                         /* name */
               TA_GroupId_Statistic,/* groupId */
@@ -150,7 +202,24 @@ static const TA_OptInputParameterInfo *TA_LINEARREG_INTERCEPT_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_LINEARREG_INTERCEPT_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "SumX", 0 };
+const TA_InputParameterInfo TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "SumXY", 0 };
+const TA_InputParameterInfo TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "SumY", 0 };
+const TA_InputParameterInfo TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "SumXSqr", 0 };
+const TA_InputParameterInfo TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "Divisor", 0 };
+
+static const TA_InputParameterInfo *TA_LINEARREG_INTERCEPT_StructParams[] = {
+    &TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_1,
+    &TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_2,
+    &TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_3,
+    &TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_4,
+    &TA_LINEARREG_INTERCEPT_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( LINEARREG_INTERCEPT,                         /* name */
               TA_GroupId_Statistic,/* groupId */
