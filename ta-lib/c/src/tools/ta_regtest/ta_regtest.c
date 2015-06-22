@@ -56,6 +56,8 @@
  *    Perform regression testing of the TA-LIB.
  */
 
+#define TEST_STATE_FUNCS
+
 /**** Headers ****/
 #ifdef WIN32
    #include "windows.h"

@@ -376,6 +376,12 @@ static ErrorNumber do_test( const TA_History *history,
                         &outBegIdx,
                         &outNbElement,
                         gBuffer[0].out0 );
+      retCode = TA_SIN_StateTest(test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
 	   break;
    default:
       retCode = TA_INTERNAL_ERROR(133);
@@ -442,6 +448,8 @@ static ErrorNumber do_test( const TA_History *history,
                         &outNbElement,
                         gBuffer[0].in
                         );
+
+
       break;
    default:
       retCode = TA_INTERNAL_ERROR(134);

@@ -77,10 +77,10 @@
  */
 
 #include "gen_code.h"
+#include "print_funcs.h"
 
 
-
-static char *ta_fs_path(int count, ...) {
+char *ta_fs_path(int count, ...) {
     char *path = (char *)malloc(16000); /* XXX quick and dirty */
     char *p; 
     va_list argp;
@@ -137,7 +137,7 @@ void print( FILE *out, const char *text, ... )
       fprintf( out, "%s", gTempBufForPrint );
 }
 
-static void printIndent( FILE *out, unsigned int indent )
+void printIndent( FILE *out, unsigned int indent )
 {
    unsigned int i;
    
@@ -246,7 +246,7 @@ int main(int argc, char* argv[])
  *
  * On failure, simply exit the software.
  */
-static void init_gToOpen( const char *filePath, const char *suffix )
+void init_gToOpen( const char *filePath, const char *suffix )
 {
    strcpy( gToOpen, filePath );
    if( suffix )
@@ -254,7 +254,7 @@ static void init_gToOpen( const char *filePath, const char *suffix )
 }
 
 
-static  FileHandle *fileOpen( const char *fileToOpen,
+ FileHandle *fileOpen( const char *fileToOpen,
                               const char *templateFile,
                               int flags )
 {
@@ -377,7 +377,7 @@ static  FileHandle *fileOpen( const char *fileToOpen,
    return retValue;
 }
 
-static void fileClose( FileHandle *handle )
+void fileClose( FileHandle *handle )
 {
    if( !handle ) return;
 
@@ -421,7 +421,7 @@ static void fileClose( FileHandle *handle )
    TA_Free( handle );
 }
 
-static void fileDelete( const char *fileToDelete )
+void fileDelete( const char *fileToDelete )
 {
    init_gToOpen( fileToDelete, NULL );
 
@@ -432,7 +432,7 @@ static void fileDelete( const char *fileToDelete )
    #endif
 }
 
-static int genCode(int argc, char* argv[])
+int genCode(int argc, char* argv[])
 {
    TA_RetCode retCode;
    unsigned int nbGroup;
@@ -929,7 +929,7 @@ static int genCode(int argc, char* argv[])
    return 0;
 }
 
-static unsigned int forEachGroup( TA_ForEachGroup forEachGroupFunc,
+unsigned int forEachGroup( TA_ForEachGroup forEachGroupFunc,
                                   void *opaqueData )
 {
    TA_RetCode retCode;
@@ -958,7 +958,7 @@ static unsigned int forEachGroup( TA_ForEachGroup forEachGroupFunc,
 }
 
 /* Replaces reserved xml characters with the appropriate escape sequence. */
-static void ReplaceReservedXmlCharacters(const char *input, char *output )
+void ReplaceReservedXmlCharacters(const char *input, char *output )
 {
 	char *currentPosition;
 	char tempString[8*1024];
@@ -1036,7 +1036,7 @@ static void ReplaceReservedXmlCharacters(const char *input, char *output )
 	}
 }
 
-static void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
+void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
 								 void *opaqueData)
 {
     TA_RetCode retCode;
@@ -1356,7 +1356,7 @@ static void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
 	fprintf(gOutFunc_XML->file, "\n");
 }
 
-static void doForEachFunctionPhase1( const TA_FuncInfo *funcInfo,
+void doForEachFunctionPhase1( const TA_FuncInfo *funcInfo,
                                void *opaqueData )
 {
 	(void)opaqueData;
@@ -1365,10 +1365,12 @@ static void doForEachFunctionPhase1( const TA_FuncInfo *funcInfo,
       genJavaCodePhase1( funcInfo );      
 }
 
-static void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
+int firstTime = 1;
+
+void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
                                void *opaqueData )
 {
-   static int firstTime = 1;
+
 
    (void)opaqueData; /* Get ride of compiler warning */
 
@@ -1431,6 +1433,10 @@ static void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
    /* Generate the corresponding state free function prototype. */
    printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFreeSignature );
    printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFreeSignature );
+
+   genPrefix = 1;
+   printStateTestFunc( gOutFunc_H->file, funcInfo);
+   genPrefix = 0;
 
    /* Create the frame definition (ta_frame.c) and declaration (ta_frame.h) */
    genPrefix = 1;
@@ -1558,7 +1564,7 @@ static void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
    firstTime = 0;
 }
 
-static void doForEachUnstableFunction( const TA_FuncInfo *funcInfo,
+void doForEachUnstableFunction( const TA_FuncInfo *funcInfo,
                                        void *opaqueData )
 {
    unsigned int *i;
@@ -1572,7 +1578,7 @@ static void doForEachUnstableFunction( const TA_FuncInfo *funcInfo,
    }
 }
 
-static void printDefines( FILE *out, const TA_FuncInfo *funcInfo )
+void printDefines( FILE *out, const TA_FuncInfo *funcInfo )
 {
    TA_RetCode retCode;
    const TA_OptInputParameterInfo *optInputParamInfo;
@@ -1671,7 +1677,7 @@ static void printDefines( FILE *out, const TA_FuncInfo *funcInfo )
    }
 }
 
-static void printFunc( FILE *out,
+void printFunc( FILE *out,
                        const char *prefix, /* Can be NULL */
                        const TA_FuncInfo *funcInfo,
                        unsigned int settings // set of printFuncSettings
@@ -1722,6 +1728,7 @@ static void printFunc( FILE *out,
    SETTING_DECL(stateInitSignature);
    SETTING_DECL(stateFuncSignature);
    SETTING_DECL(stateFreeSignature);
+   SETTING_DECL(stateTestSignature);
 
    #define ANY_SIGNATURE_PARAM (lookbackSignature || stateInitSignature || stateFuncSignature || stateFreeSignature)
 
@@ -1904,36 +1911,44 @@ static void printFunc( FILE *out,
       {
          if( arrayToSubArrayCnvt )
 		 {			 
-			 sprintf( gTempBuf, "%s%s( %s, ", prefix? prefix:"", funcName, startIdxString );
+             sprintf( gTempBuf, "%s%s%s%s( %s, ", stateTestSignature?"inline ":"", prefix? prefix:"", funcName, stateTestSignature?"_StateTest":"", startIdxString );
 		 }
          else if( managedCPPCode )
          {
-            sprintf( gTempBuf, "%s%senum class %sRetCode %s%s( int    %s,\n",
+            sprintf( gTempBuf, "%s%s%senum class %sRetCode %s%s%s( int    %s,\n",
+                     stateTestSignature?"inline ":"",
                      prefix? prefix:"",
                      managedCPPDeclaration? "         static ":"",
                      managedCPPDeclaration? "":"Core::",
                      managedCPPDeclaration? "":"Core::",
                      funcName,
+                     stateTestSignature?"_StateTest":"",
                      startIdxString );
          }
          else if( outputForJava )
          {
-               sprintf( gTempBuf, "%spublic RetCode %s( int    %s,\n",
+               sprintf( gTempBuf, "%s%spublic RetCode %s%s( int    %s,\n",
+                        stateTestSignature?"inline ":"",
                         prefix? prefix:"",                        
                         funcName,
+                        stateTestSignature?"_StateTest":"",
                         startIdxString );
          }
          else
          {
             if( inputIsSinglePrecision )
-               sprintf( gTempBuf, "%sTA_RetCode TA_S_%s( int    %s,\n",
+               sprintf( gTempBuf, "%s%sTA_RetCode TA_S_%s%s( int    %s,\n",
+                        stateTestSignature?"inline ":"",
                         prefix? prefix:"",
                         funcName,
+                        stateTestSignature?"_StateTest":"",
                         startIdxString );
             else  
-               sprintf( gTempBuf, "%sTA_RetCode TA_%s( int    %s,\n",
+               sprintf( gTempBuf, "%s%sTA_RetCode TA_%s%s( int    %s,\n",
+                        stateTestSignature?"inline ":"",
                         prefix? prefix:"",                        
                         funcName,
+                        stateTestSignature?"_StateTest":"",
                         startIdxString );
          }
          print( out, gTempBuf );
@@ -2369,7 +2384,9 @@ static void printFunc( FILE *out,
 
    if (stateFuncSignature && validationCode) {
        printIndent( out, indent );
-       fprintf( out, "size_t _cur_idx = STATE.mem_index++ %% MEM_SIZE;\n");
+       fprintf( out, "size_t _cur_idx = STATE.mem_index++;\n");
+       printIndent( out, indent );
+       fprintf( out, "if (MEM_SIZE > 0) _cur_idx %%= MEM_SIZE;\n");
        printIndent( out, indent );
        fprintf( out, "UNUSED_VARIABLE(_cur_idx); // in case PUSH\\POP methods won't be used\n");
        printIndent( out, indent );
@@ -2845,7 +2862,7 @@ static void printFunc( FILE *out,
 
 }
 
-static void printCallFrame( FILE *out, const TA_FuncInfo *funcInfo )
+void printCallFrame( FILE *out, const TA_FuncInfo *funcInfo )
 {
    genPrefix = 1;
 
@@ -2886,7 +2903,7 @@ static void printCallFrame( FILE *out, const TA_FuncInfo *funcInfo )
 }
 
 
-static void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int settings )
+void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int settings )
 {
    if( settings & pfs_lookbackSignature )
    {
@@ -2917,7 +2934,7 @@ static void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned i
    }
 }
 
-static void printExternReferenceForEachFunction( const TA_FuncInfo *info,
+void printExternReferenceForEachFunction( const TA_FuncInfo *info,
                                                  void *opaqueData )
 {
    (void)opaqueData; /* Get ride of compiler warning */
@@ -2925,7 +2942,7 @@ static void printExternReferenceForEachFunction( const TA_FuncInfo *info,
    fprintf( gOutGroupIdx_C->file, "extern const TA_FuncDef TA_DEF_%s;\n", info->name );
 }
 
-static void printPerGroupList( const char *groupName,
+void printPerGroupList( const char *groupName,
                                unsigned int index,
                                unsigned int isFirst,
                                unsigned int isLast
@@ -2946,7 +2963,7 @@ static void printPerGroupList( const char *groupName,
       index, index );
 }
 
-static void printFunctionAddress( const TA_FuncInfo *info,
+void printFunctionAddress( const TA_FuncInfo *info,
                                   void *opaqueData )
 {
    (void)opaqueData; /* Get ride of compiler warning. */
@@ -2955,7 +2972,7 @@ static void printFunctionAddress( const TA_FuncInfo *info,
       fprintf( gOutGroupIdx_C->file, "&TA_DEF_%s,\n", info->name );
 }
 
-static void printGroupListAddress( const char *groupName,
+void printGroupListAddress( const char *groupName,
                                    unsigned int index,
                                    unsigned int isFirst,
                                    unsigned int isLast
@@ -2969,7 +2986,7 @@ static void printGroupListAddress( const char *groupName,
                  index, isLast? "" : "," );
 }
 
-static void printGroupSize( const char *groupName,
+void printGroupSize( const char *groupName,
                             unsigned int index,
                             unsigned int isFirst,
                             unsigned int isLast
@@ -2982,7 +2999,7 @@ static void printGroupSize( const char *groupName,
             index, isLast? "" : "," );
 }
 
-static void printGroupSizeAddition( const char *groupName,
+void printGroupSizeAddition( const char *groupName,
                                     unsigned int index,
                                     unsigned int isFirst,
                                     unsigned int isLast
@@ -2995,7 +3012,7 @@ static void printGroupSizeAddition( const char *groupName,
             index, isLast? ";" : "+\n" );
 }
 
-static void doFuncFile( const TA_FuncInfo *funcInfo )
+void doFuncFile( const TA_FuncInfo *funcInfo )
 {
 
    FileHandle *tempFile1;
@@ -3138,7 +3155,7 @@ static void doFuncFile( const TA_FuncInfo *funcInfo )
    fileDelete( TEMPLATE_PASS2 );
 }
 
-static void doDefsFile( void )
+void doDefsFile( void )
 {
 
    FileHandle *tempFile;
@@ -3194,7 +3211,7 @@ static void doDefsFile( void )
 }
 
 #ifdef _MSC_VER
-static int createProjTemplate( FileHandle *in, FileHandle *out )
+int createProjTemplate( FileHandle *in, FileHandle *out )
 {
    FILE *inFile;
    FILE *outFile;
@@ -3252,7 +3269,7 @@ static int createProjTemplate( FileHandle *in, FileHandle *out )
    return 0;
 }
 
-static int createMSVCProjTemplate( FileHandle *in, FileHandle *out )
+int createMSVCProjTemplate( FileHandle *in, FileHandle *out )
 {
    FILE *inFile;
    FILE *outFile;
@@ -3304,7 +3321,7 @@ static int createMSVCProjTemplate( FileHandle *in, FileHandle *out )
 #endif
 
 
-static int createVS2005ProjTemplate( FileHandle *in, FileHandle *out )
+int createVS2005ProjTemplate( FileHandle *in, FileHandle *out )
 {
    // This function works also for VS2008
    FILE *inFile;
@@ -3368,7 +3385,7 @@ static int createVS2005ProjTemplate( FileHandle *in, FileHandle *out )
    return 0;
 }
 
-static void printVS2005FileNode( FILE *out, const char *name )
+void printVS2005FileNode( FILE *out, const char *name )
 {
    // This function works also for VS2008
    fprintf( out, "				<File\n" );
@@ -3434,7 +3451,7 @@ static void printVS2005FileNode( FILE *out, const char *name )
 }
 #endif
 
-static int createTemplate( FileHandle *in, FileHandle *out )
+int createTemplate( FileHandle *in, FileHandle *out )
 {
    FILE *inFile;
    FILE *outFile;
@@ -3482,7 +3499,7 @@ static int createTemplate( FileHandle *in, FileHandle *out )
    return 0;
 }
 
-static void writeFuncFile( const TA_FuncInfo *funcInfo )
+void writeFuncFile( const TA_FuncInfo *funcInfo )
 {
    FILE *out;
 
@@ -3714,7 +3731,7 @@ static void writeFuncFile( const TA_FuncInfo *funcInfo )
 //   fprintf( out, "%%%%%%GENCODE%%%%%%\n" );
 }
 
-static void printOptInputValidation( FILE *out,
+void printOptInputValidation( FILE *out,
                                      const char *name,                                     
                                      const TA_OptInputParameterInfo *optInputParamInfo,
                                      int lookbackValidationCode /* Boolean */ )
@@ -3804,7 +3821,7 @@ static void printOptInputValidation( FILE *out,
 }
 
 
-static int skipToGenCode( const char *dstName, FILE *out, FILE *templateFile )
+int skipToGenCode( const char *dstName, FILE *out, FILE *templateFile )
 {
    unsigned int headerWritten = 0;
 
@@ -3831,7 +3848,7 @@ static int skipToGenCode( const char *dstName, FILE *out, FILE *templateFile )
    return 0;
 }
 
-static void printFuncHeaderDoc( FILE *out,
+void printFuncHeaderDoc( FILE *out,
                                 const TA_FuncInfo *funcInfo,
                                 const char *prefix )
 {
@@ -4017,7 +4034,7 @@ static void printFuncHeaderDoc( FILE *out,
    fprintf( out, "%s\n", prefix );
 }
 
-static int addUnstablePeriodEnum( FILE *out )
+int addUnstablePeriodEnum( FILE *out )
 {
    TA_RetCode retCode;
    unsigned int id;
@@ -4041,7 +4058,7 @@ static int addUnstablePeriodEnum( FILE *out )
    return 0;
 }
 
-static int gen_retcode( void )
+int gen_retcode( void )
 {
    FileHandle *inHdr;
    char *ptr1, *ptr2;
@@ -4203,7 +4220,7 @@ const char *doubleToStr( double value )
    return gTempDoubleToStr;
 }
 
-static void cnvtToUpperCase( char *str )
+void cnvtToUpperCase( char *str )
 {
    char c;
 
@@ -4218,7 +4235,7 @@ static void cnvtToUpperCase( char *str )
    }      
 }
 
-static char *trimWhitespace( char *str )
+char *trimWhitespace( char *str )
 {
    int i;
 
@@ -4237,7 +4254,7 @@ static char *trimWhitespace( char *str )
    return str;
 }
 
-static void cnvtChar( char *str, char from, char to )
+void cnvtChar( char *str, char from, char to )
 {
    char c;
 
@@ -4253,7 +4270,7 @@ static void cnvtChar( char *str, char from, char to )
 }
 
 #ifdef _MSC_VER
-static void printExcelGlueCode( FILE *out, const TA_FuncInfo *funcInfo )
+void printExcelGlueCode( FILE *out, const TA_FuncInfo *funcInfo )
 {
    /*fprintf( out, "#include \"ta_%s.c\"\n", funcInfo->name );
    fprintf( out, "#include \"ta_%s_frame.c\"\n", funcInfo->name );   */
@@ -4303,7 +4320,7 @@ static void printExcelGlueCode( FILE *out, const TA_FuncInfo *funcInfo )
 #endif
 
 
-static void extractTALogic( FILE *inFile, FILE *outFile )
+void extractTALogic( FILE *inFile, FILE *outFile )
 {
    int i, length, nbCodeChar;
    int commentBlock, commentFirstCharFound, outIdx;
@@ -4418,7 +4435,7 @@ static void extractTALogic( FILE *inFile, FILE *outFile )
    }
 }
 
-static int copyFile( const char *src, const char *dest )
+int copyFile( const char *src, const char *dest )
 {
    FILE *in;
    FILE *out;
@@ -4446,7 +4463,7 @@ static int copyFile( const char *src, const char *dest )
    return 1;
 }
 
-static int areFileSame( const char *file1, const char *file2 )
+int areFileSame( const char *file1, const char *file2 )
 {
    /* Text comparison of both files */
    unsigned int i;
@@ -4509,7 +4526,7 @@ static int areFileSame( const char *file1, const char *file2 )
 }
 
 
-static void appendToFunc( FILE *out )
+void appendToFunc( FILE *out )
 {
    fprintf( out, "\n" );
    fprintf( out, "/* Some TA functions takes a certain amount of input data\n" );
@@ -4583,7 +4600,7 @@ void genJavaCodePhase2( const TA_FuncInfo *funcInfo )
    FILE *logicTmp;
    char buffer[500];
    int idx, again;
-   static int firstTime = 1;
+   int firstTime = 1;
 
    if( firstTime == 1 )
    {
@@ -4650,7 +4667,7 @@ void genJavaCodePhase2( const TA_FuncInfo *funcInfo )
 }
 
 
-static int generateFuncAPI_C()
+int generateFuncAPI_C()
 {
    FileHandle *inFile;
    FILE *out;
@@ -4684,7 +4701,7 @@ static int generateFuncAPI_C()
    return 1;
 }
 
-static void convertFileToCArray( FILE *in, FILE *out )
+void convertFileToCArray( FILE *in, FILE *out )
 {
     int c;
     int position;
@@ -4707,7 +4724,7 @@ static void convertFileToCArray( FILE *in, FILE *out )
  
 }
 
-static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
+void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
 {
     TA_RetCode retCode;
 	TA_InputParameterInfo *inputInfo;

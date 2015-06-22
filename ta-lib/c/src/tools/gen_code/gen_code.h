@@ -186,14 +186,14 @@ FileHandle *gOutVS2008ProjFile;  /* For VS2008 project file */
 
 FileHandle *gOutExcelGlue_C;     /* For "excel_glue.c" */
 
-static void printExcelGlueCode( FILE *out, const TA_FuncInfo *funcInfo );
+void printExcelGlueCode( FILE *out, const TA_FuncInfo *funcInfo );
 #endif
 
-static void genJavaCodePhase1( const TA_FuncInfo *funcInfo );
-static void genJavaCodePhase2( const TA_FuncInfo *funcInfo );
+void genJavaCodePhase1( const TA_FuncInfo *funcInfo );
+void genJavaCodePhase2( const TA_FuncInfo *funcInfo );
 
 /* To generate CoreAnnotated.java */
-static void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo);
+void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo);
 
 
 typedef void (*TA_ForEachGroup)( const char *groupName,
@@ -202,30 +202,35 @@ typedef void (*TA_ForEachGroup)( const char *groupName,
                                  unsigned int isLast   /* Boolean */
                                 );
 
-static unsigned int forEachGroup( TA_ForEachGroup forEachGroupfunc,
+unsigned int forEachGroup( TA_ForEachGroup forEachGroupfunc,
                                   void *opaqueData );
 
-static void doForEachFunctionPhase1( const TA_FuncInfo *funcInfo,
+void doForEachFunctionPhase1( const TA_FuncInfo *funcInfo,
                                void *opaqueData );
 
-static void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
+void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
                                void *opaqueData );
 
-static void doForEachFunctionXml( const TA_FuncInfo *funcInfo,
+void doForEachFunctionXml( const TA_FuncInfo *funcInfo,
                                   void *opaqueData );
 
-static void doForEachUnstableFunction( const TA_FuncInfo *funcInfo,
+void doForEachUnstableFunction( const TA_FuncInfo *funcInfo,
                                        void *opaqueData );
 
 #ifdef TA_LIB_PRO
       /* Section for code distributed with TA-Lib Pro only. */
 #endif
 
-static void doDefsFile( void );
+void doDefsFile( void );
 
-static int gen_retcode( void );
+int gen_retcode( void );
 
-static void printIndent( FILE *out, unsigned int indent );
+
+extern int genPrefix;
+
+void print( FILE *out, const char *text, ... );
+
+void printIndent( FILE *out, unsigned int indent );
 
 enum printFuncSettings
 {
@@ -245,96 +250,97 @@ enum printFuncSettings
     pfs_stateStruct =            1 << 13,
     pfs_stateInitSignature =     1 << 14,
     pfs_stateFuncSignature =     1 << 15,
-    pfs_stateFreeSignature =     1 << 16
+    pfs_stateFreeSignature =     1 << 16,
+    pfs_stateTestSignature =     1 << 17
 };
 
 
-static void printFunc(FILE *out,
+void printFunc(FILE *out,
                        const char *prefix,       /* Can be NULL */
                        const TA_FuncInfo *funcInfo,
                        unsigned int settings);
 
-static void printCallFrame  ( FILE *out, const TA_FuncInfo *funcInfo );
-static void printFrameHeader(FILE *out, const TA_FuncInfo *funcInfo, unsigned int settings );
+void printCallFrame  ( FILE *out, const TA_FuncInfo *funcInfo );
+void printFrameHeader(FILE *out, const TA_FuncInfo *funcInfo, unsigned int settings );
 
-static void printExternReferenceForEachFunction( const TA_FuncInfo *info,
+void printExternReferenceForEachFunction( const TA_FuncInfo *info,
                                                  void *opaqueData );
 
-static void printFunctionAddress( const TA_FuncInfo *info,
+void printFunctionAddress( const TA_FuncInfo *info,
                                   void *opaqueData );
 
-static void printPerGroupList( const char *groupName,
+void printPerGroupList( const char *groupName,
                                unsigned int index,
                                unsigned int isFirst,
                                unsigned int isLast
                              );
 
-static void printGroupListAddress(  const char *groupName,
+void printGroupListAddress(  const char *groupName,
                                     unsigned int index,
                                     unsigned int isFirst,
                                     unsigned int isLast
                                  );
-static void printGroupSize(  const char *groupName,
+void printGroupSize(  const char *groupName,
                              unsigned int index,
                              unsigned int isFirst,
                              unsigned int isLast
                            );
-static void printGroupSizeAddition(  const char *groupName,
+void printGroupSizeAddition(  const char *groupName,
                                      unsigned int index,
                                      unsigned int isFirst,
                                      unsigned int isLast
                                   );
 
-static int addUnstablePeriodEnum( FILE *out );
+int addUnstablePeriodEnum( FILE *out );
 
-static int createTemplate( FileHandle *in, FileHandle *out );
+int createTemplate( FileHandle *in, FileHandle *out );
 
-static int generateFuncAPI_C( void );
+int generateFuncAPI_C( void );
 
 
 #ifdef _MSC_VER
-static int createProjTemplate( FileHandle *in, FileHandle *out );
-static int createMSVCProjTemplate( FileHandle *in, FileHandle *out );
-static int createVS2005ProjTemplate( FileHandle *in, FileHandle *out );
-static void printVS2005FileNode( FILE *out, const char *name );
+int createProjTemplate( FileHandle *in, FileHandle *out );
+int createMSVCProjTemplate( FileHandle *in, FileHandle *out );
+int createVS2005ProjTemplate( FileHandle *in, FileHandle *out );
+void printVS2005FileNode( FILE *out, const char *name );
 #ifdef TA_LIB_PRO
       /* Section for code distributed with TA-Lib Pro only. */
 #endif
 #endif
 
-static void writeFuncFile( const TA_FuncInfo *funcInfo );
-static void doFuncFile( const TA_FuncInfo *funcInfo );
-static void printOptInputValidation( FILE *out,
+void writeFuncFile( const TA_FuncInfo *funcInfo );
+void doFuncFile( const TA_FuncInfo *funcInfo );
+void printOptInputValidation( FILE *out,
                                      const char *name,
                                      const TA_OptInputParameterInfo *optInputParamInfo,
                                      int lookbackValidationCode /* Boolean */ );
-static int skipToGenCode( const char *dstName, FILE *out, FILE *templateFile );
-static void printDefines( FILE *out, const TA_FuncInfo *funcInfo );
+int skipToGenCode( const char *dstName, FILE *out, FILE *templateFile );
+void printDefines( FILE *out, const TA_FuncInfo *funcInfo );
 
-static void printFuncHeaderDoc( FILE *out,
+void printFuncHeaderDoc( FILE *out,
                                 const TA_FuncInfo *funcInfo,
                                 const char *prefix );
 
 
-static void extractTALogic( FILE *inFile, FILE *outFile );
+void extractTALogic( FILE *inFile, FILE *outFile );
 
-static void cnvtToUpperCase( char *str );
-static void cnvtChar( char *str, char from, char to );
-static char *trimWhitespace( char *str );
+void cnvtToUpperCase( char *str );
+void cnvtChar( char *str, char from, char to );
+char *trimWhitespace( char *str );
 
 /* Return 1 on success */
-static int copyFile( const char *src, const char *dest );
+int copyFile( const char *src, const char *dest );
 
 /* Return 1 when identical */
-static int areFileSame( const char *file1, const char *file2 );
+int areFileSame( const char *file1, const char *file2 );
 
-static void fileDelete( const char *fileToDelete );
+void fileDelete( const char *fileToDelete );
 
-static void appendToFunc( FILE *out );
+void appendToFunc( FILE *out );
 
-static void convertFileToCArray( FILE *in, FILE *out );
+void convertFileToCArray( FILE *in, FILE *out );
 
-static void ReplaceReservedXmlCharacters(const char *input, char *output );
+void ReplaceReservedXmlCharacters(const char *input, char *output );
 
 char gToOpen[BUFFER_SIZE];
 char gTempBuf[BUFFER_SIZE];
@@ -352,7 +358,7 @@ const char *doubleToStr( double value );
 
 const char *gCurrentGroupName;
 
-static int genCode(int argc, char* argv[]);
+int genCode(int argc, char* argv[]);
 
 extern const TA_OptInputParameterInfo TA_DEF_UI_MA_Method;
 
