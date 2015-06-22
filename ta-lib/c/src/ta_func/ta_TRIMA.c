@@ -365,12 +365,6 @@
          numeratorAdd += tempReal;
          numerator    += numeratorAdd;
       }
-      for( i=middleIdx; i <= todayIdx; i++ )
-      {
-         tempReal      = inReal[i];
-         numeratorAdd += tempReal;
-         numerator    += numeratorAdd;
-      }
 
       /* Write the first output */
       outIdx = 0;
