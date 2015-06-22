@@ -109,6 +109,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 
 /**** Local variables definitions.     ****/
 
@@ -167,6 +169,15 @@ ErrorNumber test_func_1in_1out( TA_History *history )
          printf( "Failed Test #%d (Code=%d)\n", i, retValue );
          return retValue;
       }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "Failed State Test #%d (Code=%d)\n", i, retValue );
+         return retValue;
+      }
+
+
    }
 
    /* Re-initialize all the unstable period to zero. */
@@ -290,6 +301,95 @@ static TA_RetCode rangeTestFunction( TA_Integer    startIdx,
    return retCode;
 }
 
+
+static ErrorNumber do_test_state( const TA_History *history,
+                                    const TA_Test *test )
+{
+    TA_RetCode retCode = 0;
+    TA_Integer outBegIdx;
+    TA_Integer outNbElement;
+
+
+    /* Set to NAN all the elements of the gBuffers.  */
+    clearAllBuffers();
+
+    /* Build the input. */
+    setInputBuffer( 0, history->close,  history->nbBars );
+
+    /* Change the input to MEDPRICE for some tests. */
+    switch( test->theFunction )
+    {
+    case TA_HT_DCPERIOD_TEST:
+    case TA_HT_DCPHASE_TEST:
+    case TA_HT_TRENDLINE_TEST:
+    case TA_HT_TRENDMODE_TEST:
+       TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
+                    &outBegIdx, &outNbElement, gBuffer[0].in );
+
+       /* Will be use as reference */
+       TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
+                    &outBegIdx, &outNbElement, gBuffer[1].in );
+
+
+       break;
+    default: break;
+
+    }
+
+
+    switch( test->theFunction )
+    {
+    case TA_HT_DCPERIOD_TEST:
+//       retCode = TA_HT_DCPERIOD( test->startIdx,
+//                                 test->endIdx,
+//                                 gBuffer[0].in,
+//                                 &outBegIdx,
+//                                 &outNbElement,
+//                                 gBuffer[0].out0 );
+       break;
+
+    case TA_HT_DCPHASE_TEST:
+//       retCode = TA_HT_DCPHASE( test->startIdx,
+//                                test->endIdx,
+//                                gBuffer[0].in,
+//                                &outBegIdx,
+//                                &outNbElement,
+//                                gBuffer[0].out0 );
+       break;
+    case TA_HT_TRENDLINE_TEST:
+//       retCode = TA_HT_TRENDLINE( test->startIdx,
+//                                  test->endIdx,
+//                                  gBuffer[0].in,
+//                                  &outBegIdx,
+//                                  &outNbElement,
+//                                  gBuffer[0].out0 );
+       break;
+    case TA_HT_TRENDMODE_TEST:
+//       ALLOC_INT_BUFFER(size);
+//       retCode = TA_HT_TRENDMODE( test->startIdx,
+//                                  test->endIdx,
+//                                  gBuffer[0].in,
+//                                  &outBegIdx,
+//                                  &outNbElement,
+//                                  &intBuffer[1] );
+//       FREE_INT_BUFFER( gBuffer[0].out0, outNbElement );
+       break;
+    case TA_SIN_TEST:
+       retCode = TA_SIN_StateTest(test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out0 );
+        break;
+    default:
+       retCode = TA_INTERNAL_ERROR(133);
+    }
+
+
+  return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
+}
+
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test )
 {
@@ -371,12 +471,6 @@ static ErrorNumber do_test( const TA_History *history,
       break;
    case TA_SIN_TEST:
       retCode = TA_SIN( test->startIdx,
-                        test->endIdx,
-                        gBuffer[0].in,
-                        &outBegIdx,
-                        &outNbElement,
-                        gBuffer[0].out0 );
-      retCode = TA_SIN_StateTest(test->startIdx,
                         test->endIdx,
                         gBuffer[0].in,
                         &outBegIdx,

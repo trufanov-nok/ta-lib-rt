@@ -497,6 +497,139 @@ static TA_RetCode rangeTestFunction( TA_Integer    startIdx,
 
 static ErrorNumber do_test_ma( const TA_History *history,
                                const TA_Test *test,
+                               int testMAVP )
+{
+   TA_RetCode retCode;
+   ErrorNumber errNb;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+   TA_RangeTestParam testParam;
+   TA_Integer temp, temp2;
+   const TA_Real *referenceInput;
+
+   /* TA_MAVP is tested only for TA_ANY_MA_TEST */
+   if( testMAVP && (test->id != TA_ANY_MA_TEST) )
+   {
+      return TA_TEST_PASS;
+   }
+
+   TA_SetCompatibility( (TA_Compatibility)test->compatibility );
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->close, history->nbBars );
+   setInputBuffer( 1, history->close, history->nbBars );
+   if( testMAVP )
+   {
+      setInputBufferValue( 2, test->optInTimePeriod, history->nbBars );
+   }
+
+   /* Re-initialize all the unstable period to zero. */
+   TA_SetUnstablePeriod( TA_FUNC_UNST_ALL, 0 );
+
+   /* Set the unstable period requested for that test. */
+   switch( test->optInMAType_1 )
+   {
+   case TA_MAType_TEMA:
+   case TA_MAType_DEMA:
+   case TA_MAType_EMA:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_EMA, test->unstablePeriod );
+      break;
+   case TA_MAType_KAMA:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_KAMA, test->unstablePeriod );
+      break;
+   case TA_MAType_MAMA:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_MAMA, test->unstablePeriod );
+      break;
+   case TA_MAType_T3:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_T3, test->unstablePeriod );
+      break;
+   default:
+      retCode = TA_SUCCESS;
+      break;
+   }
+
+   if( retCode != TA_SUCCESS )
+      return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+   /* Transform the inputs for MAMA (it is an AVGPRICE in John Ehlers book). */
+   if( test->optInMAType_1 == TA_MAType_MAMA )
+   {
+      TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
+                   &outBegIdx, &outNbElement, gBuffer[0].in );
+
+      TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
+                   &outBegIdx, &outNbElement, gBuffer[1].in );
+
+      /* Will be use as reference */
+      TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
+                   &outBegIdx, &outNbElement, gBuffer[2].in );
+      referenceInput = gBuffer[2].in;
+   }
+   else
+      referenceInput = history->close;
+
+
+
+   /* Make a simple first call. */
+   switch( test->id )
+   {
+   case TA_ANY_MA_TEST:
+      if(testMAVP)
+      {
+         retCode = TA_MAVP_StateTest( test->startIdx,
+                            test->endIdx,
+                            gBuffer[0].in,
+                            gBuffer[2].in,
+                            2, test->optInTimePeriod,
+                            (TA_MAType)test->optInMAType_1,
+                            &outBegIdx,
+                            &outNbElement,
+                            gBuffer[0].out0 );
+      }
+      else
+      {
+         retCode = TA_MA_StateTest( test->startIdx,
+                          test->endIdx,
+                          gBuffer[0].in,
+                          test->optInTimePeriod,
+                          (TA_MAType)test->optInMAType_1,
+                          &outBegIdx,
+                          &outNbElement,
+                          gBuffer[0].out0 );
+      }
+      break;
+   case TA_MAMA_TEST:
+      retCode = TA_MAMA_StateTest( test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         0.5, 0.05,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out0,
+                         gBuffer[0].out2 );
+
+     break;
+   case TA_FAMA_TEST:
+      retCode = TA_MAMA_StateTest( test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         0.5, 0.05,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out2,
+                         gBuffer[0].out0 );
+
+     break;
+   }
+
+    return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
+}
+
+static ErrorNumber do_test_ma( const TA_History *history,
+                               const TA_Test *test,
 							   int testMAVP )
 {
    TA_RetCode retCode;
