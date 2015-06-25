@@ -160,7 +160,7 @@
 /**** END GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
 {
 	/* insert local variable here */
-
+//todo: move const to struct
    CONSTANT_DOUBLE(constMax) = 2.0/(30.0+1.0);
    CONSTANT_DOUBLE(constDiff) = 2.0/(2.0+1.0) - constMax;
 
@@ -393,8 +393,8 @@
 /* Generated */    STATE = calloc(1, sizeof(struct TA_KAMA_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
-/* Generated */    #ifndef TA_KAMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_KAMA_Lookback(optInTimePeriod );
+/* Generated */    #ifndef TA_KAMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_KAMA_Data));
 /* Generated */    else
@@ -434,7 +434,6 @@
 
         double tempReal;
         double periodROC;
-        double trailingValue;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -466,24 +465,40 @@
    if (FIRST_LAUNCH)
    {
             STATE.sumROC1 = 0.0;
+            STATE.trailingValue = 0.0;
             STATE.yestReal = inReal;
+            STATE.prevKAMA = inReal;
+            PUSH_TO_MEM(inReal,inReal);
+            return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
    } else
-        if ((int)_cur_idx < STATE.optInTimePeriod-1) // less than mem_size
+        if ( ((int)STATE.mem_index-1) <= STATE.optInTimePeriod)
         {
           STATE.sumROC1  += std_fabs(STATE.yestReal - inReal);
           STATE.yestReal = inReal;
-          STATE.prevKAMA = inReal;
-          PUSH_TO_MEM(inReal,inReal);
-          return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+          if (((int)STATE.mem_index-1) < STATE.optInTimePeriod)
+          {
+             STATE.prevKAMA = inReal;
+             PUSH_TO_MEM(inReal,inReal);
+             return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+          }
         }
 
-    trailingValue = POP_FROM_MEM(inReal);
-    periodROC = inReal - trailingValue;
+
+     if (((int)STATE.mem_index-1) > STATE.optInTimePeriod)
+     {
+         STATE.sumROC1 -= std_fabs(STATE.trailingValue-POP_FROM_MEM(inReal));
+         STATE.sumROC1 += std_fabs(inReal-STATE.yestReal);
+     }
+
+    STATE.trailingValue = POP_FROM_MEM(inReal);
+    periodROC = inReal - STATE.trailingValue;
+
 
     if( (STATE.sumROC1 <= periodROC) || TA_IS_ZERO(STATE.sumROC1))
-       tempReal = 1.0;
+        tempReal = 1.0;
     else
-       tempReal = std_fabs(periodROC/STATE.sumROC1);
+        tempReal = std_fabs(periodROC/STATE.sumROC1);
+
 
 
     tempReal  = (tempReal*constDiff)+constMax;
@@ -494,6 +509,8 @@
 
 
     PUSH_TO_MEM(inReal,inReal);
+
+    STATE.yestReal = inReal;
 
     if (NEED_MORE_DATA)
         return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
@@ -582,6 +599,7 @@
 /* Generated */                       double        outReal[] )
 /* Generated */ #endif
 /* Generated */ {
+/* Generated */ //todo: move const to struct
 /* Generated */    CONSTANT_DOUBLE(constMax) = 2.0/(30.0+1.0);
 /* Generated */    CONSTANT_DOUBLE(constDiff) = 2.0/(2.0+1.0) - constMax;
 /* Generated */    double tempReal, tempReal2;

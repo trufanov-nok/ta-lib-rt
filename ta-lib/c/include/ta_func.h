@@ -134,21 +134,30 @@ TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 /* Generated */                                          double        outRealLowerBand[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ACCBANDS(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outRealUpperBand, outRealMiddleBand, outRealLowerBand );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ACCBANDS_State* state;
 /* Generated */  res = TA_ACCBANDS_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ACCBANDS_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outRealUpperBand_local;double  outRealMiddleBand_local;double  outRealLowerBand_local;;
+/* Generated */     double outRealUpperBand_local;double  outRealMiddleBand_local;double  outRealLowerBand_local;
 /* Generated */     res = TA_ACCBANDS_State(state, inHigh[i], inLow[i], inClose[i], &outRealUpperBand_local, &outRealMiddleBand_local, &outRealLowerBand_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outRealUpperBand[i] != outRealUpperBand_local) {res = 1; break;}
-/* Generated */     if(outRealMiddleBand[i] != outRealMiddleBand_local) {res = 1; break;}
-/* Generated */     if(outRealLowerBand[i] != outRealLowerBand_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outRealUpperBand[res_start] - outRealUpperBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outRealMiddleBand[res_start] - outRealMiddleBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outRealLowerBand[res_start] - outRealLowerBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ACCBANDS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -206,19 +215,28 @@ TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ACOS(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ACOS_State* state;
 /* Generated */  res = TA_ACOS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ACOS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ACOS_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ACOS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -291,19 +309,28 @@ TA_LIB_API int TA_AD_StateFree( struct TA_AD_State** _state );
 /* Generated */                                    double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AD(startIdx, endIdx, inHigh, inLow, inClose, inVolume, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_AD_State* state;
 /* Generated */  res = TA_AD_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_AD_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_AD_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_AD_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -366,19 +393,28 @@ TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ADD(startIdx, endIdx, inReal0, inReal1, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ADD_State* state;
 /* Generated */  res = TA_ADD_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ADD_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ADD_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ADD_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -471,19 +507,28 @@ TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 /* Generated */                                       double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ADOSC(startIdx, endIdx, inHigh, inLow, inClose, inVolume, optInFastPeriod, optInSlowPeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ADOSC_State* state;
 /* Generated */  res = TA_ADOSC_StateInit(&state, optInFastPeriod, optInSlowPeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ADOSC_Lookback(optInFastPeriod, optInSlowPeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ADOSC_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ADOSC_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -562,19 +607,28 @@ TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ADX(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ADX_State* state;
 /* Generated */  res = TA_ADX_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ADX_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ADX_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ADX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -653,19 +707,28 @@ TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ADXR(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ADXR_State* state;
 /* Generated */  res = TA_ADXR_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ADXR_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ADXR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ADXR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -746,19 +809,28 @@ TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_APO(startIdx, endIdx, inReal, optInFastPeriod, optInSlowPeriod, optInMAType, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_APO_State* state;
 /* Generated */  res = TA_APO_StateInit(&state, optInFastPeriod, optInSlowPeriod, optInMAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_APO_Lookback(optInFastPeriod, optInSlowPeriod, optInMAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_APO_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_APO_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -836,20 +908,29 @@ TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state );
 /* Generated */                                       double        outAroonUp[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AROON(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outAroonDown, outAroonUp );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_AROON_State* state;
 /* Generated */  res = TA_AROON_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_AROON_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outAroonDown_local;double  outAroonUp_local;;
+/* Generated */     double outAroonDown_local;double  outAroonUp_local;
 /* Generated */     res = TA_AROON_State(state, inHigh[i], inLow[i], &outAroonDown_local, &outAroonUp_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outAroonDown[i] != outAroonDown_local) {res = 1; break;}
-/* Generated */     if(outAroonUp[i] != outAroonUp_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outAroonDown[res_start] - outAroonDown_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outAroonUp[res_start] - outAroonUp_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_AROON_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -923,19 +1004,28 @@ TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AROONOSC(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_AROONOSC_State* state;
 /* Generated */  res = TA_AROONOSC_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_AROONOSC_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_AROONOSC_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_AROONOSC_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -993,19 +1083,28 @@ TA_LIB_API int TA_ASIN_StateFree( struct TA_ASIN_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ASIN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ASIN_State* state;
 /* Generated */  res = TA_ASIN_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ASIN_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ASIN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ASIN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1063,19 +1162,28 @@ TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ATAN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ATAN_State* state;
 /* Generated */  res = TA_ATAN_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ATAN_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ATAN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ATAN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1154,19 +1262,28 @@ TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ATR(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ATR_State* state;
 /* Generated */  res = TA_ATR_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ATR_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ATR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ATR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1239,19 +1356,28 @@ TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AVGPRICE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_AVGPRICE_State* state;
 /* Generated */  res = TA_AVGPRICE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_AVGPRICE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_AVGPRICE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_AVGPRICE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1321,19 +1447,28 @@ TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
 /* Generated */                                        double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AVGDEV(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_AVGDEV_State* state;
 /* Generated */  res = TA_AVGDEV_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_AVGDEV_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_AVGDEV_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_AVGDEV_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1431,21 +1566,30 @@ TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 /* Generated */                                        double        outRealLowerBand[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_BBANDS(startIdx, endIdx, inReal, optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType, outBegIdx, outNBElement, outRealUpperBand, outRealMiddleBand, outRealLowerBand );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_BBANDS_State* state;
 /* Generated */  res = TA_BBANDS_StateInit(&state, optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_BBANDS_Lookback(optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outRealUpperBand_local;double  outRealMiddleBand_local;double  outRealLowerBand_local;;
+/* Generated */     double outRealUpperBand_local;double  outRealMiddleBand_local;double  outRealLowerBand_local;
 /* Generated */     res = TA_BBANDS_State(state, inReal[i], &outRealUpperBand_local, &outRealMiddleBand_local, &outRealLowerBand_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outRealUpperBand[i] != outRealUpperBand_local) {res = 1; break;}
-/* Generated */     if(outRealMiddleBand[i] != outRealMiddleBand_local) {res = 1; break;}
-/* Generated */     if(outRealLowerBand[i] != outRealLowerBand_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outRealUpperBand[res_start] - outRealUpperBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outRealMiddleBand[res_start] - outRealMiddleBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outRealLowerBand[res_start] - outRealLowerBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_BBANDS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1519,19 +1663,28 @@ TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_BETA(startIdx, endIdx, inReal0, inReal1, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_BETA_State* state;
 /* Generated */  res = TA_BETA_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_BETA_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_BETA_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_BETA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1604,19 +1757,28 @@ TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_BOP(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_BOP_State* state;
 /* Generated */  res = TA_BOP_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_BOP_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_BOP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_BOP_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1695,19 +1857,28 @@ TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CCI(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CCI_State* state;
 /* Generated */  res = TA_CCI_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CCI_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_CCI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CCI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1780,19 +1951,28 @@ TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
 /* Generated */                                           int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL2CROWS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDL2CROWS_State* state;
 /* Generated */  res = TA_CDL2CROWS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDL2CROWS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL2CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL2CROWS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1865,19 +2045,28 @@ TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _st
 /* Generated */                                                int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3BLACKCROWS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDL3BLACKCROWS_State* state;
 /* Generated */  res = TA_CDL3BLACKCROWS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDL3BLACKCROWS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3BLACKCROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3BLACKCROWS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -1950,19 +2139,28 @@ TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 /* Generated */                                            int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3INSIDE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDL3INSIDE_State* state;
 /* Generated */  res = TA_CDL3INSIDE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDL3INSIDE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3INSIDE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3INSIDE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2035,19 +2233,28 @@ TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _st
 /* Generated */                                                int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3LINESTRIKE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDL3LINESTRIKE_State* state;
 /* Generated */  res = TA_CDL3LINESTRIKE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDL3LINESTRIKE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3LINESTRIKE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3LINESTRIKE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2120,19 +2327,28 @@ TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
 /* Generated */                                             int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3OUTSIDE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDL3OUTSIDE_State* state;
 /* Generated */  res = TA_CDL3OUTSIDE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDL3OUTSIDE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3OUTSIDE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3OUTSIDE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2205,19 +2421,28 @@ TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State**
 /* Generated */                                                  int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3STARSINSOUTH(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDL3STARSINSOUTH_State* state;
 /* Generated */  res = TA_CDL3STARSINSOUTH_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDL3STARSINSOUTH_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3STARSINSOUTH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3STARSINSOUTH_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2290,19 +2515,28 @@ TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State
 /* Generated */                                                   int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3WHITESOLDIERS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDL3WHITESOLDIERS_State* state;
 /* Generated */  res = TA_CDL3WHITESOLDIERS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDL3WHITESOLDIERS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3WHITESOLDIERS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3WHITESOLDIERS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2386,19 +2620,28 @@ TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State**
 /* Generated */                                                  int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLABANDONEDBABY(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLABANDONEDBABY_State* state;
 /* Generated */  res = TA_CDLABANDONEDBABY_StateInit(&state, optInPenetration);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLABANDONEDBABY_Lookback(optInPenetration);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLABANDONEDBABY_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLABANDONEDBABY_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2471,19 +2714,28 @@ TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _
 /* Generated */                                                 int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLADVANCEBLOCK(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLADVANCEBLOCK_State* state;
 /* Generated */  res = TA_CDLADVANCEBLOCK_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLADVANCEBLOCK_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLADVANCEBLOCK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLADVANCEBLOCK_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2556,19 +2808,28 @@ TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 /* Generated */                                             int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLBELTHOLD(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLBELTHOLD_State* state;
 /* Generated */  res = TA_CDLBELTHOLD_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLBELTHOLD_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLBELTHOLD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLBELTHOLD_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2641,19 +2902,28 @@ TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state 
 /* Generated */                                              int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLBREAKAWAY(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLBREAKAWAY_State* state;
 /* Generated */  res = TA_CDLBREAKAWAY_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLBREAKAWAY_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLBREAKAWAY_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLBREAKAWAY_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2726,19 +2996,28 @@ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_Sta
 /* Generated */                                                    int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLCLOSINGMARUBOZU(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLCLOSINGMARUBOZU_State* state;
 /* Generated */  res = TA_CDLCLOSINGMARUBOZU_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLCLOSINGMARUBOZU_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCLOSINGMARUBOZU_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLCLOSINGMARUBOZU_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2811,19 +3090,28 @@ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_S
 /* Generated */                                                     int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLCONCEALBABYSWALL(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLCONCEALBABYSWALL_State* state;
 /* Generated */  res = TA_CDLCONCEALBABYSWALL_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLCONCEALBABYSWALL_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCONCEALBABYSWALL_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLCONCEALBABYSWALL_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2896,19 +3184,28 @@ TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State**
 /* Generated */                                                  int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLCOUNTERATTACK(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLCOUNTERATTACK_State* state;
 /* Generated */  res = TA_CDLCOUNTERATTACK_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLCOUNTERATTACK_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCOUNTERATTACK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLCOUNTERATTACK_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -2992,19 +3289,28 @@ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State
 /* Generated */                                                   int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLDARKCLOUDCOVER(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLDARKCLOUDCOVER_State* state;
 /* Generated */  res = TA_CDLDARKCLOUDCOVER_StateInit(&state, optInPenetration);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLDARKCLOUDCOVER_Lookback(optInPenetration);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDARKCLOUDCOVER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLDARKCLOUDCOVER_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3077,19 +3383,28 @@ TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
 /* Generated */                                         int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLDOJI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLDOJI_State* state;
 /* Generated */  res = TA_CDLDOJI_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLDOJI_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLDOJI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3162,19 +3477,28 @@ TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 /* Generated */                                             int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLDOJISTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLDOJISTAR_State* state;
 /* Generated */  res = TA_CDLDOJISTAR_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLDOJISTAR_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLDOJISTAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3247,19 +3571,28 @@ TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State**
 /* Generated */                                                  int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLDRAGONFLYDOJI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLDRAGONFLYDOJI_State* state;
 /* Generated */  res = TA_CDLDRAGONFLYDOJI_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLDRAGONFLYDOJI_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDRAGONFLYDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLDRAGONFLYDOJI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3332,19 +3665,28 @@ TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state 
 /* Generated */                                              int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLENGULFING(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLENGULFING_State* state;
 /* Generated */  res = TA_CDLENGULFING_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLENGULFING_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLENGULFING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLENGULFING_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3428,19 +3770,28 @@ TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_Sta
 /* Generated */                                                    int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLEVENINGDOJISTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLEVENINGDOJISTAR_State* state;
 /* Generated */  res = TA_CDLEVENINGDOJISTAR_StateInit(&state, optInPenetration);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLEVENINGDOJISTAR_Lookback(optInPenetration);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLEVENINGDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLEVENINGDOJISTAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3524,19 +3875,28 @@ TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _st
 /* Generated */                                                int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLEVENINGSTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLEVENINGSTAR_State* state;
 /* Generated */  res = TA_CDLEVENINGSTAR_StateInit(&state, optInPenetration);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLEVENINGSTAR_Lookback(optInPenetration);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLEVENINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLEVENINGSTAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3609,19 +3969,28 @@ TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_S
 /* Generated */                                                     int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLGAPSIDESIDEWHITE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLGAPSIDESIDEWHITE_State* state;
 /* Generated */  res = TA_CDLGAPSIDESIDEWHITE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLGAPSIDESIDEWHITE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLGAPSIDESIDEWHITE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLGAPSIDESIDEWHITE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3694,19 +4063,28 @@ TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State
 /* Generated */                                                   int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLGRAVESTONEDOJI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLGRAVESTONEDOJI_State* state;
 /* Generated */  res = TA_CDLGRAVESTONEDOJI_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLGRAVESTONEDOJI_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLGRAVESTONEDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLGRAVESTONEDOJI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3779,19 +4157,28 @@ TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 /* Generated */                                           int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHAMMER(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLHAMMER_State* state;
 /* Generated */  res = TA_CDLHAMMER_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLHAMMER_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHAMMER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHAMMER_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3864,19 +4251,28 @@ TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _stat
 /* Generated */                                               int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHANGINGMAN(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLHANGINGMAN_State* state;
 /* Generated */  res = TA_CDLHANGINGMAN_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLHANGINGMAN_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHANGINGMAN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHANGINGMAN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -3949,19 +4345,28 @@ TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
 /* Generated */                                           int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHARAMI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLHARAMI_State* state;
 /* Generated */  res = TA_CDLHARAMI_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLHARAMI_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHARAMI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHARAMI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4034,19 +4439,28 @@ TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _st
 /* Generated */                                                int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHARAMICROSS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLHARAMICROSS_State* state;
 /* Generated */  res = TA_CDLHARAMICROSS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLHARAMICROSS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHARAMICROSS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHARAMICROSS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4119,19 +4533,28 @@ TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 /* Generated */                                             int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHIGHWAVE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLHIGHWAVE_State* state;
 /* Generated */  res = TA_CDLHIGHWAVE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLHIGHWAVE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIGHWAVE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHIGHWAVE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4204,19 +4627,28 @@ TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
 /* Generated */                                            int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHIKKAKE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLHIKKAKE_State* state;
 /* Generated */  res = TA_CDLHIKKAKE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLHIKKAKE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIKKAKE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHIKKAKE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4289,19 +4721,28 @@ TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _stat
 /* Generated */                                               int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHIKKAKEMOD(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLHIKKAKEMOD_State* state;
 /* Generated */  res = TA_CDLHIKKAKEMOD_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLHIKKAKEMOD_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIKKAKEMOD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHIKKAKEMOD_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4374,19 +4815,28 @@ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _
 /* Generated */                                                 int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHOMINGPIGEON(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLHOMINGPIGEON_State* state;
 /* Generated */  res = TA_CDLHOMINGPIGEON_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLHOMINGPIGEON_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHOMINGPIGEON_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHOMINGPIGEON_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4459,19 +4909,28 @@ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_Sta
 /* Generated */                                                    int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLIDENTICAL3CROWS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLIDENTICAL3CROWS_State* state;
 /* Generated */  res = TA_CDLIDENTICAL3CROWS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLIDENTICAL3CROWS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLIDENTICAL3CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLIDENTICAL3CROWS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4544,19 +5003,28 @@ TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 /* Generated */                                           int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLINNECK(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLINNECK_State* state;
 /* Generated */  res = TA_CDLINNECK_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLINNECK_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLINNECK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLINNECK_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4629,19 +5097,28 @@ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State
 /* Generated */                                                   int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLINVERTEDHAMMER(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLINVERTEDHAMMER_State* state;
 /* Generated */  res = TA_CDLINVERTEDHAMMER_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLINVERTEDHAMMER_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLINVERTEDHAMMER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLINVERTEDHAMMER_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4714,19 +5191,28 @@ TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 /* Generated */                                            int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLKICKING(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLKICKING_State* state;
 /* Generated */  res = TA_CDLKICKING_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLKICKING_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLKICKING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLKICKING_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4799,19 +5285,28 @@ TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_Sta
 /* Generated */                                                    int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLKICKINGBYLENGTH(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLKICKINGBYLENGTH_State* state;
 /* Generated */  res = TA_CDLKICKINGBYLENGTH_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLKICKINGBYLENGTH_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLKICKINGBYLENGTH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLKICKINGBYLENGTH_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4884,19 +5379,28 @@ TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _
 /* Generated */                                                 int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLLADDERBOTTOM(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLLADDERBOTTOM_State* state;
 /* Generated */  res = TA_CDLLADDERBOTTOM_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLLADDERBOTTOM_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLADDERBOTTOM_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLLADDERBOTTOM_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -4969,19 +5473,28 @@ TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State
 /* Generated */                                                   int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLLONGLEGGEDDOJI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLLONGLEGGEDDOJI_State* state;
 /* Generated */  res = TA_CDLLONGLEGGEDDOJI_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLLONGLEGGEDDOJI_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLONGLEGGEDDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLLONGLEGGEDDOJI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5054,19 +5567,28 @@ TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
 /* Generated */                                             int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLLONGLINE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLLONGLINE_State* state;
 /* Generated */  res = TA_CDLLONGLINE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLLONGLINE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLONGLINE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLLONGLINE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5139,19 +5661,28 @@ TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 /* Generated */                                             int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMARUBOZU(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLMARUBOZU_State* state;
 /* Generated */  res = TA_CDLMARUBOZU_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLMARUBOZU_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMARUBOZU_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMARUBOZU_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5224,19 +5755,28 @@ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _st
 /* Generated */                                                int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMATCHINGLOW(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLMATCHINGLOW_State* state;
 /* Generated */  res = TA_CDLMATCHINGLOW_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLMATCHINGLOW_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMATCHINGLOW_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMATCHINGLOW_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5320,19 +5860,28 @@ TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
 /* Generated */                                            int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMATHOLD(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLMATHOLD_State* state;
 /* Generated */  res = TA_CDLMATHOLD_StateInit(&state, optInPenetration);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLMATHOLD_Lookback(optInPenetration);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMATHOLD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMATHOLD_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5416,19 +5965,28 @@ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_Sta
 /* Generated */                                                    int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMORNINGDOJISTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLMORNINGDOJISTAR_State* state;
 /* Generated */  res = TA_CDLMORNINGDOJISTAR_StateInit(&state, optInPenetration);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLMORNINGDOJISTAR_Lookback(optInPenetration);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMORNINGDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMORNINGDOJISTAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5512,19 +6070,28 @@ TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _st
 /* Generated */                                                int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMORNINGSTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLMORNINGSTAR_State* state;
 /* Generated */  res = TA_CDLMORNINGSTAR_StateInit(&state, optInPenetration);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLMORNINGSTAR_Lookback(optInPenetration);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMORNINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMORNINGSTAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5597,19 +6164,28 @@ TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
 /* Generated */                                           int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLONNECK(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLONNECK_State* state;
 /* Generated */  res = TA_CDLONNECK_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLONNECK_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLONNECK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLONNECK_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5682,19 +6258,28 @@ TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 /* Generated */                                             int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLPIERCING(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLPIERCING_State* state;
 /* Generated */  res = TA_CDLPIERCING_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLPIERCING_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLPIERCING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLPIERCING_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5767,19 +6352,28 @@ TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _st
 /* Generated */                                                int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLRICKSHAWMAN(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLRICKSHAWMAN_State* state;
 /* Generated */  res = TA_CDLRICKSHAWMAN_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLRICKSHAWMAN_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLRICKSHAWMAN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLRICKSHAWMAN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5852,19 +6446,28 @@ TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_S
 /* Generated */                                                     int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLRISEFALL3METHODS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLRISEFALL3METHODS_State* state;
 /* Generated */  res = TA_CDLRISEFALL3METHODS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLRISEFALL3METHODS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLRISEFALL3METHODS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLRISEFALL3METHODS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -5937,19 +6540,28 @@ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_Sta
 /* Generated */                                                    int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSEPARATINGLINES(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLSEPARATINGLINES_State* state;
 /* Generated */  res = TA_CDLSEPARATINGLINES_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLSEPARATINGLINES_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSEPARATINGLINES_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSEPARATINGLINES_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6022,19 +6634,28 @@ TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _
 /* Generated */                                                 int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSHOOTINGSTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLSHOOTINGSTAR_State* state;
 /* Generated */  res = TA_CDLSHOOTINGSTAR_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLSHOOTINGSTAR_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSHOOTINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSHOOTINGSTAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6107,19 +6728,28 @@ TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state 
 /* Generated */                                              int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSHORTLINE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLSHORTLINE_State* state;
 /* Generated */  res = TA_CDLSHORTLINE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLSHORTLINE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSHORTLINE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSHORTLINE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6192,19 +6822,28 @@ TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _st
 /* Generated */                                                int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSPINNINGTOP(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLSPINNINGTOP_State* state;
 /* Generated */  res = TA_CDLSPINNINGTOP_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLSPINNINGTOP_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSPINNINGTOP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSPINNINGTOP_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6277,19 +6916,28 @@ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State
 /* Generated */                                                   int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSTALLEDPATTERN(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLSTALLEDPATTERN_State* state;
 /* Generated */  res = TA_CDLSTALLEDPATTERN_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLSTALLEDPATTERN_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSTALLEDPATTERN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSTALLEDPATTERN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6362,19 +7010,28 @@ TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State**
 /* Generated */                                                  int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSTICKSANDWICH(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLSTICKSANDWICH_State* state;
 /* Generated */  res = TA_CDLSTICKSANDWICH_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLSTICKSANDWICH_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSTICKSANDWICH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSTICKSANDWICH_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6447,19 +7104,28 @@ TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
 /* Generated */                                           int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLTAKURI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLTAKURI_State* state;
 /* Generated */  res = TA_CDLTAKURI_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLTAKURI_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTAKURI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLTAKURI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6532,19 +7198,28 @@ TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state 
 /* Generated */                                              int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLTASUKIGAP(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLTASUKIGAP_State* state;
 /* Generated */  res = TA_CDLTASUKIGAP_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLTASUKIGAP_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTASUKIGAP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLTASUKIGAP_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6617,19 +7292,28 @@ TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state 
 /* Generated */                                              int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLTHRUSTING(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLTHRUSTING_State* state;
 /* Generated */  res = TA_CDLTHRUSTING_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLTHRUSTING_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTHRUSTING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLTHRUSTING_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6702,19 +7386,28 @@ TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 /* Generated */                                            int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLTRISTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLTRISTAR_State* state;
 /* Generated */  res = TA_CDLTRISTAR_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLTRISTAR_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTRISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLTRISTAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6787,19 +7480,28 @@ TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _
 /* Generated */                                                 int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLUNIQUE3RIVER(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLUNIQUE3RIVER_State* state;
 /* Generated */  res = TA_CDLUNIQUE3RIVER_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLUNIQUE3RIVER_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLUNIQUE3RIVER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLUNIQUE3RIVER_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6872,19 +7574,28 @@ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_Sta
 /* Generated */                                                    int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLUPSIDEGAP2CROWS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLUPSIDEGAP2CROWS_State* state;
 /* Generated */  res = TA_CDLUPSIDEGAP2CROWS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLUPSIDEGAP2CROWS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLUPSIDEGAP2CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLUPSIDEGAP2CROWS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -6957,19 +7668,28 @@ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_S
 /* Generated */                                                     int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLXSIDEGAP3METHODS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CDLXSIDEGAP3METHODS_State* state;
 /* Generated */  res = TA_CDLXSIDEGAP3METHODS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CDLXSIDEGAP3METHODS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLXSIDEGAP3METHODS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLXSIDEGAP3METHODS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7027,19 +7747,28 @@ TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CEIL(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CEIL_State* state;
 /* Generated */  res = TA_CEIL_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CEIL_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_CEIL_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CEIL_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7108,19 +7837,28 @@ TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CMO(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CMO_State* state;
 /* Generated */  res = TA_CMO_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CMO_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_CMO_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CMO_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7199,19 +7937,28 @@ TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 /* Generated */                                        double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CORREL(startIdx, endIdx, inReal0, inReal1, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_CORREL_State* state;
 /* Generated */  res = TA_CORREL_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_CORREL_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_CORREL_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_CORREL_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7269,19 +8016,28 @@ TA_LIB_API int TA_COS_StateFree( struct TA_COS_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_COS(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_COS_State* state;
 /* Generated */  res = TA_COS_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_COS_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_COS_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_COS_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7339,19 +8095,28 @@ TA_LIB_API int TA_COSH_StateFree( struct TA_COSH_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_COSH(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_COSH_State* state;
 /* Generated */  res = TA_COSH_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_COSH_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_COSH_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_COSH_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7422,19 +8187,28 @@ TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_DEMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_DEMA_State* state;
 /* Generated */  res = TA_DEMA_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_DEMA_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_DEMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_DEMA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7497,19 +8271,28 @@ TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_DIV(startIdx, endIdx, inReal0, inReal1, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_DIV_State* state;
 /* Generated */  res = TA_DIV_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_DIV_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_DIV_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_DIV_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7588,19 +8371,28 @@ TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state );
 /* Generated */                                    double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_DX(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_DX_State* state;
 /* Generated */  res = TA_DX_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_DX_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_DX_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_DX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7647,7 +8439,7 @@ TA_LIB_API struct TA_EMA_State {
                                struct TA_EMA_Data* memory;
                                double       prevMA;
                                double       tempSum;
-                               int          currentIdx;
+                               double       preprRes;
                                int           optInTimePeriod; /* From 2 to 100000 */
                                };
 
@@ -7672,19 +8464,28 @@ TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_EMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_EMA_State* state;
 /* Generated */  res = TA_EMA_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_EMA_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_EMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_EMA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7742,19 +8543,28 @@ TA_LIB_API int TA_EXP_StateFree( struct TA_EXP_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_EXP(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_EXP_State* state;
 /* Generated */  res = TA_EXP_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_EXP_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_EXP_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_EXP_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7812,19 +8622,28 @@ TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state );
 /* Generated */                                       double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_FLOOR(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_FLOOR_State* state;
 /* Generated */  res = TA_FLOOR_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_FLOOR_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_FLOOR_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_FLOOR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7882,19 +8701,28 @@ TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state );
 /* Generated */                                             double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_DCPERIOD(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_HT_DCPERIOD_State* state;
 /* Generated */  res = TA_HT_DCPERIOD_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_HT_DCPERIOD_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_DCPERIOD_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_DCPERIOD_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -7952,19 +8780,28 @@ TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state );
 /* Generated */                                            double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_DCPHASE(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_HT_DCPHASE_State* state;
 /* Generated */  res = TA_HT_DCPHASE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_HT_DCPHASE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_DCPHASE_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_DCPHASE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8026,20 +8863,29 @@ TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
 /* Generated */                                           double        outQuadrature[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_PHASOR(startIdx, endIdx, inReal, outBegIdx, outNBElement, outInPhase, outQuadrature );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_HT_PHASOR_State* state;
 /* Generated */  res = TA_HT_PHASOR_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_HT_PHASOR_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outInPhase_local;double  outQuadrature_local;;
+/* Generated */     double outInPhase_local;double  outQuadrature_local;
 /* Generated */     res = TA_HT_PHASOR_State(state, inReal[i], &outInPhase_local, &outQuadrature_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInPhase[i] != outInPhase_local) {res = 1; break;}
-/* Generated */     if(outQuadrature[i] != outQuadrature_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInPhase[res_start] - outInPhase_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outQuadrature[res_start] - outQuadrature_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_PHASOR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8101,20 +8947,29 @@ TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 /* Generated */                                         double        outLeadSine[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_SINE(startIdx, endIdx, inReal, outBegIdx, outNBElement, outSine, outLeadSine );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_HT_SINE_State* state;
 /* Generated */  res = TA_HT_SINE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_HT_SINE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outSine_local;double  outLeadSine_local;;
+/* Generated */     double outSine_local;double  outLeadSine_local;
 /* Generated */     res = TA_HT_SINE_State(state, inReal[i], &outSine_local, &outLeadSine_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outSine[i] != outSine_local) {res = 1; break;}
-/* Generated */     if(outLeadSine[i] != outLeadSine_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outSine[res_start] - outSine_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outLeadSine[res_start] - outLeadSine_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_SINE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8172,19 +9027,28 @@ TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state 
 /* Generated */                                              double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_TRENDLINE(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_HT_TRENDLINE_State* state;
 /* Generated */  res = TA_HT_TRENDLINE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_HT_TRENDLINE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_TRENDLINE_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_TRENDLINE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8242,19 +9106,28 @@ TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state 
 /* Generated */                                              int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_TRENDMODE(startIdx, endIdx, inReal, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_HT_TRENDMODE_State* state;
 /* Generated */  res = TA_HT_TRENDMODE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_HT_TRENDMODE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_HT_TRENDMODE_State(state, inReal[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_TRENDMODE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8330,19 +9203,28 @@ TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_IMI(startIdx, endIdx, inOpen, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_IMI_State* state;
 /* Generated */  res = TA_IMI_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_IMI_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_IMI_State(state, inOpen[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_IMI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8390,6 +9272,7 @@ TA_LIB_API struct TA_KAMA_State {
                                 double       sumROC1;
                                 double       yestReal;
                                 double       prevKAMA;
+                                double       trailingValue;
                                 int           optInTimePeriod; /* From 2 to 100000 */
                                 };
 
@@ -8414,19 +9297,28 @@ TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_KAMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_KAMA_State* state;
 /* Generated */  res = TA_KAMA_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_KAMA_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_KAMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_KAMA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8500,19 +9392,28 @@ TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 /* Generated */                                           double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LINEARREG(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_LINEARREG_State* state;
 /* Generated */  res = TA_LINEARREG_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_LINEARREG_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_LINEARREG_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8586,19 +9487,28 @@ TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _
 /* Generated */                                                 double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LINEARREG_ANGLE(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_LINEARREG_ANGLE_State* state;
 /* Generated */  res = TA_LINEARREG_ANGLE_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_LINEARREG_ANGLE_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_ANGLE_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_LINEARREG_ANGLE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8672,19 +9582,28 @@ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_S
 /* Generated */                                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LINEARREG_INTERCEPT(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_LINEARREG_INTERCEPT_State* state;
 /* Generated */  res = TA_LINEARREG_INTERCEPT_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_LINEARREG_INTERCEPT_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_INTERCEPT_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_LINEARREG_INTERCEPT_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8758,19 +9677,28 @@ TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _
 /* Generated */                                                 double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LINEARREG_SLOPE(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_LINEARREG_SLOPE_State* state;
 /* Generated */  res = TA_LINEARREG_SLOPE_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_LINEARREG_SLOPE_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_SLOPE_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_LINEARREG_SLOPE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8828,19 +9756,28 @@ TA_LIB_API int TA_LN_StateFree( struct TA_LN_State** _state );
 /* Generated */                                    double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_LN_State* state;
 /* Generated */  res = TA_LN_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_LN_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_LN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_LN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8898,19 +9835,28 @@ TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State** _state );
 /* Generated */                                       double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LOG10(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_LOG10_State* state;
 /* Generated */  res = TA_LOG10_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_LOG10_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_LOG10_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_LOG10_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -8983,19 +9929,28 @@ TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state );
 /* Generated */                                    double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MA(startIdx, endIdx, inReal, optInTimePeriod, optInMAType, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MA_State* state;
 /* Generated */  res = TA_MA_StateInit(&state, optInTimePeriod, optInMAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MA_Lookback(optInTimePeriod, optInMAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9090,21 +10045,30 @@ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 /* Generated */                                      double        outMACDHist[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MACD(startIdx, endIdx, inReal, optInFastPeriod, optInSlowPeriod, optInSignalPeriod, outBegIdx, outNBElement, outMACD, outMACDSignal, outMACDHist );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MACD_State* state;
 /* Generated */  res = TA_MACD_StateInit(&state, optInFastPeriod, optInSlowPeriod, optInSignalPeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MACD_Lookback(optInFastPeriod, optInSlowPeriod, optInSignalPeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;;
+/* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACD_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outMACD[i] != outMACD_local) {res = 1; break;}
-/* Generated */     if(outMACDSignal[i] != outMACDSignal_local) {res = 1; break;}
-/* Generated */     if(outMACDHist[i] != outMACDHist_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outMACD[res_start] - outMACD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outMACDSignal[res_start] - outMACDSignal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outMACDHist[res_start] - outMACDHist_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MACD_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9208,21 +10172,30 @@ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 /* Generated */                                         double        outMACDHist[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MACDEXT(startIdx, endIdx, inReal, optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType, outBegIdx, outNBElement, outMACD, outMACDSignal, outMACDHist );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MACDEXT_State* state;
 /* Generated */  res = TA_MACDEXT_StateInit(&state, optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MACDEXT_Lookback(optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;;
+/* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACDEXT_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outMACD[i] != outMACD_local) {res = 1; break;}
-/* Generated */     if(outMACDSignal[i] != outMACDSignal_local) {res = 1; break;}
-/* Generated */     if(outMACDHist[i] != outMACDHist_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outMACD[res_start] - outMACD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outMACDSignal[res_start] - outMACDSignal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outMACDHist[res_start] - outMACDHist_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MACDEXT_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9299,21 +10272,30 @@ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 /* Generated */                                         double        outMACDHist[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MACDFIX(startIdx, endIdx, inReal, optInSignalPeriod, outBegIdx, outNBElement, outMACD, outMACDSignal, outMACDHist );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MACDFIX_State* state;
 /* Generated */  res = TA_MACDFIX_StateInit(&state, optInSignalPeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MACDFIX_Lookback(optInSignalPeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;;
+/* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACDFIX_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outMACD[i] != outMACD_local) {res = 1; break;}
-/* Generated */     if(outMACDSignal[i] != outMACDSignal_local) {res = 1; break;}
-/* Generated */     if(outMACDHist[i] != outMACDHist_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outMACD[res_start] - outMACD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outMACDSignal[res_start] - outMACDSignal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outMACDHist[res_start] - outMACDHist_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MACDFIX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9415,20 +10397,29 @@ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 /* Generated */                                      double        outFAMA[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MAMA(startIdx, endIdx, inReal, optInFastLimit, optInSlowLimit, outBegIdx, outNBElement, outMAMA, outFAMA );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MAMA_State* state;
 /* Generated */  res = TA_MAMA_StateInit(&state, optInFastLimit, optInSlowLimit);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MAMA_Lookback(optInFastLimit, optInSlowLimit);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outMAMA_local;double  outFAMA_local;;
+/* Generated */     double outMAMA_local;double  outFAMA_local;
 /* Generated */     res = TA_MAMA_State(state, inReal[i], &outMAMA_local, &outFAMA_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outMAMA[i] != outMAMA_local) {res = 1; break;}
-/* Generated */     if(outFAMA[i] != outFAMA_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outMAMA[res_start] - outMAMA_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outFAMA[res_start] - outFAMA_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MAMA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9514,19 +10505,28 @@ TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MAVP(startIdx, endIdx, inReal, inPeriods, optInMinPeriod, optInMaxPeriod, optInMAType, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MAVP_State* state;
 /* Generated */  res = TA_MAVP_StateInit(&state, optInMinPeriod, optInMaxPeriod, optInMAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MAVP_Lookback(optInMinPeriod, optInMaxPeriod, optInMAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MAVP_State(state, inReal[i], inPeriods[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MAVP_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9596,19 +10596,28 @@ TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MAX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MAX_State* state;
 /* Generated */  res = TA_MAX_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MAX_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MAX_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MAX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9680,19 +10689,28 @@ TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 /* Generated */                                          int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MAXINDEX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MAXINDEX_State* state;
 /* Generated */  res = TA_MAXINDEX_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MAXINDEX_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_MAXINDEX_State(state, inReal[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MAXINDEX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9755,19 +10773,28 @@ TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MEDPRICE(startIdx, endIdx, inHigh, inLow, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MEDPRICE_State* state;
 /* Generated */  res = TA_MEDPRICE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MEDPRICE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MEDPRICE_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MEDPRICE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9851,19 +10878,28 @@ TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MFI(startIdx, endIdx, inHigh, inLow, inClose, inVolume, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MFI_State* state;
 /* Generated */  res = TA_MFI_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MFI_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MFI_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MFI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -9934,19 +10970,28 @@ TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MIDPOINT(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MIDPOINT_State* state;
 /* Generated */  res = TA_MIDPOINT_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MIDPOINT_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MIDPOINT_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MIDPOINT_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10022,19 +11067,28 @@ TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MIDPRICE(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MIDPRICE_State* state;
 /* Generated */  res = TA_MIDPRICE_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MIDPRICE_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MIDPRICE_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MIDPRICE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10104,19 +11158,28 @@ TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MIN(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MIN_State* state;
 /* Generated */  res = TA_MIN_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MIN_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MIN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MIN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10188,19 +11251,28 @@ TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 /* Generated */                                          int           outInteger[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MININDEX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outInteger );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MININDEX_State* state;
 /* Generated */  res = TA_MININDEX_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MININDEX_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outInteger_local;;
+/* Generated */     int outInteger_local;
 /* Generated */     res = TA_MININDEX_State(state, inReal[i], &outInteger_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outInteger[i] != outInteger_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MININDEX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10275,20 +11347,29 @@ TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
 /* Generated */                                        double        outMax[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MINMAX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outMin, outMax );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MINMAX_State* state;
 /* Generated */  res = TA_MINMAX_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MINMAX_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outMin_local;double  outMax_local;;
+/* Generated */     double outMin_local;double  outMax_local;
 /* Generated */     res = TA_MINMAX_State(state, inReal[i], &outMin_local, &outMax_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outMin[i] != outMin_local) {res = 1; break;}
-/* Generated */     if(outMax[i] != outMax_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outMin[res_start] - outMin_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outMax[res_start] - outMax_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MINMAX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10366,20 +11447,29 @@ TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
 /* Generated */                                             int           outMaxIdx[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MINMAXINDEX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outMinIdx, outMaxIdx );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MINMAXINDEX_State* state;
 /* Generated */  res = TA_MINMAXINDEX_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MINMAXINDEX_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     int outMinIdx_local;int  outMaxIdx_local;;
+/* Generated */     int outMinIdx_local;int  outMaxIdx_local;
 /* Generated */     res = TA_MINMAXINDEX_State(state, inReal[i], &outMinIdx_local, &outMaxIdx_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outMinIdx[i] != outMinIdx_local) {res = 1; break;}
-/* Generated */     if(outMaxIdx[i] != outMaxIdx_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outMinIdx[res_start] - outMinIdx_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outMaxIdx[res_start] - outMaxIdx_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MINMAXINDEX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10458,19 +11548,28 @@ TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MINUS_DI(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MINUS_DI_State* state;
 /* Generated */  res = TA_MINUS_DI_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MINUS_DI_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MINUS_DI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MINUS_DI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10544,19 +11643,28 @@ TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MINUS_DM(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MINUS_DM_State* state;
 /* Generated */  res = TA_MINUS_DM_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MINUS_DM_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MINUS_DM_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MINUS_DM_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10625,19 +11733,28 @@ TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MOM(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MOM_State* state;
 /* Generated */  res = TA_MOM_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MOM_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MOM_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MOM_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10700,19 +11817,28 @@ TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MULT(startIdx, endIdx, inReal0, inReal1, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_MULT_State* state;
 /* Generated */  res = TA_MULT_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_MULT_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_MULT_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_MULT_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10791,19 +11917,28 @@ TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_NATR(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_NATR_State* state;
 /* Generated */  res = TA_NATR_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_NATR_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_NATR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_NATR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10868,19 +12003,28 @@ TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_OBV(startIdx, endIdx, inReal, inVolume, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_OBV_State* state;
 /* Generated */  res = TA_OBV_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_OBV_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_OBV_State(state, inReal[i], inVolume[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_OBV_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -10959,19 +12103,28 @@ TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 /* Generated */                                         double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_PLUS_DI(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_PLUS_DI_State* state;
 /* Generated */  res = TA_PLUS_DI_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_PLUS_DI_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_PLUS_DI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_PLUS_DI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11045,19 +12198,28 @@ TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
 /* Generated */                                         double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_PLUS_DM(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_PLUS_DM_State* state;
 /* Generated */  res = TA_PLUS_DM_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_PLUS_DM_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_PLUS_DM_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_PLUS_DM_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11138,19 +12300,28 @@ TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_PPO(startIdx, endIdx, inReal, optInFastPeriod, optInSlowPeriod, optInMAType, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_PPO_State* state;
 /* Generated */  res = TA_PPO_StateInit(&state, optInFastPeriod, optInSlowPeriod, optInMAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_PPO_Lookback(optInFastPeriod, optInSlowPeriod, optInMAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_PPO_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_PPO_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11219,19 +12390,28 @@ TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ROC(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ROC_State* state;
 /* Generated */  res = TA_ROC_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ROC_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ROC_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ROC_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11300,19 +12480,28 @@ TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ROCP(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ROCP_State* state;
 /* Generated */  res = TA_ROCP_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ROCP_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCP_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ROCP_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11381,19 +12570,28 @@ TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ROCR(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ROCR_State* state;
 /* Generated */  res = TA_ROCR_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ROCR_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCR_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ROCR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11462,19 +12660,28 @@ TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
 /* Generated */                                         double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ROCR100(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ROCR100_State* state;
 /* Generated */  res = TA_ROCR100_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ROCR100_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCR100_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ROCR100_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11543,19 +12750,28 @@ TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_RSI(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_RSI_State* state;
 /* Generated */  res = TA_RSI_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_RSI_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_RSI_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_RSI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11638,19 +12854,28 @@ TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SAR(startIdx, endIdx, inHigh, inLow, optInAcceleration, optInMaximum, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_SAR_State* state;
 /* Generated */  res = TA_SAR_StateInit(&state, optInAcceleration, optInMaximum);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_SAR_Lookback(optInAcceleration, optInMaximum);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_SAR_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_SAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11787,19 +13012,28 @@ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 /* Generated */                                        double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SAREXT(startIdx, endIdx, inHigh, inLow, optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_SAREXT_State* state;
 /* Generated */  res = TA_SAREXT_StateInit(&state, optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_SAREXT_Lookback(optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_SAREXT_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_SAREXT_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11857,19 +13091,28 @@ TA_LIB_API int TA_SIN_StateFree( struct TA_SIN_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SIN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_SIN_State* state;
 /* Generated */  res = TA_SIN_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_SIN_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_SIN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_SIN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -11927,19 +13170,28 @@ TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SINH(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_SINH_State* state;
 /* Generated */  res = TA_SINH_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_SINH_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_SINH_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_SINH_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12009,19 +13261,28 @@ TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_SMA_State* state;
 /* Generated */  res = TA_SMA_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_SMA_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_SMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_SMA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12079,19 +13340,28 @@ TA_LIB_API int TA_SQRT_StateFree( struct TA_SQRT_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SQRT(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_SQRT_State* state;
 /* Generated */  res = TA_SQRT_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_SQRT_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_SQRT_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_SQRT_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12170,19 +13440,28 @@ TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
 /* Generated */                                        double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_STDDEV(startIdx, endIdx, inReal, optInTimePeriod, optInNbDev, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_STDDEV_State* state;
 /* Generated */  res = TA_STDDEV_StateInit(&state, optInTimePeriod, optInNbDev);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_STDDEV_Lookback(optInTimePeriod, optInNbDev);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_STDDEV_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_STDDEV_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12289,20 +13568,29 @@ TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 /* Generated */                                       double        outSlowD[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_STOCH(startIdx, endIdx, inHigh, inLow, inClose, optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType, outBegIdx, outNBElement, outSlowK, outSlowD );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_STOCH_State* state;
 /* Generated */  res = TA_STOCH_StateInit(&state, optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_STOCH_Lookback(optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outSlowK_local;double  outSlowD_local;;
+/* Generated */     double outSlowK_local;double  outSlowD_local;
 /* Generated */     res = TA_STOCH_State(state, inHigh[i], inLow[i], inClose[i], &outSlowK_local, &outSlowD_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outSlowK[i] != outSlowK_local) {res = 1; break;}
-/* Generated */     if(outSlowD[i] != outSlowD_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outSlowK[res_start] - outSlowK_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outSlowD[res_start] - outSlowD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_STOCH_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12397,20 +13685,29 @@ TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 /* Generated */                                        double        outFastD[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_STOCHF(startIdx, endIdx, inHigh, inLow, inClose, optInFastK_Period, optInFastD_Period, optInFastD_MAType, outBegIdx, outNBElement, outFastK, outFastD );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_STOCHF_State* state;
 /* Generated */  res = TA_STOCHF_StateInit(&state, optInFastK_Period, optInFastD_Period, optInFastD_MAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_STOCHF_Lookback(optInFastK_Period, optInFastD_Period, optInFastD_MAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outFastK_local;double  outFastD_local;;
+/* Generated */     double outFastK_local;double  outFastD_local;
 /* Generated */     res = TA_STOCHF_State(state, inHigh[i], inLow[i], inClose[i], &outFastK_local, &outFastD_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outFastK[i] != outFastK_local) {res = 1; break;}
-/* Generated */     if(outFastD[i] != outFastD_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outFastK[res_start] - outFastK_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outFastD[res_start] - outFastD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_STOCHF_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12504,20 +13801,29 @@ TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 /* Generated */                                          double        outFastD[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_STOCHRSI(startIdx, endIdx, inReal, optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType, outBegIdx, outNBElement, outFastK, outFastD );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_STOCHRSI_State* state;
 /* Generated */  res = TA_STOCHRSI_StateInit(&state, optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_STOCHRSI_Lookback(optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outFastK_local;double  outFastD_local;;
+/* Generated */     double outFastK_local;double  outFastD_local;
 /* Generated */     res = TA_STOCHRSI_State(state, inReal[i], &outFastK_local, &outFastD_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outFastK[i] != outFastK_local) {res = 1; break;}
-/* Generated */     if(outFastD[i] != outFastD_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outFastK[res_start] - outFastK_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */     if(fabs(outFastD[res_start] - outFastD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_STOCHRSI_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12580,19 +13886,28 @@ TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SUB(startIdx, endIdx, inReal0, inReal1, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_SUB_State* state;
 /* Generated */  res = TA_SUB_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_SUB_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_SUB_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_SUB_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12662,19 +13977,28 @@ TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SUM(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_SUM_State* state;
 /* Generated */  res = TA_SUM_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_SUM_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_SUM_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_SUM_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12738,6 +14062,7 @@ TA_LIB_API struct TA_T3_State {
                               double       c3;
                               double       c4;
                               double       tempReal;
+                              int          firstOutput;
                               int           optInTimePeriod; /* From 2 to 100000 */
                               double        optInVFactor; /* From 0 to 1 */
                               };
@@ -12765,19 +14090,28 @@ TA_LIB_API int TA_T3_StateFree( struct TA_T3_State** _state );
 /* Generated */                                    double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_T3(startIdx, endIdx, inReal, optInTimePeriod, optInVFactor, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_T3_State* state;
 /* Generated */  res = TA_T3_StateInit(&state, optInTimePeriod, optInVFactor);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_T3_Lookback(optInTimePeriod, optInVFactor);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_T3_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_T3_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12835,19 +14169,28 @@ TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TAN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_TAN_State* state;
 /* Generated */  res = TA_TAN_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_TAN_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_TAN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_TAN_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12905,19 +14248,28 @@ TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TANH(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_TANH_State* state;
 /* Generated */  res = TA_TANH_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_TANH_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_TANH_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_TANH_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -12989,19 +14341,28 @@ TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TEMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_TEMA_State* state;
 /* Generated */  res = TA_TEMA_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_TEMA_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_TEMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_TEMA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13069,19 +14430,28 @@ TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
 /* Generated */                                        double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TRANGE(startIdx, endIdx, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_TRANGE_State* state;
 /* Generated */  res = TA_TRANGE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_TRANGE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_TRANGE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_TRANGE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13155,19 +14525,28 @@ TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 /* Generated */                                       double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TRIMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_TRIMA_State* state;
 /* Generated */  res = TA_TRIMA_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_TRIMA_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_TRIMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_TRIMA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13236,19 +14615,28 @@ TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
 /* Generated */                                      double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TRIX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_TRIX_State* state;
 /* Generated */  res = TA_TRIX_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_TRIX_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_TRIX_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_TRIX_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13322,19 +14710,28 @@ TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TSF(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_TSF_State* state;
 /* Generated */  res = TA_TSF_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_TSF_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_TSF_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_TSF_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13402,19 +14799,28 @@ TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TYPPRICE(startIdx, endIdx, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_TYPPRICE_State* state;
 /* Generated */  res = TA_TYPPRICE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_TYPPRICE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_TYPPRICE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_TYPPRICE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13511,19 +14917,28 @@ TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 /* Generated */                                        double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ULTOSC(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod1, optInTimePeriod2, optInTimePeriod3, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_ULTOSC_State* state;
 /* Generated */  res = TA_ULTOSC_StateInit(&state, optInTimePeriod1, optInTimePeriod2, optInTimePeriod3);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_ULTOSC_Lookback(optInTimePeriod1, optInTimePeriod2, optInTimePeriod3);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_ULTOSC_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_ULTOSC_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13603,19 +15018,28 @@ TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_VAR(startIdx, endIdx, inReal, optInTimePeriod, optInNbDev, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_VAR_State* state;
 /* Generated */  res = TA_VAR_StateInit(&state, optInTimePeriod, optInNbDev);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_VAR_Lookback(optInTimePeriod, optInNbDev);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_VAR_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_VAR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13683,19 +15107,28 @@ TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
 /* Generated */                                          double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_WCLPRICE(startIdx, endIdx, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_WCLPRICE_State* state;
 /* Generated */  res = TA_WCLPRICE_StateInit(&state);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_WCLPRICE_Lookback();
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_WCLPRICE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_WCLPRICE_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13776,19 +15209,28 @@ TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 /* Generated */                                       double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_WILLR(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_WILLR_State* state;
 /* Generated */  res = TA_WILLR_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_WILLR_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_WILLR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_WILLR_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }
@@ -13860,19 +15302,28 @@ TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State** _state );
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_WMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_WMA_State* state;
 /* Generated */  res = TA_WMA_StateInit(&state, optInTimePeriod);
-/* Generated */  if (res != 0) return res;
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 /* Generated */  int i, lookback;
 /* Generated */  lookback = TA_WMA_Lookback(optInTimePeriod);
-/* Generated */  for (i = startIdx-lookback; i <= endIdx; i++)
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i < endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
-/* Generated */     double outReal_local;;
+/* Generated */     double outReal_local;
 /* Generated */     res = TA_WMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (res != 0) return res;
-/* Generated */     if(outReal[i] != outReal_local) {res = 1; break;}
+/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else return res; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
 /* Generated */    }
+/* Generated */  }
 /* Generated */  TA_RetCode r = TA_WMA_StateFree(&state);
 /* Generated */ return (res)?res:r;
 /* Generated */ }

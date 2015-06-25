@@ -543,8 +543,8 @@
 /* Generated */    STATE_P.optInSlowMAType = optInSlowMAType;
 /* Generated */    STATE_P.optInSignalPeriod = optInSignalPeriod;
 /* Generated */    STATE_P.optInSignalMAType = optInSignalMAType;
-/* Generated */    #ifndef TA_MACDEXT_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_MACDEXT_Lookback(optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType );
+/* Generated */    #ifndef TA_MACDEXT_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MACDEXT_Data));
 /* Generated */    else

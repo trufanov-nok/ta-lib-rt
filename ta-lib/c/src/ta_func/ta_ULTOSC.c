@@ -444,8 +444,8 @@
 /* Generated */    STATE_P.optInTimePeriod1 = optInTimePeriod1;
 /* Generated */    STATE_P.optInTimePeriod2 = optInTimePeriod2;
 /* Generated */    STATE_P.optInTimePeriod3 = optInTimePeriod3;
-/* Generated */    #ifndef TA_ULTOSC_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_ULTOSC_Lookback(optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
+/* Generated */    #ifndef TA_ULTOSC_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_ULTOSC_Data));
 /* Generated */    else

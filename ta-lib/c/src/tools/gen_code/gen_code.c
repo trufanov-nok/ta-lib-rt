@@ -2691,9 +2691,9 @@ void printFunc( FILE *out,
        }
 
        printIndent( out, indent );
-       fprintf( out, "#ifndef TA_%s_SUPPRESS_MEMORY_ALLOCATION\n", funcName);
-       printIndent( out, indent );
        fprintf( out, "MEM_SIZE_P = TA_%s_Lookback(%s);\n", funcName, nbOptInputArgsBuffer);
+       printIndent( out, indent );
+       fprintf( out, "#ifndef TA_%s_SUPPRESS_MEMORY_ALLOCATION\n", funcName);
        printIndent( out, indent);
        fprintf( out, "if (MEM_SIZE_P > 0)\n");
        printIndent( out, indent+6 );

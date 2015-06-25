@@ -489,8 +489,8 @@
 /* Generated */    STATE_P.optInNbDevUp = optInNbDevUp;
 /* Generated */    STATE_P.optInNbDevDn = optInNbDevDn;
 /* Generated */    STATE_P.optInMAType = optInMAType;
-/* Generated */    #ifndef TA_BBANDS_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_BBANDS_Lookback(optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType );
+/* Generated */    #ifndef TA_BBANDS_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_BBANDS_Data));
 /* Generated */    else

@@ -308,8 +308,8 @@
 /* Generated */    STATE_P.optInFastPeriod = optInFastPeriod;
 /* Generated */    STATE_P.optInSlowPeriod = optInSlowPeriod;
 /* Generated */    STATE_P.optInMAType = optInMAType;
-/* Generated */    #ifndef TA_PPO_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_PPO_Lookback(optInFastPeriod, optInSlowPeriod, optInMAType );
+/* Generated */    #ifndef TA_PPO_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_PPO_Data));
 /* Generated */    else

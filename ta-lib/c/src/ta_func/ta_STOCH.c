@@ -617,8 +617,8 @@
 /* Generated */    STATE_P.optInSlowK_MAType = optInSlowK_MAType;
 /* Generated */    STATE_P.optInSlowD_Period = optInSlowD_Period;
 /* Generated */    STATE_P.optInSlowD_MAType = optInSlowD_MAType;
-/* Generated */    #ifndef TA_STOCH_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_STOCH_Lookback(optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType );
+/* Generated */    #ifndef TA_STOCH_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_STOCH_Data));
 /* Generated */    else

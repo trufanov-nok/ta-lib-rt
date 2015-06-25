@@ -224,8 +224,8 @@
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    STATE = calloc(1, sizeof(struct TA_TYPPRICE_State));
 /* Generated */    STATE_P.mem_index = 0;
-/* Generated */    #ifndef TA_TYPPRICE_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_TYPPRICE_Lookback();
+/* Generated */    #ifndef TA_TYPPRICE_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_TYPPRICE_Data));
 /* Generated */    else

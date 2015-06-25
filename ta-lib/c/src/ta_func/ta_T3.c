@@ -404,8 +404,8 @@
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
 /* Generated */    STATE_P.optInVFactor = optInVFactor;
-/* Generated */    #ifndef TA_T3_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_T3_Lookback(optInTimePeriod, optInVFactor );
+/* Generated */    #ifndef TA_T3_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_T3_Data));
 /* Generated */    else
@@ -467,11 +467,13 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   _cur_idx = STATE.mem_index -1;
    if (FIRST_LAUNCH)
    {
     STATE.k = 2.0/(STATE.optInTimePeriod+1.0);
     STATE.one_minus_k = 1.0 - STATE.k;
     STATE.tempReal = 0.;
+    STATE.firstOutput = 0;
     double t = STATE.optInVFactor * STATE.optInVFactor;
     STATE.c1 = -(t * STATE.optInVFactor);
     STATE.c2 = 3.0 * (t - STATE.c1);
@@ -551,10 +553,12 @@
                            {
                                STATE.e6 = STATE.tempReal / STATE.optInTimePeriod;
                                STATE.tempReal = STATE.e6;
-                           }
-                           return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+                           } else
+                               return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
                        }
 
+   if (NEED_MORE_DATA)
+   {
 
    STATE.e1  = (STATE.k*inReal)+(STATE.one_minus_k*STATE.e1);
    STATE.e2  = (STATE.k*STATE.e1)+(STATE.one_minus_k*STATE.e2);
@@ -562,10 +566,21 @@
    STATE.e4  = (STATE.k*STATE.e3)+(STATE.one_minus_k*STATE.e4);
    STATE.e5  = (STATE.k*STATE.e4)+(STATE.one_minus_k*STATE.e5);
    STATE.e6  = (STATE.k*STATE.e5)+(STATE.one_minus_k*STATE.e6);
+   return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+   } else
+       if (STATE.firstOutput == 0)
+       {
+           STATE.firstOutput = 1;
+           VALUE_HANDLE_DEREF(outReal) = STATE.c1*STATE.e6+STATE.c2*STATE.e5+STATE.c3*STATE.e4+STATE.c4*STATE.e3;
+           return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+       }
 
-   if (NEED_MORE_DATA)
-       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
-
+   STATE.e1  = (STATE.k*inReal)+(STATE.one_minus_k*STATE.e1);
+   STATE.e2  = (STATE.k*STATE.e1)+(STATE.one_minus_k*STATE.e2);
+   STATE.e3  = (STATE.k*STATE.e2)+(STATE.one_minus_k*STATE.e3);
+   STATE.e4  = (STATE.k*STATE.e3)+(STATE.one_minus_k*STATE.e4);
+   STATE.e5  = (STATE.k*STATE.e4)+(STATE.one_minus_k*STATE.e5);
+   STATE.e6  = (STATE.k*STATE.e5)+(STATE.one_minus_k*STATE.e6);
 
    VALUE_HANDLE_DEREF(outReal) = STATE.c1*STATE.e6+STATE.c2*STATE.e5+STATE.c3*STATE.e4+STATE.c4*STATE.e3;
 

@@ -547,8 +547,8 @@
 /* Generated */    STATE_P.optInFastK_Period = optInFastK_Period;
 /* Generated */    STATE_P.optInFastD_Period = optInFastD_Period;
 /* Generated */    STATE_P.optInFastD_MAType = optInFastD_MAType;
-/* Generated */    #ifndef TA_STOCHF_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_STOCHF_Lookback(optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+/* Generated */    #ifndef TA_STOCHF_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_STOCHF_Data));
 /* Generated */    else

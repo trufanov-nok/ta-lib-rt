@@ -322,8 +322,8 @@
 /* Generated */    STATE = calloc(1, sizeof(struct TA_CDLMORNINGSTAR_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInPenetration = optInPenetration;
-/* Generated */    #ifndef TA_CDLMORNINGSTAR_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_CDLMORNINGSTAR_Lookback(optInPenetration );
+/* Generated */    #ifndef TA_CDLMORNINGSTAR_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_CDLMORNINGSTAR_Data));
 /* Generated */    else

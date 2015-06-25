@@ -295,8 +295,8 @@
 /* Generated */    STATE = calloc(1, sizeof(struct TA_MININDEX_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
-/* Generated */    #ifndef TA_MININDEX_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_MININDEX_Lookback(optInTimePeriod );
+/* Generated */    #ifndef TA_MININDEX_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MININDEX_Data));
 /* Generated */    else

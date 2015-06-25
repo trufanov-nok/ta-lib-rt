@@ -176,22 +176,28 @@ TA_RetCode printStateTestFunc(FILE* out, const TA_FuncInfo *funcInfo)
     listOutputParameters(outputArgs, funcInfo, ", ", NULL, NULL, 0);
 
     print(out, " TA_RetCode res = TA_%s(startIdx, endIdx, %s, %s%soutBegIdx, outNBElement, %s );\n", funcInfo->name, inputArgs, optInputArgs, strlen(optInputArgs)?", ":"", outputArgs);
-    print(out, " if (res != 0) return res;\n");
+    print(out, " if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases\n");
     print(out, " struct TA_%s_State* state;\n", funcInfo->name);
     print(out, " res = TA_%s_StateInit(&state%s%s);\n", funcInfo->name, strlen(optInputArgs)?", ":"", optInputArgs);
-    print(out, " if (res != 0) return res;\n");
+    print(out, " if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;\n");
     print(out, " int i, lookback;\n");
     print(out, " lookback = TA_%s_Lookback(%s);\n", funcInfo->name, optInputArgs);
-
-    print(out, " for (i = startIdx-lookback; i <= endIdx; i++)\n");
+    print(out, " int res_start = 0;\n");
+    print(out, " i = ( startIdx <= lookback )? lookback: startIdx;\n");
+    print(out, " if (i < endIdx) {\n");
+    print(out, " i -= lookback;\n");
+    print(out, " for (i = 0; i <= endIdx; i++)\n");
     print(out, "   {\n");
 
     listInputParameters(inputArgs, funcInfo, ", ", "[i]");
     listOutputParameters(outputArgs, funcInfo, " ", "_local;", NULL, 1);
-    print(out, "    %s;\n", outputArgs);
+    print(out, "    %s\n", outputArgs);
     listOutputParameters(outputArgs, funcInfo, ", ", "_local", "&", 0);
     print(out, "    res = TA_%s_State(state, %s, %s);\n", funcInfo->name, inputArgs, outputArgs);
-    print(out, "    if (res != 0) return res;\n");
+    print(out, "    if (i < startIdx) continue;\n");
+    print(out, "    if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {\n");
+    print(out, "      if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;\n");
+    print(out, "         else return res; }\n");
 
 
     listOutputParameters(outputArgs, funcInfo, ",", NULL, NULL, 0);
@@ -207,7 +213,7 @@ TA_RetCode printStateTestFunc(FILE* out, const TA_FuncInfo *funcInfo)
             word[word_idx] = '\0';
             if (word_idx > 0)
             {
-             print( out, "    if(%s[i] != %s_local) {res = 1; break;}\n", word, word);
+             print( out, "    if(fabs(%s[res_start] - %s_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}\n", word, word);
             }
             word_idx = 0;
             if (c == '\0') break;
@@ -216,8 +222,9 @@ TA_RetCode printStateTestFunc(FILE* out, const TA_FuncInfo *funcInfo)
             word[word_idx++] = c;
     }
 
-
+    print(out, "++res_start;\n");
     print(out, "   }\n");
+    print(out, " }\n");
 
     print(out, " TA_RetCode r = TA_%s_StateFree(&state);\n", funcInfo->name);
 

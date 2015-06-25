@@ -794,8 +794,8 @@
 /* Generated */    STATE_P.optInAccelerationInitShort = optInAccelerationInitShort;
 /* Generated */    STATE_P.optInAccelerationShort = optInAccelerationShort;
 /* Generated */    STATE_P.optInAccelerationMaxShort = optInAccelerationMaxShort;
-/* Generated */    #ifndef TA_SAREXT_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_SAREXT_Lookback(optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort );
+/* Generated */    #ifndef TA_SAREXT_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_SAREXT_Data));
 /* Generated */    else

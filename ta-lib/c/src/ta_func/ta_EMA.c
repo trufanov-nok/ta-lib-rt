@@ -391,8 +391,8 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */    STATE = calloc(1, sizeof(struct TA_EMA_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
-/* Generated */    #ifndef TA_EMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_EMA_Lookback(optInTimePeriod );
+/* Generated */    #ifndef TA_EMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_EMA_Data));
 /* Generated */    else
@@ -456,33 +456,50 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
    /* insert state based TA dunc code here. */
    if (FIRST_LAUNCH)
     {
-      STATE.currentIdx = 0;
       STATE.prevMA = 0.;
       STATE.tempSum = 0.;
-    } else
-       ++ STATE.currentIdx;
-
-
-
-    if( TA_GLOBALS_COMPATIBILITY == ENUM_VALUE(Compatibility,TA_COMPATIBILITY_DEFAULT,Default) )
-    {
-        if (STATE.currentIdx < STATE.optInTimePeriod)
-            STATE.tempSum += inReal;
-
-        STATE.prevMA = STATE.tempSum / STATE.optInTimePeriod;
-    }
-    else
-    {
-       STATE.prevMA = inReal;
     }
 
-     STATE.prevMA = ((inReal- STATE.prevMA) * PER_TO_K( STATE.optInTimePeriod ) ) + STATE.prevMA;
 
-     if (NEED_MORE_DATA)
+      if( TA_GLOBALS_COMPATIBILITY == ENUM_VALUE(Compatibility,TA_COMPATIBILITY_DEFAULT,Default) )
+         {
+          if ((int)STATE.mem_index-1 < STATE.optInTimePeriod)
+          {
+              STATE.tempSum += inReal;
+              if ((int)STATE.mem_index == STATE.optInTimePeriod)
+                {
+                  STATE.prevMA = STATE.tempSum / STATE.optInTimePeriod;
+
+                  if (!(NEED_MORE_DATA))
+                  {
+                      VALUE_HANDLE_DEREF(outReal) = STATE.prevMA;
+                      return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+                  }
+
+                } else
+                  return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+          }
+         }
+          else {
+           if (FIRST_LAUNCH)
+            {
+              STATE.prevMA = inReal;
+              return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+            }
+      }
+
+
+    STATE.prevMA = ((inReal- STATE.prevMA) * PER_TO_K( STATE.optInTimePeriod ) ) + STATE.prevMA;
+
+//    if (LAST_NEED_MORE_DATA)
+//    {
+//        VALUE_HANDLE_DEREF(outReal) = STATE.prevMA;
+//        return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+//    } else
+    if (NEED_MORE_DATA)
         return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
-   VALUE_HANDLE_DEREF(outReal) = STATE.prevMA;
-
+    VALUE_HANDLE_DEREF(outReal) = STATE.prevMA;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 

@@ -391,8 +391,8 @@
 /* Generated */    STATE_P.optInMinPeriod = optInMinPeriod;
 /* Generated */    STATE_P.optInMaxPeriod = optInMaxPeriod;
 /* Generated */    STATE_P.optInMAType = optInMAType;
-/* Generated */    #ifndef TA_MAVP_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_MAVP_Lookback(optInMinPeriod, optInMaxPeriod, optInMAType );
+/* Generated */    #ifndef TA_MAVP_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MAVP_Data));
 /* Generated */    else

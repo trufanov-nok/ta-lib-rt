@@ -518,8 +518,8 @@
 /* Generated */    STATE = calloc(1, sizeof(struct TA_TRIMA_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
-/* Generated */    #ifndef TA_TRIMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_TRIMA_Lookback(optInTimePeriod );
+/* Generated */    #ifndef TA_TRIMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_TRIMA_Data));
 /* Generated */    else
@@ -612,7 +612,7 @@ double tempReal;
        {
            STATE.numerator    -= STATE.numeratorSub;
            STATE.numeratorSub += inReal;
-           STATE.numerator    += STATE.middleIdx * inReal;
+           STATE.numerator    += (STATE.middleIdx+1) * inReal;
        }
 
        if ((int)_cur_idx > STATE.middleIdx)
@@ -620,26 +620,45 @@ double tempReal;
            STATE.numeratorAdd += inReal;
            STATE.numerator    += STATE.numeratorAdd;
        }
-   }
 
+//       ((*(STATE.memory+ _cur_idx))).inReal = inReal;
+       PUSH_TO_MEM(inReal, inReal);
+       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+   } else
+       if (STATE.mem_size == STATE.mem_index - 1)
+           ++STATE.middleIdx;
+
+   /* Step (2) line 4*/
    STATE.numeratorAdd += inReal;
 
+   /* Step (3) */
+   if (STATE.mem_size == STATE.mem_index - 1)
+     STATE.numerator    += STATE.numeratorAdd;
+   else
+     STATE.numerator    += inReal;
 
-   STATE.numerator    += STATE.numeratorAdd;
+   /* Step (4) */
    VALUE_HANDLE_DEREF(outReal) = STATE.numerator * STATE.factor;
 
+   /* Step (1) */
    STATE.numerator    -= STATE.numeratorSub;
    STATE.numeratorSub -= POP_FROM_MEM(inReal);
 
    middle = STATE.middleIdx++ % STATE.mem_size;
    tempReal = MEM_IDX_NS(middle, inReal);
-   STATE.numeratorAdd -= tempReal;
    STATE.numeratorSub += tempReal;
 
+   /* Step (2) */
    if( (STATE.optInTimePeriod % 2) == 1 )
    {
-     STATE.numerator += tempReal;
+       STATE.numerator +=  STATE.numeratorAdd;
+       STATE.numeratorAdd -= tempReal;
+   } else {
+       STATE.numeratorAdd -= tempReal;
+       STATE.numerator +=  STATE.numeratorAdd;
    }
+
+
 
    PUSH_TO_MEM(inReal, inReal);
 

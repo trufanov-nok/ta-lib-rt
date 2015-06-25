@@ -4226,7 +4226,7 @@ struct TA_EMA_State {
                     struct TA_EMA_Data* memory;
                     double       prevMA;
                     double       tempSum;
-                    int          currentIdx;
+                    double       preprRes;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 
@@ -4627,6 +4627,7 @@ struct TA_KAMA_State {
                      double       sumROC1;
                      double       yestReal;
                      double       prevKAMA;
+                     double       trailingValue;
                      int           optInTimePeriod; /* From 2 to 100000 */
                      };
 
@@ -7153,6 +7154,7 @@ struct TA_T3_State {
                    double       c3;
                    double       c4;
                    double       tempReal;
+                   int          firstOutput;
                    int           optInTimePeriod; /* From 2 to 100000 */
                    double        optInVFactor; /* From 0 to 1 */
                    };

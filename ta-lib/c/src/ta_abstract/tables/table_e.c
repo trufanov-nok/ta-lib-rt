@@ -73,7 +73,7 @@ const TA_InputParameterInfo TA_EMA_DEF_UI_STRUCT_PARAM_2 =
                                   { TA_Input_Real, "tempSum", 0 };
 
 const TA_InputParameterInfo TA_EMA_DEF_UI_STRUCT_PARAM_3 =
-                                  { TA_Input_Integer, "currentIdx", 0 };
+                                  { TA_Input_Real, "preprRes", 0 };
 
 static const TA_InputParameterInfo *TA_EMA_StructParams[] = {
     &TA_EMA_DEF_UI_STRUCT_PARAM_1,

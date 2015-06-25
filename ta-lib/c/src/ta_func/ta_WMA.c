@@ -346,8 +346,8 @@
 /* Generated */    STATE = calloc(1, sizeof(struct TA_WMA_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
-/* Generated */    #ifndef TA_WMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_WMA_Lookback(optInTimePeriod );
+/* Generated */    #ifndef TA_WMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_WMA_Data));
 /* Generated */    else
@@ -429,13 +429,13 @@
      return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
  }
 
+    STATE.periodSub += inReal;
     STATE.periodSum += inReal*STATE.optInTimePeriod;
+
 
     VALUE_HANDLE_DEREF(outReal) = STATE.periodSum / STATE.divider;
 
     STATE.periodSum -= STATE.periodSub;
-    STATE.periodSub += inReal;
-
     STATE.periodSub -= POP_FROM_MEM(inReal);
     PUSH_TO_MEM(inReal,inReal);
 

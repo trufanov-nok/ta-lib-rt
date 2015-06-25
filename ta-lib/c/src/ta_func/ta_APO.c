@@ -447,8 +447,8 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /* Generated */    STATE_P.optInFastPeriod = optInFastPeriod;
 /* Generated */    STATE_P.optInSlowPeriod = optInSlowPeriod;
 /* Generated */    STATE_P.optInMAType = optInMAType;
-/* Generated */    #ifndef TA_APO_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_APO_Lookback(optInFastPeriod, optInSlowPeriod, optInMAType );
+/* Generated */    #ifndef TA_APO_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_APO_Data));
 /* Generated */    else

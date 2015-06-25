@@ -322,8 +322,8 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /* Generated */    STATE = calloc(1, sizeof(struct TA_SMA_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
-/* Generated */    #ifndef TA_SMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_SMA_Lookback(optInTimePeriod );
+/* Generated */    #ifndef TA_SMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_SMA_Data));
 /* Generated */    else

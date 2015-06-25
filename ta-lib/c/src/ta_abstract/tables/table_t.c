@@ -106,6 +106,8 @@ const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_12 =
                                   { TA_Input_Real, "c4", 0 };
 const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_13 =
                                   { TA_Input_Real, "tempReal", 0 };
+const TA_InputParameterInfo TA_T3_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Integer, "firstOutput", 0 };
 
 static const TA_InputParameterInfo *TA_T3_StructParams[] = {
     &TA_T3_DEF_UI_STRUCT_PARAM_1,
@@ -121,6 +123,7 @@ static const TA_InputParameterInfo *TA_T3_StructParams[] = {
     &TA_T3_DEF_UI_STRUCT_PARAM_11,
     &TA_T3_DEF_UI_STRUCT_PARAM_12,
     &TA_T3_DEF_UI_STRUCT_PARAM_13,
+    &TA_T3_DEF_UI_STRUCT_PARAM_14,
     NULL };
 
 DEF_FUNCTION( T3,                         /* name */

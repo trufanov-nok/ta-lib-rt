@@ -110,7 +110,9 @@ typedef struct
 static ErrorNumber do_test_ma( const TA_History *history,
                                const TA_Test *test,
 							   int testMAVP /* Boolean */ );
-
+static ErrorNumber do_test_ma_state( const TA_History *history,
+                               const TA_Test *test,
+                               int testMAVP /* Boolean */ );
 /**** Local variables definitions.     ****/
 
 static TA_Test tableTest[] =
@@ -386,6 +388,18 @@ ErrorNumber test_func_ma( TA_History *history )
          return retValue;
       }
 
+      if (i == 94)
+      {//truf
+          --i;
+          ++i;
+      }
+      retValue = do_test_ma_state( history, &tableTest[i], 0 );
+      if( retValue != 0 )
+      {
+         printf( "TA_MA Failed State Test #%d (Code=%d)\n", i, retValue );
+         return retValue;
+      }
+
 	  /* If TA_ANY_MA_TEST. repeat test with TA_MAVP */
 	  if( tableTest[i].id == TA_ANY_MA_TEST )
 	  {
@@ -395,6 +409,7 @@ ErrorNumber test_func_ma( TA_History *history )
             printf( "TA_MAVP Failed Test #%d (Code=%d)\n", i, retValue );
             return retValue;
 	     }
+
 	  }
    }
 
@@ -495,7 +510,7 @@ static TA_RetCode rangeTestFunction( TA_Integer    startIdx,
   return retCode;
 }
 
-static ErrorNumber do_test_ma( const TA_History *history,
+static ErrorNumber do_test_ma_state( const TA_History *history,
                                const TA_Test *test,
                                int testMAVP )
 {
@@ -591,6 +606,11 @@ static ErrorNumber do_test_ma( const TA_History *history,
       }
       else
       {
+          if (test->optInMAType_1 == 1)
+          {
+              int g = 0; //truf
+              g++;
+          }
          retCode = TA_MA_StateTest( test->startIdx,
                           test->endIdx,
                           gBuffer[0].in,
@@ -715,8 +735,8 @@ static ErrorNumber do_test_ma( const TA_History *history,
          retCode = TA_MAVP( test->startIdx,
                             test->endIdx,
                             gBuffer[0].in,
-							gBuffer[2].in,
-							2, test->optInTimePeriod,
+                            gBuffer[2].in,
+                            2, test->optInTimePeriod,
                             (TA_MAType)test->optInMAType_1,
                             &outBegIdx,
                             &outNbElement,
@@ -735,7 +755,7 @@ static ErrorNumber do_test_ma( const TA_History *history,
 	  }
       break;
    case TA_MAMA_TEST:
-      retCode = TA_MAMA( test->startIdx,
+      retCode = TA_MAMA(test->startIdx,
                          test->endIdx,
                          gBuffer[0].in,
                          0.5, 0.05,                       
@@ -749,7 +769,7 @@ static ErrorNumber do_test_ma( const TA_History *history,
       retCode = TA_MAMA( test->startIdx,
                          test->endIdx,
                          gBuffer[0].in,
-                         0.5, 0.05,                       
+                         0.5, 0.05,
                          &outBegIdx,
                          &outNbElement,
                          gBuffer[0].out2,

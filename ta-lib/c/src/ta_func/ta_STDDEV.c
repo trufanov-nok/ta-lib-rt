@@ -390,8 +390,8 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
 /* Generated */    STATE_P.optInNbDev = optInNbDev;
-/* Generated */    #ifndef TA_STDDEV_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_STDDEV_Lookback(optInTimePeriod, optInNbDev );
+/* Generated */    #ifndef TA_STDDEV_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_STDDEV_Data));
 /* Generated */    else

@@ -382,8 +382,8 @@ ENUM_DECLARATION(RetCode) retValue;
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
 /* Generated */    STATE_P.optInMAType = optInMAType;
-/* Generated */    #ifndef TA_MA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_MA_Lookback(optInTimePeriod, optInMAType );
+/* Generated */    #ifndef TA_MA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MA_Data));
 /* Generated */    else
@@ -500,7 +500,7 @@ case ENUM_CASE(MAType, TA_MAType_SMA, Sma ):
    break;
 
 case ENUM_CASE(MAType, TA_MAType_EMA, Ema):
-   retValue = FUNCTION_CALL_STATE(EMA)( (struct TA_EMA_State*)  &STATE.ta_state, inReal, outReal );
+   retValue = FUNCTION_CALL_STATE(EMA)( (struct TA_EMA_State*) STATE.ta_state, inReal, outReal );
    break;
 
 case ENUM_CASE(MAType, TA_MAType_WMA, Wma):

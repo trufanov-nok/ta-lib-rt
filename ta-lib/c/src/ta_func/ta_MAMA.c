@@ -538,8 +538,8 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInFastLimit = optInFastLimit;
 /* Generated */    STATE_P.optInSlowLimit = optInSlowLimit;
-/* Generated */    #ifndef TA_MAMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_MAMA_Lookback(optInFastLimit, optInSlowLimit );
+/* Generated */    #ifndef TA_MAMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MAMA_Data));
 /* Generated */    else
@@ -554,6 +554,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
    CREATE_HILBERT_VARIABLES_STRUCT(MAMA, Q1);
    CREATE_HILBERT_VARIABLES_STRUCT(MAMA, jI);
    CREATE_HILBERT_VARIABLES_STRUCT(MAMA, jQ);
+   //TODO: only memory size 4 is really needed
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -617,6 +618,10 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+//   struct TA_MAMA_HILBERT_STRUCT* refdetrender = (struct TA_MAMA_HILBERT_STRUCT*) _state->detrender;
+//   struct TA_MAMA_HILBERT_STRUCT* refQ1 = (struct TA_MAMA_HILBERT_STRUCT*) _state->Q1;
+//   struct TA_MAMA_HILBERT_STRUCT* refjI = (struct TA_MAMA_HILBERT_STRUCT*) _state->jI;
+//   struct TA_MAMA_HILBERT_STRUCT* refjQ = (struct TA_MAMA_HILBERT_STRUCT*) _state->jQ;
 
    rad2Deg = 180.0 / (4.0 * std_atan(1));
    if (FIRST_LAUNCH)
@@ -648,20 +653,22 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
    STATE.periodWMASub     += varNewPrice; \
    STATE.periodWMASub     -= STATE.trailingWMAValue; \
    STATE.periodWMASum     += varNewPrice*4.0; \
-   STATE.trailingWMAValue  = MEM_IDX_NS(STATE.mem_index-1-4 % MEM_SIZE, inReal); \
+   STATE.trailingWMAValue  = MEM_IDX_NS((STATE.mem_index-4) % MEM_SIZE, inReal); \
    varToStoreSmoothedValue = STATE.periodWMASum*0.1; \
    STATE.periodWMASum -= STATE.periodWMASub; \
 }
 
-   if (STATE.mem_index <= 4)
+   if (STATE.mem_index < 4)
    {
       STATE.periodWMASub += inReal;
       STATE.periodWMASum += STATE.mem_index*inReal;
+      PUSH_TO_MEM(inReal,inReal);
       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
    } else
        if (STATE.mem_index <= 12)
        {
            DO_PRICE_WMA_STATE(inReal, smoothedValue);
+           PUSH_TO_MEM(inReal,inReal);
            return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
        }
 
@@ -672,7 +679,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
    adjustedPrevPeriod = (0.075*STATE.period)+0.54;
    DO_PRICE_WMA_STATE(inReal, smoothedValue);
 
-   if( (STATE.mem_index%2) == 0 )
+   if( ((STATE.mem_index+1)%2) == 0 )
    {
        /* Do the Hilbert Transforms for even price bar */
        DO_HILBERT_STRUCT_EVEN(MAMA, detrender, smoothedValue);
@@ -734,11 +741,11 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
    tempReal *= 0.5;
    STATE.fama = (tempReal*STATE.mama)+((1-tempReal)*STATE.fama);
 
-   if (NEED_MORE_DATA)
-   return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
-
-   VALUE_HANDLE_DEREF(outMAMA) = STATE.mama;
-   VALUE_HANDLE_DEREF(outFAMA) = STATE.fama;
+   if (!(NEED_MORE_DATA))
+   {
+     VALUE_HANDLE_DEREF(outMAMA) = STATE.mama;
+     VALUE_HANDLE_DEREF(outFAMA) = STATE.fama;
+   }
 
 
    STATE.Re = (0.2*((I2*STATE.prevI2)+(Q2*STATE.prevQ2)))+(0.8*STATE.Re);
@@ -761,7 +768,17 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
    STATE.period = (0.2*STATE.period) + (0.8 * tempReal);
 
 
+//   refdetrender = NULL;
+//    refQ1 = NULL;
+//    refjI = NULL;
+//    refjQ = NULL;
 
+
+   PUSH_TO_MEM(inReal,inReal);
+
+   if (NEED_MORE_DATA)
+      return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+   else
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 

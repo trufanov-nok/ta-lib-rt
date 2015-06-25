@@ -274,8 +274,8 @@
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    STATE = calloc(1, sizeof(struct TA_CDLMATCHINGLOW_State));
 /* Generated */    STATE_P.mem_index = 0;
-/* Generated */    #ifndef TA_CDLMATCHINGLOW_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    MEM_SIZE_P = TA_CDLMATCHINGLOW_Lookback();
+/* Generated */    #ifndef TA_CDLMATCHINGLOW_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
 /* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_CDLMATCHINGLOW_Data));
 /* Generated */    else
