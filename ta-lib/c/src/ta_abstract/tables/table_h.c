@@ -66,7 +66,75 @@ static const TA_OptInputParameterInfo *TA_HT_DCPERIOD_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_HT_DCPERIOD_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "detrender", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "Q1", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "jI", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "jQ", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "hilbertIdx", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "periodWMASub", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "periodWMASum", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "period", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "I1ForOddPrev2", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "I1ForEvenPrev2", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "I1ForOddPrev3", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "I1ForEvenPrev3", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Real, "prevI2", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Real, "prevQ2", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_15 =
+                                  { TA_Input_Real, "smoothPeriod", 0 };
+
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_18 =
+                                  { TA_Input_Real, "Im", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_19 =
+                                  { TA_Input_Real, "Re", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_20 =
+                                  { TA_Input_Real, "trailingWMAValue", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_21 =
+                                  { TA_Input_Real, "rad2Deg", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_22 =
+                                  { TA_Input_Real, "a", 0 };
+const TA_InputParameterInfo TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_23 =
+                                  { TA_Input_Real, "b", 0 };
+
+static const TA_InputParameterInfo *TA_HT_DCPERIOD_StructParams[] = {
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_1,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_2,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_3,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_4,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_5,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_6,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_7,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_8,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_9,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_10,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_11,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_12,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_13,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_14,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_15,
+
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_18,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_19,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_20,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_21,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_22,
+    &TA_HT_DCPERIOD_DEF_UI_STRUCT_PARAM_23,
+    NULL };
 
 DEF_FUNCTION( HT_DCPERIOD,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */
@@ -129,7 +197,73 @@ static const TA_OptInputParameterInfo *TA_HT_PHASOR_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_HT_PHASOR_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "detrender", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "Q1", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "jI", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "jQ", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "hilbertIdx", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "periodWMASub", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "periodWMASum", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "period", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "I1ForOddPrev2", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "I1ForEvenPrev2", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "I1ForOddPrev3", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "I1ForEvenPrev3", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Real, "prevI2", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Real, "prevQ2", 0 };
+
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_18 =
+                                  { TA_Input_Real, "Im", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_19 =
+                                  { TA_Input_Real, "Re", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_20 =
+                                  { TA_Input_Real, "trailingWMAValue", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_21 =
+                                  { TA_Input_Real, "rad2Deg", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_22 =
+                                  { TA_Input_Real, "a", 0 };
+const TA_InputParameterInfo TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_23 =
+                                  { TA_Input_Real, "b", 0 };
+
+
+static const TA_InputParameterInfo *TA_HT_PHASOR_StructParams[] = {
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_1,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_2,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_3,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_4,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_5,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_6,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_7,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_8,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_9,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_10,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_11,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_12,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_13,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_14,
+
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_18,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_19,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_20,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_21,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_22,
+    &TA_HT_PHASOR_DEF_UI_STRUCT_PARAM_23,
+    NULL };
 
 DEF_FUNCTION( HT_PHASOR,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */

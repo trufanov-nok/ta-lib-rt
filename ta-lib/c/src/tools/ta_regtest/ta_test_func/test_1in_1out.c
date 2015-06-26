@@ -340,12 +340,12 @@ static ErrorNumber do_test_state( const TA_History *history,
     switch( test->theFunction )
     {
     case TA_HT_DCPERIOD_TEST:
-//       retCode = TA_HT_DCPERIOD( test->startIdx,
-//                                 test->endIdx,
-//                                 gBuffer[0].in,
-//                                 &outBegIdx,
-//                                 &outNbElement,
-//                                 gBuffer[0].out0 );
+       retCode = TA_HT_DCPERIOD_StateTest(test->startIdx,
+                                 test->endIdx,
+                                 gBuffer[0].in,
+                                 &outBegIdx,
+                                 &outNbElement,
+                                 gBuffer[0].out0 );
        break;
 
     case TA_HT_DCPHASE_TEST:

@@ -580,10 +580,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 {
    /* insert local variable here */
    #define TA_MAMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
-    CONSTANT_DOUBLE(a) = 0.0962;
-    CONSTANT_DOUBLE(b) = 0.5769;
     double hilbertTempReal, smoothedValue;
-    double rad2Deg;
     double adjustedPrevPeriod;
     double Q2, I2;
     double tempReal, tempReal2;
@@ -623,7 +620,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 //   struct TA_MAMA_HILBERT_STRUCT* refjI = (struct TA_MAMA_HILBERT_STRUCT*) _state->jI;
 //   struct TA_MAMA_HILBERT_STRUCT* refjQ = (struct TA_MAMA_HILBERT_STRUCT*) _state->jQ;
 
-   rad2Deg = 180.0 / (4.0 * std_atan(1));
+
    if (FIRST_LAUNCH)
    {
        STATE.periodWMASub = 0.;
@@ -642,6 +639,9 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
        STATE.Im = 0.;
        STATE.Re = 0.;
        STATE.trailingWMAValue = 0.;
+       STATE.rad2Deg = 180.0 / (4.0 * std_atan(1));
+       STATE.a = 0.0962;
+       STATE.b = 0.5769;
 
        INIT_HILBERT_VARIABLES_STRUCT(MAMA, detrender);
        INIT_HILBERT_VARIABLES_STRUCT(MAMA, Q1);
@@ -696,7 +696,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
        STATE.I1ForOddPrev2 = GET_HILBERT_STRUCT_VAR(MAMA,detrender,var);
 
        if( STATE.I1ForEvenPrev3 != 0.0 )
-          tempReal2 = (std_atan(GET_HILBERT_STRUCT_VAR(MAMA,Q1,var)/STATE.I1ForEvenPrev3)*rad2Deg);
+          tempReal2 = (std_atan(GET_HILBERT_STRUCT_VAR(MAMA,Q1,var)/STATE.I1ForEvenPrev3)*STATE.rad2Deg);
        else
           tempReal2 = 0.0;
    } else {
@@ -713,7 +713,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
        STATE.I1ForEvenPrev2 = GET_HILBERT_STRUCT_VAR(MAMA,detrender,var);
 
        if( STATE.I1ForOddPrev3 != 0.0 )
-          tempReal2 = (std_atan(GET_HILBERT_STRUCT_VAR(MAMA,Q1,var)/STATE.I1ForOddPrev3)*rad2Deg);
+          tempReal2 = (std_atan(GET_HILBERT_STRUCT_VAR(MAMA,Q1,var)/STATE.I1ForOddPrev3)*STATE.rad2Deg);
        else
           tempReal2 = 0.0;
    }
@@ -754,7 +754,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
    STATE.prevI2 = I2;
    tempReal = STATE.period;
    if( (STATE.Im != 0.0) && (STATE.Re != 0.0) )
-      STATE.period = 360.0 / (std_atan(STATE.Im/STATE.Re)*rad2Deg);
+      STATE.period = 360.0 / (std_atan(STATE.Im/STATE.Re)*STATE.rad2Deg);
    tempReal2 = 1.5*tempReal;
    if( STATE.period > tempReal2)
       STATE.period = tempReal2;

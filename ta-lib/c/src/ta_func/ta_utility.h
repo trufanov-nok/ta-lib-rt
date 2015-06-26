@@ -338,12 +338,12 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
 #define DO_HILBERT_TRANSFORM_IN_STRUCT(taFunc,structName,input,OddOrEvenId) {\
          struct TA_##taFunc##_HILBERT_STRUCT* ref; \
          ref = (struct TA_##taFunc##_HILBERT_STRUCT*)STATE.structName; \
-         hilbertTempReal = a * input; \
+         hilbertTempReal = STATE.a * input; \
          VALUE_HANDLE_DEREF(ref).var = -VALUE_HANDLE_DEREF(ref)._##OddOrEvenId[STATE.hilbertIdx]; \
          VALUE_HANDLE_DEREF(ref)._##OddOrEvenId[STATE.hilbertIdx] = hilbertTempReal; \
          VALUE_HANDLE_DEREF(ref).var += hilbertTempReal; \
          VALUE_HANDLE_DEREF(ref).var -= VALUE_HANDLE_DEREF(ref).prev_##OddOrEvenId; \
-         VALUE_HANDLE_DEREF(ref).prev_##OddOrEvenId = b * VALUE_HANDLE_DEREF(ref).prev_input_##OddOrEvenId; \
+         VALUE_HANDLE_DEREF(ref).prev_##OddOrEvenId = STATE.b * VALUE_HANDLE_DEREF(ref).prev_input_##OddOrEvenId; \
          VALUE_HANDLE_DEREF(ref).var += VALUE_HANDLE_DEREF(ref).prev_##OddOrEvenId; \
          VALUE_HANDLE_DEREF(ref).prev_input_##OddOrEvenId = input; \
          VALUE_HANDLE_DEREF(ref).var *= adjustedPrevPeriod; \

@@ -355,6 +355,12 @@ const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_19 =
                                   { TA_Input_Real, "Re", 0 };
 const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_20 =
                                   { TA_Input_Real, "trailingWMAValue", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_21 =
+                                  { TA_Input_Real, "rad2Deg", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_22 =
+                                  { TA_Input_Real, "a", 0 };
+const TA_InputParameterInfo TA_MAMA_DEF_UI_STRUCT_PARAM_23 =
+                                  { TA_Input_Real, "b", 0 };
 
 static const TA_InputParameterInfo *TA_MAMA_StructParams[] = {
     &TA_MAMA_DEF_UI_STRUCT_PARAM_1,
@@ -377,6 +383,9 @@ static const TA_InputParameterInfo *TA_MAMA_StructParams[] = {
     &TA_MAMA_DEF_UI_STRUCT_PARAM_18,
     &TA_MAMA_DEF_UI_STRUCT_PARAM_19,
     &TA_MAMA_DEF_UI_STRUCT_PARAM_20,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_21,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_22,
+    &TA_MAMA_DEF_UI_STRUCT_PARAM_23,
     NULL };
 
 DEF_FUNCTION( MAMA,                         /* name */

@@ -4340,6 +4340,27 @@ struct TA_HT_DCPERIOD_State {
                             size_t mem_size;
                             size_t mem_index;
                             struct TA_HT_DCPERIOD_Data* memory;
+                            void*        detrender;
+                            void*        Q1;
+                            void*        jI;
+                            void*        jQ;
+                            int          hilbertIdx;
+                            double       periodWMASub;
+                            double       periodWMASum;
+                            double       period;
+                            double       I1ForOddPrev2;
+                            double       I1ForEvenPrev2;
+                            double       I1ForOddPrev3;
+                            double       I1ForEvenPrev3;
+                            double       prevI2;
+                            double       prevQ2;
+                            double       smoothPeriod;
+                            double       Im;
+                            double       Re;
+                            double       trailingWMAValue;
+                            double       rad2Deg;
+                            double       a;
+                            double       b;
                             };
 
 
@@ -4415,6 +4436,26 @@ struct TA_HT_PHASOR_State {
                           size_t mem_size;
                           size_t mem_index;
                           struct TA_HT_PHASOR_Data* memory;
+                          void*        detrender;
+                          void*        Q1;
+                          void*        jI;
+                          void*        jQ;
+                          int          hilbertIdx;
+                          double       periodWMASub;
+                          double       periodWMASum;
+                          double       period;
+                          double       I1ForOddPrev2;
+                          double       I1ForEvenPrev2;
+                          double       I1ForOddPrev3;
+                          double       I1ForEvenPrev3;
+                          double       prevI2;
+                          double       prevQ2;
+                          double       Im;
+                          double       Re;
+                          double       trailingWMAValue;
+                          double       rad2Deg;
+                          double       a;
+                          double       b;
                           };
 
 
@@ -5215,6 +5256,9 @@ struct TA_MAMA_State {
                      double       Im;
                      double       Re;
                      double       trailingWMAValue;
+                     double       rad2Deg;
+                     double       a;
+                     double       b;
                      double        optInFastLimit; /* From 0.01 to 0.99 */
                      double        optInSlowLimit; /* From 0.01 to 0.99 */
                      };

@@ -109,7 +109,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 
 static TA_Test tableTest[] =
@@ -188,6 +189,13 @@ ErrorNumber test_func_1in_2out( TA_History *history )
       if( retValue != 0 )
       {
          printf( "Failed Test #%d (Code=%d)\n", i, retValue );
+         return retValue;
+      }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "Failed State Test #%d (Code=%d)\n", i, retValue );
          return retValue;
       }
    }
@@ -466,4 +474,72 @@ static ErrorNumber do_test( const TA_History *history,
 
    return TA_TEST_PASS;
 }
+
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+   const TA_Real *referenceInput;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->close,  history->nbBars );
+   setInputBuffer( 1, history->close,  history->nbBars );
+   setInputBuffer( 2, history->close,  history->nbBars );
+
+   /* Change the input to MEDPRICE for some tests. */
+   switch( test->theFunction )
+   {
+   case TA_HT_PHASOR_TEST:
+   case TA_HT_SINE_TEST:
+      TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
+                   &outBegIdx, &outNbElement, gBuffer[0].in );
+
+      TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
+                   &outBegIdx, &outNbElement, gBuffer[1].in );
+
+      /* Will be use as reference */
+      TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
+                   &outBegIdx, &outNbElement, gBuffer[2].in );
+
+      referenceInput = gBuffer[2].in;
+      break;
+   default:
+      referenceInput = history->close;
+   }
+
+   /* Make a simple first call. */
+   switch( test->theFunction )
+   {
+   case TA_HT_PHASOR_TEST:
+      retCode = TA_HT_PHASOR_StateTest(test->startIdx,
+                              test->endIdx,
+                              gBuffer[0].in,
+                              &outBegIdx,
+                              &outNbElement,
+                              gBuffer[0].out0,
+                              gBuffer[0].out1 );
+      break;
+   case TA_HT_SINE_TEST:
+//      retCode = TA_HT_SINE( test->startIdx,
+//                            test->endIdx,
+//                            gBuffer[0].in,
+//                            &outBegIdx,
+//                            &outNbElement,
+//                            gBuffer[0].out0,
+//                            gBuffer[0].out1 );
+      break;
+   default:
+      retCode = TA_INTERNAL_ERROR(133);
+   }
+
+
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
+}
+
 
