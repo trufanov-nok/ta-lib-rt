@@ -126,4 +126,6 @@ typedef TA_RetCode (*TA_FrameFunction)( const TA_ParamHolderPriv *params,
 
 typedef unsigned int (*TA_FrameLookback)( const TA_ParamHolderPriv *params );
 
+typedef unsigned int (*TA_FrameStateFunc)( const TA_ParamHolderPriv *params );
+
 #endif

@@ -2922,7 +2922,7 @@ void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int sett
    else
    if( settings & pfs_stateFreeSignature )
    {
-      print( out, "unsigned int TA_%s_FramePPFS( const TA_ParamHolderPriv *params )\n", funcInfo->name );
+      print( out, "unsigned int TA_%s_FramePPSF( const TA_ParamHolderPriv *params )\n", funcInfo->name );
    }
    else
    {
