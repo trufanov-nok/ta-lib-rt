@@ -247,7 +247,7 @@ TA_RetCode TA_ForEachFunc( TA_CallForEachFunc functionToCall, void *opaqueData )
       for( j=0; j < funcDefTableSize; j++ )
       {
          funcDef = funcDefTable[j];
-         if( !funcDef || !funcDef->funcInfo )
+         if( !funcDef )
             return TA_INTERNAL_ERROR(3);
 
          funcInfo = funcDef->funcInfo;      
