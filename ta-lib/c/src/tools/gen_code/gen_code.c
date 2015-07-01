@@ -1839,7 +1839,7 @@ void printFunc( FILE *out,
 
    // print the beginning of function declaration with given suffix
 
-#define PRINT_STRUCT_NAME(prefic, funcName, suffix) { \
+#define PRINT_STRUCT_NAME(prefix, funcName, suffix) { \
     if( managedCPPCode ) \
     { \
        sprintf( gTempBuf, "%spublic struct TA_%s_%s ", \
@@ -1864,7 +1864,7 @@ void printFunc( FILE *out,
 
    if (stateStruct && !validationCode)
    {
-       PRINT_STRUCT_NAME(prefix, funcName, "Data {\n"); //forward declaration of memory struct
+       PRINT_STRUCT_NAME("", funcName, "Data {\n"); //forward declaration of memory struct
    } else
    if( prototype )
    {
@@ -2431,7 +2431,7 @@ void printFunc( FILE *out,
        printIndent( out, indent );
        print( out, "};\n"); //close Data struct
        //start main struct
-       PRINT_STRUCT_NAME(prefix, funcName, "State {\n");
+       PRINT_STRUCT_NAME("", funcName, "State {\n");
        printIndent( out, indent );
        print( out, "size_t mem_size;\n");
        printIndent( out, indent );

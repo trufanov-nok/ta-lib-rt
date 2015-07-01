@@ -18009,7 +18009,7 @@ public class Core {
          if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
          {
             outQuadrature.value = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .Q1.value .var ;
-            outInPhase.value = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .Q1.value .var ;
+            outInPhase.value = _state.value .I1ForEvenPrev3;
          }
          { struct TA_HT_PHASOR_HILBERT_STRUCT * ref; ref = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = _state.value .a * _state.value .I1ForEvenPrev3; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = _state.value .I1ForEvenPrev3; ref.value .var *= adjustedPrevPeriod; } ;
          { struct TA_HT_PHASOR_HILBERT_STRUCT * ref; ref = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = _state.value .a * (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
@@ -18025,7 +18025,7 @@ public class Core {
          if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
          {
             outQuadrature.value = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .Q1.value .var ;
-            outInPhase.value = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .Q1.value .var ;
+            outInPhase.value = _state.value .I1ForOddPrev3;
          }
          { struct TA_HT_PHASOR_HILBERT_STRUCT * ref; ref = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = _state.value .a * _state.value .I1ForOddPrev3; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = _state.value .I1ForOddPrev3; ref.value .var *= adjustedPrevPeriod; } ;
          { struct TA_HT_PHASOR_HILBERT_STRUCT * ref; ref = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = _state.value .a * (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_HT_PHASOR_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
