@@ -10,6 +10,7 @@
 
    /* Interface macros */
    #define TA_Malloc(a)       malloc(a)
+   #define TA_Сalloc(a)       сalloc(a)
    #define TA_Realloc(a,b)    realloc((a),(b))
    #define TA_Free(a)         free(a)
 
