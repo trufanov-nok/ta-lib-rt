@@ -557,6 +557,12 @@ TA_RetCode TA_CallFunc( const TA_ParamHolder *params,
                         TA_Integer           *outNbElement );
 
 
+/* Return XML representation of all the TA functions.
+ * The returned array is the same as the ta_func_api.xml file.
+ */
+const char *TA_FunctionDescriptionXML( void );
+
+
 TA_RetCode TA_InitNewState( const TA_ParamHolder *params );
 TA_RetCode TA_CallFuncState( const TA_ParamHolder *params );
 TA_RetCode TA_FreeState( const TA_ParamHolder *params );
@@ -567,12 +573,6 @@ typedef unsigned int (*TA_StateFunc)( const void *params );
 TA_RetCode TA_GetInitNewStateFuncPtr( const TA_ParamHolder *params, TA_StateFunc* func );
 TA_RetCode TA_GetCallFuncStateFuncPtr( const TA_ParamHolder *params, TA_StateFunc* func );
 TA_RetCode TA_GetFreeStateFuncPtr(const TA_ParamHolder *params, TA_StateFunc *func );
-
-
-/* Return XML representation of all the TA functions.
- * The returned array is the same as the ta_func_api.xml file.
- */
-const char *TA_FunctionDescriptionXML( void );
 
 #ifdef __cplusplus
 }
