@@ -1154,33 +1154,43 @@ TA_RetCode TA_SetOutputParamRealPtr( TA_ParamHolder *param,
    return TA_SUCCESS;
 }
 
+
+#define GET_PRIVATE_FUNC(param, func_name, out) \
+    const TA_ParamHolderPriv *paramHolderPriv; \
+   { \
+    const TA_FuncDef *funcDef; \
+    const TA_FuncInfo *funcInfo; \
+    \
+    if( (param == NULL) ) \
+    { \
+       return TA_BAD_PARAM; \
+    } \
+    \
+    paramHolderPriv = (TA_ParamHolderPriv *)(param->hiddenData); \
+    if( paramHolderPriv->magicNumber != TA_PARAM_HOLDER_PRIV_MAGIC_NB ) \
+    { \
+       return TA_INVALID_PARAM_HOLDER; \
+    } \
+     \
+    /* Get the pointer on the lookback function. */ \
+    funcInfo = paramHolderPriv->funcInfo; \
+    if( !funcInfo ) return TA_INVALID_HANDLE; \
+    \
+    funcDef = (const TA_FuncDef *)funcInfo->handle; \
+    if( !funcDef ) return TA_INTERNAL_ERROR(2); \
+    out = funcDef->func_name; \
+    if( !out ) return TA_INTERNAL_ERROR(2); }
+
 TA_RetCode TA_GetLookback( const TA_ParamHolder *param, TA_Integer *lookback )
 {   
-   const TA_ParamHolderPriv *paramHolderPriv;
-
-   const TA_FuncDef *funcDef;
-   const TA_FuncInfo *funcInfo;
    TA_FrameLookback lookbackFunction;
 
-   if( (param == NULL) || (lookback == NULL))
+   if( (lookback == NULL) )
    {
       return TA_BAD_PARAM;
    }
 
-   paramHolderPriv = (TA_ParamHolderPriv *)(param->hiddenData);
-   if( paramHolderPriv->magicNumber != TA_PARAM_HOLDER_PRIV_MAGIC_NB )
-   {
-      return TA_INVALID_PARAM_HOLDER;
-   }
-
-   /* Get the pointer on the lookback function. */
-   funcInfo = paramHolderPriv->funcInfo;
-   if( !funcInfo ) return TA_INVALID_HANDLE;
-
-   funcDef = (const TA_FuncDef *)funcInfo->handle;
-   if( !funcDef ) return TA_INTERNAL_ERROR(2);
-   lookbackFunction = funcDef->lookback;
-   if( !lookbackFunction ) return TA_INTERNAL_ERROR(2);
+   GET_PRIVATE_FUNC(param, lookback, lookbackFunction);
 
    /* Perform the function call. */
    *lookback = (*lookbackFunction)( paramHolderPriv );
@@ -1196,24 +1206,16 @@ TA_RetCode TA_CallFunc( const TA_ParamHolder *param,
                         TA_Integer           *outNbElement )
 {   
    TA_RetCode retCode;
-   const TA_ParamHolderPriv *paramHolderPriv;
 
-   const TA_FuncDef *funcDef;
-   const TA_FuncInfo *funcInfo;
    TA_FrameFunction function;
 
-   if( (param == NULL) ||
-       (outBegIdx == NULL) ||
+   if( (outBegIdx == NULL) ||
        (outNbElement == NULL) )
    {
       return TA_BAD_PARAM;
    }
 
-   paramHolderPriv = (TA_ParamHolderPriv *)(param->hiddenData);
-   if( paramHolderPriv->magicNumber != TA_PARAM_HOLDER_PRIV_MAGIC_NB )
-   {
-      return TA_INVALID_PARAM_HOLDER;
-   }
+   GET_PRIVATE_FUNC(param, function, function);
 
    /* Check that all parameters are initialize (except the optInput). */
    if( paramHolderPriv->inBitmap != 0 )
@@ -1226,19 +1228,95 @@ TA_RetCode TA_CallFunc( const TA_ParamHolder *param,
       return TA_OUTPUT_NOT_ALL_INITIALIZE;
    }
 
-   /* Get the pointer on the function */
-   funcInfo = paramHolderPriv->funcInfo;
-   if( !funcInfo ) return TA_INVALID_HANDLE;
-   funcDef = (const TA_FuncDef *)funcInfo->handle;
-   if( !funcDef ) return TA_INTERNAL_ERROR(2);
-   function = funcDef->function;
-   if( !function ) return TA_INTERNAL_ERROR(2);
 
    /* Perform the function call. */
    retCode = (*function)( paramHolderPriv, startIdx, endIdx,
                           outBegIdx, outNbElement );
    return retCode;
 }
+
+
+TA_RetCode TA_InitNewState( const TA_ParamHolder *param )
+{
+   TA_FrameStateFunc stateInitFunction;
+
+   GET_PRIVATE_FUNC(param, state_init, stateInitFunction);
+   /* Perform the function call. */
+   return (*stateInitFunction)( paramHolderPriv );
+}
+
+/*   */
+TA_RetCode TA_CallFuncState( const TA_ParamHolder *param )
+{
+
+   TA_FrameStateFunc stateFunction;
+
+   GET_PRIVATE_FUNC(param, state_func, stateFunction);
+
+    /* Check that all parameters are initialize (except the optInput). */
+   if( paramHolderPriv->inBitmap != 0 )
+   {
+      return TA_INPUT_NOT_ALL_INITIALIZE;
+   }
+
+   if( paramHolderPriv->outBitmap != 0 )
+   {
+      return TA_OUTPUT_NOT_ALL_INITIALIZE;
+   }
+
+   /* Perform the function call. */
+   return (*stateFunction)( paramHolderPriv );
+}
+
+TA_RetCode TA_FreeState( const TA_ParamHolder *param )
+{
+   TA_FrameStateFunc stateFreeFunction;
+
+   GET_PRIVATE_FUNC(param, state_free, stateFreeFunction);
+
+   /* Perform the function call. */
+   return (*stateFreeFunction)( paramHolderPriv ); //paramHolderPriv._state != NULL check is performed in function
+}
+
+
+TA_RetCode TA_GetInitNewStateFuncPtr( const TA_ParamHolder *param, TA_StateFunc* func  )
+{
+    if (func == NULL)
+        return TA_BAD_PARAM;
+
+    TA_FrameStateFunc f;
+    GET_PRIVATE_FUNC(param, state_init, f);
+    *func = (TA_StateFunc) f;
+
+    return TA_SUCCESS;
+}
+
+/*   */
+TA_RetCode TA_GetCallFuncStateFuncPtr( const TA_ParamHolder *param, TA_StateFunc* func  )
+{
+    if (func == NULL)
+        return TA_BAD_PARAM;
+
+    TA_FrameStateFunc f;
+    GET_PRIVATE_FUNC(param, state_func, f);
+    *func = (TA_StateFunc) f;
+
+    return TA_SUCCESS;
+}
+
+TA_RetCode TA_GetFreeStateFuncPtr( const TA_ParamHolder *param, TA_StateFunc* func  )
+{
+    if (func == NULL)
+        return TA_BAD_PARAM;
+
+    TA_FrameStateFunc f;
+    GET_PRIVATE_FUNC(param, state_free, f);
+    *func = (TA_StateFunc) f;
+
+    return TA_SUCCESS;
+}
+
+
 
 /**** Local functions definitions.     ****/
 static TA_RetCode getGroupId( const char *groupString, unsigned int *groupId )
