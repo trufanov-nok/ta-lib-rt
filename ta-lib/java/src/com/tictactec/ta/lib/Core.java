@@ -294,12 +294,12 @@ public class Core {
          optInTimePeriod = 20;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct accbands ));
+      _state.value = TA_Calloc(1, sizeof(struct accbands ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = accbandsLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ACCBANDS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ACCBANDS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -328,8 +328,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode accbands( int startIdx,
@@ -450,11 +450,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct acos ));
+      _state.value = TA_Calloc(1, sizeof(struct acos ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = acosLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ACOS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ACOS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -478,8 +478,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode acos( int startIdx,
@@ -549,11 +549,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct ad ));
+      _state.value = TA_Calloc(1, sizeof(struct ad ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = adLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_AD_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_AD_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -588,8 +588,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ad( int startIdx,
@@ -660,11 +660,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct add ));
+      _state.value = TA_Calloc(1, sizeof(struct add ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = addLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ADD_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADD_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -690,8 +690,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode add( int startIdx,
@@ -819,13 +819,13 @@ public class Core {
          optInSlowPeriod = 10;
       else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct adOsc ));
+      _state.value = TA_Calloc(1, sizeof(struct adOsc ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInFastPeriod = optInFastPeriod;
       _state.value .value .optInSlowPeriod = optInSlowPeriod;
       _state.value .value .mem_size = adOscLookback (optInFastPeriod, optInSlowPeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ADOSC_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADOSC_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -854,8 +854,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode adOsc( int startIdx,
@@ -1119,12 +1119,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct adx ));
+      _state.value = TA_Calloc(1, sizeof(struct adx ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = adxLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ADX_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADX_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -1151,8 +1151,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode adx( int startIdx,
@@ -1397,12 +1397,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct adxr ));
+      _state.value = TA_Calloc(1, sizeof(struct adxr ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = adxrLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ADXR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADXR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -1429,8 +1429,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode adxr( int startIdx,
@@ -1617,14 +1617,14 @@ public class Core {
          optInSlowPeriod = 26;
       else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct apo ));
+      _state.value = TA_Calloc(1, sizeof(struct apo ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInFastPeriod = optInFastPeriod;
       _state.value .value .optInSlowPeriod = optInSlowPeriod;
       _state.value .value .optInMAType = optInMAType;
       _state.value .value .mem_size = apoLookback (optInFastPeriod, optInSlowPeriod, optInMAType );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_APO_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_APO_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -1647,8 +1647,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode apo( int startIdx,
@@ -1866,12 +1866,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct aroon ));
+      _state.value = TA_Calloc(1, sizeof(struct aroon ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = aroonLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_AROON_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_AROON_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -1897,8 +1897,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode aroon( int startIdx,
@@ -2100,12 +2100,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct aroonOsc ));
+      _state.value = TA_Calloc(1, sizeof(struct aroonOsc ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = aroonOscLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_AROONOSC_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_AROONOSC_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -2130,8 +2130,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode aroonOsc( int startIdx,
@@ -2254,11 +2254,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct asin ));
+      _state.value = TA_Calloc(1, sizeof(struct asin ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = asinLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ASIN_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ASIN_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -2282,8 +2282,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode asin( int startIdx,
@@ -2337,11 +2337,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct atan ));
+      _state.value = TA_Calloc(1, sizeof(struct atan ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = atanLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ATAN_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ATAN_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -2365,8 +2365,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode atan( int startIdx,
@@ -2489,12 +2489,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct atr ));
+      _state.value = TA_Calloc(1, sizeof(struct atr ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = atrLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ATR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ATR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -2521,8 +2521,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode atr( int startIdx,
@@ -2642,11 +2642,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct avgPrice ));
+      _state.value = TA_Calloc(1, sizeof(struct avgPrice ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = avgPriceLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_AVGPRICE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_AVGPRICE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -2676,8 +2676,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode avgPrice( int startIdx,
@@ -2772,12 +2772,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct avgDev ));
+      _state.value = TA_Calloc(1, sizeof(struct avgDev ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = avgDevLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_AVGDEV_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_AVGDEV_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -2815,8 +2815,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode avgDev( int startIdx,
@@ -3045,7 +3045,7 @@ public class Core {
          optInNbDevDn = 2.000000e+0;
       else if( (optInNbDevDn < -3.000000e+37) || (optInNbDevDn > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct bbands ));
+      _state.value = TA_Calloc(1, sizeof(struct bbands ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInNbDevUp = optInNbDevUp;
@@ -3053,7 +3053,7 @@ public class Core {
       _state.value .value .optInMAType = optInMAType;
       _state.value .value .mem_size = bbandsLookback (optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_BBANDS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_BBANDS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -3078,8 +3078,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode bbands( int startIdx,
@@ -3324,12 +3324,12 @@ public class Core {
          optInTimePeriod = 5;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct beta ));
+      _state.value = TA_Calloc(1, sizeof(struct beta ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = betaLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_BETA_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_BETA_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -3354,8 +3354,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode beta( int startIdx,
@@ -3505,11 +3505,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct bop ));
+      _state.value = TA_Calloc(1, sizeof(struct bop ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = bopLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_BOP_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_BOP_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -3544,8 +3544,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode bop( int startIdx,
@@ -3662,12 +3662,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cci ));
+      _state.value = TA_Calloc(1, sizeof(struct cci ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = cciLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CCI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CCI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -3694,8 +3694,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cci( int startIdx,
@@ -3829,11 +3829,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdl2Crows ));
+      _state.value = TA_Calloc(1, sizeof(struct cdl2Crows ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdl2CrowsLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDL2CROWS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL2CROWS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -3862,8 +3862,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl2Crows( int startIdx,
@@ -3996,11 +3996,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdl3BlackCrows ));
+      _state.value = TA_Calloc(1, sizeof(struct cdl3BlackCrows ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdl3BlackCrowsLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3BLACKCROWS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3BLACKCROWS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -4029,8 +4029,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3BlackCrows( int startIdx,
@@ -4173,11 +4173,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdl3Inside ));
+      _state.value = TA_Calloc(1, sizeof(struct cdl3Inside ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdl3InsideLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3INSIDE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3INSIDE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -4206,8 +4206,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3Inside( int startIdx,
@@ -4357,11 +4357,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdl3LineStrike ));
+      _state.value = TA_Calloc(1, sizeof(struct cdl3LineStrike ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdl3LineStrikeLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3LINESTRIKE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3LINESTRIKE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -4390,8 +4390,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3LineStrike( int startIdx,
@@ -4525,11 +4525,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdl3Outside ));
+      _state.value = TA_Calloc(1, sizeof(struct cdl3Outside ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdl3OutsideLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3OUTSIDE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3OUTSIDE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -4558,8 +4558,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3Outside( int startIdx,
@@ -4719,11 +4719,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdl3StarsInSouth ));
+      _state.value = TA_Calloc(1, sizeof(struct cdl3StarsInSouth ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdl3StarsInSouthLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3STARSINSOUTH_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3STARSINSOUTH_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -4752,8 +4752,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3StarsInSouth( int startIdx,
@@ -4972,11 +4972,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdl3WhiteSoldiers ));
+      _state.value = TA_Calloc(1, sizeof(struct cdl3WhiteSoldiers ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdl3WhiteSoldiersLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3WHITESOLDIERS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3WHITESOLDIERS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -5005,8 +5005,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdl3WhiteSoldiers( int startIdx,
@@ -5229,12 +5229,12 @@ public class Core {
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlAbandonedBaby ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlAbandonedBaby ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInPenetration = optInPenetration;
       _state.value .value .mem_size = cdlAbandonedBabyLookback (optInPenetration );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLABANDONEDBABY_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLABANDONEDBABY_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -5263,8 +5263,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlAbandonedBaby( int startIdx,
@@ -5510,11 +5510,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlAdvanceBlock ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlAdvanceBlock ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlAdvanceBlockLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLADVANCEBLOCK_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLADVANCEBLOCK_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -5543,8 +5543,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlAdvanceBlock( int startIdx,
@@ -5763,11 +5763,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlBeltHold ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlBeltHold ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlBeltHoldLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLBELTHOLD_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLBELTHOLD_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -5796,8 +5796,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlBeltHold( int startIdx,
@@ -5944,11 +5944,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlBreakaway ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlBreakaway ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlBreakawayLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLBREAKAWAY_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLBREAKAWAY_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -5977,8 +5977,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlBreakaway( int startIdx,
@@ -6125,11 +6125,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlClosingMarubozu ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlClosingMarubozu ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlClosingMarubozuLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLCLOSINGMARUBOZU_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLCLOSINGMARUBOZU_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -6158,8 +6158,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlClosingMarubozu( int startIdx,
@@ -6304,11 +6304,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlConcealBabysWall ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlConcealBabysWall ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlConcealBabysWallLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLCONCEALBABYSWALL_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLCONCEALBABYSWALL_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -6337,8 +6337,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlConcealBabysWall( int startIdx,
@@ -6484,11 +6484,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlCounterAttack ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlCounterAttack ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlCounterAttackLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLCOUNTERATTACK_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLCOUNTERATTACK_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -6517,8 +6517,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlCounterAttack( int startIdx,
@@ -6665,12 +6665,12 @@ public class Core {
          optInPenetration = 5.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlDarkCloudCover ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlDarkCloudCover ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInPenetration = optInPenetration;
       _state.value .value .mem_size = cdlDarkCloudCoverLookback (optInPenetration );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLDARKCLOUDCOVER_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLDARKCLOUDCOVER_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -6699,8 +6699,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlDarkCloudCover( int startIdx,
@@ -6818,11 +6818,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlDoji ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlDoji ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlDojiLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLDOJI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLDOJI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -6851,8 +6851,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlDoji( int startIdx,
@@ -6972,11 +6972,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlDojiStar ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlDojiStar ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlDojiStarLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLDOJISTAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLDOJISTAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -7005,8 +7005,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlDojiStar( int startIdx,
@@ -7139,11 +7139,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlDragonflyDoji ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlDragonflyDoji ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlDragonflyDojiLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLDRAGONFLYDOJI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLDRAGONFLYDOJI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -7172,8 +7172,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlDragonflyDoji( int startIdx,
@@ -7297,11 +7297,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlEngulfing ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlEngulfing ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlEngulfingLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLENGULFING_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLENGULFING_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -7330,8 +7330,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlEngulfing( int startIdx,
@@ -7483,12 +7483,12 @@ public class Core {
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlEveningDojiStar ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlEveningDojiStar ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInPenetration = optInPenetration;
       _state.value .value .mem_size = cdlEveningDojiStarLookback (optInPenetration );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLEVENINGDOJISTAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLEVENINGDOJISTAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -7517,8 +7517,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlEveningDojiStar( int startIdx,
@@ -7689,12 +7689,12 @@ public class Core {
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlEveningStar ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlEveningStar ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInPenetration = optInPenetration;
       _state.value .value .mem_size = cdlEveningStarLookback (optInPenetration );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLEVENINGSTAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLEVENINGSTAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -7723,8 +7723,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlEveningStar( int startIdx,
@@ -7877,11 +7877,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlGapSideSideWhite ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlGapSideSideWhite ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlGapSideSideWhiteLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLGAPSIDESIDEWHITE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLGAPSIDESIDEWHITE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -7910,8 +7910,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlGapSideSideWhite( int startIdx,
@@ -8052,11 +8052,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlGravestoneDoji ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlGravestoneDoji ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlGravestoneDojiLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLGRAVESTONEDOJI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLGRAVESTONEDOJI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -8085,8 +8085,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlGravestoneDoji( int startIdx,
@@ -8242,11 +8242,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlHammer ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlHammer ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlHammerLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHAMMER_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHAMMER_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -8275,8 +8275,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHammer( int startIdx,
@@ -8455,11 +8455,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlHangingMan ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlHangingMan ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlHangingManLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHANGINGMAN_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHANGINGMAN_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -8488,8 +8488,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHangingMan( int startIdx,
@@ -8653,11 +8653,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlHarami ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlHarami ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlHaramiLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHARAMI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHARAMI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -8686,8 +8686,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHarami( int startIdx,
@@ -8836,11 +8836,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlHaramiCross ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlHaramiCross ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlHaramiCrossLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHARAMICROSS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHARAMICROSS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -8869,8 +8869,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHaramiCross( int startIdx,
@@ -9008,11 +9008,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlHignWave ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlHignWave ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlHignWaveLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHIGHWAVE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHIGHWAVE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -9041,8 +9041,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHignWave( int startIdx,
@@ -9188,11 +9188,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlHikkake ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlHikkake ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlHikkakeLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHIKKAKE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHIKKAKE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -9221,8 +9221,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHikkake( int startIdx,
@@ -9408,11 +9408,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlHikkakeMod ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlHikkakeMod ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlHikkakeModLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHIKKAKEMOD_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHIKKAKEMOD_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -9441,8 +9441,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHikkakeMod( int startIdx,
@@ -9615,11 +9615,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlHomingPigeon ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlHomingPigeon ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlHomingPigeonLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHOMINGPIGEON_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLHOMINGPIGEON_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -9648,8 +9648,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlHomingPigeon( int startIdx,
@@ -9806,11 +9806,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlIdentical3Crows ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlIdentical3Crows ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlIdentical3CrowsLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLIDENTICAL3CROWS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLIDENTICAL3CROWS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -9839,8 +9839,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlIdentical3Crows( int startIdx,
@@ -9998,11 +9998,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlInNeck ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlInNeck ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlInNeckLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLINNECK_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLINNECK_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -10031,8 +10031,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlInNeck( int startIdx,
@@ -10180,11 +10180,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlInvertedHammer ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlInvertedHammer ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlInvertedHammerLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLINVERTEDHAMMER_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLINVERTEDHAMMER_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -10213,8 +10213,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlInvertedHammer( int startIdx,
@@ -10376,11 +10376,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlKicking ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlKicking ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlKickingLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLKICKING_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLKICKING_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -10409,8 +10409,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlKicking( int startIdx,
@@ -10579,11 +10579,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlKickingByLength ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlKickingByLength ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlKickingByLengthLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLKICKINGBYLENGTH_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLKICKINGBYLENGTH_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -10612,8 +10612,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlKickingByLength( int startIdx,
@@ -10761,11 +10761,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlLadderBottom ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlLadderBottom ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlLadderBottomLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLLADDERBOTTOM_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLLADDERBOTTOM_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -10794,8 +10794,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlLadderBottom( int startIdx,
@@ -10926,11 +10926,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlLongLeggedDoji ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlLongLeggedDoji ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlLongLeggedDojiLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLLONGLEGGEDDOJI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLLONGLEGGEDDOJI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -10959,8 +10959,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlLongLeggedDoji( int startIdx,
@@ -11091,11 +11091,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlLongLine ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlLongLine ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlLongLineLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLLONGLINE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLLONGLINE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -11124,8 +11124,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlLongLine( int startIdx,
@@ -11254,11 +11254,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlMarubozu ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlMarubozu ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlMarubozuLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMARUBOZU_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMARUBOZU_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -11287,8 +11287,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMarubozu( int startIdx,
@@ -11411,11 +11411,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlMatchingLow ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlMatchingLow ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlMatchingLowLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMATCHINGLOW_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMATCHINGLOW_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -11444,8 +11444,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMatchingLow( int startIdx,
@@ -11604,12 +11604,12 @@ public class Core {
          optInPenetration = 5.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlMatHold ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlMatHold ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInPenetration = optInPenetration;
       _state.value .value .mem_size = cdlMatHoldLookback (optInPenetration );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMATHOLD_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMATHOLD_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -11638,8 +11638,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMatHold( int startIdx,
@@ -11825,12 +11825,12 @@ public class Core {
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlMorningDojiStar ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlMorningDojiStar ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInPenetration = optInPenetration;
       _state.value .value .mem_size = cdlMorningDojiStarLookback (optInPenetration );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMORNINGDOJISTAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMORNINGDOJISTAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -11859,8 +11859,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMorningDojiStar( int startIdx,
@@ -12031,12 +12031,12 @@ public class Core {
          optInPenetration = 3.000000e-1;
       else if( (optInPenetration < 0.000000e+0) || (optInPenetration > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlMorningStar ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlMorningStar ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInPenetration = optInPenetration;
       _state.value .value .mem_size = cdlMorningStarLookback (optInPenetration );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMORNINGSTAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLMORNINGSTAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -12065,8 +12065,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlMorningStar( int startIdx,
@@ -12215,11 +12215,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlOnNeck ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlOnNeck ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlOnNeckLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLONNECK_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLONNECK_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -12248,8 +12248,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlOnNeck( int startIdx,
@@ -12384,11 +12384,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlPiercing ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlPiercing ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlPiercingLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLPIERCING_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLPIERCING_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -12417,8 +12417,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlPiercing( int startIdx,
@@ -12564,11 +12564,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlRickshawMan ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlRickshawMan ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlRickshawManLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLRICKSHAWMAN_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLRICKSHAWMAN_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -12597,8 +12597,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlRickshawMan( int startIdx,
@@ -12768,11 +12768,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlRiseFall3Methods ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlRiseFall3Methods ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlRiseFall3MethodsLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLRISEFALL3METHODS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLRISEFALL3METHODS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -12801,8 +12801,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlRiseFall3Methods( int startIdx,
@@ -12978,11 +12978,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlSeperatingLines ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlSeperatingLines ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlSeperatingLinesLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSEPARATINGLINES_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSEPARATINGLINES_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -13011,8 +13011,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlSeperatingLines( int startIdx,
@@ -13176,11 +13176,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlShootingStar ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlShootingStar ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlShootingStarLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSHOOTINGSTAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSHOOTINGSTAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -13209,8 +13209,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlShootingStar( int startIdx,
@@ -13351,11 +13351,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlShortLine ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlShortLine ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlShortLineLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSHORTLINE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSHORTLINE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -13384,8 +13384,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlShortLine( int startIdx,
@@ -13505,11 +13505,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlSpinningTop ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlSpinningTop ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlSpinningTopLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSPINNINGTOP_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSPINNINGTOP_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -13538,8 +13538,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlSpinningTop( int startIdx,
@@ -13702,11 +13702,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlStalledPattern ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlStalledPattern ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlStalledPatternLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSTALLEDPATTERN_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSTALLEDPATTERN_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -13735,8 +13735,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlStalledPattern( int startIdx,
@@ -13902,11 +13902,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlStickSandwhich ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlStickSandwhich ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlStickSandwhichLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSTICKSANDWICH_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLSTICKSANDWICH_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -13935,8 +13935,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlStickSandwhich( int startIdx,
@@ -14072,11 +14072,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlTakuri ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlTakuri ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlTakuriLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLTAKURI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLTAKURI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -14105,8 +14105,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlTakuri( int startIdx,
@@ -14255,11 +14255,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlTasukiGap ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlTasukiGap ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlTasukiGapLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLTASUKIGAP_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLTASUKIGAP_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -14288,8 +14288,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlTasukiGap( int startIdx,
@@ -14433,11 +14433,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlThrusting ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlThrusting ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlThrustingLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLTHRUSTING_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLTHRUSTING_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -14466,8 +14466,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlThrusting( int startIdx,
@@ -14605,11 +14605,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlTristar ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlTristar ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlTristarLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLTRISTAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLTRISTAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -14638,8 +14638,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlTristar( int startIdx,
@@ -14778,11 +14778,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlUnique3River ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlUnique3River ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlUnique3RiverLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLUNIQUE3RIVER_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLUNIQUE3RIVER_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -14811,8 +14811,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlUnique3River( int startIdx,
@@ -14954,11 +14954,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlUpsideGap2Crows ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlUpsideGap2Crows ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlUpsideGap2CrowsLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLUPSIDEGAP2CROWS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLUPSIDEGAP2CROWS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -14987,8 +14987,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlUpsideGap2Crows( int startIdx,
@@ -15118,11 +15118,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cdlXSideGap3Methods ));
+      _state.value = TA_Calloc(1, sizeof(struct cdlXSideGap3Methods ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdlXSideGap3MethodsLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CDLXSIDEGAP3METHODS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDLXSIDEGAP3METHODS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -15151,8 +15151,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cdlXSideGap3Methods( int startIdx,
@@ -15238,11 +15238,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct ceil ));
+      _state.value = TA_Calloc(1, sizeof(struct ceil ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = ceilLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CEIL_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CEIL_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -15266,8 +15266,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ceil( int startIdx,
@@ -15449,12 +15449,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cmo ));
+      _state.value = TA_Calloc(1, sizeof(struct cmo ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = cmoLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CMO_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CMO_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -15477,8 +15477,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cmo( int startIdx,
@@ -15711,12 +15711,12 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct correl ));
+      _state.value = TA_Calloc(1, sizeof(struct correl ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = correlLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_CORREL_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CORREL_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -15763,8 +15763,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode correl( int startIdx,
@@ -15872,11 +15872,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cos ));
+      _state.value = TA_Calloc(1, sizeof(struct cos ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cosLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_COS_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_COS_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -15900,8 +15900,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cos( int startIdx,
@@ -15955,11 +15955,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct cosh ));
+      _state.value = TA_Calloc(1, sizeof(struct cosh ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = coshLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_COSH_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_COSH_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -15983,8 +15983,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode cosh( int startIdx,
@@ -16096,7 +16096,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct dema ));
+      _state.value = TA_Calloc(1, sizeof(struct dema ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = demaLookback (optInTimePeriod );
@@ -16137,8 +16137,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return res;
    }
    public RetCode dema( int startIdx,
@@ -16236,11 +16236,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct div ));
+      _state.value = TA_Calloc(1, sizeof(struct div ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = divLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_DIV_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_DIV_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -16266,8 +16266,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode div( int startIdx,
@@ -16456,12 +16456,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct dx ));
+      _state.value = TA_Calloc(1, sizeof(struct dx ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = dxLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_DX_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_DX_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -16488,8 +16488,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode dx( int startIdx,
@@ -16721,7 +16721,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct ema ));
+      _state.value = TA_Calloc(1, sizeof(struct ema ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = emaLookback (optInTimePeriod );
@@ -16776,8 +16776,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ema( int startIdx,
@@ -16878,11 +16878,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct exp ));
+      _state.value = TA_Calloc(1, sizeof(struct exp ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = expLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_EXP_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_EXP_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -16906,8 +16906,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode exp( int startIdx,
@@ -16961,11 +16961,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct floor ));
+      _state.value = TA_Calloc(1, sizeof(struct floor ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = floorLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_FLOOR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_FLOOR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -16989,8 +16989,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode floor( int startIdx,
@@ -17153,11 +17153,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct htDcPeriod ));
+      _state.value = TA_Calloc(1, sizeof(struct htDcPeriod ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = htDcPeriodLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_HT_DCPERIOD_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_DCPERIOD_Data));
       else
          _state.value .value .memory = NULL;
       { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } ;
@@ -17275,8 +17275,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htDcPeriod( int startIdx,
@@ -17590,11 +17590,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct htDcPhase ));
+      _state.value = TA_Calloc(1, sizeof(struct htDcPhase ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = htDcPhaseLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_HT_DCPHASE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_DCPHASE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -17617,8 +17617,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htDcPhase( int startIdx,
@@ -17938,11 +17938,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct htPhasor ));
+      _state.value = TA_Calloc(1, sizeof(struct htPhasor ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = htPhasorLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_HT_PHASOR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_PHASOR_Data));
       else
          _state.value .value .memory = NULL;
       { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } ;
@@ -18068,8 +18068,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htPhasor( int startIdx,
@@ -18391,11 +18391,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct htSine ));
+      _state.value = TA_Calloc(1, sizeof(struct htSine ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = htSineLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_HT_SINE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_SINE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -18419,8 +18419,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htSine( int startIdx,
@@ -18761,11 +18761,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct htTrendline ));
+      _state.value = TA_Calloc(1, sizeof(struct htTrendline ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = htTrendlineLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_HT_TRENDLINE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_TRENDLINE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -18788,8 +18788,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htTrendline( int startIdx,
@@ -19173,11 +19173,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct htTrendMode ));
+      _state.value = TA_Calloc(1, sizeof(struct htTrendMode ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = htTrendModeLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_HT_TRENDMODE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_TRENDMODE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -19200,8 +19200,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode htTrendMode( int startIdx,
@@ -19487,12 +19487,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct imi ));
+      _state.value = TA_Calloc(1, sizeof(struct imi ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = imiLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_IMI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_IMI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -19540,8 +19540,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode imi( int startIdx,
@@ -19703,12 +19703,12 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct kama ));
+      _state.value = TA_Calloc(1, sizeof(struct kama ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = kamaLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_KAMA_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_KAMA_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -19771,8 +19771,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode kama( int startIdx,
@@ -19942,12 +19942,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct linearReg ));
+      _state.value = TA_Calloc(1, sizeof(struct linearReg ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = linearRegLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_LINEARREG_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_LINEARREG_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -19992,8 +19992,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode linearReg( int startIdx,
@@ -20121,12 +20121,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct linearRegAngle ));
+      _state.value = TA_Calloc(1, sizeof(struct linearRegAngle ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = linearRegAngleLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_LINEARREG_ANGLE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_LINEARREG_ANGLE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -20173,8 +20173,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode linearRegAngle( int startIdx,
@@ -20301,12 +20301,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct linearRegIntercept ));
+      _state.value = TA_Calloc(1, sizeof(struct linearRegIntercept ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = linearRegInterceptLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_LINEARREG_INTERCEPT_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_LINEARREG_INTERCEPT_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -20353,8 +20353,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode linearRegIntercept( int startIdx,
@@ -20479,12 +20479,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct linearRegSlope ));
+      _state.value = TA_Calloc(1, sizeof(struct linearRegSlope ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = linearRegSlopeLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_LINEARREG_SLOPE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_LINEARREG_SLOPE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -20530,8 +20530,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode linearRegSlope( int startIdx,
@@ -20615,11 +20615,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct ln ));
+      _state.value = TA_Calloc(1, sizeof(struct ln ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = lnLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_LN_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_LN_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -20643,8 +20643,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ln( int startIdx,
@@ -20698,11 +20698,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct log10 ));
+      _state.value = TA_Calloc(1, sizeof(struct log10 ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = log10Lookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_LOG10_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_LOG10_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -20726,8 +20726,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode log10( int startIdx,
@@ -20883,7 +20883,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct movingAverage ));
+      _state.value = TA_Calloc(1, sizeof(struct movingAverage ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInMAType = optInMAType;
@@ -21014,8 +21014,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode movingAverage( int startIdx,
@@ -21281,14 +21281,14 @@ public class Core {
          optInSignalPeriod = 9;
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct macd ));
+      _state.value = TA_Calloc(1, sizeof(struct macd ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInFastPeriod = optInFastPeriod;
       _state.value .value .optInSlowPeriod = optInSlowPeriod;
       _state.value .value .optInSignalPeriod = optInSignalPeriod;
       _state.value .value .mem_size = macdLookback (optInFastPeriod, optInSlowPeriod, optInSignalPeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MACD_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MACD_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -21313,8 +21313,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode macd( int startIdx,
@@ -21616,7 +21616,7 @@ public class Core {
          optInSignalPeriod = 9;
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct macdExt ));
+      _state.value = TA_Calloc(1, sizeof(struct macdExt ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInFastPeriod = optInFastPeriod;
       _state.value .value .optInFastMAType = optInFastMAType;
@@ -21626,7 +21626,7 @@ public class Core {
       _state.value .value .optInSignalMAType = optInSignalMAType;
       _state.value .value .mem_size = macdExtLookback (optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MACDEXT_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MACDEXT_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -21651,8 +21651,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode macdExt( int startIdx,
@@ -21815,12 +21815,12 @@ public class Core {
          optInSignalPeriod = 9;
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct macdFix ));
+      _state.value = TA_Calloc(1, sizeof(struct macdFix ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInSignalPeriod = optInSignalPeriod;
       _state.value .value .mem_size = macdFixLookback (optInSignalPeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MACDFIX_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MACDFIX_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -21845,8 +21845,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode macdFix( int startIdx,
@@ -22072,13 +22072,13 @@ public class Core {
          optInSlowLimit = 5.000000e-2;
       else if( (optInSlowLimit < 1.000000e-2) || (optInSlowLimit > 9.900000e-1) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct mama ));
+      _state.value = TA_Calloc(1, sizeof(struct mama ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInFastLimit = optInFastLimit;
       _state.value .value .optInSlowLimit = optInSlowLimit;
       _state.value .value .mem_size = mamaLookback (optInFastLimit, optInSlowLimit );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MAMA_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MAMA_Data));
       else
          _state.value .value .memory = NULL;
       { _state.value .value .detrender = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } ;
@@ -22226,8 +22226,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode mama( int startIdx,
@@ -22514,14 +22514,14 @@ public class Core {
          optInMaxPeriod = 30;
       else if( ((int)optInMaxPeriod < 2) || ((int)optInMaxPeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct movingAverageVariablePeriod ));
+      _state.value = TA_Calloc(1, sizeof(struct movingAverageVariablePeriod ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInMinPeriod = optInMinPeriod;
       _state.value .value .optInMaxPeriod = optInMaxPeriod;
       _state.value .value .optInMAType = optInMAType;
       _state.value .value .mem_size = movingAverageVariablePeriodLookback (optInMinPeriod, optInMaxPeriod, optInMAType );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MAVP_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MAVP_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -22546,8 +22546,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode movingAverageVariablePeriod( int startIdx,
@@ -22720,7 +22720,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct max ));
+      _state.value = TA_Calloc(1, sizeof(struct max ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = maxLookback (optInTimePeriod );
@@ -22749,8 +22749,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode max( int startIdx,
@@ -22899,7 +22899,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct maxIndex ));
+      _state.value = TA_Calloc(1, sizeof(struct maxIndex ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = maxIndexLookback (optInTimePeriod );
@@ -22937,8 +22937,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode maxIndex( int startIdx,
@@ -23036,11 +23036,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct medPrice ));
+      _state.value = TA_Calloc(1, sizeof(struct medPrice ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = medPriceLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MEDPRICE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MEDPRICE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -23066,8 +23066,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode medPrice( int startIdx,
@@ -23248,12 +23248,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct mfi ));
+      _state.value = TA_Calloc(1, sizeof(struct mfi ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = mfiLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MFI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MFI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -23282,8 +23282,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode mfi( int startIdx,
@@ -23490,7 +23490,7 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct midPoint ));
+      _state.value = TA_Calloc(1, sizeof(struct midPoint ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = midPointLookback (optInTimePeriod );
@@ -23524,8 +23524,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode midPoint( int startIdx,
@@ -23645,7 +23645,7 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct midPrice ));
+      _state.value = TA_Calloc(1, sizeof(struct midPrice ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = midPriceLookback (optInTimePeriod );
@@ -23680,8 +23680,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode midPrice( int startIdx,
@@ -23817,7 +23817,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct min ));
+      _state.value = TA_Calloc(1, sizeof(struct min ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = minLookback (optInTimePeriod );
@@ -23846,8 +23846,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode min( int startIdx,
@@ -23996,7 +23996,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct minIndex ));
+      _state.value = TA_Calloc(1, sizeof(struct minIndex ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = minIndexLookback (optInTimePeriod );
@@ -24034,8 +24034,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minIndex( int startIdx,
@@ -24209,7 +24209,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct minMax ));
+      _state.value = TA_Calloc(1, sizeof(struct minMax ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = minMaxLookback (optInTimePeriod );
@@ -24245,8 +24245,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minMax( int startIdx,
@@ -24445,7 +24445,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct minMaxIndex ));
+      _state.value = TA_Calloc(1, sizeof(struct minMaxIndex ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = minMaxIndexLookback (optInTimePeriod );
@@ -24494,8 +24494,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minMaxIndex( int startIdx,
@@ -24755,12 +24755,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct minusDI ));
+      _state.value = TA_Calloc(1, sizeof(struct minusDI ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = minusDILookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MINUS_DI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MINUS_DI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -24787,8 +24787,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minusDI( int startIdx,
@@ -25082,12 +25082,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct minusDM ));
+      _state.value = TA_Calloc(1, sizeof(struct minusDM ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = minusDMLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MINUS_DM_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MINUS_DM_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -25112,8 +25112,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode minusDM( int startIdx,
@@ -25291,12 +25291,12 @@ public class Core {
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct mom ));
+      _state.value = TA_Calloc(1, sizeof(struct mom ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = momLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MOM_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MOM_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -25323,8 +25323,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode mom( int startIdx,
@@ -25392,11 +25392,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct mult ));
+      _state.value = TA_Calloc(1, sizeof(struct mult ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = multLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_MULT_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MULT_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -25422,8 +25422,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode mult( int startIdx,
@@ -25556,12 +25556,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct natr ));
+      _state.value = TA_Calloc(1, sizeof(struct natr ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = natrLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_NATR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_NATR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -25588,8 +25588,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode natr( int startIdx,
@@ -25723,11 +25723,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct obv ));
+      _state.value = TA_Calloc(1, sizeof(struct obv ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = obvLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_OBV_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_OBV_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -25764,8 +25764,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode obv( int startIdx,
@@ -25968,12 +25968,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct plusDI ));
+      _state.value = TA_Calloc(1, sizeof(struct plusDI ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = plusDILookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_PLUS_DI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_PLUS_DI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -26000,8 +26000,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode plusDI( int startIdx,
@@ -26295,12 +26295,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct plusDM ));
+      _state.value = TA_Calloc(1, sizeof(struct plusDM ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = plusDMLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_PLUS_DM_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_PLUS_DM_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -26325,8 +26325,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode plusDM( int startIdx,
@@ -26517,14 +26517,14 @@ public class Core {
          optInSlowPeriod = 26;
       else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct ppo ));
+      _state.value = TA_Calloc(1, sizeof(struct ppo ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInFastPeriod = optInFastPeriod;
       _state.value .value .optInSlowPeriod = optInSlowPeriod;
       _state.value .value .optInMAType = optInMAType;
       _state.value .value .mem_size = ppoLookback (optInFastPeriod, optInSlowPeriod, optInMAType );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_PPO_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_PPO_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -26547,8 +26547,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ppo( int startIdx,
@@ -26646,12 +26646,12 @@ public class Core {
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct roc ));
+      _state.value = TA_Calloc(1, sizeof(struct roc ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = rocLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ROC_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ROC_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -26674,8 +26674,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode roc( int startIdx,
@@ -26780,12 +26780,12 @@ public class Core {
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct rocP ));
+      _state.value = TA_Calloc(1, sizeof(struct rocP ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = rocPLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ROCP_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ROCP_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -26808,8 +26808,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode rocP( int startIdx,
@@ -26914,12 +26914,12 @@ public class Core {
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct rocR ));
+      _state.value = TA_Calloc(1, sizeof(struct rocR ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = rocRLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ROCR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ROCR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -26942,8 +26942,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode rocR( int startIdx,
@@ -27048,12 +27048,12 @@ public class Core {
          optInTimePeriod = 10;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct rocR100 ));
+      _state.value = TA_Calloc(1, sizeof(struct rocR100 ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = rocR100Lookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ROCR100_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ROCR100_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -27076,8 +27076,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode rocR100( int startIdx,
@@ -27279,12 +27279,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct rsi ));
+      _state.value = TA_Calloc(1, sizeof(struct rsi ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = rsiLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_RSI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_RSI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -27307,8 +27307,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode rsi( int startIdx,
@@ -27628,13 +27628,13 @@ public class Core {
          optInMaximum = 2.000000e-1;
       else if( (optInMaximum < 0.000000e+0) || (optInMaximum > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct sar ));
+      _state.value = TA_Calloc(1, sizeof(struct sar ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInAcceleration = optInAcceleration;
       _state.value .value .optInMaximum = optInMaximum;
       _state.value .value .mem_size = sarLookback (optInAcceleration, optInMaximum );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_SAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -27659,8 +27659,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sar( int startIdx,
@@ -28122,7 +28122,7 @@ public class Core {
          optInAccelerationMaxShort = 2.000000e-1;
       else if( (optInAccelerationMaxShort < 0.000000e+0) || (optInAccelerationMaxShort > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct sarExt ));
+      _state.value = TA_Calloc(1, sizeof(struct sarExt ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInStartValue = optInStartValue;
       _state.value .value .optInOffsetOnReverse = optInOffsetOnReverse;
@@ -28134,7 +28134,7 @@ public class Core {
       _state.value .value .optInAccelerationMaxShort = optInAccelerationMaxShort;
       _state.value .value .mem_size = sarExtLookback (optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_SAREXT_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SAREXT_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -28159,8 +28159,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sarExt( int startIdx,
@@ -28411,11 +28411,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct sin ));
+      _state.value = TA_Calloc(1, sizeof(struct sin ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = sinLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_SIN_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SIN_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -28439,8 +28439,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sin( int startIdx,
@@ -28494,11 +28494,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct sinh ));
+      _state.value = TA_Calloc(1, sizeof(struct sinh ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = sinhLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_SINH_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SINH_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -28522,8 +28522,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sinh( int startIdx,
@@ -28624,12 +28624,12 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct sma ));
+      _state.value = TA_Calloc(1, sizeof(struct sma ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = smaLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_SMA_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SMA_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -28661,8 +28661,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sma( int startIdx,
@@ -28754,11 +28754,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct sqrt ));
+      _state.value = TA_Calloc(1, sizeof(struct sqrt ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = sqrtLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_SQRT_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SQRT_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -28782,8 +28782,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sqrt( int startIdx,
@@ -28925,7 +28925,7 @@ public class Core {
          optInNbDev = 1.000000e+0;
       else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct stdDev ));
+      _state.value = TA_Calloc(1, sizeof(struct stdDev ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInNbDev = optInNbDev;
@@ -28970,8 +28970,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stdDev( int startIdx,
@@ -29255,7 +29255,7 @@ public class Core {
          optInSlowD_Period = 3;
       else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct stoch ));
+      _state.value = TA_Calloc(1, sizeof(struct stoch ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInFastK_Period = optInFastK_Period;
       _state.value .value .optInSlowK_Period = optInSlowK_Period;
@@ -29264,7 +29264,7 @@ public class Core {
       _state.value .value .optInSlowD_MAType = optInSlowD_MAType;
       _state.value .value .mem_size = stochLookback (optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_STOCH_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_STOCH_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -29292,8 +29292,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stoch( int startIdx,
@@ -29598,14 +29598,14 @@ public class Core {
          optInFastD_Period = 3;
       else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct stochF ));
+      _state.value = TA_Calloc(1, sizeof(struct stochF ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInFastK_Period = optInFastK_Period;
       _state.value .value .optInFastD_Period = optInFastD_Period;
       _state.value .value .optInFastD_MAType = optInFastD_MAType;
       _state.value .value .mem_size = stochFLookback (optInFastK_Period, optInFastD_Period, optInFastD_MAType );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_STOCHF_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_STOCHF_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -29633,8 +29633,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stochF( int startIdx,
@@ -29882,7 +29882,7 @@ public class Core {
          optInFastD_Period = 3;
       else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct stochRsi ));
+      _state.value = TA_Calloc(1, sizeof(struct stochRsi ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInFastK_Period = optInFastK_Period;
@@ -29890,7 +29890,7 @@ public class Core {
       _state.value .value .optInFastD_MAType = optInFastD_MAType;
       _state.value .value .mem_size = stochRsiLookback (optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_STOCHRSI_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_STOCHRSI_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -29914,8 +29914,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stochRsi( int startIdx,
@@ -30030,11 +30030,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct sub ));
+      _state.value = TA_Calloc(1, sizeof(struct sub ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = subLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_SUB_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SUB_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -30060,8 +30060,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sub( int startIdx,
@@ -30151,12 +30151,12 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct sum ));
+      _state.value = TA_Calloc(1, sizeof(struct sum ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = sumLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_SUM_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SUM_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -30190,8 +30190,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode sum( int startIdx,
@@ -30387,7 +30387,7 @@ public class Core {
          optInVFactor = 7.000000e-1;
       else if( (optInVFactor < 0.000000e+0) || (optInVFactor > 1.000000e+0) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct t3 ));
+      _state.value = TA_Calloc(1, sizeof(struct t3 ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInVFactor = optInVFactor;
@@ -30521,8 +30521,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode t3( int startIdx,
@@ -30673,11 +30673,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct tan ));
+      _state.value = TA_Calloc(1, sizeof(struct tan ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = tanLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_TAN_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_TAN_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -30701,8 +30701,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode tan( int startIdx,
@@ -30756,11 +30756,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct tanh ));
+      _state.value = TA_Calloc(1, sizeof(struct tanh ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = tanhLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_TANH_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_TANH_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -30784,8 +30784,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode tanh( int startIdx,
@@ -30906,7 +30906,7 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct tema ));
+      _state.value = TA_Calloc(1, sizeof(struct tema ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = temaLookback (optInTimePeriod );
@@ -30958,8 +30958,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return res;
    }
    public RetCode tema( int startIdx,
@@ -31092,11 +31092,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct trueRange ));
+      _state.value = TA_Calloc(1, sizeof(struct trueRange ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = trueRangeLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_TRANGE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_TRANGE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -31133,8 +31133,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode trueRange( int startIdx,
@@ -31322,12 +31322,12 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct trima ));
+      _state.value = TA_Calloc(1, sizeof(struct trima ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = trimaLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_TRIMA_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_TRIMA_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -31405,8 +31405,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode trima( int startIdx,
@@ -31636,12 +31636,12 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct trix ));
+      _state.value = TA_Calloc(1, sizeof(struct trix ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = trixLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_TRIX_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_TRIX_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -31664,8 +31664,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode trix( int startIdx,
@@ -31825,12 +31825,12 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct tsf ));
+      _state.value = TA_Calloc(1, sizeof(struct tsf ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = tsfLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_TSF_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_TSF_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -31878,8 +31878,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode tsf( int startIdx,
@@ -31970,11 +31970,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct typPrice ));
+      _state.value = TA_Calloc(1, sizeof(struct typPrice ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = typPriceLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_TYPPRICE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_TYPPRICE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -32002,8 +32002,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode typPrice( int startIdx,
@@ -32180,14 +32180,14 @@ public class Core {
          optInTimePeriod3 = 28;
       else if( ((int)optInTimePeriod3 < 1) || ((int)optInTimePeriod3 > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct ultOsc ));
+      _state.value = TA_Calloc(1, sizeof(struct ultOsc ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod1 = optInTimePeriod1;
       _state.value .value .optInTimePeriod2 = optInTimePeriod2;
       _state.value .value .optInTimePeriod3 = optInTimePeriod3;
       _state.value .value .mem_size = ultOscLookback (optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_ULTOSC_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ULTOSC_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -32214,8 +32214,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode ultOsc( int startIdx,
@@ -32431,13 +32431,13 @@ public class Core {
          optInNbDev = 1.000000e+0;
       else if( (optInNbDev < -3.000000e+37) || (optInNbDev > 3.000000e+37) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct variance ));
+      _state.value = TA_Calloc(1, sizeof(struct variance ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .optInNbDev = optInNbDev;
       _state.value .value .mem_size = varianceLookback (optInTimePeriod, optInNbDev );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_VAR_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_VAR_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -32479,8 +32479,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode variance( int startIdx,
@@ -32593,11 +32593,11 @@ public class Core {
    {
       if (_state == NULL)
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct wclPrice ));
+      _state.value = TA_Calloc(1, sizeof(struct wclPrice ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = wclPriceLookback ();
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_WCLPRICE_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_WCLPRICE_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -32625,8 +32625,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode wclPrice( int startIdx,
@@ -32768,7 +32768,7 @@ public class Core {
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct willR ));
+      _state.value = TA_Calloc(1, sizeof(struct willR ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = willRLookback (optInTimePeriod );
@@ -32809,8 +32809,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode willR( int startIdx,
@@ -32990,12 +32990,12 @@ public class Core {
          optInTimePeriod = 30;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
-      _state.value = calloc(1, sizeof(struct wma ));
+      _state.value = TA_Calloc(1, sizeof(struct wma ));
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = wmaLookback (optInTimePeriod );
       if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = calloc( _state.value .value .mem_size , sizeof(struct TA_WMA_Data));
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_WMA_Data));
       else
          _state.value .value .memory = NULL;
       return RetCode.Success ;
@@ -33035,8 +33035,8 @@ public class Core {
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) free( _state.value .value .memory );
-         free( _state.value ); _state.value = NULL;}
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode wma( int startIdx,

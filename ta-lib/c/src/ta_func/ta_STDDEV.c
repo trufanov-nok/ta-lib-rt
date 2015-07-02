@@ -386,14 +386,14 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /* Generated */    else if( (optInNbDev < -3.000000e+37) ||/* Generated */  (optInNbDev > 3.000000e+37) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */    STATE = calloc(1, sizeof(struct TA_STDDEV_State));
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_STDDEV_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
 /* Generated */    STATE_P.optInNbDev = optInNbDev;
 /* Generated */    MEM_SIZE_P = TA_STDDEV_Lookback(optInTimePeriod, optInNbDev );
 /* Generated */    #ifndef TA_STDDEV_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
-/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_STDDEV_Data));
+/* Generated */          MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_STDDEV_Data));
 /* Generated */    else
 /* Generated */    #endif
 /* Generated */          MEM_P = NULL;/* Generated */ 
@@ -511,8 +511,8 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if (STATE != NULL) {
-/* Generated */          if (MEM_P != NULL) free(MEM_P);
-/* Generated */          free(STATE); STATE = NULL;}
+/* Generated */          if (MEM_P != NULL) TA_Free(MEM_P);
+/* Generated */          TA_Free(STATE); STATE = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

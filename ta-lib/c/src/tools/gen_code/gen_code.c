@@ -2047,9 +2047,9 @@ void printFunc( FILE *out,
            printIndent( out, indent );
            fprintf( out, "if (STATE != NULL) {\n");
            printIndent( out, indent+6 );
-           fprintf( out, "if (MEM_P != NULL) free(MEM_P);\n");
+           fprintf( out, "if (MEM_P != NULL) TA_Free(MEM_P);\n");
            printIndent( out, indent+6 );
-           fprintf( out, "free(STATE); STATE = NULL;}\n");
+           fprintf( out, "TA_Free(STATE); STATE = NULL;}\n");
        }
 
        }
@@ -2664,7 +2664,7 @@ void printFunc( FILE *out,
 
    if (validationCode && stateInitSignature) {
        printIndent( out, indent);
-       fprintf( out, "STATE = calloc(1, sizeof(struct TA_%s_State));\n", funcName);
+       fprintf( out, "STATE = TA_Calloc(1, sizeof(struct TA_%s_State));\n", funcName);
        printIndent( out, indent);
        fprintf( out, "STATE_P.mem_index = 0;\n");
 
@@ -2697,7 +2697,7 @@ void printFunc( FILE *out,
        printIndent( out, indent);
        fprintf( out, "if (MEM_SIZE_P > 0)\n");
        printIndent( out, indent+6 );
-       fprintf( out, "MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_%s_Data));\n", funcName);
+       fprintf( out, "MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_%s_Data));\n", funcName);
        printIndent( out, indent );
        fprintf( out, "else\n");
        printIndent( out, indent );

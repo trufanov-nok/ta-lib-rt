@@ -253,13 +253,13 @@
 /* Generated */    else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */    STATE = calloc(1, sizeof(struct TA_MACDFIX_State));
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_MACDFIX_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInSignalPeriod = optInSignalPeriod;
 /* Generated */    MEM_SIZE_P = TA_MACDFIX_Lookback(optInSignalPeriod );
 /* Generated */    #ifndef TA_MACDFIX_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
-/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MACDFIX_Data));
+/* Generated */          MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_MACDFIX_Data));
 /* Generated */    else
 /* Generated */    #endif
 /* Generated */          MEM_P = NULL;/* Generated */ 
@@ -358,8 +358,8 @@
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if (STATE != NULL) {
-/* Generated */          if (MEM_P != NULL) free(MEM_P);
-/* Generated */          free(STATE); STATE = NULL;}
+/* Generated */          if (MEM_P != NULL) TA_Free(MEM_P);
+/* Generated */          TA_Free(STATE); STATE = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

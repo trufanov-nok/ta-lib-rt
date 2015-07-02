@@ -287,13 +287,13 @@
 /* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */    STATE = calloc(1, sizeof(struct TA_LINEARREG_INTERCEPT_State));
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_LINEARREG_INTERCEPT_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
 /* Generated */    MEM_SIZE_P = TA_LINEARREG_INTERCEPT_Lookback(optInTimePeriod );
 /* Generated */    #ifndef TA_LINEARREG_INTERCEPT_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
-/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_LINEARREG_INTERCEPT_Data));
+/* Generated */          MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_LINEARREG_INTERCEPT_Data));
 /* Generated */    else
 /* Generated */    #endif
 /* Generated */          MEM_P = NULL;/* Generated */ 
@@ -412,8 +412,8 @@ double m, tempReal;
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if (STATE != NULL) {
-/* Generated */          if (MEM_P != NULL) free(MEM_P);
-/* Generated */          free(STATE); STATE = NULL;}
+/* Generated */          if (MEM_P != NULL) TA_Free(MEM_P);
+/* Generated */          TA_Free(STATE); STATE = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

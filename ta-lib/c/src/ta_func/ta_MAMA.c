@@ -534,14 +534,14 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /* Generated */    else if( (optInSlowLimit < 1.000000e-2) ||/* Generated */  (optInSlowLimit > 9.900000e-1) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */    STATE = calloc(1, sizeof(struct TA_MAMA_State));
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_MAMA_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInFastLimit = optInFastLimit;
 /* Generated */    STATE_P.optInSlowLimit = optInSlowLimit;
 /* Generated */    MEM_SIZE_P = TA_MAMA_Lookback(optInFastLimit, optInSlowLimit );
 /* Generated */    #ifndef TA_MAMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
-/* Generated */          MEM_P = calloc(MEM_SIZE_P, sizeof(struct TA_MAMA_Data));
+/* Generated */          MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_MAMA_Data));
 /* Generated */    else
 /* Generated */    #endif
 /* Generated */          MEM_P = NULL;/* Generated */ 
@@ -808,8 +808,8 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if (STATE != NULL) {
-/* Generated */          if (MEM_P != NULL) free(MEM_P);
-/* Generated */          free(STATE); STATE = NULL;}
+/* Generated */          if (MEM_P != NULL) TA_Free(MEM_P);
+/* Generated */          TA_Free(STATE); STATE = NULL;}
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
