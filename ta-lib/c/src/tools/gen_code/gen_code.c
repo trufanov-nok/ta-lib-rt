@@ -2026,7 +2026,7 @@ void printFunc( FILE *out,
        unsigned int last_arg = stateFreeSignature || (!stateFuncSignature && funcInfo->nbOptInput == 0);
 
        if (frame)
-           fprintf( out, " %s(struct TA_%s_State**) params->_state%s\n", stateFuncSignature?"*":"", funcName, last_arg?"":"," );
+           fprintf( out, " %s(struct TA_%s_State**) &params->_state%s\n", stateFuncSignature?"*":"", funcName, last_arg?"":"," );
        else
        if (!validationCode) {
        fprintf( out, "struct TA_%s_State*", funcName );

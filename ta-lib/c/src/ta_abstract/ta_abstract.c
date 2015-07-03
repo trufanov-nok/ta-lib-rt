@@ -1181,6 +1181,18 @@ TA_RetCode TA_SetOutputParamRealPtr( TA_ParamHolder *param,
     out = funcDef->func_name; \
     if( !out ) return TA_INTERNAL_ERROR(2); }
 
+#define GET_PRIVATE_FUNC_BY_FUN_INFO(funcInfo, func_name, out) \
+   { \
+    const TA_FuncDef *funcDef; \
+    \
+    if( !funcInfo ) return TA_INVALID_HANDLE; \
+    \
+    funcDef = (const TA_FuncDef *)funcInfo->handle; \
+    if( !funcDef ) return TA_INTERNAL_ERROR(2); \
+    out = funcDef->func_name; \
+    if( !out ) return TA_INTERNAL_ERROR(2); }
+
+
 TA_RetCode TA_GetLookback( const TA_ParamHolder *param, TA_Integer *lookback )
 {   
    TA_FrameLookback lookbackFunction;
@@ -1279,38 +1291,38 @@ TA_RetCode TA_FreeState( const TA_ParamHolder *param )
 }
 
 
-TA_RetCode TA_GetInitNewStateFuncPtr( const TA_ParamHolder *param, TA_StateFunc* func  )
+TA_RetCode TA_GetInitNewStateFuncPtr( const TA_FuncInfo *param, TA_StateFunc* func  )
 {
     if (func == NULL)
         return TA_BAD_PARAM;
 
     TA_FrameStateFunc f;
-    GET_PRIVATE_FUNC(param, state_init, f);
+    GET_PRIVATE_FUNC_BY_FUN_INFO(param, state_init, f);
     *func = (TA_StateFunc) f;
 
     return TA_SUCCESS;
 }
 
 /*   */
-TA_RetCode TA_GetCallFuncStateFuncPtr( const TA_ParamHolder *param, TA_StateFunc* func  )
+TA_RetCode TA_GetCallFuncStateFuncPtr(const TA_FuncInfo *param, TA_StateFunc* func  )
 {
     if (func == NULL)
         return TA_BAD_PARAM;
 
     TA_FrameStateFunc f;
-    GET_PRIVATE_FUNC(param, state_func, f);
+    GET_PRIVATE_FUNC_BY_FUN_INFO(param, state_func, f);
     *func = (TA_StateFunc) f;
 
     return TA_SUCCESS;
 }
 
-TA_RetCode TA_GetFreeStateFuncPtr( const TA_ParamHolder *param, TA_StateFunc* func  )
+TA_RetCode TA_GetFreeStateFuncPtr( const TA_FuncInfo *param, TA_StateFunc* func  )
 {
     if (func == NULL)
         return TA_BAD_PARAM;
 
     TA_FrameStateFunc f;
-    GET_PRIVATE_FUNC(param, state_free, f);
+    GET_PRIVATE_FUNC_BY_FUN_INFO(param, state_free, f);
     *func = (TA_StateFunc) f;
 
     return TA_SUCCESS;

@@ -570,9 +570,9 @@ TA_RetCode TA_FreeState( const TA_ParamHolder *params );
 
 typedef unsigned int (*TA_StateFunc)( const void *params );
 
-TA_RetCode TA_GetInitNewStateFuncPtr( const TA_ParamHolder *params, TA_StateFunc* func );
-TA_RetCode TA_GetCallFuncStateFuncPtr( const TA_ParamHolder *params, TA_StateFunc* func );
-TA_RetCode TA_GetFreeStateFuncPtr(const TA_ParamHolder *params, TA_StateFunc *func );
+TA_RetCode TA_GetInitNewStateFuncPtr(const TA_FuncInfo *params, TA_StateFunc* func );
+TA_RetCode TA_GetCallFuncStateFuncPtr( const TA_FuncInfo *params, TA_StateFunc* func );
+TA_RetCode TA_GetFreeStateFuncPtr(const TA_FuncInfo *params, TA_StateFunc *func );
 
 #ifdef __cplusplus
 }
