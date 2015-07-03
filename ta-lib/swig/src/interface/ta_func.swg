@@ -6067,13 +6067,13 @@ int TA_NATR_StateFree( struct TA_NATR_State** _state );
 /*
  * TA_OBV - On Balance Volume
  * 
- * Input  = double, Volume
+ * Input  = Close, Volume
  * Output = double
  * 
  */
 TA_RetCode TA_OBV( int           START_IDX,
                    int           END_IDX,
-                   const double *IN_ARRAY /* inReal */,
+                   const double *IN_ARRAY /* inClose */,
                    const double *IN_ARRAY /* inVolume */,
                    int          *BEG_IDX,
                    int          *OUT_SIZE,
@@ -6083,7 +6083,7 @@ int TA_OBV_Lookback( void );
 
 
 struct TA_OBV_Data {
-                   double       inReal;
+                   double       inClose;
                    double       inVolume;
                    };
 struct TA_OBV_State {
@@ -6099,7 +6099,7 @@ int TA_OBV_StateInit( struct TA_OBV_State** _state );
 
 
 int TA_OBV_State( struct TA_OBV_State* _state,
-                const double inReal,
+                const double inClose,
                 const double inVolume,
                 double        *outReal );
 

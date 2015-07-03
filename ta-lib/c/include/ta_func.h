@@ -11991,13 +11991,13 @@ TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 /*
  * TA_OBV - On Balance Volume
  * 
- * Input  = double, Volume
+ * Input  = Close, Volume
  * Output = double
  * 
  */
 TA_LIB_API TA_RetCode TA_OBV( int    startIdx,
                               int    endIdx,
-                                         const double inReal[],
+                                         const double inClose[],
                                          const double inVolume[],
                                          int          *outBegIdx,
                                          int          *outNBElement,
@@ -12005,7 +12005,7 @@ TA_LIB_API TA_RetCode TA_OBV( int    startIdx,
 
 TA_LIB_API TA_RetCode TA_S_OBV( int    startIdx,
                                 int    endIdx,
-                                           const float  inReal[],
+                                           const float  inClose[],
                                            const float  inVolume[],
                                            int          *outBegIdx,
                                            int          *outNBElement,
@@ -12015,7 +12015,7 @@ TA_LIB_API int TA_OBV_Lookback( void );
 
 
 struct TA_OBV_Data {
-                              double       inReal;
+                              double       inClose;
                               double       inVolume;
                               };
 struct TA_OBV_State {
@@ -12031,7 +12031,7 @@ TA_LIB_API int TA_OBV_StateInit( struct TA_OBV_State** _state );
 
 
 TA_LIB_API int TA_OBV_State( struct TA_OBV_State* _state,
-                                      const double inReal,
+                                      const double inClose,
                                       const double inVolume,
                                       double        *outReal );
 
@@ -12040,13 +12040,13 @@ TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ inline TA_RetCode TA_OBV_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
-/* Generated */                                     const double inReal[],
+/* Generated */                                     const double inClose[],
 /* Generated */                                     const double inVolume[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
 /* Generated */                                     double        outReal[] )
 /* Generated */ {
-/* Generated */  TA_RetCode res = TA_OBV(startIdx, endIdx, inReal, inVolume, outBegIdx, outNBElement, outReal );
+/* Generated */  TA_RetCode res = TA_OBV(startIdx, endIdx, inClose, inVolume, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
 /* Generated */  struct TA_OBV_State* state;
 /* Generated */  res = TA_OBV_StateInit(&state);
@@ -12060,7 +12060,7 @@ TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 /* Generated */  for (i = 0; i <= endIdx; i++)
 /* Generated */    {
 /* Generated */     double outReal_local;
-/* Generated */     res = TA_OBV_State(state, inReal[i], inVolume[i], &outReal_local);
+/* Generated */     res = TA_OBV_State(state, inClose[i], inVolume[i], &outReal_local);
 /* Generated */     if (i < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;

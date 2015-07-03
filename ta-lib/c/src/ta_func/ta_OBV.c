@@ -108,7 +108,7 @@
 /*
  * TA_OBV - On Balance Volume
  * 
- * Input  = double, Volume
+ * Input  = Close, Volume
  * Output = double
  * 
  */
@@ -116,7 +116,7 @@
 /* Generated */ #if defined( _MANAGED ) && defined( USE_SUBARRAY )
 /* Generated */ enum class Core::RetCode Core::Obv( int    startIdx,
 /* Generated */                                     int    endIdx,
-/* Generated */                                     SubArray<double>^ inReal,
+/* Generated */                                     SubArray<double>^ inClose,
 /* Generated */                                     SubArray<double>^ inVolume,
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
@@ -124,7 +124,7 @@
 /* Generated */ #elif defined( _MANAGED )
 /* Generated */ enum class Core::RetCode Core::Obv( int    startIdx,
 /* Generated */                                     int    endIdx,
-/* Generated */                                     cli::array<double>^ inReal,
+/* Generated */                                     cli::array<double>^ inClose,
 /* Generated */                                     cli::array<double>^ inVolume,
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
@@ -132,7 +132,7 @@
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public RetCode obv( int    startIdx,
 /* Generated */                     int    endIdx,
-/* Generated */                     double       inReal[],
+/* Generated */                     double       inClose[],
 /* Generated */                     double       inVolume[],
 /* Generated */                     MInteger     outBegIdx,
 /* Generated */                     MInteger     outNBElement,
@@ -140,7 +140,7 @@
 /* Generated */ #else
 /* Generated */ TA_LIB_API TA_RetCode TA_OBV( int    startIdx,
 /* Generated */                               int    endIdx,
-/* Generated */                                          const double inReal[],
+/* Generated */                                          const double inClose[],
 /* Generated */                                          const double inVolume[],
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
@@ -164,9 +164,8 @@
 /* Generated */       return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */ 
 /* Generated */    #if !defined(_JAVA)
-/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* Verify required price component. */
-/* Generated */    if(!inVolume)
+/* Generated */    if(!inClose||!inVolume)
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -181,12 +180,12 @@
 
    /* Insert TA function code here. */
    prevOBV  = inVolume[startIdx];
-   prevReal = inReal[startIdx];
+   prevReal = inClose[startIdx];
    outIdx = 0;
 
    for(i=startIdx; i <= endIdx; i++ )
    {
-      tempReal = inReal[i];
+      tempReal = inClose[i];
       if( tempReal > prevReal )
          prevOBV += inVolume[i];
       else if( tempReal < prevReal )
@@ -248,17 +247,17 @@
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ int Core::ObvState( struct TA_Obv_State* _state,
-/* Generated */                   cli::array<double>^ inReal,
+/* Generated */                   cli::array<double>^ inClose,
 /* Generated */                   cli::array<double>^ inVolume,
 /* Generated */                   cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public int obvState( struct TA_obv_State* _state,
-/* Generated */                    double       inReal,
+/* Generated */                    double       inClose,
 /* Generated */                    double       inVolume,
 /* Generated */                    double        *outReal )
 /* Generated */ #else
 /* Generated */ TA_LIB_API int TA_OBV_State( struct TA_OBV_State* _state,
-/* Generated */                                       const double inReal,
+/* Generated */                                       const double inClose,
 /* Generated */                                       const double inVolume,
 /* Generated */                                       double        *outReal )
 /* Generated */ #endif
@@ -273,9 +272,8 @@
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
-/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    /* Verify required price component. */
-/* Generated */    if(!inVolume)
+/* Generated */    if(!inClose||!inVolume)
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
@@ -284,7 +282,7 @@
 /* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
 /* Generated */    #ifndef TA_OBV_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
-/* Generated */          PUSH_TO_MEM(inReal,inReal);
+/* Generated */          PUSH_TO_MEM(inClose,inClose);
 /* Generated */          PUSH_TO_MEM(inVolume,inVolume);
 /* Generated */    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData); }
 /* Generated */    #endif
@@ -302,16 +300,16 @@
  if (FIRST_LAUNCH)
  { // first launch
       STATE.prevOBV = inVolume;
-      STATE.prevReal = inReal;
+      STATE.prevReal = inClose;
  } else {
-    if( inReal >    STATE.prevReal )
+    if( inClose >    STATE.prevReal )
           STATE.prevOBV += inVolume;
-    else if( inReal <    STATE.prevReal )
+    else if( inClose <    STATE.prevReal )
             STATE.prevOBV -= inVolume;
  }
 
- VALUE_HANDLE_DEREF(outReal) =    STATE.prevOBV;
-    STATE.prevReal = inReal;
+   VALUE_HANDLE_DEREF(outReal) =    STATE.prevOBV;
+   STATE.prevReal = inClose;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -363,7 +361,7 @@
 /* Generated */ #if defined( _MANAGED ) && defined( USE_SUBARRAY )
 /* Generated */ enum class Core::RetCode Core::Obv( int    startIdx,
 /* Generated */                                     int    endIdx,
-/* Generated */                                     SubArray<float>^ inReal,
+/* Generated */                                     SubArray<float>^ inClose,
 /* Generated */                                     SubArray<float>^ inVolume,
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
@@ -371,7 +369,7 @@
 /* Generated */ #elif defined( _MANAGED )
 /* Generated */ enum class Core::RetCode Core::Obv( int    startIdx,
 /* Generated */                                     int    endIdx,
-/* Generated */                                     cli::array<float>^ inReal,
+/* Generated */                                     cli::array<float>^ inClose,
 /* Generated */                                     cli::array<float>^ inVolume,
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
@@ -379,7 +377,7 @@
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public RetCode obv( int    startIdx,
 /* Generated */                     int    endIdx,
-/* Generated */                     float        inReal[],
+/* Generated */                     float        inClose[],
 /* Generated */                     float        inVolume[],
 /* Generated */                     MInteger     outBegIdx,
 /* Generated */                     MInteger     outNBElement,
@@ -387,7 +385,7 @@
 /* Generated */ #else
 /* Generated */ TA_RetCode TA_S_OBV( int    startIdx,
 /* Generated */                      int    endIdx,
-/* Generated */                      const float  inReal[],
+/* Generated */                      const float  inClose[],
 /* Generated */                      const float  inVolume[],
 /* Generated */                      int          *outBegIdx,
 /* Generated */                      int          *outNBElement,
@@ -403,8 +401,7 @@
 /* Generated */     if( (endIdx < 0) || (endIdx < startIdx))
 /* Generated */        return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_END_INDEX,OutOfRangeEndIndex);
 /* Generated */     #if !defined(_JAVA)
-/* Generated */     if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */     if(!inVolume)
+/* Generated */     if(!inClose||!inVolume)
 /* Generated */        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */     #endif 
 /* Generated */     #if !defined(_JAVA)
@@ -413,11 +410,11 @@
 /* Generated */     #endif 
 /* Generated */  #endif 
 /* Generated */    prevOBV  = inVolume[startIdx];
-/* Generated */    prevReal = inReal[startIdx];
+/* Generated */    prevReal = inClose[startIdx];
 /* Generated */    outIdx = 0;
 /* Generated */    for(i=startIdx; i <= endIdx; i++ )
 /* Generated */    {
-/* Generated */       tempReal = inReal[i];
+/* Generated */       tempReal = inClose[i];
 /* Generated */       if( tempReal > prevReal )
 /* Generated */          prevOBV += inVolume[i];
 /* Generated */       else if( tempReal < prevReal )

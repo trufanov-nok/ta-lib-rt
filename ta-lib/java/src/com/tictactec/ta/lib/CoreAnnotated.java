@@ -7107,7 +7107,7 @@ public int obvLookback(
         name  = "OBV",
         group = "Volume Indicators",
         flags = 0,
-        nbInput    = 2,
+        nbInput    = 1,
         nbOptInput = 0,
         nbOutput   = 1
 )
@@ -7115,16 +7115,11 @@ public RetCode obv(
             int startIdx,
             int endIdx,
             @InputParameterInfo(
-                paramName = "inReal",
-                flags     = 0,
-                type = InputParameterType.TA_Input_Real
-            )
-            double inReal[],
-            @InputParameterInfo(
-                paramName = "inPriceV",
-                flags     = 16,
+                paramName = "inPriceCV",
+                flags     = 24,
                 type = InputParameterType.TA_Input_Price
             )
+            double inClose [],
             double inVolume [],
             MInteger     outBegIdx,
             MInteger     outNBElement,
@@ -7138,7 +7133,7 @@ public RetCode obv(
     return super.obv (
         startIdx,
         endIdx,
-        inReal,
+        inClose ,
         inVolume ,
         outBegIdx,
         outNBElement,

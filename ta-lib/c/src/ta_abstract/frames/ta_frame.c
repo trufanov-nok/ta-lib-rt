@@ -5114,8 +5114,8 @@
 /* Generated */ {
 /* Generated */    return TA_OBV(/* Generated */             startIdx,
 /* Generated */             endIdx,
-/* Generated */             params->in[0].data.inReal, /* inReal */
-/* Generated */             params->in[1].data.inPrice.volume, /* inVolume */
+/* Generated */             params->in[0].data.inPrice.close, /* inClose */
+/* Generated */             params->in[0].data.inPrice.volume, /* inVolume */
 /* Generated */             outBegIdx, 
 /* Generated */             outNBElement, 
 /* Generated */             params->out[0].data.outReal /*  outReal */ );
@@ -5135,8 +5135,8 @@
 /* Generated */ {
 /* Generated */    (void)params;
 /* Generated */    return TA_OBV_State( *(struct TA_OBV_State**) &params->_state,
-/* Generated */                     *params->in[0].data.inReal, /* inReal */
-/* Generated */                     *params->in[1].data.inPrice.volume, /* inVolume */
+/* Generated */                     *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     *params->in[0].data.inPrice.volume, /* inVolume */
 /* Generated */                     params->out[0].data.outReal /*  *outReal */ );
 /* Generated */ }
 /* Generated */ unsigned int TA_OBV_FramePPSF( const TA_ParamHolderPriv *params )

@@ -51,8 +51,7 @@
 /* OBV BEGIN */
 static const TA_InputParameterInfo    *TA_OBV_Inputs[]    =
 {
-  &TA_DEF_UI_Input_Real,
-  &TA_DEF_UI_Input_Price_V,
+  &TA_DEF_UI_Input_Price_CV,
   NULL
 };
 

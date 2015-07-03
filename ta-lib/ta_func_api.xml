@@ -5255,8 +5255,8 @@
 		<GroupId>Volume Indicators</GroupId>
 		<RequiredInputArguments>
 			<RequiredInputArgument>
-				<Type>Double Array</Type>
-				<Name>inReal</Name>
+				<Type>Close</Type>
+				<Name>Close</Name>
 			</RequiredInputArgument>
 			<RequiredInputArgument>
 				<Type>Volume</Type>

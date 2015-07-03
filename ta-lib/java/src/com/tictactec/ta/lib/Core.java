@@ -25689,7 +25689,7 @@ public class Core {
    }
    public RetCode obv( int startIdx,
       int endIdx,
-      double inReal[],
+      double inClose[],
       double inVolume[],
       MInteger outBegIdx,
       MInteger outNBElement,
@@ -25703,11 +25703,11 @@ public class Core {
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
       prevOBV = inVolume[startIdx];
-      prevReal = inReal[startIdx];
+      prevReal = inClose[startIdx];
       outIdx = 0;
       for(i=startIdx; i <= endIdx; i++ )
       {
-         tempReal = inReal[i];
+         tempReal = inClose[i];
          if( tempReal > prevReal )
             prevOBV += inVolume[i];
          else if( tempReal < prevReal )
@@ -25733,7 +25733,7 @@ public class Core {
       return RetCode.Success ;
    }
    public int obvState( struct TA_obv_State* _state,
-      double inReal,
+      double inClose,
       double inVolume,
       double *outReal )
    {
@@ -25742,21 +25742,21 @@ public class Core {
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
+         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
          ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
          return RetCode.NeedMoreData ; }
       if ( ( _state.value .mem_index == 1) )
       {
          _state.value .prevOBV = inVolume;
-         _state.value .prevReal = inReal;
+         _state.value .prevReal = inClose;
       } else {
-         if( inReal > _state.value .prevReal )
+         if( inClose > _state.value .prevReal )
             _state.value .prevOBV += inVolume;
-         else if( inReal < _state.value .prevReal )
+         else if( inClose < _state.value .prevReal )
             _state.value .prevOBV -= inVolume;
       }
       outReal.value = _state.value .prevOBV;
-      _state.value .prevReal = inReal;
+      _state.value .prevReal = inClose;
       return RetCode.Success ;
    }
    public int obvStateFree( struct TA_obv_State** _state )
@@ -25770,7 +25770,7 @@ public class Core {
    }
    public RetCode obv( int startIdx,
       int endIdx,
-      float inReal[],
+      float inClose[],
       float inVolume[],
       MInteger outBegIdx,
       MInteger outNBElement,
@@ -25784,11 +25784,11 @@ public class Core {
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
       prevOBV = inVolume[startIdx];
-      prevReal = inReal[startIdx];
+      prevReal = inClose[startIdx];
       outIdx = 0;
       for(i=startIdx; i <= endIdx; i++ )
       {
-         tempReal = inReal[i];
+         tempReal = inClose[i];
          if( tempReal > prevReal )
             prevOBV += inVolume[i];
          else if( tempReal < prevReal )
