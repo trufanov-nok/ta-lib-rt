@@ -24474,19 +24474,15 @@ public class Core {
       {
          _state.value .max = inReal;
          _state.value .maxIdx = _state.value .currentIdx;
-      } else
-         if( _state.value .max == inReal )
-         _state.value .maxIdx = _state.value .currentIdx;
+      }
       if( _state.value .min > inReal )
       {
          _state.value .min = inReal;
          _state.value .minIdx = _state.value .currentIdx;
-      } else
-         if( _state.value .min == inReal )
-         _state.value .minIdx = _state.value .currentIdx;
+      }
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
-      outMaxIdx.value = _state.value .max;
-      outMinIdx.value = _state.value .min;
+      outMaxIdx.value = _state.value .maxIdx;
+      outMinIdx.value = _state.value .minIdx;
       return RetCode.Success ;
    }
    public int minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )

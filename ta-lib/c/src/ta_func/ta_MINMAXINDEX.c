@@ -410,23 +410,19 @@ if (FIRST_LAUNCH)
         {
                STATE.max = inReal;
                STATE.maxIdx =    STATE.currentIdx;
-        } else
-            if(    STATE.max == inReal )
-                   STATE.maxIdx =    STATE.currentIdx;
+        }
 
         if(    STATE.min > inReal )
         {
                STATE.min = inReal;
                STATE.minIdx =    STATE.currentIdx;
-        } else
-            if(    STATE.min == inReal )
-                   STATE.minIdx =    STATE.currentIdx;
+        }
 
 
    if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
-        VALUE_HANDLE_DEREF(outMaxIdx) =    STATE.max;
-        VALUE_HANDLE_DEREF(outMinIdx) =    STATE.min;
+        VALUE_HANDLE_DEREF(outMaxIdx) =    STATE.maxIdx;
+        VALUE_HANDLE_DEREF(outMinIdx) =    STATE.minIdx;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
