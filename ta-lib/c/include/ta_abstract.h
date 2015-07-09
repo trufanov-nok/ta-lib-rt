@@ -574,6 +574,14 @@ TA_RetCode TA_GetInitNewStateFuncPtr(const TA_FuncInfo *params, TA_StateFunc* fu
 TA_RetCode TA_GetCallFuncStateFuncPtr( const TA_FuncInfo *params, TA_StateFunc* func );
 TA_RetCode TA_GetFreeStateFuncPtr(const TA_FuncInfo *params, TA_StateFunc *func );
 
+
+TA_RetCode TA_GetParamStatePtr(TA_ParamHolder *param,
+                                void**         state );
+
+TA_RetCode TA_SetParamStatePtr(TA_ParamHolder *param,
+                               void*           state );
+
+
 #ifdef __cplusplus
 }
 #endif

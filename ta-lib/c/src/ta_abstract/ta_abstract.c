@@ -1155,6 +1155,50 @@ TA_RetCode TA_SetOutputParamRealPtr( TA_ParamHolder *param,
 }
 
 
+TA_RetCode TA_GetParamStatePtr( TA_ParamHolder *param,
+                                void**          state )
+{
+    TA_ParamHolderPriv *paramHolderPriv;
+
+    if( (param == NULL) || (state == NULL) )
+    {
+        return TA_BAD_PARAM;
+    }
+
+    paramHolderPriv = (TA_ParamHolderPriv *)(param->hiddenData);
+    if( paramHolderPriv->magicNumber != TA_PARAM_HOLDER_PRIV_MAGIC_NB )
+    {
+        return TA_INVALID_PARAM_HOLDER;
+    }
+
+    *state = paramHolderPriv->_state;
+
+    return TA_SUCCESS;
+}
+
+
+TA_RetCode TA_SetParamStatePtr( TA_ParamHolder *param,
+                                void*           state )
+{
+    TA_ParamHolderPriv *paramHolderPriv;
+
+    if( (param == NULL) )
+    {
+        return TA_BAD_PARAM;
+    }
+
+    paramHolderPriv = (TA_ParamHolderPriv *)(param->hiddenData);
+    if( paramHolderPriv->magicNumber != TA_PARAM_HOLDER_PRIV_MAGIC_NB )
+    {
+        return TA_INVALID_PARAM_HOLDER;
+    }
+
+    paramHolderPriv->_state = state;
+
+    return TA_SUCCESS;
+}
+
+
 #define GET_PRIVATE_FUNC(param, func_name, out) \
     const TA_ParamHolderPriv *paramHolderPriv; \
    { \
