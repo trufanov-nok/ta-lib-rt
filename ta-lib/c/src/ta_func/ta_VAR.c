@@ -456,6 +456,10 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
     }
 
+
+    STATE.periodTotal1 += inReal;
+    STATE.periodTotal2 += inReal*inReal;
+
     meanValue1 = STATE.periodTotal1 / STATE.optInTimePeriod;
     meanValue2 = STATE.periodTotal2 / STATE.optInTimePeriod;
 
@@ -465,8 +469,6 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
     STATE.periodTotal1 -= tempReal;
     STATE.periodTotal2 -= tempReal*tempReal;
 
-    STATE.periodTotal1 += inReal;
-    STATE.periodTotal2 += inReal*inReal;
     PUSH_TO_MEM(inReal,inReal);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);

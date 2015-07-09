@@ -32459,14 +32459,14 @@ public class Core {
          ( _state.value .memory+_cur_idx).value .inReal = inReal ;
          return RetCode.NeedMoreData ;
       }
+      _state.value .periodTotal1 += inReal;
+      _state.value .periodTotal2 += inReal*inReal;
       meanValue1 = _state.value .periodTotal1 / _state.value .optInTimePeriod;
       meanValue2 = _state.value .periodTotal2 / _state.value .optInTimePeriod;
       outReal.value = meanValue2 - meanValue1 * meanValue1;
       tempReal = ( _state.value .memory+_cur_idx).value .inReal ;
       _state.value .periodTotal1 -= tempReal;
       _state.value .periodTotal2 -= tempReal*tempReal;
-      _state.value .periodTotal1 += inReal;
-      _state.value .periodTotal2 += inReal*inReal;
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
