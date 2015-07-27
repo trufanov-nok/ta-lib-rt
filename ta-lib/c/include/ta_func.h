@@ -11010,6 +11010,10 @@ struct TA_MFI_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_MFI_Data* memory;
+                    void*        mflow;
+                    double       prevValue;
+                    double       posSumMF;
+                    double       negSumMF;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 

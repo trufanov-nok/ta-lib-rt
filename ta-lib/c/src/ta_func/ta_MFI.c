@@ -381,6 +381,11 @@
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
+#ifndef TA_MFI_STATE_CIRCBUF_DEFINED
+#define TA_MFI_STATE_CIRCBUF_DEFINED
+DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
+#endif
+
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
@@ -429,6 +434,7 @@
 
    /* insert state init code here. */
 
+   CREATE_CIRCBUF_STRUCT_CLASS(MFI, mflow, MoneyFlow, 50);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -460,7 +466,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+ double tempValue1, tempValue2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -494,6 +500,55 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+    {
+      STATE.prevValue = (inHigh+inLow+inClose)/3.0;
+      STATE.posSumMF = 0;
+      STATE.negSumMF = 0;
+      return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA, NeedMoreData);
+    }
+
+    if (_cur_idx > (unsigned int) STATE.optInTimePeriod)
+    {
+      STATE.posSumMF -= CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).positive;
+      STATE.negSumMF -= CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).negative;
+    }
+
+    tempValue1 = (inHigh+inLow+inClose)/3.0;
+    tempValue2 = tempValue1 - STATE.prevValue;
+    STATE.prevValue  = tempValue1;
+    tempValue1 *= inVolume;
+
+    if( tempValue2 < 0 )
+    {
+       CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).negative = tempValue1;
+       STATE.negSumMF += tempValue1;
+       CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).positive = 0.0;
+    }
+    else if( tempValue2 > 0 )
+    {
+       CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).positive = tempValue1;
+       STATE.posSumMF += tempValue1;
+       CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).negative = 0.0;
+    }
+    else
+    {
+       CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).positive = 0.0;
+       CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).negative = 0.0;
+    }
+
+    CIRCBUF_STRUCT_NEXT(MFI, mflow);
+
+    if (NEED_MORE_DATA)
+        return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA, NeedMoreData);
+
+    tempValue1 = STATE.posSumMF + STATE.negSumMF;
+    if( tempValue1 < 1.0 )
+       VALUE_HANDLE_DEREF(outReal) = 0.0;
+    else
+       VALUE_HANDLE_DEREF(outReal) = 100.0*(STATE.posSumMF/tempValue1);
+
+
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -513,7 +568,7 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+   FREE_CIRCBUF_STRUCT(MFI, mflow);
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -727,6 +782,10 @@
 /* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
 /* Generated */    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */ }
+/* Generated */ #ifndef TA_MFI_STATE_CIRCBUF_DEFINED
+/* Generated */ #define TA_MFI_STATE_CIRCBUF_DEFINED
+/* Generated */ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
+/* Generated */ #endif
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib

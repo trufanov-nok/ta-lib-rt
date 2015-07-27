@@ -15453,23 +15453,59 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = cmoLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CMO_Data));
+      _state.value .value .memory = NULL;
+      if( ( (this.unstablePeriod[FuncUnstId.Cmo.ordinal()]) == 0) &&
+         ( (this.compatibility) == Compatibility.Metastock ))
+         _state.value .value .MetastockMode = 1;
       else
-         _state.value .value .memory = NULL;
+         _state.value .value .MetastockMode = 0;
       return RetCode.Success ;
    }
    public int cmoState( struct TA_cmo_State* _state,
       double inReal,
       double *outReal )
    {
+      double tempValue1, tempValue2;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      if( _state.value .optInTimePeriod == 1 )
+      {
+         outReal.value = inReal;
+         return RetCode.Success ;
+      }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .prevLoss = 0.0;
+         _state.value .prevGain = 0.0;
+         _state.value .prevValue = inReal;
+         if ( _state.value .MetastockMode == 0)
+            return RetCode.NeedMoreData ;
+      }
+      tempValue2 = inReal - _state.value .prevValue;
+      _state.value .prevValue = inReal;
+      if ( _state.value .mem_index <= (unsigned int) ( _state.value .optInTimePeriod+ _state.value .MetastockMode))
+      {
+         _state.value .prevLoss *= ( _state.value .optInTimePeriod-1);
+         _state.value .prevGain *= ( _state.value .optInTimePeriod-1);
+      }
+      if (tempValue2 < 0)
+         _state.value .prevLoss -= tempValue2;
+      else
+         _state.value .prevGain += tempValue2;
+      if ( _state.value .mem_index < (unsigned int) ( _state.value .optInTimePeriod+ _state.value .MetastockMode))
+      {
+         _state.value .prevLoss /= _state.value .optInTimePeriod;
+         _state.value .prevGain /= _state.value .optInTimePeriod;
+      }
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      tempValue1 = _state.value .prevGain+ _state.value .prevLoss;
+      if( ! (((- (0.00000000000001) )<tempValue1)&&(tempValue1< (0.00000000000001) )) )
+         outReal.value = 100*(( _state.value .prevGain- _state.value .prevLoss)/tempValue1);
+      else
+         outReal.value = 0.0;
       return RetCode.Success ;
    }
    public int cmoStateFree( struct TA_cmo_State** _state )
@@ -23901,6 +23937,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   struct TA_MFI_STATE_CIRCBUF { int idx; MoneyFlow* circbuf; int size; };
    public int mfiStateInit( struct TA_mfi_State** _state,
       int optInTimePeriod )
    {
@@ -23918,6 +23955,7 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MFI_Data));
       else
          _state.value .value .memory = NULL;
+      { _state.value .value .mflow = calloc(1, sizeof(struct TA_MFI_STATE_CIRCBUF )); if ( _state.value .value .mflow == NULL) return RetCode.AllocErr ; struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .value .mflow; buf->idx = 0; buf->size = 50; buf->circbuf = calloc(50, sizeof(MoneyFlow)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
       return RetCode.Success ;
    }
    public int mfiState( struct TA_mfi_State* _state,
@@ -23927,6 +23965,7 @@ public class Core {
       double inVolume,
       double *outReal )
    {
+      double tempValue1, tempValue2;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
@@ -23937,10 +23976,46 @@ public class Core {
          ( _state.value .memory+_cur_idx).value .inClose = inClose ;
          ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
          return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .prevValue = 0;
+         _state.value .posSumMF = 0;
+         _state.value .negSumMF = 0;
+      }
+      _state.value .posSumMF -= *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .positive;
+      _state.value .negSumMF -= *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .negative;
+      tempValue1 = (inHigh+inLow+inClose)/3.0;
+      tempValue2 = tempValue1 - _state.value .prevValue;
+      _state.value .prevValue = tempValue1;
+      tempValue1 *= inVolume;
+      if( tempValue2 < 0 )
+      {
+         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .negative = tempValue1;
+         _state.value .negSumMF += tempValue1;
+         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .positive = 0.0;
+      }
+      else if( tempValue2 > 0 )
+      {
+         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .positive = tempValue1;
+         _state.value .posSumMF += tempValue1;
+         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .negative = 0.0;
+      }
+      else
+      {
+         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .positive = 0.0;
+         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .negative = 0.0;
+      }
+      tempValue1 = _state.value .posSumMF + _state.value .negSumMF;
+      if( tempValue1 < 1.0 )
+         outReal.value = 0.0;
+      else
+         outReal.value = 100.0*( _state.value .posSumMF/tempValue1);
+      { struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
       return RetCode.Success ;
    }
    public int mfiStateFree( struct TA_mfi_State** _state )
    {
+      { struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .value .mflow; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .mflow = NULL; } } ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {

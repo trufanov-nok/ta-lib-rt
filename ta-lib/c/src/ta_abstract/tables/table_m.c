@@ -577,7 +577,21 @@ static const TA_OptInputParameterInfo *TA_MFI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MFI_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MFI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "mflow", 0 };
+const TA_InputParameterInfo TA_MFI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevValue", 0 };
+const TA_InputParameterInfo TA_MFI_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "posSumMF", 0 };
+const TA_InputParameterInfo TA_MFI_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "negSumMF", 0 };
+
+static const TA_InputParameterInfo *TA_MFI_StructParams[] = {
+    &TA_MFI_DEF_UI_STRUCT_PARAM_1,
+    &TA_MFI_DEF_UI_STRUCT_PARAM_2,
+    &TA_MFI_DEF_UI_STRUCT_PARAM_3,
+    &TA_MFI_DEF_UI_STRUCT_PARAM_4,
+    NULL };
 
 DEF_FUNCTION( MFI,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */

@@ -116,6 +116,9 @@ typedef struct
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
 
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
+
 /**** Local variables definitions.     ****/
 
 static TA_Test tableTest[] =
@@ -191,6 +194,13 @@ ErrorNumber test_func_per_hlcv( TA_History *history )
       if( retValue != 0 )
       {
          printf( "Failed Test #%d (Code=%d)\n", i, retValue );
+         return retValue;
+      }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "Failed State Test#%d (Code=%d)\n", i, retValue );
          return retValue;
       }
    }
@@ -703,6 +713,86 @@ static ErrorNumber do_test( const TA_History *history,
          printf( "Failed AD logic for fix #1359452\n" );
          return TA_TEST_FAIL_BUG1359452_5;
       }       
+   }
+
+   return TA_TEST_PASS;
+}
+
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->high,  history->nbBars );
+   setInputBuffer( 1, history->low,   history->nbBars );
+   setInputBuffer( 2, history->close, history->nbBars );
+
+   /* Clear the unstable periods from previous tests. */
+   retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_MFI, 0 );
+   if( retCode != TA_SUCCESS )
+      return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+   /* Make a simple first call. */
+   switch( test->theFunction )
+   {
+   case TA_MFI_TEST:
+      retCode = TA_MFI_StateTest(test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        gBuffer[1].in,
+                        gBuffer[2].in,
+                        history->volume,
+                        test->optInTimePeriod,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+      break;
+   case TA_AD_TEST:
+      retCode = TA_AD_StateTest( test->startIdx,
+                       test->endIdx,
+                       gBuffer[0].in,
+                       gBuffer[1].in,
+                       gBuffer[2].in,
+                       history->volume,
+                       &outBegIdx,
+                       &outNbElement,
+                       gBuffer[0].out0 );
+      break;
+
+   case TA_ADOSC_3_10_TEST:
+//      retCode = TA_ADOSC_StateTest( test->startIdx,
+//                          test->endIdx,
+//                          gBuffer[0].in,
+//                          gBuffer[1].in,
+//                          gBuffer[2].in,
+//                          history->volume,
+//                          3, 10,
+//                          &outBegIdx,
+//                          &outNbElement,
+//                          gBuffer[0].out0 );
+      break;
+
+   case TA_ADOSC_5_2_TEST:
+//      retCode = TA_ADOSC_StateTest( test->startIdx,
+//                          test->endIdx,
+//                          gBuffer[0].in,
+//                          gBuffer[1].in,
+//                          gBuffer[2].in,
+//                          history->volume,
+//                          5, 2,
+//                          &outBegIdx,
+//                          &outNbElement,
+//                          gBuffer[0].out0 );
+      break;
+   default:
+      retCode = TA_INTERNAL_ERROR(133);
    }
 
    return TA_TEST_PASS;

@@ -381,11 +381,13 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
     buf->circbuf = calloc(buf_size, sizeof(type)); \
     if (!buf->circbuf) return ENUM_VALUE(RetCode, TA_ALLOC_ERR, AllocErr );}
 
+#define CREATE_CIRCBUF_STRUCT_CLASS(taFunc, var, type, buf_size) CREATE_CIRCBUF_STRUCT (taFunc, var, type, buf_size)
+
 #define CIRCBUF_STRUCT_IDX(taFunc, var) ((struct TA_##taFunc##_STATE_CIRCBUF*) STATE.var)->idx
 #define CIRCBUF_STRUCT_SIZE(taFunc, var) ((struct TA_##taFunc##_STATE_CIRCBUF*) STATE.var)->size
 #define CIRCBUF_STRUCT_STORAGE(taFunc, var) ((struct TA_##taFunc##_STATE_CIRCBUF*) STATE.var)->circbuf
-#define CIRCBUF_STRUCT_CURRENT_EL(taFunc, var) *(CIRCBUF_STRUCT_STORAGE(taFunc,var)+CIRCBUF_STRUCT_IDX(taFunc,var))
-#define CIRCBUF_STRUCT_EL(taFunc, var, idx) *(CIRCBUF_STRUCT_STORAGE(taFunc,var)+idx)
+#define CIRCBUF_STRUCT_CURRENT_EL(taFunc, var) (*(CIRCBUF_STRUCT_STORAGE(taFunc,var)+CIRCBUF_STRUCT_IDX(taFunc,var)))
+#define CIRCBUF_STRUCT_EL(taFunc, var, idx) (*(CIRCBUF_STRUCT_STORAGE(taFunc,var)+idx))
 #define CIRCBUF_STRUCT_NEXT(taFunc, var) { \
     struct TA_##taFunc##_STATE_CIRCBUF* buf = (struct TA_##taFunc##_STATE_CIRCBUF*) STATE.var; \
     if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;}
