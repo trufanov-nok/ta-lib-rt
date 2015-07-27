@@ -238,6 +238,16 @@
       maxIdx_##Id = (Size-1); \
    }
 
+#define CIRCBUF_INIT_STATE_STRUCT(Id,Type,Size) \
+   { \
+      if( Size <= 0 ) \
+         return ENUM_VALUE(RetCode,TA_ALLOC_ERR,AllocErr); \
+      Id = gcnew cli::array<Type>(Size); \
+      if( !Id ) \
+         return ENUM_VALUE(RetCode,TA_ALLOC_ERR,AllocErr); \
+      maxIdx_##Id = (Size-1); \
+   }
+
 #define CIRCBUF_INIT_CLASS(Id,Type,Size) \
    { \
       if( Size <= 0 ) \
