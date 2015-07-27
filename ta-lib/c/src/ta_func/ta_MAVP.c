@@ -360,7 +360,7 @@
 
 {
    /* insert local variable here */
-
+#define TA_MAVP_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -404,8 +404,7 @@
 
    /* insert state init code here. */
 
-
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+ return FUNCTION_CALL_STATE_INIT(MA) ((struct TA_MA_State**)&STATE_P.MAState, STATE_P.optInMaxPeriod, STATE_P.optInMAType );
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -429,7 +428,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+   #define TA_MAVP_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+   double period;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -460,7 +460,15 @@
 
    /* insert state based TA dunc code here. */
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   if (inPeriods > STATE.optInMaxPeriod) period = STATE.optInMaxPeriod;
+   else if(inPeriods < STATE.optInMinPeriod) period = STATE.optInMinPeriod;
+   else period = inPeriods;
+
+
+   struct TA_MA_State* ma_state = (struct TA_MA_State*) STATE.MAState;
+   ma_state->optInTimePeriod = period;
+   return FUNCTION_CALL_STATE(MA)( ma_state, inReal, outReal );
+
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -477,7 +485,7 @@
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
-   /* insert local variable here */
+   FUNCTION_CALL_STATE_FREE(MA) ((struct TA_MA_State**)&STATE_P.MAState);
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

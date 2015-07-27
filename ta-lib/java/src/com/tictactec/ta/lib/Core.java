@@ -22287,10 +22287,17 @@ public class Core {
       _state.value .value .optInSignalPeriod = optInSignalPeriod;
       _state.value .value .optInSignalMAType = optInSignalMAType;
       _state.value .value .mem_size = macdExtLookback (optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MACDEXT_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
+      if( optInSlowPeriod < optInFastPeriod )
+      {
+         _state.value .value .optInSlowPeriod = _state.value .value .optInFastPeriod;
+         _state.value .value .optInFastPeriod = optInSlowPeriod;
+         _state.value .value .optInSlowMAType = _state.value .value .optInFastMAType;
+         _state.value .value .optInFastMAType = optInSlowMAType;
+      }
+      movingAverage ((struct movingAverage **)& _state.value .value .slowMAState, _state.value .value .optInSlowPeriod, _state.value .value .optInSlowMAType);
+      movingAverage ((struct movingAverage **)& _state.value .value .fastMAState, _state.value .value .optInFastPeriod, _state.value .value .optInFastMAType);
+      movingAverage ((struct movingAverage **)& _state.value .value .signalMAState, _state.value .value .optInSignalPeriod, _state.value .value .optInSignalMAType);
       return RetCode.Success ;
    }
    public int macdExtState( struct TA_macdExt_State* _state,
@@ -22299,17 +22306,33 @@ public class Core {
       double *outMACDSignal,
       double *outMACDHist )
    {
+      RetCode retCode;
+      double slowMA, fastMA;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      retCode = movingAverage ( _state.value .slowMAState, inReal, &slowMA );
+      if( retCode != RetCode.Success &&
+         retCode != RetCode.NeedMoreData )
+         return retCode;
+      retCode = movingAverage ( _state.value .fastMAState, inReal, &fastMA );
+      if( retCode != RetCode.Success &&
+         retCode != RetCode.NeedMoreData )
+         return retCode;
+      outMACD.value = fastMA - slowMA;
+      retCode = movingAverage ( _state.value .signalMAState, inReal, outMACDSignal );
+      if( retCode != RetCode.Success &&
+         retCode != RetCode.NeedMoreData )
+         return retCode;
+      outMACDHist.value = outMACD.value - outMACDSignal.value ;
       return RetCode.Success ;
    }
    public int macdExtStateFree( struct TA_macdExt_State** _state )
    {
+      movingAverage ((struct movingAverage **)& _state.value .value .slowMAState);
+      movingAverage ((struct movingAverage **)& _state.value .value .fastMAState);
+      movingAverage ((struct movingAverage **)& _state.value .value .signalMAState);
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {

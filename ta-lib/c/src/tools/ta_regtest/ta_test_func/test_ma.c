@@ -410,6 +410,13 @@ ErrorNumber test_func_ma( TA_History *history )
             return retValue;
 	     }
 
+         retValue = do_test_ma_state( history, &tableTest[i], 1 );
+         if( retValue != 0 )
+         {
+            printf( "TA_MAVP Failed State Test #%d (Code=%d)\n", i, retValue );
+            return retValue;
+         }
+
 	  }
    }
 
@@ -799,7 +806,7 @@ static ErrorNumber do_test_ma( const TA_History *history,
    switch( test->id )
    {
    case TA_ANY_MA_TEST:
-	  if(testMAVP)
+      if(testMAVP)
    	  {
       retCode = TA_MAVP( test->startIdx,
                        test->endIdx,

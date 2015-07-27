@@ -10633,6 +10633,7 @@ struct TA_MAVP_State {
                      size_t mem_size;
                      size_t mem_index;
                      struct TA_MAVP_Data* memory;
+                     void*        MAState;
                      int           optInMinPeriod; /* From 2 to 100000 */
                      int           optInMaxPeriod; /* From 2 to 100000 */
                      TA_MAType     optInMAType;                     };

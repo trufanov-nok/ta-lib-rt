@@ -441,7 +441,12 @@ static const TA_OptInputParameterInfo *TA_MAVP_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MAVP_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MAVP_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "MAState", 0 };
+
+static const TA_InputParameterInfo *TA_MAVP_StructParams[] = {
+    &TA_MAVP_DEF_UI_STRUCT_PARAM_1,
+    NULL };
 
 DEF_FUNCTION( MAVP,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
