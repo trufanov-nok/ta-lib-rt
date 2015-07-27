@@ -809,6 +809,7 @@ public class Core {
       int optInFastPeriod,
       int optInSlowPeriod )
    {
+      double slowestPeriod;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
@@ -824,11 +825,12 @@ public class Core {
       _state.value .value .optInFastPeriod = optInFastPeriod;
       _state.value .value .optInSlowPeriod = optInSlowPeriod;
       _state.value .value .mem_size = adOscLookback (optInFastPeriod, optInSlowPeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADOSC_Data));
+      _state.value .value .memory = NULL;
+      if( optInFastPeriod < optInSlowPeriod )
+         slowestPeriod = _state.value .optInSlowPeriod;
       else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+         slowestPeriod = _state.value .optInFastPeriod;
+      return emaLookback ( slowestPeriod );
    }
    public int adOscState( struct TA_adOsc_State* _state,
       double inHigh,
@@ -841,12 +843,24 @@ public class Core {
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .fastk = ((double)2.0 / ((double)( _state.value .optInFastPeriod + 1))) ;
+         _state.value .one_minus_fastk = 1.0 - _state.value .fastk;
+         _state.value .slowk = ((double)2.0 / ((double)( _state.value .optInSlowPeriod + 1))) ;
+         _state.value .one_minus_slowk = 1.0 - _state.value .slowk;
+         _state.value .ad = 0;
+         { if( inHigh > inLow ) _state.value .ad += (((inClose-inLow)-(inHigh-inClose))/(inHigh-inLow))*((double)inVolume); } ;
+         _state.value .fastEMA = _state.value .ad;
+         _state.value .slowEMA = _state.value .ad;
+         return RetCode.NeedMoreData ;
+      }
+      { if( inHigh > inLow ) _state.value .ad += (((inClose-inLow)-(inHigh-inClose))/(inHigh-inLow))*((double)inVolume); } ;
+      _state.value .fastEMA = ( _state.value .fastk* _state.value .ad)+( _state.value .one_minus_fastk* _state.value .fastEMA);
+      _state.value .slowEMA = ( _state.value .slowk* _state.value .ad)+( _state.value .one_minus_slowk* _state.value .slowEMA);
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      outReal.value = _state.value .fastEMA - _state.value .slowEMA;
       return RetCode.Success ;
    }
    public int adOscStateFree( struct TA_adOsc_State** _state )
@@ -17705,7 +17719,7 @@ public class Core {
       }
       adjustedPrevPeriod = (0.075* _state.value .period)+0.54;
       { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
-      *( ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->idx ) = smoothedValue;
+      (*( ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->idx )) = smoothedValue;
       if( (( _state.value .mem_index+1)%2) == 0 )
       {
          { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
@@ -17755,7 +17769,7 @@ public class Core {
       for( i=0; i < DCPeriodInt; i++ )
       {
          tempReal = ((double)i* _state.value .constDeg2RadBy360)/(double)DCPeriodInt;
-         tempReal2 = *( ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +idx) ;
+         tempReal2 = (*( ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +idx)) ;
          realPart += Math.sin (tempReal)*tempReal2;
          imagPart += Math.cos (tempReal)*tempReal2;
          if( idx == 0 )
@@ -18646,7 +18660,7 @@ public class Core {
       }
       adjustedPrevPeriod = (0.075* _state.value .period)+0.54;
       { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
-      *( ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->idx ) = smoothedValue;
+      (*( ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->idx )) = smoothedValue;
       if( (( _state.value .mem_index+1)%2) == 0 )
       {
          { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
@@ -18696,7 +18710,7 @@ public class Core {
       for( i=0; i < DCPeriodInt; i++ )
       {
          tempReal = ((double)i* _state.value .constDeg2RadBy360)/(double)DCPeriodInt;
-         tempReal2 = *( ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +idx) ;
+         tempReal2 = (*( ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +idx)) ;
          realPart += Math.sin (tempReal)*tempReal2;
          imagPart += Math.cos (tempReal)*tempReal2;
          if( idx == 0 )
@@ -19156,7 +19170,7 @@ public class Core {
       }
       adjustedPrevPeriod = (0.075* _state.value .period)+0.54;
       { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
-      *( ((struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .circBuf)->idx ) = smoothedValue;
+      (*( ((struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .circBuf)->idx )) = smoothedValue;
       if( (( _state.value .mem_index+1)%2) == 0 )
       {
          { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
@@ -19696,7 +19710,7 @@ public class Core {
       }
       adjustedPrevPeriod = (0.075* _state.value .period)+0.54;
       { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
-      *( ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->idx ) = smoothedValue;
+      (*( ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->idx )) = smoothedValue;
       if( (( _state.value .mem_index+1)%2) == 0 )
       {
          { struct TA_HT_TRENDMODE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDMODE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
@@ -19747,7 +19761,7 @@ public class Core {
       for( i=0; i < DCPeriodInt; i++ )
       {
          tempReal = ((double)i* _state.value .constDeg2RadBy360)/(double)DCPeriodInt;
-         tempReal2 = *( ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +idx) ;
+         tempReal2 = (*( ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +idx)) ;
          realPart += Math.sin (tempReal)*tempReal2;
          imagPart += Math.cos (tempReal)*tempReal2;
          if( idx == 0 )
@@ -19804,7 +19818,7 @@ public class Core {
       {
          trend = 0;
       }
-      tempReal = *( ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->idx ) ;
+      tempReal = (*( ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf)->idx )) ;
       if( (trendline != 0.0) && ( Math.abs ( (tempReal - trendline)/trendline ) >= 0.015) )
          trend = 1;
       { struct TA_HT_TRENDMODE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .circBuf; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
@@ -23978,39 +23992,45 @@ public class Core {
          return RetCode.NeedMoreData ; }
       if ( ( _state.value .mem_index == 1) )
       {
-         _state.value .prevValue = 0;
+         _state.value .prevValue = (inHigh+inLow+inClose)/3.0;
          _state.value .posSumMF = 0;
          _state.value .negSumMF = 0;
+         return RetCode.NeedMoreData ;
       }
-      _state.value .posSumMF -= *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .positive;
-      _state.value .negSumMF -= *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .negative;
+      if (_cur_idx > (unsigned int) _state.value .optInTimePeriod)
+      {
+         _state.value .posSumMF -= (*( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx )) .positive;
+         _state.value .negSumMF -= (*( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx )) .negative;
+      }
       tempValue1 = (inHigh+inLow+inClose)/3.0;
       tempValue2 = tempValue1 - _state.value .prevValue;
       _state.value .prevValue = tempValue1;
       tempValue1 *= inVolume;
       if( tempValue2 < 0 )
       {
-         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .negative = tempValue1;
+         (*( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx )) .negative = tempValue1;
          _state.value .negSumMF += tempValue1;
-         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .positive = 0.0;
+         (*( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx )) .positive = 0.0;
       }
       else if( tempValue2 > 0 )
       {
-         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .positive = tempValue1;
+         (*( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx )) .positive = tempValue1;
          _state.value .posSumMF += tempValue1;
-         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .negative = 0.0;
+         (*( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx )) .negative = 0.0;
       }
       else
       {
-         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .positive = 0.0;
-         *( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx ) .negative = 0.0;
+         (*( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx )) .positive = 0.0;
+         (*( ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->circbuf + ((struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow)->idx )) .negative = 0.0;
       }
+      { struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
       tempValue1 = _state.value .posSumMF + _state.value .negSumMF;
       if( tempValue1 < 1.0 )
          outReal.value = 0.0;
       else
          outReal.value = 100.0*( _state.value .posSumMF/tempValue1);
-      { struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .mflow; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
       return RetCode.Success ;
    }
    public int mfiStateFree( struct TA_mfi_State** _state )

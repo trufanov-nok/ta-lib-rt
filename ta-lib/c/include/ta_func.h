@@ -474,6 +474,13 @@ struct TA_ADOSC_State {
                       size_t mem_size;
                       size_t mem_index;
                       struct TA_ADOSC_Data* memory;
+                      double       slowk;
+                      double       one_minus_slowk;
+                      double       fastk;
+                      double       one_minus_fastk;
+                      double       ad;
+                      double       fastEMA;
+                      double       slowEMA;
                       int           optInFastPeriod; /* From 2 to 100000 */
                       int           optInSlowPeriod; /* From 2 to 100000 */
                       };

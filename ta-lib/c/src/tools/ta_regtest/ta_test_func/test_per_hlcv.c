@@ -767,29 +767,29 @@ static ErrorNumber do_test_state( const TA_History *history,
       break;
 
    case TA_ADOSC_3_10_TEST:
-//      retCode = TA_ADOSC_StateTest( test->startIdx,
-//                          test->endIdx,
-//                          gBuffer[0].in,
-//                          gBuffer[1].in,
-//                          gBuffer[2].in,
-//                          history->volume,
-//                          3, 10,
-//                          &outBegIdx,
-//                          &outNbElement,
-//                          gBuffer[0].out0 );
+      retCode = TA_ADOSC_StateTest( test->startIdx,
+                          test->endIdx,
+                          gBuffer[0].in,
+                          gBuffer[1].in,
+                          gBuffer[2].in,
+                          history->volume,
+                          3, 10,
+                          &outBegIdx,
+                          &outNbElement,
+                          gBuffer[0].out0 );
       break;
 
    case TA_ADOSC_5_2_TEST:
-//      retCode = TA_ADOSC_StateTest( test->startIdx,
-//                          test->endIdx,
-//                          gBuffer[0].in,
-//                          gBuffer[1].in,
-//                          gBuffer[2].in,
-//                          history->volume,
-//                          5, 2,
-//                          &outBegIdx,
-//                          &outNbElement,
-//                          gBuffer[0].out0 );
+      retCode = TA_ADOSC_StateTest( test->startIdx,
+                          test->endIdx,
+                          gBuffer[0].in,
+                          gBuffer[1].in,
+                          gBuffer[2].in,
+                          history->volume,
+                          5, 2,
+                          &outBegIdx,
+                          &outNbElement,
+                          gBuffer[0].out0 );
       break;
    default:
       retCode = TA_INTERNAL_ERROR(133);

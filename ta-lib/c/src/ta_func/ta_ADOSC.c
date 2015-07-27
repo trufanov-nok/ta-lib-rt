@@ -369,7 +369,8 @@
 
 {
    /* insert local variable here */
-
+#define TA_ADOSC_SUPPRESS_MEMORY_ALLOCATION
+double slowestPeriod;
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -405,8 +406,12 @@
 
    /* insert state init code here. */
 
+   if( optInFastPeriod < optInSlowPeriod )
+     slowestPeriod = STATE_P.optInSlowPeriod;
+   else
+     slowestPeriod = STATE_P.optInFastPeriod;
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   return LOOKBACK_CALL(EMA)( slowestPeriod );
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -436,7 +441,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_ADOSC_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -471,6 +476,41 @@
 
    /* insert state based TA dunc code here. */
 
+
+   #define CALCULATE_AD_STATE \
+   { \
+      if( inHigh > inLow ) \
+         STATE.ad += (((inClose-inLow)-(inHigh-inClose))/(inHigh-inLow))*((double)inVolume); \
+   }
+
+   if (FIRST_LAUNCH)
+    {
+      STATE.fastk = PER_TO_K( STATE.optInFastPeriod );
+      STATE.one_minus_fastk = 1.0 - STATE.fastk;
+
+      STATE.slowk = PER_TO_K( STATE.optInSlowPeriod );
+      STATE.one_minus_slowk = 1.0 - STATE.slowk;
+
+      STATE.ad = 0;
+
+      CALCULATE_AD_STATE;
+      STATE.fastEMA = STATE.ad;
+      STATE.slowEMA = STATE.ad;
+
+      return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+    }
+
+   CALCULATE_AD_STATE;
+
+   STATE.fastEMA = (STATE.fastk*STATE.ad)+(STATE.one_minus_fastk*STATE.fastEMA);
+   STATE.slowEMA = (STATE.slowk*STATE.ad)+(STATE.one_minus_slowk*STATE.slowEMA);
+
+
+   if (NEED_MORE_DATA)
+       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+   VALUE_HANDLE_DEREF(outReal) = STATE.fastEMA - STATE.slowEMA;
+
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -489,7 +529,6 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK

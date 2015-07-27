@@ -173,7 +173,31 @@ static const TA_OptInputParameterInfo *TA_ADOSC_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_ADOSC_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_ADOSC_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "slowk", 0 };
+const TA_InputParameterInfo TA_ADOSC_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "one_minus_slowk", 0 };
+const TA_InputParameterInfo TA_ADOSC_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "fastk", 0 };
+const TA_InputParameterInfo TA_ADOSC_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "one_minus_fastk", 0 };
+const TA_InputParameterInfo TA_ADOSC_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "ad", 0 };
+const TA_InputParameterInfo TA_ADOSC_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "fastEMA", 0 };
+const TA_InputParameterInfo TA_ADOSC_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "slowEMA", 0 };
+
+static const TA_InputParameterInfo *TA_ADOSC_StructParams[] = {
+
+    &TA_ADOSC_DEF_UI_STRUCT_PARAM_3,
+    &TA_ADOSC_DEF_UI_STRUCT_PARAM_4,
+    &TA_ADOSC_DEF_UI_STRUCT_PARAM_5,
+    &TA_ADOSC_DEF_UI_STRUCT_PARAM_6,
+    &TA_ADOSC_DEF_UI_STRUCT_PARAM_7,
+    &TA_ADOSC_DEF_UI_STRUCT_PARAM_8,
+    &TA_ADOSC_DEF_UI_STRUCT_PARAM_9,
+    NULL };
 
 DEF_FUNCTION( ADOSC,                         /* name */
               TA_GroupId_VolumeIndicators,   /* groupId */
