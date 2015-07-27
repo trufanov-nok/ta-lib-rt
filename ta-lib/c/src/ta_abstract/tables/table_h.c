@@ -162,7 +162,84 @@ static const TA_OptInputParameterInfo *TA_HT_DCPHASE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_HT_DCPHASE_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "detrender", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "Q1", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "jI", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "jQ", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "hilbertIdx", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "periodWMASub", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "periodWMASum", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "period", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "I1ForOddPrev2", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "I1ForEvenPrev2", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "I1ForOddPrev3", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "I1ForEvenPrev3", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Real, "prevI2", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Real, "prevQ2", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_15 =
+                                  { TA_Input_Real, "smoothPeriod", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_16 =
+                                  { TA_Input_Pointer, "circBuf", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_17 =
+                                  { TA_Input_Real, "DCPhase", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_18 =
+                                  { TA_Input_Real, "Im", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_19 =
+                                  { TA_Input_Real, "Re", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_20 =
+                                  { TA_Input_Real, "trailingWMAValue", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_21 =
+                                  { TA_Input_Real, "rad2Deg", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_22 =
+                                  { TA_Input_Real, "a", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_23 =
+                                  { TA_Input_Real, "b", 0 };
+const TA_InputParameterInfo TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_24 =
+                                  { TA_Input_Real, "constDeg2RadBy360", 0 };
+
+
+
+static const TA_InputParameterInfo *TA_HT_DCPHASE_StructParams[] = {
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_1,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_2,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_3,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_4,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_5,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_6,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_7,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_8,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_9,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_10,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_11,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_12,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_13,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_14,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_15,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_16,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_17,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_18,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_19,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_20,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_21,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_22,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_23,
+    &TA_HT_DCPHASE_DEF_UI_STRUCT_PARAM_24,
+    NULL };
 
 DEF_FUNCTION( HT_DCPHASE,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */
@@ -298,7 +375,84 @@ static const TA_OptInputParameterInfo *TA_HT_SINE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_HT_SINE_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "detrender", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "Q1", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "jI", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "jQ", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "hilbertIdx", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "periodWMASub", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "periodWMASum", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "period", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "I1ForOddPrev2", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "I1ForEvenPrev2", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "I1ForOddPrev3", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "I1ForEvenPrev3", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Real, "prevI2", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Real, "prevQ2", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_15 =
+                                  { TA_Input_Real, "smoothPeriod", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_16 =
+                                  { TA_Input_Pointer, "circBuf", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_17 =
+                                  { TA_Input_Real, "DCPhase", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_18 =
+                                  { TA_Input_Real, "Im", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_19 =
+                                  { TA_Input_Real, "Re", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_20 =
+                                  { TA_Input_Real, "trailingWMAValue", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_21 =
+                                  { TA_Input_Real, "rad2Deg", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_22 =
+                                  { TA_Input_Real, "a", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_23 =
+                                  { TA_Input_Real, "b", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_24 =
+                                  { TA_Input_Real, "constDeg2RadBy360", 0 };
+const TA_InputParameterInfo TA_HT_SINE_DEF_UI_STRUCT_PARAM_25 =
+                                  { TA_Input_Real, "deg2Rad", 0 };
+
+static const TA_InputParameterInfo *TA_HT_SINE_StructParams[] = {
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_1,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_2,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_3,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_4,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_5,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_6,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_7,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_8,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_9,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_10,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_11,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_12,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_13,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_14,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_15,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_16,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_17,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_18,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_19,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_20,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_21,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_22,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_23,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_24,
+    &TA_HT_SINE_DEF_UI_STRUCT_PARAM_25,
+    NULL };
 
 DEF_FUNCTION( HT_SINE,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */
@@ -326,7 +480,86 @@ static const TA_OptInputParameterInfo *TA_HT_TRENDLINE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_HT_TRENDLINE_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "detrender", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "Q1", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "jI", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "jQ", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "hilbertIdx", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "periodWMASub", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "periodWMASum", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "period", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "I1ForOddPrev2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "I1ForEvenPrev2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "I1ForOddPrev3", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "I1ForEvenPrev3", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Real, "prevI2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Real, "prevQ2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_15 =
+                                  { TA_Input_Real, "smoothPeriod", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_16 =
+                                  { TA_Input_Pointer, "circBuf", 0 };
+
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_18 =
+                                  { TA_Input_Real, "Im", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_19 =
+                                  { TA_Input_Real, "Re", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_20 =
+                                  { TA_Input_Real, "trailingWMAValue", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_21 =
+                                  { TA_Input_Real, "rad2Deg", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_22 =
+                                  { TA_Input_Real, "a", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_23 =
+                                  { TA_Input_Real, "b", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_24 =
+                                  { TA_Input_Real, "iTrend1", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_25 =
+                                  { TA_Input_Real, "iTrend2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_26 =
+                                  { TA_Input_Real, "iTrend3", 0 };
+
+static const TA_InputParameterInfo *TA_HT_TRENDLINE_StructParams[] = {
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_1,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_2,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_3,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_4,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_5,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_6,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_7,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_8,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_9,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_10,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_11,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_12,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_13,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_14,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_15,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_16,
+
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_18,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_19,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_20,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_21,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_22,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_23,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_24,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_25,
+    &TA_HT_TRENDLINE_DEF_UI_STRUCT_PARAM_26,
+    NULL };
 
 DEF_FUNCTION( HT_TRENDLINE,                         /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
@@ -354,7 +587,105 @@ static const TA_OptInputParameterInfo *TA_HT_TRENDMODE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_HT_TRENDMODE_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "detrender", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "Q1", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "jI", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "jQ", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "hilbertIdx", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "periodWMASub", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "periodWMASum", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "period", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "I1ForOddPrev2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "I1ForEvenPrev2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "I1ForOddPrev3", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "I1ForEvenPrev3", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Real, "prevI2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Real, "prevQ2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_15 =
+                                  { TA_Input_Real, "smoothPeriod", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_16 =
+                                  { TA_Input_Pointer, "circBuf", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_17 =
+                                  { TA_Input_Real, "DCPhase", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_18 =
+                                  { TA_Input_Real, "Im", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_19 =
+                                  { TA_Input_Real, "Re", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_20 =
+                                  { TA_Input_Real, "trailingWMAValue", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_21 =
+                                  { TA_Input_Real, "rad2Deg", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_22 =
+                                  { TA_Input_Real, "a", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_23 =
+                                  { TA_Input_Real, "b", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_24 =
+                                  { TA_Input_Real, "constDeg2RadBy360", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_25 =
+                                  { TA_Input_Real, "deg2Rad", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_26 =
+                                  { TA_Input_Real, "iTrend1", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_27 =
+                                  { TA_Input_Real, "iTrend2", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_28 =
+                                  { TA_Input_Real, "iTrend3", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_29 =
+                                  { TA_Input_Integer, "daysInTrend", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_30 =
+                                  { TA_Input_Real, "prevDCPhase", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_31 =
+                                  { TA_Input_Real, "prevSine", 0 };
+const TA_InputParameterInfo TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_32 =
+                                  { TA_Input_Real, "prevLeadSine", 0 };
+
+static const TA_InputParameterInfo *TA_HT_TRENDMODE_StructParams[] = {
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_1,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_2,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_3,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_4,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_5,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_6,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_7,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_8,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_9,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_10,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_11,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_12,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_13,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_14,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_15,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_16,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_17,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_18,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_19,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_20,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_21,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_22,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_23,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_24,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_25,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_26,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_27,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_28,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_29,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_30,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_31,
+    &TA_HT_TRENDMODE_DEF_UI_STRUCT_PARAM_32,
+    NULL };
 
 DEF_FUNCTION( HT_TRENDMODE,                         /* name */
               TA_GroupId_CycleIndicators,  /* groupId */

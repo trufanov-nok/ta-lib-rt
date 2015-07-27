@@ -17586,6 +17586,8 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   struct TA_HT_DCPHASE_STATE_CIRCBUF { int idx; double* circbuf; int size; };
+   struct TA_HT_DCPHASE_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
    public int htDcPhaseStateInit( struct TA_htDcPhase_State** _state )
    {
       if (_state == NULL)
@@ -17597,23 +17599,159 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_DCPHASE_Data));
       else
          _state.value .value .memory = NULL;
+      { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_DCPHASE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_DCPHASE_STATE_CIRCBUF * buf = (struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = 50; buf->circbuf = calloc(50, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
+      { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
    public int htDcPhaseState( struct TA_htDcPhase_State* _state,
       double inReal,
       double *outReal )
    {
+      double hilbertTempReal, smoothedValue;
+      double adjustedPrevPeriod;
+      double Q2, I2;
+      double tempReal, tempReal2;
+      int DCPeriodInt;
+      double DCPeriod, imagPart, realPart;
+      int idx, i;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .periodWMASub = 0.;
+         _state.value .periodWMASum = 0.;
+         _state.value .hilbertIdx = 0;
+         _state.value .period = 0;
+         _state.value .prevI2 = 0.;
+         _state.value .prevQ2 = 0.;
+         _state.value .I1ForOddPrev2 = 0;
+         _state.value .I1ForEvenPrev2 = 0;
+         _state.value .I1ForOddPrev3 = 0;
+         _state.value .I1ForEvenPrev3 = 0;
+         _state.value .smoothPeriod = 0;
+         _state.value .Im = 0.;
+         _state.value .Re = 0.;
+         _state.value .trailingWMAValue = 0.;
+         _state.value .rad2Deg = 180.0 / (4.0 * Math.atan (1));
+         _state.value .constDeg2RadBy360 = Math.atan (1)*8.0;
+         _state.value .DCPhase = 0;
+         _state.value .a = 0.0962;
+         _state.value .b = 0.5769;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jI; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jQ; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+      }
+      if ( _state.value .mem_index < 4)
+      {
+         _state.value .periodWMASub += inReal;
+         _state.value .periodWMASum += _state.value .mem_index*inReal;
          ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
-      return RetCode.Success ;
+         return RetCode.NeedMoreData ;
+      } else
+         if ( _state.value .mem_index <= 37)
+      {
+         { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
+         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
+         return RetCode.NeedMoreData ;
+      }
+      adjustedPrevPeriod = (0.075* _state.value .period)+0.54;
+      { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
+      *( ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->idx ) = smoothedValue;
+      if( (( _state.value .mem_index+1)%2) == 0 )
+      {
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1; hilbertTempReal = _state.value .a * (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = _state.value .a * _state.value .I1ForEvenPrev3; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = _state.value .I1ForEvenPrev3; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = _state.value .a * (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         if( ++ _state.value .hilbertIdx == 3 )
+            _state.value .hilbertIdx = 0;
+         Q2 = (0.2*( (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1.value .var + (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jI.value .var )) + (0.8* _state.value .prevQ2);
+         I2 = (0.2*( _state.value .I1ForEvenPrev3 - (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jQ.value .var )) + (0.8* _state.value .prevI2);
+         _state.value .I1ForOddPrev3 = _state.value .I1ForOddPrev2;
+         _state.value .I1ForOddPrev2 = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender.value .var ;
+      } else {
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1; hilbertTempReal = _state.value .a * (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = _state.value .a * _state.value .I1ForOddPrev3; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = _state.value .I1ForOddPrev3; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_DCPHASE_HILBERT_STRUCT * ref; ref = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = _state.value .a * (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         Q2 = (0.2*( (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .Q1.value .var + (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jI.value .var )) + (0.8* _state.value .prevQ2);
+         I2 = (0.2*( _state.value .I1ForOddPrev3 - (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .jQ.value .var )) + (0.8* _state.value .prevI2);
+         _state.value .I1ForEvenPrev3 = _state.value .I1ForEvenPrev2;
+         _state.value .I1ForEvenPrev2 = (struct TA_HT_DCPHASE_HILBERT_STRUCT *) _state.value .detrender.value .var ;
+      }
+      _state.value .Re = (0.2*((I2* _state.value .prevI2)+(Q2* _state.value .prevQ2)))+(0.8* _state.value .Re);
+      _state.value .Im = (0.2*((I2* _state.value .prevQ2)-(Q2* _state.value .prevI2)))+(0.8* _state.value .Im);
+      _state.value .prevQ2 = Q2;
+      _state.value .prevI2 = I2;
+      tempReal = _state.value .period;
+      if( ( _state.value .Im != 0.0) && ( _state.value .Re != 0.0) )
+         _state.value .period = 360.0 / ( Math.atan ( _state.value .Im/ _state.value .Re)* _state.value .rad2Deg);
+      tempReal2 = 1.5*tempReal;
+      if( _state.value .period > tempReal2)
+         _state.value .period = tempReal2;
+      tempReal2 = 0.67*tempReal;
+      if( _state.value .period < tempReal2 )
+         _state.value .period = tempReal2;
+      if( _state.value .period < 6 )
+         _state.value .period = 6;
+      else if( _state.value .period > 50 )
+         _state.value .period = 50;
+      _state.value .period = (0.2* _state.value .period) + (0.8 * tempReal);
+      _state.value .smoothPeriod = (0.33* _state.value .period)+(0.67* _state.value .smoothPeriod);
+      DCPeriod = _state.value .smoothPeriod+0.5;
+      DCPeriodInt = (int)DCPeriod;
+      realPart = 0.0;
+      imagPart = 0.0;
+      idx = ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->idx ;
+      for( i=0; i < DCPeriodInt; i++ )
+      {
+         tempReal = ((double)i* _state.value .constDeg2RadBy360)/(double)DCPeriodInt;
+         tempReal2 = *( ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +idx) ;
+         realPart += Math.sin (tempReal)*tempReal2;
+         imagPart += Math.cos (tempReal)*tempReal2;
+         if( idx == 0 )
+            idx = ((struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf)->size -1;
+         else
+            idx--;
+      }
+      tempReal = Math.abs (imagPart);
+      if( tempReal > 0.0 )
+         _state.value .DCPhase = Math.atan (realPart/imagPart)* _state.value .rad2Deg;
+      else if( tempReal <= 0.01 )
+      {
+         if( realPart < 0.0 )
+            _state.value .DCPhase -= 90.0;
+         else if( realPart > 0.0 )
+            _state.value .DCPhase += 90.0;
+      }
+      _state.value .DCPhase += 90.0;
+      _state.value .DCPhase += 360.0 / _state.value .smoothPeriod;
+      if( imagPart < 0.0 )
+         _state.value .DCPhase += 180.0;
+      if( _state.value .DCPhase > 315.0 )
+         _state.value .DCPhase -= 360.0;
+      { struct TA_HT_DCPHASE_STATE_CIRCBUF * buf = (struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .circBuf; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
+      ( _state.value .memory+_cur_idx).value .inReal = inReal ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      else {
+         outReal.value = _state.value .DCPhase;
+         return RetCode.Success ;
+      }
    }
    public int htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
    {
+      { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
+      { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
+      { if ( _state.value .value .jI != NULL) { free ( _state.value .value .jI); _state.value .value .jI = NULL; } } ;
+      { if ( _state.value .value .jQ != NULL) { free ( _state.value .value .jQ); _state.value .value .jQ = NULL; } } ;
+      { struct TA_HT_DCPHASE_STATE_CIRCBUF * buf = (struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .value .circBuf; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .circBuf = NULL; } } ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -18387,6 +18525,8 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   struct TA_HT_SINE_STATE_CIRCBUF { int idx; double* circbuf; int size; };
+   struct TA_HT_SINE_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
    public int htSineStateInit( struct TA_htSine_State** _state )
    {
       if (_state == NULL)
@@ -18398,6 +18538,11 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_SINE_Data));
       else
          _state.value .value .memory = NULL;
+      { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_SINE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_SINE_STATE_CIRCBUF * buf = (struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = 50; buf->circbuf = calloc(50, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
+      { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
    public int htSineState( struct TA_htSine_State* _state,
@@ -18405,17 +18550,151 @@ public class Core {
       double *outSine,
       double *outLeadSine )
    {
+      double hilbertTempReal, smoothedValue;
+      double adjustedPrevPeriod;
+      double Q2, I2;
+      double tempReal, tempReal2;
+      int DCPeriodInt;
+      double DCPeriod, imagPart, realPart;
+      int idx, i;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .periodWMASub = 0.;
+         _state.value .periodWMASum = 0.;
+         _state.value .hilbertIdx = 0;
+         _state.value .period = 0;
+         _state.value .prevI2 = 0.;
+         _state.value .prevQ2 = 0.;
+         _state.value .I1ForOddPrev2 = 0;
+         _state.value .I1ForEvenPrev2 = 0;
+         _state.value .I1ForOddPrev3 = 0;
+         _state.value .I1ForEvenPrev3 = 0;
+         _state.value .smoothPeriod = 0;
+         _state.value .Im = 0.;
+         _state.value .Re = 0.;
+         _state.value .trailingWMAValue = 0.;
+         _state.value .rad2Deg = 180.0 / (4.0 * Math.atan (1));
+         _state.value .deg2Rad = 1.0/ _state.value .rad2Deg;
+         _state.value .constDeg2RadBy360 = Math.atan (1)*8.0;
+         _state.value .DCPhase = 0;
+         _state.value .a = 0.0962;
+         _state.value .b = 0.5769;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jI; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jQ; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+      }
+      if ( _state.value .mem_index < 4)
+      {
+         _state.value .periodWMASub += inReal;
+         _state.value .periodWMASum += _state.value .mem_index*inReal;
          ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      } else
+         if ( _state.value .mem_index <= 37)
+      {
+         { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
+         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
+         return RetCode.NeedMoreData ;
+      }
+      adjustedPrevPeriod = (0.075* _state.value .period)+0.54;
+      { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
+      *( ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->idx ) = smoothedValue;
+      if( (( _state.value .mem_index+1)%2) == 0 )
+      {
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1; hilbertTempReal = _state.value .a * (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = _state.value .a * _state.value .I1ForEvenPrev3; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = _state.value .I1ForEvenPrev3; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = _state.value .a * (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         if( ++ _state.value .hilbertIdx == 3 )
+            _state.value .hilbertIdx = 0;
+         Q2 = (0.2*( (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1.value .var + (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jI.value .var )) + (0.8* _state.value .prevQ2);
+         I2 = (0.2*( _state.value .I1ForEvenPrev3 - (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jQ.value .var )) + (0.8* _state.value .prevI2);
+         _state.value .I1ForOddPrev3 = _state.value .I1ForOddPrev2;
+         _state.value .I1ForOddPrev2 = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender.value .var ;
+      } else {
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1; hilbertTempReal = _state.value .a * (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = _state.value .a * _state.value .I1ForOddPrev3; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = _state.value .I1ForOddPrev3; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_SINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = _state.value .a * (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         Q2 = (0.2*( (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .Q1.value .var + (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jI.value .var )) + (0.8* _state.value .prevQ2);
+         I2 = (0.2*( _state.value .I1ForOddPrev3 - (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .jQ.value .var )) + (0.8* _state.value .prevI2);
+         _state.value .I1ForEvenPrev3 = _state.value .I1ForEvenPrev2;
+         _state.value .I1ForEvenPrev2 = (struct TA_HT_SINE_HILBERT_STRUCT *) _state.value .detrender.value .var ;
+      }
+      _state.value .Re = (0.2*((I2* _state.value .prevI2)+(Q2* _state.value .prevQ2)))+(0.8* _state.value .Re);
+      _state.value .Im = (0.2*((I2* _state.value .prevQ2)-(Q2* _state.value .prevI2)))+(0.8* _state.value .Im);
+      _state.value .prevQ2 = Q2;
+      _state.value .prevI2 = I2;
+      tempReal = _state.value .period;
+      if( ( _state.value .Im != 0.0) && ( _state.value .Re != 0.0) )
+         _state.value .period = 360.0 / ( Math.atan ( _state.value .Im/ _state.value .Re)* _state.value .rad2Deg);
+      tempReal2 = 1.5*tempReal;
+      if( _state.value .period > tempReal2)
+         _state.value .period = tempReal2;
+      tempReal2 = 0.67*tempReal;
+      if( _state.value .period < tempReal2 )
+         _state.value .period = tempReal2;
+      if( _state.value .period < 6 )
+         _state.value .period = 6;
+      else if( _state.value .period > 50 )
+         _state.value .period = 50;
+      _state.value .period = (0.2* _state.value .period) + (0.8 * tempReal);
+      _state.value .smoothPeriod = (0.33* _state.value .period)+(0.67* _state.value .smoothPeriod);
+      DCPeriod = _state.value .smoothPeriod+0.5;
+      DCPeriodInt = (int)DCPeriod;
+      realPart = 0.0;
+      imagPart = 0.0;
+      idx = ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->idx ;
+      for( i=0; i < DCPeriodInt; i++ )
+      {
+         tempReal = ((double)i* _state.value .constDeg2RadBy360)/(double)DCPeriodInt;
+         tempReal2 = *( ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +idx) ;
+         realPart += Math.sin (tempReal)*tempReal2;
+         imagPart += Math.cos (tempReal)*tempReal2;
+         if( idx == 0 )
+            idx = ((struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf)->size -1;
+         else
+            idx--;
+      }
+      tempReal = Math.abs (imagPart);
+      if( tempReal > 0.0 )
+         _state.value .DCPhase = Math.atan (realPart/imagPart)* _state.value .rad2Deg;
+      else if( tempReal <= 0.01 )
+      {
+         if( realPart < 0.0 )
+            _state.value .DCPhase -= 90.0;
+         else if( realPart > 0.0 )
+            _state.value .DCPhase += 90.0;
+      }
+      _state.value .DCPhase += 90.0;
+      _state.value .DCPhase += 360.0 / _state.value .smoothPeriod;
+      if( imagPart < 0.0 )
+         _state.value .DCPhase += 180.0;
+      if( _state.value .DCPhase > 315.0 )
+         _state.value .DCPhase -= 360.0;
+      { struct TA_HT_SINE_STATE_CIRCBUF * buf = (struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .circBuf; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
+      ( _state.value .memory+_cur_idx).value .inReal = inReal ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      else {
+         outSine.value = Math.sin ( _state.value .DCPhase* _state.value .deg2Rad);
+         outLeadSine.value = Math.sin (( _state.value .DCPhase+45)* _state.value .deg2Rad);
+         return RetCode.Success ;
+      }
       return RetCode.Success ;
    }
    public int htSineStateFree( struct TA_htSine_State** _state )
    {
+      { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
+      { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
+      { if ( _state.value .value .jI != NULL) { free ( _state.value .value .jI); _state.value .value .jI = NULL; } } ;
+      { if ( _state.value .value .jQ != NULL) { free ( _state.value .value .jQ); _state.value .value .jQ = NULL; } } ;
+      { struct TA_HT_SINE_STATE_CIRCBUF * buf = (struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .value .circBuf; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .circBuf = NULL; } } ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -18757,6 +19036,8 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
+   struct TA_HT_TRENDLINE_STATE_CIRCBUF { int idx; double* circbuf; int size; };
+   struct TA_HT_TRENDLINE_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
    public int htTrendlineStateInit( struct TA_htTrendline_State** _state )
    {
       if (_state == NULL)
@@ -18768,23 +19049,141 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_HT_TRENDLINE_Data));
       else
          _state.value .value .memory = NULL;
+      { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_TRENDLINE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_TRENDLINE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = 50; buf->circbuf = calloc(50, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
+      { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } ;
+      { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
    public int htTrendlineState( struct TA_htTrendline_State* _state,
       double inReal,
       double *outReal )
    {
+      double hilbertTempReal, smoothedValue;
+      double adjustedPrevPeriod;
+      double Q2, I2;
+      double tempReal, tempReal2;
+      int DCPeriodInt;
+      double DCPeriod;
+      int idx, i;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .periodWMASub = 0.;
+         _state.value .periodWMASum = 0.;
+         _state.value .hilbertIdx = 0;
+         _state.value .period = 0;
+         _state.value .prevI2 = 0.;
+         _state.value .prevQ2 = 0.;
+         _state.value .I1ForOddPrev2 = 0;
+         _state.value .I1ForEvenPrev2 = 0;
+         _state.value .I1ForOddPrev3 = 0;
+         _state.value .I1ForEvenPrev3 = 0;
+         _state.value .smoothPeriod = 0;
+         _state.value .Im = 0.;
+         _state.value .Re = 0.;
+         _state.value .trailingWMAValue = 0.;
+         _state.value .rad2Deg = 180.0 / (4.0 * Math.atan (1));
+         _state.value .iTrend1 = 0;
+         _state.value .iTrend2 = 0;
+         _state.value .iTrend3 = 0;
+         _state.value .a = 0.0962;
+         _state.value .b = 0.5769;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jI; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jQ; ref.value ._Odd [0] = 0.0; ref.value ._Odd [1] = 0.0; ref.value ._Odd [2] = 0.0; ref.value ._Even[0] = 0.0; ref.value ._Even[1] = 0.0; ref.value ._Even[2] = 0.0; ref.value .var = 0.0; ref.value .prev_Odd = 0.0; ref.value .prev_Even = 0.0; ref.value .prev_input_Odd = 0.0; ref.value .prev_input_Even = 0.0; } ;
+      }
+      if ( _state.value .mem_index < 4)
+      {
+         _state.value .periodWMASub += inReal;
+         _state.value .periodWMASum += _state.value .mem_index*inReal;
          ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      } else
+         if ( _state.value .mem_index <= 37)
+      {
+         { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
+         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
+         return RetCode.NeedMoreData ;
+      }
+      adjustedPrevPeriod = (0.075* _state.value .period)+0.54;
+      { _state.value .periodWMASub += inReal; _state.value .periodWMASub -= _state.value .trailingWMAValue; _state.value .periodWMASum += inReal*4.0; _state.value .trailingWMAValue = ( _state.value .memory+( _state.value .mem_index-4) % _state.value .mem_size ).value .inReal ; smoothedValue = _state.value .periodWMASum*0.1; _state.value .periodWMASum -= _state.value .periodWMASub; } ;
+      *( ((struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .circBuf)->idx ) = smoothedValue;
+      if( (( _state.value .mem_index+1)%2) == 0 )
+      {
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1; hilbertTempReal = _state.value .a * (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = _state.value .a * _state.value .I1ForEvenPrev3; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = _state.value .I1ForEvenPrev3; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = _state.value .a * (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Even [ _state.value .hilbertIdx]; ref.value ._Even [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Even ; ref.value .prev_Even = _state.value .b * ref.value .prev_input_Even ; ref.value .var += ref.value .prev_Even ; ref.value .prev_input_Even = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         if( ++ _state.value .hilbertIdx == 3 )
+            _state.value .hilbertIdx = 0;
+         Q2 = (0.2*( (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1.value .var + (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jI.value .var )) + (0.8* _state.value .prevQ2);
+         I2 = (0.2*( _state.value .I1ForEvenPrev3 - (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jQ.value .var )) + (0.8* _state.value .prevI2);
+         _state.value .I1ForOddPrev3 = _state.value .I1ForOddPrev2;
+         _state.value .I1ForOddPrev2 = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender.value .var ;
+      } else {
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender; hilbertTempReal = _state.value .a * smoothedValue; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = smoothedValue; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1; hilbertTempReal = _state.value .a * (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jI; hilbertTempReal = _state.value .a * _state.value .I1ForOddPrev3; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = _state.value .I1ForOddPrev3; ref.value .var *= adjustedPrevPeriod; } ;
+         { struct TA_HT_TRENDLINE_HILBERT_STRUCT * ref; ref = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jQ; hilbertTempReal = _state.value .a * (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var = - ref.value ._Odd [ _state.value .hilbertIdx]; ref.value ._Odd [ _state.value .hilbertIdx] = hilbertTempReal; ref.value .var += hilbertTempReal; ref.value .var -= ref.value .prev_Odd ; ref.value .prev_Odd = _state.value .b * ref.value .prev_input_Odd ; ref.value .var += ref.value .prev_Odd ; ref.value .prev_input_Odd = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1.value .var ; ref.value .var *= adjustedPrevPeriod; } ;
+         Q2 = (0.2*( (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .Q1.value .var + (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jI.value .var )) + (0.8* _state.value .prevQ2);
+         I2 = (0.2*( _state.value .I1ForOddPrev3 - (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .jQ.value .var )) + (0.8* _state.value .prevI2);
+         _state.value .I1ForEvenPrev3 = _state.value .I1ForEvenPrev2;
+         _state.value .I1ForEvenPrev2 = (struct TA_HT_TRENDLINE_HILBERT_STRUCT *) _state.value .detrender.value .var ;
+      }
+      _state.value .Re = (0.2*((I2* _state.value .prevI2)+(Q2* _state.value .prevQ2)))+(0.8* _state.value .Re);
+      _state.value .Im = (0.2*((I2* _state.value .prevQ2)-(Q2* _state.value .prevI2)))+(0.8* _state.value .Im);
+      _state.value .prevQ2 = Q2;
+      _state.value .prevI2 = I2;
+      tempReal = _state.value .period;
+      if( ( _state.value .Im != 0.0) && ( _state.value .Re != 0.0) )
+         _state.value .period = 360.0 / ( Math.atan ( _state.value .Im/ _state.value .Re)* _state.value .rad2Deg);
+      tempReal2 = 1.5*tempReal;
+      if( _state.value .period > tempReal2)
+         _state.value .period = tempReal2;
+      tempReal2 = 0.67*tempReal;
+      if( _state.value .period < tempReal2 )
+         _state.value .period = tempReal2;
+      if( _state.value .period < 6 )
+         _state.value .period = 6;
+      else if( _state.value .period > 50 )
+         _state.value .period = 50;
+      _state.value .period = (0.2* _state.value .period) + (0.8 * tempReal);
+      _state.value .smoothPeriod = (0.33* _state.value .period)+(0.67* _state.value .smoothPeriod);
+      DCPeriod = _state.value .smoothPeriod+0.5;
+      DCPeriodInt = (int)DCPeriod;
+      ( _state.value .memory+_cur_idx).value .inReal = inReal ;
+      tempReal = 0.0;
+      idx = _state.value .mem_index-1;
+      for( i=0; i < DCPeriodInt; i++ )
+         tempReal += ( _state.value .memory+idx-- % _state.value .mem_size ).value .inReal ;
+      if( DCPeriodInt > 0 )
+         tempReal = tempReal/(double)DCPeriodInt;
+      tempReal2 = (4.0*tempReal + 3.0* _state.value .iTrend1 + 2.0* _state.value .iTrend2 + _state.value .iTrend3) / 10.0;
+      _state.value .iTrend3 = _state.value .iTrend2;
+      _state.value .iTrend2 = _state.value .iTrend1;
+      _state.value .iTrend1 = tempReal;
+      { struct TA_HT_TRENDLINE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .circBuf; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      else {
+         outReal.value = tempReal2;
+         return RetCode.Success ;
+      }
       return RetCode.Success ;
    }
    public int htTrendlineStateFree( struct TA_htTrendline_State** _state )
    {
+      { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
+      { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
+      { if ( _state.value .value .jI != NULL) { free ( _state.value .value .jI); _state.value .value .jI = NULL; } } ;
+      { if ( _state.value .value .jQ != NULL) { free ( _state.value .value .jQ); _state.value .value .jQ = NULL; } } ;
+      { struct TA_HT_TRENDLINE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .value .circBuf; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .circBuf = NULL; } } ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {

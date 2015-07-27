@@ -437,6 +437,16 @@
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
+#ifndef TA_HT_TRENDLINE_STATE_CIRCBUF_DEFUNED
+#define TA_HT_TRENDLINE_STATE_CIRCBUF_DEFUNED
+DEFINE_CIRCBUF_STRUCT(HT_TRENDLINE, double)
+#endif
+
+#ifndef HILBERT_VARIABLES_STRUCT_HT_TRENDLINE_DEFINED
+DEFINE_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE)
+#define HILBERT_VARIABLES_STRUCT_HT_TRENDLINE_DEFINED
+#endif
+
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
@@ -474,9 +484,14 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
+  CREATE_CIRCBUF_STRUCT(HT_TRENDLINE, circBuf, double, 50); // equal to #define SMOOTH_PRICE_SIZE 50
 
+  CREATE_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE, detrender);
+  CREATE_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE, Q1);
+  CREATE_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE, jI);
+  CREATE_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE, jQ);
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+  return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -497,6 +512,16 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+
+ #define TA_HT_TRENDLINE_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+ double hilbertTempReal, smoothedValue;
+ double adjustedPrevPeriod;
+ double Q2, I2;
+ double tempReal, tempReal2;
+ /* Variable used to calculate the dominant cycle phase */
+ int DCPeriodInt;
+ double DCPeriod;
+ int idx, i;
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -525,6 +550,153 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+         if (FIRST_LAUNCH)
+         {
+             STATE.periodWMASub = 0.;
+             STATE.periodWMASum = 0.;
+             STATE.hilbertIdx = 0;
+             STATE.period = 0;
+             STATE.prevI2 = 0.;
+             STATE.prevQ2 = 0.;
+             STATE.I1ForOddPrev2 = 0;
+             STATE.I1ForEvenPrev2 = 0;
+             STATE.I1ForOddPrev3 = 0;
+             STATE.I1ForEvenPrev3 = 0;
+             STATE.smoothPeriod = 0;
+             STATE.Im = 0.;
+             STATE.Re = 0.;
+             STATE.trailingWMAValue = 0.;
+             STATE.rad2Deg = 180.0 / (4.0 * std_atan(1));
+             STATE.iTrend1 = 0;
+             STATE.iTrend2 = 0;
+             STATE.iTrend3 = 0;
+
+             STATE.a = 0.0962;
+             STATE.b = 0.5769;
+
+             INIT_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE, detrender);
+             INIT_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE, Q1);
+             INIT_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE, jI);
+             INIT_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE, jQ);
+         }
+
+#define DO_PRICE_WMA_STATE(varNewPrice,varToStoreSmoothedValue) { \
+STATE.periodWMASub     += varNewPrice; \
+STATE.periodWMASub     -= STATE.trailingWMAValue; \
+STATE.periodWMASum     += varNewPrice*4.0; \
+STATE.trailingWMAValue  = MEM_IDX_NS((STATE.mem_index-4) % MEM_SIZE, inReal); \
+varToStoreSmoothedValue = STATE.periodWMASum*0.1; \
+STATE.periodWMASum -= STATE.periodWMASub; \
+}
+
+if (STATE.mem_index < 4)
+{
+   STATE.periodWMASub += inReal;
+   STATE.periodWMASum += STATE.mem_index*inReal;
+   PUSH_TO_MEM(inReal,inReal);
+   return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+} else
+    if (STATE.mem_index <= 37)
+    {
+        DO_PRICE_WMA_STATE(inReal, smoothedValue);
+        PUSH_TO_MEM(inReal,inReal);
+        return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+    }
+
+
+
+adjustedPrevPeriod = (0.075*STATE.period)+0.54;
+DO_PRICE_WMA_STATE(inReal, smoothedValue);
+
+
+CIRCBUF_STRUCT_CURRENT_EL(HT_TRENDLINE, circBuf) = smoothedValue;
+
+if( ((STATE.mem_index+1)%2) == 0 )
+{
+    /* Do the Hilbert Transforms for even price bar */
+    DO_HILBERT_STRUCT_EVEN(HT_TRENDLINE, detrender, smoothedValue);
+    DO_HILBERT_STRUCT_EVEN(HT_TRENDLINE, Q1, GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,detrender,var));
+    DO_HILBERT_STRUCT_EVEN(HT_TRENDLINE, jI, STATE.I1ForEvenPrev3);
+    DO_HILBERT_STRUCT_EVEN(HT_TRENDLINE, jQ, GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,Q1,var));
+    if( ++STATE.hilbertIdx == 3 )
+       STATE.hilbertIdx = 0;
+
+    Q2 = (0.2*(GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,Q1,var) + GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,jI,var))) + (0.8*STATE.prevQ2);
+    I2 = (0.2*(STATE.I1ForEvenPrev3 - GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,jQ,var))) + (0.8*STATE.prevI2);
+
+    STATE.I1ForOddPrev3 = STATE.I1ForOddPrev2;
+    STATE.I1ForOddPrev2 = GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,detrender,var);
+
+} else {
+
+    DO_HILBERT_STRUCT_ODD(HT_TRENDLINE, detrender, smoothedValue);
+    DO_HILBERT_STRUCT_ODD(HT_TRENDLINE, Q1, GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,detrender,var));
+    DO_HILBERT_STRUCT_ODD(HT_TRENDLINE, jI, STATE.I1ForOddPrev3);
+    DO_HILBERT_STRUCT_ODD(HT_TRENDLINE, jQ, GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,Q1,var));
+
+    Q2 = (0.2*(GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,Q1,var) + GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,jI,var))) + (0.8*STATE.prevQ2);
+    I2 = (0.2*(STATE.I1ForOddPrev3 - GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,jQ,var))) + (0.8*STATE.prevI2);
+
+    STATE.I1ForEvenPrev3 = STATE.I1ForEvenPrev2;
+    STATE.I1ForEvenPrev2 = GET_HILBERT_STRUCT_VAR(HT_TRENDLINE,detrender,var);
+
+}
+
+
+STATE.Re = (0.2*((I2*STATE.prevI2)+(Q2*STATE.prevQ2)))+(0.8*STATE.Re);
+STATE.Im = (0.2*((I2*STATE.prevQ2)-(Q2*STATE.prevI2)))+(0.8*STATE.Im);
+STATE.prevQ2 = Q2;
+STATE.prevI2 = I2;
+tempReal = STATE.period;
+if( (STATE.Im != 0.0) && (STATE.Re != 0.0) )
+   STATE.period = 360.0 / (std_atan(STATE.Im/STATE.Re)*STATE.rad2Deg);
+tempReal2 = 1.5*tempReal;
+if( STATE.period > tempReal2)
+   STATE.period = tempReal2;
+tempReal2 = 0.67*tempReal;
+if( STATE.period < tempReal2 )
+   STATE.period = tempReal2;
+if( STATE.period < 6 )
+   STATE.period = 6;
+else if( STATE.period > 50 )
+   STATE.period = 50;
+STATE.period = (0.2*STATE.period) + (0.8 * tempReal);
+
+
+STATE.smoothPeriod = (0.33*STATE.period)+(0.67*STATE.smoothPeriod);
+
+/* Compute Dominant Cycle Phase */
+DCPeriod    = STATE.smoothPeriod+0.5;
+DCPeriodInt = (int)DCPeriod;
+
+
+PUSH_TO_MEM(inReal,inReal);
+
+tempReal = 0.0;
+idx = STATE.mem_index-1;
+for( i=0; i < DCPeriodInt; i++ )
+    tempReal += MEM_IDX_NS( idx-- % MEM_SIZE, inReal);
+
+if( DCPeriodInt > 0 )
+   tempReal = tempReal/(double)DCPeriodInt;
+
+tempReal2 = (4.0*tempReal + 3.0*STATE.iTrend1 + 2.0*STATE.iTrend2 + STATE.iTrend3) / 10.0;
+STATE.iTrend3   = STATE.iTrend2;
+STATE.iTrend2   = STATE.iTrend1;
+STATE.iTrend1   = tempReal;
+
+
+//   CIRCBUF_NEXT(smoothPrice);
+CIRCBUF_STRUCT_NEXT(HT_TRENDLINE, circBuf);
+
+
+
+if (NEED_MORE_DATA)
+    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+else {
+    VALUE_HANDLE_DEREF(outReal) = tempReal2;
+    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+}
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -544,7 +716,12 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+    FREE_HILBERT_VARIABLES_STRUCT(detrender);
+    FREE_HILBERT_VARIABLES_STRUCT(Q1);
+    FREE_HILBERT_VARIABLES_STRUCT(jI);
+    FREE_HILBERT_VARIABLES_STRUCT(jQ);
 
+    FREE_CIRCBUF_STRUCT(HT_TRENDLINE, circBuf);
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -767,6 +944,14 @@
 /* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
 /* Generated */    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */ }
+/* Generated */ #ifndef TA_HT_TRENDLINE_STATE_CIRCBUF_DEFUNED
+/* Generated */ #define TA_HT_TRENDLINE_STATE_CIRCBUF_DEFUNED
+/* Generated */ DEFINE_CIRCBUF_STRUCT(HT_TRENDLINE, double)
+/* Generated */ #endif
+/* Generated */ #ifndef HILBERT_VARIABLES_STRUCT_HT_TRENDLINE_DEFINED
+/* Generated */ DEFINE_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE)
+/* Generated */ #define HILBERT_VARIABLES_STRUCT_HT_TRENDLINE_DEFINED
+/* Generated */ #endif
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib

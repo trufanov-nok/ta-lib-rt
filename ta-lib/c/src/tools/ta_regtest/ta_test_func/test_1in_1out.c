@@ -305,10 +305,15 @@ static TA_RetCode rangeTestFunction( TA_Integer    startIdx,
 static ErrorNumber do_test_state( const TA_History *history,
                                     const TA_Test *test )
 {
-    TA_RetCode retCode = 0;
+    TA_RetCode retCode;
+    ErrorNumber errNb;
     TA_Integer outBegIdx;
     TA_Integer outNbElement;
+    TA_RangeTestParam testParam;
+    const TA_Real *referenceInput;
 
+    TA_Integer *intBuffer;
+    int size, i;
 
     /* Set to NAN all the elements of the gBuffers.  */
     clearAllBuffers();
@@ -349,30 +354,56 @@ static ErrorNumber do_test_state( const TA_History *history,
        break;
 
     case TA_HT_DCPHASE_TEST:
-//       retCode = TA_HT_DCPHASE( test->startIdx,
-//                                test->endIdx,
-//                                gBuffer[0].in,
-//                                &outBegIdx,
-//                                &outNbElement,
-//                                gBuffer[0].out0 );
+       retCode = TA_HT_DCPHASE_StateTest( test->startIdx,
+                                test->endIdx,
+                                gBuffer[0].in,
+                                &outBegIdx,
+                                &outNbElement,
+                                gBuffer[0].out0 );
        break;
     case TA_HT_TRENDLINE_TEST:
-//       retCode = TA_HT_TRENDLINE( test->startIdx,
-//                                  test->endIdx,
-//                                  gBuffer[0].in,
-//                                  &outBegIdx,
-//                                  &outNbElement,
-//                                  gBuffer[0].out0 );
+       retCode = TA_HT_TRENDLINE_StateTest( test->startIdx,
+                                  test->endIdx,
+                                  gBuffer[0].in,
+                                  &outBegIdx,
+                                  &outNbElement,
+                                  gBuffer[0].out0 );
        break;
     case TA_HT_TRENDMODE_TEST:
-//       ALLOC_INT_BUFFER(size);
-//       retCode = TA_HT_TRENDMODE( test->startIdx,
-//                                  test->endIdx,
-//                                  gBuffer[0].in,
-//                                  &outBegIdx,
-//                                  &outNbElement,
-//                                  &intBuffer[1] );
-//       FREE_INT_BUFFER( gBuffer[0].out0, outNbElement );
+#define PRE_SENTINEL  ((TA_Integer)0xABABFEDC)
+#define POST_SENTINEL ((TA_Integer)0xEFABCDFF)
+#define ALLOC_INT_BUFFER(varSize)  \
+{ \
+   intBuffer = TA_Malloc(sizeof(TA_Integer)*(varSize+2)); \
+   intBuffer[0]      = PRE_SENTINEL; \
+   intBuffer[varSize+1] = POST_SENTINEL; \
+}
+
+       ALLOC_INT_BUFFER(size);
+       retCode = TA_HT_TRENDMODE_StateTest( test->startIdx,
+                                  test->endIdx,
+                                  gBuffer[0].in,
+                                  &outBegIdx,
+                                  &outNbElement,
+                                  &intBuffer[1] );
+#define FREE_INT_BUFFER( destBuffer, varNbElement ) \
+{ \
+   if( intBuffer[0] != PRE_SENTINEL ) \
+   { \
+      retCode = TA_INTERNAL_ERROR(138); \
+   } \
+   else if( intBuffer[size+1] != POST_SENTINEL ) \
+   { \
+      retCode = TA_INTERNAL_ERROR(139); \
+   } \
+   else \
+   { \
+      for( i=0; i < varNbElement; i++ ) \
+         destBuffer[i] = (double)intBuffer[i+1]; \
+   } \
+   TA_Free( intBuffer ); \
+}
+       FREE_INT_BUFFER( gBuffer[0].out0, outNbElement );
        break;
     case TA_SIN_TEST:
        retCode = TA_SIN_StateTest(test->startIdx,
