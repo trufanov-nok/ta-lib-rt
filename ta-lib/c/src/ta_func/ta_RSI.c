@@ -439,7 +439,7 @@
 
 {
    /* insert local variable here */
-
+#define TA_RSI_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -467,7 +467,11 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
-
+   if( (TA_GLOBALS_UNSTABLE_PERIOD(TA_FUNC_UNST_RSI,Rsi) == 0) &&
+                    (TA_GLOBALS_COMPATIBILITY == ENUM_VALUE(Compatibility,TA_COMPATIBILITY_METASTOCK,Metastock)))
+   STATE_P.MetastockMode = 1;
+        else
+        STATE_P.MetastockMode = 0;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -490,7 +494,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_RSI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+double tempValue1, tempValue2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -518,6 +523,51 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+    if( STATE.optInTimePeriod == 1 )
+    {
+      VALUE_HANDLE_DEREF(outReal) = inReal;
+      return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+    }
+
+    if (FIRST_LAUNCH)
+     {
+         STATE.prevLoss = 0.0;
+         STATE.prevGain = 0.0;
+         STATE.prevValue = inReal;
+         if (STATE.MetastockMode == 0)
+             return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+     }
+
+
+    tempValue2 = inReal - STATE.prevValue;
+    STATE.prevValue = inReal;
+
+    if (STATE.mem_index <= (unsigned int) (STATE.optInTimePeriod+STATE.MetastockMode))
+    {
+      STATE.prevLoss *= (STATE.optInTimePeriod-1);
+      STATE.prevGain *= (STATE.optInTimePeriod-1);
+    }
+
+   if (tempValue2 < 0)
+       STATE.prevLoss -= tempValue2;
+   else
+       STATE.prevGain += tempValue2;
+
+   if (STATE.mem_index < (unsigned int) (STATE.optInTimePeriod+STATE.MetastockMode)) // must be <
+   {
+   STATE.prevLoss /= STATE.optInTimePeriod;
+   STATE.prevGain /= STATE.optInTimePeriod;
+   }
+
+   if (NEED_MORE_DATA)
+     return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+   tempValue1 = STATE.prevGain+STATE.prevLoss;
+
+   if( !TA_IS_ZERO(tempValue1) )
+      VALUE_HANDLE_DEREF(outReal) = 100*(tempValue2/tempValue1);
+   else
+      VALUE_HANDLE_DEREF(outReal) = 0.0;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

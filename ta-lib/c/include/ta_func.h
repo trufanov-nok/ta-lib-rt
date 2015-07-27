@@ -7813,6 +7813,10 @@ struct TA_CMO_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_CMO_Data* memory;
+                    int          MetastockMode;
+                    double       prevGain;
+                    double       prevLoss;
+                    double       prevValue;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 
@@ -12884,6 +12888,10 @@ struct TA_RSI_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_RSI_Data* memory;
+                    int          MetastockMode;
+                    double       prevGain;
+                    double       prevLoss;
+                    double       prevValue;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 

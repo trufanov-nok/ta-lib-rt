@@ -105,7 +105,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 
 static TA_Test tableTest[] =
@@ -210,6 +211,14 @@ ErrorNumber test_func_rsi( TA_History *history )
       if( retValue != 0 )
       {
          printf( "%s Failed Test #%d (Code=%d)\n", __FILE__,
+                 i, retValue );
+         return retValue;
+      }
+
+      retValue = do_test_state(history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "%s Failed State Test #%d (Code=%d)\n", __FILE__,
                  i, retValue );
          return retValue;
       }
@@ -505,3 +514,67 @@ static ErrorNumber do_test( const TA_History *history,
    return TA_TEST_PASS;
 }
 
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   ErrorNumber errNb;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+   TA_RangeTestParam testParam;
+   const TA_FuncHandle *funcHandle;
+   const TA_FuncInfo *funcInfo;
+   TA_ParamHolder *params;
+
+   retCode = TA_SUCCESS;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   TA_SetCompatibility( (TA_Compatibility)test->compatibility );
+
+   /* Build the input. */
+   setInputBuffer( 0, history->close, history->nbBars );
+   setInputBuffer( 1, history->close, history->nbBars );
+
+   /* Set the unstable period requested for that test. */
+   switch( test->theFunction )
+   {
+   case TA_RSI_TEST:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_RSI, test->unstablePeriod );
+      break;
+   case TA_CMO_TEST:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_CMO, test->unstablePeriod );
+      break;
+   }
+
+   if( retCode != TA_SUCCESS )
+      return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+   /* Make a simple first call. */
+   switch( test->theFunction )
+   {
+   case TA_RSI_TEST:
+      retCode = TA_RSI_StateTest(test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        test->optInTimePeriod,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+      break;
+   case TA_CMO_TEST:
+      retCode = TA_CMO_StateTest( test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        test->optInTimePeriod,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+      break;
+   default:
+      retCode = TA_INTERNAL_ERROR(178);
+   }
+
+   return TA_TEST_PASS;
+}

@@ -23182,29 +23182,29 @@ public class Core {
       _state.value .value .optInMaxPeriod = optInMaxPeriod;
       _state.value .value .optInMAType = optInMAType;
       _state.value .value .mem_size = movingAverageVariablePeriodLookback (optInMinPeriod, optInMaxPeriod, optInMAType );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MAVP_Data));
-      else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+      _state.value .value .memory = NULL;
+      return movingAverage ((struct movingAverage **)& _state.value .value .MAState, _state.value .value .optInMaxPeriod, _state.value .value .optInMAType );
    }
    public int movingAverageVariablePeriodState( struct TA_movingAverageVariablePeriod_State* _state,
       double inReal,
       double inPeriods,
       double *outReal )
    {
+      double period;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         ( _state.value .memory+_cur_idx).value .inPeriods = inPeriods ;
-         return RetCode.NeedMoreData ; }
-      return RetCode.Success ;
+      if (inPeriods > _state.value .optInMaxPeriod) period = _state.value .optInMaxPeriod;
+      else if(inPeriods < _state.value .optInMinPeriod) period = _state.value .optInMinPeriod;
+      else period = inPeriods;
+      struct movingAverage * ma_state = (struct movingAverage *) _state.value .MAState;
+      ma_state->optInTimePeriod = period;
+      return movingAverage ( ma_state, inReal, outReal );
    }
    public int movingAverageVariablePeriodStateFree( struct TA_movingAverageVariablePeriod_State** _state )
    {
+      movingAverage ((struct movingAverage **)& _state.value .value .MAState);
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -27941,23 +27941,59 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = rsiLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_RSI_Data));
+      _state.value .value .memory = NULL;
+      if( ( (this.unstablePeriod[FuncUnstId.Rsi.ordinal()]) == 0) &&
+         ( (this.compatibility) == Compatibility.Metastock ))
+         _state.value .value .MetastockMode = 1;
       else
-         _state.value .value .memory = NULL;
+         _state.value .value .MetastockMode = 0;
       return RetCode.Success ;
    }
    public int rsiState( struct TA_rsi_State* _state,
       double inReal,
       double *outReal )
    {
+      double tempValue1, tempValue2;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      if( _state.value .optInTimePeriod == 1 )
+      {
+         outReal.value = inReal;
+         return RetCode.Success ;
+      }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .prevLoss = 0.0;
+         _state.value .prevGain = 0.0;
+         _state.value .prevValue = inReal;
+         if ( _state.value .MetastockMode == 0)
+            return RetCode.NeedMoreData ;
+      }
+      tempValue2 = inReal - _state.value .prevValue;
+      _state.value .prevValue = inReal;
+      if ( _state.value .mem_index <= (unsigned int) ( _state.value .optInTimePeriod+ _state.value .MetastockMode))
+      {
+         _state.value .prevLoss *= ( _state.value .optInTimePeriod-1);
+         _state.value .prevGain *= ( _state.value .optInTimePeriod-1);
+      }
+      if (tempValue2 < 0)
+         _state.value .prevLoss -= tempValue2;
+      else
+         _state.value .prevGain += tempValue2;
+      if ( _state.value .mem_index < (unsigned int) ( _state.value .optInTimePeriod+ _state.value .MetastockMode))
+      {
+         _state.value .prevLoss /= _state.value .optInTimePeriod;
+         _state.value .prevGain /= _state.value .optInTimePeriod;
+      }
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      tempValue1 = _state.value .prevGain+ _state.value .prevLoss;
+      if( ! (((- (0.00000000000001) )<tempValue1)&&(tempValue1< (0.00000000000001) )) )
+         outReal.value = 100*(tempValue2/tempValue1);
+      else
+         outReal.value = 0.0;
       return RetCode.Success ;
    }
    public int rsiStateFree( struct TA_rsi_State** _state )

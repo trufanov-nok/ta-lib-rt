@@ -1877,7 +1877,21 @@ static const TA_OptInputParameterInfo *TA_CMO_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CMO_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CMO_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Integer, "MetastockMode", 0 };
+const TA_InputParameterInfo TA_CMO_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevGain", 0 };
+const TA_InputParameterInfo TA_CMO_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevLoss", 0 };
+const TA_InputParameterInfo TA_CMO_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "prevValue", 0 };
+
+static const TA_InputParameterInfo *TA_CMO_StructParams[] = {
+    &TA_CMO_DEF_UI_STRUCT_PARAM_1,
+    &TA_CMO_DEF_UI_STRUCT_PARAM_2,
+    &TA_CMO_DEF_UI_STRUCT_PARAM_3,
+    &TA_CMO_DEF_UI_STRUCT_PARAM_4,
+    NULL };
 
 DEF_FUNCTION( CMO,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
