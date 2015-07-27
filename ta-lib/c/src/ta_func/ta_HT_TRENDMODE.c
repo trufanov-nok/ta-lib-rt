@@ -524,8 +524,8 @@
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
-#ifndef TA_HT_TRENDMODE_STATE_CIRCBUF_DEFUNED
-#define TA_HT_TRENDMODE_STATE_CIRCBUF_DEFUNED
+#ifndef TA_HT_TRENDMODE_STATE_CIRCBUF_DEFINED
+#define TA_HT_TRENDMODE_STATE_CIRCBUF_DEFINED
 DEFINE_CIRCBUF_STRUCT(HT_TRENDMODE, double)
 #endif
 
@@ -1179,8 +1179,8 @@ double sine, leadSine;
 /* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
 /* Generated */    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */ }
-/* Generated */ #ifndef TA_HT_TRENDMODE_STATE_CIRCBUF_DEFUNED
-/* Generated */ #define TA_HT_TRENDMODE_STATE_CIRCBUF_DEFUNED
+/* Generated */ #ifndef TA_HT_TRENDMODE_STATE_CIRCBUF_DEFINED
+/* Generated */ #define TA_HT_TRENDMODE_STATE_CIRCBUF_DEFINED
 /* Generated */ DEFINE_CIRCBUF_STRUCT(HT_TRENDMODE, double)
 /* Generated */ #endif
 /* Generated */ #ifndef HILBERT_VARIABLES_STRUCT_HT_TRENDMODE_DEFINED
