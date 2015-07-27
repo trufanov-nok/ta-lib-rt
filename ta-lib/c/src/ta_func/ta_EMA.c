@@ -375,7 +375,9 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 
 {
    /* insert local variable here */
-   #define TA_EMA_SUPPRESS_MEMORY_ALLOCATION
+   return TA_INT_EMA_StateInit(_state, optInTimePeriod, PER_TO_K( optInTimePeriod ));
+
+#ifdef SUPPRESS_CODE_BLOCK_BELOW
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -401,9 +403,46 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+#endif
+}
 
-   /* insert state init code here. */
 
+ #if defined( _MANAGED )
+ int Core::TA_INT_EMA_StateInit( struct TA_Ema_State** _state,
+                       int           optInTimePeriod,
+                         double optInK_1)
+
+ #elif defined( _JAVA )
+ public int TA_INT_EMA_StateInit( struct TA_ema_State** _state,
+                        int           optInTimePeriod,
+                          double optInK_1)
+
+ #else
+ TA_RetCode TA_INT_EMA_StateInit( struct TA_EMA_State** _state,
+                                           int           optInTimePeriod,
+                                           double optInK_1)
+
+ #endif
+{
+   /* insert local variable here */
+
+ #ifndef TA_FUNC_NO_RANGE_CHECK
+
+    if (_state == NULL)
+          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+    /* min/max are checked for optInTimePeriod. */
+    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
+       optInTimePeriod = 30;
+    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+    STATE = TA_Calloc(1, sizeof(struct TA_EMA_State));
+    STATE_P.mem_index = 0;
+    STATE_P.optInTimePeriod = optInTimePeriod;
+    STATE_P.optInK_1 = optInK_1;
+    MEM_SIZE_P = TA_EMA_Lookback(optInTimePeriod );
+    MEM_P = NULL;
+ #endif /* TA_FUNC_NO_RANGE_CHECK */
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -489,7 +528,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
       }
 
 
-    STATE.prevMA = ((inReal- STATE.prevMA) * PER_TO_K( STATE.optInTimePeriod ) ) + STATE.prevMA;
+    STATE.prevMA = ((inReal- STATE.prevMA) * STATE.optInK_1 ) + STATE.prevMA;
 
 //    if (LAST_NEED_MORE_DATA)
 //    {
@@ -502,6 +541,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
     VALUE_HANDLE_DEREF(outReal) = STATE.prevMA;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
+
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

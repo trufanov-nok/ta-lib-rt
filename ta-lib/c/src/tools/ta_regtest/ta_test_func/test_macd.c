@@ -113,7 +113,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 static TA_Test tableTest[] =
 {
@@ -192,6 +193,13 @@ ErrorNumber test_func_macd( TA_History *history )
       if( retValue != 0 )
       {
          printf( "TA_MACD Failed Test #%d (Code=%d)\n", i, retValue );
+         return retValue;
+      }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "TA_MACD Failed State Test #%d (Code=%d)\n", i, retValue );
          return retValue;
       }
    }
@@ -597,6 +605,78 @@ static ErrorNumber do_test( const TA_History *history,
                            (void *)&testParam, 3, 0 );
       if( errNb != TA_TEST_PASS )
          return errNb;
+   }
+
+   return TA_TEST_PASS;
+}
+
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+
+   retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_EMA, 0 );
+   if( retCode != TA_SUCCESS )
+      return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+   TA_SetCompatibility( (TA_Compatibility)test->compatibility );
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->close, history->nbBars );
+   setInputBuffer( 1, history->close, history->nbBars );
+   setInputBuffer( 2, history->close, history->nbBars );
+   setInputBuffer( 3, history->close, history->nbBars );
+
+   CLEAR_EXPECTED_VALUE(0);
+   CLEAR_EXPECTED_VALUE(1);
+   CLEAR_EXPECTED_VALUE(2);
+
+   /* Make a simple first call. */
+   switch( test->testId )
+   {
+   case TA_MACDFIX_TEST:
+      retCode = TA_MACDFIX_StateTest( test->startIdx,
+                            test->endIdx,
+                            gBuffer[0].in,
+                            test->optInSignalPeriod_2,
+                            &outBegIdx, &outNbElement,
+                            gBuffer[0].out0,
+                            gBuffer[0].out1,
+                            gBuffer[0].out2 );
+      break;
+   case TA_MACD_TEST:
+      retCode = TA_MACD_StateTest(test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        test->optInFastPeriod,
+                        test->optInSlowPeriod,
+                        test->optInSignalPeriod_2,
+                        &outBegIdx, &outNbElement,
+                        gBuffer[0].out0,
+                        gBuffer[0].out1,
+                        gBuffer[0].out2 );
+      break;
+   case TA_MACDEXT_TEST:
+      retCode = TA_MACDEXT_StateTest(test->startIdx,
+                            test->endIdx,
+                            gBuffer[0].in,
+                            test->optInFastPeriod,
+                            TA_MAType_EMA,
+                            test->optInSlowPeriod,
+                            TA_MAType_EMA,
+                            test->optInSignalPeriod_2,
+                            TA_MAType_EMA,
+                            &outBegIdx, &outNbElement,
+                            gBuffer[0].out0,
+                            gBuffer[0].out1,
+                            gBuffer[0].out2 );
+      break;
    }
 
    return TA_TEST_PASS;

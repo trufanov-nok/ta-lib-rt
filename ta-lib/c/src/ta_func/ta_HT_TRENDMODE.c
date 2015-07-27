@@ -1179,6 +1179,14 @@ double sine, leadSine;
 /* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
 /* Generated */    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */ }
+/* Generated */ #ifndef TA_HT_TRENDMODE_STATE_CIRCBUF_DEFUNED
+/* Generated */ #define TA_HT_TRENDMODE_STATE_CIRCBUF_DEFUNED
+/* Generated */ DEFINE_CIRCBUF_STRUCT(HT_TRENDMODE, double)
+/* Generated */ #endif
+/* Generated */ #ifndef HILBERT_VARIABLES_STRUCT_HT_TRENDMODE_DEFINED
+/* Generated */ DEFINE_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE)
+/* Generated */ #define HILBERT_VARIABLES_STRUCT_HT_TRENDMODE_DEFINED
+/* Generated */ #endif
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib

@@ -75,10 +75,14 @@ const TA_InputParameterInfo TA_EMA_DEF_UI_STRUCT_PARAM_2 =
 const TA_InputParameterInfo TA_EMA_DEF_UI_STRUCT_PARAM_3 =
                                   { TA_Input_Real, "preprRes", 0 };
 
+const TA_InputParameterInfo TA_EMA_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "optInK_1", 0 };
+
 static const TA_InputParameterInfo *TA_EMA_StructParams[] = {
     &TA_EMA_DEF_UI_STRUCT_PARAM_1,
     &TA_EMA_DEF_UI_STRUCT_PARAM_2,
     &TA_EMA_DEF_UI_STRUCT_PARAM_3,
+    &TA_EMA_DEF_UI_STRUCT_PARAM_4,
     NULL };
 
 DEF_FUNCTION( EMA,                         /* name */

@@ -67,6 +67,10 @@ TA_RetCode TA_S_INT_EMA( int          startIdx,
                          int         *outBegIdx,
                          int         *outNBElement,
                          double      *outReal );
+
+TA_RetCode TA_INT_EMA_StateInit( struct TA_EMA_State** _state,
+                          int           optInTimePeriod,
+                          double optInK_1);
 #endif
 
 /* Calculate a MACD
@@ -97,6 +101,11 @@ TA_RetCode TA_S_INT_MACD( int          startIdx,
                           double       outRealMACD_0[],
                           double       outRealMACDSignal_1[],
                           double       outRealMACDHist_2[] );
+
+TA_RetCode TA_INT_MACD_StateInit( struct TA_MACD_State** _state,
+                                  int           optInFastPeriod,
+                                  int           optInSlowPeriod,
+                                  int           optInSignalPeriod );
 #endif
 
 /* Internal Price Oscillator function.

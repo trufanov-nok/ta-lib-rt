@@ -552,6 +552,7 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 
 {
    /* insert local variable here */
+#define TA_MACD_SUPPRESS_MEMORY_ALLOCATION
 
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -595,9 +596,108 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 
    /* insert state init code here. */
 
+        if( optInSlowPeriod < optInFastPeriod )
+        {
+            STATE_P.optInSlowPeriod = optInFastPeriod;
+            STATE_P.optInFastPeriod = optInSlowPeriod;
+        }
+
+   FUNCTION_CALL_STATE_INIT(EMA) ((struct TA_EMA_State**)&STATE_P.slowEMAState, STATE_P.optInSlowPeriod);
+   FUNCTION_CALL_STATE_INIT(EMA) ((struct TA_EMA_State**)&STATE_P.fastEMAState, STATE_P.optInFastPeriod);
+   FUNCTION_CALL_STATE_INIT(EMA) ((struct TA_EMA_State**)&STATE_P.signalEMAState, STATE_P.optInSignalPeriod);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
+
+
+
+ #if defined( _MANAGED )
+ int Core::TA_INT_MACD_StateInit( struct TA_Macd_State** _state,
+                        int           optInFastPeriod,
+                        int           optInSlowPeriod,
+                        int           optInSignalPeriod )
+
+ #elif defined( _JAVA )
+ public int TA_INT_MACD_StateInit( struct TA_macd_State** _state,
+                         int           optInFastPeriod,
+                         int           optInSlowPeriod,
+                         int           optInSignalPeriod )
+
+ #else
+ TA_RetCode TA_INT_MACD_StateInit( struct TA_MACD_State** _state,
+                                            int           optInFastPeriod,
+                                            int           optInSlowPeriod,
+                                            int           optInSignalPeriod )
+
+ #endif
+
+{
+// in this ver optInFastPeriod and optInSlowPeriod may be nulls.
+double k1, k2;
+
+ #ifndef TA_FUNC_NO_RANGE_CHECK
+
+    if (_state == NULL)
+          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+    /* min/max are checked for optInFastPeriod. */
+    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
+       optInFastPeriod = 12;
+    else if( ((int)optInFastPeriod > 100000) )
+       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+    /* min/max are checked for optInSlowPeriod. */
+    if( (int)optInSlowPeriod == TA_INTEGER_DEFAULT )
+       optInSlowPeriod = 26;
+    else if( ((int)optInSlowPeriod > 100000) )
+       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+    /* min/max are checked for optInSignalPeriod. */
+    if( (int)optInSignalPeriod == TA_INTEGER_DEFAULT )
+       optInSignalPeriod = 9;
+    else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
+       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+    STATE = TA_Calloc(1, sizeof(struct TA_MACD_State));
+    STATE_P.mem_index = 0;
+    STATE_P.optInFastPeriod = optInFastPeriod;
+    STATE_P.optInSlowPeriod = optInSlowPeriod;
+    STATE_P.optInSignalPeriod = optInSignalPeriod;
+    MEM_SIZE_P = TA_MACD_Lookback(optInFastPeriod, optInSlowPeriod, optInSignalPeriod );
+    MEM_P = NULL;
+ #endif /* TA_FUNC_NO_RANGE_CHECK */
+
+
+        if( optInSlowPeriod < optInFastPeriod )
+        {
+            STATE_P.optInSlowPeriod = optInFastPeriod;
+            STATE_P.optInFastPeriod = optInSlowPeriod;
+        }
+
+    /* Catch special case for fix 26/12 MACD. */
+    if( STATE_P.optInSlowPeriod != 0 )
+       k1 = PER_TO_K(STATE_P.optInSlowPeriod);
+    else
+    {
+       STATE_P.optInSlowPeriod = 26;
+       k1 = (double)0.075; /* Fix 26 */
+    }
+
+    if( STATE_P.optInFastPeriod != 0 )
+       k2 = PER_TO_K(STATE_P.optInFastPeriod);
+    else
+    {
+       STATE_P.optInFastPeriod = 12;
+       k2 = (double)0.15; /* Fix 12 */
+    }
+
+   FUNCTION_CALL_STATE_INIT(INT_EMA) ((struct TA_EMA_State**)&STATE_P.slowEMAState, STATE_P.optInSlowPeriod, k1);
+   FUNCTION_CALL_STATE_INIT(INT_EMA) ((struct TA_EMA_State**)&STATE_P.fastEMAState, STATE_P.optInFastPeriod, k2);
+   FUNCTION_CALL_STATE_INIT(INT_EMA) ((struct TA_EMA_State**)&STATE_P.signalEMAState, STATE_P.optInSignalPeriod, PER_TO_K(STATE_P.optInSignalPeriod));
+
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+}
+
+
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -623,7 +723,9 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_MACD_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+  ENUM_DECLARATION(RetCode) retCode;
+  double slowEMA, fastEMA;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -658,7 +760,36 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 
    /* insert state based TA dunc code here. */
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+          /* Calculate the slow EMA.  */
+          retCode = FUNCTION_CALL_STATE(EMA)( STATE.slowEMAState, inReal, &slowEMA );
+
+          if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
+              retCode != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
+             return retCode;
+
+
+          /* Calculate the fast EMA. */
+          retCode = FUNCTION_CALL_STATE(EMA)( STATE.fastEMAState, inReal, &fastEMA );
+
+          if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
+              retCode != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
+             return retCode;
+
+
+          /* Calculate (fast EMA) - (slow EMA). */
+          VALUE_HANDLE_DEREF(outMACD) = fastEMA - slowEMA;
+
+          /* Calculate the signal/trigger line. */
+          retCode = FUNCTION_CALL_DOUBLE_STATE(EMA)( STATE.signalEMAState, inReal, outMACDSignal );
+
+          if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
+              retCode != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
+             return retCode;
+
+          /* Calculate the histogram. */
+          VALUE_HANDLE_DEREF( outMACDHist ) = VALUE_HANDLE_DEREF(outMACD)-VALUE_HANDLE_DEREF(outMACDSignal);
+
+   return retCode;
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -676,6 +807,10 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+
+    FUNCTION_CALL_STATE_FREE(EMA)((struct TA_EMA_State**)&STATE_P.slowEMAState);
+    FUNCTION_CALL_STATE_FREE(EMA)((struct TA_EMA_State**)&STATE_P.fastEMAState);
+    FUNCTION_CALL_STATE_FREE(EMA)((struct TA_EMA_State**)&STATE_P.signalEMAState);
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

@@ -240,7 +240,11 @@
 
 {
    /* insert local variable here */
-
+return FUNCTION_CALL_STATE_INIT(INT_MACD)((struct TA_MACD_State**) _state,
+                                          0, /* 0 indicate fix 12 == 0.15  for optInFastPeriod */
+                                          0, /* 0 indicate fix 26 == 0.075 for optInSlowPeriod */
+                                          optInSignalPeriod);
+#ifdef SUPPRESS_CODE_BLOCK_BELOW
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -271,6 +275,7 @@
 
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+#endif
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -296,8 +301,9 @@
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
-   /* insert local variable here */
 
+   return FUNCTION_CALL_STATE(MACD)( (struct TA_MACD_State*) _state, inReal, outMACD, outMACDSignal, outMACDHist );
+#ifdef SUPPRESS_CODE_BLOCK_BELOW
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -333,6 +339,7 @@
    /* insert state based TA dunc code here. */
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+#endif
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -349,8 +356,9 @@
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
-   /* insert local variable here */
+   return FUNCTION_CALL_STATE_FREE(MACD)( (struct TA_MACD_State**) _state );
 
+#ifdef SUPPRESS_CODE_BLOCK_BELOW
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -367,6 +375,7 @@
 
    /* insert state free code here. */   
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+#endif
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
