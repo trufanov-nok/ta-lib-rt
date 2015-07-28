@@ -21946,6 +21946,26 @@ public class Core {
    {
       double k1, k2;
       RetCode retCode;
+      if( optInSlowPeriod < optInFastPeriod )
+      {
+         int temp = optInSlowPeriod;
+         optInSlowPeriod = optInFastPeriod;
+         optInFastPeriod = temp;
+      }
+      if( optInSlowPeriod != 0 )
+         k1 = ((double)2.0 / ((double)(optInSlowPeriod + 1))) ;
+      else
+      {
+         optInSlowPeriod = 26;
+         k1 = (double)0.075;
+      }
+      if( optInFastPeriod != 0 )
+         k2 = ((double)2.0 / ((double)(optInFastPeriod + 1))) ;
+      else
+      {
+         optInFastPeriod = 12;
+         k2 = (double)0.15;
+      }
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
@@ -21967,25 +21987,6 @@ public class Core {
       _state.value .value .optInSignalPeriod = optInSignalPeriod;
       _state.value .value .mem_size = macdLookback (optInFastPeriod, optInSlowPeriod, optInSignalPeriod );
       _state.value .value .memory = NULL;
-      if( optInSlowPeriod < optInFastPeriod )
-      {
-         _state.value .value .optInSlowPeriod = optInFastPeriod;
-         _state.value .value .optInFastPeriod = optInSlowPeriod;
-      }
-      if( _state.value .value .optInSlowPeriod != 0 )
-         k1 = ((double)2.0 / ((double)( _state.value .value .optInSlowPeriod + 1))) ;
-      else
-      {
-         _state.value .value .optInSlowPeriod = 26;
-         k1 = (double)0.075;
-      }
-      if( _state.value .value .optInFastPeriod != 0 )
-         k2 = ((double)2.0 / ((double)( _state.value .value .optInFastPeriod + 1))) ;
-      else
-      {
-         _state.value .value .optInFastPeriod = 12;
-         k2 = (double)0.15;
-      }
       retCode = TA_INT_EMA_StateInit ((struct ema **)& _state.value .value .slowEMAState, _state.value .value .optInSlowPeriod, k1);
       if (retCode != RetCode.Success ) return retCode;
       retCode = TA_INT_EMA_StateInit ((struct ema **)& _state.value .value .fastEMAState, _state.value .value .optInFastPeriod, k2);
@@ -22015,7 +22016,7 @@ public class Core {
       if( retCode1 != RetCode.Success &&
          retCode1 != RetCode.NeedMoreData )
          return retCode1;
-      if ( _state.value .fastEMADelay < _state.value .mem_index)
+      if ( ( _state.value .fastEMADelay < (int) _state.value .mem_index) || ( (this.compatibility) != Compatibility.Default ))
       {
          retCode2 = ema ( _state.value .fastEMAState, inReal, &fastEMA );
          if( retCode2 != RetCode.Success &&
@@ -22388,13 +22389,13 @@ public class Core {
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
       if ( ( _state.value .mem_index == 1) )
       {
-         _state.value .fastMADelay = movingAverageLookback ( _state.value .optInSlowPeriod ) - movingAverageLookback ( _state.value .optInFastPeriod );
+         _state.value .fastMADelay = abs( movingAverageLookback ( _state.value .optInSlowPeriod, _state.value .optInSlowMAType ) - movingAverageLookback ( _state.value .optInFastPeriod, _state.value .optInFastMAType ) );
       }
       retCode1 = movingAverage ( _state.value .slowMAState, inReal, &slowMA );
       if( retCode1 != RetCode.Success &&
          retCode1 != RetCode.NeedMoreData )
          return retCode1;
-      if ( _state.value .fastMADelay < _state.value .mem_index)
+      if ( _state.value .fastMADelay < (int) _state.value .mem_index)
       {
          retCode2 = movingAverage ( _state.value .fastMAState, inReal, &fastMA );
          if( retCode2 != RetCode.Success &&
@@ -22404,7 +22405,7 @@ public class Core {
       if (retCode1 | retCode2)
          return (retCode1 | retCode2);
       outMACD.value = fastMA - slowMA;
-      retCode3 = movingAverage ( _state.value .signalMAState, inReal, outMACDSignal );
+      retCode3 = movingAverage ( _state.value .signalMAState, fastMA - slowMA, outMACDSignal );
       if( retCode3 != RetCode.Success &&
          retCode3 != RetCode.NeedMoreData )
          return retCode3;

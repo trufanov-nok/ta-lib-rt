@@ -2334,11 +2334,14 @@ void printFunc( FILE *out,
             return;
          }
 
-         if( inputParamInfo->type != TA_Input_Price )
+         if( inputParamInfo->type != TA_Input_Price)
          {
             printIndent( out, indent );
             if( validationCode )
+            {
+               if (!stateFuncSignature)
                fprintf( out, "if( !%s ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n", inputParamInfo->paramName );
+            }
             else
             {
 				
