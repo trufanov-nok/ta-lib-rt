@@ -370,7 +370,7 @@
 {
    /* insert local variable here */
 #define TA_ADOSC_SUPPRESS_MEMORY_ALLOCATION
-double slowestPeriod;
+
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -406,12 +406,7 @@ double slowestPeriod;
 
    /* insert state init code here. */
 
-   if( optInFastPeriod < optInSlowPeriod )
-     slowestPeriod = STATE_P.optInSlowPeriod;
-   else
-     slowestPeriod = STATE_P.optInFastPeriod;
-
-   return LOOKBACK_CALL(EMA)( slowestPeriod );
+   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/

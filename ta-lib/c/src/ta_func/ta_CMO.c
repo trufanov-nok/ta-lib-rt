@@ -539,7 +539,7 @@ double tempValue1, tempValue2;
         tempValue2 = inReal - STATE.prevValue;
         STATE.prevValue = inReal;
 
-        if (STATE.mem_index <= (unsigned int) (STATE.optInTimePeriod+STATE.MetastockMode))
+        if (STATE.mem_index+STATE.MetastockMode-1 > (unsigned int) (STATE.optInTimePeriod+STATE.MetastockMode))
         {
           STATE.prevLoss *= (STATE.optInTimePeriod-1);
           STATE.prevGain *= (STATE.optInTimePeriod-1);
@@ -550,7 +550,7 @@ double tempValue1, tempValue2;
        else
            STATE.prevGain += tempValue2;
 
-       if (STATE.mem_index < (unsigned int) (STATE.optInTimePeriod+STATE.MetastockMode)) // must be <
+       if (STATE.mem_index+STATE.MetastockMode-1 >= (unsigned int) (STATE.optInTimePeriod+STATE.MetastockMode)) // must be <
        {
        STATE.prevLoss /= STATE.optInTimePeriod;
        STATE.prevGain /= STATE.optInTimePeriod;

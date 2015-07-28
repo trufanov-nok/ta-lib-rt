@@ -174,11 +174,13 @@ const TA_InputParameterInfo TA_MACD_DEF_UI_STRUCT_PARAM_2 =
                                   { TA_Input_Pointer, "fastEMAState", 0 };
 const TA_InputParameterInfo TA_MACD_DEF_UI_STRUCT_PARAM_3 =
                                   { TA_Input_Pointer, "signalEMAState", 0 };
-
+const TA_InputParameterInfo TA_MACD_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "fastEMADelay", 0 };
 static const TA_InputParameterInfo *TA_MACD_StructParams[] = {
     &TA_MACD_DEF_UI_STRUCT_PARAM_1,
     &TA_MACD_DEF_UI_STRUCT_PARAM_2,
     &TA_MACD_DEF_UI_STRUCT_PARAM_3,
+    &TA_MACD_DEF_UI_STRUCT_PARAM_4,
     NULL };
 
 DEF_FUNCTION( MACD,                         /* name */
@@ -221,11 +223,14 @@ const TA_InputParameterInfo TA_MACDEXT_DEF_UI_STRUCT_PARAM_2 =
                                   { TA_Input_Pointer, "fastMAState", 0 };
 const TA_InputParameterInfo TA_MACDEXT_DEF_UI_STRUCT_PARAM_3 =
                                   { TA_Input_Pointer, "signalMAState", 0 };
+const TA_InputParameterInfo TA_MACDEXT_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "fastMADelay", 0 };
 
 static const TA_InputParameterInfo *TA_MACDEXT_StructParams[] = {
     &TA_MACDEXT_DEF_UI_STRUCT_PARAM_1,
     &TA_MACDEXT_DEF_UI_STRUCT_PARAM_2,
     &TA_MACDEXT_DEF_UI_STRUCT_PARAM_3,
+    &TA_MACDEXT_DEF_UI_STRUCT_PARAM_4,
     NULL };
 
 DEF_FUNCTION( MACDEXT,                         /* name */

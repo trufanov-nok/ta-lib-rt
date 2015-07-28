@@ -333,14 +333,18 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+   {
+       STATE.ad = 0;
+   }
 
    tmp = inHigh - inLow;
 
 
    if( tmp > 0.0 )
-       VALUE_HANDLE_DEREF(outReal) = (((inClose-inLow)-(inHigh-inClose))/tmp)*((double)inVolume);
-   else
-       VALUE_HANDLE_DEREF(outReal) = 0.0;
+       STATE.ad += (((inClose-inLow)-(inHigh-inClose))/tmp)*((double)inVolume);
+
+   VALUE_HANDLE_DEREF(outReal) = STATE.ad;
 
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);

@@ -162,6 +162,7 @@ struct TA_AD_State {
                    size_t mem_size;
                    size_t mem_index;
                    struct TA_AD_Data* memory;
+                   double       ad;
                    };
 
 
@@ -5176,6 +5177,7 @@ struct TA_MACD_State {
                      void*        slowEMAState;
                      void*        fastEMAState;
                      void*        signalEMAState;
+                     int          fastEMADelay;
                      int           optInFastPeriod; /* From 2 to 100000 */
                      int           optInSlowPeriod; /* From 2 to 100000 */
                      int           optInSignalPeriod; /* From 1 to 100000 */
@@ -5252,6 +5254,7 @@ struct TA_MACDEXT_State {
                         void*        slowMAState;
                         void*        fastMAState;
                         void*        signalMAState;
+                        int          fastMADelay;
                         int           optInFastPeriod; /* From 2 to 100000 */
                         TA_MAType     optInFastMAType;                        int           optInSlowPeriod; /* From 2 to 100000 */
                         TA_MAType     optInSlowMAType;                        int           optInSignalPeriod; /* From 1 to 100000 */

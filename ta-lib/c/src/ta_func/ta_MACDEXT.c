@@ -490,6 +490,7 @@
 {
    /* insert local variable here */
 #define TA_MACDEXT_SUPPRESS_MEMORY_ALLOCATION
+ENUM_DECLARATION(RetCode) retCode;
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -567,11 +568,13 @@
                 }
 
 
-   FUNCTION_CALL_STATE_INIT(MA) ((struct TA_MA_State**)&STATE_P.slowMAState, STATE_P.optInSlowPeriod, STATE_P.optInSlowMAType);
-   FUNCTION_CALL_STATE_INIT(MA) ((struct TA_MA_State**)&STATE_P.fastMAState, STATE_P.optInFastPeriod, STATE_P.optInFastMAType);
-   FUNCTION_CALL_STATE_INIT(MA) ((struct TA_MA_State**)&STATE_P.signalMAState, STATE_P.optInSignalPeriod, STATE_P.optInSignalMAType);
+   retCode = FUNCTION_CALL_STATE_INIT(MA) ((struct TA_MA_State**)&STATE_P.slowMAState, STATE_P.optInSlowPeriod, STATE_P.optInSlowMAType);
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_INIT(MA) ((struct TA_MA_State**)&STATE_P.fastMAState, STATE_P.optInFastPeriod, STATE_P.optInFastMAType);
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_INIT(MA) ((struct TA_MA_State**)&STATE_P.signalMAState, STATE_P.optInSignalPeriod, STATE_P.optInSignalMAType);
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   return retCode;
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -599,7 +602,9 @@
 {
    /* insert local variable here */
 #define TA_MACDEXT_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
-ENUM_DECLARATION(RetCode) retCode;
+ ENUM_DECLARATION(RetCode) retCode1;
+ ENUM_DECLARATION(RetCode) retCode2;
+ ENUM_DECLARATION(RetCode) retCode3;
 double slowMA, fastMA;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -634,36 +639,47 @@ double slowMA, fastMA;
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
-        /* Calculate the slow EMA.  */
-        retCode = FUNCTION_CALL_STATE(MA)( STATE.slowMAState, inReal, &slowMA );
+        if (FIRST_LAUNCH)
+         {
+           STATE.fastMADelay = abs( LOOKBACK_CALL(MA)( STATE.optInSlowPeriod, STATE.optInSlowMAType ) -  LOOKBACK_CALL(MA)( STATE.optInFastPeriod, STATE.optInFastMAType ) );
+         }
 
-        if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
-            retCode != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
-           return retCode;
+        /* Calculate the slow MA.  */
+        retCode1 = FUNCTION_CALL_STATE(MA)( STATE.slowMAState, inReal, &slowMA );
+
+        if( retCode1 != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
+            retCode1 != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
+           return retCode1;
 
 
-        /* Calculate the fast EMA. */
-        retCode = FUNCTION_CALL_STATE(MA)( STATE.fastMAState, inReal, &fastMA );
+        /* Calculate the fast MA. */
+        if (STATE.fastMADelay < (int) STATE.mem_index)
+        {
+        retCode2 = FUNCTION_CALL_STATE(MA)( STATE.fastMAState, inReal, &fastMA );
 
-        if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
-            retCode != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
-           return retCode;
+        if( retCode2 != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
+            retCode2 != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
+           return retCode2;
+        } else return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
+
+        if (retCode1 | retCode2)
+           return (retCode1 | retCode2);
 
         /* Calculate (fast MA) - (slow MA). */
         VALUE_HANDLE_DEREF(outMACD) = fastMA - slowMA;
 
         /* Calculate the signal/trigger line. */
-        retCode = FUNCTION_CALL_DOUBLE_STATE(MA)( STATE.signalMAState, inReal, outMACDSignal );
+        retCode3 = FUNCTION_CALL_DOUBLE_STATE(MA)( STATE.signalMAState, fastMA - slowMA, outMACDSignal );
 
-        if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
-            retCode != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
-           return retCode;
+        if( retCode3 != ENUM_VALUE(RetCode,TA_SUCCESS,Success) &&
+            retCode3 != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
+           return retCode3;
 
         /* Calculate the histogram. */
         VALUE_HANDLE_DEREF( outMACDHist ) = VALUE_HANDLE_DEREF(outMACD)-VALUE_HANDLE_DEREF(outMACDSignal);
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   return (retCode1 | retCode2 | retCode3);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -681,9 +697,13 @@ double slowMA, fastMA;
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-        FUNCTION_CALL_STATE_FREE(MA)((struct TA_MA_State**)&STATE_P.slowMAState);
-        FUNCTION_CALL_STATE_FREE(MA)((struct TA_MA_State**)&STATE_P.fastMAState);
-        FUNCTION_CALL_STATE_FREE(MA)((struct TA_MA_State**)&STATE_P.signalMAState);
+        ENUM_DECLARATION(RetCode) retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(MA)((struct TA_MA_State**)&STATE_P.slowMAState);
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(MA)((struct TA_MA_State**)&STATE_P.fastMAState);
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(MA)((struct TA_MA_State**)&STATE_P.signalMAState);
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

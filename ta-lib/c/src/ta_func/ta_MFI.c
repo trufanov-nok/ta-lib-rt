@@ -434,7 +434,7 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
 
    /* insert state init code here. */
 
-   CREATE_CIRCBUF_STRUCT_CLASS(MFI, mflow, MoneyFlow, 50);
+   CREATE_CIRCBUF_STRUCT_CLASS(MFI, mflow, MoneyFlow, STATE_P.optInTimePeriod);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -466,6 +466,7 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+ #define TA_MFI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
  double tempValue1, tempValue2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -508,7 +509,7 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA, NeedMoreData);
     }
 
-    if (_cur_idx > (unsigned int) STATE.optInTimePeriod)
+    if (STATE.mem_index-1 > (unsigned int) STATE.optInTimePeriod)
     {
       STATE.posSumMF -= CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).positive;
       STATE.negSumMF -= CIRCBUF_STRUCT_CURRENT_EL(MFI, mflow).negative;

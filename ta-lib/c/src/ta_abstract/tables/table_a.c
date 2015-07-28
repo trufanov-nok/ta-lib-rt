@@ -111,7 +111,12 @@ static const TA_OptInputParameterInfo *TA_AD_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_AD_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_AD_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "ad", 0 };
+
+static const TA_InputParameterInfo *TA_AD_StructParams[] = {
+    &TA_AD_DEF_UI_STRUCT_PARAM_1,
+    NULL };
 
 DEF_FUNCTION( AD,                         /* name */
               TA_GroupId_VolumeIndicators,   /* groupId */

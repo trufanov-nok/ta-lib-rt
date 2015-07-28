@@ -679,5 +679,5 @@ static ErrorNumber do_test_state( const TA_History *history,
       break;
    }
 
-   return TA_TEST_PASS;
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
 }
