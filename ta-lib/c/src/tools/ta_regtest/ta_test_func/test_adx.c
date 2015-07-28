@@ -112,7 +112,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 
 static TA_Test tableTest[] =
@@ -215,6 +216,15 @@ ErrorNumber test_func_adx( TA_History *history )
                  i, retValue );
          return retValue;
       }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "%s Failed State Test #%d (Code=%d)\n", __FILE__,
+                 i, retValue );
+         return retValue;
+      }
+
    }
 
    /* Re-initialize all the unstable period to zero. */
@@ -679,4 +689,149 @@ static ErrorNumber do_test( const TA_History *history,
    }
 
    return TA_TEST_PASS;
+}
+
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->high,  history->nbBars );
+   setInputBuffer( 1, history->low,   history->nbBars );
+   setInputBuffer( 2, history->close, history->nbBars );
+   setInputBuffer( 3, history->high,  history->nbBars );
+
+   /* Make a simple first call. */
+   switch( test->id )
+   {
+   case TST_MINUS_DM:
+      retCode = TA_SetUnstablePeriod(
+                                      TA_FUNC_UNST_MINUS_DM,
+                                      test->unstablePeriod );
+      if( retCode != TA_SUCCESS )
+         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+//      retCode = TA_MINUS_DM_StateTest(test->startIdx,
+//                             test->endIdx,
+//                             gBuffer[0].in,
+//                             gBuffer[1].in,
+//                             test->optInTimePeriod,
+//                             &outBegIdx,
+//                             &outNbElement,
+//                             gBuffer[0].out0 );
+      break;
+
+   case TST_MINUS_DI:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_MINUS_DI,
+                                      test->unstablePeriod );
+      if( retCode != TA_SUCCESS )
+         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+//      retCode = TA_MINUS_DI_StateTest( test->startIdx,
+//                             test->endIdx,
+//                             gBuffer[0].in,
+//                             gBuffer[1].in,
+//                             gBuffer[2].in,
+//                             test->optInTimePeriod,
+//                             &outBegIdx,
+//                             &outNbElement,
+//                             gBuffer[0].out0 );
+      break;
+
+   case TST_DX:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_DX,
+                                      test->unstablePeriod );
+      if( retCode != TA_SUCCESS )
+         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+      retCode = TA_DX_StateTest( test->startIdx,
+                       test->endIdx,
+                       gBuffer[0].in,
+                       gBuffer[1].in,
+                       gBuffer[2].in,
+                       test->optInTimePeriod,
+                       &outBegIdx,
+                       &outNbElement,
+                       gBuffer[0].out0 );
+      break;
+
+   case TST_ADX:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_ADX,
+                                      test->unstablePeriod );
+      if( retCode != TA_SUCCESS )
+         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+      retCode = TA_ADX_StateTest( test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        gBuffer[1].in,
+                        gBuffer[2].in,
+                        test->optInTimePeriod,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+      break;
+
+   case TST_PLUS_DM:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_PLUS_DM,
+                                      test->unstablePeriod );
+      if( retCode != TA_SUCCESS )
+         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+//      retCode = TA_PLUS_DM_StateTest( test->startIdx,
+//                            test->endIdx,
+//                            gBuffer[0].in,
+//                            gBuffer[1].in,
+//                            test->optInTimePeriod,
+//                            &outBegIdx,
+//                            &outNbElement,
+//                            gBuffer[0].out0 );
+      break;
+
+   case TST_PLUS_DI:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_PLUS_DI,
+                                      test->unstablePeriod );
+      if( retCode != TA_SUCCESS )
+         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+//      retCode = TA_PLUS_DI_StateTest( test->startIdx,
+//                            test->endIdx,
+//                            gBuffer[0].in,
+//                            gBuffer[1].in,
+//                            gBuffer[2].in,
+//                            test->optInTimePeriod,
+//                            &outBegIdx,
+//                            &outNbElement,
+//                            gBuffer[0].out0 );
+      break;
+
+   case TST_ADXR:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_ADX,
+                                      test->unstablePeriod );
+      if( retCode != TA_SUCCESS )
+         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+
+      retCode = TA_ADXR_StateTest( test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         gBuffer[1].in,
+                         gBuffer[2].in,
+                         test->optInTimePeriod,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out0 );
+      break;
+   default:
+      retCode = TA_BAD_PARAM;
+   }
+
+
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
 }

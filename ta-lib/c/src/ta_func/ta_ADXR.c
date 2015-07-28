@@ -288,7 +288,7 @@
 
 {
    /* insert local variable here */
-
+#define TA_ADXR_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -316,9 +316,14 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
+   if( optInTimePeriod > 1 )
+      MEM_SIZE_P = optInTimePeriod-1;
+   else
+      MEM_SIZE_P = 3;
 
+   MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_ADXR_Data));
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   return FUNCTION_CALL_STATE_INIT(ADX)((struct TA_ADX_State**)&STATE_P.ADXState, STATE_P.optInTimePeriod);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -345,7 +350,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+ #define TA_ADXR_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+ENUM_DECLARATION(RetCode) retCode;
+double tempReal;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -378,6 +385,24 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   retCode = FUNCTION_CALL_STATE(ADX)((struct TA_ADX_State*)STATE.ADXState, inHigh, inLow, inClose, &tempReal);
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success))
+   {
+       if (retCode == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData))
+       {
+           STATE.mem_index--;
+       }
+       return retCode;
+   }
+
+   if (!(NEED_MORE_DATA))
+   {
+   VALUE_HANDLE_DEREF(outReal) = round_pos((POP_FROM_MEM(inClose)+tempReal)/2.0);
+   PUSH_TO_MEM(inClose, tempReal);
+   } else {
+       PUSH_TO_MEM(inClose, tempReal);
+       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+   }
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -397,6 +422,9 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+ENUM_DECLARATION(RetCode) retCode;
+retCode = FUNCTION_CALL_STATE_FREE(ADX)((struct TA_ADX_State**)&STATE_P.ADXState);
+if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

@@ -107,7 +107,30 @@ static const TA_OptInputParameterInfo *TA_DX_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_DX_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_DX_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+const TA_InputParameterInfo TA_DX_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevLow", 0 };
+const TA_InputParameterInfo TA_DX_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevClose", 0 };
+const TA_InputParameterInfo TA_DX_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "prevMinusDM", 0 };
+const TA_InputParameterInfo TA_DX_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "prevPlusDM", 0 };
+const TA_InputParameterInfo TA_DX_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "prevTR", 0 };
+const TA_InputParameterInfo TA_DX_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "prevOutReal", 0 };
+static const TA_InputParameterInfo *TA_DX_StructParams[] = {
+    &TA_DX_DEF_UI_STRUCT_PARAM_1,
+    &TA_DX_DEF_UI_STRUCT_PARAM_2,
+    &TA_DX_DEF_UI_STRUCT_PARAM_3,
+    &TA_DX_DEF_UI_STRUCT_PARAM_4,
+    &TA_DX_DEF_UI_STRUCT_PARAM_5,
+    &TA_DX_DEF_UI_STRUCT_PARAM_6,
+    &TA_DX_DEF_UI_STRUCT_PARAM_7,
+    NULL };
 
 DEF_FUNCTION( DX,                         /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */

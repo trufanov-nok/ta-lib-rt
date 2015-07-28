@@ -230,7 +230,34 @@ static const TA_OptInputParameterInfo *TA_ADX_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_ADX_StructParams[] = { NULL };
+
+const TA_InputParameterInfo TA_ADX_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+const TA_InputParameterInfo TA_ADX_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevLow", 0 };
+const TA_InputParameterInfo TA_ADX_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevClose", 0 };
+const TA_InputParameterInfo TA_ADX_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "prevMinusDM", 0 };
+const TA_InputParameterInfo TA_ADX_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "prevPlusDM", 0 };
+const TA_InputParameterInfo TA_ADX_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "prevTR", 0 };
+const TA_InputParameterInfo TA_ADX_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "prevADX", 0 };
+const TA_InputParameterInfo TA_ADX_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "sumDX", 0 };
+
+static const TA_InputParameterInfo *TA_ADX_StructParams[] = {
+    &TA_ADX_DEF_UI_STRUCT_PARAM_1,
+    &TA_ADX_DEF_UI_STRUCT_PARAM_2,
+    &TA_ADX_DEF_UI_STRUCT_PARAM_3,
+    &TA_ADX_DEF_UI_STRUCT_PARAM_4,
+    &TA_ADX_DEF_UI_STRUCT_PARAM_5,
+    &TA_ADX_DEF_UI_STRUCT_PARAM_6,
+    &TA_ADX_DEF_UI_STRUCT_PARAM_7,
+    &TA_ADX_DEF_UI_STRUCT_PARAM_8,
+    NULL };
 
 DEF_FUNCTION( ADX,                         /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */
@@ -258,7 +285,11 @@ static const TA_OptInputParameterInfo *TA_ADXR_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_ADXR_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_ADXR_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "ADXState", 0 };
+static const TA_InputParameterInfo *TA_ADXR_StructParams[] = {
+    &TA_ADXR_DEF_UI_STRUCT_PARAM_1,
+    NULL };
 
 DEF_FUNCTION( ADXR,                         /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */

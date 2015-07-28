@@ -1135,10 +1135,7 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = adxLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADX_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
    public int adxState( struct TA_adx_State* _state,
@@ -1147,15 +1144,70 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      double tempReal, tempReal2, diffP, diffM;
+      double minusDI, plusDI;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .prevMinusDM = 0.0;
+         _state.value .prevPlusDM = 0.0;
+         _state.value .prevTR = 0.0;
+         _state.value .prevADX = 0.0;
+         _state.value .sumDX = 0.0;
+         _state.value .prevHigh = inHigh;
+         _state.value .prevLow = inLow;
+         _state.value .prevClose = inClose;
+         return RetCode.NeedMoreData ;
+      }
+      diffP = inHigh- _state.value .prevHigh;
+      _state.value .prevHigh = inHigh;
+      diffM = _state.value .prevLow-inLow;
+      _state.value .prevLow = inLow;
+      if ((int) _state.value .mem_index > _state.value .optInTimePeriod )
+      {
+         _state.value .prevMinusDM -= _state.value .prevMinusDM/ _state.value .optInTimePeriod;
+         _state.value .prevPlusDM -= _state.value .prevPlusDM/ _state.value .optInTimePeriod;
+      }
+      if( (diffM > 0) && (diffP < diffM) )
+      {
+         _state.value .prevMinusDM += diffM;
+      }
+      else if( (diffP > 0) && (diffP > diffM) )
+      {
+         _state.value .prevPlusDM += diffP;
+      }
+      { tempReal = _state.value .prevHigh- _state.value .prevLow; tempReal2 = Math.abs ( _state.value .prevHigh- _state.value .prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs ( _state.value .prevLow- _state.value .prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+      if ((int) _state.value .mem_index < _state.value .optInTimePeriod )
+         _state.value .prevTR += tempReal;
+      else
+         _state.value .prevTR = _state.value .prevTR - ( _state.value .prevTR/ _state.value .optInTimePeriod) + tempReal;
+      _state.value .prevClose = inClose;
+      if ((int) _state.value .mem_index > _state.value .optInTimePeriod )
+      {
+         if( ! (((- (0.00000000000001) )< _state.value .prevTR)&&( _state.value .prevTR< (0.00000000000001) )) )
+         {
+            minusDI = (100.0*( _state.value .prevMinusDM/ _state.value .prevTR)) ;
+            plusDI = (100.0*( _state.value .prevPlusDM/ _state.value .prevTR)) ;
+            tempReal = minusDI+plusDI;
+            if( ! (((- (0.00000000000001) )<tempReal)&&(tempReal< (0.00000000000001) )) )
+            {
+               if ((int) _state.value .mem_index > 2* _state.value .optInTimePeriod )
+               {
+                  tempReal= (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
+                  _state.value .prevADX = ((( _state.value .prevADX*( _state.value .optInTimePeriod-1))+tempReal)/ _state.value .optInTimePeriod) ;
+               } else {
+                  _state.value .sumDX += (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
+                  _state.value .prevADX = ( _state.value .sumDX / _state.value .optInTimePeriod) ;
+               }
+            }
+         }
+      }
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      outReal.value = _state.value .prevADX;
       return RetCode.Success ;
    }
    public int adxStateFree( struct TA_adx_State** _state )
@@ -1413,11 +1465,13 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = adxrLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADXR_Data));
+      _state.value .value .memory = NULL;
+      if( optInTimePeriod > 1 )
+         _state.value .value .mem_size = optInTimePeriod - 1;
       else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+         _state.value .value .mem_size = 3;
+      _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADXR_Data));
+      return adx ((struct adx **)& _state.value .value .ADXState, _state.value .value .optInTimePeriod);
    }
    public int adxrState( struct TA_adxr_State* _state,
       double inHigh,
@@ -1425,19 +1479,37 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      retCode = adx ((struct adx *) _state.value .ADXState, inReal, outReal);
+      if (retCode != RetCode.Success )
+      {
+         if (retCode == RetCode.NeedMoreData )
+         {
+            ( _state.value .memory+_cur_idx).value .inClose = outReal ;
+         }
+         return retCode;
+      }
+      if (! _state.value .mem_size > _state.value .mem_index - 1 )
+      {
+         double tempReal;
+         tempReal = ( _state.value .memory+_cur_idx).value .inClose ;
+         outReal.value = ((tempReal+outReal)/2.0) ;
+         ( _state.value .memory+_cur_idx).value .inClose = outReal ;
+      } else {
+         ( _state.value .memory+_cur_idx).value .inClose = outReal ;
+         return RetCode.NeedMoreData ;
+      }
       return RetCode.Success ;
    }
    public int adxrStateFree( struct TA_adxr_State** _state )
    {
+      RetCode retCode;
+      retCode = adx ((struct adx **)& _state.value .value .ADXState);
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -16508,10 +16580,7 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = dxLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_DX_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
    public int dxState( struct TA_dx_State* _state,
@@ -16520,15 +16589,59 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      double tempReal, tempReal2, diffP, diffM;
+      double minusDI, plusDI;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .prevMinusDM = 0.0;
+         _state.value .prevPlusDM = 0.0;
+         _state.value .prevTR = 0.0;
+         _state.value .prevOutReal = 0.0;
+         _state.value .prevHigh = inHigh;
+         _state.value .prevLow = inLow;
+         _state.value .prevClose = inClose;
+         return RetCode.NeedMoreData ;
+      }
+      diffP = inHigh- _state.value .prevHigh;
+      _state.value .prevHigh = inHigh;
+      diffM = _state.value .prevLow-inLow;
+      _state.value .prevLow = inLow;
+      if ((int) _state.value .mem_index > _state.value .optInTimePeriod )
+      {
+         _state.value .prevMinusDM -= _state.value .prevMinusDM/ _state.value .optInTimePeriod;
+         _state.value .prevPlusDM -= _state.value .prevPlusDM/ _state.value .optInTimePeriod;
+      }
+      if( (diffM > 0) && (diffP < diffM) )
+      {
+         _state.value .prevMinusDM += diffM;
+      }
+      else if( (diffP > 0) && (diffP > diffM) )
+      {
+         _state.value .prevPlusDM += diffP;
+      }
+      { tempReal = _state.value .prevHigh- _state.value .prevLow; tempReal2 = Math.abs ( _state.value .prevHigh- _state.value .prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; tempReal2 = Math.abs ( _state.value .prevLow- _state.value .prevClose); if( tempReal2 > tempReal ) tempReal = tempReal2; } ;
+      if ((int) _state.value .mem_index < _state.value .optInTimePeriod )
+         _state.value .prevTR += tempReal;
+      else
+         _state.value .prevTR = _state.value .prevTR - ( _state.value .prevTR/ _state.value .optInTimePeriod) + tempReal;
+      _state.value .prevClose = inClose;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      if( ! (((- (0.00000000000001) )< _state.value .prevTR)&&( _state.value .prevTR< (0.00000000000001) )) )
+      {
+         minusDI = (100.0*( _state.value .prevMinusDM/ _state.value .prevTR)) ;
+         plusDI = (100.0*( _state.value .prevPlusDM/ _state.value .prevTR)) ;
+         tempReal = minusDI+plusDI;
+         if( ! (((- (0.00000000000001) )<tempReal)&&(tempReal< (0.00000000000001) )) )
+            _state.value .prevOutReal = (100.0 * ( Math.abs (minusDI-plusDI)/tempReal)) ;
+         outReal.value = _state.value .prevOutReal;
+      }
+      else
+         outReal.value = _state.value .prevOutReal;
       return RetCode.Success ;
    }
    public int dxStateFree( struct TA_dx_State** _state )

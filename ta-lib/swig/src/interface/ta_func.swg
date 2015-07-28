@@ -323,6 +323,14 @@ struct TA_ADX_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_ADX_Data* memory;
+                    double       prevHigh;
+                    double       prevLow;
+                    double       prevClose;
+                    double       prevMinusDM;
+                    double       prevPlusDM;
+                    double       prevTR;
+                    double       prevADX;
+                    double       sumDX;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 
@@ -375,6 +383,7 @@ struct TA_ADXR_State {
                      size_t mem_size;
                      size_t mem_index;
                      struct TA_ADXR_Data* memory;
+                     void*        ADXState;
                      int           optInTimePeriod; /* From 2 to 100000 */
                      };
 
@@ -4188,6 +4197,13 @@ struct TA_DX_State {
                    size_t mem_size;
                    size_t mem_index;
                    struct TA_DX_Data* memory;
+                   double       prevHigh;
+                   double       prevLow;
+                   double       prevClose;
+                   double       prevMinusDM;
+                   double       prevPlusDM;
+                   double       prevTR;
+                   double       prevOutReal;
                    int           optInTimePeriod; /* From 2 to 100000 */
                    };
 
