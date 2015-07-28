@@ -321,6 +321,7 @@
    else
       MEM_SIZE_P = 3;
 
+   // TODO only one double is needed for memory
    MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_ADXR_Data));
 
    return FUNCTION_CALL_STATE_INIT(ADX)((struct TA_ADX_State**)&STATE_P.ADXState, STATE_P.optInTimePeriod);
