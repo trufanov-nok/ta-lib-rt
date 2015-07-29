@@ -66,7 +66,24 @@ static const TA_OptInputParameterInfo *TA_PLUS_DI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_PLUS_DI_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_PLUS_DI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+const TA_InputParameterInfo TA_PLUS_DI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevLow", 0 };
+const TA_InputParameterInfo TA_PLUS_DI_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevClose", 0 };
+const TA_InputParameterInfo TA_PLUS_DI_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "prevTR", 0 };
+const TA_InputParameterInfo TA_PLUS_DI_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "prevPlusDM", 0 };
+
+static const TA_InputParameterInfo *TA_PLUS_DI_StructParams[] = {
+    &TA_PLUS_DI_DEF_UI_STRUCT_PARAM_1,
+    &TA_PLUS_DI_DEF_UI_STRUCT_PARAM_2,
+    &TA_PLUS_DI_DEF_UI_STRUCT_PARAM_3,
+    &TA_PLUS_DI_DEF_UI_STRUCT_PARAM_4,
+    &TA_PLUS_DI_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION ( PLUS_DI,                     /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */
@@ -95,7 +112,17 @@ static const TA_OptInputParameterInfo *TA_PLUS_DM_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_PLUS_DM_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_PLUS_DM_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+const TA_InputParameterInfo TA_PLUS_DM_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevLow", 0 };
+const TA_InputParameterInfo TA_PLUS_DM_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevPlusDM", 0 };
+static const TA_InputParameterInfo *TA_PLUS_DM_StructParams[] = {
+    &TA_PLUS_DM_DEF_UI_STRUCT_PARAM_1,
+    &TA_PLUS_DM_DEF_UI_STRUCT_PARAM_2,
+    &TA_PLUS_DM_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( PLUS_DM,                     /* name */
               TA_GroupId_MomentumIndicators, /* groupId */

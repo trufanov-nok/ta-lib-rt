@@ -870,7 +870,24 @@ static const TA_OptInputParameterInfo *TA_MINUS_DI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MINUS_DI_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MINUS_DI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+const TA_InputParameterInfo TA_MINUS_DI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevLow", 0 };
+const TA_InputParameterInfo TA_MINUS_DI_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevClose", 0 };
+const TA_InputParameterInfo TA_MINUS_DI_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "prevTR", 0 };
+const TA_InputParameterInfo TA_MINUS_DI_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "prevMinusDM", 0 };
+
+static const TA_InputParameterInfo *TA_MINUS_DI_StructParams[] = {
+    &TA_MINUS_DI_DEF_UI_STRUCT_PARAM_1,
+    &TA_MINUS_DI_DEF_UI_STRUCT_PARAM_2,
+    &TA_MINUS_DI_DEF_UI_STRUCT_PARAM_3,
+    &TA_MINUS_DI_DEF_UI_STRUCT_PARAM_4,
+    &TA_MINUS_DI_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( MINUS_DI,                         /* name */
               TA_GroupId_MomentumIndicators,    /* groupId */
@@ -899,7 +916,18 @@ static const TA_OptInputParameterInfo *TA_MINUS_DM_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_MINUS_DM_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_MINUS_DM__DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+const TA_InputParameterInfo TA_MINUS_DM__DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevLow", 0 };
+const TA_InputParameterInfo TA_MINUS_DM__DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevMinusDM", 0 };
+
+static const TA_InputParameterInfo *TA_MINUS_DM_StructParams[] = {
+    &TA_MINUS_DM__DEF_UI_STRUCT_PARAM_1,
+    &TA_MINUS_DM__DEF_UI_STRUCT_PARAM_2,
+    &TA_MINUS_DM__DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( MINUS_DM,                         /* name */
               TA_GroupId_MomentumIndicators,   /* groupId */

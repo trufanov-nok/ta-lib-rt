@@ -11712,6 +11712,11 @@ struct TA_MINUS_DI_State {
                          size_t mem_size;
                          size_t mem_index;
                          struct TA_MINUS_DI_Data* memory;
+                         double       prevHigh;
+                         double       prevLow;
+                         double       prevClose;
+                         double       prevTR;
+                         double       prevMinusDM;
                          int           optInTimePeriod; /* From 1 to 100000 */
                          };
 
@@ -11809,6 +11814,9 @@ struct TA_MINUS_DM_State {
                          size_t mem_size;
                          size_t mem_index;
                          struct TA_MINUS_DM_Data* memory;
+                         double       prevHigh;
+                         double       prevLow;
+                         double       prevMinusDM;
                          int           optInTimePeriod; /* From 1 to 100000 */
                          };
 
@@ -12267,6 +12275,11 @@ struct TA_PLUS_DI_State {
                         size_t mem_size;
                         size_t mem_index;
                         struct TA_PLUS_DI_Data* memory;
+                        double       prevHigh;
+                        double       prevLow;
+                        double       prevClose;
+                        double       prevTR;
+                        double       prevPlusDM;
                         int           optInTimePeriod; /* From 1 to 100000 */
                         };
 
@@ -12364,6 +12377,9 @@ struct TA_PLUS_DM_State {
                         size_t mem_size;
                         size_t mem_index;
                         struct TA_PLUS_DM_Data* memory;
+                        double       prevHigh;
+                        double       prevLow;
+                        double       prevPlusDM;
                         int           optInTimePeriod; /* From 1 to 100000 */
                         };
 

@@ -428,7 +428,7 @@
 
 {
    /* insert local variable here */
-
+#define TA_MINUS_DM_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -482,7 +482,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_MINUS_DM_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+double diffP, diffM;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -514,6 +515,61 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+         {
+          STATE.prevMinusDM = 0.0;
+
+          STATE.prevHigh    = inHigh;
+          STATE.prevLow     = inLow;
+
+          return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+         }
+
+
+      diffP    = inHigh-STATE.prevHigh; /* Plus Delta */
+      STATE.prevHigh = inHigh;
+
+      diffM    = STATE.prevLow-inLow;   /* Minus Delta */
+      STATE.prevLow  = inLow;
+
+
+      if (STATE.optInTimePeriod <= 1)
+      {
+          if( (diffM > 0) && (diffP < diffM) )
+          {
+                /* Case 2 and 4: +DM=0,-DM=diffM */
+                VALUE_HANDLE_DEREF(outReal) = diffM;
+          }
+          else
+             VALUE_HANDLE_DEREF(outReal) = (double)0.0;
+
+          return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+      }
+
+
+      if ((int)STATE.mem_index <= STATE.optInTimePeriod )
+      {
+          if( (diffM > 0) && (diffP < diffM) )
+          {
+             /* Case 1 and 3: +DM=diffP,-DM=0 */
+             STATE.prevMinusDM += diffM;
+          }
+      } else
+      if( (diffM > 0) && (diffP < diffM) )
+      {
+         /* Case 2 and 4: +DM=0,-DM=diffM */
+         STATE.prevMinusDM = STATE.prevMinusDM - (STATE.prevMinusDM/STATE.optInTimePeriod) + diffM;
+      }
+      else
+      {
+         /* Case 1,3,5 and 7 */
+         STATE.prevMinusDM = STATE.prevMinusDM - (STATE.prevMinusDM/STATE.optInTimePeriod);
+      }
+
+      if (NEED_MORE_DATA)
+          return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+      VALUE_HANDLE_DEREF(outReal) = STATE.prevMinusDM;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

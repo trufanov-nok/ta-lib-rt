@@ -515,7 +515,7 @@
 
 {
    /* insert local variable here */
-
+#define TA_MINUS_DI_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -572,7 +572,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_MINUS_DI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+        double tempReal, tempReal2, diffP, diffM;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -605,6 +606,81 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                if (FIRST_LAUNCH)
+                 {
+                  STATE.prevTR      = 0.0;
+                  STATE.prevMinusDM = 0.0;
+
+                  STATE.prevHigh    = inHigh;
+                  STATE.prevLow     = inLow;
+                  STATE.prevClose   = inClose;
+                  return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+                 }
+
+
+              diffP    = inHigh-STATE.prevHigh; /* Plus Delta */
+              STATE.prevHigh = inHigh;
+
+              diffM    = STATE.prevLow-inLow;   /* Minus Delta */
+              STATE.prevLow  = inLow;
+
+
+              if (STATE.optInTimePeriod <= 1)
+              {
+                  if( (diffM > 0) && (diffP < diffM) )
+                  {
+                     /* Case 1 and 3: +DM=diffP,-DM=0 */
+                     TRUE_RANGE(STATE.prevHigh,STATE.prevLow,STATE.prevClose,tempReal);
+                     if( TA_IS_ZERO(tempReal) )
+                        VALUE_HANDLE_DEREF(outReal) = (double)0.0;
+                     else
+                        VALUE_HANDLE_DEREF(outReal) = diffM/tempReal;
+                  }
+                  else
+                     VALUE_HANDLE_DEREF(outReal) = (double)0.0;
+                  STATE.prevClose = inClose;
+                  return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+              }
+
+
+              if ((int)STATE.mem_index <= STATE.optInTimePeriod )
+              {
+                  if( (diffM > 0) && (diffP < diffM) )
+                  {
+                     /* Case 2 and 4: +DM=0,-DM=diffM */
+                     STATE.prevMinusDM += diffM;
+                  }
+              } else
+              if( (diffM > 0) && (diffP < diffM) )
+              {
+                 /* Case 2 and 4: +DM=0,-DM=diffM */
+                 STATE.prevMinusDM = STATE.prevMinusDM - (STATE.prevMinusDM/STATE.optInTimePeriod) + diffM;
+              }
+              else
+              {
+                 /* Case 1,3,5 and 7 */
+                 STATE.prevMinusDM = STATE.prevMinusDM - (STATE.prevMinusDM/STATE.optInTimePeriod);
+              }
+
+              /* Calculate the prevTR */
+              TRUE_RANGE(STATE.prevHigh,STATE.prevLow,STATE.prevClose,tempReal);
+              if ((int)STATE.mem_index <= STATE.optInTimePeriod )
+                  STATE.prevTR += tempReal;
+              else
+                  STATE.prevTR = STATE.prevTR - (STATE.prevTR/STATE.optInTimePeriod) + tempReal;
+
+              STATE.prevClose = inClose;
+
+
+              if (NEED_MORE_DATA)
+                  return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+              /* Calculate the DX. The value is rounded (see Wilder book). */
+              if( !TA_IS_ZERO(STATE.prevTR))
+                   VALUE_HANDLE_DEREF(outReal) = round_pos( 100.0 * (STATE.prevMinusDM/STATE.prevTR) );
+              else
+                VALUE_HANDLE_DEREF(outReal) = 0.0;
+
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

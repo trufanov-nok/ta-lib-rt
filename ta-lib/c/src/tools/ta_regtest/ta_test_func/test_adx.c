@@ -718,14 +718,14 @@ static ErrorNumber do_test_state( const TA_History *history,
       if( retCode != TA_SUCCESS )
          return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
 
-//      retCode = TA_MINUS_DM_StateTest(test->startIdx,
-//                             test->endIdx,
-//                             gBuffer[0].in,
-//                             gBuffer[1].in,
-//                             test->optInTimePeriod,
-//                             &outBegIdx,
-//                             &outNbElement,
-//                             gBuffer[0].out0 );
+      retCode = TA_MINUS_DM_StateTest(test->startIdx,
+                             test->endIdx,
+                             gBuffer[0].in,
+                             gBuffer[1].in,
+                             test->optInTimePeriod,
+                             &outBegIdx,
+                             &outNbElement,
+                             gBuffer[0].out0 );
       break;
 
    case TST_MINUS_DI:
@@ -734,15 +734,15 @@ static ErrorNumber do_test_state( const TA_History *history,
       if( retCode != TA_SUCCESS )
          return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
 
-//      retCode = TA_MINUS_DI_StateTest( test->startIdx,
-//                             test->endIdx,
-//                             gBuffer[0].in,
-//                             gBuffer[1].in,
-//                             gBuffer[2].in,
-//                             test->optInTimePeriod,
-//                             &outBegIdx,
-//                             &outNbElement,
-//                             gBuffer[0].out0 );
+      retCode = TA_MINUS_DI_StateTest( test->startIdx,
+                             test->endIdx,
+                             gBuffer[0].in,
+                             gBuffer[1].in,
+                             gBuffer[2].in,
+                             test->optInTimePeriod,
+                             &outBegIdx,
+                             &outNbElement,
+                             gBuffer[0].out0 );
       break;
 
    case TST_DX:
@@ -785,14 +785,14 @@ static ErrorNumber do_test_state( const TA_History *history,
       if( retCode != TA_SUCCESS )
          return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
 
-//      retCode = TA_PLUS_DM_StateTest( test->startIdx,
-//                            test->endIdx,
-//                            gBuffer[0].in,
-//                            gBuffer[1].in,
-//                            test->optInTimePeriod,
-//                            &outBegIdx,
-//                            &outNbElement,
-//                            gBuffer[0].out0 );
+      retCode = TA_PLUS_DM_StateTest( test->startIdx,
+                            test->endIdx,
+                            gBuffer[0].in,
+                            gBuffer[1].in,
+                            test->optInTimePeriod,
+                            &outBegIdx,
+                            &outNbElement,
+                            gBuffer[0].out0 );
       break;
 
    case TST_PLUS_DI:
@@ -801,15 +801,15 @@ static ErrorNumber do_test_state( const TA_History *history,
       if( retCode != TA_SUCCESS )
          return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
 
-//      retCode = TA_PLUS_DI_StateTest( test->startIdx,
-//                            test->endIdx,
-//                            gBuffer[0].in,
-//                            gBuffer[1].in,
-//                            gBuffer[2].in,
-//                            test->optInTimePeriod,
-//                            &outBegIdx,
-//                            &outNbElement,
-//                            gBuffer[0].out0 );
+      retCode = TA_PLUS_DI_StateTest( test->startIdx,
+                            test->endIdx,
+                            gBuffer[0].in,
+                            gBuffer[1].in,
+                            gBuffer[2].in,
+                            test->optInTimePeriod,
+                            &outBegIdx,
+                            &outNbElement,
+                            gBuffer[0].out0 );
       break;
 
    case TST_ADXR:
