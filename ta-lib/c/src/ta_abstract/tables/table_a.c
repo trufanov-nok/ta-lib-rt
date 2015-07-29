@@ -319,7 +319,17 @@ static const TA_OptInputParameterInfo *TA_APO_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_APO_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_APO_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "fastMAState", 0 };
+const TA_InputParameterInfo TA_APO_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "slowMAState", 0 };
+const TA_InputParameterInfo TA_APO_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "doPercentageOutput", 0 };
+static const TA_InputParameterInfo *TA_APO_StructParams[] = {
+    &TA_APO_DEF_UI_STRUCT_PARAM_1,
+    &TA_APO_DEF_UI_STRUCT_PARAM_2,
+    &TA_APO_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( APO,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */

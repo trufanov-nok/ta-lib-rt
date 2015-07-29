@@ -277,7 +277,9 @@
 
 {
    /* insert local variable here */
+return FUNCTION_CALL_STATE_INIT(INT_PO)((struct TA_APO_State**)_state, optInFastPeriod, optInSlowPeriod, optInMAType, 1);
 
+#ifdef SUPPRESS_UNNECESARY_CODE
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -318,11 +320,11 @@
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
-
    /* insert state init code here. */
 
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+#endif
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -343,7 +345,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+  return FUNCTION_CALL_STATE(APO)((struct TA_APO_State*)_state, inReal, outReal);
+#ifdef SUPPRESS_UNNECESARY_CODE
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -372,6 +375,7 @@
    /* insert state based TA dunc code here. */
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+#endif
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -389,7 +393,8 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+  return FUNCTION_CALL_STATE_FREE(APO)((struct TA_APO_State**)_state);
+#ifdef SUPPRESS_UNNECESARY_CODE
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -406,6 +411,7 @@
 
    /* insert state free code here. */   
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+#endif
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/

@@ -416,7 +416,9 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 
 {
    /* insert local variable here */
+ return FUNCTION_CALL_STATE_INIT(INT_PO)(_state, optInFastPeriod, optInSlowPeriod, optInMAType, 0);
 
+#ifdef SUPPRESS_UNNECESSARY_CODE
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -457,11 +459,87 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
+#endif
+
+}
+
+
+
+
+ #if defined( _MANAGED )
+ int Core::TA_INT_PO_StateInit( struct TA_Apo_State** _state,
+                       int           optInFastPeriod, /* From 2 to 100000 */
+                       int           optInSlowPeriod, /* From 2 to 100000 */
+                       MAType        optInMAType,
+                       int doPercentageOutput)
+ #elif defined( _JAVA )
+ public int TA_INT_PO_StateInit( struct TA_apo_State** _state,
+                        int           optInFastPeriod, /* From 2 to 100000 */
+                        int           optInSlowPeriod, /* From 2 to 100000 */
+                        MAType        optInMAType,
+                        int doPercentageOutput)
+ #else
+ TA_LIB_API int TA_INT_PO_StateInit( struct TA_APO_State** _state,
+                                           int           optInFastPeriod, /* From 2 to 100000 */
+                                           int           optInSlowPeriod, /* From 2 to 100000 */
+                                           TA_MAType     optInMAType,
+                                           int doPercentageOutput)
+ #endif
+
+
+{
+
+int tempInteger;
+TA_RetCode retCode;
+if( optInSlowPeriod < optInFastPeriod )
+{
+    /* swap */
+    tempInteger     = optInSlowPeriod;
+    optInSlowPeriod = optInFastPeriod;
+    optInFastPeriod = tempInteger;
+}
+
+
+ #ifndef TA_FUNC_NO_RANGE_CHECK
+
+    if (_state == NULL)
+          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+    /* min/max are checked for optInFastPeriod. */
+    if( (int)optInFastPeriod == TA_INTEGER_DEFAULT )
+       optInFastPeriod = 12;
+    else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
+       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+    /* min/max are checked for optInSlowPeriod. */
+    if( (int)optInSlowPeriod == TA_INTEGER_DEFAULT )
+       optInSlowPeriod = 26;
+    else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
+       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+    #if !defined(_MANAGED) && !defined(_JAVA)
+    if( (int)optInMAType == TA_INTEGER_DEFAULT )
+       optInMAType = (TA_MAType)0;
+    else if( ((int)optInMAType < 0) || ((int)optInMAType > 8) )
+       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
+    STATE = TA_Calloc(1, sizeof(struct TA_APO_State));
+    STATE_P.mem_index = 0;
+    STATE_P.optInFastPeriod = optInFastPeriod;
+    STATE_P.optInSlowPeriod = optInSlowPeriod;
+    STATE_P.optInMAType = optInMAType;
+    MEM_SIZE_P = TA_APO_Lookback(optInFastPeriod, optInSlowPeriod, optInMAType );
+    MEM_P = NULL;
+ #endif /* TA_FUNC_NO_RANGE_CHECK */
+
+  STATE_P.doPercentageOutput = doPercentageOutput;
 
    /* insert state init code here. */
+  retCode = FUNCTION_CALL_STATE_INIT(MA)((struct TA_MA_State**)&STATE_P.fastMAState, STATE_P.optInFastPeriod, STATE_P.optInMAType);
+  if ( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success))
+     return retCode;
 
-
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   return FUNCTION_CALL_STATE_INIT(MA)((struct TA_MA_State**)&STATE_P.slowMAState, STATE_P.optInSlowPeriod, STATE_P.optInMAType);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -482,7 +560,9 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_APO_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+double fastMA, slowMA;
+int res1, res2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -509,6 +589,22 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   res1 = FUNCTION_CALL_STATE(MA)((struct TA_MA_State*) STATE.fastMAState, inReal, &fastMA);
+   res2 = FUNCTION_CALL_STATE(MA)((struct TA_MA_State*) STATE.slowMAState, inReal, &slowMA);
+
+   if (res1|res2)
+       return (res1|res2);
+
+   if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+   if (STATE.doPercentageOutput != 0)
+   {
+       if( !TA_IS_ZERO(slowMA) )
+          VALUE_HANDLE_DEREF(outReal) = ((fastMA-slowMA)/slowMA)*100.0;
+       else
+          VALUE_HANDLE_DEREF(outReal) = 0.0;
+   } else
+       VALUE_HANDLE_DEREF(outReal) = fastMA - slowMA;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -528,6 +624,11 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+     int res = FUNCTION_CALL_STATE_FREE(MA)((struct TA_MA_State**)&STATE_P.fastMAState);
+     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+
+         res = FUNCTION_CALL_STATE_FREE(MA)((struct TA_MA_State**)&STATE_P.slowMAState);
+     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

@@ -103,7 +103,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 static TA_Test tableTest[] =
 {
@@ -233,6 +234,14 @@ ErrorNumber test_func_po( TA_History *history )
          printf( "TA_APO/TA_PPO Failed Test #%d (Code=%d)\n", i, retValue );
          return retValue;
       }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "TA_APO/TA_PPO Failed State Test #%d (Code=%d)\n", i, retValue );
+         return retValue;
+      }
+
    }
 
    /* All test succeed. */
@@ -436,5 +445,57 @@ static ErrorNumber do_test( const TA_History *history,
    }
 
    return TA_TEST_PASS;
+}
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   ErrorNumber errNb;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+
+   TA_RangeTestParam testParam;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   TA_SetCompatibility( (TA_Compatibility)test->compatibility );
+
+   /* Build the input. */
+   setInputBuffer( 0, history->close, history->nbBars );
+   setInputBuffer( 1, history->close, history->nbBars );
+
+   TA_SetUnstablePeriod( TA_FUNC_UNST_EMA, 0 );
+
+   /* Make a simple first call. */
+   if( test->doPercentage )
+   {
+      retCode = TA_PPO_StateTest(test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        test->optInFastPeriod,
+                        test->optInSlowPeriod,
+                        (TA_MAType)test->optInMethod_2,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+   }
+   else
+   {
+      retCode = TA_APO_StateTest( test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        test->optInFastPeriod,
+                        test->optInSlowPeriod,
+                        (TA_MAType)test->optInMethod_2,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+   }
+
+
+
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
 }
 

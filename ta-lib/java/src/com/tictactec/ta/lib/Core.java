@@ -1690,6 +1690,22 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMAType )
    {
+      return TA_INT_PO_StateInit (_state, optInFastPeriod, optInFastPeriod, optInMAType, 0);
+   }
+   public int TA_INT_PO_StateInit( struct TA_apo_State** _state,
+      int optInFastPeriod,
+      int optInSlowPeriod,
+      MAType optInMAType,
+      int doPercentageOutput)
+   {
+      int tempInteger;
+      TA_RetCode retCode;
+      if( optInSlowPeriod < optInFastPeriod )
+      {
+         tempInteger = optInSlowPeriod;
+         optInSlowPeriod = optInFastPeriod;
+         optInFastPeriod = tempInteger;
+      }
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
@@ -1706,27 +1722,44 @@ public class Core {
       _state.value .value .optInSlowPeriod = optInSlowPeriod;
       _state.value .value .optInMAType = optInMAType;
       _state.value .value .mem_size = apoLookback (optInFastPeriod, optInSlowPeriod, optInMAType );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_APO_Data));
-      else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+      _state.value .value .memory = NULL;
+      _state.value .value .doPercentageOutput = doPercentageOutput;
+      retCode = movingAverage ((struct movingAverage **)& _state.value .value .fastMAState, _state.value .value .optInFastPeriod, _state.value .value .optInMAType);
+      if ( retCode != RetCode.Success )
+         return retCode;
+      return movingAverage ((struct movingAverage **)& _state.value .value .slowMAState, _state.value .value .optInSlowPeriod, _state.value .value .optInMAType);
    }
    public int apoState( struct TA_apo_State* _state,
       double inReal,
       double *outReal )
    {
+      double fastMA, slowMA;
+      int res1, res2;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      res1 = movingAverage ((struct movingAverage *) _state.value .fastMAState, inReal, &fastMA);
+      res2 = movingAverage ((struct movingAverage *) _state.value .fastMAState, inReal, &fastMA);
+      if (res1|res2)
+         return (res1|res2);
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
+      if ( _state.value .doPercentageOutput != 0)
+      {
+         if( ! (((- (0.00000000000001) )<slowMA)&&(slowMA< (0.00000000000001) )) )
+            outReal.value = ((fastMA-slowMA)/slowMA)*100.0;
+         else
+            outReal.value = 0.0;
+      } else
+         outReal.value = fastMA - slowMA;
       return RetCode.Success ;
    }
    public int apoStateFree( struct TA_apo_State** _state )
    {
+      int res = movingAverage ((struct movingAverage **)& _state.value .value .fastMAState);
+      if (res != RetCode.Success ) return res;
+      res = movingAverage ((struct movingAverage **)& _state.value .value .slowMAState);
+      if (res != RetCode.Success ) return res;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {

@@ -799,6 +799,9 @@ struct TA_APO_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_APO_Data* memory;
+                    void*        fastMAState;
+                    void*        slowMAState;
+                    int          doPercentageOutput;
                     int           optInFastPeriod; /* From 2 to 100000 */
                     int           optInSlowPeriod; /* From 2 to 100000 */
                     TA_MAType     optInMAType;                    };
