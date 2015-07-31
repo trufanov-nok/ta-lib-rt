@@ -375,7 +375,7 @@
 
  if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
- VALUE_HANDLE_DEREF(outInteger) = STATE.max;
+ VALUE_HANDLE_DEREF(outInteger) = STATE.maxIdx;
 
  return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

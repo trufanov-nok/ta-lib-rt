@@ -375,7 +375,7 @@
 
  if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
- VALUE_HANDLE_DEREF(outInteger) =    STATE.min;
+ VALUE_HANDLE_DEREF(outInteger) =    STATE.minIdx;
 
  return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
