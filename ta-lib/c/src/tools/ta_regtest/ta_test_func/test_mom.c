@@ -134,7 +134,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 
 static TA_Test tableTest[] =
@@ -282,6 +283,15 @@ ErrorNumber test_func_mom_roc( TA_History *history )
                  i, retValue );
          return retValue;
       }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "%s Failed State Test #%d (Code=%d)\n", __FILE__,
+                 i, retValue );
+         return retValue;
+      }
+
    }
 
    /* All test succeed. */
@@ -549,5 +559,89 @@ static ErrorNumber do_test( const TA_History *history,
    }
 
    return TA_TEST_PASS;
+}
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   ErrorNumber errNb;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+   TA_RangeTestParam testParam;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->close, history->nbBars );
+   setInputBuffer( 1, history->close, history->nbBars );
+
+   CLEAR_EXPECTED_VALUE(0);
+
+   retCode = TA_TEST_PASS;
+
+   /* Make a simple first call. */
+   switch( test->theFunction )
+   {
+   case TA_MOM_TEST:
+      retCode = TA_MOM_StateTest(
+                        test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        test->optInTimePeriod,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+      break;
+
+   case TA_ROC_TEST:
+      retCode = TA_ROC_StateTest(
+                        test->startIdx,
+                        test->endIdx,
+                        gBuffer[0].in,
+                        test->optInTimePeriod,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+      break;
+   case TA_ROCR_TEST:
+//      retCode = TA_ROCR_StateTest(
+//                         test->startIdx,
+//                         test->endIdx,
+//                         gBuffer[0].in,
+//                         test->optInTimePeriod,
+//                         &outBegIdx,
+//                         &outNbElement,
+//                         gBuffer[0].out0 );
+      break;
+   case TA_ROCR100_TEST:
+//      retCode = TA_ROCR100_StateTest(
+//                            test->startIdx,
+//                            test->endIdx,
+//                            gBuffer[0].in,
+//                            test->optInTimePeriod,
+//                            &outBegIdx,
+//                            &outNbElement,
+//                            gBuffer[0].out0 );
+      break;
+
+   case TA_ROCP_TEST:
+//      retCode = TA_ROCP_StateTest(
+//                         test->startIdx,
+//                         test->endIdx,
+//                         gBuffer[0].in,
+//                         test->optInTimePeriod,
+//                         &outBegIdx,
+//                         &outNbElement,
+//                         gBuffer[0].out0 );
+      break;
+
+   default:
+      retCode = TA_BAD_PARAM;
+   }
+
+
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
 }
 

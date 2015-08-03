@@ -330,7 +330,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+double tempReal;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -358,6 +358,9 @@
 
    /* insert state based TA dunc code here. */
 
+   tempReal = POP_FROM_MEM(inReal);
+   VALUE_HANDLE_DEREF(outReal) = (tempReal!=0.0)?((inReal / tempReal)-1.0)*100.0 : 0.0;
+   PUSH_TO_MEM(inReal,inReal);
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
