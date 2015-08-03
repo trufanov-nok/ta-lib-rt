@@ -52,6 +52,11 @@ extern "C" {
    #include "ta_defs.h"
 #endif
 
+#define TEST_WHOLE_DATA_MA
+#define TEST_WHOLE_DATA_MAVP
+#define TEST_WHOLE_DATA_PPO
+#define TEST_WHOLE_DATA_APO
+
 
 /*
  * TA_ACCBANDS - Acceleration Bands
@@ -147,11 +152,11 @@ TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ACCBANDS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outRealUpperBand_local;double  outRealMiddleBand_local;double  outRealLowerBand_local;
 /* Generated */     res = TA_ACCBANDS_State(state, inHigh[i], inLow[i], inClose[i], &outRealUpperBand_local, &outRealMiddleBand_local, &outRealLowerBand_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -231,11 +236,11 @@ TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ACOS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ACOS_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -329,11 +334,11 @@ TA_LIB_API int TA_AD_StateFree( struct TA_AD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AD
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_AD_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -416,11 +421,11 @@ TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADD
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ADD_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -540,11 +545,11 @@ TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADOSC
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ADOSC_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -651,11 +656,11 @@ TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ADX_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -755,11 +760,11 @@ TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADXR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ADXR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -863,11 +868,11 @@ TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_APO
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_APO_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -970,11 +975,11 @@ TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AROON
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outAroonDown_local;double  outAroonUp_local;
 /* Generated */     res = TA_AROON_State(state, inHigh[i], inLow[i], &outAroonDown_local, &outAroonUp_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1074,11 +1079,11 @@ TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AROONOSC
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_AROONOSC_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1156,11 +1161,11 @@ TA_LIB_API int TA_ASIN_StateFree( struct TA_ASIN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ASIN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ASIN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1238,11 +1243,11 @@ TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ATAN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ATAN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1341,11 +1346,11 @@ TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ATR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ATR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1438,11 +1443,11 @@ TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AVGPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_AVGPRICE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1532,11 +1537,11 @@ TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AVGDEV
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_AVGDEV_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1654,11 +1659,11 @@ TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_BBANDS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outRealUpperBand_local;double  outRealMiddleBand_local;double  outRealLowerBand_local;
 /* Generated */     res = TA_BBANDS_State(state, inReal[i], &outRealUpperBand_local, &outRealMiddleBand_local, &outRealLowerBand_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1763,11 +1768,11 @@ TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_BETA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_BETA_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1860,11 +1865,11 @@ TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_BOP
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_BOP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -1963,11 +1968,11 @@ TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CCI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_CCI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2060,11 +2065,11 @@ TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL2CROWS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL2CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2157,11 +2162,11 @@ TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3BLACKCROWS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3BLACKCROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2254,11 +2259,11 @@ TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3INSIDE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3INSIDE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2351,11 +2356,11 @@ TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3LINESTRIKE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3LINESTRIKE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2448,11 +2453,11 @@ TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3OUTSIDE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3OUTSIDE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2545,11 +2550,11 @@ TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3STARSINSOUTH
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3STARSINSOUTH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2642,11 +2647,11 @@ TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3WHITESOLDIERS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3WHITESOLDIERS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2750,11 +2755,11 @@ TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLABANDONEDBABY
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLABANDONEDBABY_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2847,11 +2852,11 @@ TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLADVANCEBLOCK
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLADVANCEBLOCK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -2944,11 +2949,11 @@ TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLBELTHOLD
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLBELTHOLD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3041,11 +3046,11 @@ TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLBREAKAWAY
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLBREAKAWAY_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3138,11 +3143,11 @@ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCLOSINGMARUBOZU
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCLOSINGMARUBOZU_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3235,11 +3240,11 @@ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCONCEALBABYSWALL
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCONCEALBABYSWALL_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3332,11 +3337,11 @@ TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCOUNTERATTACK
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCOUNTERATTACK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3440,11 +3445,11 @@ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDARKCLOUDCOVER
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDARKCLOUDCOVER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3537,11 +3542,11 @@ TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDOJI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3634,11 +3639,11 @@ TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDOJISTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3731,11 +3736,11 @@ TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDRAGONFLYDOJI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDRAGONFLYDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3828,11 +3833,11 @@ TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLENGULFING
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLENGULFING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -3936,11 +3941,11 @@ TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLEVENINGDOJISTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLEVENINGDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4044,11 +4049,11 @@ TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLEVENINGSTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLEVENINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4141,11 +4146,11 @@ TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLGAPSIDESIDEWHITE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLGAPSIDESIDEWHITE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4238,11 +4243,11 @@ TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLGRAVESTONEDOJI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLGRAVESTONEDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4335,11 +4340,11 @@ TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHAMMER
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHAMMER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4432,11 +4437,11 @@ TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _stat
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHANGINGMAN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHANGINGMAN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4529,11 +4534,11 @@ TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHARAMI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHARAMI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4626,11 +4631,11 @@ TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHARAMICROSS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHARAMICROSS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4723,11 +4728,11 @@ TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIGHWAVE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIGHWAVE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4820,11 +4825,11 @@ TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIKKAKE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIKKAKE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -4917,11 +4922,11 @@ TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _stat
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIKKAKEMOD
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIKKAKEMOD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5014,11 +5019,11 @@ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHOMINGPIGEON
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHOMINGPIGEON_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5111,11 +5116,11 @@ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLIDENTICAL3CROWS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLIDENTICAL3CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5208,11 +5213,11 @@ TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLINNECK
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLINNECK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5305,11 +5310,11 @@ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLINVERTEDHAMMER
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLINVERTEDHAMMER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5402,11 +5407,11 @@ TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLKICKING
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLKICKING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5499,11 +5504,11 @@ TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLKICKINGBYLENGTH
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLKICKINGBYLENGTH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5596,11 +5601,11 @@ TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLADDERBOTTOM
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLADDERBOTTOM_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5693,11 +5698,11 @@ TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLONGLEGGEDDOJI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLONGLEGGEDDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5790,11 +5795,11 @@ TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLONGLINE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLONGLINE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5887,11 +5892,11 @@ TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMARUBOZU
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMARUBOZU_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -5984,11 +5989,11 @@ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMATCHINGLOW
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMATCHINGLOW_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6092,11 +6097,11 @@ TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMATHOLD
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMATHOLD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6200,11 +6205,11 @@ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMORNINGDOJISTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMORNINGDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6308,11 +6313,11 @@ TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMORNINGSTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMORNINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6405,11 +6410,11 @@ TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLONNECK
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLONNECK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6502,11 +6507,11 @@ TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLPIERCING
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLPIERCING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6599,11 +6604,11 @@ TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLRICKSHAWMAN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLRICKSHAWMAN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6696,11 +6701,11 @@ TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLRISEFALL3METHODS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLRISEFALL3METHODS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6793,11 +6798,11 @@ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSEPARATINGLINES
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSEPARATINGLINES_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6890,11 +6895,11 @@ TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSHOOTINGSTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSHOOTINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -6987,11 +6992,11 @@ TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSHORTLINE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSHORTLINE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7084,11 +7089,11 @@ TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSPINNINGTOP
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSPINNINGTOP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7181,11 +7186,11 @@ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSTALLEDPATTERN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSTALLEDPATTERN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7278,11 +7283,11 @@ TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSTICKSANDWICH
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSTICKSANDWICH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7375,11 +7380,11 @@ TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTAKURI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTAKURI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7472,11 +7477,11 @@ TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTASUKIGAP
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTASUKIGAP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7569,11 +7574,11 @@ TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTHRUSTING
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTHRUSTING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7666,11 +7671,11 @@ TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTRISTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTRISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7763,11 +7768,11 @@ TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLUNIQUE3RIVER
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLUNIQUE3RIVER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7860,11 +7865,11 @@ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLUPSIDEGAP2CROWS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLUPSIDEGAP2CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -7957,11 +7962,11 @@ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLXSIDEGAP3METHODS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLXSIDEGAP3METHODS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8039,11 +8044,11 @@ TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CEIL
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_CEIL_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8136,11 +8141,11 @@ TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CMO
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_CMO_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8239,11 +8244,11 @@ TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CORREL
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_CORREL_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8321,11 +8326,11 @@ TA_LIB_API int TA_COS_StateFree( struct TA_COS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_COS
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_COS_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8403,11 +8408,11 @@ TA_LIB_API int TA_COSH_StateFree( struct TA_COSH_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_COSH
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_COSH_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8498,11 +8503,11 @@ TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_DEMA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_DEMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8585,11 +8590,11 @@ TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_DIV
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_DIV_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8695,11 +8700,11 @@ TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_DX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_DX_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8792,11 +8797,11 @@ TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_EMA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_EMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8874,11 +8879,11 @@ TA_LIB_API int TA_EXP_StateFree( struct TA_EXP_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_EXP
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_EXP_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -8956,11 +8961,11 @@ TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_FLOOR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_FLOOR_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9059,11 +9064,11 @@ TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_DCPERIOD
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_DCPERIOD_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9165,11 +9170,11 @@ TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_DCPHASE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_DCPHASE_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9271,11 +9276,11 @@ TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_PHASOR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outInPhase_local;double  outQuadrature_local;
 /* Generated */     res = TA_HT_PHASOR_State(state, inReal[i], &outInPhase_local, &outQuadrature_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9383,11 +9388,11 @@ TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_SINE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outSine_local;double  outLeadSine_local;
 /* Generated */     res = TA_HT_SINE_State(state, inReal[i], &outSine_local, &outLeadSine_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9491,11 +9496,11 @@ TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_TRENDLINE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_TRENDLINE_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9605,11 +9610,11 @@ TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_TRENDMODE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_HT_TRENDMODE_State(state, inReal[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9705,11 +9710,11 @@ TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_IMI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_IMI_State(state, inOpen[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9802,11 +9807,11 @@ TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_KAMA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_KAMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9900,11 +9905,11 @@ TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -9998,11 +10003,11 @@ TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_ANGLE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_ANGLE_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10096,11 +10101,11 @@ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_INTERCEPT
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_INTERCEPT_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10194,11 +10199,11 @@ TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_SLOPE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_SLOPE_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10276,11 +10281,11 @@ TA_LIB_API int TA_LN_StateFree( struct TA_LN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_LN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10358,11 +10363,11 @@ TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_LOG10
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LOG10_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10455,11 +10460,11 @@ TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10578,11 +10583,11 @@ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACD
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACD_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10712,11 +10717,11 @@ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACDEXT
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACDEXT_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10815,11 +10820,11 @@ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACDFIX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACDFIX_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -10946,11 +10951,11 @@ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAMA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outMAMA_local;double  outFAMA_local;
 /* Generated */     res = TA_MAMA_State(state, inReal[i], &outMAMA_local, &outFAMA_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11058,11 +11063,11 @@ TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAVP
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MAVP_State(state, inReal[i], inPeriods[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11152,11 +11157,11 @@ TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MAX_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11248,11 +11253,11 @@ TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAXINDEX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_MAXINDEX_State(state, inReal[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11335,11 +11340,11 @@ TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MEDPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MEDPRICE_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11447,11 +11452,11 @@ TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MFI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MFI_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11542,11 +11547,11 @@ TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIDPOINT
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MIDPOINT_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11642,11 +11647,11 @@ TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIDPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MIDPRICE_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11736,11 +11741,11 @@ TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MIN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11832,11 +11837,11 @@ TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MININDEX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_MININDEX_State(state, inReal[i], &outInteger_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -11931,11 +11936,11 @@ TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINMAX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outMin_local;double  outMax_local;
 /* Generated */     res = TA_MINMAX_State(state, inReal[i], &outMin_local, &outMax_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12034,11 +12039,11 @@ TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINMAXINDEX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     int outMinIdx_local;int  outMaxIdx_local;
 /* Generated */     res = TA_MINMAXINDEX_State(state, inReal[i], &outMinIdx_local, &outMaxIdx_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12143,11 +12148,11 @@ TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINUS_DI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MINUS_DI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12244,11 +12249,11 @@ TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINUS_DM
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MINUS_DM_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12337,11 +12342,11 @@ TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MOM
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MOM_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12424,11 +12429,11 @@ TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MULT
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MULT_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12527,11 +12532,11 @@ TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_NATR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_NATR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12616,11 +12621,11 @@ TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_OBV
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_OBV_State(state, inClose[i], inVolume[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12724,11 +12729,11 @@ TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_PLUS_DI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_PLUS_DI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12825,11 +12830,11 @@ TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_PLUS_DM
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_PLUS_DM_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -12930,11 +12935,11 @@ TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_PPO
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_PPO_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13023,11 +13028,11 @@ TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROC
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ROC_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13116,11 +13121,11 @@ TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCP
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCP_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13209,11 +13214,11 @@ TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCR_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13302,11 +13307,11 @@ TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCR100
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCR100_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13399,11 +13404,11 @@ TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_RSI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_RSI_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13506,11 +13511,11 @@ TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SAR_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13667,11 +13672,11 @@ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SAREXT
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SAREXT_State(state, inHigh[i], inLow[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13749,11 +13754,11 @@ TA_LIB_API int TA_SIN_StateFree( struct TA_SIN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SIN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SIN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13831,11 +13836,11 @@ TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SINH
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SINH_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -13925,11 +13930,11 @@ TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SMA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14007,11 +14012,11 @@ TA_LIB_API int TA_SQRT_StateFree( struct TA_SQRT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SQRT
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SQRT_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14110,11 +14115,11 @@ TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_STDDEV
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_STDDEV_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14241,11 +14246,11 @@ TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCH
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outSlowK_local;double  outSlowD_local;
 /* Generated */     res = TA_STOCH_State(state, inHigh[i], inLow[i], inClose[i], &outSlowK_local, &outSlowD_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14361,11 +14366,11 @@ TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCHF
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outFastK_local;double  outFastD_local;
 /* Generated */     res = TA_STOCHF_State(state, inHigh[i], inLow[i], inClose[i], &outFastK_local, &outFastD_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14480,11 +14485,11 @@ TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCHRSI
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outFastK_local;double  outFastD_local;
 /* Generated */     res = TA_STOCHRSI_State(state, inReal[i], &outFastK_local, &outFastD_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14568,11 +14573,11 @@ TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SUB
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SUB_State(state, inReal0[i], inReal1[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14662,11 +14667,11 @@ TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SUM
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SUM_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14778,11 +14783,11 @@ TA_LIB_API int TA_T3_StateFree( struct TA_T3_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_T3
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_T3_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14860,11 +14865,11 @@ TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TAN
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TAN_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -14942,11 +14947,11 @@ TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TANH
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TANH_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15038,11 +15043,11 @@ TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TEMA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TEMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15130,11 +15135,11 @@ TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRANGE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TRANGE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15228,11 +15233,11 @@ TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRIMA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TRIMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15321,11 +15326,11 @@ TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRIX
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TRIX_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15419,11 +15424,11 @@ TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TSF
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TSF_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15511,11 +15516,11 @@ TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TYPPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TYPPRICE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15632,11 +15637,11 @@ TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ULTOSC
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ULTOSC_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15736,11 +15741,11 @@ TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_VAR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_VAR_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15828,11 +15833,11 @@ TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_WCLPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_WCLPRICE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -15933,11 +15938,11 @@ TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_WILLR
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_WILLR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }
@@ -16029,11 +16034,11 @@ TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_WMA
 /* Generated */    i = 0;
 /* Generated */  #endif
-/* Generated */  while (i++ <= endIdx)
+/* Generated */  while (i <= endIdx)
 /* Generated */    {
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_WMA_State(state, inReal[i], &outReal_local);
-/* Generated */     if (i < startIdx) continue;
+/* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
 /* Generated */          else return res; }

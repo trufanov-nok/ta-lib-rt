@@ -52,6 +52,11 @@ extern "C" {
    #include "ta_defs.h"
 #endif
 
+#define TEST_WHOLE_DATA_MA
+#define TEST_WHOLE_DATA_MAVP
+#define TEST_WHOLE_DATA_PPO
+#define TEST_WHOLE_DATA_APO
+
 %%%GENCODE%%%
 
 #ifdef __cplusplus
