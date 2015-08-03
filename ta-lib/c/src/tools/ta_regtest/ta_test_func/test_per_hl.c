@@ -109,7 +109,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 
 static TA_Test tableTest[] =
@@ -233,6 +234,13 @@ ErrorNumber test_func_per_hl( TA_History *history )
       if( retValue != 0 )
       {
          printf( "Failed Test #%d (Code=%d)\n", i, retValue );
+         return retValue;
+      }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "Failed State Test #%d (Code=%d)\n", i, retValue );
          return retValue;
       }
    }
@@ -636,5 +644,93 @@ static ErrorNumber do_test( const TA_History *history,
    }
 
    return TA_TEST_PASS;
+}
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->high,  history->nbBars );
+   setInputBuffer( 1, history->low,   history->nbBars );
+
+   /* Make a simple first call. */
+   switch( test->theFunction )
+   {
+   case TA_AROON_UP_TEST:
+      retCode = TA_AROON_StateTest( test->startIdx,
+                          test->endIdx,
+                          gBuffer[0].in,
+                          gBuffer[1].in,
+                          test->optInTimePeriod,
+                          &outBegIdx,
+                          &outNbElement,
+                          gBuffer[1].out0,
+                          gBuffer[0].out0
+                        );
+      break;
+
+   case TA_AROON_DOWN_TEST:
+      retCode = TA_AROON_StateTest( test->startIdx,
+                          test->endIdx,
+                          gBuffer[0].in,
+                          gBuffer[1].in,
+                          test->optInTimePeriod,
+                          &outBegIdx,
+                          &outNbElement,
+                          gBuffer[0].out0,
+                          gBuffer[1].out0
+                        );
+      break;
+
+   case TA_AROONOSC_TEST:
+      retCode = TA_AROONOSC_StateTest( test->startIdx,
+                             test->endIdx,
+                             gBuffer[0].in,
+                             gBuffer[1].in,
+                             test->optInTimePeriod,
+                             &outBegIdx,
+                             &outNbElement,
+                             gBuffer[0].out0
+                           );
+      break;
+
+   case TA_CORREL_TEST:
+//      retCode = TA_CORREL_StateTest( test->startIdx,
+//                           test->endIdx,
+//                           gBuffer[0].in,
+//                           gBuffer[1].in,
+//                           test->optInTimePeriod,
+//                           &outBegIdx,
+//                           &outNbElement,
+//                           gBuffer[0].out0
+//                         );
+      break;
+
+   case TA_BETA_TEST:
+      retCode = TA_BETA_StateTest( test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         gBuffer[1].in,
+                         test->optInTimePeriod,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out0
+                         );
+      break;
+
+   default:
+      retCode = TA_INTERNAL_ERROR(133);
+   }
+
+
+
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
 }
 

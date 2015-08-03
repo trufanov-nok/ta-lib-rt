@@ -364,8 +364,23 @@ static const TA_OptInputParameterInfo *TA_AROON_OptInputs[] =
   &TA_DEF_UI_TimePeriod_14_MINIMUM2,
   NULL
 };
-
-static const TA_InputParameterInfo *TA_AROON_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_AROON_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "lowest", 0 };
+const TA_InputParameterInfo TA_AROON_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "highest", 0 };
+const TA_InputParameterInfo TA_AROON_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "lowest_exp", 0 };
+const TA_InputParameterInfo TA_AROON_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "highest_exp", 0 };
+const TA_InputParameterInfo TA_AROON_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "factor", 0 };
+static const TA_InputParameterInfo *TA_AROON_StructParams[] = {
+    &TA_AROON_DEF_UI_STRUCT_PARAM_1,
+    &TA_AROON_DEF_UI_STRUCT_PARAM_2,
+    &TA_AROON_DEF_UI_STRUCT_PARAM_3,
+    &TA_AROON_DEF_UI_STRUCT_PARAM_4,
+    &TA_AROON_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( AROON,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */
@@ -395,7 +410,24 @@ static const TA_OptInputParameterInfo *TA_AROONOSC_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_AROONOSC_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_AROONOSC_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "lowest", 0 };
+const TA_InputParameterInfo TA_AROONOSC_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "highest", 0 };
+const TA_InputParameterInfo TA_AROONOSC_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "lowest_exp", 0 };
+const TA_InputParameterInfo TA_AROONOSC_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "highest_exp", 0 };
+const TA_InputParameterInfo TA_AROONOSC_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "factor", 0 };
+
+static const TA_InputParameterInfo *TA_AROONOSC_StructParams[] = {
+    &TA_AROONOSC_DEF_UI_STRUCT_PARAM_1,
+    &TA_AROONOSC_DEF_UI_STRUCT_PARAM_2,
+    &TA_AROONOSC_DEF_UI_STRUCT_PARAM_3,
+    &TA_AROONOSC_DEF_UI_STRUCT_PARAM_4,
+    &TA_AROONOSC_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( AROONOSC,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */

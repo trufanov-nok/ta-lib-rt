@@ -392,7 +392,10 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_AROONOSC_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+unsigned  int i;
+int j,p;
+double temp;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -424,8 +427,70 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+             STATE.lowest = inLow;
+             STATE.highest = inHigh;
+             STATE.lowest_exp = STATE.optInTimePeriod;
+             STATE.highest_exp = STATE.optInTimePeriod;
+             STATE.factor = (double)100.0/(double)STATE.optInTimePeriod;
+           }
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+        if (inLow <= STATE.lowest)
+        {
+            STATE.lowest = inLow;
+            STATE.lowest_exp = STATE.optInTimePeriod;
+        } else
+            if (STATE.lowest_exp-- <= 0)
+            {
+                STATE.lowest = inLow;
+                STATE.lowest_exp = STATE.optInTimePeriod;
+                j = STATE.mem_index-1;
+                p = STATE.optInTimePeriod;
+                for (i = 0; i < MEM_SIZE; i++)
+                {
+                    temp = MEM_IDX_NS( (--j) % MEM_SIZE, inLow);
+                    p--;
+                    if (temp < STATE.lowest)
+                    {
+                        STATE.lowest = temp;
+                        STATE.lowest_exp = p;
+                    }
+                }
+            }
+
+        if (inHigh >= STATE.highest)
+        {
+            STATE.highest = inHigh;
+            STATE.highest_exp = STATE.optInTimePeriod;
+        } else
+            if (STATE.highest_exp-- <= 0)
+            {
+                STATE.highest = inHigh;
+                STATE.highest_exp = STATE.optInTimePeriod;
+                j = STATE.mem_index-1;
+                p = STATE.optInTimePeriod;
+                for ( i = 0; i < MEM_SIZE; i++)
+                {
+                    temp = MEM_IDX_NS( (--j) % MEM_SIZE, inHigh);
+                    p--;
+                    if (temp > STATE.highest)
+                    {
+                        STATE.highest = temp;
+                        STATE.highest_exp = p;
+                    }
+                }
+            }
+
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+
+        if (NEED_MORE_DATA)
+            return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+        VALUE_HANDLE_DEREF(outReal) = STATE.factor*(STATE.highest_exp - STATE.lowest_exp);
+
+        return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/

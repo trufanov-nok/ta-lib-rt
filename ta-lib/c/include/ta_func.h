@@ -900,6 +900,11 @@ struct TA_AROON_State {
                       size_t mem_size;
                       size_t mem_index;
                       struct TA_AROON_Data* memory;
+                      double       lowest;
+                      double       highest;
+                      int          lowest_exp;
+                      int          highest_exp;
+                      double       factor;
                       int           optInTimePeriod; /* From 2 to 100000 */
                       };
 
@@ -998,6 +1003,11 @@ struct TA_AROONOSC_State {
                          size_t mem_size;
                          size_t mem_index;
                          struct TA_AROONOSC_Data* memory;
+                         double       lowest;
+                         double       highest;
+                         int          lowest_exp;
+                         int          highest_exp;
+                         double       factor;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
 
@@ -1657,6 +1667,15 @@ struct TA_BETA_State {
                      size_t mem_size;
                      size_t mem_index;
                      struct TA_BETA_Data* memory;
+                     double       S_xx;
+                     double       S_xy;
+                     double       S_x;
+                     double       S_y;
+                     double       prev_price_x;
+                     double       prev_price_y;
+                     double       last_price_x;
+                     double       last_price_y;
+                     int          initialized;
                      int           optInTimePeriod; /* From 1 to 100000 */
                      };
 

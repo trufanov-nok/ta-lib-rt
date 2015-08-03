@@ -347,7 +347,7 @@
 
 {
    /* insert local variable here */
-
+#define TA_BETA_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -375,7 +375,10 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
-
+   STATE_P.initialized = 0;
+   MEM_SIZE_P--;
+   if (MEM_SIZE_P > 0)
+     MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_BETA_Data));
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -401,7 +404,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_BETA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+double x,y,temp;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -429,6 +433,78 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+
+   if (!STATE.initialized)
+   {
+    STATE.S_xx = 0;
+    STATE.S_xy = 0;
+    STATE.S_x = 0;
+    STATE.last_price_x = inReal0;
+    STATE.last_price_y = inReal1;
+    STATE.prev_price_x = inReal0;
+    STATE.prev_price_y = inReal1;
+    STATE.initialized = 1;
+    STATE.mem_index--;
+    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+   }
+
+  if( !TA_IS_ZERO(STATE.prev_price_x) )
+     x = (inReal0-STATE.prev_price_x)/STATE.prev_price_x;
+  else
+     x = 0.0;
+  STATE.prev_price_x = inReal0;
+
+  if( !TA_IS_ZERO(STATE.prev_price_y) )
+     y = (inReal1-STATE.prev_price_y)/STATE.prev_price_y;
+  else
+     y = 0.0;
+  STATE.prev_price_y = inReal1;
+
+  STATE.S_xx += x*x;
+  STATE.S_xy += x*y;
+  STATE.S_x += x;
+  STATE.S_y += y;
+
+  if (NEED_MORE_DATA)
+  {
+    PUSH_TO_MEM(inReal0,inReal0);
+    PUSH_TO_MEM(inReal1,inReal1);
+    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+  }
+
+  temp = POP_FROM_MEM(inReal0);
+
+  if( !TA_IS_ZERO(STATE.last_price_x) )
+     x = (temp-STATE.last_price_x)/STATE.last_price_x;
+  else
+     x = 0.0;
+  STATE.last_price_x = temp;
+
+  temp = POP_FROM_MEM(inReal1);
+
+  if( !TA_IS_ZERO(STATE.last_price_y) )
+     y = (temp-STATE.last_price_y)/STATE.last_price_y;
+  else
+     y = 0.0;
+  STATE.last_price_y = temp;
+
+
+  /* Write the output */
+  temp = ((double)STATE.optInTimePeriod * STATE.S_xx) - (STATE.S_x * STATE.S_x);
+  if( !TA_IS_ZERO(temp) )
+     VALUE_HANDLE_DEREF(outReal) = (((double)STATE.optInTimePeriod * STATE.S_xy) - (STATE.S_x * STATE.S_y)) / temp;
+  else
+     VALUE_HANDLE_DEREF(outReal) = 0.0;
+
+  /* Remove the calculation starting with the trailingIdx. */
+  STATE.S_xx -= x*x;
+  STATE.S_xy -= x*y;
+  STATE.S_x -= x;
+  STATE.S_y -= y;
+
+  PUSH_TO_MEM(inReal0,inReal0);
+  PUSH_TO_MEM(inReal1,inReal1);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

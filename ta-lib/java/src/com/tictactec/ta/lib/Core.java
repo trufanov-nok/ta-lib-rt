@@ -1690,7 +1690,7 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMAType )
    {
-      return TA_INT_PO_StateInit (_state, optInFastPeriod, optInFastPeriod, optInMAType, 0);
+      return TA_INT_PO_StateInit (_state, optInFastPeriod, optInSlowPeriod, optInMAType, 0);
    }
    public int TA_INT_PO_StateInit( struct TA_apo_State** _state,
       int optInFastPeriod,
@@ -1740,7 +1740,7 @@ public class Core {
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
       res1 = movingAverage ((struct movingAverage *) _state.value .fastMAState, inReal, &fastMA);
-      res2 = movingAverage ((struct movingAverage *) _state.value .fastMAState, inReal, &fastMA);
+      res2 = movingAverage ((struct movingAverage *) _state.value .slowMAState, inReal, &slowMA);
       if (res1|res2)
          return (res1|res2);
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
@@ -1998,14 +1998,71 @@ public class Core {
       double *outAroonDown,
       double *outAroonUp )
    {
+      unsigned int i;
+      int j,p;
+      double temp;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .lowest = inLow;
+         _state.value .highest = inHigh;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+         _state.value .factor = (double)100.0/(double) _state.value .optInTimePeriod;
+      }
+      if (inLow <= _state.value .lowest)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+      } else
+         if ( _state.value .lowest_exp-- <= 0)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+         j = _state.value .mem_index-1;
+         p = _state.value .optInTimePeriod;
+         for (i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inLow ;
+            p--;
+            if (temp < _state.value .lowest)
+            {
+               _state.value .lowest = temp;
+               _state.value .lowest_exp = p;
+            }
+         }
+      }
+      if (inHigh >= _state.value .highest)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+      } else
+         if ( _state.value .highest_exp-- <= 0)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+         j = _state.value .mem_index-1;
+         p = _state.value .optInTimePeriod;
+         for ( i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inHigh ;
+            p--;
+            if (temp > _state.value .highest)
+            {
+               _state.value .highest = temp;
+               _state.value .highest_exp = p;
+            }
+         }
+      }
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      outAroonUp.value = _state.value .factor* _state.value .highest_exp;
+      outAroonDown.value = _state.value .factor* _state.value .lowest_exp;
       return RetCode.Success ;
    }
    public int aroonStateFree( struct TA_aroon_State** _state )
@@ -2231,14 +2288,70 @@ public class Core {
       double inLow,
       double *outReal )
    {
+      unsigned int i;
+      int j,p;
+      double temp;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .lowest = inLow;
+         _state.value .highest = inHigh;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+         _state.value .factor = (double)100.0/(double) _state.value .optInTimePeriod;
+      }
+      if (inLow <= _state.value .lowest)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+      } else
+         if ( _state.value .lowest_exp-- <= 0)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+         j = _state.value .mem_index-1;
+         p = _state.value .optInTimePeriod;
+         for (i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inLow ;
+            p--;
+            if (temp < _state.value .lowest)
+            {
+               _state.value .lowest = temp;
+               _state.value .lowest_exp = p;
+            }
+         }
+      }
+      if (inHigh >= _state.value .highest)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+      } else
+         if ( _state.value .highest_exp-- <= 0)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+         j = _state.value .mem_index-1;
+         p = _state.value .optInTimePeriod;
+         for ( i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inHigh ;
+            p--;
+            if (temp > _state.value .highest)
+            {
+               _state.value .highest = temp;
+               _state.value .highest_exp = p;
+            }
+         }
+      }
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      outReal.value = _state.value .factor*( _state.value .highest_exp - _state.value .lowest_exp);
       return RetCode.Success ;
    }
    public int aroonOscStateFree( struct TA_aroonOsc_State** _state )
@@ -3444,10 +3557,11 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = betaLookback (optInTimePeriod );
+      _state.value .value .memory = NULL;
+      _state.value .value .initialized = 0;
+      _state.value .value .mem_size --;
       if ( _state.value .value .mem_size > 0)
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_BETA_Data));
-      else
-         _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
    public int betaState( struct TA_beta_State* _state,
@@ -3455,14 +3569,67 @@ public class Core {
       double inReal1,
       double *outReal )
    {
+      double x,y,temp;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
+      if (! _state.value .initialized)
+      {
+         _state.value .S_xx = 0;
+         _state.value .S_xy = 0;
+         _state.value .S_x = 0;
+         _state.value .last_price_x = inReal0;
+         _state.value .last_price_y = inReal1;
+         _state.value .prev_price_x = inReal0;
+         _state.value .prev_price_y = inReal1;
+         _state.value .initialized = 1;
+         _state.value .mem_index--;
+         return RetCode.NeedMoreData ;
+      }
+      if( ! (((- (0.00000000000001) )< _state.value .prev_price_x)&&( _state.value .prev_price_x< (0.00000000000001) )) )
+         x = (inReal0- _state.value .prev_price_x)/ _state.value .prev_price_x;
+      else
+         x = 0.0;
+      _state.value .prev_price_x = inReal0;
+      if( ! (((- (0.00000000000001) )< _state.value .prev_price_y)&&( _state.value .prev_price_y< (0.00000000000001) )) )
+         y = (inReal1- _state.value .prev_price_y)/ _state.value .prev_price_y;
+      else
+         y = 0.0;
+      _state.value .prev_price_y = inReal1;
+      _state.value .S_xx += x*x;
+      _state.value .S_xy += x*y;
+      _state.value .S_x += x;
+      _state.value .S_y += y;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+      {
          ( _state.value .memory+_cur_idx).value .inReal0 = inReal0 ;
          ( _state.value .memory+_cur_idx).value .inReal1 = inReal1 ;
-         return RetCode.NeedMoreData ; }
+         return RetCode.NeedMoreData ;
+      }
+      temp = ( _state.value .memory+_cur_idx).value .inReal0 ;
+      if( ! (((- (0.00000000000001) )< _state.value .last_price_x)&&( _state.value .last_price_x< (0.00000000000001) )) )
+         x = (temp- _state.value .last_price_x)/ _state.value .last_price_x;
+      else
+         x = 0.0;
+      _state.value .last_price_x = temp;
+      temp = ( _state.value .memory+_cur_idx).value .inReal1 ;
+      if( ! (((- (0.00000000000001) )< _state.value .last_price_y)&&( _state.value .last_price_y< (0.00000000000001) )) )
+         y = (temp- _state.value .last_price_y)/ _state.value .last_price_y;
+      else
+         y = 0.0;
+      _state.value .last_price_y = temp;
+      temp = ((double) _state.value .optInTimePeriod * _state.value .S_xx) - ( _state.value .S_x * _state.value .S_x);
+      if( ! (((- (0.00000000000001) )<temp)&&(temp< (0.00000000000001) )) )
+         outReal.value = (((double) _state.value .optInTimePeriod * _state.value .S_xy) - ( _state.value .S_x * _state.value .S_y)) / temp;
+      else
+         outReal.value = 0.0;
+      _state.value .S_xx -= x*x;
+      _state.value .S_xy -= x*y;
+      _state.value .S_x -= x;
+      _state.value .S_y -= y;
+      ( _state.value .memory+_cur_idx).value .inReal0 = inReal0 ;
+      ( _state.value .memory+_cur_idx).value .inReal1 = inReal1 ;
       return RetCode.Success ;
    }
    public int betaStateFree( struct TA_beta_State** _state )
@@ -23824,7 +23991,7 @@ public class Core {
          if( _state.value .max == inReal )
          _state.value .maxIdx = _state.value .currentIdx;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
-      outInteger.value = _state.value .max;
+      outInteger.value = _state.value .maxIdx;
       return RetCode.Success ;
    }
    public int maxIndexStateFree( struct TA_maxIndex_State** _state )
@@ -24960,7 +25127,7 @@ public class Core {
          if( _state.value .min == inReal )
          _state.value .minIdx = _state.value .currentIdx;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
-      outInteger.value = _state.value .min;
+      outInteger.value = _state.value .minIdx;
       return RetCode.Success ;
    }
    public int minIndexStateFree( struct TA_minIndex_State** _state )
@@ -27599,49 +27766,17 @@ public class Core {
       int optInSlowPeriod,
       MAType optInMAType )
    {
-      if (_state == NULL)
-         return RetCode.BadParam ;
-      if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
-         optInFastPeriod = 12;
-      else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInSlowPeriod == ( Integer.MIN_VALUE ) )
-         optInSlowPeriod = 26;
-      else if( ((int)optInSlowPeriod < 2) || ((int)optInSlowPeriod > 100000) )
-         return RetCode.BadParam ;
-      _state.value = TA_Calloc(1, sizeof(struct ppo ));
-      _state.value .value .mem_index = 0;
-      _state.value .value .optInFastPeriod = optInFastPeriod;
-      _state.value .value .optInSlowPeriod = optInSlowPeriod;
-      _state.value .value .optInMAType = optInMAType;
-      _state.value .value .mem_size = ppoLookback (optInFastPeriod, optInSlowPeriod, optInMAType );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_PPO_Data));
-      else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+      return TA_INT_PO_StateInit ((struct apo **)_state, optInFastPeriod, optInSlowPeriod, optInMAType, 1);
    }
    public int ppoState( struct TA_ppo_State* _state,
       double inReal,
       double *outReal )
    {
-      if (_state == NULL)
-         return RetCode.BadParam ;
-      size_t _cur_idx = _state.value .mem_index++;
-      if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
-      return RetCode.Success ;
+      return apo ((struct apo *)_state, inReal, outReal);
    }
    public int ppoStateFree( struct TA_ppo_State** _state )
    {
-      if (_state == NULL)
-         return RetCode.BadParam ;
-      if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
-         TA_Free( _state.value ); _state.value = NULL;}
-      return RetCode.Success ;
+      return apo ((struct apo **)_state);
    }
    public RetCode ppo( int startIdx,
       int endIdx,

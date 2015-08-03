@@ -167,7 +167,35 @@ static const TA_OptInputParameterInfo *TA_BETA_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_BETA_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "S_xx", 0 };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "S_xy", 0 };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "S_x", 0 };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "S_y", 0 };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "prev_price_x", 0 };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "prev_price_y", 0 };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "last_price_x", 0 };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "last_price_y", 0 };
+const TA_InputParameterInfo TA_BETA_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Integer, "initialized", 0 };
+static const TA_InputParameterInfo *TA_BETA_StructParams[] = {
+    &TA_BETA_DEF_UI_STRUCT_PARAM_1,
+    &TA_BETA_DEF_UI_STRUCT_PARAM_2,
+    &TA_BETA_DEF_UI_STRUCT_PARAM_3,
+    &TA_BETA_DEF_UI_STRUCT_PARAM_4,
+    &TA_BETA_DEF_UI_STRUCT_PARAM_5,
+    &TA_BETA_DEF_UI_STRUCT_PARAM_6,
+    &TA_BETA_DEF_UI_STRUCT_PARAM_7,
+    &TA_BETA_DEF_UI_STRUCT_PARAM_8,
+    &TA_BETA_DEF_UI_STRUCT_PARAM_9,
+    NULL };
 
 DEF_FUNCTION( BETA,                         /* name */
               TA_GroupId_Statistic,     /* groupId */
