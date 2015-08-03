@@ -565,10 +565,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                             const TA_Test *test )
 {
    TA_RetCode retCode;
-   ErrorNumber errNb;
    TA_Integer outBegIdx;
    TA_Integer outNbElement;
-   TA_RangeTestParam testParam;
 
    /* Set to NAN all the elements of the gBuffers.  */
    clearAllBuffers();
@@ -606,35 +604,35 @@ static ErrorNumber do_test_state( const TA_History *history,
                         gBuffer[0].out0 );
       break;
    case TA_ROCR_TEST:
-//      retCode = TA_ROCR_StateTest(
-//                         test->startIdx,
-//                         test->endIdx,
-//                         gBuffer[0].in,
-//                         test->optInTimePeriod,
-//                         &outBegIdx,
-//                         &outNbElement,
-//                         gBuffer[0].out0 );
+      retCode = TA_ROCR_StateTest(
+                         test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         test->optInTimePeriod,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out0 );
       break;
    case TA_ROCR100_TEST:
-//      retCode = TA_ROCR100_StateTest(
-//                            test->startIdx,
-//                            test->endIdx,
-//                            gBuffer[0].in,
-//                            test->optInTimePeriod,
-//                            &outBegIdx,
-//                            &outNbElement,
-//                            gBuffer[0].out0 );
+      retCode = TA_ROCR100_StateTest(
+                            test->startIdx,
+                            test->endIdx,
+                            gBuffer[0].in,
+                            test->optInTimePeriod,
+                            &outBegIdx,
+                            &outNbElement,
+                            gBuffer[0].out0 );
       break;
 
    case TA_ROCP_TEST:
-//      retCode = TA_ROCP_StateTest(
-//                         test->startIdx,
-//                         test->endIdx,
-//                         gBuffer[0].in,
-//                         test->optInTimePeriod,
-//                         &outBegIdx,
-//                         &outNbElement,
-//                         gBuffer[0].out0 );
+      retCode = TA_ROCP_StateTest(
+                         test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         test->optInTimePeriod,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out0 );
       break;
 
    default:
