@@ -186,7 +186,10 @@ TA_RetCode printStateTestFunc(FILE* out, const TA_FuncInfo *funcInfo)
     print(out, " i = ( startIdx <= lookback )? lookback: startIdx;\n");
     print(out, " if (i < endIdx) {\n");
     print(out, " i -= lookback;\n");
-    print(out, " for (i = 0; i <= endIdx; i++)\n");
+    print(out, " #ifdef TEST_WHOLE_DATA_%s\n", funcInfo->name);
+    print(out, "   i = 0;\n");
+    print(out, " #endif\n");
+    print(out, " while (i++ <= endIdx)\n");
     print(out, "   {\n");
 
     listInputParameters(inputArgs, funcInfo, ", ", "[i]");

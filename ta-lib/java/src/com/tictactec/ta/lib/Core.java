@@ -27887,6 +27887,7 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
@@ -27894,6 +27895,9 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
          ( _state.value .memory+_cur_idx).value .inReal = inReal ;
          return RetCode.NeedMoreData ; }
+      tempReal = ( _state.value .memory+_cur_idx).value .inReal ;
+      outReal.value = (tempReal!=0.0)?((inReal / tempReal)-1.0)*100.0 : 0.0;
+      ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
    public int rocStateFree( struct TA_roc_State** _state )
