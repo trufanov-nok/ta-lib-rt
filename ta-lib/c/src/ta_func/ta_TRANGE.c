@@ -335,7 +335,6 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
-
            /* Find the greatest of the 3 values. */
 
    tempCY = POP_FROM_MEM(inClose);
@@ -350,6 +349,8 @@
        greatest = val3;
 
    VALUE_HANDLE_DEREF(outReal)  = greatest;
+
+   PUSH_TO_MEM(inClose,inClose);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
