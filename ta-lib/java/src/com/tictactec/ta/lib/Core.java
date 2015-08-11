@@ -2712,6 +2712,7 @@ public class Core {
    public int atrStateInit( struct TA_atr_State** _state,
       int optInTimePeriod )
    {
+      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -2726,7 +2727,13 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ATR_Data));
       else
          _state.value .value .memory = NULL;
-      return RetCode.Success ;
+      if( optInTimePeriod <= 1 )
+      {
+         return trueRange ( (struct trueRange **) & _state.value .value .StateTRANGE );
+      }
+      retCode = trueRange ( (struct trueRange **) & _state.value .value .StateTRANGE );
+      if (retCode != RetCode.Success ) return retCode;
+      return sma ( (struct sma **) & _state.value .value .StateSMA, optInTimePeriod );
    }
    public int atrState( struct TA_atr_State* _state,
       double inHigh,
@@ -2734,19 +2741,49 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      if( _state.value .optInTimePeriod <= 1 )
+      {
+         return trueRange ( (struct trueRange *) _state.value .StateTRANGE, inHigh, inLow, inClose, outReal );
+      }
+      TA_RetCode retCode;
+      double tempReal, tempATR;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .firstATR = 1;
+      }
+      retCode = trueRange ( _state.value .StateTRANGE,inHigh, inLow, inClose, &tempReal );
+      if( retCode != RetCode.Success ) return retCode;
+      if ( _state.value .firstATR == 1)
+      {
+         retCode = sma ( _state.value .StateSMA, tempReal, &tempATR );
+         if( retCode != RetCode.Success ) return retCode;
+         _state.value .firstATR = 0;
+         _state.value .prevATR = tempATR;
+      } else {
+         _state.value .prevATR *= _state.value .optInTimePeriod - 1;
+         _state.value .prevATR += tempReal;
+         _state.value .prevATR /= _state.value .optInTimePeriod;
+      }
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      outReal.value = _state.value .prevATR;
       return RetCode.Success ;
    }
    public int atrStateFree( struct TA_atr_State** _state )
    {
+      if( _state.value .value .optInTimePeriod <= 1 )
+      {
+         return trueRange ( (struct trueRange **) & _state.value .value .StateTRANGE);
+      }
+      TA_RetCode retCode;
+      retCode = trueRange ( (struct trueRange **) & _state.value .value .StateTRANGE );
+      if (retCode != RetCode.Success ) return retCode;
+      else retCode = sma ( (struct sma **) & _state.value .value .StateSMA );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -28163,6 +28200,7 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
@@ -28170,6 +28208,9 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
          ( _state.value .memory+_cur_idx).value .inReal = inReal ;
          return RetCode.NeedMoreData ; }
+      tempReal = ( _state.value .memory+_cur_idx).value .inReal ;
+      outReal.value = (tempReal!=0.0)? inReal/tempReal : 0.0;
+      ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
    public int rocRStateFree( struct TA_rocR_State** _state )
@@ -28297,6 +28338,7 @@ public class Core {
       double inReal,
       double *outReal )
    {
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
@@ -28304,6 +28346,9 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
          ( _state.value .memory+_cur_idx).value .inReal = inReal ;
          return RetCode.NeedMoreData ; }
+      tempReal = ( _state.value .memory+_cur_idx).value .inReal ;
+      outReal.value = (tempReal!=0.0)? (inReal/tempReal)*100.0 : 0.0;
+      ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
    public int rocR100StateFree( struct TA_rocR100_State** _state )
@@ -32397,6 +32442,7 @@ public class Core {
       if( val3 > greatest )
          greatest = val3;
       outReal.value = greatest;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
    public int trueRangeStateFree( struct TA_trueRange_State** _state )

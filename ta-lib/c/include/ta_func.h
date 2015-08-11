@@ -1305,6 +1305,10 @@ struct TA_ATR_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_ATR_Data* memory;
+                    void*        StateTRANGE;
+                    void*        StateSMA;
+                    double       prevATR;
+                    int          firstATR;
                     int           optInTimePeriod; /* From 1 to 100000 */
                     };
 
@@ -12491,6 +12495,10 @@ struct TA_NATR_State {
                      size_t mem_size;
                      size_t mem_index;
                      struct TA_NATR_Data* memory;
+                     void*        StateTRANGE;
+                     void*        StateSMA;
+                     double       prevATR;
+                     int          firstATR;
                      int           optInTimePeriod; /* From 1 to 100000 */
                      };
 

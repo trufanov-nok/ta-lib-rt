@@ -119,7 +119,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 
 static TA_Test tableTest[] =
@@ -225,6 +226,13 @@ ErrorNumber test_func_per_hlc( TA_History *history )
       if( retValue != 0 )
       {
          printf( "Failed Test #%d (Code=%d)\n", i, retValue );
+         return retValue;
+      }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "Failed State Test #%d (Code=%d)\n", i, retValue );
          return retValue;
       }
    }
@@ -475,6 +483,102 @@ static TA_RetCode do_call( const TA_Test *test,
    return retCode;
 }
 
+static TA_RetCode do_call_state( const TA_Test *test,
+                            const double high[],
+                            const double low[],
+                            const double close[],
+                            int *outBegIdx,
+                            int *outNbElement,
+                            double output[] )
+{
+   TA_RetCode retCode;
+   TA_Real *dummyBuffer1, *dummyBuffer2;
+
+   if( test->theFunction != TA_ACCBANDS_TEST )
+   {
+       dummyBuffer1 = NULL;
+       dummyBuffer2 = NULL;
+   }
+   else
+   {
+       dummyBuffer1 = TA_Malloc( ((test->endIdx-test->startIdx)+1)*sizeof(TA_Real));
+       if( !dummyBuffer1 )
+         return TA_ALLOC_ERR;
+
+       dummyBuffer2 = TA_Malloc( ((test->endIdx-test->startIdx)+1)*sizeof(TA_Real));
+       if( !dummyBuffer2 )
+       {
+          TA_Free( dummyBuffer1 );
+          return TA_ALLOC_ERR;
+       }
+   }
+
+   switch( test->theFunction )
+   {
+   case TA_NATR_TEST:
+      retCode = TA_NATR_StateTest(test->startIdx,
+                         test->endIdx,
+                         high, low, close,
+                         test->optInTimePeriod1,
+                         outBegIdx,
+                         outNbElement,
+                         output );
+      break;
+
+   case TA_CCI_TEST:
+//      retCode = TA_CCI_StateTest( test->startIdx,
+//                        test->endIdx,
+//                        high, low, close,
+//                        test->optInTimePeriod1,
+//                        outBegIdx,
+//                        outNbElement,
+//                        output );
+      break;
+
+   case TA_WILLR_TEST:
+      retCode = TA_WILLR_StateTest( test->startIdx,
+                          test->endIdx,
+                          high, low, close,
+                          test->optInTimePeriod1,
+                          outBegIdx,
+                          outNbElement,
+                          output );
+      break;
+
+   case TA_ULTOSC_TEST:
+//      retCode = TA_ULTOSC_StateTest( test->startIdx,
+//                           test->endIdx,
+//                           high, low, close,
+//                           test->optInTimePeriod1,
+//                           test->optInTimePeriod2,
+//                           test->optInTimePeriod3,
+//                           outBegIdx,
+//                           outNbElement,
+//                           output );
+      break;
+
+   case TA_ACCBANDS_TEST:
+       /* TODO: replace dummy with real for more complete tests. */
+//      retCode = TA_ACCBANDS_StateTest( test->startIdx,
+//                          test->endIdx,
+//                          high, low, close,
+//                          test->optInTimePeriod1,
+//                          outBegIdx,
+//                          outNbElement,
+//                          dummyBuffer1, output, dummyBuffer2 );
+      break;
+
+   default:
+      retCode = TA_INTERNAL_ERROR(133);
+   }
+
+   FREE_IF_NOT_NULL( dummyBuffer1 );
+   FREE_IF_NOT_NULL( dummyBuffer2 );
+
+   return retCode;
+}
+
+
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test )
 {
@@ -647,5 +751,34 @@ static ErrorNumber do_test( const TA_History *history,
    }
 
    return TA_TEST_PASS;
+}
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->high,  history->nbBars );
+   setInputBuffer( 1, history->low,   history->nbBars );
+   setInputBuffer( 2, history->close, history->nbBars );
+
+   /* Make a simple first call. */
+   retCode = do_call_state( test,
+                      gBuffer[0].in,
+                      gBuffer[1].in,
+                      gBuffer[2].in,
+                      &outBegIdx,
+                      &outNbElement,
+                      gBuffer[0].out0 );
+
+
+
+    return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
 }
 

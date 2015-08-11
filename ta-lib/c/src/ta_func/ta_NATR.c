@@ -363,7 +363,7 @@
 
 {
    /* insert local variable here */
-
+TA_RetCode retCode;
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -391,6 +391,16 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
+
+        if( optInTimePeriod <= 1 )
+        {
+           /* No smoothing needed. Just do a TRANGE. */
+           return FUNCTION_CALL_STATE_INIT(TRANGE)( (struct TA_TRANGE_State**) &STATE_P.StateTRANGE );
+        }
+
+   retCode = FUNCTION_CALL_STATE_INIT(TRANGE)( (struct TA_TRANGE_State**) &STATE_P.StateTRANGE );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   return FUNCTION_CALL_STATE_INIT(SMA)( (struct TA_SMA_State**) &STATE_P.StateSMA, optInTimePeriod );
 
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
@@ -420,6 +430,15 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+        if( STATE.optInTimePeriod <= 1 )
+        {
+           /* No smoothing needed. Just do a TRANGE. */
+           return FUNCTION_CALL_STATE(TRANGE)( (struct TA_TRANGE_State*) STATE.StateTRANGE, inHigh, inLow, inClose, outReal );
+        }
+
+        TA_RetCode retCode;
+#define TA_NATR_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+double tempReal, tempATR;
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -453,8 +472,35 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+         {
+          STATE.firstATR = 1;
+         }
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+        retCode = FUNCTION_CALL_STATE(TRANGE)( STATE.StateTRANGE,inHigh, inLow, inClose, &tempReal );
+
+        if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+
+        if (STATE.firstATR == 1)
+        {
+          retCode = FUNCTION_CALL_STATE(SMA)( STATE.StateSMA, tempReal, &tempATR );
+          if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+          STATE.firstATR = 0;
+          STATE.prevATR = tempATR;
+        } else {
+            STATE.prevATR *= STATE.optInTimePeriod - 1;
+            STATE.prevATR += tempReal;
+            STATE.prevATR /= STATE.optInTimePeriod;
+        }
+
+        if (NEED_MORE_DATA)
+        return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+        if( !TA_IS_ZERO(inClose) )
+        VALUE_HANDLE_DEREF(outReal) = (STATE.prevATR/inClose)*100.0;
+        else VALUE_HANDLE_DEREF(outReal) = 0.;
+
+        return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -472,6 +518,18 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+        if( STATE_P.optInTimePeriod <= 1 )
+        {
+           /* No smoothing needed. Just do a TRANGE. */
+           return FUNCTION_CALL_STATE_FREE(TRANGE)( (struct TA_TRANGE_State**) &STATE_P.StateTRANGE);
+        }
+
+        TA_RetCode retCode;
+
+        retCode = FUNCTION_CALL_STATE_FREE(TRANGE)( (struct TA_TRANGE_State**) &STATE_P.StateTRANGE );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        else retCode = FUNCTION_CALL_STATE_FREE(SMA)( (struct TA_SMA_State**) &STATE_P.StateSMA );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

@@ -464,7 +464,24 @@ static const TA_OptInputParameterInfo *TA_ATR_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_ATR_StructParams[] = { NULL };
+
+const TA_InputParameterInfo TA_ATR_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "StateTRANGE", 0 };
+
+const TA_InputParameterInfo TA_ATR_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "StateSMA", 0 };
+
+const TA_InputParameterInfo TA_ATR_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevATR", 0 };
+const TA_InputParameterInfo TA_ATR_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "firstATR", 0 };
+
+static const TA_InputParameterInfo *TA_ATR_StructParams[] = {
+    &TA_ATR_DEF_UI_STRUCT_PARAM_1,
+    &TA_ATR_DEF_UI_STRUCT_PARAM_2,
+    &TA_ATR_DEF_UI_STRUCT_PARAM_3,
+    &TA_ATR_DEF_UI_STRUCT_PARAM_4,
+    NULL };
 
 DEF_FUNCTION( ATR,                         /* name */
               TA_GroupId_VolatilityIndicators, /* groupId */
