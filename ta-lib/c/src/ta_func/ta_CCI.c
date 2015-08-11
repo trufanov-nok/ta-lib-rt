@@ -605,6 +605,10 @@ double lastValue, sum, avg;
 /* Generated */    CIRCBUF_DESTROY(circBuffer);
 /* Generated */    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */ }
+/* Generated */ #ifndef TA_CCI_STATE_CIRCBUF_DEFINED
+/* Generated */ #define TA_CCI_STATE_CIRCBUF_DEFINED
+/* Generated */ DEFINE_CIRCBUF_STRUCT(CCI, double)
+/* Generated */ #endif
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib

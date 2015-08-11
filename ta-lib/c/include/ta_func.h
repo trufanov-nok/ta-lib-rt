@@ -15299,6 +15299,10 @@ struct TA_TRIX_State {
                      size_t mem_size;
                      size_t mem_index;
                      struct TA_TRIX_Data* memory;
+                     void*        stateEMA1;
+                     void*        stateEMA2;
+                     void*        stateEMA3;
+                     void*        stateROC;
                      int           optInTimePeriod; /* From 1 to 100000 */
                      };
 

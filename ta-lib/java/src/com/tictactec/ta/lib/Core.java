@@ -3973,6 +3973,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   struct TA_CCI_STATE_CIRCBUF { int idx; double* circbuf; int size; };
    public int cciStateInit( struct TA_cci_State** _state,
       int optInTimePeriod )
    {
@@ -3986,10 +3987,9 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = cciLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CCI_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
+      { _state.value .value .circBuf = calloc(1, sizeof(struct TA_CCI_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = optInTimePeriod-1; buf->circbuf = calloc(optInTimePeriod-1, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
+      _state.value .value .theAverage = 0.;
       return RetCode.Success ;
    }
    public int cciState( struct TA_cci_State* _state,
@@ -3998,19 +3998,40 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      int i;
+      double lastValue, sum, avg;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      lastValue = (inHigh+inLow+inClose) / 3.0;
+      _state.value .theAverage += lastValue;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+      {
+         (*( ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->idx )) = lastValue;
+         { struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
+         return RetCode.NeedMoreData ;
+      }
+      sum = 0;
+      avg = _state.value .theAverage / _state.value .optInTimePeriod;
+      _state.value .theAverage -= (*( ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->idx )) ;
+      for( i=0; i < ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->size ; i++ )
+         sum += Math.abs ( (*( ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->circbuf +i)) - avg);
+      sum += Math.abs (lastValue - avg);
+      (*( ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->idx )) = lastValue;
+      lastValue -= avg;
+      if( ( Math.abs (lastValue) > 1e-13) && ( Math.abs (sum) > 1e-13) )
+      {
+         outReal.value = lastValue/(0.015*(sum/ _state.value .optInTimePeriod));
+      }
+      else
+         outReal.value = 0.0;
+      { struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
       return RetCode.Success ;
    }
    public int cciStateFree( struct TA_cci_State** _state )
    {
+      { struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .value .circBuf; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .circBuf = NULL; } } ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {

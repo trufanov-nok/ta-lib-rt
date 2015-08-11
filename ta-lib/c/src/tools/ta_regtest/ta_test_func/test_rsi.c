@@ -518,13 +518,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                             const TA_Test *test )
 {
    TA_RetCode retCode;
-   ErrorNumber errNb;
    TA_Integer outBegIdx;
    TA_Integer outNbElement;
-   TA_RangeTestParam testParam;
-   const TA_FuncHandle *funcHandle;
-   const TA_FuncInfo *funcInfo;
-   TA_ParamHolder *params;
 
    retCode = TA_SUCCESS;
 

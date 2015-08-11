@@ -271,7 +271,21 @@ static const TA_OptInputParameterInfo *TA_TRIX_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_TRIX_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_TRIX_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "stateEMA1", 0 };
+const TA_InputParameterInfo TA_TRIX_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "stateEMA2", 0 };
+const TA_InputParameterInfo TA_TRIX_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "stateEMA3", 0 };
+const TA_InputParameterInfo TA_TRIX_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "stateROC", 0 };
+
+static const TA_InputParameterInfo *TA_TRIX_StructParams[] = {
+    &TA_TRIX_DEF_UI_STRUCT_PARAM_1,
+    &TA_TRIX_DEF_UI_STRUCT_PARAM_2,
+    &TA_TRIX_DEF_UI_STRUCT_PARAM_3,
+    &TA_TRIX_DEF_UI_STRUCT_PARAM_4,
+    NULL };
 
 DEF_FUNCTION( TRIX,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */

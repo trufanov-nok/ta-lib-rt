@@ -211,7 +211,7 @@
    {
       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
-      return ENUM_VALUE(RetCode,TA_SUCCESS,Success); 
+      return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
    }
 
    VALUE_HANDLE_DEREF(outBegIdx) = startIdx; 
@@ -328,7 +328,9 @@
 
 {
    /* insert local variable here */
-
+ TA_RetCode retCode;
+ double k;
+#define TA_TRIX_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -356,6 +358,15 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
+   k = PER_TO_K(optInTimePeriod);
+   retCode = FUNCTION_CALL_STATE_INIT(INT_EMA)( (struct TA_EMA_State**) &STATE_P.stateEMA1, optInTimePeriod, k );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_INIT(INT_EMA)( (struct TA_EMA_State**) &STATE_P.stateEMA2, optInTimePeriod, k );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_INIT(INT_EMA)( (struct TA_EMA_State**) &STATE_P.stateEMA3, optInTimePeriod, k );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_INIT(ROC)( (struct TA_ROC_State**) &STATE_P.stateROC, 1);
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
@@ -379,7 +390,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+ #define TA_TRIX_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+ TA_RetCode retCode;
+ double tempReal;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -406,7 +419,16 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   retCode = FUNCTION_CALL_STATE(EMA)( (struct TA_EMA_State*)  STATE.stateEMA1, inReal, &tempReal );
+   if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE(EMA)( (struct TA_EMA_State*)  STATE.stateEMA2, tempReal, &tempReal );
+   if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE(EMA)( (struct TA_EMA_State*)  STATE.stateEMA3, tempReal, &tempReal );
+   if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE(ROC)( (struct TA_ROC_State*)  STATE.stateROC, tempReal, &tempReal );
+   if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
+   VALUE_HANDLE_DEREF(outReal) = tempReal;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -425,7 +447,15 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+        TA_RetCode retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(EMA)( (struct TA_EMA_State**) &STATE_P.stateEMA1 );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(EMA)( (struct TA_EMA_State**) &STATE_P.stateEMA2 );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(EMA)( (struct TA_EMA_State**) &STATE_P.stateEMA3 );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(ROC)( (struct TA_ROC_State**) &STATE_P.stateROC );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
