@@ -999,6 +999,8 @@ struct TA_CCI_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_CCI_Data* memory;
+                    void*        circBuf;
+                    double       theAverage;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 

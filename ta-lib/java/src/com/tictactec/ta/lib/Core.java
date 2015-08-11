@@ -2018,7 +2018,7 @@ public class Core {
          _state.value .lowest = inLow;
          _state.value .lowest_exp = _state.value .optInTimePeriod;
       } else
-         if ( _state.value .lowest_exp-- <= 0)
+         if (-- _state.value .lowest_exp <= 0)
       {
          _state.value .lowest = inLow;
          _state.value .lowest_exp = _state.value .optInTimePeriod;
@@ -2040,7 +2040,7 @@ public class Core {
          _state.value .highest = inHigh;
          _state.value .highest_exp = _state.value .optInTimePeriod;
       } else
-         if ( _state.value .highest_exp-- <= 0)
+         if (-- _state.value .highest_exp <= 0)
       {
          _state.value .highest = inHigh;
          _state.value .highest_exp = _state.value .optInTimePeriod;
@@ -34156,12 +34156,7 @@ public class Core {
          _state.value .lowest_exp = _state.value .optInTimePeriod;
          _state.value .highest_exp = _state.value .optInTimePeriod;
       }
-      if (inLow <= _state.value .lowest)
-      {
-         _state.value .lowest = inLow;
-         _state.value .lowest_exp = _state.value .optInTimePeriod;
-      } else
-         if ( _state.value .lowest_exp-- <= 0)
+      if (-- _state.value .lowest_exp <= 0)
       {
          _state.value .lowest = inLow;
          _state.value .lowest_exp = _state.value .optInTimePeriod;
@@ -34177,13 +34172,12 @@ public class Core {
                _state.value .lowest_exp = p;
             }
          }
-      }
-      if (inHigh >= _state.value .highest)
+      } else if (inLow <= _state.value .lowest)
       {
-         _state.value .highest = inHigh;
-         _state.value .highest_exp = _state.value .optInTimePeriod;
-      } else
-         if ( _state.value .highest_exp-- <= 0)
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+      }
+      if (-- _state.value .highest_exp <= 0)
       {
          _state.value .highest = inHigh;
          _state.value .highest_exp = _state.value .optInTimePeriod;
@@ -34199,6 +34193,10 @@ public class Core {
                _state.value .highest_exp = p;
             }
          }
+      } else if (inHigh >= _state.value .highest)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
       }
       ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
       ( _state.value .memory+_cur_idx).value .inLow = inLow ;

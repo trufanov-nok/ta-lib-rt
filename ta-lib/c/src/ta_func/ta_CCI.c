@@ -299,6 +299,11 @@
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
+#ifndef TA_CCI_STATE_CIRCBUF_DEFINED
+#define TA_CCI_STATE_CIRCBUF_DEFINED
+DEFINE_CIRCBUF_STRUCT(CCI, double)
+#endif
+
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
@@ -318,7 +323,7 @@
 
 {
    /* insert local variable here */
-
+#define TA_CCI_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -347,7 +352,8 @@
 
    /* insert state init code here. */
 
-
+   CREATE_CIRCBUF_STRUCT(CCI, circBuf, double, optInTimePeriod-1);
+   STATE_P.theAverage = 0.;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -375,7 +381,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CCI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i;
+double lastValue, sum, avg;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -408,7 +416,38 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   lastValue = (inHigh+inLow+inClose) / 3.0;
 
+   STATE.theAverage += lastValue;
+
+   if (NEED_MORE_DATA)
+   {
+        CIRCBUF_STRUCT_CURRENT_EL(CCI, circBuf) = lastValue;
+        CIRCBUF_STRUCT_NEXT( CCI, circBuf);
+        return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+   }
+
+   sum = 0;
+   avg = STATE.theAverage / STATE.optInTimePeriod;
+
+   STATE.theAverage -= CIRCBUF_STRUCT_CURRENT_EL(CCI, circBuf);
+
+   for( i=0; i < CIRCBUF_STRUCT_SIZE(CCI, circBuf); i++ )
+      sum += std_fabs(CIRCBUF_STRUCT_EL(CCI, circBuf, i) - avg);
+   sum += std_fabs(lastValue - avg);
+
+   CIRCBUF_STRUCT_CURRENT_EL(CCI, circBuf) = lastValue;
+
+   lastValue -= avg;
+
+   if( (std_fabs(lastValue) > 1e-13) && (std_fabs(sum) > 1e-13) )
+   {
+      VALUE_HANDLE_DEREF(outReal) = lastValue/(0.015*(sum/STATE.optInTimePeriod));
+   }
+   else
+       VALUE_HANDLE_DEREF(outReal) = 0.0;
+
+   CIRCBUF_STRUCT_NEXT( CCI, circBuf);
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -427,7 +466,7 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+  FREE_CIRCBUF_STRUCT(CCI, circBuf);
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK

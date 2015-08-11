@@ -66,7 +66,14 @@ static const TA_OptInputParameterInfo *TA_CCI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CCI_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CCI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "circBuf", 0 };
+const TA_InputParameterInfo TA_CCI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "theAverage", 0 };
+static const TA_InputParameterInfo *TA_CCI_StructParams[] = {
+    &TA_CCI_DEF_UI_STRUCT_PARAM_1,
+    &TA_CCI_DEF_UI_STRUCT_PARAM_2,
+    NULL };
 
 DEF_FUNCTION( CCI,                         /* name */
               TA_GroupId_MomentumIndicators, /* groupId */

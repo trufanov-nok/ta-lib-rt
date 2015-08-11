@@ -526,13 +526,13 @@ static TA_RetCode do_call_state( const TA_Test *test,
       break;
 
    case TA_CCI_TEST:
-//      retCode = TA_CCI_StateTest( test->startIdx,
-//                        test->endIdx,
-//                        high, low, close,
-//                        test->optInTimePeriod1,
-//                        outBegIdx,
-//                        outNbElement,
-//                        output );
+      retCode = TA_CCI_StateTest( test->startIdx,
+                        test->endIdx,
+                        high, low, close,
+                        test->optInTimePeriod1,
+                        outBegIdx,
+                        outNbElement,
+                        output );
       break;
 
    case TA_WILLR_TEST:
