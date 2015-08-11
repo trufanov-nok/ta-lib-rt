@@ -371,3 +371,37 @@
 
 #endif
 
+
+
+#define DEFINE_CIRCBUF_STRUCT(taFunc, type) \
+  struct TA_##taFunc##_STATE_CIRCBUF  { \
+       int idx;   \
+       type* circbuf;  \
+       int size;  };
+
+#define CREATE_CIRCBUF_STRUCT(taFunc, var, type, buf_size) {\
+    STATE_P.var = calloc(1, sizeof(struct TA_##taFunc##_STATE_CIRCBUF)); \
+    if (STATE_P.var == NULL) return ENUM_VALUE(RetCode, TA_ALLOC_ERR, AllocErr ); \
+    struct TA_##taFunc##_STATE_CIRCBUF* buf = (struct TA_##taFunc##_STATE_CIRCBUF*) STATE_P.var; \
+    buf->idx = 0; \
+    buf->size = buf_size; \
+    buf->circbuf = calloc(buf_size, sizeof(type)); \
+    if (!buf->circbuf) return ENUM_VALUE(RetCode, TA_ALLOC_ERR, AllocErr );}
+
+#define CREATE_CIRCBUF_STRUCT_CLASS(taFunc, var, type, buf_size) CREATE_CIRCBUF_STRUCT (taFunc, var, type, buf_size)
+
+#define CIRCBUF_STRUCT_IDX(taFunc, var) ((struct TA_##taFunc##_STATE_CIRCBUF*) STATE.var)->idx
+#define CIRCBUF_STRUCT_SIZE(taFunc, var) ((struct TA_##taFunc##_STATE_CIRCBUF*) STATE.var)->size
+#define CIRCBUF_STRUCT_STORAGE(taFunc, var) ((struct TA_##taFunc##_STATE_CIRCBUF*) STATE.var)->circbuf
+#define CIRCBUF_STRUCT_CURRENT_EL(taFunc, var) (*(CIRCBUF_STRUCT_STORAGE(taFunc,var)+CIRCBUF_STRUCT_IDX(taFunc,var)))
+#define CIRCBUF_STRUCT_EL(taFunc, var, idx) (*(CIRCBUF_STRUCT_STORAGE(taFunc,var)+idx))
+#define CIRCBUF_STRUCT_NEXT(taFunc, var) { \
+    struct TA_##taFunc##_STATE_CIRCBUF* buf = (struct TA_##taFunc##_STATE_CIRCBUF*) STATE.var; \
+    if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;}
+#define FREE_CIRCBUF_STRUCT(taFunc, var) { \
+    struct TA_##taFunc##_STATE_CIRCBUF* buf = (struct TA_##taFunc##_STATE_CIRCBUF*) STATE_P.var; \
+    if (buf != NULL) { \
+        if (buf->circbuf != NULL) free(buf->circbuf); \
+        free (buf);    \
+        STATE_P.var = NULL; } \
+        }
