@@ -26765,6 +26765,7 @@ public class Core {
    public int natrStateInit( struct TA_natr_State** _state,
       int optInTimePeriod )
    {
+      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -26779,6 +26780,13 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_NATR_Data));
       else
          _state.value .value .memory = NULL;
+      if( optInTimePeriod <= 1 )
+      {
+         return trueRange ( (struct trueRange **) & _state.value .value .StateTRANGE );
+      }
+      retCode = trueRange ( (struct trueRange **) & _state.value .value .StateTRANGE );
+      if (retCode != RetCode.Success ) return retCode;
+      return sma ( (struct sma **) & _state.value .value .StateSMA, optInTimePeriod );
       return RetCode.Success ;
    }
    public int natrState( struct TA_natr_State* _state,
@@ -26787,19 +26795,51 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      if( _state.value .optInTimePeriod <= 1 )
+      {
+         return trueRange ( (struct trueRange *) _state.value .StateTRANGE, inHigh, inLow, inClose, outReal );
+      }
+      TA_RetCode retCode;
+      double tempReal, tempATR;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .firstATR = 1;
+      }
+      retCode = trueRange ( _state.value .StateTRANGE,inHigh, inLow, inClose, &tempReal );
+      if( retCode != RetCode.Success ) return retCode;
+      if ( _state.value .firstATR == 1)
+      {
+         retCode = sma ( _state.value .StateSMA, tempReal, &tempATR );
+         if( retCode != RetCode.Success ) return retCode;
+         _state.value .firstATR = 0;
+         _state.value .prevATR = tempATR;
+      } else {
+         _state.value .prevATR *= _state.value .optInTimePeriod - 1;
+         _state.value .prevATR += tempReal;
+         _state.value .prevATR /= _state.value .optInTimePeriod;
+      }
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      if( ! (((- (0.00000000000001) )<inClose)&&(inClose< (0.00000000000001) )) )
+         outReal.value = ( _state.value .prevATR/inClose)*100.0;
+      else outReal.value = 0.;
       return RetCode.Success ;
    }
    public int natrStateFree( struct TA_natr_State** _state )
    {
+      if( _state.value .value .optInTimePeriod <= 1 )
+      {
+         return trueRange ( (struct trueRange **) & _state.value .value .StateTRANGE);
+      }
+      TA_RetCode retCode;
+      retCode = trueRange ( (struct trueRange **) & _state.value .value .StateTRANGE );
+      if (retCode != RetCode.Success ) return retCode;
+      else retCode = sma ( (struct sma **) & _state.value .value .StateSMA );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -34089,7 +34129,10 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = willRLookback (optInTimePeriod );
-      _state.value .value .memory = NULL;
+      if ( _state.value .value .mem_size > 0)
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_WILLR_Data));
+      else
+         _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
    public int willRState( struct TA_willR_State* _state,
@@ -34098,6 +34141,9 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      unsigned int i;
+      int j,p;
+      double temp;
       double diff;
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -34105,13 +34151,57 @@ public class Core {
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
       if ( ( _state.value .mem_index == 1) )
       {
-         _state.value .lowest = 0.;
-         _state.value .highest = 0.;
-      }
-      if (inLow < _state.value .lowest)
          _state.value .lowest = inLow;
-      if (inHigh > _state.value .highest)
          _state.value .highest = inHigh;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+      }
+      if (inLow <= _state.value .lowest)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+      } else
+         if ( _state.value .lowest_exp-- <= 0)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .optInTimePeriod;
+         j = _state.value .mem_index-1;
+         p = _state.value .optInTimePeriod;
+         for (i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inLow ;
+            p--;
+            if (temp <= _state.value .lowest)
+            {
+               _state.value .lowest = temp;
+               _state.value .lowest_exp = p;
+            }
+         }
+      }
+      if (inHigh >= _state.value .highest)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+      } else
+         if ( _state.value .highest_exp-- <= 0)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .optInTimePeriod;
+         j = _state.value .mem_index-1;
+         p = _state.value .optInTimePeriod;
+         for ( i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inHigh ;
+            p--;
+            if (temp >= _state.value .highest)
+            {
+               _state.value .highest = temp;
+               _state.value .highest_exp = p;
+            }
+         }
+      }
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 )
          return RetCode.NeedMoreData ;
       diff = ( _state.value .highest - _state.value .lowest)/(-100.0);

@@ -92,13 +92,19 @@ static const TA_OptInputParameterInfo *TA_WILLR_OptInputs[] =
 };
 
 const TA_InputParameterInfo TA_WILLR_DEF_UI_STRUCT_PARAM_1 =
-                                  { TA_Input_Real, "highest", 0 };
-const TA_InputParameterInfo TA_WILLR_DEF_UI_STRUCT_PARAM_2 =
                                   { TA_Input_Real, "lowest", 0 };
+const TA_InputParameterInfo TA_WILLR_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "highest", 0 };
+const TA_InputParameterInfo TA_WILLR_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "lowest_exp", 0 };
+const TA_InputParameterInfo TA_WILLR_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "highest_exp", 0 };
 
 static const TA_InputParameterInfo *TA_WILLR_StructParams[] = {
     &TA_WILLR_DEF_UI_STRUCT_PARAM_1,
     &TA_WILLR_DEF_UI_STRUCT_PARAM_2,
+    &TA_WILLR_DEF_UI_STRUCT_PARAM_3,
+    &TA_WILLR_DEF_UI_STRUCT_PARAM_4,
     NULL };
 
 DEF_FUNCTION( WILLR,                         /* name */

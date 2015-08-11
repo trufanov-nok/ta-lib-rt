@@ -436,7 +436,7 @@ double temp;
        STATE.lowest = inLow;
        STATE.lowest_exp = STATE.optInTimePeriod;
    } else
-       if (STATE.lowest_exp-- <= 0)
+       if (--STATE.lowest_exp <= 0)
        {
            STATE.lowest = inLow;
            STATE.lowest_exp = STATE.optInTimePeriod;
@@ -459,7 +459,7 @@ double temp;
        STATE.highest = inHigh;
        STATE.highest_exp = STATE.optInTimePeriod;
    } else
-       if (STATE.highest_exp-- <= 0)
+       if (--STATE.highest_exp <= 0)
        {
            STATE.highest = inHigh;
            STATE.highest_exp = STATE.optInTimePeriod;

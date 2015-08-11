@@ -15903,8 +15903,10 @@ struct TA_WILLR_State {
                       size_t mem_size;
                       size_t mem_index;
                       struct TA_WILLR_Data* memory;
-                      double       highest;
                       double       lowest;
+                      double       highest;
+                      int          lowest_exp;
+                      int          highest_exp;
                       int           optInTimePeriod; /* From 2 to 100000 */
                       };
 

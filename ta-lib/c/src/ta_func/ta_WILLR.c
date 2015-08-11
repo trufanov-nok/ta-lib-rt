@@ -327,7 +327,7 @@
 
 {
    /* insert local variable here */
-   #define TA_WILLR_SUPPRESS_MEMORY_ALLOCATION
+
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -385,6 +385,9 @@
 {
    /* insert local variable here */
 #define TA_WILLR_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+        unsigned  int i;
+        int j,p;
+        double temp;
         double diff;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -420,15 +423,58 @@
    /* insert state based TA dunc code here. */
    if (FIRST_LAUNCH)
         {
-            STATE.lowest = 0.;
-            STATE.highest = 0.;
+            STATE.lowest = inLow;
+            STATE.highest = inHigh;
+            STATE.lowest_exp = STATE.optInTimePeriod;
+            STATE.highest_exp = STATE.optInTimePeriod;
         }
 
-   if (inLow < STATE.lowest)
-       STATE.lowest = inLow;
+         if (--STATE.lowest_exp <= 0)
+            {
+                STATE.lowest = inLow;
+                STATE.lowest_exp = STATE.optInTimePeriod;
+                j = STATE.mem_index-1;
+                p = STATE.optInTimePeriod;
+                for (i = 0; i < MEM_SIZE; i++)
+                {
+                    temp = MEM_IDX_NS( (--j) % MEM_SIZE, inLow);
+                    p--;
+                    if (temp <= STATE.lowest)
+                    {
+                        STATE.lowest = temp;
+                        STATE.lowest_exp = p;
+                    }
+                }
+            } else if (inLow <= STATE.lowest)
+         {
+             STATE.lowest = inLow;
+             STATE.lowest_exp = STATE.optInTimePeriod;
+         }
 
-   if (inHigh > STATE.highest)
-       STATE.highest = inHigh;
+         if (--STATE.highest_exp <= 0)
+            {
+                STATE.highest = inHigh;
+                STATE.highest_exp = STATE.optInTimePeriod;
+                j = STATE.mem_index-1;
+                p = STATE.optInTimePeriod;
+                for ( i = 0; i < MEM_SIZE; i++)
+                {
+                    temp = MEM_IDX_NS( (--j) % MEM_SIZE, inHigh);
+                    p--;
+                    if (temp >= STATE.highest)
+                    {
+                        STATE.highest = temp;
+                        STATE.highest_exp = p;
+                    }
+                }
+            } else if (inHigh >= STATE.highest)
+         {
+             STATE.highest = inHigh;
+             STATE.highest_exp = STATE.optInTimePeriod;
+         }
+
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
 
 
    if (NEED_MORE_DATA)
