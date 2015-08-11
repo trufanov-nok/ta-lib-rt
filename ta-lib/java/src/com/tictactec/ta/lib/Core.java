@@ -30618,6 +30618,7 @@ public class Core {
       MAType optInSlowK_MAType, int optInSlowD_Period,
       MAType optInSlowD_MAType )
    {
+      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
@@ -30644,6 +30645,10 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_STOCH_Data));
       else
          _state.value .value .memory = NULL;
+      retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1, optInSlowK_Period, optInSlowK_MAType );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA2, optInSlowD_Period, optInSlowD_MAType );
+      if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
    public int stochState( struct TA_stoch_State* _state,
@@ -30653,19 +30658,86 @@ public class Core {
       double *outSlowK,
       double *outSlowD )
    {
+      TA_RetCode retCode;
+      double temp;
+      unsigned int j,i,p;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .lowest = inLow;
+         _state.value .highest = inHigh;
+         _state.value .lowest_exp = _state.value .mem_size ;
+         _state.value .highest_exp = _state.value .mem_size ;
+      }
+      if (-- _state.value .lowest_exp <= 0)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .mem_size ;
+         j = _state.value .mem_index-1;
+         p = _state.value .mem_size ;
+         for (i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inLow ;
+            p--;
+            if (temp < _state.value .lowest)
+            {
+               _state.value .lowest = temp;
+               _state.value .lowest_exp = p;
+            }
+         }
+      } else
+         if (inLow <= _state.value .lowest)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .mem_size ;
+      }
+      if (-- _state.value .highest_exp <= 0)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .mem_size ;
+         j = _state.value .mem_index-1;
+         p = _state.value .mem_size ;
+         for ( i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inHigh ;
+            p--;
+            if (temp > _state.value .highest)
+            {
+               _state.value .highest = temp;
+               _state.value .highest_exp = p;
+            }
+         }
+      } else
+         if (inHigh >= _state.value .highest)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .mem_size ;
+      }
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      temp = ( _state.value .highest - _state.value .lowest)/100.0;
+      if( temp != 0.0 )
+         temp = (inClose- _state.value .lowest)/temp;
+      else
+         temp = 0.0;
+      retCode = movingAverage ( (struct movingAverage *) _state.value .stateMA1, temp, &temp );
+      if( retCode != RetCode.Success ) return retCode;
+      outSlowK.value = temp;
+      retCode = movingAverage ( (struct movingAverage *) _state.value .stateMA2, temp, &temp );
+      if( retCode != RetCode.Success ) return retCode;
+      outSlowD.value = temp;
       return RetCode.Success ;
    }
    public int stochStateFree( struct TA_stoch_State** _state )
    {
+      TA_RetCode retCode;
+      retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1 );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA2 );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -33008,6 +33080,8 @@ public class Core {
    public int trixStateInit( struct TA_trix_State** _state,
       int optInTimePeriod )
    {
+      TA_RetCode retCode;
+      double k;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -33018,27 +33092,50 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = trixLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_TRIX_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
+      k = ((double)2.0 / ((double)(optInTimePeriod + 1))) ;
+      retCode = TA_INT_EMA_StateInit ( (struct ema **) & _state.value .value .stateEMA1, optInTimePeriod, k );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_INT_EMA_StateInit ( (struct ema **) & _state.value .value .stateEMA2, optInTimePeriod, k );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_INT_EMA_StateInit ( (struct ema **) & _state.value .value .stateEMA3, optInTimePeriod, k );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = roc ( (struct roc **) & _state.value .value .stateROC, 1);
+      if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
    public int trixState( struct TA_trix_State* _state,
       double inReal,
       double *outReal )
    {
+      TA_RetCode retCode;
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      retCode = ema ( (struct ema *) _state.value .stateEMA1, inReal, &tempReal );
+      if( retCode != RetCode.Success ) return retCode;
+      retCode = ema ( (struct ema *) _state.value .stateEMA2, tempReal, &tempReal );
+      if( retCode != RetCode.Success ) return retCode;
+      retCode = ema ( (struct ema *) _state.value .stateEMA3, tempReal, &tempReal );
+      if( retCode != RetCode.Success ) return retCode;
+      retCode = roc ( (struct roc *) _state.value .stateROC, tempReal, &tempReal );
+      if( retCode != RetCode.Success ) return retCode;
+      outReal.value = tempReal;
       return RetCode.Success ;
    }
    public int trixStateFree( struct TA_trix_State** _state )
    {
+      TA_RetCode retCode;
+      retCode = ema ( (struct ema **) & _state.value .value .stateEMA1 );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = ema ( (struct ema **) & _state.value .value .stateEMA2 );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = ema ( (struct ema **) & _state.value .value .stateEMA3 );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = roc ( (struct roc **) & _state.value .value .stateROC );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {

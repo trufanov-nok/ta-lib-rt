@@ -147,7 +147,7 @@ TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 /* Generated */  lookback = TA_ACCBANDS_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ACCBANDS
 /* Generated */    i = 0;
@@ -231,7 +231,7 @@ TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State** _state );
 /* Generated */  lookback = TA_ACOS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ACOS
 /* Generated */    i = 0;
@@ -329,7 +329,7 @@ TA_LIB_API int TA_AD_StateFree( struct TA_AD_State** _state );
 /* Generated */  lookback = TA_AD_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_AD
 /* Generated */    i = 0;
@@ -416,7 +416,7 @@ TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State** _state );
 /* Generated */  lookback = TA_ADD_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADD
 /* Generated */    i = 0;
@@ -540,7 +540,7 @@ TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 /* Generated */  lookback = TA_ADOSC_Lookback(optInFastPeriod, optInSlowPeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADOSC
 /* Generated */    i = 0;
@@ -651,7 +651,7 @@ TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State** _state );
 /* Generated */  lookback = TA_ADX_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADX
 /* Generated */    i = 0;
@@ -755,7 +755,7 @@ TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
 /* Generated */  lookback = TA_ADXR_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADXR
 /* Generated */    i = 0;
@@ -863,7 +863,7 @@ TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state );
 /* Generated */  lookback = TA_APO_Lookback(optInFastPeriod, optInSlowPeriod, optInMAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_APO
 /* Generated */    i = 0;
@@ -970,7 +970,7 @@ TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state );
 /* Generated */  lookback = TA_AROON_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_AROON
 /* Generated */    i = 0;
@@ -1074,7 +1074,7 @@ TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 /* Generated */  lookback = TA_AROONOSC_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_AROONOSC
 /* Generated */    i = 0;
@@ -1156,7 +1156,7 @@ TA_LIB_API int TA_ASIN_StateFree( struct TA_ASIN_State** _state );
 /* Generated */  lookback = TA_ASIN_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ASIN
 /* Generated */    i = 0;
@@ -1238,7 +1238,7 @@ TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State** _state );
 /* Generated */  lookback = TA_ATAN_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ATAN
 /* Generated */    i = 0;
@@ -1345,7 +1345,7 @@ TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State** _state );
 /* Generated */  lookback = TA_ATR_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ATR
 /* Generated */    i = 0;
@@ -1442,7 +1442,7 @@ TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
 /* Generated */  lookback = TA_AVGPRICE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_AVGPRICE
 /* Generated */    i = 0;
@@ -1536,7 +1536,7 @@ TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
 /* Generated */  lookback = TA_AVGDEV_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_AVGDEV
 /* Generated */    i = 0;
@@ -1658,7 +1658,7 @@ TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 /* Generated */  lookback = TA_BBANDS_Lookback(optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_BBANDS
 /* Generated */    i = 0;
@@ -1767,7 +1767,7 @@ TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state );
 /* Generated */  lookback = TA_BETA_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_BETA
 /* Generated */    i = 0;
@@ -1864,7 +1864,7 @@ TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State** _state );
 /* Generated */  lookback = TA_BOP_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_BOP
 /* Generated */    i = 0;
@@ -1969,7 +1969,7 @@ TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state );
 /* Generated */  lookback = TA_CCI_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CCI
 /* Generated */    i = 0;
@@ -2066,7 +2066,7 @@ TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
 /* Generated */  lookback = TA_CDL2CROWS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL2CROWS
 /* Generated */    i = 0;
@@ -2163,7 +2163,7 @@ TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _st
 /* Generated */  lookback = TA_CDL3BLACKCROWS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3BLACKCROWS
 /* Generated */    i = 0;
@@ -2260,7 +2260,7 @@ TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 /* Generated */  lookback = TA_CDL3INSIDE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3INSIDE
 /* Generated */    i = 0;
@@ -2357,7 +2357,7 @@ TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _st
 /* Generated */  lookback = TA_CDL3LINESTRIKE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3LINESTRIKE
 /* Generated */    i = 0;
@@ -2454,7 +2454,7 @@ TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
 /* Generated */  lookback = TA_CDL3OUTSIDE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3OUTSIDE
 /* Generated */    i = 0;
@@ -2551,7 +2551,7 @@ TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State**
 /* Generated */  lookback = TA_CDL3STARSINSOUTH_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3STARSINSOUTH
 /* Generated */    i = 0;
@@ -2648,7 +2648,7 @@ TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State
 /* Generated */  lookback = TA_CDL3WHITESOLDIERS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3WHITESOLDIERS
 /* Generated */    i = 0;
@@ -2756,7 +2756,7 @@ TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State**
 /* Generated */  lookback = TA_CDLABANDONEDBABY_Lookback(optInPenetration);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLABANDONEDBABY
 /* Generated */    i = 0;
@@ -2853,7 +2853,7 @@ TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _
 /* Generated */  lookback = TA_CDLADVANCEBLOCK_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLADVANCEBLOCK
 /* Generated */    i = 0;
@@ -2950,7 +2950,7 @@ TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 /* Generated */  lookback = TA_CDLBELTHOLD_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLBELTHOLD
 /* Generated */    i = 0;
@@ -3047,7 +3047,7 @@ TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state 
 /* Generated */  lookback = TA_CDLBREAKAWAY_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLBREAKAWAY
 /* Generated */    i = 0;
@@ -3144,7 +3144,7 @@ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_Sta
 /* Generated */  lookback = TA_CDLCLOSINGMARUBOZU_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCLOSINGMARUBOZU
 /* Generated */    i = 0;
@@ -3241,7 +3241,7 @@ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_S
 /* Generated */  lookback = TA_CDLCONCEALBABYSWALL_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCONCEALBABYSWALL
 /* Generated */    i = 0;
@@ -3338,7 +3338,7 @@ TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State**
 /* Generated */  lookback = TA_CDLCOUNTERATTACK_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCOUNTERATTACK
 /* Generated */    i = 0;
@@ -3446,7 +3446,7 @@ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State
 /* Generated */  lookback = TA_CDLDARKCLOUDCOVER_Lookback(optInPenetration);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDARKCLOUDCOVER
 /* Generated */    i = 0;
@@ -3543,7 +3543,7 @@ TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
 /* Generated */  lookback = TA_CDLDOJI_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDOJI
 /* Generated */    i = 0;
@@ -3640,7 +3640,7 @@ TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 /* Generated */  lookback = TA_CDLDOJISTAR_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDOJISTAR
 /* Generated */    i = 0;
@@ -3737,7 +3737,7 @@ TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State**
 /* Generated */  lookback = TA_CDLDRAGONFLYDOJI_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDRAGONFLYDOJI
 /* Generated */    i = 0;
@@ -3834,7 +3834,7 @@ TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state 
 /* Generated */  lookback = TA_CDLENGULFING_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLENGULFING
 /* Generated */    i = 0;
@@ -3942,7 +3942,7 @@ TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_Sta
 /* Generated */  lookback = TA_CDLEVENINGDOJISTAR_Lookback(optInPenetration);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLEVENINGDOJISTAR
 /* Generated */    i = 0;
@@ -4050,7 +4050,7 @@ TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _st
 /* Generated */  lookback = TA_CDLEVENINGSTAR_Lookback(optInPenetration);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLEVENINGSTAR
 /* Generated */    i = 0;
@@ -4147,7 +4147,7 @@ TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_S
 /* Generated */  lookback = TA_CDLGAPSIDESIDEWHITE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLGAPSIDESIDEWHITE
 /* Generated */    i = 0;
@@ -4244,7 +4244,7 @@ TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State
 /* Generated */  lookback = TA_CDLGRAVESTONEDOJI_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLGRAVESTONEDOJI
 /* Generated */    i = 0;
@@ -4341,7 +4341,7 @@ TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 /* Generated */  lookback = TA_CDLHAMMER_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHAMMER
 /* Generated */    i = 0;
@@ -4438,7 +4438,7 @@ TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _stat
 /* Generated */  lookback = TA_CDLHANGINGMAN_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHANGINGMAN
 /* Generated */    i = 0;
@@ -4535,7 +4535,7 @@ TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
 /* Generated */  lookback = TA_CDLHARAMI_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHARAMI
 /* Generated */    i = 0;
@@ -4632,7 +4632,7 @@ TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _st
 /* Generated */  lookback = TA_CDLHARAMICROSS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHARAMICROSS
 /* Generated */    i = 0;
@@ -4729,7 +4729,7 @@ TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 /* Generated */  lookback = TA_CDLHIGHWAVE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIGHWAVE
 /* Generated */    i = 0;
@@ -4826,7 +4826,7 @@ TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
 /* Generated */  lookback = TA_CDLHIKKAKE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIKKAKE
 /* Generated */    i = 0;
@@ -4923,7 +4923,7 @@ TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _stat
 /* Generated */  lookback = TA_CDLHIKKAKEMOD_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIKKAKEMOD
 /* Generated */    i = 0;
@@ -5020,7 +5020,7 @@ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _
 /* Generated */  lookback = TA_CDLHOMINGPIGEON_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHOMINGPIGEON
 /* Generated */    i = 0;
@@ -5117,7 +5117,7 @@ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_Sta
 /* Generated */  lookback = TA_CDLIDENTICAL3CROWS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLIDENTICAL3CROWS
 /* Generated */    i = 0;
@@ -5214,7 +5214,7 @@ TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 /* Generated */  lookback = TA_CDLINNECK_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLINNECK
 /* Generated */    i = 0;
@@ -5311,7 +5311,7 @@ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State
 /* Generated */  lookback = TA_CDLINVERTEDHAMMER_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLINVERTEDHAMMER
 /* Generated */    i = 0;
@@ -5408,7 +5408,7 @@ TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 /* Generated */  lookback = TA_CDLKICKING_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLKICKING
 /* Generated */    i = 0;
@@ -5505,7 +5505,7 @@ TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_Sta
 /* Generated */  lookback = TA_CDLKICKINGBYLENGTH_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLKICKINGBYLENGTH
 /* Generated */    i = 0;
@@ -5602,7 +5602,7 @@ TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _
 /* Generated */  lookback = TA_CDLLADDERBOTTOM_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLADDERBOTTOM
 /* Generated */    i = 0;
@@ -5699,7 +5699,7 @@ TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State
 /* Generated */  lookback = TA_CDLLONGLEGGEDDOJI_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLONGLEGGEDDOJI
 /* Generated */    i = 0;
@@ -5796,7 +5796,7 @@ TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
 /* Generated */  lookback = TA_CDLLONGLINE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLONGLINE
 /* Generated */    i = 0;
@@ -5893,7 +5893,7 @@ TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 /* Generated */  lookback = TA_CDLMARUBOZU_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMARUBOZU
 /* Generated */    i = 0;
@@ -5990,7 +5990,7 @@ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _st
 /* Generated */  lookback = TA_CDLMATCHINGLOW_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMATCHINGLOW
 /* Generated */    i = 0;
@@ -6098,7 +6098,7 @@ TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
 /* Generated */  lookback = TA_CDLMATHOLD_Lookback(optInPenetration);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMATHOLD
 /* Generated */    i = 0;
@@ -6206,7 +6206,7 @@ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_Sta
 /* Generated */  lookback = TA_CDLMORNINGDOJISTAR_Lookback(optInPenetration);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMORNINGDOJISTAR
 /* Generated */    i = 0;
@@ -6314,7 +6314,7 @@ TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _st
 /* Generated */  lookback = TA_CDLMORNINGSTAR_Lookback(optInPenetration);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMORNINGSTAR
 /* Generated */    i = 0;
@@ -6411,7 +6411,7 @@ TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
 /* Generated */  lookback = TA_CDLONNECK_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLONNECK
 /* Generated */    i = 0;
@@ -6508,7 +6508,7 @@ TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 /* Generated */  lookback = TA_CDLPIERCING_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLPIERCING
 /* Generated */    i = 0;
@@ -6605,7 +6605,7 @@ TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _st
 /* Generated */  lookback = TA_CDLRICKSHAWMAN_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLRICKSHAWMAN
 /* Generated */    i = 0;
@@ -6702,7 +6702,7 @@ TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_S
 /* Generated */  lookback = TA_CDLRISEFALL3METHODS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLRISEFALL3METHODS
 /* Generated */    i = 0;
@@ -6799,7 +6799,7 @@ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_Sta
 /* Generated */  lookback = TA_CDLSEPARATINGLINES_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSEPARATINGLINES
 /* Generated */    i = 0;
@@ -6896,7 +6896,7 @@ TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _
 /* Generated */  lookback = TA_CDLSHOOTINGSTAR_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSHOOTINGSTAR
 /* Generated */    i = 0;
@@ -6993,7 +6993,7 @@ TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state 
 /* Generated */  lookback = TA_CDLSHORTLINE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSHORTLINE
 /* Generated */    i = 0;
@@ -7090,7 +7090,7 @@ TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _st
 /* Generated */  lookback = TA_CDLSPINNINGTOP_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSPINNINGTOP
 /* Generated */    i = 0;
@@ -7187,7 +7187,7 @@ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State
 /* Generated */  lookback = TA_CDLSTALLEDPATTERN_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSTALLEDPATTERN
 /* Generated */    i = 0;
@@ -7284,7 +7284,7 @@ TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State**
 /* Generated */  lookback = TA_CDLSTICKSANDWICH_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSTICKSANDWICH
 /* Generated */    i = 0;
@@ -7381,7 +7381,7 @@ TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
 /* Generated */  lookback = TA_CDLTAKURI_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTAKURI
 /* Generated */    i = 0;
@@ -7478,7 +7478,7 @@ TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state 
 /* Generated */  lookback = TA_CDLTASUKIGAP_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTASUKIGAP
 /* Generated */    i = 0;
@@ -7575,7 +7575,7 @@ TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state 
 /* Generated */  lookback = TA_CDLTHRUSTING_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTHRUSTING
 /* Generated */    i = 0;
@@ -7672,7 +7672,7 @@ TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 /* Generated */  lookback = TA_CDLTRISTAR_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTRISTAR
 /* Generated */    i = 0;
@@ -7769,7 +7769,7 @@ TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _
 /* Generated */  lookback = TA_CDLUNIQUE3RIVER_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLUNIQUE3RIVER
 /* Generated */    i = 0;
@@ -7866,7 +7866,7 @@ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_Sta
 /* Generated */  lookback = TA_CDLUPSIDEGAP2CROWS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLUPSIDEGAP2CROWS
 /* Generated */    i = 0;
@@ -7963,7 +7963,7 @@ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_S
 /* Generated */  lookback = TA_CDLXSIDEGAP3METHODS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLXSIDEGAP3METHODS
 /* Generated */    i = 0;
@@ -8045,7 +8045,7 @@ TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State** _state );
 /* Generated */  lookback = TA_CEIL_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CEIL
 /* Generated */    i = 0;
@@ -8142,7 +8142,7 @@ TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State** _state );
 /* Generated */  lookback = TA_CMO_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CMO
 /* Generated */    i = 0;
@@ -8245,7 +8245,7 @@ TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 /* Generated */  lookback = TA_CORREL_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_CORREL
 /* Generated */    i = 0;
@@ -8327,7 +8327,7 @@ TA_LIB_API int TA_COS_StateFree( struct TA_COS_State** _state );
 /* Generated */  lookback = TA_COS_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_COS
 /* Generated */    i = 0;
@@ -8409,7 +8409,7 @@ TA_LIB_API int TA_COSH_StateFree( struct TA_COSH_State** _state );
 /* Generated */  lookback = TA_COSH_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_COSH
 /* Generated */    i = 0;
@@ -8504,7 +8504,7 @@ TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 /* Generated */  lookback = TA_DEMA_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_DEMA
 /* Generated */    i = 0;
@@ -8591,7 +8591,7 @@ TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state );
 /* Generated */  lookback = TA_DIV_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_DIV
 /* Generated */    i = 0;
@@ -8701,7 +8701,7 @@ TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state );
 /* Generated */  lookback = TA_DX_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_DX
 /* Generated */    i = 0;
@@ -8798,7 +8798,7 @@ TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State** _state );
 /* Generated */  lookback = TA_EMA_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_EMA
 /* Generated */    i = 0;
@@ -8880,7 +8880,7 @@ TA_LIB_API int TA_EXP_StateFree( struct TA_EXP_State** _state );
 /* Generated */  lookback = TA_EXP_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_EXP
 /* Generated */    i = 0;
@@ -8962,7 +8962,7 @@ TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state );
 /* Generated */  lookback = TA_FLOOR_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_FLOOR
 /* Generated */    i = 0;
@@ -9065,7 +9065,7 @@ TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state );
 /* Generated */  lookback = TA_HT_DCPERIOD_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_DCPERIOD
 /* Generated */    i = 0;
@@ -9171,7 +9171,7 @@ TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state );
 /* Generated */  lookback = TA_HT_DCPHASE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_DCPHASE
 /* Generated */    i = 0;
@@ -9277,7 +9277,7 @@ TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
 /* Generated */  lookback = TA_HT_PHASOR_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_PHASOR
 /* Generated */    i = 0;
@@ -9389,7 +9389,7 @@ TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 /* Generated */  lookback = TA_HT_SINE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_SINE
 /* Generated */    i = 0;
@@ -9497,7 +9497,7 @@ TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state 
 /* Generated */  lookback = TA_HT_TRENDLINE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_TRENDLINE
 /* Generated */    i = 0;
@@ -9611,7 +9611,7 @@ TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state 
 /* Generated */  lookback = TA_HT_TRENDMODE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_TRENDMODE
 /* Generated */    i = 0;
@@ -9711,7 +9711,7 @@ TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state );
 /* Generated */  lookback = TA_IMI_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_IMI
 /* Generated */    i = 0;
@@ -9808,7 +9808,7 @@ TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
 /* Generated */  lookback = TA_KAMA_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_KAMA
 /* Generated */    i = 0;
@@ -9906,7 +9906,7 @@ TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 /* Generated */  lookback = TA_LINEARREG_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG
 /* Generated */    i = 0;
@@ -10004,7 +10004,7 @@ TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _
 /* Generated */  lookback = TA_LINEARREG_ANGLE_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_ANGLE
 /* Generated */    i = 0;
@@ -10102,7 +10102,7 @@ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_S
 /* Generated */  lookback = TA_LINEARREG_INTERCEPT_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_INTERCEPT
 /* Generated */    i = 0;
@@ -10200,7 +10200,7 @@ TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _
 /* Generated */  lookback = TA_LINEARREG_SLOPE_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_SLOPE
 /* Generated */    i = 0;
@@ -10282,7 +10282,7 @@ TA_LIB_API int TA_LN_StateFree( struct TA_LN_State** _state );
 /* Generated */  lookback = TA_LN_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_LN
 /* Generated */    i = 0;
@@ -10364,7 +10364,7 @@ TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State** _state );
 /* Generated */  lookback = TA_LOG10_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_LOG10
 /* Generated */    i = 0;
@@ -10461,7 +10461,7 @@ TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state );
 /* Generated */  lookback = TA_MA_Lookback(optInTimePeriod, optInMAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MA
 /* Generated */    i = 0;
@@ -10584,7 +10584,7 @@ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 /* Generated */  lookback = TA_MACD_Lookback(optInFastPeriod, optInSlowPeriod, optInSignalPeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACD
 /* Generated */    i = 0;
@@ -10718,7 +10718,7 @@ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 /* Generated */  lookback = TA_MACDEXT_Lookback(optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACDEXT
 /* Generated */    i = 0;
@@ -10821,7 +10821,7 @@ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 /* Generated */  lookback = TA_MACDFIX_Lookback(optInSignalPeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACDFIX
 /* Generated */    i = 0;
@@ -10952,7 +10952,7 @@ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 /* Generated */  lookback = TA_MAMA_Lookback(optInFastLimit, optInSlowLimit);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAMA
 /* Generated */    i = 0;
@@ -11064,7 +11064,7 @@ TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 /* Generated */  lookback = TA_MAVP_Lookback(optInMinPeriod, optInMaxPeriod, optInMAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAVP
 /* Generated */    i = 0;
@@ -11158,7 +11158,7 @@ TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state );
 /* Generated */  lookback = TA_MAX_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAX
 /* Generated */    i = 0;
@@ -11254,7 +11254,7 @@ TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 /* Generated */  lookback = TA_MAXINDEX_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAXINDEX
 /* Generated */    i = 0;
@@ -11341,7 +11341,7 @@ TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
 /* Generated */  lookback = TA_MEDPRICE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MEDPRICE
 /* Generated */    i = 0;
@@ -11453,7 +11453,7 @@ TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state );
 /* Generated */  lookback = TA_MFI_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MFI
 /* Generated */    i = 0;
@@ -11548,7 +11548,7 @@ TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
 /* Generated */  lookback = TA_MIDPOINT_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIDPOINT
 /* Generated */    i = 0;
@@ -11648,7 +11648,7 @@ TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 /* Generated */  lookback = TA_MIDPRICE_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIDPRICE
 /* Generated */    i = 0;
@@ -11742,7 +11742,7 @@ TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state );
 /* Generated */  lookback = TA_MIN_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIN
 /* Generated */    i = 0;
@@ -11838,7 +11838,7 @@ TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 /* Generated */  lookback = TA_MININDEX_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MININDEX
 /* Generated */    i = 0;
@@ -11937,7 +11937,7 @@ TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
 /* Generated */  lookback = TA_MINMAX_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINMAX
 /* Generated */    i = 0;
@@ -12040,7 +12040,7 @@ TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
 /* Generated */  lookback = TA_MINMAXINDEX_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINMAXINDEX
 /* Generated */    i = 0;
@@ -12149,7 +12149,7 @@ TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 /* Generated */  lookback = TA_MINUS_DI_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINUS_DI
 /* Generated */    i = 0;
@@ -12250,7 +12250,7 @@ TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 /* Generated */  lookback = TA_MINUS_DM_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINUS_DM
 /* Generated */    i = 0;
@@ -12343,7 +12343,7 @@ TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State** _state );
 /* Generated */  lookback = TA_MOM_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MOM
 /* Generated */    i = 0;
@@ -12430,7 +12430,7 @@ TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state );
 /* Generated */  lookback = TA_MULT_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_MULT
 /* Generated */    i = 0;
@@ -12537,7 +12537,7 @@ TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 /* Generated */  lookback = TA_NATR_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_NATR
 /* Generated */    i = 0;
@@ -12626,7 +12626,7 @@ TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 /* Generated */  lookback = TA_OBV_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_OBV
 /* Generated */    i = 0;
@@ -12734,7 +12734,7 @@ TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 /* Generated */  lookback = TA_PLUS_DI_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_PLUS_DI
 /* Generated */    i = 0;
@@ -12835,7 +12835,7 @@ TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
 /* Generated */  lookback = TA_PLUS_DM_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_PLUS_DM
 /* Generated */    i = 0;
@@ -12940,7 +12940,7 @@ TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state );
 /* Generated */  lookback = TA_PPO_Lookback(optInFastPeriod, optInSlowPeriod, optInMAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_PPO
 /* Generated */    i = 0;
@@ -13033,7 +13033,7 @@ TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State** _state );
 /* Generated */  lookback = TA_ROC_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROC
 /* Generated */    i = 0;
@@ -13126,7 +13126,7 @@ TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 /* Generated */  lookback = TA_ROCP_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCP
 /* Generated */    i = 0;
@@ -13219,7 +13219,7 @@ TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 /* Generated */  lookback = TA_ROCR_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCR
 /* Generated */    i = 0;
@@ -13312,7 +13312,7 @@ TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
 /* Generated */  lookback = TA_ROCR100_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCR100
 /* Generated */    i = 0;
@@ -13409,7 +13409,7 @@ TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state );
 /* Generated */  lookback = TA_RSI_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_RSI
 /* Generated */    i = 0;
@@ -13516,7 +13516,7 @@ TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state );
 /* Generated */  lookback = TA_SAR_Lookback(optInAcceleration, optInMaximum);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_SAR
 /* Generated */    i = 0;
@@ -13677,7 +13677,7 @@ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 /* Generated */  lookback = TA_SAREXT_Lookback(optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_SAREXT
 /* Generated */    i = 0;
@@ -13759,7 +13759,7 @@ TA_LIB_API int TA_SIN_StateFree( struct TA_SIN_State** _state );
 /* Generated */  lookback = TA_SIN_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_SIN
 /* Generated */    i = 0;
@@ -13841,7 +13841,7 @@ TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State** _state );
 /* Generated */  lookback = TA_SINH_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_SINH
 /* Generated */    i = 0;
@@ -13935,7 +13935,7 @@ TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state );
 /* Generated */  lookback = TA_SMA_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_SMA
 /* Generated */    i = 0;
@@ -14017,7 +14017,7 @@ TA_LIB_API int TA_SQRT_StateFree( struct TA_SQRT_State** _state );
 /* Generated */  lookback = TA_SQRT_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_SQRT
 /* Generated */    i = 0;
@@ -14120,7 +14120,7 @@ TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
 /* Generated */  lookback = TA_STDDEV_Lookback(optInTimePeriod, optInNbDev);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_STDDEV
 /* Generated */    i = 0;
@@ -14207,6 +14207,12 @@ struct TA_STOCH_State {
                       size_t mem_size;
                       size_t mem_index;
                       struct TA_STOCH_Data* memory;
+                      double       lowest;
+                      double       highest;
+                      int          lowest_exp;
+                      int          highest_exp;
+                      void*        stateMA1;
+                      void*        stateMA2;
                       int           optInFastK_Period; /* From 1 to 100000 */
                       int           optInSlowK_Period; /* From 1 to 100000 */
                       TA_MAType     optInSlowK_MAType;                      int           optInSlowD_Period; /* From 1 to 100000 */
@@ -14251,7 +14257,7 @@ TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 /* Generated */  lookback = TA_STOCH_Lookback(optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCH
 /* Generated */    i = 0;
@@ -14371,7 +14377,7 @@ TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 /* Generated */  lookback = TA_STOCHF_Lookback(optInFastK_Period, optInFastD_Period, optInFastD_MAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCHF
 /* Generated */    i = 0;
@@ -14490,7 +14496,7 @@ TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 /* Generated */  lookback = TA_STOCHRSI_Lookback(optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCHRSI
 /* Generated */    i = 0;
@@ -14578,7 +14584,7 @@ TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state );
 /* Generated */  lookback = TA_SUB_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_SUB
 /* Generated */    i = 0;
@@ -14672,7 +14678,7 @@ TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State** _state );
 /* Generated */  lookback = TA_SUM_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_SUM
 /* Generated */    i = 0;
@@ -14788,7 +14794,7 @@ TA_LIB_API int TA_T3_StateFree( struct TA_T3_State** _state );
 /* Generated */  lookback = TA_T3_Lookback(optInTimePeriod, optInVFactor);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_T3
 /* Generated */    i = 0;
@@ -14870,7 +14876,7 @@ TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State** _state );
 /* Generated */  lookback = TA_TAN_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_TAN
 /* Generated */    i = 0;
@@ -14952,7 +14958,7 @@ TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State** _state );
 /* Generated */  lookback = TA_TANH_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_TANH
 /* Generated */    i = 0;
@@ -15048,7 +15054,7 @@ TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 /* Generated */  lookback = TA_TEMA_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_TEMA
 /* Generated */    i = 0;
@@ -15140,7 +15146,7 @@ TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
 /* Generated */  lookback = TA_TRANGE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRANGE
 /* Generated */    i = 0;
@@ -15238,7 +15244,7 @@ TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 /* Generated */  lookback = TA_TRIMA_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRIMA
 /* Generated */    i = 0;
@@ -15335,7 +15341,7 @@ TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
 /* Generated */  lookback = TA_TRIX_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRIX
 /* Generated */    i = 0;
@@ -15433,7 +15439,7 @@ TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State** _state );
 /* Generated */  lookback = TA_TSF_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_TSF
 /* Generated */    i = 0;
@@ -15525,7 +15531,7 @@ TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
 /* Generated */  lookback = TA_TYPPRICE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_TYPPRICE
 /* Generated */    i = 0;
@@ -15646,7 +15652,7 @@ TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 /* Generated */  lookback = TA_ULTOSC_Lookback(optInTimePeriod1, optInTimePeriod2, optInTimePeriod3);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_ULTOSC
 /* Generated */    i = 0;
@@ -15750,7 +15756,7 @@ TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state );
 /* Generated */  lookback = TA_VAR_Lookback(optInTimePeriod, optInNbDev);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_VAR
 /* Generated */    i = 0;
@@ -15842,7 +15848,7 @@ TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
 /* Generated */  lookback = TA_WCLPRICE_Lookback();
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_WCLPRICE
 /* Generated */    i = 0;
@@ -15949,7 +15955,7 @@ TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 /* Generated */  lookback = TA_WILLR_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_WILLR
 /* Generated */    i = 0;
@@ -16045,7 +16051,7 @@ TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State** _state );
 /* Generated */  lookback = TA_WMA_Lookback(optInTimePeriod);
 /* Generated */  int res_start = 0;
 /* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
-/* Generated */  if (i < endIdx) {
+/* Generated */  if (i <= endIdx) {
 /* Generated */  i -= lookback;
 /* Generated */  #ifdef TEST_WHOLE_DATA_WMA
 /* Generated */    i = 0;

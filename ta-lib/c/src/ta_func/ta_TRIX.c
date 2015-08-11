@@ -552,7 +552,7 @@
 /* Generated */    {
 /* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
 /* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
-/* Generated */       return ENUM_VALUE(RetCode,TA_SUCCESS,Success); 
+/* Generated */       return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */    }
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx) = startIdx; 
 /* Generated */    nbElementToOutput = (endIdx-startIdx)+1+totalLookback;

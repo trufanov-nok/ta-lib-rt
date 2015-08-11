@@ -184,7 +184,7 @@ TA_RetCode printStateTestFunc(FILE* out, const TA_FuncInfo *funcInfo)
     print(out, " lookback = TA_%s_Lookback(%s);\n", funcInfo->name, optInputArgs);
     print(out, " int res_start = 0;\n");
     print(out, " i = ( startIdx <= lookback )? lookback: startIdx;\n");
-    print(out, " if (i < endIdx) {\n");
+    print(out, " if (i <= endIdx) {\n");
     print(out, " i -= lookback;\n");
     print(out, " #ifdef TEST_WHOLE_DATA_%s\n", funcInfo->name);
     print(out, "   i = 0;\n");

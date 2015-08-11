@@ -116,7 +116,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 static TA_RetCode referenceStoch( TA_Integer    startIdx,
                                   TA_Integer    endIdx,
                                   const TA_Real inHigh[],
@@ -215,6 +216,13 @@ ErrorNumber test_func_stoch( TA_History *history )
       if( retValue != 0 )
       {
          printf( "%s Failed Test #%d (Code=%d)\n", __FILE__,
+                 i, retValue );
+         return retValue;
+      }
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "%s Failed State Test #%d (Code=%d)\n", __FILE__,
                  i, retValue );
          return retValue;
       }
@@ -791,4 +799,86 @@ static TA_RetCode referenceStoch( TA_Integer    startIdx,
    return TA_SUCCESS;
 }
 
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+
+   retCode = TA_NOT_SUPPORTED;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->high,  history->nbBars );
+   setInputBuffer( 1, history->low,   history->nbBars );
+   setInputBuffer( 2, history->close, history->nbBars );
+
+   /* Re-initialize all the unstable period to zero. */
+   TA_SetUnstablePeriod( TA_FUNC_UNST_ALL, 0 );
+
+   /* Set the unstable period requested for that test. */
+   switch( test->optInMAType_1 )
+   {
+   case TA_MAType_EMA:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_EMA, test->unstablePeriod );
+      if( retCode != TA_SUCCESS )
+         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
+      break;
+   default:
+      /* No unstable period for other methods. */
+      break;
+   }
+
+   /* Make a simple first call. */
+   switch( test->testId )
+   {
+   case TEST_STOCH:
+      retCode = TA_STOCH_StateTest(test->startIdx,
+                          test->endIdx,
+                          gBuffer[0].in,
+                          gBuffer[1].in,
+                          gBuffer[2].in,
+                          test->optInPeriod_0,
+                          test->optInPeriod_1,
+                          (TA_MAType)test->optInMAType_1,
+                          test->optInPeriod_2,
+                          (TA_MAType)test->optInMAType_2,
+                          &outBegIdx, &outNbElement,
+                          gBuffer[0].out0,
+                          gBuffer[0].out1 );
+      break;
+   case TEST_STOCHF:
+//      retCode = TA_STOCHF_StateTest( test->startIdx,
+//                           test->endIdx,
+//                           gBuffer[0].in,
+//                           gBuffer[1].in,
+//                           gBuffer[2].in,
+//                           test->optInPeriod_0,
+//                           test->optInPeriod_1,
+//                           (TA_MAType)test->optInMAType_1,
+//                           &outBegIdx, &outNbElement,
+//                           gBuffer[0].out0,
+//                           gBuffer[0].out1 );
+      break;
+   case TEST_STOCHRSI:
+//      retCode = TA_STOCHRSI_StateTest( test->startIdx,
+//                             test->endIdx,
+//                             gBuffer[2].in,
+//                             test->optInPeriod_0,
+//                             test->optInPeriod_1,
+//                             test->optInPeriod_2,
+//                             (TA_MAType)test->optInMAType_2,
+//                             &outBegIdx, &outNbElement,
+//                             gBuffer[0].out0,
+//                             gBuffer[0].out1 );
+      break;
+   }
+
+
+
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
+}
 

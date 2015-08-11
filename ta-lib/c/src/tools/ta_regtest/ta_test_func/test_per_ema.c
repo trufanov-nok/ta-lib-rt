@@ -316,10 +316,8 @@ static ErrorNumber do_test_per_ema_state( const TA_History *history,
                                     const TA_Test *test )
 {
    TA_RetCode retCode;
-   ErrorNumber errNb;
    TA_Integer outBegIdx;
    TA_Integer outNbElement;
-   TA_RangeTestParam testParam;
 
    /* Set to NAN all the elements of the gBuffers.  */
    clearAllBuffers();

@@ -7111,6 +7111,12 @@ struct TA_STOCH_State {
                       size_t mem_size;
                       size_t mem_index;
                       struct TA_STOCH_Data* memory;
+                      double       lowest;
+                      double       highest;
+                      int          lowest_exp;
+                      int          highest_exp;
+                      void*        stateMA1;
+                      void*        stateMA2;
                       int           optInFastK_Period; /* From 1 to 100000 */
                       int           optInSlowK_Period; /* From 1 to 100000 */
                       TA_MAType     optInSlowK_MAType;                      int           optInSlowD_Period; /* From 1 to 100000 */

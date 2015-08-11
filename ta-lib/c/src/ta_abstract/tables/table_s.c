@@ -522,7 +522,26 @@ static const TA_OptInputParameterInfo *TA_STOCH_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_STOCH_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_STOCH_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "lowest", 0 };
+const TA_InputParameterInfo TA_STOCH_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "highest", 0 };
+const TA_InputParameterInfo TA_STOCH_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "lowest_exp", 0 };
+const TA_InputParameterInfo TA_STOCH_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "highest_exp", 0 };
+const TA_InputParameterInfo TA_STOCH_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Pointer, "stateMA1", 0 };
+const TA_InputParameterInfo TA_STOCH_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Pointer, "stateMA2", 0 };
+static const TA_InputParameterInfo *TA_STOCH_StructParams[] = {
+    &TA_STOCH_DEF_UI_STRUCT_PARAM_1,
+    &TA_STOCH_DEF_UI_STRUCT_PARAM_2,
+    &TA_STOCH_DEF_UI_STRUCT_PARAM_3,
+    &TA_STOCH_DEF_UI_STRUCT_PARAM_4,
+    &TA_STOCH_DEF_UI_STRUCT_PARAM_5,
+    &TA_STOCH_DEF_UI_STRUCT_PARAM_6,
+    NULL };
 
 DEF_FUNCTION( STOCH,                     /* name */
               TA_GroupId_MomentumIndicators, /* groupId */
