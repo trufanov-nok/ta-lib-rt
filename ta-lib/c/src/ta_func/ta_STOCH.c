@@ -572,6 +572,7 @@
 {
    /* insert local variable here */
  TA_RetCode retCode;
+#define TA_STOCH_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -629,7 +630,10 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
-
+   MEM_SIZE_P = (optInFastK_Period - 1);
+ if (MEM_SIZE_P > 0)
+     MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_STOCH_Data));
+ else MEM_P = NULL;
 
    retCode = FUNCTION_CALL_STATE_INIT(MA)( (struct TA_MA_State**) &STATE_P.stateMA1, optInSlowK_Period, optInSlowK_MAType );
    if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
@@ -762,6 +766,9 @@
 
    PUSH_TO_MEM(inHigh,inHigh);
    PUSH_TO_MEM(inLow,inLow);
+
+   if (NEED_MORE_DATA)
+       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    temp = (STATE.highest - STATE.lowest)/100.0;
    if( temp != 0.0 )

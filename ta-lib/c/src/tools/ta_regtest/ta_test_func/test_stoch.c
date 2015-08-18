@@ -806,7 +806,7 @@ static ErrorNumber do_test_state( const TA_History *history,
    TA_Integer outBegIdx;
    TA_Integer outNbElement;
 
-   retCode = TA_NOT_SUPPORTED;
+   retCode = TA_TEST_PASS;
 
    /* Set to NAN all the elements of the gBuffers.  */
    clearAllBuffers();
