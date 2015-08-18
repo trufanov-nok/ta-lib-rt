@@ -200,7 +200,7 @@ TA_RetCode printStateTestFunc(FILE* out, const TA_FuncInfo *funcInfo)
     print(out, "    if (i++ < startIdx) continue;\n");
     print(out, "    if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {\n");
     print(out, "      if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;\n");
-    print(out, "         else return res; }\n");
+    print(out, "         else break; }\n");
 
 
     listOutputParameters(outputArgs, funcInfo, ",", NULL, NULL, 0);
@@ -231,7 +231,7 @@ TA_RetCode printStateTestFunc(FILE* out, const TA_FuncInfo *funcInfo)
 
     print(out, " TA_RetCode r = TA_%s_StateFree(&state);\n", funcInfo->name);
 
-    print(out, "return (res)?res:r;\n");
+    print(out, "return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;\n");
     print(out, "}\n");
     print(out, "#endif\n");
 

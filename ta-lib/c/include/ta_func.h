@@ -159,7 +159,7 @@ TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outRealUpperBand[res_start] - outRealUpperBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outRealMiddleBand[res_start] - outRealMiddleBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outRealLowerBand[res_start] - outRealLowerBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
@@ -167,7 +167,7 @@ TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ACCBANDS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -243,13 +243,13 @@ TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ACOS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -341,13 +341,13 @@ TA_LIB_API int TA_AD_StateFree( struct TA_AD_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_AD_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -428,13 +428,13 @@ TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ADD_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -552,13 +552,13 @@ TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ADOSC_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -663,13 +663,13 @@ TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ADX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -767,13 +767,13 @@ TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ADXR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -875,13 +875,13 @@ TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_APO_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -982,14 +982,14 @@ TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outAroonDown[res_start] - outAroonDown_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outAroonUp[res_start] - outAroonUp_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_AROON_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1086,13 +1086,13 @@ TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_AROONOSC_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1168,13 +1168,13 @@ TA_LIB_API int TA_ASIN_StateFree( struct TA_ASIN_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ASIN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1250,13 +1250,13 @@ TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ATAN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1357,13 +1357,13 @@ TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ATR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1454,13 +1454,13 @@ TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_AVGPRICE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1548,13 +1548,13 @@ TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_AVGDEV_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1670,7 +1670,7 @@ TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outRealUpperBand[res_start] - outRealUpperBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outRealMiddleBand[res_start] - outRealMiddleBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outRealLowerBand[res_start] - outRealLowerBand_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
@@ -1678,7 +1678,7 @@ TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_BBANDS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1779,13 +1779,13 @@ TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_BETA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1876,13 +1876,13 @@ TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_BOP_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -1981,13 +1981,13 @@ TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CCI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2078,13 +2078,13 @@ TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL2CROWS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2175,13 +2175,13 @@ TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _st
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3BLACKCROWS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2272,13 +2272,13 @@ TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3INSIDE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2369,13 +2369,13 @@ TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _st
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3LINESTRIKE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2466,13 +2466,13 @@ TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3OUTSIDE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2563,13 +2563,13 @@ TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State**
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3STARSINSOUTH_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2660,13 +2660,13 @@ TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDL3WHITESOLDIERS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2768,13 +2768,13 @@ TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State**
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLABANDONEDBABY_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2865,13 +2865,13 @@ TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLADVANCEBLOCK_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -2962,13 +2962,13 @@ TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLBELTHOLD_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3059,13 +3059,13 @@ TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state 
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLBREAKAWAY_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3156,13 +3156,13 @@ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_Sta
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLCLOSINGMARUBOZU_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3253,13 +3253,13 @@ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_S
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLCONCEALBABYSWALL_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3350,13 +3350,13 @@ TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State**
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLCOUNTERATTACK_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3458,13 +3458,13 @@ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLDARKCLOUDCOVER_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3555,13 +3555,13 @@ TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLDOJI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3652,13 +3652,13 @@ TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLDOJISTAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3749,13 +3749,13 @@ TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State**
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLDRAGONFLYDOJI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3846,13 +3846,13 @@ TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state 
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLENGULFING_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -3954,13 +3954,13 @@ TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_Sta
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLEVENINGDOJISTAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4062,13 +4062,13 @@ TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _st
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLEVENINGSTAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4159,13 +4159,13 @@ TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_S
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLGAPSIDESIDEWHITE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4256,13 +4256,13 @@ TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLGRAVESTONEDOJI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4353,13 +4353,13 @@ TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHAMMER_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4450,13 +4450,13 @@ TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _stat
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHANGINGMAN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4547,13 +4547,13 @@ TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHARAMI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4644,13 +4644,13 @@ TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _st
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHARAMICROSS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4741,13 +4741,13 @@ TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHIGHWAVE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4838,13 +4838,13 @@ TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHIKKAKE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -4935,13 +4935,13 @@ TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _stat
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHIKKAKEMOD_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5032,13 +5032,13 @@ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLHOMINGPIGEON_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5129,13 +5129,13 @@ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_Sta
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLIDENTICAL3CROWS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5226,13 +5226,13 @@ TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLINNECK_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5323,13 +5323,13 @@ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLINVERTEDHAMMER_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5420,13 +5420,13 @@ TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLKICKING_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5517,13 +5517,13 @@ TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_Sta
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLKICKINGBYLENGTH_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5614,13 +5614,13 @@ TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLLADDERBOTTOM_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5711,13 +5711,13 @@ TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLLONGLEGGEDDOJI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5808,13 +5808,13 @@ TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLLONGLINE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -5905,13 +5905,13 @@ TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMARUBOZU_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6002,13 +6002,13 @@ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _st
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMATCHINGLOW_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6110,13 +6110,13 @@ TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMATHOLD_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6218,13 +6218,13 @@ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_Sta
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMORNINGDOJISTAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6326,13 +6326,13 @@ TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _st
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLMORNINGSTAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6423,13 +6423,13 @@ TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLONNECK_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6520,13 +6520,13 @@ TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLPIERCING_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6617,13 +6617,13 @@ TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _st
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLRICKSHAWMAN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6714,13 +6714,13 @@ TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_S
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLRISEFALL3METHODS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6811,13 +6811,13 @@ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_Sta
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSEPARATINGLINES_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -6908,13 +6908,13 @@ TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSHOOTINGSTAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7005,13 +7005,13 @@ TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state 
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSHORTLINE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7102,13 +7102,13 @@ TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _st
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSPINNINGTOP_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7199,13 +7199,13 @@ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSTALLEDPATTERN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7296,13 +7296,13 @@ TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State**
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLSTICKSANDWICH_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7393,13 +7393,13 @@ TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLTAKURI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7490,13 +7490,13 @@ TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state 
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLTASUKIGAP_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7587,13 +7587,13 @@ TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state 
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLTHRUSTING_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7684,13 +7684,13 @@ TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLTRISTAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7781,13 +7781,13 @@ TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLUNIQUE3RIVER_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7878,13 +7878,13 @@ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_Sta
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLUPSIDEGAP2CROWS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -7975,13 +7975,13 @@ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_S
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CDLXSIDEGAP3METHODS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8057,13 +8057,13 @@ TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CEIL_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8154,13 +8154,13 @@ TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CMO_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8257,13 +8257,13 @@ TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_CORREL_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8339,13 +8339,13 @@ TA_LIB_API int TA_COS_StateFree( struct TA_COS_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_COS_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8421,13 +8421,13 @@ TA_LIB_API int TA_COSH_StateFree( struct TA_COSH_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_COSH_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8516,13 +8516,13 @@ TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_DEMA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8603,13 +8603,13 @@ TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_DIV_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8713,13 +8713,13 @@ TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_DX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8810,13 +8810,13 @@ TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_EMA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8892,13 +8892,13 @@ TA_LIB_API int TA_EXP_StateFree( struct TA_EXP_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_EXP_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -8974,13 +8974,13 @@ TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_FLOOR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9077,13 +9077,13 @@ TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_DCPERIOD_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9183,13 +9183,13 @@ TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_DCPHASE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9289,14 +9289,14 @@ TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInPhase[res_start] - outInPhase_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outQuadrature[res_start] - outQuadrature_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_PHASOR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9401,14 +9401,14 @@ TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outSine[res_start] - outSine_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outLeadSine[res_start] - outLeadSine_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_SINE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9509,13 +9509,13 @@ TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state 
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_TRENDLINE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9623,13 +9623,13 @@ TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state 
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_HT_TRENDMODE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9723,13 +9723,13 @@ TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_IMI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9820,13 +9820,13 @@ TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_KAMA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -9918,13 +9918,13 @@ TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_LINEARREG_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10016,13 +10016,13 @@ TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_LINEARREG_ANGLE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10114,13 +10114,13 @@ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_S
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_LINEARREG_INTERCEPT_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10212,13 +10212,13 @@ TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_LINEARREG_SLOPE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10294,13 +10294,13 @@ TA_LIB_API int TA_LN_StateFree( struct TA_LN_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_LN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10376,13 +10376,13 @@ TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_LOG10_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10473,13 +10473,13 @@ TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10596,7 +10596,7 @@ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outMACD[res_start] - outMACD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outMACDSignal[res_start] - outMACDSignal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outMACDHist[res_start] - outMACDHist_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
@@ -10604,7 +10604,7 @@ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MACD_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10730,7 +10730,7 @@ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outMACD[res_start] - outMACD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outMACDSignal[res_start] - outMACDSignal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outMACDHist[res_start] - outMACDHist_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
@@ -10738,7 +10738,7 @@ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MACDEXT_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10833,7 +10833,7 @@ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outMACD[res_start] - outMACD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outMACDSignal[res_start] - outMACDSignal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outMACDHist[res_start] - outMACDHist_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
@@ -10841,7 +10841,7 @@ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MACDFIX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -10964,14 +10964,14 @@ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outMAMA[res_start] - outMAMA_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outFAMA[res_start] - outFAMA_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MAMA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11076,13 +11076,13 @@ TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MAVP_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11170,13 +11170,13 @@ TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MAX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11266,13 +11266,13 @@ TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MAXINDEX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11353,13 +11353,13 @@ TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MEDPRICE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11465,13 +11465,13 @@ TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MFI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11560,13 +11560,13 @@ TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MIDPOINT_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11660,13 +11660,13 @@ TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MIDPRICE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11754,13 +11754,13 @@ TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MIN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11850,13 +11850,13 @@ TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outInteger[res_start] - outInteger_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MININDEX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -11949,14 +11949,14 @@ TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outMin[res_start] - outMin_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outMax[res_start] - outMax_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MINMAX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12052,14 +12052,14 @@ TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outMinIdx[res_start] - outMinIdx_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outMaxIdx[res_start] - outMaxIdx_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MINMAXINDEX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12161,13 +12161,13 @@ TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MINUS_DI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12262,13 +12262,13 @@ TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MINUS_DM_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12355,13 +12355,13 @@ TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MOM_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12442,13 +12442,13 @@ TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_MULT_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12549,13 +12549,13 @@ TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_NATR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12638,13 +12638,13 @@ TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_OBV_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12746,13 +12746,13 @@ TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_PLUS_DI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12847,13 +12847,13 @@ TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_PLUS_DM_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -12952,13 +12952,13 @@ TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_PPO_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13045,13 +13045,13 @@ TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ROC_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13138,13 +13138,13 @@ TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ROCP_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13231,13 +13231,13 @@ TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ROCR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13324,13 +13324,13 @@ TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ROCR100_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13421,13 +13421,13 @@ TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_RSI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13528,13 +13528,13 @@ TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_SAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13689,13 +13689,13 @@ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_SAREXT_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13771,13 +13771,13 @@ TA_LIB_API int TA_SIN_StateFree( struct TA_SIN_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_SIN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13853,13 +13853,13 @@ TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_SINH_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -13947,13 +13947,13 @@ TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_SMA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14029,13 +14029,13 @@ TA_LIB_API int TA_SQRT_StateFree( struct TA_SQRT_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_SQRT_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14132,13 +14132,13 @@ TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_STDDEV_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14269,14 +14269,14 @@ TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outSlowK[res_start] - outSlowK_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outSlowD[res_start] - outSlowD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_STOCH_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14389,14 +14389,14 @@ TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outFastK[res_start] - outFastK_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outFastD[res_start] - outFastD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_STOCHF_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14508,14 +14508,14 @@ TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outFastK[res_start] - outFastK_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */     if(fabs(outFastD[res_start] - outFastD_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_STOCHRSI_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14596,13 +14596,13 @@ TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_SUB_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14690,13 +14690,13 @@ TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_SUM_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14806,13 +14806,13 @@ TA_LIB_API int TA_T3_StateFree( struct TA_T3_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_T3_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14888,13 +14888,13 @@ TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_TAN_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -14970,13 +14970,13 @@ TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_TANH_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15066,13 +15066,13 @@ TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_TEMA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15158,13 +15158,13 @@ TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_TRANGE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15256,13 +15256,13 @@ TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_TRIMA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15353,13 +15353,13 @@ TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_TRIX_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15451,13 +15451,13 @@ TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_TSF_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15543,13 +15543,13 @@ TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_TYPPRICE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15664,13 +15664,13 @@ TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_ULTOSC_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15768,13 +15768,13 @@ TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_VAR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15860,13 +15860,13 @@ TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_WCLPRICE_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -15967,13 +15967,13 @@ TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_WILLR_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 
@@ -16063,13 +16063,13 @@ TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State** _state );
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
-/* Generated */          else return res; }
+/* Generated */          else break; }
 /* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
 /* Generated */ ++res_start;
 /* Generated */    }
 /* Generated */  }
 /* Generated */  TA_RetCode r = TA_WMA_StateFree(&state);
-/* Generated */ return (res)?res:r;
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
 /* Generated */ }
 /* Generated */ #endif
 

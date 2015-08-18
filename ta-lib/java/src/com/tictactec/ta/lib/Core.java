@@ -30641,10 +30641,11 @@ public class Core {
       _state.value .value .optInSlowD_Period = optInSlowD_Period;
       _state.value .value .optInSlowD_MAType = optInSlowD_MAType;
       _state.value .value .mem_size = stochLookback (optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType );
+      _state.value .value .memory = NULL;
+      _state.value .value .mem_size = (optInFastK_Period - 1);
       if ( _state.value .value .mem_size > 0)
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_STOCH_Data));
-      else
-         _state.value .value .memory = NULL;
+      else _state.value .value .memory = NULL;
       retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1, optInSlowK_Period, optInSlowK_MAType );
       if (retCode != RetCode.Success ) return retCode;
       retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA2, optInSlowD_Period, optInSlowD_MAType );
@@ -30718,6 +30719,8 @@ public class Core {
       }
       ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
       ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
       temp = ( _state.value .highest - _state.value .lowest)/100.0;
       if( temp != 0.0 )
          temp = (inClose- _state.value .lowest)/temp;
