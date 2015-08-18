@@ -114,7 +114,36 @@ static const TA_OptInputParameterInfo *TA_SAR_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_SAR_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "newHigh", 0 };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "newLow", 0 };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "prevLow", 0 };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "isLong", 0 };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Pointer, "stateMINUS_DM", 0 };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "sar", 0 };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "ep", 0 };
+const TA_InputParameterInfo TA_SAR_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "af", 0 };
+
+static const TA_InputParameterInfo *TA_SAR_StructParams[] = {
+    &TA_SAR_DEF_UI_STRUCT_PARAM_1,
+    &TA_SAR_DEF_UI_STRUCT_PARAM_2,
+    &TA_SAR_DEF_UI_STRUCT_PARAM_3,
+    &TA_SAR_DEF_UI_STRUCT_PARAM_4,
+    &TA_SAR_DEF_UI_STRUCT_PARAM_5,
+    &TA_SAR_DEF_UI_STRUCT_PARAM_6,
+    &TA_SAR_DEF_UI_STRUCT_PARAM_7,
+    &TA_SAR_DEF_UI_STRUCT_PARAM_8,
+    &TA_SAR_DEF_UI_STRUCT_PARAM_9,
+    NULL };
 
 DEF_FUNCTION( SAR,                     /* name */
               TA_GroupId_OverlapStudies,  /* groupId */
@@ -290,7 +319,39 @@ static const TA_OptInputParameterInfo *TA_SAREXT_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_SAREXT_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "newHigh", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "newLow", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "prevLow", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "isLong", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Pointer, "stateMINUS_DM", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "sar", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "ep", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "afLong", 0 };
+const TA_InputParameterInfo TA_SAREXT_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "afShort", 0 };
+
+static const TA_InputParameterInfo *TA_SAREXT_StructParams[] = {
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_1,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_2,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_3,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_4,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_5,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_6,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_7,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_8,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_9,
+    &TA_SAREXT_DEF_UI_STRUCT_PARAM_10,
+    NULL };
 
 DEF_FUNCTION( SAREXT,                     /* name */
               TA_GroupId_OverlapStudies,  /* groupId */

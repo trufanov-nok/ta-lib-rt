@@ -738,6 +738,7 @@
 {
    /* insert local variable here */
 
+#define TA_SAREXT_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -806,9 +807,27 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
+   STATE_P.afLong = optInAccelerationInitLong;
+   STATE_P.afShort = optInAccelerationInitShort;
 
+if( optInAccelerationInitLong > optInAccelerationMaxLong )
+   STATE_P.afLong = STATE_P.optInAccelerationInitLong = optInAccelerationMaxLong;
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+if( optInAccelerationLong > optInAccelerationMaxLong )
+   STATE_P.optInAccelerationLong = optInAccelerationMaxLong;
+
+if( optInAccelerationInitShort > optInAccelerationMaxShort)
+   STATE_P.afShort = STATE_P.optInAccelerationInitShort = optInAccelerationMaxShort;
+
+if( optInAccelerationShort > optInAccelerationMaxShort )
+   STATE_P.optInAccelerationShort = optInAccelerationMaxShort;
+
+  if(optInStartValue == 0)
+    return FUNCTION_CALL_STATE_INIT(MINUS_DM)( (struct TA_MINUS_DM_State**) &STATE_P.stateMINUS_DM, 1 );
+  else
+      STATE_P.stateMINUS_DM = NULL;
+    \
+  return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
@@ -832,7 +851,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+  TA_RetCode retCode;
+  double ep_temp;
+  #define TA_SAREXT_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -865,6 +886,198 @@
 
    /* insert state based TA dunc code here. */
 
+          if(STATE.mem_index <= 2)
+           {
+             if(FIRST_LAUNCH)
+             {
+              STATE.newHigh = inHigh;
+              STATE.newLow = inLow;
+             }
+
+             if(STATE.optInStartValue == 0)
+             {
+             retCode = FUNCTION_CALL_STATE(MINUS_DM)( (struct TA_MINUS_DM_State*) STATE.stateMINUS_DM, inHigh, inLow, &ep_temp );
+             if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+             STATE.isLong = (ep_temp > 0)?0:1;
+             } else
+                 STATE.isLong = (STATE.optInStartValue > 0)?1:0;
+
+             SAR_ROUNDING(STATE.newHigh);
+             SAR_ROUNDING(STATE.newLow);
+
+             if(STATE.optInStartValue == 0)
+             {
+                 if (STATE.isLong == 0)
+                 {
+                     STATE.ep  = inLow;
+                     STATE.sar = STATE.newHigh;
+                 } else {
+                     STATE.ep  = inHigh;
+                     STATE.sar = STATE.newLow;
+                 }
+
+             } else
+                 if ( STATE.optInStartValue > 0 )
+                 {
+                     STATE.ep  = inHigh;
+                     STATE.sar = STATE.optInStartValue;
+                 }
+                 else
+                 {
+                     STATE.ep  = inLow;
+                     STATE.sar = std_fabs(STATE.optInStartValue);
+                 }
+              SAR_ROUNDING(STATE.sar);
+
+              STATE.newHigh = inHigh;
+              STATE.newLow = inLow;
+           }
+
+
+          STATE.prevLow  = STATE.newLow;
+          STATE.prevHigh = STATE.newHigh;
+          STATE.newLow  = inLow;
+          STATE.newHigh = inHigh;
+
+          SAR_ROUNDING(STATE.newLow);
+          SAR_ROUNDING(STATE.newHigh);
+
+          if( STATE.isLong == 1 )
+          {
+             /* Switch to short if the low penetrates the SAR value. */
+             if( STATE.newLow <= STATE.sar )
+             {
+                /* Switch and Overide the SAR with the ep */
+                STATE.isLong = 0;
+                STATE.sar = STATE.ep;
+
+                /* Make sure the overide SAR is within
+                 * yesterday's and today's range.
+                 */
+                if( STATE.sar < STATE.prevHigh )
+                   STATE.sar = STATE.prevHigh;
+                if( STATE.sar < STATE.newHigh )
+                   STATE.sar = STATE.newHigh;
+
+                /* Output the overide SAR  */
+                if( STATE.optInOffsetOnReverse != 0.0 )
+                   STATE.sar += STATE.sar * STATE.optInOffsetOnReverse;
+                VALUE_HANDLE_DEREF(outReal) = -STATE.sar;
+
+                /* Adjust af and ep */
+                STATE.afShort = STATE.optInAccelerationInitShort;
+                STATE.ep = STATE.newLow;
+
+                /* Calculate the new SAR */
+                STATE.sar = STATE.sar + STATE.afShort * (STATE.ep - STATE.sar);
+                SAR_ROUNDING( STATE.sar );
+
+                /* Make sure the new SAR is within
+                 * yesterday's and today's range.
+                 */
+                if( STATE.sar < STATE.prevHigh )
+                   STATE.sar = STATE.prevHigh;
+                if( STATE.sar < STATE.newHigh )
+                   STATE.sar = STATE.newHigh;
+             }
+             else
+             {
+                /* No switch */
+
+                /* Output the SAR (was calculated in the previous iteration) */
+                VALUE_HANDLE_DEREF(outReal) = STATE.sar;
+
+                /* Adjust af and ep. */
+                if( STATE.newHigh > STATE.ep )
+                {
+                   STATE.ep = STATE.newHigh;
+                   STATE.afLong += STATE.optInAccelerationLong;
+                   if( STATE.afLong > STATE.optInAccelerationMaxLong )
+                      STATE.afLong = STATE.optInAccelerationMaxLong;
+                }
+
+                /* Calculate the new SAR */
+                STATE.sar = STATE.sar + STATE.afLong * (STATE.ep - STATE.sar);
+                SAR_ROUNDING( STATE.sar );
+
+                /* Make sure the new SAR is within
+                 * yesterday's and today's range.
+                 */
+                if( STATE.sar > STATE.prevLow )
+                   STATE.sar = STATE.prevLow;
+                if( STATE.sar > STATE.newLow )
+                   STATE.sar = STATE.newLow;
+             }
+          }
+          else
+          {
+             /* Switch to long if the high penetrates the SAR value. */
+             if( STATE.newHigh >= STATE.sar )
+             {
+                /* Switch and Overide the SAR with the ep */
+                STATE.isLong = 1;
+                STATE.sar = STATE.ep;
+
+                /* Make sure the overide SAR is within
+                 * yesterday's and today's range.
+                 */
+                if( STATE.sar > STATE.prevLow )
+                   STATE.sar = STATE.prevLow;
+                if( STATE.sar > STATE.newLow )
+                   STATE.sar = STATE.newLow;
+
+                /* Output the overide SAR  */
+                if( STATE.optInOffsetOnReverse != 0.0 )
+                   STATE.sar -= STATE.sar * STATE.optInOffsetOnReverse;
+                VALUE_HANDLE_DEREF(outReal) = STATE.sar;
+
+                /* Adjust af and ep */
+                STATE.afLong = STATE.optInAccelerationInitLong;
+                STATE.ep = STATE.newHigh;
+
+                /* Calculate the new SAR */
+                STATE.sar = STATE.sar + STATE.afLong * (STATE.ep - STATE.sar);
+                SAR_ROUNDING( STATE.sar );
+
+                /* Make sure the new SAR is within
+                 * yesterday's and today's range.
+                 */
+                if( STATE.sar > STATE.prevLow )
+                   STATE.sar = STATE.prevLow;
+                if( STATE.sar > STATE.newLow )
+                   STATE.sar = STATE.newLow;
+             }
+             else
+             {
+                /* No switch */
+
+                /* Output the SAR (was calculated in the previous iteration) */
+                VALUE_HANDLE_DEREF(outReal) = -STATE.sar;
+
+                /* Adjust af and ep. */
+                if( STATE.newLow < STATE.ep )
+                {
+                   STATE.ep = STATE.newLow;
+                   STATE.afShort += STATE.optInAccelerationShort;
+                   if( STATE.afShort > STATE.optInAccelerationMaxShort )
+                      STATE.afShort = STATE.optInAccelerationMaxShort;
+                }
+
+                /* Calculate the new SAR */
+                STATE.sar = STATE.sar + STATE.afShort * (STATE.ep - STATE.sar);
+                SAR_ROUNDING( STATE.sar );
+
+                /* Make sure the new SAR is within
+                 * yesterday's and today's range.
+                 */
+                if( STATE.sar < STATE.prevHigh )
+                   STATE.sar = STATE.prevHigh;
+                if( STATE.sar < STATE.newHigh )
+                   STATE.sar = STATE.newHigh;
+             }
+          }
+
+
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -883,6 +1096,12 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+ if (STATE_P.optInStartValue == 0)
+  {
+    TA_RetCode retCode;
+    retCode = FUNCTION_CALL_STATE_FREE(MINUS_DM)( (struct TA_MINUS_DM_State**) &STATE_P.stateMINUS_DM );
+    if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+  }
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

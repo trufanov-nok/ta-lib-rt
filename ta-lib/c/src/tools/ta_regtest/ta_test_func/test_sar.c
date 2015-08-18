@@ -96,7 +96,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 /**** Local variables definitions.     ****/
 
 static TA_Real wilderHigh[] =
@@ -155,6 +156,14 @@ ErrorNumber test_func_sar( TA_History *history )
       if( retValue != 0 )
       {
          printf( "%s Failed Test #%d (Code=%d)\n", __FILE__,
+                 i, retValue );
+         return retValue;
+      }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "%s Failed State Test #%d (Code=%d)\n", __FILE__,
                  i, retValue );
          return retValue;
       }
@@ -297,5 +306,53 @@ static ErrorNumber do_test( const TA_History *history,
       return errNb;
 
    return TA_TEST_PASS;
+}
+
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RetCode retCode;
+   TA_Integer outBegIdx;
+   TA_Integer outNbElement;
+
+   const TA_Real *highPtr;
+   const TA_Real *lowPtr;
+   TA_Integer nbPriceBar;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   if( test->useWilderData )
+   {
+      highPtr = wilderHigh;
+      lowPtr  = wilderLow;
+      nbPriceBar = WILDER_NB_BAR;
+   }
+   else
+   {
+      highPtr = history->high;
+      lowPtr  = history->low;
+      nbPriceBar = history->nbBars;
+   }
+
+   setInputBuffer( 0, highPtr,  nbPriceBar );
+   setInputBuffer( 1, lowPtr,   nbPriceBar );
+
+   /* Make a simple first call. */
+   retCode = TA_SAR_StateTest(test->startIdx,
+                     test->endIdx,
+                     gBuffer[0].in,
+                     gBuffer[1].in,
+                     test->optInAcceleration,
+                     test->optInMaximum,
+                     &outBegIdx,
+                     &outNbElement,
+                     gBuffer[0].out0 );
+
+
+
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
 }
 

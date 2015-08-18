@@ -558,14 +558,13 @@ static TA_RetCode do_call_state( const TA_Test *test,
       break;
 
    case TA_ACCBANDS_TEST:
-       /* TODO: replace dummy with real for more complete tests. */
-//      retCode = TA_ACCBANDS_StateTest( test->startIdx,
-//                          test->endIdx,
-//                          high, low, close,
-//                          test->optInTimePeriod1,
-//                          outBegIdx,
-//                          outNbElement,
-//                          dummyBuffer1, output, dummyBuffer2 );
+      retCode = TA_ACCBANDS_StateTest( test->startIdx,
+                          test->endIdx,
+                          high, low, close,
+                          test->optInTimePeriod1,
+                          outBegIdx,
+                          outNbElement,
+                          dummyBuffer1, output, dummyBuffer2 );
       break;
 
    default:

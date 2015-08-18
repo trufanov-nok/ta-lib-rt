@@ -78,7 +78,17 @@ static const TA_OptInputParameterInfo *TA_ACCBANDS_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_ACCBANDS_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_ACCBANDS_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "stateSMA1", 0 };
+const TA_InputParameterInfo TA_ACCBANDS_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "stateSMA2", 0 };
+const TA_InputParameterInfo TA_ACCBANDS_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "stateSMA3", 0 };
+static const TA_InputParameterInfo *TA_ACCBANDS_StructParams[] = {
+    &TA_ACCBANDS_DEF_UI_STRUCT_PARAM_1,
+    &TA_ACCBANDS_DEF_UI_STRUCT_PARAM_2,
+    &TA_ACCBANDS_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( ACCBANDS,                         /* name */
               TA_GroupId_OverlapStudies,   /* groupId */

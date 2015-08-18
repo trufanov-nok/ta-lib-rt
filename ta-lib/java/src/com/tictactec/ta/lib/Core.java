@@ -288,6 +288,7 @@ public class Core {
    public int accbandsStateInit( struct TA_accbands_State** _state,
       int optInTimePeriod )
    {
+      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -298,10 +299,13 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = accbandsLookback (optInTimePeriod );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ACCBANDS_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
+      retCode = sma ( (struct sma **) & _state.value .value .stateSMA1, optInTimePeriod );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = sma ( (struct sma **) & _state.value .value .stateSMA2, optInTimePeriod );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = sma ( (struct sma **) & _state.value .value .stateSMA3, optInTimePeriod );
+      if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
    public int accbandsState( struct TA_accbands_State* _state,
@@ -312,19 +316,38 @@ public class Core {
       double *outRealMiddleBand,
       double *outRealLowerBand )
    {
+      TA_RetCode retCode1, retCode2, retCode3;
+      double tempReal,tempReal1,tempReal2;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
-      return RetCode.Success ;
+      tempReal = inHigh+inLow;
+      if( ! (((- (0.00000000000001) )<tempReal)&&(tempReal< (0.00000000000001) )) )
+      {
+         tempReal = 4*(inHigh-inLow)/tempReal;
+         tempReal1 = inHigh*(1+tempReal);
+         tempReal2 = inLow*(1-tempReal);
+      }
+      else
+      {
+         tempReal1 = inHigh;
+         tempReal2 = inLow;
+      }
+      retCode1 = sma ( (struct sma *) _state.value .stateSMA1, inClose, outRealMiddleBand );
+      retCode2 = sma ( (struct sma *) _state.value .stateSMA2, tempReal1, outRealUpperBand );
+      retCode3 = sma ( (struct sma *) _state.value .stateSMA3, tempReal2, outRealLowerBand );
+      return retCode1 | retCode2 | retCode3;
    }
    public int accbandsStateFree( struct TA_accbands_State** _state )
    {
+      TA_RetCode retCode;
+      retCode = sma ( (struct sma **) & _state.value .value .stateSMA1 );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = sma ( (struct sma **) & _state.value .value .stateSMA2 );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = sma ( (struct sma **) & _state.value .value .stateSMA3 );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -21897,6 +21920,11 @@ public class Core {
       _state.value .value .optInMAType = optInMAType;
       _state.value .value .mem_size = movingAverageLookback (optInTimePeriod, optInMAType );
       _state.value .value .memory = NULL;
+      if( optInTimePeriod == 1 )
+      {
+         _state.value .value .ta_state = NULL;
+         return RetCode.Success ;
+      }
       switch( optInMAType )
       {
          case Sma :
@@ -21985,37 +22013,40 @@ public class Core {
    public int movingAverageStateFree( struct TA_movingAverage_State** _state )
    {
       RetCode retValue;
-      switch( _state.value .value .optInMAType )
+      if( _state.value .value .optInTimePeriod != 1 )
       {
-         case Sma :
-            retValue = sma ( (struct sma **) & _state.value .value .ta_state);
-         break;
-         case Ema :
-            retValue = ema ( (struct ema **) & _state.value .value .ta_state);
-         break;
-         case Wma :
-            retValue = wma ( (struct wma **) & _state.value .value .ta_state);
-         break;
-         case Dema :
-            retValue = dema ( (struct dema **) & _state.value .value .ta_state);
-         break;
-         case Tema :
-            retValue = tema ( (struct tema **) & _state.value .value .ta_state);
-         break;
-         case Trima :
-            retValue = trima ( (struct trima **) & _state.value .value .ta_state);
-         break;
-         case Kama :
-            retValue = kama ( (struct kama **) & _state.value .value .ta_state);
-         break;
-         case Mama :
-            retValue = mama ( (struct mama **) & _state.value .value .ta_state);
-         break;
-         case T3 :
-            retValue = t3 ( (struct t3 **) & _state.value .value .ta_state);
-         break;
-         default:
-            retValue = RetCode.BadParam ;
+         switch( _state.value .value .optInMAType )
+         {
+            case Sma :
+               retValue = sma ( (struct sma **) & _state.value .value .ta_state);
+            break;
+            case Ema :
+               retValue = ema ( (struct ema **) & _state.value .value .ta_state);
+            break;
+            case Wma :
+               retValue = wma ( (struct wma **) & _state.value .value .ta_state);
+            break;
+            case Dema :
+               retValue = dema ( (struct dema **) & _state.value .value .ta_state);
+            break;
+            case Tema :
+               retValue = tema ( (struct tema **) & _state.value .value .ta_state);
+            break;
+            case Trima :
+               retValue = trima ( (struct trima **) & _state.value .value .ta_state);
+            break;
+            case Kama :
+               retValue = kama ( (struct kama **) & _state.value .value .ta_state);
+            break;
+            case Mama :
+               retValue = mama ( (struct mama **) & _state.value .value .ta_state);
+            break;
+            case T3 :
+               retValue = t3 ( (struct t3 **) & _state.value .value .ta_state);
+            break;
+            default:
+               retValue = RetCode.BadParam ;
+         }
       }
       if (retValue != RetCode.Success )
          return retValue;
@@ -28995,6 +29026,7 @@ public class Core {
       double optInAcceleration,
       double optInMaximum )
    {
+      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInAcceleration == (-4e+37) )
@@ -29010,29 +29042,129 @@ public class Core {
       _state.value .value .optInAcceleration = optInAcceleration;
       _state.value .value .optInMaximum = optInMaximum;
       _state.value .value .mem_size = sarLookback (optInAcceleration, optInMaximum );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SAR_Data));
-      else
-         _state.value .value .memory = NULL;
-      return RetCode.Success ;
+      _state.value .value .memory = NULL;
+      if( optInAcceleration > optInMaximum )
+         _state.value .value .optInAcceleration = optInMaximum;
+      retCode = minusDM ( (struct minusDM **) & _state.value .value .stateMINUS_DM, 1 );
+      return retCode;
    }
    public int sarState( struct TA_sar_State* _state,
       double inHigh,
       double inLow,
       double *outReal )
    {
+      TA_RetCode retCode;
+      double ep_temp;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         return RetCode.NeedMoreData ; }
+      if( _state.value .mem_index <= 2)
+      {
+         if( ( _state.value .mem_index == 1) )
+         {
+            _state.value .af = _state.value .optInAcceleration;
+            _state.value .newHigh = inHigh;
+            _state.value .newLow = inLow;
+         }
+         retCode = minusDM ( (struct minusDM *) _state.value .stateMINUS_DM, inHigh, inLow, &ep_temp );
+         if (retCode != RetCode.Success ) return retCode;
+         if (ep_temp > 0)
+         {
+            _state.value .isLong = 0;
+            _state.value .ep = inLow;
+            _state.value .sar = _state.value .newHigh;
+         } else {
+            _state.value .isLong = 1;
+            _state.value .ep = inHigh;
+            _state.value .sar = _state.value .newLow;
+         }
+         _state.value .newHigh = inHigh;
+         _state.value .newLow = inLow;
+      }
+      _state.value .prevLow = _state.value .newLow;
+      _state.value .prevHigh = _state.value .newHigh;
+      _state.value .newLow = inLow;
+      _state.value .newHigh = inHigh;
+      if( _state.value .isLong == 1 )
+      {
+         if( _state.value .newLow <= _state.value .sar )
+         {
+            _state.value .isLong = 0;
+            _state.value .sar = _state.value .ep;
+            if( _state.value .sar < _state.value .prevHigh )
+               _state.value .sar = _state.value .prevHigh;
+            if( _state.value .sar < _state.value .newHigh )
+               _state.value .sar = _state.value .newHigh;
+            outReal.value = _state.value .sar;
+            _state.value .af = _state.value .optInAcceleration;
+            _state.value .ep = _state.value .newLow;
+            _state.value .sar = _state.value .sar + _state.value .af * ( _state.value .ep - _state.value .sar);
+            if( _state.value .sar < _state.value .prevHigh )
+               _state.value .sar = _state.value .prevHigh;
+            if( _state.value .sar < _state.value .newHigh )
+               _state.value .sar = _state.value .newHigh;
+         }
+         else
+         {
+            outReal.value = _state.value .sar;
+            if( _state.value .newHigh > _state.value .ep )
+            {
+               _state.value .ep = _state.value .newHigh;
+               _state.value .af += _state.value .optInAcceleration;
+               if( _state.value .af > _state.value .optInMaximum )
+                  _state.value .af = _state.value .optInMaximum;
+            }
+            _state.value .sar = _state.value .sar + _state.value .af * ( _state.value .ep - _state.value .sar);
+            if( _state.value .sar > _state.value .prevLow )
+               _state.value .sar = _state.value .prevLow;
+            if( _state.value .sar > _state.value .newLow )
+               _state.value .sar = _state.value .newLow;
+         }
+      }
+      else
+      {
+         if( _state.value .newHigh >= _state.value .sar )
+         {
+            _state.value .isLong = 1;
+            _state.value .sar = _state.value .ep;
+            if( _state.value .sar > _state.value .prevLow )
+               _state.value .sar = _state.value .prevLow;
+            if( _state.value .sar > _state.value .newLow )
+               _state.value .sar = _state.value .newLow;
+            outReal.value = _state.value .sar;
+            _state.value .af = _state.value .optInAcceleration;
+            _state.value .ep = _state.value .newHigh;
+            _state.value .sar = _state.value .sar + _state.value .af * ( _state.value .ep - _state.value .sar);
+            if( _state.value .sar > _state.value .prevLow )
+               _state.value .sar = _state.value .prevLow;
+            if( _state.value .sar > _state.value .newLow )
+               _state.value .sar = _state.value .newLow;
+         }
+         else
+         {
+            outReal.value = _state.value .sar;
+            if( _state.value .newLow < _state.value .ep )
+            {
+               _state.value .ep = _state.value .newLow;
+               _state.value .af += _state.value .optInAcceleration;
+               if( _state.value .af > _state.value .optInMaximum )
+                  _state.value .af = _state.value .optInMaximum;
+            }
+            _state.value .sar = _state.value .sar + _state.value .af * ( _state.value .ep - _state.value .sar);
+            if( _state.value .sar < _state.value .prevHigh )
+               _state.value .sar = _state.value .prevHigh;
+            if( _state.value .sar < _state.value .newHigh )
+               _state.value .sar = _state.value .newHigh;
+         }
+      }
       return RetCode.Success ;
    }
    public int sarStateFree( struct TA_sar_State** _state )
    {
+      TA_RetCode retCode;
+      retCode = minusDM ( (struct minusDM **) & _state.value .value .stateMINUS_DM );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -29465,6 +29597,7 @@ public class Core {
       double optInAccelerationShort,
       double optInAccelerationMaxShort )
    {
+      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInStartValue == (-4e+37) )
@@ -29510,10 +29643,21 @@ public class Core {
       _state.value .value .optInAccelerationShort = optInAccelerationShort;
       _state.value .value .optInAccelerationMaxShort = optInAccelerationMaxShort;
       _state.value .value .mem_size = sarExtLookback (optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_SAREXT_Data));
+      _state.value .value .memory = NULL;
+      _state.value .value .afLong = optInAccelerationInitLong;
+      _state.value .value .afShort = optInAccelerationInitShort;
+      if( afLong > optInAccelerationMaxLong )
+         _state.value .value .afLong = _state.value .value .optInAccelerationInitLong = optInAccelerationMaxLong;
+      if( optInAccelerationLong > optInAccelerationMaxLong )
+         _state.value .value .optInAccelerationLong = optInAccelerationMaxLong;
+      if( afShort > optInAccelerationMaxShort)
+         _state.value .value .afShort = _state.value .value .optInAccelerationInitShort = optInAccelerationMaxShort;
+      if( optInAccelerationShort > optInAccelerationMaxShort )
+         _state.value .value .optInAccelerationShort = optInAccelerationMaxShort;
+      if(optInStartValue == 0)
+         return minusDM ( (struct minusDM **) & _state.value .value .stateMINUS_DM, 1 );
       else
-         _state.value .value .memory = NULL;
+         _state.value .value .stateMINUS_DM = NULL;
       return RetCode.Success ;
    }
    public int sarExtState( struct TA_sarExt_State* _state,
@@ -29521,18 +29665,140 @@ public class Core {
       double inLow,
       double *outReal )
    {
+      TA_RetCode retCode;
+      double ep_temp;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         return RetCode.NeedMoreData ; }
+      if( _state.value .mem_index <= 2)
+      {
+         if( ( _state.value .mem_index == 1) )
+         {
+            _state.value .newHigh = inHigh;
+            _state.value .newLow = inLow;
+         }
+         if( _state.value .optInStartValue == 0)
+         {
+            retCode = minusDM ( (struct minusDM *) _state.value .stateMINUS_DM, inHigh, inLow, &ep_temp );
+            if (retCode != RetCode.Success ) return retCode;
+            _state.value .isLong = (ep_temp > 0)?0:1;
+         } else
+            _state.value .isLong = (optInStartValue > 0)?1:0;
+         if(optInStartValue == 0)
+         {
+            if ( _state.value .isLong == 0)
+            {
+               _state.value .ep = inLow;
+               _state.value .sar = _state.value .newHigh;
+            } else {
+               _state.value .ep = inHigh;
+               _state.value .sar = _state.value .newLow;
+            }
+         } else
+            if ( _state.value .optInStartValue > 0 )
+         {
+            _state.value .ep = inHigh;
+            _state.value .sar = _state.value .optInStartValue;
+         }
+         else
+         {
+            _state.value .ep = inLow;
+            _state.value .sar = Math.abs ( _state.value .optInStartValue);
+         }
+         _state.value .newHigh = inHigh;
+         _state.value .newLow = inLow;
+      }
+      _state.value .prevLow = _state.value .newLow;
+      _state.value .prevHigh = _state.value .newHigh;
+      _state.value .newLow = inLow;
+      _state.value .newHigh = inHigh;
+      if( _state.value .isLong == 1 )
+      {
+         if( _state.value .newLow <= _state.value .sar )
+         {
+            _state.value .isLong = 0;
+            _state.value .sar = _state.value .ep;
+            if( _state.value .sar < _state.value .prevHigh )
+               _state.value .sar = _state.value .prevHigh;
+            if( _state.value .sar < _state.value .newHigh )
+               _state.value .sar = _state.value .newHigh;
+            if( _state.value .optInOffsetOnReverse != 0.0 )
+               _state.value .sar += _state.value .sar * _state.value .optInOffsetOnReverse;
+            outReal.value = - _state.value .sar;
+            _state.value .afShort = _state.value .optInAccelerationInitShort;
+            _state.value .ep = _state.value .newLow;
+            _state.value .sar = _state.value .sar + _state.value .afShort * ( _state.value .ep - _state.value .sar);
+            if( _state.value .sar < _state.value .prevHigh )
+               _state.value .sar = _state.value .prevHigh;
+            if( _state.value .sar < _state.value .newHigh )
+               _state.value .sar = _state.value .newHigh;
+         }
+         else
+         {
+            outReal.value = _state.value .sar;
+            if( _state.value .newHigh > _state.value .ep )
+            {
+               _state.value .ep = _state.value .newHigh;
+               _state.value .afLong += _state.value .optInAccelerationLong;
+               if( _state.value .afLong > _state.value .optInAccelerationMaxLong )
+                  _state.value .afLong = _state.value .optInAccelerationMaxLong;
+            }
+            _state.value .sar = _state.value .sar + _state.value .afLong * ( _state.value .ep - _state.value .sar);
+            if( _state.value .sar > _state.value .prevLow )
+               _state.value .sar = _state.value .prevLow;
+            if( _state.value .sar > _state.value .newLow )
+               _state.value .sar = _state.value .newLow;
+         }
+      }
+      else
+      {
+         if( _state.value .newHigh >= _state.value .sar )
+         {
+            _state.value .isLong = 1;
+            _state.value .sar = _state.value .ep;
+            if( _state.value .sar > _state.value .prevLow )
+               _state.value .sar = _state.value .prevLow;
+            if( _state.value .sar > _state.value .newLow )
+               _state.value .sar = _state.value .newLow;
+            if( _state.value .optInOffsetOnReverse != 0.0 )
+               _state.value .sar -= _state.value .sar * _state.value .optInOffsetOnReverse;
+            outReal.value = _state.value .sar;
+            _state.value .afLong = _state.value .optInAccelerationInitLong;
+            _state.value .ep = _state.value .newHigh;
+            _state.value .sar = _state.value .sar + _state.value .afLong * ( _state.value .ep - _state.value .sar);
+            if( _state.value .sar > _state.value .prevLow )
+               _state.value .sar = _state.value .prevLow;
+            if( _state.value .sar > _state.value .newLow )
+               _state.value .sar = _state.value .newLow;
+         }
+         else
+         {
+            outReal.value = - _state.value .sar;
+            if( _state.value .newLow < _state.value .ep )
+            {
+               _state.value .ep = _state.value .newLow;
+               _state.value .afShort += _state.value .optInAccelerationShort;
+               if( _state.value .afShort > _state.value .optInAccelerationMaxShort )
+                  _state.value .afShort = _state.value .optInAccelerationMaxShort;
+            }
+            _state.value .sar = _state.value .sar + _state.value .afShort * ( _state.value .ep - _state.value .sar);
+            if( _state.value .sar < _state.value .prevHigh )
+               _state.value .sar = _state.value .prevHigh;
+            if( _state.value .sar < _state.value .newHigh )
+               _state.value .sar = _state.value .newHigh;
+         }
+      }
       return RetCode.Success ;
    }
    public int sarExtStateFree( struct TA_sarExt_State** _state )
    {
+      if ( _state.value .value .optInStartValue == 0)
+      {
+         TA_RetCode retCode;
+         retCode = minusDM ( (struct minusDM **) & _state.value .value .stateMINUS_DM );
+         if (retCode != RetCode.Success ) return retCode;
+      }
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -31389,6 +31655,7 @@ public class Core {
       int optInFastD_Period,
       MAType optInFastD_MAType )
    {
+      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -31410,10 +31677,11 @@ public class Core {
       _state.value .value .optInFastD_Period = optInFastD_Period;
       _state.value .value .optInFastD_MAType = optInFastD_MAType;
       _state.value .value .mem_size = stochRsiLookback (optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_STOCHRSI_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
+      retCode = rsi ( (struct rsi **) & _state.value .value .stateRSI, optInTimePeriod );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = stochF ( (struct stochF **) & _state.value .value .stateSTOCHF, optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+      if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
    public int stochRsiState( struct TA_stochRsi_State* _state,
@@ -31421,17 +31689,25 @@ public class Core {
       double *outFastK,
       double *outFastD )
    {
+      TA_RetCode retCode;
+      double tempReal;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      retCode = rsi ( (struct rsi *) _state.value .stateRSI, inReal, &tempReal );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = stochF ( (struct stochF *) _state.value .stateSTOCHF, tempReal, tempReal, tempReal, outFastK, outFastD );
+      if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
    public int stochRsiStateFree( struct TA_stochRsi_State** _state )
    {
+      TA_RetCode retCode;
+      retCode = rsi ( (struct rsi **) & _state.value .value .stateRSI );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = stochF ( (struct stochF **) & _state.value .value .stateSTOCHF );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {

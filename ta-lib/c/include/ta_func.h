@@ -107,6 +107,9 @@ struct TA_ACCBANDS_State {
                          size_t mem_size;
                          size_t mem_index;
                          struct TA_ACCBANDS_Data* memory;
+                         void*        stateSMA1;
+                         void*        stateSMA2;
+                         void*        stateSMA3;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
 
@@ -13479,6 +13482,15 @@ struct TA_SAR_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_SAR_Data* memory;
+                    double       newHigh;
+                    double       newLow;
+                    double       prevHigh;
+                    double       prevLow;
+                    int          isLong;
+                    void*        stateMINUS_DM;
+                    double       sar;
+                    double       ep;
+                    double       af;
                     double        optInAcceleration; /* From 0 to TA_REAL_MAX */
                     double        optInMaximum; /* From 0 to TA_REAL_MAX */
                     };
@@ -13622,6 +13634,16 @@ struct TA_SAREXT_State {
                        size_t mem_size;
                        size_t mem_index;
                        struct TA_SAREXT_Data* memory;
+                       double       newHigh;
+                       double       newLow;
+                       double       prevHigh;
+                       double       prevLow;
+                       int          isLong;
+                       void*        stateMINUS_DM;
+                       double       sar;
+                       double       ep;
+                       double       afLong;
+                       double       afShort;
                        double        optInStartValue; /* From TA_REAL_MIN to TA_REAL_MAX */
                        double        optInOffsetOnReverse; /* From 0 to TA_REAL_MAX */
                        double        optInAccelerationInitLong; /* From 0 to TA_REAL_MAX */

@@ -354,7 +354,8 @@
 
 {
    /* insert local variable here */
-
+TA_RetCode retCode;
+#define TA_ACCBANDS_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -382,7 +383,12 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
-
+   retCode = FUNCTION_CALL_STATE_INIT(SMA)( (struct TA_SMA_State**) &STATE_P.stateSMA1, optInTimePeriod );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_INIT(SMA)( (struct TA_SMA_State**) &STATE_P.stateSMA2, optInTimePeriod );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_INIT(SMA)( (struct TA_SMA_State**) &STATE_P.stateSMA3, optInTimePeriod );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -417,7 +423,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+TA_RetCode retCode1, retCode2, retCode3;
+double tempReal,tempReal1,tempReal2;
+#define TA_ACCBANDS_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -456,8 +464,24 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   tempReal = inHigh+inLow;
+   if( !TA_IS_ZERO(tempReal) )
+    {
+       tempReal = 4*(inHigh-inLow)/tempReal;
+       tempReal1 = inHigh*(1+tempReal);
+       tempReal2 = inLow*(1-tempReal);
+    }
+    else
+    {
+       tempReal1 = inHigh;
+       tempReal2 = inLow;
+    }
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   retCode1 = FUNCTION_CALL_STATE(SMA)( (struct TA_SMA_State*) STATE.stateSMA1, inClose, outRealMiddleBand );
+   retCode2 = FUNCTION_CALL_STATE(SMA)( (struct TA_SMA_State*) STATE.stateSMA2, tempReal1, outRealUpperBand );
+   retCode3 = FUNCTION_CALL_STATE(SMA)( (struct TA_SMA_State*) STATE.stateSMA3, tempReal2, outRealLowerBand );
+
+   return retCode1 | retCode2 | retCode3;
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -475,6 +499,13 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+   TA_RetCode retCode;
+   retCode = FUNCTION_CALL_STATE_FREE(SMA)( (struct TA_SMA_State**) &STATE_P.stateSMA1 );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_FREE(SMA)( (struct TA_SMA_State**) &STATE_P.stateSMA2 );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_FREE(SMA)( (struct TA_SMA_State**) &STATE_P.stateSMA3 );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
