@@ -606,7 +606,23 @@ static const TA_OptInputParameterInfo *TA_STOCHF_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_STOCHF_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_STOCHF_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "lowest", 0 };
+const TA_InputParameterInfo TA_STOCHF_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "highest", 0 };
+const TA_InputParameterInfo TA_STOCHF_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "lowest_exp", 0 };
+const TA_InputParameterInfo TA_STOCHF_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "highest_exp", 0 };
+const TA_InputParameterInfo TA_STOCHF_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Pointer, "stateMA1", 0 };
+static const TA_InputParameterInfo *TA_STOCHF_StructParams[] = {
+    &TA_STOCHF_DEF_UI_STRUCT_PARAM_1,
+    &TA_STOCHF_DEF_UI_STRUCT_PARAM_2,
+    &TA_STOCHF_DEF_UI_STRUCT_PARAM_3,
+    &TA_STOCHF_DEF_UI_STRUCT_PARAM_4,
+    &TA_STOCHF_DEF_UI_STRUCT_PARAM_5,
+    NULL };
 
 DEF_FUNCTION( STOCHF,                     /* name */
               TA_GroupId_MomentumIndicators, /* groupId */
@@ -639,7 +655,14 @@ static const TA_OptInputParameterInfo *TA_STOCHRSI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_STOCHRSI_StructParams[] = { NULL };
+const TA_InputParameterInfo TA_STOCHRSI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "stateRSI", 0 };
+const TA_InputParameterInfo TA_STOCHRSI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "stateSTOCHF", 0 };
+static const TA_InputParameterInfo *TA_STOCHRSI_StructParams[] = {
+    &TA_STOCHRSI_DEF_UI_STRUCT_PARAM_1,
+    &TA_STOCHRSI_DEF_UI_STRUCT_PARAM_2,
+    NULL };
 
 DEF_FUNCTION( STOCHRSI,                     /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */

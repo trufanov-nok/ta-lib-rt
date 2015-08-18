@@ -516,7 +516,8 @@
 
 {
    /* insert local variable here */
-
+TA_RetCode retCode;
+#define TA_STOCHF_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -559,6 +560,13 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
+        MEM_SIZE_P = (optInFastK_Period - 1);
+      if (MEM_SIZE_P > 0)
+          MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_STOCHF_Data));
+      else MEM_P = NULL;
+
+        retCode = FUNCTION_CALL_STATE_INIT(MA)( (struct TA_MA_State**) &STATE_P.stateMA1, optInFastD_Period, optInFastD_MAType );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
@@ -591,7 +599,10 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+        TA_RetCode retCode;
+        double temp;
+        unsigned int j,i,p;
+#define TA_STOCHF_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -627,7 +638,78 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                if (FIRST_LAUNCH)
+                   {
+                     STATE.lowest = inLow;
+                     STATE.highest = inHigh;
+                     STATE.lowest_exp = MEM_SIZE;
+                     STATE.highest_exp = MEM_SIZE;
+                   }
 
+
+                    if (--STATE.lowest_exp <= 0)
+                    {
+                        STATE.lowest = inLow;
+                        STATE.lowest_exp = MEM_SIZE;
+                        j = STATE.mem_index-1;
+                        p = MEM_SIZE;
+                        for (i = 0; i < MEM_SIZE; i++)
+                        {
+                            temp = MEM_IDX_NS( (--j) % MEM_SIZE, inLow);
+                            p--;
+                            if (temp < STATE.lowest)
+                            {
+                                STATE.lowest = temp;
+                                STATE.lowest_exp = p;
+                            }
+                        }
+                    } else
+                        if (inLow <= STATE.lowest)
+                        {
+                            STATE.lowest = inLow;
+                            STATE.lowest_exp = MEM_SIZE;
+                        }
+
+
+                    if (--STATE.highest_exp <= 0)
+                    {
+                        STATE.highest = inHigh;
+                        STATE.highest_exp = MEM_SIZE;
+                        j = STATE.mem_index-1;
+                        p = MEM_SIZE;
+                        for ( i = 0; i < MEM_SIZE; i++)
+                        {
+                            temp = MEM_IDX_NS( (--j) % MEM_SIZE, inHigh);
+                            p--;
+                            if (temp > STATE.highest)
+                            {
+                                STATE.highest = temp;
+                                STATE.highest_exp = p;
+                            }
+                        }
+                    } else
+                        if (inHigh >= STATE.highest)
+                        {
+                            STATE.highest = inHigh;
+                            STATE.highest_exp = MEM_SIZE;
+                        }
+
+   PUSH_TO_MEM(inHigh,inHigh);
+   PUSH_TO_MEM(inLow,inLow);
+
+   if (NEED_MORE_DATA)
+       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+   temp = (STATE.highest - STATE.lowest)/100.0;
+   if( temp != 0.0 )
+     temp = (inClose-STATE.lowest)/temp;
+   else
+     temp = 0.0;
+
+   VALUE_HANDLE_DEREF(outFastK) = temp;
+   retCode = FUNCTION_CALL_STATE(MA)( (struct TA_MA_State*)  STATE.stateMA1, temp, &temp );
+   if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   VALUE_HANDLE_DEREF(outFastD) = temp;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -646,6 +728,9 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+        TA_RetCode retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(MA)( (struct TA_MA_State**) &STATE_P.stateMA1 );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

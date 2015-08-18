@@ -851,29 +851,29 @@ static ErrorNumber do_test_state( const TA_History *history,
                           gBuffer[0].out1 );
       break;
    case TEST_STOCHF:
-//      retCode = TA_STOCHF_StateTest( test->startIdx,
-//                           test->endIdx,
-//                           gBuffer[0].in,
-//                           gBuffer[1].in,
-//                           gBuffer[2].in,
-//                           test->optInPeriod_0,
-//                           test->optInPeriod_1,
-//                           (TA_MAType)test->optInMAType_1,
-//                           &outBegIdx, &outNbElement,
-//                           gBuffer[0].out0,
-//                           gBuffer[0].out1 );
+      retCode = TA_STOCHF_StateTest( test->startIdx,
+                           test->endIdx,
+                           gBuffer[0].in,
+                           gBuffer[1].in,
+                           gBuffer[2].in,
+                           test->optInPeriod_0,
+                           test->optInPeriod_1,
+                           (TA_MAType)test->optInMAType_1,
+                           &outBegIdx, &outNbElement,
+                           gBuffer[0].out0,
+                           gBuffer[0].out1 );
       break;
    case TEST_STOCHRSI:
-//      retCode = TA_STOCHRSI_StateTest( test->startIdx,
-//                             test->endIdx,
-//                             gBuffer[2].in,
-//                             test->optInPeriod_0,
-//                             test->optInPeriod_1,
-//                             test->optInPeriod_2,
-//                             (TA_MAType)test->optInMAType_2,
-//                             &outBegIdx, &outNbElement,
-//                             gBuffer[0].out0,
-//                             gBuffer[0].out1 );
+      retCode = TA_STOCHRSI_StateTest( test->startIdx,
+                             test->endIdx,
+                             gBuffer[2].in,
+                             test->optInPeriod_0,
+                             test->optInPeriod_1,
+                             test->optInPeriod_2,
+                             (TA_MAType)test->optInMAType_2,
+                             &outBegIdx, &outNbElement,
+                             gBuffer[0].out0,
+                             gBuffer[0].out1 );
       break;
    }
 

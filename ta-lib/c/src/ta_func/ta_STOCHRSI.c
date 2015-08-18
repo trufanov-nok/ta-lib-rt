@@ -384,7 +384,8 @@
 
 {
    /* insert local variable here */
-
+TA_RetCode retCode;
+#define TA_STOCHRSI_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -434,6 +435,10 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
+  retCode = FUNCTION_CALL_STATE_INIT(RSI)( (struct TA_RSI_State**) &STATE_P.stateRSI, optInTimePeriod );
+  if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+  retCode = FUNCTION_CALL_STATE_INIT(STOCHF)( (struct TA_STOCHF_State**) &STATE_P.stateSTOCHF, optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+  if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
@@ -460,7 +465,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+        TA_RetCode retCode;
+        double tempReal;
+        #define TA_STOCHRSI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -490,6 +497,10 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   retCode = FUNCTION_CALL_STATE(RSI)( (struct TA_RSI_State*) STATE.stateRSI, inReal, &tempReal );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE(STOCHF)( (struct TA_STOCHF_State*) STATE.stateSTOCHF, tempReal, tempReal, tempReal, outFastK, outFastD );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -509,6 +520,11 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+        TA_RetCode retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(RSI)( (struct TA_RSI_State**) &STATE_P.stateRSI );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(STOCHF)( (struct TA_STOCHF_State**) &STATE_P.stateSTOCHF );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

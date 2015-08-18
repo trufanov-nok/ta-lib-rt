@@ -31040,6 +31040,7 @@ public class Core {
       int optInFastD_Period,
       MAType optInFastD_MAType )
    {
+      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
@@ -31056,10 +31057,13 @@ public class Core {
       _state.value .value .optInFastD_Period = optInFastD_Period;
       _state.value .value .optInFastD_MAType = optInFastD_MAType;
       _state.value .value .mem_size = stochFLookback (optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+      _state.value .value .memory = NULL;
+      _state.value .value .mem_size = (optInFastK_Period - 1);
       if ( _state.value .value .mem_size > 0)
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_STOCHF_Data));
-      else
-         _state.value .value .memory = NULL;
+      else _state.value .value .memory = NULL;
+      retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1, optInFastD_Period, optInFastD_MAType );
+      if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
    public int stochFState( struct TA_stochF_State* _state,
@@ -31069,19 +31073,84 @@ public class Core {
       double *outFastK,
       double *outFastD )
    {
+      TA_RetCode retCode;
+      double temp;
+      unsigned int j,i,p;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .lowest = inLow;
+         _state.value .highest = inHigh;
+         _state.value .lowest_exp = _state.value .mem_size ;
+         _state.value .highest_exp = _state.value .mem_size ;
+      }
+      if (-- _state.value .lowest_exp <= 0)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .mem_size ;
+         j = _state.value .mem_index-1;
+         p = _state.value .mem_size ;
+         for (i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inLow ;
+            p--;
+            if (temp < _state.value .lowest)
+            {
+               _state.value .lowest = temp;
+               _state.value .lowest_exp = p;
+            }
+         }
+      } else
+         if (inLow <= _state.value .lowest)
+      {
+         _state.value .lowest = inLow;
+         _state.value .lowest_exp = _state.value .mem_size ;
+      }
+      if (-- _state.value .highest_exp <= 0)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .mem_size ;
+         j = _state.value .mem_index-1;
+         p = _state.value .mem_size ;
+         for ( i = 0; i < _state.value .mem_size ; i++)
+         {
+            temp = ( _state.value .memory+(--j) % _state.value .mem_size ).value .inHigh ;
+            p--;
+            if (temp > _state.value .highest)
+            {
+               _state.value .highest = temp;
+               _state.value .highest_exp = p;
+            }
+         }
+      } else
+         if (inHigh >= _state.value .highest)
+      {
+         _state.value .highest = inHigh;
+         _state.value .highest_exp = _state.value .mem_size ;
+      }
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      temp = ( _state.value .highest - _state.value .lowest)/100.0;
+      if( temp != 0.0 )
+         temp = (inClose- _state.value .lowest)/temp;
+      else
+         temp = 0.0;
+      outFastK.value = temp;
+      retCode = movingAverage ( (struct movingAverage *) _state.value .stateMA1, temp, &temp );
+      if( retCode != RetCode.Success ) return retCode;
+      outFastD.value = temp;
       return RetCode.Success ;
    }
    public int stochFStateFree( struct TA_stochF_State** _state )
    {
+      TA_RetCode retCode;
+      retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1 );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
