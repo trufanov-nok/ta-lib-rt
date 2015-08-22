@@ -603,6 +603,11 @@ TA_RetCode retCode;
         double temp;
         unsigned int j,i,p;
 #define TA_STOCHF_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+#define TA_FUNC_NO_RANGE_CHECK //(!inHigh||!inLow||!inClose) may be true when passed from STOCHRSI
+   if (!_state || !outFastK || !outFastD) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+   size_t _cur_idx = STATE.mem_index++;
+   if (MEM_SIZE > 0) _cur_idx %= MEM_SIZE;
+
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
