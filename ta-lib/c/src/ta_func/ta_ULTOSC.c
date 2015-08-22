@@ -389,6 +389,12 @@
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
+
+#ifndef TA_ULTOSC_STATE_CIRCBUF_DEFINED
+#define TA_ULTOSC_STATE_CIRCBUF_DEFINED
+DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
+#endif
+
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
@@ -414,6 +420,23 @@
 
 {
    /* insert local variable here */
+#define TA_ULTOSC_SUPPRESS_MEMORY_ALLOCATION
+
+   #define swap(x,y) \
+    { \
+       x = x ^ y; \
+       y = x ^ y; \
+       x = x ^ y; \
+    }
+
+   //sort optIns
+    if (optInTimePeriod1 < optInTimePeriod2) {
+        if (optInTimePeriod3 < optInTimePeriod1) swap(optInTimePeriod1, optInTimePeriod3);
+    } else {
+        if (optInTimePeriod2 < optInTimePeriod3) {swap(optInTimePeriod1, optInTimePeriod2); }
+        else swap(optInTimePeriod1, optInTimePeriod3);
+    }
+    if(optInTimePeriod3 < optInTimePeriod2) swap(optInTimePeriod2, optInTimePeriod3);
 
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -456,8 +479,10 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
-
-
+ CREATE_CIRCBUF_STRUCT(ULTOSC, periodA, double, optInTimePeriod3+1);
+ CREATE_CIRCBUF_STRUCT(ULTOSC, periodB, double, optInTimePeriod3+1);
+#undef swap
+// MEM_SIZE_P -= 1;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -485,6 +510,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+#define TA_ULTOSC_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+ double closeMinusTrueLow, trueRange, tempDouble;
+ int idx;
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -519,6 +547,77 @@
 
    /* insert state based TA dunc code here. */
 
+    if (FIRST_LAUNCH)
+     {
+       STATE.a1Total = 0;
+       STATE.a2Total = 0;
+       STATE.a3Total = 0;
+       STATE.b1Total = 0;
+       STATE.b2Total = 0;
+       STATE.b3Total = 0;
+       STATE.gap2 = STATE.optInTimePeriod3 - STATE.optInTimePeriod2;
+       STATE.gap1 = STATE.optInTimePeriod3 - STATE.optInTimePeriod1;
+       STATE.prevClose = inClose;
+       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+     }
+
+    closeMinusTrueLow = inClose - min( inLow, STATE.prevClose );
+    trueRange = inHigh - inLow;
+    tempDouble = std_fabs( STATE.prevClose - inHigh );
+    if( tempDouble > trueRange )
+        trueRange = tempDouble;
+    tempDouble = std_fabs( STATE.prevClose - inLow  );
+    if( tempDouble > trueRange )
+        trueRange = tempDouble;
+
+
+    STATE.a3Total += closeMinusTrueLow;
+    STATE.b3Total += trueRange;
+
+    if (STATE.mem_index-1 > STATE.gap2)
+    {
+        STATE.a2Total += closeMinusTrueLow;
+        STATE.b2Total += trueRange;
+    }
+
+    if (STATE.mem_index-1 > STATE.gap1)
+    {
+        STATE.a1Total += closeMinusTrueLow;
+        STATE.b1Total += trueRange;
+    }
+
+    if (!(NEED_MORE_DATA))
+    {
+        tempDouble = 0.0;
+        if( !TA_IS_ZERO(STATE.b1Total) ) tempDouble += 4.0*(STATE.a1Total/STATE.b1Total);
+        if( !TA_IS_ZERO(STATE.b2Total) ) tempDouble += 2.0*(STATE.a2Total/STATE.b2Total);
+        if( !TA_IS_ZERO(STATE.b3Total) ) tempDouble += STATE.a3Total/STATE.b3Total;
+
+        VALUE_HANDLE_DEREF(outReal) = 100.0 * (tempDouble / 7.0);
+
+        idx = (STATE.mem_index-1 - STATE.optInTimePeriod3) % (MEM_SIZE+1);
+        STATE.a3Total -= CIRCBUF_STRUCT_EL(ULTOSC, periodA, idx);
+        STATE.b3Total -= CIRCBUF_STRUCT_EL(ULTOSC, periodB, idx);
+
+        idx = (STATE.mem_index-1 - STATE.optInTimePeriod2) % (MEM_SIZE+1);
+        STATE.a2Total -= CIRCBUF_STRUCT_EL(ULTOSC, periodA, idx);
+        STATE.b2Total -= CIRCBUF_STRUCT_EL(ULTOSC, periodB, idx);
+
+        idx = (STATE.mem_index-1 - STATE.optInTimePeriod1) % (MEM_SIZE+1);
+        STATE.a1Total -= CIRCBUF_STRUCT_EL(ULTOSC, periodA, idx);
+        STATE.b1Total -= CIRCBUF_STRUCT_EL(ULTOSC, periodB, idx);
+}
+    CIRCBUF_STRUCT_CURRENT_EL(ULTOSC, periodA) = closeMinusTrueLow;
+    CIRCBUF_STRUCT_CURRENT_EL(ULTOSC, periodB) = trueRange;
+
+    CIRCBUF_STRUCT_NEXT( ULTOSC, periodA);
+    CIRCBUF_STRUCT_NEXT( ULTOSC, periodB);
+
+    STATE.prevClose = inClose;
+
+    if (NEED_MORE_DATA)
+    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -537,7 +636,8 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+   FREE_CIRCBUF_STRUCT(ULTOSC, periodA);
+   FREE_CIRCBUF_STRUCT(ULTOSC, periodB);
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -751,6 +851,10 @@
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)    = startIdx;
 /* Generated */    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */ }
+/* Generated */ #ifndef TA_ULTOSC_STATE_CIRCBUF_DEFINED
+/* Generated */ #define TA_ULTOSC_STATE_CIRCBUF_DEFINED
+/* Generated */ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
+/* Generated */ #endif
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib

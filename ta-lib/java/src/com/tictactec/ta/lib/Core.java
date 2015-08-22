@@ -29597,7 +29597,6 @@ public class Core {
       double optInAccelerationShort,
       double optInAccelerationMaxShort )
    {
-      TA_RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( optInStartValue == (-4e+37) )
@@ -29646,11 +29645,11 @@ public class Core {
       _state.value .value .memory = NULL;
       _state.value .value .afLong = optInAccelerationInitLong;
       _state.value .value .afShort = optInAccelerationInitShort;
-      if( afLong > optInAccelerationMaxLong )
+      if( optInAccelerationInitLong > optInAccelerationMaxLong )
          _state.value .value .afLong = _state.value .value .optInAccelerationInitLong = optInAccelerationMaxLong;
       if( optInAccelerationLong > optInAccelerationMaxLong )
          _state.value .value .optInAccelerationLong = optInAccelerationMaxLong;
-      if( afShort > optInAccelerationMaxShort)
+      if( optInAccelerationInitShort > optInAccelerationMaxShort)
          _state.value .value .afShort = _state.value .value .optInAccelerationInitShort = optInAccelerationMaxShort;
       if( optInAccelerationShort > optInAccelerationMaxShort )
          _state.value .value .optInAccelerationShort = optInAccelerationMaxShort;
@@ -29684,8 +29683,8 @@ public class Core {
             if (retCode != RetCode.Success ) return retCode;
             _state.value .isLong = (ep_temp > 0)?0:1;
          } else
-            _state.value .isLong = (optInStartValue > 0)?1:0;
-         if(optInStartValue == 0)
+            _state.value .isLong = ( _state.value .optInStartValue > 0)?1:0;
+         if( _state.value .optInStartValue == 0)
          {
             if ( _state.value .isLong == 0)
             {
@@ -33984,11 +33983,19 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
+   struct TA_ULTOSC_STATE_CIRCBUF { int idx; double* circbuf; int size; };
    public int ultOscStateInit( struct TA_ultOsc_State** _state,
       int optInTimePeriod1,
       int optInTimePeriod2,
       int optInTimePeriod3 )
    {
+      if (optInTimePeriod1 < optInTimePeriod2) {
+         if (optInTimePeriod3 < optInTimePeriod1) { optInTimePeriod1 = optInTimePeriod1 ^ optInTimePeriod3; optInTimePeriod3 = optInTimePeriod1 ^ optInTimePeriod3; optInTimePeriod1 = optInTimePeriod1 ^ optInTimePeriod3; } ;
+      } else {
+         if (optInTimePeriod2 < optInTimePeriod3) { { optInTimePeriod1 = optInTimePeriod1 ^ optInTimePeriod2; optInTimePeriod2 = optInTimePeriod1 ^ optInTimePeriod2; optInTimePeriod1 = optInTimePeriod1 ^ optInTimePeriod2; } ; }
+         else { optInTimePeriod1 = optInTimePeriod1 ^ optInTimePeriod3; optInTimePeriod3 = optInTimePeriod1 ^ optInTimePeriod3; optInTimePeriod1 = optInTimePeriod1 ^ optInTimePeriod3; } ;
+      }
+      if(optInTimePeriod3 < optInTimePeriod2) { optInTimePeriod2 = optInTimePeriod2 ^ optInTimePeriod3; optInTimePeriod3 = optInTimePeriod2 ^ optInTimePeriod3; optInTimePeriod2 = optInTimePeriod2 ^ optInTimePeriod3; } ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod1 == ( Integer.MIN_VALUE ) )
@@ -34009,10 +34016,9 @@ public class Core {
       _state.value .value .optInTimePeriod2 = optInTimePeriod2;
       _state.value .value .optInTimePeriod3 = optInTimePeriod3;
       _state.value .value .mem_size = ultOscLookback (optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ULTOSC_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
+      { _state.value .value .periodA = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodA == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodA; buf->idx = 0; buf->size = optInTimePeriod1; buf->circbuf = calloc(optInTimePeriod1, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
+      { _state.value .value .periodB = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodB == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; buf->idx = 0; buf->size = optInTimePeriod1; buf->circbuf = calloc(optInTimePeriod1, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
       return RetCode.Success ;
    }
    public int ultOscState( struct TA_ultOsc_State* _state,
@@ -34021,19 +34027,79 @@ public class Core {
       double inClose,
       double *outReal )
    {
+      double closeMinusTrueLow, trueRange, tempDouble;
+      int idx;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .a1Total = 0;
+         _state.value .a2Total = 0;
+         _state.value .a3Total = 0;
+         _state.value .b1Total = 0;
+         _state.value .b2Total = 0;
+         _state.value .b3Total = 0;
+         _state.value .gap2 = _state.value .optInTimePeriod3 - _state.value .optInTimePeriod2;
+         _state.value .gap1 = _state.value .optInTimePeriod3 - _state.value .optInTimePeriod1;
+         _state.value .prevClose = inClose;
+         return RetCode.NeedMoreData ;
+      }
+      closeMinusTrueLow = inClose - (((inLow) < ( _state.value .prevClose)) ? (inLow) : ( _state.value .prevClose)) ;
+      trueRange = inHigh - inLow;
+      tempDouble = Math.abs ( _state.value .prevClose - inHigh );
+      if( tempDouble > trueRange )
+         trueRange = tempDouble;
+      tempDouble = Math.abs ( _state.value .prevClose - inLow );
+      if( tempDouble > trueRange )
+         trueRange = tempDouble;
+      _state.value .a3Total += closeMinusTrueLow;
+      _state.value .b3Total += trueRange;
+      if ( _state.value .mem_index > _state.value .gap2)
+      {
+         _state.value .a2Total += closeMinusTrueLow;
+         _state.value .b2Total += trueRange;
+      }
+      if ( _state.value .mem_index > _state.value .gap1)
+      {
+         _state.value .a1Total += closeMinusTrueLow;
+         _state.value .b1Total += trueRange;
+         tempDouble = 0.0;
+         if( ! (((- (0.00000000000001) )< _state.value .b1Total)&&( _state.value .b1Total< (0.00000000000001) )) ) tempDouble += 4.0*( _state.value .a1Total/ _state.value .b1Total);
+         if( ! (((- (0.00000000000001) )< _state.value .b2Total)&&( _state.value .b2Total< (0.00000000000001) )) ) tempDouble += 2.0*( _state.value .a2Total/ _state.value .b2Total);
+         if( ! (((- (0.00000000000001) )< _state.value .b3Total)&&( _state.value .b3Total< (0.00000000000001) )) ) tempDouble += _state.value .a3Total/ _state.value .b3Total;
+         outReal.value = 100.0 * (tempDouble / 7.0);
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .a3Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->circbuf + ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->idx )) ;
+         _state.value .b3Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf + ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->idx )) ;
+      }
+      if ( _state.value .optInTimePeriod2 < (int) _state.value .mem_index-1)
+      {
+         idx = ( _state.value .mem_index-1 - _state.value .optInTimePeriod2) % _state.value .mem_size ;
+         _state.value .a2Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->circbuf +idx)) ;
+         _state.value .b2Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf +idx)) ;
+      }
+      if ( _state.value .optInTimePeriod1 < (int) _state.value .mem_index-1)
+      {
+         idx = ( _state.value .mem_index-1 - _state.value .optInTimePeriod1) % _state.value .mem_size ;
+         _state.value .a1Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->circbuf +idx)) ;
+         _state.value .b1Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf +idx)) ;
+      }
+      (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->circbuf + ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->idx )) = closeMinusTrueLow;
+      (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf + ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->idx )) = trueRange;
+      { struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
+      { struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+         return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int ultOscStateFree( struct TA_ultOsc_State** _state )
    {
+      { struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodA; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .periodA = NULL; } } ;
+      { struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .periodB = NULL; } } ;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {

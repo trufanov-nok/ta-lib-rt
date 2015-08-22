@@ -546,15 +546,15 @@ static TA_RetCode do_call_state( const TA_Test *test,
       break;
 
    case TA_ULTOSC_TEST:
-//      retCode = TA_ULTOSC_StateTest( test->startIdx,
-//                           test->endIdx,
-//                           high, low, close,
-//                           test->optInTimePeriod1,
-//                           test->optInTimePeriod2,
-//                           test->optInTimePeriod3,
-//                           outBegIdx,
-//                           outNbElement,
-//                           output );
+      retCode = TA_ULTOSC_StateTest( test->startIdx,
+                           test->endIdx,
+                           high, low, close,
+                           test->optInTimePeriod1,
+                           test->optInTimePeriod2,
+                           test->optInTimePeriod3,
+                           outBegIdx,
+                           outNbElement,
+                           output );
       break;
 
    case TA_ACCBANDS_TEST:

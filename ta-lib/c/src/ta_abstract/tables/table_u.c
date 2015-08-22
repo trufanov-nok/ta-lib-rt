@@ -111,7 +111,41 @@ static const TA_OptInputParameterInfo *TA_ULTOSC_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_ULTOSC_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "periodA", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "periodB", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "a1Total", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "a2Total", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Real, "a3Total", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Real, "b1Total", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Real, "b2Total", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Real, "b3Total", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Real, "prevClose", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Real, "gap2", 0 };
+const TA_InputParameterInfo TA_ULTOSC_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Real, "gap1", 0 };
+static const TA_InputParameterInfo *TA_ULTOSC_StructParams[] = {
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_1,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_2,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_4,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_5,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_6,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_7,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_8,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_9,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_10,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_11,
+    &TA_ULTOSC_DEF_UI_STRUCT_PARAM_12,
+    NULL };
 
 DEF_FUNCTION( ULTOSC,                         /* name */
               TA_GroupId_MomentumIndicators,  /* groupId */

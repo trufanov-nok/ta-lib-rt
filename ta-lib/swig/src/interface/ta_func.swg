@@ -7857,6 +7857,17 @@ struct TA_ULTOSC_State {
                        size_t mem_size;
                        size_t mem_index;
                        struct TA_ULTOSC_Data* memory;
+                       void*        periodA;
+                       void*        periodB;
+                       double       a1Total;
+                       double       a2Total;
+                       double       a3Total;
+                       double       b1Total;
+                       double       b2Total;
+                       double       b3Total;
+                       double       prevClose;
+                       double       gap2;
+                       double       gap1;
                        int           optInTimePeriod1; /* From 1 to 100000 */
                        int           optInTimePeriod2; /* From 1 to 100000 */
                        int           optInTimePeriod3; /* From 1 to 100000 */
