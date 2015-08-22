@@ -3320,6 +3320,7 @@ public class Core {
       double optInNbDevDn,
       MAType optInMAType )
    {
+      RetCode retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -3341,10 +3342,11 @@ public class Core {
       _state.value .value .optInNbDevDn = optInNbDevDn;
       _state.value .value .optInMAType = optInMAType;
       _state.value .value .mem_size = bbandsLookback (optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType );
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_BBANDS_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
+      retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA, optInTimePeriod, optInMAType );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = stdDev ( (struct stdDev **) & _state.value .value .stateSTDDEV, optInTimePeriod, 1.0 );
+      if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
    public int bbandsState( struct TA_bbands_State* _state,
@@ -3353,17 +3355,52 @@ public class Core {
       double *outRealMiddleBand,
       double *outRealLowerBand )
    {
+      RetCode retCode;
+      double tempReal, tempReal2;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
-         return RetCode.NeedMoreData ; }
+      retCode = movingAverage ( (struct movingAverage *) _state.value .stateMA, inReal, &tempReal2 );
+      if (retCode != RetCode.Success && retCode != RetCode.NeedMoreData ) return retCode;
+      retCode = stdDev ( (struct stdDev *) _state.value .stateSTDDEV, tempReal2, &tempReal );
+      if (retCode != RetCode.Success ) return retCode;
+      outRealMiddleBand.value = tempReal2;
+      if( _state.value .optInNbDevUp == _state.value .optInNbDevDn )
+      {
+         if( _state.value .optInNbDevUp == 1.0 )
+         {
+            outRealUpperBand.value = tempReal2 + tempReal;
+            outRealLowerBand.value = tempReal2 - tempReal;
+         } else {
+            outRealUpperBand.value = tempReal2 + tempReal;
+            outRealLowerBand.value = tempReal2 - tempReal;
+         }
+      }
+      else if( _state.value .optInNbDevUp == 1.0 )
+      {
+         outRealUpperBand.value = tempReal2 + tempReal;
+         outRealLowerBand.value = tempReal2 - (tempReal * _state.value .optInNbDevDn);
+      }
+      else if( _state.value .optInNbDevDn == 1.0 )
+      {
+         outRealLowerBand.value = tempReal2 - tempReal;
+         outRealUpperBand.value = tempReal2 + (tempReal * _state.value .optInNbDevUp);
+      }
+      else
+      {
+         outRealUpperBand.value = tempReal2 + (tempReal * _state.value .optInNbDevUp);
+         outRealLowerBand.value = tempReal2 - (tempReal * _state.value .optInNbDevDn);
+      }
       return RetCode.Success ;
    }
    public int bbandsStateFree( struct TA_bbands_State** _state )
    {
+      TA_RetCode retCode;
+      retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = stdDev ( (struct stdDev **) & _state.value .value .stateSTDDEV );
+      if (retCode != RetCode.Success ) return retCode;
       if (_state == NULL)
          return RetCode.BadParam ;
       if ( _state.value != NULL) {
@@ -31341,8 +31378,7 @@ public class Core {
       TA_RetCode retCode;
       double temp;
       unsigned int j,i,p;
-      if (_state == NULL)
-         return RetCode.BadParam ;
+      if (!_state || !outFastK || !outFastD) return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
       if ( ( _state.value .mem_index == 1) )
@@ -31416,11 +31452,6 @@ public class Core {
       TA_RetCode retCode;
       retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1 );
       if (retCode != RetCode.Success ) return retCode;
-      if (_state == NULL)
-         return RetCode.BadParam ;
-      if ( _state.value != NULL) {
-         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
-         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stochF( int startIdx,
@@ -31441,18 +31472,6 @@ public class Core {
       int outIdx, lowestIdx, highestIdx;
       int lookbackTotal, lookbackK, lookbackFastD;
       int trailingIdx, today, i;
-      if( startIdx < 0 )
-         return RetCode.OutOfRangeStartIndex ;
-      if( (endIdx < 0) || (endIdx < startIdx))
-         return RetCode.OutOfRangeEndIndex ;
-      if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
-         optInFastK_Period = 5;
-      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
-         return RetCode.BadParam ;
-      if( (int)optInFastD_Period == ( Integer.MIN_VALUE ) )
-         optInFastD_Period = 3;
-      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
-         return RetCode.BadParam ;
       lookbackK = optInFastK_Period-1;
       lookbackFastD = movingAverageLookback ( optInFastD_Period, optInFastD_MAType );
       lookbackTotal = lookbackK + lookbackFastD;
@@ -34017,8 +34036,8 @@ public class Core {
       _state.value .value .optInTimePeriod3 = optInTimePeriod3;
       _state.value .value .mem_size = ultOscLookback (optInTimePeriod1, optInTimePeriod2, optInTimePeriod3 );
       _state.value .value .memory = NULL;
-      { _state.value .value .periodA = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodA == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodA; buf->idx = 0; buf->size = optInTimePeriod1; buf->circbuf = calloc(optInTimePeriod1, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
-      { _state.value .value .periodB = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodB == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; buf->idx = 0; buf->size = optInTimePeriod1; buf->circbuf = calloc(optInTimePeriod1, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
+      { _state.value .value .periodA = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodA == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodA; buf->idx = 0; buf->size = optInTimePeriod3+1; buf->circbuf = calloc(optInTimePeriod3+1, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
+      { _state.value .value .periodB = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodB == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; buf->idx = 0; buf->size = optInTimePeriod3+1; buf->circbuf = calloc(optInTimePeriod3+1, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
       return RetCode.Success ;
    }
    public int ultOscState( struct TA_ultOsc_State* _state,
@@ -34056,35 +34075,30 @@ public class Core {
          trueRange = tempDouble;
       _state.value .a3Total += closeMinusTrueLow;
       _state.value .b3Total += trueRange;
-      if ( _state.value .mem_index > _state.value .gap2)
+      if ( _state.value .mem_index-1 > _state.value .gap2)
       {
          _state.value .a2Total += closeMinusTrueLow;
          _state.value .b2Total += trueRange;
       }
-      if ( _state.value .mem_index > _state.value .gap1)
+      if ( _state.value .mem_index-1 > _state.value .gap1)
       {
          _state.value .a1Total += closeMinusTrueLow;
          _state.value .b1Total += trueRange;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
          tempDouble = 0.0;
          if( ! (((- (0.00000000000001) )< _state.value .b1Total)&&( _state.value .b1Total< (0.00000000000001) )) ) tempDouble += 4.0*( _state.value .a1Total/ _state.value .b1Total);
          if( ! (((- (0.00000000000001) )< _state.value .b2Total)&&( _state.value .b2Total< (0.00000000000001) )) ) tempDouble += 2.0*( _state.value .a2Total/ _state.value .b2Total);
          if( ! (((- (0.00000000000001) )< _state.value .b3Total)&&( _state.value .b3Total< (0.00000000000001) )) ) tempDouble += _state.value .a3Total/ _state.value .b3Total;
          outReal.value = 100.0 * (tempDouble / 7.0);
-      }
-      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
-      {
-         _state.value .a3Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->circbuf + ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->idx )) ;
-         _state.value .b3Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf + ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->idx )) ;
-      }
-      if ( _state.value .optInTimePeriod2 < (int) _state.value .mem_index-1)
-      {
-         idx = ( _state.value .mem_index-1 - _state.value .optInTimePeriod2) % _state.value .mem_size ;
+         idx = ( _state.value .mem_index-1 - _state.value .optInTimePeriod3) % ( _state.value .mem_size +1);
+         _state.value .a3Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->circbuf +idx)) ;
+         _state.value .b3Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf +idx)) ;
+         idx = ( _state.value .mem_index-1 - _state.value .optInTimePeriod2) % ( _state.value .mem_size +1);
          _state.value .a2Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->circbuf +idx)) ;
          _state.value .b2Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf +idx)) ;
-      }
-      if ( _state.value .optInTimePeriod1 < (int) _state.value .mem_index-1)
-      {
-         idx = ( _state.value .mem_index-1 - _state.value .optInTimePeriod1) % _state.value .mem_size ;
+         idx = ( _state.value .mem_index-1 - _state.value .optInTimePeriod1) % ( _state.value .mem_size +1);
          _state.value .a1Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA)->circbuf +idx)) ;
          _state.value .b1Total -= (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf +idx)) ;
       }
@@ -34092,7 +34106,8 @@ public class Core {
       (*( ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->circbuf + ((struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB)->idx )) = trueRange;
       { struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodA; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
       { struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .periodB; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
-      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      _state.value .prevClose = inClose;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
          return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }

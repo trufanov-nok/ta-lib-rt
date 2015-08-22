@@ -453,7 +453,8 @@
 
 {
    /* insert local variable here */
-
+   ENUM_DECLARATION(RetCode) retCode;
+   #define TA_BBANDS_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -501,7 +502,10 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
-
+   retCode = FUNCTION_CALL_STATE_INIT(MA)( (struct TA_MA_State**) &STATE_P.stateMA, optInTimePeriod, optInMAType );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+   retCode = FUNCTION_CALL_STATE_INIT(STDDEV)( (struct TA_STDDEV_State**) &STATE_P.stateSTDDEV, optInTimePeriod, 1.0 );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -530,7 +534,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+  ENUM_DECLARATION(RetCode) retCode;
+  double tempReal, tempReal2;
+  #define TA_BBANDS_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -563,6 +569,46 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   retCode = FUNCTION_CALL_STATE(MA)( (struct TA_MA_State*) STATE.stateMA, inReal, &tempReal2 );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) && retCode != ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData)) return retCode;
+   retCode = FUNCTION_CALL_STATE(STDDEV)( (struct TA_STDDEV_State*) STATE.stateSTDDEV, inReal, &tempReal );
+   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+
+
+   VALUE_HANDLE_DEREF(outRealMiddleBand) = tempReal2;
+
+   if( STATE.optInNbDevUp == STATE.optInNbDevDn )
+   {
+      if(  STATE.optInNbDevUp == 1.0 )
+      {
+         /* No standard deviation multiplier needed. */
+            VALUE_HANDLE_DEREF(outRealUpperBand) = tempReal2 + tempReal;
+            VALUE_HANDLE_DEREF(outRealLowerBand) = tempReal2 - tempReal;
+      } else {
+         /* Upper/lower band use the same standard deviation multiplier. */
+            tempReal *= STATE.optInNbDevUp;
+            VALUE_HANDLE_DEREF(outRealUpperBand) = tempReal2 + tempReal;
+            VALUE_HANDLE_DEREF(outRealLowerBand) = tempReal2 - tempReal;
+      }
+   }
+   else if( STATE.optInNbDevUp == 1.0 )
+   {
+      /* Only lower band has a standard deviation multiplier. */
+         VALUE_HANDLE_DEREF(outRealUpperBand) = tempReal2 + tempReal;
+         VALUE_HANDLE_DEREF(outRealLowerBand) = tempReal2 - (tempReal * STATE.optInNbDevDn);
+   }
+   else if( STATE.optInNbDevDn == 1.0 )
+   {
+      /* Only upper band has a standard deviation multiplier. */
+         VALUE_HANDLE_DEREF(outRealLowerBand) = tempReal2 - tempReal;
+         VALUE_HANDLE_DEREF(outRealUpperBand) = tempReal2 + (tempReal * STATE.optInNbDevUp);
+   }
+   else
+   {
+      /* Upper/lower band have distinctive standard deviation multiplier. */
+         VALUE_HANDLE_DEREF(outRealUpperBand) = tempReal2 + (tempReal * STATE.optInNbDevUp);
+         VALUE_HANDLE_DEREF(outRealLowerBand) = tempReal2 - (tempReal * STATE.optInNbDevDn);
+   }
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -582,7 +628,11 @@
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+        TA_RetCode retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(MA)( (struct TA_MA_State**) &STATE_P.stateMA );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        retCode = FUNCTION_CALL_STATE_FREE(STDDEV)( (struct TA_STDDEV_State**) &STATE_P.stateSTDDEV );
+        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK

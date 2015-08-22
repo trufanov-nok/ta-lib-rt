@@ -1619,6 +1619,8 @@ struct TA_BBANDS_State {
                        size_t mem_size;
                        size_t mem_index;
                        struct TA_BBANDS_Data* memory;
+                       void*        stateMA;
+                       void*        stateSTDDEV;
                        int           optInTimePeriod; /* From 2 to 100000 */
                        double        optInNbDevUp; /* From TA_REAL_MIN to TA_REAL_MAX */
                        double        optInNbDevDn; /* From TA_REAL_MIN to TA_REAL_MAX */

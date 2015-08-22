@@ -111,7 +111,16 @@ static const TA_OptInputParameterInfo *TA_BBANDS_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_BBANDS_StructParams[] = { NULL };
+
+const TA_InputParameterInfo TA_BBANDS_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "stateMA", 0 };
+const TA_InputParameterInfo TA_BBANDS_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "stateSTDDEV", 0 };
+
+static const TA_InputParameterInfo *TA_BBANDS_StructParams[] = {
+    &TA_BBANDS_DEF_UI_STRUCT_PARAM_1,
+    &TA_BBANDS_DEF_UI_STRUCT_PARAM_2,
+    NULL };
 
 DEF_FUNCTION( BBANDS,                         /* name */
               TA_GroupId_OverlapStudies, /* groupId */
