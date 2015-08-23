@@ -290,7 +290,48 @@ static const TA_OptInputParameterInfo *TA_CDL3STARSINSOUTH_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDL3STARSINSOUTH_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "ShadowLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal1", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal0", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "BodyShortPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "periodBodyLong", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Integer, "periodShadowLong", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Integer, "periodShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Integer, "periodBodyShort", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Integer, "gapBodyLong", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Integer, "gapShadowLong", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Integer, "gapShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_13 =
+                                  { TA_Input_Integer, "gapBodyShort", 0 };
+
+static const TA_InputParameterInfo *TA_CDL3STARSINSOUTH_StructParams[] = {
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_6,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_7,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_8,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_9,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_10,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_11,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_12,
+    &TA_CDL3STARSINSOUTH_DEF_UI_STRUCT_PARAM_13,
+    NULL };
 
 DEF_FUNCTION( CDL3STARSINSOUTH,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */

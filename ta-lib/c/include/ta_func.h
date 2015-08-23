@@ -2533,6 +2533,19 @@ struct TA_CDL3STARSINSOUTH_State {
                                  size_t mem_size;
                                  size_t mem_index;
                                  struct TA_CDL3STARSINSOUTH_Data* memory;
+                                 double       BodyLongPeriodTotal;
+                                 double       ShadowLongPeriodTotal;
+                                 double       ShadowVeryShortPeriodTotal1;
+                                 double       ShadowVeryShortPeriodTotal0;
+                                 double       BodyShortPeriodTotal;
+                                 int          periodBodyLong;
+                                 int          periodShadowLong;
+                                 int          periodShadowVeryShort;
+                                 int          periodBodyShort;
+                                 int          gapBodyLong;
+                                 int          gapShadowLong;
+                                 int          gapShadowVeryShort;
+                                 int          gapBodyShort;
                                  };
 
 

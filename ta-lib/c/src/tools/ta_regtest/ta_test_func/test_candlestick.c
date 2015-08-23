@@ -793,20 +793,20 @@ static ErrorNumber do_test_state( const TA_History *history,
    TEST_4IN(CDL3INSIDE) else
    TEST_4IN(CDL3OUTSIDE)
 
-//   if( strcmp(test->name,"CDL3OUTSIDE") == 0 )
-//   {
-//      TA_Integer outBegIdx;
-//      TA_Integer outNbElement;
-//      retCode = TA_CDL3LINESTRIKE_StateTest(0,
-//                        252,
-//                        gBuffer[0].in,
-//                        gBuffer[1].in,
-//                        gBuffer[2].in,
-//                        gBuffer[3].in,
-//                        &outBegIdx,
-//                        &outNbElement,
-//                        gBuffer[0].out0 );
-//   }
+   if( strcmp(test->name,"CDL3STARSINSOUTH") == 0 )
+   {
+      TA_Integer outBegIdx;
+      TA_Integer outNbElement;
+      retCode = TA_CDL3LINESTRIKE_StateTest(0,
+                        252,
+                        gBuffer[0].in,
+                        gBuffer[1].in,
+                        gBuffer[2].in,
+                        gBuffer[3].in,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+   }
 
 
    return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
