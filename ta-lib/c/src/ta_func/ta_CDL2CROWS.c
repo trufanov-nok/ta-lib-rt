@@ -386,6 +386,14 @@
        STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i2 ) - TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-MEM_SIZE) );
    } else  STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyLong );
 
+
+   PUSH_TO_MEM(inOpen,inOpen);
+   PUSH_TO_MEM(inHigh,inHigh);
+   PUSH_TO_MEM(inLow,inLow);
+   PUSH_TO_MEM(inClose,inClose);
+
+   if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 

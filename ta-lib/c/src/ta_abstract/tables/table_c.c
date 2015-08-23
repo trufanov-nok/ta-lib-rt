@@ -134,7 +134,18 @@ static const TA_OptInputParameterInfo *TA_CDL3BLACKCROWS_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDL3BLACKCROWS_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal0", 0 };
+const TA_InputParameterInfo TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal1", 0 };
+const TA_InputParameterInfo TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal2", 0 };
+
+static const TA_InputParameterInfo *TA_CDL3BLACKCROWS_StructParams[] = {
+    &TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( CDL3BLACKCROWS,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
