@@ -347,7 +347,7 @@
    temp = 0.0;
 
    FOR_ALL_MEM(i) {
-       temp += std_fabs(MEM_IDX_NS(i,inReal) - STATE.sum / STATE.optInTimePeriod);
+       temp += std_fabs(MEM_IDX_NS(inReal,i) - STATE.sum / STATE.optInTimePeriod);
    }
 
    VALUE_HANDLE_DEREF(outReal) = temp / STATE.optInTimePeriod;

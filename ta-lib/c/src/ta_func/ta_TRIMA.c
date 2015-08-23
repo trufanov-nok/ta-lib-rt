@@ -644,7 +644,7 @@ double tempReal;
    STATE.numeratorSub -= POP_FROM_MEM(inReal);
 
    middle = STATE.middleIdx++ % STATE.mem_size;
-   tempReal = MEM_IDX_NS(middle, inReal);
+   tempReal = MEM_IDX_NS(inReal, middle);
    STATE.numeratorSub += tempReal;
 
    /* Step (2) */

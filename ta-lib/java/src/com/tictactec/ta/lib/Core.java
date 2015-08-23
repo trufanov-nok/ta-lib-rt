@@ -3363,7 +3363,7 @@ public class Core {
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
       retCode = movingAverage ( (struct movingAverage *) _state.value .stateMA, inReal, &tempReal2 );
       if (retCode != RetCode.Success && retCode != RetCode.NeedMoreData ) return retCode;
-      retCode = stdDev ( (struct stdDev *) _state.value .stateSTDDEV, tempReal2, &tempReal );
+      retCode = stdDev ( (struct stdDev *) _state.value .stateSTDDEV, inReal, &tempReal );
       if (retCode != RetCode.Success ) return retCode;
       outRealMiddleBand.value = tempReal2;
       if( _state.value .optInNbDevUp == _state.value .optInNbDevDn )
@@ -3373,6 +3373,7 @@ public class Core {
             outRealUpperBand.value = tempReal2 + tempReal;
             outRealLowerBand.value = tempReal2 - tempReal;
          } else {
+            tempReal *= _state.value .optInNbDevUp;
             outRealUpperBand.value = tempReal2 + tempReal;
             outRealLowerBand.value = tempReal2 - tempReal;
          }
@@ -4929,10 +4930,8 @@ public class Core {
       _state.value = TA_Calloc(1, sizeof(struct cdl3Outside ));
       _state.value .value .mem_index = 0;
       _state.value .value .mem_size = cdl3OutsideLookback ();
-      if ( _state.value .value .mem_size > 0)
-         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3OUTSIDE_Data));
-      else
-         _state.value .value .memory = NULL;
+      _state.value .value .memory = NULL;
+      _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3OUTSIDE_Data));
       return RetCode.Success ;
    }
    public int cdl3OutsideState( struct TA_cdl3Outside_State* _state,
@@ -4942,6 +4941,7 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      unsigned int prev_idx, pprev_idx;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
@@ -4952,6 +4952,25 @@ public class Core {
          ( _state.value .memory+_cur_idx).value .inLow = inLow ;
          ( _state.value .memory+_cur_idx).value .inClose = inClose ;
          return RetCode.NeedMoreData ; }
+      prev_idx = ( _state.value .mem_index-2)% _state.value .mem_size ;
+      pprev_idx = ( _state.value .mem_index-3)% _state.value .mem_size ;
+      if( ( ( ( _state.value .memory+prev_idx).value .inClose >= ( _state.value .memory+prev_idx).value .inOpen ? 1 : -1 ) == 1 && ( ( _state.value .memory+pprev_idx).value .inClose >= ( _state.value .memory+pprev_idx).value .inOpen ? 1 : -1 ) == -1 &&
+         ( _state.value .memory+prev_idx).value .inClose > ( _state.value .memory+pprev_idx).value .inOpen && ( _state.value .memory+prev_idx).value .inOpen < ( _state.value .memory+pprev_idx).value .inClose &&
+         inClose > ( _state.value .memory+prev_idx).value .inClose
+         )
+         ||
+         ( ( ( _state.value .memory+prev_idx).value .inClose >= ( _state.value .memory+prev_idx).value .inOpen ? 1 : -1 ) == -1 && ( ( _state.value .memory+pprev_idx).value .inClose >= ( _state.value .memory+pprev_idx).value .inOpen ? 1 : -1 ) == 1 &&
+         ( _state.value .memory+prev_idx).value .inOpen > ( _state.value .memory+pprev_idx).value .inClose && ( _state.value .memory+prev_idx).value .inClose < ( _state.value .memory+pprev_idx).value .inOpen &&
+         inClose < ( _state.value .memory+prev_idx).value .inClose
+         )
+         )
+         outInteger.value = ( ( _state.value .memory+prev_idx).value .inClose >= ( _state.value .memory+prev_idx).value .inOpen ? 1 : -1 ) * 100;
+      else
+         outInteger.value = 0;
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
    public int cdl3OutsideStateFree( struct TA_cdl3Outside_State** _state )

@@ -725,7 +725,7 @@
                         p = MEM_SIZE;
                         for (i = 0; i < MEM_SIZE; i++)
                         {
-                            temp = MEM_IDX_NS( (--j) % MEM_SIZE, inLow);
+                            temp = MEM_IDX_NS(inLow, (--j) % MEM_SIZE);
                             p--;
                             if (temp < STATE.lowest)
                             {
@@ -749,7 +749,7 @@
                         p = MEM_SIZE;
                         for ( i = 0; i < MEM_SIZE; i++)
                         {
-                            temp = MEM_IDX_NS( (--j) % MEM_SIZE, inHigh);
+                            temp = MEM_IDX_NS(inHigh, (--j) % MEM_SIZE);
                             p--;
                             if (temp > STATE.highest)
                             {

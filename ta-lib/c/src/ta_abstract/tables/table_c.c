@@ -101,7 +101,11 @@ static const TA_OptInputParameterInfo *TA_CDL2CROWS_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDL2CROWS_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDL2CROWS_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyLongPeriodTotal", 0 };
+static const TA_InputParameterInfo *TA_CDL2CROWS_StructParams[] = {
+    &TA_CDL2CROWS_DEF_UI_STRUCT_PARAM_1,
+    NULL };
 
 DEF_FUNCTION( CDL2CROWS,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */

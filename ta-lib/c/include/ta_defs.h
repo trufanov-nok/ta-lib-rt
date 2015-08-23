@@ -210,13 +210,14 @@
 #define MEM_SIZE STATE.mem_size
 #define MEM_SIZE_P STATE_P.mem_size
 #define MEM_IDX(idx) VALUE_HANDLE_DEREF( (STATE.memory+idx) )
-#define MEM_IDX_NS(idx,ns) MEM_IDX(idx).ns
+#define MEM_IDX_NS(ns,idx) MEM_IDX(idx).ns
 #define FOR_ALL_MEM(i) for (i = 0; i < MEM_SIZE; ++i)
-#define PUSH_TO_MEM(x,y) MEM_IDX_NS(_cur_idx, x) = y
-#define POP_FROM_MEM(x) MEM_IDX_NS(_cur_idx, x)
+#define PUSH_TO_MEM(x,y) MEM_IDX_NS(x, _cur_idx) = y
+#define POP_FROM_MEM(x) MEM_IDX_NS(x, _cur_idx)
 #define NEED_MORE_DATA STATE.mem_size > STATE.mem_index - 1
 #define LAST_NEED_MORE_DATA STATE.mem_size == STATE.mem_index
 #define FIRST_LAUNCH (STATE.mem_index == 1)
+#define GET_LOCAL_IDX(i) (STATE.mem_index-1+i)%MEM_SIZE
 
 
 /* Abstraction of function calls within the library.

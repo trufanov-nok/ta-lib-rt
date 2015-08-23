@@ -395,11 +395,17 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
 #define TA_HIGHLOWRANGE(IDX)    ( inHigh[IDX] - inLow[IDX] )
 #define TA_CANDLECOLOR(IDX)     ( inClose[IDX] >= inOpen[IDX] ? 1 : -1 )
 
-#define TA_REALBODY_STATE(IDX)        ( std_fabs( MEM_IDX_NS(IDX,inClose) - MEM_IDX_NS(IDX,inOpen) ) )
-#define TA_UPPERSHADOW_STATE(IDX)     ( MEM_IDX_NS(IDX,inHigh) - ( MEM_IDX_NS(IDX,inClose) >= MEM_IDX_NS(IDX,inOpen) ? MEM_IDX_NS(IDX,inClose) : MEM_IDX_NS(IDX,inOpen) ) )
-#define TA_LOWERSHADOW_STATE(IDX)     ( ( MEM_IDX_NS(IDX,inClose) >= MEM_IDX_NS(IDX,inOpen) ? MEM_IDX_NS(IDX,inOpen) : MEM_IDX_NS(IDX,inClose) ) - MEM_IDX_NS(IDX,inLow) )
-#define TA_HIGHLOWRANGE_STATE(IDX)    ( MEM_IDX_NS(IDX,inHigh) - MEM_IDX_NS(IDX,inLow) )
-#define TA_CANDLECOLOR_STATE(IDX)     ( MEM_IDX_NS(IDX,inClose) >= MEM_IDX_NS(IDX,inOpen) ? 1 : -1 )
+#define TA_REALBODY_STATE(IDX)        ( std_fabs( MEM_IDX_NS(inClose,IDX) - MEM_IDX_NS(inOpen,IDX) ) )
+#define TA_UPPERSHADOW_STATE(IDX)     ( MEM_IDX_NS(inHigh,IDX) - ( MEM_IDX_NS(inClose,IDX) >= MEM_IDX_NS(inOpen,IDX) ? MEM_IDX_NS(inClose,IDX) : MEM_IDX_NS(inOpen,IDX) ) )
+#define TA_LOWERSHADOW_STATE(IDX)     ( ( MEM_IDX_NS(inClose,IDX) >= MEM_IDX_NS(inOpen,IDX) ? MEM_IDX_NS(inOpen,IDX) : MEM_IDX_NS(inClose,IDX) ) - MEM_IDX_NS(inLow,IDX) )
+#define TA_HIGHLOWRANGE_STATE(IDX)    ( MEM_IDX_NS(inHigh,IDX) - MEM_IDX_NS(inLow,IDX) )
+#define TA_CANDLECOLOR_STATE(IDX)     ( MEM_IDX_NS(inClose,IDX) >= MEM_IDX_NS(inOpen,IDX) ? 1 : -1 )
+
+#define TA_REALBODY_STATE_CUR()        ( std_fabs( inClose - inOpen ) )
+#define TA_UPPERSHADOW_STATE_CUR()     ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) )
+#define TA_LOWERSHADOW_STATE_CUR()     ( ( inClose >= inOpen ? inOpen : inClose ) - inLow )
+#define TA_HIGHLOWRANGE_STATE_CUR()    ( inHigh - inLow )
+#define TA_CANDLECOLOR_STATE_CUR()     ( inClose >= inOpen ? 1 : -1 )
 
 #ifdef TA_LIB_PRO
 /* Section for code distributed with TA-Lib Pro only. */
@@ -445,6 +451,18 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
         * ( TA_CANDLEAVGPERIOD(SET) != 0.0? SUM / TA_CANDLEAVGPERIOD(SET) : TA_CANDLERANGE_STATE(SET,IDX) ) \
         / ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_Shadows,Shadows) ? 2.0 : 1.0 ) \
     )
+
+#define TA_CANDLERANGE_STATE_CUR(SET) \
+    ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_RealBody,RealBody) ? TA_REALBODY_STATE_CUR() : \
+    ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_HighLow,HighLow)   ? TA_HIGHLOWRANGE_STATE_CUR() : \
+    ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_Shadows,Shadows)   ? TA_UPPERSHADOW_STATE_CUR() + TA_LOWERSHADOW_STATE_CUR() : \
+      0 ) ) )
+#define TA_CANDLEAVERAGE_STATE_CUR(SET,SUM) \
+    ( TA_CANDLEFACTOR(SET) \
+        * ( TA_CANDLEAVGPERIOD(SET) != 0.0? SUM / TA_CANDLEAVGPERIOD(SET) : TA_CANDLERANGE_STATE_CUR(SET) ) \
+        / ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_Shadows,Shadows) ? 2.0 : 1.0 ) \
+    )
+
 #define TA_REALBODYGAPUP_STATE(IDX2,IDX1)     ( min(MEM_IDX_NS(inOpen,IDX2),MEM_IDX_NS(inClose,IDX2)) > max(MEM_IDX_NS(inOpen,IDX1),MEM_IDX_NS(inClose,IDX1)) )
 #define TA_REALBODYGAPDOWN_STATE(IDX2,IDX1)   ( max(MEM_IDX_NS(inOpen,IDX2),MEM_IDX_NS(inClose,IDX2)) < min(MEM_IDX_NS(inOpen,IDX1),MEM_IDX_NS(inClose,IDX1)) )
 #define TA_CANDLEGAPUP_STATE(IDX2,IDX1)       ( MEM_IDX_NS(inLow,IDX2) > MEM_IDX_NS(inHigh,IDX1) )

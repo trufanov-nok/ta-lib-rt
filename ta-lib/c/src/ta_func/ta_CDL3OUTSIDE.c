@@ -349,17 +349,17 @@ unsigned int prev_idx, pprev_idx;
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
-   prev_idx = (STATE.mem_index-2)%MEM_SIZE;
-   pprev_idx = (STATE.mem_index-3)%MEM_SIZE;
+   prev_idx = GET_LOCAL_IDX(-1);
+   pprev_idx = GET_LOCAL_IDX(-2);
 
                 if( ( TA_CANDLECOLOR_STATE(prev_idx) == 1 && TA_CANDLECOLOR_STATE(pprev_idx) == -1 &&          // white engulfs black
-                      MEM_IDX_NS(prev_idx,inClose) > MEM_IDX_NS(pprev_idx,inOpen) && MEM_IDX_NS(prev_idx,inOpen) < MEM_IDX_NS(pprev_idx,inClose) &&
-                      inClose > MEM_IDX_NS(prev_idx,inClose)                                         // third candle higher
+                      MEM_IDX_NS(inClose,prev_idx) > MEM_IDX_NS(inOpen,pprev_idx) && MEM_IDX_NS(inOpen,prev_idx) < MEM_IDX_NS(inClose,pprev_idx) &&
+                      inClose > MEM_IDX_NS(inClose,prev_idx)                                         // third candle higher
                     )
                     ||
                     ( TA_CANDLECOLOR_STATE(prev_idx) == -1 && TA_CANDLECOLOR_STATE(pprev_idx) == 1 &&          // black engulfs white
-                      MEM_IDX_NS(prev_idx,inOpen) > MEM_IDX_NS(pprev_idx,inClose) && MEM_IDX_NS(prev_idx,inClose) < MEM_IDX_NS(pprev_idx,inOpen) &&
-                      inClose < MEM_IDX_NS(prev_idx,inClose)                                         // third candle lower
+                      MEM_IDX_NS(inOpen,prev_idx) > MEM_IDX_NS(inClose,pprev_idx) && MEM_IDX_NS(inClose,prev_idx) < MEM_IDX_NS(inOpen,pprev_idx) &&
+                      inClose < MEM_IDX_NS(inClose,prev_idx)                                         // third candle lower
                     )
                   )
                     VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE(prev_idx) * 100;

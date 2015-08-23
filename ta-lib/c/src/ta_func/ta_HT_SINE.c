@@ -617,7 +617,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_SINE)
 STATE.periodWMASub     += varNewPrice; \
 STATE.periodWMASub     -= STATE.trailingWMAValue; \
 STATE.periodWMASum     += varNewPrice*4.0; \
-STATE.trailingWMAValue  = MEM_IDX_NS((STATE.mem_index-4) % MEM_SIZE, inReal); \
+STATE.trailingWMAValue  = MEM_IDX_NS(inReal, GET_LOCAL_IDX(-3)); \
 varToStoreSmoothedValue = STATE.periodWMASum*0.1; \
 STATE.periodWMASum -= STATE.periodWMASub; \
 }

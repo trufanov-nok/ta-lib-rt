@@ -325,7 +325,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+ #define TA_CDL2CROWS_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+ unsigned int i1,i2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -359,6 +360,31 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+      {
+            STATE.BodyLongPeriodTotal = 0.;
+      }
+
+   if (STATE.mem_index > MEM_SIZE-2)
+   {
+       i1 = GET_LOCAL_IDX(-1);
+       i2 = GET_LOCAL_IDX(-2);
+
+       if( TA_CANDLECOLOR_STATE(i2) == 1 &&                                                         // 1st: white
+           TA_REALBODY_STATE(i2) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i2 ) &&     //      long
+           TA_CANDLECOLOR_STATE(i1) == -1 &&                                                        // 2nd: black
+           TA_REALBODYGAPUP_STATE(i1,i2) &&                                                        //      gapping up
+           TA_CANDLECOLOR_STATE_CUR() == -1 &&                                                          // 3rd: black
+           inOpen < MEM_IDX_NS(inOpen,i1) && inOpen > MEM_IDX_NS(inClose,i1) &&                              //      opening within 2nd rb
+           inClose > MEM_IDX_NS(inOpen,i2) && inClose < MEM_IDX_NS(inClose,i2)                               //      closing within 1st rb
+         )
+
+           VALUE_HANDLE_DEREF(outInteger) = -100;
+       else
+           VALUE_HANDLE_DEREF(outInteger) = 0;
+
+       STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i2 ) - TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-MEM_SIZE) );
+   } else  STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyLong );
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

@@ -679,7 +679,7 @@ double sine, leadSine;
         STATE.periodWMASub     += varNewPrice; \
         STATE.periodWMASub     -= STATE.trailingWMAValue; \
         STATE.periodWMASum     += varNewPrice*4.0; \
-        STATE.trailingWMAValue  = MEM_IDX_NS((STATE.mem_index-4) % MEM_SIZE, inReal); \
+        STATE.trailingWMAValue  = MEM_IDX_NS(inReal, GET_LOCAL_IDX(-3)); \
         varToStoreSmoothedValue = STATE.periodWMASum*0.1; \
         STATE.periodWMASum -= STATE.periodWMASub; \
         }
@@ -816,7 +816,7 @@ double sine, leadSine;
         tempReal = 0.0;
         idx = STATE.mem_index-1;
         for( i=0; i < DCPeriodInt; i++ )
-           tempReal += MEM_IDX_NS( idx-- % MEM_SIZE, inReal);
+           tempReal += MEM_IDX_NS(inReal, idx-- % MEM_SIZE);
 
         if( DCPeriodInt > 0 )
            tempReal = tempReal/(double)DCPeriodInt;

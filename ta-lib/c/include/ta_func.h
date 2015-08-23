@@ -2036,6 +2036,7 @@ struct TA_CDL2CROWS_State {
                           size_t mem_size;
                           size_t mem_index;
                           struct TA_CDL2CROWS_Data* memory;
+                          double       BodyLongPeriodTotal;
                           };
 
 
