@@ -415,9 +415,12 @@ unsigned int i1,i2,i3;
         }
 
 
-        STATE.ShadowVeryShortPeriodTotal2 += TA_CANDLERANGE_STATE( ShadowVeryShort, i2 );
-        STATE.ShadowVeryShortPeriodTotal1 += TA_CANDLERANGE_STATE( ShadowVeryShort, i1 );
-        STATE.ShadowVeryShortPeriodTotal0 += TA_CANDLERANGE_STATE_CUR( ShadowVeryShort );
+        if (STATE.mem_index-1 >= 2)
+        {
+          STATE.ShadowVeryShortPeriodTotal2 += TA_CANDLERANGE_STATE( ShadowVeryShort, i2 );
+          STATE.ShadowVeryShortPeriodTotal1 += TA_CANDLERANGE_STATE( ShadowVeryShort, i1 );
+          STATE.ShadowVeryShortPeriodTotal0 += TA_CANDLERANGE_STATE_CUR( ShadowVeryShort );
+        }
 
 
 
