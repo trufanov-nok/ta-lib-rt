@@ -1423,6 +1423,15 @@ struct TA_CDLABANDONEDBABY_State {
                                  size_t mem_size;
                                  size_t mem_index;
                                  struct TA_CDLABANDONEDBABY_Data* memory;
+                                 double       BodyLongPeriodTotal;
+                                 double       BodyDojiPeriodTotal;
+                                 double       BodyShortPeriodTotal;
+                                 int          gapBodyLong;
+                                 int          periodBodyLong;
+                                 int          gapBodyDoji;
+                                 int          periodBodyDoji;
+                                 int          gapBodyShort;
+                                 int          periodBodyShort;
                                  double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                  };
 

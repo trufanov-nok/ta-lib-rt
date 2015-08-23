@@ -786,28 +786,49 @@ static ErrorNumber do_test_state( const TA_History *history,
                                     gBuffer[0].out0 ); \
                }
 
+  #define TEST_4IN_1OPT(ta_func) \
+  if( strcmp(test->name,""""#ta_func"""") == 0 ) \
+             { \
+                TA_Integer outBegIdx; \
+                TA_Integer outNbElement; \
+                retCode = TA_##ta_func##_StateTest(0, \
+                                  252, \
+                                  gBuffer[0].in, \
+                                  gBuffer[1].in, \
+                                  gBuffer[2].in, \
+                                  gBuffer[3].in, \
+                                  test->params[0], \
+                                  &outBegIdx, \
+                                  &outNbElement, \
+                                  gBuffer[0].out0 ); \
+             }
+
    /* Make a simple first call. */
    TEST_4IN(CDL3OUTSIDE) else
    TEST_4IN(CDL2CROWS) else
    TEST_4IN(CDL3BLACKCROWS) else
    TEST_4IN(CDL3INSIDE) else
    TEST_4IN(CDL3OUTSIDE) else
-   TEST_4IN(CDL3STARSINSOUTH)
+   TEST_4IN(CDL3STARSINSOUTH) else
+   TEST_4IN(CDL3WHITESOLDIERS) else
+   TEST_4IN_1OPT(CDLABANDONEDBABY)
 
-   if( strcmp(test->name,"CDL3WHITESOLDIERS") == 0 )
-   {
-      TA_Integer outBegIdx;
-      TA_Integer outNbElement;
-      retCode = TA_CDL3WHITESOLDIERS_StateTest(0,
-                        252,
-                        gBuffer[0].in,
-                        gBuffer[1].in,
-                        gBuffer[2].in,
-                        gBuffer[3].in,
-                        &outBegIdx,
-                        &outNbElement,
-                        gBuffer[0].out0 );
-   }
+//   if( strcmp(test->name,"CDLABANDONEDBABY") == 0 )
+//   {
+//      TA_Integer outBegIdx;
+//      TA_Integer outNbElement;
+//      retCode = TA_CDLABANDONEDBABY_StateTest(0,
+//                        252,
+//                        gBuffer[0].in,
+//                        gBuffer[1].in,
+//                        gBuffer[2].in,
+//                        gBuffer[3].in,
+//                        test->params[0],
+//                        &outBegIdx,
+//                        &outNbElement,
+//                        gBuffer[0].out0 );
+//   }
+
 
 
    return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;

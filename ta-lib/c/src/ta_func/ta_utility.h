@@ -468,6 +468,13 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
 #define TA_CANDLEGAPUP_STATE(IDX2,IDX1)       ( MEM_IDX_NS(inLow,IDX2) > MEM_IDX_NS(inHigh,IDX1) )
 #define TA_CANDLEGAPDOWN_STATE(IDX2,IDX1)     ( MEM_IDX_NS(inHigh,IDX2) < MEM_IDX_NS(inLow,IDX1) )
 
+
+#define TA_REALBODYGAPUP_STATE_CUR1(IDX1)     ( min(inOpen,inClose) > max(MEM_IDX_NS(inOpen,IDX1),MEM_IDX_NS(inClose,IDX1)) )
+#define TA_REALBODYGAPDOWN_STATE_CUR1(IDX1)   ( max(inOpen,inClose) < min(MEM_IDX_NS(inOpen,IDX1),MEM_IDX_NS(inClose,IDX1)) )
+#define TA_CANDLEGAPUP_STATE_CUR1(IDX1)       ( inLow > MEM_IDX_NS(inHigh,IDX1) )
+#define TA_CANDLEGAPDOWN_STATE_CUR1(IDX1)     ( inHigh < MEM_IDX_NS(inLow,IDX1) )
+
+
 #ifdef TA_LIB_PRO
 /* Section for code distributed with TA-Lib Pro only. */
 #endif

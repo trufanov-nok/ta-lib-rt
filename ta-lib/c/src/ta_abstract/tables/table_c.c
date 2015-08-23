@@ -441,7 +441,39 @@ static const TA_OptInputParameterInfo *TA_CDLABANDONEDBABY_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLABANDONEDBABY_StructParams[] = { NULL }; 
+
+
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "BodyDojiPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "BodyShortPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "gapBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "periodBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapBodyDoji", 0 };
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Integer, "periodBodyDoji", 0 };
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Integer, "gapBodyShort", 0 };
+const TA_InputParameterInfo TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Integer, "periodBodyShort", 0 };
+
+
+static const TA_InputParameterInfo *TA_CDLABANDONEDBABY_StructParams[] = {
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_6,
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_7,
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_8,
+    &TA_CDLABANDONEDBABY_DEF_UI_STRUCT_PARAM_9,
+    NULL };
 
 DEF_FUNCTION( CDLABANDONEDBABY,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */

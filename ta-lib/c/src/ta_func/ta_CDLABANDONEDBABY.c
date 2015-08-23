@@ -396,7 +396,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLABANDONEDBABY_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+ unsigned int i1,i2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -430,8 +431,86 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+         if (FIRST_LAUNCH)
+            {
+                  STATE.BodyLongPeriodTotal = 0.;
+                  STATE.BodyDojiPeriodTotal = 0.;
+                  STATE.BodyShortPeriodTotal = 0.;
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+                  STATE.periodBodyLong = TA_CANDLEAVGPERIOD(BodyLong);
+                  STATE.periodBodyDoji = TA_CANDLEAVGPERIOD(BodyDoji);
+                  STATE.periodBodyShort = TA_CANDLEAVGPERIOD(BodyShort);
+
+                  STATE.gapBodyLong = MEM_SIZE - STATE.periodBodyLong -2;
+                  STATE.gapBodyDoji = MEM_SIZE - STATE.periodBodyDoji -1;
+                  STATE.gapBodyShort = MEM_SIZE - STATE.periodBodyShort;
+            }
+
+         i1 = GET_LOCAL_IDX(-1);
+         i2 = GET_LOCAL_IDX(-2);
+
+         if (!(NEED_MORE_DATA))
+         {
+
+             if( TA_REALBODY_STATE(i2) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i2 ) &&         // 1st: long
+                 TA_REALBODY_STATE(i1) <= TA_CANDLEAVERAGE_STATE( BodyDoji, STATE.BodyDojiPeriodTotal, i1 ) &&        // 2nd: doji
+                 TA_REALBODY_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( BodyShort, STATE.BodyShortPeriodTotal ) &&           // 3rd: longer than short
+                 ( ( TA_CANDLECOLOR_STATE(i2) == 1 &&                                                         // 1st white
+                     TA_CANDLECOLOR_STATE_CUR() == -1 &&                                                          // 3rd black
+                     inClose < MEM_IDX_NS(inClose,i2) - TA_REALBODY_STATE(i2) * STATE.optInPenetration &&                  // 3rd closes well within 1st rb
+                     TA_CANDLEGAPUP_STATE(i1,i2) &&                                                          // upside gap between 1st and 2nd
+                     TA_CANDLEGAPDOWN_STATE_CUR1(i1)                                                             // downside gap between 2nd and 3rd
+                   )
+                   ||
+                   (
+                     TA_CANDLECOLOR_STATE(i2) == -1 &&                                                        // 1st black
+                     TA_CANDLECOLOR_STATE_CUR() == 1 &&                                                           // 3rd white
+                     inClose > MEM_IDX_NS(inClose,i2) + TA_REALBODY_STATE(i2) * STATE.optInPenetration &&                  // 3rd closes well within 1st rb
+                     TA_CANDLEGAPDOWN_STATE(i1,i2) &&                                                        // downside gap between 1st and 2nd
+                     TA_CANDLEGAPUP_STATE_CUR1(i1)                                                               // upside gap between 2nd and 3rd
+                   )
+                 )
+               )
+             {
+                 VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_CUR() * 100;
+             }
+             else
+                 VALUE_HANDLE_DEREF(outInteger) = 0;
+
+         }
+
+
+         if ((int)STATE.mem_index-1 >= STATE.gapBodyLong)
+         {
+           STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i2 );
+         }
+
+         if ((int)STATE.mem_index-1 >= STATE.gapBodyDoji)
+         {
+           STATE.BodyDojiPeriodTotal += TA_CANDLERANGE_STATE( BodyDoji, i1 );
+         }
+
+         if ((int)STATE.mem_index-1 >= STATE.gapBodyShort)
+         {
+           STATE.BodyShortPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyShort );
+         }
+
+
+
+         if (!(NEED_MORE_DATA))
+         {
+          STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong) );
+          STATE.BodyDojiPeriodTotal -= TA_CANDLERANGE_STATE( BodyDoji, GET_LOCAL_IDX(-STATE.periodBodyDoji) );
+          STATE.BodyShortPeriodTotal -= TA_CANDLERANGE_STATE( BodyShort, GET_LOCAL_IDX(-STATE.periodBodyShort) );
+         }
+
+         PUSH_TO_MEM(inOpen,inOpen);
+         PUSH_TO_MEM(inHigh,inHigh);
+         PUSH_TO_MEM(inLow,inLow);
+         PUSH_TO_MEM(inClose,inClose);
+         if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
