@@ -177,7 +177,21 @@ static const TA_OptInputParameterInfo *TA_CDL3INSIDE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDL3INSIDE_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDL3INSIDE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDL3INSIDE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "BodyShortPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDL3INSIDE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodBodyLong", 0 };
+const TA_InputParameterInfo TA_CDL3INSIDE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "periodBodyShort", 0 };
+
+static const TA_InputParameterInfo *TA_CDL3INSIDE_StructParams[] = {
+    &TA_CDL3INSIDE_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDL3INSIDE_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDL3INSIDE_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDL3INSIDE_DEF_UI_STRUCT_PARAM_4,
+    NULL };
 
 DEF_FUNCTION( CDL3INSIDE,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -206,7 +220,19 @@ static const TA_OptInputParameterInfo *TA_CDL3LINESTRIKE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDL3LINESTRIKE_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_CDL3LINESTRIKE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "NearPeriodTotal3", 0 };
+const TA_InputParameterInfo TA_CDL3LINESTRIKE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "NearPeriodTotal2", 0 };
+const TA_InputParameterInfo TA_CDL3LINESTRIKE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodNear", 0 };
+
+static const TA_InputParameterInfo *TA_CDL3LINESTRIKE_StructParams[] = {
+    &TA_CDL3LINESTRIKE_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDL3LINESTRIKE_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDL3LINESTRIKE_DEF_UI_STRUCT_PARAM_3,
+    NULL };
 
 DEF_FUNCTION( CDL3LINESTRIKE,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */

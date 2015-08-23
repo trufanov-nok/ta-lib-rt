@@ -345,7 +345,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDL3LINESTRIKE_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+unsigned int i1,i2,i3;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -379,6 +380,69 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+        if (FIRST_LAUNCH)
+           {
+                 STATE.NearPeriodTotal3 = 0.;
+                 STATE.NearPeriodTotal2 = 0.;
+                 STATE.periodNear = TA_CANDLEAVGPERIOD(Near);
+           }
+
+        i2 = GET_LOCAL_IDX(-2);
+        i3 = GET_LOCAL_IDX(-3);
+
+        if (!(NEED_MORE_DATA))
+        {
+            i1 = GET_LOCAL_IDX(-1);
+
+            if( TA_CANDLECOLOR_STATE(i3) == TA_CANDLECOLOR_STATE(i2) &&                                   // three with same color
+                TA_CANDLECOLOR_STATE(i2) == TA_CANDLECOLOR_STATE(i1) &&
+                TA_CANDLECOLOR_STATE_CUR() == -TA_CANDLECOLOR_STATE(i1) &&                                    // 4th opposite color
+                                                                                                // 2nd opens within/near 1st rb
+                MEM_IDX_NS(inOpen,i2) >= min( MEM_IDX_NS(inOpen,i3), MEM_IDX_NS(inClose,i3) ) - TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal3, i3 ) &&
+                MEM_IDX_NS(inOpen,i2) <= max( MEM_IDX_NS(inOpen,i3), MEM_IDX_NS(inClose,i3) ) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal3, i3 ) &&
+                                                                                                // 3rd opens within/near 2nd rb
+                MEM_IDX_NS(inOpen,i1) >= min( MEM_IDX_NS(inOpen,i2), MEM_IDX_NS(inClose,i2) ) - TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal2, i2 ) &&
+                MEM_IDX_NS(inOpen,i1) <= max( MEM_IDX_NS(inOpen,i2), MEM_IDX_NS(inClose,i2) ) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal2, i2 ) &&
+                (
+                    (   // if three white
+                        TA_CANDLECOLOR_STATE(i1) == 1 &&
+                        MEM_IDX_NS(inClose,i1) > MEM_IDX_NS(inClose,i2) && MEM_IDX_NS(inClose,i2) > MEM_IDX_NS(inClose,i3) &&           // consecutive higher closes
+                        inOpen > MEM_IDX_NS(inClose,i1) &&                                             // 4th opens above prior close
+                        inClose < MEM_IDX_NS(inOpen,i3)                                               // 4th closes below 1st open
+                    ) ||
+                    (   // if three black
+                        TA_CANDLECOLOR_STATE(i1) == -1 &&
+                        MEM_IDX_NS(inClose,i1) < MEM_IDX_NS(inClose,i2) && MEM_IDX_NS(inClose,i2) < MEM_IDX_NS(inClose,i3) &&           // consecutive lower closes
+                        inOpen < MEM_IDX_NS(inClose,i1) &&                                             // 4th opens below prior close
+                        inClose > MEM_IDX_NS(inOpen,i3)                                               // 4th closes above 1st open
+                    )
+                )
+              )
+                VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE(i1) * 100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+
+        }
+
+
+        if (STATE.mem_index-1 >= 3)
+        {
+          STATE.NearPeriodTotal3 += TA_CANDLERANGE_STATE( Near, i3 );
+          STATE.NearPeriodTotal2 += TA_CANDLERANGE_STATE( Near, i2 );
+        }
+
+        if (!(NEED_MORE_DATA))
+        {
+         STATE.NearPeriodTotal3 -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodNear-3) );
+         STATE.NearPeriodTotal2 -= TA_CANDLERANGE_STATE( BodyShort, GET_LOCAL_IDX(-STATE.periodNear-2) );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

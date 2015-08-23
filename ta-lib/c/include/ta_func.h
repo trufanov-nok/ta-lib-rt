@@ -2235,6 +2235,10 @@ struct TA_CDL3INSIDE_State {
                            size_t mem_size;
                            size_t mem_index;
                            struct TA_CDL3INSIDE_Data* memory;
+                           double       BodyLongPeriodTotal;
+                           double       BodyShortPeriodTotal;
+                           int          periodBodyLong;
+                           int          periodBodyShort;
                            };
 
 
@@ -2332,6 +2336,9 @@ struct TA_CDL3LINESTRIKE_State {
                                size_t mem_size;
                                size_t mem_index;
                                struct TA_CDL3LINESTRIKE_Data* memory;
+                               double       NearPeriodTotal3;
+                               double       NearPeriodTotal2;
+                               int          periodNear;
                                };
 
 

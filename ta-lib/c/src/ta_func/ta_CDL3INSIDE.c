@@ -334,7 +334,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDL3INSIDE_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+unsigned int i1,i2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -369,7 +370,59 @@
 
    /* insert state based TA dunc code here. */
 
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+                if (FIRST_LAUNCH)
+                   {
+                         STATE.BodyLongPeriodTotal = 0.;
+                         STATE.BodyShortPeriodTotal = 0.;
+                         STATE.periodBodyLong = 2 + TA_CANDLEAVGPERIOD(BodyLong);
+                         STATE.periodBodyShort = 1 + TA_CANDLEAVGPERIOD(BodyShort);
+                   }
+
+                i1 = GET_LOCAL_IDX(-1);
+                i2 = GET_LOCAL_IDX(-2);
+
+                if (!(NEED_MORE_DATA))
+                {
+
+                    if( TA_REALBODY_STATE(i2) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i2 ) &&         // 1st: long
+                        TA_REALBODY_STATE(i1) <= TA_CANDLEAVERAGE_STATE( BodyShort, STATE.BodyShortPeriodTotal, i1 ) &&      // 2nd: short
+                        max( MEM_IDX_NS(inClose,i1), MEM_IDX_NS(inOpen,i1) ) < max( MEM_IDX_NS(inClose,i2), MEM_IDX_NS(inOpen,i2) ) &&                  //      engulfed by 1st
+                        min( MEM_IDX_NS(inClose,i1), MEM_IDX_NS(inOpen,i1) ) > min( MEM_IDX_NS(inClose,i2), MEM_IDX_NS(inOpen,i2) ) &&
+                        ( ( TA_CANDLECOLOR_STATE(i2) == 1 && TA_CANDLECOLOR_STATE_CUR() == -1 && inClose < MEM_IDX_NS(inOpen,i2) )   // 3rd: opposite to 1st
+                          ||                                                                                    //      and closing out
+                          ( TA_CANDLECOLOR_STATE(i2) == -1 && TA_CANDLECOLOR_STATE_CUR() == 1 && inClose > MEM_IDX_NS(inOpen,i2) )
+                        )
+                      )
+                        VALUE_HANDLE_DEREF(outInteger) = -TA_CANDLECOLOR_STATE(i2) * 100;
+                    else
+                        VALUE_HANDLE_DEREF(outInteger) = 0;
+
+                }
+
+
+                if (STATE.mem_index-1 >= 2)
+                {
+                  STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i2 );
+                }
+
+                if (STATE.mem_index-1 >= 1)
+                {
+                  STATE.BodyShortPeriodTotal += TA_CANDLERANGE_STATE( BodyShort, i1 );
+                }
+
+                if (!(NEED_MORE_DATA))
+                {
+                 STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong) );
+                 STATE.BodyShortPeriodTotal -= TA_CANDLERANGE_STATE( BodyShort, GET_LOCAL_IDX(-STATE.periodBodyShort) );
+                }
+
+                PUSH_TO_MEM(inOpen,inOpen);
+                PUSH_TO_MEM(inHigh,inHigh);
+                PUSH_TO_MEM(inLow,inLow);
+                PUSH_TO_MEM(inClose,inClose);
+                if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
+           return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
