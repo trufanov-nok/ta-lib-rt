@@ -799,7 +799,21 @@ static ErrorNumber do_test_state( const TA_History *history,
                             &outBegIdx,
                             &outNbElement,
                             gBuffer[0].out0 );
-       }
+       } else
+           if( strcmp(test->name,"CDL3BLACKCROWS") == 0 )
+           {
+              TA_Integer outBegIdx;
+              TA_Integer outNbElement;
+              retCode = TA_CDL3BLACKCROWS_StateTest(0,
+                                252,
+                                gBuffer[0].in,
+                                gBuffer[1].in,
+                                gBuffer[2].in,
+                                gBuffer[3].in,
+                                &outBegIdx,
+                                &outNbElement,
+                                gBuffer[0].out0 );
+           }
 
 
    return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;

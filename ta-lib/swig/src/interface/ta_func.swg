@@ -1100,6 +1100,10 @@ struct TA_CDL3BLACKCROWS_State {
                                size_t mem_size;
                                size_t mem_index;
                                struct TA_CDL3BLACKCROWS_Data* memory;
+                               double       ShadowVeryShortPeriodTotal0;
+                               double       ShadowVeryShortPeriodTotal1;
+                               double       ShadowVeryShortPeriodTotal2;
+                               int          periodShadowVeryShort;
                                };
 
 

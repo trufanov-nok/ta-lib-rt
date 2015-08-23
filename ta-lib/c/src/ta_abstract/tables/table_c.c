@@ -140,11 +140,14 @@ const TA_InputParameterInfo TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_2 =
                                   { TA_Input_Real, "ShadowVeryShortPeriodTotal1", 0 };
 const TA_InputParameterInfo TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_3 =
                                   { TA_Input_Real, "ShadowVeryShortPeriodTotal2", 0 };
+const TA_InputParameterInfo TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "periodShadowVeryShort", 0 };
 
 static const TA_InputParameterInfo *TA_CDL3BLACKCROWS_StructParams[] = {
     &TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_1,
     &TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_2,
     &TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDL3BLACKCROWS_DEF_UI_STRUCT_PARAM_4,
     NULL };
 
 DEF_FUNCTION( CDL3BLACKCROWS,                         /* name */
