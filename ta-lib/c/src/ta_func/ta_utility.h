@@ -394,6 +394,13 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
 #define TA_LOWERSHADOW(IDX)     ( ( inClose[IDX] >= inOpen[IDX] ? inOpen[IDX] : inClose[IDX] ) - inLow[IDX] )
 #define TA_HIGHLOWRANGE(IDX)    ( inHigh[IDX] - inLow[IDX] )
 #define TA_CANDLECOLOR(IDX)     ( inClose[IDX] >= inOpen[IDX] ? 1 : -1 )
+
+#define TA_REALBODY_STATE(IDX)        ( std_fabs( MEM_IDX_NS(IDX,inClose) - MEM_IDX_NS(IDX,inOpen) ) )
+#define TA_UPPERSHADOW_STATE(IDX)     ( MEM_IDX_NS(IDX,inHigh) - ( MEM_IDX_NS(IDX,inClose) >= MEM_IDX_NS(IDX,inOpen) ? MEM_IDX_NS(IDX,inClose) : MEM_IDX_NS(IDX,inOpen) ) )
+#define TA_LOWERSHADOW_STATE(IDX)     ( ( MEM_IDX_NS(IDX,inClose) >= MEM_IDX_NS(IDX,inOpen) ? MEM_IDX_NS(IDX,inOpen) : MEM_IDX_NS(IDX,inClose) ) - MEM_IDX_NS(IDX,inLow) )
+#define TA_HIGHLOWRANGE_STATE(IDX)    ( MEM_IDX_NS(IDX,inHigh) - MEM_IDX_NS(IDX,inLow) )
+#define TA_CANDLECOLOR_STATE(IDX)     ( MEM_IDX_NS(IDX,inClose) >= MEM_IDX_NS(IDX,inOpen) ? 1 : -1 )
+
 #ifdef TA_LIB_PRO
 /* Section for code distributed with TA-Lib Pro only. */
 #endif
@@ -426,6 +433,22 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
 #define TA_REALBODYGAPDOWN(IDX2,IDX1)   ( max(inOpen[IDX2],inClose[IDX2]) < min(inOpen[IDX1],inClose[IDX1]) )
 #define TA_CANDLEGAPUP(IDX2,IDX1)       ( inLow[IDX2] > inHigh[IDX1] )
 #define TA_CANDLEGAPDOWN(IDX2,IDX1)     ( inHigh[IDX2] < inLow[IDX1] )
+
+
+#define TA_CANDLERANGE_STATE(SET,IDX) \
+    ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_RealBody,RealBody) ? TA_REALBODY_STATE(IDX) : \
+    ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_HighLow,HighLow)   ? TA_HIGHLOWRANGE_STATE(IDX) : \
+    ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_Shadows,Shadows)   ? TA_UPPERSHADOW_STATE(IDX) + TA_LOWERSHADOW_STATE(IDX) : \
+      0 ) ) )
+#define TA_CANDLEAVERAGE_STATE(SET,SUM,IDX) \
+    ( TA_CANDLEFACTOR(SET) \
+        * ( TA_CANDLEAVGPERIOD(SET) != 0.0? SUM / TA_CANDLEAVGPERIOD(SET) : TA_CANDLERANGE_STATE(SET,IDX) ) \
+        / ( TA_CANDLERANGETYPE(SET) == ENUM_VALUE(RangeType,TA_RangeType_Shadows,Shadows) ? 2.0 : 1.0 ) \
+    )
+#define TA_REALBODYGAPUP_STATE(IDX2,IDX1)     ( min(MEM_IDX_NS(inOpen,IDX2),MEM_IDX_NS(inClose,IDX2)) > max(MEM_IDX_NS(inOpen,IDX1),MEM_IDX_NS(inClose,IDX1)) )
+#define TA_REALBODYGAPDOWN_STATE(IDX2,IDX1)   ( max(MEM_IDX_NS(inOpen,IDX2),MEM_IDX_NS(inClose,IDX2)) < min(MEM_IDX_NS(inOpen,IDX1),MEM_IDX_NS(inClose,IDX1)) )
+#define TA_CANDLEGAPUP_STATE(IDX2,IDX1)       ( MEM_IDX_NS(inLow,IDX2) > MEM_IDX_NS(inHigh,IDX1) )
+#define TA_CANDLEGAPDOWN_STATE(IDX2,IDX1)     ( MEM_IDX_NS(inHigh,IDX2) < MEM_IDX_NS(inLow,IDX1) )
 
 #ifdef TA_LIB_PRO
 /* Section for code distributed with TA-Lib Pro only. */

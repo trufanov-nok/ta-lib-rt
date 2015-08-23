@@ -166,7 +166,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
-
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test );
 static ErrorNumber callCandlestick( TA_ParamHolder **paramHolderPtr,
                                     const char   *name,
                                     int           startIdx,
@@ -272,6 +273,13 @@ ErrorNumber test_candlestick( TA_History *history )
       if( retValue != 0 )
       {
          printf( "Failed Test #%d for %s (retValue=%d)\n", i, tableTest[i].name, retValue );
+         return retValue;
+      }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+         printf( "Failed State Test #%d for %s (retValue=%d)\n", i, tableTest[i].name, retValue );
          return retValue;
       }
    }
@@ -554,7 +562,7 @@ static ErrorNumber do_test( const TA_History *history,
    outBegIdx = outNbElement = 0;
 
    /* Make another call where the input and the output are the
-    * same buffer.
+    * same buffer.https://www.google.ru/search?q=MACRO+EXPANSION+TREATS+INT+AS+DOUBLE&ie=UTF-8&sa=Search&channel=fe&client=browser-ubuntu&hl=ru&gws_rd=cr,ssl&ei=c7TYVZqtH6ifygPW86rIAg
     */
    switch( test->theFunction )
    {
@@ -742,3 +750,44 @@ static ErrorNumber do_test( const TA_History *history,
 
    return TA_TEST_PASS;
 }
+
+static ErrorNumber do_test_state( const TA_History *history,
+                            const TA_Test *test )
+{
+   TA_RangeTestParam testParam;
+   ErrorNumber errNb;
+   TA_RetCode retCode;
+
+   (void)test;
+
+   /* Set to NAN all the elements of the gBuffers.  */
+   clearAllBuffers();
+
+   /* Build the input. */
+   setInputBuffer( 0, history->open,  history->nbBars );
+   setInputBuffer( 1, history->high,  history->nbBars );
+   setInputBuffer( 2, history->low,   history->nbBars );
+   setInputBuffer( 3, history->close, history->nbBars );
+
+
+
+   /* Make a simple first call. */
+   if( strcmp(test->name,"CDL3OUTSIDE") == 0 )
+   {
+      TA_Integer outBegIdx;
+      TA_Integer outNbElement;
+      retCode = TA_CDL3OUTSIDE_StateTest(0,
+                        252,
+                        gBuffer[0].in,
+                        gBuffer[1].in,
+                        gBuffer[2].in,
+                        gBuffer[3].in,
+                        &outBegIdx,
+                        &outNbElement,
+                        gBuffer[0].out0 );
+   }
+
+
+   return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;
+}
+
