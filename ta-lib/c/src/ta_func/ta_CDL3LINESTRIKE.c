@@ -434,8 +434,8 @@ unsigned int i1,i2,i3;
 
         if (!(NEED_MORE_DATA))
         {
-         STATE.NearPeriodTotal3 -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodNear-3) );
-         STATE.NearPeriodTotal2 -= TA_CANDLERANGE_STATE( BodyShort, GET_LOCAL_IDX(-STATE.periodNear-2) );
+         STATE.NearPeriodTotal3 -= TA_CANDLERANGE_STATE( Near, GET_LOCAL_IDX(-STATE.periodNear-3) );
+         STATE.NearPeriodTotal2 -= TA_CANDLERANGE_STATE( Near, GET_LOCAL_IDX(-STATE.periodNear-2) );
         }
 
         PUSH_TO_MEM(inOpen,inOpen);
