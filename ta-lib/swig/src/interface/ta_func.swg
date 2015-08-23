@@ -1354,6 +1354,22 @@ struct TA_CDL3WHITESOLDIERS_State {
                                   size_t mem_size;
                                   size_t mem_index;
                                   struct TA_CDL3WHITESOLDIERS_Data* memory;
+                                  double       ShadowVeryShortPeriodTotal0;
+                                  double       ShadowVeryShortPeriodTotal1;
+                                  double       ShadowVeryShortPeriodTotal2;
+                                  double       NearPeriodTotal1;
+                                  double       NearPeriodTotal2;
+                                  double       FarPeriodTotal1;
+                                  double       FarPeriodTotal2;
+                                  double       BodyShortPeriodTotal;
+                                  int          gapShadowVeryShort;
+                                  int          periodShadowVeryShort;
+                                  int          gapNear;
+                                  int          periodNear;
+                                  int          gapFar;
+                                  int          periodFar;
+                                  int          gapBodyShort;
+                                  int          periodBodyShort;
                                   };
 
 

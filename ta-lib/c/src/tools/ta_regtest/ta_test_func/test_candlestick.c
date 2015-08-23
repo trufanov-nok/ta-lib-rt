@@ -791,13 +791,14 @@ static ErrorNumber do_test_state( const TA_History *history,
    TEST_4IN(CDL2CROWS) else
    TEST_4IN(CDL3BLACKCROWS) else
    TEST_4IN(CDL3INSIDE) else
-   TEST_4IN(CDL3OUTSIDE)
+   TEST_4IN(CDL3OUTSIDE) else
+   TEST_4IN(CDL3STARSINSOUTH)
 
-   if( strcmp(test->name,"CDL3STARSINSOUTH") == 0 )
+   if( strcmp(test->name,"CDL3WHITESOLDIERS") == 0 )
    {
       TA_Integer outBegIdx;
       TA_Integer outNbElement;
-      retCode = TA_CDL3LINESTRIKE_StateTest(0,
+      retCode = TA_CDL3WHITESOLDIERS_StateTest(0,
                         252,
                         gBuffer[0].in,
                         gBuffer[1].in,

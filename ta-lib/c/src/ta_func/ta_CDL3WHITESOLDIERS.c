@@ -387,7 +387,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDL3WHITESOLDIERS_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+unsigned int i1,i2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -421,6 +422,104 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.ShadowVeryShortPeriodTotal0 = 0.;
+                 STATE.ShadowVeryShortPeriodTotal1 = 0.;
+                 STATE.ShadowVeryShortPeriodTotal2 = 0.;
+                 STATE.NearPeriodTotal1 = 0.;
+                 STATE.NearPeriodTotal2 = 0.;
+                 STATE.FarPeriodTotal1 = 0.;
+                 STATE.FarPeriodTotal2 = 0.;
+                 STATE.BodyShortPeriodTotal = 0.;
+
+                 STATE.periodFar = TA_CANDLEAVGPERIOD(Far);
+                 STATE.periodNear = TA_CANDLEAVGPERIOD(Near);
+                 STATE.periodShadowVeryShort = TA_CANDLEAVGPERIOD(ShadowVeryShort);
+                 STATE.periodBodyShort = TA_CANDLEAVGPERIOD(BodyShort);
+
+                 STATE.gapFar = MEM_SIZE - STATE.periodFar;
+                 STATE.gapNear = MEM_SIZE - STATE.periodNear;
+                 STATE.gapShadowVeryShort = MEM_SIZE - STATE.periodShadowVeryShort;
+                 STATE.gapBodyShort = MEM_SIZE - STATE.periodBodyShort;
+           }
+
+        i1 = GET_LOCAL_IDX(-1);
+        i2 = GET_LOCAL_IDX(-2);
+
+        if (!(NEED_MORE_DATA))
+        {
+
+            if( TA_CANDLECOLOR_STATE(i2) == 1 &&                                                     // 1st white
+                TA_UPPERSHADOW_STATE(i2) < TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal2, i2 ) &&
+                                                                                                // very short upper shadow
+                TA_CANDLECOLOR_STATE(i1) == 1 &&                                                     // 2nd white
+                TA_UPPERSHADOW_STATE(i1) < TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal1, i1 ) &&
+                                                                                                // very short upper shadow
+                TA_CANDLECOLOR_STATE_CUR() == 1 &&                                                       // 3rd white
+                TA_UPPERSHADOW_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal0 ) &&
+                                                                                                // very short upper shadow
+                inClose > MEM_IDX_NS(inClose,i1) && MEM_IDX_NS(inClose,i1) > MEM_IDX_NS(inClose,i2) &&                     // consecutive higher closes
+                MEM_IDX_NS(inOpen,i1) > MEM_IDX_NS(inOpen,i2) &&                                                    // 2nd opens within/near 1st real body
+                MEM_IDX_NS(inOpen,i1) <= MEM_IDX_NS(inClose,i2) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal2, i2 ) &&
+                inOpen > MEM_IDX_NS(inOpen,i1) &&                                                      // 3rd opens within/near 2nd real body
+                inOpen <= MEM_IDX_NS(inClose,i1) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal1, i1 ) &&
+                TA_REALBODY_STATE(i1) > TA_REALBODY_STATE(i2) - TA_CANDLEAVERAGE_STATE( Far, STATE.FarPeriodTotal2, i2 ) &&
+                                                                                                // 2nd not far shorter than 1st
+                TA_REALBODY_STATE_CUR() > TA_REALBODY_STATE(i1) - TA_CANDLEAVERAGE_STATE( Far, STATE.FarPeriodTotal1, i1 ) &&
+                                                                                                // 3rd not far shorter than 2nd
+                TA_REALBODY_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( BodyShort, STATE.BodyShortPeriodTotal )      // not short real body
+              )
+                VALUE_HANDLE_DEREF(outInteger) = 100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+
+        }
+
+
+        if ((int)STATE.mem_index-1 >= STATE.gapShadowVeryShort)
+        {
+          STATE.ShadowVeryShortPeriodTotal2 += TA_CANDLERANGE_STATE( ShadowVeryShort, i2 );
+          STATE.ShadowVeryShortPeriodTotal1 += TA_CANDLERANGE_STATE( ShadowVeryShort, i1 );
+          STATE.ShadowVeryShortPeriodTotal0 += TA_CANDLERANGE_STATE_CUR( ShadowVeryShort );
+        }
+
+        if ((int)STATE.mem_index-1 >= STATE.gapFar)
+        {
+          STATE.FarPeriodTotal2 += TA_CANDLERANGE_STATE( Far, i2 );
+          STATE.FarPeriodTotal1 += TA_CANDLERANGE_STATE( Far, i1 );
+        }
+
+        if ((int)STATE.mem_index-1 >= STATE.gapNear)
+        {
+          STATE.NearPeriodTotal2 += TA_CANDLERANGE_STATE( Near, i2 );
+          STATE.NearPeriodTotal1 += TA_CANDLERANGE_STATE( Near, i1 );
+        }
+
+        if ((int)STATE.mem_index-1 >= STATE.gapBodyShort)
+        {
+          STATE.BodyShortPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyShort );
+        }
+
+
+
+        if (!(NEED_MORE_DATA))
+        {
+         STATE.ShadowVeryShortPeriodTotal2 -= TA_CANDLERANGE_STATE( ShadowVeryShort, GET_LOCAL_IDX(-STATE.periodShadowVeryShort-2) );
+         STATE.ShadowVeryShortPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowVeryShort, GET_LOCAL_IDX(-STATE.periodShadowVeryShort-1) );
+         STATE.ShadowVeryShortPeriodTotal0 -= TA_CANDLERANGE_STATE( ShadowVeryShort, GET_LOCAL_IDX(-STATE.periodShadowVeryShort) );
+         STATE.FarPeriodTotal2 -= TA_CANDLERANGE_STATE( Far, GET_LOCAL_IDX(-STATE.periodFar-2) );
+         STATE.FarPeriodTotal1 -= TA_CANDLERANGE_STATE( Far, GET_LOCAL_IDX(-STATE.periodFar-1) );
+         STATE.NearPeriodTotal2 -= TA_CANDLERANGE_STATE( Near, GET_LOCAL_IDX(-STATE.periodNear-2) );
+         STATE.NearPeriodTotal1 -= TA_CANDLERANGE_STATE( Near, GET_LOCAL_IDX(-STATE.periodNear-1) );
+         STATE.BodyShortPeriodTotal -= TA_CANDLERANGE_STATE( BodyShort, GET_LOCAL_IDX(-STATE.periodBodyShort) );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
