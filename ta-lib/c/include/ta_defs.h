@@ -217,7 +217,7 @@
 #define NEED_MORE_DATA STATE.mem_size > STATE.mem_index - 1
 #define LAST_NEED_MORE_DATA STATE.mem_size == STATE.mem_index
 #define FIRST_LAUNCH (STATE.mem_index == 1)
-#define GET_LOCAL_IDX(i) (STATE.mem_index-1+i)%MEM_SIZE
+#define GET_LOCAL_IDX(i)  ((STATE.mem_index-1+i)%MEM_SIZE)
 
 
 /* Abstraction of function calls within the library.

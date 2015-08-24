@@ -430,13 +430,13 @@ int i1,i2;
         if (!(NEED_MORE_DATA))
         {
 
-            if( TA_REALBODY_STATE(i2) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i2 ) &&         // 1st: long
-                TA_CANDLECOLOR_STATE(i2) == 1 &&                                                             //           white
-                TA_REALBODY_STATE(i1) <= TA_CANDLEAVERAGE_STATE( BodyShort, STATE.BodyShortPeriodTotal, i1 ) &&      // 2nd: short
-                TA_REALBODYGAPUP_STATE(i1,i2) &&                                                            //            gapping up
+            if( TA_REALBODY_STATE_IDX(i2) > TA_CANDLEAVERAGE_STATE_IDX(  BodyLong,  STATE.BodyLongPeriodTotal, i2 ) &&         // 1st: long
+                TA_CANDLECOLOR_STATE_IDX(i2) == 1 &&                                                             //           white
+                TA_REALBODY_STATE_IDX(i1) <= TA_CANDLEAVERAGE_STATE_IDX(  BodyShort,  STATE.BodyShortPeriodTotal, i1 ) &&      // 2nd: short
+                TA_REALBODYGAPUP_STATE_IDX( i1, i2 ) &&                                                            //            gapping up
                 TA_REALBODY_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( BodyShort, STATE.BodyShortPeriodTotal2) &&          // 3rd: longer than short
                 TA_CANDLECOLOR_STATE_CUR() == -1 &&                                                              //          black real body
-                inClose < MEM_IDX_NS(inClose,i2) - TA_REALBODY_STATE(i2) * STATE.optInPenetration                         //               closing well within 1st rb
+                inClose < MEM_IDX_NS(inClose,i2) - TA_REALBODY_STATE_IDX(i2) * STATE.optInPenetration                         //               closing well within 1st rb
               )
                 VALUE_HANDLE_DEREF(outInteger) = -100;
             else
@@ -447,12 +447,12 @@ int i1,i2;
 
         if ((int)STATE.mem_index-1 >= STATE.gapBodyLong)
         {
-          STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i2 );
+          STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_IDX(  BodyLong, i2 );
         }
 
         if ((int)STATE.mem_index-1 >= STATE.gapBodyShort)
         {
-          STATE.BodyShortPeriodTotal += TA_CANDLERANGE_STATE( BodyShort, i1 );
+          STATE.BodyShortPeriodTotal += TA_CANDLERANGE_STATE_IDX(  BodyShort, i1 );
           STATE.BodyShortPeriodTotal2 += TA_CANDLERANGE_STATE_CUR( BodyShort );
         }
 
@@ -460,8 +460,8 @@ int i1,i2;
 
         if (!(NEED_MORE_DATA))
         {
-         STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong) );
-         STATE.BodyShortPeriodTotal -= TA_CANDLERANGE_STATE( BodyShort, GET_LOCAL_IDX(-STATE.periodBodyShort) );
+         STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, -STATE.periodBodyLong );
+         STATE.BodyShortPeriodTotal -= TA_CANDLERANGE_STATE( BodyShort, -STATE.periodBodyShort );
          STATE.BodyShortPeriodTotal2 -= TA_CANDLERANGE_STATE( BodyShort, GET_LOCAL_IDX(-STATE.periodBodyShort+1) );
         }
 

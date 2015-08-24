@@ -398,19 +398,19 @@ unsigned int i1,i2,i3;
         if (!(NEED_MORE_DATA))
         {
 
-            if( TA_CANDLECOLOR_STATE(i3) == -1 &&                                    // 1st black
-                TA_CANDLECOLOR_STATE(i2) == -1 &&                                    // 2nd black
-                TA_CANDLECOLOR_STATE(i1) == -1 &&                                    // 3rd black
+            if( TA_CANDLECOLOR_STATE_IDX(i3) == -1 &&                                    // 1st black
+                TA_CANDLECOLOR_STATE_IDX(i2) == -1 &&                                    // 2nd black
+                TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&                                    // 3rd black
                 TA_CANDLECOLOR_STATE_CUR() == -1 &&                                      // 4th black
                                                                                 // 1st: marubozu
-                TA_LOWERSHADOW_STATE(i3) < TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal3, i3 ) &&
-                TA_UPPERSHADOW_STATE(i3) < TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal3, i3 ) &&
+                TA_LOWERSHADOW_STATE_IDX(i3) < TA_CANDLEAVERAGE_STATE_IDX(  ShadowVeryShort,  STATE.ShadowVeryShortPeriodTotal3, i3 ) &&
+                TA_UPPERSHADOW_STATE_IDX(i3) < TA_CANDLEAVERAGE_STATE_IDX(  ShadowVeryShort,  STATE.ShadowVeryShortPeriodTotal3, i3 ) &&
                                                                                 // 2nd: marubozu
-                TA_LOWERSHADOW_STATE(i2) < TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal2, i2 ) &&
-                TA_UPPERSHADOW_STATE(i2) < TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal2, i2 ) &&
-                TA_REALBODYGAPDOWN_STATE(i1,i2) &&                                  // 3rd: opens gapping down
+                TA_LOWERSHADOW_STATE_IDX(i2) < TA_CANDLEAVERAGE_STATE_IDX(  ShadowVeryShort,  STATE.ShadowVeryShortPeriodTotal2, i2 ) &&
+                TA_UPPERSHADOW_STATE_IDX(i2) < TA_CANDLEAVERAGE_STATE_IDX(  ShadowVeryShort,  STATE.ShadowVeryShortPeriodTotal2, i2 ) &&
+                TA_REALBODYGAPDOWN_STATE_IDX( i1, i2 ) &&                                  // 3rd: opens gapping down
                                                                                 //      and HAS an upper shadow
-                TA_UPPERSHADOW_STATE(i1) > TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal1, i1 ) &&
+                TA_UPPERSHADOW_STATE_IDX(i1) > TA_CANDLEAVERAGE_STATE_IDX(  ShadowVeryShort,  STATE.ShadowVeryShortPeriodTotal1, i1 ) &&
                 MEM_IDX_NS(inHigh,i1) > MEM_IDX_NS(inClose,i2) &&                                   //      that extends into the prior body
                 inHigh > MEM_IDX_NS(inHigh,i1) && inLow < MEM_IDX_NS(inLow,i1)                // 4th: engulfs the 3rd including the shadows
               )
@@ -423,17 +423,17 @@ unsigned int i1,i2,i3;
 
         if ((int)STATE.mem_index-1 >= 3)
         {
-           STATE.ShadowVeryShortPeriodTotal3 += TA_CANDLERANGE_STATE( ShadowVeryShort, i3 );
-           STATE.ShadowVeryShortPeriodTotal2 += TA_CANDLERANGE_STATE( ShadowVeryShort, i2 );
-           STATE.ShadowVeryShortPeriodTotal1 += TA_CANDLERANGE_STATE( ShadowVeryShort, i1 );
+           STATE.ShadowVeryShortPeriodTotal3 += TA_CANDLERANGE_STATE_IDX(  ShadowVeryShort, i3 );
+           STATE.ShadowVeryShortPeriodTotal2 += TA_CANDLERANGE_STATE_IDX(  ShadowVeryShort, i2 );
+           STATE.ShadowVeryShortPeriodTotal1 += TA_CANDLERANGE_STATE_IDX(  ShadowVeryShort, i1 );
         }
 
 
         if (!(NEED_MORE_DATA))
         {
-         STATE.ShadowVeryShortPeriodTotal3 -= TA_CANDLERANGE_STATE( ShadowVeryShort, GET_LOCAL_IDX(-STATE.periodShadowVeryShort-3) );
-         STATE.ShadowVeryShortPeriodTotal2 -= TA_CANDLERANGE_STATE( ShadowVeryShort, GET_LOCAL_IDX(-STATE.periodShadowVeryShort-2) );
-         STATE.ShadowVeryShortPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowVeryShort, GET_LOCAL_IDX(-STATE.periodShadowVeryShort-1) );
+         STATE.ShadowVeryShortPeriodTotal3 -= TA_CANDLERANGE_STATE( ShadowVeryShort, -STATE.periodShadowVeryShort-3 );
+         STATE.ShadowVeryShortPeriodTotal2 -= TA_CANDLERANGE_STATE( ShadowVeryShort, -STATE.periodShadowVeryShort-2 );
+         STATE.ShadowVeryShortPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowVeryShort, -STATE.periodShadowVeryShort-1 );
         }
 
         PUSH_TO_MEM(inOpen,inOpen);

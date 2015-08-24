@@ -488,43 +488,43 @@ int i1,i2;
         if (!(NEED_MORE_DATA))
         {
 
-            if( TA_CANDLECOLOR_STATE(i2) == 1 &&                                                     // 1st white
-                TA_CANDLECOLOR_STATE(i1) == 1 &&                                                     // 2nd white
+            if( TA_CANDLECOLOR_STATE_IDX(i2) == 1 &&                                                     // 1st white
+                TA_CANDLECOLOR_STATE_IDX(i1) == 1 &&                                                     // 2nd white
                 TA_CANDLECOLOR_STATE_CUR() == 1 &&                                                       // 3rd white
                 inClose > MEM_IDX_NS(inClose,i1) && MEM_IDX_NS(inClose,i1) > MEM_IDX_NS(inClose,i2) &&                     // consecutive higher closes
                 MEM_IDX_NS(inOpen,i1) > MEM_IDX_NS(inOpen,i2) &&                                                    // 2nd opens within/near 1st real body
-                MEM_IDX_NS(inOpen,i1) <= MEM_IDX_NS(inClose,i2) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal2, i2 ) &&
+                MEM_IDX_NS(inOpen,i1) <= MEM_IDX_NS(inClose,i2) + TA_CANDLEAVERAGE_STATE_IDX(  Near,  STATE.NearPeriodTotal2, i2 ) &&
                 inOpen > MEM_IDX_NS(inOpen,i1) &&                                                      // 3rd opens within/near 2nd real body
-                inOpen <= MEM_IDX_NS(inClose,i1) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal1, i1 ) &&
-                TA_REALBODY_STATE(i2) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i2 ) && // 1st: long real body
-                TA_UPPERSHADOW_STATE(i2) < TA_CANDLEAVERAGE_STATE( ShadowShort, STATE.ShadowShortPeriodTotal2, i2 ) &&
+                inOpen <= MEM_IDX_NS(inClose,i1) + TA_CANDLEAVERAGE_STATE_IDX(  Near,  STATE.NearPeriodTotal1, i1 ) &&
+                TA_REALBODY_STATE_IDX(i2) > TA_CANDLEAVERAGE_STATE_IDX(  BodyLong,  STATE.BodyLongPeriodTotal, i2 ) && // 1st: long real body
+                TA_UPPERSHADOW_STATE_IDX(i2) < TA_CANDLEAVERAGE_STATE_IDX(  ShadowShort,  STATE.ShadowShortPeriodTotal2, i2 ) &&
                                                                                                 // 1st: short upper shadow
                 (
                     // ( 2 far smaller than 1 && 3 not longer than 2 )
                     // advance blocked with the 2nd, 3rd must not carry on the advance
                     (
-                        TA_REALBODY_STATE(i1) < TA_REALBODY_STATE(i2) - TA_CANDLEAVERAGE_STATE( Far, STATE.FarPeriodTotal2, i2 ) &&
-                        TA_REALBODY_STATE_CUR() < TA_REALBODY_STATE(i1) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal1, i1 )
+                        TA_REALBODY_STATE_IDX(i1) < TA_REALBODY_STATE_IDX(i2) - TA_CANDLEAVERAGE_STATE_IDX(  Far,  STATE.FarPeriodTotal2, i2 ) &&
+                        TA_REALBODY_STATE_CUR() < TA_REALBODY_STATE_IDX(i1) + TA_CANDLEAVERAGE_STATE_IDX(  Near,  STATE.NearPeriodTotal1, i1 )
                     ) ||
                     // 3 far smaller than 2
                     // advance blocked with the 3rd
                     (
-                        TA_REALBODY_STATE_CUR() < TA_REALBODY_STATE(i1) - TA_CANDLEAVERAGE_STATE( Far, STATE.FarPeriodTotal1, i1 )
+                        TA_REALBODY_STATE_CUR() < TA_REALBODY_STATE_IDX(i1) - TA_CANDLEAVERAGE_STATE_IDX(  Far,  STATE.FarPeriodTotal1, i1 )
                     ) ||
                     // ( 3 smaller than 2 && 2 smaller than 1 && (3 or 2 not short upper shadow) )
                     // advance blocked with progressively smaller real bodies and some upper shadows
                     (
-                        TA_REALBODY_STATE_CUR() < TA_REALBODY_STATE(i1) &&
-                        TA_REALBODY_STATE(i1) < TA_REALBODY_STATE(i2) &&
+                        TA_REALBODY_STATE_CUR() < TA_REALBODY_STATE_IDX(i1) &&
+                        TA_REALBODY_STATE_IDX(i1) < TA_REALBODY_STATE_IDX(i2) &&
                         (
                             TA_UPPERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowShort, STATE.ShadowShortPeriodTotal0 ) ||
-                            TA_UPPERSHADOW_STATE(i1) > TA_CANDLEAVERAGE_STATE( ShadowShort, STATE.ShadowShortPeriodTotal1, i1 )
+                            TA_UPPERSHADOW_STATE_IDX(i1) > TA_CANDLEAVERAGE_STATE_IDX(  ShadowShort,  STATE.ShadowShortPeriodTotal1, i1 )
                         )
                     ) ||
                     // ( 3 smaller than 2 && 3 long upper shadow )
                     // advance blocked with 3rd candle's long upper shadow and smaller body
                     (
-                        TA_REALBODY_STATE_CUR() < TA_REALBODY_STATE(i1) &&
+                        TA_REALBODY_STATE_CUR() < TA_REALBODY_STATE_IDX(i1) &&
                         TA_UPPERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowLong, STATE.ShadowLongPeriodTotal0 )
                     )
                 )
@@ -538,49 +538,49 @@ int i1,i2;
 
         if ((int)STATE.mem_index-1 >= STATE.gapShadowShort)
         {
-          STATE.ShadowShortPeriodTotal2 += TA_CANDLERANGE_STATE( ShadowShort, i2 );
-          STATE.ShadowShortPeriodTotal1 += TA_CANDLERANGE_STATE( ShadowShort, i1 );
+          STATE.ShadowShortPeriodTotal2 += TA_CANDLERANGE_STATE_IDX(  ShadowShort, i2 );
+          STATE.ShadowShortPeriodTotal1 += TA_CANDLERANGE_STATE_IDX(  ShadowShort, i1 );
           STATE.ShadowShortPeriodTotal0 += TA_CANDLERANGE_STATE_CUR( ShadowShort );
         }
 
 
         if ((int)STATE.mem_index-1 >= STATE.gapShadowLong)
         {
-          STATE.ShadowLongPeriodTotal1 += TA_CANDLERANGE_STATE( ShadowLong, i1 );
+          STATE.ShadowLongPeriodTotal1 += TA_CANDLERANGE_STATE_IDX(  ShadowLong, i1 );
           STATE.ShadowLongPeriodTotal0 += TA_CANDLERANGE_STATE_CUR( ShadowLong );
         }
 
         if ((int)STATE.mem_index-1 >= STATE.gapFar)
         {
-          STATE.FarPeriodTotal2 += TA_CANDLERANGE_STATE( Far, i2 );
-          STATE.FarPeriodTotal1 += TA_CANDLERANGE_STATE( Far, i1 );
+          STATE.FarPeriodTotal2 += TA_CANDLERANGE_STATE_IDX(  Far, i2 );
+          STATE.FarPeriodTotal1 += TA_CANDLERANGE_STATE_IDX(  Far, i1 );
         }
 
         if ((int)STATE.mem_index-1 >= STATE.gapNear)
         {
-          STATE.NearPeriodTotal2 += TA_CANDLERANGE_STATE( Near, i2 );
-          STATE.NearPeriodTotal1 += TA_CANDLERANGE_STATE( Near, i1 );
+          STATE.NearPeriodTotal2 += TA_CANDLERANGE_STATE_IDX(  Near, i2 );
+          STATE.NearPeriodTotal1 += TA_CANDLERANGE_STATE_IDX(  Near, i1 );
         }
 
         if ((int)STATE.mem_index-1 >= STATE.gapBodyLong)
         {
-          STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i2 );
+          STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_IDX(  BodyLong, i2 );
         }
 
 
 
         if (!(NEED_MORE_DATA))
         {
-         STATE.ShadowShortPeriodTotal2 -= TA_CANDLERANGE_STATE( ShadowShort, GET_LOCAL_IDX(-STATE.periodShadowShort-2) );
-         STATE.ShadowShortPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowShort, GET_LOCAL_IDX(-STATE.periodShadowShort-1) );
-         STATE.ShadowShortPeriodTotal0 -= TA_CANDLERANGE_STATE( ShadowShort, GET_LOCAL_IDX(-STATE.periodShadowShort) );
-         STATE.ShadowLongPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowLong, GET_LOCAL_IDX(-STATE.periodShadowLong-1) );
-         STATE.ShadowLongPeriodTotal0 -= TA_CANDLERANGE_STATE( ShadowLong, GET_LOCAL_IDX(-STATE.periodShadowLong) );
-         STATE.FarPeriodTotal2 -= TA_CANDLERANGE_STATE( Far, GET_LOCAL_IDX(-STATE.periodFar-2) );
-         STATE.FarPeriodTotal1 -= TA_CANDLERANGE_STATE( Far, GET_LOCAL_IDX(-STATE.periodFar-1) );
-         STATE.NearPeriodTotal2 -= TA_CANDLERANGE_STATE( Near, GET_LOCAL_IDX(-STATE.periodNear-2) );
-         STATE.NearPeriodTotal1 -= TA_CANDLERANGE_STATE( Near, GET_LOCAL_IDX(-STATE.periodNear-1) );
-         STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong-2) );
+         STATE.ShadowShortPeriodTotal2 -= TA_CANDLERANGE_STATE( ShadowShort, -STATE.periodShadowShort-2 );
+         STATE.ShadowShortPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowShort, -STATE.periodShadowShort-1 );
+         STATE.ShadowShortPeriodTotal0 -= TA_CANDLERANGE_STATE( ShadowShort, -STATE.periodShadowShort );
+         STATE.ShadowLongPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowLong, -STATE.periodShadowLong-1 );
+         STATE.ShadowLongPeriodTotal0 -= TA_CANDLERANGE_STATE( ShadowLong, -STATE.periodShadowLong );
+         STATE.FarPeriodTotal2 -= TA_CANDLERANGE_STATE( Far, -STATE.periodFar-2 );
+         STATE.FarPeriodTotal1 -= TA_CANDLERANGE_STATE( Far, -STATE.periodFar-1 );
+         STATE.NearPeriodTotal2 -= TA_CANDLERANGE_STATE( Near, -STATE.periodNear-2 );
+         STATE.NearPeriodTotal1 -= TA_CANDLERANGE_STATE( Near, -STATE.periodNear-1 );
+         STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, -STATE.periodBodyLong-2 );
         }
 
         PUSH_TO_MEM(inOpen,inOpen);

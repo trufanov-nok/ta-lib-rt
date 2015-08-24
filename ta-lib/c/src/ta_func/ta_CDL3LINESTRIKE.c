@@ -395,31 +395,31 @@ unsigned int i1,i2,i3;
         {
             i1 = GET_LOCAL_IDX(-1);
 
-            if( TA_CANDLECOLOR_STATE(i3) == TA_CANDLECOLOR_STATE(i2) &&                                   // three with same color
-                TA_CANDLECOLOR_STATE(i2) == TA_CANDLECOLOR_STATE(i1) &&
-                TA_CANDLECOLOR_STATE_CUR() == -TA_CANDLECOLOR_STATE(i1) &&                                    // 4th opposite color
+            if( TA_CANDLECOLOR_STATE_IDX(i3) == TA_CANDLECOLOR_STATE_IDX(i2) &&                                   // three with same color
+                TA_CANDLECOLOR_STATE_IDX(i2) == TA_CANDLECOLOR_STATE_IDX(i1) &&
+                TA_CANDLECOLOR_STATE_CUR() == -TA_CANDLECOLOR_STATE_IDX(i1) &&                                    // 4th opposite color
                                                                                                 // 2nd opens within/near 1st rb
-                MEM_IDX_NS(inOpen,i2) >= min( MEM_IDX_NS(inOpen,i3), MEM_IDX_NS(inClose,i3) ) - TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal3, i3 ) &&
-                MEM_IDX_NS(inOpen,i2) <= max( MEM_IDX_NS(inOpen,i3), MEM_IDX_NS(inClose,i3) ) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal3, i3 ) &&
+                MEM_IDX_NS(inOpen,i2) >= min( MEM_IDX_NS(inOpen,i3), MEM_IDX_NS(inClose,i3) ) - TA_CANDLEAVERAGE_STATE_IDX(  Near,  STATE.NearPeriodTotal3, i3 ) &&
+                MEM_IDX_NS(inOpen,i2) <= max( MEM_IDX_NS(inOpen,i3), MEM_IDX_NS(inClose,i3) ) + TA_CANDLEAVERAGE_STATE_IDX(  Near,  STATE.NearPeriodTotal3, i3 ) &&
                                                                                                 // 3rd opens within/near 2nd rb
-                MEM_IDX_NS(inOpen,i1) >= min( MEM_IDX_NS(inOpen,i2), MEM_IDX_NS(inClose,i2) ) - TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal2, i2 ) &&
-                MEM_IDX_NS(inOpen,i1) <= max( MEM_IDX_NS(inOpen,i2), MEM_IDX_NS(inClose,i2) ) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal2, i2 ) &&
+                MEM_IDX_NS(inOpen,i1) >= min( MEM_IDX_NS(inOpen,i2), MEM_IDX_NS(inClose,i2) ) - TA_CANDLEAVERAGE_STATE_IDX(  Near,  STATE.NearPeriodTotal2, i2 ) &&
+                MEM_IDX_NS(inOpen,i1) <= max( MEM_IDX_NS(inOpen,i2), MEM_IDX_NS(inClose,i2) ) + TA_CANDLEAVERAGE_STATE_IDX(  Near,  STATE.NearPeriodTotal2, i2 ) &&
                 (
                     (   // if three white
-                        TA_CANDLECOLOR_STATE(i1) == 1 &&
+                        TA_CANDLECOLOR_STATE_IDX(i1) == 1 &&
                         MEM_IDX_NS(inClose,i1) > MEM_IDX_NS(inClose,i2) && MEM_IDX_NS(inClose,i2) > MEM_IDX_NS(inClose,i3) &&           // consecutive higher closes
                         inOpen > MEM_IDX_NS(inClose,i1) &&                                             // 4th opens above prior close
                         inClose < MEM_IDX_NS(inOpen,i3)                                               // 4th closes below 1st open
                     ) ||
                     (   // if three black
-                        TA_CANDLECOLOR_STATE(i1) == -1 &&
+                        TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&
                         MEM_IDX_NS(inClose,i1) < MEM_IDX_NS(inClose,i2) && MEM_IDX_NS(inClose,i2) < MEM_IDX_NS(inClose,i3) &&           // consecutive lower closes
                         inOpen < MEM_IDX_NS(inClose,i1) &&                                             // 4th opens below prior close
                         inClose > MEM_IDX_NS(inOpen,i3)                                               // 4th closes above 1st open
                     )
                 )
               )
-                VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE(i1) * 100;
+                VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_IDX(i1) * 100;
             else
                 VALUE_HANDLE_DEREF(outInteger) = 0;
 
@@ -428,14 +428,14 @@ unsigned int i1,i2,i3;
 
         if (STATE.mem_index-1 >= 3)
         {
-          STATE.NearPeriodTotal3 += TA_CANDLERANGE_STATE( Near, i3 );
-          STATE.NearPeriodTotal2 += TA_CANDLERANGE_STATE( Near, i2 );
+          STATE.NearPeriodTotal3 += TA_CANDLERANGE_STATE_IDX(  Near, i3 );
+          STATE.NearPeriodTotal2 += TA_CANDLERANGE_STATE_IDX(  Near, i2 );
         }
 
         if (!(NEED_MORE_DATA))
         {
-         STATE.NearPeriodTotal3 -= TA_CANDLERANGE_STATE( Near, GET_LOCAL_IDX(-STATE.periodNear-3) );
-         STATE.NearPeriodTotal2 -= TA_CANDLERANGE_STATE( Near, GET_LOCAL_IDX(-STATE.periodNear-2) );
+         STATE.NearPeriodTotal3 -= TA_CANDLERANGE_STATE( Near, -STATE.periodNear-3 );
+         STATE.NearPeriodTotal2 -= TA_CANDLERANGE_STATE( Near, -STATE.periodNear-2 );
         }
 
         PUSH_TO_MEM(inOpen,inOpen);

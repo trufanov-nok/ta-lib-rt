@@ -402,12 +402,12 @@ int i1;
         if (!(NEED_MORE_DATA))
         {
 
-            if( TA_CANDLECOLOR_STATE(i1) == 1 &&                                                     // 1st: white
-                TA_REALBODY_STATE(i1) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i1 ) && //      long
+            if( TA_CANDLECOLOR_STATE_IDX(i1) == 1 &&                                                     // 1st: white
+                TA_REALBODY_STATE_IDX(i1) > TA_CANDLEAVERAGE_STATE_IDX(  BodyLong,  STATE.BodyLongPeriodTotal, i1 ) && //      long
                 TA_CANDLECOLOR_STATE_CUR() == -1 &&                                                      // 2nd: black
                 inOpen >   MEM_IDX_NS(inHigh,i1) &&                                                      //      open above prior high
                 inClose >  MEM_IDX_NS(inOpen,i1) &&                                                     //      close within prior body
-                inClose <  MEM_IDX_NS(inClose,i1) - TA_REALBODY_STATE(i1) * STATE.optInPenetration
+                inClose <  MEM_IDX_NS(inClose,i1) - TA_REALBODY_STATE_IDX(i1) * STATE.optInPenetration
               )
                 VALUE_HANDLE_DEREF(outInteger) = -100;
             else
@@ -417,12 +417,12 @@ int i1;
 
         if ((int)STATE.mem_index-1 >= 1)
         {
-           STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i1 );
+           STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_IDX(  BodyLong, i1 );
         }
 
         if (!(NEED_MORE_DATA))
         {
-         STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong-1) );
+         STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, -STATE.periodBodyLong-1 );
         }
 
         PUSH_TO_MEM(inOpen,inOpen);

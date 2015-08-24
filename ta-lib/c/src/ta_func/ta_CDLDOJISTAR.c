@@ -383,13 +383,13 @@ int i1;
 
                 i1 = GET_LOCAL_IDX(-1);
 
-                if( TA_REALBODY_STATE(i1) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i1 ) &&     // 1st: long real body
+                if( TA_REALBODY_STATE_IDX(i1) > TA_CANDLEAVERAGE_STATE_IDX(  BodyLong,  STATE.BodyLongPeriodTotal, i1 ) &&     // 1st: long real body
                     TA_REALBODY_STATE_CUR() <= TA_CANDLEAVERAGE_STATE_CUR( BodyDoji, STATE.DojiPeriodTotal ) &&        // 2nd: doji
-                    ( ( TA_CANDLECOLOR_STATE(i1) == 1 && TA_REALBODYGAPUP_STATE_CUR1(i1) )                        //        that gaps up if 1st is white
+                    ( ( TA_CANDLECOLOR_STATE_IDX(i1) == 1 && TA_REALBODYGAPUP_STATE_CUR1(i1) )                        //        that gaps up if 1st is white
                         ||
-                      ( TA_CANDLECOLOR_STATE(i1) == -1 && TA_REALBODYGAPDOWN_STATE_CUR1(i1) )                        //      or down if 1st is black
+                      ( TA_CANDLECOLOR_STATE_IDX(i1) == -1 && TA_REALBODYGAPDOWN_STATE_CUR1(i1) )                        //      or down if 1st is black
                     ) )
-                    VALUE_HANDLE_DEREF(outInteger) = -TA_CANDLECOLOR_STATE(i1) * 100;
+                    VALUE_HANDLE_DEREF(outInteger) = -TA_CANDLECOLOR_STATE_IDX(i1) * 100;
                 else
                     VALUE_HANDLE_DEREF(outInteger) = 0;
 
@@ -402,13 +402,14 @@ int i1;
 
                 if ((int)STATE.mem_index-1 >= STATE.gapBodyLong)
                 {
-                   STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i1 );
+                   STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_IDX(  BodyLong, i1 );
                 }
 
                 if (!(NEED_MORE_DATA))
                 {
-                 STATE.DojiPeriodTotal -= TA_CANDLERANGE_STATE( BodyDoji, GET_LOCAL_IDX(-STATE.periodDoji) );
-                 STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong) );
+
+                    STATE.DojiPeriodTotal -= TA_CANDLERANGE_STATE( BodyDoji, -STATE.periodDoji );
+                    STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, -STATE.periodBodyLong );
                 }
 
                 PUSH_TO_MEM(inOpen,inOpen);

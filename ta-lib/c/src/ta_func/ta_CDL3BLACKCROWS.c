@@ -389,12 +389,12 @@ unsigned int i1,i2,i3;
         {
             i3 = GET_LOCAL_IDX(-3);
 
-            if( TA_CANDLECOLOR_STATE(i3) == 1 &&                                         // white
-                TA_CANDLECOLOR_STATE(i2) == -1 &&                                        // 1st black
-                TA_LOWERSHADOW_STATE(i2) < TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal2, i2 ) &&
+            if( TA_CANDLECOLOR_STATE_IDX(i3) == 1 &&                                         // white
+                TA_CANDLECOLOR_STATE_IDX(i2) == -1 &&                                        // 1st black
+                TA_LOWERSHADOW_STATE_IDX(i2) < TA_CANDLEAVERAGE_STATE_IDX(  ShadowVeryShort,  STATE.ShadowVeryShortPeriodTotal2, i2 ) &&
                                                                                     // very short lower shadow
-                TA_CANDLECOLOR_STATE(i1) == -1 &&                                        // 2nd black
-                TA_LOWERSHADOW_STATE(i1) < TA_CANDLEAVERAGE_STATE( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal1, i1 ) &&
+                TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&                                        // 2nd black
+                TA_LOWERSHADOW_STATE_IDX(i1) < TA_CANDLEAVERAGE_STATE_IDX(  ShadowVeryShort,  STATE.ShadowVeryShortPeriodTotal1, i1 ) &&
                                                                                     // very short lower shadow
                 TA_CANDLECOLOR_STATE_CUR() == -1 &&                                          // 3rd black
                 TA_LOWERSHADOW_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal0 ) &&
@@ -409,16 +409,16 @@ unsigned int i1,i2,i3;
             else
                 VALUE_HANDLE_DEREF(outInteger) = 0;
 
-            STATE.ShadowVeryShortPeriodTotal2 -= TA_CANDLERANGE_STATE( ShadowVeryShort,  GET_LOCAL_IDX(STATE.periodShadowVeryShort-2) );
-            STATE.ShadowVeryShortPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowVeryShort,  GET_LOCAL_IDX(STATE.periodShadowVeryShort-1) );
-            STATE.ShadowVeryShortPeriodTotal0 -= TA_CANDLERANGE_STATE( ShadowVeryShort,  GET_LOCAL_IDX(STATE.periodShadowVeryShort) );
+            STATE.ShadowVeryShortPeriodTotal2 -= TA_CANDLERANGE_STATE( ShadowVeryShort,  STATE.periodShadowVeryShort-2 );
+            STATE.ShadowVeryShortPeriodTotal1 -= TA_CANDLERANGE_STATE( ShadowVeryShort,  STATE.periodShadowVeryShort-1 );
+            STATE.ShadowVeryShortPeriodTotal0 -= TA_CANDLERANGE_STATE( ShadowVeryShort,  STATE.periodShadowVeryShort );
         }
 
 
         if (STATE.mem_index-1 >= 2)
         {
-          STATE.ShadowVeryShortPeriodTotal2 += TA_CANDLERANGE_STATE( ShadowVeryShort, i2 );
-          STATE.ShadowVeryShortPeriodTotal1 += TA_CANDLERANGE_STATE( ShadowVeryShort, i1 );
+          STATE.ShadowVeryShortPeriodTotal2 += TA_CANDLERANGE_STATE_IDX(  ShadowVeryShort, i2 );
+          STATE.ShadowVeryShortPeriodTotal1 += TA_CANDLERANGE_STATE_IDX(  ShadowVeryShort, i1 );
           STATE.ShadowVeryShortPeriodTotal0 += TA_CANDLERANGE_STATE_CUR( ShadowVeryShort );
         }
 

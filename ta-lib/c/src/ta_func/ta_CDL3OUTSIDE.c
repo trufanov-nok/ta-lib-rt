@@ -352,12 +352,12 @@ unsigned int prev_idx, pprev_idx;
    prev_idx = GET_LOCAL_IDX(-1);
    pprev_idx = GET_LOCAL_IDX(-2);
 
-                if( ( TA_CANDLECOLOR_STATE(prev_idx) == 1 && TA_CANDLECOLOR_STATE(pprev_idx) == -1 &&          // white engulfs black
+                if( ( TA_CANDLECOLOR_STATE_IDX(prev_idx) == 1 && TA_CANDLECOLOR_STATE_IDX(pprev_idx) == -1 &&          // white engulfs black
                       MEM_IDX_NS(inClose,prev_idx) > MEM_IDX_NS(inOpen,pprev_idx) && MEM_IDX_NS(inOpen,prev_idx) < MEM_IDX_NS(inClose,pprev_idx) &&
                       inClose > MEM_IDX_NS(inClose,prev_idx)                                         // third candle higher
                     )
                     ||
-                    ( TA_CANDLECOLOR_STATE(prev_idx) == -1 && TA_CANDLECOLOR_STATE(pprev_idx) == 1 &&          // black engulfs white
+                    ( TA_CANDLECOLOR_STATE_IDX(prev_idx) == -1 && TA_CANDLECOLOR_STATE_IDX(pprev_idx) == 1 &&          // black engulfs white
                       MEM_IDX_NS(inOpen,prev_idx) > MEM_IDX_NS(inClose,pprev_idx) && MEM_IDX_NS(inClose,prev_idx) < MEM_IDX_NS(inOpen,pprev_idx) &&
                       inClose < MEM_IDX_NS(inClose,prev_idx)                                         // third candle lower
                     )

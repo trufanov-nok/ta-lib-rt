@@ -370,10 +370,10 @@
        i1 = GET_LOCAL_IDX(-1);
        i2 = GET_LOCAL_IDX(-2);
 
-       if( TA_CANDLECOLOR_STATE(i2) == 1 &&                                                         // 1st: white
-           TA_REALBODY_STATE(i2) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i2 ) &&     //      long
-           TA_CANDLECOLOR_STATE(i1) == -1 &&                                                        // 2nd: black
-           TA_REALBODYGAPUP_STATE(i1,i2) &&                                                        //      gapping up
+       if( TA_CANDLECOLOR_STATE_IDX(i2) == 1 &&                                                         // 1st: white
+           TA_REALBODY_STATE_IDX(i2) > TA_CANDLEAVERAGE_STATE_IDX(  BodyLong,  STATE.BodyLongPeriodTotal, i2 ) &&     //      long
+           TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&                                                        // 2nd: black
+           TA_REALBODYGAPUP_STATE_IDX( i1, i2 ) &&                                                        //      gapping up
            TA_CANDLECOLOR_STATE_CUR() == -1 &&                                                          // 3rd: black
            inOpen < MEM_IDX_NS(inOpen,i1) && inOpen > MEM_IDX_NS(inClose,i1) &&                              //      opening within 2nd rb
            inClose > MEM_IDX_NS(inOpen,i2) && inClose < MEM_IDX_NS(inClose,i2)                               //      closing within 1st rb
@@ -383,7 +383,7 @@
        else
            VALUE_HANDLE_DEREF(outInteger) = 0;
 
-       STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i2 ) - TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-MEM_SIZE) );
+       STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_IDX(  BodyLong, i2 ) - TA_CANDLERANGE_STATE( BodyLong, -MEM_SIZE );
    } else  STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyLong );
 
 

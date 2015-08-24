@@ -384,16 +384,16 @@ unsigned int i1,i2;
                 if (!(NEED_MORE_DATA))
                 {
 
-                    if( TA_REALBODY_STATE(i2) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i2 ) &&         // 1st: long
-                        TA_REALBODY_STATE(i1) <= TA_CANDLEAVERAGE_STATE( BodyShort, STATE.BodyShortPeriodTotal, i1 ) &&      // 2nd: short
+                    if( TA_REALBODY_STATE_IDX(i2) > TA_CANDLEAVERAGE_STATE_IDX( BodyLong, STATE.BodyLongPeriodTotal, i2 ) &&         // 1st: long
+                        TA_REALBODY_STATE_IDX(i1) <= TA_CANDLEAVERAGE_STATE_IDX( BodyShort, STATE.BodyShortPeriodTotal, i1 ) &&      // 2nd: short
                         max( MEM_IDX_NS(inClose,i1), MEM_IDX_NS(inOpen,i1) ) < max( MEM_IDX_NS(inClose,i2), MEM_IDX_NS(inOpen,i2) ) &&                  //      engulfed by 1st
                         min( MEM_IDX_NS(inClose,i1), MEM_IDX_NS(inOpen,i1) ) > min( MEM_IDX_NS(inClose,i2), MEM_IDX_NS(inOpen,i2) ) &&
-                        ( ( TA_CANDLECOLOR_STATE(i2) == 1 && TA_CANDLECOLOR_STATE_CUR() == -1 && inClose < MEM_IDX_NS(inOpen,i2) )   // 3rd: opposite to 1st
+                        ( ( TA_CANDLECOLOR_STATE_IDX(i2) == 1 && TA_CANDLECOLOR_STATE_CUR() == -1 && inClose < MEM_IDX_NS(inOpen,i2) )   // 3rd: opposite to 1st
                           ||                                                                                    //      and closing out
-                          ( TA_CANDLECOLOR_STATE(i2) == -1 && TA_CANDLECOLOR_STATE_CUR() == 1 && inClose > MEM_IDX_NS(inOpen,i2) )
+                          ( TA_CANDLECOLOR_STATE_IDX(i2) == -1 && TA_CANDLECOLOR_STATE_CUR() == 1 && inClose > MEM_IDX_NS(inOpen,i2) )
                         )
                       )
-                        VALUE_HANDLE_DEREF(outInteger) = -TA_CANDLECOLOR_STATE(i2) * 100;
+                        VALUE_HANDLE_DEREF(outInteger) = -TA_CANDLECOLOR_STATE_IDX(i2) * 100;
                     else
                         VALUE_HANDLE_DEREF(outInteger) = 0;
 
@@ -402,18 +402,18 @@ unsigned int i1,i2;
 
                 if (STATE.mem_index-1 >= 2)
                 {
-                  STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i2 );
+                  STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_IDX( BodyLong, i2 );
                 }
 
                 if (STATE.mem_index-1 >= 1)
                 {
-                  STATE.BodyShortPeriodTotal += TA_CANDLERANGE_STATE( BodyShort, i1 );
+                  STATE.BodyShortPeriodTotal += TA_CANDLERANGE_STATE_IDX( BodyShort, i1 );
                 }
 
                 if (!(NEED_MORE_DATA))
                 {
-                 STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong) );
-                 STATE.BodyShortPeriodTotal -= TA_CANDLERANGE_STATE( BodyShort, GET_LOCAL_IDX(-STATE.periodBodyShort) );
+                 STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, -STATE.periodBodyLong );
+                 STATE.BodyShortPeriodTotal -= TA_CANDLERANGE_STATE( BodyShort, -STATE.periodBodyShort );
                 }
 
                 PUSH_TO_MEM(inOpen,inOpen);

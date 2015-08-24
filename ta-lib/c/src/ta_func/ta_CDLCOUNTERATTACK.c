@@ -390,11 +390,11 @@ unsigned int i1;
         if (!(NEED_MORE_DATA))
         {
 
-            if( TA_CANDLECOLOR_STATE(i1) == -TA_CANDLECOLOR_STATE_CUR() &&                                        // opposite candles
-                TA_REALBODY_STATE(i1) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal1, i1 ) &&     // 1st long
+            if( TA_CANDLECOLOR_STATE_IDX(i1) == -TA_CANDLECOLOR_STATE_CUR() &&                                        // opposite candles
+                TA_REALBODY_STATE_IDX(i1) > TA_CANDLEAVERAGE_STATE_IDX(  BodyLong,  STATE.BodyLongPeriodTotal1, i1 ) &&     // 1st long
                 TA_REALBODY_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( BodyLong, STATE.BodyLongPeriodTotal0 ) &&         // 2nd long
-                inClose <= MEM_IDX_NS(inClose,i1) + TA_CANDLEAVERAGE_STATE( Equal, STATE.EqualPeriodTotal, i1 ) && // equal closes
-                inClose >= MEM_IDX_NS(inClose,i1) - TA_CANDLEAVERAGE_STATE( Equal, STATE.EqualPeriodTotal, i1 )
+                inClose <= MEM_IDX_NS(inClose,i1) + TA_CANDLEAVERAGE_STATE_IDX(  Equal,  STATE.EqualPeriodTotal, i1 ) && // equal closes
+                inClose >= MEM_IDX_NS(inClose,i1) - TA_CANDLEAVERAGE_STATE_IDX(  Equal,  STATE.EqualPeriodTotal, i1 )
               )
                 VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_CUR() * 100;
             else
@@ -404,19 +404,19 @@ unsigned int i1;
 
         if ((int)STATE.mem_index-1 >= STATE.gapEqual)
         {
-           STATE.EqualPeriodTotal += TA_CANDLERANGE_STATE( Equal, i1 );
+           STATE.EqualPeriodTotal += TA_CANDLERANGE_STATE_IDX(  Equal, i1 );
         }
 
         if ((int)STATE.mem_index-1 >= STATE.gapBodyLong)
         {
-           STATE.BodyLongPeriodTotal1 += TA_CANDLERANGE_STATE( BodyLong, i1 );
+           STATE.BodyLongPeriodTotal1 += TA_CANDLERANGE_STATE_IDX(  BodyLong, i1 );
            STATE.BodyLongPeriodTotal0 += TA_CANDLERANGE_STATE_CUR( BodyLong );
         }
 
         if (!(NEED_MORE_DATA))
         {
-         STATE.EqualPeriodTotal -= TA_CANDLERANGE_STATE( Equal, GET_LOCAL_IDX(-STATE.periodEqual-1) );
-         STATE.BodyLongPeriodTotal1 -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong-1) );
+         STATE.EqualPeriodTotal -= TA_CANDLERANGE_STATE( Equal, -STATE.periodEqual-1 );
+         STATE.BodyLongPeriodTotal1 -= TA_CANDLERANGE_STATE( BodyLong, -STATE.periodBodyLong-1 );
          STATE.BodyLongPeriodTotal0 -= TA_CANDLERANGE_STATE_CUR( BodyLong );
         }
 
