@@ -1480,6 +1480,26 @@ struct TA_CDLADVANCEBLOCK_State {
                                 size_t mem_size;
                                 size_t mem_index;
                                 struct TA_CDLADVANCEBLOCK_Data* memory;
+                                double       ShadowShortPeriodTotal0;
+                                double       ShadowShortPeriodTotal1;
+                                double       ShadowShortPeriodTotal2;
+                                double       ShadowLongPeriodTotal0;
+                                double       ShadowLongPeriodTotal1;
+                                double       NearPeriodTotal1;
+                                double       NearPeriodTotal2;
+                                double       FarPeriodTotal1;
+                                double       FarPeriodTotal2;
+                                double       BodyLongPeriodTotal;
+                                int          gapShadowShort;
+                                int          periodShadowShort;
+                                int          gapShadowLong;
+                                int          periodShadowLong;
+                                int          gapNear;
+                                int          periodNear;
+                                int          gapFar;
+                                int          periodFar;
+                                int          gapBodyLong;
+                                int          periodBodyLong;
                                 };
 
 
@@ -1526,6 +1546,12 @@ struct TA_CDLBELTHOLD_State {
                             size_t mem_size;
                             size_t mem_index;
                             struct TA_CDLBELTHOLD_Data* memory;
+                            double       ShadowVeryShortPeriodTotal;
+                            double       BodyLongPeriodTotal;
+                            int          gapShadowVeryShort;
+                            int          periodShadowVeryShort;
+                            int          gapBodyLong;
+                            int          periodBodyLong;
                             };
 
 
@@ -1572,6 +1598,7 @@ struct TA_CDLBREAKAWAY_State {
                              size_t mem_size;
                              size_t mem_index;
                              struct TA_CDLBREAKAWAY_Data* memory;
+                             double       BodyLongPeriodTotal;
                              };
 
 
@@ -1618,6 +1645,12 @@ struct TA_CDLCLOSINGMARUBOZU_State {
                                    size_t mem_size;
                                    size_t mem_index;
                                    struct TA_CDLCLOSINGMARUBOZU_Data* memory;
+                                   double       ShadowVeryShortPeriodTotal;
+                                   double       BodyLongPeriodTotal;
+                                   int          gapShadowVeryShort;
+                                   int          periodShadowVeryShort;
+                                   int          gapBodyLong;
+                                   int          periodBodyLong;
                                    };
 
 
@@ -1664,6 +1697,10 @@ struct TA_CDLCONCEALBABYSWALL_State {
                                     size_t mem_size;
                                     size_t mem_index;
                                     struct TA_CDLCONCEALBABYSWALL_Data* memory;
+                                    double       ShadowVeryShortPeriodTotal1;
+                                    double       ShadowVeryShortPeriodTotal2;
+                                    double       ShadowVeryShortPeriodTotal3;
+                                    int          periodShadowVeryShort;
                                     };
 
 
@@ -1710,6 +1747,13 @@ struct TA_CDLCOUNTERATTACK_State {
                                  size_t mem_size;
                                  size_t mem_index;
                                  struct TA_CDLCOUNTERATTACK_Data* memory;
+                                 double       BodyLongPeriodTotal0;
+                                 double       BodyLongPeriodTotal1;
+                                 double       EqualPeriodTotal;
+                                 int          periodBodyLong;
+                                 int          gapBodyLong;
+                                 int          periodEqual;
+                                 int          gapEqual;
                                  };
 
 
@@ -1763,6 +1807,8 @@ struct TA_CDLDARKCLOUDCOVER_State {
                                   size_t mem_size;
                                   size_t mem_index;
                                   struct TA_CDLDARKCLOUDCOVER_Data* memory;
+                                  double       BodyLongPeriodTotal;
+                                  int          periodBodyLong;
                                   double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                   };
 
@@ -1811,6 +1857,7 @@ struct TA_CDLDOJI_State {
                         size_t mem_size;
                         size_t mem_index;
                         struct TA_CDLDOJI_Data* memory;
+                        double       BodyDojiPeriodTotal;
                         };
 
 
@@ -1857,6 +1904,12 @@ struct TA_CDLDOJISTAR_State {
                             size_t mem_size;
                             size_t mem_index;
                             struct TA_CDLDOJISTAR_Data* memory;
+                            double       DojiPeriodTotal;
+                            double       BodyLongPeriodTotal;
+                            int          periodBodyLong;
+                            int          gapBodyLong;
+                            int          periodDoji;
+                            int          gapDoji;
                             };
 
 
@@ -1903,6 +1956,12 @@ struct TA_CDLDRAGONFLYDOJI_State {
                                  size_t mem_size;
                                  size_t mem_index;
                                  struct TA_CDLDRAGONFLYDOJI_Data* memory;
+                                 double       BodyDojiPeriodTotal;
+                                 double       ShadowVeryShortPeriodTotal;
+                                 int          periodShadowVeryShort;
+                                 int          gapShadowVeryShort;
+                                 int          periodBodyDoji;
+                                 int          gapBodyDoji;
                                  };
 
 
@@ -2002,6 +2061,15 @@ struct TA_CDLEVENINGDOJISTAR_State {
                                    size_t mem_size;
                                    size_t mem_index;
                                    struct TA_CDLEVENINGDOJISTAR_Data* memory;
+                                   double       BodyDojiPeriodTotal;
+                                   double       BodyLongPeriodTotal;
+                                   double       BodyShortPeriodTotal;
+                                   int          periodBodyLong;
+                                   int          gapBodyLong;
+                                   int          periodBodyShort;
+                                   int          gapBodyShort;
+                                   int          periodBodyDoji;
+                                   int          gapBodyDoji;
                                    double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                    };
 
@@ -2057,6 +2125,13 @@ struct TA_CDLEVENINGSTAR_State {
                                size_t mem_size;
                                size_t mem_index;
                                struct TA_CDLEVENINGSTAR_Data* memory;
+                               double       BodyShortPeriodTotal2;
+                               double       BodyLongPeriodTotal;
+                               double       BodyShortPeriodTotal;
+                               int          periodBodyLong;
+                               int          gapBodyLong;
+                               int          periodBodyShort;
+                               int          gapBodyShort;
                                double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                };
 
@@ -2933,6 +3008,12 @@ struct TA_CDLMARUBOZU_State {
                             size_t mem_size;
                             size_t mem_index;
                             struct TA_CDLMARUBOZU_Data* memory;
+                            double       ShadowVeryShortPeriodTotal;
+                            double       BodyLongPeriodTotal;
+                            int          gapShadowVeryShort;
+                            int          periodShadowVeryShort;
+                            int          gapBodyLong;
+                            int          periodBodyLong;
                             };
 
 
@@ -3087,6 +3168,15 @@ struct TA_CDLMORNINGDOJISTAR_State {
                                    size_t mem_size;
                                    size_t mem_index;
                                    struct TA_CDLMORNINGDOJISTAR_Data* memory;
+                                   double       BodyDojiPeriodTotal;
+                                   double       BodyLongPeriodTotal;
+                                   double       BodyShortPeriodTotal;
+                                   int          periodBodyLong;
+                                   int          gapBodyLong;
+                                   int          periodBodyShort;
+                                   int          gapBodyShort;
+                                   int          periodBodyDoji;
+                                   int          gapBodyDoji;
                                    double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                    };
 
@@ -3142,6 +3232,13 @@ struct TA_CDLMORNINGSTAR_State {
                                size_t mem_size;
                                size_t mem_index;
                                struct TA_CDLMORNINGSTAR_Data* memory;
+                               double       BodyShortPeriodTotal2;
+                               double       BodyLongPeriodTotal;
+                               double       BodyShortPeriodTotal;
+                               int          periodBodyLong;
+                               int          gapBodyLong;
+                               int          periodBodyShort;
+                               int          gapBodyShort;
                                double        optInPenetration; /* From 0 to TA_REAL_MAX */
                                };
 

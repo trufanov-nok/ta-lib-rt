@@ -804,31 +804,71 @@ static ErrorNumber do_test_state( const TA_History *history,
              }
 
    /* Make a simple first call. */
-   TEST_4IN(CDL3OUTSIDE) else
-   TEST_4IN(CDL2CROWS) else
-   TEST_4IN(CDL3BLACKCROWS) else
-   TEST_4IN(CDL3INSIDE) else
-   TEST_4IN(CDL3OUTSIDE) else
-   TEST_4IN(CDL3STARSINSOUTH) else
-   TEST_4IN(CDL3WHITESOLDIERS) else
+   TEST_4IN(CDL3OUTSIDE)
+   TEST_4IN(CDL2CROWS)
+   TEST_4IN(CDL3BLACKCROWS)
+   TEST_4IN(CDL3INSIDE)
+   TEST_4IN(CDL3OUTSIDE)
+   TEST_4IN(CDL3STARSINSOUTH)
+   TEST_4IN(CDL3WHITESOLDIERS)
    TEST_4IN_1OPT(CDLABANDONEDBABY)
+   TEST_4IN(CDLADVANCEBLOCK)
+   TEST_4IN(CDLBELTHOLD)
+   TEST_4IN(CDLBREAKAWAY)
+   TEST_4IN(CDLCLOSINGMARUBOZU)
+   TEST_4IN(CDLMARUBOZU)
+   TEST_4IN(CDLCONCEALBABYSWALL)
+   TEST_4IN(CDLCOUNTERATTACK)
+   TEST_4IN(CDLDARKCLOUDCOVER)
+   TEST_4IN(CDLDOJI)
+   TEST_4IN(CDLDOJISTAR)
+   TEST_4IN(CDLDRAGONFLYDOJI)
+   TEST_4IN(CDLENGULFING)
+   TEST_4IN_1OPT(CDLEVENINGDOJISTAR)
+   TEST_4IN_1OPT(CDLMORNINGDOJISTAR)
+   TEST_4IN_1OPT(CDLEVENINGSTAR)
+   TEST_4IN_1OPT(CDLMORNINGSTAR)
+//   setInputBufferReverseOrder( 0, history->open,  history->nbBars );
+//   setInputBufferReverseOrder( 1, history->high,  history->nbBars );
+//   setInputBufferReverseOrder( 2, history->low,   history->nbBars );
+//   setInputBufferReverseOrder( 3, history->close, history->nbBars );
 
-//   if( strcmp(test->name,"CDLABANDONEDBABY") == 0 )
-//   {
-//      TA_Integer outBegIdx;
-//      TA_Integer outNbElement;
-//      retCode = TA_CDLABANDONEDBABY_StateTest(0,
-//                        252,
-//                        gBuffer[0].in,
-//                        gBuffer[1].in,
-//                        gBuffer[2].in,
-//                        gBuffer[3].in,
-//                        test->params[0],
-//                        &outBegIdx,
-//                        &outNbElement,
-//                        gBuffer[0].out0 );
-//   }
+           if( strcmp(test->name,"CDLMORNINGSTAR") == 0 )
+           {
+              TA_Integer outBegIdx;
+              TA_Integer outNbElement;
+              retCode = TA_CDLMORNINGSTAR_StateTest(0,
+                                252,
+                                gBuffer[0].in,
+                                gBuffer[1].in,
+                                gBuffer[2].in,
+                                gBuffer[3].in,
+                      test->params[0],
+                                &outBegIdx,
+                                &outNbElement,
+                                gBuffer[0].out0 );
+           }
 
+
+  setInputBufferReverseOrder( 0, history->open,  history->nbBars );
+  setInputBufferReverseOrder( 1, history->high,  history->nbBars );
+  setInputBufferReverseOrder( 2, history->low,   history->nbBars );
+  setInputBufferReverseOrder( 3, history->close, history->nbBars );
+
+  /* Make a simple first call. */
+  TEST_4IN(CDL3OUTSIDE)
+  TEST_4IN(CDL2CROWS)
+  TEST_4IN(CDL3BLACKCROWS)
+  TEST_4IN(CDL3INSIDE)
+  TEST_4IN(CDL3OUTSIDE)
+  TEST_4IN(CDL3STARSINSOUTH)
+  TEST_4IN(CDL3WHITESOLDIERS)
+  TEST_4IN_1OPT(CDLABANDONEDBABY)
+  TEST_4IN(CDLADVANCEBLOCK)
+  TEST_4IN(CDLBELTHOLD)
+  TEST_4IN(CDLBREAKAWAY)
+  TEST_4IN(CDLCLOSINGMARUBOZU)
+  TEST_4IN(CDLMARUBOZU)
 
 
    return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;

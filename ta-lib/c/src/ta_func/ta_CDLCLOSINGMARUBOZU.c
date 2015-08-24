@@ -343,7 +343,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLCLOSINGMARUBOZU_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -377,6 +377,62 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                if (FIRST_LAUNCH)
+                   {
+                         STATE.ShadowVeryShortPeriodTotal = 0.;
+                         STATE.BodyLongPeriodTotal = 0.;
+
+                         STATE.periodShadowVeryShort = TA_CANDLEAVGPERIOD(ShadowVeryShort);
+                         STATE.periodBodyLong = TA_CANDLEAVGPERIOD(BodyLong);
+
+                         STATE.gapShadowVeryShort = MEM_SIZE - STATE.periodShadowVeryShort;
+                         STATE.gapBodyLong = MEM_SIZE - STATE.periodBodyLong;
+                   }
+
+                if (!(NEED_MORE_DATA))
+                {
+
+                    if( TA_REALBODY_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( BodyLong, STATE.BodyLongPeriodTotal ) &&             // long body
+                        (
+                          ( // white body and very short lower shadow
+                            TA_CANDLECOLOR_STATE_CUR() == 1 &&
+                            TA_UPPERSHADOW_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal )
+                          ) ||
+                          ( // black body and very short upper shadow
+                            TA_CANDLECOLOR_STATE_CUR() == -1 &&
+                            TA_LOWERSHADOW_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal )
+                          )
+                        ) )
+                        VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_CUR() * 100;
+                    else
+                        VALUE_HANDLE_DEREF(outInteger) = 0;
+
+                }
+
+
+                if ((int)STATE.mem_index-1 >= STATE.gapShadowVeryShort)
+                {
+                   STATE.ShadowVeryShortPeriodTotal += TA_CANDLERANGE_STATE_CUR( ShadowVeryShort );
+                }
+
+                if ((int)STATE.mem_index-1 >= STATE.gapBodyLong)
+                {
+                  STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyLong );
+                }
+
+
+
+                if (!(NEED_MORE_DATA))
+                {
+                 STATE.ShadowVeryShortPeriodTotal -= TA_CANDLERANGE_STATE( ShadowVeryShort, GET_LOCAL_IDX(-STATE.periodShadowVeryShort) );
+                 STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong) );
+                }
+
+                PUSH_TO_MEM(inOpen,inOpen);
+                PUSH_TO_MEM(inHigh,inHigh);
+                PUSH_TO_MEM(inLow,inLow);
+                PUSH_TO_MEM(inClose,inClose);
+                if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

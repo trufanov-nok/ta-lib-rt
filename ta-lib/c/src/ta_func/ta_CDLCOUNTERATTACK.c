@@ -339,7 +339,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLCOUNTERATTACK_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+unsigned int i1;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -373,6 +374,57 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.BodyLongPeriodTotal1 = 0.;
+                 STATE.BodyLongPeriodTotal0 = 0.;
+                 STATE.EqualPeriodTotal = 0.;
+                 STATE.periodEqual = TA_CANDLEAVGPERIOD(Equal);
+                 STATE.periodBodyLong = TA_CANDLEAVGPERIOD(BodyLong);
+                 STATE.gapEqual = MEM_SIZE - STATE.periodEqual;
+                 STATE.gapBodyLong = MEM_SIZE - STATE.periodBodyLong;
+           }
+
+        i1 = GET_LOCAL_IDX(-1);
+
+        if (!(NEED_MORE_DATA))
+        {
+
+            if( TA_CANDLECOLOR_STATE(i1) == -TA_CANDLECOLOR_STATE_CUR() &&                                        // opposite candles
+                TA_REALBODY_STATE(i1) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal1, i1 ) &&     // 1st long
+                TA_REALBODY_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( BodyLong, STATE.BodyLongPeriodTotal0 ) &&         // 2nd long
+                inClose <= MEM_IDX_NS(inClose,i1) + TA_CANDLEAVERAGE_STATE( Equal, STATE.EqualPeriodTotal, i1 ) && // equal closes
+                inClose >= MEM_IDX_NS(inClose,i1) - TA_CANDLEAVERAGE_STATE( Equal, STATE.EqualPeriodTotal, i1 )
+              )
+                VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_CUR() * 100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+        }
+
+
+        if ((int)STATE.mem_index-1 >= STATE.gapEqual)
+        {
+           STATE.EqualPeriodTotal += TA_CANDLERANGE_STATE( Equal, i1 );
+        }
+
+        if ((int)STATE.mem_index-1 >= STATE.gapBodyLong)
+        {
+           STATE.BodyLongPeriodTotal1 += TA_CANDLERANGE_STATE( BodyLong, i1 );
+           STATE.BodyLongPeriodTotal0 += TA_CANDLERANGE_STATE_CUR( BodyLong );
+        }
+
+        if (!(NEED_MORE_DATA))
+        {
+         STATE.EqualPeriodTotal -= TA_CANDLERANGE_STATE( Equal, GET_LOCAL_IDX(-STATE.periodEqual-1) );
+         STATE.BodyLongPeriodTotal1 -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong-1) );
+         STATE.BodyLongPeriodTotal0 -= TA_CANDLERANGE_STATE_CUR( BodyLong );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

@@ -321,7 +321,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLDOJI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -355,6 +355,36 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                if (FIRST_LAUNCH)
+                   {
+                         STATE.BodyDojiPeriodTotal = 0.;
+                   }
+
+                if (!(NEED_MORE_DATA))
+                {
+
+                    if( TA_REALBODY_STATE_CUR() <= TA_CANDLEAVERAGE_STATE_CUR( BodyDoji, STATE.BodyDojiPeriodTotal ) )
+                       VALUE_HANDLE_DEREF(outInteger) = 100;
+                    else
+                        VALUE_HANDLE_DEREF(outInteger) = 0;
+
+                }
+
+
+                STATE.BodyDojiPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyDoji );
+
+
+
+                if (!(NEED_MORE_DATA))
+                {
+                 STATE.BodyDojiPeriodTotal -= TA_CANDLERANGE_STATE( BodyDoji, GET_LOCAL_IDX(0) );
+                }
+
+                PUSH_TO_MEM(inOpen,inOpen);
+                PUSH_TO_MEM(inHigh,inHigh);
+                PUSH_TO_MEM(inLow,inLow);
+                PUSH_TO_MEM(inClose,inClose);
+                if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

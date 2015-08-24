@@ -356,7 +356,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLDARKCLOUDCOVER_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i1;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -390,6 +391,45 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.BodyLongPeriodTotal = 0.;
+                 STATE.periodBodyLong = TA_CANDLEAVGPERIOD(BodyLong);
+           }
+
+        i1 = GET_LOCAL_IDX(-1);
+
+        if (!(NEED_MORE_DATA))
+        {
+
+            if( TA_CANDLECOLOR_STATE(i1) == 1 &&                                                     // 1st: white
+                TA_REALBODY_STATE(i1) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i1 ) && //      long
+                TA_CANDLECOLOR_STATE_CUR() == -1 &&                                                      // 2nd: black
+                inOpen >   MEM_IDX_NS(inHigh,i1) &&                                                      //      open above prior high
+                inClose >  MEM_IDX_NS(inOpen,i1) &&                                                     //      close within prior body
+                inClose <  MEM_IDX_NS(inClose,i1) - TA_REALBODY_STATE(i1) * STATE.optInPenetration
+              )
+                VALUE_HANDLE_DEREF(outInteger) = -100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+        }
+
+
+        if ((int)STATE.mem_index-1 >= 1)
+        {
+           STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i1 );
+        }
+
+        if (!(NEED_MORE_DATA))
+        {
+         STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(-STATE.periodBodyLong-1) );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

@@ -265,6 +265,13 @@ void setInputBuffer( unsigned int i, const TA_Real *data, unsigned int nbElement
       buf[i][0][j+TA_BUF_PREFIX] = data[j];
 }
 
+void setInputBufferReverseOrder( unsigned int i, const TA_Real *data, unsigned int nbElement )
+{
+   unsigned int j;
+   for( j=0; j < nbElement; j++ )
+      buf[i][0][j+TA_BUF_PREFIX] = data[nbElement-j-1];
+}
+
 void setInputBufferValue( unsigned int i, const TA_Real data, unsigned int nbElement )
 {
    unsigned int j;

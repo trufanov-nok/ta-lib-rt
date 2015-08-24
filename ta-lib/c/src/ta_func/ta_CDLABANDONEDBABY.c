@@ -437,12 +437,12 @@
                   STATE.BodyDojiPeriodTotal = 0.;
                   STATE.BodyShortPeriodTotal = 0.;
 
-                  STATE.periodBodyLong = TA_CANDLEAVGPERIOD(BodyLong);
-                  STATE.periodBodyDoji = TA_CANDLEAVGPERIOD(BodyDoji);
+                  STATE.periodBodyLong = TA_CANDLEAVGPERIOD(BodyLong) + 2;
+                  STATE.periodBodyDoji = TA_CANDLEAVGPERIOD(BodyDoji) - 1;
                   STATE.periodBodyShort = TA_CANDLEAVGPERIOD(BodyShort);
 
-                  STATE.gapBodyLong = MEM_SIZE - STATE.periodBodyLong -2;
-                  STATE.gapBodyDoji = MEM_SIZE - STATE.periodBodyDoji -1;
+                  STATE.gapBodyLong = MEM_SIZE - STATE.periodBodyLong;
+                  STATE.gapBodyDoji = MEM_SIZE - STATE.periodBodyDoji;
                   STATE.gapBodyShort = MEM_SIZE - STATE.periodBodyShort;
             }
 

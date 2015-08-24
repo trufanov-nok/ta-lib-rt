@@ -339,7 +339,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLBREAKAWAY_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+unsigned int i1,i2,i3,i4;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -373,6 +374,64 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.BodyLongPeriodTotal = 0.;
+           }
+
+        i4 = GET_LOCAL_IDX(-4);
+
+        if (!(NEED_MORE_DATA))
+        {
+
+            i1 = GET_LOCAL_IDX(-1);
+            i2 = GET_LOCAL_IDX(-2);
+            i3 = GET_LOCAL_IDX(-3);
+
+            if( TA_REALBODY_STATE(i4) > TA_CANDLEAVERAGE_STATE( BodyLong, STATE.BodyLongPeriodTotal, i4 ) &&     // 1st long
+                TA_CANDLECOLOR_STATE(i4) == TA_CANDLECOLOR_STATE(i3) &&                   // 1st, 2nd, 4th same color, 5th opposite
+                TA_CANDLECOLOR_STATE(i3) == TA_CANDLECOLOR_STATE(i1) &&
+                TA_CANDLECOLOR_STATE(i1) == -TA_CANDLECOLOR_STATE_CUR() &&
+                (
+                  ( TA_CANDLECOLOR_STATE(i4) == -1 &&                                // when 1st is black:
+                    TA_REALBODYGAPDOWN_STATE(i3,i4) &&                              // 2nd gaps down
+                    MEM_IDX_NS(inHigh,i2) < MEM_IDX_NS(inHigh,i3) && MEM_IDX_NS(inLow,i2) < MEM_IDX_NS(inLow,i3) &&     // 3rd has lower high and low than 2nd
+                    MEM_IDX_NS(inHigh,i1) < MEM_IDX_NS(inHigh,i2) && MEM_IDX_NS(inLow,i1) < MEM_IDX_NS(inLow,i2) &&     // 4th has lower high and low than 3rd
+                    inClose > MEM_IDX_NS(inOpen,i3) && inClose < MEM_IDX_NS(inClose,i4)       // 5th closes inside the gap
+                  )
+                  ||
+                  ( TA_CANDLECOLOR_STATE(i4) == 1 &&                                 // when 1st is white:
+                    TA_REALBODYGAPUP_STATE(i3,i4) &&                                // 2nd gaps up
+                    MEM_IDX_NS(inHigh,i2) > MEM_IDX_NS(inHigh,i3) && MEM_IDX_NS(inLow,i2) > MEM_IDX_NS(inLow,i3) &&     // 3rd has higher high and low than 2nd
+                    MEM_IDX_NS(inHigh,i1) > MEM_IDX_NS(inHigh,i2) && MEM_IDX_NS(inLow,i1) > MEM_IDX_NS(inLow,i2) &&     // 4th has higher high and low than 3rd
+                    inClose < MEM_IDX_NS(inOpen,i3) && inClose > MEM_IDX_NS(inClose,i4)       // 5th closes inside the gap
+                  )
+                )
+              )
+
+                VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_CUR() * 100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+
+        }
+
+
+        if ((int)STATE.mem_index-1 >= 4)
+        {
+           STATE.BodyLongPeriodTotal += TA_CANDLERANGE_STATE( BodyLong, i4 );
+        }
+
+
+        if (!(NEED_MORE_DATA))
+        {
+         STATE.BodyLongPeriodTotal -= TA_CANDLERANGE_STATE( BodyLong, GET_LOCAL_IDX(0) );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

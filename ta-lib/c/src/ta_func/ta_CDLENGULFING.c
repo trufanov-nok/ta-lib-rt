@@ -288,7 +288,6 @@
 
    /* insert state init code here. */
 
-
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -319,7 +318,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+  int i1;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -353,6 +352,30 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+          i1 = GET_LOCAL_IDX(-1);
+          if( ( TA_CANDLECOLOR_STATE_CUR() == 1 && TA_CANDLECOLOR_STATE(i1) == -1 &&            // white engulfs black
+                ( ( inClose >= MEM_IDX_NS(inOpen,i1) && inOpen < MEM_IDX_NS(inClose,i1) ) ||
+                  ( inClose > MEM_IDX_NS(inOpen,i1) && inOpen <= MEM_IDX_NS(inClose,i1) )
+                )
+              )
+              ||
+              ( TA_CANDLECOLOR_STATE_CUR() == -1 && TA_CANDLECOLOR_STATE(i1) == 1 &&            // black engulfs white
+                ( ( inOpen >= MEM_IDX_NS(inClose,i1) && inClose < MEM_IDX_NS(inOpen,i1) ) ||
+                  ( inOpen > MEM_IDX_NS(inClose,i1) && inClose <= MEM_IDX_NS(inOpen,i1) )
+                )
+              )
+            )
+              if( inOpen != MEM_IDX_NS(inClose,i1) && inClose != MEM_IDX_NS(inOpen,i1) )
+                  VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_CUR() * 100;
+              else
+                  VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_CUR() * 80;
+          else
+              VALUE_HANDLE_DEREF(outInteger) = 0;
+
+   PUSH_TO_MEM(inOpen,inOpen);
+   PUSH_TO_MEM(inHigh,inHigh);
+   PUSH_TO_MEM(inLow,inLow);
+   PUSH_TO_MEM(inClose,inClose);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
