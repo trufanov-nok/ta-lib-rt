@@ -828,27 +828,44 @@ static ErrorNumber do_test_state( const TA_History *history,
    TEST_4IN_1OPT(CDLMORNINGDOJISTAR)
    TEST_4IN_1OPT(CDLEVENINGSTAR)
    TEST_4IN_1OPT(CDLMORNINGSTAR)
+   TEST_4IN(CDLGRAVESTONEDOJI)
+   TEST_4IN(CDLLONGLEGGEDDOJI)
+   TEST_4IN(CDLGAPSIDESIDEWHITE)
+   TEST_4IN(CDLHAMMER)
+   TEST_4IN(CDLHANGINGMAN)
+   TEST_4IN(CDLHARAMI)
+   TEST_4IN(CDLHARAMICROSS)
+   TEST_4IN(CDLHIGHWAVE)
+   TEST_4IN(CDLHIKKAKE)
+   TEST_4IN(CDLHIKKAKEMOD)
+   TEST_4IN(CDLHOMINGPIGEON)
+   TEST_4IN(CDLHIKKAKEMOD)
+   TEST_4IN(CDLHIKKAKEMOD)
+
 //   setInputBufferReverseOrder( 0, history->open,  history->nbBars );
 //   setInputBufferReverseOrder( 1, history->high,  history->nbBars );
 //   setInputBufferReverseOrder( 2, history->low,   history->nbBars );
 //   setInputBufferReverseOrder( 3, history->close, history->nbBars );
 
-           if( strcmp(test->name,"CDLMORNINGSTAR") == 0 )
+           if( strcmp(test->name,"CDLINNECK") == 0 )
            {
               TA_Integer outBegIdx;
               TA_Integer outNbElement;
-              retCode = TA_CDLMORNINGSTAR_StateTest(0,
+              retCode = TA_CDLINNECK_StateTest(0,
                                 252,
                                 gBuffer[0].in,
                                 gBuffer[1].in,
                                 gBuffer[2].in,
                                 gBuffer[3].in,
-                      test->params[0],
+//                      test->params[0],
                                 &outBegIdx,
                                 &outNbElement,
                                 gBuffer[0].out0 );
            }
 
+
+   if (retCode)
+       return TA_TEST_ERROR_IN_STATE_FUNC;
 
   setInputBufferReverseOrder( 0, history->open,  history->nbBars );
   setInputBufferReverseOrder( 1, history->high,  history->nbBars );
@@ -869,6 +886,28 @@ static ErrorNumber do_test_state( const TA_History *history,
   TEST_4IN(CDLBREAKAWAY)
   TEST_4IN(CDLCLOSINGMARUBOZU)
   TEST_4IN(CDLMARUBOZU)
+  TEST_4IN(CDLCONCEALBABYSWALL)
+  TEST_4IN(CDLCOUNTERATTACK)
+  TEST_4IN(CDLDARKCLOUDCOVER)
+  TEST_4IN(CDLDOJI)
+  TEST_4IN(CDLDOJISTAR)
+  TEST_4IN(CDLDRAGONFLYDOJI)
+  TEST_4IN(CDLENGULFING)
+  TEST_4IN_1OPT(CDLEVENINGDOJISTAR)
+  TEST_4IN_1OPT(CDLMORNINGDOJISTAR)
+  TEST_4IN_1OPT(CDLEVENINGSTAR)
+  TEST_4IN_1OPT(CDLMORNINGSTAR)
+  TEST_4IN(CDLGRAVESTONEDOJI)
+  TEST_4IN(CDLLONGLEGGEDDOJI)
+  TEST_4IN(CDLGAPSIDESIDEWHITE)
+  TEST_4IN(CDLHAMMER)
+  TEST_4IN(CDLHANGINGMAN)
+  TEST_4IN(CDLHARAMI)
+  TEST_4IN(CDLHARAMICROSS)
+  TEST_4IN(CDLHIGHWAVE)
+  TEST_4IN(CDLHIKKAKE)
+  TEST_4IN(CDLHIKKAKEMOD)
+  TEST_4IN(CDLHOMINGPIGEON)
 
 
    return (!retCode)?TA_TEST_PASS:TA_TEST_ERROR_IN_STATE_FUNC;

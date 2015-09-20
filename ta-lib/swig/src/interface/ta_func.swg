@@ -2180,6 +2180,10 @@ struct TA_CDLGAPSIDESIDEWHITE_State {
                                     size_t mem_size;
                                     size_t mem_index;
                                     struct TA_CDLGAPSIDESIDEWHITE_Data* memory;
+                                    double       NearPeriodTotal;
+                                    double       EqualPeriodTotal;
+                                    int          periodNear;
+                                    int          periodEqual;
                                     };
 
 
@@ -2226,6 +2230,12 @@ struct TA_CDLGRAVESTONEDOJI_State {
                                   size_t mem_size;
                                   size_t mem_index;
                                   struct TA_CDLGRAVESTONEDOJI_Data* memory;
+                                  double       BodyDojiPeriodTotal;
+                                  double       ShadowVeryShortPeriodTotal;
+                                  int          periodShadowVeryShort;
+                                  int          gapShadowVeryShort;
+                                  int          periodBodyDoji;
+                                  int          gapBodyDoji;
                                   };
 
 
@@ -2272,6 +2282,18 @@ struct TA_CDLHAMMER_State {
                           size_t mem_size;
                           size_t mem_index;
                           struct TA_CDLHAMMER_Data* memory;
+                          double       BodyPeriodTotal;
+                          double       ShadowVeryShortPeriodTotal;
+                          double       ShadowLongPeriodTotal;
+                          double       NearPeriodTotal;
+                          int          periodShadowVeryShort;
+                          int          gapShadowVeryShort;
+                          int          periodBody;
+                          int          gapBody;
+                          int          periodShadowLong;
+                          int          gapShadowLong;
+                          int          periodNear;
+                          int          gapNear;
                           };
 
 
@@ -2318,6 +2340,18 @@ struct TA_CDLHANGINGMAN_State {
                               size_t mem_size;
                               size_t mem_index;
                               struct TA_CDLHANGINGMAN_Data* memory;
+                              double       BodyPeriodTotal;
+                              double       ShadowVeryShortPeriodTotal;
+                              double       ShadowLongPeriodTotal;
+                              double       NearPeriodTotal;
+                              int          periodShadowVeryShort;
+                              int          gapShadowVeryShort;
+                              int          periodBody;
+                              int          gapBody;
+                              int          periodShadowLong;
+                              int          gapShadowLong;
+                              int          periodNear;
+                              int          gapNear;
                               };
 
 
@@ -2364,6 +2398,12 @@ struct TA_CDLHARAMI_State {
                           size_t mem_size;
                           size_t mem_index;
                           struct TA_CDLHARAMI_Data* memory;
+                          double       BodyShortPeriodTotal;
+                          double       BodyLongPeriodTotal;
+                          int          periodBodyLong;
+                          int          gapBodyLong;
+                          int          periodBodyShort;
+                          int          gapBodyShort;
                           };
 
 
@@ -2410,6 +2450,12 @@ struct TA_CDLHARAMICROSS_State {
                                size_t mem_size;
                                size_t mem_index;
                                struct TA_CDLHARAMICROSS_Data* memory;
+                               double       BodyDojiPeriodTotal;
+                               double       BodyLongPeriodTotal;
+                               int          periodBodyLong;
+                               int          gapBodyLong;
+                               int          periodBodyDoji;
+                               int          gapBodyDoji;
                                };
 
 
@@ -2456,6 +2502,10 @@ struct TA_CDLHIGHWAVE_State {
                             size_t mem_size;
                             size_t mem_index;
                             struct TA_CDLHIGHWAVE_Data* memory;
+                            double       BodyPeriodTotal;
+                            double       ShadowPeriodTotal;
+                            int          periodBody;
+                            int          periodShadow;
                             };
 
 
@@ -2502,6 +2552,10 @@ struct TA_CDLHIKKAKE_State {
                            size_t mem_size;
                            size_t mem_index;
                            struct TA_CDLHIKKAKE_Data* memory;
+                           double       patternResult;
+                           int          patternIdx;
+                           double       patternHigh;
+                           double       patternLow;
                            };
 
 
@@ -2548,6 +2602,13 @@ struct TA_CDLHIKKAKEMOD_State {
                               size_t mem_size;
                               size_t mem_index;
                               struct TA_CDLHIKKAKEMOD_Data* memory;
+                              double       patternResult;
+                              int          patternIdx;
+                              double       patternHigh;
+                              double       patternLow;
+                              double       NearPeriodTotal;
+                              int          periodNear;
+                              int          gapNear;
                               };
 
 
@@ -2594,6 +2655,12 @@ struct TA_CDLHOMINGPIGEON_State {
                                 size_t mem_size;
                                 size_t mem_index;
                                 struct TA_CDLHOMINGPIGEON_Data* memory;
+                                double       BodyLongPeriodTotal;
+                                double       BodyShortPeriodTotal;
+                                int          periodBodyLong;
+                                int          periodBodyShort;
+                                int          gapBodyLong;
+                                int          gapBodyShort;
                                 };
 
 
@@ -2640,6 +2707,15 @@ struct TA_CDLIDENTICAL3CROWS_State {
                                    size_t mem_size;
                                    size_t mem_index;
                                    struct TA_CDLIDENTICAL3CROWS_Data* memory;
+                                   double       ShadowVeryShortPeriodTotal0;
+                                   double       ShadowVeryShortPeriodTotal1;
+                                   double       ShadowVeryShortPeriodTotal2;
+                                   double       EqualPeriodTotal1;
+                                   double       EqualPeriodTotal2;
+                                   int          gapShadowVeryShort;
+                                   int          periodShadowVeryShort;
+                                   int          gapEqual;
+                                   int          periodEqual;
                                    };
 
 
@@ -2686,6 +2762,12 @@ struct TA_CDLINNECK_State {
                           size_t mem_size;
                           size_t mem_index;
                           struct TA_CDLINNECK_Data* memory;
+                          double       BodyLongPeriodTotal;
+                          double       EqualPeriodTotal;
+                          int          periodBodyLong;
+                          int          gapBodyLong;
+                          int          periodEqual;
+                          int          gapEqual;
                           };
 
 
@@ -2916,6 +2998,12 @@ struct TA_CDLLONGLEGGEDDOJI_State {
                                   size_t mem_size;
                                   size_t mem_index;
                                   struct TA_CDLLONGLEGGEDDOJI_Data* memory;
+                                  double       BodyDojiPeriodTotal;
+                                  double       ShadowLongPeriodTotal;
+                                  int          periodShadowLong;
+                                  int          gapShadowLong;
+                                  int          periodBodyDoji;
+                                  int          gapBodyDoji;
                                   };
 
 

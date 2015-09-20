@@ -383,14 +383,17 @@
                          STATE.gapShadowVeryShort = MEM_SIZE - STATE.periodShadowVeryShort;
                    }
 
-        if( TA_REALBODY_STATE_CUR() <= TA_CANDLEAVERAGE_STATE_CUR( BodyDoji, STATE.BodyDojiPeriodTotal ) &&
-            TA_UPPERSHADOW_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal ) &&
-            TA_LOWERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal )
-          )
-            VALUE_HANDLE_DEREF(outInteger) = 100;
-        else
-            VALUE_HANDLE_DEREF(outInteger) = 0;
 
+        if (!(NEED_MORE_DATA))
+        {
+            if( TA_REALBODY_STATE_CUR() <= TA_CANDLEAVERAGE_STATE_CUR( BodyDoji, STATE.BodyDojiPeriodTotal ) &&
+                    TA_UPPERSHADOW_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal ) &&
+                    TA_LOWERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal )
+                    )
+                VALUE_HANDLE_DEREF(outInteger) = 100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+        }
 
 
                 if ((int)STATE.mem_index-1 >= STATE.gapBodyDoji)
@@ -411,10 +414,10 @@
 
                 if (MEM_SIZE > 0)
                 {
-                PUSH_TO_MEM(inOpen,inOpen);
-                PUSH_TO_MEM(inHigh,inHigh);
-                PUSH_TO_MEM(inLow,inLow);
-                PUSH_TO_MEM(inClose,inClose);
+                    PUSH_TO_MEM(inOpen,inOpen);
+                    PUSH_TO_MEM(inHigh,inHigh);
+                    PUSH_TO_MEM(inLow,inLow);
+                    PUSH_TO_MEM(inClose,inClose);
                 }
                 if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 

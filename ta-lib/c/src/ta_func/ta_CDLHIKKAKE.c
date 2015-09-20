@@ -290,7 +290,7 @@
 
 {
    /* insert local variable here */
-
+//#define TA_CDLHIKKAKE_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -311,7 +311,8 @@
 /**** END GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 
    /* insert state init code here. */
-
+//MEM_SIZE_P = 2;
+//MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_CDLHIKKAKE_Data));
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -343,7 +344,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLHIKKAKE_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i1,i2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -377,6 +379,53 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.patternResult = 0.;
+                 STATE.patternIdx = 0.;
+                 STATE.patternHigh = 0.;
+                 STATE.patternLow = 0.;
+            }
+
+        i1 = GET_LOCAL_IDX(-1);
+        i2 = GET_LOCAL_IDX(-2);
+
+        if (STATE.mem_index >= 3)
+        {
+
+            if( MEM_IDX_NS(inHigh,i1) < MEM_IDX_NS(inHigh,i2) && MEM_IDX_NS(inLow,i1) > MEM_IDX_NS(inLow,i2) &&             // 1st + 2nd: lower high and higher low
+                    ( ( inHigh < MEM_IDX_NS(inHigh,i1) && inLow < MEM_IDX_NS(inLow,i1) )              // (bull) 3rd: lower high and lower low
+                      ||
+                      ( inHigh > MEM_IDX_NS(inHigh,i1) && inLow > MEM_IDX_NS(inLow,i1) )              // (bear) 3rd: higher high and higher low
+                      )
+                    )
+            {
+                STATE.patternResult = 100 * ( inHigh < MEM_IDX_NS(inHigh,i1) ? 1 : -1 );
+                STATE.patternIdx = STATE.mem_index-1;
+                STATE.patternHigh = MEM_IDX_NS(inHigh,i1);
+                STATE.patternLow = MEM_IDX_NS(inLow,i1);
+                VALUE_HANDLE_DEREF(outInteger) = STATE.patternResult;
+            } else
+                /* search for confirmation if hikkake was no more than 3 bars ago */
+                if( (int)STATE.mem_index-1 <= STATE.patternIdx+3 &&
+                        ( ( STATE.patternResult > 0 && inClose > STATE.patternHigh )    // close higher than the high of 2nd
+                          ||
+                          ( STATE.patternResult < 0 && inClose < STATE.patternLow )     // close lower than the low of 2nd
+                          )
+                        )
+                {
+                    VALUE_HANDLE_DEREF(outInteger) = STATE.patternResult + 100 * ( STATE.patternResult > 0 ? 1 : -1 );
+                    STATE.patternIdx = 0;
+                } else
+                    VALUE_HANDLE_DEREF(outInteger) = 0;
+
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

@@ -375,7 +375,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLHIKKAKEMOD_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i1,i2,i3;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -409,6 +410,72 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                if (FIRST_LAUNCH)
+                   {
+                         STATE.patternResult = 0.;
+                         STATE.patternIdx = 0.;
+                         STATE.patternHigh = 0.;
+                         STATE.patternLow = 0.;
+                         STATE.NearPeriodTotal = 0.;
+
+                         STATE.periodNear = TA_CANDLEAVGPERIOD(Near)+3;
+                         STATE.gapNear = MEM_SIZE - STATE.periodNear;
+                    }
+
+                i1 = GET_LOCAL_IDX(-1);
+                i2 = GET_LOCAL_IDX(-2);
+                i3 = GET_LOCAL_IDX(-3);
+
+                if ((int)STATE.mem_index-1 >= (int)MEM_SIZE-3)
+                {
+
+                    if( MEM_IDX_NS(inHigh,i2) < MEM_IDX_NS(inHigh,i3) && MEM_IDX_NS(inLow,i2) > MEM_IDX_NS(inLow,i3) &&             // 2nd: lower high and higher low than 1st
+                            MEM_IDX_NS(inHigh,i1) < MEM_IDX_NS(inHigh,i2) && MEM_IDX_NS(inLow,i1) > MEM_IDX_NS(inLow,i2) &&             // 3rd: lower high and higher low than 2nd
+                            ( ( inHigh < MEM_IDX_NS(inHigh,i1) && inLow < MEM_IDX_NS(inLow,i1) &&             // (bull) 4th: lower high and lower low
+                                MEM_IDX_NS(inClose,i2) <= MEM_IDX_NS(inLow,i2) + TA_CANDLEAVERAGE_STATE_IDX( Near, STATE.NearPeriodTotal, i2 )
+                                                                                                // (bull) 2nd: close near the low
+                              )
+                              ||
+                              ( inHigh > MEM_IDX_NS(inHigh,i1) && inLow > MEM_IDX_NS(inLow,i1) &&             // (bear) 4th: higher high and higher low
+                                MEM_IDX_NS(inClose,i2) >= MEM_IDX_NS(inHigh,i2) - TA_CANDLEAVERAGE_STATE_IDX( Near, STATE.NearPeriodTotal, i2 )
+                                                                                                // (bull) 2nd: close near the top
+                              )
+                            )
+                        )
+                    {
+                        STATE.patternResult = 100 * ( inHigh < MEM_IDX_NS(inHigh,i1) ? 1 : -1 );
+                        STATE.patternIdx = STATE.mem_index-1;
+                        STATE.patternHigh = MEM_IDX_NS(inHigh,i1);
+                        STATE.patternLow = MEM_IDX_NS(inLow,i1);
+                        VALUE_HANDLE_DEREF(outInteger) = STATE.patternResult;
+                    } else
+                        /* search for confirmation if hikkake was no more than 3 bars ago */
+                        if( (int)STATE.mem_index-1 <= STATE.patternIdx+3 &&
+                                ( ( STATE.patternResult > 0 && inClose > STATE.patternHigh )    // close higher than the high of 2nd
+                                  ||
+                                  ( STATE.patternResult < 0 && inClose < STATE.patternLow )     // close lower than the low of 2nd
+                                  )
+                                )
+                        {
+                            VALUE_HANDLE_DEREF(outInteger) = STATE.patternResult + 100 * ( STATE.patternResult > 0 ? 1 : -1 );
+                            STATE.patternIdx = 0;
+                        } else
+                            VALUE_HANDLE_DEREF(outInteger) = 0;
+
+                }
+
+                if ((int)STATE.mem_index-1 >= STATE.gapNear)
+                    STATE.NearPeriodTotal += TA_CANDLERANGE_STATE_IDX( Near, i2 );
+
+                if ((int)STATE.mem_index-1 >= (int)MEM_SIZE-3)
+                    STATE.NearPeriodTotal -= TA_CANDLERANGE_STATE( Near, -STATE.periodNear-2 );
+
+
+                PUSH_TO_MEM(inOpen,inOpen);
+                PUSH_TO_MEM(inHigh,inHigh);
+                PUSH_TO_MEM(inLow,inLow);
+                PUSH_TO_MEM(inClose,inClose);
+                if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

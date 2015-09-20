@@ -321,7 +321,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLHIGHWAVE_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -355,6 +355,45 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                if (FIRST_LAUNCH)
+                   {
+                         STATE.BodyPeriodTotal = 0.;
+                         STATE.ShadowPeriodTotal = 0.;
+                   }
+
+                if (!(NEED_MORE_DATA))
+                {
+
+                    if( TA_REALBODY_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( BodyShort, STATE.BodyPeriodTotal ) &&
+                        TA_UPPERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryLong, STATE.ShadowPeriodTotal ) &&
+                        TA_LOWERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryLong, STATE.ShadowPeriodTotal ) )
+                        VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_CUR() * 100;
+                    else
+
+                        VALUE_HANDLE_DEREF(outInteger) = 0;
+
+                }
+
+
+                STATE.BodyPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyShort );
+                STATE.ShadowPeriodTotal += TA_CANDLERANGE_STATE_CUR( ShadowVeryLong );
+
+
+
+                if (!(NEED_MORE_DATA))
+                {
+                   STATE.BodyPeriodTotal -= TA_CANDLERANGE_STATE( BodyShort, -TA_CANDLEAVGPERIOD(BodyShort) );
+                   STATE.ShadowPeriodTotal -= TA_CANDLERANGE_STATE( ShadowVeryLong, -TA_CANDLEAVGPERIOD(ShadowVeryLong) );
+                }
+
+                if (MEM_SIZE > 0)
+                {
+                    PUSH_TO_MEM(inOpen,inOpen);
+                    PUSH_TO_MEM(inHigh,inHigh);
+                    PUSH_TO_MEM(inLow,inLow);
+                    PUSH_TO_MEM(inClose,inClose);
+                }
+                if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

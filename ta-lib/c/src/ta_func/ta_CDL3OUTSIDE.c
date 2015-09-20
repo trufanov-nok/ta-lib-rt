@@ -314,7 +314,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-unsigned int prev_idx, pprev_idx;
+int i1, i2;
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -349,23 +349,23 @@ unsigned int prev_idx, pprev_idx;
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
-   prev_idx = GET_LOCAL_IDX(-1);
-   pprev_idx = GET_LOCAL_IDX(-2);
+   i1 = GET_LOCAL_IDX(-1);
+   i2 = GET_LOCAL_IDX(-2);
 
-                if( ( TA_CANDLECOLOR_STATE_IDX(prev_idx) == 1 && TA_CANDLECOLOR_STATE_IDX(pprev_idx) == -1 &&          // white engulfs black
-                      MEM_IDX_NS(inClose,prev_idx) > MEM_IDX_NS(inOpen,pprev_idx) && MEM_IDX_NS(inOpen,prev_idx) < MEM_IDX_NS(inClose,pprev_idx) &&
-                      inClose > MEM_IDX_NS(inClose,prev_idx)                                         // third candle higher
-                    )
-                    ||
-                    ( TA_CANDLECOLOR_STATE_IDX(prev_idx) == -1 && TA_CANDLECOLOR_STATE_IDX(pprev_idx) == 1 &&          // black engulfs white
-                      MEM_IDX_NS(inOpen,prev_idx) > MEM_IDX_NS(inClose,pprev_idx) && MEM_IDX_NS(inClose,prev_idx) < MEM_IDX_NS(inOpen,pprev_idx) &&
-                      inClose < MEM_IDX_NS(inClose,prev_idx)                                         // third candle lower
-                    )
-                  )
-                    VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE(prev_idx) * 100;
+    if( ( TA_CANDLECOLOR_STATE_IDX(i1) == 1 && TA_CANDLECOLOR_STATE_IDX(i2) == -1 &&          // white engulfs black
+          MEM_IDX_NS(inClose,i1) > MEM_IDX_NS(inOpen,i2) && MEM_IDX_NS(inOpen,i1) < MEM_IDX_NS(inClose,i2) &&
+          inClose > MEM_IDX_NS(inClose,i1)                                         // third candle higher
+        )
+        ||
+        ( TA_CANDLECOLOR_STATE_IDX(i1) == -1 && TA_CANDLECOLOR_STATE_IDX(i2) == 1 &&          // black engulfs white
+          MEM_IDX_NS(inOpen,i1) > MEM_IDX_NS(inClose,i2) && MEM_IDX_NS(inClose,i1) < MEM_IDX_NS(inOpen,i2) &&
+          inClose < MEM_IDX_NS(inClose,i1)                                         // third candle lower
+        )
+      )
+        VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_IDX(i1) * 100;
 
-                else
-                    VALUE_HANDLE_DEREF(outInteger) = 0;
+    else
+        VALUE_HANDLE_DEREF(outInteger) = 0;
 
    PUSH_TO_MEM(inOpen,inOpen);
    PUSH_TO_MEM(inHigh,inHigh);

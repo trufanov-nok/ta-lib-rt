@@ -283,7 +283,6 @@
 
 {
    /* insert local variable here */
-
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -336,7 +335,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLGAPSIDESIDEWHITE_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i1,i2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -369,7 +369,65 @@
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+        /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+        {
+            STATE.NearPeriodTotal = 0.;
+            STATE.EqualPeriodTotal = 0.;
+
+            STATE.periodNear = TA_CANDLEAVGPERIOD(Near);
+            STATE.periodEqual = TA_CANDLEAVGPERIOD(Equal);
+        }
+
+        i1 = GET_LOCAL_IDX(-1);
+        i2 = GET_LOCAL_IDX(-2);
+
+
+        if (!(NEED_MORE_DATA))
+        {
+            if(
+                    ( // upside or downside gap between the 1st candle and both the next 2 candles
+                      ( TA_REALBODYGAPUP_STATE(i1,i2) && TA_REALBODYGAPUP_STATE_CUR1(i2) )
+                      ||
+                      ( TA_REALBODYGAPDOWN_STATE(i1,i2) && TA_REALBODYGAPDOWN_STATE_CUR1(i2) )
+                      ) &&
+                    TA_CANDLECOLOR_STATE(i1) == 1 &&                                                                 // 2nd: white
+                    TA_CANDLECOLOR_STATE_CUR() == 1 &&                                                                   // 3rd: white
+                    TA_REALBODY_STATE_CUR() >= TA_REALBODY_STATE(i1) - TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal, i1 ) &&   // same size 2 and 3
+                    TA_REALBODY_STATE_CUR() <= TA_REALBODY_STATE(i1) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal, i1 ) &&
+                    inOpen >= MEM_IDX_NS(inOpen,i1) - TA_CANDLEAVERAGE_STATE( Equal, STATE.EqualPeriodTotal, i1 ) &&           // same open 2 and 3
+                    inOpen <= MEM_IDX_NS(inOpen,i1) + TA_CANDLEAVERAGE_STATE( Equal, STATE.EqualPeriodTotal, i1 )
+                    )
+                VALUE_HANDLE_DEREF(outInteger) = ( TA_REALBODYGAPUP_STATE(i1,i2) ? 100 : -100 );
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+        }
+
+
+        if ((int)STATE.mem_index-1 >= 1)
+        {
+            STATE.NearPeriodTotal += TA_CANDLERANGE_STATE( Near, i1 );
+        }
+
+        if ((int)STATE.mem_index-1 >= 1)
+        {
+            STATE.EqualPeriodTotal += TA_CANDLERANGE_STATE( Equal, i1 );
+        }
+
+        if (!(NEED_MORE_DATA))
+        {
+            STATE.NearPeriodTotal -= TA_CANDLERANGE_STATE( Near, -STATE.periodNear -1 );
+            STATE.EqualPeriodTotal -= TA_CANDLERANGE_STATE( Equal, -STATE.periodEqual -1);
+        }
+
+        if (MEM_SIZE > 0)
+        {
+            PUSH_TO_MEM(inOpen,inOpen);
+            PUSH_TO_MEM(inHigh,inHigh);
+            PUSH_TO_MEM(inLow,inLow);
+            PUSH_TO_MEM(inClose,inClose);
+        }
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

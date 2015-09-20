@@ -325,7 +325,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLGRAVESTONEDOJI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -359,6 +359,55 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+
+        if (FIRST_LAUNCH)
+                   {
+                         STATE.ShadowVeryShortPeriodTotal = 0.;
+                         STATE.BodyDojiPeriodTotal = 0.;
+
+                         STATE.periodBodyDoji = TA_CANDLEAVGPERIOD(BodyDoji);
+                         STATE.periodShadowVeryShort = TA_CANDLEAVGPERIOD(ShadowVeryShort);
+                         STATE.gapBodyDoji = MEM_SIZE - STATE.periodBodyDoji;
+                         STATE.gapShadowVeryShort = MEM_SIZE - STATE.periodShadowVeryShort;
+                   }
+
+
+        if (!(NEED_MORE_DATA))
+        {
+            if( TA_REALBODY_STATE_CUR() <= TA_CANDLEAVERAGE_STATE_CUR( BodyDoji, STATE.BodyDojiPeriodTotal ) &&
+                    TA_LOWERSHADOW_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal ) &&
+                    TA_UPPERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal )
+                    )
+                VALUE_HANDLE_DEREF(outInteger) = 100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+        }
+
+
+                if ((int)STATE.mem_index-1 >= STATE.gapBodyDoji)
+                {
+                   STATE.BodyDojiPeriodTotal += TA_CANDLERANGE_STATE_CUR( BodyDoji );
+                }
+
+                if ((int)STATE.mem_index-1 >= STATE.gapShadowVeryShort)
+                {
+                   STATE.ShadowVeryShortPeriodTotal += TA_CANDLERANGE_STATE_CUR( ShadowVeryShort );
+                }
+
+                if (!(NEED_MORE_DATA))
+                {
+                    STATE.BodyDojiPeriodTotal -= TA_CANDLERANGE_STATE( BodyDoji, -STATE.periodBodyDoji );
+                    STATE.ShadowVeryShortPeriodTotal -= TA_CANDLERANGE_STATE( ShadowVeryShort, -STATE.periodShadowVeryShort );
+                }
+
+                if (MEM_SIZE > 0)
+                {
+                    PUSH_TO_MEM(inOpen,inOpen);
+                    PUSH_TO_MEM(inHigh,inHigh);
+                    PUSH_TO_MEM(inLow,inLow);
+                    PUSH_TO_MEM(inClose,inClose);
+                }
+                if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

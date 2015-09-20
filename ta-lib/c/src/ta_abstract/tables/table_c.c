@@ -1142,7 +1142,22 @@ static const TA_OptInputParameterInfo *TA_CDLGAPSIDESIDEWHITE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLGAPSIDESIDEWHITE_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLGAPSIDESIDEWHITE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "NearPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLGAPSIDESIDEWHITE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "EqualPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLGAPSIDESIDEWHITE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodNear", 0 };
+const TA_InputParameterInfo TA_CDLGAPSIDESIDEWHITE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "periodEqual", 0 };
+
+
+static const TA_InputParameterInfo *TA_CDLGAPSIDESIDEWHITE_StructParams[] = {
+    &TA_CDLGAPSIDESIDEWHITE_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLGAPSIDESIDEWHITE_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLGAPSIDESIDEWHITE_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLGAPSIDESIDEWHITE_DEF_UI_STRUCT_PARAM_4,
+    NULL };
 
 DEF_FUNCTION( CDLGAPSIDESIDEWHITE,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1171,7 +1186,27 @@ static const TA_OptInputParameterInfo *TA_CDLGRAVESTONEDOJI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLGRAVESTONEDOJI_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyDojiPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "gapShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "periodBodyDoji", 0 };
+const TA_InputParameterInfo TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapBodyDoji", 0 };
+
+static const TA_InputParameterInfo *TA_CDLGRAVESTONEDOJI_StructParams[] = {
+    &TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLGRAVESTONEDOJI_DEF_UI_STRUCT_PARAM_6,
+    NULL };
 
 DEF_FUNCTION( CDLGRAVESTONEDOJI,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1200,7 +1235,46 @@ static const TA_OptInputParameterInfo *TA_CDLHAMMER_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLHAMMER_StructParams[] = { NULL }; 
+
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "ShadowLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "NearPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "periodShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Integer, "periodBody", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Integer, "gapBody", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Integer, "periodShadowLong", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Integer, "gapShadowLong", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Integer, "periodNear", 0 };
+const TA_InputParameterInfo TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Integer, "gapNear", 0 };
+
+static const TA_InputParameterInfo *TA_CDLHAMMER_StructParams[] = {
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_6,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_7,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_8,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_9,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_10,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_11,
+    &TA_CDLHAMMER_DEF_UI_STRUCT_PARAM_12,
+    NULL };
 
 DEF_FUNCTION( CDLHAMMER,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1229,7 +1303,45 @@ static const TA_OptInputParameterInfo *TA_CDLHANGINGMAN_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLHANGINGMAN_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "ShadowLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "NearPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "periodShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Integer, "periodBody", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Integer, "gapBody", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Integer, "periodShadowLong", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_10 =
+                                  { TA_Input_Integer, "gapShadowLong", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_11 =
+                                  { TA_Input_Integer, "periodNear", 0 };
+const TA_InputParameterInfo TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_12 =
+                                  { TA_Input_Integer, "gapNear", 0 };
+
+static const TA_InputParameterInfo *TA_CDLHANGINGMAN_StructParams[] = {
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_6,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_7,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_8,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_9,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_10,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_11,
+    &TA_CDLHANGINGMAN_DEF_UI_STRUCT_PARAM_12,
+    NULL };
 
 DEF_FUNCTION( CDLHANGINGMAN,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1258,7 +1370,27 @@ static const TA_OptInputParameterInfo *TA_CDLHARAMI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLHARAMI_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyShortPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "BodyLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "gapBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "periodBodyShort", 0 };
+const TA_InputParameterInfo TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapBodyShort", 0 };
+
+static const TA_InputParameterInfo *TA_CDLHARAMI_StructParams[] = {
+    &TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLHARAMI_DEF_UI_STRUCT_PARAM_6,
+    NULL };
 
 DEF_FUNCTION( CDLHARAMI,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1287,7 +1419,27 @@ static const TA_OptInputParameterInfo *TA_CDLHARAMICROSS_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLHARAMICROSS_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyDojiPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "BodyLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "gapBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "periodBodyDoji", 0 };
+const TA_InputParameterInfo TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapBodyDoji", 0 };
+
+static const TA_InputParameterInfo *TA_CDLHARAMICROSS_StructParams[] = {
+    &TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLHARAMICROSS_DEF_UI_STRUCT_PARAM_6,
+    NULL };
 
 DEF_FUNCTION( CDLHARAMICROSS,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1316,7 +1468,21 @@ static const TA_OptInputParameterInfo *TA_CDLHIGHWAVE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLHIGHWAVE_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLHIGHWAVE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHIGHWAVE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "ShadowPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHIGHWAVE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodBody", 0 };
+const TA_InputParameterInfo TA_CDLHIGHWAVE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "periodShadow", 0 };
+
+static const TA_InputParameterInfo *TA_CDLHIGHWAVE_StructParams[] = {
+    &TA_CDLHIGHWAVE_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLHIGHWAVE_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLHIGHWAVE_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLHIGHWAVE_DEF_UI_STRUCT_PARAM_4,
+    NULL };
 
 DEF_FUNCTION( CDLHIGHWAVE,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1345,7 +1511,21 @@ static const TA_OptInputParameterInfo *TA_CDLHIKKAKE_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLHIKKAKE_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLHIKKAKE_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "patternResult", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKE_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Integer, "patternIdx", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKE_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "patternHigh", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKE_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "patternLow", 0 };
+
+static const TA_InputParameterInfo *TA_CDLHIKKAKE_StructParams[] = {
+    &TA_CDLHIKKAKE_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLHIKKAKE_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLHIKKAKE_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLHIKKAKE_DEF_UI_STRUCT_PARAM_4,
+    NULL };
 
 DEF_FUNCTION( CDLHIKKAKE,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1374,7 +1554,29 @@ static const TA_OptInputParameterInfo *TA_CDLHIKKAKEMOD_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLHIKKAKEMOD_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "patternResult", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Integer, "patternIdx", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "patternHigh", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "patternLow", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "NearPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "periodNear", 0 };
+const TA_InputParameterInfo TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Integer, "gapNear", 0 };
+static const TA_InputParameterInfo *TA_CDLHIKKAKEMOD_StructParams[] = {
+    &TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_6,
+    &TA_CDLHIKKAKEMOD_DEF_UI_STRUCT_PARAM_7,
+    NULL };
 
 DEF_FUNCTION( CDLHIKKAKEMOD,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1403,7 +1605,28 @@ static const TA_OptInputParameterInfo *TA_CDLHOMINGPIGEON_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLHOMINGPIGEON_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "BodyShortPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "periodBodyShort", 0 };
+const TA_InputParameterInfo TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "gapBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapBodyShort", 0 };
+
+
+static const TA_InputParameterInfo *TA_CDLHOMINGPIGEON_StructParams[] = {
+    &TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLHOMINGPIGEON_DEF_UI_STRUCT_PARAM_6,
+    NULL };
 
 DEF_FUNCTION( CDLHOMINGPIGEON,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1432,7 +1655,36 @@ static const TA_OptInputParameterInfo *TA_CDLIDENTICAL3CROWS_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLIDENTICAL3CROWS_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal0", 0 };
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal1", 0 };
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "ShadowVeryShortPeriodTotal2", 0 };
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "EqualPeriodTotal1", 0 };
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Real, "EqualPeriodTotal2", 0 };
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Integer, "periodShadowVeryShort", 0 };
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_8 =
+                                  { TA_Input_Integer, "gapEqual", 0 };
+const TA_InputParameterInfo TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_9 =
+                                  { TA_Input_Integer, "periodEqual", 0 };
+
+static const TA_InputParameterInfo *TA_CDLIDENTICAL3CROWS_StructParams[] = {
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_6,
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_7,
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_8,
+    &TA_CDLIDENTICAL3CROWS_DEF_UI_STRUCT_PARAM_9,
+    NULL };
 
 DEF_FUNCTION( CDLIDENTICAL3CROWS,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1461,7 +1713,27 @@ static const TA_OptInputParameterInfo *TA_CDLINNECK_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLINNECK_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLINNECK_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLINNECK_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "EqualPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLINNECK_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "periodBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLINNECK_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "gapBodyLong", 0 };
+const TA_InputParameterInfo TA_CDLINNECK_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "periodEqual", 0 };
+const TA_InputParameterInfo TA_CDLINNECK_DEF_UI_STRUCT_PARAM_7 =
+                                  { TA_Input_Integer, "gapEqual", 0 };
+
+static const TA_InputParameterInfo *TA_CDLINNECK_StructParams[] = {
+    &TA_CDLINNECK_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLINNECK_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLINNECK_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLINNECK_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLINNECK_DEF_UI_STRUCT_PARAM_6,
+    &TA_CDLINNECK_DEF_UI_STRUCT_PARAM_7,
+    NULL };
 
 DEF_FUNCTION( CDLINNECK,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
@@ -1606,7 +1878,27 @@ static const TA_OptInputParameterInfo *TA_CDLLONGLEGGEDDOJI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_CDLLONGLEGGEDDOJI_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "BodyDojiPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "ShadowLongPeriodTotal", 0 };
+const TA_InputParameterInfo TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Integer, "periodShadowLong", 0 };
+const TA_InputParameterInfo TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "gapShadowLong", 0 };
+const TA_InputParameterInfo TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_5 =
+                                  { TA_Input_Integer, "periodBodyDoji", 0 };
+const TA_InputParameterInfo TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_6 =
+                                  { TA_Input_Integer, "gapBodyDoji", 0 };
+
+static const TA_InputParameterInfo *TA_CDLLONGLEGGEDDOJI_StructParams[] = {
+    &TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_1,
+    &TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_2,
+    &TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_3,
+    &TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_4,
+    &TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_5,
+    &TA_CDLLONGLEGGEDDOJI_DEF_UI_STRUCT_PARAM_6,
+    NULL };
 
 DEF_FUNCTION( CDLLONGLEGGEDDOJI,                         /* name */
               TA_GroupId_PatternRecognition,  /* groupId */
