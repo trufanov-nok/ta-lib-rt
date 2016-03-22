@@ -1,6 +1,9 @@
 #ifndef TA_TEST_PRIV_H
 #define TA_TEST_PRIV_H
 
+#define TEST_STATE_FUNCS
+#include "ta_func.h"
+
 #ifndef TA_LIBC_H
    #include "ta_libc.h"
 #endif

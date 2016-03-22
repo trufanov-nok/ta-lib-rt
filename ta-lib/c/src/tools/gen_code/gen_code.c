@@ -1911,12 +1911,12 @@ void printFunc( FILE *out,
       {
          if( arrayToSubArrayCnvt )
 		 {			 
-             sprintf( gTempBuf, "%s%s%s%s( %s, ", stateTestSignature?"inline ":"", prefix? prefix:"", funcName, stateTestSignature?"_StateTest":"", startIdxString );
+             sprintf( gTempBuf, "%s%s%s%s( %s, ", stateTestSignature?"static ":"", prefix? prefix:"", funcName, stateTestSignature?"_StateTest":"", startIdxString );
 		 }
          else if( managedCPPCode )
          {
             sprintf( gTempBuf, "%s%s%senum class %sRetCode %s%s%s( int    %s,\n",
-                     stateTestSignature?"inline ":"",
+                     stateTestSignature?"static ":"",
                      prefix? prefix:"",
                      managedCPPDeclaration? "         static ":"",
                      managedCPPDeclaration? "":"Core::",
@@ -1928,7 +1928,7 @@ void printFunc( FILE *out,
          else if( outputForJava )
          {
                sprintf( gTempBuf, "%s%spublic RetCode %s%s( int    %s,\n",
-                        stateTestSignature?"inline ":"",
+                        stateTestSignature?"static ":"",
                         prefix? prefix:"",                        
                         funcName,
                         stateTestSignature?"_StateTest":"",
@@ -1938,14 +1938,14 @@ void printFunc( FILE *out,
          {
             if( inputIsSinglePrecision )
                sprintf( gTempBuf, "%s%sTA_RetCode TA_S_%s%s( int    %s,\n",
-                        stateTestSignature?"inline ":"",
+                        stateTestSignature?"static ":"",
                         prefix? prefix:"",
                         funcName,
                         stateTestSignature?"_StateTest":"",
                         startIdxString );
             else  
                sprintf( gTempBuf, "%s%sTA_RetCode TA_%s%s( int    %s,\n",
-                        stateTestSignature?"inline ":"",
+                        stateTestSignature?"static ":"",
                         prefix? prefix:"",                        
                         funcName,
                         stateTestSignature?"_StateTest":"",
